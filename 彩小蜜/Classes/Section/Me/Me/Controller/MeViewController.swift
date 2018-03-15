@@ -9,6 +9,8 @@
 import UIKit
 import TTTAttributedLabel
 
+fileprivate let meCellIdentifier = "meCellIdentifier"
+
 class MeViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, MeHeaderViewDelegate, MeFooterViewDelegate, TTTAttributedLabelDelegate {
     
     //MARK: - 点击事件
@@ -71,26 +73,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    //MARK: - 懒加载
-    lazy var tableView : UITableView = {
-        let tableview = UITableView(frame: CGRect.zero, style: .grouped)
-        self.view.addSubview(tableview)
-        tableview.delegate = self
-        tableview.dataSource = self
-        tableview.separatorStyle = .singleLine
-        //tableview.separatorColor = UIColor.red
-        tableview.register(MeCell.self, forCellReuseIdentifier: meCellIdentifier)
-        
-        headerView = MeHeaderView()
-        headerView.delegate = self
-        
-        footerView = MeFooterView()
-        footerView.delegate = self
-        
-        tableview.tableHeaderView = headerView
-        tableview.tableFooterView = footerView
-        return tableview
-    }()
+    
     
     //MARK: - 属性
     private var headerView: MeHeaderView!
@@ -100,6 +83,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         hideBackBut()
+        self.view.addSubview(tableView)
         userInfoRequest()
     }
     
@@ -138,7 +122,27 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
                 }
             }, onCompleted: nil, onDisposed: nil)
     }
-    
+    //MARK: - 懒加载
+    lazy var tableView : UITableView = {
+        let table = UITableView(frame: CGRect.zero, style: .grouped)
+        
+        table.delegate = self
+        table.dataSource = self
+        //table.separatorStyle = .singleLine
+        
+        table.register(MeCell.self, forCellReuseIdentifier: meCellIdentifier)
+        
+        headerView = MeHeaderView()
+        headerView.delegate = self
+
+        footerView = MeFooterView()
+        footerView.delegate = self
+
+        table.tableHeaderView = headerView
+        table.tableFooterView = footerView
+        
+        return table
+    }()
     //MARK: - tableView dataSource
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -150,7 +154,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: meCellIdentifier, for: indexPath) as! MeCell
-        cell.accessoryType = .disclosureIndicator
+        //cell.accessoryType = .disclosureIndicator
         
         switch indexPath.section {
         case 0:
@@ -202,6 +206,8 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return nil
     }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

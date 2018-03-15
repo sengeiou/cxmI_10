@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MeGuaranteeVC: UIViewController {
+class MeGuaranteeVC: BaseViewController {
     // MARK: - 点击事件
     
     // MARK: - 属性

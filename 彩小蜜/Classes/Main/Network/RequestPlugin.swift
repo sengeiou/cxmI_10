@@ -17,7 +17,7 @@ public final class RequestLoadingPlugin:PluginType{
     public func willSend(_ request: RequestType, target: TargetType) {
         print("""
             
-            ************************************
+            ^^^^^^^^****************************
             
             token   :    \(String(describing: request.request?.allHTTPHeaderFields!["token"]))
             

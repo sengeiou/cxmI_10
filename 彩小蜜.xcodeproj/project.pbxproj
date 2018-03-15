@@ -22,6 +22,15 @@
 		E512A96F20490556003F14F4 /* HomeListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E512A96E20490556003F14F4 /* HomeListModel.swift */; };
 		E514DDE02052A37E00274854 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E514DDDF2052A37E00274854 /* DataModel.swift */; };
 		E514DDE22052B3E000274854 /* WithdrawalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E514DDE12052B3E000274854 /* WithdrawalViewController.swift */; };
+		E51F9A56205A11EA00AB8A21 /* MobileTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51F9A55205A11EA00AB8A21 /* MobileTextFieldCell.swift */; };
+		E51F9A58205A120A00AB8A21 /* PasswordTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51F9A57205A120A00AB8A21 /* PasswordTextFieldCell.swift */; };
+		E51F9A5A205A122000AB8A21 /* VcodeTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51F9A59205A122000AB8A21 /* VcodeTextFieldCell.swift */; };
+		E51F9A5C205A29B800AB8A21 /* RegisterFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51F9A5B205A29B800AB8A21 /* RegisterFooterView.swift */; };
+		E51F9A5E205A29D500AB8A21 /* LoginFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51F9A5D205A29D400AB8A21 /* LoginFooterView.swift */; };
+		E51F9A60205A29EE00AB8A21 /* VCodeLoginFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51F9A5F205A29EE00AB8A21 /* VCodeLoginFooterView.swift */; };
+		E51F9A62205A2A1500AB8A21 /* ForgetPswModileFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51F9A61205A2A1500AB8A21 /* ForgetPswModileFooterView.swift */; };
+		E51F9A64205A2A2D00AB8A21 /* ForgetPswVCodeFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51F9A63205A2A2D00AB8A21 /* ForgetPswVCodeFooterView.swift */; };
+		E51F9A66205A629100AB8A21 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51F9A65205A629100AB8A21 /* UserViewController.swift */; };
 		E537397420576FEE0087E4E6 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E537397320576FEE0087E4E6 /* APIManager.swift */; };
 		E53739772057B9340087E4E6 /* extension+UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53739762057B9340087E4E6 /* extension+UserDefaults.swift */; };
 		E537397B2057F4270087E4E6 /* UserInfoDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E537397A2057F4270087E4E6 /* UserInfoDataModel.swift */; };
@@ -90,10 +99,10 @@
 
 /* Begin PBXFileReference section */
 		6B0C42B903C8908121D72F5C /* Pods-彩小蜜Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜Tests/Pods-彩小蜜Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		A0D1D20EBEFE94020803D6D7 /* Pods____Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods____Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0D1D20EBEFE94020803D6D7 /* Pods____Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods____Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0F39BAB4469B5128625D7A3 /* Pods-彩小蜜UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜UITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜UITests/Pods-彩小蜜UITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A7A8CDA4EA02975014D806E4 /* Pods-彩小蜜.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜.release.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜/Pods-彩小蜜.release.xcconfig"; sourceTree = "<group>"; };
-		AB1F21E30D8FD47C0735B12D /* Pods____.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods____.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB1F21E30D8FD47C0735B12D /* Pods____.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods____.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C46655EB1FBD7C2CB77E79A1 /* Pods-彩小蜜UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜UITests/Pods-彩小蜜UITests.release.xcconfig"; sourceTree = "<group>"; };
 		C6498BCAF23256B536C54738 /* Pods-彩小蜜.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜.debug.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜/Pods-彩小蜜.debug.xcconfig"; sourceTree = "<group>"; };
 		E50B907020522FFF00417BFE /* RechargeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeViewController.swift; sourceTree = "<group>"; };
@@ -108,6 +117,15 @@
 		E512A96E20490556003F14F4 /* HomeListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeListModel.swift; sourceTree = "<group>"; };
 		E514DDDF2052A37E00274854 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		E514DDE12052B3E000274854 /* WithdrawalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalViewController.swift; sourceTree = "<group>"; };
+		E51F9A55205A11EA00AB8A21 /* MobileTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileTextFieldCell.swift; sourceTree = "<group>"; };
+		E51F9A57205A120A00AB8A21 /* PasswordTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTextFieldCell.swift; sourceTree = "<group>"; };
+		E51F9A59205A122000AB8A21 /* VcodeTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VcodeTextFieldCell.swift; sourceTree = "<group>"; };
+		E51F9A5B205A29B800AB8A21 /* RegisterFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterFooterView.swift; sourceTree = "<group>"; };
+		E51F9A5D205A29D400AB8A21 /* LoginFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFooterView.swift; sourceTree = "<group>"; };
+		E51F9A5F205A29EE00AB8A21 /* VCodeLoginFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCodeLoginFooterView.swift; sourceTree = "<group>"; };
+		E51F9A61205A2A1500AB8A21 /* ForgetPswModileFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPswModileFooterView.swift; sourceTree = "<group>"; };
+		E51F9A63205A2A2D00AB8A21 /* ForgetPswVCodeFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPswVCodeFooterView.swift; sourceTree = "<group>"; };
+		E51F9A65205A629100AB8A21 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		E537397320576FEE0087E4E6 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		E53739762057B9340087E4E6 /* extension+UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "extension+UserDefaults.swift"; sourceTree = "<group>"; };
 		E537397A2057F4270087E4E6 /* UserInfoDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoDataModel.swift; sourceTree = "<group>"; };
@@ -123,10 +141,10 @@
 		E57375A920468B8900148622 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E57375AC20468B8900148622 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E57375B320468B8900148622 /* 彩小蜜Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "彩小蜜Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E57375B720468B8900148622 /* ___Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ___Tests.swift; sourceTree = "<group>"; };
+		E57375B720468B8900148622 /* ___Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "___Tests.swift"; sourceTree = "<group>"; };
 		E57375B920468B8900148622 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E57375BE20468B8900148622 /* 彩小蜜UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "彩小蜜UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E57375C220468B8900148622 /* ___UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ___UITests.swift; sourceTree = "<group>"; };
+		E57375C220468B8900148622 /* ___UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "___UITests.swift"; sourceTree = "<group>"; };
 		E57375C420468B8900148622 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E57375F42046B1AD00148622 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E57376012046B37900148622 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -160,7 +178,7 @@
 		E5973E34204FCCF2006461CE /* MeAboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeAboutViewController.swift; sourceTree = "<group>"; };
 		E5973E3F204FDD34006461CE /* MeComplaintVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeComplaintVC.swift; sourceTree = "<group>"; };
 		E5973E41204FDD6F006461CE /* MeGuaranteeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeGuaranteeVC.swift; sourceTree = "<group>"; };
-		EAE714330A11D581FBF18120 /* Pods____UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods____UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EAE714330A11D581FBF18120 /* Pods____UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods____UITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDB760CCFE10D3EA06C79E83 /* Pods-彩小蜜Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜Tests/Pods-彩小蜜Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -619,6 +637,7 @@
 			isa = PBXGroup;
 			children = (
 				E57376452046BC6400148622 /* MeViewController.swift */,
+				E51F9A65205A629100AB8A21 /* UserViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -768,6 +787,14 @@
 			isa = PBXGroup;
 			children = (
 				E5973E1D204D50BC006461CE /* CustomTextField.swift */,
+				E51F9A55205A11EA00AB8A21 /* MobileTextFieldCell.swift */,
+				E51F9A57205A120A00AB8A21 /* PasswordTextFieldCell.swift */,
+				E51F9A59205A122000AB8A21 /* VcodeTextFieldCell.swift */,
+				E51F9A5B205A29B800AB8A21 /* RegisterFooterView.swift */,
+				E51F9A5D205A29D400AB8A21 /* LoginFooterView.swift */,
+				E51F9A5F205A29EE00AB8A21 /* VCodeLoginFooterView.swift */,
+				E51F9A61205A2A1500AB8A21 /* ForgetPswModileFooterView.swift */,
+				E51F9A63205A2A2D00AB8A21 /* ForgetPswVCodeFooterView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1304,10 +1331,13 @@
 				E5973E27204E3CB0006461CE /* CountdownButton.swift in Sources */,
 				E50B9073205231B500417BFE /* RechargeHeaderView.swift in Sources */,
 				E57376442046BC1300148622 /* LotteryViewController.swift in Sources */,
+				E51F9A66205A629100AB8A21 /* UserViewController.swift in Sources */,
 				E514DDE22052B3E000274854 /* WithdrawalViewController.swift in Sources */,
 				E512A96D20480917003F14F4 /* HomeDataModel.swift in Sources */,
+				E51F9A56205A11EA00AB8A21 /* MobileTextFieldCell.swift in Sources */,
 				E537397D2057F7220087E4E6 /* RealInfoDataModel.swift in Sources */,
 				E58B57BA2056364A0025E2F1 /* AddNewBankCardVC.swift in Sources */,
+				E51F9A64205A2A2D00AB8A21 /* ForgetPswVCodeFooterView.swift in Sources */,
 				E58B57C5205676CB0025E2F1 /* MeNetAPIManager.swift in Sources */,
 				E50B9077205235BF00417BFE /* RechargeCardCell.swift in Sources */,
 				E57376422046BB7F00148622 /* HomeTableViewController.swift in Sources */,
@@ -1315,6 +1345,7 @@
 				E5973E31204F8FD4006461CE /* MeHeaderView.swift in Sources */,
 				E58B57B220561BB80025E2F1 /* Spacing&SizeConstraint.swift in Sources */,
 				E58B57C9205688570025E2F1 /* UserDataModel.swift in Sources */,
+				E51F9A62205A2A1500AB8A21 /* ForgetPswModileFooterView.swift in Sources */,
 				E5973E24204E3687006461CE /* VCodeLoginViewController.swift in Sources */,
 				E512A96620479FD7003F14F4 /* HomeNetAPIManager.swift in Sources */,
 				E5973E2F204F8B33006461CE /* MeCell.swift in Sources */,
@@ -1327,19 +1358,24 @@
 				E57376022046B37900148622 /* MainTabBarController.swift in Sources */,
 				E512A96B2047EF67003F14F4 /* RequestPlugin.swift in Sources */,
 				E58B57B4205622950025E2F1 /* BankCardViewController.swift in Sources */,
+				E51F9A5E205A29D500AB8A21 /* LoginFooterView.swift in Sources */,
 				E537397F2057F8F40087E4E6 /* BankCardInfo.swift in Sources */,
 				E50B907120522FFF00417BFE /* RechargeViewController.swift in Sources */,
 				E5973E2B204E442F006461CE /* ForgetPswVCodeVC.swift in Sources */,
 				E56298BD20513429006397EA /* AuthenticationVC.swift in Sources */,
 				E58B57BE205671410025E2F1 /* LoginNetAPIManager.swift in Sources */,
 				E5973E29204E4387006461CE /* ForgetPswPhoneVC.swift in Sources */,
+				E51F9A60205A29EE00AB8A21 /* VCodeLoginFooterView.swift in Sources */,
+				E51F9A58205A120A00AB8A21 /* PasswordTextFieldCell.swift in Sources */,
 				E514DDE02052A37E00274854 /* DataModel.swift in Sources */,
 				E537397420576FEE0087E4E6 /* APIManager.swift in Sources */,
 				E57375A320468B8900148622 /* AppDelegate.swift in Sources */,
+				E51F9A5C205A29B800AB8A21 /* RegisterFooterView.swift in Sources */,
 				E5973E1E204D50BC006461CE /* CustomTextField.swift in Sources */,
 				E562989F2050E04C006397EA /* ValidateProtocol.swift in Sources */,
 				E56298A32050E712006397EA /* AlertProtocol.swift in Sources */,
 				E58B57C7205676EC0025E2F1 /* LotteryNetAPIManager.swift in Sources */,
+				E51F9A5A205A122000AB8A21 /* VcodeTextFieldCell.swift in Sources */,
 				E50B907D20526BB200417BFE /* RechargeCell.swift in Sources */,
 				E562989C2050D1DD006397EA /* RegisterViewController.swift in Sources */,
 			);

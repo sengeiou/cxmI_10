@@ -8,8 +8,11 @@
 
 import UIKit
 
-class LotteryViewController: UIViewController {
+class LotteryViewController: BaseViewController {
 
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

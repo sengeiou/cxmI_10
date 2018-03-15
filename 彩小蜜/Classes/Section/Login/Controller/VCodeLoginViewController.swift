@@ -7,8 +7,11 @@
 //
 
 import UIKit
+fileprivate let mobileCellIdentifier = "mobileCellIdentifier"
+fileprivate let passwordCellIdentifier = "passwordCellIdentifier"
+fileprivate let vcodeCellIdentifier = "vcodeCellIdentifier"
 
-class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, CountdownButtonDelegate, ValidatePro, UserInfoPro {
+class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro, UserInfoPro, CustomTextFieldDelegate , UITableViewDataSource, UITableViewDelegate{
     
     
     
@@ -23,12 +26,20 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Countdo
         loginRequest()
     }
     
-    func countdownButClicked(button: CountdownButton) {
+    func countdown() {
         guard validate(.phone, str: self.userNameTF.text) == true else {
             showHUD(message: "请输入正确的手机号")
             return }
         showHUD(message: "验证码已发送，请注意查收")
         sendSmsRequest()
+    }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if let textf = textField as? CustomTextField {
+            textf.changeImg(string)
+        }
+        
+        return true
     }
     
     //MARK: - 属性
@@ -43,10 +54,15 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Countdo
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "彩小秘·登录"
-        creatUI()
-        
+        self.view.addSubview(tableView)
     }
-    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        tableView.snp.makeConstraints { (make) in
+            make.top.left.right.bottom.equalTo(self.view)
+        }
+    }
     //MARK: - 网络请求
     private func loginRequest() {
         _ = loginProvider.rx.request(.loginBySms(mobile: self.userNameTF.text!, smsCode: self.vcodeTF.text!))
@@ -101,75 +117,54 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Countdo
         }
     }
     
-    //MARK: - UI
-    private func creatUI() {
-        userNameTF = CustomTextField(imageName : "userID")
-        vcodeTF = CustomTextField(imageName : "userID")
+    //MARK: - 懒加载
+    lazy private var tableView : UITableView = {
+        let table = UITableView(frame: CGRect.zero, style: .plain)
+        table.dataSource = self
+        table.delegate = self
+        table.backgroundColor = UIColor.red
+        table.isScrollEnabled = false
+        table.separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        table.register(MobileTextFieldCell.self, forCellReuseIdentifier: mobileCellIdentifier)
+        table.register(PasswordTextFieldCell.self, forCellReuseIdentifier: passwordCellIdentifier)
+        table.register(VcodeTextFieldCell.self, forCellReuseIdentifier: vcodeCellIdentifier)
         
-        self.view.addSubview(userNameTF)
-        self.view.addSubview(vcodeTF)
+        let footer = VCodeLoginFooterView()
+        footer.login.addTarget(self, action: #selector(loginClicked(_:)), for: .touchUpInside)
+        table.tableFooterView = footer
         
-        userNameTF.delegate = self
-        vcodeTF.delegate = self
+        return table
+    }()
+    
+    //MARK: - tableview datasource
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        userNameTF.borderStyle = .roundedRect
-        vcodeTF.borderStyle = .roundedRect
-        
-        userNameTF.placeholder = "请输入手机号"
-        vcodeTF.placeholder = "请输入验证码"
-        
-        userNameTF.snp.makeConstraints { (make) in
-            make.height.equalTo(45)
-            make.left.equalTo(self.view).offset(20)
-            make.right.equalTo(self.view).offset(-20)
-            make.top.equalTo(self.view).offset(SafeAreaTopHeight + 20)
-        }
-        
-        vcodeTF.snp.makeConstraints { (make) in
-            make.height.equalTo(45)
-            make.left.equalTo(self.view).offset(20)
-            make.right.equalTo(self.view).offset(-20)
-            make.top.equalTo(userNameTF.snp.bottom).offset(20)
-        }
-        
-        
-        // button
-        
-        loginBut = UIButton(type: .custom)
-        
-        self.view.addSubview(loginBut)
-        
-        loginBut.layer.cornerRadius = 5
-        
-        loginBut.setTitle("登录", for: .normal)
-        
-        loginBut.backgroundColor = UIColor.blue
-        
-        loginBut.setTitleColor(UIColor.black, for: .normal)
-        
-        loginBut.addTarget(self, action: #selector(loginClicked(_:)), for:.touchUpInside)
-        
-        loginBut.snp.makeConstraints { (make) in
-            make.height.equalTo(50)
-            make.left.equalTo(self.view).offset(20)
-            make.right.equalTo(self.view).offset(-20)
-            make.top.equalTo(vcodeTF.snp.bottom).offset(40)
-        }
-       
-        // countdown button
-        countdownBut = CountdownButton()
-        
-        self.view.addSubview(countdownBut)
-        
-        countdownBut.delegate = self
-        
-        countdownBut.snp.makeConstraints { (make) in
-            make.top.equalTo(loginBut.snp.bottom).offset(20)
-            make.height.equalTo(30)
-            make.width.equalTo(180)
-            make.right.equalTo(self.view).offset(-20)
+        switch indexPath.row {
+        case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: mobileCellIdentifier, for: indexPath) as! MobileTextFieldCell
+            cell.textfield.delegate = self
+            self.userNameTF = cell.textfield
+            return cell
+        case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: vcodeCellIdentifier, for: indexPath) as! VcodeTextFieldCell
+            cell.textfield.delegate = self
+            cell.textfield.customDelegate = self
+            self.vcodeTF = cell.textfield
+            return cell
+        default:
+            return UITableViewCell()
         }
     }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat(loginTextFieldHeight)
+    }
+    
     
     
     

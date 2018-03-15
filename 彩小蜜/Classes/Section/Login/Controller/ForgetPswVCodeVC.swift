@@ -7,8 +7,12 @@
 //
 
 import UIKit
+fileprivate let mobileCellIdentifier = "mobileCellIdentifier"
+fileprivate let passwordCellIdentifier = "passwordCellIdentifier"
+fileprivate let vcodeCellIdentifier = "vcodeCellIdentifier"
 
-class ForgetPswVCodeVC: BaseViewController, CountdownButtonDelegate, UITextFieldDelegate, ValidatePro {
+
+class ForgetPswVCodeVC: BaseViewController, UITextFieldDelegate, ValidatePro,CustomTextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
     
     //MARK: - 点击事件
     @objc private func confirmButClicked(_ sender: UIButton) {
@@ -21,12 +25,19 @@ class ForgetPswVCodeVC: BaseViewController, CountdownButtonDelegate, UITextField
         
         updatePassRequest()
     }
-    
-    func countdownButClicked(button: CountdownButton) {
+    func countdown() {
         guard validate(.password, str: self.passwordTF.text) == true else {
             showHUD(message: "请输入6-20位的密码")
             return }
         sendSmsRequest()
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if let textf = textField as? CustomTextField {
+            textf.changeImg(string)
+        }
+        return true
     }
     
     //MARK: - 属性
@@ -43,9 +54,15 @@ class ForgetPswVCodeVC: BaseViewController, CountdownButtonDelegate, UITextField
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "彩小秘·登录"
-        creatUI() //创建UI
+        self.view.addSubview(tableView)
     }
-
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        tableView.snp.makeConstraints { (make) in
+            make.top.left.right.bottom.equalTo(self.view)
+        }
+    }
     //MARK: - 网络请求
     private func updatePassRequest() {
         _ = loginProvider.rx.request(.updatePass(mobile: self.phoneNum, password: self.passwordTF.text!))
@@ -98,64 +115,51 @@ class ForgetPswVCodeVC: BaseViewController, CountdownButtonDelegate, UITextField
                 }
         }
     }
-    
-    //MARK: - UI
-    private func creatUI() {
+    //MARK: - 懒加载
+    lazy private var tableView : UITableView = {
+        let table = UITableView(frame: CGRect.zero, style: .plain)
+        table.dataSource = self
+        table.delegate = self
+        table.backgroundColor = UIColor.red
+        table.isScrollEnabled = false
+        table.separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        table.register(MobileTextFieldCell.self, forCellReuseIdentifier: mobileCellIdentifier)
+        table.register(PasswordTextFieldCell.self, forCellReuseIdentifier: passwordCellIdentifier)
+        table.register(VcodeTextFieldCell.self, forCellReuseIdentifier: vcodeCellIdentifier)
         
-        passwordTF = CustomTextField(imageName: "userID")
-        passwordTF.delegate = self
-        passwordTF.placeholder = "请输入您的新密码6-20个字符"
-        passwordTF.borderStyle = .roundedRect
+        let footer = ForgetPswVCodeFooterView()
+        footer.confirm.addTarget(self, action: #selector(confirmButClicked(_:)), for: .touchUpInside)
+        table.tableFooterView = footer
         
-        vcodeTF = CustomTextField(imageName: "userID")
-        vcodeTF.placeholder = "请输入验证码"
-        vcodeTF.borderStyle = .roundedRect
-        
-        countdownBut = CountdownButton()
-        countdownBut.delegate = self
-        countdownBut.layer.cornerRadius = 5
-        countdownBut.isCounting = true
-        
-        confirm = UIButton(type: .custom)
-        confirm.setTitle("确认", for: .normal)
-        confirm.setTitleColor(UIColor.white, for: .normal)
-        confirm.backgroundColor = UIColor.blue
-        confirm.layer.cornerRadius = 5
-        confirm.addTarget(self, action: #selector(confirmButClicked(_:)), for: .touchUpInside)
-        
-        
-        self.view.addSubview(passwordTF)
-        self.view.addSubview(vcodeTF)
-        //self.view.addSubview(countdownBut)
-        self.view.addSubview(confirm)
-        vcodeTF.addSubview(countdownBut)
+        return table
+    }()
+    //MARK: - tableview datasource
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        passwordTF.snp.makeConstraints { (make) in
-            make.height.equalTo(50)
-            make.left.equalTo(self.view).offset(10)
-            make.right.equalTo(self.view).offset(-10)
-            make.top.equalTo(SafeAreaTopHeight + 20)
+        switch indexPath.row {
+        case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: passwordCellIdentifier, for: indexPath) as! PasswordTextFieldCell
+            cell.textfield.delegate = self
+            self.passwordTF = cell.textfield
+            return cell
+        case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: vcodeCellIdentifier, for: indexPath) as! VcodeTextFieldCell
+            cell.textfield.delegate = self
+            cell.textfield.customDelegate = self
+            self.vcodeTF = cell.textfield
+            return cell
+        default:
+            return UITableViewCell()
         }
-        vcodeTF.snp.makeConstraints { (make) in
-            make.height.left.right.equalTo(passwordTF)
-            make.top.equalTo(passwordTF.snp.bottom).offset(20)
-        }
-        countdownBut.snp.makeConstraints { (make) in
-            make.width.equalTo(100)
-            make.right.equalTo(vcodeTF).offset(-1)
-            make.top.equalTo(vcodeTF).offset(1)
-            make.bottom.equalTo(vcodeTF).offset(-1)
-        }
-        confirm.snp.makeConstraints { (make) in
-            make.height.equalTo(50)
-            make.left.equalTo(self.view).offset(20)
-            make.right.equalTo(self.view).offset(-20)
-            make.top.equalTo(countdownBut.snp.bottom).offset(20)
-        }
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat(loginTextFieldHeight)
     }
     
     override func didReceiveMemoryWarning() {

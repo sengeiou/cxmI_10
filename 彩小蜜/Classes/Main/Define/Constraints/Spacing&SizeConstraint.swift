@@ -22,3 +22,10 @@ let textFieldHeight = 40
 let labelHeight = 20
 /// 按钮高度
 let buttonHeight = 40
+/// 登录等 按钮的高度
+let loginButHeight = 40
+/// 登录按钮距离上方的高度
+let loginButTopSpacing = 40
+///
+let loginTextFieldHeight = 50
+

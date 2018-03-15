@@ -9,8 +9,11 @@
 import UIKit
 import SnapKit
 
+fileprivate let mobileCellIdentifier = "mobileCellIdentifier"
+fileprivate let passwordCellIdentifier = "passwordCellIdentifier"
+fileprivate let vcodeCellIdentifier = "vcodeCellIdentifier"
 
-class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro, UserInfoPro {
+class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro, UserInfoPro, UITableViewDelegate, UITableViewDataSource {
 
     //MARK: - 按钮 点击 事件
     @objc private func loginClicked(_ sender : UIButton) {
@@ -33,15 +36,20 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro,
         self.navigationController?.pushViewController(forget, animated: true)
     }
     
-    @objc private func VerificationCodeClicked(_ sender : UIButton) {
+    @objc private func VCodeClicked(_ sender : UIButton) {
         let vcode = VCodeLoginViewController()
         
         self.navigationController?.pushViewController(vcode, animated: true)
     }
     
     //MARK: - textField DELEGATE
-    func textFieldDidBeginEditing(_ textField: UITextField) {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
+        if let textf = textField as? CustomTextField {
+            textf.changeImg(string)
+        }
+        
+        return true
     }
     
     
@@ -59,13 +67,16 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro,
     //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.title = "彩小秘·登录"
-        
-        creatUI() // 创建UI
-        
+        self.view.addSubview(tableView)
     }
-
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        tableView.snp.makeConstraints { (make) in
+            make.top.left.right.bottom.equalTo(self.view)
+        }
+    }
     //MARK: - 网络请求
     private func loginRequest() {
        _ = loginProvider.rx.request(.loginByPass(mobile: "13601180392", password: "123456"))
@@ -96,131 +107,55 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro,
         
     }
     
-    //MARK: - UI
-    private func creatUI() {
-        userNameTF = CustomTextField(imageName : "userID")
-        passwordTF = CustomTextField(imageName : "userID")
+    //MARK: - 懒加载
+    lazy private var tableView : UITableView = {
+        let table = UITableView(frame: CGRect.zero, style: .plain)
+        table.dataSource = self
+        table.delegate = self
+        table.backgroundColor = UIColor.red
+        table.isScrollEnabled = false
+        table.separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        table.register(MobileTextFieldCell.self, forCellReuseIdentifier: mobileCellIdentifier)
+        table.register(PasswordTextFieldCell.self, forCellReuseIdentifier: passwordCellIdentifier)
+        table.register(VcodeTextFieldCell.self, forCellReuseIdentifier: vcodeCellIdentifier)
         
-        self.view.addSubview(userNameTF)
-        self.view.addSubview(passwordTF)
+        let footer = LoginFooterView()
+        footer.login.addTarget(self, action: #selector(loginClicked(_:)), for: .touchUpInside)
+        footer.register.addTarget(self, action: #selector(registerClicked(_:)), for: .touchUpInside)
+        footer.smsLogin.addTarget(self, action: #selector(VCodeClicked(_:)), for: .touchUpInside)
+        footer.forget.addTarget(self, action: #selector(forgetPasswordClicked(_:)), for: .touchUpInside)
+        table.tableFooterView = footer
         
-        userNameTF.delegate = self
-        passwordTF.delegate = self
-        
-        userNameTF.borderStyle = .roundedRect
-        passwordTF.borderStyle = .roundedRect
-        
-        userNameTF.placeholder = "请输入手机号"
-        passwordTF.placeholder = "请输入密码"
-        
-        userNameTF.snp.makeConstraints { (make) in
-            make.height.equalTo(45)
-            make.left.equalTo(self.view).offset(20)
-            make.right.equalTo(self.view).offset(-20)
-            make.top.equalTo(self.view).offset(SafeAreaTopHeight + 20)
-        }
-        
-        passwordTF.snp.makeConstraints { (make) in
-            make.height.equalTo(45)
-            make.left.equalTo(self.view).offset(20)
-            make.right.equalTo(self.view).offset(-20)
-            make.top.equalTo(userNameTF.snp.bottom).offset(20)
-        }
-        
-        
-        // button
-        
-        loginBut = UIButton(type: .custom)
-        registerBut = UIButton(type: .custom)
-        forgetPasswordBut   = UIButton(type: .custom)
-        VerificationCodeBut = UIButton(type: .custom)
-        
-        
-        self.view.addSubview(loginBut)
-        self.view.addSubview(registerBut)
-        self.view.addSubview(forgetPasswordBut)
-        self.view.addSubview(VerificationCodeBut)
-        
-        
-        loginBut.layer.cornerRadius = 5
-        registerBut.layer.cornerRadius = 5
-        
-        
-        loginBut.setTitle("登录", for: .normal)
-        registerBut.setTitle("新用户注册", for: .normal)
-        forgetPasswordBut.setTitle("忘记密码?", for: .normal)
-        VerificationCodeBut.setTitle("短信验证码登录", for: .normal)
-        
-        
-        forgetPasswordBut.contentHorizontalAlignment = .right
-        VerificationCodeBut.contentHorizontalAlignment = .left
-        
-        
-        forgetPasswordBut.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        VerificationCodeBut.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        
-        
-        loginBut.backgroundColor = UIColor.blue
-        registerBut.backgroundColor = UIColor.red
-        forgetPasswordBut.backgroundColor = UIColor.white
-        VerificationCodeBut.backgroundColor = UIColor.white
-        
-        
-        loginBut.setTitleColor(UIColor.black, for: .normal)
-        registerBut.setTitleColor(UIColor.black, for: .normal)
-        forgetPasswordBut.setTitleColor(UIColor.black, for: .normal)
-        VerificationCodeBut.setTitleColor(UIColor.black, for: .normal)
-        
-        
-        loginBut.addTarget(self, action: #selector(loginClicked(_:)), for:.touchUpInside)
-        registerBut.addTarget(self, action: #selector(registerClicked(_:)), for: .touchUpInside)
-        forgetPasswordBut.addTarget(self, action: #selector(forgetPasswordClicked(_:)), for: .touchUpInside)
-        VerificationCodeBut.addTarget(self, action: #selector(VerificationCodeClicked(_:)), for: .touchUpInside)
-        
-        
-        loginBut.snp.makeConstraints { (make) in
-            make.height.equalTo(50)
-            make.left.equalTo(self.view).offset(20)
-            make.right.equalTo(self.view).offset(-20)
-            make.top.equalTo(passwordTF.snp.bottom).offset(40)
-        }
-        registerBut.snp.makeConstraints { (make) in
-            make.height.equalTo(50)
-            make.left.equalTo(self.view).offset(20)
-            make.right.equalTo(self.view).offset(-20)
-            make.top.equalTo(loginBut.snp.bottom).offset(20)
-        }
-        VerificationCodeBut.snp.makeConstraints { (make) in
-            make.height.equalTo(40)
-            make.width.equalTo(forgetPasswordBut)
-            make.left.equalTo(self.view).offset(20)
-            make.top.equalTo(registerBut.snp.bottom).offset(20)
-            make.right.equalTo(forgetPasswordBut.snp.left).offset(-10)
-        }
-        forgetPasswordBut.snp.makeConstraints { (make) in
-            make.height.equalTo(40)
-            make.top.equalTo(VerificationCodeBut)
-            make.width.equalTo(VerificationCodeBut)
-            make.right.equalTo(self.view).offset(-20)
-        }
-        
-
+        return table
+    }()
+    
+    //MARK: - tableview datasource
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
-    
-    
-    
-   
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        switch indexPath.row {
+        case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: mobileCellIdentifier, for: indexPath) as! MobileTextFieldCell
+            cell.textfield.delegate = self
+            self.userNameTF = cell.textfield
+            return cell
+        case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: passwordCellIdentifier, for: indexPath) as! PasswordTextFieldCell
+            cell.textfield.delegate = self
+            self.passwordTF = cell.textfield
+            return cell
+        default:
+            return UITableViewCell()
+        }
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat(loginTextFieldHeight)
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

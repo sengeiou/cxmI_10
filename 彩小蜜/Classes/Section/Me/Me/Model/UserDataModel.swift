@@ -73,8 +73,7 @@ extension UserInfoPro {
     }
 }
 
-private let userData = UserDefaults.standard.object(forKey: "userInfo") as! Data
-private let userInfo = NSKeyedUnarchiver.unarchiveObject(with: userData ) as! UserDataModel
+private let userData = UserDefaults.standard.object(forKey: "userInfo") as? Data
+private let userInfo = NSKeyedUnarchiver.unarchiveObject(with: userData != nil ? userData! : Data() ) as? UserDataModel
 
-
-let token : String = userInfo.token != nil ? userInfo.token! : ""
+let token : String = userInfo != nil ? userInfo!.token! : ""

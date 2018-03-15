@@ -9,7 +9,7 @@
 import UIKit
 import TTTAttributedLabel
 
-let meCellIdentifier = "meCellIdentifier"
+
 
 class MeCell: UITableViewCell {
 

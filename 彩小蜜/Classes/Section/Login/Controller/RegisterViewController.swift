@@ -8,8 +8,11 @@
 
 import UIKit
 
-class RegisterViewController: BaseViewController, CountdownButtonDelegate, UITextFieldDelegate, ValidatePro, UserInfoPro {
+fileprivate let mobileCellIdentifier = "mobileCellIdentifier"
+fileprivate let passwordCellIdentifier = "passwordCellIdentifier"
+fileprivate let vcodeCellIdentifier = "vcodeCellIdentifier"
 
+class RegisterViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, ValidatePro, UserInfoPro, CustomTextFieldDelegate {
 
     // MARK: - 点击事件
     @objc private func registerClicked(_ sender: UIButton) {
@@ -30,29 +33,46 @@ class RegisterViewController: BaseViewController, CountdownButtonDelegate, UITex
         registerRequest()
     }
     
-    func countdownButClicked(button: CountdownButton) {
+    func countdown() {
         guard validate(.phone, str: self.phoneTF.text) else {
             showHUD(message: "请输入合法的手机号")
             return
         }
         sendSmsRequest()
-        
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if let textf = textField as? CustomTextField {
+            textf.changeImg(string)
+        }
+        
+        return true
+    }
+    
+    
     
     // MARK: - 属性
     private var phoneTF : CustomTextField!     // 输入手机号
     private var passwordTF : CustomTextField!  // 输入密码
     private var vcodeTF : UITextField!         // 输入验证码
-    private var countdownBut : CountdownButton!// 倒计时按钮
-    private var registerBut : UIButton!        // 注册按钮
+    
+    
     
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "彩小秘·注册"
-        initSubview()
+        self.view.addSubview(tableView)
     }
-
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        tableView.snp.makeConstraints { (make) in
+            make.top.left.right.bottom.equalTo(self.view)
+        }
+    }
+    
     // MARK: 网络请求
     private func registerRequest() {
         _ = loginProvider.rx.request(.register(mobile: self.phoneTF.text!, password: self.passwordTF.text!, vcode: vcodeTF.text!))
@@ -105,77 +125,57 @@ class RegisterViewController: BaseViewController, CountdownButtonDelegate, UITex
         }
     }
     
-    //MARK: - UI
-    private func initSubview() {
-        phoneTF = CustomTextField(imageName: "userID")
-        phoneTF.delegate = self
-        phoneTF.placeholder = "请输入手机号"
-        phoneTF.borderStyle = .roundedRect
-        phoneTF.keyboardType = .numberPad
+    lazy private var tableView : UITableView = {
+        let table = UITableView(frame: CGRect.zero, style: .plain)
+        table.dataSource = self
+        table.delegate = self
+        table.backgroundColor = UIColor.gray
+        table.isScrollEnabled = false
+        table.separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        table.register(MobileTextFieldCell.self, forCellReuseIdentifier: mobileCellIdentifier)
+        table.register(PasswordTextFieldCell.self, forCellReuseIdentifier: passwordCellIdentifier)
+        table.register(VcodeTextFieldCell.self, forCellReuseIdentifier: vcodeCellIdentifier)
         
-        passwordTF = CustomTextField(imageName: "userID")
-        passwordTF.delegate = self
-        passwordTF.placeholder = "6-20位密码"
-        passwordTF.borderStyle = .roundedRect
-        passwordTF.isPassword = true 
+        let footer = RegisterFooterView()
+        footer.register.addTarget(self, action: #selector(registerClicked(_:)), for: .touchUpInside)
+        table.tableFooterView = footer
         
-        vcodeTF = UITextField()
-        vcodeTF.delegate = self
-        vcodeTF.placeholder = "输入短信验证码"
-        vcodeTF.borderStyle = .roundedRect
-        vcodeTF.keyboardType = .numberPad
+        return table
+    }()
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        countdownBut = CountdownButton()
-        countdownBut.delegate = self
-        countdownBut.layer.cornerRadius = 5
-        
-        registerBut = UIButton(type: .custom)
-        registerBut.setTitle("注册", for: .normal)
-        registerBut.setTitleColor(UIColor.black, for: .normal)
-        registerBut.backgroundColor = UIColor.blue
-        registerBut.layer.cornerRadius = 5
-        registerBut.addTarget(self, action: #selector(registerClicked(_:)), for: .touchUpInside)
-        
-        
-        self.view.addSubview(phoneTF)
-        self.view.addSubview(passwordTF)
-        self.view.addSubview(vcodeTF)
-        //self.view.addSubview(countdownBut)
-        self.view.addSubview(registerBut)
-        vcodeTF.addSubview(countdownBut)
+        switch indexPath.row {
+        case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: mobileCellIdentifier, for: indexPath) as! MobileTextFieldCell
+            cell.textfield.delegate = self
+            self.phoneTF = cell.textfield
+            return cell
+        case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: passwordCellIdentifier, for: indexPath) as! PasswordTextFieldCell
+            cell.textfield.delegate = self
+            self.passwordTF = cell.textfield
+            return cell
+        case 2:
+            let cell = tableView.dequeueReusableCell(withIdentifier: vcodeCellIdentifier, for: indexPath) as! VcodeTextFieldCell
+            cell.textfield.delegate = self
+            cell.textfield.customDelegate = self
+            self.vcodeTF = cell.textfield
+            return cell
+        default:
+            return UITableViewCell()
+        }
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat(loginTextFieldHeight)
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        phoneTF.snp.makeConstraints { (make) in
-            make.height.equalTo(40)
-            make.left.equalTo(self.view).offset(10)
-            make.right.equalTo(self.view).offset(-10)
-            make.top.equalTo(self.view).offset(SafeAreaTopHeight + 20)
-        }
-        passwordTF.snp.makeConstraints { (make) in
-            make.height.equalTo(phoneTF)
-            make.left.right.equalTo(phoneTF)
-            make.top.equalTo(phoneTF.snp.bottom).offset(10)
-        }
-        vcodeTF.snp.makeConstraints { (make) in
-            make.height.left.right.equalTo(phoneTF)
-            make.top.equalTo(passwordTF.snp.bottom).offset(10)
-        }
-        countdownBut.snp.makeConstraints { (make) in
-            make.top.equalTo(vcodeTF).offset(1)
-            make.bottom.equalTo(vcodeTF).offset(-1)
-            make.width.equalTo(90)
-            make.right.equalTo(vcodeTF).offset(-1)
-        }
-        
-        registerBut.snp.makeConstraints { (make) in
-            make.height.equalTo(40)
-            make.left.equalTo(self.view).offset(10)
-            make.right.equalTo(self.view).offset(-10)
-            make.top.equalTo(vcodeTF.snp.bottom).offset(40)
-        }
-    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

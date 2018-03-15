@@ -8,7 +8,12 @@
 
 import UIKit
 
-class ForgetPswPhoneVC: BaseViewController, UITextFieldDelegate, ValidatePro {
+fileprivate let mobileCellIdentifier = "mobileCellIdentifier"
+fileprivate let passwordCellIdentifier = "passwordCellIdentifier"
+fileprivate let vcodeCellIdentifier = "vcodeCellIdentifier"
+
+
+class ForgetPswPhoneVC: BaseViewController, UITextFieldDelegate, ValidatePro, UITableViewDataSource, UITableViewDelegate {
 
     //MARK: - 点击事件
     @objc private func confirmButClicked(_ sender : UIButton) {
@@ -20,6 +25,15 @@ class ForgetPswPhoneVC: BaseViewController, UITextFieldDelegate, ValidatePro {
         validateMobileRequest()
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if let textf = textField as? CustomTextField {
+            textf.changeImg(string)
+        }
+        
+        return true
+    }
+    
     //MARK: - 属性
     private var phoneTF : CustomTextField!
     private var confirmBut : UIButton!
@@ -29,9 +43,15 @@ class ForgetPswPhoneVC: BaseViewController, UITextFieldDelegate, ValidatePro {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "彩小秘·找回密码"
-        creatUI() //创建UI
+        self.view.addSubview(tableView)
     }
-
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        tableView.snp.makeConstraints { (make) in
+            make.top.left.right.bottom.equalTo(self.view)
+        }
+    }
     //MARK: - 网络请求
     private func validateMobileRequest() {
         _ = loginProvider.rx.request(.validateMobile(mobile: self.phoneTF.text!))
@@ -89,46 +109,47 @@ class ForgetPswPhoneVC: BaseViewController, UITextFieldDelegate, ValidatePro {
         }
     }
     
-    
-    
-    //MARK: - UI
-    private func creatUI() {
-        // TextField
-        phoneTF = CustomTextField(imageName: "userID")
-        phoneTF.delegate = self
-        phoneTF.borderStyle = .roundedRect
-        phoneTF.placeholder = "请输入要找回的手机号"
-        phoneTF.keyboardType = .numberPad
+    //MARK: - 懒加载
+    lazy private var tableView : UITableView = {
+        let table = UITableView(frame: CGRect.zero, style: .plain)
+        table.dataSource = self
+        table.delegate = self
+        table.backgroundColor = UIColor.red
+        table.isScrollEnabled = false
+        table.separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        table.register(MobileTextFieldCell.self, forCellReuseIdentifier: mobileCellIdentifier)
+        table.register(PasswordTextFieldCell.self, forCellReuseIdentifier: passwordCellIdentifier)
+        table.register(VcodeTextFieldCell.self, forCellReuseIdentifier: vcodeCellIdentifier)
         
-        // button
-        confirmBut = UIButton(type: .custom)
-        confirmBut.setTitle("下一步", for: .normal)
-        confirmBut.setTitleColor(UIColor.white, for: .normal)
-        confirmBut.backgroundColor = UIColor.blue
-        confirmBut.layer.cornerRadius = 5
-        confirmBut.addTarget(self, action: #selector(confirmButClicked(_:)), for: .touchUpInside)
+        let footer = ForgetPswModileFooterView()
+        footer.nextBut.addTarget(self, action: #selector(confirmButClicked(_:)), for: .touchUpInside)
+        table.tableFooterView = footer
         
-        
-        self.view.addSubview(phoneTF)
-        self.view.addSubview(confirmBut)
-        
+        return table
+    }()
+    //MARK: - tableview datasource
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        phoneTF.snp.makeConstraints { (make) in
-            make.height.equalTo(45)
-            make.left.equalTo(self.view).offset(20)
-            make.right.equalTo(self.view).offset(-20)
-            make.top.equalTo(self.view).offset(SafeAreaTopHeight + 20)
-        }
-        confirmBut.snp.makeConstraints { (make) in
-            make.height.equalTo(50)
-            make.top.equalTo(phoneTF.snp.bottom).offset(50)
-            make.left.equalTo(self.view).offset(20)
-            make.right.equalTo(self.view).offset(-20)
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        switch indexPath.row {
+        case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: mobileCellIdentifier, for: indexPath) as! MobileTextFieldCell
+            cell.textfield.delegate = self
+            self.phoneTF = cell.textfield
+            return cell
+        default:
+            return UITableViewCell()
         }
     }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat(loginTextFieldHeight)
+    }
+    
     
     
     
