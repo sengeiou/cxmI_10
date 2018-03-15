@@ -43,6 +43,7 @@ class MeCell: UITableViewCell {
     }
     
     override func layoutSubviews() {
+        super.layoutSubviews()
         title.snp.makeConstraints { (make) in
             make.width.equalTo(100)
             make.top.equalTo(self.contentView).offset(10)
@@ -61,10 +62,7 @@ class MeCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-       
-    }
+    
 
     
 
