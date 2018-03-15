@@ -21,10 +21,9 @@ class PasswordTextFieldCell: UITableViewCell {
     }
     
     private func initSubview() {
-        textfield = CustomTextField(imageName: "userID")
+        textfield = CustomTextField(style: .password, img: "sec_nor")
         textfield.borderStyle = .none
-        textfield.style = .password
-        
+        textfield.selectImg = "sec_sel"
         self.contentView.addSubview(textfield)
         
     }

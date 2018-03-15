@@ -68,22 +68,6 @@ class CustomTextField: UITextField, CountdownButtonDelegate {
         }
     }
     
-    init(imageName : String) {
-        super.init(frame: CGRect.zero)
-        
-        let cusLeftView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 30))
-        
-        imageView = UIImageView(frame: CGRect(x: 10, y: 0, width: 30, height: 30))
-        imageView.image = UIImage(named: imageName)
-        
-        cusLeftView.addSubview(imageView)
-        
-        self.leftView = cusLeftView
-        self.leftViewMode = .always
-        
-        
-    }
-    
     public func changeImg(_ string: String) {
         guard selectImg != nil else { return }
         self.imageView.image = UIImage(named: selectImg!)
@@ -105,8 +89,8 @@ class CustomTextField: UITextField, CountdownButtonDelegate {
         
         
         let but = UIButton(type: .custom)
-        but.setBackgroundImage(UIImage(named: "userID"), for: .normal)
-        but.setBackgroundImage(UIImage(named: "eye"), for: .selected)
+        but.setBackgroundImage(UIImage(named: "hid"), for: .normal)
+        but.setBackgroundImage(UIImage(named: "show"), for: .selected)
         but.addTarget(self, action: #selector(eyeButClicked(_:)), for: .touchUpInside)
         cusRightView.addSubview(but)
         

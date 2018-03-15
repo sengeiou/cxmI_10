@@ -21,9 +21,9 @@ class MobileTextFieldCell: UITableViewCell {
     }
     
     private func initSubview() {
-        textfield = CustomTextField(style: .mobile, img: "userID")
+        textfield = CustomTextField(style: .mobile, img: "pho_nor")
         textfield.borderStyle = .none
-        textfield.selectImg = "eye"
+        textfield.selectImg = "pho_sel"
         
         self.contentView.addSubview(textfield)
         

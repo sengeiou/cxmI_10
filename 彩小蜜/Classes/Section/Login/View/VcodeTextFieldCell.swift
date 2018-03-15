@@ -22,10 +22,10 @@ class VcodeTextFieldCell: UITableViewCell {
     }
     
     private func initSubview() {
-        textfield = CustomTextField(style: .vcode, img: "userID")
+        textfield = CustomTextField(style: .vcode, img: "tes_nor")
         textfield.borderStyle = .none
-        
-        
+        textfield.selectImg = "tes_sel"
+    
         self.contentView.addSubview(textfield)
         
     }

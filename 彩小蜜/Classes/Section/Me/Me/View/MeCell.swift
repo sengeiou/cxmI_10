@@ -28,6 +28,7 @@ class MeCell: UITableViewCell {
     }
     
     private func createUI() {
+        self.selectionStyle = .none
         
         title = UILabel()
         title.textAlignment = .left
