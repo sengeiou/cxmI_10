@@ -44,7 +44,7 @@ class ForgetPswPhoneVC: BaseViewController, UITextFieldDelegate, ValidatePro, UI
     //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "彩小秘·找回密码"
+        self.title = "彩小秘 · 找回密码"
         self.view.addSubview(tableView)
     }
     override func viewDidLayoutSubviews() {
