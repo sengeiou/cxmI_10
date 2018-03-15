@@ -24,6 +24,7 @@ class PasswordTextFieldCell: UITableViewCell {
         textfield = CustomTextField(style: .password, img: "sec_nor")
         textfield.borderStyle = .none
         textfield.selectImg = "sec_sel"
+        textfield.placeholder = "请输入6-20位密码"
         self.contentView.addSubview(textfield)
         
     }
@@ -31,8 +32,8 @@ class PasswordTextFieldCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         textfield.snp.makeConstraints { (make) in
-            make.top.equalTo(self.contentView).offset(5)
-            make.bottom.equalTo(self.contentView).offset(-5)
+            make.top.equalTo(self.contentView)
+            make.bottom.equalTo(self.contentView)
             make.left.equalTo(self.contentView).offset(5)
             make.right.equalTo(self.contentView).offset(-5)
         }

@@ -120,7 +120,7 @@ class ForgetPswVCodeVC: BaseViewController, UITextFieldDelegate, ValidatePro,Cus
         let table = UITableView(frame: CGRect.zero, style: .plain)
         table.dataSource = self
         table.delegate = self
-        table.backgroundColor = UIColor.red
+        table.backgroundColor = ColorF4F4F4
         table.isScrollEnabled = false
         table.separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         table.register(MobileTextFieldCell.self, forCellReuseIdentifier: mobileCellIdentifier)

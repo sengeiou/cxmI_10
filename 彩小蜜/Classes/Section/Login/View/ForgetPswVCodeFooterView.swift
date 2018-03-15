@@ -22,8 +22,8 @@ class ForgetPswVCodeFooterView: UIView {
     private func initSubview() {
         confirm = UIButton(type: .custom)
         confirm.setTitle("确认", for: .normal)
-        confirm.setTitleColor(UIColor.white, for: .normal)
-        confirm.backgroundColor = UIColor.green
+        confirm.setTitleColor(ColorFFFFFF, for: .normal)
+        confirm.backgroundColor = ColorEA5504
         confirm.layer.cornerRadius = 5
         
         self.addSubview(confirm)

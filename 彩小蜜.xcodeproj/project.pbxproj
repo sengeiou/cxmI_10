@@ -77,6 +77,8 @@
 		E5973E35204FCCF2006461CE /* MeAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5973E34204FCCF2006461CE /* MeAboutViewController.swift */; };
 		E5973E40204FDD34006461CE /* MeComplaintVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5973E3F204FDD34006461CE /* MeComplaintVC.swift */; };
 		E5973E42204FDD6F006461CE /* MeGuaranteeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5973E41204FDD6F006461CE /* MeGuaranteeVC.swift */; };
+		E5B68AFB205A81940038A5A2 /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B68AFA205A81940038A5A2 /* Extension+String.swift */; };
+		E5B68AFD205A81A70038A5A2 /* Extension+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B68AFC205A81A70038A5A2 /* Extension+Color.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -176,6 +178,8 @@
 		E5973E34204FCCF2006461CE /* MeAboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeAboutViewController.swift; sourceTree = "<group>"; };
 		E5973E3F204FDD34006461CE /* MeComplaintVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeComplaintVC.swift; sourceTree = "<group>"; };
 		E5973E41204FDD6F006461CE /* MeGuaranteeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeGuaranteeVC.swift; sourceTree = "<group>"; };
+		E5B68AFA205A81940038A5A2 /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
+		E5B68AFC205A81A70038A5A2 /* Extension+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Color.swift"; sourceTree = "<group>"; };
 		EAE714330A11D581FBF18120 /* Pods____UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods____UITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDB760CCFE10D3EA06C79E83 /* Pods-彩小蜜Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜Tests/Pods-彩小蜜Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -250,6 +254,8 @@
 			isa = PBXGroup;
 			children = (
 				E53739762057B9340087E4E6 /* extension+UserDefaults.swift */,
+				E5B68AFA205A81940038A5A2 /* Extension+String.swift */,
+				E5B68AFC205A81A70038A5A2 /* Extension+Color.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1329,6 +1335,7 @@
 				E50B9073205231B500417BFE /* RechargeHeaderView.swift in Sources */,
 				E57376442046BC1300148622 /* LotteryViewController.swift in Sources */,
 				E514DDE22052B3E000274854 /* WithdrawalViewController.swift in Sources */,
+				E5B68AFD205A81A70038A5A2 /* Extension+Color.swift in Sources */,
 				E512A96D20480917003F14F4 /* HomeDataModel.swift in Sources */,
 				E51F9A56205A11EA00AB8A21 /* MobileTextFieldCell.swift in Sources */,
 				E537397D2057F7220087E4E6 /* RealInfoDataModel.swift in Sources */,
@@ -1343,6 +1350,7 @@
 				E58B57C9205688570025E2F1 /* UserDataModel.swift in Sources */,
 				E51F9A62205A2A1500AB8A21 /* ForgetPswModileFooterView.swift in Sources */,
 				E5973E24204E3687006461CE /* VCodeLoginViewController.swift in Sources */,
+				E5B68AFB205A81940038A5A2 /* Extension+String.swift in Sources */,
 				E512A96620479FD7003F14F4 /* HomeNetAPIManager.swift in Sources */,
 				E5973E2F204F8B33006461CE /* MeCell.swift in Sources */,
 				E537397B2057F4270087E4E6 /* UserInfoDataModel.swift in Sources */,

@@ -17,7 +17,9 @@ class ForgetPswPhoneVC: BaseViewController, UITextFieldDelegate, ValidatePro, UI
 
     //MARK: - 点击事件
     @objc private func confirmButClicked(_ sender : UIButton) {
-        
+        let vcode = ForgetPswVCodeVC()
+        vcode.phoneNum = self.phoneTF.text
+        self.pushViewController(vc: vcode)
         guard validate(.phone, str: self.phoneTF.text) == true else {
             showAlert(message: "请输入合法的手机号")
             return
@@ -114,7 +116,7 @@ class ForgetPswPhoneVC: BaseViewController, UITextFieldDelegate, ValidatePro, UI
         let table = UITableView(frame: CGRect.zero, style: .plain)
         table.dataSource = self
         table.delegate = self
-        table.backgroundColor = UIColor.red
+        table.backgroundColor = ColorF4F4F4
         table.isScrollEnabled = false
         table.separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         table.register(MobileTextFieldCell.self, forCellReuseIdentifier: mobileCellIdentifier)

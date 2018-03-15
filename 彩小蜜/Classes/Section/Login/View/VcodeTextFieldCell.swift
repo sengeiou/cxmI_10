@@ -25,7 +25,7 @@ class VcodeTextFieldCell: UITableViewCell {
         textfield = CustomTextField(style: .vcode, img: "tes_nor")
         textfield.borderStyle = .none
         textfield.selectImg = "tes_sel"
-    
+        textfield.placeholder = "输入验证码"
         self.contentView.addSubview(textfield)
         
     }
@@ -33,8 +33,8 @@ class VcodeTextFieldCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         textfield.snp.makeConstraints { (make) in
-            make.top.equalTo(self.contentView).offset(5)
-            make.bottom.equalTo(self.contentView).offset(-5)
+            make.top.equalTo(self.contentView)
+            make.bottom.equalTo(self.contentView)
             make.left.equalTo(self.contentView).offset(5)
             make.right.equalTo(self.contentView).offset(-5)
         }

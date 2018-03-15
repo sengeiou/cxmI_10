@@ -23,12 +23,18 @@ class RegisterFooterView: UIView {
     private func initSubview() {
         register = UIButton(type: .custom)
         register.setTitle("注册", for: .normal)
-        register.setTitleColor(UIColor.white, for: .normal)
-        register.backgroundColor = UIColor.red
+        register.setTitleColor(ColorFFFFFF, for: .normal)
+        register.backgroundColor = ColorEA5504
         register.layer.cornerRadius = 5
         
+        let attStr = NSMutableAttributedString(string: "注册表明您已同意", attributes: [NSAttributedStringKey.foregroundColor: ColorA0A0A0])
+        
+        let attProStr = NSAttributedString(string: "《彩小秘彩票服务协议》", attributes: [NSAttributedStringKey.foregroundColor: Color787878])
+        attStr.append(attProStr)
+        
+        
         registerPro = UILabel()
-        registerPro.text = "注册表明您已同意 《彩小秘彩票服务协议》"
+        registerPro.attributedText = attStr
         registerPro.textColor = UIColor.black
         registerPro.font = Font14
         registerPro.textAlignment = .center
@@ -49,7 +55,7 @@ class RegisterFooterView: UIView {
             make.height.equalTo(30)
             make.left.equalTo(self).offset(leftSpacing)
             make.right.equalTo(self).offset(-rightSpacing)
-            make.top.equalTo(register.snp.bottom).offset(verticalSpacing)
+            make.top.equalTo(register.snp.bottom).offset(12.5)
         }
     }
     

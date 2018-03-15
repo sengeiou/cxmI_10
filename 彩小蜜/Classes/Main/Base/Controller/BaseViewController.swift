@@ -81,7 +81,7 @@ class BaseViewController: UIViewController, AlertPro {
         let leftBut = UIButton(type: .custom)
         leftBut.setTitle("返回", for: .normal)
         
-        leftBut.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        leftBut.titleLabel?.font = Font15
         
         leftBut.contentEdgeInsets = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
         

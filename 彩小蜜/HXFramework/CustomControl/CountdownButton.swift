@@ -66,10 +66,10 @@ class CountdownButton: UIButton {
     init() {
         super.init(frame: CGRect.zero)
         
-        self.titleLabel?.font = UIFont.systemFont(ofSize: 12)
-        self.backgroundColor = UIColor.red
-        self.setTitleColor(UIColor.white, for: .normal)
-        self.setTitle("获取验证码", for: .normal)
+        self.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        //self.backgroundColor = UIColor.red
+        self.setTitleColor(ColorA0A0A0, for: .normal)
+        self.setTitle("获取短信验证码", for: .normal)
         self.addTarget(self, action: #selector(sendButtonClick(_:)), for: .touchUpInside)
         
     }

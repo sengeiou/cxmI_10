@@ -21,8 +21,8 @@ class VCodeLoginFooterView: UIView {
     private func initSubview() {
         login = UIButton(type: .custom)
         login.setTitle("登录", for: .normal)
-        login.setTitleColor(UIColor.white, for: .normal)
-        login.backgroundColor = UIColor.blue
+        login.setTitleColor(ColorFFFFFF, for: .normal)
+        login.backgroundColor = ColorEA5504
         login.layer.cornerRadius = 5
         
         self.addSubview(login)

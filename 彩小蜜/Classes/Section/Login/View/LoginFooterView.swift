@@ -30,22 +30,26 @@ class LoginFooterView: UIView {
         forget = UIButton(type: .custom)
         
         login.setTitle("登录", for: .normal)
-        login.setTitleColor(UIColor.black, for: .normal)
-        login.backgroundColor = UIColor.blue
+        login.setTitleColor(ColorFFFFFF, for: .normal)
+        login.backgroundColor = ColorEA5504
         login.layer.cornerRadius = 5
         
         register.setTitle("新用户注册", for: .normal)
-        register.setTitleColor(UIColor.black, for: .normal)
+        register.setTitleColor(ColorEA5504, for: .normal)
         register.backgroundColor = UIColor.white
         register.layer.cornerRadius = 5
+        register.layer.borderWidth = 0.5
+        register.layer.borderColor = ColorEA5504.cgColor
         
         smsLogin.setTitle("短信验证码登录", for: .normal)
-        smsLogin.setTitleColor(UIColor.black, for: .normal)
+        smsLogin.titleLabel?.font = Font14
+        smsLogin.setTitleColor(Color787878, for: .normal)
         smsLogin.backgroundColor = UIColor.clear
         smsLogin.contentHorizontalAlignment = .left
         
         forget.setTitle("忘记密码？", for: .normal)
-        forget.setTitleColor(UIColor.black, for: .normal)
+        forget.titleLabel?.font = Font14
+        forget.setTitleColor(ColorF7931E, for: .normal)
         forget.backgroundColor = UIColor.clear
         forget.contentHorizontalAlignment = .right
         
@@ -68,7 +72,7 @@ class LoginFooterView: UIView {
             make.height.equalTo(loginButHeight)
             make.left.equalTo(self).offset(leftSpacing)
             make.right.equalTo(self).offset(-rightSpacing)
-            make.top.equalTo(login.snp.bottom).offset(10)
+            make.top.equalTo(login.snp.bottom).offset(12.5)
         }
         smsLogin.snp.makeConstraints { (make) in
             make.height.equalTo(30)

@@ -24,7 +24,7 @@ class MobileTextFieldCell: UITableViewCell {
         textfield = CustomTextField(style: .mobile, img: "pho_nor")
         textfield.borderStyle = .none
         textfield.selectImg = "pho_sel"
-        
+        textfield.placeholder = "请输入手机号码"
         self.contentView.addSubview(textfield)
         
     }
@@ -32,8 +32,8 @@ class MobileTextFieldCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         textfield.snp.makeConstraints { (make) in
-            make.top.equalTo(self.contentView).offset(5)
-            make.bottom.equalTo(self.contentView).offset(-5)
+            make.top.equalTo(self.contentView)
+            make.bottom.equalTo(self.contentView)
             make.left.equalTo(self.contentView).offset(5)
             make.right.equalTo(self.contentView).offset(-5)
         }

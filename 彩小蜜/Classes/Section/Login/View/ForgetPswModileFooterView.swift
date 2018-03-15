@@ -20,8 +20,8 @@ class ForgetPswModileFooterView: UIView {
     private func initSubview() {
         nextBut = UIButton(type: .custom)
         nextBut.setTitle("下一步", for: .normal)
-        nextBut.setTitleColor(UIColor.white, for: .normal)
-        nextBut.backgroundColor = UIColor.blue
+        nextBut.setTitleColor(ColorFFFFFF, for: .normal)
+        nextBut.backgroundColor = ColorEA5504
         nextBut.layer.cornerRadius = 5
         
         self.addSubview(nextBut)

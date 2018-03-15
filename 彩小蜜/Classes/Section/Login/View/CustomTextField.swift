@@ -47,9 +47,9 @@ class CustomTextField: UITextField, CountdownButtonDelegate {
     
     init(style : CustomTFStyle, img : String) {
         super.init(frame: CGRect.zero)
-        let cusLeftView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 30))
+        let cusLeftView = UIView(frame: CGRect(x: 0, y: 0, width: 19 + 20 + 7.5, height: 30))
         
-        imageView = UIImageView(frame: CGRect(x: 10, y: 0, width: 30, height: 30))
+        imageView = UIImageView()
         imageView.image = UIImage(named: img)
         self.defaultImg = img
         
@@ -57,6 +57,14 @@ class CustomTextField: UITextField, CountdownButtonDelegate {
         
         self.leftView = cusLeftView
         self.leftViewMode = .always
+        
+        imageView.snp.makeConstraints { (make) in
+            make.height.equalTo(20)
+            make.left.equalTo(cusLeftView).offset(19)
+            make.width.equalTo(imageView.snp.height)
+            make.centerY.equalTo(cusLeftView.snp.centerY)
+        }
+        
         
         switch style {
         case .mobile:
@@ -85,8 +93,7 @@ class CustomTextField: UITextField, CountdownButtonDelegate {
     private func initPassword() {
         self.isSecureTextEntry = true
         
-        let cusRightView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 30))
-        
+        let cusRightView = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 30))
         
         let but = UIButton(type: .custom)
         but.setBackgroundImage(UIImage(named: "hid"), for: .normal)
@@ -98,16 +105,15 @@ class CustomTextField: UITextField, CountdownButtonDelegate {
         self.rightViewMode = .always
         
         but.snp.makeConstraints { (make) in
-            make.top.equalTo(cusRightView).offset(5)
-            make.bottom.equalTo(cusRightView).offset(-5)
-            make.right.equalTo(cusRightView).offset(-5)
+            make.height.equalTo(24)
+            make.centerY.equalTo(cusRightView.snp.centerY)
+            make.right.equalTo(cusRightView).offset(-23.5)
             make.width.equalTo(but.snp.height)
         }
     }
     private func initVcode() {
-        self.isSecureTextEntry = true
-        
-        let cusRightView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 30))
+    
+        let cusRightView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: loginTextFieldHeight))
         self.rightView = cusRightView
         self.rightViewMode = .always
         
@@ -115,13 +121,25 @@ class CustomTextField: UITextField, CountdownButtonDelegate {
         countdownBut.delegate = self
         countdownBut.layer.cornerRadius = 5
         
+        let line = UIView()
+        line.backgroundColor = ColorEAEAEA
+        
+        cusRightView.addSubview(line)
+        
         cusRightView.addSubview(countdownBut)
+        
+        line.snp.makeConstraints { (make) in
+            make.top.equalTo(cusRightView).offset(12.5)
+            make.right.equalTo(countdownBut.snp.left).offset(-12)
+            make.bottom.equalTo(cusRightView).offset(-12.5)
+            make.width.equalTo(1)
+        }
         
         countdownBut.snp.makeConstraints { (make) in
             make.top.equalTo(cusRightView).offset(1)
             make.bottom.equalTo(cusRightView).offset(-1)
-            make.right.equalTo(cusRightView).offset(-5)
-            make.width.equalTo(100)
+            make.right.equalTo(cusRightView).offset(-33.5)
+            make.width.equalTo(120)
         }
     }
     

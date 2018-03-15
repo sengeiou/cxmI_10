@@ -67,7 +67,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro,
     //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "彩小秘·登录"
+        self.title = "彩小秘 · 密码登录"
         self.view.addSubview(tableView)
     }
     override func viewDidLayoutSubviews() {
@@ -112,7 +112,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro,
         let table = UITableView(frame: CGRect.zero, style: .plain)
         table.dataSource = self
         table.delegate = self
-        table.backgroundColor = UIColor.red
+        table.backgroundColor = ColorF4F4F4
         table.isScrollEnabled = false
         table.separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         table.register(MobileTextFieldCell.self, forCellReuseIdentifier: mobileCellIdentifier)
