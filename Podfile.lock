@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (4.6.0)
+  - FSPagerView (0.7.1)
   - HandyJSON (4.0.0-beta.1)
   - Kingfisher (4.6.2)
   - MJRefresh (3.1.15.3)
@@ -17,6 +18,7 @@ PODS:
   - TTTAttributedLabel (2.0.0)
 
 DEPENDENCIES:
+  - FSPagerView
   - HandyJSON (~> 4.0.0-beta.1)
   - Kingfisher
   - MJRefresh
@@ -30,6 +32,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
+  FSPagerView: 958aba39684e1573755ddcfcc29f7eebb8413cee
   HandyJSON: 428bb18e2c34c2a77361accebf90cf64e4f74118
   Kingfisher: 55b9c395bf8d3949676ad3861111923990ab68cf
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
@@ -41,6 +44,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
 
-PODFILE CHECKSUM: 5b0968567845f34755f0c7e110eeaf268786d3e9
+PODFILE CHECKSUM: 963a9b58c85651f0ce11902ed79f4e475baaa89b
 
 COCOAPODS: 1.4.0

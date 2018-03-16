@@ -47,7 +47,6 @@
 		E57375C320468B8900148622 /* ___UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57375C220468B8900148622 /* ___UITests.swift */; };
 		E57375F52046B1AD00148622 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E57375F42046B1AD00148622 /* Info.plist */; };
 		E57376022046B37900148622 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57376012046B37900148622 /* MainTabBarController.swift */; };
-		E57376422046BB7F00148622 /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57376412046BB7F00148622 /* HomeTableViewController.swift */; };
 		E57376442046BC1300148622 /* LotteryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57376432046BC1300148622 /* LotteryViewController.swift */; };
 		E57376462046BC6400148622 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57376452046BC6400148622 /* MeViewController.swift */; };
 		E58B57B220561BB80025E2F1 /* Spacing&SizeConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58B57B120561BB80025E2F1 /* Spacing&SizeConstraint.swift */; };
@@ -77,6 +76,7 @@
 		E5973E35204FCCF2006461CE /* MeAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5973E34204FCCF2006461CE /* MeAboutViewController.swift */; };
 		E5973E40204FDD34006461CE /* MeComplaintVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5973E3F204FDD34006461CE /* MeComplaintVC.swift */; };
 		E5973E42204FDD6F006461CE /* MeGuaranteeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5973E41204FDD6F006461CE /* MeGuaranteeVC.swift */; };
+		E5A2644E205B742B00EE6491 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A2644D205B742B00EE6491 /* HomeViewController.swift */; };
 		E5B68AFB205A81940038A5A2 /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B68AFA205A81940038A5A2 /* Extension+String.swift */; };
 		E5B68AFD205A81A70038A5A2 /* Extension+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B68AFC205A81A70038A5A2 /* Extension+Color.swift */; };
 /* End PBXBuildFile section */
@@ -148,7 +148,6 @@
 		E57375C420468B8900148622 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E57375F42046B1AD00148622 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E57376012046B37900148622 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
-		E57376412046BB7F00148622 /* HomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
 		E57376432046BC1300148622 /* LotteryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryViewController.swift; sourceTree = "<group>"; };
 		E57376452046BC6400148622 /* MeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
 		E58B57B120561BB80025E2F1 /* Spacing&SizeConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Spacing&SizeConstraint.swift"; sourceTree = "<group>"; };
@@ -178,6 +177,7 @@
 		E5973E34204FCCF2006461CE /* MeAboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeAboutViewController.swift; sourceTree = "<group>"; };
 		E5973E3F204FDD34006461CE /* MeComplaintVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeComplaintVC.swift; sourceTree = "<group>"; };
 		E5973E41204FDD6F006461CE /* MeGuaranteeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeGuaranteeVC.swift; sourceTree = "<group>"; };
+		E5A2644D205B742B00EE6491 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		E5B68AFA205A81940038A5A2 /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
 		E5B68AFC205A81A70038A5A2 /* Extension+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Color.swift"; sourceTree = "<group>"; };
 		EAE714330A11D581FBF18120 /* Pods____UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods____UITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -689,7 +689,7 @@
 		E57375E22046AF6400148622 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				E57376412046BB7F00148622 /* HomeTableViewController.swift */,
+				E5A2644D205B742B00EE6491 /* HomeViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1171,6 +1171,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-彩小蜜/Pods-彩小蜜-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/FSPagerView/FSPagerView.framework",
 				"${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
@@ -1185,6 +1186,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSPagerView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HandyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
@@ -1343,7 +1345,6 @@
 				E51F9A64205A2A2D00AB8A21 /* ForgetPswVCodeFooterView.swift in Sources */,
 				E58B57C5205676CB0025E2F1 /* MeNetAPIManager.swift in Sources */,
 				E50B9077205235BF00417BFE /* RechargeCardCell.swift in Sources */,
-				E57376422046BB7F00148622 /* HomeTableViewController.swift in Sources */,
 				E512A9692047E598003F14F4 /* Observable+ObjectMapper.swift in Sources */,
 				E5973E31204F8FD4006461CE /* MeHeaderView.swift in Sources */,
 				E58B57B220561BB80025E2F1 /* Spacing&SizeConstraint.swift in Sources */,
@@ -1378,6 +1379,7 @@
 				E5973E1E204D50BC006461CE /* CustomTextField.swift in Sources */,
 				E562989F2050E04C006397EA /* ValidateProtocol.swift in Sources */,
 				E56298A32050E712006397EA /* AlertProtocol.swift in Sources */,
+				E5A2644E205B742B00EE6491 /* HomeViewController.swift in Sources */,
 				E58B57C7205676EC0025E2F1 /* LotteryNetAPIManager.swift in Sources */,
 				E51F9A5A205A122000AB8A21 /* VcodeTextFieldCell.swift in Sources */,
 				E50B907D20526BB200417BFE /* RechargeCell.swift in Sources */,

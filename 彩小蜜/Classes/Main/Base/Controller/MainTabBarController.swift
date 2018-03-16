@@ -20,7 +20,7 @@ class MainTabBarController: UITabBarController {
     private func creatSubViewControllers()
     {
         // 主页
-        let home = HomeTableViewController()
+        let home = HomeViewController()
         
         let homeNav = UINavigationController(rootViewController: home)
         homeNav.tabBarItem.imageInsets = UIEdgeInsets(top: 10, left: 0, bottom: -10, right: 0)

@@ -67,13 +67,18 @@ extension UserInfoPro {
         UserDefaults.standard.synchronize()
     }
     public func getUserData() -> UserDataModel {
-        let userData = UserDefaults.standard.object(forKey: "userInfo") as! Data
-        let userInfo = NSKeyedUnarchiver.unarchiveObject(with: userData ) as! UserDataModel
+        guard let userData = UserDefaults.standard.object(forKey: "userInfo") as? Data else { return UserDataModel() }
+        guard let userInfo = NSKeyedUnarchiver.unarchiveObject(with: userData ) as? UserDataModel else { return UserDataModel() }
         return userInfo
+    }
+    public func getToken() -> String {
+        let userInfo = self.getUserData()
+        return userInfo.token
     }
 }
 
-private let userData = UserDefaults.standard.object(forKey: "userInfo") as? Data
-private let userInfo = NSKeyedUnarchiver.unarchiveObject(with: userData != nil ? userData! : Data() ) as? UserDataModel
+struct UserInfoManager: UserInfoPro {
+    
+}
 
-let token : String = userInfo != nil ? userInfo!.token! : ""
+

@@ -31,7 +31,7 @@ extension MeNetAPIManager : TargetType {
     
     var headers: [String : String]? {
         return ["Content-Type" : "application/json",
-                "token" : token
+                "token" : UserInfoManager().getToken()
         ]
     }
     

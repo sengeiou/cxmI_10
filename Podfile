@@ -27,7 +27,7 @@ target '彩小蜜' do
 
   pod 'Kingfisher'
 
-
+  pod 'FSPagerView'
 
 
 
