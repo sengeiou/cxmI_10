@@ -7,6 +7,9 @@
 //
 
 import Foundation
+import UIKit
+
+fileprivate let defaultScale = screenWidth / 375
 
 /// 距离屏幕左侧间隔
 let leftSpacing = 17.5
@@ -28,4 +31,8 @@ let loginButHeight = 44
 let loginButTopSpacing = 30
 ///
 let loginTextFieldHeight = 55
+/// banner高度
+let bannerHeight : CGFloat = 130.0 * defaultScale
+
+//MARK: -  首页足球尺寸
 

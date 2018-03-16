@@ -80,6 +80,7 @@
 		E59CB3DB205BA1300086DD0E /* HomeActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59CB3DA205BA1300086DD0E /* HomeActivityCell.swift */; };
 		E59CB3DD205BA1650086DD0E /* HomeSportLotteryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59CB3DC205BA1650086DD0E /* HomeSportLotteryCell.swift */; };
 		E59CB3DF205BA17F0086DD0E /* HomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59CB3DE205BA17F0086DD0E /* HomeHeaderView.swift */; };
+		E59CB3E1205BBD900086DD0E /* HomeFootballCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59CB3E0205BBD900086DD0E /* HomeFootballCell.swift */; };
 		E5A2644E205B742B00EE6491 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A2644D205B742B00EE6491 /* HomeViewController.swift */; };
 		E5B68AFB205A81940038A5A2 /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B68AFA205A81940038A5A2 /* Extension+String.swift */; };
 		E5B68AFD205A81A70038A5A2 /* Extension+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B68AFC205A81A70038A5A2 /* Extension+Color.swift */; };
@@ -185,6 +186,7 @@
 		E59CB3DA205BA1300086DD0E /* HomeActivityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeActivityCell.swift; sourceTree = "<group>"; };
 		E59CB3DC205BA1650086DD0E /* HomeSportLotteryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSportLotteryCell.swift; sourceTree = "<group>"; };
 		E59CB3DE205BA17F0086DD0E /* HomeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeaderView.swift; sourceTree = "<group>"; };
+		E59CB3E0205BBD900086DD0E /* HomeFootballCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFootballCell.swift; sourceTree = "<group>"; };
 		E5A2644D205B742B00EE6491 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		E5B68AFA205A81940038A5A2 /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
 		E5B68AFC205A81A70038A5A2 /* Extension+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Color.swift"; sourceTree = "<group>"; };
@@ -553,7 +555,7 @@
 				E57375E82046AFCB00148622 /* Base */,
 				E512A9672047E532003F14F4 /* Network */,
 				E57375E72046AFC900148622 /* Extension */,
-				E57375E62046AFC600148622 /* Define */,
+				E57375EC2046B04600148622 /* Constraints */,
 				E57375E92046B02C00148622 /* Tool */,
 			);
 			path = Main;
@@ -708,6 +710,7 @@
 				E59CB3D8205BA11A0086DD0E /* HomeScrollBarCell.swift */,
 				E59CB3DA205BA1300086DD0E /* HomeActivityCell.swift */,
 				E59CB3DC205BA1650086DD0E /* HomeSportLotteryCell.swift */,
+				E59CB3E0205BBD900086DD0E /* HomeFootballCell.swift */,
 				E59CB3DE205BA17F0086DD0E /* HomeHeaderView.swift */,
 			);
 			path = View;
@@ -733,15 +736,6 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
-		E57375E62046AFC600148622 /* Define */ = {
-			isa = PBXGroup;
-			children = (
-				E57375EC2046B04600148622 /* Constraints */,
-				E57375EB2046B04000148622 /* Macro */,
-			);
-			path = Define;
-			sourceTree = "<group>";
-		};
 		E57375E72046AFC900148622 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -765,13 +759,6 @@
 			children = (
 			);
 			path = Tool;
-			sourceTree = "<group>";
-		};
-		E57375EB2046B04000148622 /* Macro */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Macro;
 			sourceTree = "<group>";
 		};
 		E57375EC2046B04600148622 /* Constraints */ = {
@@ -1354,6 +1341,7 @@
 				E5B68AFD205A81A70038A5A2 /* Extension+Color.swift in Sources */,
 				E512A96D20480917003F14F4 /* HomeDataModel.swift in Sources */,
 				E51F9A56205A11EA00AB8A21 /* MobileTextFieldCell.swift in Sources */,
+				E59CB3E1205BBD900086DD0E /* HomeFootballCell.swift in Sources */,
 				E537397D2057F7220087E4E6 /* RealInfoDataModel.swift in Sources */,
 				E58B57BA2056364A0025E2F1 /* AddNewBankCardVC.swift in Sources */,
 				E51F9A64205A2A2D00AB8A21 /* ForgetPswVCodeFooterView.swift in Sources */,

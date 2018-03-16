@@ -43,9 +43,9 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         let header = HomeHeaderView()
         table.tableHeaderView = header
         
-        table.register(UITableViewCell.self, forCellReuseIdentifier: homeScrollBarCellIdentifier)
-        table.register(UITableViewCell.self, forCellReuseIdentifier: homeActivityCellIdentifier)
-        table.register(UITableViewCell.self, forCellReuseIdentifier: homeSportsCellIdentifier)
+        table.register(HomeScrollBarCell.self, forCellReuseIdentifier: homeScrollBarCellIdentifier)
+        table.register(HomeActivityCell.self, forCellReuseIdentifier: homeActivityCellIdentifier)
+        table.register(HomeSportLotteryCell.self, forCellReuseIdentifier: homeSportsCellIdentifier)
         
         return table
     }()
@@ -60,13 +60,14 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         
         switch indexPath.section {
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: homeScrollBarCellIdentifier, for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: homeScrollBarCellIdentifier, for: indexPath) as! HomeScrollBarCell
             return cell
         case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: homeActivityCellIdentifier, for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: homeActivityCellIdentifier, for: indexPath) as! HomeActivityCell
             return cell
         case 2:
-            let cell = tableView.dequeueReusableCell(withIdentifier: homeSportsCellIdentifier, for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: homeSportsCellIdentifier, for: indexPath) as! HomeSportLotteryCell
+            
             return cell
         default:
             return UITableViewCell()
@@ -74,7 +75,27 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+        
+        switch indexPath.section {
+        case 0:
+            return 40
+        case 1:
+            return 80
+        case 2:
+            
+            let count = 10
+            var verticalCount = count / HorizontalItemCount
+            
+            if count % HorizontalItemCount != 0 {
+                verticalCount += 1
+            }
+            
+            let height : CGFloat = 10 + 10 + FootballCellHeight * CGFloat(verticalCount) + FootballCellLineSpacing * CGFloat(verticalCount)
+            
+            return height
+        default:
+            return 0
+        }
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 5

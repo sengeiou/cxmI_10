@@ -16,6 +16,7 @@ let ColorEAEAEA = UIColor(hexColor: "EAEAEA")
 /// 界面背景主色
 let ColorF4F4F4 = UIColor(hexColor: "F4F4F4")
 let Color787878 = UIColor(hexColor: "787878")
+/// 主白
 let ColorFFFFFF = UIColor(hexColor: "FFFFFF")
 /// app 主色
 let ColorEA5504 = UIColor(hexColor: "EA5504")

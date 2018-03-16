@@ -9,26 +9,41 @@
 import UIKit
 import FSPagerView
 
-class HomeHeaderView: UIView {
+fileprivate let headerCellIdentifier = "headerCellIdentifier"
+
+class HomeHeaderView: UIView, FSPagerViewDataSource, FSPagerViewDelegate {
 
     
     init() {
-        super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 200))
-        
+        super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: bannerHeight))
+        print(bannerHeight)
         initSubview()
     }
     
     private func initSubview() {
-        
+        self.addSubview(viewPager)
+        viewPager.addSubview(pageControl)
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        viewPager.snp.makeConstraints { (make) in
+            make.top.left.right.bottom.equalTo(self)
+        }
+        pageControl.snp.makeConstraints { (make) in
+            make.left.right.equalTo(viewPager)
+            make.bottom.equalTo(viewPager).offset(-5)
+            make.height.equalTo(20)
+        }
+    }
+    
     lazy var viewPager: FSPagerView = {
         let viewPager = FSPagerView()
-        //viewPager.frame = frame1
-        //viewPager.dataSource = self
-        //viewPager.delegate = self
-        //viewPager.register(FSPagerViewCell.self, forCellWithReuseIdentifier: cellId)
+        viewPager.dataSource = self
+        viewPager.delegate = self
+        viewPager.register(FSPagerViewCell.self, forCellWithReuseIdentifier: headerCellIdentifier)
         //设置自动翻页事件间隔，默认值为0（不自动翻页）
-        viewPager.automaticSlidingInterval = 1.0
+        viewPager.automaticSlidingInterval = 2.0
         //设置页面之间的间隔距离
         viewPager.interitemSpacing = 8.0
         //设置可以无限翻页，默认值为false，false时从尾部向前滚动到头部再继续循环滚动，true时可以无限滚动
@@ -38,6 +53,30 @@ class HomeHeaderView: UIView {
         
         return viewPager
     }()
+    
+    lazy var pageControl:FSPageControl = {
+        let pageControl = FSPageControl()
+        pageControl.numberOfPages = 5
+        pageControl.contentHorizontalAlignment = .right
+        pageControl.contentInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        pageControl.hidesForSinglePage = true
+        return pageControl
+    }()
+    
+    func numberOfItems(in pagerView: FSPagerView) -> Int {
+        return 5
+    }
+    func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
+        let cell = pagerView.dequeueReusableCell(withReuseIdentifier: headerCellIdentifier, at: index)
+        cell.imageView?.image = UIImage(named: "sec_sel")
+        return cell
+    }
+    func pagerViewDidScroll(_ pagerView: FSPagerView) {
+        guard self.pageControl.currentPage != pagerView.currentIndex else {
+            return
+        }
+        self.pageControl.currentPage = pagerView.currentIndex // Or Use KVO with property "currentIndex"
+    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
