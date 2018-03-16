@@ -33,11 +33,12 @@ class RegisterViewController: BaseViewController, UITableViewDelegate, UITableVi
         registerRequest()
     }
     
-    func countdown() {
+    func countdown(button:CountdownButton) {
         guard validate(.phone, str: self.phoneTF.text) else {
             showHUD(message: "请输入合法的手机号")
             return
         }
+        button.isCounting = true
         sendSmsRequest()
     }
     
@@ -107,9 +108,14 @@ class RegisterViewController: BaseViewController, UITableViewDelegate, UITableVi
                 switch event {
                 case .next(let data):
                     switch data.code {
-                    case "22" :
+                    case "301010" :
+                        self.showConfirm(message: data.msg, confirm: { (action) in
+                            self.popViewController()
+                        })
                         break
-                    default : break
+                    default :
+                        
+                        break
                     }
                 case .error(let error):
                     guard let hxError = error as? HXError else { return }

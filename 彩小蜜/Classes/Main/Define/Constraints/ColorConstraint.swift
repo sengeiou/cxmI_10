@@ -13,6 +13,7 @@ import UIKit
 
 let ColorA0A0A0 = UIColor(hexColor: "A0A0A0")
 let ColorEAEAEA = UIColor(hexColor: "EAEAEA")
+/// 界面背景主色
 let ColorF4F4F4 = UIColor(hexColor: "F4F4F4")
 let Color787878 = UIColor(hexColor: "787878")
 let ColorFFFFFF = UIColor(hexColor: "FFFFFF")

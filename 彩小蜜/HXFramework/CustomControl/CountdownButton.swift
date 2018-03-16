@@ -8,7 +8,7 @@
 
 import UIKit
 
-let remainingSecond = 1
+let remainingSecond = 60
 
 protocol CountdownButtonDelegate: NSObjectProtocol {
     func countdownButClicked(button:CountdownButton) -> Void
@@ -27,12 +27,9 @@ class CountdownButton: UIButton {
                 
                 remainingSeconds = remainingSecond
                 
-                self.backgroundColor = UIColor.gray
             } else {
                 countdownTimer?.invalidate()
                 countdownTimer = nil
-                
-                self.backgroundColor = UIColor.red
             }
             
             self.isEnabled = !newValue
@@ -43,17 +40,22 @@ class CountdownButton: UIButton {
     
     private var remainingSeconds: Int = 0 {
         willSet {
-            self.setTitle("\(newValue)秒后重新获取", for: .normal)
+            let second = NSAttributedString(string: "\(newValue)s", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+            let title = NSMutableAttributedString(string: "验证码已发送", attributes: [NSAttributedStringKey.foregroundColor: ColorA0A0A0])
+            title.append(second)
+            
+            self.setAttributedTitle(title, for: .normal)
             
             if newValue <= 0 {
-                self.setTitle("重新获取验证码", for: .normal)
+                let title = NSAttributedString(string: "重新获取验证码", attributes: [NSAttributedStringKey.foregroundColor: ColorA0A0A0])
+                self.setAttributedTitle(title, for: .normal)
                 isCounting = false
             }
         }
     }
     
     @objc private func sendButtonClick(_ sender: CountdownButton) {
-        isCounting = true
+        //isCounting = true
         guard delegate != nil else { return }
         
         delegate.countdownButClicked(button: sender)

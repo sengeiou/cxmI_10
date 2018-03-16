@@ -26,10 +26,11 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
         loginRequest()
     }
     
-    func countdown() {
+    func countdown(button:CountdownButton) {
         guard validate(.phone, str: self.userNameTF.text) == true else {
             showHUD(message: "请输入正确的手机号")
             return }
+        button.isCounting = true
         showHUD(message: "验证码已发送，请注意查收")
         sendSmsRequest()
     }

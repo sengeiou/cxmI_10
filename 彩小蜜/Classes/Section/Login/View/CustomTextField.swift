@@ -15,13 +15,13 @@ enum CustomTFStyle {
 }
 
 protocol CustomTextFieldDelegate {
-    func countdown() -> Void
+    func countdown(button:CountdownButton) -> Void
 }
 
 class CustomTextField: UITextField, CountdownButtonDelegate {
     func countdownButClicked(button: CountdownButton) {
         guard customDelegate != nil else { return }
-        customDelegate.countdown()
+        customDelegate.countdown(button: button)
     }
     
     public var style : CustomTFStyle! {

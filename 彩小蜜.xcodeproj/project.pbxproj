@@ -76,6 +76,10 @@
 		E5973E35204FCCF2006461CE /* MeAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5973E34204FCCF2006461CE /* MeAboutViewController.swift */; };
 		E5973E40204FDD34006461CE /* MeComplaintVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5973E3F204FDD34006461CE /* MeComplaintVC.swift */; };
 		E5973E42204FDD6F006461CE /* MeGuaranteeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5973E41204FDD6F006461CE /* MeGuaranteeVC.swift */; };
+		E59CB3D9205BA11A0086DD0E /* HomeScrollBarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59CB3D8205BA11A0086DD0E /* HomeScrollBarCell.swift */; };
+		E59CB3DB205BA1300086DD0E /* HomeActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59CB3DA205BA1300086DD0E /* HomeActivityCell.swift */; };
+		E59CB3DD205BA1650086DD0E /* HomeSportLotteryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59CB3DC205BA1650086DD0E /* HomeSportLotteryCell.swift */; };
+		E59CB3DF205BA17F0086DD0E /* HomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59CB3DE205BA17F0086DD0E /* HomeHeaderView.swift */; };
 		E5A2644E205B742B00EE6491 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A2644D205B742B00EE6491 /* HomeViewController.swift */; };
 		E5B68AFB205A81940038A5A2 /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B68AFA205A81940038A5A2 /* Extension+String.swift */; };
 		E5B68AFD205A81A70038A5A2 /* Extension+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B68AFC205A81A70038A5A2 /* Extension+Color.swift */; };
@@ -177,6 +181,10 @@
 		E5973E34204FCCF2006461CE /* MeAboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeAboutViewController.swift; sourceTree = "<group>"; };
 		E5973E3F204FDD34006461CE /* MeComplaintVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeComplaintVC.swift; sourceTree = "<group>"; };
 		E5973E41204FDD6F006461CE /* MeGuaranteeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeGuaranteeVC.swift; sourceTree = "<group>"; };
+		E59CB3D8205BA11A0086DD0E /* HomeScrollBarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScrollBarCell.swift; sourceTree = "<group>"; };
+		E59CB3DA205BA1300086DD0E /* HomeActivityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeActivityCell.swift; sourceTree = "<group>"; };
+		E59CB3DC205BA1650086DD0E /* HomeSportLotteryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSportLotteryCell.swift; sourceTree = "<group>"; };
+		E59CB3DE205BA17F0086DD0E /* HomeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeaderView.swift; sourceTree = "<group>"; };
 		E5A2644D205B742B00EE6491 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		E5B68AFA205A81940038A5A2 /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
 		E5B68AFC205A81A70038A5A2 /* Extension+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Color.swift"; sourceTree = "<group>"; };
@@ -697,6 +705,10 @@
 		E57375E32046AF6700148622 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E59CB3D8205BA11A0086DD0E /* HomeScrollBarCell.swift */,
+				E59CB3DA205BA1300086DD0E /* HomeActivityCell.swift */,
+				E59CB3DC205BA1650086DD0E /* HomeSportLotteryCell.swift */,
+				E59CB3DE205BA17F0086DD0E /* HomeHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1324,6 +1336,7 @@
 				E5973E35204FCCF2006461CE /* MeAboutViewController.swift in Sources */,
 				E58B57B8205634250025E2F1 /* BankCardFooterView.swift in Sources */,
 				E5973DDE204D152F006461CE /* BaseViewController.swift in Sources */,
+				E59CB3DD205BA1650086DD0E /* HomeSportLotteryCell.swift in Sources */,
 				E50B9075205231C800417BFE /* RechargeFooterView.swift in Sources */,
 				E5973DDC204CEFDB006461CE /* LoginViewController.swift in Sources */,
 				E5973E40204FDD34006461CE /* MeComplaintVC.swift in Sources */,
@@ -1336,6 +1349,7 @@
 				E5973E27204E3CB0006461CE /* CountdownButton.swift in Sources */,
 				E50B9073205231B500417BFE /* RechargeHeaderView.swift in Sources */,
 				E57376442046BC1300148622 /* LotteryViewController.swift in Sources */,
+				E59CB3DF205BA17F0086DD0E /* HomeHeaderView.swift in Sources */,
 				E514DDE22052B3E000274854 /* WithdrawalViewController.swift in Sources */,
 				E5B68AFD205A81A70038A5A2 /* Extension+Color.swift in Sources */,
 				E512A96D20480917003F14F4 /* HomeDataModel.swift in Sources */,
@@ -1372,6 +1386,7 @@
 				E5973E29204E4387006461CE /* ForgetPswPhoneVC.swift in Sources */,
 				E51F9A60205A29EE00AB8A21 /* VCodeLoginFooterView.swift in Sources */,
 				E51F9A58205A120A00AB8A21 /* PasswordTextFieldCell.swift in Sources */,
+				E59CB3DB205BA1300086DD0E /* HomeActivityCell.swift in Sources */,
 				E514DDE02052A37E00274854 /* DataModel.swift in Sources */,
 				E537397420576FEE0087E4E6 /* APIManager.swift in Sources */,
 				E57375A320468B8900148622 /* AppDelegate.swift in Sources */,
@@ -1384,6 +1399,7 @@
 				E51F9A5A205A122000AB8A21 /* VcodeTextFieldCell.swift in Sources */,
 				E50B907D20526BB200417BFE /* RechargeCell.swift in Sources */,
 				E562989C2050D1DD006397EA /* RegisterViewController.swift in Sources */,
+				E59CB3D9205BA11A0086DD0E /* HomeScrollBarCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

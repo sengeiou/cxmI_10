@@ -25,10 +25,11 @@ class ForgetPswVCodeVC: BaseViewController, UITextFieldDelegate, ValidatePro,Cus
         
         updatePassRequest()
     }
-    func countdown() {
+    func countdown(button:CountdownButton) {
         guard validate(.password, str: self.passwordTF.text) == true else {
             showHUD(message: "请输入6-20位的密码")
             return }
+        button.isCounting = true
         sendSmsRequest()
     }
     
