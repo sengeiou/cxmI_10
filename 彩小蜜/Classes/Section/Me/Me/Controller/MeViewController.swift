@@ -128,7 +128,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         
         table.delegate = self
         table.dataSource = self
-        //table.separatorStyle = .singleLine
+        table.backgroundColor = ColorF4F4F4
         
         table.register(MeCell.self, forCellReuseIdentifier: meCellIdentifier)
         
@@ -160,10 +160,13 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         case 0:
             switch indexPath.row {
             case 0:
+                cell.icon.image = UIImage(named: "recording")
                 cell.title.text = "投注记录"
             case 1:
+                cell.icon.image = UIImage(named: "Details")
                 cell.title.text = "账号明细"
             case 2:
+                cell.icon.image = UIImage(named: "coupon")
                 cell.title.text = "我的卡券"
             default :
                 break
@@ -171,15 +174,17 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         case 1:
             switch indexPath.row {
             case 0:
+                cell.icon.image = UIImage(named: "help")
                 cell.title.text = "帮助中心"
             case 1:
+                cell.icon.image = UIImage(named: "serive")
                 cell.title.text = "联系客服"
-                let phoneNum = "400-133-1234"
-                cell.detail.attributedText = NSAttributedString(string: "400-133-1234")
-                cell.detail.addLink(toPhoneNumber: phoneNum, with: NSRange.init(location: 0, length: phoneNum.lengthOfBytes(using: .utf8)))
+                cell.serviceNum = "400-123-1234"
+                
                 cell.detail.delegate = self
                 cell.accessoryType = .none
             case 2:
+                cell.icon.image = UIImage(named: "our")
                 cell.title.text = "关于我们"
             default :
                 break
@@ -192,7 +197,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+        return 44
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 5

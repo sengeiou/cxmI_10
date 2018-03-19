@@ -33,20 +33,21 @@ class MeFooterView: UIView {
         signOutBut = UIButton(type: .custom)
         self.addSubview(signOutBut)
         
-        signOutBut.titleLabel?.font = Font12
+        signOutBut.titleLabel?.font = Font14
         signOutBut.setTitle("退出登录", for: .normal)
-        signOutBut.setTitleColor(UIColor.white, for: .normal)
-        signOutBut.backgroundColor = UIColor.brown
+        signOutBut.setTitleColor(ColorFFFFFF, for: .normal)
+        signOutBut.backgroundColor = ColorEA5504
+        signOutBut.layer.cornerRadius = 5
         signOutBut.addTarget(self, action: #selector(signOutClicked(_:)), for: .touchUpInside)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         signOutBut.snp.makeConstraints { (make) in
-            make.height.equalTo(40)
-            make.top.equalTo(self).offset(20)
-            make.left.equalTo(self).offset(10)
-            make.right.equalTo(self).offset(-10)
+            make.height.equalTo(44)
+            make.top.equalTo(self).offset(21)
+            make.left.equalTo(self).offset(18)
+            make.right.equalTo(self).offset(-18)
         }
     }
     
