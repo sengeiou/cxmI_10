@@ -10,16 +10,30 @@ import UIKit
 
 class HomeActivityCell: UITableViewCell {
 
+    public var imageStr : String! {
+        didSet{
+            
+        }
+    }
+    
+    private var icon : UIImageView!
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         initSubview()
     }
-    
-    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        icon.snp.makeConstraints { (make) in
+            make.top.left.right.bottom.equalTo(self.contentView)
+        }
+    }
     
     private func initSubview() {
+        icon = UIImageView()
         
+        self.contentView.addSubview(icon)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

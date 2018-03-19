@@ -10,6 +10,7 @@ import Foundation
 import HandyJSON
 
 struct BankCardInfo: HandyJSON {
+    var showMsg  : String!
     var bankLogo : String!
     var bankName : String!
     var cardNo   : String!

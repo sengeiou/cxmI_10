@@ -78,7 +78,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         
         switch indexPath.section {
         case 0:
-            return 40
+            return 20
         case 1:
             return 80
         case 2:

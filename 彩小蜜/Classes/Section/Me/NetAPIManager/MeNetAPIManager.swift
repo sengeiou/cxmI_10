@@ -62,15 +62,21 @@ extension MeNetAPIManager : TargetType {
             dic["idcode"] = idcode
             dic["realName"] = realName
         case .addBankCard(let bankCardNo, let realName):
-            dic["bankCardNo"] = bankCardNo
+            dic["bankCardNo"] = bankCardNo.replacingOccurrences(of: " ", with: "")
             dic["realName"] = realName
         case .userInfo:
-            dic["str"] = "d14fs54df4sf"
+            dic["str"] = "d14fs54df4sf韩笑孟宪征"
+        case .realInfo:
+            dic["str"] = "d14fs54df4sf韩笑孟宪征"
+        case .bankList:
+            dic["str"] = "d14fs54df4sf韩笑孟宪征"
         default:
             return .requestPlain
         }
         
         let jsonStr = try? JSONSerialization.data(withJSONObject: dic, options: .prettyPrinted)
+    
+        
         return .requestData(jsonStr!)
     }
     

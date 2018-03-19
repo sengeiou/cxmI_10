@@ -47,7 +47,9 @@ extension Observable where E == Response {
                     
                     code   :    \(json["code"] as! String)
                     msg    :    \(json["msg"] as! String)
-
+                    URL    :    \(String(describing: response.request?.url))
+                    TOKEN  :    \(UserInfoManager().getToken())
+                
                     ************************************
                 """)
             
@@ -80,6 +82,8 @@ extension Observable where E == Response {
                 
                 code   :    \(json["code"] as! String)
                 msg    :    \(json["msg"] as! String)
+                URL    :    \(String(describing: response.request?.url))
+                TOKEN  :    \(UserInfoManager().getToken())
                 
                 ************************************
                 """)

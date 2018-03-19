@@ -100,10 +100,11 @@ class AddNewBankCardVC: BaseViewController, UITextFieldDelegate, ValidatePro {
     }
     
     private func addBankCardRequest() {
-        _ = userProvider.rx.request(.addBankCard(bankCardNo: self.cardNumTF.text!, realName: nameLB.text!))
+        _ = userProvider.rx.request(.addBankCard(bankCardNo: self.cardNumTF.text!, realName: self.realInfo.realName))
         .asObservable()
         .mapObject(type: BankCardInfo.self)
             .subscribe(onNext: { (data) in
+                self.showHUD(message: data.showMsg)
                 print(data)
             }, onError: { (error) in
                 guard let err = error as? HXError else { return }

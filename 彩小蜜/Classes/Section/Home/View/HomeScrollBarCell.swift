@@ -23,10 +23,10 @@ class HomeScrollBarCell: UITableViewCell, FSPagerViewDataSource, FSPagerViewDele
         super.layoutSubviews()
         
         viewPager.snp.makeConstraints { (make) in
-            make.top.bottom.equalTo(self.contentView)
+            make.top.equalTo(self.contentView)
+            make.bottom.equalTo(self.contentView)
             make.left.equalTo(self.contentView).offset(80)
-            make.right.equalTo(self.contentView).offset(-20)
-            make.height.equalTo(40)
+            make.right.equalTo(self.contentView)
         }
     }
     
@@ -44,11 +44,11 @@ class HomeScrollBarCell: UITableViewCell, FSPagerViewDataSource, FSPagerViewDele
         //设置自动翻页事件间隔，默认值为0（不自动翻页）
         viewPager.automaticSlidingInterval = 2.0
         //设置页面之间的间隔距离
-        viewPager.interitemSpacing = 0.8
+        viewPager.interitemSpacing = 10
         //设置可以无限翻页，默认值为false，false时从尾部向前滚动到头部再继续循环滚动，true时可以无限滚动
         viewPager.isInfinite = true
         //设置转场的模式
-        viewPager.transformer = FSPagerViewTransformer(type: FSPagerViewTransformerType.cubic)
+        viewPager.transformer = FSPagerViewTransformer(type: FSPagerViewTransformerType.ferrisWheel)
         viewPager.scrollDirection = .vertical
         
         return viewPager
@@ -60,10 +60,11 @@ class HomeScrollBarCell: UITableViewCell, FSPagerViewDataSource, FSPagerViewDele
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
         let cell = pagerView.dequeueReusableCell(withReuseIdentifier: ScrollCellIdentifier, at: index)
         
-        
-        cell.textLabel?.text = "sssssfdsfsdfsfsdfsdfsfsdfsd"
+        cell.textLabel?.text = "中奖信息：恭喜【138…672】投注竟足中奖888.88元"
+        cell.textLabel?.font = Font10
         cell.textLabel?.textColor = ColorA0A0A0
         cell.textLabel?.superview?.backgroundColor = ColorFFFFFF
+        cell.contentView.layer.shadowColor = ColorFFFFFF.cgColor
         return cell
     }
     
