@@ -78,7 +78,7 @@ class MeHeaderView: UIView {
     }
 
     
-    
+    // MARK: - 属性
     public var delegate : MeHeaderViewDelegate!
     
     private var icon : UIImageView! // 用户头像
@@ -95,12 +95,14 @@ class MeHeaderView: UIView {
     private var hLine : UIView! // 水平分割线
     private var vLine : UIView! // 竖直分割线
     
+    // 生命周期
     init() {
         super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 183))
         self.backgroundColor = UIColor.white
         initSubview()
     }
     
+    // MARK: - 懒加载
     lazy private var authenticationView : UIImageView = {
     
         let stateView = UIImageView()
@@ -133,8 +135,8 @@ class MeHeaderView: UIView {
         bgView.addSubview(imageview)
         
         imagev.snp.makeConstraints({ (make) in
-            make.top.equalTo(bgView).offset(2)
-            make.bottom.equalTo(bgView).offset(-2)
+            make.top.equalTo(bgView).offset(4)
+            make.bottom.equalTo(bgView).offset(-4)
             make.left.equalTo(bgView).offset(10)
             make.width.equalTo(imagev.snp.height)
         })
@@ -146,8 +148,8 @@ class MeHeaderView: UIView {
         })
         
         imageview.snp.makeConstraints({ (make) in
-            make.top.bottom.equalTo(bgView).offset(2)
-            make.bottom.equalTo(bgView).offset(-2)
+            make.top.bottom.equalTo(bgView).offset(4)
+            make.bottom.equalTo(bgView).offset(-4)
             make.width.equalTo(imageview.snp.height)
             make.right.equalTo(bgView).offset(-7.5)
         })
@@ -155,6 +157,7 @@ class MeHeaderView: UIView {
         return bgView
     }() // 未认证提示条
     
+    // MARK: - LAYOUT
     override func layoutSubviews() {
         super.layoutSubviews()
         
