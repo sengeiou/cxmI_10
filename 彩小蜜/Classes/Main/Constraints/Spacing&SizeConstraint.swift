@@ -24,7 +24,7 @@ let textFieldHeight = 40
 /// label高度
 let labelHeight = 20
 /// 按钮高度
-let buttonHeight = 40
+let buttonHeight = 44
 /// 登录等 按钮的高度
 let loginButHeight = 44
 /// 登录按钮距离上方的高度
@@ -33,6 +33,8 @@ let loginButTopSpacing = 30
 let loginTextFieldHeight = 55
 /// banner高度
 let bannerHeight : CGFloat = 130.0 * defaultScale
+/// 分隔线 高度
+let SeparationLineHeight = 1
 
 //MARK: -  首页足球尺寸
 

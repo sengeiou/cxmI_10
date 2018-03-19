@@ -44,10 +44,10 @@ class MeFooterView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         signOutBut.snp.makeConstraints { (make) in
-            make.height.equalTo(44)
+            make.height.equalTo(buttonHeight)
             make.top.equalTo(self).offset(21)
-            make.left.equalTo(self).offset(18)
-            make.right.equalTo(self).offset(-18)
+            make.left.equalTo(self).offset(leftSpacing)
+            make.right.equalTo(self).offset(-rightSpacing)
         }
     }
     

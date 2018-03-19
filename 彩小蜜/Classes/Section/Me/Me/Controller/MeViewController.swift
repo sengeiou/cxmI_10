@@ -113,6 +113,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
                 weakSelf!.tableView.reloadData()
                 print(data)
             }, onError: { (error) in
+                print(error)
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):
@@ -129,7 +130,6 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         table.delegate = self
         table.dataSource = self
         table.backgroundColor = ColorF4F4F4
-        
         table.register(MeCell.self, forCellReuseIdentifier: meCellIdentifier)
         
         headerView = MeHeaderView()

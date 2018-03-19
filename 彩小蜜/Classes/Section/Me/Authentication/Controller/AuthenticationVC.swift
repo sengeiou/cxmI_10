@@ -41,7 +41,6 @@ class AuthenticationVC: BaseViewController, UITextFieldDelegate, ValidatePro {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        
         return true
     }
     
@@ -70,43 +69,90 @@ class AuthenticationVC: BaseViewController, UITextFieldDelegate, ValidatePro {
     private var authenticationBut : UIButton! // 认证按钮
     private var alertTitleLB : UILabel! //顶部警告
     private var alertLB : UILabel! // 警告语
+    
+    private var bgView : UIView!
+    private var line : UIView!
+    
+    private var nameIcon : UIImageView!
+    private var nameTitle : UILabel!
+    
+    private var idIcon : UIImageView!
+    private var idTitle : UILabel!
+    
+    
     //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "彩小秘·实名认证"
+        self.title = "彩小秘 · 实名认证"
         initSubView()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         alertTitleLB.snp.makeConstraints { (make) in
-            make.height.equalTo(40)
+            make.height.equalTo(15)
             make.left.equalTo(self.view).offset(10)
             make.right.equalTo(self.view).offset(-10)
-            make.top.equalTo(self.view).offset(SafeAreaTopHeight + 20)
+            make.top.equalTo(self.view).offset(SafeAreaTopHeight + 18)
         }
+        
+        bgView.snp.makeConstraints { (make) in
+            make.top.equalTo(alertTitleLB.snp.bottom).offset(17.5)
+            make.left.right.equalTo(self.view)
+            make.height.equalTo(111)
+        }
+        
+        line.snp.makeConstraints { (make) in
+            make.height.equalTo(SeparationLineHeight)
+            make.centerY.equalTo(bgView.snp.centerY)
+            make.left.equalTo(bgView).offset(10)
+            make.right.equalTo(bgView).offset(-10)
+        }
+        
+        nameIcon.snp.makeConstraints { (make) in
+            make.bottom.equalTo(line.snp.top).offset(-17.5)
+            make.left.equalTo(bgView).offset(19)
+            make.width.height.equalTo(20)
+        }
+        idIcon.snp.makeConstraints { (make) in
+            make.bottom.equalTo(bgView).offset(-17.5)
+            make.left.equalTo(bgView).offset(19)
+            make.width.height.equalTo(20)
+        }
+        
+        nameTitle.snp.makeConstraints { (make) in
+            make.left.equalTo(nameIcon.snp.right).offset(10)
+            make.top.equalTo(bgView).offset(10)
+            make.bottom.equalTo(line.snp.top).offset(-10)
+            make.width.equalTo(80)
+        }
+        
+        idTitle.snp.makeConstraints { (make) in
+            make.left.equalTo(nameTitle)
+            make.width.equalTo(nameTitle)
+            make.top.equalTo(line.snp.bottom).offset(10)
+            make.bottom.equalTo(bgView).offset(-10)
+        }
+        
         nameTF.snp.makeConstraints { (make) in
-            make.height.equalTo(40)
-            make.left.equalTo(self.view).offset(10)
-            make.right.equalTo(self.view).offset(-10)
-            make.top.equalTo(alertTitleLB.snp.bottom).offset(10)
+            make.left.equalTo(nameTitle.snp.right).offset(0)
+            make.right.equalTo(bgView).offset(-10)
+            make.top.equalTo(bgView).offset(10)
+            make.bottom.equalTo(line.snp.top).offset(-10)
         }
         IDNumberTF.snp.makeConstraints { (make) in
-            make.height.left.right.equalTo(nameTF)
-            make.top.equalTo(nameTF.snp.bottom).offset(10)
+            make.left.right.equalTo(nameTF)
+            make.top.equalTo(line.snp.bottom).offset(10)
+            make.bottom.equalTo(bgView).offset(-10)
         }
         authenticationBut.snp.makeConstraints { (make) in
-            make.height.equalTo(40)
-            make.width.equalTo(150)
+            make.height.equalTo(buttonHeight)
+            make.left.equalTo(self.view).offset(leftSpacing)
+            make.right.equalTo(self.view).offset(-rightSpacing)
             make.centerX.equalTo(self.view)
-            make.top.equalTo(IDNumberTF.snp.bottom).offset(30)
+            make.top.equalTo(bgView.snp.bottom).offset(30)
         }
-        alertLB.snp.makeConstraints { (make) in
-            make.height.equalTo(20)
-            make.left.equalTo(self.view).offset(10)
-            make.right.equalTo(self.view).offset(-10)
-            make.top.equalTo(authenticationBut.snp.bottom).offset(90)
-        }
+        
     }
     
     //MARK: - 网络请求
@@ -130,49 +176,74 @@ class AuthenticationVC: BaseViewController, UITextFieldDelegate, ValidatePro {
     
     //MARK: - UI
     private func initSubView() {
+        
+        
+        bgView = UIView()
+        bgView.backgroundColor = ColorFFFFFF
+        
+        line = UIView()
+        line.backgroundColor = ColorF4F4F4
+        
+        nameIcon = UIImageView()
+        nameIcon.image = UIImage(named: "name")
+        
+        nameTitle = UILabel()
+        nameTitle.font = Font15
+        nameTitle.text = "真实姓名:"
+        nameTitle.textColor = Color505050
+        
+        idIcon = UIImageView()
+        idIcon.image = UIImage(named: "IDcard")
+        
+        idTitle = UILabel()
+        idTitle.font = Font15
+        idTitle.text = "身份证号:"
+        idTitle.textColor = Color505050
+        
+        
         alertTitleLB = UILabel()
-        alertTitleLB.font = Font12
+        alertTitleLB.font = Font13
         alertTitleLB.text = """
-        身份信息是领奖、提款的重要依据，请如实填写本人身份信息。
+        身份信息是领奖和提款的重要依据，请您如实填写。
         """
-        alertTitleLB.textColor = UIColor.black
+        alertTitleLB.textColor = ColorA0A0A0
+        alertTitleLB.textAlignment = .center
+        
         
         nameTF = UITextField()
-        nameTF.placeholder = "请输入姓名"
-        nameTF.borderStyle = .roundedRect
-        let nameLeftView = UILabel(frame: CGRect(x: 0, y: 0, width: 60, height: 30))
-        nameLeftView.text = "姓名"
-        nameTF.leftView = nameLeftView
-        nameTF.leftViewMode = .always
+        nameTF.placeholder = "确认后不可修改"
+        nameTF.borderStyle = .none
         nameTF.delegate = self
         nameTF.becomeFirstResponder()
         nameTF.returnKeyType = .next
         
         IDNumberTF = UITextField()
-        IDNumberTF.placeholder = "请输入身份证号"
-        IDNumberTF.borderStyle = .roundedRect
+        IDNumberTF.placeholder = "确认后不可修改"
+        IDNumberTF.borderStyle = .none
         IDNumberTF.delegate = self
         IDNumberTF.keyboardType = .namePhonePad
         IDNumberTF.returnKeyType = .done
         
         authenticationBut = UIButton(type: .custom)
+        authenticationBut.titleLabel?.font = Font15
         authenticationBut.setTitle("认证", for: .normal)
-        authenticationBut.setTitleColor(UIColor.black, for: .normal)
-        authenticationBut.backgroundColor = UIColor.gray
+        authenticationBut.setTitleColor(ColorFFFFFF, for: .normal)
+        authenticationBut.backgroundColor = ColorEA5504
         authenticationBut.layer.cornerRadius = 5
         authenticationBut.addTarget(self, action: #selector(authenticationClicked(_:)), for: .touchUpInside)
         
-        alertLB = UILabel()
-        alertLB.font = Font12
-        alertLB.text = "身份信息认证通过后将不可修改，请谨慎填写。"
-        alertLB.textColor = UIColor.black
         
-        
+        self.view.addSubview(self.bgView)
         self.view.addSubview(alertTitleLB)
-        self.view.addSubview(nameTF)
-        self.view.addSubview(IDNumberTF)
+        bgView.addSubview(nameIcon)
+        bgView.addSubview(nameTitle)
+        bgView.addSubview(idIcon)
+        bgView.addSubview(idTitle)
+        bgView.addSubview(line)
+        bgView.addSubview(nameTF)
+        bgView.addSubview(IDNumberTF)
         self.view.addSubview(authenticationBut)
-        self.view.addSubview(alertLB)
+        
         
     }
     

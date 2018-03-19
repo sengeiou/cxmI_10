@@ -65,7 +65,7 @@ class BaseViewController: UIViewController, AlertPro {
         super.viewDidLoad()
 
         self.view.backgroundColor = UIColor.white
-        
+        self.view.backgroundColor = ColorF4F4F4
         setNavigation()
     }
 

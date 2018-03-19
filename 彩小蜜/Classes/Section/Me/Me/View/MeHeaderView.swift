@@ -40,12 +40,9 @@ class MeHeaderView: UIView {
 //            let url = URL(string: userInfo.headimg)
 //            self.icon.kf.setImage(with: url)
             
-            
-            
-            
             self.accountBalanceLB.attributedText = getBalanceText(str: userInfo.userMoney )
             self.withdrawalBalanceLB.attributedText = getBalanceText(str: userInfo.userMoneyLimit)
-            userInfo.isReal = false
+
             setupAuth()
         }
     }
@@ -63,7 +60,7 @@ class MeHeaderView: UIView {
             self.addSubview(authenticationView)
             
             authenticationView.snp.makeConstraints { (make) in
-                make.width.equalTo(100)
+                make.width.equalTo(80)
                 make.height.equalTo(18)
                 make.top.equalTo(phoneLB.snp.bottom).offset(5)
                 make.left.equalTo(phoneLB)
@@ -108,7 +105,7 @@ class MeHeaderView: UIView {
     
         let stateView = UIImageView()
         
-        stateView.image = UIImage(named: "")
+        stateView.image = UIImage(named: "V")
         
         
         return stateView
@@ -200,13 +197,13 @@ class MeHeaderView: UIView {
         hLine.snp.makeConstraints { (make) in
             make.top.equalTo(accountTitle.snp.bottom).offset(15)
             make.left.right.equalTo(self)
-            make.height.equalTo(0.8)
+            make.height.equalTo(SeparationLineHeight)
         }
         vLine.snp.makeConstraints { (make) in
             make.top.equalTo(hLine.snp.bottom)
             make.bottom.equalTo(self)
             make.left.equalTo(rechargeBut.snp.right)
-            make.width.equalTo(0.8)
+            make.width.equalTo(SeparationLineHeight)
         }
         rechargeBut.snp.makeConstraints { (make) in
             make.top.equalTo(hLine.snp.bottom).offset(1)
