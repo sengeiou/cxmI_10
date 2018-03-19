@@ -22,16 +22,7 @@ enum MeNetAPIManager {
     case addBankCard (bankCardNo : String, realName: String)
     /// 查询银行卡信息
     case bankList
-    /// 添加优惠券
-    case bonusAdd
-    /// 删除优惠券
-    case bonusDelete
-    /// 
-    case bonusDetail
-    /// 所有优惠券
-    case bonusList
-    ///
-    case bonusUpdate
+    
 }
 
 extension MeNetAPIManager : TargetType {
@@ -57,16 +48,7 @@ extension MeNetAPIManager : TargetType {
             return "/user/bank/addBankCard"
         case .bankList:
             return "/user/bank/userBankList"
-        case .bonusAdd:
-            return "/activity/bonus/add"
-        case .bonusDetail:
-            return "/activity/bonus/detail"
-        case .bonusList:
-            return "/activity/bonus/list"
-        case .bonusDelete:
-            return "/activity/bonus/delete"
-        case .bonusUpdate:
-            return "/activity/bonus/update"
+        
             
         }
         
