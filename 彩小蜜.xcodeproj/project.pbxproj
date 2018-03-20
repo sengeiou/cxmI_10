@@ -31,6 +31,8 @@
 		E51F9A62205A2A1500AB8A21 /* ForgetPswModileFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51F9A61205A2A1500AB8A21 /* ForgetPswModileFooterView.swift */; };
 		E51F9A64205A2A2D00AB8A21 /* ForgetPswVCodeFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51F9A63205A2A2D00AB8A21 /* ForgetPswVCodeFooterView.swift */; };
 		E533BEFF2060BF950037D2D8 /* WithDrawDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E533BEFE2060BF950037D2D8 /* WithDrawDataModel.swift */; };
+		E533BF012060DE600037D2D8 /* RechargeTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E533BF002060DE600037D2D8 /* RechargeTitleCell.swift */; };
+		E533BF032060EB3A0037D2D8 /* RechargePaymentTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E533BF022060EB3A0037D2D8 /* RechargePaymentTitleCell.swift */; };
 		E537397420576FEE0087E4E6 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E537397320576FEE0087E4E6 /* APIManager.swift */; };
 		E53739772057B9340087E4E6 /* extension+UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53739762057B9340087E4E6 /* extension+UserDefaults.swift */; };
 		E537397B2057F4270087E4E6 /* UserInfoDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E537397A2057F4270087E4E6 /* UserInfoDataModel.swift */; };
@@ -133,6 +135,8 @@
 		E51F9A61205A2A1500AB8A21 /* ForgetPswModileFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPswModileFooterView.swift; sourceTree = "<group>"; };
 		E51F9A63205A2A2D00AB8A21 /* ForgetPswVCodeFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPswVCodeFooterView.swift; sourceTree = "<group>"; };
 		E533BEFE2060BF950037D2D8 /* WithDrawDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithDrawDataModel.swift; sourceTree = "<group>"; };
+		E533BF002060DE600037D2D8 /* RechargeTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeTitleCell.swift; sourceTree = "<group>"; };
+		E533BF022060EB3A0037D2D8 /* RechargePaymentTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargePaymentTitleCell.swift; sourceTree = "<group>"; };
 		E537397320576FEE0087E4E6 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		E53739762057B9340087E4E6 /* extension+UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "extension+UserDefaults.swift"; sourceTree = "<group>"; };
 		E537397A2057F4270087E4E6 /* UserInfoDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoDataModel.swift; sourceTree = "<group>"; };
@@ -377,6 +381,8 @@
 				E50B9072205231B500417BFE /* RechargeHeaderView.swift */,
 				E50B9074205231C800417BFE /* RechargeFooterView.swift */,
 				E50B9076205235BF00417BFE /* RechargeCardCell.swift */,
+				E533BF002060DE600037D2D8 /* RechargeTitleCell.swift */,
+				E533BF022060EB3A0037D2D8 /* RechargePaymentTitleCell.swift */,
 				E50B907C20526BB200417BFE /* RechargeCell.swift */,
 			);
 			path = View;
@@ -1328,6 +1334,7 @@
 				E5973DDE204D152F006461CE /* BaseViewController.swift in Sources */,
 				E59CB3DD205BA1650086DD0E /* HomeSportLotteryCell.swift in Sources */,
 				E50B9075205231C800417BFE /* RechargeFooterView.swift in Sources */,
+				E533BF032060EB3A0037D2D8 /* RechargePaymentTitleCell.swift in Sources */,
 				E5973DDC204CEFDB006461CE /* LoginViewController.swift in Sources */,
 				E5973E40204FDD34006461CE /* MeComplaintVC.swift in Sources */,
 				E5973E22204E34F2006461CE /* ColorConstraint.swift in Sources */,
@@ -1350,6 +1357,7 @@
 				E58B57BA2056364A0025E2F1 /* AddNewBankCardVC.swift in Sources */,
 				E51F9A64205A2A2D00AB8A21 /* ForgetPswVCodeFooterView.swift in Sources */,
 				E58B57C5205676CB0025E2F1 /* MeNetAPIManager.swift in Sources */,
+				E533BF012060DE600037D2D8 /* RechargeTitleCell.swift in Sources */,
 				E50B9077205235BF00417BFE /* RechargeCardCell.swift in Sources */,
 				E512A9692047E598003F14F4 /* Observable+ObjectMapper.swift in Sources */,
 				E5973E31204F8FD4006461CE /* MeHeaderView.swift in Sources */,

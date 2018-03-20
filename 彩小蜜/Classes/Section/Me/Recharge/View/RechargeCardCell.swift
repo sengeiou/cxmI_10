@@ -11,12 +11,13 @@ import UIKit
 
 
 
-let RechargeCardCellIdentifier = "RechargeCardCellIdentifier"
 
-let titleHeight = 20
-let rowSpacing = 10
-let textfieldHeight = 40
-let cardHeight = 40
+
+fileprivate let titleHeight : CGFloat = 20
+fileprivate let rowSpacing : CGFloat = 13.5
+fileprivate let textfieldHeight : CGFloat = 36
+fileprivate let cardHeight : CGFloat = 36
+fileprivate let topSpacing : CGFloat = 17
 
 class RechargeCardCell: UITableViewCell {
 
@@ -65,34 +66,34 @@ class RechargeCardCell: UITableViewCell {
         
         title.snp.makeConstraints { (make) in
             make.height.equalTo(titleHeight)
-            make.top.equalTo(self.contentView).offset(5)
-            make.left.equalTo(self.contentView).offset(10)
-            make.right.equalTo(self.contentView).offset(-10)
+            make.top.equalTo(self.contentView).offset(topSpacing)
+            make.left.equalTo(self.contentView).offset(19)
+            make.right.equalTo(self.contentView).offset(-19)
         }
         textfield.snp.makeConstraints { (make) in
             make.height.equalTo(textfieldHeight)
-            make.left.equalTo(self.contentView).offset(10)
-            make.right.equalTo(self.contentView).offset(-10)
+            make.left.equalTo(self.contentView).offset(19)
+            make.right.equalTo(self.contentView).offset(-19)
             make.top.equalTo(title.snp.bottom).offset(rowSpacing)
         }
         card20.snp.makeConstraints { (make) in
             make.height.equalTo(cardHeight)
             make.width.equalTo(card50)
-            make.left.equalTo(self.contentView).offset(10)
+            make.left.equalTo(self.contentView).offset(19)
             make.top.equalTo(textfield.snp.bottom).offset(rowSpacing)
         }
         card50.snp.makeConstraints { (make) in
             make.height.width.top.equalTo(card20)
-            make.left.equalTo(card20.snp.right).offset(10)
+            make.left.equalTo(card20.snp.right).offset(13.5)
         }
         card100.snp.makeConstraints { (make) in
             make.height.width.top.equalTo(card20)
-            make.left.equalTo(card50.snp.right).offset(10)
+            make.left.equalTo(card50.snp.right).offset(13.5)
         }
         card200.snp.makeConstraints { (make) in
             make.height.width.top.equalTo(card20)
-            make.left.equalTo(card100.snp.right).offset(10)
-            make.right.equalTo(self.contentView).offset(-10)
+            make.left.equalTo(card100.snp.right).offset(13.5)
+            make.right.equalTo(self.contentView).offset(-19)
         }
     }
     
@@ -100,11 +101,11 @@ class RechargeCardCell: UITableViewCell {
         let but = UIButton(type: .custom)
         but.tag = tag
         but.setTitle(String(tag), for: .normal)
-        but.setTitleColor(UIColor.black, for: .normal)
+        but.setTitleColor(Color505050, for: .normal)
+        but.titleLabel?.font = Font13
         but.layer.cornerRadius = 5
-        but.backgroundColor = UIColor.gray
         but.layer.borderWidth = 1
-        but.layer.borderColor = UIColor.black.cgColor
+        but.layer.borderColor = ColorC8C8C8.cgColor
         but.addTarget(self, action: #selector(cartButClicked(_:)), for: .touchUpInside)
         
         return but

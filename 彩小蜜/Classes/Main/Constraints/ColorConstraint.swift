@@ -26,3 +26,5 @@ let ColorE95504 = UIColor(hexColor: "E95504")
 let ColorE95504a2 = UIColor(hexColor: "E95504", alpha: 0.2)
 let Color505050 = UIColor(hexColor: "505050")
 
+/// 按钮 borderColor
+let ColorC8C8C8 = UIColor(hexColor: "C8C8C8")

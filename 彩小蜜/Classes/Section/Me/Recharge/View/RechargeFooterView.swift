@@ -33,8 +33,9 @@ class RechargeFooterView: UIView {
     private func initSubview() {
         rechargeBut = UIButton(type: .custom)
         rechargeBut.setTitle("立即支付", for: .normal)
-        rechargeBut.setTitleColor(UIColor.white, for: .normal)
-        rechargeBut.backgroundColor = UIColor.gray
+        rechargeBut.setTitleColor(ColorFFFFFF, for: .normal)
+        rechargeBut.titleLabel?.font = Font15
+        rechargeBut.backgroundColor = ColorEA5504
         rechargeBut.layer.cornerRadius = 5
         rechargeBut.addTarget(self, action: #selector(recharge(_:)), for: .touchUpInside)
         
@@ -44,10 +45,10 @@ class RechargeFooterView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         rechargeBut.snp.makeConstraints { (make) in
-            make.height.equalTo(40)
-            make.left.equalTo(10)
-            make.right.equalTo(-10)
-            make.top.equalTo(self).offset(10)
+            make.height.equalTo(buttonHeight)
+            make.left.equalTo(leftSpacing)
+            make.right.equalTo(-rightSpacing)
+            make.top.equalTo(self).offset(loginButTopSpacing)
         }
     }
     

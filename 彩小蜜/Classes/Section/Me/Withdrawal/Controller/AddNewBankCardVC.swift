@@ -49,7 +49,7 @@ class AddNewBankCardVC: BaseViewController, UITextFieldDelegate, ValidatePro {
             make.top.equalTo(self.view).offset(SafeAreaTopHeight + 20)
         }
         cardNumTF.snp.makeConstraints { (make) in
-            make.height.equalTo(textfieldHeight)
+            make.height.equalTo(35)
             make.left.equalTo(self.view).offset(leftSpacing)
             make.right.equalTo(self.view).offset(-rightSpacing)
             make.top.equalTo(nameLB.snp.bottom).offset(20)

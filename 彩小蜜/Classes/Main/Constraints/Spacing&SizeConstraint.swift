@@ -36,5 +36,14 @@ let bannerHeight : CGFloat = 130.0 * defaultScale
 /// 分隔线 高度
 let SeparationLineHeight = 1
 
+
+//MARK: - TABLE VIEW
+/// 默认cell 高度
+let defaultCellHeight : CGFloat = 55
+/// heightForHeaderInSection
+let sectionHeaderHeight : CGFloat = 5
+
+
+
 //MARK: -  首页足球尺寸
 
