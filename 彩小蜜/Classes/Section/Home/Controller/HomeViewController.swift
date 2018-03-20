@@ -23,6 +23,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         self.navigationItem.title = "彩小秘 · 购彩大厅"
         hideBackBut()
         self.view.addSubview(tableView)
+        setRightBarItem()
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -112,11 +113,36 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     }
     
     
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
 
+    private func setRightBarItem() {
+        let leftBut = UIButton(type: .custom)
+        //leftBut.setTitle("返回", for: .normal)
+        
+        leftBut.titleLabel?.font = Font15
+        
+        leftBut.contentEdgeInsets = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+        
+        leftBut.setTitleColor(UIColor.black, for: .normal)
+        
+        leftBut.setImage(UIImage(named:"ret"), for: .normal)
+        
+        leftBut.addTarget(self, action: #selector(rightBut(sender:)), for: .touchUpInside)
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: leftBut)
+        
+        
+    }
+    
+    @objc func rightBut(sender: UIButton) {
+        let xxx = BasePopViewController()
+        self.present(xxx, animated: true, completion: nil)
+    }
     
 }

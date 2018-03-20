@@ -24,7 +24,7 @@ let textFieldHeight = 40
 /// label高度
 let labelHeight = 20
 /// 按钮高度
-let buttonHeight = 44
+let buttonHeight = 44 * defaultScale
 /// 登录等 按钮的高度
 let loginButHeight = 44
 /// 登录按钮距离上方的高度
@@ -39,11 +39,12 @@ let SeparationLineHeight = 1
 
 //MARK: - TABLE VIEW
 /// 默认cell 高度
-let defaultCellHeight : CGFloat = 55
+let defaultCellHeight : CGFloat = 55 * defaultScale
 /// heightForHeaderInSection
 let sectionHeaderHeight : CGFloat = 5
 
-
+//MARK: - 提现界面高度
+let WithdrawalViewHeight : CGFloat = 166 * defaultScale
 
 //MARK: -  首页足球尺寸
 

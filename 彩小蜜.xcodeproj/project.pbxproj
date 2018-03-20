@@ -33,6 +33,7 @@
 		E533BEFF2060BF950037D2D8 /* WithDrawDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E533BEFE2060BF950037D2D8 /* WithDrawDataModel.swift */; };
 		E533BF012060DE600037D2D8 /* RechargeTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E533BF002060DE600037D2D8 /* RechargeTitleCell.swift */; };
 		E533BF032060EB3A0037D2D8 /* RechargePaymentTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E533BF022060EB3A0037D2D8 /* RechargePaymentTitleCell.swift */; };
+		E533BF0520610D170037D2D8 /* BasePopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E533BF0420610D170037D2D8 /* BasePopViewController.swift */; };
 		E537397420576FEE0087E4E6 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E537397320576FEE0087E4E6 /* APIManager.swift */; };
 		E53739772057B9340087E4E6 /* extension+UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53739762057B9340087E4E6 /* extension+UserDefaults.swift */; };
 		E537397B2057F4270087E4E6 /* UserInfoDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E537397A2057F4270087E4E6 /* UserInfoDataModel.swift */; };
@@ -137,6 +138,7 @@
 		E533BEFE2060BF950037D2D8 /* WithDrawDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithDrawDataModel.swift; sourceTree = "<group>"; };
 		E533BF002060DE600037D2D8 /* RechargeTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeTitleCell.swift; sourceTree = "<group>"; };
 		E533BF022060EB3A0037D2D8 /* RechargePaymentTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargePaymentTitleCell.swift; sourceTree = "<group>"; };
+		E533BF0420610D170037D2D8 /* BasePopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePopViewController.swift; sourceTree = "<group>"; };
 		E537397320576FEE0087E4E6 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		E53739762057B9340087E4E6 /* extension+UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "extension+UserDefaults.swift"; sourceTree = "<group>"; };
 		E537397A2057F4270087E4E6 /* UserInfoDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoDataModel.swift; sourceTree = "<group>"; };
@@ -908,6 +910,7 @@
 			children = (
 				E57376012046B37900148622 /* MainTabBarController.swift */,
 				E5973DDD204D152F006461CE /* BaseViewController.swift */,
+				E533BF0420610D170037D2D8 /* BasePopViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1376,6 +1379,7 @@
 				E5973E33204FC1D9006461CE /* MeFooterView.swift in Sources */,
 				E57376022046B37900148622 /* MainTabBarController.swift in Sources */,
 				E512A96B2047EF67003F14F4 /* RequestPlugin.swift in Sources */,
+				E533BF0520610D170037D2D8 /* BasePopViewController.swift in Sources */,
 				E58B57B4205622950025E2F1 /* BankCardViewController.swift in Sources */,
 				E51F9A5E205A29D500AB8A21 /* LoginFooterView.swift in Sources */,
 				E537397F2057F8F40087E4E6 /* BankCardInfo.swift in Sources */,

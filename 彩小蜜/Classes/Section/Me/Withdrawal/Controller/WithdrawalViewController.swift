@@ -26,14 +26,18 @@ class WithdrawalViewController: BaseViewController {
         pushViewController(vc: bankCard)
     }
     //MARK: - 属性
+    private var bgView: UIView! // 背景图
+    
     private var moneyLB : UILabel! // 可提现金额
-    private var bankCardBGView : UIView! // 银行卡背景图
     private var bankCardLB : UILabel! // 银行卡
     private var bankCardBut : UIButton! // 银行卡管理
     private var amountOfMoney : UITextField!// 提现金额
     private var allDrawBut : UIButton!  // 全部提现
     private var drawMoneyBut : UIButton! //提交按钮
     private var instructions : UILabel! // 说明
+    
+    private var hLine : UIView!
+    private var vLine : UIView!
     
     private var drawDataModel : WithDrawDataModel!
     //MARK: - 生命周期
@@ -74,14 +78,21 @@ class WithdrawalViewController: BaseViewController {
     
     //MARK: - UI
     private func initSubview() {
+        
+        bgView = UIView()
+        bgView.backgroundColor = ColorFFFFFF
+        
+        vLine = UIView()
+        vLine.backgroundColor = ColorF4F4F4
+        
+        hLine = UIView()
+        hLine.backgroundColor = ColorF4F4F4
+        
         moneyLB = UILabel()
         moneyLB.font = Font14
         moneyLB.text = "可提现金额: 100元"
         moneyLB.textColor = UIColor.black
         moneyLB.textAlignment = .left
-        
-        bankCardBGView = UIView()
-        bankCardBGView.backgroundColor = UIColor.gray
         
         bankCardLB = UILabel()
         bankCardLB.font = Font12
@@ -91,7 +102,7 @@ class WithdrawalViewController: BaseViewController {
         
         bankCardBut = UIButton(type: .custom)
         bankCardBut.setTitle("管理", for: .normal)
-        bankCardBut.setTitleColor(UIColor.black, for: .normal)
+        bankCardBut.setTitleColor(ColorA0A0A0, for: .normal)
         bankCardBut.contentHorizontalAlignment = .right
         bankCardBut.addTarget(self, action: #selector(administrate(_:)), for: .touchUpInside)
         
@@ -99,12 +110,15 @@ class WithdrawalViewController: BaseViewController {
         allDrawBut.setTitle("全部提现", for: .normal)
         allDrawBut.setTitleColor(UIColor.black, for: .normal)
         allDrawBut.addTarget(self, action: #selector(allDraw(_:)), for: .touchUpInside)
-        allDrawBut.frame = CGRect(x: 0, y: 0, width: 80, height: 20)
+        allDrawBut.frame = CGRect(x: 0, y: 0, width: 80, height: defaultCellHeight)
+        
+        
+        allDrawBut.addSubview(vLine)
         
         amountOfMoney = UITextField()
         amountOfMoney.font = Font12
         amountOfMoney.placeholder = "请输入提现金额"
-        amountOfMoney.borderStyle = .roundedRect
+        //amountOfMoney.borderStyle = .roundedRect
         amountOfMoney.rightView = allDrawBut
         amountOfMoney.rightViewMode = .always
         amountOfMoney.keyboardType = .numberPad
@@ -129,53 +143,70 @@ class WithdrawalViewController: BaseViewController {
         """
         instructions.textColor = UIColor.black
         
-        self.view.addSubview(moneyLB)
-        self.view.addSubview(bankCardBGView)
-        bankCardBGView.addSubview(bankCardLB)
-        bankCardBGView.addSubview(bankCardBut)
-        self.view.addSubview(amountOfMoney)
-        self.view.addSubview(drawMoneyBut)
-        self.view.addSubview(instructions)
         
+        
+        bgView.addSubview(moneyLB)
+        bgView.addSubview(bankCardLB)
+        bgView.addSubview(bankCardBut)
+        bgView.addSubview(amountOfMoney)
+        bgView.addSubview(drawMoneyBut)
+        self.view.addSubview(instructions)
+        bgView.addSubview(hLine)
+        
+        self.view.addSubview(bgView)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
+        bgView.snp.makeConstraints { (make) in
+            make.height.equalTo(WithdrawalViewHeight)
+            make.left.right.equalTo(self.view)
+            make.top.equalTo(self.view).offset(SafeAreaTopHeight + 1)
+        }
+        
+        hLine.snp.makeConstraints { (make) in
+            make.height.equalTo(1)
+            make.bottom.equalTo(bgView).offset(-56)
+            make.left.equalTo(bgView).offset(10)
+            make.right.equalTo(bgView).offset(-10)
+        }
+        vLine.snp.makeConstraints { (make) in
+            make.width.equalTo(1)
+            make.right.equalTo(allDrawBut.snp.left).offset(-10)
+            make.top.equalTo(allDrawBut).offset(12)
+            make.bottom.equalTo(allDrawBut).offset(-12)
+        }
+        
         moneyLB.snp.makeConstraints { (make) in
-            make.height.equalTo(labelHeight)
-            make.left.equalTo(self.view).offset(leftSpacing)
-            make.right.equalTo(self.view).offset(-rightSpacing)
-            make.top.equalTo(self.view).offset(SafeAreaTopHeight + 20)
+            make.height.equalTo(defaultCellHeight)
+            make.left.equalTo(bgView).offset(leftSpacing)
+            make.right.equalTo(bgView).offset(-rightSpacing)
+            make.top.equalTo(bgView).offset(0)
         }
-        bankCardBGView.snp.makeConstraints { (make) in
-            make.height.equalTo(textFieldHeight)
-            make.left.equalTo(self.view).offset(leftSpacing)
-            make.right.equalTo(self.view).offset(-rightSpacing)
-            make.top.equalTo(moneyLB.snp.bottom).offset(verticalSpacing)
-        }
+        
         bankCardLB.snp.makeConstraints { (make) in
-            make.left.equalTo(bankCardBGView).offset(1)
-            make.right.equalTo(bankCardBGView).offset(-1)
-            make.top.equalTo(bankCardBGView).offset(1)
-            make.bottom.equalTo(bankCardBGView).offset(-1)
+            make.height.equalTo(defaultCellHeight)
+            make.left.equalTo(bgView).offset(leftSpacing)
+            make.right.equalTo(bgView).offset(-rightSpacing)
+            make.bottom.equalTo(hLine.snp.top).offset(0)
         }
         bankCardBut.snp.makeConstraints { (make) in
             make.width.equalTo(80)
-            make.right.equalTo(bankCardBGView).offset(-1)
-            make.top.equalTo(bankCardBGView).offset(5)
-            make.bottom.equalTo(bankCardBGView).offset(-5)
+            make.right.equalTo(bgView).offset(-rightSpacing)
+            make.height.bottom.equalTo(bankCardLB)
         }
         amountOfMoney.snp.makeConstraints { (make) in
-            make.height.equalTo(textFieldHeight)
-            make.left.equalTo(self.view).offset(leftSpacing)
-            make.right.equalTo(self.view).offset(-rightSpacing)
-            make.top.equalTo(bankCardBGView.snp.bottom).offset(1)
+            make.height.equalTo(defaultCellHeight)
+            make.left.equalTo(bgView).offset(leftSpacing)
+            make.right.equalTo(bgView).offset(-rightSpacing)
+            make.bottom.equalTo(bgView).offset(0)
         }
         drawMoneyBut.snp.makeConstraints { (make) in
             make.height.equalTo(buttonHeight)
-            make.left.equalTo(self.view).offset(leftSpacing)
-            make.right.equalTo(self.view).offset(-rightSpacing)
-            make.top.equalTo(amountOfMoney.snp.bottom).offset(100)
+            make.left.equalTo(bgView).offset(leftSpacing)
+            make.right.equalTo(bgView).offset(-rightSpacing)
+            make.top.equalTo(amountOfMoney.snp.bottom).offset(loginButTopSpacing)
         }
         instructions.snp.makeConstraints { (make) in
             make.height.equalTo(100)
