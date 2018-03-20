@@ -24,7 +24,7 @@ class MainTabBarController: UITabBarController {
         
         let homeNav = UINavigationController(rootViewController: home)
         homeNav.tabBarItem.imageInsets = UIEdgeInsets(top: 10, left: 0, bottom: -10, right: 0)
-        
+        homeNav.title = ""
         
         homeNav.view.backgroundColor = UIColor.white
         
@@ -33,7 +33,7 @@ class MainTabBarController: UITabBarController {
         
         homeNav.tabBarItem.image = homeImage
         homeNav.tabBarItem.selectedImage = homeSelectImage
-        
+        homeNav.tabBarItem.title = ""
         
         
         // 开奖

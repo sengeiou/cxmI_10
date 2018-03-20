@@ -20,7 +20,8 @@ class BankCardViewController: BaseViewController, UITableViewDelegate, UITableVi
     //MARK: - BankCardCellDelegate
     func settingDefaultCard(_ bankInfo: BankCardInfo) {
         guard bankInfo.status == "0" else { return } // 只有非默认卡(0)才可更改设置
-        bankCardDefaultRequest(cardId: bankInfo.userBankId)
+        guard let bankId = bankInfo.userBankId else { return }
+        bankCardDefaultRequest(cardId: bankId)
     }
     func deleteCard() {
         

@@ -83,6 +83,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         hideBackBut()
+        self.navigationItem.title = "彩小秘 · 我的"
         self.view.addSubview(tableView)
         userInfoRequest()
     }

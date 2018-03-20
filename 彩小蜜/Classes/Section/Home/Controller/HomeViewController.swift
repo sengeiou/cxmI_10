@@ -20,7 +20,8 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.navigationItem.title = "彩小秘 · 购彩大厅"
+        hideBackBut()
         self.view.addSubview(tableView)
     }
     override func viewDidLayoutSubviews() {
