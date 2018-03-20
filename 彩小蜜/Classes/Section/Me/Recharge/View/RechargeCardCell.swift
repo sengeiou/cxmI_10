@@ -28,7 +28,7 @@ class RechargeCardCell: UITableViewCell {
     
     //MARK: - 属性
     private var title : UILabel! //
-    public var textfield : UITextField!
+    public var textfield : CustomTextField!
     
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -46,14 +46,16 @@ class RechargeCardCell: UITableViewCell {
         title.textColor = UIColor.black
         title.textAlignment = .left
         
-        textfield = UITextField()
-        textfield.font = Font13
+        textfield = CustomTextField()
+        textfield.font = Font14
         textfield.placeholder = "请输入充值金额"
         textfield.borderStyle = .roundedRect
         textfield.keyboardType = .numberPad
         textfield.layer.cornerRadius = 5
         textfield.layer.borderWidth = 1
         textfield.layer.borderColor = ColorC8C8C8.cgColor
+        textfield.textColor = ColorE95504
+        
         
         let card20 = createCardBut(20)
         let card50 = createCardBut(50)

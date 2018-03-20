@@ -45,6 +45,10 @@ class CustomTextField: UITextField, CountdownButtonDelegate {
     private var defaultImg : String!
     private var imageView : UIImageView!
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
     init(style : CustomTFStyle, img : String) {
         super.init(frame: CGRect.zero)
         let cusLeftView = UIView(frame: CGRect(x: 0, y: 0, width: 19 + 20 + 7.5, height: 30))
@@ -85,6 +89,16 @@ class CustomTextField: UITextField, CountdownButtonDelegate {
         guard length == 1 else { return }
         
         self.imageView.image = UIImage(named: defaultImg)
+    }
+    
+    public func changeBorderColor(_ string: String) {
+        self.layer.borderColor = ColorA0A0A0.cgColor
+        
+        guard string == "" else { return }
+        guard let length = self.text?.lengthOfBytes(using: .utf8) else { return }
+        guard length == 1 else { return }
+        
+        self.layer.borderColor = ColorC8C8C8.cgColor
     }
     
     private func initMobile() {

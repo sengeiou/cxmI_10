@@ -25,7 +25,9 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        
+        if let tex = textField as? CustomTextField {
+            tex.changeBorderColor(string)
+        }
         return true
     }
     
@@ -104,6 +106,7 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
         case 1:
             let cell = tableview.dequeueReusableCell(withIdentifier: RechargeCardCellIdentifier, for: indexPath) as! RechargeCardCell
             self.cardCell = cell
+            cell.textfield.delegate = self
             return cell
         case 2:
             if indexPath.row == 0 {
