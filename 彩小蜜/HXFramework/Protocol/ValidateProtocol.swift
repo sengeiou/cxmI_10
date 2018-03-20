@@ -15,7 +15,7 @@ enum ValidateType : String {
     case chinese = "[\u{4e00}-\u{9fa5}]+"
     case IDNumber = "(^[0-9]{15}$)|([0-9]{17}([0-9]|[0-9a-zA-Z])$)"
     case bankCard = "(^[0-9]{16}$)|([0-9]{19})"
-    case vcode = "[1-9]"
+    case vcode = "[1-9]?"
 }
 
 protocol ValidatePro  {

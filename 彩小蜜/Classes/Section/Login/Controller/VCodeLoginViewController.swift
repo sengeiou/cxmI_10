@@ -20,7 +20,7 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
         guard validate(.phone, str: self.userNameTF.text) == true else {
             showHUD(message: "请输入正确的手机号")
             return }
-        guard validate(.vcode, str: self.vcodeTF.text) == true else {
+        guard validate(.number, str: self.vcodeTF.text) == true else {
             showHUD(message: "请输入验证码")
             return }
         loginRequest()
@@ -31,7 +31,7 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
             showHUD(message: "请输入正确的手机号")
             return }
         button.isCounting = true
-        showHUD(message: "验证码已发送，请注意查收")
+        //showHUD(message: "验证码已发送，请注意查收")
         sendSmsRequest()
     }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -81,10 +81,14 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
                 case .error(let error):
                     guard let hxerror = error as? HXError else { return }
                     switch hxerror {
-                    case .UnexpectedResult(_, let resultMsg) :
-                        self.showConfirm(message: resultMsg!, confirm: { (action) in
-                            self.popViewController()
-                        })
+                    case .UnexpectedResult(let code, let resultMsg) :
+                        if code == "301016", let resultMsg = resultMsg {
+                            self.showConfirm(message: resultMsg)
+                        }else {
+                            self.showConfirm(message: resultMsg!, confirm: { (action) in
+                                self.popViewController()
+                            })
+                        }
                     default: break
                     }
                 case .completed:
@@ -100,17 +104,21 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
                 switch event {
                 case .next(let data):
                     switch data.code {
-                    case "22" :
-                        break
+                    case "0" :
+                        self.showHUD(message: data.msg)
                     default : break
                     }
                 case .error(let error):
                     guard let hxError = error as? HXError else { return }
                     switch hxError {
-                    case .UnexpectedResult(_, let resultMsg):
-                        self.showConfirm(message: resultMsg!, confirm: { (action) in
-                            self.popViewController()
-                        })
+                    case .UnexpectedResult(let code, let resultMsg):
+                        if code == "301016", let resultMsg = resultMsg {
+                            self.showConfirm(message: resultMsg)
+                        }else {
+                            self.showConfirm(message: resultMsg!, confirm: { (action) in
+                                self.popViewController()
+                            })
+                        }
                     default : break
                     }
                 case .completed : break

@@ -51,8 +51,6 @@ extension MeNetAPIManager : TargetType {
         
             
         }
-        
-        
     }
     
     var task: Task {

@@ -76,7 +76,6 @@ extension Observable where E == Response {
                 throw HXError.NoResponse
             }
             
-            
             print("""
                 ************************************
                 
@@ -87,6 +86,7 @@ extension Observable where E == Response {
                 
                 ************************************
                 """)
+            
             guard json["code"] as! String == "0", let data = json["data"] as? [[String: Any]] else {
                 throw HXError.UnexpectedResult(resultCode: json["code"] as? String , resultMsg: json["msg"] as? String )
             }
@@ -94,6 +94,7 @@ extension Observable where E == Response {
             guard let objcArr : [T] = JSONDeserializer<T>.deserializeModelArrayFrom(array: data) as? [T] else {
                 throw HXError.ParseJSONError
             }
+        
             return objcArr
         }
     }

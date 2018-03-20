@@ -8,6 +8,6 @@
 
 import Foundation
 
-let baseURLStr = "http://192.168.1.142:7071"
-//let baseURLStr = "http://39.106.18.39:7071"
+//let baseURLStr = "http://192.168.1.142:7071"
+let baseURLStr = "http://39.106.18.39:7071"
 //let baseURLStr = "http://39.107.121.76:8081"
