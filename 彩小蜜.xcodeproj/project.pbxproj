@@ -30,6 +30,7 @@
 		E51F9A60205A29EE00AB8A21 /* VCodeLoginFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51F9A5F205A29EE00AB8A21 /* VCodeLoginFooterView.swift */; };
 		E51F9A62205A2A1500AB8A21 /* ForgetPswModileFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51F9A61205A2A1500AB8A21 /* ForgetPswModileFooterView.swift */; };
 		E51F9A64205A2A2D00AB8A21 /* ForgetPswVCodeFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51F9A63205A2A2D00AB8A21 /* ForgetPswVCodeFooterView.swift */; };
+		E533BEFF2060BF950037D2D8 /* WithDrawDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E533BEFE2060BF950037D2D8 /* WithDrawDataModel.swift */; };
 		E537397420576FEE0087E4E6 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E537397320576FEE0087E4E6 /* APIManager.swift */; };
 		E53739772057B9340087E4E6 /* extension+UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53739762057B9340087E4E6 /* extension+UserDefaults.swift */; };
 		E537397B2057F4270087E4E6 /* UserInfoDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E537397A2057F4270087E4E6 /* UserInfoDataModel.swift */; };
@@ -131,6 +132,7 @@
 		E51F9A5F205A29EE00AB8A21 /* VCodeLoginFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCodeLoginFooterView.swift; sourceTree = "<group>"; };
 		E51F9A61205A2A1500AB8A21 /* ForgetPswModileFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPswModileFooterView.swift; sourceTree = "<group>"; };
 		E51F9A63205A2A2D00AB8A21 /* ForgetPswVCodeFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPswVCodeFooterView.swift; sourceTree = "<group>"; };
+		E533BEFE2060BF950037D2D8 /* WithDrawDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithDrawDataModel.swift; sourceTree = "<group>"; };
 		E537397320576FEE0087E4E6 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		E53739762057B9340087E4E6 /* extension+UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "extension+UserDefaults.swift"; sourceTree = "<group>"; };
 		E537397A2057F4270087E4E6 /* UserInfoDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoDataModel.swift; sourceTree = "<group>"; };
@@ -402,6 +404,7 @@
 			isa = PBXGroup;
 			children = (
 				E537397E2057F8F40087E4E6 /* BankCardInfo.swift */,
+				E533BEFE2060BF950037D2D8 /* WithDrawDataModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1332,6 +1335,7 @@
 				E512A96F20490556003F14F4 /* HomeListModel.swift in Sources */,
 				E58B57B6205623B30025E2F1 /* BankCardCell.swift in Sources */,
 				E57376462046BC6400148622 /* MeViewController.swift in Sources */,
+				E533BEFF2060BF950037D2D8 /* WithDrawDataModel.swift in Sources */,
 				E5973DD920492DD2006461CE /* UIScrollView+MJRefresh.swift in Sources */,
 				E5973E27204E3CB0006461CE /* CountdownButton.swift in Sources */,
 				E50B9073205231B500417BFE /* RechargeHeaderView.swift in Sources */,

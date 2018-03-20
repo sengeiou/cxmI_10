@@ -11,8 +11,8 @@ import UIKit
 let bankCardIdentifier = "bankCardIdentifier"
 
 protocol BankCardCellDelegate {
-    func delete() -> Void
-    func settingDefaultCard(cardID : String) -> Void
+    func deleteCard() -> Void
+    func settingDefaultCard(_ bankInfo : BankCardInfo) -> Void
 }
 
 class BankCardCell: UITableViewCell {
@@ -23,6 +23,21 @@ class BankCardCell: UITableViewCell {
     }
     @objc private func settingDefaultCard(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
+        
+        guard  delegate != nil else { return }
+        delegate.settingDefaultCard(self.bankInfo)
+        
+    }
+    
+    public var bankInfo : BankCardInfo! {
+        didSet{
+            if let url = URL(string: bankInfo.bankLogo) {
+                bankIcon.kf.setImage(with: url)
+            }
+            
+            bankName.text = bankInfo.bankName
+            bankCardNum.text = bankInfo.cardNo
+        }
     }
     
     //MARK: - 属性
@@ -39,45 +54,6 @@ class BankCardCell: UITableViewCell {
         
         initSubview()
     }
-    
-    //MARK: - UI
-    private func initSubview() {
-        bankIcon = UIImageView()
-        bankIcon.image = UIImage(named: "eye")
-        
-        bankName = UILabel()
-        bankName.font = Font14
-        bankName.text = "中国银行"
-        bankName.textColor = UIColor.black
-        bankName.textAlignment = .left
-        
-        bankCardNum = UILabel()
-        bankCardNum.font = Font12
-        bankCardNum.text = "6225 **** **** 1212"
-        bankCardNum.textColor = UIColor.black
-        bankCardNum.textAlignment = .center
-        
-        bankCardState = UIButton(type: .custom)
-        bankCardState.setTitle("默认收款卡", for: .normal)
-        bankCardState.setTitle("默认收款卡", for: .selected)
-        bankCardState.setTitleColor(UIColor.black, for: .normal)
-        bankCardState.setImage(UIImage(named: "userID"), for: .normal)
-        bankCardState.setImage(UIImage(named: "userID"), for: .selected)
-        bankCardState.contentHorizontalAlignment = .left
-        bankCardState.addTarget(self, action: #selector(settingDefaultCard(_:)), for: .touchUpInside)
-        
-        deleteBut = UIButton(type: .custom)
-        deleteBut.setBackgroundImage(UIImage(named: "eye"), for: .normal)
-        deleteBut.addTarget(self, action: #selector(deleteCard(_:)), for: .touchUpInside)
-        
-        self.contentView.addSubview(bankIcon)
-        self.contentView.addSubview(bankName)
-        self.contentView.addSubview(bankCardNum)
-        self.contentView.addSubview(deleteBut)
-        self.contentView.addSubview(bankCardState)
-    
-    }
-    
     override func layoutSubviews() {
         super.layoutSubviews()
         bankIcon.snp.makeConstraints { (make) in
@@ -110,6 +86,40 @@ class BankCardCell: UITableViewCell {
             make.top.equalTo(bankIcon)
         }
     }
+    //MARK: - UI
+    private func initSubview() {
+        bankIcon = UIImageView()
+        
+        bankName = UILabel()
+        bankName.font = Font14
+        bankName.textColor = UIColor.black
+        bankName.textAlignment = .left
+        
+        bankCardNum = UILabel()
+        bankCardNum.font = Font12
+        bankCardNum.textColor = UIColor.black
+        bankCardNum.textAlignment = .center
+        
+        bankCardState = UIButton(type: .custom)
+        bankCardState.setTitle("默认收款卡", for: .normal)
+        bankCardState.setTitle("默认收款卡", for: .selected)
+        bankCardState.setTitleColor(UIColor.black, for: .normal)
+        bankCardState.setImage(UIImage(named: "userID"), for: .normal)
+        bankCardState.setImage(UIImage(named: "userID"), for: .selected)
+        bankCardState.contentHorizontalAlignment = .left
+        bankCardState.addTarget(self, action: #selector(settingDefaultCard(_:)), for: .touchUpInside)
+        
+        deleteBut = UIButton(type: .custom)
+        deleteBut.setBackgroundImage(UIImage(named: "redarrow"), for: .normal)
+        deleteBut.addTarget(self, action: #selector(deleteCard(_:)), for: .touchUpInside)
+        
+        self.contentView.addSubview(bankIcon)
+        self.contentView.addSubview(bankName)
+        self.contentView.addSubview(bankCardNum)
+        self.contentView.addSubview(deleteBut)
+        self.contentView.addSubview(bankCardState)
+    
+    }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -119,7 +129,7 @@ class BankCardCell: UITableViewCell {
 
    
     static public func height() -> CGFloat {
-        return 110
+        return 130
     }
     
     required init?(coder aDecoder: NSCoder) {

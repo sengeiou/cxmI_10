@@ -22,7 +22,10 @@ enum MeNetAPIManager {
     case addBankCard (bankCardNo : String, realName: String)
     /// 查询银行卡信息
     case bankList
-    
+    /// 提现界面的数据显示
+    case withDrawDataShow
+    /// 设置当前银行卡为默认卡
+    case setBankDefault (cardId : String)
 }
 
 extension MeNetAPIManager : TargetType {
@@ -47,8 +50,12 @@ extension MeNetAPIManager : TargetType {
         case .addBankCard:
             return "/user/bank/addBankCard"
         case .bankList:
-            return "/user/bank/userBankList"
-        
+            return "/user/bank/queryUserBankList"
+        case .withDrawDataShow:
+            return "/user/bank/queryWithDrawShow"
+        case .setBankDefault:
+            return "/user/bank/updateUserBankDefault"
+            
             
         }
     }
@@ -69,6 +76,11 @@ extension MeNetAPIManager : TargetType {
             dic["str"] = "d14fs54df4sf韩笑孟宪征"
         case .bankList:
             dic["str"] = "d14fs54df4sf韩笑孟宪征"
+        case .withDrawDataShow:
+            dic["str"] = "d14fs54df4sf韩笑孟宪征"
+        case .setBankDefault ( let cardId ):
+            dic["id"] = cardId
+            
         default:
             return .requestPlain
         }

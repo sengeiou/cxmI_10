@@ -35,16 +35,43 @@ class WithdrawalViewController: BaseViewController {
     private var drawMoneyBut : UIButton! //提交按钮
     private var instructions : UILabel! // 说明
     
+    private var drawDataModel : WithDrawDataModel!
     //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         initSubview()
+        drawDataRequest()
     }
     //MARK: - 网络请求
+    //提现
     private func drawRequest(money: String) {
         
     }
+    //提现信息
+    private func drawDataRequest() {
+        weak var weakSelf = self
+        _ = userProvider.rx.request(.withDrawDataShow)
+        .asObservable()
+        .mapObject(type: WithDrawDataModel.self)
+            .subscribe(onNext: { (data) in
+                weakSelf?.drawDataModel = data
+                weakSelf?.setDrawData(data: data)
+            }, onError: { (error) in
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    print(code!)
+                    self.showHUD(message: msg!)
+                default: break
+                }
+            }, onCompleted: nil, onDisposed: nil)
+    }
+    private func setDrawData(data : WithDrawDataModel) {
+        moneyLB.text = "可提现金额: \(data.userMoney!)元"
+        bankCardLB.text = "银行卡: \(data.defaultBankCardLabel!)"
+    }
+    
     //MARK: - UI
     private func initSubview() {
         moneyLB = UILabel()

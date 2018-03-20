@@ -8,12 +8,22 @@
 
 import UIKit
 
-class BankCardViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, BankCardFooterViewDelegate {
-
+class BankCardViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, BankCardFooterViewDelegate, BankCardCellDelegate {
+    
+    
     //MARK: - 点击事件
     func addNewBankCard() {
         let add = AddNewBankCardVC()
         pushViewController(vc: add)
+    }
+    
+    //MARK: - BankCardCellDelegate
+    func settingDefaultCard(_ bankInfo: BankCardInfo) {
+        guard bankInfo.status == "0" else { return } // 只有非默认卡(0)才可更改设置
+        bankCardDefaultRequest(cardId: bankInfo.userBankId)
+    }
+    func deleteCard() {
+        
     }
     
     // tableView delegate
@@ -22,6 +32,8 @@ class BankCardViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     //MARK: - 属性
+    
+    private var bankCardList: [BankCardInfo]!
     //MARK: - 懒加载
     lazy private var tableview : UITableView = {
         let table = UITableView(frame: CGRect.zero, style: .grouped)
@@ -57,8 +69,29 @@ class BankCardViewController: BaseViewController, UITableViewDelegate, UITableVi
         _ = userProvider.rx.request(.bankList)
         .asObservable()
         .mapArray(type: BankCardInfo.self)
+        .subscribe(onNext: { (data) in
+            print(data)
+            self.bankCardList = data
+            self.tableview.reloadData()
+        }, onError: { (error) in
+            guard let err = error as? HXError else { return }
+            switch err {
+            case .UnexpectedResult(let code, let msg):
+                print(code!)
+                self.showHUD(message: msg!)
+            default: break
+            }
+        }, onCompleted: nil, onDisposed: nil)
+    }
+    // 设置默认银行卡
+    private func bankCardDefaultRequest(cardId: String) {
+        weak var weakSelf = self
+        _ = userProvider.rx.request(.setBankDefault(cardId: cardId))
+        .asObservable()
+        .mapBaseObject(type: DataModel.self)
             .subscribe(onNext: { (data) in
-                print(data)
+                guard weakSelf != nil else { return }
+                weakSelf?.showHUD(message: data.msg)
             }, onError: { (error) in
                 guard let err = error as? HXError else { return }
                 switch err {
@@ -70,19 +103,23 @@ class BankCardViewController: BaseViewController, UITableViewDelegate, UITableVi
             }, onCompleted: nil, onDisposed: nil)
     }
     
+    
     //MARK: - UI
     private func initSubview() {
         
     }
     // tableView DataSource
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        guard self.bankCardList != nil else { return 0 }
+        return self.bankCardList.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: bankCardIdentifier, for: indexPath) as! BankCardCell
+        cell.delegate = self
+        cell.bankInfo = self.bankCardList[indexPath.section]
         return cell 
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
