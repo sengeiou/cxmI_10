@@ -14,7 +14,7 @@
 		E50B9073205231B500417BFE /* RechargeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50B9072205231B500417BFE /* RechargeHeaderView.swift */; };
 		E50B9075205231C800417BFE /* RechargeFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50B9074205231C800417BFE /* RechargeFooterView.swift */; };
 		E50B9077205235BF00417BFE /* RechargeCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50B9076205235BF00417BFE /* RechargeCardCell.swift */; };
-		E50B907D20526BB200417BFE /* RechargeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50B907C20526BB200417BFE /* RechargeCell.swift */; };
+		E50B907D20526BB200417BFE /* RechargePaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50B907C20526BB200417BFE /* RechargePaymentCell.swift */; };
 		E512A96620479FD7003F14F4 /* HomeNetAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E512A96520479FD7003F14F4 /* HomeNetAPIManager.swift */; };
 		E512A9692047E598003F14F4 /* Observable+ObjectMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E512A9682047E598003F14F4 /* Observable+ObjectMapper.swift */; };
 		E512A96B2047EF67003F14F4 /* RequestPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E512A96A2047EF67003F14F4 /* RequestPlugin.swift */; };
@@ -119,7 +119,7 @@
 		E50B9072205231B500417BFE /* RechargeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeHeaderView.swift; sourceTree = "<group>"; };
 		E50B9074205231C800417BFE /* RechargeFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeFooterView.swift; sourceTree = "<group>"; };
 		E50B9076205235BF00417BFE /* RechargeCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeCardCell.swift; sourceTree = "<group>"; };
-		E50B907C20526BB200417BFE /* RechargeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeCell.swift; sourceTree = "<group>"; };
+		E50B907C20526BB200417BFE /* RechargePaymentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargePaymentCell.swift; sourceTree = "<group>"; };
 		E512A96520479FD7003F14F4 /* HomeNetAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNetAPIManager.swift; sourceTree = "<group>"; };
 		E512A9682047E598003F14F4 /* Observable+ObjectMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+ObjectMapper.swift"; sourceTree = "<group>"; };
 		E512A96A2047EF67003F14F4 /* RequestPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestPlugin.swift; sourceTree = "<group>"; };
@@ -385,7 +385,7 @@
 				E50B9076205235BF00417BFE /* RechargeCardCell.swift */,
 				E533BF002060DE600037D2D8 /* RechargeTitleCell.swift */,
 				E533BF022060EB3A0037D2D8 /* RechargePaymentTitleCell.swift */,
-				E50B907C20526BB200417BFE /* RechargeCell.swift */,
+				E50B907C20526BB200417BFE /* RechargePaymentCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1401,7 +1401,7 @@
 				E5A2644E205B742B00EE6491 /* HomeViewController.swift in Sources */,
 				E58B57C7205676EC0025E2F1 /* LotteryNetAPIManager.swift in Sources */,
 				E51F9A5A205A122000AB8A21 /* VcodeTextFieldCell.swift in Sources */,
-				E50B907D20526BB200417BFE /* RechargeCell.swift in Sources */,
+				E50B907D20526BB200417BFE /* RechargePaymentCell.swift in Sources */,
 				E562989C2050D1DD006397EA /* RegisterViewController.swift in Sources */,
 				E59CB3D9205BA11A0086DD0E /* HomeScrollBarCell.swift in Sources */,
 			);

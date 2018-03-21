@@ -97,23 +97,24 @@ class WithdrawalViewController: BaseViewController {
         moneyLB = UILabel()
         moneyLB.font = Font15
         moneyLB.text = "可提现金额: 100元"
-        moneyLB.textColor = UIColor.black
+        moneyLB.textColor = Color505050
         moneyLB.textAlignment = .left
         
         bankTitle = UILabel()
-        bankTitle.font = Font13
+        bankTitle.font = Font15
         bankTitle.text = "银行卡: "
         bankTitle.textAlignment = .left
         bankTitle.textColor = ColorA0A0A0
         
         bankCardLB = UILabel()
-        bankCardLB.font = Font13
-        bankCardLB.textColor = UIColor.black
+        bankCardLB.font = Font15
+        bankCardLB.textColor = Color505050
         bankCardLB.textAlignment = .left
         
         bankCardBut = UIButton(type: .custom)
         bankCardBut.setTitle("管理", for: .normal)
-        bankCardBut.setImage(UIImage(named: "Jump"), for: .normal)
+        bankCardBut.titleLabel?.font = Font15
+        bankCardBut.setImage(UIImage(named: "jump"), for: .normal)
         bankCardBut.imageEdgeInsets = UIEdgeInsets(top: 0, left: 60, bottom: 0, right: 0)
         bankCardBut.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
         bankCardBut.setTitleColor(ColorA0A0A0, for: .normal)
@@ -121,6 +122,7 @@ class WithdrawalViewController: BaseViewController {
         bankCardBut.addTarget(self, action: #selector(administrate(_:)), for: .touchUpInside)
         
         allDrawBut = UIButton(type: .custom)
+        allDrawBut.titleLabel?.font = Font15
         allDrawBut.setTitle("全部提现", for: .normal)
         allDrawBut.setTitleColor(ColorA0A0A0, for: .normal)
         allDrawBut.addTarget(self, action: #selector(allDraw(_:)), for: .touchUpInside)
@@ -130,7 +132,7 @@ class WithdrawalViewController: BaseViewController {
         allDrawBut.addSubview(vLine)
         
         amountOfMoney = UITextField()
-        amountOfMoney.font = Font12
+        amountOfMoney.font = Font15
         amountOfMoney.placeholder = "请输入提现金额"
         amountOfMoney.rightView = allDrawBut
         amountOfMoney.rightViewMode = .always
@@ -146,7 +148,7 @@ class WithdrawalViewController: BaseViewController {
         instructions = UITextView()
         instructions.isUserInteractionEnabled = false
         instructions.textColor = ColorA0A0A0
-        instructions.font = Font14
+        instructions.font = Font13
         instructions.backgroundColor = UIColor.clear
         instructions.text = """
         说明：
@@ -174,7 +176,7 @@ class WithdrawalViewController: BaseViewController {
         bgView.snp.makeConstraints { (make) in
             make.height.equalTo(WithdrawalViewHeight)
             make.left.right.equalTo(self.view)
-            make.top.equalTo(self.view).offset(SafeAreaTopHeight + 1)
+            make.top.equalTo(self.view).offset(SafeAreaTopHeight)
         }
         
         hLine.snp.makeConstraints { (make) in
@@ -185,7 +187,7 @@ class WithdrawalViewController: BaseViewController {
         }
         vLine.snp.makeConstraints { (make) in
             make.width.equalTo(1)
-            make.right.equalTo(allDrawBut.snp.left).offset(-10)
+            make.right.equalTo(allDrawBut.snp.left).offset(-15)
             make.top.equalTo(allDrawBut).offset(12)
             make.bottom.equalTo(allDrawBut).offset(-12)
         }
@@ -200,7 +202,7 @@ class WithdrawalViewController: BaseViewController {
         bankTitle.snp.makeConstraints { (make) in
             make.height.equalTo(defaultCellHeight)
             make.left.equalTo(bgView).offset(leftSpacing)
-            make.width.equalTo(50)
+            make.width.equalTo(55)
             make.bottom.equalTo(hLine.snp.top)
         }
         
@@ -231,7 +233,7 @@ class WithdrawalViewController: BaseViewController {
             make.height.equalTo(300)
             make.left.equalTo(self.view).offset(leftSpacing)
             make.right.equalTo(self.view).offset(-rightSpacing)
-            make.top.equalTo(drawMoneyBut.snp.bottom).offset(50)
+            make.top.equalTo(drawMoneyBut.snp.bottom).offset(loginButHeight)
         }
         
     }

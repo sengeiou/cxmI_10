@@ -37,7 +37,7 @@ class AddNewBankCardVC: BaseViewController, UITextFieldDelegate, ValidatePro {
     //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "彩小秘·添加银行卡"
+        self.title = "彩小秘 · 添加银行卡"
         realInfoRequest()
         initSubview()
     }
@@ -51,6 +51,7 @@ class AddNewBankCardVC: BaseViewController, UITextFieldDelegate, ValidatePro {
             .mapObject(type: RealInfoDataModel.self)
             .subscribe(onNext: { (data) in
                 self.realInfo = data
+                self.nameLB.text = data.realName
             }, onError: { (error) in
                 guard let err = error as? HXError else { return }
                 switch err {
@@ -84,7 +85,7 @@ class AddNewBankCardVC: BaseViewController, UITextFieldDelegate, ValidatePro {
         super.viewDidLayoutSubviews()
         
         bgView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.view).offset(SafeAreaTopHeight + 10)
+            make.top.equalTo(self.view).offset(SafeAreaTopHeight)
             make.left.right.equalTo(self.view)
             make.height.equalTo(111)
         }
@@ -151,7 +152,6 @@ class AddNewBankCardVC: BaseViewController, UITextFieldDelegate, ValidatePro {
         
         nameLB = UILabel()
         nameLB.font = Font14
-        nameLB.text = "笑笑"
         nameLB.textColor = Color505050
         nameLB.textAlignment = .left
         

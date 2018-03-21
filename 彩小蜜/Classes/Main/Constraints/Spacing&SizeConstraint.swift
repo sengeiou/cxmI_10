@@ -26,7 +26,7 @@ let labelHeight = 20
 /// 按钮高度
 let buttonHeight = 44 * defaultScale
 /// 登录等 按钮的高度
-let loginButHeight = 44
+let loginButHeight = 44 * defaultScale
 /// 登录按钮距离上方的高度
 let loginButTopSpacing = 30
 ///

@@ -134,13 +134,13 @@ class BankCardCell: UITableViewCell {
         bankCardState.setTitle("默认收款卡", for: .selected)
         bankCardState.setTitleColor(ColorFFFFFF, for: .selected)
         bankCardState.setTitleColor(ColorA0A0A0, for: .normal)
-        bankCardState.setImage(UIImage(named: "jump"), for: .normal)
-        bankCardState.setImage(UIImage(named: "name"), for: .selected)
+        bankCardState.setImage(UIImage(named: "Confirmationbox"), for: .normal)
+        bankCardState.setImage(UIImage(named: "recharge"), for: .selected)
         bankCardState.contentHorizontalAlignment = .left
         bankCardState.addTarget(self, action: #selector(settingDefaultCard(_:)), for: .touchUpInside)
         
         deleteBut = UIButton(type: .custom)
-        deleteBut.setBackgroundImage(UIImage(named: "redarrow"), for: .normal)
+        deleteBut.setBackgroundImage(UIImage(named: "shut"), for: .normal)
         deleteBut.addTarget(self, action: #selector(deleteCard(_:)), for: .touchUpInside)
         
         self.contentView.addSubview(bgView)

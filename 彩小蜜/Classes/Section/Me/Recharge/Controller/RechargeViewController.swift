@@ -69,7 +69,7 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
         self.view.addSubview(tableview)
         tableview.register(RechargeTitleCell.self, forCellReuseIdentifier: RechargeTitleCellIdentifier)
         tableview.register(RechargeCardCell.self, forCellReuseIdentifier: RechargeCardCellIdentifier)
-        tableview.register(RechargeCell.self, forCellReuseIdentifier: RechargeCellIdentifier)
+        tableview.register(RechargePaymentCell.self, forCellReuseIdentifier: RechargeCellIdentifier)
         tableview.register(RechargePaymentTitleCell.self, forCellReuseIdentifier: RechargePaymentTitleCellId)
         
         tableview.separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
@@ -113,7 +113,7 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
                 let cell = tableview.dequeueReusableCell(withIdentifier: RechargePaymentTitleCellId, for: indexPath) as! RechargePaymentTitleCell
                 return cell
             }
-            let cell = tableview.dequeueReusableCell(withIdentifier: RechargeCellIdentifier, for: indexPath) as! RechargeCell
+            let cell = tableview.dequeueReusableCell(withIdentifier: RechargeCellIdentifier, for: indexPath) as! RechargePaymentCell
             return cell
         default:
             return UITableViewCell()

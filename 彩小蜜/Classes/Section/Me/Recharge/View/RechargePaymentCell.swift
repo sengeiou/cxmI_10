@@ -1,5 +1,5 @@
 //
-//  RechargeCell.swift
+//  RechargePaymentCell.swift
 //  彩小蜜
 //
 //  Created by HX on 2018/3/9.
@@ -9,7 +9,7 @@
 import UIKit
 
 let RechargeCellIdentifier = "rechargeCellIdentifier"
-class RechargeCell: UITableViewCell {
+class RechargePaymentCell: UITableViewCell {
 
     
     //MARK: - 属性
@@ -27,10 +27,10 @@ class RechargeCell: UITableViewCell {
         self.selectionStyle = .none
         
         icon = UIImageView()
-        icon.image = UIImage(named: "our")
+        icon.image = UIImage(named: "WeChatrecharge")
         
         selectorIcon = UIImageView()
-        selectorIcon.image = UIImage(named: "our")
+        selectorIcon.image = UIImage(named: "chargesure")
         
         title = UILabel()
         title.font = Font15
