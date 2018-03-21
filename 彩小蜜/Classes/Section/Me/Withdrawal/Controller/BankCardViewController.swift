@@ -165,13 +165,15 @@ class BankCardViewController: BaseViewController, UITableViewDelegate, UITableVi
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard self.bankCardList != nil else { return 0 }
-        return self.bankCardList.count
+//        guard self.bankCardList != nil else { return 0 }
+//        return self.bankCardList.count
+        
+        return 2
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: bankCardIdentifier, for: indexPath) as! BankCardCell
         cell.delegate = self
-        cell.bankInfo = self.bankCardList[indexPath.row]
+        //cell.bankInfo = self.bankCardList[indexPath.row]
         return cell 
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

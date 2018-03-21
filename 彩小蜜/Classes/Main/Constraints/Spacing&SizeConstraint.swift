@@ -45,6 +45,9 @@ let sectionHeaderHeight : CGFloat = 5
 
 //MARK: - 提现界面高度
 let WithdrawalViewHeight : CGFloat = 166 * defaultScale
-let BankCardHeight : CGFloat = 140 * defaultScale
+let BankCardHeight : CGFloat = 120 * defaultScale
+let BankCardWidth : CGFloat = 340 * defaultScale
+let BankCardIconWidth : CGFloat = 26 * defaultScale
+let BankCardDeleteWidth: CGFloat = 14 * defaultScale
 //MARK: -  首页足球尺寸
 

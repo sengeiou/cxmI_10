@@ -37,7 +37,8 @@ class BankCardFooterView: UIView {
         detailIcon.image = UIImage(named: "jump")
         
         addCardBut = UIButton(type: .custom)
-        addCardBut.setTitle("添加银行卡", for: .normal)
+        addCardBut.titleLabel?.font = Font13
+        addCardBut.setTitle(" 添加银行卡", for: .normal)
         addCardBut.setTitleColor(ColorA0A0A0, for: .normal)
         addCardBut.setImage(UIImage(named: "jump"), for: .normal)
         addCardBut.backgroundColor = ColorFFFFFF
@@ -54,7 +55,7 @@ class BankCardFooterView: UIView {
         
         detailIcon.snp.makeConstraints { (make) in
             make.centerY.equalTo(addCardBut.snp.centerY)
-            make.height.width.equalTo(20)
+            make.height.width.equalTo(14)
             make.right.equalTo(addCardBut).offset(-rightSpacing)
         }
         

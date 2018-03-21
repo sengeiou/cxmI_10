@@ -18,6 +18,7 @@ let ColorF4F4F4 = UIColor(hexColor: "F4F4F4")
 let Color787878 = UIColor(hexColor: "787878")
 /// 主白
 let ColorFFFFFF = UIColor(hexColor: "FFFFFF")
+let ColorFFFFFFa8 = UIColor(hexColor: "FFFFFF", alpha: 0.8)
 /// app 主色
 let ColorEA5504 = UIColor(hexColor: "EA5504")
 /// 黄橙色
@@ -27,6 +28,7 @@ let ColorE95504 = UIColor(hexColor: "E95504")
 let ColorE95504a2 = UIColor(hexColor: "E95504", alpha: 0.2)
 /// 黑色字体
 let Color505050 = UIColor(hexColor: "505050")
-
+/// 银行卡背景色- 玫红
+let ColorCC4050 = UIColor(hexColor: "CC4050")
 /// 按钮 borderColor
 let ColorC8C8C8 = UIColor(hexColor: "C8C8C8")

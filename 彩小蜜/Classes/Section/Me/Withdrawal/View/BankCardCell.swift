@@ -20,12 +20,14 @@ class BankCardCell: UITableViewCell {
     //MARK: - 点击事件
     @objc private func deleteCard(_ sender: UIButton) {
         guard  delegate != nil else { return }
+        guard self.bankInfo != nil else { return }
         delegate.deleteCard(bankInfo: self.bankInfo)
     }
     @objc private func settingDefaultCard(_ sender: UIButton) {
         //sender.isSelected = !sender.isSelected
         
         guard  delegate != nil else { return }
+        guard self.bankInfo != nil else { return }
         delegate.settingDefaultCard(self.bankInfo)
         
     }
@@ -66,23 +68,28 @@ class BankCardCell: UITableViewCell {
         super.layoutSubviews()
         
         bgView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.contentView).offset(sectionHeaderHeight)
-            make.bottom.equalTo(self.contentView).offset(-sectionHeaderHeight)
-            make.left.equalTo(self.contentView).offset(leftSpacing)
-            make.right.equalTo(self.contentView).offset(-rightSpacing)
+            
+            make.height.equalTo(BankCardHeight)
+            make.width.equalTo(BankCardWidth)
+            //make.top.equalTo(self.contentView).offset(sectionHeaderHeight)
+            //make.bottom.equalTo(self.contentView).offset(-sectionHeaderHeight)
+//            make.left.equalTo(self.contentView).offset(leftSpacing)
+//            make.right.equalTo(self.contentView).offset(-rightSpacing)
+            make.centerY.equalTo(self.contentView.snp.centerY)
+            make.centerX.equalTo(self.contentView.snp.centerX)
         }
         
         bankIcon.snp.makeConstraints { (make) in
-            make.height.width.equalTo(40)
-            make.left.equalTo(bgView).offset(10)
-            make.top.equalTo(bgView).offset(10)
+            make.height.width.equalTo(BankCardIconWidth)
+            make.left.equalTo(bgView).offset(12)
+            make.top.equalTo(bgView).offset(12)
         }
         
         bankName.snp.makeConstraints { (make) in
             make.height.equalTo(labelHeight)
-            make.left.equalTo(bankIcon.snp.right).offset(10)
+            make.left.equalTo(bankIcon.snp.right).offset(6)
             make.right.equalTo(deleteBut.snp.left).offset(-10)
-            make.top.equalTo(bgView).offset(15)
+            make.top.equalTo(bgView).offset(10.5)
         }
         bankType.snp.makeConstraints { (make) in
             make.left.right.height.equalTo(bankName)
@@ -92,7 +99,7 @@ class BankCardCell: UITableViewCell {
             make.left.equalTo(bgView).offset(leftSpacing)
             make.right.equalTo(bgView).offset(-rightSpacing)
             make.top.equalTo(bankType.snp.bottom).offset(verticalSpacing)
-            make.bottom.equalTo(bankCardState.snp.top).offset(-verticalSpacing)
+            make.height.equalTo(30)
         }
         bankCardState.snp.makeConstraints { (make) in
             make.height.equalTo(20)
@@ -101,16 +108,18 @@ class BankCardCell: UITableViewCell {
             make.bottom.equalTo(bgView).offset(-verticalSpacing)
         }
         deleteBut.snp.makeConstraints { (make) in
-            make.height.width.equalTo(30)
-            make.right.equalTo(bgView).offset(-rightSpacing)
-            make.top.equalTo(bankIcon)
+            make.height.width.equalTo(BankCardDeleteWidth)
+            make.right.equalTo(bgView).offset(-7)
+            make.top.equalTo(bgView).offset(7)
         }
     }
     //MARK: - UI
     private func initSubview() {
+        self.selectionStyle = .none
+        
         bgView = UIView()
         bgView.layer.cornerRadius = 3
-        bgView.backgroundColor = UIColor.red
+        bgView.backgroundColor = ColorCC4050
         
         bankIcon = UIImageView()
         
@@ -120,23 +129,25 @@ class BankCardCell: UITableViewCell {
         bankName.textAlignment = .left
         
         bankType = UILabel()
-        bankType.font = Font14
+        bankType.font = Font10
         bankType.textColor = ColorFFFFFF
         bankType.textAlignment = .left
         
         bankCardNum = UILabel()
-        bankCardNum.font = Font12
-        bankCardNum.textColor = ColorFFFFFF
+        bankCardNum.font = Font18
+        bankCardNum.textColor = ColorFFFFFFa8
         bankCardNum.textAlignment = .center
         
         bankCardState = UIButton(type: .custom)
+        bankCardState.titleLabel?.font = Font12
         bankCardState.setTitle("默认收款卡", for: .normal)
         bankCardState.setTitle("默认收款卡", for: .selected)
         bankCardState.setTitleColor(ColorFFFFFF, for: .selected)
-        bankCardState.setTitleColor(ColorA0A0A0, for: .normal)
+        bankCardState.setTitleColor(ColorFFFFFFa8, for: .normal)
         bankCardState.setImage(UIImage(named: "Confirmationbox"), for: .normal)
         bankCardState.setImage(UIImage(named: "recharge"), for: .selected)
         bankCardState.contentHorizontalAlignment = .left
+        bankCardState.titleEdgeInsets = UIEdgeInsets(top: 0, left: 7, bottom: 0, right: 0)
         bankCardState.addTarget(self, action: #selector(settingDefaultCard(_:)), for: .touchUpInside)
         
         deleteBut = UIButton(type: .custom)
@@ -158,10 +169,9 @@ class BankCardCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
-   
+    
     static public func height() -> CGFloat {
-        return BankCardHeight
+        return BankCardHeight + 10
     }
     
     required init?(coder aDecoder: NSCoder) {
