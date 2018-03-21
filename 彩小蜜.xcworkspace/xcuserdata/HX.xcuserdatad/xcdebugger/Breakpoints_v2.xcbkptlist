@@ -100,7 +100,7 @@
                   moduleName = "&#x5f69;&#x5c0f;&#x871c;"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/HX/Desktop/%E5%BD%A9%E5%B0%8F%E7%A7%98/%E5%BD%A9%E5%B0%8F%E8%9C%9C/Classes/Section/Login/Controller/VCodeLoginViewController.swift"
-                  timestampString = "543321540.668431"
+                  timestampString = "543324771.990494"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "118"
@@ -115,7 +115,7 @@
                   moduleName = "&#x5f69;&#x5c0f;&#x871c;"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/HX/Desktop/%E5%BD%A9%E5%B0%8F%E7%A7%98/%E5%BD%A9%E5%B0%8F%E8%9C%9C/Classes/Section/Login/Controller/VCodeLoginViewController.swift"
-                  timestampString = "543321540.679625"
+                  timestampString = "543324772.004676"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "119"
@@ -170,22 +170,6 @@
             startingLineNumber = "100"
             endingLineNumber = "100"
             landmarkName = "sendSmsRequest()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Me/Withdrawal/Controller/BankCardViewController.swift"
-            timestampString = "543321540.231009"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "117"
-            endingLineNumber = "117"
-            landmarkName = "deleteBankCardRequest(status:cardId:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

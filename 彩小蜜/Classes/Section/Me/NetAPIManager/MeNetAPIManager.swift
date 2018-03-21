@@ -28,6 +28,14 @@ enum MeNetAPIManager {
     case setBankDefault (cardId : String)
     /// 删除银行卡
     case deleteBank (status: String, cardId: String)
+    /// 支付
+    case payment (payCode: String, payToken: String)
+    /// 支付订单结果
+    case paymentQuery
+    /// 充值
+    case paymentRecharge (payCode: String, totalAmount: String)
+    /// 提现
+    case paymentWithdraw (totalAmount: String, userBankId: String)
 }
 
 extension MeNetAPIManager : TargetType {
@@ -59,6 +67,15 @@ extension MeNetAPIManager : TargetType {
             return "/user/bank/updateUserBankDefault"
         case .deleteBank:
             return "/user/bank/deleteUserBank"
+        case .payment:
+            return "/payment/app"
+        case .paymentQuery:
+            return "/payment/query"
+        case .paymentRecharge:
+            return "/payment/recharge"
+        case .paymentWithdraw:
+            return "/payment/withdraw"
+            
             
         }
     }
@@ -86,6 +103,15 @@ extension MeNetAPIManager : TargetType {
         case .deleteBank (let status, let cardId):
             dic["id"] = cardId
             dic["status"] = status
+        case .payment(let payCode, let payToken):
+            dic["payCode"] = payCode
+            dic["payToken"] = payToken
+        case .paymentRecharge(let payCode, let totalAmount):
+            dic["payCode"] = payCode
+            dic["totalAmount"] = totalAmount
+        case .paymentWithdraw(let totalAmount, let userBankId):
+            dic["totalAmount"] = totalAmount
+            dic["userBankId"] = userBankId
         default:
             return .requestPlain
         }

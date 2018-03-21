@@ -26,7 +26,7 @@ class BankCardViewController: BaseViewController, UITableViewDelegate, UITableVi
     func deleteCard(bankInfo: BankCardInfo) {
         weak var weakSelf = self
         
-        if bankInfo.status == "0" {
+        if bankInfo.status == "1" {
             let str = """
                         这张卡为默认收款卡，
                           您确认要删除吗？
@@ -116,11 +116,12 @@ class BankCardViewController: BaseViewController, UITableViewDelegate, UITableVi
             
             var attStr : NSMutableAttributedString!
             
-            if data.cardNo == nil {
+            if data.lastCardNo4 == nil {
                 attStr = NSMutableAttributedString(string: "", attributes: [NSAttributedStringKey.foregroundColor: ColorA0A0A0])
             }else {
                 attStr = NSMutableAttributedString(string: "默认收款卡已设置为", attributes: [NSAttributedStringKey.foregroundColor: ColorA0A0A0])
-                let bankCardNo = NSAttributedString(string: "尾号为\(data.cardNo)", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+                
+                let bankCardNo = NSAttributedString(string: "尾号为\(data.lastCardNo4!)", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
                 let 的 = NSAttributedString(string: "的", attributes: [NSAttributedStringKey.foregroundColor: ColorA0A0A0])
                 let cardName = NSAttributedString(string: data.bankName, attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
                 attStr.append(bankCardNo)
