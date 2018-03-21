@@ -23,8 +23,23 @@ class BankCardViewController: BaseViewController, UITableViewDelegate, UITableVi
         guard let bankId = bankInfo.userBankId else { return }
         bankCardDefaultRequest(cardId: bankId)
     }
-    func deleteCard() {
+    func deleteCard(bankInfo: BankCardInfo) {
+        weak var weakSelf = self
         
+        if bankInfo.status == "0" {
+            let str = """
+                        这张卡为默认收款卡，
+                          您确认要删除吗？
+                      """
+            showDeleteAlert(message: str, action: "删除", confirm: { (action) in
+                weakSelf?.deleteBankCardRequest(status: bankInfo.status, cardId: bankInfo.userBankId)
+            })
+        }else {
+            showDeleteAlert(message: "请确认删除这张银行卡", action: "删除") { (action) in
+                weakSelf?.deleteBankCardRequest(status: bankInfo.status, cardId: bankInfo.userBankId)
+            }
+        }
+
     }
     
     // tableView delegate
@@ -35,23 +50,11 @@ class BankCardViewController: BaseViewController, UITableViewDelegate, UITableVi
     //MARK: - 属性
     
     private var bankCardList: [BankCardInfo]!
-    //MARK: - 懒加载
-    lazy private var tableview : UITableView = {
-        let table = UITableView(frame: CGRect.zero, style: .grouped)
-        table.delegate = self
-        table.dataSource = self
-        self.view.addSubview(table)
-        table.register(BankCardCell.self, forCellReuseIdentifier: bankCardIdentifier)
-        
-        let footer = BankCardFooterView()
-        footer.delegate = self
-        table.tableFooterView = footer
-        
-        return table
-    }()
+    
     //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "彩小秘 · 管理银行卡"
         initSubview()
        
     }
@@ -90,44 +93,92 @@ class BankCardViewController: BaseViewController, UITableViewDelegate, UITableVi
         _ = userProvider.rx.request(.setBankDefault(cardId: cardId))
         .asObservable()
         .mapBaseObject(type: DataModel.self)
-            .subscribe(onNext: { (data) in
-                guard weakSelf != nil else { return }
-                weakSelf?.showHUD(message: data.msg)
-            }, onError: { (error) in
-                guard let err = error as? HXError else { return }
-                switch err {
-                case .UnexpectedResult(let code, let msg):
-                    print(code!)
-                    self.showHUD(message: msg!)
-                default: break
-                }
-            }, onCompleted: nil, onDisposed: nil)
+        .subscribe(onNext: { (data) in
+            guard weakSelf != nil else { return }
+            weakSelf?.showHUD(message: data.msg)
+        }, onError: { (error) in
+            guard let err = error as? HXError else { return }
+            switch err {
+            case .UnexpectedResult(let code, let msg):
+                print(code!)
+                self.showHUD(message: msg!)
+            default: break
+            }
+        }, onCompleted: nil, onDisposed: nil)
     }
-    
+    // 删除银行卡
+    private func deleteBankCardRequest(status: String, cardId: String) {
+        weak var weakSelf = self
+        _ = userProvider.rx.request(.deleteBank(status: status, cardId: cardId))
+        .asObservable()
+        .mapObject(type: BankCardInfo.self)
+        .subscribe(onNext: { (data) in
+            
+            var attStr : NSMutableAttributedString!
+            
+            if data.cardNo == nil {
+                attStr = NSMutableAttributedString(string: "", attributes: [NSAttributedStringKey.foregroundColor: ColorA0A0A0])
+            }else {
+                attStr = NSMutableAttributedString(string: "默认收款卡已设置为", attributes: [NSAttributedStringKey.foregroundColor: ColorA0A0A0])
+                let bankCardNo = NSAttributedString(string: "尾号为\(data.cardNo)", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+                let 的 = NSAttributedString(string: "的", attributes: [NSAttributedStringKey.foregroundColor: ColorA0A0A0])
+                let cardName = NSAttributedString(string: data.bankName, attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+                attStr.append(bankCardNo)
+                attStr.append(的)
+                attStr.append(cardName)
+            }
+            weakSelf?.showConfirm(title: "删除成功！", message: attStr, action: "知道了", confirm: { (action) in
+                weakSelf?.bankListRequest()
+            })
+            
+        }, onError: { (error) in
+            guard let err = error as? HXError else { return }
+            switch err {
+            case .UnexpectedResult(let code, let msg):
+                print(code!)
+                self.showHUD(message: msg!)
+            default: break
+            }
+        }, onCompleted: nil, onDisposed: nil)
+    }
     
     //MARK: - UI
     private func initSubview() {
-        
+        self.view.addSubview(tableview)
     }
+    //MARK: - 懒加载
+    lazy private var tableview : UITableView = {
+        let table = UITableView(frame: CGRect.zero, style: .grouped)
+        table.delegate = self
+        table.dataSource = self
+        table.separatorStyle = .none
+        table.register(BankCardCell.self, forCellReuseIdentifier: bankCardIdentifier)
+        
+        let footer = BankCardFooterView()
+        footer.delegate = self
+        table.tableFooterView = footer
+        
+        return table
+    }()
     // tableView DataSource
     func numberOfSections(in tableView: UITableView) -> Int {
-        guard self.bankCardList != nil else { return 0 }
-        return self.bankCardList.count
+        return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        guard self.bankCardList != nil else { return 0 }
+        return self.bankCardList.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: bankCardIdentifier, for: indexPath) as! BankCardCell
         cell.delegate = self
-        cell.bankInfo = self.bankCardList[indexPath.section]
+        cell.bankInfo = self.bankCardList[indexPath.row]
         return cell 
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return BankCardCell.height()
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 5
+        return 0
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0

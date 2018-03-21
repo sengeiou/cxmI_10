@@ -26,6 +26,8 @@ enum MeNetAPIManager {
     case withDrawDataShow
     /// 设置当前银行卡为默认卡
     case setBankDefault (cardId : String)
+    /// 删除银行卡
+    case deleteBank (status: String, cardId: String)
 }
 
 extension MeNetAPIManager : TargetType {
@@ -55,7 +57,8 @@ extension MeNetAPIManager : TargetType {
             return "/user/bank/queryWithDrawShow"
         case .setBankDefault:
             return "/user/bank/updateUserBankDefault"
-            
+        case .deleteBank:
+            return "/user/bank/deleteUserBank"
             
         }
     }
@@ -80,7 +83,9 @@ extension MeNetAPIManager : TargetType {
             dic["str"] = "d14fs54df4sf韩笑孟宪征"
         case .setBankDefault ( let cardId ):
             dic["id"] = cardId
-            
+        case .deleteBank (let status, let cardId):
+            dic["id"] = cardId
+            dic["status"] = status
         default:
             return .requestPlain
         }

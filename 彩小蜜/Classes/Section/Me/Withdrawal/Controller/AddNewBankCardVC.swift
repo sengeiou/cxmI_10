@@ -25,11 +25,13 @@ class AddNewBankCardVC: BaseViewController, UITextFieldDelegate, ValidatePro {
     }
     //MARK: - 属性
     private var nameLB : UILabel! // 名字
+    private var nameTitle : UILabel!
     private var cardNumTF : UITextField! // 银行卡号输入
     private var alertLB : UILabel! // 警告语
     private var addCardBut : UIButton! // 添加按钮
-    private var instructionsTitle : UILabel! // 温馨提示
-    private var instructions : UILabel! // 温馨提示
+    private var instructions : UITextView! // 温馨提示
+    private var bgView : UIView!
+    private var hLine : UIView!
     
     private var realInfo : RealInfoDataModel!
     //MARK: - 生命周期
@@ -39,46 +41,7 @@ class AddNewBankCardVC: BaseViewController, UITextFieldDelegate, ValidatePro {
         realInfoRequest()
         initSubview()
     }
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        nameLB.snp.makeConstraints { (make) in
-            make.height.equalTo(labelHeight)
-            make.left.equalTo(self.view).offset(leftSpacing)
-            make.right.equalTo(self.view).offset(-rightSpacing)
-            make.top.equalTo(self.view).offset(SafeAreaTopHeight + 20)
-        }
-        cardNumTF.snp.makeConstraints { (make) in
-            make.height.equalTo(35)
-            make.left.equalTo(self.view).offset(leftSpacing)
-            make.right.equalTo(self.view).offset(-rightSpacing)
-            make.top.equalTo(nameLB.snp.bottom).offset(20)
-        }
-        alertLB.snp.makeConstraints { (make) in
-            make.height.equalTo(labelHeight)
-            make.left.equalTo(self.view).offset(leftSpacing)
-            make.right.equalTo(self.view).offset(-rightSpacing)
-            make.top.equalTo(cardNumTF.snp.bottom).offset(5)
-        }
-        addCardBut.snp.makeConstraints { (make) in
-            make.height.equalTo(40)
-            make.width.equalTo(150)
-            make.centerX.equalTo(self.view.snp.centerX)
-            make.top.equalTo(alertLB.snp.bottom).offset(80)
-        }
-        instructionsTitle.snp.makeConstraints { (make) in
-            make.height.equalTo(labelHeight)
-            make.left.equalTo(self.view).offset(leftSpacing)
-            make.right.equalTo(self.view).offset(-rightSpacing)
-            make.top.equalTo(addCardBut.snp.bottom).offset(100)
-        }
-        instructions.snp.makeConstraints { (make) in
-            make.height.equalTo(100)
-            make.left.equalTo(self.view).offset(leftSpacing)
-            make.right.equalTo(self.view).offset(-rightSpacing)
-            make.top.equalTo(instructionsTitle.snp.bottom).offset(1)
-        }
-    }
+    
 
     //MARK: - 网络请求
     // 实名认证信息
@@ -117,64 +80,129 @@ class AddNewBankCardVC: BaseViewController, UITextFieldDelegate, ValidatePro {
             }, onCompleted: nil, onDisposed: nil)
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        bgView.snp.makeConstraints { (make) in
+            make.top.equalTo(self.view).offset(SafeAreaTopHeight + 10)
+            make.left.right.equalTo(self.view)
+            make.height.equalTo(111)
+        }
+        
+        hLine.snp.makeConstraints { (make) in
+            make.centerY.equalTo(bgView.snp.centerY)
+            make.left.equalTo(bgView).offset(10)
+            make.right.equalTo(bgView).offset(-10)
+            make.height.equalTo(SeparationLineHeight)
+        }
+        
+        nameTitle.snp.makeConstraints { (make) in
+            make.left.equalTo(bgView).offset(leftSpacing)
+            make.width.equalTo(45)
+            make.top.equalTo(bgView)
+            make.bottom.equalTo(hLine.snp.top)
+        }
+        
+        nameLB.snp.makeConstraints { (make) in
+            make.left.equalTo(nameTitle.snp.right)
+            make.right.equalTo(bgView).offset(-rightSpacing)
+            make.top.equalTo(bgView)
+            make.bottom.equalTo(hLine.snp.top)
+        }
+        cardNumTF.snp.makeConstraints { (make) in
+            make.left.equalTo(bgView).offset(leftSpacing)
+            make.right.equalTo(bgView).offset(-rightSpacing)
+            make.top.equalTo(hLine.snp.bottom)
+            make.bottom.equalTo(bgView)
+        }
+        alertLB.snp.makeConstraints { (make) in
+            make.height.equalTo(20)
+            make.left.equalTo(bgView).offset(leftSpacing)
+            make.right.equalTo(bgView).offset(-rightSpacing)
+            make.top.equalTo(bgView.snp.bottom).offset(17.5)
+        }
+        addCardBut.snp.makeConstraints { (make) in
+            make.height.equalTo(loginButHeight)
+            make.left.equalTo(self.view).offset(leftSpacing)
+            make.right.equalTo(self.view).offset(-rightSpacing)
+            make.top.equalTo(bgView.snp.bottom).offset(loginButTopSpacing*2)
+        }
+        
+        instructions.snp.makeConstraints { (make) in
+            make.height.equalTo(200)
+            make.left.equalTo(self.view).offset(leftSpacing)
+            make.right.equalTo(self.view).offset(-rightSpacing)
+            make.top.equalTo(addCardBut.snp.bottom).offset(loginButTopSpacing*2 - 10)
+        }
+    }
     //MARK: - UI
     private func initSubview() {
+        bgView = UIView()
+        bgView.backgroundColor = ColorFFFFFF
+        
+        hLine = UIView()
+        hLine.backgroundColor = ColorF4F4F4
+        
+        nameTitle = UILabel()
+        nameTitle.font = Font14
+        nameTitle.text = "姓名:"
+        nameTitle.textColor = ColorA0A0A0
+        nameTitle.textAlignment = .left
+        
         nameLB = UILabel()
         nameLB.font = Font14
         nameLB.text = "笑笑"
-        nameLB.textColor = UIColor.black
+        nameLB.textColor = Color505050
         nameLB.textAlignment = .left
         
         cardNumTF = UITextField()
         cardNumTF.font = Font13
         cardNumTF.placeholder = "请输入银行卡号"
-        cardNumTF.borderStyle = .roundedRect
+        //cardNumTF.borderStyle = .roundedRect
         cardNumTF.keyboardType = .numberPad
         cardNumTF.delegate = self
         
-        let alertStr = NSMutableAttributedString(string: " 该卡号为默认收款")
-        let imageText = NSTextAttachment()
-        imageText.image = UIImage(named: "eye")
-        imageText.bounds = CGRect(x: 0, y: 0, width: 12, height: 12)
-        
-        let imageAtt = NSAttributedString(attachment: imageText)
-        
-        alertStr.insert(imageAtt, at: 0)
+//        let alertStr = NSMutableAttributedString(string: " 该卡号为默认收款")
+//        let imageText = NSTextAttachment()
+//        imageText.image = UIImage(named: "eye")
+//        imageText.bounds = CGRect(x: 0, y: 0, width: 12, height: 12)
+//
+//        let imageAtt = NSAttributedString(attachment: imageText)
+//
+//        alertStr.insert(imageAtt, at: 0)
         
         alertLB = UILabel()
-        alertLB.font = Font12
-        alertLB.attributedText = alertStr
-        alertLB.textColor = UIColor.red
+        alertLB.font = Font15
+        alertLB.text = "注： 该卡号为默认收款"
+        alertLB.textColor = ColorF7931E
         
         addCardBut = UIButton(type: .custom)
         addCardBut.setTitle("添加", for: .normal)
-        addCardBut.setTitleColor(UIColor.white, for: .normal)
-        addCardBut.backgroundColor = UIColor.green
+        addCardBut.setTitleColor(ColorFFFFFF, for: .normal)
+        addCardBut.backgroundColor = ColorEA5504
         addCardBut.layer.cornerRadius = 5
         addCardBut.addTarget(self, action: #selector(addNewCard(_:)), for: .touchUpInside)
         
-        instructionsTitle = UILabel()
-        instructionsTitle.font = Font14
-        instructionsTitle.textColor = UIColor.black
-        instructionsTitle.text = "温馨提示"
-        instructionsTitle.textAlignment = .center
-        
-        instructions = UILabel()
-        instructions.font = Font12
-        instructions.textColor = UIColor.black
-        instructions.numberOfLines = 0
+        instructions = UITextView()
+        instructions.font = Font14
+        instructions.textColor = ColorA0A0A0
+        instructions.backgroundColor = UIColor.clear
+        instructions.isUserInteractionEnabled = false
         instructions.text = """
+        温馨提示
         1.建议使用：中国银行 工商银行 招商银行 建设银行卡，提现更快捷；
         2.请务必确保银行卡开户名与实名认证的姓名一致；
         3.请使用储蓄卡作为收款银行卡；
         4.添加银行卡可能会有信息延迟，请耐心等待，如添加未成功请再次添加；
         """
         
-        self.view.addSubview(nameLB)
-        self.view.addSubview(cardNumTF)
+        self.view.addSubview(bgView)
+        bgView.addSubview(hLine)
+        bgView.addSubview(nameTitle)
+        bgView.addSubview(nameLB)
+        bgView.addSubview(cardNumTF)
         self.view.addSubview(alertLB)
         self.view.addSubview(addCardBut)
-        self.view.addSubview(instructionsTitle)
         self.view.addSubview(instructions)
         
     }

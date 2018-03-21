@@ -26,6 +26,32 @@ extension AlertPro {
         HUD.flash(.label(message), delay: 1.0)
     }
     
+    
+    
+    /// 带取消删除弹窗
+    public func showDeleteAlert(message: String, action : String, confirm: ((UIAlertAction)->Void)?) {
+        if let vc = UIApplication.shared.keyWindow?.rootViewController {
+            showAlert(message: message, action: action, in: vc, confirm: confirm)
+        }
+    }
+    public func showAlert(message: String, action : String, in viewController: UIViewController, confirm: ((UIAlertAction)->Void)?) {
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: action, style: .default, handler: confirm)
+        action.setValue(ColorEA5504, forKey:"titleTextColor")
+        let cancel = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        cancel.setValue(Color505050, forKey: "titleTextColor")
+        
+        alert.addAction(action)
+        alert.addAction(cancel)
+        viewController.present(alert, animated: true)
+    }
+    
+    public func showConfirm(title: String, message: NSAttributedString, action: String, confirm: ((UIAlertAction)->Void)?) {
+        if let vc = UIApplication.shared.keyWindow?.rootViewController {
+            showConfirm(title: title, message: message, action: action, in: vc, confirm: confirm)
+        }
+    }
+    
     //在指定视图控制器上弹出普通消息提示框
     public func showAlert(message: String, in viewController: UIViewController) {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
@@ -70,5 +96,16 @@ extension AlertPro {
             showConfirm(message: message, action: action, in: vc, confirm: confirm)
         }
     }
+    public func showConfirm(title: String, message: NSAttributedString, action: String, in viewController: UIViewController, confirm: ((UIAlertAction)->Void)?) {
+        
     
+        
+        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+        alert.setValue(message, forKey: "attributedMessage")
+        
+        let action = UIAlertAction(title: action, style: .default, handler: confirm)
+        action.setValue(Color505050, forKey:"titleTextColor")
+        alert.addAction(action)
+        viewController.present(alert, animated: true)
+    }
 }

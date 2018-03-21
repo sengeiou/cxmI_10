@@ -22,7 +22,7 @@ class BankCardFooterView: UIView {
     //MARK: - 属性
     public var delegate : BankCardFooterViewDelegate!
     private var addCardBut: UIButton! // 添加新银行卡
-    
+    private var detailIcon : UIImageView!
     
     init() {
         super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 100))
@@ -32,23 +32,36 @@ class BankCardFooterView: UIView {
     
     //MARK: - UI
     private func initSubview() {
+        
+        detailIcon = UIImageView()
+        detailIcon.image = UIImage(named: "jump")
+        
         addCardBut = UIButton(type: .custom)
-        addCardBut.setTitle("使用新银行卡收款", for: .normal)
-        addCardBut.setTitleColor(UIColor.white, for: .normal)
-        addCardBut.backgroundColor = UIColor.green
-        addCardBut.layer.cornerRadius = 5
+        addCardBut.setTitle("添加银行卡", for: .normal)
+        addCardBut.setTitleColor(ColorA0A0A0, for: .normal)
+        addCardBut.setImage(UIImage(named: "jump"), for: .normal)
+        addCardBut.backgroundColor = ColorFFFFFF
+        addCardBut.contentHorizontalAlignment = .left
+        addCardBut.imageEdgeInsets = UIEdgeInsets(top: 0, left: CGFloat(leftSpacing), bottom: 0, right: 10)
+        addCardBut.titleEdgeInsets = UIEdgeInsets(top: 0, left: CGFloat(leftSpacing), bottom: 0, right: 0)
         addCardBut.addTarget(self, action: #selector(addNewCard(_:)), for: .touchUpInside)
         
         self.addSubview(addCardBut)
+        addCardBut.addSubview(detailIcon)
     }
     override func layoutSubviews() {
         super.layoutSubviews()
         
+        detailIcon.snp.makeConstraints { (make) in
+            make.centerY.equalTo(addCardBut.snp.centerY)
+            make.height.width.equalTo(20)
+            make.right.equalTo(addCardBut).offset(-rightSpacing)
+        }
+        
         addCardBut.snp.makeConstraints { (make) in
             make.height.equalTo(40)
-            make.width.equalTo(150)
-            make.centerX.equalTo(self.snp.centerX)
-            make.top.equalTo(self).offset(80)
+            make.left.right.equalTo(self)
+            make.top.equalTo(self).offset(sectionHeaderHeight)
         }
     }
     
