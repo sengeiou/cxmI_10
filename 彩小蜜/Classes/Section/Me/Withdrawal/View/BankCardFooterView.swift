@@ -60,7 +60,7 @@ class BankCardFooterView: UIView {
         }
         
         addCardBut.snp.makeConstraints { (make) in
-            make.height.equalTo(40)
+            make.height.equalTo(32)
             make.left.right.equalTo(self)
             make.top.equalTo(self).offset(sectionHeaderHeight)
         }
