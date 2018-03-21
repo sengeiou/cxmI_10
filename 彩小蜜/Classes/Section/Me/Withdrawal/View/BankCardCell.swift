@@ -98,8 +98,8 @@ class BankCardCell: UITableViewCell {
         bankCardNum.snp.makeConstraints { (make) in
             make.left.equalTo(bgView).offset(leftSpacing)
             make.right.equalTo(bgView).offset(-rightSpacing)
-            make.top.equalTo(bankType.snp.bottom).offset(verticalSpacing)
-            make.height.equalTo(30)
+            make.top.equalTo(bankType.snp.bottom).offset(1)
+            make.height.equalTo(20)
         }
         bankCardState.snp.makeConstraints { (make) in
             make.height.equalTo(20)
@@ -132,6 +132,7 @@ class BankCardCell: UITableViewCell {
         bankType.font = Font10
         bankType.textColor = ColorFFFFFF
         bankType.textAlignment = .left
+        bankType.text = "储蓄卡"
         
         bankCardNum = UILabel()
         bankCardNum.font = Font18

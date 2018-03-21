@@ -40,7 +40,7 @@ class BankCardFooterView: UIView {
         addCardBut.titleLabel?.font = Font13
         addCardBut.setTitle(" 添加银行卡", for: .normal)
         addCardBut.setTitleColor(ColorA0A0A0, for: .normal)
-        addCardBut.setImage(UIImage(named: "jump"), for: .normal)
+        addCardBut.setImage(UIImage(named: "add"), for: .normal)
         addCardBut.backgroundColor = ColorFFFFFF
         addCardBut.contentHorizontalAlignment = .left
         addCardBut.imageEdgeInsets = UIEdgeInsets(top: 0, left: CGFloat(leftSpacing), bottom: 0, right: 10)
