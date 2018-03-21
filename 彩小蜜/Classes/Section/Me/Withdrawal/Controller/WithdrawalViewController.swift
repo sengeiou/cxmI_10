@@ -34,7 +34,8 @@ class WithdrawalViewController: BaseViewController {
     private var amountOfMoney : UITextField!// 提现金额
     private var allDrawBut : UIButton!  // 全部提现
     private var drawMoneyBut : UIButton! //提交按钮
-    private var instructions : UILabel! // 说明
+    private var instructions : UITextView! // 说明
+    private var bankTitle : UILabel!
     
     private var hLine : UIView!
     private var vLine : UIView!
@@ -43,7 +44,7 @@ class WithdrawalViewController: BaseViewController {
     //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.title = "彩小秘 · 提现"
         initSubview()
         drawDataRequest()
     }
@@ -73,7 +74,7 @@ class WithdrawalViewController: BaseViewController {
     }
     private func setDrawData(data : WithDrawDataModel) {
         moneyLB.text = "可提现金额: \(data.userMoney!)元"
-        bankCardLB.text = "银行卡: \(data.defaultBankCardLabel!)"
+        bankCardLB.text = "\(data.defaultBankCardLabel!)"
     }
     
     //MARK: - UI
@@ -89,26 +90,34 @@ class WithdrawalViewController: BaseViewController {
         hLine.backgroundColor = ColorF4F4F4
         
         moneyLB = UILabel()
-        moneyLB.font = Font14
+        moneyLB.font = Font15
         moneyLB.text = "可提现金额: 100元"
         moneyLB.textColor = UIColor.black
         moneyLB.textAlignment = .left
         
+        bankTitle = UILabel()
+        bankTitle.font = Font13
+        bankTitle.text = "银行卡: "
+        bankTitle.textAlignment = .left
+        bankTitle.textColor = ColorA0A0A0
+        
         bankCardLB = UILabel()
-        bankCardLB.font = Font12
-        bankCardLB.text = "银行卡: 请添加银行卡"
+        bankCardLB.font = Font13
         bankCardLB.textColor = UIColor.black
         bankCardLB.textAlignment = .left
         
         bankCardBut = UIButton(type: .custom)
         bankCardBut.setTitle("管理", for: .normal)
+        bankCardBut.setImage(UIImage(named: "Jump"), for: .normal)
+        bankCardBut.imageEdgeInsets = UIEdgeInsets(top: 0, left: 60, bottom: 0, right: 0)
+        bankCardBut.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
         bankCardBut.setTitleColor(ColorA0A0A0, for: .normal)
         bankCardBut.contentHorizontalAlignment = .right
         bankCardBut.addTarget(self, action: #selector(administrate(_:)), for: .touchUpInside)
         
         allDrawBut = UIButton(type: .custom)
         allDrawBut.setTitle("全部提现", for: .normal)
-        allDrawBut.setTitleColor(UIColor.black, for: .normal)
+        allDrawBut.setTitleColor(ColorA0A0A0, for: .normal)
         allDrawBut.addTarget(self, action: #selector(allDraw(_:)), for: .touchUpInside)
         allDrawBut.frame = CGRect(x: 0, y: 0, width: 80, height: defaultCellHeight)
         
@@ -118,21 +127,22 @@ class WithdrawalViewController: BaseViewController {
         amountOfMoney = UITextField()
         amountOfMoney.font = Font12
         amountOfMoney.placeholder = "请输入提现金额"
-        //amountOfMoney.borderStyle = .roundedRect
         amountOfMoney.rightView = allDrawBut
         amountOfMoney.rightViewMode = .always
         amountOfMoney.keyboardType = .numberPad
         
         drawMoneyBut = UIButton(type: .custom)
-        drawMoneyBut.setTitle("提交", for: .normal)
-        drawMoneyBut.setTitleColor(UIColor.black, for: .normal)
-        drawMoneyBut.backgroundColor = UIColor.brown
+        drawMoneyBut.setTitle("立即支付", for: .normal)
+        drawMoneyBut.setTitleColor(ColorFFFFFF, for: .normal)
+        drawMoneyBut.backgroundColor = ColorEA5504
         drawMoneyBut.layer.cornerRadius = 5
         drawMoneyBut.addTarget(self, action: #selector(drawMoney(_:)), for: .touchUpInside)
         
-        instructions = UILabel()
-        instructions.font = Font12
-        instructions.numberOfLines = 6
+        instructions = UITextView()
+        instructions.isUserInteractionEnabled = false
+        instructions.textColor = ColorA0A0A0
+        instructions.font = Font14
+        instructions.backgroundColor = UIColor.clear
         instructions.text = """
         说明：
         1.中奖金额在1小时后可提现；
@@ -141,9 +151,6 @@ class WithdrawalViewController: BaseViewController {
         4.每天提现不超过3次，每次最低3元；
         5.活动赠送金额不可提现；
         """
-        instructions.textColor = UIColor.black
-        
-        
         
         bgView.addSubview(moneyLB)
         bgView.addSubview(bankCardLB)
@@ -152,7 +159,7 @@ class WithdrawalViewController: BaseViewController {
         bgView.addSubview(drawMoneyBut)
         self.view.addSubview(instructions)
         bgView.addSubview(hLine)
-        
+        bgView.addSubview(bankTitle)
         self.view.addSubview(bgView)
     }
     
@@ -185,9 +192,16 @@ class WithdrawalViewController: BaseViewController {
             make.top.equalTo(bgView).offset(0)
         }
         
-        bankCardLB.snp.makeConstraints { (make) in
+        bankTitle.snp.makeConstraints { (make) in
             make.height.equalTo(defaultCellHeight)
             make.left.equalTo(bgView).offset(leftSpacing)
+            make.width.equalTo(50)
+            make.bottom.equalTo(hLine.snp.top)
+        }
+        
+        bankCardLB.snp.makeConstraints { (make) in
+            make.height.equalTo(defaultCellHeight)
+            make.left.equalTo(bankTitle.snp.right).offset(0)
             make.right.equalTo(bgView).offset(-rightSpacing)
             make.bottom.equalTo(hLine.snp.top).offset(0)
         }
@@ -209,7 +223,7 @@ class WithdrawalViewController: BaseViewController {
             make.top.equalTo(amountOfMoney.snp.bottom).offset(loginButTopSpacing)
         }
         instructions.snp.makeConstraints { (make) in
-            make.height.equalTo(100)
+            make.height.equalTo(300)
             make.left.equalTo(self.view).offset(leftSpacing)
             make.right.equalTo(self.view).offset(-rightSpacing)
             make.top.equalTo(drawMoneyBut.snp.bottom).offset(50)
