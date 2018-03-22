@@ -86,12 +86,11 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         hideBackBut()
         self.navigationItem.title = "彩小秘 · 我的"
         self.view.addSubview(tableView)
-        userInfoRequest()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //hideNavigationBar()
+        userInfoRequest()
     }
     
     override func viewDidLayoutSubviews() {
@@ -133,7 +132,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         .mapBaseObject(type: DataModel.self)
             .subscribe(onNext: { (data) in
                 weakSelf?.removeUserData()
-                weakSelf?.userInfoRequest()
+                weakSelf?.pushLoginVC(from: self)
             }, onError: { (error) in
                 print(error)
                 guard let err = error as? HXError else { return }

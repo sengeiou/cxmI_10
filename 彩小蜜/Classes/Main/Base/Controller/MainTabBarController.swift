@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainTabBarController: UITabBarController {
+class MainTabBarController: UITabBarController, UserInfoPro {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +51,13 @@ class MainTabBarController: UITabBarController {
         lotteryNav.tabBarItem.selectedImage = loSelImg
         
         // me
-        let me = MeViewController()
+        var me : BaseViewController!
+        
+        if getUserData() != nil {
+            me = MeViewController()
+        }else {
+            me = LoginViewController()
+        }
         
         let meNav = UINavigationController(rootViewController: me)
         meNav.tabBarItem.imageInsets = UIEdgeInsets(top: 10, left: 0, bottom: -10, right: 0)

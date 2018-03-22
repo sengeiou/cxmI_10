@@ -67,8 +67,12 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro,
     //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "彩小秘 · 密码登录"
+        self.navigationItem.title = "彩小秘 · 密码登录"
         self.view.addSubview(tableView)
+        
+        if getUserData() == nil {
+            hideBackBut()
+        }
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
