@@ -19,7 +19,7 @@ enum MeNetAPIManager {
     /// 实名认证信息
     case realInfo
     /// 添加银行卡
-    case addBankCard (bankCardNo : String, realName: String)
+    case addBankCard (bankCardNo : String)
     /// 查询银行卡信息
     case bankList
     /// 提现界面的数据显示
@@ -87,9 +87,9 @@ extension MeNetAPIManager : TargetType {
         case .realNameAuth(let idcode, let realName):
             dic["idcode"] = idcode
             dic["realName"] = realName
-        case .addBankCard(let bankCardNo, let realName):
+        case .addBankCard(let bankCardNo):
             dic["bankCardNo"] = bankCardNo.replacingOccurrences(of: " ", with: "")
-            dic["realName"] = realName
+            
         case .userInfo:
             dic["str"] = "d14fs54df4sf韩笑孟宪征"
         case .realInfo:

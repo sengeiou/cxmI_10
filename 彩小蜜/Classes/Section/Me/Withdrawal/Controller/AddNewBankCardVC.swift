@@ -64,7 +64,7 @@ class AddNewBankCardVC: BaseViewController, UITextFieldDelegate, ValidatePro {
     }
     
     private func addBankCardRequest() {
-        _ = userProvider.rx.request(.addBankCard(bankCardNo: self.cardNumTF.text!, realName: self.realInfo.realName))
+        _ = userProvider.rx.request(.addBankCard(bankCardNo: self.cardNumTF.text!))
         .asObservable()
         .mapObject(type: BankCardInfo.self)
             .subscribe(onNext: { (data) in
