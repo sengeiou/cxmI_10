@@ -53,6 +53,7 @@
 		E57376022046B37900148622 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57376012046B37900148622 /* MainTabBarController.swift */; };
 		E57376442046BC1300148622 /* LotteryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57376432046BC1300148622 /* LotteryViewController.swift */; };
 		E57376462046BC6400148622 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57376452046BC6400148622 /* MeViewController.swift */; };
+		E581F378206348EB002AB9F7 /* UserInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F377206348EB002AB9F7 /* UserInfoManager.swift */; };
 		E58B57B220561BB80025E2F1 /* Spacing&SizeConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58B57B120561BB80025E2F1 /* Spacing&SizeConstraint.swift */; };
 		E58B57B4205622950025E2F1 /* BankCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58B57B3205622950025E2F1 /* BankCardViewController.swift */; };
 		E58B57B6205623B30025E2F1 /* BankCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58B57B5205623B30025E2F1 /* BankCardCell.swift */; };
@@ -163,6 +164,7 @@
 		E57376012046B37900148622 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		E57376432046BC1300148622 /* LotteryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryViewController.swift; sourceTree = "<group>"; };
 		E57376452046BC6400148622 /* MeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
+		E581F377206348EB002AB9F7 /* UserInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoManager.swift; sourceTree = "<group>"; };
 		E58B57B120561BB80025E2F1 /* Spacing&SizeConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Spacing&SizeConstraint.swift"; sourceTree = "<group>"; };
 		E58B57B3205622950025E2F1 /* BankCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankCardViewController.swift; sourceTree = "<group>"; };
 		E58B57B5205623B30025E2F1 /* BankCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankCardCell.swift; sourceTree = "<group>"; };
@@ -567,6 +569,7 @@
 				E512A9672047E532003F14F4 /* Network */,
 				E57375E72046AFC900148622 /* Extension */,
 				E57375EC2046B04600148622 /* Constraints */,
+				E581F37620634899002AB9F7 /* Util */,
 				E57375E92046B02C00148622 /* Tool */,
 			);
 			path = Main;
@@ -928,6 +931,14 @@
 				E514DDDF2052A37E00274854 /* DataModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		E581F37620634899002AB9F7 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				E581F377206348EB002AB9F7 /* UserInfoManager.swift */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 		E58B57C12056717B0025E2F1 /* NetAPIManager */ = {
@@ -1388,6 +1399,7 @@
 				E56298BD20513429006397EA /* AuthenticationVC.swift in Sources */,
 				E58B57BE205671410025E2F1 /* LoginNetAPIManager.swift in Sources */,
 				E5973E29204E4387006461CE /* ForgetPswPhoneVC.swift in Sources */,
+				E581F378206348EB002AB9F7 /* UserInfoManager.swift in Sources */,
 				E51F9A60205A29EE00AB8A21 /* VCodeLoginFooterView.swift in Sources */,
 				E51F9A58205A120A00AB8A21 /* PasswordTextFieldCell.swift in Sources */,
 				E59CB3DB205BA1300086DD0E /* HomeActivityCell.swift in Sources */,

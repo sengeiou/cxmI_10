@@ -75,10 +75,11 @@ extension UserInfoPro {
         let userInfo = self.getUserData()
         return userInfo.token
     }
+    public func removeUserData() {
+        UserDefaults.standard.removeObject(forKey: "userInfo")
+    }
 }
 
-struct UserInfoManager: UserInfoPro {
-    
-}
+
 
 

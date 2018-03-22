@@ -113,13 +113,10 @@ class BankCardViewController: BaseViewController, UITableViewDelegate, UITableVi
         .asObservable()
         .mapObject(type: BankCardInfo.self)
         .subscribe(onNext: { (data) in
-            
-            var attStr : NSMutableAttributedString!
-            
             if data.lastCardNo4 == nil {
-                attStr = NSMutableAttributedString(string: "", attributes: [NSAttributedStringKey.foregroundColor: ColorA0A0A0])
+                weakSelf?.showHUD(message: data.showMsg)
             }else {
-                attStr = NSMutableAttributedString(string: "默认收款卡已设置为", attributes: [NSAttributedStringKey.foregroundColor: ColorA0A0A0])
+                let attStr = NSMutableAttributedString(string: "默认收款卡已设置为", attributes: [NSAttributedStringKey.foregroundColor: ColorA0A0A0])
                 
                 let bankCardNo = NSAttributedString(string: "尾号为\(data.lastCardNo4!)", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
                 let 的 = NSAttributedString(string: "的", attributes: [NSAttributedStringKey.foregroundColor: ColorA0A0A0])
@@ -127,10 +124,11 @@ class BankCardViewController: BaseViewController, UITableViewDelegate, UITableVi
                 attStr.append(bankCardNo)
                 attStr.append(的)
                 attStr.append(cardName)
+                weakSelf?.showConfirm(title: "删除成功！", message: attStr, action: "知道了", confirm: { (action) in
+                    weakSelf?.bankListRequest()
+                })
             }
-            weakSelf?.showConfirm(title: "删除成功！", message: attStr, action: "知道了", confirm: { (action) in
-                weakSelf?.bankListRequest()
-            })
+            
             
         }, onError: { (error) in
             guard let err = error as? HXError else { return }

@@ -21,6 +21,7 @@ enum LoginNetAPIManager {
     case updatePass (mobile: String, password: String)
     /// smsType: 短信类型:0-短信登录验证码 1-注册验证码 2-忘记密码验证码
     case sendSms (mobile: String, smsType: String)
+
 }
 
 extension LoginNetAPIManager: TargetType {
@@ -41,7 +42,7 @@ extension LoginNetAPIManager: TargetType {
         case .loginBySms:
             return "/login/loginBySms"
         case .logout:
-            return ""
+            return "/login/logout"
         case .register:
             return "/user/register"
         case .resetPass:
@@ -93,8 +94,6 @@ extension LoginNetAPIManager: TargetType {
         case .sendSms(let mobile, let smsType):
             dic["mobile"] = mobile
             dic["smsType"] = smsType
-            
-            
         default:
             return .requestPlain
         }

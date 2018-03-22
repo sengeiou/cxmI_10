@@ -27,7 +27,11 @@ extension AlertPro {
     }
     
     
-    
+    public func showConfirm( message: String, action: String, cancel: String, confirm: ((UIAlertAction)->Void)?) {
+        if let vc = UIApplication.shared.keyWindow?.rootViewController {
+            showAlert(title: nil, message: message, action: action, cancel: cancel, in: vc, confirm: confirm)
+        }
+    }
     /// 带取消删除弹窗
     public func showDeleteAlert(message: String, action : String, confirm: ((UIAlertAction)->Void)?) {
         if let vc = UIApplication.shared.keyWindow?.rootViewController {
@@ -45,6 +49,9 @@ extension AlertPro {
         alert.addAction(cancel)
         viewController.present(alert, animated: true)
     }
+    
+    
+    
     
     public func showConfirm(title: String, message: NSAttributedString, action: String, confirm: ((UIAlertAction)->Void)?) {
         if let vc = UIApplication.shared.keyWindow?.rootViewController {
@@ -106,6 +113,18 @@ extension AlertPro {
         let action = UIAlertAction(title: action, style: .default, handler: confirm)
         action.setValue(Color505050, forKey:"titleTextColor")
         alert.addAction(action)
+        viewController.present(alert, animated: true)
+    }
+    
+    public func showAlert(title: String?, message: String, action: String, cancel: String, in viewController: UIViewController, confirm: ((UIAlertAction)->Void)?) {
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: action, style: .default, handler: confirm)
+        action.setValue(ColorEA5504, forKey:"titleTextColor")
+        let cancel = UIAlertAction(title: cancel, style: .cancel, handler: nil)
+        cancel.setValue(Color505050, forKey: "titleTextColor")
+        
+        alert.addAction(action)
+        alert.addAction(cancel)
         viewController.present(alert, animated: true)
     }
 }

@@ -11,7 +11,7 @@ import TTTAttributedLabel
 
 fileprivate let meCellIdentifier = "meCellIdentifier"
 
-class MeViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, MeHeaderViewDelegate, MeFooterViewDelegate, TTTAttributedLabelDelegate {
+class MeViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, MeHeaderViewDelegate, MeFooterViewDelegate, TTTAttributedLabelDelegate, UserInfoPro {
     
     //MARK: - 点击事件
     // header delegate
@@ -29,9 +29,10 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     // footer delegate
     func signOutClicked() {
         print("退出登录")
-        //let vc = LoginViewController()
-        //pushViewController(vc: vc)
-        
+        weak var weakSelf = self
+        showConfirm(message: "您正在退出登录", action: "继续退出", cancel: "返回") { (action) in
+            weakSelf?.logoutRequest()
+        }
         pushLoginVC(from: self)
         
     }
@@ -123,6 +124,25 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
                 default: break
                 }
             }, onCompleted: nil, onDisposed: nil)
+    }
+    // 退出登录
+    private func logoutRequest() {
+        weak var weakSelf = self
+        _ = loginProvider.rx.request(.logout)
+        .asObservable()
+        .mapBaseObject(type: DataModel.self)
+            .subscribe(onNext: { (data) in
+                weakSelf?.removeUserData()
+            }, onError: { (error) in
+                print(error)
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    print(code!)
+                    self.showHUD(message: msg!)
+                default: break
+                }
+            }, onCompleted: nil, onDisposed: nil )
     }
     //MARK: - 懒加载
     lazy var tableView : UITableView = {
