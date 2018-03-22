@@ -113,8 +113,9 @@ class BankCardViewController: BaseViewController, UITableViewDelegate, UITableVi
         .asObservable()
         .mapObject(type: BankCardInfo.self)
         .subscribe(onNext: { (data) in
-            if data.lastCardNo4 == nil {
+            if data.userBankId == nil {
                 weakSelf?.showHUD(message: data.showMsg)
+                weakSelf?.bankListRequest()
             }else {
                 let attStr = NSMutableAttributedString(string: "默认收款卡已设置为", attributes: [NSAttributedStringKey.foregroundColor: ColorA0A0A0])
                 
