@@ -141,8 +141,10 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     }
     
     @objc func rightBut(sender: UIButton) {
-        let xxx = BasePopViewController()
-        self.present(xxx, animated: true, completion: nil)
+        //let xxx = BasePopViewController()
+        //self.present(xxx, animated: true, completion: nil)
+        
+        pushLoginVC(from: self)
     }
     
 }
