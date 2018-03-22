@@ -29,6 +29,7 @@ target '彩小蜜' do
 
   pod 'FSPagerView'
 
+  pod 'XLPagerTabStrip', '~> 8.0'
 
 
 
