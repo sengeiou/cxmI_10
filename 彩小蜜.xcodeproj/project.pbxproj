@@ -54,6 +54,7 @@
 		E57376442046BC1300148622 /* LotteryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57376432046BC1300148622 /* LotteryViewController.swift */; };
 		E57376462046BC6400148622 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57376452046BC6400148622 /* MeViewController.swift */; };
 		E581F378206348EB002AB9F7 /* UserInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F377206348EB002AB9F7 /* UserInfoManager.swift */; };
+		E581F37C2063573C002AB9F7 /* PaymentNetAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F37B2063573C002AB9F7 /* PaymentNetAPIManager.swift */; };
 		E58B57B220561BB80025E2F1 /* Spacing&SizeConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58B57B120561BB80025E2F1 /* Spacing&SizeConstraint.swift */; };
 		E58B57B4205622950025E2F1 /* BankCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58B57B3205622950025E2F1 /* BankCardViewController.swift */; };
 		E58B57B6205623B30025E2F1 /* BankCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58B57B5205623B30025E2F1 /* BankCardCell.swift */; };
@@ -165,6 +166,7 @@
 		E57376432046BC1300148622 /* LotteryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryViewController.swift; sourceTree = "<group>"; };
 		E57376452046BC6400148622 /* MeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
 		E581F377206348EB002AB9F7 /* UserInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoManager.swift; sourceTree = "<group>"; };
+		E581F37B2063573C002AB9F7 /* PaymentNetAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentNetAPIManager.swift; sourceTree = "<group>"; };
 		E58B57B120561BB80025E2F1 /* Spacing&SizeConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Spacing&SizeConstraint.swift"; sourceTree = "<group>"; };
 		E58B57B3205622950025E2F1 /* BankCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankCardViewController.swift; sourceTree = "<group>"; };
 		E58B57B5205623B30025E2F1 /* BankCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankCardCell.swift; sourceTree = "<group>"; };
@@ -582,8 +584,8 @@
 				E57375D92046AE7700148622 /* Lottery */,
 				E57375D82046AE7000148622 /* Me */,
 				E57375E52046AF8000148622 /* Login */,
+				E581F379206356A2002AB9F7 /* Payment */,
 				E57375F62046B1E800148622 /* Share */,
-				E57375F72046B1FD00148622 /* Pay */,
 				E57375F02046B11300148622 /* NewFeature */,
 			);
 			path = Section;
@@ -856,16 +858,6 @@
 			path = Share;
 			sourceTree = "<group>";
 		};
-		E57375F72046B1FD00148622 /* Pay */ = {
-			isa = PBXGroup;
-			children = (
-				E57375FD2046B23C00148622 /* Model */,
-				E57375FC2046B23A00148622 /* View */,
-				E57375FB2046B23800148622 /* Controller */,
-			);
-			path = Pay;
-			sourceTree = "<group>";
-		};
 		E57375F82046B20F00148622 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -939,6 +931,25 @@
 				E581F377206348EB002AB9F7 /* UserInfoManager.swift */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		E581F379206356A2002AB9F7 /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				E581F37A206356F2002AB9F7 /* NetAPIManager */,
+				E57375FD2046B23C00148622 /* Model */,
+				E57375FC2046B23A00148622 /* View */,
+				E57375FB2046B23800148622 /* Controller */,
+			);
+			path = Payment;
+			sourceTree = "<group>";
+		};
+		E581F37A206356F2002AB9F7 /* NetAPIManager */ = {
+			isa = PBXGroup;
+			children = (
+				E581F37B2063573C002AB9F7 /* PaymentNetAPIManager.swift */,
+			);
+			path = NetAPIManager;
 			sourceTree = "<group>";
 		};
 		E58B57C12056717B0025E2F1 /* NetAPIManager */ = {
@@ -1388,6 +1399,7 @@
 				E53739772057B9340087E4E6 /* extension+UserDefaults.swift in Sources */,
 				E5973E20204E34A3006461CE /* FontConstraint.swift in Sources */,
 				E5973E33204FC1D9006461CE /* MeFooterView.swift in Sources */,
+				E581F37C2063573C002AB9F7 /* PaymentNetAPIManager.swift in Sources */,
 				E57376022046B37900148622 /* MainTabBarController.swift in Sources */,
 				E512A96B2047EF67003F14F4 /* RequestPlugin.swift in Sources */,
 				E533BF0520610D170037D2D8 /* BasePopViewController.swift in Sources */,
