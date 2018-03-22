@@ -82,9 +82,15 @@ class RegisterViewController: BaseViewController, UITableViewDelegate, UITableVi
         .subscribe { (event) in
             switch event {
             case .next(let data):
-                print(data)
-                self.save(userInfo: data)
-                self.popToCurrentVC()
+                self.showHUD(message: data.showMsg)
+                
+                if self.getUserData() == nil {
+                    self.save(userInfo: data)
+                    self.pushRootViewController()
+                }else {
+                    self.save(userInfo: data)
+                    self.popToCurrentVC()
+                }
             case .error(let error):
                 guard let hxError = error as? HXError else { return }
                 switch hxError {

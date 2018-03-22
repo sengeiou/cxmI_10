@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Login/Controller/VCodeLoginViewController.swift"
-            timestampString = "543238181.7064511"
+            timestampString = "543385242.606806"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
             landmarkName = "sendSmsRequest()"
             landmarkType = "7">
          </BreakpointContent>
@@ -36,119 +36,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Login/Controller/VCodeLoginViewController.swift"
-            timestampString = "543238181.706585"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "115"
-            endingLineNumber = "115"
-            landmarkName = "sendSmsRequest()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Login/Controller/VCodeLoginViewController.swift"
-            timestampString = "543238181.706671"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
-            landmarkName = "sendSmsRequest()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Login/Controller/VCodeLoginViewController.swift"
-            timestampString = "543238181.706738"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
-            landmarkName = "sendSmsRequest()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Login/Controller/VCodeLoginViewController.swift"
-            timestampString = "543238181.706795"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
-            landmarkName = "sendSmsRequest()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (RxSwift.Event&lt;&#x5f69;&#x5c0f;&#x871c;.DataModel&gt;) -&gt; () in &#x5f69;&#x5c0f;&#x871c;.VCodeLoginViewController.(sendSmsRequest in _97E5656062C8A97C2A2251EA5D426B31)() -&gt; ()"
-                  moduleName = "&#x5f69;&#x5c0f;&#x871c;"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/HX/Desktop/%E5%BD%A9%E5%B0%8F%E7%A7%98/%E5%BD%A9%E5%B0%8F%E8%9C%9C/Classes/Section/Login/Controller/VCodeLoginViewController.swift"
-                  timestampString = "543383829.974583"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "118"
-                  endingLineNumber = "118"
-                  offsetFromSymbolStart = "4242">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__ObjC.UIAlertAction) -&gt; () in closure #1 (RxSwift.Event&lt;&#x5f69;&#x5c0f;&#x871c;.DataModel&gt;) -&gt; () in &#x5f69;&#x5c0f;&#x871c;.VCodeLoginViewController.(sendSmsRequest in _97E5656062C8A97C2A2251EA5D426B31)() -&gt; ()"
-                  moduleName = "&#x5f69;&#x5c0f;&#x871c;"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/HX/Desktop/%E5%BD%A9%E5%B0%8F%E7%A7%98/%E5%BD%A9%E5%B0%8F%E8%9C%9C/Classes/Section/Login/Controller/VCodeLoginViewController.swift"
-                  timestampString = "543383829.97929"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "119"
-                  endingLineNumber = "119"
-                  offsetFromSymbolStart = "18">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Login/Controller/VCodeLoginViewController.swift"
-            timestampString = "543238181.706848"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
-            landmarkName = "sendSmsRequest()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Login/Controller/VCodeLoginViewController.swift"
-            timestampString = "543238181.706921"
+            timestampString = "543385242.607015"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "119"
@@ -164,11 +52,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Login/Controller/VCodeLoginViewController.swift"
-            timestampString = "543238181.706975"
+            timestampString = "543385242.607109"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
             landmarkName = "sendSmsRequest()"
             landmarkType = "7">
          </BreakpointContent>
@@ -179,8 +67,120 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
+            filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Login/Controller/VCodeLoginViewController.swift"
+            timestampString = "543385242.607168"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
+            landmarkName = "sendSmsRequest()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Login/Controller/VCodeLoginViewController.swift"
+            timestampString = "543385242.607223"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
+            landmarkName = "sendSmsRequest()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (RxSwift.Event&lt;&#x5f69;&#x5c0f;&#x871c;.DataModel&gt;) -&gt; () in &#x5f69;&#x5c0f;&#x871c;.VCodeLoginViewController.(sendSmsRequest in _97E5656062C8A97C2A2251EA5D426B31)() -&gt; ()"
+                  moduleName = "&#x5f69;&#x5c0f;&#x871c;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/HX/Desktop/%E5%BD%A9%E5%B0%8F%E7%A7%98/%E5%BD%A9%E5%B0%8F%E8%9C%9C/Classes/Section/Login/Controller/VCodeLoginViewController.swift"
+                  timestampString = "543385242.949422"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "122"
+                  endingLineNumber = "122"
+                  offsetFromSymbolStart = "4242">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__ObjC.UIAlertAction) -&gt; () in closure #1 (RxSwift.Event&lt;&#x5f69;&#x5c0f;&#x871c;.DataModel&gt;) -&gt; () in &#x5f69;&#x5c0f;&#x871c;.VCodeLoginViewController.(sendSmsRequest in _97E5656062C8A97C2A2251EA5D426B31)() -&gt; ()"
+                  moduleName = "&#x5f69;&#x5c0f;&#x871c;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/HX/Desktop/%E5%BD%A9%E5%B0%8F%E7%A7%98/%E5%BD%A9%E5%B0%8F%E8%9C%9C/Classes/Section/Login/Controller/VCodeLoginViewController.swift"
+                  timestampString = "543385242.953972"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "123"
+                  endingLineNumber = "123"
+                  offsetFromSymbolStart = "18">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Login/Controller/VCodeLoginViewController.swift"
+            timestampString = "543385242.607276"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
+            landmarkName = "sendSmsRequest()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Login/Controller/VCodeLoginViewController.swift"
+            timestampString = "543385242.607326"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "sendSmsRequest()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Login/Controller/VCodeLoginViewController.swift"
+            timestampString = "543385242.607378"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
+            landmarkName = "loginRequest()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
             filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Me/Withdrawal/Controller/BankCardViewController.swift"
-            timestampString = "543383829.437472"
+            timestampString = "543385242.607433"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "78"

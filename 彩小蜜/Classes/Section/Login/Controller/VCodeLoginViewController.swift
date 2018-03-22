@@ -72,11 +72,15 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
             .subscribe { (event) in
                 switch event {
                 case .next(let data):
-                    weak var weakSelf = self
-                    self.save(userInfo: data)
-                    self.showConfirm(message: data.showMsg, confirm: { (action) in
-                        weakSelf?.pushRootViewController()
-                    })
+                    self.showHUD(message: data.showMsg)
+                    
+                    if self.getUserData() == nil {
+                        self.save(userInfo: data)
+                        self.pushRootViewController()
+                    }else {
+                        self.save(userInfo: data)
+                        self.popToCurrentVC()
+                    }
                     print(data)
                 case .error(let error):
                     guard let hxerror = error as? HXError else { return }

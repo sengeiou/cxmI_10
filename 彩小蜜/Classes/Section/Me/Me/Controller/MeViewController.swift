@@ -132,7 +132,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         .mapBaseObject(type: DataModel.self)
             .subscribe(onNext: { (data) in
                 weakSelf?.removeUserData()
-                weakSelf?.pushLoginVC(from: self)
+                weakSelf?.pushRootViewController(2)
             }, onError: { (error) in
                 print(error)
                 guard let err = error as? HXError else { return }

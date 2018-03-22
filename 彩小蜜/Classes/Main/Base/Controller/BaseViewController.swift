@@ -34,8 +34,13 @@ class BaseViewController: UIViewController, AlertPro {
     }
     
     public func pushRootViewController() {
+        pushRootViewController(0)
+    }
+    public func pushRootViewController(_ index: Int) {
         guard let window = UIApplication.shared.keyWindow else { return }
-        window.rootViewController = MainTabBarController()
+        let root = MainTabBarController()
+        root.selectedIndex = index
+        window.rootViewController = root
     }
     
     public func popViewController() {
