@@ -54,10 +54,13 @@ class CouponViewController: BaseViewController, IndicatorInfoProvider, UITableVi
     
     //MARK: - 加载数据
     private func loadNewData() {
+        
         couponListRequest(1)
     }
     private func loadNextData() {
-        guard self.couponListModel.nextPage >= 1 else { return }
+        guard self.couponListModel.isLastPage == true else {
+            self.tableview.noMoreData()
+            return }
         
         couponListRequest(self.couponListModel.nextPage)
     }
@@ -79,10 +82,15 @@ class CouponViewController: BaseViewController, IndicatorInfoProvider, UITableVi
            .asObservable()
            .mapObject(type: CouponListModel.self)
            .subscribe(onNext: { (data) in
+                weakSelf?.tableview.endrefresh()
                 weakSelf?.couponListModel = data
+                if pageNum == 1 {
+                    weakSelf?.couponList.removeAll()
+                }
                 weakSelf?.couponList.append(contentsOf: data.list)
                 weakSelf?.tableview.reloadData()
            }, onError: { (error) in
+                weakSelf?.tableview.endrefresh()
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):

@@ -33,4 +33,7 @@ extension UIScrollView
         self.mj_footer.endRefreshing()
         self.mj_header.endRefreshing()
     }
+    func noMoreData() {
+        self.mj_footer.endRefreshingWithNoMoreData()
+    }
 }

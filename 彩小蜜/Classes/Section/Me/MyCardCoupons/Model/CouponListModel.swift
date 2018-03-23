@@ -14,4 +14,5 @@ struct CouponListModel: HandyJSON {
     var endRow : String!
     var pageSize : String!
     var nextPage : Int!
+    var isLastPage : Bool!
 }
