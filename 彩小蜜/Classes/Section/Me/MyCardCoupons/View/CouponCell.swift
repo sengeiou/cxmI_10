@@ -10,6 +10,50 @@ import UIKit
 
 class CouponCell: UITableViewCell {
 
+    public var couponInfo: CouponInfoModel! {
+        didSet{
+            
+            var moneyColor : UIColor!
+            
+            switch couponInfo.bonusStatus {
+            case "0":
+                titleLB.textColor = Color505050
+                stateIcon.image = UIImage(named: "Expiresoon")
+                moneyColor = ColorE95504
+            case "1":
+                moneyColor = Color787878
+                titleLB.textColor = Color505050
+                stateIcon.image = UIImage(named: "used")
+            case "2":
+                moneyColor = ColorA0A0A0
+                titleLB.textColor = ColorA0A0A0
+                stateIcon.image = UIImage(named: "Expired")
+            default: break
+                
+            }
+            
+            let moneyAtt = NSMutableAttributedString(string: "¥", attributes: [NSAttributedStringKey.font: Font18, NSAttributedStringKey.foregroundColor: moneyColor])
+            let money = NSAttributedString(string: couponInfo.bonusPrice, attributes: [NSAttributedStringKey.foregroundColor: moneyColor])
+            moneyAtt.append(money)
+            
+            let timeAtt = NSMutableAttributedString(string: "有效期: ")
+            let time = NSAttributedString(string: couponInfo.limitTime, attributes: [NSAttributedStringKey.foregroundColor: ColorA0A0A0])
+            timeAtt.append(time)
+            
+            let insAtt = NSMutableAttributedString(string: "使用说明: ")
+            let ins = NSAttributedString(string: couponInfo.useRange, attributes: [NSAttributedStringKey.foregroundColor: ColorA0A0A0])
+            insAtt.append(ins)
+            
+            moneyLB.attributedText = moneyAtt
+            titleLB.text = couponInfo.minGoodsAmount
+            timeLB.attributedText = timeAtt
+            instructions.attributedText = insAtt
+            
+            
+        }
+    }
+    
+    
     private var bgImageView : UIImageView!
     private var moneyLB : UILabel!
     private var titleLB : UILabel!
@@ -28,14 +72,14 @@ class CouponCell: UITableViewCell {
         
         bgImageView.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(self.contentView)
-            make.left.equalTo(self.contentView).offset(10)
-            make.right.equalTo(self.contentView).offset(-10)
+            make.left.equalTo(self.contentView).offset(7.5)
+            make.right.equalTo(self.contentView).offset(-7.5)
         }
         moneyLB.snp.makeConstraints { (make) in
             make.top.equalTo(bgImageView)
             make.bottom.equalTo(bgImageView.snp.centerY)
             make.left.equalTo(bgImageView).offset(leftSpacing)
-            make.width.equalTo(80)
+            make.width.equalTo(150)
         }
         titleLB.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(moneyLB)
@@ -47,15 +91,14 @@ class CouponCell: UITableViewCell {
             make.top.equalTo(bgImageView)
             make.right.equalTo(bgImageView)
         }
-        
         timeLB.snp.makeConstraints { (make) in
-            make.top.equalTo(bgImageView.snp.centerY).offset(10)
-            make.height.equalTo(20)
+            make.height.equalTo(10)
             make.left.equalTo(moneyLB)
             make.right.equalTo(bgImageView)
+            make.bottom.equalTo(instructions.snp.top).offset(-5)
         }
         instructions.snp.makeConstraints { (make) in
-            make.bottom.equalTo(bgImageView).offset(-10)
+            make.bottom.equalTo(bgImageView).offset(-17.5)
             make.left.right.height.equalTo(timeLB)
         }
         
@@ -67,21 +110,22 @@ class CouponCell: UITableViewCell {
         bgImageView.image = UIImage(named: "couponBg")
         
         moneyLB = UILabel()
-        moneyLB.text = "100"
-        
+        moneyLB.font = Font30
+        moneyLB.textColor = ColorE95504
         
         titleLB = UILabel()
         titleLB.numberOfLines = 0
-        titleLB.text = "购彩满1000减50元，不限彩种"
         
         timeLB = UILabel()
-        timeLB.text = "有效期: 剩余7天"
-    
+        timeLB.font = Font10
+        timeLB.textColor = ColorC8C8C8
+        
         instructions = UILabel()
-        instructions.text = "使用说明： 订单金额满1000元可减免50元"
+        instructions.font = Font10
+        instructions.textColor = ColorC8C8C8
         
         stateIcon = UIImageView()
-        stateIcon.image = UIImage(named: "Expired")
+        
         
         
         self.contentView.addSubview(bgImageView)

@@ -49,5 +49,9 @@ let BankCardHeight : CGFloat = 120 * defaultScale
 let BankCardWidth : CGFloat = 340 * defaultScale
 let BankCardIconWidth : CGFloat = 26 * defaultScale
 let BankCardDeleteWidth: CGFloat = 14 * defaultScale
+
+//MARK: - 优惠券
+let CouponCellHeight : CGFloat = 121 * defaultScale
+
 //MARK: -  首页足球尺寸
 

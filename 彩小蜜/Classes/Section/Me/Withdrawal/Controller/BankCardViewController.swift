@@ -96,6 +96,7 @@ class BankCardViewController: BaseViewController, UITableViewDelegate, UITableVi
         .subscribe(onNext: { (data) in
             guard weakSelf != nil else { return }
             weakSelf?.showHUD(message: data.msg)
+            weakSelf?.bankListRequest()
         }, onError: { (error) in
             guard let err = error as? HXError else { return }
             switch err {

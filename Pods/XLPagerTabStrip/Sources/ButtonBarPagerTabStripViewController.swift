@@ -146,7 +146,6 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         buttonBarView.showsHorizontalScrollIndicator = false
         buttonBarView.backgroundColor = settings.style.buttonBarBackgroundColor ?? buttonBarView.backgroundColor
         buttonBarView.selectedBar.backgroundColor = settings.style.selectedBarBackgroundColor
-
         buttonBarView.selectedBarHeight = settings.style.selectedBarHeight
         buttonBarView.selectedBarVerticalAlignment = settings.style.selectedBarVerticalAlignment
 
@@ -308,7 +307,13 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? ButtonBarViewCell else {
             fatalError("UICollectionViewCell should be or extend from ButtonBarViewCell")
         }
-
+        
+        if indexPath.row == 0 {
+            cell.spaingIcon.isHidden = true
+        }else {
+            cell.spaingIcon.isHidden = false
+        }
+        cell.spaingIcon.backgroundColor = UIColor(red: 244/255, green: 244/255, blue: 244/255, alpha: 1)
         collectionViewDidLoad = true
 
         let childController = viewControllers[indexPath.item] as! IndicatorInfoProvider // swiftlint:disable:this force_cast

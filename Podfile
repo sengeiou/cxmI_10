@@ -32,8 +32,6 @@ target '彩小蜜' do
   pod 'XLPagerTabStrip', '~> 8.0'
 
 
-
-
   # Pods for 彩小蜜
 
   target '彩小蜜Tests' do
