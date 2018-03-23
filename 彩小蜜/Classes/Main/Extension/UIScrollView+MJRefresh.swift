@@ -10,16 +10,13 @@ import Foundation
 
 import MJRefresh
 
-
-
-
-
 extension UIScrollView
 {
     func headerRefresh(block: @escaping () -> ()) -> (){
-        self.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
-            block()
-        })
+        let header = MJRefreshNormalHeader(refreshingBlock: block)
+        header?.setTitle("下拉可以刷新", for: .refreshing)
+        
+        self.mj_header = header
     }
     
     func footerRefresh(block: @escaping () -> ()) -> (){
