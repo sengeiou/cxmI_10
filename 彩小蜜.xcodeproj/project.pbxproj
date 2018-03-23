@@ -17,6 +17,11 @@
 		E50B907D20526BB200417BFE /* RechargePaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50B907C20526BB200417BFE /* RechargePaymentCell.swift */; };
 		E51032482064A99700A0156C /* CouponListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51032472064A99700A0156C /* CouponListModel.swift */; };
 		E510324A2064A9C000A0156C /* CouponInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51032492064A9C000A0156C /* CouponInfoModel.swift */; };
+		E51032502064FD2D00A0156C /* BasePagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E510324F2064FD2D00A0156C /* BasePagerViewController.swift */; };
+		E5103254206500A800A0156C /* PurchaseRecordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5103253206500A800A0156C /* PurchaseRecordVC.swift */; };
+		E5103256206502DA00A0156C /* PurchaseRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5103255206502DA00A0156C /* PurchaseRecordCell.swift */; };
+		E51032582065037700A0156C /* PurchaseRecordListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51032572065037700A0156C /* PurchaseRecordListModel.swift */; };
+		E510325A2065044100A0156C /* PurchaseRecordInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51032592065044100A0156C /* PurchaseRecordInfoModel.swift */; };
 		E512A96620479FD7003F14F4 /* HomeNetAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E512A96520479FD7003F14F4 /* HomeNetAPIManager.swift */; };
 		E512A9692047E598003F14F4 /* Observable+ObjectMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E512A9682047E598003F14F4 /* Observable+ObjectMapper.swift */; };
 		E512A96B2047EF67003F14F4 /* RequestPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E512A96A2047EF67003F14F4 /* RequestPlugin.swift */; };
@@ -57,7 +62,6 @@
 		E57376462046BC6400148622 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57376452046BC6400148622 /* MeViewController.swift */; };
 		E581F378206348EB002AB9F7 /* UserInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F377206348EB002AB9F7 /* UserInfoManager.swift */; };
 		E581F37C2063573C002AB9F7 /* PaymentNetAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F37B2063573C002AB9F7 /* PaymentNetAPIManager.swift */; };
-		E581F37F2063882C002AB9F7 /* MyCouponViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F37E2063882C002AB9F7 /* MyCouponViewController.swift */; };
 		E581F38C2063B446002AB9F7 /* CouponCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F38B2063B446002AB9F7 /* CouponCell.swift */; };
 		E581F38F2063C7A0002AB9F7 /* CouponViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F38E2063C7A0002AB9F7 /* CouponViewController.swift */; };
 		E58B57B220561BB80025E2F1 /* Spacing&SizeConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58B57B120561BB80025E2F1 /* Spacing&SizeConstraint.swift */; };
@@ -129,6 +133,11 @@
 		E50B907C20526BB200417BFE /* RechargePaymentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargePaymentCell.swift; sourceTree = "<group>"; };
 		E51032472064A99700A0156C /* CouponListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponListModel.swift; sourceTree = "<group>"; };
 		E51032492064A9C000A0156C /* CouponInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponInfoModel.swift; sourceTree = "<group>"; };
+		E510324F2064FD2D00A0156C /* BasePagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePagerViewController.swift; sourceTree = "<group>"; };
+		E5103253206500A800A0156C /* PurchaseRecordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseRecordVC.swift; sourceTree = "<group>"; };
+		E5103255206502DA00A0156C /* PurchaseRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseRecordCell.swift; sourceTree = "<group>"; };
+		E51032572065037700A0156C /* PurchaseRecordListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseRecordListModel.swift; sourceTree = "<group>"; };
+		E51032592065044100A0156C /* PurchaseRecordInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseRecordInfoModel.swift; sourceTree = "<group>"; };
 		E512A96520479FD7003F14F4 /* HomeNetAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNetAPIManager.swift; sourceTree = "<group>"; };
 		E512A9682047E598003F14F4 /* Observable+ObjectMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+ObjectMapper.swift"; sourceTree = "<group>"; };
 		E512A96A2047EF67003F14F4 /* RequestPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestPlugin.swift; sourceTree = "<group>"; };
@@ -174,7 +183,6 @@
 		E57376452046BC6400148622 /* MeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
 		E581F377206348EB002AB9F7 /* UserInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoManager.swift; sourceTree = "<group>"; };
 		E581F37B2063573C002AB9F7 /* PaymentNetAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentNetAPIManager.swift; sourceTree = "<group>"; };
-		E581F37E2063882C002AB9F7 /* MyCouponViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCouponViewController.swift; sourceTree = "<group>"; };
 		E581F38B2063B446002AB9F7 /* CouponCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponCell.swift; sourceTree = "<group>"; };
 		E581F38E2063C7A0002AB9F7 /* CouponViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponViewController.swift; sourceTree = "<group>"; };
 		E58B57B120561BB80025E2F1 /* Spacing&SizeConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Spacing&SizeConstraint.swift"; sourceTree = "<group>"; };
@@ -443,6 +451,7 @@
 		E56298B3205133C7006397EA /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				E5103253206500A800A0156C /* PurchaseRecordVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -450,6 +459,8 @@
 		E56298B4205133C7006397EA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E51032572065037700A0156C /* PurchaseRecordListModel.swift */,
+				E51032592065044100A0156C /* PurchaseRecordInfoModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -457,6 +468,7 @@
 		E56298B5205133C7006397EA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E5103255206502DA00A0156C /* PurchaseRecordCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -485,7 +497,6 @@
 		E56298B9205133E8006397EA /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				E581F37E2063882C002AB9F7 /* MyCouponViewController.swift */,
 				E581F38E2063C7A0002AB9F7 /* CouponViewController.swift */,
 			);
 			path = Controller;
@@ -920,6 +931,7 @@
 			children = (
 				E57376012046B37900148622 /* MainTabBarController.swift */,
 				E5973DDD204D152F006461CE /* BaseViewController.swift */,
+				E510324F2064FD2D00A0156C /* BasePagerViewController.swift */,
 				E533BF0420610D170037D2D8 /* BasePopViewController.swift */,
 			);
 			path = Controller;
@@ -1374,6 +1386,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E5973E35204FCCF2006461CE /* MeAboutViewController.swift in Sources */,
+				E51032502064FD2D00A0156C /* BasePagerViewController.swift in Sources */,
 				E58B57B8205634250025E2F1 /* BankCardFooterView.swift in Sources */,
 				E5973DDE204D152F006461CE /* BaseViewController.swift in Sources */,
 				E59CB3DD205BA1650086DD0E /* HomeSportLotteryCell.swift in Sources */,
@@ -1402,9 +1415,9 @@
 				E58B57BA2056364A0025E2F1 /* AddNewBankCardVC.swift in Sources */,
 				E51F9A64205A2A2D00AB8A21 /* ForgetPswVCodeFooterView.swift in Sources */,
 				E58B57C5205676CB0025E2F1 /* MeNetAPIManager.swift in Sources */,
+				E510325A2065044100A0156C /* PurchaseRecordInfoModel.swift in Sources */,
 				E533BF012060DE600037D2D8 /* RechargeTitleCell.swift in Sources */,
 				E50B9077205235BF00417BFE /* RechargeCardCell.swift in Sources */,
-				E581F37F2063882C002AB9F7 /* MyCouponViewController.swift in Sources */,
 				E512A9692047E598003F14F4 /* Observable+ObjectMapper.swift in Sources */,
 				E5973E31204F8FD4006461CE /* MeHeaderView.swift in Sources */,
 				E58B57B220561BB80025E2F1 /* Spacing&SizeConstraint.swift in Sources */,
@@ -1417,6 +1430,7 @@
 				E537397B2057F4270087E4E6 /* UserInfoDataModel.swift in Sources */,
 				E58B57BC205670670025E2F1 /* ServeConstraint.swift in Sources */,
 				E5973E1C204D4A75006461CE /* ScreenConstraint.swift in Sources */,
+				E5103254206500A800A0156C /* PurchaseRecordVC.swift in Sources */,
 				E53739772057B9340087E4E6 /* extension+UserDefaults.swift in Sources */,
 				E5973E20204E34A3006461CE /* FontConstraint.swift in Sources */,
 				E5973E33204FC1D9006461CE /* MeFooterView.swift in Sources */,
@@ -1425,7 +1439,9 @@
 				E581F38C2063B446002AB9F7 /* CouponCell.swift in Sources */,
 				E51032482064A99700A0156C /* CouponListModel.swift in Sources */,
 				E512A96B2047EF67003F14F4 /* RequestPlugin.swift in Sources */,
+				E51032582065037700A0156C /* PurchaseRecordListModel.swift in Sources */,
 				E533BF0520610D170037D2D8 /* BasePopViewController.swift in Sources */,
+				E5103256206502DA00A0156C /* PurchaseRecordCell.swift in Sources */,
 				E58B57B4205622950025E2F1 /* BankCardViewController.swift in Sources */,
 				E51F9A5E205A29D500AB8A21 /* LoginFooterView.swift in Sources */,
 				E537397F2057F8F40087E4E6 /* BankCardInfo.swift in Sources */,

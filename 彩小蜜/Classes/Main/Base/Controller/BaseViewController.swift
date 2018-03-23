@@ -29,6 +29,12 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
         }
     }
     
+    public func pushPagerView(pagerType: PagerViewType) {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let vc = storyboard.instantiateViewController(withIdentifier: "BasePagerViewController") as! BasePagerViewController
+        vc.pagerType = pagerType
+        pushViewController(vc: vc)
+    }
     
     public func pushViewController(vc: UIViewController) {
         self.navigationController?.pushViewController(vc, animated: true)

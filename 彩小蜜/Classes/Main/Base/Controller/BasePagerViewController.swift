@@ -1,24 +1,29 @@
 //
-//  MyCouponViewController.swift
+//  BasePagerViewController.swift
 //  彩小蜜
 //
-//  Created by HX on 2018/3/22.
+//  Created by HX on 2018/3/23.
 //  Copyright © 2018年 韩笑. All rights reserved.
 //
 
 import UIKit
 import XLPagerTabStrip
 
-class MyCouponViewController: ButtonBarPagerTabStripViewController {
+enum PagerViewType: String {
+    case coupon = "彩小秘 · 账户明细"
+    case purchaseRecord = "彩小秘 · 购彩记录"
+}
 
-
+class BasePagerViewController: ButtonBarPagerTabStripViewController {
+    
+    var pagerType: PagerViewType!
+    
     override func viewDidLoad() {
-
         settings.style.buttonBarBackgroundColor = ColorFFFFFF
         settings.style.buttonBarItemBackgroundColor = ColorFFFFFF
         settings.style.selectedBarBackgroundColor = ColorE95504
         settings.style.buttonBarItemTitleColor = Color505050
-
+        
         settings.style.selectedBarHeight = 1
         settings.style.buttonBarItemLeftRightMargin = 0
         settings.style.buttonBarItemsShouldFillAvailableWidth = true
@@ -26,28 +31,59 @@ class MyCouponViewController: ButtonBarPagerTabStripViewController {
         settings.style.buttonBarMinimumLineSpacing = 0
         settings.style.buttonBarItemFont = Font15
         
-        
         changeCurrentIndexProgressive = { [weak self] (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
             guard changeCurrentIndex == true else { return }
             oldCell?.label.textColor = Color505050
             newCell?.label.textColor = ColorE95504
         }
-
         super.viewDidLoad()
-        self.title = "彩小秘 · 账户明细"
+        self.title = self.pagerType.rawValue
         setLiftButtonItem()
+        
     }
 
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+        return getViewController()
+    }
+    
+    func getViewController() -> [UIViewController] {
+        
+        switch pagerType {
+        case .coupon:
+            return self.getCouponViewController()
+        case .purchaseRecord:
+            return getPurchaseRecordVC()
+            
+        default:
+            return[]
+        }
+        
+    
+    }
+    
+    //MARK: - 初始化控制器
+    private func getCouponViewController() -> [UIViewController]{
         let notUsed = CouponViewController()
         notUsed.couponType = .unUsed
         let used = CouponViewController()
         used.couponType = .used
         let overdue = CouponViewController()
         overdue.couponType = .overdue
+        
         return [notUsed, used, overdue]
     }
-
+    
+    private func getPurchaseRecordVC() -> [UIViewController] {
+        let all = PurchaseRecordVC()
+        all.recordType = .all
+        let winning = PurchaseRecordVC()
+        winning.recordType = .winning
+        let prize = PurchaseRecordVC()
+        prize.recordType = .prize
+        return [all, winning, prize]
+    }
+    
+    
     private func setLiftButtonItem() {
         
         let leftBut = UIButton(type: .custom)
@@ -69,13 +105,13 @@ class MyCouponViewController: ButtonBarPagerTabStripViewController {
     @objc private func back(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-
+        // Dispose of any resources that can be recreated.
     }
+    
 
-
-
+    
 
 }
-

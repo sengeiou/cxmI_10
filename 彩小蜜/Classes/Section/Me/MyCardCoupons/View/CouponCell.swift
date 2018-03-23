@@ -106,6 +106,8 @@ class CouponCell: UITableViewCell {
     
     
     private func initSubview() {
+        self.selectionStyle = .none
+        
         bgImageView = UIImageView()
         bgImageView.image = UIImage(named: "couponBg")
         

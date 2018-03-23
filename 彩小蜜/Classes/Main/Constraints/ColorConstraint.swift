@@ -30,5 +30,5 @@ let ColorE95504a2 = UIColor(hexColor: "E95504", alpha: 0.2)
 let Color505050 = UIColor(hexColor: "505050")
 /// 银行卡背景色- 玫红
 let ColorCC4050 = UIColor(hexColor: "CC4050")
-/// 按钮 borderColor
+/// 按钮 borderColor 次灰
 let ColorC8C8C8 = UIColor(hexColor: "C8C8C8")

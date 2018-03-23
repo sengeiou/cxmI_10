@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--My Coupon View Controller-->
+        <!--Base Pager View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="MyCouponViewController" id="BYZ-38-t0r" customClass="MyCouponViewController" customModule="彩小蜜" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BasePagerViewController" id="BYZ-38-t0r" customClass="BasePagerViewController" customModule="彩小蜜" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4Fz-4l-FOt"/>
                         <viewControllerLayoutGuide type="bottom" id="SEY-CA-1oY"/>

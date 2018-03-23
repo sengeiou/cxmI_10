@@ -89,7 +89,7 @@ class CouponViewController: BaseViewController, IndicatorInfoProvider, UITableVi
                 if pageNum == 1 {
                     weakSelf?.couponList.removeAll()
                 }
-                //weakSelf?.couponList.append(contentsOf: data.list)
+                weakSelf?.couponList.append(contentsOf: data.list)
                 weakSelf?.tableview.reloadData()
            }, onError: { (error) in
                 weakSelf?.tableview.endrefresh()

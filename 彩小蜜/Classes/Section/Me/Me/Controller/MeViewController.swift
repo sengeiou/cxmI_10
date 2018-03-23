@@ -55,11 +55,10 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         switch indexPath.section {
         case 0:
             switch indexPath.row {
-            case 0: break
+            case 0:
+                pushPagerView(pagerType: .purchaseRecord)
             case 2:
-               let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-               let vc = storyboard.instantiateViewController(withIdentifier: "MyCouponViewController")
-                pushViewController(vc: vc)
+                pushPagerView(pagerType: .coupon)
             default :
                 break
             }

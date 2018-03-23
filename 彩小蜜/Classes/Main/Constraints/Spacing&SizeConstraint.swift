@@ -53,5 +53,7 @@ let BankCardDeleteWidth: CGFloat = 14 * defaultScale
 //MARK: - 优惠券
 let CouponCellHeight : CGFloat = 121 * defaultScale
 
+//MARK: - 购彩记录
+let RecordCellHeight : CGFloat = 100 * defaultScale
 //MARK: -  首页足球尺寸
 
