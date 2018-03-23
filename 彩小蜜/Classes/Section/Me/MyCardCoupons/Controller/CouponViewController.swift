@@ -9,6 +9,8 @@
 import UIKit
 import XLPagerTabStrip
 
+//import DZNEmptyDataSet
+
 fileprivate let CouponCellId = "CouponCellId"
 
 enum CouponType: String {
@@ -16,8 +18,6 @@ enum CouponType: String {
     case used = "已使用"
     case overdue = "已过期"
 }
-
-
 
 class CouponViewController: BaseViewController, IndicatorInfoProvider, UITableViewDelegate, UITableViewDataSource {
 
@@ -33,13 +33,14 @@ class CouponViewController: BaseViewController, IndicatorInfoProvider, UITableVi
         couponList = []
         couponListRequest(1)
         
+        setEmpty(title: "您还没有优惠券！", tableview)
+        
         self.tableview.headerRefresh {
             self.loadNewData()
         }
         self.tableview.footerRefresh {
             self.loadNextData()
         }
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -48,6 +49,7 @@ class CouponViewController: BaseViewController, IndicatorInfoProvider, UITableVi
             make.top.left.right.bottom.equalTo(self.view)
         }
     }
+    
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: couponType.rawValue)
     }
@@ -87,7 +89,7 @@ class CouponViewController: BaseViewController, IndicatorInfoProvider, UITableVi
                 if pageNum == 1 {
                     weakSelf?.couponList.removeAll()
                 }
-                weakSelf?.couponList.append(contentsOf: data.list)
+                //weakSelf?.couponList.append(contentsOf: data.list)
                 weakSelf?.tableview.reloadData()
            }, onError: { (error) in
                 weakSelf?.tableview.endrefresh()

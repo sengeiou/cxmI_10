@@ -9,10 +9,11 @@
 import UIKit
 import SnapKit
 
+import DZNEmptyDataSet
 
 public var currentVC : UIViewController?
 
-class BaseViewController: UIViewController, AlertPro {
+class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate{
 
     // public
     public func pushLoginVC(from vc: UIViewController) {
@@ -62,10 +63,16 @@ class BaseViewController: UIViewController, AlertPro {
     public func hideNavigationBar() {
         self.navigationController?.navigationBar.isHidden = true
     }
-    //MARK: -
+    public func setEmpty(title: String, _ tableView: UITableView) {
+        tableView.emptyDataSetDelegate = self
+        tableView.emptyDataSetSource = self
+        self.emptyTitle = title
+    }
     
+    //MARK: - 属性
+    private var emptyTitle: String!
     
-    
+    //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = ColorF4F4F4
@@ -77,7 +84,17 @@ class BaseViewController: UIViewController, AlertPro {
         setLiftButtonItem()
         
     }
-    
+    //MARK: - 空列表视图
+    func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
+        return UIImage(named: "empty")
+    }
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        let att = NSAttributedString(string: emptyTitle, attributes: [NSAttributedStringKey.foregroundColor: ColorA0A0A0, NSAttributedStringKey.font: Font15])
+        return att
+    }
+    func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
+        return ColorF4F4F4
+    }
     
     private func setLiftButtonItem() {
         
