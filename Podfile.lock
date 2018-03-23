@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (4.6.0)
+  - DZNEmptyDataSet (1.8.1)
   - FSPagerView (0.7.1)
   - HandyJSON (4.0.0-beta.1)
   - Kingfisher (4.6.2)
@@ -19,6 +20,7 @@ PODS:
   - XLPagerTabStrip (8.0.0)
 
 DEPENDENCIES:
+  - DZNEmptyDataSet
   - FSPagerView
   - HandyJSON (~> 4.0.0-beta.1)
   - Kingfisher
@@ -34,6 +36,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
+  DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   FSPagerView: 958aba39684e1573755ddcfcc29f7eebb8413cee
   HandyJSON: 428bb18e2c34c2a77361accebf90cf64e4f74118
   Kingfisher: 55b9c395bf8d3949676ad3861111923990ab68cf
@@ -47,6 +50,6 @@ SPEC CHECKSUMS:
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
   XLPagerTabStrip: d1ab378af0923320ec0b5eab11d7b2f803d31261
 
-PODFILE CHECKSUM: 53866825b3a9fc9dd4e03a2c723c3ce609799f3e
+PODFILE CHECKSUM: 17b16d4309fea29f64edb62e9ef66866de9490c3
 
 COCOAPODS: 1.4.0

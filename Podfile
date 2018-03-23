@@ -15,6 +15,8 @@ target '彩小蜜' do
 
   pod 'HandyJSON’,  ‘~> 4.0.0-beta.1’
 
+  pod 'DZNEmptyDataSet'
+
   pod 'Result'
 
   pod 'SVProgressHUD'
