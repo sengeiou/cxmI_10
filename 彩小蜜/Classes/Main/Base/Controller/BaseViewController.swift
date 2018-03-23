@@ -95,7 +95,9 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
     func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
         return ColorF4F4F4
     }
-    
+    func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
+        return -80
+    }
     private func setLiftButtonItem() {
         
         let leftBut = UIButton(type: .custom)
