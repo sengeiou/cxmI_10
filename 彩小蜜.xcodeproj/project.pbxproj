@@ -99,6 +99,13 @@
 		E5A2644E205B742B00EE6491 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A2644D205B742B00EE6491 /* HomeViewController.swift */; };
 		E5B68AFB205A81940038A5A2 /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B68AFA205A81940038A5A2 /* Extension+String.swift */; };
 		E5B68AFD205A81A70038A5A2 /* Extension+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B68AFC205A81A70038A5A2 /* Extension+Color.swift */; };
+		E5D8ABB4206737FF002D688B /* OrderDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D8ABB3206737FF002D688B /* OrderDetailVC.swift */; };
+		E5D8ABB6206739CF002D688B /* OrderDetailTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D8ABB5206739CF002D688B /* OrderDetailTitleCell.swift */; };
+		E5D8ABB820674283002D688B /* OrderDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D8ABB720674283002D688B /* OrderDetailCell.swift */; };
+		E5D8ABBA20674352002D688B /* OrderRuleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D8ABB920674352002D688B /* OrderRuleCell.swift */; };
+		E5D8ABBC2067443E002D688B /* OrderProgrammeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D8ABBB2067443E002D688B /* OrderProgrammeCell.swift */; };
+		E5D8ABBE206749F5002D688B /* OrderDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D8ABBD206749F5002D688B /* OrderDetailHeaderView.swift */; };
+		E5D8ABC020674A07002D688B /* OrderDetailFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D8ABBF20674A07002D688B /* OrderDetailFooterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -220,6 +227,13 @@
 		E5A2644D205B742B00EE6491 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		E5B68AFA205A81940038A5A2 /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
 		E5B68AFC205A81A70038A5A2 /* Extension+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Color.swift"; sourceTree = "<group>"; };
+		E5D8ABB3206737FF002D688B /* OrderDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailVC.swift; sourceTree = "<group>"; };
+		E5D8ABB5206739CF002D688B /* OrderDetailTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailTitleCell.swift; sourceTree = "<group>"; };
+		E5D8ABB720674283002D688B /* OrderDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailCell.swift; sourceTree = "<group>"; };
+		E5D8ABB920674352002D688B /* OrderRuleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderRuleCell.swift; sourceTree = "<group>"; };
+		E5D8ABBB2067443E002D688B /* OrderProgrammeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderProgrammeCell.swift; sourceTree = "<group>"; };
+		E5D8ABBD206749F5002D688B /* OrderDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailHeaderView.swift; sourceTree = "<group>"; };
+		E5D8ABBF20674A07002D688B /* OrderDetailFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailFooterView.swift; sourceTree = "<group>"; };
 		EAE714330A11D581FBF18120 /* Pods____UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods____UITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDB760CCFE10D3EA06C79E83 /* Pods-彩小蜜Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜Tests/Pods-彩小蜜Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -452,6 +466,7 @@
 			isa = PBXGroup;
 			children = (
 				E5103253206500A800A0156C /* PurchaseRecordVC.swift */,
+				E5D8ABB3206737FF002D688B /* OrderDetailVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -469,6 +484,12 @@
 			isa = PBXGroup;
 			children = (
 				E5103255206502DA00A0156C /* PurchaseRecordCell.swift */,
+				E5D8ABB5206739CF002D688B /* OrderDetailTitleCell.swift */,
+				E5D8ABB720674283002D688B /* OrderDetailCell.swift */,
+				E5D8ABB920674352002D688B /* OrderRuleCell.swift */,
+				E5D8ABBB2067443E002D688B /* OrderProgrammeCell.swift */,
+				E5D8ABBD206749F5002D688B /* OrderDetailHeaderView.swift */,
+				E5D8ABBF20674A07002D688B /* OrderDetailFooterView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1392,6 +1413,9 @@
 				E59CB3DD205BA1650086DD0E /* HomeSportLotteryCell.swift in Sources */,
 				E50B9075205231C800417BFE /* RechargeFooterView.swift in Sources */,
 				E533BF032060EB3A0037D2D8 /* RechargePaymentTitleCell.swift in Sources */,
+				E5D8ABC020674A07002D688B /* OrderDetailFooterView.swift in Sources */,
+				E5D8ABBC2067443E002D688B /* OrderProgrammeCell.swift in Sources */,
+				E5D8ABBA20674352002D688B /* OrderRuleCell.swift in Sources */,
 				E5973DDC204CEFDB006461CE /* LoginViewController.swift in Sources */,
 				E5973E40204FDD34006461CE /* MeComplaintVC.swift in Sources */,
 				E5973E22204E34F2006461CE /* ColorConstraint.swift in Sources */,
@@ -1403,6 +1427,7 @@
 				E510324A2064A9C000A0156C /* CouponInfoModel.swift in Sources */,
 				E5973DD920492DD2006461CE /* UIScrollView+MJRefresh.swift in Sources */,
 				E5973E27204E3CB0006461CE /* CountdownButton.swift in Sources */,
+				E5D8ABB6206739CF002D688B /* OrderDetailTitleCell.swift in Sources */,
 				E50B9073205231B500417BFE /* RechargeHeaderView.swift in Sources */,
 				E57376442046BC1300148622 /* LotteryViewController.swift in Sources */,
 				E59CB3DF205BA17F0086DD0E /* HomeHeaderView.swift in Sources */,
@@ -1443,6 +1468,7 @@
 				E533BF0520610D170037D2D8 /* BasePopViewController.swift in Sources */,
 				E5103256206502DA00A0156C /* PurchaseRecordCell.swift in Sources */,
 				E58B57B4205622950025E2F1 /* BankCardViewController.swift in Sources */,
+				E5D8ABB4206737FF002D688B /* OrderDetailVC.swift in Sources */,
 				E51F9A5E205A29D500AB8A21 /* LoginFooterView.swift in Sources */,
 				E537397F2057F8F40087E4E6 /* BankCardInfo.swift in Sources */,
 				E50B907120522FFF00417BFE /* RechargeViewController.swift in Sources */,
@@ -1450,6 +1476,7 @@
 				E56298BD20513429006397EA /* AuthenticationVC.swift in Sources */,
 				E58B57BE205671410025E2F1 /* LoginNetAPIManager.swift in Sources */,
 				E5973E29204E4387006461CE /* ForgetPswPhoneVC.swift in Sources */,
+				E5D8ABBE206749F5002D688B /* OrderDetailHeaderView.swift in Sources */,
 				E581F378206348EB002AB9F7 /* UserInfoManager.swift in Sources */,
 				E51F9A60205A29EE00AB8A21 /* VCodeLoginFooterView.swift in Sources */,
 				E51F9A58205A120A00AB8A21 /* PasswordTextFieldCell.swift in Sources */,
@@ -1462,6 +1489,7 @@
 				E562989F2050E04C006397EA /* ValidateProtocol.swift in Sources */,
 				E581F38F2063C7A0002AB9F7 /* CouponViewController.swift in Sources */,
 				E56298A32050E712006397EA /* AlertProtocol.swift in Sources */,
+				E5D8ABB820674283002D688B /* OrderDetailCell.swift in Sources */,
 				E5A2644E205B742B00EE6491 /* HomeViewController.swift in Sources */,
 				E58B57C7205676EC0025E2F1 /* LotteryNetAPIManager.swift in Sources */,
 				E51F9A5A205A122000AB8A21 /* VcodeTextFieldCell.swift in Sources */,

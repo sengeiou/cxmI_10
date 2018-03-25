@@ -62,7 +62,9 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
     }
     
     
-    
+    public func hideTabBar() {
+        self.tabBarController?.tabBar.isHidden = true
+    }
     public func hideBackBut() {
         self.navigationItem.leftBarButtonItem = nil
     }

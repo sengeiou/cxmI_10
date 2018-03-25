@@ -42,7 +42,7 @@ let SeparationLineHeight = 1
 let defaultCellHeight : CGFloat = 55 * defaultScale
 /// heightForHeaderInSection
 let sectionHeaderHeight : CGFloat = 5
-
+let SeparatorLeftSpacing : CGFloat = 10
 //MARK: - 提现界面高度
 let WithdrawalViewHeight : CGFloat = 166 * defaultScale
 let BankCardHeight : CGFloat = 120 * defaultScale
@@ -55,5 +55,7 @@ let CouponCellHeight : CGFloat = 121 * defaultScale
 
 //MARK: - 购彩记录
 let RecordCellHeight : CGFloat = 100 * defaultScale
+let OrderDetailCellHeight: CGFloat = 100 * defaultScale
+
 //MARK: -  首页足球尺寸
 

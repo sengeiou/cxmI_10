@@ -19,6 +19,12 @@ fileprivate let PurchaseRecordCellId = "PurchaseRecordCellId"
 
 class PurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableViewDelegate, UITableViewDataSource {
 
+    //MARK: - 点击事件
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let order = OrderDetailVC()
+        pushViewController(vc: order)
+    }
+    
     public var recordType : PurchaseRecordType = .all
     
     //MARK: - 属性
