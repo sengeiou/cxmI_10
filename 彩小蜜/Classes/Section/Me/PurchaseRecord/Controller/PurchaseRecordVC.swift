@@ -12,7 +12,7 @@ import XLPagerTabStrip
 enum PurchaseRecordType: String {
     case all = "全部"
     case winning = "中奖"
-    case prize = "带开奖"
+    case prize = "待开奖"
 }
 
 fileprivate let PurchaseRecordCellId = "PurchaseRecordCellId"
@@ -21,7 +21,9 @@ class PurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
 
     //MARK: - 点击事件
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let recordInfo = recordList[indexPath.section]
         let order = OrderDetailVC()
+        order.orderId = recordInfo.orderId
         pushViewController(vc: order)
     }
     
@@ -43,6 +45,8 @@ class PurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
         self.tableView.footerRefresh {
             self.loadNextData()
         }
+        self.recordList = []
+        recordRequest(1)
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -57,13 +61,50 @@ class PurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
     
     //MARK: - 加载数据
     private func loadNewData() {
-        
-        
+        recordRequest(1)
     }
     private func loadNextData() {
+        guard self.recordListModel.isLastPage == true else {
+            self.tableView.noMoreData()
+            return }
         
+        recordRequest(self.recordListModel.nextPage)
     }
-    
+    //MARK: - 网络请求
+    private func recordRequest(_ pageNum: Int) {
+        var orderStatus:String!
+        switch recordType {
+        case .all:
+            orderStatus = "-1"
+        case .prize:
+            orderStatus = "3"
+        case .winning :
+            orderStatus = "5"
+        }
+        
+        weak var weakSelf = self
+        _ = userProvider.rx.request(.orderInfoList(fyId: "1", orderStatus: orderStatus, pageNum: pageNum))
+        .asObservable()
+        .mapObject(type: PurchaseRecordListModel.self)
+            .subscribe(onNext: { (data) in
+                weakSelf?.tableView.endrefresh()
+                weakSelf?.recordListModel = data
+                if pageNum == 1 {
+                    weakSelf?.recordList.removeAll()
+                }
+                weakSelf?.recordList.append(contentsOf: data.list)
+                weakSelf?.tableView.reloadData()
+            }, onError: { (error) in
+                weakSelf?.tableView.endrefresh()
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    print(code!)
+                    self.showHUD(message: msg!)
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil )
+    }
     // MARK: - 懒加载
     lazy private var tableView: UITableView = {
         let table = UITableView(frame: CGRect.zero, style: .grouped)
@@ -77,8 +118,8 @@ class PurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
     }()
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        //guard recordListModel != nil else { return 0 }
-        return 10
+        guard recordListModel != nil else { return 0 }
+        return recordList.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
@@ -86,7 +127,7 @@ class PurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: PurchaseRecordCellId, for: indexPath) as! PurchaseRecordCell
-        
+        cell.recordInfo = recordList[indexPath.section]
         return cell
     }
     

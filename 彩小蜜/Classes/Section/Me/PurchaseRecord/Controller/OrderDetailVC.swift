@@ -13,49 +13,69 @@ fileprivate let OrderDetailCellId = "OrderDetailCellId"
 fileprivate let OrderRuleCellId = "OrderRuleCellId"
 fileprivate let OrderProgrammeCellId = "OrderProgrammeCellId"
 
-class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, OrderDetailFooterViewDelegate {
 
     // MARK: - 点击事件
-    @objc private func orderClicked(_ sender: UIButton) {
+    func goBuy() {
         
     }
     
-    // MARK: - 属性
-    private var orderList = ["","",""]
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 1 {
+            let scheme = OrderSchemeVC()
+            scheme.programmeSn = self.orderInfo.programmeSn
+            pushViewController(vc: scheme)
+        }
+    }
     
-    private var orderBut : UIButton!
+    // MARK: - 属性
+    public var orderId : String!
+    private var orderInfo : OrderInfoModel!
+    private var header : OrderDetailHeaderView!
+    
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "彩小秘 · 订单详情"
         self.view.addSubview(tableView)
+        orderInfoRequest()
         initSubview()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        hideTabBar()
+        self.isHidenBar = true 
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.snp.makeConstraints { (make) in
             make.top.left.right.bottom.equalTo(self.view)
         }
-        orderBut.snp.makeConstraints { (make) in
-            make.bottom.equalTo(self.view).offset(-20)
-            make.left.right.equalTo(self.view)
-            make.height.equalTo(loginButHeight)
-        }
     }
     // MARK: - 网络请求
+    private func orderInfoRequest() {
+        weak var weakSelf = self
+        guard orderId != nil  else { return }
+        
+        _ = userProvider.rx.request(.orderInfo(orderId: orderId))
+            .asObservable()
+            .mapObject(type: OrderInfoModel.self)
+            .subscribe(onNext: { (data) in
+                weakSelf?.orderInfo = data
+                weakSelf?.header.orderInfo = self.orderInfo
+                weakSelf?.tableView.reloadData()
+            }, onError: { (error) in
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    print(code!)
+                    self.showHUD(message: msg!)
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil )
+    }
     // MARK: - 初始化
     private func initSubview() {
-        orderBut = UIButton(type: .custom)
-        orderBut.setTitle("继续预约", for: .normal)
-        orderBut.setTitleColor(ColorFFFFFF, for: .normal)
-        orderBut.backgroundColor = ColorEA5504
-        orderBut.addTarget(self, action: #selector(orderClicked(_:)), for: .touchUpInside)
         
-        self.view.addSubview(orderBut)
     }
 
     // MARK: - 懒加载
@@ -65,10 +85,12 @@ class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         table.dataSource = self
         table.separatorStyle = .none
         
-        let header = OrderDetailHeaderView()
-        table.tableHeaderView = header
+        header = OrderDetailHeaderView()
         
-        table.tableFooterView = UIView()
+        table.tableHeaderView = header
+        let footer = OrderDetailFooterView()
+        footer.delegate = self
+        table.tableFooterView = footer
         
         
         table.register(OrderDetailTitleCell.self, forCellReuseIdentifier: OrderDetailTitleCellId)
@@ -80,13 +102,13 @@ class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
     }()
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        //guard recordListModel != nil else { return 0 }
+        guard orderInfo != nil else { return 0 }
         return 2
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return orderList.count
+            return orderInfo.matchInfos.count + 1
         default:
             return 1
         }
@@ -99,24 +121,23 @@ class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
             switch indexPath.row {
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: OrderDetailTitleCellId, for: indexPath) as! OrderDetailTitleCell
-                
+                    cell.matchInfo = self.orderInfo.matchInfos[indexPath.row]
                 return cell
                 
-            case orderList.count - 1:
+            case orderInfo.matchInfos.count :
                 let cell = tableView.dequeueReusableCell(withIdentifier: OrderRuleCellId, for: indexPath) as! OrderRuleCell
-                
+                cell.orderInfo = self.orderInfo
                 return cell
                 
             default :
                 let cell = tableView.dequeueReusableCell(withIdentifier: OrderDetailCellId, for: indexPath) as! OrderDetailCell
-                
+                    cell.matchInfo = self.orderInfo.matchInfos[indexPath.row]
                 return cell
-                
             }
             
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: OrderProgrammeCellId, for: indexPath) as! OrderProgrammeCell
-            
+                cell.orderInfo = self.orderInfo
             return cell
         }
         
@@ -129,14 +150,14 @@ class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         case 0:
             switch indexPath.row {
             case 0:
-                 return OrderDetailCellHeight + 40
-            case orderList.count - 1:
-                return OrderDetailCellHeight - 30
+                 return OrderDetailCellHeight + orderSectionHeaderHeight + 23
+            case orderInfo.matchInfos.count - 1:
+                return OrderDetailCellHeight - 2
             default:
                 return OrderDetailCellHeight
             }
         case 1:
-            return 150
+            return 124
         default:
             return 0
         }
@@ -160,15 +181,5 @@ class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

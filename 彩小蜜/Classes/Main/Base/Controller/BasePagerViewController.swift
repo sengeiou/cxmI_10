@@ -12,6 +12,7 @@ import XLPagerTabStrip
 enum PagerViewType: String {
     case coupon = "彩小秘 · 账户明细"
     case purchaseRecord = "彩小秘 · 购彩记录"
+    case message = "彩小秘 · 消息中心"
 }
 
 class BasePagerViewController: ButtonBarPagerTabStripViewController {
@@ -50,10 +51,11 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
         
         switch pagerType {
         case .coupon:
-            return self.getCouponViewController()
+            return getCouponViewController()
         case .purchaseRecord:
             return getPurchaseRecordVC()
-            
+        case .message:
+            return getMessageCenterVC()
         default:
             return[]
         }
@@ -83,6 +85,13 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
         return [all, winning, prize]
     }
     
+    private func getMessageCenterVC() -> [UIViewController] {
+        let notice = MessageCenterVC()
+        notice.messageType = .notice
+        let message = MessageCenterVC()
+        message.messageType = .message
+        return [notice, message]
+    }
     
     private func setLiftButtonItem() {
         

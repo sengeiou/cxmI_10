@@ -10,11 +10,12 @@ import Foundation
 import UIKit
 
 
-/// 灰色字体
+/// 浅灰色字体
 let ColorA0A0A0 = UIColor(hexColor: "A0A0A0")
 let ColorEAEAEA = UIColor(hexColor: "EAEAEA")
 /// 界面背景主色
 let ColorF4F4F4 = UIColor(hexColor: "F4F4F4")
+/// 灰色字体
 let Color787878 = UIColor(hexColor: "787878")
 /// 主白
 let ColorFFFFFF = UIColor(hexColor: "FFFFFF")

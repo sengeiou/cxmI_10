@@ -10,16 +10,47 @@ import UIKit
 
 class PurchaseRecordCell: UITableViewCell {
 
-    // MARK: - 点击事件
-    @objc private func detailClicked(_ sender : UIButton) {
-        
+    public var recordInfo : PurchaseRecordInfoModel! {
+        didSet{
+            let moneyAtt = NSMutableAttributedString(string: "¥", attributes: [NSAttributedStringKey.font: Font11])
+            let money = NSAttributedString(string: recordInfo.ticketAmount)
+            moneyAtt.append(money)
+            moneyLB.attributedText = moneyAtt
+            
+            titleLB.text = recordInfo.lotteryName
+            timeLB.text = recordInfo.payTime
+            detailLB.text = recordInfo.orderStatusInfo
+            stateBut.text = recordInfo.orderStatusDesc
+            
+            switch recordInfo.orderStatus {
+            case "0": break
+            case "1": break
+            case "2": // 出票失败
+                stateBut.textColor = ColorA0A0A0
+                stateIcon.image = UIImage(named: "jump")
+            case "3": // 待开奖
+                stateBut.textColor = Color505050
+                stateIcon.image = UIImage(named: "jump")
+            case "4": // 未中奖
+                stateBut.textColor = ColorA0A0A0
+                stateIcon.image = UIImage(named: "jump")
+            case "5": // 已中奖
+                stateBut.textColor = ColorE95504
+                stateIcon.image = UIImage(named: "redarrow")
+            default: break
+                
+            }
+        }
     }
+    
+    // MARK: - 点击事件
+    
     
     // MARK: - 属性
     private var titleLB : UILabel!
     private var moneyLB : UILabel!
     private var timeLB : UILabel!
-    private var stateBut : UIButton!
+    private var stateBut : UILabel!
     private var stateIcon : UIImageView!
     private var detailLB : UILabel!
     
@@ -31,33 +62,33 @@ class PurchaseRecordCell: UITableViewCell {
         super.layoutSubviews()
         
         titleLB.snp.makeConstraints { (make) in
-            make.height.equalTo(20)
-            make.top.equalTo(self.contentView).offset(10)
+            make.height.equalTo(15)
+            make.top.equalTo(self.contentView).offset(12)
             make.left.equalTo(self.contentView).offset(leftSpacing)
             make.right.equalTo(stateBut.snp.left).offset(-10)
         }
         moneyLB.snp.makeConstraints { (make) in
             make.left.height.right.equalTo(titleLB)
-            make.top.equalTo(titleLB.snp.bottom).offset(5)
+            make.top.equalTo(titleLB.snp.bottom).offset(3)
         }
         timeLB.snp.makeConstraints { (make) in
             make.left.height.right.equalTo(titleLB)
-            make.top.equalTo(moneyLB.snp.bottom).offset(5)
+            make.top.equalTo(moneyLB.snp.bottom).offset(3)
         }
         stateBut.snp.makeConstraints { (make) in
             make.top.equalTo(self.contentView).offset(10)
             make.height.equalTo(20)
-            make.width.equalTo(60)
+            make.width.equalTo(titleLB)
             make.right.equalTo(stateIcon.snp.left).offset(1)
         }
         stateIcon.snp.makeConstraints { (make) in
-            make.right.equalTo(self.contentView).offset(-rightSpacing)
+            make.right.equalTo(self.contentView).offset(-12)
             make.centerY.equalTo(stateBut.snp.centerY)
-            make.height.width.equalTo(20)
+            make.height.width.equalTo(14)
         }
         detailLB.snp.makeConstraints { (make) in
             make.right.equalTo(self.contentView).offset(-rightSpacing)
-            make.width.equalTo(100)
+            make.width.equalTo(timeLB)
             make.height.equalTo(20)
             make.top.equalTo(timeLB)
         }
@@ -69,34 +100,28 @@ class PurchaseRecordCell: UITableViewCell {
         
         titleLB = UILabel()
         titleLB.font = Font15
-        titleLB.text = "竞彩足球"
         titleLB.textColor = Color505050
-        
+    
         moneyLB = UILabel()
-        moneyLB.font = Font13
-        moneyLB.textColor = ColorA0A0A0
-        moneyLB.text = "¥25.00"
-        
+        moneyLB.font = Font12
+        moneyLB.textColor = Color787878
+
         timeLB = UILabel()
-        timeLB.font = Font12
-        timeLB.textColor = ColorC8C8C8
-        timeLB.text = "2018.02.03  14:15:88"
+        timeLB.font = Font10
+        timeLB.textColor = ColorA0A0A0
         
-        stateBut = UIButton(type: .custom)
-        stateBut.titleLabel?.font = Font15
-        stateBut.setTitle("已中奖", for: .normal)
-        stateBut.setTitleColor(ColorEA5504, for: .normal)
-        stateBut.addTarget(self, action: #selector(detailClicked(_:)), for: .touchUpInside)
+        stateBut = UILabel()
+        stateBut.font = Font15
+        stateBut.textAlignment = .right
         
         stateIcon = UIImageView()
         stateIcon.image = UIImage(named: "redarrow")
         
         detailLB = UILabel()
-        detailLB.font = Font13
-        detailLB.textColor = ColorC8C8C8
+        detailLB.font = Font10
+        detailLB.textColor = ColorA0A0A0
         detailLB.textAlignment = .right
-        detailLB.text = "中奖金额：¥ 500"
-        
+
         
         self.contentView.addSubview(titleLB)
         self.contentView.addSubview(moneyLB)

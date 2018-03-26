@@ -8,21 +8,42 @@
 
 import UIKit
 
+protocol OrderDetailFooterViewDelegate {
+    func goBuy() -> Void
+}
+
 class OrderDetailFooterView: UIView {
 
+    @objc private func orderClicked(_ sender: UIButton) {
+        guard delegate != nil else { return }
+        delegate.goBuy()
+    }
+    
+    public var delegate: OrderDetailFooterViewDelegate!
     private var button : UIButton!
     
     init() {
-        super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 100))
+        super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: OrderHeaderViewHeight))
         initSubview()
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        
+        button.snp.makeConstraints { (make) in
+            make.top.equalTo(self).offset(loginButTopSpacing)
+            make.left.equalTo(self).offset(0)
+            make.right.equalTo(self).offset(-0)
+            make.height.equalTo(loginButHeight)
+        }
     }
     
     private func initSubview() {
+        button = UIButton(type: .custom)
+        button.setTitle("继续预约", for: .normal)
+        button.setTitleColor(ColorFFFFFF, for: .normal)
+        button.backgroundColor = ColorEA5504
+        button.addTarget(self, action: #selector(orderClicked(_:)), for: .touchUpInside)
         
+        self.addSubview(button)
     }
     
     required init?(coder aDecoder: NSCoder) {

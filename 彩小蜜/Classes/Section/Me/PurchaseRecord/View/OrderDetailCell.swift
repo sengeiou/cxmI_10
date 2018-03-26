@@ -10,15 +10,31 @@ import UIKit
 
 class OrderDetailCell: UITableViewCell {
 
+    public var matchInfo: MatchInfo! {
+        didSet{
+            timeLB.text = matchInfo.changci
+            nameLB.text = matchInfo.match
+            ruleLB.text = matchInfo.playType
+            recordLB.text = matchInfo.cathectic
+            resultLB.text = matchInfo.result
+            
+            if matchInfo.matchResult == "0" {
+                recordLB.textColor = Color505050
+                resultLB.textColor = Color505050
+            }else if matchInfo.matchResult == "1" {
+                recordLB.textColor = ColorE95504
+                resultLB.textColor = ColorE95504
+            }
+        }
+    }
 
     private var timeLB : UILabel!
     private var nameLB : UILabel!
-    private var vsLB : UILabel!
-    private var nameTwoLB: UILabel!
     private var ruleLB : UILabel!
     private var recordLB: UILabel!
     private var resultLB : UILabel!
     private var line : UIImageView!
+    private var oddsIcon: UIImageView!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -35,8 +51,8 @@ class OrderDetailCell: UITableViewCell {
         }
         
         timeLB.snp.makeConstraints { (make) in
-            make.top.equalTo(line.snp.bottom).offset(5)
-            make.bottom.equalTo(self.contentView).offset(-5)
+            make.top.equalTo(line.snp.bottom).offset(11)
+            make.bottom.equalTo(self.contentView).offset(-11)
             make.width.equalTo(OrderDetailTitleWidth)
             make.left.equalTo(self.contentView).offset(leftSpacing)
         }
@@ -44,62 +60,63 @@ class OrderDetailCell: UITableViewCell {
             make.top.equalTo(timeLB)
             make.left.equalTo(timeLB.snp.right).offset(1)
             make.right.equalTo(ruleLB.snp.left).offset(-1)
-        }
-        vsLB.snp.makeConstraints { (make) in
-            make.top.equalTo(nameLB.snp.bottom).offset(1)
-            make.left.width.height.equalTo(nameLB)
-        }
-        nameTwoLB.snp.makeConstraints { (make) in
-            make.top.equalTo(vsLB.snp.bottom)
-            make.left.height.width.equalTo(nameLB)
             make.bottom.equalTo(timeLB)
         }
-        
         ruleLB.snp.makeConstraints { (make) in
             make.top.height.width.equalTo(timeLB)
             make.right.equalTo(recordLB.snp.left).offset(-1)
         }
         
         recordLB.snp.makeConstraints { (make) in
-            make.top.height.width.equalTo(timeLB)
+            make.bottom.equalTo(oddsIcon.snp.top).offset(-5)
+            
+            make.width.equalTo(timeLB)
             make.right.equalTo(resultLB.snp.left).offset(-1)
         }
         
+        oddsIcon.snp.makeConstraints { (make) in
+            make.height.width.equalTo(8)
+            make.centerX.equalTo(recordLB.snp.centerX)
+            make.bottom.equalTo(timeLB)
+        }
         resultLB.snp.makeConstraints { (make) in
             make.top.height.width.equalTo(timeLB)
-            make.right.equalTo(self.contentView).offset(-rightSpacing)
+            make.right.equalTo(self.contentView).offset(-26)
         }
         
     }
     
     private func initSubview() {
+        self.selectionStyle = .none
+        
         line = UIImageView()
         line.image = UIImage(named:"line")
         
         timeLB = getDetailLB()
         timeLB.textAlignment = .left
         nameLB = getDetailLB()
-        vsLB = getDetailLB()
-        nameTwoLB = getDetailLB()
+        nameLB.numberOfLines = 3
         ruleLB = getDetailLB()
         recordLB = getDetailLB()
+        recordLB.numberOfLines = 2
         resultLB = getDetailLB()
         resultLB.textAlignment = .right
+        
+        oddsIcon = UIImageView()
+        oddsIcon.image = UIImage(named: "info")
         
         self.contentView.addSubview(line)
         self.contentView.addSubview(timeLB)
         self.contentView.addSubview(nameLB)
-        self.contentView.addSubview(vsLB)
-        self.contentView.addSubview(nameTwoLB)
         self.contentView.addSubview(ruleLB)
         self.contentView.addSubview(recordLB)
         self.contentView.addSubview(resultLB)
-        
+        self.contentView.addSubview(oddsIcon)
     }
     
     private func getDetailLB() -> UILabel {
         let lab = UILabel()
-        lab.font = Font15
+        lab.font = Font12
         lab.text = "白塞"
         lab.textColor = Color505050
         lab.textAlignment = .center

@@ -32,6 +32,12 @@ enum MeNetAPIManager {
     case couponList (status: String, pageNum: Int)
     /// 单个优惠券
     case coupon (userBonusId: String)
+    /// 订单列表 -1 -所有订单 2-待开奖 4-已中奖
+    case orderInfoList (fyId: String, orderStatus: String, pageNum: Int)
+    /// 订单详情
+    case orderInfo (orderId: String)
+    /// 出票方案
+    case orderScheme (programmeSn: String)
 }
 
 extension MeNetAPIManager : TargetType {
@@ -41,7 +47,8 @@ extension MeNetAPIManager : TargetType {
     
     var headers: [String : String]? {
         return ["Content-Type" : "application/json",
-                "token" : UserInfoManager().getToken()
+                //"token" : UserInfoManager().getToken()
+            "token" : "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxZDg4OTYxZDUtYjI0Yi00NzAxLWJhZWMtNzBkZmUxY2MwMDAzIiwidXNlcklkIjoiNDAwMDY4In0.1aBwA_Rasiew0kiLK8uR3AiUGj1iJ6ZZ8Hvup5v8tNUVMpQWWHVQBSrUBGCxZ28Lmsk0I-cQGQkOcAdoJKJQE1GGjDqSfAWGD951Kyq187C_axWKNazkRK1b-RIuuXV4ZSSSYhn0o45KsLCUh1YO76Q19oFnuVCbrF8DTvXTbSY"
         ]
     }
     
@@ -67,6 +74,13 @@ extension MeNetAPIManager : TargetType {
             return "/user/bonus/queryBonusListByStatus"
         case .coupon:
             return "/user/bonus/queryUserBonus"
+        case .orderInfoList:
+            return "/order/getOrderInfoList"
+        case .orderInfo:
+            return "/order/getOrderDetail"
+        case .orderScheme:
+            return "/order/getTicketScheme"
+            
             
         }
     }
@@ -100,6 +114,16 @@ extension MeNetAPIManager : TargetType {
             dic["pageSize"] = "20"
         case .coupon(let userBonusId):
             dic["userBonusId"] = userBonusId
+        case .orderInfoList(let fyId, let orderStatus, let pageNum):
+            dic["lotteryClassifyId"] = fyId
+            dic["orderStatus"] = orderStatus
+            dic["pageNum"] = pageNum
+        case .orderInfo(let orderId):
+            dic["orderId"] = orderId
+        case .orderScheme(let programmeSn):
+            dic["programmeSn"] = programmeSn
+            
+            
         default:
             return .requestPlain
         }

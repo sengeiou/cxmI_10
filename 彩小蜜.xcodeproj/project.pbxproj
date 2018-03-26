@@ -41,6 +41,7 @@
 		E533BF012060DE600037D2D8 /* RechargeTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E533BF002060DE600037D2D8 /* RechargeTitleCell.swift */; };
 		E533BF032060EB3A0037D2D8 /* RechargePaymentTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E533BF022060EB3A0037D2D8 /* RechargePaymentTitleCell.swift */; };
 		E533BF0520610D170037D2D8 /* BasePopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E533BF0420610D170037D2D8 /* BasePopViewController.swift */; };
+		E536386B2068A99200457EB5 /* OrderInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E536386A2068A99200457EB5 /* OrderInfoModel.swift */; };
 		E537397420576FEE0087E4E6 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E537397320576FEE0087E4E6 /* APIManager.swift */; };
 		E53739772057B9340087E4E6 /* extension+UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53739762057B9340087E4E6 /* extension+UserDefaults.swift */; };
 		E537397B2057F4270087E4E6 /* UserInfoDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E537397A2057F4270087E4E6 /* UserInfoDataModel.swift */; };
@@ -64,6 +65,12 @@
 		E581F37C2063573C002AB9F7 /* PaymentNetAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F37B2063573C002AB9F7 /* PaymentNetAPIManager.swift */; };
 		E581F38C2063B446002AB9F7 /* CouponCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F38B2063B446002AB9F7 /* CouponCell.swift */; };
 		E581F38F2063C7A0002AB9F7 /* CouponViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F38E2063C7A0002AB9F7 /* CouponViewController.swift */; };
+		E5883F4C2068DA0800CB3A46 /* OrderSchemeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5883F4B2068DA0800CB3A46 /* OrderSchemeVC.swift */; };
+		E5883F4E2068DA2300CB3A46 /* OrderSchemeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5883F4D2068DA2300CB3A46 /* OrderSchemeCell.swift */; };
+		E5883F502068DC2100CB3A46 /* OrderSchemeInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5883F4F2068DC2100CB3A46 /* OrderSchemeInfoModel.swift */; };
+		E5883F522068DFBF00CB3A46 /* OrderSchemeTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5883F512068DFBF00CB3A46 /* OrderSchemeTitleCell.swift */; };
+		E5883F582068E8C100CB3A46 /* MessageCenterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5883F572068E8C100CB3A46 /* MessageCenterVC.swift */; };
+		E5883F5A2068EA5700CB3A46 /* MessageCenterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5883F592068EA5700CB3A46 /* MessageCenterCell.swift */; };
 		E58B57B220561BB80025E2F1 /* Spacing&SizeConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58B57B120561BB80025E2F1 /* Spacing&SizeConstraint.swift */; };
 		E58B57B4205622950025E2F1 /* BankCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58B57B3205622950025E2F1 /* BankCardViewController.swift */; };
 		E58B57B6205623B30025E2F1 /* BankCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58B57B5205623B30025E2F1 /* BankCardCell.swift */; };
@@ -164,6 +171,7 @@
 		E533BF002060DE600037D2D8 /* RechargeTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeTitleCell.swift; sourceTree = "<group>"; };
 		E533BF022060EB3A0037D2D8 /* RechargePaymentTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargePaymentTitleCell.swift; sourceTree = "<group>"; };
 		E533BF0420610D170037D2D8 /* BasePopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePopViewController.swift; sourceTree = "<group>"; };
+		E536386A2068A99200457EB5 /* OrderInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderInfoModel.swift; sourceTree = "<group>"; };
 		E537397320576FEE0087E4E6 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		E53739762057B9340087E4E6 /* extension+UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "extension+UserDefaults.swift"; sourceTree = "<group>"; };
 		E537397A2057F4270087E4E6 /* UserInfoDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoDataModel.swift; sourceTree = "<group>"; };
@@ -192,6 +200,12 @@
 		E581F37B2063573C002AB9F7 /* PaymentNetAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentNetAPIManager.swift; sourceTree = "<group>"; };
 		E581F38B2063B446002AB9F7 /* CouponCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponCell.swift; sourceTree = "<group>"; };
 		E581F38E2063C7A0002AB9F7 /* CouponViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponViewController.swift; sourceTree = "<group>"; };
+		E5883F4B2068DA0800CB3A46 /* OrderSchemeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderSchemeVC.swift; sourceTree = "<group>"; };
+		E5883F4D2068DA2300CB3A46 /* OrderSchemeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderSchemeCell.swift; sourceTree = "<group>"; };
+		E5883F4F2068DC2100CB3A46 /* OrderSchemeInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderSchemeInfoModel.swift; sourceTree = "<group>"; };
+		E5883F512068DFBF00CB3A46 /* OrderSchemeTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderSchemeTitleCell.swift; sourceTree = "<group>"; };
+		E5883F572068E8C100CB3A46 /* MessageCenterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCenterVC.swift; sourceTree = "<group>"; };
+		E5883F592068EA5700CB3A46 /* MessageCenterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCenterCell.swift; sourceTree = "<group>"; };
 		E58B57B120561BB80025E2F1 /* Spacing&SizeConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Spacing&SizeConstraint.swift"; sourceTree = "<group>"; };
 		E58B57B3205622950025E2F1 /* BankCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankCardViewController.swift; sourceTree = "<group>"; };
 		E58B57B5205623B30025E2F1 /* BankCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankCardCell.swift; sourceTree = "<group>"; };
@@ -467,6 +481,7 @@
 			children = (
 				E5103253206500A800A0156C /* PurchaseRecordVC.swift */,
 				E5D8ABB3206737FF002D688B /* OrderDetailVC.swift */,
+				E5883F4B2068DA0800CB3A46 /* OrderSchemeVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -476,6 +491,8 @@
 			children = (
 				E51032572065037700A0156C /* PurchaseRecordListModel.swift */,
 				E51032592065044100A0156C /* PurchaseRecordInfoModel.swift */,
+				E536386A2068A99200457EB5 /* OrderInfoModel.swift */,
+				E5883F4F2068DC2100CB3A46 /* OrderSchemeInfoModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -490,6 +507,8 @@
 				E5D8ABBB2067443E002D688B /* OrderProgrammeCell.swift */,
 				E5D8ABBD206749F5002D688B /* OrderDetailHeaderView.swift */,
 				E5D8ABBF20674A07002D688B /* OrderDetailFooterView.swift */,
+				E5883F4D2068DA2300CB3A46 /* OrderSchemeCell.swift */,
+				E5883F512068DFBF00CB3A46 /* OrderSchemeTitleCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -675,6 +694,7 @@
 				E56298AA20513207006397EA /* PurchaseRecord */,
 				E56298AB205132EA006397EA /* AccountDetails */,
 				E56298AC20513316006397EA /* MyCardCoupons */,
+				E5883F532068E84D00CB3A46 /* MessageCenter */,
 				E56298A420513101006397EA /* Authentication */,
 				E5973E38204FDB5A006461CE /* About */,
 			);
@@ -998,6 +1018,39 @@
 				E581F37B2063573C002AB9F7 /* PaymentNetAPIManager.swift */,
 			);
 			path = NetAPIManager;
+			sourceTree = "<group>";
+		};
+		E5883F532068E84D00CB3A46 /* MessageCenter */ = {
+			isa = PBXGroup;
+			children = (
+				E5883F562068E88600CB3A46 /* Model */,
+				E5883F552068E88000CB3A46 /* View */,
+				E5883F542068E87200CB3A46 /* Controller */,
+			);
+			path = MessageCenter;
+			sourceTree = "<group>";
+		};
+		E5883F542068E87200CB3A46 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E5883F572068E8C100CB3A46 /* MessageCenterVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E5883F552068E88000CB3A46 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E5883F592068EA5700CB3A46 /* MessageCenterCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E5883F562068E88600CB3A46 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		E58B57C12056717B0025E2F1 /* NetAPIManager */ = {
@@ -1425,6 +1478,7 @@
 				E57376462046BC6400148622 /* MeViewController.swift in Sources */,
 				E533BEFF2060BF950037D2D8 /* WithDrawDataModel.swift in Sources */,
 				E510324A2064A9C000A0156C /* CouponInfoModel.swift in Sources */,
+				E5883F4E2068DA2300CB3A46 /* OrderSchemeCell.swift in Sources */,
 				E5973DD920492DD2006461CE /* UIScrollView+MJRefresh.swift in Sources */,
 				E5973E27204E3CB0006461CE /* CountdownButton.swift in Sources */,
 				E5D8ABB6206739CF002D688B /* OrderDetailTitleCell.swift in Sources */,
@@ -1442,7 +1496,9 @@
 				E58B57C5205676CB0025E2F1 /* MeNetAPIManager.swift in Sources */,
 				E510325A2065044100A0156C /* PurchaseRecordInfoModel.swift in Sources */,
 				E533BF012060DE600037D2D8 /* RechargeTitleCell.swift in Sources */,
+				E5883F4C2068DA0800CB3A46 /* OrderSchemeVC.swift in Sources */,
 				E50B9077205235BF00417BFE /* RechargeCardCell.swift in Sources */,
+				E5883F5A2068EA5700CB3A46 /* MessageCenterCell.swift in Sources */,
 				E512A9692047E598003F14F4 /* Observable+ObjectMapper.swift in Sources */,
 				E5973E31204F8FD4006461CE /* MeHeaderView.swift in Sources */,
 				E58B57B220561BB80025E2F1 /* Spacing&SizeConstraint.swift in Sources */,
@@ -1451,6 +1507,7 @@
 				E5973E24204E3687006461CE /* VCodeLoginViewController.swift in Sources */,
 				E5B68AFB205A81940038A5A2 /* Extension+String.swift in Sources */,
 				E512A96620479FD7003F14F4 /* HomeNetAPIManager.swift in Sources */,
+				E5883F582068E8C100CB3A46 /* MessageCenterVC.swift in Sources */,
 				E5973E2F204F8B33006461CE /* MeCell.swift in Sources */,
 				E537397B2057F4270087E4E6 /* UserInfoDataModel.swift in Sources */,
 				E58B57BC205670670025E2F1 /* ServeConstraint.swift in Sources */,
@@ -1462,6 +1519,7 @@
 				E581F37C2063573C002AB9F7 /* PaymentNetAPIManager.swift in Sources */,
 				E57376022046B37900148622 /* MainTabBarController.swift in Sources */,
 				E581F38C2063B446002AB9F7 /* CouponCell.swift in Sources */,
+				E536386B2068A99200457EB5 /* OrderInfoModel.swift in Sources */,
 				E51032482064A99700A0156C /* CouponListModel.swift in Sources */,
 				E512A96B2047EF67003F14F4 /* RequestPlugin.swift in Sources */,
 				E51032582065037700A0156C /* PurchaseRecordListModel.swift in Sources */,
@@ -1483,6 +1541,7 @@
 				E59CB3DB205BA1300086DD0E /* HomeActivityCell.swift in Sources */,
 				E514DDE02052A37E00274854 /* DataModel.swift in Sources */,
 				E537397420576FEE0087E4E6 /* APIManager.swift in Sources */,
+				E5883F522068DFBF00CB3A46 /* OrderSchemeTitleCell.swift in Sources */,
 				E57375A320468B8900148622 /* AppDelegate.swift in Sources */,
 				E51F9A5C205A29B800AB8A21 /* RegisterFooterView.swift in Sources */,
 				E5973E1E204D50BC006461CE /* CustomTextField.swift in Sources */,
@@ -1490,6 +1549,7 @@
 				E581F38F2063C7A0002AB9F7 /* CouponViewController.swift in Sources */,
 				E56298A32050E712006397EA /* AlertProtocol.swift in Sources */,
 				E5D8ABB820674283002D688B /* OrderDetailCell.swift in Sources */,
+				E5883F502068DC2100CB3A46 /* OrderSchemeInfoModel.swift in Sources */,
 				E5A2644E205B742B00EE6491 /* HomeViewController.swift in Sources */,
 				E58B57C7205676EC0025E2F1 /* LotteryNetAPIManager.swift in Sources */,
 				E51F9A5A205A122000AB8A21 /* VcodeTextFieldCell.swift in Sources */,

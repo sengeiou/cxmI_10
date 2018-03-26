@@ -62,9 +62,7 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
     }
     
     
-    public func hideTabBar() {
-        self.tabBarController?.tabBar.isHidden = true
-    }
+    
     public func hideBackBut() {
         self.navigationItem.leftBarButtonItem = nil
     }
@@ -78,6 +76,14 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
     }
     
     //MARK: - 属性
+    public var isHidenBar : Bool! {
+        didSet{
+            if isHidenBar == true {
+                hideTabBar()
+            }
+        }
+    }
+    
     private var emptyTitle: String!
     
     //MARK: - 生命周期
@@ -85,6 +91,7 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
         super.viewDidLoad()
         self.view.backgroundColor = ColorF4F4F4
         setNavigation()
+        self.isHidenBar = false
     }
 
     private func setNavigation() {
@@ -106,6 +113,11 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
     func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
         return -80
     }
+    
+    private func hideTabBar() {
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
     private func setLiftButtonItem() {
         
         let leftBut = UIButton(type: .custom)

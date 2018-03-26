@@ -8,8 +8,28 @@
 
 import UIKit
 
+
 class OrderDetailHeaderView: UIView {
 
+    public var orderInfo: OrderInfoModel! {
+        didSet{
+            if let url = URL(string: orderInfo.lotteryClassifyImg){
+                icon.kf.setImage(with: url)
+            }
+            
+            let moneyAtt = NSMutableAttributedString(string: "¥", attributes: [NSAttributedStringKey.font: Font10])
+            let money = NSAttributedString(string: orderInfo.moneyPaid)
+            moneyAtt.append(money)
+            
+            titleLB.text = orderInfo.lotteryClassifyName
+            moneyLB.attributedText = moneyAtt
+            state.text = orderInfo.processResult
+            thankLB.text = orderInfo.processStatusDesc
+            programmeLB.text = orderInfo.orderStatusDesc
+            
+        }
+    }
+    
     private var icon : UIImageView!
     private var titleLB : UILabel!
     private var moneyLB : UILabel!
@@ -17,60 +37,68 @@ class OrderDetailHeaderView: UIView {
     private var state : UILabel!
     private var programmeTitle : UILabel!
     private var programmeLB : UILabel!
+    private var thankLB : UILabel!
     
     init() {
-        super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 111))
+        super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: OrderHeaderViewHeight))
         initSubview()
     }
     override func layoutSubviews() {
         super.layoutSubviews()
         
         line.snp.makeConstraints { (make) in
-            make.centerY.equalTo(self.snp.centerY)
+            make.centerY.equalTo(self.snp.centerY).offset(7.5)
             make.left.equalTo(self).offset(SeparatorLeftSpacing)
             make.right.equalTo(self).offset(-SeparatorLeftSpacing)
             make.height.equalTo(SeparationLineHeight)
         }
         icon.snp.makeConstraints { (make) in
-            //make.height.width.equalTo(40)
-            make.top.equalTo(self).offset(10)
-            make.left.equalTo(self).offset(10)
-            make.bottom.equalTo(line.snp.top).offset(-10)
+            make.top.equalTo(self).offset(11)
+            make.left.equalTo(self).offset(16)
+            make.bottom.equalTo(line.snp.top).offset(-11)
             make.width.equalTo(icon.snp.height)
         }
         titleLB.snp.makeConstraints { (make) in
-            make.top.equalTo(self).offset(14)
+            make.top.equalTo(self).offset(18)
             make.left.equalTo(icon.snp.right).offset(10)
             make.right.equalTo(state.snp.left).offset(-5)
-            make.height.equalTo(20)
+            make.height.equalTo(15)
         }
         moneyLB.snp.makeConstraints { (make) in
-            make.top.equalTo(titleLB.snp.bottom).offset(1)
-            make.left.right.height.equalTo(titleLB)
+            make.bottom.equalTo(line.snp.top).offset(-16)
+            make.left.right.equalTo(titleLB)
+            make.height.equalTo(12)
         }
         state.snp.makeConstraints { (make) in
             make.top.height.equalTo(titleLB)
-            make.right.equalTo(self).offset(-rightSpacing)
+            make.right.equalTo(self).offset(-26)
             make.width.equalTo(100)
         }
         programmeTitle.snp.makeConstraints { (make) in
-            make.top.equalTo(line.snp.bottom).offset(1)
-            make.left.equalTo(self).offset(leftSpacing)
-            make.right.equalTo(self).offset(-rightSpacing)
-            
+            make.top.equalTo(line.snp.bottom).offset(10)
+            make.left.equalTo(self).offset(26)
+            make.width.equalTo(100)
+            make.height.equalTo(12)
         }
         programmeLB.snp.makeConstraints { (make) in
-            make.top.equalTo(programmeTitle.snp.bottom).offset(1)
+            make.height.equalTo(19)
             make.left.right.width.equalTo(programmeTitle)
-            make.bottom.equalTo(self).offset(-1)
+            make.bottom.equalTo(self).offset(-10)
         }
+        
+        thankLB.snp.makeConstraints { (make) in
+            make.height.equalTo(19)
+            make.right.equalTo(self).offset(-26)
+            make.left.equalTo(programmeLB.snp.right).offset(10)
+            make.bottom.equalTo(self).offset(-12)
+        }
+        
     }
     
     private func initSubview() {
         self.backgroundColor = ColorFFFFFF
         
         icon = UIImageView()
-        icon.image = UIImage(named: "足球")
         
         titleLB = UILabel()
         titleLB.font = Font15
@@ -79,8 +107,8 @@ class OrderDetailHeaderView: UIView {
         titleLB.text = "精彩足球"
         
         moneyLB = UILabel()
-        moneyLB.font = Font15
-        moneyLB.textColor = ColorA0A0A0
+        moneyLB.font = Font12
+        moneyLB.textColor = Color787878
         moneyLB.textAlignment = .left
         moneyLB.text = "¥ 25.00"
         
@@ -94,17 +122,22 @@ class OrderDetailHeaderView: UIView {
         line.backgroundColor = ColorF4F4F4
         
         programmeTitle = UILabel()
-        programmeTitle.font = Font15
+        programmeTitle.font = Font12
         programmeTitle.textColor = ColorA0A0A0
         programmeTitle.textAlignment = .left
         programmeTitle.text = "方案状态"
         
         programmeLB = UILabel()
-        programmeLB.font = Font15
+        programmeLB.font = Font14
         programmeLB.textColor = Color505050
         programmeLB.textAlignment = .left
         programmeLB.text = "出票成功"
         
+        thankLB = UILabel()
+        thankLB.font = Font14
+        thankLB.textColor = Color505050
+        thankLB.textAlignment = .right
+        thankLB.text = "感谢您助力公益事业"
         
         self.addSubview(icon)
         self.addSubview(titleLB)
@@ -113,6 +146,7 @@ class OrderDetailHeaderView: UIView {
         self.addSubview(programmeTitle)
         self.addSubview(programmeLB)
         self.addSubview(line)
+        self.addSubview(thankLB)
     }
     
     required init?(coder aDecoder: NSCoder) {

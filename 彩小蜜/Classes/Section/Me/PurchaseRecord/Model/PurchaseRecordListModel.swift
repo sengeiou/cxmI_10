@@ -10,5 +10,14 @@ import Foundation
 import HandyJSON
 
 struct PurchaseRecordListModel: HandyJSON {
-    
+    var endRow: String!
+    var firstPage: String!
+    var hasNextPage: String!
+    var hasPreviousPage: String!
+    var isFirstPage: String!
+    var isLastPage: Bool!
+    var lastPage: String!
+    var nextPage: Int!
+
+    var list : [PurchaseRecordInfoModel]!
 }

@@ -1,0 +1,37 @@
+//
+//  OrderInfoModel.swift
+//  彩小蜜
+//
+//  Created by HX on 2018/3/26.
+//  Copyright © 2018年 韩笑. All rights reserved.
+//
+
+import Foundation
+import HandyJSON
+
+struct OrderInfoModel: HandyJSON {
+    var acceptTime: String!
+    var cathectic : String!
+    var createTime: String!
+    var lotteryClassifyImg: String!
+    var lotteryClassifyName: String!
+    var matchInfos: [MatchInfo]!
+    var moneyPaid: String!
+    var orderStatus: String!
+    var orderStatusDesc: String!
+    var passType: String!
+    var processResult: String!
+    var processStatusDesc: String!
+    var programmeSn: String!
+    var ticketTime: String!
+}
+
+struct MatchInfo: HandyJSON {
+    var cathectic : String!
+    var changci: String!
+    var match: String!
+    var matchResult: String!
+    var playType: String!
+    var result: String!
+    
+}

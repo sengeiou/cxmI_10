@@ -59,6 +59,8 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
                 pushPagerView(pagerType: .purchaseRecord)
             case 2:
                 pushPagerView(pagerType: .coupon)
+            case 3:
+                pushPagerView(pagerType: .message)
             default :
                 break
             }
@@ -173,7 +175,14 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        switch section {
+        case 0:
+            return 4
+        case 1:
+            return 3
+        default:
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -192,6 +201,9 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
             case 2:
                 cell.icon.image = UIImage(named: "coupon")
                 cell.title.text = "我的卡券"
+            case 3:
+                cell.icon.image = UIImage(named: "coupon")
+                cell.title.text = "消息中心"
             default :
                 break
             }
