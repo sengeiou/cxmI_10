@@ -57,6 +57,8 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
             switch indexPath.row {
             case 0:
                 pushPagerView(pagerType: .purchaseRecord)
+            case 1:
+                pushPagerView(pagerType: .accountDetails)
             case 2:
                 pushPagerView(pagerType: .coupon)
             case 3:

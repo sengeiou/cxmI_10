@@ -10,9 +10,10 @@ import UIKit
 import XLPagerTabStrip
 
 enum PagerViewType: String {
-    case coupon = "彩小秘 · 账户明细"
+    case coupon = "彩小秘 · 我的优惠券"
     case purchaseRecord = "彩小秘 · 购彩记录"
     case message = "彩小秘 · 消息中心"
+    case accountDetails = "彩小秘 · 账户明细"
 }
 
 class BasePagerViewController: ButtonBarPagerTabStripViewController {
@@ -56,6 +57,8 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
             return getPurchaseRecordVC()
         case .message:
             return getMessageCenterVC()
+        case .accountDetails:
+            return getAccountDetailsVC()
         default:
             return[]
         }
@@ -92,6 +95,29 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
         message.messageType = .message
         return [notice, message]
     }
+    private func getAccountDetailsVC() -> [UIViewController] {
+        let all = AccountDetailsVC()
+        all.accountType = .all
+        let bonus = AccountDetailsVC()
+        bonus.accountType = .bonus
+        let recharge = AccountDetailsVC()
+        recharge.accountType = .recharge
+        let buy = AccountDetailsVC()
+        buy.accountType = .buy
+        let withdrawal = AccountDetailsVC()
+        withdrawal.accountType = .withdrawal
+        let coupon = AccountDetailsVC()
+        coupon.accountType = .coupon
+        return [all, bonus, recharge, buy, withdrawal, coupon]
+    }
+    
+    
+    
+    
+    
+    
+    
+    
     
     private func setLiftButtonItem() {
         

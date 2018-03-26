@@ -1,5 +1,5 @@
 //
-//  MessageCenterVC.swift
+//  AccountDetailsVC.swift
 //  彩小蜜
 //
 //  Created by HX on 2018/3/26.
@@ -9,41 +9,42 @@
 import UIKit
 import XLPagerTabStrip
 
-enum MessageCenterType : String{
-    case notice = "通知"
-    case message = "消息"
+enum AccountDetailsType: String {
+    case all = "全部"
+    case bonus = "奖金"
+    case recharge = "充值"
+    case buy = "购彩"
+    case withdrawal = "提现"
+    case coupon = "红包"
 }
 
-fileprivate let MessageCenterCellId = "MessageCenterCellId"
+fileprivate let AccountDetailsCellId = "AccountDetailsCellId"
 
-class MessageCenterVC: BaseViewController, IndicatorInfoProvider, UITableViewDelegate, UITableViewDataSource {
+class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDelegate, UITableViewDataSource {
 
-    public var messageType: MessageCenterType = .notice
+    public var accountType : AccountDetailsType = .all
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setEmpty(title: "xxx", tableView)
-        self.view.addSubview(self.tableView)
+        self.view.addSubview(tableView)
+        setEmpty(title: "您还没有优惠券！", tableView)
     }
-
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.snp.makeConstraints { (make) in
             make.top.left.right.bottom.equalTo(self.view)
         }
     }
-    
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: messageType.rawValue)
+        return IndicatorInfo(title: accountType.rawValue)
     }
-    
     //MARK: - 懒加载
     lazy private var tableView : UITableView = {
         let table = UITableView(frame: CGRect.zero, style: .grouped)
         table.delegate = self
         table.dataSource = self
         table.separatorStyle = .none
-        table.register(MessageCenterCell.self, forCellReuseIdentifier: MessageCenterCellId)
+        table.register(AccountDetailsCell.self, forCellReuseIdentifier: AccountDetailsCellId)
         
         return table
     }()
@@ -57,7 +58,7 @@ class MessageCenterVC: BaseViewController, IndicatorInfoProvider, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: MessageCenterCellId, for: indexPath) as! MessageCenterCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: AccountDetailsCellId, for: indexPath) as! AccountDetailsCell
         
         return cell
     }
@@ -82,7 +83,7 @@ class MessageCenterVC: BaseViewController, IndicatorInfoProvider, UITableViewDel
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        
+        // Dispose of any resources that can be recreated.
     }
     
 

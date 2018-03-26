@@ -71,6 +71,8 @@
 		E5883F522068DFBF00CB3A46 /* OrderSchemeTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5883F512068DFBF00CB3A46 /* OrderSchemeTitleCell.swift */; };
 		E5883F582068E8C100CB3A46 /* MessageCenterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5883F572068E8C100CB3A46 /* MessageCenterVC.swift */; };
 		E5883F5A2068EA5700CB3A46 /* MessageCenterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5883F592068EA5700CB3A46 /* MessageCenterCell.swift */; };
+		E5883F5E20690CED00CB3A46 /* AccountDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5883F5D20690CED00CB3A46 /* AccountDetailsVC.swift */; };
+		E5883F6020690E8B00CB3A46 /* AccountDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5883F5F20690E8B00CB3A46 /* AccountDetailsCell.swift */; };
 		E58B57B220561BB80025E2F1 /* Spacing&SizeConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58B57B120561BB80025E2F1 /* Spacing&SizeConstraint.swift */; };
 		E58B57B4205622950025E2F1 /* BankCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58B57B3205622950025E2F1 /* BankCardViewController.swift */; };
 		E58B57B6205623B30025E2F1 /* BankCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58B57B5205623B30025E2F1 /* BankCardCell.swift */; };
@@ -206,6 +208,8 @@
 		E5883F512068DFBF00CB3A46 /* OrderSchemeTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderSchemeTitleCell.swift; sourceTree = "<group>"; };
 		E5883F572068E8C100CB3A46 /* MessageCenterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCenterVC.swift; sourceTree = "<group>"; };
 		E5883F592068EA5700CB3A46 /* MessageCenterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCenterCell.swift; sourceTree = "<group>"; };
+		E5883F5D20690CED00CB3A46 /* AccountDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsVC.swift; sourceTree = "<group>"; };
+		E5883F5F20690E8B00CB3A46 /* AccountDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsCell.swift; sourceTree = "<group>"; };
 		E58B57B120561BB80025E2F1 /* Spacing&SizeConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Spacing&SizeConstraint.swift"; sourceTree = "<group>"; };
 		E58B57B3205622950025E2F1 /* BankCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankCardViewController.swift; sourceTree = "<group>"; };
 		E58B57B5205623B30025E2F1 /* BankCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankCardCell.swift; sourceTree = "<group>"; };
@@ -516,6 +520,7 @@
 		E56298B6205133D9006397EA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E5883F5F20690E8B00CB3A46 /* AccountDetailsCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -523,6 +528,7 @@
 		E56298B7205133D9006397EA /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				E5883F5D20690CED00CB3A46 /* AccountDetailsVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1494,6 +1500,7 @@
 				E58B57BA2056364A0025E2F1 /* AddNewBankCardVC.swift in Sources */,
 				E51F9A64205A2A2D00AB8A21 /* ForgetPswVCodeFooterView.swift in Sources */,
 				E58B57C5205676CB0025E2F1 /* MeNetAPIManager.swift in Sources */,
+				E5883F5E20690CED00CB3A46 /* AccountDetailsVC.swift in Sources */,
 				E510325A2065044100A0156C /* PurchaseRecordInfoModel.swift in Sources */,
 				E533BF012060DE600037D2D8 /* RechargeTitleCell.swift in Sources */,
 				E5883F4C2068DA0800CB3A46 /* OrderSchemeVC.swift in Sources */,
@@ -1537,6 +1544,7 @@
 				E5D8ABBE206749F5002D688B /* OrderDetailHeaderView.swift in Sources */,
 				E581F378206348EB002AB9F7 /* UserInfoManager.swift in Sources */,
 				E51F9A60205A29EE00AB8A21 /* VCodeLoginFooterView.swift in Sources */,
+				E5883F6020690E8B00CB3A46 /* AccountDetailsCell.swift in Sources */,
 				E51F9A58205A120A00AB8A21 /* PasswordTextFieldCell.swift in Sources */,
 				E59CB3DB205BA1300086DD0E /* HomeActivityCell.swift in Sources */,
 				E514DDE02052A37E00274854 /* DataModel.swift in Sources */,
