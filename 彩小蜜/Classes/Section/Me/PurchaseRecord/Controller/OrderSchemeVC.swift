@@ -21,6 +21,9 @@ class OrderSchemeVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         super.viewDidLoad()
         self.title = "彩小秘 · 出票方案"
         self.view.addSubview(self.tableView)
+        
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 300
         orderSchemeRequest()
     }
 
@@ -57,8 +60,13 @@ class OrderSchemeVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         table.dataSource = self
         table.separatorStyle = .none
         
+        table.estimatedRowHeight = orderSectionHeaderHeight * 20
+        table.rowHeight = UITableViewAutomaticDimension
+        
         table.register(OrderSchemeTitleCell.self, forCellReuseIdentifier: OrderSchemeTitleCellId)
         table.register(OrderSchemeCell.self, forCellReuseIdentifier: OrderSchemeCellId)
+        
+        
         
         return table
     }()
@@ -81,28 +89,25 @@ class OrderSchemeVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: OrderSchemeCellId, for: indexPath) as! OrderSchemeCell
-        
+            cell.schemeDetail = self.orderSchemeInfo.ticketSchemeDetailDTOs[indexPath.row - 1]
+            if indexPath.row == 1{
+                cell.ishidenLine = true
+            }
+            
             return cell
         }
 
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        switch indexPath.section {
+
+        switch indexPath.row {
         case 0:
-            switch indexPath.row {
-            case 0:
-                return OrderDetailCellHeight + orderSectionHeaderHeight + 23
-            case 1:
-                return OrderDetailCellHeight - 2
-            default:
-                return OrderDetailCellHeight
-            }
+            return  orderSectionHeaderHeight * 2 - 10
         case 1:
-            return 124
+            return UITableViewAutomaticDimension
         default:
-            return 0
+            return UITableViewAutomaticDimension
         }
     }
     
@@ -119,7 +124,7 @@ class OrderSchemeVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         return nil
     }
     
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

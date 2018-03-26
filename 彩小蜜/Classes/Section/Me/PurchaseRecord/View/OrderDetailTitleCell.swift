@@ -53,6 +53,7 @@ class OrderDetailTitleCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         initSubview()
+        oddsIcon.isHidden = true
     }
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -194,7 +195,6 @@ class OrderDetailTitleCell: UITableViewCell {
     private func getDetailLB() -> UILabel {
         let lab = UILabel()
         lab.font = Font12
-        lab.text = "周一"
         lab.textColor = Color505050
         lab.textAlignment = .center
         return lab

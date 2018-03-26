@@ -45,16 +45,16 @@ class OrderSchemeTitleCell: UITableViewCell {
             make.height.equalTo(SeparationLineHeight)
         }
         sectionTitle.snp.makeConstraints { (make) in
-            make.top.equalTo(self.contentView).offset(11)
-            make.bottom.equalTo(line.snp.top).offset(-11)
+            make.top.equalTo(self.contentView).offset(5)
+            make.bottom.equalTo(line.snp.top).offset(-5)
             make.left.equalTo(self.contentView).offset(leftSpacing)
             make.right.equalTo(self.contentView).offset(-rightSpacing)
         }
         numTitle.snp.makeConstraints { (make) in
-            make.top.equalTo(line.snp.bottom).offset(11)
+            make.top.equalTo(line.snp.bottom).offset(10)
+            make.bottom.equalTo(self.contentView)
             make.left.equalTo(self.contentView).offset(26)
-            make.width.equalTo(OrderDetailTitleWidth)
-            make.height.equalTo(12)
+            make.width.equalTo(OrderDetailTitleWidth - 20)
         }
         contentTitle.snp.makeConstraints { (make) in
             make.top.height.equalTo(numTitle)
@@ -62,11 +62,12 @@ class OrderSchemeTitleCell: UITableViewCell {
             make.right.equalTo(passTitle.snp.left).offset(-1)
         }
         passTitle.snp.makeConstraints { (make) in
-            make.top.height.width.equalTo(numTitle)
+            make.top.height.equalTo(numTitle)
+            make.width.equalTo(OrderDetailTitleWidth)
             make.right.equalTo(multipleTitle.snp.left).offset(-1)
         }
         multipleTitle.snp.makeConstraints { (make) in
-            make.top.height.width.equalTo(numTitle)
+            make.top.height.width.equalTo(passTitle)
             make.right.equalTo(self.contentView).offset(-26)
         }
     }
@@ -81,7 +82,7 @@ class OrderSchemeTitleCell: UITableViewCell {
         sectionTitle.font = Font19
         sectionTitle.textColor = ColorA0A0A0
         sectionTitle.textAlignment = .left
-        sectionTitle.text = "方案内容"
+        sectionTitle.text = "方案编号"
         
         numTitle = getTitleLB("序号")
         numTitle.textAlignment = .left

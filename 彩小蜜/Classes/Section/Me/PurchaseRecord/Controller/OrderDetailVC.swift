@@ -121,7 +121,9 @@ class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
             switch indexPath.row {
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: OrderDetailTitleCellId, for: indexPath) as! OrderDetailTitleCell
+                if self.orderInfo.matchInfos.count >= 1 {
                     cell.matchInfo = self.orderInfo.matchInfos[indexPath.row]
+                }
                 return cell
                 
             case orderInfo.matchInfos.count :
@@ -131,7 +133,9 @@ class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
                 
             default :
                 let cell = tableView.dequeueReusableCell(withIdentifier: OrderDetailCellId, for: indexPath) as! OrderDetailCell
+                if self.orderInfo.matchInfos.count >= 1 {
                     cell.matchInfo = self.orderInfo.matchInfos[indexPath.row]
+                }
                 return cell
             }
             

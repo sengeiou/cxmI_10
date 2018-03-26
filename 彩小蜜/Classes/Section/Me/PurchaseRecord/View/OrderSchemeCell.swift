@@ -10,6 +10,24 @@ import UIKit
 
 class OrderSchemeCell: UITableViewCell {
 
+    public var schemeDetail : SchemeDetail! {
+        didSet{
+            numLB.text = schemeDetail.number
+            contentLB.text = schemeDetail.tickeContent
+            passLB.text = schemeDetail.passType
+            multipleLB.text = schemeDetail.multiple
+        }
+    }
+    
+    public var ishidenLine : Bool! {
+        didSet{
+            if ishidenLine == true {
+                self.line.isHidden = true
+            }else {
+                self.line.isHidden = false
+            }
+        }
+    }
     
     private var line : UIImageView!
     private var numLB : UILabel!
@@ -22,45 +40,22 @@ class OrderSchemeCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         initSubview()
+        ishidenLine = false
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        line.snp.makeConstraints { (make) in
-            make.top.equalTo(self.contentView).offset(0)
-            make.left.equalTo(self.contentView).offset(SeparatorLeftSpacing)
-            make.right.equalTo(self.contentView).offset(-SeparatorLeftSpacing)
-            make.height.equalTo(SeparationLineHeight)
-        }
         
-        numLB.snp.makeConstraints { (make) in
-            make.top.equalTo(line.snp.bottom).offset(11)
-            make.bottom.equalTo(self.contentView).offset(-11)
-            make.width.equalTo(OrderDetailTitleWidth)
-            make.left.equalTo(self.contentView).offset(leftSpacing)
-        }
-        contentLB.snp.makeConstraints { (make) in
-            make.top.equalTo(numLB)
-            make.left.equalTo(numLB.snp.right).offset(1)
-            make.right.equalTo(passLB.snp.left).offset(-1)
-            make.bottom.equalTo(numLB)
-        }
-        passLB.snp.makeConstraints { (make) in
-            make.top.height.width.equalTo(numLB)
-            make.right.equalTo(multipleLB.snp.left).offset(-1)
-        }
-        multipleLB.snp.makeConstraints { (make) in
-            make.top.height.width.equalTo(numLB)
-            make.right.equalTo(self.contentView).offset(-26)
-        }
     }
 
     private func initSubview() {
+        
+        
         line = UIImageView()
         line.image = UIImage(named:"line")
         
         numLB = getDetailLB()
-        numLB.textAlignment = .left
+        numLB.textAlignment = .center
         contentLB = getDetailLB()
         contentLB.numberOfLines = 0
         
@@ -74,6 +69,37 @@ class OrderSchemeCell: UITableViewCell {
         self.contentView.addSubview(contentLB)
         self.contentView.addSubview(passLB)
         self.contentView.addSubview(multipleLB)
+        
+        line.snp.makeConstraints { (make) in
+            make.top.equalTo(self.contentView).offset(0)
+            make.left.equalTo(self.contentView).offset(SeparatorLeftSpacing)
+            make.right.equalTo(self.contentView).offset(-SeparatorLeftSpacing)
+            make.height.equalTo(SeparationLineHeight)
+        }
+        
+        numLB.snp.makeConstraints { (make) in
+            make.centerY.equalTo(contentLB.snp.centerY)
+            make.width.equalTo(OrderDetailTitleWidth - 20)
+            make.left.equalTo(self.contentView).offset(leftSpacing)
+            make.height.equalTo(20)
+        }
+        contentLB.snp.makeConstraints { (make) in
+            make.top.equalTo(line.snp.bottom).offset(10)
+            make.left.equalTo(numLB.snp.right).offset(1)
+            make.right.equalTo(passLB.snp.left).offset(-1)
+            make.bottom.equalTo(self.contentView).offset(-11)
+        }
+        passLB.snp.makeConstraints { (make) in
+            make.centerY.equalTo(contentLB.snp.centerY)
+            make.width.equalTo(OrderDetailTitleWidth)
+            make.right.equalTo(multipleLB.snp.left).offset(-15)
+        }
+        multipleLB.snp.makeConstraints { (make) in
+            make.centerY.equalTo(contentLB.snp.centerY)
+            make.height.width.equalTo(passLB)
+            make.width.equalTo(OrderDetailTitleWidth - 14 )
+            make.right.equalTo(self.contentView).offset(-33)
+        }
     }
     
     private func getDetailLB() -> UILabel {
