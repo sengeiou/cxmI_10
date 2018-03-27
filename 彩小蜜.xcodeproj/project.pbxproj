@@ -60,6 +60,11 @@
 		E56CE80E206A22240090A1B5 /* WithdrawalProgressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56CE80D206A22240090A1B5 /* WithdrawalProgressCell.swift */; };
 		E56CE810206A22E10090A1B5 /* WithdrawalProgressFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56CE80F206A22E10090A1B5 /* WithdrawalProgressFooter.swift */; };
 		E56CE812206A23070090A1B5 /* WithdrawalProgressHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56CE811206A23070090A1B5 /* WithdrawalProgressHeader.swift */; };
+		E56CE814206A33310090A1B5 /* MessageCenterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56CE813206A33310090A1B5 /* MessageCenterModel.swift */; };
+		E56CE816206A3FBF0090A1B5 /* AccountStatisticsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56CE815206A3FBF0090A1B5 /* AccountStatisticsModel.swift */; };
+		E56CE818206A47720090A1B5 /* AboutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56CE817206A47720090A1B5 /* AboutCell.swift */; };
+		E56CE81A206A47860090A1B5 /* AboutHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56CE819206A47860090A1B5 /* AboutHeader.swift */; };
+		E56CE81C206A47930090A1B5 /* AboutFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56CE81B206A47930090A1B5 /* AboutFooter.swift */; };
 		E57375A320468B8900148622 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57375A220468B8900148622 /* AppDelegate.swift */; };
 		E57375A820468B8900148622 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E57375A620468B8900148622 /* Main.storyboard */; };
 		E57375AA20468B8900148622 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E57375A920468B8900148622 /* Assets.xcassets */; };
@@ -201,6 +206,11 @@
 		E56CE80D206A22240090A1B5 /* WithdrawalProgressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalProgressCell.swift; sourceTree = "<group>"; };
 		E56CE80F206A22E10090A1B5 /* WithdrawalProgressFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalProgressFooter.swift; sourceTree = "<group>"; };
 		E56CE811206A23070090A1B5 /* WithdrawalProgressHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalProgressHeader.swift; sourceTree = "<group>"; };
+		E56CE813206A33310090A1B5 /* MessageCenterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCenterModel.swift; sourceTree = "<group>"; };
+		E56CE815206A3FBF0090A1B5 /* AccountStatisticsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStatisticsModel.swift; sourceTree = "<group>"; };
+		E56CE817206A47720090A1B5 /* AboutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutCell.swift; sourceTree = "<group>"; };
+		E56CE819206A47860090A1B5 /* AboutHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutHeader.swift; sourceTree = "<group>"; };
+		E56CE81B206A47930090A1B5 /* AboutFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutFooter.swift; sourceTree = "<group>"; };
 		E573759F20468B8900148622 /* 彩小蜜.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "彩小蜜.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E57375A220468B8900148622 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E57375A720468B8900148622 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -562,6 +572,7 @@
 			children = (
 				E56CE8052069E5830090A1B5 /* AccountDetailModel.swift */,
 				E56CE8092069F4080090A1B5 /* AccountListModel.swift */,
+				E56CE815206A3FBF0090A1B5 /* AccountStatisticsModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1082,6 +1093,7 @@
 		E5883F562068E88600CB3A46 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E56CE813206A33310090A1B5 /* MessageCenterModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1151,6 +1163,9 @@
 		E5973E3B204FDC35006461CE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E56CE817206A47720090A1B5 /* AboutCell.swift */,
+				E56CE819206A47860090A1B5 /* AboutHeader.swift */,
+				E56CE81B206A47930090A1B5 /* AboutFooter.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1508,6 +1523,7 @@
 				E5973E40204FDD34006461CE /* MeComplaintVC.swift in Sources */,
 				E5973E22204E34F2006461CE /* ColorConstraint.swift in Sources */,
 				E5973E42204FDD6F006461CE /* MeGuaranteeVC.swift in Sources */,
+				E56CE81A206A47860090A1B5 /* AboutHeader.swift in Sources */,
 				E512A96F20490556003F14F4 /* HomeListModel.swift in Sources */,
 				E58B57B6205623B30025E2F1 /* BankCardCell.swift in Sources */,
 				E57376462046BC6400148622 /* MeViewController.swift in Sources */,
@@ -1529,6 +1545,8 @@
 				E537397D2057F7220087E4E6 /* RealInfoDataModel.swift in Sources */,
 				E58B57BA2056364A0025E2F1 /* AddNewBankCardVC.swift in Sources */,
 				E51F9A64205A2A2D00AB8A21 /* ForgetPswVCodeFooterView.swift in Sources */,
+				E56CE814206A33310090A1B5 /* MessageCenterModel.swift in Sources */,
+				E56CE818206A47720090A1B5 /* AboutCell.swift in Sources */,
 				E58B57C5205676CB0025E2F1 /* MeNetAPIManager.swift in Sources */,
 				E5883F5E20690CED00CB3A46 /* AccountDetailsVC.swift in Sources */,
 				E510325A2065044100A0156C /* PurchaseRecordInfoModel.swift in Sources */,
@@ -1547,6 +1565,7 @@
 				E512A96620479FD7003F14F4 /* HomeNetAPIManager.swift in Sources */,
 				E5883F582068E8C100CB3A46 /* MessageCenterVC.swift in Sources */,
 				E5973E2F204F8B33006461CE /* MeCell.swift in Sources */,
+				E56CE816206A3FBF0090A1B5 /* AccountStatisticsModel.swift in Sources */,
 				E537397B2057F4270087E4E6 /* UserInfoDataModel.swift in Sources */,
 				E58B57BC205670670025E2F1 /* ServeConstraint.swift in Sources */,
 				E5973E1C204D4A75006461CE /* ScreenConstraint.swift in Sources */,
@@ -1568,6 +1587,7 @@
 				E56CE8082069E63E0090A1B5 /* BasePageModel.swift in Sources */,
 				E58B57B4205622950025E2F1 /* BankCardViewController.swift in Sources */,
 				E5D8ABB4206737FF002D688B /* OrderDetailVC.swift in Sources */,
+				E56CE81C206A47930090A1B5 /* AboutFooter.swift in Sources */,
 				E51F9A5E205A29D500AB8A21 /* LoginFooterView.swift in Sources */,
 				E537397F2057F8F40087E4E6 /* BankCardInfo.swift in Sources */,
 				E50B907120522FFF00417BFE /* RechargeViewController.swift in Sources */,

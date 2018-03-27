@@ -26,10 +26,15 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
     public var accountType : AccountDetailsType = .all
     
     private var pageDataModel: BasePageModel<AccountDetailModel>!
+    private var accountList: [AccountDetailModel]!
+    private var statisticsModel : AccountStatisticsModel!
+    
+    private var footer : AccountDetailFooterView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.isHidenBar = true
+        accountList = []
         self.view.addSubview(tableView)
         setEmpty(title: "您还没有优惠券！", tableView)
         self.tableView.headerRefresh {
@@ -40,6 +45,7 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
         }
         
         accountListRequest(1)
+        statisticsRequest()
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -61,14 +67,42 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
     
     //MARK: - 网络请求
     private func accountListRequest(_ pageNum: Int) {
+        var type: String!
+        // 0-全部 1-奖金 2-充值 3-购彩 4-提现 5-红包
+        switch accountType {
+        case .all:
+            type = "0"
+        case .bonus:
+            type = "1"
+        case .recharge:
+            type = "2"
+        case .buy:
+            type = "3"
+        case .withdrawal:
+            type = "4"
+        case .coupon:
+            type = "5"
+        }
+        
         weak var weakSelf = self
-        _ = userProvider.rx.request(.accountDetailsList(pageNum: pageNum))
+        _ = userProvider.rx.request(.accountDetailsList(amountType: type, pageNum: pageNum))
             .asObservable()
             .mapObject(type: BasePageModel<AccountDetailModel>.self)
             .subscribe(onNext: { (data) in
+                weakSelf?.tableView.endrefresh()
                 weakSelf?.pageDataModel = data
+                if pageNum == 1 {
+                    weakSelf?.accountList.removeAll()
+                }
+                weakSelf?.accountList.append(contentsOf: data.list)
                 weakSelf?.tableView.reloadData()
+                if weakSelf?.accountList.count == 0 {
+                    weakSelf?.tableView.tableFooterView?.isHidden = true
+                }
             }, onError: { (error) in
+                if weakSelf?.accountList.count == 0 {
+                    weakSelf?.tableView.tableFooterView?.isHidden = true
+                }
                 weakSelf?.tableView.endrefresh()
                 guard let err = error as? HXError else { return }
                 switch err {
@@ -80,6 +114,24 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
             }, onCompleted: nil , onDisposed: nil )
     }
     
+    private func statisticsRequest() {
+        weak var weakSelf = self
+        _ = userProvider.rx.request(.accountStatistics)
+            .asObservable()
+            .mapObject(type: AccountStatisticsModel.self)
+            .subscribe(onNext: { (data) in
+                //weakSelf?.statisticsModel = data
+                weakSelf?.footer.dataModel = data
+            }, onError: { (error) in
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    print(code!)
+                    self.showHUD(message: msg!)
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil )
+    }
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: accountType.rawValue)
@@ -90,7 +142,7 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
         table.delegate = self
         table.dataSource = self
         table.separatorStyle = .none
-        let footer = AccountDetailFooterView()
+        footer = AccountDetailFooterView()
         
         table.tableFooterView = footer
         
@@ -101,6 +153,11 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
     
     //MARK: - TABLEVIEW  DELEGATE
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let account = accountList[indexPath.section]
+        
+        // 提现可进入详情
+        guard account.processType == "4" else { return }
+       
         let progress = WithdrawalProgressVC()
         pushViewController(vc: progress)
     }
@@ -108,7 +165,7 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
     //MARK: - TABLEVIEW  DATASOURCE
     func numberOfSections(in tableView: UITableView) -> Int {
         guard pageDataModel != nil else { return 0 }
-        return pageDataModel.list.count
+        return accountList.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
@@ -117,7 +174,7 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AccountDetailsCellId, for: indexPath) as! AccountDetailsCell
         
-        cell.accountDetail = pageDataModel.list[indexPath.section]
+        cell.accountDetail = accountList[indexPath.section]
         
         return cell
     }
@@ -128,8 +185,8 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section > 0 {
-            let acc = pageDataModel.list[section]
-            let axx = pageDataModel.list[section - 1]
+            let acc = accountList[section]
+            let axx = accountList[section - 1]
 
             if acc.addTime == axx.addTime {
                 return 0
@@ -155,8 +212,8 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
         }
         
         if section > 0 {
-            let acc = pageDataModel.list[section]
-            let axx = pageDataModel.list[section - 1]
+            let acc = accountList[section]
+            let axx = accountList[section - 1]
             
             if acc.addTime == axx.addTime {
                 

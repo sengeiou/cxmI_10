@@ -10,11 +10,28 @@ import UIKit
 
 class AccountDetailFooterView: UIView {
 
+    public var dataModel : AccountStatisticsModel! {
+        didSet{
+            let rechargeAtt = NSMutableAttributedString(string: "充值 ")
+            let recharge = NSAttributedString(string: dataModel.rechargeMoney, attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+            let with = NSAttributedString(string: dataModel.withDrawMoney, attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+            let buy = NSAttributedString(string: dataModel.buyMoney, attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+            let reward = NSAttributedString(string: dataModel.rewardMoney, attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+            rechargeAtt.append(recharge)
+            rechargeAtt.append(with)
+            rechargeAtt.append(buy)
+            rechargeAtt.append(reward)
+            
+            
+            rechargeLB.attributedText = rechargeAtt
+        }
+    }
+    
     private var titleLB: UILabel!
     private var rechargeLB: UILabel!
-    private var withdrawalLB: UILabel!
-    private var buyLB: UILabel!
-    private var winLB: UILabel!
+//    private var withdrawalLB: UILabel!
+//    private var buyLB: UILabel!
+//    private var winLB: UILabel!
     
     private var bgView: UIView!
     
@@ -34,44 +51,46 @@ class AccountDetailFooterView: UIView {
         titleLB.snp.makeConstraints { (make) in
             make.top.equalTo(10)
             make.left.equalTo(leftSpacing)
-            make.width.equalTo(60)
+            make.width.equalTo(80)
             make.height.equalTo(20)
         }
         rechargeLB.snp.makeConstraints { (make) in
-            make.top.equalTo(titleLB)
-            make.left.equalTo(titleLB.snp.right).offset(5)
+            make.top.equalTo(titleLB.snp.bottom).offset(5)
+            make.left.equalTo(leftSpacing)
+            make.right.equalTo(-rightSpacing)
             make.height.equalTo(20)
         }
-        withdrawalLB.snp.makeConstraints { (make) in
-            make.top.equalTo(rechargeLB)
-            make.left.equalTo(rechargeLB.snp.right).offset(5)
-            make.right.equalTo(-rightSpacing)
-            make.width.equalTo(rechargeLB)
-        }
-        buyLB.snp.makeConstraints { (make) in
-            make.bottom.equalTo(-10)
-            make.left.width.height.equalTo(rechargeLB)
-        }
-        winLB.snp.makeConstraints { (make) in
-            make.bottom.equalTo(buyLB)
-            make.left.width.height.equalTo(buyLB)
-        }
+//        withdrawalLB.snp.makeConstraints { (make) in
+//            make.top.equalTo(rechargeLB)
+//            make.left.equalTo(rechargeLB.snp.right).offset(5)
+//            make.right.equalTo(-rightSpacing)
+//            make.width.equalTo(rechargeLB)
+//        }
+//        buyLB.snp.makeConstraints { (make) in
+//            make.bottom.equalTo(-10)
+//            make.left.width.height.equalTo(rechargeLB)
+//        }
+//        winLB.snp.makeConstraints { (make) in
+//            make.bottom.equalTo(buyLB)
+//            make.left.width.height.equalTo(buyLB)
+//        }
     }
     private func initSubview() {
         titleLB = getLB()
+        titleLB.text = "当月合计: "
         rechargeLB = getLB()
-        buyLB = getLB()
-        winLB = getLB()
-        withdrawalLB = getLB()
+//        buyLB = getLB()
+//        winLB = getLB()
+//        withdrawalLB = getLB()
         
         bgView = UIView()
         bgView.backgroundColor = ColorFFFFFF
         
         bgView.addSubview(titleLB)
         bgView.addSubview(rechargeLB)
-        bgView.addSubview(buyLB)
-        bgView.addSubview(winLB)
-        bgView.addSubview(withdrawalLB)
+//        bgView.addSubview(buyLB)
+//        bgView.addSubview(winLB)
+//        bgView.addSubview(withdrawalLB)
         
         self.addSubview(bgView)
         
@@ -79,7 +98,7 @@ class AccountDetailFooterView: UIView {
     
     private func getLB() -> UILabel {
         let lab = UILabel()
-        lab.font = Font15
+        lab.font = Font12
         lab.textColor = Color505050
         lab.textAlignment = .left
         lab.text = "充值： 1000000000000"

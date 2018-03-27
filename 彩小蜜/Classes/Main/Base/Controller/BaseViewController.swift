@@ -80,6 +80,8 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
         didSet{
             if isHidenBar == true {
                 hideTabBar()
+            }else {
+                showTabBar()
             }
         }
     }
@@ -114,6 +116,9 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
         return -80
     }
     
+    private func showTabBar() {
+        self.tabBarController?.tabBar.isHidden = false
+    }
     private func hideTabBar() {
         self.tabBarController?.tabBar.isHidden = true
     }

@@ -20,10 +20,24 @@ class MessageCenterVC: BaseViewController, IndicatorInfoProvider, UITableViewDel
 
     public var messageType: MessageCenterType = .notice
     
+    private var messageModel : BasePageModel<MessageCenterModel>!
+    private var messageList: [MessageCenterModel]!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setEmpty(title: "xxx", tableView)
         self.view.addSubview(self.tableView)
+        
+        messageList = []
+        
+        messageListRequest(1)
+        
+        self.tableView.headerRefresh {
+            self.loadNewData()
+        }
+        self.tableView.footerRefresh {
+            self.loadNextData()
+        }
     }
 
     override func viewDidLayoutSubviews() {
@@ -31,6 +45,51 @@ class MessageCenterVC: BaseViewController, IndicatorInfoProvider, UITableViewDel
         tableView.snp.makeConstraints { (make) in
             make.top.left.right.bottom.equalTo(self.view)
         }
+    }
+    //MARK: - 加载数据
+    private func loadNewData() {
+        
+        messageListRequest(1)
+    }
+    private func loadNextData() {
+        guard self.messageModel.isLastPage == true else {
+            self.tableView.noMoreData()
+            return }
+        
+        messageListRequest(self.messageModel.nextPage)
+    }
+    // MARK: - 网络请求
+    private func messageListRequest(_ pageNum: Int) {
+        var type : String!
+        switch messageType {
+        case .message:
+            type = "1"
+        case .notice:
+            type = "0"
+        }
+        
+        weak var weakSelf = self
+        _ = userProvider.rx.request(.messageList(msgType: type, pageNum: pageNum))
+            .asObservable()
+            .mapObject(type: BasePageModel<MessageCenterModel>.self)
+            .subscribe(onNext: { (data) in
+                weakSelf?.tableView.endrefresh()
+                weakSelf?.messageModel = data
+                if pageNum == 1 {
+                    weakSelf?.messageList.removeAll()
+                }
+                weakSelf?.messageList.append(contentsOf: data.list)
+                weakSelf?.tableView.reloadData()
+            }, onError: { (error) in
+                weakSelf?.tableView.endrefresh()
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    print(code!)
+                    self.showHUD(message: msg!)
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil )
     }
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
@@ -49,8 +108,8 @@ class MessageCenterVC: BaseViewController, IndicatorInfoProvider, UITableViewDel
     }()
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        //guard couponListModel != nil else { return 0 }
-        return 10
+        guard messageModel != nil else { return 0 }
+        return messageList.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
@@ -58,7 +117,7 @@ class MessageCenterVC: BaseViewController, IndicatorInfoProvider, UITableViewDel
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MessageCenterCellId, for: indexPath) as! MessageCenterCell
-        
+        cell.messageModel = messageList[indexPath.section]
         return cell
     }
     

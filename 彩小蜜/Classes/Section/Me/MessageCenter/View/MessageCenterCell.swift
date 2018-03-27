@@ -10,6 +10,16 @@ import UIKit
 
 class MessageCenterCell: UITableViewCell {
 
+    public var messageModel: MessageCenterModel! {
+        didSet{
+            titleLB.text = messageModel.title
+            timeLB.text = messageModel.sendTime
+            moneyLB.text = messageModel.content
+            detailLB.text = messageModel.msgDesc
+            stateLB.text = messageModel.contentDesc
+        }
+    }
+    
     private var titleLB : UILabel!
     private var moneyLB : UILabel!
     private var timeLB : UILabel!
@@ -38,10 +48,10 @@ class MessageCenterCell: UITableViewCell {
             make.right.equalTo(self.contentView.snp.centerX).offset(-20)
         }
         timeLB.snp.makeConstraints { (make) in
-            make.top.equalTo(timeLB)
-            make.left.equalTo(timeLB.snp.right).offset(10)
+            make.top.equalTo(titleLB).offset(5)
+            make.left.equalTo(titleLB.snp.right).offset(10)
             make.right.equalTo(self.contentView).offset(-rightSpacing)
-            make.height.equalTo(timeLB)
+            make.height.equalTo(12)
         }
         stateLB.snp.makeConstraints { (make) in
             make.top.equalTo(moneyLB)
@@ -84,7 +94,7 @@ class MessageCenterCell: UITableViewCell {
         moneyLB.text = "中奖3000.00元"
         
         timeLB = UILabel()
-        timeLB.font = Font14
+        timeLB.font = Font10
         timeLB.textColor = ColorA0A0A0
         timeLB.textAlignment = .left
         timeLB.text = "01月30日 08： 30"

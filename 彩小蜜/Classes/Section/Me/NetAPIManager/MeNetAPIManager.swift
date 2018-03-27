@@ -39,7 +39,11 @@ enum MeNetAPIManager {
     /// 出票方案
     case orderScheme (programmeSn: String)
     /// 账户明细列表
-    case accountDetailsList (pageNum: Int)
+    case accountDetailsList (amountType: String, pageNum: Int)
+    /// 统计账户信息
+    case accountStatistics
+    /// 消息列表 0通知，1消息 
+    case messageList (msgType: String, pageNum: Int)
 }
 
 extension MeNetAPIManager : TargetType {
@@ -84,6 +88,12 @@ extension MeNetAPIManager : TargetType {
             return "/order/getTicketScheme"
         case .accountDetailsList:
             return "/user/account/getUserAccountList"
+        case .messageList:
+            return "/user/message/list"
+        case .accountStatistics:
+            return "/user/account/countMoneyCurrentMonth"
+            
+            
             
         }
     }
@@ -125,9 +135,18 @@ extension MeNetAPIManager : TargetType {
             dic["orderId"] = orderId
         case .orderScheme(let programmeSn):
             dic["programmeSn"] = programmeSn
-        case .accountDetailsList(let pageNum):
+        case .accountDetailsList(let amountType, let pageNum):
+            dic["amountType"] = amountType
             dic["pageNum"] = pageNum
             dic["pageSize"] = "20"
+        case .accountStatistics:
+            dic["str"] = "ss"
+        case .messageList(let msgType, let pageNum):
+            dic["msgType"] = msgType
+            dic["pageNum"] = pageNum
+            dic["pageSize"] = "20"
+            
+            
             
         default:
             return .requestPlain

@@ -15,6 +15,8 @@ struct AccountDetailModel: HandyJSON {
     var changeAmount: String!
     var isShow: String!
     var note: String!
+    /// 0-全部 1-奖金 2-充值 3-购彩 4-提现 5-红包 ,
+    var processType : String!
     var processTypeName: String!
     var shotTime: String!
     var status: String!
