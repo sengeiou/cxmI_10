@@ -29,23 +29,23 @@ class CouponViewController: BaseViewController, IndicatorInfoProvider, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.addSubview(tableview)
+        self.view.addSubview(tableView)
         couponList = []
         couponListRequest(1)
         
-        setEmpty(title: "您还没有优惠券！", tableview)
+        setEmpty(title: "您还没有优惠券！", tableView)
         
-        self.tableview.headerRefresh {
+        self.tableView.headerRefresh {
             self.loadNewData()
         }
-        self.tableview.footerRefresh {
+        self.tableView.footerRefresh {
             self.loadNextData()
         }
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        tableview.snp.makeConstraints { (make) in
+        tableView.snp.makeConstraints { (make) in
             make.top.left.right.bottom.equalTo(self.view)
         }
     }
@@ -61,7 +61,7 @@ class CouponViewController: BaseViewController, IndicatorInfoProvider, UITableVi
     }
     private func loadNextData() {
         guard self.couponListModel.isLastPage == true else {
-            self.tableview.noMoreData()
+            self.tableView.noMoreData()
             return }
         
         couponListRequest(self.couponListModel.nextPage)
@@ -84,15 +84,15 @@ class CouponViewController: BaseViewController, IndicatorInfoProvider, UITableVi
            .asObservable()
            .mapObject(type: CouponListModel.self)
            .subscribe(onNext: { (data) in
-                weakSelf?.tableview.endrefresh()
+                weakSelf?.tableView.endrefresh()
                 weakSelf?.couponListModel = data
                 if pageNum == 1 {
                     weakSelf?.couponList.removeAll()
                 }
                 weakSelf?.couponList.append(contentsOf: data.list)
-                weakSelf?.tableview.reloadData()
+                weakSelf?.tableView.reloadData()
            }, onError: { (error) in
-                weakSelf?.tableview.endrefresh()
+                weakSelf?.tableView.endrefresh()
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):
@@ -104,7 +104,7 @@ class CouponViewController: BaseViewController, IndicatorInfoProvider, UITableVi
     }
     
     //MARK: - 懒加载
-    lazy private var tableview : UITableView = {
+    lazy private var tableView : UITableView = {
         let table = UITableView(frame: CGRect.zero, style: .grouped)
         table.delegate = self
         table.dataSource = self

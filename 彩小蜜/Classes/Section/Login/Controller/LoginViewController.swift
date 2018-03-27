@@ -83,7 +83,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro,
     }
     //MARK: - 网络请求
     private func loginRequest() {
-       _ = loginProvider.rx.request(.loginByPass(mobile: "13601180392", password: "123456"))
+       _ = loginProvider.rx.request(.loginByPass(mobile: userNameTF.text!, password: passwordTF.text!))
         .asObservable()
         .mapObject(type: UserDataModel.self)
         .subscribe { (event) in

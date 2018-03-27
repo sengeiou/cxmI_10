@@ -51,6 +51,15 @@
 		E562989F2050E04C006397EA /* ValidateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E562989E2050E04C006397EA /* ValidateProtocol.swift */; };
 		E56298A32050E712006397EA /* AlertProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56298A22050E712006397EA /* AlertProtocol.swift */; };
 		E56298BD20513429006397EA /* AuthenticationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56298BC20513429006397EA /* AuthenticationVC.swift */; };
+		E56CE8022069DFC20090A1B5 /* AccountDetailSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56CE8012069DFC20090A1B5 /* AccountDetailSectionHeader.swift */; };
+		E56CE8042069E2340090A1B5 /* AccountDetailFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56CE8032069E2340090A1B5 /* AccountDetailFooterView.swift */; };
+		E56CE8062069E5830090A1B5 /* AccountDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56CE8052069E5830090A1B5 /* AccountDetailModel.swift */; };
+		E56CE8082069E63E0090A1B5 /* BasePageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56CE8072069E63E0090A1B5 /* BasePageModel.swift */; };
+		E56CE80A2069F4080090A1B5 /* AccountListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56CE8092069F4080090A1B5 /* AccountListModel.swift */; };
+		E56CE80C206A21670090A1B5 /* WithdrawalProgressVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56CE80B206A21670090A1B5 /* WithdrawalProgressVC.swift */; };
+		E56CE80E206A22240090A1B5 /* WithdrawalProgressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56CE80D206A22240090A1B5 /* WithdrawalProgressCell.swift */; };
+		E56CE810206A22E10090A1B5 /* WithdrawalProgressFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56CE80F206A22E10090A1B5 /* WithdrawalProgressFooter.swift */; };
+		E56CE812206A23070090A1B5 /* WithdrawalProgressHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56CE811206A23070090A1B5 /* WithdrawalProgressHeader.swift */; };
 		E57375A320468B8900148622 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57375A220468B8900148622 /* AppDelegate.swift */; };
 		E57375A820468B8900148622 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E57375A620468B8900148622 /* Main.storyboard */; };
 		E57375AA20468B8900148622 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E57375A920468B8900148622 /* Assets.xcassets */; };
@@ -183,6 +192,15 @@
 		E562989E2050E04C006397EA /* ValidateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateProtocol.swift; sourceTree = "<group>"; };
 		E56298A22050E712006397EA /* AlertProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertProtocol.swift; sourceTree = "<group>"; };
 		E56298BC20513429006397EA /* AuthenticationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationVC.swift; sourceTree = "<group>"; };
+		E56CE8012069DFC20090A1B5 /* AccountDetailSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailSectionHeader.swift; sourceTree = "<group>"; };
+		E56CE8032069E2340090A1B5 /* AccountDetailFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailFooterView.swift; sourceTree = "<group>"; };
+		E56CE8052069E5830090A1B5 /* AccountDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailModel.swift; sourceTree = "<group>"; };
+		E56CE8072069E63E0090A1B5 /* BasePageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePageModel.swift; sourceTree = "<group>"; };
+		E56CE8092069F4080090A1B5 /* AccountListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountListModel.swift; sourceTree = "<group>"; };
+		E56CE80B206A21670090A1B5 /* WithdrawalProgressVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalProgressVC.swift; sourceTree = "<group>"; };
+		E56CE80D206A22240090A1B5 /* WithdrawalProgressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalProgressCell.swift; sourceTree = "<group>"; };
+		E56CE80F206A22E10090A1B5 /* WithdrawalProgressFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalProgressFooter.swift; sourceTree = "<group>"; };
+		E56CE811206A23070090A1B5 /* WithdrawalProgressHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalProgressHeader.swift; sourceTree = "<group>"; };
 		E573759F20468B8900148622 /* 彩小蜜.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "彩小蜜.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E57375A220468B8900148622 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E57375A720468B8900148622 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -521,6 +539,11 @@
 			isa = PBXGroup;
 			children = (
 				E5883F5F20690E8B00CB3A46 /* AccountDetailsCell.swift */,
+				E56CE8012069DFC20090A1B5 /* AccountDetailSectionHeader.swift */,
+				E56CE8032069E2340090A1B5 /* AccountDetailFooterView.swift */,
+				E56CE80D206A22240090A1B5 /* WithdrawalProgressCell.swift */,
+				E56CE80F206A22E10090A1B5 /* WithdrawalProgressFooter.swift */,
+				E56CE811206A23070090A1B5 /* WithdrawalProgressHeader.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -529,6 +552,7 @@
 			isa = PBXGroup;
 			children = (
 				E5883F5D20690CED00CB3A46 /* AccountDetailsVC.swift */,
+				E56CE80B206A21670090A1B5 /* WithdrawalProgressVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -536,6 +560,8 @@
 		E56298B8205133D9006397EA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E56CE8052069E5830090A1B5 /* AccountDetailModel.swift */,
+				E56CE8092069F4080090A1B5 /* AccountListModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -995,6 +1021,7 @@
 			isa = PBXGroup;
 			children = (
 				E514DDDF2052A37E00274854 /* DataModel.swift */,
+				E56CE8072069E63E0090A1B5 /* BasePageModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1467,6 +1494,8 @@
 			files = (
 				E5973E35204FCCF2006461CE /* MeAboutViewController.swift in Sources */,
 				E51032502064FD2D00A0156C /* BasePagerViewController.swift in Sources */,
+				E56CE8062069E5830090A1B5 /* AccountDetailModel.swift in Sources */,
+				E56CE8022069DFC20090A1B5 /* AccountDetailSectionHeader.swift in Sources */,
 				E58B57B8205634250025E2F1 /* BankCardFooterView.swift in Sources */,
 				E5973DDE204D152F006461CE /* BaseViewController.swift in Sources */,
 				E59CB3DD205BA1650086DD0E /* HomeSportLotteryCell.swift in Sources */,
@@ -1493,6 +1522,7 @@
 				E59CB3DF205BA17F0086DD0E /* HomeHeaderView.swift in Sources */,
 				E514DDE22052B3E000274854 /* WithdrawalViewController.swift in Sources */,
 				E5B68AFD205A81A70038A5A2 /* Extension+Color.swift in Sources */,
+				E56CE80C206A21670090A1B5 /* WithdrawalProgressVC.swift in Sources */,
 				E512A96D20480917003F14F4 /* HomeDataModel.swift in Sources */,
 				E51F9A56205A11EA00AB8A21 /* MobileTextFieldCell.swift in Sources */,
 				E59CB3E1205BBD900086DD0E /* HomeFootballCell.swift in Sources */,
@@ -1508,6 +1538,7 @@
 				E5883F5A2068EA5700CB3A46 /* MessageCenterCell.swift in Sources */,
 				E512A9692047E598003F14F4 /* Observable+ObjectMapper.swift in Sources */,
 				E5973E31204F8FD4006461CE /* MeHeaderView.swift in Sources */,
+				E56CE810206A22E10090A1B5 /* WithdrawalProgressFooter.swift in Sources */,
 				E58B57B220561BB80025E2F1 /* Spacing&SizeConstraint.swift in Sources */,
 				E58B57C9205688570025E2F1 /* UserDataModel.swift in Sources */,
 				E51F9A62205A2A1500AB8A21 /* ForgetPswModileFooterView.swift in Sources */,
@@ -1521,7 +1552,9 @@
 				E5973E1C204D4A75006461CE /* ScreenConstraint.swift in Sources */,
 				E5103254206500A800A0156C /* PurchaseRecordVC.swift in Sources */,
 				E53739772057B9340087E4E6 /* extension+UserDefaults.swift in Sources */,
+				E56CE80E206A22240090A1B5 /* WithdrawalProgressCell.swift in Sources */,
 				E5973E20204E34A3006461CE /* FontConstraint.swift in Sources */,
+				E56CE812206A23070090A1B5 /* WithdrawalProgressHeader.swift in Sources */,
 				E5973E33204FC1D9006461CE /* MeFooterView.swift in Sources */,
 				E581F37C2063573C002AB9F7 /* PaymentNetAPIManager.swift in Sources */,
 				E57376022046B37900148622 /* MainTabBarController.swift in Sources */,
@@ -1532,6 +1565,7 @@
 				E51032582065037700A0156C /* PurchaseRecordListModel.swift in Sources */,
 				E533BF0520610D170037D2D8 /* BasePopViewController.swift in Sources */,
 				E5103256206502DA00A0156C /* PurchaseRecordCell.swift in Sources */,
+				E56CE8082069E63E0090A1B5 /* BasePageModel.swift in Sources */,
 				E58B57B4205622950025E2F1 /* BankCardViewController.swift in Sources */,
 				E5D8ABB4206737FF002D688B /* OrderDetailVC.swift in Sources */,
 				E51F9A5E205A29D500AB8A21 /* LoginFooterView.swift in Sources */,
@@ -1540,6 +1574,7 @@
 				E5973E2B204E442F006461CE /* ForgetPswVCodeVC.swift in Sources */,
 				E56298BD20513429006397EA /* AuthenticationVC.swift in Sources */,
 				E58B57BE205671410025E2F1 /* LoginNetAPIManager.swift in Sources */,
+				E56CE8042069E2340090A1B5 /* AccountDetailFooterView.swift in Sources */,
 				E5973E29204E4387006461CE /* ForgetPswPhoneVC.swift in Sources */,
 				E5D8ABBE206749F5002D688B /* OrderDetailHeaderView.swift in Sources */,
 				E581F378206348EB002AB9F7 /* UserInfoManager.swift in Sources */,
@@ -1560,6 +1595,7 @@
 				E5883F502068DC2100CB3A46 /* OrderSchemeInfoModel.swift in Sources */,
 				E5A2644E205B742B00EE6491 /* HomeViewController.swift in Sources */,
 				E58B57C7205676EC0025E2F1 /* LotteryNetAPIManager.swift in Sources */,
+				E56CE80A2069F4080090A1B5 /* AccountListModel.swift in Sources */,
 				E51F9A5A205A122000AB8A21 /* VcodeTextFieldCell.swift in Sources */,
 				E50B907D20526BB200417BFE /* RechargePaymentCell.swift in Sources */,
 				E562989C2050D1DD006397EA /* RegisterViewController.swift in Sources */,

@@ -38,6 +38,8 @@ enum MeNetAPIManager {
     case orderInfo (orderId: String)
     /// 出票方案
     case orderScheme (programmeSn: String)
+    /// 账户明细列表
+    case accountDetailsList (pageNum: Int)
 }
 
 extension MeNetAPIManager : TargetType {
@@ -47,8 +49,8 @@ extension MeNetAPIManager : TargetType {
     
     var headers: [String : String]? {
         return ["Content-Type" : "application/json",
-                //"token" : UserInfoManager().getToken()
-            "token" : "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxZDg4OTYxZDUtYjI0Yi00NzAxLWJhZWMtNzBkZmUxY2MwMDAzIiwidXNlcklkIjoiNDAwMDY4In0.1aBwA_Rasiew0kiLK8uR3AiUGj1iJ6ZZ8Hvup5v8tNUVMpQWWHVQBSrUBGCxZ28Lmsk0I-cQGQkOcAdoJKJQE1GGjDqSfAWGD951Kyq187C_axWKNazkRK1b-RIuuXV4ZSSSYhn0o45KsLCUh1YO76Q19oFnuVCbrF8DTvXTbSY"
+                "token" : UserInfoManager().getToken()
+            //"token" : "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxZDg4OTYxZDUtYjI0Yi00NzAxLWJhZWMtNzBkZmUxY2MwMDAzIiwidXNlcklkIjoiNDAwMDY4In0.1aBwA_Rasiew0kiLK8uR3AiUGj1iJ6ZZ8Hvup5v8tNUVMpQWWHVQBSrUBGCxZ28Lmsk0I-cQGQkOcAdoJKJQE1GGjDqSfAWGD951Kyq187C_axWKNazkRK1b-RIuuXV4ZSSSYhn0o45KsLCUh1YO76Q19oFnuVCbrF8DTvXTbSY"
         ]
     }
     
@@ -80,7 +82,8 @@ extension MeNetAPIManager : TargetType {
             return "/order/getOrderDetail"
         case .orderScheme:
             return "/order/getTicketScheme"
-            
+        case .accountDetailsList:
+            return "/user/account/getUserAccountList"
             
         }
     }
@@ -122,7 +125,9 @@ extension MeNetAPIManager : TargetType {
             dic["orderId"] = orderId
         case .orderScheme(let programmeSn):
             dic["programmeSn"] = programmeSn
-            
+        case .accountDetailsList(let pageNum):
+            dic["pageNum"] = pageNum
+            dic["pageSize"] = "20"
             
         default:
             return .requestPlain
