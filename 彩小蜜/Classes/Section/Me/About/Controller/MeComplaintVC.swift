@@ -26,7 +26,7 @@ class MeComplaintVC: BaseViewController {
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "彩小秘·投诉建议"
+        self.title = "彩小秘 · 投诉建议"
         initSubview()
     }
 
@@ -37,8 +37,8 @@ class MeComplaintVC: BaseViewController {
         bgView.backgroundColor = ColorFFFFFF
         
         titleLB = UILabel()
-        titleLB.font = Font12
-        titleLB.textColor = UIColor.black
+        titleLB.font = Font14
+        titleLB.textColor = Color787878
         titleLB.numberOfLines = 5
         titleLB.text = """
         尊敬的上帝您好：
@@ -47,8 +47,6 @@ class MeComplaintVC: BaseViewController {
         
         textView = HXTextView()
         textView.limitNumber = 140
-        
-        
         
         sendBut = UIButton(type: .custom)
         sendBut.setTitle("发送", for: .normal)
@@ -70,17 +68,17 @@ class MeComplaintVC: BaseViewController {
         bgView.snp.makeConstraints { (make) in
             make.top.equalTo(SafeAreaTopHeight)
             make.left.right.equalTo(0)
-            make.height.equalTo(240 * defaultScale)
+            make.height.equalTo(245 * defaultScale)
         }
         
         titleLB.snp.makeConstraints { (make) in
-            make.height.equalTo(100)
+            make.height.equalTo(100 * defaultScale)
             make.left.equalTo(leftSpacing)
             make.right.equalTo(-rightSpacing)
             make.top.equalTo(bgView).offset(1)
         }
         textView.snp.makeConstraints { (make) in
-            make.height.equalTo(120)
+            make.height.equalTo(120 * defaultScale)
             make.left.right.equalTo(titleLB)
             make.top.equalTo(titleLB.snp.bottom).offset(10)
         }

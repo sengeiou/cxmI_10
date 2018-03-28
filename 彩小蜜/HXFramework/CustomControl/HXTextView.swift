@@ -45,19 +45,21 @@ class HXTextView: UIView, UITextViewDelegate {
     }
     
     private func initSubview() {
-        self.layer.borderWidth = 1
+        self.layer.borderWidth = 0.3
         self.layer.borderColor = ColorC8C8C8.cgColor
-        self.layer.cornerRadius = 5
+        self.layer.cornerRadius = 3
         self.backgroundColor = ColorFFFFFF
         
         textView = HHTextView()
         textView.delegate = self
         textView.placeholder = "投诉建议"
         textView.backgroundColor = ColorFFFFFF
+        textView.placeholderColor = ColorA0A0A0
+        textView.font = Font12
         
         numLB = UILabel()
-        numLB.font = Font10
-        numLB.textColor = ColorA0A0A0
+        numLB.font = Font12
+        numLB.textColor = ColorC8C8C8
         numLB.textAlignment = .right
         numLB.text = "SSS"
         
