@@ -99,6 +99,9 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
                 if weakSelf?.accountList.count == 0 {
                     weakSelf?.tableView.tableFooterView?.isHidden = true
                 }
+                
+                let xxx = AccountListModel.getAccountList(data.list)
+                print(xxx)
             }, onError: { (error) in
                 if weakSelf?.accountList.count == 0 {
                     weakSelf?.tableView.tableFooterView?.isHidden = true
@@ -197,7 +200,7 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
                 return orderSectionHeaderHeight
             }
         }
-        return 0.0
+        return orderSectionHeaderHeight
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.0
