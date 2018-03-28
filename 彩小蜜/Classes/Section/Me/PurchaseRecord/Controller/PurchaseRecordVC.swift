@@ -64,7 +64,7 @@ class PurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
         recordRequest(1)
     }
     private func loadNextData() {
-        guard self.recordListModel.isLastPage == true else {
+        guard self.recordListModel.isLastPage == false else {
             self.tableView.noMoreData()
             return }
         

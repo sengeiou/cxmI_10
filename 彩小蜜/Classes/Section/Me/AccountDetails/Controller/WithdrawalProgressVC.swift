@@ -72,7 +72,7 @@ class WithdrawalProgressVC: BaseViewController, UITableViewDelegate, UITableView
     }()
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        //guard pageDataModel != nil else { return 0 }
+        guard progressList != nil else { return 3 }
         return progressList.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -92,7 +92,7 @@ class WithdrawalProgressVC: BaseViewController, UITableViewDelegate, UITableView
             cell.bottomLine.isHidden = false
         }
         
-        cell.progressModel = progressList[indexPath.section]
+        //cell.progressModel = progressList[indexPath.section]
         return cell
     }
     
@@ -101,10 +101,10 @@ class WithdrawalProgressVC: BaseViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 0
+        return 0.0
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0
+        return 0.0
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return nil

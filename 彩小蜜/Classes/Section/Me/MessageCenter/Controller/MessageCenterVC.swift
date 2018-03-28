@@ -52,7 +52,7 @@ class MessageCenterVC: BaseViewController, IndicatorInfoProvider, UITableViewDel
         messageListRequest(1)
     }
     private func loadNextData() {
-        guard self.messageModel.isLastPage == true else {
+        guard self.messageModel.isLastPage == false else {
             self.tableView.noMoreData()
             return }
         

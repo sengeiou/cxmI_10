@@ -36,7 +36,7 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
         self.isHidenBar = true
         accountList = []
         self.view.addSubview(tableView)
-        setEmpty(title: "您还没有优惠券！", tableView)
+        setEmpty(title: "暂无记录！", tableView)
         self.tableView.headerRefresh {
             self.loadNewData()
         }
@@ -58,7 +58,7 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
         accountListRequest(1)
     }
     private func loadNextData() {
-        guard self.pageDataModel.isLastPage == true else {
+        guard self.pageDataModel.isLastPage == false else {
             self.tableView.noMoreData()
             return }
         
@@ -192,27 +192,29 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
             let axx = accountList[section - 1]
 
             if acc.addTime == axx.addTime {
-                return 0.1
+                return 0.0
             }else {
                 return orderSectionHeaderHeight
             }
         }
-        return 0.1
+        return 0.0
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.1
+        return 0.0
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: AccountDetailSectionHeaderId)as! AccountDetailSectionHeader
         
-        header.accountDetail = pageDataModel.list[section]
+        header.accountDetail = accountList[section]
         
-        let cell = tableView.cellForRow(at: IndexPath(row: 0, section: section)) as! AccountDetailsCell
-        if section == 0 {
-            cell.line.isHidden = true
-        }else {
-            cell.line.isHidden = false
+        
+        if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: section)) as? AccountDetailsCell {
+            if section == 0 {
+                cell.line.isHidden = true
+            }else {
+                cell.line.isHidden = false
+            }
         }
         
         if section > 0 {
@@ -223,7 +225,10 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
                 
                 return nil
             }else {
-                cell.line.isHidden = true
+                if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: section)) as? AccountDetailsCell {
+                    cell.line.isHidden = true
+                }
+                
                 return header
             }
         }

@@ -60,7 +60,7 @@ class CouponViewController: BaseViewController, IndicatorInfoProvider, UITableVi
         couponListRequest(1)
     }
     private func loadNextData() {
-        guard self.couponListModel.isLastPage == true else {
+        guard self.couponListModel.isLastPage == false else {
             self.tableView.noMoreData()
             return }
         
