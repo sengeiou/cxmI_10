@@ -144,6 +144,8 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
         table.separatorStyle = .none
         footer = AccountDetailFooterView()
         
+        table.estimatedRowHeight = 80 * defaultScale
+        
         table.tableFooterView = footer
         
         table.register(AccountDetailsCell.self, forCellReuseIdentifier: AccountDetailsCellId)
@@ -189,19 +191,20 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
             let axx = accountList[section - 1]
 
             if acc.addTime == axx.addTime {
-                return 0
+                return 0.1
             }else {
-                return 30
+                return orderSectionHeaderHeight
             }
         }
-        return 30
+        return 0.1
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0
+        return 0.1
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: AccountDetailSectionHeaderId)as! AccountDetailSectionHeader
+        
         header.accountDetail = pageDataModel.list[section]
         
         let cell = tableView.cellForRow(at: IndexPath(row: 0, section: section)) as! AccountDetailsCell

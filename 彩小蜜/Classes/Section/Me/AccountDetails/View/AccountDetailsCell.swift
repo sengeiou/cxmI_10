@@ -12,21 +12,28 @@ class AccountDetailsCell: UITableViewCell {
 
     public var accountDetail : AccountDetailModel! {
         didSet{
-            titleLB.text = accountDetail.note
-            detailLB.text = accountDetail.shotTime
+            titleLB.text = accountDetail.processTypeName
+            detailLB.text = accountDetail.note
             moneyLB.text = accountDetail.changeAmount
+            timeLB.text = accountDetail.shotTime
             
+            stateLB.text = accountDetail.status
+            
+            stateLB.isHidden = true
+            stateIcon.isHidden = true
            // 0-全部 1-奖金 2-充值 3-购彩 4-提现 5-红包
             
             switch accountDetail.processType {
             case "1":
-                icon.image = UIImage(named: "")
+                icon.image = UIImage(named: "Thewinning")
             case "2":
-                icon.image = UIImage(named: "")
+                icon.image = UIImage(named: "top-up")
             case "3":
-                icon.image = UIImage(named: "")
+                icon.image = UIImage(named: "Buyticket")
             case "4":
-                icon.image = UIImage(named: "")
+                stateLB.isHidden = false
+                stateIcon.isHidden = false
+                icon.image = UIImage(named: "withdrawal")
             case "5":
                 icon.image = UIImage(named: "")
     
@@ -44,7 +51,7 @@ class AccountDetailsCell: UITableViewCell {
     private var moneyLB: UILabel!
     private var stateLB: UILabel!
     private var stateIcon : UIImageView!
-    
+    private var timeLB: UILabel!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -60,34 +67,39 @@ class AccountDetailsCell: UITableViewCell {
         icon.image = UIImage(named: "足球")
         
         titleLB = UILabel()
-        titleLB.font = Font15
+        titleLB.font = Font14
         titleLB.textColor = Color505050
         titleLB.textAlignment = .left
-        titleLB.text = "微信充值"
+        //titleLB.text = "微信充值"
         
         detailLB = UILabel()
         detailLB.font = Font10
-        detailLB.textColor = ColorA0A0A0
+        detailLB.textColor = Color787878
         detailLB.textAlignment = .left
         detailLB.numberOfLines = 0
-        detailLB.text = """
-        微信支付1.5元
-        余额支付1.5元
-        红包抵扣2.5元
-        14 ：00 ：36
-        """
+//        detailLB.text = """
+//        微信支付1.5元
+//        余额支付1.5元
+//        红包抵扣2.5元
+//        14 ：00 ：36
+//        """
+        
+        timeLB = UILabel()
+        timeLB.font = Font10
+        timeLB.textColor = ColorA0A0A0
+        timeLB.textAlignment = .left
         
         moneyLB = UILabel()
-        moneyLB.font = Font12
+        moneyLB.font = Font14
         moneyLB.textColor = Color505050
         moneyLB.textAlignment = .right
-        moneyLB.text = "+ ¥ 1,000.00"
+        //moneyLB.text = "+ ¥ 1,000.00"
         
         stateLB = UILabel()
-        stateLB.font = Font12
+        stateLB.font = Font14
         stateLB.textColor = ColorA0A0A0
         stateLB.textAlignment = .right
-        stateLB.text = "提现成功"
+        //stateLB.text = "提现成功"
         
         stateIcon = UIImageView()
         stateIcon.image = UIImage(named: "jump")
@@ -99,6 +111,7 @@ class AccountDetailsCell: UITableViewCell {
         self.contentView.addSubview(moneyLB)
         self.contentView.addSubview(stateLB)
         self.contentView.addSubview(stateIcon)
+        self.contentView.addSubview(timeLB)
         
         line.snp.makeConstraints { (make) in
             make.top.equalTo(0)
@@ -108,20 +121,26 @@ class AccountDetailsCell: UITableViewCell {
         }
         
         icon.snp.makeConstraints { (make) in
-            make.top.equalTo(line.snp.bottom).offset(10)
+            make.top.equalTo(line.snp.bottom).offset(12.5 * defaultScale)
             make.left.equalTo(leftSpacing)
-            make.width.height.equalTo(40)
+            make.width.height.equalTo(36 * defaultScale)
         }
         titleLB.snp.makeConstraints { (make) in
-            make.top.equalTo(self.contentView).offset(12)
-            make.left.equalTo(icon.snp.right).offset(10)
-            make.height.equalTo(20)
+            make.top.equalTo(self.contentView).offset(16 * defaultScale)
+            make.left.equalTo(icon.snp.right).offset(8 * defaultScale)
+            make.height.equalTo(14 * defaultScale)
         }
         detailLB.snp.makeConstraints { (make) in
             make.top.equalTo(titleLB.snp.bottom).offset(5)
-            make.bottom.equalTo(self.contentView).offset(-5)
+            make.bottom.equalTo(timeLB.snp.top).offset(-5)
             make.left.right.equalTo(titleLB)
         }
+        timeLB.snp.makeConstraints { (make) in
+            make.bottom.equalTo(self.contentView).offset(-12.5 * defaultScale)
+            make.left.right.equalTo(titleLB)
+            make.height.equalTo(10)
+        }
+        
         moneyLB.snp.makeConstraints { (make) in
             make.height.top.equalTo(titleLB)
             make.right.equalTo(self.contentView).offset(-rightSpacing)
@@ -130,13 +149,13 @@ class AccountDetailsCell: UITableViewCell {
         }
         stateLB.snp.makeConstraints { (make) in
             make.top.equalTo(detailLB)
-            make.right.equalTo(stateIcon.snp.left).offset(-5)
+            make.right.equalTo(stateIcon.snp.left).offset(-1)
             make.width.equalTo(100)
             make.height.equalTo(15)
         }
         stateIcon.snp.makeConstraints { (make) in
             make.centerY.equalTo(stateLB.snp.centerY)
-            make.height.width.equalTo(12)
+            make.height.width.equalTo(11)
             make.right.equalTo(-rightSpacing)
         }
         

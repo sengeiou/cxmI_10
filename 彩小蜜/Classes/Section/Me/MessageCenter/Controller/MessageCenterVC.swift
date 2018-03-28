@@ -25,7 +25,7 @@ class MessageCenterVC: BaseViewController, IndicatorInfoProvider, UITableViewDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setEmpty(title: "xxx", tableView)
+        setEmpty(title: "暂无消息", tableView)
         self.view.addSubview(self.tableView)
         
         messageList = []
@@ -122,7 +122,7 @@ class MessageCenterVC: BaseViewController, IndicatorInfoProvider, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CouponCellHeight
+        return 121 * defaultScale
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

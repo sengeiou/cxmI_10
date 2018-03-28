@@ -13,10 +13,10 @@ class AccountDetailFooterView: UIView {
     public var dataModel : AccountStatisticsModel! {
         didSet{
             let rechargeAtt = NSMutableAttributedString(string: "充值 ")
-            let recharge = NSAttributedString(string: dataModel.rechargeMoney, attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
-            let with = NSAttributedString(string: dataModel.withDrawMoney, attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
-            let buy = NSAttributedString(string: dataModel.buyMoney, attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
-            let reward = NSAttributedString(string: dataModel.rewardMoney, attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+            let recharge = NSAttributedString(string: dataModel.rechargeMoney + "元", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+            let with = NSAttributedString(string: dataModel.withDrawMoney + "元", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+            let buy = NSAttributedString(string: dataModel.buyMoney + "元", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+            let reward = NSAttributedString(string: dataModel.rewardMoney + "元", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
             rechargeAtt.append(recharge)
             rechargeAtt.append(with)
             rechargeAtt.append(buy)
@@ -36,7 +36,7 @@ class AccountDetailFooterView: UIView {
     private var bgView: UIView!
     
     init() {
-        super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 90))
+        super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: loginButHeight + loginButTopSpacing))
         initSubview()
     }
     override func layoutSubviews() {
@@ -45,17 +45,17 @@ class AccountDetailFooterView: UIView {
         bgView.snp.makeConstraints { (make) in
             make.top.equalTo(loginButTopSpacing)
             make.left.right.equalTo(self)
-            make.height.equalTo(60)
+            make.height.equalTo(loginButHeight)
         }
         
         titleLB.snp.makeConstraints { (make) in
             make.top.equalTo(10)
             make.left.equalTo(leftSpacing)
             make.width.equalTo(80)
-            make.height.equalTo(20)
+            make.height.equalTo(10)
         }
         rechargeLB.snp.makeConstraints { (make) in
-            make.top.equalTo(titleLB.snp.bottom).offset(5)
+            make.top.equalTo(titleLB.snp.bottom).offset(1)
             make.left.equalTo(leftSpacing)
             make.right.equalTo(-rightSpacing)
             make.height.equalTo(20)
@@ -98,10 +98,10 @@ class AccountDetailFooterView: UIView {
     
     private func getLB() -> UILabel {
         let lab = UILabel()
-        lab.font = Font12
+        lab.font = Font10
         lab.textColor = Color505050
         lab.textAlignment = .left
-        lab.text = "充值： 1000000000000"
+        //lab.text = "充值： 1000000000000"
         return lab
     }
     

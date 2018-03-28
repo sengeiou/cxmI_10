@@ -10,25 +10,27 @@ import UIKit
 
 class WithdrawalProgressHeader: UIView {
 
+    
+    
     private var moneyLB: UILabel!
     private var stateLB: UILabel!
     
     init() {
-        super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 150))
+        super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 125 * defaultScale))
         initSubview()
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         moneyLB.snp.makeConstraints { (make) in
-            make.top.equalTo(50)
+            make.top.equalTo(29 * defaultScale)
             make.left.right.equalTo(self)
-            make.height.equalTo(30)
+            make.height.equalTo(36 * defaultScale)
         }
         stateLB.snp.makeConstraints { (make) in
-            make.top.equalTo(moneyLB.snp.bottom).offset(5)
+            make.top.equalTo(moneyLB.snp.bottom).offset(1)
             make.left.right.equalTo(moneyLB)
-            make.height.equalTo(15)
+            make.height.equalTo(24 * defaultScale)
         }
     }
     
@@ -36,13 +38,17 @@ class WithdrawalProgressHeader: UIView {
         self.backgroundColor = ColorFFFFFF
         
         moneyLB = UILabel()
-        moneyLB.font = Font19
+        moneyLB.font = Font36
         moneyLB.textColor = ColorEA5504
         moneyLB.textAlignment = .center
         moneyLB.text = "100.00"
         
+        let moneyAtt = NSMutableAttributedString(string: "¥", attributes: [NSAttributedStringKey.font: Font14])
+        
+        
+        
         stateLB = UILabel()
-        stateLB.font = Font13
+        stateLB.font = Font24
         stateLB.textColor = Color787878
         stateLB.textAlignment = .center
         stateLB.text = "处理中"

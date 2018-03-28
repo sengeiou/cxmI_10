@@ -15,7 +15,7 @@ class WithdrawalProgressFooter: UIView {
     private var line : UIView!
     
     init() {
-        super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 90))
+        super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: (44 + 30) * defaultScale))
         initSubview()
     }
     
@@ -29,10 +29,10 @@ class WithdrawalProgressFooter: UIView {
         }
         
         titleLB.snp.makeConstraints { (make) in
-            make.top.equalTo(line.snp.bottom)
+            make.top.equalTo(line.snp.bottom).offset(5)
             make.left.equalTo(leftSpacing)
             make.width.equalTo(60)
-            make.bottom.equalTo(10)
+            make.bottom.equalTo(-5)
         }
         detailLB.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(titleLB)
@@ -49,13 +49,13 @@ class WithdrawalProgressFooter: UIView {
         line.backgroundColor = ColorF4F4F4
         
         titleLB = UILabel()
-        titleLB.font = Font19
+        titleLB.font = Font14
         titleLB.textColor = Color505050
-        titleLB.textAlignment = .center
+        titleLB.textAlignment = .left
         titleLB.text = "提取到"
         
         detailLB = UILabel()
-        detailLB.font = Font13
+        detailLB.font = Font14
         detailLB.textColor = ColorA0A0A0
         detailLB.textAlignment = .right
         detailLB.text = "招商银行（尾号1234）"

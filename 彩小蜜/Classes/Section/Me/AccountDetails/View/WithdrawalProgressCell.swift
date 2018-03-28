@@ -24,8 +24,8 @@ class WithdrawalProgressCell: UITableViewCell {
         super.layoutSubviews()
         icon.snp.makeConstraints { (make) in
             make.centerY.equalTo(self.contentView.snp.centerY)
-            make.left.equalTo(50)
-            make.width.height.equalTo(14)
+            make.left.equalTo(61 * defaultScale)
+            make.width.height.equalTo(24 * defaultScale)
         }
         topLine.snp.makeConstraints { (make) in
             make.top.equalTo(0)
@@ -53,7 +53,7 @@ class WithdrawalProgressCell: UITableViewCell {
     }
     private func initSubview() {
         icon = UIImageView()
-        icon.image = UIImage(named: "chargesure")
+        icon.image = UIImage(named: "Mentionmoneysteps_sel")
         
         topLine = UIView()
         topLine.backgroundColor = Color787878
@@ -68,7 +68,7 @@ class WithdrawalProgressCell: UITableViewCell {
         titleLB.text = "提现成功"
         
         timeLB = UILabel()
-        timeLB.font = Font12
+        timeLB.font = Font10
         timeLB.textColor = ColorA0A0A0
         timeLB.textAlignment = .left
         timeLB.text = "14: 00: 36"

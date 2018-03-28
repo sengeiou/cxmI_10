@@ -70,7 +70,7 @@ class MeComplaintVC: BaseViewController {
         bgView.snp.makeConstraints { (make) in
             make.top.equalTo(SafeAreaTopHeight)
             make.left.right.equalTo(0)
-            make.height.equalTo(220)
+            make.height.equalTo(240 * defaultScale)
         }
         
         titleLB.snp.makeConstraints { (make) in

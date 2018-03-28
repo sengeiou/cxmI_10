@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-fileprivate let defaultScale = screenWidth / 375
+let defaultScale = screenWidth / 375
 
 /// 距离屏幕左侧间隔
 let leftSpacing = 17.5
@@ -24,11 +24,11 @@ let textFieldHeight = 40
 /// label高度
 let labelHeight = 20
 /// 按钮高度
-let buttonHeight = 44 * defaultScale
+let buttonHeight : CGFloat = 44 * defaultScale
 /// 登录等 按钮的高度
-let loginButHeight = 44 * defaultScale
+let loginButHeight : CGFloat = 44 * defaultScale
 /// 登录按钮距离上方的高度
-let loginButTopSpacing = 30
+let loginButTopSpacing : CGFloat = 30 * defaultScale
 ///
 let loginTextFieldHeight = 55
 /// banner高度

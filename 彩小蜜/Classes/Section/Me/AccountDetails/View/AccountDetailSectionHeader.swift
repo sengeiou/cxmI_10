@@ -35,8 +35,8 @@ class AccountDetailSectionHeader: UITableViewHeaderFooterView {
     
     private func initSubview() {
         title = UILabel()
-        title.font = Font15
-        title.textColor = Color787878
+        title.font = Font14
+        title.textColor = ColorA0A0A0
         title.textAlignment = .left
         
         self.contentView.addSubview(title)
