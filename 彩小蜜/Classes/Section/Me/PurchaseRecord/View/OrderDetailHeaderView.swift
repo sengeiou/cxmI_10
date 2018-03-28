@@ -23,9 +23,18 @@ class OrderDetailHeaderView: UIView {
             
             titleLB.text = orderInfo.lotteryClassifyName
             moneyLB.attributedText = moneyAtt
-            state.text = orderInfo.processResult
-            thankLB.text = orderInfo.processStatusDesc
             programmeLB.text = orderInfo.orderStatusDesc
+            forecastMoney.text = orderInfo.forecastMoney
+            
+            if orderInfo.orderStatus == "5" {
+                setWinMoney()
+                winMoney.text = "¥ " + orderInfo.processStatusDesc
+                state.text = orderInfo.orderStatusDesc
+                state.textColor = ColorEA5504
+            }else {
+                thankLB.text = orderInfo.processStatusDesc
+                state.text = orderInfo.processResult
+            }
             
         }
     }
@@ -35,9 +44,13 @@ class OrderDetailHeaderView: UIView {
     private var moneyLB : UILabel!
     private var line : UIView!
     private var state : UILabel!
+    private var forecastMoney: UILabel!
     private var programmeTitle : UILabel!
     private var programmeLB : UILabel!
     private var thankLB : UILabel!
+    
+    private var winTitle: UILabel!
+    private var winMoney: UILabel!
     
     init() {
         super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: OrderHeaderViewHeight))
@@ -74,6 +87,11 @@ class OrderDetailHeaderView: UIView {
             make.right.equalTo(self).offset(-26)
             make.width.equalTo(100)
         }
+        forecastMoney.snp.makeConstraints { (make) in
+            make.top.equalTo(state.snp.bottom).offset(1)
+            make.bottom.equalTo(line.snp.top).offset(-1)
+            make.right.width.equalTo(state)
+        }
         programmeTitle.snp.makeConstraints { (make) in
             make.top.equalTo(line.snp.bottom).offset(10)
             make.left.equalTo(self).offset(26)
@@ -104,19 +122,26 @@ class OrderDetailHeaderView: UIView {
         titleLB.font = Font15
         titleLB.textColor = Color505050
         titleLB.textAlignment = .left
-        titleLB.text = "精彩足球"
+        //titleLB.text = "精彩足球"
         
         moneyLB = UILabel()
         moneyLB.font = Font12
         moneyLB.textColor = Color787878
         moneyLB.textAlignment = .left
-        moneyLB.text = "¥ 25.00"
+        //moneyLB.text = "¥ 25.00"
         
         state = UILabel()
         state.font = Font15
         state.textColor = Color505050
         state.textAlignment = .right
-        state.text = "等待开奖"
+        //state.text = "等待开奖"
+        
+        forecastMoney = UILabel()
+        forecastMoney.font = Font10
+        forecastMoney.textColor = ColorA0A0A0
+        forecastMoney.textAlignment = .right
+        
+        
         
         line = UIView()
         line.backgroundColor = ColorF4F4F4
@@ -131,13 +156,13 @@ class OrderDetailHeaderView: UIView {
         programmeLB.font = Font14
         programmeLB.textColor = Color505050
         programmeLB.textAlignment = .left
-        programmeLB.text = "出票成功"
+        
         
         thankLB = UILabel()
         thankLB.font = Font14
         thankLB.textColor = Color505050
         thankLB.textAlignment = .right
-        thankLB.text = "感谢您助力公益事业"
+       
         
         self.addSubview(icon)
         self.addSubview(titleLB)
@@ -147,6 +172,36 @@ class OrderDetailHeaderView: UIView {
         self.addSubview(programmeLB)
         self.addSubview(line)
         self.addSubview(thankLB)
+        self.addSubview(forecastMoney)
+    }
+    
+    private func setWinMoney() {
+        winMoney = UILabel()
+        winMoney.font = Font12
+        winMoney.textColor = ColorEA5504
+        winMoney.textAlignment = .right
+        
+        
+        winTitle = UILabel()
+        winTitle.font = Font12
+        winTitle.textColor = ColorA0A0A0
+        winTitle.textAlignment = .right
+        winTitle.text = "中奖金额"
+        
+        self.addSubview(winMoney)
+        self.addSubview(winTitle)
+        
+        winTitle.snp.makeConstraints { (make) in
+            make.top.equalTo(line.snp.bottom).offset(5)
+            make.right.equalTo(-rightSpacing)
+            make.width.equalTo(100)
+        }
+        winMoney.snp.makeConstraints { (make) in
+            make.top.equalTo(winTitle.snp.bottom).offset(1)
+            make.bottom.equalTo(-5)
+            make.right.equalTo(winTitle)
+            make.left.equalTo(programmeTitle.snp.right).offset(1)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -20,7 +20,7 @@ class MeComplaintVC: BaseViewController {
     // MARK: - 属性
     private var titleLB : UILabel!
     private var sendBut : UIButton! // 发送
-    private var textView : UITextView! // 投诉输入
+    private var textView : HXTextView! // 投诉输入
     private var bgView: UIView!
     
     // MARK: - 生命周期
@@ -45,11 +45,9 @@ class MeComplaintVC: BaseViewController {
             请将您对我们产品的反馈内容输入下面输入框中，我们会认真对待您的每一条建议。谢谢您的反馈。如果您有在使用上不清楚的地方，请点击右上角联系人工客服进行咨询。
         """
         
-        textView = UITextView()
-        textView.layer.borderWidth = 1
-        textView.layer.borderColor = ColorC8C8C8.cgColor
-        textView.layer.cornerRadius = 5
-        textView.backgroundColor = ColorFFFFFF
+        textView = HXTextView()
+        textView.limitNumber = 140
+        
         
         
         sendBut = UIButton(type: .custom)
@@ -72,42 +70,32 @@ class MeComplaintVC: BaseViewController {
         bgView.snp.makeConstraints { (make) in
             make.top.equalTo(SafeAreaTopHeight)
             make.left.right.equalTo(0)
-            make.height.equalTo(260)
+            make.height.equalTo(220)
         }
         
         titleLB.snp.makeConstraints { (make) in
             make.height.equalTo(100)
-            make.left.equalTo(10)
-            make.right.equalTo(-10)
-            make.top.equalTo(20)
+            make.left.equalTo(leftSpacing)
+            make.right.equalTo(-rightSpacing)
+            make.top.equalTo(bgView).offset(1)
         }
         textView.snp.makeConstraints { (make) in
-            make.height.equalTo(100)
+            make.height.equalTo(120)
             make.left.right.equalTo(titleLB)
             make.top.equalTo(titleLB.snp.bottom).offset(10)
         }
         sendBut.snp.makeConstraints { (make) in
-            make.height.equalTo(loginButTopSpacing)
-            make.left.equalTo(self.view).offset(10)
-            make.right.equalTo(self.view).offset(-10)
-            make.top.equalTo(textView.snp.bottom).offset(100)
+            make.height.equalTo(loginButHeight)
+            make.left.equalTo(self.view).offset(leftSpacing)
+            make.right.equalTo(self.view).offset(-rightSpacing)
+            make.top.equalTo(bgView.snp.bottom).offset(loginButTopSpacing)
         }
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

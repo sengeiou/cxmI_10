@@ -100,12 +100,12 @@
                   moduleName = "&#x5f69;&#x5c0f;&#x871c;"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/HX/Desktop/%E5%BD%A9%E5%B0%8F%E7%A7%98/%E5%BD%A9%E5%B0%8F%E8%9C%9C/Classes/Section/Login/Controller/VCodeLoginViewController.swift"
-                  timestampString = "543843256.174142"
+                  timestampString = "543902587.023797"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "122"
                   endingLineNumber = "122"
-                  offsetFromSymbolStart = "3080">
+                  offsetFromSymbolStart = "4242">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -115,12 +115,12 @@
                   moduleName = "&#x5f69;&#x5c0f;&#x871c;"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/HX/Desktop/%E5%BD%A9%E5%B0%8F%E7%A7%98/%E5%BD%A9%E5%B0%8F%E8%9C%9C/Classes/Section/Login/Controller/VCodeLoginViewController.swift"
-                  timestampString = "543843256.1762331"
+                  timestampString = "543902587.029619"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "123"
                   endingLineNumber = "123"
-                  offsetFromSymbolStart = "24">
+                  offsetFromSymbolStart = "18">
                </Location>
             </Locations>
          </BreakpointContent>

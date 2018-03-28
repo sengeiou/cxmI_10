@@ -51,6 +51,8 @@
 		E562989F2050E04C006397EA /* ValidateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E562989E2050E04C006397EA /* ValidateProtocol.swift */; };
 		E56298A32050E712006397EA /* AlertProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56298A22050E712006397EA /* AlertProtocol.swift */; };
 		E56298BD20513429006397EA /* AuthenticationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56298BC20513429006397EA /* AuthenticationVC.swift */; };
+		E567636A206B2FDA00E2D9A8 /* HHTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5676369206B2FDA00E2D9A8 /* HHTextView.swift */; };
+		E567636C206B375A00E2D9A8 /* HXTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E567636B206B375A00E2D9A8 /* HXTextView.swift */; };
 		E56CE8022069DFC20090A1B5 /* AccountDetailSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56CE8012069DFC20090A1B5 /* AccountDetailSectionHeader.swift */; };
 		E56CE8042069E2340090A1B5 /* AccountDetailFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56CE8032069E2340090A1B5 /* AccountDetailFooterView.swift */; };
 		E56CE8062069E5830090A1B5 /* AccountDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56CE8052069E5830090A1B5 /* AccountDetailModel.swift */; };
@@ -197,6 +199,8 @@
 		E562989E2050E04C006397EA /* ValidateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateProtocol.swift; sourceTree = "<group>"; };
 		E56298A22050E712006397EA /* AlertProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertProtocol.swift; sourceTree = "<group>"; };
 		E56298BC20513429006397EA /* AuthenticationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationVC.swift; sourceTree = "<group>"; };
+		E5676369206B2FDA00E2D9A8 /* HHTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HHTextView.swift; sourceTree = "<group>"; };
+		E567636B206B375A00E2D9A8 /* HXTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HXTextView.swift; sourceTree = "<group>"; };
 		E56CE8012069DFC20090A1B5 /* AccountDetailSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailSectionHeader.swift; sourceTree = "<group>"; };
 		E56CE8032069E2340090A1B5 /* AccountDetailFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailFooterView.swift; sourceTree = "<group>"; };
 		E56CE8052069E5830090A1B5 /* AccountDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailModel.swift; sourceTree = "<group>"; };
@@ -1110,6 +1114,8 @@
 			isa = PBXGroup;
 			children = (
 				E5973E26204E3CB0006461CE /* CountdownButton.swift */,
+				E5676369206B2FDA00E2D9A8 /* HHTextView.swift */,
+				E567636B206B375A00E2D9A8 /* HXTextView.swift */,
 			);
 			path = CustomControl;
 			sourceTree = "<group>";
@@ -1574,6 +1580,7 @@
 				E56CE80E206A22240090A1B5 /* WithdrawalProgressCell.swift in Sources */,
 				E5973E20204E34A3006461CE /* FontConstraint.swift in Sources */,
 				E56CE812206A23070090A1B5 /* WithdrawalProgressHeader.swift in Sources */,
+				E567636A206B2FDA00E2D9A8 /* HHTextView.swift in Sources */,
 				E5973E33204FC1D9006461CE /* MeFooterView.swift in Sources */,
 				E581F37C2063573C002AB9F7 /* PaymentNetAPIManager.swift in Sources */,
 				E57376022046B37900148622 /* MainTabBarController.swift in Sources */,
@@ -1617,6 +1624,7 @@
 				E58B57C7205676EC0025E2F1 /* LotteryNetAPIManager.swift in Sources */,
 				E56CE80A2069F4080090A1B5 /* AccountListModel.swift in Sources */,
 				E51F9A5A205A122000AB8A21 /* VcodeTextFieldCell.swift in Sources */,
+				E567636C206B375A00E2D9A8 /* HXTextView.swift in Sources */,
 				E50B907D20526BB200417BFE /* RechargePaymentCell.swift in Sources */,
 				E562989C2050D1DD006397EA /* RegisterViewController.swift in Sources */,
 				E59CB3D9205BA11A0086DD0E /* HomeScrollBarCell.swift in Sources */,

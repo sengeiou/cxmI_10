@@ -24,6 +24,7 @@ struct OrderInfoModel: HandyJSON {
     var processStatusDesc: String!
     var programmeSn: String!
     var ticketTime: String!
+    var forecastMoney: String!
 }
 
 struct MatchInfo: HandyJSON {
