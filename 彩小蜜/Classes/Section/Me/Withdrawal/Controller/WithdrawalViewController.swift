@@ -13,8 +13,23 @@ class WithdrawalViewController: BaseViewController {
     //MARK: - 点击事件
     // 提交
     @objc private func drawMoney(_ sender: UIButton) {
-        guard amountOfMoney.text != nil else { return }
-        guard drawDataModel.defaultBankCardLabel != nil, drawDataModel.defaultBankCardLabel != "" else { return }
+        
+        guard drawDataModel.defaultBankCardLabel != nil, drawDataModel.defaultBankCardLabel != "" else {
+            showHUD(message: "请添加收款银行卡")
+            return
+        }
+        
+        guard let draw = amountOfMoney.text else {
+            showHUD(message: "请输入提现金额")
+            return }
+        
+        guard let drawAmount = Int(draw), let amount = Int(drawDataModel.userMoney) else { return }
+        guard drawAmount > amount else {
+            showHUD(message: "您输入的金额已超过可提现金额")
+            return
+        }
+       
+        drawRequest()
     }
     // 全部提现
     @objc private func allDraw(_ sender: UIButton) {
@@ -51,7 +66,7 @@ class WithdrawalViewController: BaseViewController {
     }
     //MARK: - 网络请求
     //提现
-    private func drawRequest(money: String) {
+    private func drawRequest() {
         
     }
     //提现信息
@@ -164,7 +179,7 @@ class WithdrawalViewController: BaseViewController {
         bgView.addSubview(bankCardLB)
         bgView.addSubview(bankCardBut)
         bgView.addSubview(amountOfMoney)
-        bgView.addSubview(drawMoneyBut)
+        self.view.addSubview(drawMoneyBut)
         self.view.addSubview(instructions)
         bgView.addSubview(hLine)
         bgView.addSubview(bankTitle)
