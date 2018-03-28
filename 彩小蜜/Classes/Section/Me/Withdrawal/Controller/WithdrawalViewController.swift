@@ -13,11 +13,12 @@ class WithdrawalViewController: BaseViewController {
     //MARK: - 点击事件
     // 提交
     @objc private func drawMoney(_ sender: UIButton) {
-        
+        guard amountOfMoney.text != nil else { return }
+        guard drawDataModel.defaultBankCardLabel != nil, drawDataModel.defaultBankCardLabel != "" else { return }
     }
     // 全部提现
     @objc private func allDraw(_ sender: UIButton) {
-        amountOfMoney.text = "888"
+        amountOfMoney.text = drawDataModel.userMoney
     }
     // 管理
     @objc private func administrate(_ sender: UIButton) {

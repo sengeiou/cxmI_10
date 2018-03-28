@@ -13,4 +13,6 @@ struct WithDrawDataModel: HandyJSON {
     var showMsg: String!
     var defaultBankCardLabel: String!
     var userMoney: String!
+    var userBankId: String!
+    var bankName: String!
 }
