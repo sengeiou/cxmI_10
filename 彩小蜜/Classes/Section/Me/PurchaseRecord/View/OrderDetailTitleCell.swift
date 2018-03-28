@@ -165,7 +165,7 @@ class OrderDetailTitleCell: UITableViewCell {
         resultLB.textAlignment = .right
         
         oddsIcon = UIImageView()
-        oddsIcon.image = UIImage(named: "info")
+        oddsIcon.image = UIImage(named: "guess")
         
         self.contentView.addSubview(line)
         self.contentView.addSubview(sectionTitle)

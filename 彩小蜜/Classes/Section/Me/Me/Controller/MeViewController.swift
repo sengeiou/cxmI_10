@@ -205,7 +205,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
                 cell.icon.image = UIImage(named: "coupon")
                 cell.title.text = "我的卡券"
             case 3:
-                cell.icon.image = UIImage(named: "coupon")
+                cell.icon.image = UIImage(named: "nformationsecurity")
                 cell.title.text = "消息中心"
             default :
                 break
