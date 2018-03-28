@@ -93,7 +93,7 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
         super.viewDidLoad()
         self.view.backgroundColor = ColorF4F4F4
         setNavigation()
-        self.isHidenBar = false
+        self.isHidenBar = true
     }
 
     private func setNavigation() {
@@ -126,15 +126,9 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
     private func setLiftButtonItem() {
         
         let leftBut = UIButton(type: .custom)
-        leftBut.setTitle("返回", for: .normal)
+        leftBut.frame = CGRect(x: 0, y: 0, width: 16, height: 16)
         
-        leftBut.titleLabel?.font = Font15
-        
-        leftBut.contentEdgeInsets = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
-        
-        leftBut.setTitleColor(UIColor.black, for: .normal)
-        
-        leftBut.setImage(UIImage(named:"ret"), for: .normal)
+        leftBut.setBackgroundImage(UIImage(named:"ret"), for: .normal)
         
         leftBut.addTarget(self, action: #selector(back(_:)), for: .touchUpInside)
         

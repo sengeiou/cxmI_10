@@ -32,6 +32,10 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.isHidenBar = false
+    }
     //MARK: - 网络请求
     
     

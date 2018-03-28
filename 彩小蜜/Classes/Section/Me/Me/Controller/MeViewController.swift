@@ -93,12 +93,12 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         hideBackBut()
         self.navigationItem.title = "彩小秘 · 我的"
         self.view.addSubview(tableView)
-        self.isHidenBar = false
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        userInfoRequest()
+        self.isHidenBar = false
     }
     
     override func viewDidLayoutSubviews() {
