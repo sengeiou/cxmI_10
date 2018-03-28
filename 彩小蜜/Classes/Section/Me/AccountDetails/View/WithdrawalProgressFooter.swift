@@ -10,6 +10,12 @@ import UIKit
 
 class WithdrawalProgressFooter: UIView {
 
+    public var progressModel: ProgressModel! {
+        didSet{
+            detailLB.text = progressModel.card
+        }
+    }
+    
     private var titleLB: UILabel!
     private var detailLB: UILabel!
     private var line : UIView!

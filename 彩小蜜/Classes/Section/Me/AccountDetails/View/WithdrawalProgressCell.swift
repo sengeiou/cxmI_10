@@ -10,7 +10,7 @@ import UIKit
 
 class WithdrawalProgressCell: UITableViewCell {
 
-    public var progressModel: ProgressModel! {
+    public var progressModel: ProgressLogModel! {
         didSet{
             titleLB.text = progressModel.logName
             timeLB.text = progressModel.logTime

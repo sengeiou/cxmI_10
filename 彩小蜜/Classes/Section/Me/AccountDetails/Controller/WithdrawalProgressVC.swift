@@ -41,6 +41,8 @@ class WithdrawalProgressVC: BaseViewController, UITableViewDelegate, UITableView
             .mapObject(type: ProgressModel.self)
             .subscribe(onNext: { (data) in
                 weakSelf?.progressModel = data
+                weakSelf?.header.progressModel = data
+                weakSelf?.footer.progressModel = data
                 weakSelf?.tableView.reloadData()
             }, onError: { (error) in
                 guard let err = error as? HXError else { return }

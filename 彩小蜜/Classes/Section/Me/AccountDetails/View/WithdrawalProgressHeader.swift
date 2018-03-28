@@ -10,7 +10,12 @@ import UIKit
 
 class WithdrawalProgressHeader: UIView {
 
-    
+    public var progressModel: ProgressModel! {
+        didSet{
+            moneyLB.text = progressModel.amount
+            stateLB.text = progressModel.status
+        }
+    }
     
     private var moneyLB: UILabel!
     private var stateLB: UILabel!
