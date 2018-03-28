@@ -40,8 +40,8 @@ class MeHeaderView: UIView {
 //            let url = URL(string: userInfo.headimg)
 //            self.icon.kf.setImage(with: url)
             
-            self.accountBalanceLB.attributedText = getBalanceText(str: userInfo.userMoney )
-            self.withdrawalBalanceLB.attributedText = getBalanceText(str: userInfo.userMoneyLimit)
+            self.accountBalanceLB.attributedText = getBalanceText(str: userInfo.totalMoney)
+            self.withdrawalBalanceLB.attributedText = getBalanceText(str: userInfo.userMoney)
 
             setupAuth()
         }
@@ -49,7 +49,14 @@ class MeHeaderView: UIView {
     
     private func getBalanceText(str : String?) -> NSAttributedString {
     
-        let attStr = NSMutableAttributedString(string: str != nil ? str! : "0.00")
+        var attStr : NSMutableAttributedString!
+        
+        if str != nil , str != "" {
+            attStr = NSMutableAttributedString(string: str!)
+        }else {
+            attStr = NSMutableAttributedString(string: "0.00")
+        }
+        
         let 元 = NSAttributedString(string: "元", attributes: [NSAttributedStringKey.font: Font14])
         attStr.append(元)
         return attStr

@@ -81,8 +81,6 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    
-    
     //MARK: - 属性
     private var headerView: MeHeaderView!
     private var footerView: MeFooterView!
@@ -98,6 +96,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        userInfoRequest()
         self.isHidenBar = false
     }
     

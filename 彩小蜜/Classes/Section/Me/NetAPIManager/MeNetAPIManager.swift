@@ -44,6 +44,8 @@ enum MeNetAPIManager {
     case accountStatistics
     /// 消息列表 0通知，1消息 
     case messageList (msgType: String, pageNum: Int)
+    /// 提现进度
+    case withdrawList (withdawSn: String)
 }
 
 extension MeNetAPIManager : TargetType {
@@ -92,7 +94,8 @@ extension MeNetAPIManager : TargetType {
             return "/user/message/list"
         case .accountStatistics:
             return "/user/account/countMoneyCurrentMonth"
-            
+        case .withdrawList:
+            return "/payment/withdraw/list"
             
             
         }
@@ -145,7 +148,8 @@ extension MeNetAPIManager : TargetType {
             dic["msgType"] = msgType
             dic["pageNum"] = pageNum
             dic["pageSize"] = "20"
-            
+        case .withdrawList(let withdawSn):
+            dic["withdawSn"] = withdawSn
             
             
         default:
