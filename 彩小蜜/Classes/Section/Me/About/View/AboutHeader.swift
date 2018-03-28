@@ -15,7 +15,7 @@ class AboutHeader: UIView {
     
     
     init() {
-        super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 150))
+        super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 192 * defaultScale))
         
         initSubview()
     }
@@ -23,9 +23,9 @@ class AboutHeader: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         icon.snp.makeConstraints { (make) in
-            make.top.equalTo(40)
-            make.width.equalTo(80)
-            make.height.equalTo(50)
+            make.top.equalTo(49 * defaultScale)
+            make.width.equalTo(162 * defaultScale)
+            make.height.equalTo(46 * defaultScale)
             make.centerX.equalTo(self.snp.centerX)
         }
         versionLB.snp.makeConstraints { (make) in
@@ -39,7 +39,7 @@ class AboutHeader: UIView {
         self.backgroundColor = ColorFFFFFF
         
         icon = UIImageView()
-        icon.image = UIImage(named: "recording")
+        icon.image = UIImage(named: "Versionofthelogo")
         
         versionLB = UILabel()
         versionLB.font = Font10

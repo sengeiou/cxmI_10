@@ -24,27 +24,30 @@ class AboutFooter: UIView {
         super.layoutSubviews()
         serviceLB.snp.makeConstraints { (make) in
             make.top.equalTo(150)
-            make.left.equalTo(80)
+            make.left.equalTo(webLB)
             make.right.equalTo(-rightSpacing)
             make.height.equalTo(20)
         }
         webLB.snp.makeConstraints { (make) in
             make.top.equalTo(serviceLB.snp.bottom).offset(1)
-            make.left.right.height.equalTo(serviceLB)
+            //make.left.right.height.equalTo(serviceLB)
+            make.centerX.equalTo(self.snp.centerX)
+            make.height.equalTo(20)
         }
     }
     private func initSubview() {
         serviceLB = UILabel()
-        serviceLB.font = Font10
+        serviceLB.font = Font13
         serviceLB.textColor = ColorEA5504
         serviceLB.textAlignment = .left
         serviceLB.text = "客服热线： 400-000-1234"
         
         webLB = UILabel()
-        webLB.font = Font10
+        webLB.font = Font13
         webLB.textColor = ColorEA5504
         webLB.textAlignment = .left
         webLB.text = "官网： http://www.caixiaomi.com"
+        webLB.sizeToFit()
         
         self.addSubview(serviceLB)
         self.addSubview(webLB)
