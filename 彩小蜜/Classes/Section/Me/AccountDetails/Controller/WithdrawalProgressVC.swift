@@ -14,8 +14,11 @@ class WithdrawalProgressVC: BaseViewController, UITableViewDelegate, UITableView
     //MARK: - 点击事件
     //MARK: - 属性
     
+    public var withdawalSn : String!
+    
     private var header : WithdrawalProgressHeader!
     private var footer : WithdrawalProgressFooter!
+    private var progressList: [ProgressModel]!
     
     //MARK: - 生命周期
     override func viewDidLoad() {
@@ -31,6 +34,24 @@ class WithdrawalProgressVC: BaseViewController, UITableViewDelegate, UITableView
         }
     }
     //MARK: - 网络请求
+    private func progressRequest() {
+        weak var weakSelf = self
+        _ = userProvider.rx.request(.withdrawList(withdawSn: withdawalSn))
+            .asObservable()
+            .mapArray(type: ProgressModel.self)
+            .subscribe(onNext: { (data) in
+                weakSelf?.progressList = data
+                weakSelf?.tableView.reloadData()
+            }, onError: { (error) in
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    print(code!)
+                    self.showHUD(message: msg!)
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil )
+    }
     //MARK: -
    
     //MARK: - 懒加载
@@ -52,7 +73,7 @@ class WithdrawalProgressVC: BaseViewController, UITableViewDelegate, UITableView
     
     func numberOfSections(in tableView: UITableView) -> Int {
         //guard pageDataModel != nil else { return 0 }
-        return 3
+        return progressList.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
@@ -71,7 +92,7 @@ class WithdrawalProgressVC: BaseViewController, UITableViewDelegate, UITableView
             cell.bottomLine.isHidden = false
         }
         
-        
+        cell.progressModel = progressList[indexPath.section]
         return cell
     }
     

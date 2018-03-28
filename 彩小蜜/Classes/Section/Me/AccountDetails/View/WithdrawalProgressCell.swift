@@ -10,6 +10,20 @@ import UIKit
 
 class WithdrawalProgressCell: UITableViewCell {
 
+    public var progressModel: ProgressModel! {
+        didSet{
+            titleLB.text = progressModel.logName
+            timeLB.text = progressModel.logTime
+            
+            switch progressModel.logCode {
+            case "0":
+                break
+            default: break
+                
+            }
+        }
+    }
+    
     private var icon : UIImageView!
     public var topLine : UIView!
     public var bottomLine: UIView!

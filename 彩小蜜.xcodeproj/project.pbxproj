@@ -53,6 +53,7 @@
 		E56298BD20513429006397EA /* AuthenticationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56298BC20513429006397EA /* AuthenticationVC.swift */; };
 		E567636A206B2FDA00E2D9A8 /* HHTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5676369206B2FDA00E2D9A8 /* HHTextView.swift */; };
 		E567636C206B375A00E2D9A8 /* HXTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E567636B206B375A00E2D9A8 /* HXTextView.swift */; };
+		E567636E206B9D6D00E2D9A8 /* ProgressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E567636D206B9D6D00E2D9A8 /* ProgressModel.swift */; };
 		E56CE8022069DFC20090A1B5 /* AccountDetailSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56CE8012069DFC20090A1B5 /* AccountDetailSectionHeader.swift */; };
 		E56CE8042069E2340090A1B5 /* AccountDetailFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56CE8032069E2340090A1B5 /* AccountDetailFooterView.swift */; };
 		E56CE8062069E5830090A1B5 /* AccountDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56CE8052069E5830090A1B5 /* AccountDetailModel.swift */; };
@@ -201,6 +202,7 @@
 		E56298BC20513429006397EA /* AuthenticationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationVC.swift; sourceTree = "<group>"; };
 		E5676369206B2FDA00E2D9A8 /* HHTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HHTextView.swift; sourceTree = "<group>"; };
 		E567636B206B375A00E2D9A8 /* HXTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HXTextView.swift; sourceTree = "<group>"; };
+		E567636D206B9D6D00E2D9A8 /* ProgressModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressModel.swift; sourceTree = "<group>"; };
 		E56CE8012069DFC20090A1B5 /* AccountDetailSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailSectionHeader.swift; sourceTree = "<group>"; };
 		E56CE8032069E2340090A1B5 /* AccountDetailFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailFooterView.swift; sourceTree = "<group>"; };
 		E56CE8052069E5830090A1B5 /* AccountDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailModel.swift; sourceTree = "<group>"; };
@@ -577,6 +579,7 @@
 				E56CE8052069E5830090A1B5 /* AccountDetailModel.swift */,
 				E56CE8092069F4080090A1B5 /* AccountListModel.swift */,
 				E56CE815206A3FBF0090A1B5 /* AccountStatisticsModel.swift */,
+				E567636D206B9D6D00E2D9A8 /* ProgressModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1593,6 +1596,7 @@
 				E5103256206502DA00A0156C /* PurchaseRecordCell.swift in Sources */,
 				E56CE8082069E63E0090A1B5 /* BasePageModel.swift in Sources */,
 				E58B57B4205622950025E2F1 /* BankCardViewController.swift in Sources */,
+				E567636E206B9D6D00E2D9A8 /* ProgressModel.swift in Sources */,
 				E5D8ABB4206737FF002D688B /* OrderDetailVC.swift in Sources */,
 				E56CE81C206A47930090A1B5 /* AboutFooter.swift in Sources */,
 				E51F9A5E205A29D500AB8A21 /* LoginFooterView.swift in Sources */,
