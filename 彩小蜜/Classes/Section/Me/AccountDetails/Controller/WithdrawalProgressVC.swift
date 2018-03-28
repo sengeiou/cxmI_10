@@ -18,14 +18,14 @@ class WithdrawalProgressVC: BaseViewController, UITableViewDelegate, UITableView
     
     private var header : WithdrawalProgressHeader!
     private var footer : WithdrawalProgressFooter!
-    private var progressList: [ProgressModel]!
+    private var progressModel: ProgressModel!
     
     //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "彩小秘 · 提现详情"
         self.view.addSubview(tableView)
-        
+        progressRequest()
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -38,9 +38,9 @@ class WithdrawalProgressVC: BaseViewController, UITableViewDelegate, UITableView
         weak var weakSelf = self
         _ = userProvider.rx.request(.withdrawList(withdawSn: withdawalSn))
             .asObservable()
-            .mapArray(type: ProgressModel.self)
+            .mapObject(type: ProgressModel.self)
             .subscribe(onNext: { (data) in
-                weakSelf?.progressList = data
+                weakSelf?.progressModel = data
                 weakSelf?.tableView.reloadData()
             }, onError: { (error) in
                 guard let err = error as? HXError else { return }
@@ -72,8 +72,8 @@ class WithdrawalProgressVC: BaseViewController, UITableViewDelegate, UITableView
     }()
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        guard progressList != nil else { return 3 }
-        return progressList.count
+        guard progressModel != nil else { return 3 }
+        return progressModel.userWithdrawLogs.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
@@ -92,7 +92,7 @@ class WithdrawalProgressVC: BaseViewController, UITableViewDelegate, UITableView
             cell.bottomLine.isHidden = false
         }
         
-        //cell.progressModel = progressList[indexPath.section]
+        cell.progressModel = progressModel.userWithdrawLogs[indexPath.section]
         return cell
     }
     
