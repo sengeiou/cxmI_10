@@ -131,6 +131,8 @@
 		E5D5A36D206CC17B00FC865D /* HomePlayListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D5A36C206CC17B00FC865D /* HomePlayListModel.swift */; };
 		E5D5A36F206CC3BD00FC865D /* HomeMatchListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D5A36E206CC3BD00FC865D /* HomeMatchListModel.swift */; };
 		E5D5A377206D034100FC865D /* FootballMatchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D5A376206D034100FC865D /* FootballMatchVC.swift */; };
+		E5D5A379206D191C00FC865D /* FootballTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D5A378206D191C00FC865D /* FootballTopView.swift */; };
+		E5D5A37B206D193100FC865D /* FootballBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D5A37A206D193100FC865D /* FootballBottomView.swift */; };
 		E5D8ABB4206737FF002D688B /* OrderDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D8ABB3206737FF002D688B /* OrderDetailVC.swift */; };
 		E5D8ABB6206739CF002D688B /* OrderDetailTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D8ABB5206739CF002D688B /* OrderDetailTitleCell.swift */; };
 		E5D8ABB820674283002D688B /* OrderDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D8ABB720674283002D688B /* OrderDetailCell.swift */; };
@@ -291,6 +293,8 @@
 		E5D5A36C206CC17B00FC865D /* HomePlayListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePlayListModel.swift; sourceTree = "<group>"; };
 		E5D5A36E206CC3BD00FC865D /* HomeMatchListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMatchListModel.swift; sourceTree = "<group>"; };
 		E5D5A376206D034100FC865D /* FootballMatchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballMatchVC.swift; sourceTree = "<group>"; };
+		E5D5A378206D191C00FC865D /* FootballTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballTopView.swift; sourceTree = "<group>"; };
+		E5D5A37A206D193100FC865D /* FootballBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballBottomView.swift; sourceTree = "<group>"; };
 		E5D8ABB3206737FF002D688B /* OrderDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailVC.swift; sourceTree = "<group>"; };
 		E5D8ABB5206739CF002D688B /* OrderDetailTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailTitleCell.swift; sourceTree = "<group>"; };
 		E5D8ABB720674283002D688B /* OrderDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailCell.swift; sourceTree = "<group>"; };
@@ -1233,6 +1237,8 @@
 		E5D5A374206D022400FC865D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E5D5A378206D191C00FC865D /* FootballTopView.swift */,
+				E5D5A37A206D193100FC865D /* FootballBottomView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1672,6 +1678,7 @@
 				E5973E29204E4387006461CE /* ForgetPswPhoneVC.swift in Sources */,
 				E5D8ABBE206749F5002D688B /* OrderDetailHeaderView.swift in Sources */,
 				E581F378206348EB002AB9F7 /* UserInfoManager.swift in Sources */,
+				E5D5A379206D191C00FC865D /* FootballTopView.swift in Sources */,
 				E51F9A60205A29EE00AB8A21 /* VCodeLoginFooterView.swift in Sources */,
 				E5883F6020690E8B00CB3A46 /* AccountDetailsCell.swift in Sources */,
 				E51F9A58205A120A00AB8A21 /* PasswordTextFieldCell.swift in Sources */,
@@ -1683,6 +1690,7 @@
 				E57375A320468B8900148622 /* AppDelegate.swift in Sources */,
 				E51F9A5C205A29B800AB8A21 /* RegisterFooterView.swift in Sources */,
 				E5973E1E204D50BC006461CE /* CustomTextField.swift in Sources */,
+				E5D5A37B206D193100FC865D /* FootballBottomView.swift in Sources */,
 				E562989F2050E04C006397EA /* ValidateProtocol.swift in Sources */,
 				E581F38F2063C7A0002AB9F7 /* CouponViewController.swift in Sources */,
 				E56298A32050E712006397EA /* AlertProtocol.swift in Sources */,

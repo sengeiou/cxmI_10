@@ -19,8 +19,14 @@ let FootballCellInteritemSpacing: CGFloat = (screenWidth - CGFloat(sectionLeftSp
 let FootballCellWidth : CGFloat = (screenWidth - 40 * 3 - CGFloat(sectionLeftSpacing) * 2) / CGFloat(HorizontalItemCount)
 let FootballCellHeight : CGFloat = 90
 
+protocol HomeSportLotteryCellDelegate {
+    func didSelectItem() -> Void
+}
+
 
 class HomeSportLotteryCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
+    
+    public var delegate: HomeSportLotteryCellDelegate!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -54,6 +60,12 @@ class HomeSportLotteryCell: UITableViewCell, UICollectionViewDataSource, UIColle
         collection.register(HomeFootballCell.self, forCellWithReuseIdentifier: homeFootballCellIdentifier)
         return collection
     }()
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard delegate != nil else { return }
+        delegate.didSelectItem()
+    }
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }

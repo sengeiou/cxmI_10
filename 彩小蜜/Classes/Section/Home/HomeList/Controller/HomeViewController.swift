@@ -12,9 +12,13 @@ fileprivate let homeActivityCellIdentifier = "homeActivityCellIdentifier"
 fileprivate let homeScrollBarCellIdentifier = "homeScrollBarCellIdentifier"
 
 
-class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, HomeSportLotteryCellDelegate {
 
     //MARK: - 点击事件
+    func didSelectItem() {
+        let football = FootballMatchVC()
+        pushViewController(vc: football)
+    }
     //MARK: - 属性
 
     //MARK: - 生命周期
@@ -76,7 +80,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: homeSportsCellIdentifier, for: indexPath) as! HomeSportLotteryCell
-            
+            cell.delegate = self
             return cell
         default:
             return UITableViewCell()
