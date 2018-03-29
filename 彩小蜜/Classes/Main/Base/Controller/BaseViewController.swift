@@ -135,7 +135,7 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftBut)
     }
     
-    @objc private func back(_ sender: UIButton) {
+    @objc func back(_ sender: UIButton) {
         popViewController()
     }
     

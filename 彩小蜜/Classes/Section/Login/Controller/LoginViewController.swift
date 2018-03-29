@@ -70,9 +70,9 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro,
         self.navigationItem.title = "彩小秘 · 密码登录"
         self.view.addSubview(tableView)
         
-        if getUserData() == nil {
-            hideBackBut()
-        }
+        //if getUserData() == nil {
+            //hideBackBut()
+        //}
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -166,6 +166,10 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro,
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(loginTextFieldHeight)
+    }
+    
+    @objc override func back(_ sender: UIButton) {
+        pushRootViewController()
     }
     
     override func didReceiveMemoryWarning() {
