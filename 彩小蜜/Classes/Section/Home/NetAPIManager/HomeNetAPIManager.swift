@@ -57,6 +57,7 @@ extension HomeNetAPIManager : TargetType {
             
             
             
+            
         default:
             return .requestPlain
         }
