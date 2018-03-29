@@ -171,7 +171,7 @@ class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         return 5
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0
+        return 0.01
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return nil

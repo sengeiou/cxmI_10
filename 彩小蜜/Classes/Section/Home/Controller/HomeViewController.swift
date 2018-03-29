@@ -24,6 +24,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         hideBackBut()
         self.view.addSubview(tableView)
         setRightBarItem()
+        homeListRequest()
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -37,7 +38,9 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         self.isHidenBar = false
     }
     //MARK: - 网络请求
-    
+    private func homeListRequest() {
+        
+    }
     
     //MARK: - 懒加载
     lazy private var tableView: UITableView = {
@@ -84,7 +87,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         
         switch indexPath.section {
         case 0:
-            return 20
+            return 30
         case 1:
             return 80
         case 2:
@@ -107,7 +110,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         return 5
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0
+        return 0.01
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return nil

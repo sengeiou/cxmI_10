@@ -195,7 +195,7 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
             let axx = accountList[section - 1]
 
             if acc.addTime == axx.addTime {
-                return 0.0
+                return 0.01
             }else {
                 return orderSectionHeaderHeight
             }
@@ -203,7 +203,7 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
         return orderSectionHeaderHeight
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.0
+        return 0.01
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         

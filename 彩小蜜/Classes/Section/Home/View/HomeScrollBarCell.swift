@@ -13,6 +13,9 @@ fileprivate let ScrollCellIdentifier = "ScrollCellIdentifier"
 
 class HomeScrollBarCell: UITableViewCell, FSPagerViewDataSource, FSPagerViewDelegate {
 
+    private var bgView: UIView!
+    private var icon : UIImageView!
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -22,16 +25,37 @@ class HomeScrollBarCell: UITableViewCell, FSPagerViewDataSource, FSPagerViewDele
     override func layoutSubviews() {
         super.layoutSubviews()
         
+        icon.snp.makeConstraints { (make) in
+            make.centerY.equalTo(self.contentView.snp.centerY)
+            make.left.equalTo(leftSpacing)
+            make.height.width.equalTo(20)
+        }
+        
+        bgView.snp.makeConstraints { (make) in
+            make.top.equalTo(0)
+            make.left.equalTo(icon.snp.right).offset(5)
+            make.right.equalTo(-10)
+            make.bottom.equalTo(-10)
+        }
+        
         viewPager.snp.makeConstraints { (make) in
-            make.top.equalTo(self.contentView)
-            make.bottom.equalTo(self.contentView)
-            make.left.equalTo(self.contentView).offset(80)
-            make.right.equalTo(self.contentView)
+            make.top.equalTo(1)
+            make.bottom.equalTo(0)
+            make.left.equalTo(0)
+            make.right.equalTo(0)
         }
     }
     
     private func initSubview() {
-        self.contentView.addSubview(viewPager)
+        bgView = UIView()
+        bgView.backgroundColor = ColorF4F4F4
+        
+        icon = UIImageView()
+        icon.image = UIImage(named: "not")
+        
+        self.contentView.addSubview(icon)
+        self.contentView.addSubview(bgView)
+        bgView.addSubview(viewPager)
     }
     
     
@@ -48,8 +72,9 @@ class HomeScrollBarCell: UITableViewCell, FSPagerViewDataSource, FSPagerViewDele
         //设置可以无限翻页，默认值为false，false时从尾部向前滚动到头部再继续循环滚动，true时可以无限滚动
         viewPager.isInfinite = true
         //设置转场的模式
-        viewPager.transformer = FSPagerViewTransformer(type: FSPagerViewTransformerType.ferrisWheel)
+        viewPager.transformer = FSPagerViewTransformer(type: FSPagerViewTransformerType.coverFlow)
         viewPager.scrollDirection = .vertical
+        viewPager.backgroundView?.backgroundColor = ColorFFFFFF
         
         return viewPager
     }()
@@ -64,6 +89,7 @@ class HomeScrollBarCell: UITableViewCell, FSPagerViewDataSource, FSPagerViewDele
         cell.textLabel?.font = Font10
         cell.textLabel?.textColor = ColorA0A0A0
         cell.textLabel?.superview?.backgroundColor = ColorFFFFFF
+        cell.contentView.backgroundColor = ColorFFFFFF
         cell.contentView.layer.shadowColor = ColorFFFFFF.cgColor
         return cell
     }
