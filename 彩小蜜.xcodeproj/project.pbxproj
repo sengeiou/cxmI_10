@@ -128,6 +128,8 @@
 		E5A2644E205B742B00EE6491 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A2644D205B742B00EE6491 /* HomeViewController.swift */; };
 		E5B68AFB205A81940038A5A2 /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B68AFA205A81940038A5A2 /* Extension+String.swift */; };
 		E5B68AFD205A81A70038A5A2 /* Extension+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B68AFC205A81A70038A5A2 /* Extension+Color.swift */; };
+		E5D5A36D206CC17B00FC865D /* HomePlayListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D5A36C206CC17B00FC865D /* HomePlayListModel.swift */; };
+		E5D5A36F206CC3BD00FC865D /* HomeMatchListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D5A36E206CC3BD00FC865D /* HomeMatchListModel.swift */; };
 		E5D8ABB4206737FF002D688B /* OrderDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D8ABB3206737FF002D688B /* OrderDetailVC.swift */; };
 		E5D8ABB6206739CF002D688B /* OrderDetailTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D8ABB5206739CF002D688B /* OrderDetailTitleCell.swift */; };
 		E5D8ABB820674283002D688B /* OrderDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D8ABB720674283002D688B /* OrderDetailCell.swift */; };
@@ -285,6 +287,8 @@
 		E5A2644D205B742B00EE6491 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		E5B68AFA205A81940038A5A2 /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
 		E5B68AFC205A81A70038A5A2 /* Extension+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Color.swift"; sourceTree = "<group>"; };
+		E5D5A36C206CC17B00FC865D /* HomePlayListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePlayListModel.swift; sourceTree = "<group>"; };
+		E5D5A36E206CC3BD00FC865D /* HomeMatchListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMatchListModel.swift; sourceTree = "<group>"; };
 		E5D8ABB3206737FF002D688B /* OrderDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailVC.swift; sourceTree = "<group>"; };
 		E5D8ABB5206739CF002D688B /* OrderDetailTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailTitleCell.swift; sourceTree = "<group>"; };
 		E5D8ABB720674283002D688B /* OrderDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailCell.swift; sourceTree = "<group>"; };
@@ -859,6 +863,8 @@
 			isa = PBXGroup;
 			children = (
 				E512A96C20480917003F14F4 /* HomeDataModel.swift */,
+				E5D5A36C206CC17B00FC865D /* HomePlayListModel.swift */,
+				E5D5A36E206CC3BD00FC865D /* HomeMatchListModel.swift */,
 				E50643AD206CBE3C0046A2D4 /* WinningMsgModel.swift */,
 				E50643AF206CBE800046A2D4 /* BannerModel.swift */,
 				E512A96E20490556003F14F4 /* HomeListModel.swift */,
@@ -1595,6 +1601,7 @@
 				E5973E20204E34A3006461CE /* FontConstraint.swift in Sources */,
 				E56CE812206A23070090A1B5 /* WithdrawalProgressHeader.swift in Sources */,
 				E567636A206B2FDA00E2D9A8 /* HHTextView.swift in Sources */,
+				E5D5A36D206CC17B00FC865D /* HomePlayListModel.swift in Sources */,
 				E5973E33204FC1D9006461CE /* MeFooterView.swift in Sources */,
 				E581F37C2063573C002AB9F7 /* PaymentNetAPIManager.swift in Sources */,
 				E57376022046B37900148622 /* MainTabBarController.swift in Sources */,
@@ -1612,6 +1619,7 @@
 				E56CE81C206A47930090A1B5 /* AboutFooter.swift in Sources */,
 				E51F9A5E205A29D500AB8A21 /* LoginFooterView.swift in Sources */,
 				E537397F2057F8F40087E4E6 /* BankCardInfo.swift in Sources */,
+				E5D5A36F206CC3BD00FC865D /* HomeMatchListModel.swift in Sources */,
 				E50B907120522FFF00417BFE /* RechargeViewController.swift in Sources */,
 				E5973E2B204E442F006461CE /* ForgetPswVCodeVC.swift in Sources */,
 				E56298BD20513429006397EA /* AuthenticationVC.swift in Sources */,

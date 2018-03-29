@@ -15,8 +15,12 @@ let homeProvider = MoyaProvider<HomeNetAPIManager>(plugins:[RequestLoadingPlugin
 enum HomeNetAPIManager {
     /// 彩票大厅列表
     case homeList
+    /// 彩票玩法列表
+    case playList (fyId: String)
+    /// 赛事列表
+    case matchList (playType: String)
     
-    case footBall
+
 }
 
 extension HomeNetAPIManager : TargetType {
@@ -30,8 +34,13 @@ extension HomeNetAPIManager : TargetType {
         switch self {
         case .homeList:
             return "/lottery/hall/getHallData"
-        case .footBall:
-            return ""
+        case .playList:
+            return "/lottery/hall/getPlayClassifyList"
+        case .matchList:
+            return "/lottery/match/getMatchList"
+            
+            
+            
         }
     }
     
@@ -39,6 +48,14 @@ extension HomeNetAPIManager : TargetType {
         var dic : [String: Any] = [:]
         
         switch self {
+        case .playList(let fyId):
+            dic["lotteryClassifyId"] = fyId
+        case .matchList(let playType):
+            dic["playType"] = playType
+            
+            
+            
+            
             
         default:
             return .requestPlain
