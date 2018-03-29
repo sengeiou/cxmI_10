@@ -130,6 +130,7 @@
 		E5B68AFD205A81A70038A5A2 /* Extension+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B68AFC205A81A70038A5A2 /* Extension+Color.swift */; };
 		E5D5A36D206CC17B00FC865D /* HomePlayListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D5A36C206CC17B00FC865D /* HomePlayListModel.swift */; };
 		E5D5A36F206CC3BD00FC865D /* HomeMatchListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D5A36E206CC3BD00FC865D /* HomeMatchListModel.swift */; };
+		E5D5A377206D034100FC865D /* FootballMatchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D5A376206D034100FC865D /* FootballMatchVC.swift */; };
 		E5D8ABB4206737FF002D688B /* OrderDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D8ABB3206737FF002D688B /* OrderDetailVC.swift */; };
 		E5D8ABB6206739CF002D688B /* OrderDetailTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D8ABB5206739CF002D688B /* OrderDetailTitleCell.swift */; };
 		E5D8ABB820674283002D688B /* OrderDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D8ABB720674283002D688B /* OrderDetailCell.swift */; };
@@ -289,6 +290,7 @@
 		E5B68AFC205A81A70038A5A2 /* Extension+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Color.swift"; sourceTree = "<group>"; };
 		E5D5A36C206CC17B00FC865D /* HomePlayListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePlayListModel.swift; sourceTree = "<group>"; };
 		E5D5A36E206CC3BD00FC865D /* HomeMatchListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMatchListModel.swift; sourceTree = "<group>"; };
+		E5D5A376206D034100FC865D /* FootballMatchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballMatchVC.swift; sourceTree = "<group>"; };
 		E5D8ABB3206737FF002D688B /* OrderDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailVC.swift; sourceTree = "<group>"; };
 		E5D8ABB5206739CF002D688B /* OrderDetailTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailTitleCell.swift; sourceTree = "<group>"; };
 		E5D8ABB720674283002D688B /* OrderDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailCell.swift; sourceTree = "<group>"; };
@@ -776,9 +778,8 @@
 			isa = PBXGroup;
 			children = (
 				E512A96420479F8A003F14F4 /* NetAPIManager */,
-				E57375E42046AF6900148622 /* Model */,
-				E57375E32046AF6700148622 /* View */,
-				E57375E22046AF6400148622 /* Controller */,
+				E5D5A371206D013500FC865D /* HomeList */,
+				E5D5A372206D018B00FC865D /* FootballMatch */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1201,6 +1202,48 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		E5D5A371206D013500FC865D /* HomeList */ = {
+			isa = PBXGroup;
+			children = (
+				E57375E42046AF6900148622 /* Model */,
+				E57375E32046AF6700148622 /* View */,
+				E57375E22046AF6400148622 /* Controller */,
+			);
+			path = HomeList;
+			sourceTree = "<group>";
+		};
+		E5D5A372206D018B00FC865D /* FootballMatch */ = {
+			isa = PBXGroup;
+			children = (
+				E5D5A375206D022800FC865D /* Model */,
+				E5D5A374206D022400FC865D /* View */,
+				E5D5A373206D022000FC865D /* Controller */,
+			);
+			path = FootballMatch;
+			sourceTree = "<group>";
+		};
+		E5D5A373206D022000FC865D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E5D5A376206D034100FC865D /* FootballMatchVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E5D5A374206D022400FC865D /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E5D5A375206D022800FC865D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		F57F686066089931831C044D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1576,6 +1619,7 @@
 				E5883F5E20690CED00CB3A46 /* AccountDetailsVC.swift in Sources */,
 				E510325A2065044100A0156C /* PurchaseRecordInfoModel.swift in Sources */,
 				E533BF012060DE600037D2D8 /* RechargeTitleCell.swift in Sources */,
+				E5D5A377206D034100FC865D /* FootballMatchVC.swift in Sources */,
 				E5883F4C2068DA0800CB3A46 /* OrderSchemeVC.swift in Sources */,
 				E50B9077205235BF00417BFE /* RechargeCardCell.swift in Sources */,
 				E5883F5A2068EA5700CB3A46 /* MessageCenterCell.swift in Sources */,
