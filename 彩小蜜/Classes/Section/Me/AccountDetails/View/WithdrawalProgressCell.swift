@@ -15,11 +15,10 @@ class WithdrawalProgressCell: UITableViewCell {
             titleLB.text = progressModel.logName
             timeLB.text = progressModel.logTime
             
-            switch progressModel.logCode {
-            case "0":
-                break
-            default: break
-                
+            if progressModel.logTime != nil , progressModel.logTime != "" {
+                icon.image = UIImage(named: "Mentionmoneysteps_sel")
+            }else {
+                icon.image = UIImage(named: "Mentionmoneysteps_nor")
             }
         }
     }
@@ -79,13 +78,13 @@ class WithdrawalProgressCell: UITableViewCell {
         titleLB.font = Font15
         titleLB.textColor = Color505050
         titleLB.textAlignment = .left
-        titleLB.text = "提现成功"
+        //titleLB.text = "提现成功"
         
         timeLB = UILabel()
         timeLB.font = Font10
         timeLB.textColor = ColorA0A0A0
         timeLB.textAlignment = .left
-        timeLB.text = "14: 00: 36"
+        //timeLB.text = "14: 00: 36"
         
         self.contentView.addSubview(icon)
         self.contentView.addSubview(topLine)

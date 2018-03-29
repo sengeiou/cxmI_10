@@ -10,6 +10,7 @@
 		0239AFB787326CE28D84A44F /* Pods____UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAE714330A11D581FBF18120 /* Pods____UITests.framework */; };
 		2545AF6A97B25DA9BA7C9A3A /* Pods____.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB1F21E30D8FD47C0735B12D /* Pods____.framework */; };
 		E3730DD9CBCC541439A1110F /* Pods____Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D1D20EBEFE94020803D6D7 /* Pods____Tests.framework */; };
+		E50643AA206C93A70046A2D4 /* BaseWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50643A9206C93A70046A2D4 /* BaseWebViewController.swift */; };
 		E50B907120522FFF00417BFE /* RechargeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50B907020522FFF00417BFE /* RechargeViewController.swift */; };
 		E50B9073205231B500417BFE /* RechargeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50B9072205231B500417BFE /* RechargeHeaderView.swift */; };
 		E50B9075205231C800417BFE /* RechargeFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50B9074205231C800417BFE /* RechargeFooterView.swift */; };
@@ -159,6 +160,7 @@
 		AB1F21E30D8FD47C0735B12D /* Pods____.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods____.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C46655EB1FBD7C2CB77E79A1 /* Pods-彩小蜜UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜UITests/Pods-彩小蜜UITests.release.xcconfig"; sourceTree = "<group>"; };
 		C6498BCAF23256B536C54738 /* Pods-彩小蜜.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜.debug.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜/Pods-彩小蜜.debug.xcconfig"; sourceTree = "<group>"; };
+		E50643A9206C93A70046A2D4 /* BaseWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWebViewController.swift; sourceTree = "<group>"; };
 		E50B907020522FFF00417BFE /* RechargeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeViewController.swift; sourceTree = "<group>"; };
 		E50B9072205231B500417BFE /* RechargeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeHeaderView.swift; sourceTree = "<group>"; };
 		E50B9074205231C800417BFE /* RechargeFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeFooterView.swift; sourceTree = "<group>"; };
@@ -1024,6 +1026,7 @@
 				E5973DDD204D152F006461CE /* BaseViewController.swift */,
 				E510324F2064FD2D00A0156C /* BasePagerViewController.swift */,
 				E533BF0420610D170037D2D8 /* BasePopViewController.swift */,
+				E50643A9206C93A70046A2D4 /* BaseWebViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1534,6 +1537,7 @@
 				E5973E42204FDD6F006461CE /* MeGuaranteeVC.swift in Sources */,
 				E56CE81A206A47860090A1B5 /* AboutHeader.swift in Sources */,
 				E512A96F20490556003F14F4 /* HomeListModel.swift in Sources */,
+				E50643AA206C93A70046A2D4 /* BaseWebViewController.swift in Sources */,
 				E58B57B6205623B30025E2F1 /* BankCardCell.swift in Sources */,
 				E57376462046BC6400148622 /* MeViewController.swift in Sources */,
 				E533BEFF2060BF950037D2D8 /* WithDrawDataModel.swift in Sources */,

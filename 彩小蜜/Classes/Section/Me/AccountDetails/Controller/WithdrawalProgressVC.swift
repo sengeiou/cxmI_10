@@ -74,7 +74,7 @@ class WithdrawalProgressVC: BaseViewController, UITableViewDelegate, UITableView
     }()
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        guard progressModel != nil else { return 3 }
+        guard progressModel != nil else { return 0 }
         return progressModel.userWithdrawLogs.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -94,7 +94,7 @@ class WithdrawalProgressVC: BaseViewController, UITableViewDelegate, UITableView
             cell.bottomLine.isHidden = false
         }
         
-        //cell.progressModel = progressModel.userWithdrawLogs[indexPath.section]
+        cell.progressModel = progressModel.userWithdrawLogs[indexPath.section]
         return cell
     }
     
