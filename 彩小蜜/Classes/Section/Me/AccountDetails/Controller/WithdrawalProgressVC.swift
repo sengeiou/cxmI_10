@@ -36,7 +36,7 @@ class WithdrawalProgressVC: BaseViewController, UITableViewDelegate, UITableView
     //MARK: - 网络请求
     private func progressRequest() {
         weak var weakSelf = self
-        _ = userProvider.rx.request(.withdrawList(withdawSn: withdawalSn))
+        _ = userProvider.rx.request(.withdrawProgressList(withdawSn: withdawalSn))
             .asObservable()
             .mapObject(type: ProgressModel.self)
             .subscribe(onNext: { (data) in
@@ -94,7 +94,7 @@ class WithdrawalProgressVC: BaseViewController, UITableViewDelegate, UITableView
             cell.bottomLine.isHidden = false
         }
         
-        cell.progressModel = progressModel.userWithdrawLogs[indexPath.section]
+        //cell.progressModel = progressModel.userWithdrawLogs[indexPath.section]
         return cell
     }
     

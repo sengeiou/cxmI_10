@@ -4,7 +4,7 @@
 //
 //  Created by HX on 2018/3/23.
 //  Copyright © 2018年 韩笑. All rights reserved.
-//
+// 投注记录
 
 import UIKit
 import XLPagerTabStrip
@@ -37,7 +37,7 @@ class PurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
         super.viewDidLoad()
         self.title = "彩小秘 · 购彩记录"
         self.view.addSubview(self.tableView)
-        setEmpty(title: "您还没有优惠券！", tableView)
+        setEmpty(title: "暂无记录！", tableView)
         
         self.tableView.headerRefresh {
             self.loadNewData()

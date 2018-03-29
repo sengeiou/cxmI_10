@@ -32,7 +32,7 @@ enum MeNetAPIManager {
     case couponList (status: String, pageNum: Int)
     /// 单个优惠券
     case coupon (userBonusId: String)
-    /// 订单列表 -1 -所有订单 2-待开奖 4-已中奖
+    /// 订单列表 - 投注记录 -1 -所有订单 2-待开奖 4-已中奖
     case orderInfoList (fyId: String, orderStatus: String, pageNum: Int)
     /// 订单详情
     case orderInfo (orderId: String)
@@ -45,12 +45,12 @@ enum MeNetAPIManager {
     /// 消息列表 0通知，1消息 
     case messageList (msgType: String, pageNum: Int)
     /// 提现进度
-    case withdrawList (withdawSn: String)
+    case withdrawProgressList (withdawSn: String)
 }
 
 extension MeNetAPIManager : TargetType {
     var baseURL : URL {
-        return URL(string : baseURLStr)!
+        return URL(string : baseURLStr + xpath)!
     }
     
     var headers: [String : String]? {
@@ -61,45 +61,90 @@ extension MeNetAPIManager : TargetType {
     }
     
     var path : String {
+        return ""
+    }
+    
+    var xpath: String {
         switch self {
-        case .userInfo:
-            return "/user/userInfoExceptPass"
-        case .realNameAuth:
-            return "/user/real/realNameAuth"
-        case .realInfo:
-            return "/user/real/userRealInfo"
-        case .addBankCard:
-            return "/user/bank/addBankCard"
-        case .bankList:
-            return "/user/bank/queryUserBankList"
-        case .withDrawDataShow:
-            return "/user/bank/queryWithDrawShow"
-        case .setBankDefault:
-            return "/user/bank/updateUserBankDefault"
-        case .deleteBank:
-            return "/user/bank/deleteUserBank"
-        case .couponList:
-            return "/user/bonus/queryBonusListByStatus"
-        case .coupon:
-            return "/user/bonus/queryUserBonus"
-        case .orderInfoList:
-            return "/order/getOrderInfoList"
-        case .orderInfo:
-            return "/order/getOrderDetail"
-        case .orderScheme:
-            return "/order/getTicketScheme"
-        case .accountDetailsList:
-            return "/user/account/getUserAccountList"
-        case .messageList:
-            return "/user/message/list"
-        case .accountStatistics:
-            return "/user/account/countMoneyCurrentMonth"
-        case .withdrawList:
-            return "/payment/withdraw/list"
+            case .userInfo:
+                return "7071/user/userInfoExceptPass"
+            case .realNameAuth:
+                return "7071/user/real/realNameAuth"
+            case .realInfo:
+                return "7071/user/real/userRealInfo"
+            case .addBankCard:
+                return "7071/user/bank/addBankCard"
+            case .bankList:
+                return "7071/user/bank/queryUserBankList"
+            case .withDrawDataShow:
+                return "7071/user/bank/queryWithDrawShow"
+            case .setBankDefault:
+                return "7071/user/bank/updateUserBankDefault"
+            case .deleteBank:
+                return "7071/user/bank/deleteUserBank"
+            case .couponList:
+                return "7071/user/bonus/queryBonusListByStatus"
+            case .coupon:
+                return "7071/user/bonus/queryUserBonus"
+            case .orderInfoList:
+                return "7075/order/getOrderInfoList"
+            case .orderInfo:
+                return "7075/order/getOrderDetail"
+            case .orderScheme:
+                return "7075/order/getTicketScheme"
+            case .accountDetailsList:
+                return "7071/user/account/getUserAccountList"
+            case .messageList:
+                return "7071/user/message/list"
+            case .accountStatistics:
+                return "7071/user/account/countMoneyCurrentMonth"
+            case .withdrawProgressList:
+                return "7076/payment/withdraw/list"
             
             
         }
     }
+    
+//    var path : String {
+//        switch self {
+//        case .userInfo:
+//            return ":7071/user/userInfoExceptPass"
+//        case .realNameAuth:
+//            return "/user/real/realNameAuth"
+//        case .realInfo:
+//            return "/user/real/userRealInfo"
+//        case .addBankCard:
+//            return "/user/bank/addBankCard"
+//        case .bankList:
+//            return "/user/bank/queryUserBankList"
+//        case .withDrawDataShow:
+//            return "/user/bank/queryWithDrawShow"
+//        case .setBankDefault:
+//            return "/user/bank/updateUserBankDefault"
+//        case .deleteBank:
+//            return "/user/bank/deleteUserBank"
+//        case .couponList:
+//            return "/user/bonus/queryBonusListByStatus"
+//        case .coupon:
+//            return "/user/bonus/queryUserBonus"
+//        case .orderInfoList:
+//            return "/order/getOrderInfoList"
+//        case .orderInfo:
+//            return "/order/getOrderDetail"
+//        case .orderScheme:
+//            return "/order/getTicketScheme"
+//        case .accountDetailsList:
+//            return "/user/account/getUserAccountList"
+//        case .messageList:
+//            return "/user/message/list"
+//        case .accountStatistics:
+//            return "/user/account/countMoneyCurrentMonth"
+//        case .withdrawProgressList:
+//            return "/payment/withdraw/list"
+//
+//
+//        }
+//    }
     
     var task: Task {
         var dic : [String: Any] = [:]
@@ -148,7 +193,7 @@ extension MeNetAPIManager : TargetType {
             dic["msgType"] = msgType
             dic["pageNum"] = pageNum
             dic["pageSize"] = "20"
-        case .withdrawList(let withdawSn):
+        case .withdrawProgressList(let withdawSn):
             dic["withdawSn"] = withdawSn
             
             

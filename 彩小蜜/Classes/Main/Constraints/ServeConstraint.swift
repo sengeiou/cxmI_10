@@ -9,6 +9,6 @@
 
 
 //let baseURLStr = "http://192.168.1.142:7071"
-let baseURLStr = "http://39.106.18.39:7071"
+let baseURLStr = "http://39.106.18.39:"
 //let baseURLStr = "http://39.106.18.39:7075"
 //let baseURLStr = "http://39.106.18.39:7076"
