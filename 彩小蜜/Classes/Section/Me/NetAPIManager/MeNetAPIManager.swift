@@ -105,46 +105,6 @@ extension MeNetAPIManager : TargetType {
         }
     }
     
-//    var path : String {
-//        switch self {
-//        case .userInfo:
-//            return ":7071/user/userInfoExceptPass"
-//        case .realNameAuth:
-//            return "/user/real/realNameAuth"
-//        case .realInfo:
-//            return "/user/real/userRealInfo"
-//        case .addBankCard:
-//            return "/user/bank/addBankCard"
-//        case .bankList:
-//            return "/user/bank/queryUserBankList"
-//        case .withDrawDataShow:
-//            return "/user/bank/queryWithDrawShow"
-//        case .setBankDefault:
-//            return "/user/bank/updateUserBankDefault"
-//        case .deleteBank:
-//            return "/user/bank/deleteUserBank"
-//        case .couponList:
-//            return "/user/bonus/queryBonusListByStatus"
-//        case .coupon:
-//            return "/user/bonus/queryUserBonus"
-//        case .orderInfoList:
-//            return "/order/getOrderInfoList"
-//        case .orderInfo:
-//            return "/order/getOrderDetail"
-//        case .orderScheme:
-//            return "/order/getTicketScheme"
-//        case .accountDetailsList:
-//            return "/user/account/getUserAccountList"
-//        case .messageList:
-//            return "/user/message/list"
-//        case .accountStatistics:
-//            return "/user/account/countMoneyCurrentMonth"
-//        case .withdrawProgressList:
-//            return "/payment/withdraw/list"
-//
-//
-//        }
-//    }
     
     var task: Task {
         var dic : [String: Any] = [:]
