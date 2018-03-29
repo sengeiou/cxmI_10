@@ -9,25 +9,28 @@
 import UIKit
 import HandyJSON
 
+
 struct HomeDataModel : HandyJSON {
     
-    var content_url: String?
-    var cover_image_url: String?
-    var created_at: String?
-    var id: String?
-    var liked: String?
-    var likes_count: Int = 0
-    var share_msg: String?
-    var published_at: String?
-    var short_title: String?
-    var status: String?
-    var type: String?
-    var title: String?
-    var template: String?
-    var updated_at: String?
-    var url : String?
-//    init() {
-//        
-//    }
+    var activity: HomeActivityModel!
+    var dlPlayClassifyDetailDTOs: [HomePlayModel]!
+    var navBanners: [BannerModel]!
+    var winningMsgs: [WinningMsgModel]!
     
+}
+
+/// 玩法
+struct HomePlayModel: HandyJSON {
+    var playClassifyId: String!
+    var playClassifyImg: String!
+    var playClassifyLabelId: String!
+    var playClassifyLabelName: String!
+    var playClassifyName: String!
+}
+
+/// 活动栏
+struct HomeActivityModel: HandyJSON {
+    var actImg: String!
+    var actTitle: String!
+    var actUrl: String!
 }

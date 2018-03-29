@@ -11,6 +11,8 @@
 		2545AF6A97B25DA9BA7C9A3A /* Pods____.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB1F21E30D8FD47C0735B12D /* Pods____.framework */; };
 		E3730DD9CBCC541439A1110F /* Pods____Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D1D20EBEFE94020803D6D7 /* Pods____Tests.framework */; };
 		E50643AA206C93A70046A2D4 /* BaseWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50643A9206C93A70046A2D4 /* BaseWebViewController.swift */; };
+		E50643AE206CBE3C0046A2D4 /* WinningMsgModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50643AD206CBE3C0046A2D4 /* WinningMsgModel.swift */; };
+		E50643B0206CBE800046A2D4 /* BannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50643AF206CBE800046A2D4 /* BannerModel.swift */; };
 		E50B907120522FFF00417BFE /* RechargeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50B907020522FFF00417BFE /* RechargeViewController.swift */; };
 		E50B9073205231B500417BFE /* RechargeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50B9072205231B500417BFE /* RechargeHeaderView.swift */; };
 		E50B9075205231C800417BFE /* RechargeFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50B9074205231C800417BFE /* RechargeFooterView.swift */; };
@@ -161,6 +163,8 @@
 		C46655EB1FBD7C2CB77E79A1 /* Pods-彩小蜜UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜UITests/Pods-彩小蜜UITests.release.xcconfig"; sourceTree = "<group>"; };
 		C6498BCAF23256B536C54738 /* Pods-彩小蜜.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜.debug.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜/Pods-彩小蜜.debug.xcconfig"; sourceTree = "<group>"; };
 		E50643A9206C93A70046A2D4 /* BaseWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWebViewController.swift; sourceTree = "<group>"; };
+		E50643AD206CBE3C0046A2D4 /* WinningMsgModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinningMsgModel.swift; sourceTree = "<group>"; };
+		E50643AF206CBE800046A2D4 /* BannerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerModel.swift; sourceTree = "<group>"; };
 		E50B907020522FFF00417BFE /* RechargeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeViewController.swift; sourceTree = "<group>"; };
 		E50B9072205231B500417BFE /* RechargeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeHeaderView.swift; sourceTree = "<group>"; };
 		E50B9074205231C800417BFE /* RechargeFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeFooterView.swift; sourceTree = "<group>"; };
@@ -855,6 +859,8 @@
 			isa = PBXGroup;
 			children = (
 				E512A96C20480917003F14F4 /* HomeDataModel.swift */,
+				E50643AD206CBE3C0046A2D4 /* WinningMsgModel.swift */,
+				E50643AF206CBE800046A2D4 /* BannerModel.swift */,
 				E512A96E20490556003F14F4 /* HomeListModel.swift */,
 			);
 			path = Model;
@@ -1576,6 +1582,7 @@
 				E5973E24204E3687006461CE /* VCodeLoginViewController.swift in Sources */,
 				E5B68AFB205A81940038A5A2 /* Extension+String.swift in Sources */,
 				E512A96620479FD7003F14F4 /* HomeNetAPIManager.swift in Sources */,
+				E50643AE206CBE3C0046A2D4 /* WinningMsgModel.swift in Sources */,
 				E5883F582068E8C100CB3A46 /* MessageCenterVC.swift in Sources */,
 				E5973E2F204F8B33006461CE /* MeCell.swift in Sources */,
 				E56CE816206A3FBF0090A1B5 /* AccountStatisticsModel.swift in Sources */,
@@ -1616,6 +1623,7 @@
 				E51F9A60205A29EE00AB8A21 /* VCodeLoginFooterView.swift in Sources */,
 				E5883F6020690E8B00CB3A46 /* AccountDetailsCell.swift in Sources */,
 				E51F9A58205A120A00AB8A21 /* PasswordTextFieldCell.swift in Sources */,
+				E50643B0206CBE800046A2D4 /* BannerModel.swift in Sources */,
 				E59CB3DB205BA1300086DD0E /* HomeActivityCell.swift in Sources */,
 				E514DDE02052A37E00274854 /* DataModel.swift in Sources */,
 				E537397420576FEE0087E4E6 /* APIManager.swift in Sources */,
