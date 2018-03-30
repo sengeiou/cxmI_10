@@ -11,34 +11,33 @@ import UIKit
 enum FootballMatchType: String {
     case 胜平负 = "彩小秘 · 胜平负"
     case 让球胜平负 = "彩小秘 · 让球胜平负"
-    
+    case 总进球 = "彩小秘 · 总进球"
+    case 比分 = "彩小秘 · 比分"
+    case 半全场 = "彩小秘 · 半全场"
+    case 二选一 = "彩小秘 · 2选1"
+    case 混合过关 = "彩小秘 · 混合过关"
 }
 
 fileprivate let FootballSectionHeaderId = "FootballSectionHeaderId"
+fileprivate let FootballSPFCellId = "FootballSPFCellId"
+fileprivate let FootballRangSPFCellId = "FootballRangSPFCellId"
+fileprivate let FootballTotalCellId = "FootballTotalCellId"
+fileprivate let FootballScoreCellId = "FootballScoreCellId"
+fileprivate let FootballBanQuanCCellId = "FootballBanQuanCCellId"
+fileprivate let Football2_1CellId = "Football2_1CellId"
+fileprivate let FootballHunheCellId = "FootballHunheCellId"
 
-class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballBottomViewDelegate, FootballSectionHeaderDelegate {
-    func spread(sender: UIButton, section: Int) {
-        let header = list[section]
-        
-        header.isSpreading = !header.isSpreading
-        
-        tableView.reloadSections(IndexSet(integer: section), with: .automatic)
-    }
-    
-    // MARK: - FOOTBALLBOTTOM delegate
-    func delete() {
-        
-    }
-    func confirm() {
-        
-    }
+
+class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballBottomViewDelegate, FootballSectionHeaderDelegate, FootballRequestPro {
+   
     
     // MARK: - 属性
-    private var matchType: FootballMatchType = .胜平负
+    public var matchType: FootballMatchType = .胜平负
+    
     private var list : [FootballMatchModel]!
-    
+    public var matchList : [FootballMatchModel]!
+    public var matchData : FootballMatchData!
     // MARK: - 生命周期
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = matchType.rawValue
@@ -50,10 +49,9 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
             let one = FootballMatchModel()
             list.append(one)
         }
-        
-        
-        
+        footballRequest()
     }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -98,49 +96,125 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         table.delegate = self
         table.dataSource = self
         table.backgroundColor = ColorF4F4F4
-        table.register(MeCell.self, forCellReuseIdentifier: "ss")
         table.register(FootballSectionHeader.self, forHeaderFooterViewReuseIdentifier: FootballSectionHeaderId)
+        registerCell(table)
         return table
     }()
+    private func registerCell(_ table: UITableView) {
+        switch matchType {
+        case .胜平负:
+            table.register(FootballSPFCell.self, forCellReuseIdentifier: FootballSPFCellId)
+        case .让球胜平负:
+            table.register(FootballRangSPFCell.self, forCellReuseIdentifier: FootballRangSPFCellId)
+        case .总进球:
+            table.register(FootballTotalCell.self, forCellReuseIdentifier: FootballTotalCellId)
+        case .比分:
+            table.register(FootballScoreCell.self, forCellReuseIdentifier: FootballScoreCellId)
+        case .半全场:
+            table.register(FootballBanQuanCCell.self, forCellReuseIdentifier: FootballBanQuanCCellId)
+        case .二选一:
+            table.register(Football2_1Cell.self, forCellReuseIdentifier: Football2_1CellId)
+        case .混合过关:
+            table.register(FootballHunheCell.self, forCellReuseIdentifier: FootballHunheCellId)
+        }
+    }
     
     //MARK: - tableView dataSource
     func numberOfSections(in tableView: UITableView) -> Int {
-        return list.count
+        guard matchList != nil else { return 0 }
+        return matchList.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let header = list[section]
         
         if header.isSpreading == true {
-            return 3
+            let matchModel = matchList[section]
+            return matchModel.playList.count
         }else {
             return 0
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ss", for: indexPath) as! MeCell
-        cell.title.text = "ssss"
+        switch matchType {
+        case .胜平负:
+            return initSPFCell(indexPath: indexPath)
+        case .让球胜平负:
+            return initSPFCell(indexPath: indexPath)
+        case .总进球:
+            return initSPFCell(indexPath: indexPath)
+        case .比分:
+            return initSPFCell(indexPath: indexPath)
+        case .半全场:
+            return initSPFCell(indexPath: indexPath)
+        case .二选一:
+            return initSPFCell(indexPath: indexPath)
+        case .混合过关:
+            return initSPFCell(indexPath: indexPath)
+        }
+    }
+    
+    private func initSPFCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: FootballSPFCellId, for: indexPath) as! FootballSPFCell
+        let matchModel = matchList[indexPath.section]
+        cell.playInfoModel = matchModel.playList[indexPath.row]
+        
         return cell
     }
+    private func initRangSPFCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: FootballSPFCellId, for: indexPath) as! FootballSPFCell
+        
+        return cell
+    }
+    private func initTatolCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: FootballSPFCellId, for: indexPath) as! FootballSPFCell
+        
+        return cell
+    }
+    private func initScoreCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: FootballSPFCellId, for: indexPath) as! FootballSPFCell
+        
+        return cell
+    }
+    private func initBanQuanCCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: FootballSPFCellId, for: indexPath) as! FootballSPFCell
+        
+        return cell
+    }
+    private func init2Cell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: FootballSPFCellId, for: indexPath) as! FootballSPFCell
+        
+        return cell
+    }
+    private func initHunheCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: FootballSPFCellId, for: indexPath) as! FootballSPFCell
+        
+        return cell
+    }
+   
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: FootballSectionHeaderId) as! FootballSectionHeader
         header.tag = section
         header.delegate = self
-        
-        if section == 0 {
+
+
+        if section == 0, self.matchData.hotPlayList.isEmpty == false {
             header.headerType = .hotMatch
         }else {
             header.headerType = .match
         }
+        
+        header.matchModel = matchList[section]
+        
         return header
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44
+        return 88 * defaultScale
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30 * defaultScale
+        return 44 * defaultScale
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 5
@@ -150,7 +224,22 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         return nil
     }
     
+    // MARK: - delegate
+    func spread(sender: UIButton, section: Int) {
+        let header = list[section]
+        
+        header.isSpreading = !header.isSpreading
+        
+        tableView.reloadSections(IndexSet(integer: section), with: .automatic)
+    }
     
+    // MARK: - FOOTBALLBOTTOM delegate
+    func delete() {
+        
+    }
+    func confirm() {
+        
+    }
     
     
     override func didReceiveMemoryWarning() {

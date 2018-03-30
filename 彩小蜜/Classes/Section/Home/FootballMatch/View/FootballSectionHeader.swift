@@ -19,7 +19,36 @@ protocol FootballSectionHeaderDelegate {
 
 class FootballSectionHeader: UITableViewHeaderFooterView {
 
-    public var headerType: FootballHeaderType = .match
+    public var matchModel : FootballMatchModel! {
+        didSet{
+            if matchModel.title != nil {
+                title.text = "热门比赛"
+                title.textColor = ColorEA5504
+            }else{
+                title.text = "今日\(matchModel.matchDay)共有\(matchModel.playList.count)场比赛可投"
+                title.textColor = Color787878
+            }
+        }
+    }
+    
+    public var headerType: FootballHeaderType = .match {
+        didSet{
+            switch headerType {
+            case .hotMatch:
+                title.textColor = ColorEA5504
+                icon.isHidden = false
+                title.snp.makeConstraints({ (make) in
+                    make.left.equalTo(icon.snp.right).offset(10)
+                })
+            case .match:
+                title.textColor = Color787878
+                icon.isHidden = true
+                title.snp.makeConstraints({ (make) in
+                    make.left.equalTo(leftSpacing)
+                })
+            }
+        }
+    }
     public var delegate : FootballSectionHeaderDelegate!
     
     
@@ -32,20 +61,7 @@ class FootballSectionHeader: UITableViewHeaderFooterView {
         super.init(reuseIdentifier: reuseIdentifier)
         initSubview()
         
-        switch headerType {
-        case .hotMatch:
-            title.textColor = ColorEA5504
-            icon.isHidden = false
-            title.snp.makeConstraints({ (make) in
-                make.left.equalTo(icon.snp.right).offset(10)
-            })
-        case .match:
-            title.textColor = Color787878
-            icon.isHidden = true
-            title.snp.makeConstraints({ (make) in
-                make.left.equalTo(leftSpacing)
-            })
-        }
+        
     }
     override func layoutSubviews() {
         super.layoutSubviews()

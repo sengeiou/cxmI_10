@@ -90,6 +90,8 @@
 		E5786FBE206DE9BD0045F7F5 /* FootballBanQuanCCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5786FBD206DE9BD0045F7F5 /* FootballBanQuanCCell.swift */; };
 		E5786FC0206DEA650045F7F5 /* Football2-1Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5786FBF206DEA650045F7F5 /* Football2-1Cell.swift */; };
 		E5786FC2206DEAB30045F7F5 /* FootballHunheCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5786FC1206DEAB30045F7F5 /* FootballHunheCell.swift */; };
+		E5786FC4206E13840045F7F5 /* FootballTeamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5786FC3206E13840045F7F5 /* FootballTeamView.swift */; };
+		E5786FC7206E29730045F7F5 /* FootballProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5786FC6206E29730045F7F5 /* FootballProtocol.swift */; };
 		E581F378206348EB002AB9F7 /* UserInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F377206348EB002AB9F7 /* UserInfoManager.swift */; };
 		E581F37C2063573C002AB9F7 /* PaymentNetAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F37B2063573C002AB9F7 /* PaymentNetAPIManager.swift */; };
 		E581F38C2063B446002AB9F7 /* CouponCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F38B2063B446002AB9F7 /* CouponCell.swift */; };
@@ -261,6 +263,8 @@
 		E5786FBD206DE9BD0045F7F5 /* FootballBanQuanCCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballBanQuanCCell.swift; sourceTree = "<group>"; };
 		E5786FBF206DEA650045F7F5 /* Football2-1Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Football2-1Cell.swift"; sourceTree = "<group>"; };
 		E5786FC1206DEAB30045F7F5 /* FootballHunheCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballHunheCell.swift; sourceTree = "<group>"; };
+		E5786FC3206E13840045F7F5 /* FootballTeamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballTeamView.swift; sourceTree = "<group>"; };
+		E5786FC6206E29730045F7F5 /* FootballProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballProtocol.swift; sourceTree = "<group>"; };
 		E581F377206348EB002AB9F7 /* UserInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoManager.swift; sourceTree = "<group>"; };
 		E581F37B2063573C002AB9F7 /* PaymentNetAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentNetAPIManager.swift; sourceTree = "<group>"; };
 		E581F38B2063B446002AB9F7 /* CouponCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponCell.swift; sourceTree = "<group>"; };
@@ -1082,6 +1086,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		E5786FC5206E29560045F7F5 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				E5786FC6206E29730045F7F5 /* FootballProtocol.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 		E581F37620634899002AB9F7 /* Util */ = {
 			isa = PBXGroup;
 			children = (
@@ -1237,6 +1249,7 @@
 		E5D5A372206D018B00FC865D /* FootballMatch */ = {
 			isa = PBXGroup;
 			children = (
+				E5786FC5206E29560045F7F5 /* Protocol */,
 				E5D5A375206D022800FC865D /* Model */,
 				E5D5A374206D022400FC865D /* View */,
 				E5D5A373206D022000FC865D /* Controller */,
@@ -1258,6 +1271,7 @@
 				E5D5A378206D191C00FC865D /* FootballTopView.swift */,
 				E5D5A37A206D193100FC865D /* FootballBottomView.swift */,
 				E5786FB1206DDA420045F7F5 /* FootballSectionHeader.swift */,
+				E5786FC3206E13840045F7F5 /* FootballTeamView.swift */,
 				E5786FB5206DE87E0045F7F5 /* FootballSPFCell.swift */,
 				E5786FB7206DE9080045F7F5 /* FootballRangSPFCell.swift */,
 				E5786FB9206DE9620045F7F5 /* FootballTotalCell.swift */,
@@ -1610,6 +1624,7 @@
 				E5973E35204FCCF2006461CE /* MeAboutViewController.swift in Sources */,
 				E51032502064FD2D00A0156C /* BasePagerViewController.swift in Sources */,
 				E56CE8062069E5830090A1B5 /* AccountDetailModel.swift in Sources */,
+				E5786FC7206E29730045F7F5 /* FootballProtocol.swift in Sources */,
 				E56CE8022069DFC20090A1B5 /* AccountDetailSectionHeader.swift in Sources */,
 				E58B57B8205634250025E2F1 /* BankCardFooterView.swift in Sources */,
 				E5973DDE204D152F006461CE /* BaseViewController.swift in Sources */,
@@ -1691,6 +1706,7 @@
 				E51032482064A99700A0156C /* CouponListModel.swift in Sources */,
 				E512A96B2047EF67003F14F4 /* RequestPlugin.swift in Sources */,
 				E51032582065037700A0156C /* PurchaseRecordListModel.swift in Sources */,
+				E5786FC4206E13840045F7F5 /* FootballTeamView.swift in Sources */,
 				E533BF0520610D170037D2D8 /* BasePopViewController.swift in Sources */,
 				E5103256206502DA00A0156C /* PurchaseRecordCell.swift in Sources */,
 				E56CE8082069E63E0090A1B5 /* BasePageModel.swift in Sources */,
