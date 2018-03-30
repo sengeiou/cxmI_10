@@ -125,6 +125,7 @@ class FootballTeamView: UIView {
         homeBut = UIButton(type: .custom)
         homeBut.backgroundColor = ColorFFFFFF
         homeBut.addTarget(self, action: #selector(homeClicked(_:)), for: .touchUpInside)
+        homeBut.isSelected = false
         
         drawBut = UIButton(type: .custom)
         drawBut.backgroundColor = ColorFFFFFF
@@ -209,6 +210,7 @@ class FootballTeamView: UIView {
             homeName.textColor = Color505050
             homeOdds.textColor = Color787878
         }
+        homeBut.isSelected = isSelected
     }
     private func drawIsSelected(_ isSelected: Bool) {
         if isSelected {
@@ -220,6 +222,7 @@ class FootballTeamView: UIView {
             VSLB.textColor = Color505050
             drawOdds.textColor = Color787878
         }
+        drawBut.isSelected = isSelected
     }
     private func awayIsSelected(_ isSelected: Bool) {
         if isSelected {
@@ -231,6 +234,7 @@ class FootballTeamView: UIView {
             awayName.textColor = Color505050
             awayOdds.textColor = Color787878
         }
+        awayBut.isSelected = isSelected
     }
     
     required init?(coder aDecoder: NSCoder) {
