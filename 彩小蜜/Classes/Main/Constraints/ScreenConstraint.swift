@@ -15,6 +15,6 @@ let screenWidth  = UIScreen.main.bounds.width
 
 
 let SafeAreaTopHeight    = screenHeight == 812.0 ? 88 : 64
-let SafeAreaBottomHeight = screenHeight == 812.0 ? 34 : 0
+let SafeAreaBottomHeight: CGFloat = screenHeight == 812.0 ? 24 : 0
 
 

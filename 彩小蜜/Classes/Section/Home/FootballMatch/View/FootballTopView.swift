@@ -11,27 +11,39 @@ import UIKit
 class FootballTopView: UIView {
 
     private var titleLB: UILabel!
+    private var bgView: UIView!
     init() {
-        super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 44 * defaultScale))
+        super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 44 * defaultScale + 5))
         initSubview()
     }
     override func layoutSubviews() {
         super.layoutSubviews()
+        bgView.snp.makeConstraints { (make) in
+            make.top.left.right.equalTo(0)
+            make.bottom.equalTo(-5)
+        }
+        
         titleLB.snp.makeConstraints { (make) in
-            make.top.bottom.equalTo(0)
+            make.top.equalTo(0)
+            make.bottom.equalTo(0)
             make.left.equalTo(leftSpacing)
             make.right.equalTo(-rightSpacing)
         }
     }
     private func initSubview() {
-        self.backgroundColor = ColorFFFFFF
+        self.backgroundColor = ColorF4F4F4
+        
+        bgView = UIView()
+        bgView.backgroundColor = ColorFFFFFF
+        
         titleLB = UILabel()
         titleLB.font = Font14
         titleLB.textColor = Color787878
         titleLB.textAlignment = .left
         titleLB.text = "共有********场比赛可投"
         
-        self.addSubview(titleLB)
+        bgView.addSubview(titleLB)
+        self.addSubview(bgView)
     }
     
     required init?(coder aDecoder: NSCoder) {
