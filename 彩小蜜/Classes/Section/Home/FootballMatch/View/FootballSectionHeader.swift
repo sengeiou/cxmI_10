@@ -25,7 +25,8 @@ class FootballSectionHeader: UITableViewHeaderFooterView {
                 title.text = "热门比赛"
                 title.textColor = ColorEA5504
             }else{
-                title.text = "今日\(matchModel.matchDay)共有\(matchModel.playList.count)场比赛可投"
+                title.text = "今日" + matchModel.matchDay + "共有"
+                + "\(matchModel.playList.count)" + "场比赛可投"
                 title.textColor = Color787878
             }
         }
