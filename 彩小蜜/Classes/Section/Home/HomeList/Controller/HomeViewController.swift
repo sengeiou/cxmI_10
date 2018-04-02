@@ -84,7 +84,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 1:
-            guard let activity = self.homeData.activity else { return }
+            guard homeData != nil, let activity = self.homeData.activity else { return }
             let web = HomeWebViewController()
             web.urlStr = activity.actUrl
             web.titleStr = activity.actTitle
@@ -198,8 +198,9 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     @objc func rightBut(sender: UIButton) {
         //let xxx = BasePopViewController()
         //self.present(xxx, animated: true, completion: nil)
-        
-        pushLoginVC(from: self)
+        let football = FootballMatchVC()
+        pushViewController(vc: football)
+        //pushLoginVC(from: self)
     }
     
 }

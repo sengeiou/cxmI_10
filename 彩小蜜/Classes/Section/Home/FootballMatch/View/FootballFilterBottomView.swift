@@ -8,8 +8,16 @@
 
 import UIKit
 
+
+protocol FootballFilterBottomViewDelegate {
+    func filterConfirm() -> Void
+    func filterCancel() -> Void
+}
+
 class FootballFilterBottomView: UIView {
 
+    public var delegate : FootballFilterBottomViewDelegate!
+    
     private var line : UIView!
     private var vLine : UIView!
     
@@ -67,10 +75,12 @@ class FootballFilterBottomView: UIView {
     }
     
     @objc private func confirmClicked(_ sender: UIButton) {
-        
+        guard delegate != nil else { return }
+        delegate.filterConfirm()
     }
     @objc private func cancelClicked(_ sender: UIButton) {
-        
+        guard delegate != nil else { return }
+        delegate.filterCancel()
     }
     
     required init?(coder aDecoder: NSCoder) {

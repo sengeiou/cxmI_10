@@ -10,6 +10,15 @@ import UIKit
 
 class FootballFilterCell: UICollectionViewCell {
     
+    public var filterModel : FilterModel! {
+        didSet{
+            
+            selected(filterModel.isSelected)
+            
+            //self.filterModel.isSelected = !self.filterModel.isSelected
+        }
+    }
+    
     public var isSelectedItem: Bool! {
         didSet{
             selected(isSelectedItem)
@@ -21,7 +30,7 @@ class FootballFilterCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         initSubview()
-        isSelectedItem = false
+        //isSelectedItem = false
     }
     
     override func layoutSubviews() {
@@ -32,14 +41,8 @@ class FootballFilterCell: UICollectionViewCell {
     }
     
     private func initSubview() {
-        self.layer.borderWidth = 0.5
+        self.layer.borderWidth = 0.3
         self.layer.borderColor = ColorC8C8C8.cgColor
-        
-        let seview = UIView()
-        seview.backgroundColor = ColorEA5504
-        self.selectedBackgroundView = seview
-        
-    
         
         title = UILabel()
         title.font = Font14
@@ -49,11 +52,9 @@ class FootballFilterCell: UICollectionViewCell {
         
         self.contentView.addSubview(title)
         
-       
     }
     
     private func selected(_ selected: Bool) {
-        //isSelectedItem = !isSelectedItem
         
         if selected == true {
             self.backgroundColor = ColorEA5504

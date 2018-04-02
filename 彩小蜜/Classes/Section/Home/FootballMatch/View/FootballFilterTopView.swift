@@ -51,9 +51,9 @@ class FootballFilterTopView: UIView {
             make.width.equalTo(reverseBut)
         }
         vLineOne.snp.makeConstraints { (make) in
-            make.top.equalTo(10)
-            make.bottom.equalTo(-10)
-            make.width.equalTo(1)
+            make.top.equalTo(5)
+            make.bottom.equalTo(-5)
+            make.width.equalTo(0.3)
             make.right.equalTo(reverseBut.snp.left)
         }
         vLineTwo.snp.makeConstraints { (make) in
@@ -64,7 +64,7 @@ class FootballFilterTopView: UIView {
     
     private func initSubview() {
         self.backgroundColor = ColorFFFFFF
-        self.layer.borderWidth = 0.5
+        self.layer.borderWidth = 0.3
         self.layer.borderColor = ColorC8C8C8.cgColor
         
         vLineOne = UIView()

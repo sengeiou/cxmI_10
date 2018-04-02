@@ -54,6 +54,7 @@
 		E55016F5207220100056AB1F /* FootballFilterBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55016F4207220100056AB1F /* FootballFilterBottomView.swift */; };
 		E55016F7207228220056AB1F /* FootballFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55016F6207228220056AB1F /* FootballFilterCell.swift */; };
 		E55016F920722E190056AB1F /* FootballFilterTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55016F820722E190056AB1F /* FootballFilterTopView.swift */; };
+		E55016FB20724E4E0056AB1F /* FootballFilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55016FA20724E4E0056AB1F /* FootballFilterModel.swift */; };
 		E562989C2050D1DD006397EA /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E562989B2050D1DD006397EA /* RegisterViewController.swift */; };
 		E562989F2050E04C006397EA /* ValidateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E562989E2050E04C006397EA /* ValidateProtocol.swift */; };
 		E56298A32050E712006397EA /* AlertProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56298A22050E712006397EA /* AlertProtocol.swift */; };
@@ -224,6 +225,7 @@
 		E55016F4207220100056AB1F /* FootballFilterBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballFilterBottomView.swift; sourceTree = "<group>"; };
 		E55016F6207228220056AB1F /* FootballFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballFilterCell.swift; sourceTree = "<group>"; };
 		E55016F820722E190056AB1F /* FootballFilterTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballFilterTopView.swift; sourceTree = "<group>"; };
+		E55016FA20724E4E0056AB1F /* FootballFilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballFilterModel.swift; sourceTree = "<group>"; };
 		E562989B2050D1DD006397EA /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		E562989E2050E04C006397EA /* ValidateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateProtocol.swift; sourceTree = "<group>"; };
 		E56298A22050E712006397EA /* AlertProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertProtocol.swift; sourceTree = "<group>"; };
@@ -1293,6 +1295,7 @@
 			isa = PBXGroup;
 			children = (
 				E5786FB3206DE19F0045F7F5 /* FootballMatchModel.swift */,
+				E55016FA20724E4E0056AB1F /* FootballFilterModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1667,6 +1670,7 @@
 				E56CE80C206A21670090A1B5 /* WithdrawalProgressVC.swift in Sources */,
 				E512A96D20480917003F14F4 /* HomeDataModel.swift in Sources */,
 				E51F9A56205A11EA00AB8A21 /* MobileTextFieldCell.swift in Sources */,
+				E55016FB20724E4E0056AB1F /* FootballFilterModel.swift in Sources */,
 				E59CB3E1205BBD900086DD0E /* HomeFootballCell.swift in Sources */,
 				E537397D2057F7220087E4E6 /* RealInfoDataModel.swift in Sources */,
 				E58B57BA2056364A0025E2F1 /* AddNewBankCardVC.swift in Sources */,

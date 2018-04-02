@@ -18,7 +18,8 @@ fileprivate let leftInset: CGFloat = 0
 
 fileprivate let FootballFilterCellId = "FootballFilterCellId"
 
-class FootballMatchFilterVC: BasePopViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, FootballFilterTopViewDelegate {
+class FootballMatchFilterVC: BasePopViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, FootballFilterTopViewDelegate, FootballFilterBottomViewDelegate {
+   
     
     
 
@@ -28,10 +29,19 @@ class FootballMatchFilterVC: BasePopViewController, UICollectionViewDelegate, UI
     private var bgView: UIView!
     private var titleLB: UILabel!
     
+    private var filterList: [FilterModel]!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         initSubview()
+        
+        filterList = [FilterModel]()
+        
+        for _ in 0...8 {
+            let fil = FilterModel()
+            filterList.append(fil)
+        }
         
     }
     
@@ -67,7 +77,9 @@ class FootballMatchFilterVC: BasePopViewController, UICollectionViewDelegate, UI
     }
     private func initSubview() {
         topView = FootballFilterTopView()
+        topView.delegate = self
         bottomView = FootballFilterBottomView()
+        bottomView.delegate = self
         
         bgView = UIView()
         bgView.backgroundColor = ColorFFFFFF
@@ -106,10 +118,13 @@ class FootballMatchFilterVC: BasePopViewController, UICollectionViewDelegate, UI
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 9
+        return filterList.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FootballFilterCellId, for: indexPath) as! FootballFilterCell
+        
+        cell.filterModel = self.filterList[indexPath.row]
+        
         return cell 
     }
     
@@ -127,20 +142,26 @@ class FootballMatchFilterVC: BasePopViewController, UICollectionViewDelegate, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! FootballFilterCell
-        
-        cell.isSelectedItem = true
+        let filter = filterList[indexPath.row]
+        filter.isSelected = !filter.isSelected
+        collectionView.reloadItems(at: [indexPath])
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! FootballFilterCell
-        
-        cell.isSelectedItem = false
+        let filter = filterList[indexPath.row]
+        filter.isSelected = !filter.isSelected
+        collectionView.reloadItems(at: [indexPath])
     }
-   
+    
     // MARK: - TOP VIEW Delegate
     // 全选
     func allSelected() {
+        for  index in 0..<filterList.count {
+            let indexPath = IndexPath(item: index, section: 0)
+            let filter = filterList[indexPath.row]
+            filter.isSelected = true
+            self.collectionView.reloadItems(at: [indexPath])
+        }
         
     }
     // 反选
@@ -151,6 +172,21 @@ class FootballMatchFilterVC: BasePopViewController, UICollectionViewDelegate, UI
     func fiveSelected() {
         
     }
+    
+    func filterConfirm() {
+        var i = 0
+        for filter in self.filterList {
+            if filter.isSelected == true {
+                print(i)
+            }
+            i += 1
+        }
+    }
+    
+    func filterCancel() {
+        
+    }
+    
     
     
     override func didReceiveMemoryWarning() {
