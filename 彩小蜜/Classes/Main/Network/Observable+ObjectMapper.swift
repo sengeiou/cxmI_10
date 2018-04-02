@@ -63,9 +63,16 @@ extension Observable where E == Response {
             guard json["code"] as! String == "0", var data = json["data"] as? [String: Any] else {
                 throw HXError.UnexpectedResult(resultCode: json["code"] as? String , resultMsg: json["msg"] as? String )
             }
-            
-           
+
             data["showMsg"] = json["msg"] as! String
+            
+            print("""
+                ********---------数据----------******
+                
+                \(data)
+                
+                ************************************
+                """)
             
             return JSONDeserializer<T>.deserializeFrom(dict: data)!
         }

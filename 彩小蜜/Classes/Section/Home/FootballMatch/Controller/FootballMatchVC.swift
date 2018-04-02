@@ -41,7 +41,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = matchType.rawValue
-        
+        setEmpty(title: "暂无可选赛事", tableView)
         initSubview()
         list = [FootballMatchModel]()
         
@@ -79,12 +79,12 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     }
     // MARK: - 网络请求
     // MARK: - 懒加载
-    lazy private var topView: FootballTopView = {
+    lazy public var topView: FootballTopView = {
         let topView = FootballTopView()
         return topView
     }()
     
-    lazy private var bottomView: FootballBottomView = {
+    lazy public var bottomView: FootballBottomView = {
         let bottomView = FootballBottomView()
         bottomView.delegate = self
         return bottomView
@@ -222,6 +222,24 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return nil
+    }
+    
+    // MARK: - RIGHT ITEM
+    private func setRightButtonItem() {
+        
+        let rightBut = UIButton(type: .custom)
+        rightBut.frame = CGRect(x: 0, y: 0, width: 16, height: 16)
+        
+        rightBut.setBackgroundImage(UIImage(named:"ret"), for: .normal)
+        
+        rightBut.addTarget(self, action: #selector(showMenu(_:)), for: .touchUpInside)
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightBut)
+    }
+    
+    @objc private func showMenu(_ sender: UIButton) {
+        let filter = FootballMatchFilterVC()
+        pushViewController(vc: filter)
     }
     
     // MARK: - delegate

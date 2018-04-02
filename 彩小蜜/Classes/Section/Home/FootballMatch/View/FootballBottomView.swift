@@ -52,7 +52,7 @@ class FootballBottomView: UIView {
         titleLB.font = Font14
         titleLB.textColor = Color787878
         titleLB.textAlignment = .left
-        titleLB.text = "您共选择3场非单关比赛"
+        titleLB.text = "您共选择0场非单关比赛"
         
         deleteBut = UIButton(type: .custom)
         deleteBut.setBackgroundImage(UIImage(named: "empty"), for: .normal)

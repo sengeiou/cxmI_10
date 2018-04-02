@@ -50,6 +50,7 @@ extension FootballRequestPro where Self: FootballMatchVC {
                     weakSelf?.matchList.insert(footb, at: 0)
                     
                 }
+                self.topView.number = data.playList.count
                 weakSelf?.tableView.reloadData()
             }, onError: { (error) in
                 guard let err = error as? HXError else { return }

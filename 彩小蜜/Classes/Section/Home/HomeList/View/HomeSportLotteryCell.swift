@@ -10,14 +10,15 @@ import UIKit
 
 fileprivate let homeFootballCellIdentifier = "homeFootballCellIdentifier"
 
-fileprivate let sectionLeftSpacing = 30
-
+fileprivate let sectionLeftSpacing: CGFloat = 20 * defaultScale
+let HomesectionTopSpacing : CGFloat = 10
+let HomeSectionViewHeight : CGFloat = 44 * defaultScale
 let HorizontalItemCount = 4
 
-let FootballCellLineSpacing: CGFloat = 10
-let FootballCellInteritemSpacing: CGFloat = (screenWidth - CGFloat(sectionLeftSpacing) * 2 - FootballCellWidth * 4.0) / 3.0
-let FootballCellWidth : CGFloat = (screenWidth - 40 * 3 - CGFloat(sectionLeftSpacing) * 2) / CGFloat(HorizontalItemCount)
-let FootballCellHeight : CGFloat = 90
+let FootballCellLineSpacing: CGFloat = 10 * defaultScale
+let FootballCellInteritemSpacing: CGFloat = 20 * defaultScale
+let FootballCellWidth : CGFloat = (screenWidth - (FootballCellInteritemSpacing * CGFloat(HorizontalItemCount - 1)) - sectionLeftSpacing * 2) / CGFloat(HorizontalItemCount)
+let FootballCellHeight : CGFloat = 90 * defaultScale
 
 protocol HomeSportLotteryCellDelegate {
     func didSelectItem() -> Void
@@ -26,7 +27,16 @@ protocol HomeSportLotteryCellDelegate {
 
 class HomeSportLotteryCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
     
+    public var playList : [HomePlayModel]! {
+        didSet{
+            self.collectionView.reloadData()
+        }
+    }
+    
     public var delegate: HomeSportLotteryCellDelegate!
+    
+    private var title : UILabel!
+    private var line : UIView!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -35,8 +45,24 @@ class HomeSportLotteryCell: UITableViewCell, UICollectionViewDataSource, UIColle
     }
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+        line.snp.makeConstraints { (make) in
+            make.top.equalTo(HomeSectionViewHeight)
+            make.left.equalTo(10 * defaultScale)
+            make.right.equalTo(-10 * defaultScale)
+            make.height.equalTo(0.5)
+        }
+        
+        title.snp.makeConstraints { (make) in
+            make.top.equalTo(0)
+            make.bottom.equalTo(line.snp.top).offset(0)
+            make.left.equalTo(leftSpacing)
+            make.right.equalTo(-rightSpacing)
+        }
+        
         collectionView.snp.makeConstraints { (make) in
-            make.top.bottom.equalTo(self.contentView)
+            make.top.equalTo(line.snp.bottom)
+            make.bottom.equalTo(self.contentView)
             make.left.equalTo(self.contentView).offset(0)
             make.right.equalTo(self.contentView).offset(-0)
         }
@@ -44,6 +70,17 @@ class HomeSportLotteryCell: UITableViewCell, UICollectionViewDataSource, UIColle
     
     private func initSubview() {
         self.selectionStyle = .none
+        title = UILabel()
+        title.font = Font15
+        title.textColor = Color505050
+        title.textAlignment = .left
+        title.text = "竞彩足球"
+        
+        line = UIView()
+        line.backgroundColor = ColorF4F4F4
+        
+        self.contentView.addSubview(line)
+        self.contentView.addSubview(title)
         self.contentView.addSubview(collectionView)
     }
     
@@ -70,12 +107,13 @@ class HomeSportLotteryCell: UITableViewCell, UICollectionViewDataSource, UIColle
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        guard playList != nil , playList.isEmpty != true else { return 0 }
+        return playList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: homeFootballCellIdentifier, for: indexPath) as! HomeFootballCell
-        
+        cell.playModel = self.playList[indexPath.row]
         return cell
     }
     
@@ -89,7 +127,7 @@ class HomeSportLotteryCell: UITableViewCell, UICollectionViewDataSource, UIColle
         return FootballCellInteritemSpacing
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 10, left: 30, bottom: 10, right: 30)
+        return UIEdgeInsets(top: HomesectionTopSpacing, left: sectionLeftSpacing, bottom: HomesectionTopSpacing, right: sectionLeftSpacing)
     }
     
     

@@ -13,6 +13,11 @@ fileprivate let headerCellIdentifier = "headerCellIdentifier"
 
 class HomeHeaderView: UIView, FSPagerViewDataSource, FSPagerViewDelegate {
 
+    public var bannerList : [BannerModel]! {
+        didSet{
+            self.viewPager.reloadData()
+        }
+    }
     
     init() {
         super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: bannerHeight))
@@ -43,13 +48,13 @@ class HomeHeaderView: UIView, FSPagerViewDataSource, FSPagerViewDelegate {
         viewPager.delegate = self
         viewPager.register(FSPagerViewCell.self, forCellWithReuseIdentifier: headerCellIdentifier)
         //设置自动翻页事件间隔，默认值为0（不自动翻页）
-        viewPager.automaticSlidingInterval = 2.0
+        viewPager.automaticSlidingInterval = 3.0
         //设置页面之间的间隔距离
         viewPager.interitemSpacing = 8.0
         //设置可以无限翻页，默认值为false，false时从尾部向前滚动到头部再继续循环滚动，true时可以无限滚动
         viewPager.isInfinite = true
         //设置转场的模式
-        viewPager.transformer = FSPagerViewTransformer(type: FSPagerViewTransformerType.depth)
+        viewPager.transformer = FSPagerViewTransformer(type: FSPagerViewTransformerType.linear)
         
         return viewPager
     }()
@@ -64,11 +69,18 @@ class HomeHeaderView: UIView, FSPagerViewDataSource, FSPagerViewDelegate {
     }()
     
     func numberOfItems(in pagerView: FSPagerView) -> Int {
-        return 5
+        guard bannerList != nil else { return 0 }
+        return bannerList.count
     }
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
         let cell = pagerView.dequeueReusableCell(withReuseIdentifier: headerCellIdentifier, at: index)
-        cell.imageView?.image = UIImage(named: "sec_sel")
+        
+        let banner = bannerList[index]
+        
+        if let url = URL(string: banner.bannerImage) {
+            cell.imageView?.kf.setImage(with: url)
+        }
+        
         return cell
     }
     func pagerViewDidScroll(_ pagerView: FSPagerView) {
@@ -76,6 +88,12 @@ class HomeHeaderView: UIView, FSPagerViewDataSource, FSPagerViewDelegate {
             return
         }
         self.pageControl.currentPage = pagerView.currentIndex // Or Use KVO with property "currentIndex"
+    }
+    
+    func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
+        if  bannerList != nil {
+            let banner = bannerList[index]
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

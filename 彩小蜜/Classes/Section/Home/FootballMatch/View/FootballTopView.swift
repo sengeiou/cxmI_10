@@ -10,6 +10,12 @@ import UIKit
 
 class FootballTopView: UIView {
 
+    public var number : Int = 0 {
+        didSet{
+            titleLB.text = "共有\(number)场比赛可投"
+        }
+    }
+    
     private var titleLB: UILabel!
     private var bgView: UIView!
     init() {
@@ -40,7 +46,7 @@ class FootballTopView: UIView {
         titleLB.font = Font14
         titleLB.textColor = Color787878
         titleLB.textAlignment = .left
-        titleLB.text = "共有********场比赛可投"
+        titleLB.text = "共有\(number)场比赛可投"
         
         bgView.addSubview(titleLB)
         self.addSubview(bgView)

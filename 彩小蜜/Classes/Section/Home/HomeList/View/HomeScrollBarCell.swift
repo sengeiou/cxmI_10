@@ -13,6 +13,12 @@ fileprivate let ScrollCellIdentifier = "ScrollCellIdentifier"
 
 class HomeScrollBarCell: UITableViewCell, FSPagerViewDataSource, FSPagerViewDelegate {
 
+    public var winningList : [WinningMsgModel]! {
+        didSet{
+            self.viewPager.reloadData()
+        }
+    }
+    
     private var bgView: UIView!
     private var icon : UIImageView!
     
@@ -47,6 +53,8 @@ class HomeScrollBarCell: UITableViewCell, FSPagerViewDataSource, FSPagerViewDele
     }
     
     private func initSubview() {
+        self.selectionStyle = .none
+        
         bgView = UIView()
         bgView.backgroundColor = ColorF4F4F4
         
@@ -80,12 +88,15 @@ class HomeScrollBarCell: UITableViewCell, FSPagerViewDataSource, FSPagerViewDele
     }()
     
     func numberOfItems(in pagerView: FSPagerView) -> Int {
-        return 5
+        guard winningList != nil , winningList.isEmpty == false else { return 0 }
+        return winningList.count
     }
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
         let cell = pagerView.dequeueReusableCell(withReuseIdentifier: ScrollCellIdentifier, at: index)
         
-        cell.textLabel?.text = "中奖信息：恭喜【138…672】投注竟足中奖888.88元"
+        let winning = winningList[index]
+        
+        cell.textLabel?.text = winning.winningMsg
         cell.textLabel?.font = Font10
         cell.textLabel?.textColor = ColorA0A0A0
         cell.textLabel?.superview?.backgroundColor = ColorFFFFFF

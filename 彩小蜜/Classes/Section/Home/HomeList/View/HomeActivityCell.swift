@@ -10,9 +10,11 @@ import UIKit
 
 class HomeActivityCell: UITableViewCell {
 
-    public var imageStr : String! {
+    public var activityModel : HomeActivityModel! {
         didSet{
-            
+            if let url = URL(string: activityModel.actImg) {
+                icon.kf.setImage(with: url)
+            }
         }
     }
     
@@ -31,6 +33,8 @@ class HomeActivityCell: UITableViewCell {
     }
     
     private func initSubview() {
+        self.selectionStyle = .none
+        
         icon = UIImageView()
         
         self.contentView.addSubview(icon)

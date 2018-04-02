@@ -10,6 +10,16 @@ import UIKit
 
 class HomeFootballCell: UICollectionViewCell {
     
+    public var playModel: HomePlayModel! {
+        didSet{
+            if let url = URL(string: playModel.playClassifyImg) {
+                icon.kf.setImage(with: url)
+            }
+            
+            title.text = playModel.playClassifyName
+        }
+    }
+    
     private var icon : UIImageView!
     private var title : UILabel!
     private var activityIcon : UIImageView!
@@ -23,8 +33,8 @@ class HomeFootballCell: UICollectionViewCell {
         super.layoutSubviews()
         icon.snp.makeConstraints { (make) in
             make.top.equalTo(self.contentView).offset(5)
-            make.left.equalTo(self.contentView).offset(1)
-            make.right.equalTo(self.contentView).offset(-1)
+            make.left.equalTo(self.contentView).offset(10 * defaultScale)
+            make.right.equalTo(self.contentView).offset(-10 * defaultScale)
             make.height.equalTo(icon.snp.width)
         }
         title.snp.makeConstraints { (make) in

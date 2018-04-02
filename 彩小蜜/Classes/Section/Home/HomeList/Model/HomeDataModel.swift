@@ -11,12 +11,10 @@ import HandyJSON
 
 
 struct HomeDataModel : HandyJSON {
-    
     var activity: HomeActivityModel!
     var dlPlayClassifyDetailDTOs: [HomePlayModel]!
     var navBanners: [BannerModel]!
     var winningMsgs: [WinningMsgModel]!
-    
 }
 
 /// 玩法

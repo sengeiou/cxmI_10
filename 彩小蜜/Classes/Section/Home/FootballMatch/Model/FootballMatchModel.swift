@@ -8,6 +8,14 @@
 
 import Foundation
 import HandyJSON
+class FootballMatchData : HandyJSON {
+    required init() { }
+    
+    var allMatchCount: String!
+    var playList: [FootballMatchModel]!
+    var hotPlayList: [FootballPlayListModel]!
+    
+}
 
 class FootballMatchModel: HandyJSON {
     var isSpreading : Bool! = true
@@ -57,13 +65,6 @@ class FootballPlayCellModel: HandyJSON {
     var cellOdds: String!
 }
 
-class FootballMatchData : HandyJSON {
-    required init() { }
-    
-    var allMatchCount: String!
-    var playList: [FootballMatchModel]!
-    var hotPlayList: [FootballPlayListModel]!
-    
-}
+
 
 
