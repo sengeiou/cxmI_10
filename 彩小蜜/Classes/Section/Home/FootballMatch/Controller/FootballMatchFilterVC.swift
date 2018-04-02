@@ -162,11 +162,15 @@ class FootballMatchFilterVC: BasePopViewController, UICollectionViewDelegate, UI
             filter.isSelected = true
             self.collectionView.reloadItems(at: [indexPath])
         }
-        
     }
     // 反选
     func reverseSelected() {
-        
+        for index in 0..<filterList.count {
+            let indexPath = IndexPath(item: index, section: 0)
+            let filter = filterList[indexPath.row]
+            filter.isSelected = !filter.isSelected
+            self.collectionView.reloadItems(at: [indexPath])
+        }
     }
     // 仅五大联赛
     func fiveSelected() {
