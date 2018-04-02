@@ -51,6 +51,9 @@
 		E537397D2057F7220087E4E6 /* RealInfoDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E537397C2057F7220087E4E6 /* RealInfoDataModel.swift */; };
 		E537397F2057F8F40087E4E6 /* BankCardInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E537397E2057F8F40087E4E6 /* BankCardInfo.swift */; };
 		E55016F3207208A80056AB1F /* HomeWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55016F2207208A80056AB1F /* HomeWebViewController.swift */; };
+		E55016F5207220100056AB1F /* FootballFilterBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55016F4207220100056AB1F /* FootballFilterBottomView.swift */; };
+		E55016F7207228220056AB1F /* FootballFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55016F6207228220056AB1F /* FootballFilterCell.swift */; };
+		E55016F920722E190056AB1F /* FootballFilterTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55016F820722E190056AB1F /* FootballFilterTopView.swift */; };
 		E562989C2050D1DD006397EA /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E562989B2050D1DD006397EA /* RegisterViewController.swift */; };
 		E562989F2050E04C006397EA /* ValidateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E562989E2050E04C006397EA /* ValidateProtocol.swift */; };
 		E56298A32050E712006397EA /* AlertProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56298A22050E712006397EA /* AlertProtocol.swift */; };
@@ -218,6 +221,9 @@
 		E537397C2057F7220087E4E6 /* RealInfoDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealInfoDataModel.swift; sourceTree = "<group>"; };
 		E537397E2057F8F40087E4E6 /* BankCardInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankCardInfo.swift; sourceTree = "<group>"; };
 		E55016F2207208A80056AB1F /* HomeWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWebViewController.swift; sourceTree = "<group>"; };
+		E55016F4207220100056AB1F /* FootballFilterBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballFilterBottomView.swift; sourceTree = "<group>"; };
+		E55016F6207228220056AB1F /* FootballFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballFilterCell.swift; sourceTree = "<group>"; };
+		E55016F820722E190056AB1F /* FootballFilterTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballFilterTopView.swift; sourceTree = "<group>"; };
 		E562989B2050D1DD006397EA /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		E562989E2050E04C006397EA /* ValidateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateProtocol.swift; sourceTree = "<group>"; };
 		E56298A22050E712006397EA /* AlertProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertProtocol.swift; sourceTree = "<group>"; };
@@ -1276,6 +1282,9 @@
 				E5786FBD206DE9BD0045F7F5 /* FootballBanQuanCCell.swift */,
 				E5786FBF206DEA650045F7F5 /* Football2-1Cell.swift */,
 				E5786FC1206DEAB30045F7F5 /* FootballHunheCell.swift */,
+				E55016F4207220100056AB1F /* FootballFilterBottomView.swift */,
+				E55016F820722E190056AB1F /* FootballFilterTopView.swift */,
+				E55016F6207228220056AB1F /* FootballFilterCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1662,6 +1671,7 @@
 				E537397D2057F7220087E4E6 /* RealInfoDataModel.swift in Sources */,
 				E58B57BA2056364A0025E2F1 /* AddNewBankCardVC.swift in Sources */,
 				E51F9A64205A2A2D00AB8A21 /* ForgetPswVCodeFooterView.swift in Sources */,
+				E55016F7207228220056AB1F /* FootballFilterCell.swift in Sources */,
 				E56CE814206A33310090A1B5 /* MessageCenterModel.swift in Sources */,
 				E56CE818206A47720090A1B5 /* AboutCell.swift in Sources */,
 				E58B57C5205676CB0025E2F1 /* MeNetAPIManager.swift in Sources */,
@@ -1694,6 +1704,7 @@
 				E56CE80E206A22240090A1B5 /* WithdrawalProgressCell.swift in Sources */,
 				E5973E20204E34A3006461CE /* FontConstraint.swift in Sources */,
 				E56CE812206A23070090A1B5 /* WithdrawalProgressHeader.swift in Sources */,
+				E55016F920722E190056AB1F /* FootballFilterTopView.swift in Sources */,
 				E567636A206B2FDA00E2D9A8 /* HHTextView.swift in Sources */,
 				E5973E33204FC1D9006461CE /* MeFooterView.swift in Sources */,
 				E581F37C2063573C002AB9F7 /* PaymentNetAPIManager.swift in Sources */,
@@ -1736,6 +1747,7 @@
 				E5883F522068DFBF00CB3A46 /* OrderSchemeTitleCell.swift in Sources */,
 				E57375A320468B8900148622 /* AppDelegate.swift in Sources */,
 				E51F9A5C205A29B800AB8A21 /* RegisterFooterView.swift in Sources */,
+				E55016F5207220100056AB1F /* FootballFilterBottomView.swift in Sources */,
 				E5973E1E204D50BC006461CE /* CustomTextField.swift in Sources */,
 				E5786FBC206DE98A0045F7F5 /* FootballScoreCell.swift in Sources */,
 				E5D5A37B206D193100FC865D /* FootballBottomView.swift in Sources */,

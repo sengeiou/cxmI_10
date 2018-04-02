@@ -84,6 +84,7 @@ class HomeSportLotteryCell: UITableViewCell, UICollectionViewDataSource, UIColle
         self.contentView.addSubview(collectionView)
     }
     
+    // MARK: - 懒加载
     lazy public var collectionView: UICollectionView = {
         
         let layout = UICollectionViewFlowLayout()

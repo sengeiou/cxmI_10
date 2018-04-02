@@ -10,7 +10,7 @@ import UIKit
 
 class FootballTopView: UIView {
 
-    public var number : Int = 0 {
+    public var number : String = "0" {
         didSet{
             titleLB.text = "共有\(number)场比赛可投"
         }

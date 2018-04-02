@@ -61,7 +61,9 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
         }
     }
     
-    
+    public func present(_ vc: UIViewController) {
+        self.present(vc, animated: true, completion: nil)
+    }
     
     public func hideBackBut() {
         self.navigationItem.leftBarButtonItem = nil

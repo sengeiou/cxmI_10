@@ -34,22 +34,16 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     // MARK: - 属性
     public var matchType: FootballMatchType = .胜平负
     
-    private var list : [FootballMatchModel]!
     public var matchList : [FootballMatchModel]!
     public var matchData : FootballMatchData!
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = matchType.rawValue
-        setEmpty(title: "暂无可选赛事", tableView)
         initSubview()
-        list = [FootballMatchModel]()
-        
-        for _ in 0...3 {
-            let one = FootballMatchModel()
-            list.append(one)
-        }
+        setEmpty(title: "暂无可选赛事", tableView)
         footballRequest()
+        setRightButtonItem()
     }
     
     override func viewDidLayoutSubviews() {
@@ -126,7 +120,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let header = list[section]
+        let header = matchList[section]
         
         if header.isSpreading == true {
             let matchModel = matchList[section]
@@ -224,13 +218,13 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         return nil
     }
     
-    // MARK: - RIGHT ITEM
+    // MARK: - right bar item
     private func setRightButtonItem() {
         
         let rightBut = UIButton(type: .custom)
         rightBut.frame = CGRect(x: 0, y: 0, width: 16, height: 16)
         
-        rightBut.setBackgroundImage(UIImage(named:"ret"), for: .normal)
+        rightBut.setBackgroundImage(UIImage(named:"Details"), for: .normal)
         
         rightBut.addTarget(self, action: #selector(showMenu(_:)), for: .touchUpInside)
         
@@ -239,12 +233,13 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     
     @objc private func showMenu(_ sender: UIButton) {
         let filter = FootballMatchFilterVC()
-        pushViewController(vc: filter)
+        filter.popStyle = .fromCenter
+        present(filter)
     }
     
     // MARK: - delegate
     func spread(sender: UIButton, section: Int) {
-        let header = list[section]
+        let header = matchList[section]
         
         header.isSpreading = !header.isSpreading
         
