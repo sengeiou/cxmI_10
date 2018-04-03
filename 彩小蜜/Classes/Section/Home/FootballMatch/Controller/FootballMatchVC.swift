@@ -270,7 +270,9 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         }
     }
     func confirm() {
-        
+        let order = FootballOrderConfirmVC()
+        order.selectPlayList = selectPlayList
+        pushViewController(vc: order)
     }
     
     

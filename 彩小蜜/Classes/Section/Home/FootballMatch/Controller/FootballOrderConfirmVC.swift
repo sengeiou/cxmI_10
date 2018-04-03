@@ -26,10 +26,28 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = matchType.rawValue
+        self.title = "彩小秘 · 投注确认"
         initSubview()
         setEmpty(title: "暂无可选赛事", tableView)
         setRightButtonItem()
+    }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableView.snp.makeConstraints { (make) in
+            make.top.equalTo(topView.snp.bottom)
+            make.left.right.equalTo(self.view)
+            make.bottom.equalTo(bottomView.snp.top)
+        }
+        topView.snp.makeConstraints { (make) in
+            make.left.right.equalTo(self.view)
+            make.top.equalTo(self.view).offset(SafeAreaTopHeight)
+            make.height.equalTo(44 * defaultScale)
+        }
+        bottomView.snp.makeConstraints { (make) in
+            make.left.right.equalTo(self.view)
+            make.height.equalTo(44 * defaultScale + SafeAreaBottomHeight)
+            make.bottom.equalTo(-0)
+        }
     }
     // MARK: - 初始化子视图
     private func initSubview() {
@@ -39,8 +57,8 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     // MARK: - 懒加载
-    lazy public var topView: FootballTopView = {
-        let topView = FootballTopView()
+    lazy public var topView: FootballOrderTopView = {
+        let topView = FootballOrderTopView()
         return topView
     }()
     
@@ -52,30 +70,29 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     
     lazy var tableView : UITableView = {
         let table = UITableView(frame: CGRect.zero, style: .grouped)
-        
         table.delegate = self
         table.dataSource = self
         table.backgroundColor = ColorF4F4F4
-        table.register(FootballSectionHeader.self, forHeaderFooterViewReuseIdentifier: "FootballSectionHeaderId")
         registerCell(table)
         return table
     }()
+    
     private func registerCell(_ table: UITableView) {
         switch matchType {
         case .胜平负:
-            table.register(FootballSPFCell.self, forCellReuseIdentifier: FootballOrderSPFCellId)
+            table.register(FootballOrderSPFCell.self, forCellReuseIdentifier: FootballOrderSPFCellId)
         case .让球胜平负:
-            table.register(FootballRangSPFCell.self, forCellReuseIdentifier: FootballOrderRangSPFCellId)
+            table.register(FootballOrderRangSPFCell.self, forCellReuseIdentifier: FootballOrderRangSPFCellId)
         case .总进球:
-            table.register(FootballTotalCell.self, forCellReuseIdentifier: FootballOrderTotalCellId)
+            table.register(FootballOrderTotalCell.self, forCellReuseIdentifier: FootballOrderTotalCellId)
         case .比分:
-            table.register(FootballScoreCell.self, forCellReuseIdentifier: FootballOrderScoreCellId)
+            table.register(FootballOrderScoreCell.self, forCellReuseIdentifier: FootballOrderScoreCellId)
         case .半全场:
-            table.register(FootballBanQuanCCell.self, forCellReuseIdentifier: FootballOrderBanQuanCCellId)
+            table.register(FootballOrderBanQuanCCell.self, forCellReuseIdentifier: FootballOrderBanQuanCCellId)
         case .二选一:
-            table.register(Football2_1Cell.self, forCellReuseIdentifier: FootballOrder2_1CellId)
+            table.register(FootballOrder2_1Cell.self, forCellReuseIdentifier: FootballOrder2_1CellId)
         case .混合过关:
-            table.register(FootballHunheCell.self, forCellReuseIdentifier: FootballOrderHunheCellId)
+            table.register(FootballOrderHunheCell.self, forCellReuseIdentifier: FootballOrderHunheCellId)
         }
     }
     
@@ -90,6 +107,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         switch matchType {
         case .胜平负:
             return initSPFCell(indexPath: indexPath)
@@ -110,9 +128,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     
     private func initSPFCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballOrderSPFCellId, for: indexPath) as! FootballOrderSPFCell
-        
-        
-        
+        cell.playInfoModel = selectPlayList[indexPath.section]
         return cell
     }
     private func initRangSPFCell(indexPath: IndexPath) -> UITableViewCell {
@@ -151,10 +167,10 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 88 * defaultScale
+        return 96 * defaultScale
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 0.01
+        return 5
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.01

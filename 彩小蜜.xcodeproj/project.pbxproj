@@ -65,6 +65,7 @@
 		E550D89F207339F9002DDE23 /* FootballOrderBanQuanCCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E550D89E207339F9002DDE23 /* FootballOrderBanQuanCCell.swift */; };
 		E550D8A120733A0F002DDE23 /* FootballOrder2-1Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E550D8A020733A0F002DDE23 /* FootballOrder2-1Cell.swift */; };
 		E550D8A320733A2D002DDE23 /* FootballOrderHunheCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E550D8A220733A2D002DDE23 /* FootballOrderHunheCell.swift */; };
+		E550D8A52073598E002DDE23 /* FootballOrderTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E550D8A42073598E002DDE23 /* FootballOrderTopView.swift */; };
 		E562989C2050D1DD006397EA /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E562989B2050D1DD006397EA /* RegisterViewController.swift */; };
 		E562989F2050E04C006397EA /* ValidateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E562989E2050E04C006397EA /* ValidateProtocol.swift */; };
 		E56298A32050E712006397EA /* AlertProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56298A22050E712006397EA /* AlertProtocol.swift */; };
@@ -246,6 +247,7 @@
 		E550D89E207339F9002DDE23 /* FootballOrderBanQuanCCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballOrderBanQuanCCell.swift; sourceTree = "<group>"; };
 		E550D8A020733A0F002DDE23 /* FootballOrder2-1Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FootballOrder2-1Cell.swift"; sourceTree = "<group>"; };
 		E550D8A220733A2D002DDE23 /* FootballOrderHunheCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballOrderHunheCell.swift; sourceTree = "<group>"; };
+		E550D8A42073598E002DDE23 /* FootballOrderTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballOrderTopView.swift; sourceTree = "<group>"; };
 		E562989B2050D1DD006397EA /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		E562989E2050E04C006397EA /* ValidateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateProtocol.swift; sourceTree = "<group>"; };
 		E56298A22050E712006397EA /* AlertProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertProtocol.swift; sourceTree = "<group>"; };
@@ -434,6 +436,7 @@
 		E550D89520733959002DDE23 /* OrderView */ = {
 			isa = PBXGroup;
 			children = (
+				E550D8A42073598E002DDE23 /* FootballOrderTopView.swift */,
 				E550D89320733891002DDE23 /* FootballOrderBottomView.swift */,
 				E550D896207339A4002DDE23 /* FootballOrderSPFCell.swift */,
 				E550D898207339B6002DDE23 /* FootballOrderRangSPFCell.swift */,
@@ -1787,6 +1790,7 @@
 				E581F378206348EB002AB9F7 /* UserInfoManager.swift in Sources */,
 				E5D5A379206D191C00FC865D /* FootballTopView.swift in Sources */,
 				E51F9A60205A29EE00AB8A21 /* VCodeLoginFooterView.swift in Sources */,
+				E550D8A52073598E002DDE23 /* FootballOrderTopView.swift in Sources */,
 				E5883F6020690E8B00CB3A46 /* AccountDetailsCell.swift in Sources */,
 				E51F9A58205A120A00AB8A21 /* PasswordTextFieldCell.swift in Sources */,
 				E50643B0206CBE800046A2D4 /* BannerModel.swift in Sources */,
