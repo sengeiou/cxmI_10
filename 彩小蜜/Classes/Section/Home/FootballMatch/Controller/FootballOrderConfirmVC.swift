@@ -45,7 +45,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         }
         bottomView.snp.makeConstraints { (make) in
             make.left.right.equalTo(self.view)
-            make.height.equalTo(44 * defaultScale + SafeAreaBottomHeight)
+            make.height.equalTo(118 * defaultScale + SafeAreaBottomHeight)
             make.bottom.equalTo(-0)
         }
     }
@@ -128,6 +128,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     
     private func initSPFCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballOrderSPFCellId, for: indexPath) as! FootballOrderSPFCell
+        cell.teamView.delegate = self 
         cell.playInfoModel = selectPlayList[indexPath.section]
         return cell
     }
@@ -181,15 +182,14 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     func select(teamInfo: FootballPlayListModel) {
-        
+        guard selectPlayList != nil else { return }
+        selectPlayList.append(teamInfo)
     }
     
     func deSelect(teamInfo: FootballPlayListModel) {
-        
+        guard selectPlayList != nil else { return }
+        selectPlayList.remove(teamInfo)
     }
-    
-    
-    
     
     // MARK: - right bar item
     private func setRightButtonItem() {
