@@ -29,6 +29,13 @@ class BasePopViewController: UIViewController {
         }
     }
     
+    public var viewHeight : CGFloat = 300 {
+        didSet{
+            pushBgView.snp.makeConstraints { (make) in
+                make.height.equalTo(viewHeight)
+            }
+        }
+    }
     public var pushBgView : UIView!
     
     init() {
