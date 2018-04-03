@@ -8,8 +8,19 @@
 
 import UIKit
 
+protocol FootballOrderBottomViewDelegate {
+    /// 确认
+    func orderConfirm() -> Void
+    /// 串关选择
+    func orderPlay() -> Void
+    /// 倍数选择
+    func orderMultiple() -> Void
+}
+
 class FootballOrderBottomView: UIView {
 
+    public var delegate : FootballOrderBottomViewDelegate!
+    
     private var titleLB: UILabel!
     private var playBut: UIButton!
     private var multipleBut: UIButton!
@@ -153,13 +164,16 @@ class FootballOrderBottomView: UIView {
     }
     
     @objc private func playClicked(_ sender: UIButton) {
-        
+        guard delegate != nil else { return }
+        delegate.orderPlay()
     }
     @objc private func multipleClicked(_ sender: UIButton) {
-        
+        guard delegate != nil else { return }
+        delegate.orderMultiple()
     }
     @objc private func confirmClicked(_ sender: UIButton) {
-        
+        guard delegate != nil else { return }
+        delegate.orderConfirm()
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

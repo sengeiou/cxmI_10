@@ -66,6 +66,8 @@
 		E550D8A120733A0F002DDE23 /* FootballOrder2-1Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E550D8A020733A0F002DDE23 /* FootballOrder2-1Cell.swift */; };
 		E550D8A320733A2D002DDE23 /* FootballOrderHunheCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E550D8A220733A2D002DDE23 /* FootballOrderHunheCell.swift */; };
 		E550D8A52073598E002DDE23 /* FootballOrderTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E550D8A42073598E002DDE23 /* FootballOrderTopView.swift */; };
+		E550D8A72073719A002DDE23 /* FootballPlayFilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E550D8A62073719A002DDE23 /* FootballPlayFilterVC.swift */; };
+		E550D8A92073726D002DDE23 /* FootballTimesFilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E550D8A82073726D002DDE23 /* FootballTimesFilterVC.swift */; };
 		E562989C2050D1DD006397EA /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E562989B2050D1DD006397EA /* RegisterViewController.swift */; };
 		E562989F2050E04C006397EA /* ValidateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E562989E2050E04C006397EA /* ValidateProtocol.swift */; };
 		E56298A32050E712006397EA /* AlertProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56298A22050E712006397EA /* AlertProtocol.swift */; };
@@ -248,6 +250,8 @@
 		E550D8A020733A0F002DDE23 /* FootballOrder2-1Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FootballOrder2-1Cell.swift"; sourceTree = "<group>"; };
 		E550D8A220733A2D002DDE23 /* FootballOrderHunheCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballOrderHunheCell.swift; sourceTree = "<group>"; };
 		E550D8A42073598E002DDE23 /* FootballOrderTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballOrderTopView.swift; sourceTree = "<group>"; };
+		E550D8A62073719A002DDE23 /* FootballPlayFilterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballPlayFilterVC.swift; sourceTree = "<group>"; };
+		E550D8A82073726D002DDE23 /* FootballTimesFilterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballTimesFilterVC.swift; sourceTree = "<group>"; };
 		E562989B2050D1DD006397EA /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		E562989E2050E04C006397EA /* ValidateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateProtocol.swift; sourceTree = "<group>"; };
 		E56298A22050E712006397EA /* AlertProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertProtocol.swift; sourceTree = "<group>"; };
@@ -1307,6 +1311,8 @@
 				E5D5A376206D034100FC865D /* FootballMatchVC.swift */,
 				E550D8912073363D002DDE23 /* FootballOrderConfirmVC.swift */,
 				E512CE3F2071D0A30095B6DD /* FootballMatchFilterVC.swift */,
+				E550D8A62073719A002DDE23 /* FootballPlayFilterVC.swift */,
+				E550D8A82073726D002DDE23 /* FootballTimesFilterVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1732,6 +1738,7 @@
 				E5883F5A2068EA5700CB3A46 /* MessageCenterCell.swift in Sources */,
 				E512A9692047E598003F14F4 /* Observable+ObjectMapper.swift in Sources */,
 				E5973E31204F8FD4006461CE /* MeHeaderView.swift in Sources */,
+				E550D8A72073719A002DDE23 /* FootballPlayFilterVC.swift in Sources */,
 				E56CE810206A22E10090A1B5 /* WithdrawalProgressFooter.swift in Sources */,
 				E58B57B220561BB80025E2F1 /* Spacing&SizeConstraint.swift in Sources */,
 				E58B57C9205688570025E2F1 /* UserDataModel.swift in Sources */,
@@ -1763,6 +1770,7 @@
 				E51032482064A99700A0156C /* CouponListModel.swift in Sources */,
 				E512A96B2047EF67003F14F4 /* RequestPlugin.swift in Sources */,
 				E550D89B207339CD002DDE23 /* FootballOrderTotalCell.swift in Sources */,
+				E550D8A92073726D002DDE23 /* FootballTimesFilterVC.swift in Sources */,
 				E51032582065037700A0156C /* PurchaseRecordListModel.swift in Sources */,
 				E5786FC4206E13840045F7F5 /* FootballTeamView.swift in Sources */,
 				E533BF0520610D170037D2D8 /* BasePopViewController.swift in Sources */,

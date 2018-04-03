@@ -17,7 +17,9 @@ fileprivate let FootballOrder2_1CellId = "FootballOrder2_1CellId"
 fileprivate let FootballOrderHunheCellId = "FootballOrderHunheCellId"
 
 
-class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballTeamViewDelegate{
+class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballTeamViewDelegate, FootballOrderBottomViewDelegate{
+    
+    
     
     // MARK: - 属性
     public var matchType: FootballMatchType = .胜平负
@@ -64,7 +66,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     
     lazy public var bottomView: FootballOrderBottomView = {
         let bottomView = FootballOrderBottomView()
-        
+        bottomView.delegate = self
         return bottomView
     }()
     
@@ -181,6 +183,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         return nil
     }
     
+    // MARK: ITEM 选择 delegate
     func select(teamInfo: FootballPlayListModel) {
         guard selectPlayList != nil else { return }
         selectPlayList.append(teamInfo)
@@ -189,6 +192,21 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     func deSelect(teamInfo: FootballPlayListModel) {
         guard selectPlayList != nil else { return }
         selectPlayList.remove(teamInfo)
+    }
+    
+    // MARK: - BOTTOM Delegate
+    func orderConfirm() {
+        
+    }
+    
+    func orderPlay() {
+        let play = FootballPlayFilterVC()
+        present(play)
+    }
+    
+    func orderMultiple() {
+        let times = FootballTimesFilterVC()
+        present(times)
     }
     
     // MARK: - right bar item
