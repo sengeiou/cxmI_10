@@ -12,7 +12,7 @@ class FootballTimesFilterVC: BasePopViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.popStyle = .fromBottom
         
     }
 
