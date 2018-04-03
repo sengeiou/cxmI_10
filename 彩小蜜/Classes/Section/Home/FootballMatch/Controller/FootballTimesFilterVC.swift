@@ -84,7 +84,8 @@ class FootballTimesFilterVC: BasePopViewController, UITextFieldDelegate, CXMKeyb
         textField.text = "5"
         textField.delegate = self
         textField.textColor = Color505050
-        textField.borderStyle = .roundedRect
+        textField.layer.borderWidth = 0.3
+        textField.layer.borderColor = ColorC8C8C8.cgColor
         
         timesView = UIView()
         timesView.backgroundColor = ColorFFFFFF
