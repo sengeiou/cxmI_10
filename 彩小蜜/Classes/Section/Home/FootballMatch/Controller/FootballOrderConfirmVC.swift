@@ -17,7 +17,11 @@ fileprivate let FootballOrder2_1CellId = "FootballOrder2_1CellId"
 fileprivate let FootballOrderHunheCellId = "FootballOrderHunheCellId"
 
 
-class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballTeamViewDelegate, FootballOrderBottomViewDelegate{
+class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballTeamViewDelegate, FootballOrderBottomViewDelegate, FootballTimesFilterVCDelegate, FootballPlayFilterVCDelegate{
+    
+    
+   
+    
     
     
     
@@ -199,16 +203,32 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         
     }
     
+    // 串关 弹窗
     func orderPlay() {
         let play = FootballPlayFilterVC()
+        play.delegate = self
         present(play)
     }
     
     func orderMultiple() {
         let times = FootballTimesFilterVC()
+        times.delegate = self
         present(times)
     }
     
+    // MARK: - 选取倍数 delegate
+    func timesConfirm(times: String) {
+        print(times)
+    }
+    
+    // MARK: - 串关方式
+    func playFilterConfirm() {
+        
+    }
+    
+    func playFilterCancel() {
+        
+    }
     // MARK: - right bar item
     private func setRightButtonItem() {
         

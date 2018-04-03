@@ -21,11 +21,18 @@ fileprivate let FilterCellWidth : CGFloat = (screenWidth - leftInset * 2 - minim
 
 fileprivate let FootballPlayFilterCellId = "FootballPlayFilterCellId"
 
+protocol FootballPlayFilterVCDelegate {
+    func playFilterConfirm() -> Void
+    func playFilterCancel() -> Void
+}
+
 class FootballPlayFilterVC: BasePopViewController, FootballFilterBottomViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     
 
     // MARK: - 属性
+    public var delegate: FootballPlayFilterVCDelegate!
+    
     private var bottomView: FootballFilterBottomView!
     
     private var bgView: UIView!
@@ -150,11 +157,13 @@ class FootballPlayFilterVC: BasePopViewController, FootballFilterBottomViewDeleg
     
     
     func filterConfirm() {
-        
+        guard delegate != nil else { return }
+        delegate.playFilterConfirm()
     }
     
     func filterCancel() {
-        
+        guard delegate != nil else { return }
+        delegate.playFilterCancel()
     }
     
     

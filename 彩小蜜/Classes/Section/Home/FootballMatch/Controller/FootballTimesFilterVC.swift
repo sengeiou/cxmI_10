@@ -10,15 +10,21 @@ import UIKit
 
 fileprivate let TimesViewHeight : CGFloat = 44 * defaultScale
 
+protocol FootballTimesFilterVCDelegate {
+    func timesConfirm(times: String) -> Void
+}
+
 class FootballTimesFilterVC: BasePopViewController, UITextFieldDelegate, CXMKeyboardViewDelegate {
     
-    
+    public var delegate : FootballTimesFilterVCDelegate!
 
     private var keyboardView: CXMKeyboardView!
     private var backBut: UIButton!
     private var timesTitle: UILabel!
     private var textField : UITextField!
     private var timesView: UIView!
+    
+    private var isFirst: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,7 +81,7 @@ class FootballTimesFilterVC: BasePopViewController, UITextFieldDelegate, CXMKeyb
         timesTitle.text = "倍数"
         
         textField = UITextField()
-        textField.text = "1"
+        textField.text = "5"
         textField.delegate = self
         textField.textColor = Color505050
         textField.borderStyle = .roundedRect
@@ -115,13 +121,20 @@ class FootballTimesFilterVC: BasePopViewController, UITextFieldDelegate, CXMKeyb
     
     // MARK: - 键盘  Delegate
     func keyboardDidTipItem(num: String) {
+        
         guard let number = Int(self.textField.text!) else { return }
         guard number < 10000 else {
             self.textField.text = "99999"
             return }
+        
+        if isFirst == true {
+            textField.text = nil
+            isFirst = false
+        }
+        
         self.textField.text = self.textField.text! + num
     }
-    
+    // 删除
     func keyboardDelete() {
         guard textField.text != nil else { return }
         guard textField.text?.lengthOfBytes(using: .utf8) != 1 else {
@@ -130,15 +143,17 @@ class FootballTimesFilterVC: BasePopViewController, UITextFieldDelegate, CXMKeyb
         }
         self.textField.text?.removeLast()
     }
-    
+    // 确定
     func keyboardConfirm() {
-       
+        guard delegate != nil else { return }
+        guard let times = self.textField.text else { return }
+        delegate.timesConfirm(times: times)
+        dismiss(animated: true, completion: nil)
     }
     
 
     // MARK: - TextField Delegate
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        
         return false
     }
     
