@@ -9,8 +9,8 @@
 import UIKit
 
 protocol FootballTeamViewDelegate {
-    func select(cellId: String) -> Void
-    func deSelect(cellId: String) -> Void
+    func select(teamInfo: FootballPlayListModel) -> Void
+    func deSelect(teamInfo: FootballPlayListModel) -> Void
 }
 
 
@@ -182,21 +182,21 @@ class FootballTeamView: UIView {
     
     @objc private func homeClicked(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
+        selectItem(sender.isSelected)
         teamInfo.homeCell.isSelected = sender.isSelected
         homeIsSelected(sender.isSelected)
-        guard delegate != nil else { return }
     }
     @objc private func drawClicked(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
+        selectItem(sender.isSelected)
         teamInfo.flatCell.isSelected = sender.isSelected
         drawIsSelected(sender.isSelected)
-        guard delegate != nil else { return }
     }
     @objc private func awayClicked(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
+        selectItem(sender.isSelected)
         teamInfo.visitingCell.isSelected = sender.isSelected
         awayIsSelected(sender.isSelected)
-        guard delegate != nil else { return }
     }
     
     private func homeIsSelected(_ isSelected: Bool) {
@@ -235,6 +235,21 @@ class FootballTeamView: UIView {
             awayOdds.textColor = Color787878
         }
         awayBut.isSelected = isSelected
+    }
+    
+    private func selectItem(_ isSelected: Bool) {
+        if isSelected == true {
+            guard teamInfo.homeCell.isSelected == false,
+                teamInfo.flatCell.isSelected == false,
+                teamInfo.visitingCell.isSelected == false else { return }
+            
+            guard delegate != nil else { return }
+            delegate.select(teamInfo: self.teamInfo)
+        }else {
+            guard homeBut.isSelected == false, drawBut.isSelected == false, awayBut.isSelected == false else { return }
+            guard delegate != nil else { return }
+            delegate.deSelect(teamInfo: self.teamInfo)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

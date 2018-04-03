@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+
 fileprivate let FilterCellWidth : CGFloat = 70
 fileprivate let FilterCellHeight: CGFloat = 35
 fileprivate let minimumLineSpacing : CGFloat = 10
@@ -15,13 +17,16 @@ fileprivate let minimumInteritemSpacing : CGFloat = 10
 fileprivate let topInset : CGFloat = 10
 fileprivate let leftInset: CGFloat = 0
 
-
 fileprivate let FootballFilterCellId = "FootballFilterCellId"
+
+protocol FootballMatchFilterVCDelegate {
+    func filterConfirm() -> Void
+}
 
 class FootballMatchFilterVC: BasePopViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, FootballFilterTopViewDelegate, FootballFilterBottomViewDelegate {
    
     
-    
+    public var delegate : FootballMatchFilterVCDelegate!
 
     private var bottomView: FootballFilterBottomView!
     private var topView : FootballFilterTopView!
@@ -185,6 +190,9 @@ class FootballMatchFilterVC: BasePopViewController, UICollectionViewDelegate, UI
             }
             i += 1
         }
+        
+        guard delegate != nil else { return }
+        delegate.filterConfirm()
     }
     
     func filterCancel() {

@@ -123,8 +123,28 @@ extension AlertPro {
         let cancel = UIAlertAction(title: cancel, style: .cancel, handler: nil)
         cancel.setValue(Color505050, forKey: "titleTextColor")
         
-        alert.addAction(action)
+        
         alert.addAction(cancel)
+        alert.addAction(action)
         viewController.present(alert, animated: true)
+    }
+    
+    public func showCXMAlert(title: String?, message: String, action: String, cancel: String,confirm: ((UIAlertAction)->Void)?) {
+        if let vc = UIApplication.shared.keyWindow?.rootViewController {
+            
+            let attStr = NSAttributedString(string: message, attributes: [NSAttributedStringKey.foregroundColor: Color787878])
+            
+            let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+            alert.setValue(attStr, forKey: "attributedMessage")
+            
+            let action = UIAlertAction(title: action, style: .default, handler: confirm)
+            action.setValue(ColorEA5504, forKey:"titleTextColor")
+            let cancel = UIAlertAction(title: cancel, style: .cancel, handler: nil)
+            cancel.setValue(Color505050, forKey: "titleTextColor")
+            
+            alert.addAction(cancel)
+            alert.addAction(action)
+            vc.present(alert, animated: true)
+        }
     }
 }

@@ -29,8 +29,8 @@ class FootballMatchModel: HandyJSON {
     }
 }
 
-class FootballPlayListModel: HandyJSON {
-    required init() { }
+class FootballPlayListModel:NSObject, HandyJSON {
+    required override init() { }
     
     var changci: String!
     var changciId: String!

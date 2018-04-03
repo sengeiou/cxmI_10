@@ -23,7 +23,7 @@ class FootballSPFCell: UITableViewCell {
     private var matchTime: UILabel!
     private var endTime: UILabel!
     private var detailBut: UIButton!
-    private var teamView: FootballTeamView!
+    public var teamView: FootballTeamView!
     
     private var typeIcon : UIImageView!
     

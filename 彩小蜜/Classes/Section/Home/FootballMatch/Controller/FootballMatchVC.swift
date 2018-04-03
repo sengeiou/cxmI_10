@@ -28,18 +28,23 @@ fileprivate let Football2_1CellId = "Football2_1CellId"
 fileprivate let FootballHunheCellId = "FootballHunheCellId"
 
 
-class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballBottomViewDelegate, FootballSectionHeaderDelegate, FootballRequestPro {
+class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballBottomViewDelegate, FootballSectionHeaderDelegate, FootballRequestPro, FootballTeamViewDelegate {
+    
+    
    
     
     // MARK: - 属性
     public var matchType: FootballMatchType = .胜平负
     
     public var matchList : [FootballMatchModel]!
+    public var selectPlayList: [FootballPlayListModel]!
     public var matchData : FootballMatchData!
+    
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = matchType.rawValue
+        selectPlayList = [FootballPlayListModel]()
         initSubview()
         setEmpty(title: "暂无可选赛事", tableView)
         footballRequest()
@@ -151,6 +156,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     
     private func initSPFCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballSPFCellId, for: indexPath) as! FootballSPFCell
+        cell.teamView.delegate = self
         let matchModel = matchList[indexPath.section]
         cell.playInfoModel = matchModel.playList[indexPath.row]
         
@@ -208,10 +214,10 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         return 88 * defaultScale
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 44 * defaultScale
+        return 49 * defaultScale
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 5
+        return 0.01
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -246,9 +252,22 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         tableView.reloadSections(IndexSet(integer: section), with: .automatic)
     }
     
+    // MARK: - FootballTeamView Delegate 选取比赛，
+    func select(teamInfo: FootballPlayListModel) {
+        guard selectPlayList != nil else { return }
+        selectPlayList.append(teamInfo)
+    }
+    
+    func deSelect(teamInfo: FootballPlayListModel) {
+        guard selectPlayList != nil else { return }
+        selectPlayList.remove(teamInfo)
+    }
+    
     // MARK: - FOOTBALLBOTTOM delegate
     func delete() {
-        
+        showCXMAlert(title: nil, message: "您正在清空方案列表", action: "清空", cancel: "返回") { (action) in
+            
+        }
     }
     func confirm() {
         

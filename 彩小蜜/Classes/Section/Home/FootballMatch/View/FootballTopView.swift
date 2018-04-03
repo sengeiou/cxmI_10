@@ -19,14 +19,14 @@ class FootballTopView: UIView {
     private var titleLB: UILabel!
     private var bgView: UIView!
     init() {
-        super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 44 * defaultScale + 5))
+        super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 44 * defaultScale))
         initSubview()
     }
     override func layoutSubviews() {
         super.layoutSubviews()
         bgView.snp.makeConstraints { (make) in
             make.top.left.right.equalTo(0)
-            make.bottom.equalTo(-5)
+            make.bottom.equalTo(0)
         }
         
         titleLB.snp.makeConstraints { (make) in

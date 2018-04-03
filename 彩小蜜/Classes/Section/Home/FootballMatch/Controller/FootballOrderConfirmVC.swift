@@ -1,0 +1,213 @@
+//
+//  FootballOrderConfirmVC.swift
+//  彩小蜜
+//
+//  Created by HX on 2018/4/3.
+//  Copyright © 2018年 韩笑. All rights reserved.
+//
+
+import UIKit
+
+fileprivate let FootballOrderSPFCellId = "FootballOrderSPFCellId"
+fileprivate let FootballOrderRangSPFCellId = "FootballOrderRangSPFCellId"
+fileprivate let FootballOrderTotalCellId = "FootballOrderTotalCellId"
+fileprivate let FootballOrderScoreCellId = "FootballOrderScoreCellId"
+fileprivate let FootballOrderBanQuanCCellId = "FootballOrderBanQuanCCellId"
+fileprivate let FootballOrder2_1CellId = "FootballOrder2_1CellId"
+fileprivate let FootballOrderHunheCellId = "FootballOrderHunheCellId"
+
+
+class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballTeamViewDelegate{
+    
+    // MARK: - 属性
+    public var matchType: FootballMatchType = .胜平负
+    public var selectPlayList: [FootballPlayListModel]!
+    
+    // MARK: - 生命周期
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.title = matchType.rawValue
+        initSubview()
+        setEmpty(title: "暂无可选赛事", tableView)
+        setRightButtonItem()
+    }
+    // MARK: - 初始化子视图
+    private func initSubview() {
+        self.view.addSubview(tableView)
+        self.view.addSubview(topView)
+        self.view.addSubview(bottomView)
+    }
+    
+    // MARK: - 懒加载
+    lazy public var topView: FootballTopView = {
+        let topView = FootballTopView()
+        return topView
+    }()
+    
+    lazy public var bottomView: FootballOrderBottomView = {
+        let bottomView = FootballOrderBottomView()
+        
+        return bottomView
+    }()
+    
+    lazy var tableView : UITableView = {
+        let table = UITableView(frame: CGRect.zero, style: .grouped)
+        
+        table.delegate = self
+        table.dataSource = self
+        table.backgroundColor = ColorF4F4F4
+        table.register(FootballSectionHeader.self, forHeaderFooterViewReuseIdentifier: "FootballSectionHeaderId")
+        registerCell(table)
+        return table
+    }()
+    private func registerCell(_ table: UITableView) {
+        switch matchType {
+        case .胜平负:
+            table.register(FootballSPFCell.self, forCellReuseIdentifier: FootballOrderSPFCellId)
+        case .让球胜平负:
+            table.register(FootballRangSPFCell.self, forCellReuseIdentifier: FootballOrderRangSPFCellId)
+        case .总进球:
+            table.register(FootballTotalCell.self, forCellReuseIdentifier: FootballOrderTotalCellId)
+        case .比分:
+            table.register(FootballScoreCell.self, forCellReuseIdentifier: FootballOrderScoreCellId)
+        case .半全场:
+            table.register(FootballBanQuanCCell.self, forCellReuseIdentifier: FootballOrderBanQuanCCellId)
+        case .二选一:
+            table.register(Football2_1Cell.self, forCellReuseIdentifier: FootballOrder2_1CellId)
+        case .混合过关:
+            table.register(FootballHunheCell.self, forCellReuseIdentifier: FootballOrderHunheCellId)
+        }
+    }
+    
+    //MARK: - tableView dataSource
+    func numberOfSections(in tableView: UITableView) -> Int {
+        guard selectPlayList != nil else { return 0 }
+        return selectPlayList.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch matchType {
+        case .胜平负:
+            return initSPFCell(indexPath: indexPath)
+        case .让球胜平负:
+            return initSPFCell(indexPath: indexPath)
+        case .总进球:
+            return initSPFCell(indexPath: indexPath)
+        case .比分:
+            return initSPFCell(indexPath: indexPath)
+        case .半全场:
+            return initSPFCell(indexPath: indexPath)
+        case .二选一:
+            return initSPFCell(indexPath: indexPath)
+        case .混合过关:
+            return initSPFCell(indexPath: indexPath)
+        }
+    }
+    
+    private func initSPFCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: FootballOrderSPFCellId, for: indexPath) as! FootballOrderSPFCell
+        
+        
+        
+        return cell
+    }
+    private func initRangSPFCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: FootballOrderRangSPFCellId, for: indexPath) as! FootballOrderRangSPFCell
+        
+        return cell
+    }
+    private func initTatolCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: FootballOrderTotalCellId, for: indexPath) as! FootballOrderTotalCell
+        
+        return cell
+    }
+    private func initScoreCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: FootballOrderScoreCellId, for: indexPath) as! FootballOrderScoreCell
+        
+        return cell
+    }
+    private func initBanQuanCCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: FootballOrderBanQuanCCellId, for: indexPath) as! FootballOrderBanQuanCCell
+        
+        return cell
+    }
+    private func init2Cell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: FootballOrder2_1CellId, for: indexPath) as! FootballOrder2_1Cell
+        
+        return cell
+    }
+    private func initHunheCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: FootballOrderHunheCellId, for: indexPath) as! FootballOrderHunheCell
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return nil
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 88 * defaultScale
+    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.01
+    }
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.01
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return nil
+    }
+    
+    func select(teamInfo: FootballPlayListModel) {
+        
+    }
+    
+    func deSelect(teamInfo: FootballPlayListModel) {
+        
+    }
+    
+    
+    
+    
+    // MARK: - right bar item
+    private func setRightButtonItem() {
+        
+        let rightBut = UIButton(type: .custom)
+        rightBut.frame = CGRect(x: 0, y: 0, width: 16, height: 16)
+        
+        rightBut.setBackgroundImage(UIImage(named:"Details"), for: .normal)
+        
+        rightBut.addTarget(self, action: #selector(showMenu(_:)), for: .touchUpInside)
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightBut)
+    }
+    
+    @objc private func showMenu(_ sender: UIButton) {
+        let filter = FootballMatchFilterVC()
+        filter.popStyle = .fromCenter
+        present(filter)
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+
+    
+
+}

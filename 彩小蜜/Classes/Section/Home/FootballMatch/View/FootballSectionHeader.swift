@@ -56,7 +56,7 @@ class FootballSectionHeader: UITableViewHeaderFooterView {
     private var icon : UIImageView!
     private var title : UILabel!
     private var spreadBut : UIButton!
-    
+    private var bgView: UIView!
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -66,8 +66,14 @@ class FootballSectionHeader: UITableViewHeaderFooterView {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+        bgView.snp.makeConstraints { (make) in
+            make.top.equalTo(5 * defaultScale)
+            make.left.right.bottom.equalTo(0)
+        }
+        
         icon.snp.makeConstraints { (make) in
-            make.centerY.equalTo(self.snp.centerY)
+            make.centerY.equalTo(bgView.snp.centerY)
             make.left.equalTo(leftSpacing)
             make.width.height.equalTo(30)
         }
@@ -77,13 +83,16 @@ class FootballSectionHeader: UITableViewHeaderFooterView {
             make.right.equalTo(spreadBut.snp.left).offset(-10)
         }
         spreadBut.snp.makeConstraints { (make) in
-            make.centerY.equalTo(self.snp.centerY)
+            make.centerY.equalTo(bgView.snp.centerY)
             make.right.equalTo(-rightSpacing)
             make.width.height.equalTo(20)
         }
     }
     private func initSubview() {
-        self.contentView.backgroundColor = ColorFFFFFF
+        self.contentView.backgroundColor = ColorF4F4F4
+        
+        bgView = UIView()
+        bgView.backgroundColor = ColorFFFFFF
         
         icon = UIImageView()
         icon.image = UIImage(named: "Datasecurity")
@@ -98,9 +107,10 @@ class FootballSectionHeader: UITableViewHeaderFooterView {
         spreadBut.addTarget(self, action: #selector(spreadClicked(_:)), for: .touchUpInside)
         spreadBut.isSelected = true
         
-        self.contentView.addSubview(icon)
-        self.contentView.addSubview(title)
-        self.contentView.addSubview(spreadBut)
+        bgView.addSubview(icon)
+        bgView.addSubview(title)
+        bgView.addSubview(spreadBut)
+        self.contentView.addSubview(bgView)
     }
     
     @objc private func spreadClicked(_ sender: UIButton) {
