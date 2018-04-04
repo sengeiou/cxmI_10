@@ -12,10 +12,8 @@ class FootballFilterCell: UICollectionViewCell {
     
     public var filterModel : FilterModel! {
         didSet{
-            
             selected(filterModel.isSelected)
-            
-            //self.filterModel.isSelected = !self.filterModel.isSelected
+            title.text = filterModel.leagueAddr
         }
     }
     

@@ -18,8 +18,9 @@ enum HomeNetAPIManager {
     /// 彩票玩法列表
     case playList (fyId: String)
     /// 赛事列表
-    case matchList (playType: String)
-    
+    case matchList (playType: String, leagueId: String)
+    /// 赛事筛选 联赛列表
+    case filterMatchList
 
 }
 
@@ -38,7 +39,8 @@ extension HomeNetAPIManager : TargetType {
             return "/lottery/hall/getPlayClassifyList"
         case .matchList:
             return "/lottery/match/getMatchList"
-            
+        case .filterMatchList:
+            return "/lottery/match/filterConditions"
             
             
         }
@@ -50,10 +52,11 @@ extension HomeNetAPIManager : TargetType {
         switch self {
         case .playList(let fyId):
             dic["lotteryClassifyId"] = fyId
-        case .matchList(let playType):
+        case .matchList(let playType, let leagueId):
             dic["playType"] = playType
-            
-            
+            dic["leagueId"] = leagueId
+        case .filterMatchList:
+            dic["str"] = ""
             
             
             

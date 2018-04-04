@@ -21,7 +21,7 @@ let FootballCellWidth : CGFloat = (screenWidth - (FootballCellInteritemSpacing *
 let FootballCellHeight : CGFloat = 90 * defaultScale
 
 protocol HomeSportLotteryCellDelegate {
-    func didSelectItem() -> Void
+    func didSelectItem(playType: String) -> Void
 }
 
 
@@ -101,7 +101,9 @@ class HomeSportLotteryCell: UITableViewCell, UICollectionViewDataSource, UIColle
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard delegate != nil else { return }
-        delegate.didSelectItem()
+        guard playList.isEmpty == false else { return }
+        guard let play = playList[indexPath.row].playType else { return }
+        delegate.didSelectItem(playType: play)
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {

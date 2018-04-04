@@ -24,6 +24,7 @@ struct HomePlayModel: HandyJSON {
     var playClassifyLabelId: String!
     var playClassifyLabelName: String!
     var playClassifyName: String!
+    var playType: String!
 }
 
 /// 活动栏

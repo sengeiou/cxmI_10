@@ -17,5 +17,8 @@ class FilterData: HandyJSON {
 
 class FilterModel: HandyJSON {
     var isSelected : Bool = false
+    var leagueAddr: String!
+    var leagueId: String!
+    var leagueName: String!
     required init() { }
 }

@@ -20,7 +20,7 @@ fileprivate let leftInset: CGFloat = 0
 fileprivate let FootballFilterCellId = "FootballFilterCellId"
 
 protocol FootballMatchFilterVCDelegate {
-    func filterConfirm() -> Void
+    func filterConfirm(leagueId: String) -> Void
 }
 
 class FootballMatchFilterVC: BasePopViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, FootballFilterTopViewDelegate, FootballFilterBottomViewDelegate {
@@ -43,11 +43,31 @@ class FootballMatchFilterVC: BasePopViewController, UICollectionViewDelegate, UI
         
         filterList = [FilterModel]()
         
-        for _ in 0...8 {
-            let fil = FilterModel()
-            filterList.append(fil)
-        }
-        
+//        for _ in 0...8 {
+//            let fil = FilterModel()
+//            filterList.append(fil)
+//        }
+        filterRequest()
+    }
+    
+    // MARK: - 网络请求
+    private func filterRequest() {
+        weak var weakSelf = self
+        _ = homeProvider.rx.request(.filterMatchList)
+            .asObservable()
+            .mapArray(type: FilterModel.self)
+            .subscribe(onNext: { (data) in
+                weakSelf?.filterList = data
+                weakSelf?.collectionView.reloadData()
+            }, onError: { (error) in
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    print(code!)
+                    weakSelf?.showHUD(message: msg!)
+                default: break
+                }
+            }, onCompleted: nil, onDisposed: nil )
     }
     
     override func viewDidLayoutSubviews() {
@@ -183,23 +203,29 @@ class FootballMatchFilterVC: BasePopViewController, UICollectionViewDelegate, UI
     }
     
     func filterConfirm() {
+        var idStr : String = ""
         var i = 0
         for filter in self.filterList {
             if filter.isSelected == true {
                 print(i)
+                idStr += filter.leagueId + ","
             }
             i += 1
         }
         
         guard delegate != nil else { return }
-        delegate.filterConfirm()
+        delegate.filterConfirm(leagueId: idStr)
+        
+        self.dismiss(animated: true, completion: nil)
     }
     
     func filterCancel() {
-        
+        self.dismiss(animated: true, completion: nil)
     }
     
-    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

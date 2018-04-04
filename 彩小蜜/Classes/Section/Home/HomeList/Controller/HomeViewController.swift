@@ -13,12 +13,37 @@ fileprivate let homeScrollBarCellIdentifier = "homeScrollBarCellIdentifier"
 
 
 class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, HomeSportLotteryCellDelegate {
+    
+    
 
     //MARK: - 点击事件
-    func didSelectItem() {
+    func didSelectItem(playType: String) {
         let football = FootballMatchVC()
+        
+        switch playType {
+        case "2":
+            football.matchType = .胜平负
+        case "1":
+            football.matchType = .让球胜平负
+        case "4":
+            football.matchType = .总进球
+        case "5":
+            football.matchType = .半全场
+        case "3":
+            football.matchType = .比分
+        case "6":
+            football.matchType = .混合过关
+        case "7":
+            football.matchType = .二选一
+        default: break
+            
+        }
+        
+        
+        
         pushViewController(vc: football)
     }
+    
     //MARK: - 属性
     private var homeData : HomeDataModel!
     private var header : HomeHeaderView!

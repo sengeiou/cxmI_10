@@ -14,28 +14,28 @@ protocol FootballRequestPro {
 }
 
 extension FootballRequestPro where Self: FootballMatchVC {
-    func footballRequest() {
+    func footballRequest(leagueId: String) {
         switch matchType {
         case .胜平负:
-            request(type: "1")
+            request(type: "2", leagueId: leagueId)
         case .让球胜平负:
-            request(type: "")
+            request(type: "1", leagueId: leagueId)
         case .总进球:
-            request(type: "")
+            request(type: "4", leagueId: leagueId)
         case .比分:
-            request(type: "")
+            request(type: "3", leagueId: leagueId)
         case .半全场:
-            request(type: "")
+            request(type: "5", leagueId: leagueId)
         case .二选一:
-            request(type: "")
+            request(type: "7", leagueId: leagueId)
         case .混合过关:
-            request(type: "")
+            request(type: "6", leagueId: leagueId)
         }
     }
     
-    private func request(type: String) {
+    private func request(type: String, leagueId: String) {
         weak var weakSelf = self
-        _ = homeProvider.rx.request(.matchList(playType: type))
+        _ = homeProvider.rx.request(.matchList(playType: type, leagueId: leagueId))
             .asObservable()
             .mapObject(type: FootballMatchData.self)
             .subscribe(onNext: { (data) in

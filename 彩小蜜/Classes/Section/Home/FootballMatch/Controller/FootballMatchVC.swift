@@ -28,10 +28,8 @@ fileprivate let Football2_1CellId = "Football2_1CellId"
 fileprivate let FootballHunheCellId = "FootballHunheCellId"
 
 
-class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballBottomViewDelegate, FootballSectionHeaderDelegate, FootballRequestPro, FootballTeamViewDelegate {
+class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballBottomViewDelegate, FootballSectionHeaderDelegate, FootballRequestPro, FootballTeamViewDelegate , FootballMatchFilterVCDelegate{
     
-    
-   
     
     // MARK: - 属性
     public var matchType: FootballMatchType = .胜平负
@@ -47,7 +45,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         selectPlayList = [FootballPlayListModel]()
         initSubview()
         setEmpty(title: "暂无可选赛事", tableView)
-        footballRequest()
+        footballRequest(leagueId: "")
         setRightButtonItem()
     }
     
@@ -240,6 +238,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     @objc private func showMenu(_ sender: UIButton) {
         let filter = FootballMatchFilterVC()
         filter.popStyle = .fromCenter
+        filter.delegate = self
         present(filter)
     }
     
@@ -269,13 +268,32 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
             
         }
     }
+    // 确认
     func confirm() {
+        guard selectPlayList.isEmpty == false else {
+            showHUD(message: "请至少选择1场单关比赛或者2场非单关比赛")
+            return }
+
+        guard selectPlayList.count >= 2 else {
+            let play = selectPlayList[0]
+            guard play.single == true else {
+                showHUD(message: "请至少选择1场单关比赛或者2场非单关比赛")
+                return }
+            
+            let order = FootballOrderConfirmVC()
+            order.selectPlayList = selectPlayList
+            pushViewController(vc: order)
+            return
+        }
         let order = FootballOrderConfirmVC()
         order.selectPlayList = selectPlayList
         pushViewController(vc: order)
     }
     
-    
+    // MARK: - 联赛 筛选 代理
+    func filterConfirm(leagueId: String) {
+        footballRequest(leagueId: leagueId)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         

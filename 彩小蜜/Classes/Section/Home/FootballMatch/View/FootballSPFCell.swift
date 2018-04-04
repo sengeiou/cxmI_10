@@ -8,14 +8,19 @@
 
 import UIKit
 
-class FootballSPFCell: UITableViewCell {
+class FootballSPFCell: UITableViewCell, DateProtocol {
 
     public var playInfoModel: FootballPlayListModel! {
         didSet{
             matchTitle.text = playInfoModel.leagueAddr
             matchTime.text = playInfoModel.changci
-            endTime.text = playInfoModel.matchTime
             teamView.teamInfo = playInfoModel
+            endTime.text = "截止" + timeStampToHHmm(playInfoModel.matchTime)
+            if playInfoModel.single == true {
+                typeIcon.isHidden = false
+            }else {
+                typeIcon.isHidden = true
+            }
         }
     }
     
@@ -24,7 +29,7 @@ class FootballSPFCell: UITableViewCell {
     private var endTime: UILabel!
     private var detailBut: UIButton!
     public var teamView: FootballTeamView!
-    
+    // 单关图标
     private var typeIcon : UIImageView!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {

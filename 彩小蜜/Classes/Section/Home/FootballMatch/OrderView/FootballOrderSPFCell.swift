@@ -14,6 +14,7 @@ class FootballOrderSPFCell: UITableViewCell {
         didSet{
             titleLB.text = playInfoModel.leagueAddr
             teamView.teamInfo = playInfoModel
+            
         }
     }
     

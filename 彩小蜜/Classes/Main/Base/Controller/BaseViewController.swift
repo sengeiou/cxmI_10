@@ -13,7 +13,7 @@ import DZNEmptyDataSet
 
 public var currentVC : UIViewController?
 
-class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate{
+class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, DateProtocol{
 
     // public
     public func pushLoginVC(from vc: UIViewController) {

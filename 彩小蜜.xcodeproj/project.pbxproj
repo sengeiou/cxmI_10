@@ -18,6 +18,7 @@
 		E50B9075205231C800417BFE /* RechargeFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50B9074205231C800417BFE /* RechargeFooterView.swift */; };
 		E50B9077205235BF00417BFE /* RechargeCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50B9076205235BF00417BFE /* RechargeCardCell.swift */; };
 		E50B907D20526BB200417BFE /* RechargePaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50B907C20526BB200417BFE /* RechargePaymentCell.swift */; };
+		E50C99BB20746E6B002D8C2F /* DateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50C99BA20746E6B002D8C2F /* DateProtocol.swift */; };
 		E51032482064A99700A0156C /* CouponListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51032472064A99700A0156C /* CouponListModel.swift */; };
 		E510324A2064A9C000A0156C /* CouponInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51032492064A9C000A0156C /* CouponInfoModel.swift */; };
 		E51032502064FD2D00A0156C /* BasePagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E510324F2064FD2D00A0156C /* BasePagerViewController.swift */; };
@@ -204,6 +205,7 @@
 		E50B9074205231C800417BFE /* RechargeFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeFooterView.swift; sourceTree = "<group>"; };
 		E50B9076205235BF00417BFE /* RechargeCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeCardCell.swift; sourceTree = "<group>"; };
 		E50B907C20526BB200417BFE /* RechargePaymentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargePaymentCell.swift; sourceTree = "<group>"; };
+		E50C99BA20746E6B002D8C2F /* DateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateProtocol.swift; sourceTree = "<group>"; };
 		E51032472064A99700A0156C /* CouponListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponListModel.swift; sourceTree = "<group>"; };
 		E51032492064A9C000A0156C /* CouponInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponInfoModel.swift; sourceTree = "<group>"; };
 		E510324F2064FD2D00A0156C /* BasePagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePagerViewController.swift; sourceTree = "<group>"; };
@@ -464,6 +466,7 @@
 			children = (
 				E562989E2050E04C006397EA /* ValidateProtocol.swift */,
 				E56298A22050E712006397EA /* AlertProtocol.swift */,
+				E50C99BA20746E6B002D8C2F /* DateProtocol.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -1746,6 +1749,7 @@
 				E5973E31204F8FD4006461CE /* MeHeaderView.swift in Sources */,
 				E550D8A72073719A002DDE23 /* FootballPlayFilterVC.swift in Sources */,
 				E56CE810206A22E10090A1B5 /* WithdrawalProgressFooter.swift in Sources */,
+				E50C99BB20746E6B002D8C2F /* DateProtocol.swift in Sources */,
 				E58B57B220561BB80025E2F1 /* Spacing&SizeConstraint.swift in Sources */,
 				E58B57C9205688570025E2F1 /* UserDataModel.swift in Sources */,
 				E51F9A62205A2A1500AB8A21 /* ForgetPswModileFooterView.swift in Sources */,
