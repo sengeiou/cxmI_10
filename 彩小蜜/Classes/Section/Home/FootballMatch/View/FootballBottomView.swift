@@ -15,6 +15,12 @@ protocol FootballBottomViewDelegate {
 
 class FootballBottomView: UIView {
 
+    public var number : Int! {
+        didSet{
+            titleLB.text = "您共选择\(number!)场非单关比赛"
+        }
+    }
+    
     public var delegate: FootballBottomViewDelegate!
     
     private var titleLB: UILabel!

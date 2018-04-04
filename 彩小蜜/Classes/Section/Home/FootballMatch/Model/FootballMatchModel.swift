@@ -8,8 +8,8 @@
 
 import Foundation
 import HandyJSON
-class FootballMatchData : HandyJSON {
-    required init() { }
+class FootballMatchData :NSObject, HandyJSON {
+    required override init() { }
     
     var allMatchCount: String!
     var playList: [FootballMatchModel]!
@@ -17,14 +17,14 @@ class FootballMatchData : HandyJSON {
     
 }
 
-class FootballMatchModel: HandyJSON {
+class FootballMatchModel:NSObject, HandyJSON {
     var isSpreading : Bool! = true
     var playList: [FootballPlayListModel]!
     var matchDay: String!
     var title: String!
     var allMatchCount: Int!
     
-    required init() {
+    required override init() {
         
     }
 }
@@ -60,8 +60,8 @@ class FootballPlayListModel:NSObject, HandyJSON {
     
 }
 
-class FootballPlayCellModel: HandyJSON {
-    required init() { }
+class FootballPlayCellModel:NSObject, HandyJSON {
+    required override init() { }
     var isSelected = false
     var cellCode: String!
     var cellName: String!

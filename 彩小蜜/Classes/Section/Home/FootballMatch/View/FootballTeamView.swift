@@ -8,13 +8,16 @@
 
 import UIKit
 
+var mixNum = 3
+var limitNum = 1
+
 protocol FootballTeamViewDelegate {
     func select(teamInfo: FootballPlayListModel) -> Void
     func deSelect(teamInfo: FootballPlayListModel) -> Void
 }
 
 
-class FootballTeamView: UIView {
+class FootballTeamView: UIView , AlertPro{
 
     public var teamInfo: FootballPlayListModel! {
         didSet{
@@ -47,6 +50,8 @@ class FootballTeamView: UIView {
     
     private var lineOne: UIView!
     private var lineTwo: UIView!
+    
+   
     
     init() {
         super.init(frame: CGRect.zero)
@@ -181,7 +186,9 @@ class FootballTeamView: UIView {
     }
     
     @objc private func homeClicked(_ sender: UIButton) {
+
         sender.isSelected = !sender.isSelected
+        
         selectItem(sender.isSelected)
         teamInfo.homeCell.isSelected = sender.isSelected
         homeIsSelected(sender.isSelected)
@@ -200,7 +207,9 @@ class FootballTeamView: UIView {
     }
     
     private func homeIsSelected(_ isSelected: Bool) {
+        
         if isSelected {
+            
             homeBut.backgroundColor = ColorEA5504
             homeName.textColor = ColorFFFFFF
             homeOdds.textColor = ColorFFFFFF
@@ -238,16 +247,26 @@ class FootballTeamView: UIView {
     }
     
     private func selectItem(_ isSelected: Bool) {
+        
         if isSelected == true {
             guard teamInfo.homeCell.isSelected == false,
                 teamInfo.flatCell.isSelected == false,
                 teamInfo.visitingCell.isSelected == false else { return }
             
             guard delegate != nil else { return }
+            guard limitNum <= mixNum else {
+                homeIsSelected(false)
+                drawIsSelected(false)
+                awayIsSelected(false)
+                showHUD(message: "最多选择\(mixNum)场比赛")
+                return }
+            limitNum += 1
             delegate.select(teamInfo: self.teamInfo)
+            
         }else {
             guard homeBut.isSelected == false, drawBut.isSelected == false, awayBut.isSelected == false else { return }
             guard delegate != nil else { return }
+            limitNum -= 1
             delegate.deSelect(teamInfo: self.teamInfo)
         }
     }

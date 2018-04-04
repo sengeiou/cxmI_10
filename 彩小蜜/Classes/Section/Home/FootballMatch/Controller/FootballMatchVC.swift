@@ -35,9 +35,14 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     public var matchType: FootballMatchType = .胜平负
     
     public var matchList : [FootballMatchModel]!
-    public var selectPlayList: [FootballPlayListModel]!
+    
     public var matchData : FootballMatchData!
     
+    public var selectPlayList: [FootballPlayListModel]! {
+        didSet{
+            self.bottomView.number = selectPlayList.count
+        }
+    }
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -155,6 +160,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     private func initSPFCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballSPFCellId, for: indexPath) as! FootballSPFCell
         cell.teamView.delegate = self
+       
         let matchModel = matchList[indexPath.section]
         cell.playInfoModel = matchModel.playList[indexPath.row]
         
@@ -264,8 +270,9 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     
     // MARK: - FOOTBALLBOTTOM delegate
     func delete() {
+        weak var weakSelf = self
         showCXMAlert(title: nil, message: "您正在清空方案列表", action: "清空", cancel: "返回") { (action) in
-            
+            weakSelf?.footballRequest(leagueId: "")
         }
     }
     // 确认
