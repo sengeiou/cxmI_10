@@ -186,9 +186,7 @@ class FootballTeamView: UIView , AlertPro{
     }
     
     @objc private func homeClicked(_ sender: UIButton) {
-
         sender.isSelected = !sender.isSelected
-        
         selectItem(sender.isSelected)
         teamInfo.homeCell.isSelected = sender.isSelected
         homeIsSelected(sender.isSelected)

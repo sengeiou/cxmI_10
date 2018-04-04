@@ -52,6 +52,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         setEmpty(title: "暂无可选赛事", tableView)
         footballRequest(leagueId: "")
         setRightButtonItem()
+        limitNum = 1
     }
     
     override func viewDidLayoutSubviews() {
