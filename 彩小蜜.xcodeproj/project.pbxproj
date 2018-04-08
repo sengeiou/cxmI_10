@@ -11,6 +11,9 @@
 		2545AF6A97B25DA9BA7C9A3A /* Pods____.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB1F21E30D8FD47C0735B12D /* Pods____.framework */; };
 		E3730DD9CBCC541439A1110F /* Pods____Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D1D20EBEFE94020803D6D7 /* Pods____Tests.framework */; };
 		E503F5BE2079E8D6006D4A0B /* FootballFilterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E503F5BD2079E8D6006D4A0B /* FootballFilterProtocol.swift */; };
+		E503F5C0207A11B3006D4A0B /* FootballRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E503F5BF207A11B3006D4A0B /* FootballRequestModel.swift */; };
+		E503F5C2207A15A7006D4A0B /* FootballOrderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E503F5C1207A15A7006D4A0B /* FootballOrderProtocol.swift */; };
+		E503F5C4207A1952006D4A0B /* FootballBetInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E503F5C3207A1952006D4A0B /* FootballBetInfoModel.swift */; };
 		E50643AA206C93A70046A2D4 /* BaseWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50643A9206C93A70046A2D4 /* BaseWebViewController.swift */; };
 		E50643AE206CBE3C0046A2D4 /* WinningMsgModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50643AD206CBE3C0046A2D4 /* WinningMsgModel.swift */; };
 		E50643B0206CBE800046A2D4 /* BannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50643AF206CBE800046A2D4 /* BannerModel.swift */; };
@@ -199,6 +202,9 @@
 		C46655EB1FBD7C2CB77E79A1 /* Pods-彩小蜜UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜UITests/Pods-彩小蜜UITests.release.xcconfig"; sourceTree = "<group>"; };
 		C6498BCAF23256B536C54738 /* Pods-彩小蜜.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜.debug.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜/Pods-彩小蜜.debug.xcconfig"; sourceTree = "<group>"; };
 		E503F5BD2079E8D6006D4A0B /* FootballFilterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballFilterProtocol.swift; sourceTree = "<group>"; };
+		E503F5BF207A11B3006D4A0B /* FootballRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballRequestModel.swift; sourceTree = "<group>"; };
+		E503F5C1207A15A7006D4A0B /* FootballOrderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballOrderProtocol.swift; sourceTree = "<group>"; };
+		E503F5C3207A1952006D4A0B /* FootballBetInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballBetInfoModel.swift; sourceTree = "<group>"; };
 		E50643A9206C93A70046A2D4 /* BaseWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWebViewController.swift; sourceTree = "<group>"; };
 		E50643AD206CBE3C0046A2D4 /* WinningMsgModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinningMsgModel.swift; sourceTree = "<group>"; };
 		E50643AF206CBE800046A2D4 /* BannerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerModel.swift; sourceTree = "<group>"; };
@@ -1148,6 +1154,7 @@
 			isa = PBXGroup;
 			children = (
 				E5786FC6206E29730045F7F5 /* FootballProtocol.swift */,
+				E503F5C1207A15A7006D4A0B /* FootballOrderProtocol.swift */,
 				E503F5BD2079E8D6006D4A0B /* FootballFilterProtocol.swift */,
 			);
 			path = Protocol;
@@ -1355,6 +1362,8 @@
 			children = (
 				E5786FB3206DE19F0045F7F5 /* FootballMatchModel.swift */,
 				E55016FA20724E4E0056AB1F /* FootballFilterModel.swift */,
+				E503F5BF207A11B3006D4A0B /* FootballRequestModel.swift */,
+				E503F5C3207A1952006D4A0B /* FootballBetInfoModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1695,6 +1704,7 @@
 				E5786FC7206E29730045F7F5 /* FootballProtocol.swift in Sources */,
 				E56CE8022069DFC20090A1B5 /* AccountDetailSectionHeader.swift in Sources */,
 				E58B57B8205634250025E2F1 /* BankCardFooterView.swift in Sources */,
+				E503F5C0207A11B3006D4A0B /* FootballRequestModel.swift in Sources */,
 				E5973DDE204D152F006461CE /* BaseViewController.swift in Sources */,
 				E59CB3DD205BA1650086DD0E /* HomeSportLotteryCell.swift in Sources */,
 				E50B9075205231C800417BFE /* RechargeFooterView.swift in Sources */,
@@ -1752,6 +1762,7 @@
 				E5973E31204F8FD4006461CE /* MeHeaderView.swift in Sources */,
 				E550D8A72073719A002DDE23 /* FootballPlayFilterVC.swift in Sources */,
 				E56CE810206A22E10090A1B5 /* WithdrawalProgressFooter.swift in Sources */,
+				E503F5C4207A1952006D4A0B /* FootballBetInfoModel.swift in Sources */,
 				E50C99BB20746E6B002D8C2F /* DateProtocol.swift in Sources */,
 				E58B57B220561BB80025E2F1 /* Spacing&SizeConstraint.swift in Sources */,
 				E58B57C9205688570025E2F1 /* UserDataModel.swift in Sources */,
@@ -1820,6 +1831,7 @@
 				E59CB3DB205BA1300086DD0E /* HomeActivityCell.swift in Sources */,
 				E5786FB6206DE87E0045F7F5 /* FootballSPFCell.swift in Sources */,
 				E514DDE02052A37E00274854 /* DataModel.swift in Sources */,
+				E503F5C2207A15A7006D4A0B /* FootballOrderProtocol.swift in Sources */,
 				E537397420576FEE0087E4E6 /* APIManager.swift in Sources */,
 				E5883F522068DFBF00CB3A46 /* OrderSchemeTitleCell.swift in Sources */,
 				E57375A320468B8900148622 /* AppDelegate.swift in Sources */,

@@ -19,6 +19,7 @@ struct HomeDataModel : HandyJSON {
 
 /// 玩法
 struct HomePlayModel: HandyJSON {
+    var lotteryId: String!
     var playClassifyId: String!
     var playClassifyImg: String!
     var playClassifyLabelId: String!

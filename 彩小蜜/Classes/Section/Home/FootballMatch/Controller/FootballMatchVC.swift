@@ -34,6 +34,8 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     // MARK: - 属性
     public var matchType: FootballMatchType = .胜平负
     
+    public var homeData : HomePlayModel!
+    
     public var matchList : [FootballMatchModel]!
     
     public var matchData : FootballMatchData!
@@ -269,7 +271,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         selectPlayList.remove(teamInfo)
     }
     
-    // MARK: - FOOTBALLBOTTOM delegate
+    // MARK: - FOOTBALL Bottom delegate
     func delete() {
         weak var weakSelf = self
         showCXMAlert(title: nil, message: "您正在清空方案列表", action: "清空", cancel: "返回") { (action) in
@@ -294,7 +296,8 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
             return
         }
         let order = FootballOrderConfirmVC()
-        order.selectPlayList = selectPlayList
+        order.playList = selectPlayList
+        order.homeData = self.homeData
         pushViewController(vc: order)
     }
     

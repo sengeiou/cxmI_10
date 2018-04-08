@@ -17,22 +17,27 @@ fileprivate let FootballOrder2_1CellId = "FootballOrder2_1CellId"
 fileprivate let FootballOrderHunheCellId = "FootballOrderHunheCellId"
 
 
-class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballTeamViewDelegate, FootballOrderBottomViewDelegate, FootballTimesFilterVCDelegate, FootballPlayFilterVCDelegate{
-    
-    
-   
-    
-    
+class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballTeamViewDelegate, FootballOrderBottomViewDelegate, FootballTimesFilterVCDelegate, FootballPlayFilterVCDelegate, FootballFilterPro, FootballOrderProtocol{
     
     
     // MARK: - 属性
     public var matchType: FootballMatchType = .胜平负
+    public var homeData: HomePlayModel!
+    
     public var selectPlayList: [FootballPlayListModel]! {
         didSet{
-            bottomView.playList = self.selectPlayList
+            let filters = filterPlay(with: selectPlayList)
+            bottomView.filterList = filters
+            guard homeData != nil else { return }
+            orderReuqest(betType: (filters?.last?.titleNum)!, times: "5")
         }
     }
-    
+    public var playList: [FootballPlayListModel]! {
+        didSet{
+            selectPlayList = playList
+        }
+    }
+    private var betInfo : FootballBetInfoModel!
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +45,10 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         initSubview()
         setEmpty(title: "暂无可选赛事", tableView)
         setRightButtonItem()
+       // playList = selectPlayList
+        
+        let filters = filterPlay(with: selectPlayList)
+        orderReuqest(betType: (filters?.last?.titleNum)!, times: "5")
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -108,8 +117,8 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     
     //MARK: - tableView dataSource
     func numberOfSections(in tableView: UITableView) -> Int {
-        guard selectPlayList != nil else { return 0 }
-        return selectPlayList.count
+        guard playList != nil else { return 0 }
+        return playList.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -139,7 +148,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     private func initSPFCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballOrderSPFCellId, for: indexPath) as! FootballOrderSPFCell
         cell.teamView.delegate = self 
-        cell.playInfoModel = selectPlayList[indexPath.section]
+        cell.playInfoModel = playList[indexPath.section]
         return cell
     }
     private func initRangSPFCell(indexPath: IndexPath) -> UITableViewCell {
@@ -203,18 +212,18 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     // MARK: - Bottow Delegate
-    func orderConfirm() {
+    // 确认键
+    func orderConfirm(filterList: [FootballPlayFilterModel], times: String) {
         
     }
-    
     // 串关 弹窗
-    func orderPlay() {
+    func orderPlay(filterList: [FootballPlayFilterModel]) {
         let play = FootballPlayFilterVC()
         play.delegate = self
-        play.playList = selectPlayList
+        play.filterList = filterList
         present(play)
     }
-    
+  
     func orderMultiple() {
         let times = FootballTimesFilterVC()
         times.delegate = self
@@ -224,11 +233,12 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     // MARK: - 选取倍数 delegate
     func timesConfirm(times: String) {
         print(times)
+        bottomView.times = times
     }
     
     // MARK: - 串关方式
-    func playFilterConfirm() {
-        
+    func playFilterConfirm(filterList: [FootballPlayFilterModel]) {
+        bottomView.filterList = filterList
     }
     
     func playFilterCancel() {

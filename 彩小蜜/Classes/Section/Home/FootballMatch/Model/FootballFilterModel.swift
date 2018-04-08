@@ -22,3 +22,12 @@ class FilterModel: HandyJSON {
     var leagueName: String!
     required init() { }
 }
+
+// 记录串关，
+class FootballPlayFilterModel: NSObject {
+    var isSelected : Bool = false
+    var playTitle: String = ""
+    var title : String!
+    /// 传给服务端用到的 11，21，31，41，51，61，71，81 串关
+    var titleNum: String!
+}

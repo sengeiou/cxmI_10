@@ -10,27 +10,33 @@ import UIKit
 
 protocol FootballOrderBottomViewDelegate {
     /// 确认
-    func orderConfirm() -> Void
+    func orderConfirm(filterList: [FootballPlayFilterModel], times: String) -> Void
     /// 串关选择
-    func orderPlay() -> Void
+    func orderPlay(filterList: [FootballPlayFilterModel]) -> Void
     /// 倍数选择
     func orderMultiple() -> Void
 }
 
 class FootballOrderBottomView: UIView {
 
-    public var playList: [FootballPlayListModel]! {
+    public var filterList: [FootballPlayFilterModel]! {
         didSet{
-            guard playList.isEmpty == false else { return }
-            if playList.count < 2, playList[0].single == true {
-                playBut.setTitle("单关", for: .normal)
-            }else if playList.count < 2, playList[0].single == false{
-                playBut.setTitle("串关 ", for: .normal)
-            }else if playList.count < 9{
-                playBut.setTitle("串关 \(playList.count)串1", for: .normal)
-            }else {
-                playBut.setTitle("串关 8串1", for: .normal)
+            guard filterList != nil else { return }
+            guard filterList.isEmpty == false else { return }
+            var str : String = ""
+            for filter in filterList {
+                if filter.isSelected == true {
+                    str += filter.title + ","
+                }
             }
+            str.removeLast()
+            playBut.setTitle(filterList[0].playTitle + str, for: .normal)
+        }
+    }
+    
+    public var times : String! {
+        didSet{
+            multipleBut.setTitle("倍数  " + times + "倍", for: .normal)
         }
     }
     
@@ -132,8 +138,13 @@ class FootballOrderBottomView: UIView {
         vLine.backgroundColor = ColorF4F4F4
         
         playBut = UIButton(type: .custom)
-        playBut.setTitle("串关  4串1", for: .normal)
+        //playBut.setTitle("串关  4串1", for: .normal)
         playBut.setTitleColor(Color505050, for: .normal)
+        
+        //playBut.titleLabel?.lineBreakMode = .byCharWrapping
+        playBut.titleLabel?.lineBreakMode = .byTruncatingTail
+        playBut.titleLabel?.numberOfLines = 2
+        
         playBut.addTarget(self, action: #selector(playClicked(_:)), for: .touchUpInside)
         
         multipleBut = UIButton(type: .custom)
@@ -180,7 +191,7 @@ class FootballOrderBottomView: UIView {
     
     @objc private func playClicked(_ sender: UIButton) {
         guard delegate != nil else { return }
-        delegate.orderPlay()
+        delegate.orderPlay(filterList: filterList)
     }
     @objc private func multipleClicked(_ sender: UIButton) {
         guard delegate != nil else { return }
@@ -188,7 +199,7 @@ class FootballOrderBottomView: UIView {
     }
     @objc private func confirmClicked(_ sender: UIButton) {
         guard delegate != nil else { return }
-        delegate.orderConfirm()
+        delegate.orderConfirm(filterList: filterList, times: times)
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

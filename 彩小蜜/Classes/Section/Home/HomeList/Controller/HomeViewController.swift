@@ -17,7 +17,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     
 
     //MARK: - 点击事件
-    func didSelectItem(playType: String) {
+    func didSelectItem(playType: String, index: Int) {
         let football = FootballMatchVC()
         
         switch playType {
@@ -38,9 +38,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         default: break
             
         }
-        
-        
-        
+        football.homeData = homeData.dlPlayClassifyDetailDTOs[index]
         pushViewController(vc: football)
     }
     

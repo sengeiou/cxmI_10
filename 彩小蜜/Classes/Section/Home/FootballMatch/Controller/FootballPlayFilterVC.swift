@@ -9,13 +9,6 @@
 import UIKit
 
 
-class FootballPlayFilterModel: NSObject {
-    var isSelected : Bool = false
-    var title : String!
-    var titleNum: String!
-}
-
-
 fileprivate let FilterCellHeight: CGFloat = 35
 fileprivate let minimumLineSpacing : CGFloat = 10
 fileprivate let minimumInteritemSpacing : CGFloat = 10
@@ -29,46 +22,19 @@ fileprivate let FilterCellWidth : CGFloat = (screenWidth - leftInset * 2 - minim
 fileprivate let FootballPlayFilterCellId = "FootballPlayFilterCellId"
 
 protocol FootballPlayFilterVCDelegate {
-    func playFilterConfirm() -> Void
+    func playFilterConfirm(filterList:[FootballPlayFilterModel]) -> Void
     func playFilterCancel() -> Void
 }
 
 class FootballPlayFilterVC: BasePopViewController, FootballFilterBottomViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    public var playList : [FootballPlayListModel]!{
+    
+    public var filterList: [FootballPlayFilterModel]! {
         didSet{
-            guard playList.isEmpty == false else { return }
-            if playList.count < 2, playList[0].single == true {
-                let filter = FootballPlayFilterModel()
-                filter.title = "单关"
-                filter.titleNum = "11"
-                filterList.append(filter)
-            }else if playList.count < 2, playList[0].single == false{
-                let filter = FootballPlayFilterModel()
-                filter.title = "2串1"
-                filter.titleNum = "21"
-                filterList.append(filter)
-            }else if playList.count < 9{
-                for index in 2..<playList.count + 1 {
-                    let filter = FootballPlayFilterModel()
-                    filter.title = "\(index)串1"
-                    filter.titleNum = "\(index)1"
-                    filterList.append(filter)
-                }
-                
-            }else {
-                for index in 2...8 {
-                    let filter = FootballPlayFilterModel()
-                    filter.title = "\(index)串1"
-                    filter.titleNum = "\(index)1"
-                    filterList.append(filter)
-                }
-            }
-            
-            filterList.last?.isSelected = true
+            self.collectionView.reloadData()
         }
     }
-
+    
     // MARK: - 属性
     public var delegate: FootballPlayFilterVCDelegate!
     
@@ -77,11 +43,7 @@ class FootballPlayFilterVC: BasePopViewController, FootballFilterBottomViewDeleg
     private var bgView: UIView!
     private var titleLB: UILabel!
     
-    private var filterList: [FootballPlayFilterModel]! {
-        didSet{
-            self.collectionView.reloadData()
-        }
-    }
+    
     
     // MARK: - 生命周期
     override func viewDidLoad() {
@@ -194,18 +156,21 @@ class FootballPlayFilterVC: BasePopViewController, FootballFilterBottomViewDeleg
     
     func filterConfirm() {
         guard delegate != nil else { return }
-        delegate.playFilterConfirm()
+        delegate.playFilterConfirm(filterList: filterList)
+        dismiss(animated: true, completion: nil)
     }
     
     func filterCancel() {
         guard delegate != nil else { return }
         delegate.playFilterCancel()
+        dismiss(animated: true, completion: nil)
     }
     
     
     
-    
-    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
