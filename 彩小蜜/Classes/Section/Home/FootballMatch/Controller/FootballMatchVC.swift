@@ -297,7 +297,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         }
         let order = FootballOrderConfirmVC()
         order.playList = selectPlayList
-        order.homeData = self.homeData
+        order.homeData = homeData
         pushViewController(vc: order)
     }
     

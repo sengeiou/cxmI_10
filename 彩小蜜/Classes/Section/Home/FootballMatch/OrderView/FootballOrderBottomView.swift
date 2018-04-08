@@ -40,6 +40,13 @@ class FootballOrderBottomView: UIView {
         }
     }
     
+    public var betInfo : FootballBetInfoModel! {
+        didSet{
+            moneyLB.text = betInfo.betNum + "注" + betInfo.times + "倍 共需：¥" + betInfo.money
+            bonusLB.text = betInfo.minBonus + "-" + betInfo.maxBonus
+        }
+    }
+    
     public var delegate : FootballOrderBottomViewDelegate!
     
     private var titleLB: UILabel!

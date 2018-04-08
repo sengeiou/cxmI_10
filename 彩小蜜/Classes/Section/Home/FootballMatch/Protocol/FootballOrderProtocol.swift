@@ -46,12 +46,12 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
         requestModel.playType = homeData.playType
         requestModel.times = times
         
-        
+        weak var weakSelf = self
         _ = homeProvider.rx.request(.getBetInfo(requestModel: requestModel))
             .asObservable()
             .mapObject(type: FootballBetInfoModel.self)
             .subscribe(onNext: { (data) in
-                
+                weakSelf?.betInfo = data
             }, onError: { (error) in
                 guard let err = error as? HXError else { return }
                 switch err {

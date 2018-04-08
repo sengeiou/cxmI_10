@@ -37,7 +37,11 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
             selectPlayList = playList
         }
     }
-    private var betInfo : FootballBetInfoModel!
+    public var betInfo : FootballBetInfoModel! {
+        didSet{
+            bottomView.betInfo = betInfo
+        }
+    }
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -234,6 +238,8 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     func timesConfirm(times: String) {
         print(times)
         bottomView.times = times
+        let filters = filterPlay(with: selectPlayList)
+        orderReuqest(betType: (filters?.last?.titleNum)!, times: times)
     }
     
     // MARK: - 串关方式
