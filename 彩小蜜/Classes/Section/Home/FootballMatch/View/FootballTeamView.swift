@@ -8,14 +8,13 @@
 
 import UIKit
 
-var mixNum = 3
+var mixNum = 15
 var limitNum = 1
 
 protocol FootballTeamViewDelegate {
     func select(teamInfo: FootballPlayListModel) -> Void
     func deSelect(teamInfo: FootballPlayListModel) -> Void
 }
-
 
 class FootballTeamView: UIView , AlertPro{
 

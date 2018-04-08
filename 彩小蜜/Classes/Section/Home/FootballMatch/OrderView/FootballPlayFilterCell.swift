@@ -9,12 +9,10 @@
 import UIKit
 
 class FootballPlayFilterCell: UICollectionViewCell {
-    public var filterModel : FilterModel! {
+    public var filterModel : FootballPlayFilterModel! {
         didSet{
-            
             selected(filterModel.isSelected)
-            
-            //self.filterModel.isSelected = !self.filterModel.isSelected
+            title.text = filterModel.title
         }
     }
     
@@ -47,10 +45,8 @@ class FootballPlayFilterCell: UICollectionViewCell {
         title.font = Font14
         title.textColor = Color505050
         title.textAlignment = .center
-        title.text = "德甲"
         
         self.contentView.addSubview(title)
-        
     }
     
     private func selected(_ selected: Bool) {

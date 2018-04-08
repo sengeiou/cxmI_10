@@ -27,7 +27,11 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     
     // MARK: - 属性
     public var matchType: FootballMatchType = .胜平负
-    public var selectPlayList: [FootballPlayListModel]!
+    public var selectPlayList: [FootballPlayListModel]! {
+        didSet{
+            bottomView.playList = self.selectPlayList
+        }
+    }
     
     // MARK: - 生命周期
     override func viewDidLoad() {
@@ -198,7 +202,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         selectPlayList.remove(teamInfo)
     }
     
-    // MARK: - BOTTOM Delegate
+    // MARK: - Bottow Delegate
     func orderConfirm() {
         
     }
@@ -207,6 +211,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     func orderPlay() {
         let play = FootballPlayFilterVC()
         play.delegate = self
+        play.playList = selectPlayList
         present(play)
     }
     

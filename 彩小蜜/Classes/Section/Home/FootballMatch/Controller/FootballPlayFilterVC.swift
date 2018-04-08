@@ -9,6 +9,13 @@
 import UIKit
 
 
+class FootballPlayFilterModel: NSObject {
+    var isSelected : Bool = false
+    var title : String!
+    var titleNum: String!
+}
+
+
 fileprivate let FilterCellHeight: CGFloat = 35
 fileprivate let minimumLineSpacing : CGFloat = 10
 fileprivate let minimumInteritemSpacing : CGFloat = 10
@@ -28,7 +35,39 @@ protocol FootballPlayFilterVCDelegate {
 
 class FootballPlayFilterVC: BasePopViewController, FootballFilterBottomViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    
+    public var playList : [FootballPlayListModel]!{
+        didSet{
+            guard playList.isEmpty == false else { return }
+            if playList.count < 2, playList[0].single == true {
+                let filter = FootballPlayFilterModel()
+                filter.title = "单关"
+                filter.titleNum = "11"
+                filterList.append(filter)
+            }else if playList.count < 2, playList[0].single == false{
+                let filter = FootballPlayFilterModel()
+                filter.title = "2串1"
+                filter.titleNum = "21"
+                filterList.append(filter)
+            }else if playList.count < 9{
+                for index in 2..<playList.count + 1 {
+                    let filter = FootballPlayFilterModel()
+                    filter.title = "\(index)串1"
+                    filter.titleNum = "\(index)1"
+                    filterList.append(filter)
+                }
+                
+            }else {
+                for index in 2...8 {
+                    let filter = FootballPlayFilterModel()
+                    filter.title = "\(index)串1"
+                    filter.titleNum = "\(index)1"
+                    filterList.append(filter)
+                }
+            }
+            
+            filterList.last?.isSelected = true
+        }
+    }
 
     // MARK: - 属性
     public var delegate: FootballPlayFilterVCDelegate!
@@ -38,21 +77,18 @@ class FootballPlayFilterVC: BasePopViewController, FootballFilterBottomViewDeleg
     private var bgView: UIView!
     private var titleLB: UILabel!
     
-    private var filterList: [FilterModel]!
+    private var filterList: [FootballPlayFilterModel]! {
+        didSet{
+            self.collectionView.reloadData()
+        }
+    }
     
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
         self.popStyle = .fromBottom
-        
         initSubview()
-        
-        filterList = [FilterModel]()
-        
-        for _ in 0...8 {
-            let fil = FilterModel()
-            filterList.append(fil)
-        }
+        filterList = [FootballPlayFilterModel]()
     }
 
     override func viewDidLayoutSubviews() {
@@ -175,8 +211,4 @@ class FootballPlayFilterVC: BasePopViewController, FootballFilterBottomViewDeleg
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    
-
 }

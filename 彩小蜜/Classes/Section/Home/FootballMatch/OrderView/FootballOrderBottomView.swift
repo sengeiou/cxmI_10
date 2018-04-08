@@ -19,6 +19,21 @@ protocol FootballOrderBottomViewDelegate {
 
 class FootballOrderBottomView: UIView {
 
+    public var playList: [FootballPlayListModel]! {
+        didSet{
+            guard playList.isEmpty == false else { return }
+            if playList.count < 2, playList[0].single == true {
+                playBut.setTitle("单关", for: .normal)
+            }else if playList.count < 2, playList[0].single == false{
+                playBut.setTitle("串关 ", for: .normal)
+            }else if playList.count < 9{
+                playBut.setTitle("串关 \(playList.count)串1", for: .normal)
+            }else {
+                playBut.setTitle("串关 8串1", for: .normal)
+            }
+        }
+    }
+    
     public var delegate : FootballOrderBottomViewDelegate!
     
     private var titleLB: UILabel!
