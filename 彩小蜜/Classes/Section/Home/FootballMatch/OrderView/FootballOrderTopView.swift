@@ -29,8 +29,6 @@ class FootballOrderTopView: UIView, DateProtocol {
             
             titleLB.attributedText = attStr
             
-            
-            
         }
     }
     

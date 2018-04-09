@@ -17,8 +17,8 @@ fileprivate let FootballOrder2_1CellId = "FootballOrder2_1CellId"
 fileprivate let FootballOrderHunheCellId = "FootballOrderHunheCellId"
 
 
-class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballTeamViewDelegate, FootballOrderBottomViewDelegate, FootballTimesFilterVCDelegate, FootballPlayFilterVCDelegate, FootballFilterPro, FootballOrderProtocol{
-    
+class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballTeamViewDelegate, FootballOrderBottomViewDelegate, FootballTimesFilterVCDelegate, FootballPlayFilterVCDelegate, FootballFilterPro, FootballOrderProtocol, FootballOrderSPFCellDelegate{
+   
     
     // MARK: - 属性
     public var matchType: FootballMatchType = .胜平负
@@ -36,6 +36,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     public var playList: [FootballPlayListModel]! {
         didSet{
             selectPlayList = playList
+            self.tableView.reloadData()
         }
     }
     public var betInfo : FootballBetInfoModel! {
@@ -152,6 +153,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     
     private func initSPFCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballOrderSPFCellId, for: indexPath) as! FootballOrderSPFCell
+        cell.delegate = self 
         cell.teamView.delegate = self 
         cell.playInfoModel = playList[indexPath.section]
         return cell
@@ -192,7 +194,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 96 * defaultScale
+        return 91 * defaultScale
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 5
@@ -203,6 +205,11 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return nil
+    }
+    
+    // MARK: CELL  删除
+    func deleteOrderSPFCell(playInfo: FootballPlayListModel) {
+        playList.remove(playInfo)
     }
     
     // MARK: ITEM 选择 delegate

@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol FootballOrderSPFCellDelegate {
+    func deleteOrderSPFCell(playInfo: FootballPlayListModel) -> Void
+}
+
 class FootballOrderSPFCell: UITableViewCell , DateProtocol{
 
     public var playInfoModel: FootballPlayListModel! {
@@ -20,6 +24,8 @@ class FootballOrderSPFCell: UITableViewCell , DateProtocol{
             teamView.teamInfo = playInfoModel
         }
     }
+    
+    public var delegate : FootballOrderSPFCellDelegate!
     
     public var teamView: FootballTeamView!
     private var titleLB: UILabel!
@@ -87,7 +93,8 @@ class FootballOrderSPFCell: UITableViewCell , DateProtocol{
     }
     // 删除
     @objc private func deleteClicked(_ sender : UIButton) {
-        
+        guard delegate != nil else { return }
+        delegate.deleteOrderSPFCell(playInfo: self.playInfoModel)
     }
     // 胆
     @objc private func danClicked(_ sender: UIButton) {

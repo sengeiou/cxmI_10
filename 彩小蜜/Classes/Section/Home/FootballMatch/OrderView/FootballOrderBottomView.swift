@@ -42,8 +42,22 @@ class FootballOrderBottomView: UIView {
     
     public var betInfo : FootballBetInfoModel! {
         didSet{
-            moneyLB.text = betInfo.betNum + "注" + betInfo.times + "倍 共需：¥" + betInfo.money
-            bonusLB.text = betInfo.minBonus + "-" + betInfo.maxBonus
+            guard let betNum = betInfo.betNum else { return }
+            guard let times = betInfo.times else { return }
+            guard let money = betInfo.money else { return }
+            guard let minBonus = betInfo.minBonus else { return }
+            guard let maxBouns = betInfo.maxBonus else { return }
+            
+            let moneyAtt = NSMutableAttributedString(string: "\(betNum)注 \(times)倍 共需：")
+            let moneyStr = NSAttributedString(string: "¥\(money)", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+            moneyAtt.append(moneyStr)
+            
+            let bonusAtt = NSMutableAttributedString(string: "预测奖金: ")
+            let bonusStr = NSAttributedString(string: "\(minBonus)-\(maxBouns)", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+            bonusAtt.append(bonusStr)
+            
+            moneyLB.attributedText = moneyAtt
+            bonusLB.attributedText = bonusAtt
         }
     }
     
@@ -56,6 +70,7 @@ class FootballOrderBottomView: UIView {
     private var playCornerIcon: UIImageView!
     private var multCornerIcon: UIImageView!
     
+    private var topLine : UIView!
     private var hLineOne: UIView!
     private var hLineTwo: UIView!
     private var vLine : UIView!
@@ -65,16 +80,23 @@ class FootballOrderBottomView: UIView {
     
     private var confirmBut: UIButton!
     init() {
-        super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: CGFloat(120 * defaultScale) + CGFloat(SafeAreaBottomHeight)))
+        super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: (32 + 3 + 88) * defaultScale  + CGFloat(SafeAreaBottomHeight)))
         
         initSubview()
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        titleLB.snp.makeConstraints { (make) in
+        
+        topLine.snp.makeConstraints { (make) in
             make.top.equalTo(0)
             make.left.right.equalTo(0)
-            make.height.equalTo(30)
+            make.height.equalTo(0.5)
+        }
+        
+        titleLB.snp.makeConstraints { (make) in
+            make.top.equalTo(topLine.snp.bottom)
+            make.left.right.equalTo(0)
+            make.height.equalTo(32 * defaultScale)
         }
         hLineOne.snp.makeConstraints { (make) in
             make.top.equalTo(titleLB.snp.bottom)
@@ -104,7 +126,7 @@ class FootballOrderBottomView: UIView {
         }
         playCornerIcon.snp.makeConstraints { (make) in
             make.top.right.equalTo(0)
-            make.width.height.equalTo(8)
+            make.width.height.equalTo(10 * defaultScale)
         }
         multCornerIcon.snp.makeConstraints { (make) in
             make.top.right.equalTo(0)
@@ -125,24 +147,27 @@ class FootballOrderBottomView: UIView {
             make.top.equalTo(hLineTwo.snp.bottom)
             make.right.equalTo(0)
             make.bottom.equalTo(-SafeAreaBottomHeight)
-            make.width.equalTo(90)
+            make.width.equalTo(120 * defaultScale)
         }
     }
     private func initSubview() {
         self.backgroundColor = ColorFFFFFF
         
         titleLB = UILabel()
-        titleLB.font = Font12
-        titleLB.textColor = ColorC8C8C8
+        titleLB.font = Font10
+        titleLB.textColor = Color9F9F9F
         titleLB.textAlignment = .center
         titleLB.text = "页面盘口，赔率仅供参考，请以出票盘口赔率为准"
         
+        topLine = UIView()
+        topLine.backgroundColor = ColorE9E9E9
+        
         hLineOne = UIView()
-        hLineOne.backgroundColor = ColorF4F4F4
+        hLineOne.backgroundColor = ColorE9E9E9
         hLineTwo = UIView()
-        hLineTwo.backgroundColor = ColorF4F4F4
+        hLineTwo.backgroundColor = ColorE9E9E9
         vLine = UIView()
-        vLine.backgroundColor = ColorF4F4F4
+        vLine.backgroundColor = ColorE9E9E9
         
         playBut = UIButton(type: .custom)
         //playBut.setTitle("串关  4串1", for: .normal)
@@ -151,28 +176,29 @@ class FootballOrderBottomView: UIView {
         //playBut.titleLabel?.lineBreakMode = .byCharWrapping
         playBut.titleLabel?.lineBreakMode = .byTruncatingTail
         playBut.titleLabel?.numberOfLines = 2
-        
+        playBut.titleLabel?.font = Font12
         playBut.addTarget(self, action: #selector(playClicked(_:)), for: .touchUpInside)
         
         multipleBut = UIButton(type: .custom)
+        multipleBut.titleLabel?.font = Font12
         multipleBut.setTitle("倍数  5倍", for: .normal)
         multipleBut.setTitleColor(Color505050, for: .normal)
         multipleBut.addTarget(self, action: #selector(multipleClicked(_:)), for: .touchUpInside)
         
         playCornerIcon = UIImageView()
-        playCornerIcon.image = UIImage(named: "Expired")
+        playCornerIcon.image = UIImage(named: "Clickable")
         
         multCornerIcon = UIImageView()
-        multCornerIcon.image = UIImage(named: "Expired")
+        multCornerIcon.image = UIImage(named: "Clickable")
         
         moneyLB = UILabel()
-        moneyLB.font = Font14
+        moneyLB.font = Font11
         moneyLB.textColor = Color787878
         moneyLB.textAlignment = .left
         moneyLB.text = "4注5倍 共需： ¥20"
         
         bonusLB = UILabel()
-        bonusLB.font = Font14
+        bonusLB.font = Font11
         bonusLB.textColor = Color787878
         bonusLB.textAlignment = .left
         bonusLB.text = "预测奖金： 30.06-42.56元"
@@ -194,6 +220,7 @@ class FootballOrderBottomView: UIView {
         self.addSubview(moneyLB)
         self.addSubview(bonusLB)
         self.addSubview(confirmBut)
+        self.addSubview(topLine)
     }
     
     @objc private func playClicked(_ sender: UIButton) {
