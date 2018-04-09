@@ -26,9 +26,18 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     
     public var selectPlayList: [FootballPlayListModel]! {
         didSet{
-            let filters = filterPlay(with: selectPlayList)
+            guard let filters = filterPlay(with: selectPlayList) else { return }
             bottomView.filterList = filters
             topView.playModelList = selectPlayList
+            guard filters.isEmpty == false else { return }
+            var str : String = ""
+            for filter in filters {
+                if filter.isSelected == true {
+                    str += filter.titleNum + ","
+                }
+            }
+            str.removeLast()
+            self.playType = str
         }
     }
     public var playList: [FootballPlayListModel]! {
@@ -43,8 +52,8 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         }
     }
     
-    private var times : String!
-    
+    public var times : String = "5"  // 倍数  网络请求用
+    public var playType : String! // 串关方式 网络请求用
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,10 +61,8 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         initSubview()
         setEmpty(title: "暂无可选赛事", tableView)
         setRightButtonItem()
-       // playList = selectPlayList
-        
-        let filters = filterPlay(with: selectPlayList)
-        orderReuqest(betType: (filters?.last?.titleNum)!, times: "5")
+
+        orderRequest ()
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -226,17 +233,12 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     func selectedItem() {
         guard homeData != nil else { return }
         
-        let filters = filterPlay(with: selectPlayList)
-        var times = "5"
-        if self.times != nil {
-            times = self.times
-        }
-        orderReuqest(betType: (filters?.last?.titleNum)!, times: times)
+        orderRequest ()
     }
     // MARK: - Bottow Delegate
     // 确认键
     func orderConfirm(filterList: [FootballPlayFilterModel], times: String) {
-        self.times = times
+        
         
     }
     // 串关 弹窗
@@ -246,24 +248,35 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         play.filterList = filterList
         present(play)
     }
-  
+    // 倍数弹窗
     func orderMultiple() {
         let times = FootballTimesFilterVC()
         times.delegate = self
         present(times)
     }
     
-    // MARK: - 选取倍数 delegate
+    // MARK: - 倍数弹窗 delegate
     func timesConfirm(times: String) {
         print(times)
+        self.times = times
         bottomView.times = times
-        let filters = filterPlay(with: selectPlayList)
-        orderReuqest(betType: (filters?.last?.titleNum)!, times: times)
+        orderRequest ()
     }
     
-    // MARK: - 串关方式
+    // MARK: - 串关弹窗 delegate
     func playFilterConfirm(filterList: [FootballPlayFilterModel]) {
         bottomView.filterList = filterList
+
+        guard filterList.isEmpty == false else { return }
+        var str : String = ""
+        for filter in filterList {
+            if filter.isSelected == true {
+                str += filter.titleNum + ","
+            }
+        }
+        str.removeLast()
+        self.playType = str
+        orderRequest()
     }
     
     func playFilterCancel() {

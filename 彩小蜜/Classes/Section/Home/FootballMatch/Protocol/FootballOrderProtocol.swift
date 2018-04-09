@@ -12,7 +12,13 @@ import Foundation
 protocol FootballOrderProtocol { }
 
 extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
-    func orderReuqest(betType: String, times: String) {
+    
+    func orderRequest () {
+        
+        self.orderReuqest(betType: self.playType, times: times)
+    }
+    
+    private func orderReuqest(betType: String, times: String) {
         guard selectPlayList.isEmpty == false else { return }
         
         if selectPlayList.count == 1 {
