@@ -78,7 +78,7 @@ class FootballTeamView: UIView , AlertPro{
         drawBut.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(homeBut)
             make.centerX.equalTo(self.snp.centerX)
-            make.width.equalTo(60)
+            make.width.equalTo(55 * defaultScale)
         }
         awayBut.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(homeBut)
@@ -144,6 +144,7 @@ class FootballTeamView: UIView , AlertPro{
         homeName.text = "[5]沙尔克"
         
         homeOdds = initLabel()
+        homeOdds.font = Font10
         homeOdds.text = "主胜1.57"
         
         VSLB = initLabel()
@@ -151,6 +152,7 @@ class FootballTeamView: UIView , AlertPro{
         VSLB.text = "VS"
         
         drawOdds = initLabel()
+        drawOdds.font = Font10
         drawOdds.text = "平3.6"
         
         awayName = initLabel()
@@ -158,6 +160,7 @@ class FootballTeamView: UIView , AlertPro{
         awayName.text = "[5]沙尔克"
         
         awayOdds = initLabel()
+        awayOdds.font = Font10
         awayOdds.text = "客胜1.88"
         
         self.addSubview(homeBut)
@@ -177,7 +180,7 @@ class FootballTeamView: UIView , AlertPro{
     }
     private func initLabel() -> UILabel {
         let lab = UILabel()
-        lab.font = Font14
+        lab.font = Font12
         lab.textColor = Color787878
         lab.textAlignment = .center
         

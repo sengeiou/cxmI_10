@@ -12,9 +12,9 @@ import UIKit
 let defaultScale = screenWidth / 375
 
 /// 距离屏幕左侧间隔
-let leftSpacing = 17.5
+let leftSpacing = 17.5 * defaultScale
 /// 距离屏幕右侧间隔
-let rightSpacing: CGFloat = 17.5
+let rightSpacing: CGFloat = 17.5 * defaultScale
 /// 水平方向间隔
 let horizontalSpacing = 10
 /// 竖直方向间隔

@@ -55,7 +55,7 @@ class FootballSPFCell: UITableViewCell, DateProtocol {
         }
         
         matchTitle.snp.makeConstraints { (make) in
-            make.top.equalTo(10)
+            make.top.equalTo(13.5 * defaultScale)
             make.left.equalTo(leftSpacing)
             make.width.height.equalTo(endTime)
         }

@@ -24,6 +24,8 @@ let ColorFFFFFF = UIColor(hexColor: "FFFFFF")
 let ColorFFFFFFa8 = UIColor(hexColor: "FFFFFF", alpha: 0.8)
 /// app 主色
 let ColorEA5504 = UIColor(hexColor: "EA5504")
+/// app 主色2
+let ColorE85504 = UIColor(hexColor: "E85504")
 /// 黄橙色
 let ColorF7931E = UIColor(hexColor: "F7931E")
 /// 未认证条，字体颜色

@@ -42,13 +42,13 @@ class FootballSectionHeader: UITableViewHeaderFooterView {
         didSet{
             switch headerType {
             case .hotMatch:
-                title.textColor = ColorEA5504
+                title.textColor = ColorE85504
                 icon.isHidden = false
                 title.snp.makeConstraints({ (make) in
                     make.left.equalTo(icon.snp.right).offset(10)
                 })
             case .match:
-                title.textColor = Color787878
+                title.textColor = Color9F9F9F
                 icon.isHidden = true
                 title.snp.makeConstraints({ (make) in
                     make.left.equalTo(leftSpacing)
@@ -119,10 +119,10 @@ class FootballSectionHeader: UITableViewHeaderFooterView {
         title = UILabel()
         title.font = Font15
         title.textAlignment = .left
+        title.textColor = ColorE85504
         title.text = "热门比赛"
         
         spreadBut = UIButton(type: .custom)
-        //spreadBut.setImage(UIImage(named: "Unfold"), for: .selected)
         spreadBut.setImage(UIImage(named: "Unfold"), for: .normal)
         spreadBut.addTarget(self, action: #selector(spreadClicked(_:)), for: .touchUpInside)
         spreadBut.isSelected = true
