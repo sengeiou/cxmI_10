@@ -9,13 +9,12 @@
 import UIKit
 
 
-
-fileprivate let FilterCellWidth : CGFloat = 96 * defaultScale
 fileprivate let FilterCellHeight: CGFloat = 30 * defaultScale
-fileprivate let minimumLineSpacing : CGFloat = 10
-fileprivate let minimumInteritemSpacing : CGFloat = 1
+fileprivate let minimumLineSpacing : CGFloat = 12
+fileprivate let minimumInteritemSpacing : CGFloat = 9
 fileprivate let topInset : CGFloat = 10
 fileprivate let leftInset: CGFloat = 0
+fileprivate let FilterCellWidth : CGFloat = ((326 * defaultScale) - (10 * 2 * defaultScale) - (minimumInteritemSpacing * 2 * defaultScale) - 1) / 3
 
 fileprivate let FootballFilterCellId = "FootballFilterCellId"
 
@@ -78,16 +77,16 @@ class FootballMatchFilterVC: BasePopViewController, UICollectionViewDelegate, UI
         }
         
         topView.snp.makeConstraints { (make) in
-            make.top.equalTo(44 * defaultScale)
-            make.left.equalTo(leftSpacing)
-            make.right.equalTo(-rightSpacing)
+            make.top.equalTo(50 * defaultScale)
+            make.left.equalTo(10 * defaultScale)
+            make.right.equalTo(-10 * defaultScale)
             make.height.equalTo(30 * defaultScale)
         }
         collectionView.snp.makeConstraints { (make) in
             make.top.equalTo(topView.snp.bottom)
             make.bottom.equalTo(bottomView.snp.top)
-            make.left.equalTo(leftSpacing)
-            make.right.equalTo(-rightSpacing)
+            make.left.equalTo(10 * defaultScale)
+            make.right.equalTo(-10 * defaultScale)
         }
         bottomView.snp.makeConstraints { (make) in
             make.bottom.equalTo(0)

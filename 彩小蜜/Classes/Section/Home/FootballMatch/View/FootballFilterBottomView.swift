@@ -32,12 +32,12 @@ class FootballFilterBottomView: UIView {
         super.layoutSubviews()
         line.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
-            make.height.equalTo(0.3)
+            make.height.equalTo(0.5)
             make.top.equalTo(0)
         }
         vLine.snp.makeConstraints { (make) in
             make.centerX.equalTo(self.snp.centerX)
-            make.width.equalTo(0.3)
+            make.width.equalTo(0.5)
             make.top.bottom.equalTo(0)
         }
         confirmBut.snp.makeConstraints { (make) in
@@ -60,11 +60,13 @@ class FootballFilterBottomView: UIView {
         
         confirmBut = UIButton(type: .custom)
         confirmBut.setTitle("确定", for: .normal)
+        confirmBut.titleLabel?.font = Font13
         confirmBut.setTitleColor(ColorEA5504, for: .normal)
         confirmBut.addTarget(self, action: #selector(confirmClicked(_:)), for: .touchUpInside)
         
         cancelBut = UIButton(type: .custom)
         cancelBut.setTitle("取消", for: .normal)
+        cancelBut.titleLabel?.font = Font13
         cancelBut.setTitleColor(Color505050, for: .normal)
         cancelBut.addTarget(self, action: #selector(cancelClicked(_:)), for: .touchUpInside)
         

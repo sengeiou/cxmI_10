@@ -75,19 +75,19 @@ class FootballFilterTopView: UIView {
         
         allBut = UIButton(type: .custom)
         allBut.setTitle("全选", for: .normal)
-        allBut.titleLabel?.font = Font16
+        allBut.titleLabel?.font = Font12
         allBut.setTitleColor(Color787878, for: .normal)
         allBut.addTarget(self, action: #selector(allClicked(_:)), for: .touchUpInside)
         
         reverseBut = UIButton(type: .custom)
         reverseBut.setTitle("反选", for: .normal)
-        reverseBut.titleLabel?.font = Font16
+        reverseBut.titleLabel?.font = Font12
         reverseBut.setTitleColor(Color787878, for: .normal)
         reverseBut.addTarget(self, action: #selector(reverseClicked(_:)), for: .touchUpInside)
         
         fiveBut = UIButton(type: .custom)
         fiveBut.setTitle("仅五大联赛", for: .normal)
-        fiveBut.titleLabel?.font = Font16
+        fiveBut.titleLabel?.font = Font12
         fiveBut.setTitleColor(Color787878, for: .normal)
         fiveBut.addTarget(self, action: #selector(fiveClicked(_:)), for: .touchUpInside)
         
