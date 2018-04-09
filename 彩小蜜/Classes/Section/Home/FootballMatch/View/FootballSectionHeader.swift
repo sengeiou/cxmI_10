@@ -29,6 +29,12 @@ class FootballSectionHeader: UITableViewHeaderFooterView {
                 + "\(matchModel.playList.count)" + "场比赛可投"
                 title.textColor = Color787878
             }
+            
+            if matchModel.isSpreading == true {
+                spreadBut.setImage(UIImage(named: "Unfold"), for: .normal)
+            }else {
+                spreadBut.setImage(UIImage(named: "Collapse"), for: .normal)
+            }
         }
     }
     
@@ -58,6 +64,8 @@ class FootballSectionHeader: UITableViewHeaderFooterView {
     private var spreadBut : UIButton!
     private var bgView: UIView!
     
+    private var line : UIView!
+    
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         initSubview()
@@ -69,7 +77,15 @@ class FootballSectionHeader: UITableViewHeaderFooterView {
         
         bgView.snp.makeConstraints { (make) in
             make.top.equalTo(5 * defaultScale)
-            make.left.right.bottom.equalTo(0)
+            make.left.right.equalTo(0)
+            make.bottom.equalTo(-1.5)
+        }
+        
+        line.snp.makeConstraints { (make) in
+            make.bottom.equalTo(-0.5)
+            make.left.equalTo(leftSpacing)
+            make.right.equalTo(-rightSpacing)
+            make.height.equalTo(0.6)
         }
         
         icon.snp.makeConstraints { (make) in
@@ -91,11 +107,14 @@ class FootballSectionHeader: UITableViewHeaderFooterView {
     private func initSubview() {
         self.contentView.backgroundColor = ColorF4F4F4
         
+        line = UIView()
+        line.backgroundColor = ColorC8C8C8
+        
         bgView = UIView()
         bgView.backgroundColor = ColorFFFFFF
         
         icon = UIImageView()
-        icon.image = UIImage(named: "Datasecurity")
+        icon.image = UIImage(named: "Popular")
         
         title = UILabel()
         title.font = Font15
@@ -103,13 +122,16 @@ class FootballSectionHeader: UITableViewHeaderFooterView {
         title.text = "热门比赛"
         
         spreadBut = UIButton(type: .custom)
-        spreadBut.setImage(UIImage(named: "jump"), for: .normal)
+        //spreadBut.setImage(UIImage(named: "Unfold"), for: .selected)
+        spreadBut.setImage(UIImage(named: "Unfold"), for: .normal)
         spreadBut.addTarget(self, action: #selector(spreadClicked(_:)), for: .touchUpInside)
         spreadBut.isSelected = true
+        
         
         bgView.addSubview(icon)
         bgView.addSubview(title)
         bgView.addSubview(spreadBut)
+        self.contentView.addSubview(line)
         self.contentView.addSubview(bgView)
     }
     

@@ -19,7 +19,7 @@ class FootballTopView: UIView {
     private var titleLB: UILabel!
     private var bgView: UIView!
     init() {
-        super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 44 * defaultScale))
+        super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 36 * defaultScale))
         initSubview()
     }
     override func layoutSubviews() {
@@ -44,7 +44,7 @@ class FootballTopView: UIView {
         
         titleLB = UILabel()
         titleLB.font = Font14
-        titleLB.textColor = Color787878
+        titleLB.textColor = Color9F9F9F
         titleLB.textAlignment = .left
         titleLB.text = "共有\(number)场比赛可投"
         

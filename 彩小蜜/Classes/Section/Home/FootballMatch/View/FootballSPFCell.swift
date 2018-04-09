@@ -32,6 +32,8 @@ class FootballSPFCell: UITableViewCell, DateProtocol {
     // 单关图标
     private var typeIcon : UIImageView!
     
+    private var line : UIImageView!
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initSubview()
@@ -39,6 +41,14 @@ class FootballSPFCell: UITableViewCell, DateProtocol {
 
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+        line.snp.makeConstraints { (make) in
+            make.bottom.equalTo(0)
+            make.left.equalTo(leftSpacing)
+            make.right.equalTo(-rightSpacing)
+            make.height.equalTo(1)
+        }
+        
         typeIcon.snp.makeConstraints { (make) in
             make.top.left.equalTo(0)
             make.width.height.equalTo(20)
@@ -64,8 +74,8 @@ class FootballSPFCell: UITableViewCell, DateProtocol {
             make.bottom.equalTo(-10)
         }
         teamView.snp.makeConstraints { (make) in
-            make.top.equalTo(10)
-            make.bottom.equalTo(-10)
+            make.top.equalTo(15 * defaultScale)
+            make.bottom.equalTo(-15 * defaultScale)
             make.left.equalTo(endTime.snp.right).offset(10)
             make.right.equalTo(-rightSpacing)
         }
@@ -73,10 +83,13 @@ class FootballSPFCell: UITableViewCell, DateProtocol {
     private func initSubview() {
         self.selectionStyle = .none
         
+        line = UIImageView()
+        line.image = UIImage(named: "line")
+        
         teamView = FootballTeamView()
         
         typeIcon = UIImageView()
-        typeIcon.image = UIImage(named: "Datasecurity")
+        typeIcon.image = UIImage(named: "Singlefield")
         
         matchTitle = initLabel()
         
@@ -86,9 +99,10 @@ class FootballSPFCell: UITableViewCell, DateProtocol {
         endTime.sizeToFit()
         
         detailBut = UIButton(type: .custom)
-        detailBut.setImage(UIImage(named: "jump"), for: .normal)
+        detailBut.setImage(UIImage(named: "Collapse"), for: .normal)
         detailBut.titleLabel?.numberOfLines = 2
         
+        self.contentView.addSubview(line)
         self.contentView.addSubview(teamView)
         self.contentView.addSubview(typeIcon)
         self.contentView.addSubview(matchTitle)

@@ -17,6 +17,8 @@ let ColorEAEAEA = UIColor(hexColor: "EAEAEA")
 let ColorF4F4F4 = UIColor(hexColor: "F4F4F4")
 /// 灰色字体
 let Color787878 = UIColor(hexColor: "787878")
+/// 灰
+let Color9F9F9F = UIColor(hexColor: "9F9F9F")
 /// 主白
 let ColorFFFFFF = UIColor(hexColor: "FFFFFF")
 let ColorFFFFFFa8 = UIColor(hexColor: "FFFFFF", alpha: 0.8)

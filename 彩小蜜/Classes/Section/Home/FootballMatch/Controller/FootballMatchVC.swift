@@ -101,6 +101,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         table.delegate = self
         table.dataSource = self
         table.backgroundColor = ColorF4F4F4
+        table.separatorStyle = .none
         table.register(FootballSectionHeader.self, forHeaderFooterViewReuseIdentifier: FootballSectionHeaderId)
         registerCell(table)
         return table
@@ -218,10 +219,10 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 88 * defaultScale
+        return 84 * defaultScale
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 49 * defaultScale
+        return 36 * defaultScale
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.01
@@ -258,6 +259,8 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         header.isSpreading = !header.isSpreading
         
         tableView.reloadSections(IndexSet(integer: section), with: .automatic)
+        
+        
     }
     
     // MARK: - FootballTeamView Delegate 选取比赛，
