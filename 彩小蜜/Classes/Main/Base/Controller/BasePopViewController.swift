@@ -64,7 +64,7 @@ class BasePopViewController: UIViewController, AlertPro {
             make.centerY.equalTo(self.view.snp.centerY)
             make.left.equalTo(leftSpacing)
             make.right.equalTo(-rightSpacing)
-            make.height.equalTo(pushBgView.snp.width)
+            make.height.equalTo(266 * defaultScale)
         }
     }
     

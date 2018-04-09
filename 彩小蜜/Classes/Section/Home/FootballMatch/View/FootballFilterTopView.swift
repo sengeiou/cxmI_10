@@ -47,13 +47,13 @@ class FootballFilterTopView: UIView {
         }
         fiveBut.snp.makeConstraints { (make) in
             make.right.top.bottom.equalTo(0)
-            make.left.equalTo(vLineTwo.snp.right)
+            make.left.equalTo(vLineTwo.snp.right).offset(1)
             make.width.equalTo(reverseBut)
         }
         vLineOne.snp.makeConstraints { (make) in
-            make.top.equalTo(5)
-            make.bottom.equalTo(-5)
-            make.width.equalTo(0.3)
+            make.centerY.equalTo(self.snp.centerY)
+            make.height.equalTo(18 * defaultScale)
+            make.width.equalTo(0.5)
             make.right.equalTo(reverseBut.snp.left)
         }
         vLineTwo.snp.makeConstraints { (make) in
@@ -75,19 +75,21 @@ class FootballFilterTopView: UIView {
         
         allBut = UIButton(type: .custom)
         allBut.setTitle("全选", for: .normal)
-        allBut.setTitleColor(Color505050, for: .normal)
+        allBut.titleLabel?.font = Font16
+        allBut.setTitleColor(Color787878, for: .normal)
         allBut.addTarget(self, action: #selector(allClicked(_:)), for: .touchUpInside)
         
         reverseBut = UIButton(type: .custom)
         reverseBut.setTitle("反选", for: .normal)
-        reverseBut.setTitleColor(Color505050, for: .normal)
+        reverseBut.titleLabel?.font = Font16
+        reverseBut.setTitleColor(Color787878, for: .normal)
         reverseBut.addTarget(self, action: #selector(reverseClicked(_:)), for: .touchUpInside)
         
         fiveBut = UIButton(type: .custom)
         fiveBut.setTitle("仅五大联赛", for: .normal)
-        fiveBut.setTitleColor(Color505050, for: .normal)
+        fiveBut.titleLabel?.font = Font16
+        fiveBut.setTitleColor(Color787878, for: .normal)
         fiveBut.addTarget(self, action: #selector(fiveClicked(_:)), for: .touchUpInside)
-        
         
         self.addSubview(vLineOne)
         self.addSubview(vLineTwo)
@@ -108,8 +110,6 @@ class FootballFilterTopView: UIView {
         guard delegate != nil else { return }
         delegate.fiveSelected()
     }
-    
-    
     
     
     required init?(coder aDecoder: NSCoder) {
