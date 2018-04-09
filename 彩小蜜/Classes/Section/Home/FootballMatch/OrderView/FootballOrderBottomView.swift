@@ -79,6 +79,7 @@ class FootballOrderBottomView: UIView {
     private var bonusLB: UILabel!
     
     private var confirmBut: UIButton!
+    
     init() {
         super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: (32 + 3 + 88) * defaultScale  + CGFloat(SafeAreaBottomHeight)))
         

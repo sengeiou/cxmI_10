@@ -34,15 +34,21 @@ class FootballOrderTopView: UIView, DateProtocol {
     
     private var titleLB: UILabel!
     private var bgView: UIView!
+    private var line : UIView!
+    
     init() {
         super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 44 * defaultScale))
         initSubview()
     }
     override func layoutSubviews() {
         super.layoutSubviews()
+        line.snp.makeConstraints { (make) in
+            make.bottom.left.right.equalTo(0)
+            make.height.equalTo(0.5)
+        }
         bgView.snp.makeConstraints { (make) in
             make.top.left.right.equalTo(0)
-            make.bottom.equalTo(0)
+            make.bottom.equalTo(line.snp.top)
         }
         
         titleLB.snp.makeConstraints { (make) in
@@ -55,6 +61,9 @@ class FootballOrderTopView: UIView, DateProtocol {
     private func initSubview() {
         self.backgroundColor = ColorF4F4F4
         
+        line = UIView()
+        line.backgroundColor = ColorE9E9E9
+        
         bgView = UIView()
         bgView.backgroundColor = ColorFFFFFF
         
@@ -65,6 +74,7 @@ class FootballOrderTopView: UIView, DateProtocol {
         
         bgView.addSubview(titleLB)
         self.addSubview(bgView)
+        self.addSubview(line)
     }
     
     required init?(coder aDecoder: NSCoder) {

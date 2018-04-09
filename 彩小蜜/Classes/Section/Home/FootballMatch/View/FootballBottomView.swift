@@ -32,6 +32,7 @@ class FootballBottomView: UIView {
     private var confirmBut: UIButton!
     
     private var line : UIView!
+    private var topLine : UIView!
     
     init() {
         super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: CGFloat(44 * defaultScale) + CGFloat(SafeAreaBottomHeight)))
@@ -40,8 +41,12 @@ class FootballBottomView: UIView {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
+        topLine.snp.makeConstraints { (make) in
+            make.top.left.right.equalTo(0)
+            make.height.equalTo(0.5)
+        }
         titleLB.snp.makeConstraints { (make) in
-            make.top.equalTo(0)
+            make.top.equalTo(topLine.snp.bottom)
             make.height.equalTo(44 * defaultScale)
             make.left.equalTo(line.snp.right).offset(leftSpacing)
             make.right.equalTo(confirmBut.snp.left)
@@ -67,6 +72,8 @@ class FootballBottomView: UIView {
     
     private func initSubview() {
         self.backgroundColor = ColorFFFFFF
+        topLine = UIView()
+        topLine.backgroundColor = ColorE9E9E9
         
         line = UIView()
         line.backgroundColor = ColorC8C8C8
@@ -88,6 +95,7 @@ class FootballBottomView: UIView {
         confirmBut.backgroundColor = ColorEA5504
         confirmBut.addTarget(self, action: #selector(confirmClicked(_:)), for: .touchUpInside)
         
+        self.addSubview(topLine)
         self.addSubview(line)
         self.addSubview(titleLB)
         self.addSubview(deleteBut)
