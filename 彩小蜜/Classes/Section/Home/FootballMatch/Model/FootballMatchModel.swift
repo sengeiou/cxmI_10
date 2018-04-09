@@ -50,6 +50,7 @@ class FootballPlayListModel:NSObject, HandyJSON {
     var leagueName: String!
     var matchDay: String!
     var matchTime: Int!
+    var betEndTime : Int!
     var matchId: String!
     var playCode: String!
     var playContent: String!

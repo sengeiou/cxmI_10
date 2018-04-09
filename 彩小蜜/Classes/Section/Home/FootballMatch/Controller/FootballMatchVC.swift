@@ -29,10 +29,6 @@ fileprivate let FootballHunheCellId = "FootballHunheCellId"
 
 
 class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballBottomViewDelegate, FootballSectionHeaderDelegate, FootballRequestPro, FootballTeamViewDelegate , FootballMatchFilterVCDelegate{
-    func selectedItem() {
-        
-    }
-    
     
     
     // MARK: - 属性
@@ -277,7 +273,9 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         guard selectPlayList != nil else { return }
         selectPlayList.remove(teamInfo)
     }
-    
+    func selectedItem() {
+        
+    }
     // MARK: - FOOTBALL Bottom delegate
     func delete() {
         weak var weakSelf = self

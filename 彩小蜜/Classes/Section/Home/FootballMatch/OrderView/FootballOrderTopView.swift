@@ -16,7 +16,7 @@ class FootballOrderTopView: UIView, DateProtocol {
             
             var arr = [Int]()
             for model in playModelList {
-                arr.append(model.matchTime)
+                arr.append(model.betEndTime)
             }
             
             guard let timeInt = arr.min() else { return }

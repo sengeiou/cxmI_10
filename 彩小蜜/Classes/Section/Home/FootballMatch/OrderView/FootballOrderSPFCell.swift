@@ -16,7 +16,7 @@ class FootballOrderSPFCell: UITableViewCell , DateProtocol{
 
     public var playInfoModel: FootballPlayListModel! {
         didSet{
-            let time = timeStampToHHmm(playInfoModel.matchTime)
+            let time = timeStampToHHmm(playInfoModel.betEndTime)
             guard let addr = playInfoModel.leagueAddr else { return }
             guard let changci = playInfoModel.changci else { return }
             
