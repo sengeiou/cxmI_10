@@ -238,7 +238,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         let rightBut = UIButton(type: .custom)
         rightBut.frame = CGRect(x: 0, y: 0, width: 16, height: 16)
         
-        rightBut.setBackgroundImage(UIImage(named:"Details"), for: .normal)
+        rightBut.setBackgroundImage(UIImage(named:"filter"), for: .normal)
         
         rightBut.addTarget(self, action: #selector(showMenu(_:)), for: .touchUpInside)
         

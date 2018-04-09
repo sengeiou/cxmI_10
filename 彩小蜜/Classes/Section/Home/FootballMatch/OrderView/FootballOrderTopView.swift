@@ -8,11 +8,29 @@
 
 import UIKit
 
-class FootballOrderTopView: UIView {
+class FootballOrderTopView: UIView, DateProtocol {
 
-    public var number : String = "0" {
+    public var playModelList : [FootballPlayListModel]! {
         didSet{
-            titleLB.text = "共有\(number)场比赛可投"
+            guard playModelList.isEmpty == false else { return }
+            
+            var arr = [Int]()
+            for model in playModelList {
+                arr.append(model.matchTime)
+            }
+            
+            guard let timeInt = arr.min() else { return }
+            
+            let time = timeStampToHHmm(timeInt)
+            
+            let attStr = NSMutableAttributedString(string: "已选\(playModelList.count)场比赛 投注截止时间：", attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F])
+            let att = NSAttributedString(string: time, attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+            attStr.append(att)
+            
+            titleLB.attributedText = attStr
+            
+            
+            
         }
     }
     
@@ -46,7 +64,6 @@ class FootballOrderTopView: UIView {
         titleLB.font = Font14
         titleLB.textColor = Color787878
         titleLB.textAlignment = .left
-        titleLB.text = "共有\(number)场比赛可投"
         
         bgView.addSubview(titleLB)
         self.addSubview(bgView)

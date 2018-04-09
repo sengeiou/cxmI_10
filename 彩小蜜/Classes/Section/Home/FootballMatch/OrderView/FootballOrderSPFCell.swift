@@ -8,13 +8,16 @@
 
 import UIKit
 
-class FootballOrderSPFCell: UITableViewCell {
+class FootballOrderSPFCell: UITableViewCell , DateProtocol{
 
     public var playInfoModel: FootballPlayListModel! {
         didSet{
-            titleLB.text = playInfoModel.leagueAddr
-            teamView.teamInfo = playInfoModel
+            let time = timeStampToHHmm(playInfoModel.matchTime)
+            guard let addr = playInfoModel.leagueAddr else { return }
+            guard let changci = playInfoModel.changci else { return }
             
+            titleLB.text = "\(addr)  \(changci)  截止\(time)"
+            teamView.teamInfo = playInfoModel
         }
     }
     
@@ -31,21 +34,21 @@ class FootballOrderSPFCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         titleLB.snp.makeConstraints { (make) in
-            make.top.equalTo(5)
-            make.height.equalTo(20)
+            make.top.equalTo(0)
             make.left.equalTo(leftSpacing)
             make.right.equalTo(-rightSpacing)
+            make.bottom.equalTo(danBut.snp.top)
         }
         deleteBut.snp.makeConstraints { (make) in
             make.centerY.equalTo(teamView.snp.centerY)
-            make.left.equalTo(leftSpacing)
-            make.width.height.equalTo(22)
+            make.left.equalTo(15 * defaultScale)
+            make.width.height.equalTo(24 * defaultScale)
         }
         danBut.snp.makeConstraints { (make) in
             make.centerY.equalTo(teamView.snp.centerY)
-            make.width.equalTo(28 * defaultScale)
-            make.top.equalTo(titleLB.snp.bottom).offset(5 * defaultScale)
-            make.bottom.equalTo(-10 * defaultScale)
+            make.width.equalTo(31 * defaultScale)
+            make.top.equalTo(self.contentView).offset(27 * defaultScale)
+            make.bottom.equalTo(-11 * defaultScale)
             make.right.equalTo(-rightSpacing)
         }
         teamView.snp.makeConstraints { (make) in
@@ -58,7 +61,7 @@ class FootballOrderSPFCell: UITableViewCell {
         self.selectionStyle = .none
         
         deleteBut = UIButton(type: .custom)
-        deleteBut.setBackgroundImage(UIImage(named: "sut"), for: .normal)
+        deleteBut.setBackgroundImage(UIImage(named: "Remove"), for: .normal)
         deleteBut.addTarget(self, action: #selector(deleteClicked(_:)), for: .touchUpInside)
         
         titleLB = UILabel()

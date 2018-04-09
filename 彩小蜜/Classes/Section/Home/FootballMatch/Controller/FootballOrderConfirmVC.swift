@@ -28,6 +28,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         didSet{
             let filters = filterPlay(with: selectPlayList)
             bottomView.filterList = filters
+            topView.playModelList = selectPlayList
             guard homeData != nil else { return }
             orderReuqest(betType: (filters?.last?.titleNum)!, times: "5")
         }
