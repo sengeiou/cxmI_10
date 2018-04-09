@@ -53,9 +53,11 @@ class FootballBottomView: UIView {
             make.left.equalTo(14 * defaultScale)
         }
         line.snp.makeConstraints { (make) in
-            make.top.equalTo(10)
-            make.bottom.equalTo(-10)
-            make.width.equalTo(0.3)
+//            make.top.equalTo(10)
+//            make.bottom.equalTo(-(10 + SafeAreaBottomHeight))
+            make.centerY.equalTo(titleLB.snp.centerY)
+            make.width.equalTo(0.5)
+            make.height.equalTo(28 * defaultScale)
             make.left.equalTo(deleteBut.snp.right).offset(leftSpacing)
         }
         confirmBut.snp.makeConstraints { (make) in
