@@ -23,7 +23,7 @@ struct FootballRequestMode : HandyJSON {
     var times: String!
 }
 
-struct FootballMatchBetCellReq {
+struct FootballMatchBetCellReq: HandyJSON {
     var betCells: [FootballPlayCellModel]!
     var changci: String!
     var isDan: Bool!

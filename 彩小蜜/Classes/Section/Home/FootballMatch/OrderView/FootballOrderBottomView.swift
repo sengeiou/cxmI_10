@@ -196,13 +196,13 @@ class FootballOrderBottomView: UIView {
         moneyLB.font = Font11
         moneyLB.textColor = Color787878
         moneyLB.textAlignment = .left
-        moneyLB.text = "4注5倍 共需： ¥20"
+        //moneyLB.text = "4注5倍 共需： ¥20"
         
         bonusLB = UILabel()
         bonusLB.font = Font11
         bonusLB.textColor = Color787878
         bonusLB.textAlignment = .left
-        bonusLB.text = "预测奖金： 30.06-42.56元"
+        //bonusLB.text = "预测奖金： 30.06-42.56元"
         
         confirmBut = UIButton(type: .custom)
         confirmBut.setTitle("确定", for: .normal)

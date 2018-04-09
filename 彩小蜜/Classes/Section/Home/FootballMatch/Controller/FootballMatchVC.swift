@@ -29,6 +29,10 @@ fileprivate let FootballHunheCellId = "FootballHunheCellId"
 
 
 class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballBottomViewDelegate, FootballSectionHeaderDelegate, FootballRequestPro, FootballTeamViewDelegate , FootballMatchFilterVCDelegate{
+    func selectedItem() {
+        
+    }
+    
     
     
     // MARK: - 属性

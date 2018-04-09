@@ -29,8 +29,6 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
             let filters = filterPlay(with: selectPlayList)
             bottomView.filterList = filters
             topView.playModelList = selectPlayList
-            guard homeData != nil else { return }
-            orderReuqest(betType: (filters?.last?.titleNum)!, times: "5")
         }
     }
     public var playList: [FootballPlayListModel]! {
@@ -44,6 +42,9 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
             bottomView.betInfo = betInfo
         }
     }
+    
+    private var times : String!
+    
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -222,10 +223,20 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         guard selectPlayList != nil else { return }
         selectPlayList.remove(teamInfo)
     }
-    
+    func selectedItem() {
+        guard homeData != nil else { return }
+        
+        let filters = filterPlay(with: selectPlayList)
+        var times = "5"
+        if self.times != nil {
+            times = self.times
+        }
+        orderReuqest(betType: (filters?.last?.titleNum)!, times: times)
+    }
     // MARK: - Bottow Delegate
     // 确认键
     func orderConfirm(filterList: [FootballPlayFilterModel], times: String) {
+        self.times = times
         
     }
     // 串关 弹窗

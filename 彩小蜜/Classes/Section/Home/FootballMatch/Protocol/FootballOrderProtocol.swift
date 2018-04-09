@@ -13,7 +13,14 @@ protocol FootballOrderProtocol { }
 
 extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
     func orderReuqest(betType: String, times: String) {
-       
+        guard selectPlayList.isEmpty == false else { return }
+        
+        if selectPlayList.count == 1 {
+            guard selectPlayList[0].single == true else {
+                showHUD(message: "请选择一场单关或2场以上非单关比赛")
+                return }
+        }
+        
         
         var requestModel = FootballRequestMode()
         
@@ -24,9 +31,16 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
         for playInfo in selectPlayList {
             var matchBetCell = FootballMatchBetCellReq()
             var betCells = [FootballPlayCellModel]()
-            betCells.append(playInfo.homeCell)
-            betCells.append(playInfo.flatCell)
-            betCells.append(playInfo.visitingCell)
+
+            if playInfo.homeCell.isSelected == true {
+                betCells.append(playInfo.homeCell)
+            }
+            if playInfo.flatCell.isSelected == true {
+                betCells.append(playInfo.flatCell)
+            }
+            if playInfo.visitingCell.isSelected == true {
+                betCells.append(playInfo.visitingCell)
+            }
             
             matchBetCell.betCells = betCells
             matchBetCell.changci = playInfo.changci

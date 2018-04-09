@@ -12,8 +12,17 @@ var mixNum = 15
 var limitNum = 1
 
 protocol FootballTeamViewDelegate {
+
+    
+    func selectedItem() -> Void
+    
     func select(teamInfo: FootballPlayListModel) -> Void
     func deSelect(teamInfo: FootballPlayListModel) -> Void
+}
+
+extension FootballTeamViewDelegate {
+    
+    func deSelectedItem() { }
 }
 
 class FootballTeamView: UIView , AlertPro{
@@ -192,28 +201,32 @@ class FootballTeamView: UIView , AlertPro{
         selectItem(sender.isSelected)
         teamInfo.homeCell.isSelected = sender.isSelected
         homeIsSelected(sender.isSelected)
+        guard delegate != nil else { return }
+        delegate.selectedItem()
     }
     @objc private func drawClicked(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         selectItem(sender.isSelected)
         teamInfo.flatCell.isSelected = sender.isSelected
         drawIsSelected(sender.isSelected)
+        guard delegate != nil else { return }
+        delegate.selectedItem()
     }
     @objc private func awayClicked(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         selectItem(sender.isSelected)
         teamInfo.visitingCell.isSelected = sender.isSelected
         awayIsSelected(sender.isSelected)
+        guard delegate != nil else { return }
+        delegate.selectedItem()
     }
     
     private func homeIsSelected(_ isSelected: Bool) {
         
         if isSelected {
-            
             homeBut.backgroundColor = ColorEA5504
             homeName.textColor = ColorFFFFFF
             homeOdds.textColor = ColorFFFFFF
-            
         }else {
             homeBut.backgroundColor = ColorFFFFFF
             homeName.textColor = Color505050
@@ -246,14 +259,14 @@ class FootballTeamView: UIView , AlertPro{
         awayBut.isSelected = isSelected
     }
     
-    private func selectItem(_ isSelected: Bool) {
+    @objc private func selectItem(_ isSelected: Bool) {
         
         if isSelected == true {
+            
             guard teamInfo.homeCell.isSelected == false,
                 teamInfo.flatCell.isSelected == false,
                 teamInfo.visitingCell.isSelected == false else { return }
             
-            guard delegate != nil else { return }
             guard limitNum <= mixNum else {
                 homeIsSelected(false)
                 drawIsSelected(false)
