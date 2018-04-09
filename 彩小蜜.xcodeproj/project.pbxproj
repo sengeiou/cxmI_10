@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0239AFB787326CE28D84A44F /* Pods____UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAE714330A11D581FBF18120 /* Pods____UITests.framework */; };
+		11EB8EE2207B6D9B00AFC9C1 /* PanmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EB8EE1207B6D9B00AFC9C1 /* PanmentViewController.swift */; };
+		11EB8EE4207B6E8800AFC9C1 /* PaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EB8EE3207B6E8800AFC9C1 /* PaymentCell.swift */; };
 		2545AF6A97B25DA9BA7C9A3A /* Pods____.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB1F21E30D8FD47C0735B12D /* Pods____.framework */; };
 		E3730DD9CBCC541439A1110F /* Pods____Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D1D20EBEFE94020803D6D7 /* Pods____Tests.framework */; };
 		E503F5BE2079E8D6006D4A0B /* FootballFilterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E503F5BD2079E8D6006D4A0B /* FootballFilterProtocol.swift */; };
@@ -194,6 +196,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		11EB8EE1207B6D9B00AFC9C1 /* PanmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanmentViewController.swift; sourceTree = "<group>"; };
+		11EB8EE3207B6E8800AFC9C1 /* PaymentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentCell.swift; sourceTree = "<group>"; };
 		6B0C42B903C8908121D72F5C /* Pods-彩小蜜Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜Tests/Pods-彩小蜜Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		A0D1D20EBEFE94020803D6D7 /* Pods____Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods____Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0F39BAB4469B5128625D7A3 /* Pods-彩小蜜UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜UITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜UITests/Pods-彩小蜜UITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1104,6 +1108,7 @@
 		E57375FB2046B23800148622 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				11EB8EE1207B6D9B00AFC9C1 /* PanmentViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1111,6 +1116,7 @@
 		E57375FC2046B23A00148622 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				11EB8EE3207B6E8800AFC9C1 /* PaymentCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1708,6 +1714,7 @@
 				E5973DDE204D152F006461CE /* BaseViewController.swift in Sources */,
 				E59CB3DD205BA1650086DD0E /* HomeSportLotteryCell.swift in Sources */,
 				E50B9075205231C800417BFE /* RechargeFooterView.swift in Sources */,
+				11EB8EE4207B6E8800AFC9C1 /* PaymentCell.swift in Sources */,
 				E533BF032060EB3A0037D2D8 /* RechargePaymentTitleCell.swift in Sources */,
 				E5D8ABC020674A07002D688B /* OrderDetailFooterView.swift in Sources */,
 				E5D8ABBC2067443E002D688B /* OrderProgrammeCell.swift in Sources */,
@@ -1777,6 +1784,7 @@
 				E537397B2057F4270087E4E6 /* UserInfoDataModel.swift in Sources */,
 				E58B57BC205670670025E2F1 /* ServeConstraint.swift in Sources */,
 				E5973E1C204D4A75006461CE /* ScreenConstraint.swift in Sources */,
+				11EB8EE2207B6D9B00AFC9C1 /* PanmentViewController.swift in Sources */,
 				E550D8A120733A0F002DDE23 /* FootballOrder2-1Cell.swift in Sources */,
 				E5103254206500A800A0156C /* PurchaseRecordVC.swift in Sources */,
 				E53739772057B9340087E4E6 /* extension+UserDefaults.swift in Sources */,

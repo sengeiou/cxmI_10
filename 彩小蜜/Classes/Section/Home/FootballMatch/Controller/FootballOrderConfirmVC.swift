@@ -52,7 +52,11 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         }
     }
     
-    public var times : String = "5"  // 倍数  网络请求用
+    public var times : String = "5" {
+        didSet{
+            bottomView.times = times
+        }
+    } // 倍数  网络请求用
     public var playType : String! // 串关方式 网络请求用
     // MARK: - 生命周期
     override func viewDidLoad() {
@@ -239,6 +243,8 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     // 确认键
     func orderConfirm(filterList: [FootballPlayFilterModel], times: String) {
         
+        let payment = PanmentViewController()
+        pushViewController(vc: payment)
         
     }
     // 串关 弹窗
