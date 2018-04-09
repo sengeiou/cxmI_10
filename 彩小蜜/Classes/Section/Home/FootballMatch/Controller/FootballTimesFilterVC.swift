@@ -8,7 +8,7 @@
 
 import UIKit
 
-fileprivate let TimesViewHeight : CGFloat = 44 * defaultScale
+fileprivate let TimesViewHeight : CGFloat = 36 * defaultScale
 
 protocol FootballTimesFilterVCDelegate {
     func timesConfirm(times: String) -> Void
@@ -47,7 +47,7 @@ class FootballTimesFilterVC: BasePopViewController, UITextFieldDelegate, CXMKeyb
         
         backBut.snp.makeConstraints { (make) in
             make.centerY.equalTo(timesTitle.snp.centerY)
-            make.width.height.equalTo(30)
+            make.width.height.equalTo(12 * defaultScale)
             make.left.equalTo(leftSpacing)
         }
         timesTitle.snp.makeConstraints { (make) in
@@ -56,25 +56,25 @@ class FootballTimesFilterVC: BasePopViewController, UITextFieldDelegate, CXMKeyb
             make.right.equalTo(textField.snp.left).offset(-10)
         }
         textField.snp.makeConstraints { (make) in
-            make.top.equalTo(10)
-            make.bottom.equalTo(timesView.snp.top).offset(-10)
+            make.centerY.equalTo(timesTitle.snp.centerY)
             make.right.equalTo(-rightSpacing)
-            make.width.equalTo(screenWidth / 4 - rightSpacing)
+            make.height.equalTo(30 * defaultScale)
+            make.width.equalTo(76 * defaultScale)
         }
     }
     
     private func initSubview() {
-        self.viewHeight = 260
+        self.viewHeight = 240 * defaultScale
         
         keyboardView = CXMKeyboardView()
         keyboardView.delegate = self
         
         backBut = UIButton(type: .custom)
-        backBut.setBackgroundImage(UIImage(named: "jump"), for: .normal)
+        backBut.setBackgroundImage(UIImage(named: "Collapse"), for: .normal)
         backBut.addTarget(self, action: #selector(backClicked(_:)), for: .touchUpInside)
         
         timesTitle = UILabel()
-        timesTitle.font = Font14
+        timesTitle.font = Font13
         timesTitle.textColor = Color505050
         timesTitle.textAlignment = .right
         timesTitle.sizeToFit()
@@ -115,6 +115,7 @@ class FootballTimesFilterVC: BasePopViewController, UITextFieldDelegate, CXMKeyb
         let but = UIButton(type: .custom)
         but.setTitleColor(Color505050, for: .normal)
         but.layer.borderWidth = 0.3
+        but.titleLabel?.font = Font12
         but.layer.borderColor = ColorC8C8C8.cgColor
         but.addTarget(self, action: #selector(timesClicked(_:)), for: .touchUpInside)
         return but
