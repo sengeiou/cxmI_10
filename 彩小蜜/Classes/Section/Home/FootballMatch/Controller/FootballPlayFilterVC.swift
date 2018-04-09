@@ -9,7 +9,7 @@
 import UIKit
 
 
-fileprivate let FilterCellHeight: CGFloat = 35
+fileprivate let FilterCellHeight: CGFloat = 30 * defaultScale
 fileprivate let minimumLineSpacing : CGFloat = 10
 fileprivate let minimumInteritemSpacing : CGFloat = 10
 fileprivate let topInset : CGFloat = 10
@@ -61,7 +61,7 @@ class FootballPlayFilterVC: BasePopViewController, FootballFilterBottomViewDeleg
         }
         titleLB.snp.makeConstraints { (make) in
             make.top.left.right.equalTo(0)
-            make.height.equalTo(44 * defaultScale)
+            make.height.equalTo(50 * defaultScale)
         }
         
         collectionView.snp.makeConstraints { (make) in
@@ -72,12 +72,13 @@ class FootballPlayFilterVC: BasePopViewController, FootballFilterBottomViewDeleg
         }
         bottomView.snp.makeConstraints { (make) in
             make.bottom.equalTo(-SafeAreaBottomHeight)
-            make.height.equalTo(44 * defaultScale)
+            make.height.equalTo(36 * defaultScale)
             make.left.right.equalTo(0)
         }
         
     }
     private func initSubview() {
+        self.viewHeight = 240 * defaultScale
         
         bottomView = FootballFilterBottomView()
         bottomView.delegate = self
@@ -86,8 +87,8 @@ class FootballPlayFilterVC: BasePopViewController, FootballFilterBottomViewDeleg
         bgView.backgroundColor = ColorFFFFFF
         
         titleLB = UILabel()
-        titleLB.font = Font15
-        titleLB.textColor = Color505050
+        titleLB.font = Font12
+        titleLB.textColor = Color9F9F9F
         titleLB.textAlignment = .center
         titleLB.text = "可选串关方式"
         

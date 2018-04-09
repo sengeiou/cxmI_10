@@ -40,9 +40,10 @@ class FootballPlayFilterCell: UICollectionViewCell {
     private func initSubview() {
         self.layer.borderWidth = 0.3
         self.layer.borderColor = ColorC8C8C8.cgColor
+        self.backgroundColor = ColorFFFFFF
         
         title = UILabel()
-        title.font = Font14
+        title.font = Font12
         title.textColor = Color505050
         title.textAlignment = .center
         
@@ -52,10 +53,10 @@ class FootballPlayFilterCell: UICollectionViewCell {
     private func selected(_ selected: Bool) {
         
         if selected == true {
-            self.backgroundColor = ColorEA5504
-            self.title.textColor = ColorFFFFFF
+            self.layer.borderColor = ColorEA5504.cgColor
+            self.title.textColor = ColorEA5504
         }else {
-            self.backgroundColor = ColorFFFFFF
+            self.layer.borderColor = ColorC8C8C8.cgColor
             self.title.textColor = Color505050
         }
         
