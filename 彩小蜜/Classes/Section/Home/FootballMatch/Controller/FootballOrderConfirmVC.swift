@@ -243,7 +243,10 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     // 确认键
     func orderConfirm(filterList: [FootballPlayFilterModel], times: String) {
         
+        let requestModel = getRequestModel(betType: self.playType, times: self.times, homeData: self.homeData)
+        
         let payment = PanmentViewController()
+        payment.requestModel = requestModel
         pushViewController(vc: payment)
         
     }
@@ -283,6 +286,12 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         str.removeLast()
         self.playType = str
         orderRequest()
+        
+        let numStr = str.first
+        //let num = Int(numStr)
+        
+        //danMaxNum = num
+        self.tableView.reloadData()
     }
     
     func playFilterCancel() {

@@ -9,15 +9,19 @@
 import UIKit
 
 fileprivate let PaymentCellId = "PaymentCellId"
+fileprivate let PaymentMethodCellId = "PaymentMethodCellId"
 
 class PanmentViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
 
+    public var requestModel: FootballRequestMode!
+    
     private var confirmBut : UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         initSubview()
+        orderRequest()
     }
 
     override func viewDidLayoutSubviews() {
@@ -30,9 +34,29 @@ class PanmentViewController: BaseViewController, UITableViewDelegate, UITableVie
         confirmBut.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
             make.height.equalTo(44 * defaultScale)
-            make.bottom.equalTo(-SafeAreaTopHeight)
+            make.bottom.equalTo(-SafeAreaBottomHeight)
         }
     }
+    
+    // MARK: - 网络请求
+    private func orderRequest() {
+        _ = homeProvider.rx.request(.saveBetInfo(requestModel: self.requestModel))
+            .asObservable()
+            .mapObject(type: FootballSaveBetInfoModel.self)
+            .subscribe(onNext: { (data) in
+                
+            }, onError: { (error) in
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    print(code!)
+                    self.showHUD(message: msg!)
+                default: break
+                }
+            }, onCompleted: nil, onDisposed: nil )
+    }
+    
+    
     private func initSubview() {
         self.view.addSubview(tableView)
         initBottowView()
@@ -54,8 +78,9 @@ class PanmentViewController: BaseViewController, UITableViewDelegate, UITableVie
         table.delegate = self
         table.dataSource = self
         table.backgroundColor = ColorF4F4F4
-        table.register(PaymentCell.self, forHeaderFooterViewReuseIdentifier: PaymentCellId)
-        
+        table.separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        table.register(PaymentCell.self, forCellReuseIdentifier: PaymentCellId)
+        table.register(PaymentMethodCell.self, forCellReuseIdentifier: PaymentMethodCellId)
         return table
     }()
     
@@ -75,10 +100,12 @@ class PanmentViewController: BaseViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: PaymentCellId, for: indexPath) as! PaymentCell
+        
+        
         
         switch indexPath.section {
         case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: PaymentCellId, for: indexPath) as! PaymentCell
             switch indexPath.row {
             case 0:
                 cell.title.text = "订单金额"
@@ -94,28 +121,38 @@ class PanmentViewController: BaseViewController, UITableViewDelegate, UITableVie
                 cell.detail.text = "¥ 30.00"
             default: break
             }
-            
+            return cell
         case 1:
+            
             switch indexPath.row {
             case 0:
+                let cell = tableView.dequeueReusableCell(withIdentifier: PaymentCellId, for: indexPath) as! PaymentCell
                 cell.title.text = "订单金额"
                 cell.detail.text = "¥ 30.00"
+                return cell
             case 1:
+                let cell = tableView.dequeueReusableCell(withIdentifier: PaymentMethodCellId, for: indexPath) as! PaymentMethodCell
                 cell.title.text = "订单金额"
-                cell.detail.text = "¥ 30.00"
+                return cell
             default: break
             }
         default: break
             
         }
-        return cell
+        
+        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 5
+        switch section {
+        case 0:
+            return 0.01
+        default:
+            return 5
+        }
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.01

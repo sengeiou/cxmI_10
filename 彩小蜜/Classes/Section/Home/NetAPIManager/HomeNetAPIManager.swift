@@ -23,7 +23,8 @@ enum HomeNetAPIManager {
     case filterMatchList
     /// 计算投注信息
     case getBetInfo (requestModel: FootballRequestMode)
-
+    /// 保存投注信息
+    case saveBetInfo(requestModel: FootballRequestMode)
 }
 
 extension HomeNetAPIManager : TargetType {
@@ -45,7 +46,8 @@ extension HomeNetAPIManager : TargetType {
             return "/lottery/match/filterConditions"
         case .getBetInfo:
             return "/lottery/match/getBetInfo"
-            
+        case .saveBetInfo:
+            return "/lottery/match/saveBetInfo"
             
         }
     }
@@ -63,8 +65,8 @@ extension HomeNetAPIManager : TargetType {
             dic["str"] = ""
         case .getBetInfo(let requestModel) :
             dic = requestModel.toJSON()!
-            
-            
+        case .saveBetInfo(let requestModel) :
+            dic = requestModel.toJSON()!
             
         default:
             return .requestPlain

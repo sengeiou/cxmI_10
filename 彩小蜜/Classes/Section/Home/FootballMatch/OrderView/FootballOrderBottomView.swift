@@ -34,7 +34,7 @@ class FootballOrderBottomView: UIView {
         }
     }
     
-    public var times : String! {
+    public var times : String = "5" {
         didSet{
             multipleBut.setTitle("倍数  " + times + "倍", for: .normal)
         }
@@ -234,6 +234,7 @@ class FootballOrderBottomView: UIView {
     }
     @objc private func confirmClicked(_ sender: UIButton) {
         guard delegate != nil else { return }
+        
         delegate.orderConfirm(filterList: filterList, times: times)
     }
     required init?(coder aDecoder: NSCoder) {

@@ -13,21 +13,7 @@ protocol FootballOrderProtocol { }
 
 extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
     
-    func orderRequest () {
-        
-        self.orderReuqest(betType: self.playType, times: times)
-    }
-    
-    private func orderReuqest(betType: String, times: String) {
-        guard selectPlayList.isEmpty == false else { return }
-        
-        if selectPlayList.count == 1 {
-            guard selectPlayList[0].single == true else {
-                showHUD(message: "请选择一场单关或2场以上非单关比赛")
-                return }
-        }
-        
-        
+    func getRequestModel(betType: String, times: String, homeData: HomePlayModel) -> FootballRequestMode {
         var requestModel = FootballRequestMode()
         
         requestModel.betType = betType
@@ -37,7 +23,7 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
         for playInfo in selectPlayList {
             var matchBetCell = FootballMatchBetCellReq()
             var betCells = [FootballPlayCellModel]()
-
+            
             if playInfo.homeCell.isSelected == true {
                 betCells.append(playInfo.homeCell)
             }
@@ -65,6 +51,25 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
         requestModel.matchBetCells = matchBetCells
         requestModel.playType = homeData.playType
         requestModel.times = times
+        
+        return requestModel
+    }
+    
+    func orderRequest () {
+        
+        self.orderReuqest(betType: self.playType, times: times)
+    }
+    
+    private func orderReuqest(betType: String, times: String) {
+        guard selectPlayList.isEmpty == false else { return }
+        
+        if selectPlayList.count == 1 {
+            guard selectPlayList[0].single == true else {
+                showHUD(message: "请选择一场单关或2场以上非单关比赛")
+                return }
+        }
+        
+        let requestModel = getRequestModel(betType: betType, times: times, homeData: self.homeData)
         
         weak var weakSelf = self
         _ = homeProvider.rx.request(.getBetInfo(requestModel: requestModel))

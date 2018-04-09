@@ -10,6 +10,9 @@
 		0239AFB787326CE28D84A44F /* Pods____UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAE714330A11D581FBF18120 /* Pods____UITests.framework */; };
 		11EB8EE2207B6D9B00AFC9C1 /* PanmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EB8EE1207B6D9B00AFC9C1 /* PanmentViewController.swift */; };
 		11EB8EE4207B6E8800AFC9C1 /* PaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EB8EE3207B6E8800AFC9C1 /* PaymentCell.swift */; };
+		11EB8EE6207B791500AFC9C1 /* PaymentMethodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EB8EE5207B791500AFC9C1 /* PaymentMethodCell.swift */; };
+		11EB8EE8207B8A5500AFC9C1 /* FootballSaveBetInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EB8EE7207B8A5500AFC9C1 /* FootballSaveBetInfoModel.swift */; };
+		11EB8EEA207B8B1500AFC9C1 /* BonusInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EB8EE9207B8B1500AFC9C1 /* BonusInfoModel.swift */; };
 		2545AF6A97B25DA9BA7C9A3A /* Pods____.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB1F21E30D8FD47C0735B12D /* Pods____.framework */; };
 		E3730DD9CBCC541439A1110F /* Pods____Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D1D20EBEFE94020803D6D7 /* Pods____Tests.framework */; };
 		E503F5BE2079E8D6006D4A0B /* FootballFilterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E503F5BD2079E8D6006D4A0B /* FootballFilterProtocol.swift */; };
@@ -198,6 +201,9 @@
 /* Begin PBXFileReference section */
 		11EB8EE1207B6D9B00AFC9C1 /* PanmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanmentViewController.swift; sourceTree = "<group>"; };
 		11EB8EE3207B6E8800AFC9C1 /* PaymentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentCell.swift; sourceTree = "<group>"; };
+		11EB8EE5207B791500AFC9C1 /* PaymentMethodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodCell.swift; sourceTree = "<group>"; };
+		11EB8EE7207B8A5500AFC9C1 /* FootballSaveBetInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballSaveBetInfoModel.swift; sourceTree = "<group>"; };
+		11EB8EE9207B8B1500AFC9C1 /* BonusInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusInfoModel.swift; sourceTree = "<group>"; };
 		6B0C42B903C8908121D72F5C /* Pods-彩小蜜Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜Tests/Pods-彩小蜜Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		A0D1D20EBEFE94020803D6D7 /* Pods____Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods____Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0F39BAB4469B5128625D7A3 /* Pods-彩小蜜UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜UITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜UITests/Pods-彩小蜜UITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1117,6 +1123,7 @@
 			isa = PBXGroup;
 			children = (
 				11EB8EE3207B6E8800AFC9C1 /* PaymentCell.swift */,
+				11EB8EE5207B791500AFC9C1 /* PaymentMethodCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1370,6 +1377,8 @@
 				E55016FA20724E4E0056AB1F /* FootballFilterModel.swift */,
 				E503F5BF207A11B3006D4A0B /* FootballRequestModel.swift */,
 				E503F5C3207A1952006D4A0B /* FootballBetInfoModel.swift */,
+				11EB8EE7207B8A5500AFC9C1 /* FootballSaveBetInfoModel.swift */,
+				11EB8EE9207B8B1500AFC9C1 /* BonusInfoModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1747,6 +1756,7 @@
 				E512A96D20480917003F14F4 /* HomeDataModel.swift in Sources */,
 				E51F9A56205A11EA00AB8A21 /* MobileTextFieldCell.swift in Sources */,
 				E55016FB20724E4E0056AB1F /* FootballFilterModel.swift in Sources */,
+				11EB8EE8207B8A5500AFC9C1 /* FootballSaveBetInfoModel.swift in Sources */,
 				E59CB3E1205BBD900086DD0E /* HomeFootballCell.swift in Sources */,
 				E537397D2057F7220087E4E6 /* RealInfoDataModel.swift in Sources */,
 				E58B57BA2056364A0025E2F1 /* AddNewBankCardVC.swift in Sources */,
@@ -1765,6 +1775,7 @@
 				E5883F4C2068DA0800CB3A46 /* OrderSchemeVC.swift in Sources */,
 				E50B9077205235BF00417BFE /* RechargeCardCell.swift in Sources */,
 				E5883F5A2068EA5700CB3A46 /* MessageCenterCell.swift in Sources */,
+				11EB8EEA207B8B1500AFC9C1 /* BonusInfoModel.swift in Sources */,
 				E512A9692047E598003F14F4 /* Observable+ObjectMapper.swift in Sources */,
 				E5973E31204F8FD4006461CE /* MeHeaderView.swift in Sources */,
 				E550D8A72073719A002DDE23 /* FootballPlayFilterVC.swift in Sources */,
@@ -1826,6 +1837,7 @@
 				E550D899207339B6002DDE23 /* FootballOrderRangSPFCell.swift in Sources */,
 				E5786FC2206DEAB30045F7F5 /* FootballHunheCell.swift in Sources */,
 				E5973E29204E4387006461CE /* ForgetPswPhoneVC.swift in Sources */,
+				11EB8EE6207B791500AFC9C1 /* PaymentMethodCell.swift in Sources */,
 				E550D8A320733A2D002DDE23 /* FootballOrderHunheCell.swift in Sources */,
 				E5D8ABBE206749F5002D688B /* OrderDetailHeaderView.swift in Sources */,
 				E581F378206348EB002AB9F7 /* UserInfoManager.swift in Sources */,

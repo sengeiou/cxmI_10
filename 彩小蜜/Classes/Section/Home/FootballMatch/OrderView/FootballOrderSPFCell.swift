@@ -8,6 +8,8 @@
 
 import UIKit
 
+var danMaxNum = 0
+
 protocol FootballOrderSPFCellDelegate {
     func deleteOrderSPFCell(playInfo: FootballPlayListModel) -> Void
 }
@@ -35,6 +37,19 @@ class FootballOrderSPFCell: UITableViewCell , DateProtocol{
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initSubview()
+        setupDanBut()
+    }
+    
+    private func setupDanBut() {
+        if danMaxNum <= 0 {
+            danBut.isUserInteractionEnabled = false
+            danBut.backgroundColor = Color787878
+            danBut.setTitleColor(ColorFFFFFF, for: .normal)
+        }else {
+            danBut.isUserInteractionEnabled = true
+            danBut.backgroundColor = ColorFFFFFF
+            danBut.setTitleColor(Color505050, for: .normal)
+        }
     }
     
     override func layoutSubviews() {
