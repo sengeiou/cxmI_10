@@ -35,7 +35,7 @@ class FootballPlayListModel:NSObject, HandyJSON {
     var fixedOdds : Int!
     /// 单关，1-单关，0不可以 
     var single: Bool!
-    var isDan : Bool!
+    var isDan : Bool! = false
     var changci: String!
     var changciId: String!
     var flatCell: FootballPlayCellModel!

@@ -223,7 +223,17 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     func deleteOrderSPFCell(playInfo: FootballPlayListModel) {
         playList.remove(playInfo)
     }
-    
+    // MARK: CELL 选择胆
+    func danSelected() {
+        danMaxNum -= 1
+        self.tableView.reloadData()
+        orderRequest()
+    }
+    func danDeSelected() {
+        danMaxNum += 1
+        self.tableView.reloadData()
+        orderRequest()
+    }
     // MARK: ITEM 选择 delegate
     func select(teamInfo: FootballPlayListModel) {
         guard selectPlayList != nil else { return }
@@ -287,10 +297,13 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         self.playType = str
         orderRequest()
         
-        let numStr = str.first
-        //let num = Int(numStr)
+        for info in playList {
+            info.isDan = false
+        }
+        let numStr = str.first?.description
+        let num = Int(numStr!)
         
-        //danMaxNum = num
+        danMaxNum = num! - 1
         self.tableView.reloadData()
     }
     

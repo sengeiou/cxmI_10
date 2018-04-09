@@ -12,6 +12,8 @@ var danMaxNum = 0
 
 protocol FootballOrderSPFCellDelegate {
     func deleteOrderSPFCell(playInfo: FootballPlayListModel) -> Void
+    func danSelected() -> Void
+    func danDeSelected() -> Void
 }
 
 class FootballOrderSPFCell: UITableViewCell , DateProtocol{
@@ -24,6 +26,8 @@ class FootballOrderSPFCell: UITableViewCell , DateProtocol{
             
             titleLB.text = "\(addr)  \(changci)  截止\(time)"
             teamView.teamInfo = playInfoModel
+            setupDanBut()
+            danIsSelected(isSelected: playInfoModel.isDan)
         }
     }
     
@@ -37,21 +41,33 @@ class FootballOrderSPFCell: UITableViewCell , DateProtocol{
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initSubview()
-        setupDanBut()
+        //setupDanBut()
     }
     
     private func setupDanBut() {
         if danMaxNum <= 0 {
-            danBut.isUserInteractionEnabled = false
-            danBut.backgroundColor = Color787878
-            danBut.setTitleColor(ColorFFFFFF, for: .normal)
+            if self.playInfoModel.isDan != true {
+                danBut.isUserInteractionEnabled = false
+                danBut.backgroundColor = Color787878
+            }
         }else {
             danBut.isUserInteractionEnabled = true
             danBut.backgroundColor = ColorFFFFFF
-            danBut.setTitleColor(Color505050, for: .normal)
         }
     }
-    
+    private func danIsSelected(isSelected: Bool) {
+        self.playInfoModel.isDan = isSelected
+        
+        if isSelected == true {
+            danBut.layer.borderColor = ColorEA5504.cgColor
+            danBut.setTitleColor(ColorEA5504, for: .selected)
+        }else {
+            danBut.layer.borderColor = ColorC8C8C8.cgColor
+            danBut.setTitleColor(Color505050, for: .normal)
+           
+        }
+        danBut.isSelected = isSelected
+    }
     override func layoutSubviews() {
         super.layoutSubviews()
         titleLB.snp.makeConstraints { (make) in
@@ -97,7 +113,7 @@ class FootballOrderSPFCell: UITableViewCell , DateProtocol{
         danBut.layer.borderWidth = 0.3
         danBut.layer.borderColor = ColorC8C8C8.cgColor
         danBut.setTitleColor(Color505050, for: .normal)
-        danBut.setTitleColor(ColorEA5504, for: .selected)
+        //danBut.setTitleColor(ColorEA5504, for: .selected)
         danBut.contentHorizontalAlignment = .center
         danBut.addTarget(self , action: #selector(danClicked(_:)), for: .touchUpInside)
         
@@ -114,11 +130,17 @@ class FootballOrderSPFCell: UITableViewCell , DateProtocol{
     // 胆
     @objc private func danClicked(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
+        danIsSelected(isSelected: sender.isSelected)
         if sender.isSelected == true {
-            sender.layer.borderColor = ColorEA5504.cgColor
+            guard delegate != nil else { return }
+            delegate.danSelected()
+            
         }else {
-            sender.layer.borderColor = ColorC8C8C8.cgColor
+            guard delegate != nil else { return }
+            delegate.danDeSelected()
         }
+        
+        
     }
     
     
