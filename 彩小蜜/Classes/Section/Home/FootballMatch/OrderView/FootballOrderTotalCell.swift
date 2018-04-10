@@ -10,6 +10,8 @@ import UIKit
 
 class FootballOrderTotalCell: UITableViewCell {
 
+    
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initSubview()
@@ -26,7 +28,6 @@ class FootballOrderTotalCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
-        // Configure the view for the selected state
     }
     
     required init?(coder aDecoder: NSCoder) {

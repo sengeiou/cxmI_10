@@ -224,9 +224,17 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     // MARK: CELL  删除
     func deleteOrderSPFCell(playInfo: FootballPlayListModel) {
         playList.remove(playInfo)
+        
+        if playList.count < 3 {
+            danMaxNum = 0
+            self.tableView.reloadData()
+        }
     }
     // MARK: CELL 选择胆
     func danSelected() {
+        guard selectPlayList.count > 1 else {
+            showHUD(message: "请选择2场以上比赛")
+            return }
         danMaxNum -= 1
         self.tableView.reloadData()
         orderRequest()
