@@ -56,6 +56,7 @@ class FootballOrderSPFCell: UITableViewCell , DateProtocol{
         }
         
         if !self.playInfoModel.homeCell.isSelected && !self.playInfoModel.flatCell.isSelected && !self.playInfoModel.visitingCell.isSelected {
+            self.playInfoModel.isDan = false
             danBut.isUserInteractionEnabled = false
             danBut.backgroundColor = Color787878
         }
