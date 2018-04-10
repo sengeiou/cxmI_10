@@ -29,6 +29,7 @@ class FootballOrderBottomView: UIView {
                     str += filter.title + ","
                 }
             }
+            guard str != "" else { return }
             str.removeLast()
             playBut.setTitle(filterList[0].playTitle + str, for: .normal)
         }
