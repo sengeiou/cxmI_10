@@ -13,7 +13,6 @@ var limitNum = 1
 
 protocol FootballTeamViewDelegate {
 
-    
     func selectedItem() -> Void
     
     func select(teamInfo: FootballPlayListModel) -> Void
@@ -31,29 +30,33 @@ class FootballTeamView: UIView , AlertPro{
     
     public var teamInfo: FootballPlayListModel! {
         didSet{
-            homeName.text = teamInfo.homeTeamAbbr
-            homeOdds.text = teamInfo.homeCell.cellName + teamInfo.homeCell.cellOdds
             
-            drawOdds.text = teamInfo.flatCell.cellName + teamInfo.flatCell.cellOdds
+            let matchPlay = teamInfo.matchPlays[0]
+            
+            homeName.text = teamInfo.homeTeamAbbr
+            homeOdds.text = matchPlay.homeCell.cellName + matchPlay.homeCell.cellOdds
+            
+            drawOdds.text = matchPlay.flatCell.cellName + matchPlay.flatCell.cellOdds
             
             awayName.text = teamInfo.visitingTeamAbbr
-            awayOdds.text = teamInfo.visitingCell.cellName + teamInfo.visitingCell.cellOdds
+            awayOdds.text = matchPlay.visitingCell.cellName + matchPlay.visitingCell.cellOdds
             
-            homeIsSelected(teamInfo.homeCell.isSelected)
-            drawIsSelected(teamInfo.flatCell.isSelected)
-            awayIsSelected(teamInfo.visitingCell.isSelected)
+            homeIsSelected(matchPlay.homeCell.isSelected)
+            drawIsSelected(matchPlay.flatCell.isSelected)
+            awayIsSelected(matchPlay.visitingCell.isSelected)
             
             switch matchType {
             case .胜平负:
                 VSLB.text = "VS"
             case .让球胜平负:
                 let vsAtt = NSMutableAttributedString(string: "VS")
-                if teamInfo.fixedOdds < 0 {
-                    let att = NSAttributedString(string:" " + String(teamInfo.fixedOdds), attributes: [NSAttributedStringKey.foregroundColor: Color44AE35])
+                let matchPlay = teamInfo.matchPlays[0]
+                if matchPlay.fixedOdds < 0 {
+                    let att = NSAttributedString(string:" " + String(matchPlay.fixedOdds), attributes: [NSAttributedStringKey.foregroundColor: Color44AE35])
                     vsAtt.append(att)
                     
-                }else if teamInfo.fixedOdds > 0 {
-                    let att = NSAttributedString(string:" +" + String(teamInfo.fixedOdds), attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+                }else if matchPlay.fixedOdds > 0 {
+                    let att = NSAttributedString(string:" +" + String(matchPlay.fixedOdds), attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
                     vsAtt.append(att)
                 }
                 VSLB.attributedText = vsAtt
@@ -79,8 +82,6 @@ class FootballTeamView: UIView , AlertPro{
     
     private var lineOne: UIView!
     private var lineTwo: UIView!
-    
-   
     
     init() {
         super.init(frame: CGRect.zero)
@@ -220,7 +221,8 @@ class FootballTeamView: UIView , AlertPro{
     @objc private func homeClicked(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         selectItem(sender.isSelected)
-        teamInfo.homeCell.isSelected = sender.isSelected
+        let matchPlay = teamInfo.matchPlays[0]
+        matchPlay.homeCell.isSelected = sender.isSelected
         homeIsSelected(sender.isSelected)
         guard delegate != nil else { return }
         delegate.selectedItem()
@@ -228,7 +230,8 @@ class FootballTeamView: UIView , AlertPro{
     @objc private func drawClicked(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         selectItem(sender.isSelected)
-        teamInfo.flatCell.isSelected = sender.isSelected
+        let matchPlay = teamInfo.matchPlays[0]
+        matchPlay.flatCell.isSelected = sender.isSelected
         drawIsSelected(sender.isSelected)
         guard delegate != nil else { return }
         delegate.selectedItem()
@@ -236,7 +239,8 @@ class FootballTeamView: UIView , AlertPro{
     @objc private func awayClicked(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         selectItem(sender.isSelected)
-        teamInfo.visitingCell.isSelected = sender.isSelected
+        let matchPlay = teamInfo.matchPlays[0]
+        matchPlay.visitingCell.isSelected = sender.isSelected
         awayIsSelected(sender.isSelected)
         guard delegate != nil else { return }
         delegate.selectedItem()
@@ -283,10 +287,10 @@ class FootballTeamView: UIView , AlertPro{
     @objc private func selectItem(_ isSelected: Bool) {
         
         if isSelected == true {
-            
-            guard teamInfo.homeCell.isSelected == false,
-                teamInfo.flatCell.isSelected == false,
-                teamInfo.visitingCell.isSelected == false else { return }
+            let matchPlay = teamInfo.matchPlays[0]
+            guard matchPlay.homeCell.isSelected == false,
+                matchPlay.flatCell.isSelected == false,
+                matchPlay.visitingCell.isSelected == false else { return }
             
             guard limitNum <= mixNum else {
                 homeIsSelected(false)

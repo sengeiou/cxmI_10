@@ -180,7 +180,10 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     }
     private func initTotalCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballTotalCellId, for: indexPath) as! FootballTotalCell
+        //cell.teamView.delegate = self
         
+        let matchModel = matchList[indexPath.section]
+        cell.playInfoModel = matchModel.playList[indexPath.row]
         return cell
     }
     private func initScoreCell(indexPath: IndexPath) -> UITableViewCell {
@@ -222,7 +225,17 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 84 * defaultScale
+        
+        
+        switch matchType {
+        case .胜平负, .让球胜平负:
+            return 84 * defaultScale
+        case .总进球:
+            return (84 + 15) * defaultScale
+            
+        default: return 0
+            
+        }
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 36 * defaultScale

@@ -24,14 +24,16 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
             var matchBetCell = FootballMatchBetCellReq()
             var betCells = [FootballPlayCellModel]()
             
-            if playInfo.homeCell.isSelected == true {
-                betCells.append(playInfo.homeCell)
+            let matchPlay = playInfo.matchPlays[0]
+            
+            if matchPlay.homeCell.isSelected == true {
+                betCells.append(matchPlay.homeCell)
             }
-            if playInfo.flatCell.isSelected == true {
-                betCells.append(playInfo.flatCell)
+            if matchPlay.flatCell.isSelected == true {
+                betCells.append(matchPlay.flatCell)
             }
-            if playInfo.visitingCell.isSelected == true {
-                betCells.append(playInfo.visitingCell)
+            if matchPlay.visitingCell.isSelected == true {
+                betCells.append(matchPlay.visitingCell)
             }
             
             matchBetCell.betCells = betCells
@@ -40,7 +42,7 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
             matchBetCell.lotteryClassifyId = homeData.lotteryId
             matchBetCell.lotteryPlayClassifyId = homeData.playClassifyId
             matchBetCell.matchId = playInfo.matchId
-            matchBetCell.matchTeam = playInfo.homeCell.cellName + "VS" + playInfo.visitingCell.cellName
+            matchBetCell.matchTeam = matchPlay.homeCell.cellName + "VS" + matchPlay.visitingCell.cellName
             matchBetCell.matchTime = playInfo.matchTime
             matchBetCell.playCode = playInfo.playCode
             matchBetCell.playType = homeData.playType

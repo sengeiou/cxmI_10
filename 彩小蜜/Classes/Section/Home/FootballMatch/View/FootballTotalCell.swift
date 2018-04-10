@@ -14,7 +14,7 @@ class FootballTotalCell: UITableViewCell, DateProtocol {
         didSet{
             matchTitle.text = playInfoModel.leagueAddr
             matchTime.text = playInfoModel.changci
-            teamView.teamInfo = playInfoModel
+            //teamView.teamInfo = playInfoModel
             endTime.text = "截止" + timeStampToHHmm(playInfoModel.betEndTime)
             if playInfoModel.single == true {
                 typeIcon.isHidden = false
@@ -28,7 +28,11 @@ class FootballTotalCell: UITableViewCell, DateProtocol {
     private var matchTime: UILabel!
     private var endTime: UILabel!
     private var detailBut: UIButton!
-    public var teamView: FootballTeamView!
+    public var totalView: FootballTotalView!
+    private var homeMatch: UILabel!
+    private var visitingMatch : UILabel!
+    private var vsLb : UILabel!
+    
     // 单关图标
     private var typeIcon : UIImageView!
     
@@ -73,8 +77,24 @@ class FootballTotalCell: UITableViewCell, DateProtocol {
             make.width.height.equalTo(20)
             make.bottom.equalTo(-10)
         }
-        teamView.snp.makeConstraints { (make) in
-            make.top.equalTo(15 * defaultScale)
+        
+        homeMatch.snp.makeConstraints { (make) in
+            make.top.equalTo(0)
+            make.bottom.equalTo(totalView.snp.top)
+            make.left.equalTo(totalView)
+        }
+        vsLb.snp.makeConstraints { (make) in
+            make.top.bottom.width.equalTo(homeMatch)
+            make.left.equalTo(homeMatch.snp.right)
+        }
+        visitingMatch.snp.makeConstraints { (make) in
+            make.top.bottom.width.equalTo(homeMatch)
+            make.left.equalTo(vsLb.snp.right)
+            make.right.equalTo(totalView)
+        }
+        
+        totalView.snp.makeConstraints { (make) in
+            make.top.equalTo(35 * defaultScale)
             make.bottom.equalTo(-15 * defaultScale)
             make.left.equalTo(endTime.snp.right).offset(10)
             make.right.equalTo(-rightSpacing)
@@ -86,7 +106,7 @@ class FootballTotalCell: UITableViewCell, DateProtocol {
         line = UIImageView()
         line.image = UIImage(named: "line")
         
-        teamView = FootballTeamView()
+        totalView = FootballTotalView()
         
         typeIcon = UIImageView()
         typeIcon.image = UIImage(named: "Singlefield")
@@ -102,13 +122,22 @@ class FootballTotalCell: UITableViewCell, DateProtocol {
         detailBut.setImage(UIImage(named: "Collapse"), for: .normal)
         detailBut.titleLabel?.numberOfLines = 2
         
+        homeMatch = initLabel()
+        vsLb = initLabel()
+        vsLb.text = "VS"
+        visitingMatch = initLabel()
+        
+        
         self.contentView.addSubview(line)
-        self.contentView.addSubview(teamView)
         self.contentView.addSubview(typeIcon)
         self.contentView.addSubview(matchTitle)
         self.contentView.addSubview(matchTime)
         self.contentView.addSubview(endTime)
         self.contentView.addSubview(detailBut)
+        self.contentView.addSubview(totalView)
+        self.contentView.addSubview(homeMatch)
+        self.contentView.addSubview(vsLb)
+        self.contentView.addSubview(visitingMatch)
     }
     private func initLabel() -> UILabel {
         let lab = UILabel()
