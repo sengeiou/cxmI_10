@@ -239,12 +239,17 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     // MARK: ITEM 选择 delegate
     func select(teamInfo: FootballPlayListModel) {
         guard selectPlayList != nil else { return }
+        
         selectPlayList.append(teamInfo)
+        danMaxNum = 0
+        self.tableView.reloadData()
     }
     
     func deSelect(teamInfo: FootballPlayListModel) {
         guard selectPlayList != nil else { return }
         selectPlayList.remove(teamInfo)
+        danMaxNum = 0
+        self.tableView.reloadData()
     }
     func selectedItem() {
         guard homeData != nil else { return }
@@ -290,12 +295,22 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
 
         guard filterList.isEmpty == false else { return }
         var str : String = ""
+        
+        
         for filter in filterList {
             if filter.isSelected == true {
                 str += filter.titleNum + ","
             }
         }
         str.removeLast()
+        var maxStr : String!
+        if str.lengthOfBytes(using: .utf8) > 3 {
+            maxStr = str.components(separatedBy: ",").last!
+        }else {
+            maxStr = str
+        }
+        
+
         self.playType = str
         orderRequest()
         
@@ -305,8 +320,14 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         let numStr = str.first?.description
         let num = Int(numStr!)
         
-        danMaxNum = num! - 1
+        // 取最后一个串关方式
+        let lastStr = maxStr.first?.description
+        let lastNum = Int(lastStr!)
+        if lastNum! < selectPlayList.count {
+            danMaxNum = num! - 1
+        }
         self.tableView.reloadData()
+        
     }
     
     func playFilterCancel() {
