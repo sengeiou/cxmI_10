@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0239AFB787326CE28D84A44F /* Pods____UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAE714330A11D581FBF18120 /* Pods____UITests.framework */; };
+		11A250BE207C9C2200780D3D /* FootballTotalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A250BD207C9C2200780D3D /* FootballTotalView.swift */; };
 		11EB8EE2207B6D9B00AFC9C1 /* PanmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EB8EE1207B6D9B00AFC9C1 /* PanmentViewController.swift */; };
 		11EB8EE4207B6E8800AFC9C1 /* PaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EB8EE3207B6E8800AFC9C1 /* PaymentCell.swift */; };
 		11EB8EE6207B791500AFC9C1 /* PaymentMethodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EB8EE5207B791500AFC9C1 /* PaymentMethodCell.swift */; };
@@ -199,6 +200,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		11A250BD207C9C2200780D3D /* FootballTotalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballTotalView.swift; sourceTree = "<group>"; };
 		11EB8EE1207B6D9B00AFC9C1 /* PanmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanmentViewController.swift; sourceTree = "<group>"; };
 		11EB8EE3207B6E8800AFC9C1 /* PaymentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentCell.swift; sourceTree = "<group>"; };
 		11EB8EE5207B791500AFC9C1 /* PaymentMethodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodCell.swift; sourceTree = "<group>"; };
@@ -412,6 +414,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		11A250BC207C9BF100780D3D /* TeamView */ = {
+			isa = PBXGroup;
+			children = (
+				E5786FC3206E13840045F7F5 /* FootballTeamView.swift */,
+				11A250BD207C9C2200780D3D /* FootballTotalView.swift */,
+			);
+			path = TeamView;
+			sourceTree = "<group>";
+		};
 		3D53D12139ECA36385ED9222 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1330,6 +1341,7 @@
 			children = (
 				E5786FC5206E29560045F7F5 /* Protocol */,
 				E5D5A375206D022800FC865D /* Model */,
+				11A250BC207C9BF100780D3D /* TeamView */,
 				E5D5A374206D022400FC865D /* View */,
 				E550D89520733959002DDE23 /* OrderView */,
 				E5D5A373206D022000FC865D /* Controller */,
@@ -1355,7 +1367,6 @@
 				E5D5A378206D191C00FC865D /* FootballTopView.swift */,
 				E5D5A37A206D193100FC865D /* FootballBottomView.swift */,
 				E5786FB1206DDA420045F7F5 /* FootballSectionHeader.swift */,
-				E5786FC3206E13840045F7F5 /* FootballTeamView.swift */,
 				E5786FB5206DE87E0045F7F5 /* FootballSPFCell.swift */,
 				E5786FB7206DE9080045F7F5 /* FootballRangSPFCell.swift */,
 				E5786FB9206DE9620045F7F5 /* FootballTotalCell.swift */,
@@ -1821,6 +1832,7 @@
 				E56CE8082069E63E0090A1B5 /* BasePageModel.swift in Sources */,
 				E550D8922073363D002DDE23 /* FootballOrderConfirmVC.swift in Sources */,
 				E58B57B4205622950025E2F1 /* BankCardViewController.swift in Sources */,
+				11A250BE207C9C2200780D3D /* FootballTotalView.swift in Sources */,
 				E567636E206B9D6D00E2D9A8 /* ProgressModel.swift in Sources */,
 				E5D8ABB4206737FF002D688B /* OrderDetailVC.swift in Sources */,
 				E56CE81C206A47930090A1B5 /* AboutFooter.swift in Sources */,
