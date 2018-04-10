@@ -329,7 +329,13 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         present(filter)
     }
     
-    
+    override func back(_ sender: UIButton) {
+        danMaxNum = 0
+        for play in playList{
+            play.isDan = false
+        }
+        popViewController()
+    }
     
     
     

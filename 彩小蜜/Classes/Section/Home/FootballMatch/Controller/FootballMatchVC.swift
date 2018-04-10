@@ -147,17 +147,17 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         case .胜平负:
             return initSPFCell(indexPath: indexPath)
         case .让球胜平负:
-            return initSPFCell(indexPath: indexPath)
+            return initRangSPFCell(indexPath: indexPath)
         case .总进球:
-            return initSPFCell(indexPath: indexPath)
+            return initTotalCell(indexPath: indexPath)
         case .比分:
-            return initSPFCell(indexPath: indexPath)
+            return initScoreCell(indexPath: indexPath)
         case .半全场:
-            return initSPFCell(indexPath: indexPath)
+            return initBanQuanCCell(indexPath: indexPath)
         case .二选一:
-            return initSPFCell(indexPath: indexPath)
+            return init2Cell(indexPath: indexPath)
         case .混合过关:
-            return initSPFCell(indexPath: indexPath)
+            return initHunheCell(indexPath: indexPath)
         }
     }
     
@@ -171,32 +171,35 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         return cell
     }
     private func initRangSPFCell(indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: FootballSPFCellId, for: indexPath) as! FootballSPFCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: FootballRangSPFCellId, for: indexPath) as! FootballRangSPFCell
+        cell.teamView.delegate = self
         
+        let matchModel = matchList[indexPath.section]
+        cell.playInfoModel = matchModel.playList[indexPath.row]
         return cell
     }
-    private func initTatolCell(indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: FootballSPFCellId, for: indexPath) as! FootballSPFCell
+    private func initTotalCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: FootballTotalCellId, for: indexPath) as! FootballTotalCell
         
         return cell
     }
     private func initScoreCell(indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: FootballSPFCellId, for: indexPath) as! FootballSPFCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: FootballScoreCellId, for: indexPath) as! FootballScoreCell
         
         return cell
     }
     private func initBanQuanCCell(indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: FootballSPFCellId, for: indexPath) as! FootballSPFCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: FootballBanQuanCCellId, for: indexPath) as! FootballBanQuanCCell
         
         return cell
     }
     private func init2Cell(indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: FootballSPFCellId, for: indexPath) as! FootballSPFCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Football2_1CellId, for: indexPath) as! Football2_1Cell
         
         return cell
     }
     private func initHunheCell(indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: FootballSPFCellId, for: indexPath) as! FootballSPFCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: FootballHunheCellId, for: indexPath) as! FootballHunheCell
         
         return cell
     }

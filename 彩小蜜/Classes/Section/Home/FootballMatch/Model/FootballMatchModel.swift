@@ -32,6 +32,7 @@ class FootballMatchModel:NSObject, HandyJSON {
 class FootballPlayListModel:NSObject, HandyJSON {
     required override init() { }
     
+    /// 让球数
     var fixedOdds : Int!
     /// 单关，1-单关，0不可以 
     var single: Bool!

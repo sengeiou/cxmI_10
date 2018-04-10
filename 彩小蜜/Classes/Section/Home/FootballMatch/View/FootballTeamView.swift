@@ -27,6 +27,8 @@ extension FootballTeamViewDelegate {
 
 class FootballTeamView: UIView , AlertPro{
 
+    public var matchType: FootballMatchType = .胜平负
+    
     public var teamInfo: FootballPlayListModel! {
         didSet{
             homeName.text = teamInfo.homeTeamAbbr
@@ -40,6 +42,25 @@ class FootballTeamView: UIView , AlertPro{
             homeIsSelected(teamInfo.homeCell.isSelected)
             drawIsSelected(teamInfo.flatCell.isSelected)
             awayIsSelected(teamInfo.visitingCell.isSelected)
+            
+            switch matchType {
+            case .胜平负:
+                VSLB.text = "VS"
+            case .让球胜平负:
+                let vsAtt = NSMutableAttributedString(string: "VS")
+                if teamInfo.fixedOdds < 0 {
+                    let att = NSAttributedString(string:" " + String(teamInfo.fixedOdds), attributes: [NSAttributedStringKey.foregroundColor: Color44AE35])
+                    vsAtt.append(att)
+                    
+                }else if teamInfo.fixedOdds > 0 {
+                    let att = NSAttributedString(string:" +" + String(teamInfo.fixedOdds), attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+                    vsAtt.append(att)
+                }
+                VSLB.attributedText = vsAtt
+            default: break
+                
+            }
+            
         }
     }
     

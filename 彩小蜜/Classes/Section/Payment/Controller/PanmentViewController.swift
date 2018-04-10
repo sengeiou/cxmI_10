@@ -15,6 +15,8 @@ class PanmentViewController: BaseViewController, UITableViewDelegate, UITableVie
 
     public var requestModel: FootballRequestMode!
     
+    private var saveBetInfo : FootballSaveBetInfoModel!
+    
     private var confirmBut : UIButton!
     
     override func viewDidLoad() {
@@ -40,17 +42,19 @@ class PanmentViewController: BaseViewController, UITableViewDelegate, UITableVie
     
     // MARK: - 网络请求
     private func orderRequest() {
+        weak var weakSelf = self
         _ = homeProvider.rx.request(.saveBetInfo(requestModel: self.requestModel))
             .asObservable()
             .mapObject(type: FootballSaveBetInfoModel.self)
             .subscribe(onNext: { (data) in
-                
+                weakSelf?.saveBetInfo = data
+                weakSelf?.tableView.reloadData()
             }, onError: { (error) in
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):
                     print(code!)
-                    self.showHUD(message: msg!)
+                    weakSelf?.showHUD(message: msg!)
                 default: break
                 }
             }, onCompleted: nil, onDisposed: nil )
@@ -101,7 +105,7 @@ class PanmentViewController: BaseViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        
+        guard self.saveBetInfo != nil else { return UITableViewCell()}
         
         switch indexPath.section {
         case 0:
@@ -109,16 +113,18 @@ class PanmentViewController: BaseViewController, UITableViewDelegate, UITableVie
             switch indexPath.row {
             case 0:
                 cell.title.text = "订单金额"
-                cell.detail.text = "¥ 30.00"
+                let money = NSAttributedString(string:"¥" + self.saveBetInfo.orderMoney, attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+                cell.detail.attributedText = money
             case 1:
                 cell.title.text = "余额抵扣"
-                cell.detail.text = "¥ 30.00"
+                cell.detail.text = "- ¥" + self.saveBetInfo.surplus
             case 2:
                 cell.title.text = "优惠券抵扣"
-                cell.detail.text = "¥ 30.00"
+                cell.detail.text = "- ¥" + self.saveBetInfo.bonusAmount
             case 3:
                 cell.title.text = "还需支付"
-                cell.detail.text = "¥ 30.00"
+                let money = NSAttributedString(string:"- ¥ " + self.saveBetInfo.thirdPartyPaid, attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+                cell.detail.attributedText = money
             default: break
             }
             return cell
@@ -127,12 +133,12 @@ class PanmentViewController: BaseViewController, UITableViewDelegate, UITableVie
             switch indexPath.row {
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: PaymentCellId, for: indexPath) as! PaymentCell
-                cell.title.text = "订单金额"
-                cell.detail.text = "¥ 30.00"
+                cell.title.text = "支付方式"
+                cell.detail.text = ""
                 return cell
             case 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: PaymentMethodCellId, for: indexPath) as! PaymentMethodCell
-                cell.title.text = "订单金额"
+                cell.title.text = "微信支付"
                 return cell
             default: break
             }

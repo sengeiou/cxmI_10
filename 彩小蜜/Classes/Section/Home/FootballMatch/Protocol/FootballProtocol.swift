@@ -48,7 +48,6 @@ extension FootballRequestPro where Self: FootballMatchVC {
                     footb.playList = data.hotPlayList
                     footb.title = "热门赛事"
                     weakSelf?.matchList.insert(footb, at: 0)
-                    
                 }
                 self.topView.number = data.allMatchCount
                 weakSelf?.tableView.reloadData()
