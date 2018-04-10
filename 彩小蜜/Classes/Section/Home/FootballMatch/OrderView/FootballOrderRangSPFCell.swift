@@ -99,6 +99,7 @@ class FootballOrderRangSPFCell: UITableViewCell, DateProtocol {
         titleLB.textAlignment = .left
         
         teamView = FootballTeamView()
+        teamView.matchType = .让球胜平负
         
         danBut = UIButton(type: .custom)
         danBut.setTitle("胆", for: .normal)

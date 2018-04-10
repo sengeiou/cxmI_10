@@ -149,17 +149,17 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         case .胜平负:
             return initSPFCell(indexPath: indexPath)
         case .让球胜平负:
-            return initSPFCell(indexPath: indexPath)
+            return initRangSPFCell(indexPath: indexPath)
         case .总进球:
-            return initSPFCell(indexPath: indexPath)
+            return initTatolCell(indexPath: indexPath)
         case .比分:
-            return initSPFCell(indexPath: indexPath)
+            return initScoreCell(indexPath: indexPath)
         case .半全场:
-            return initSPFCell(indexPath: indexPath)
+            return initBanQuanCCell(indexPath: indexPath)
         case .二选一:
-            return initSPFCell(indexPath: indexPath)
+            return init2Cell(indexPath: indexPath)
         case .混合过关:
-            return initSPFCell(indexPath: indexPath)
+            return initHunheCell(indexPath: indexPath)
         }
     }
     
@@ -172,7 +172,9 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     }
     private func initRangSPFCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballOrderRangSPFCellId, for: indexPath) as! FootballOrderRangSPFCell
-        
+        cell.delegate = self
+        cell.teamView.delegate = self
+        cell.playInfoModel = playList[indexPath.section]
         return cell
     }
     private func initTatolCell(indexPath: IndexPath) -> UITableViewCell {
