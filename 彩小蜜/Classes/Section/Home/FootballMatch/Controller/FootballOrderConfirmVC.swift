@@ -242,6 +242,11 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         
         selectPlayList.append(teamInfo)
         danMaxNum = 0
+        
+        for play in playList {
+            play.isDan = false
+        }
+        
         self.tableView.reloadData()
     }
     
@@ -249,11 +254,13 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         guard selectPlayList != nil else { return }
         selectPlayList.remove(teamInfo)
         danMaxNum = 0
+        for play in playList {
+            play.isDan = false
+        }
         self.tableView.reloadData()
     }
     func selectedItem() {
         guard homeData != nil else { return }
-        
         orderRequest ()
     }
     // MARK: - Bottow Delegate

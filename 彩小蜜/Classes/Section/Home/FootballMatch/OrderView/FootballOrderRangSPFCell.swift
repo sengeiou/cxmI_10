@@ -37,7 +37,7 @@ class FootballOrderRangSPFCell: UITableViewCell, DateProtocol {
     }
     
     private func setupDanBut() {
-        if danMaxNum <= 0 {
+        if danMaxNum <= 0  {
             if self.playInfoModel.isDan != true {
                 danBut.isUserInteractionEnabled = false
                 danBut.backgroundColor = Color787878
@@ -45,6 +45,12 @@ class FootballOrderRangSPFCell: UITableViewCell, DateProtocol {
         }else {
             danBut.isUserInteractionEnabled = true
             danBut.backgroundColor = ColorFFFFFF
+        }
+        
+        if !self.playInfoModel.homeCell.isSelected && !self.playInfoModel.flatCell.isSelected && !self.playInfoModel.visitingCell.isSelected {
+            self.playInfoModel.isDan = false
+            danBut.isUserInteractionEnabled = false
+            danBut.backgroundColor = Color787878
         }
     }
     private func danIsSelected(isSelected: Bool) {
@@ -99,7 +105,6 @@ class FootballOrderRangSPFCell: UITableViewCell, DateProtocol {
         titleLB.textAlignment = .left
         
         teamView = FootballTeamView()
-        teamView.matchType = .让球胜平负
         
         danBut = UIButton(type: .custom)
         danBut.setTitle("胆", for: .normal)
