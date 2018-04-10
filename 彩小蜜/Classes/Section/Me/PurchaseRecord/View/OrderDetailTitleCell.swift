@@ -14,22 +14,40 @@ class OrderDetailTitleCell: UITableViewCell {
 
     public var matchInfo: MatchInfo! {
         didSet{
-            timeLB.text = matchInfo.changci
-            nameLB.text = matchInfo.match
-            ruleLB.text = matchInfo.playType
-            recordLB.text = matchInfo.cathectic
-            resultLB.text = matchInfo.result
             
+            guard let range = matchInfo.match.range(of: "VS") else { return }
             
-            if matchInfo.matchResult == "0" {
-                recordLB.textColor = Color505050
-                resultLB.textColor = Color505050
-                oddsIcon.isHidden = true
-            }else if matchInfo.matchResult == "1" {
-                recordLB.textColor = ColorE95504
-                resultLB.textColor = ColorE95504
-                oddsIcon.isHidden = false
+            let homeMatch = matchInfo.match.prefix(upTo: (range.lowerBound))
+            let viMatch = matchInfo.match.suffix(from: range.upperBound)
+            
+            let record = NSMutableAttributedString()
+            var resultStr = ""
+            for result in matchInfo.cathecticResults {
+                for cath in result.cathectics {
+                    let color : UIColor!
+                    if cath.isGuess == true {
+                        color = ColorEA5504
+                    }else {
+                        color = Color505050
+                    }
+                    
+                    let rec = NSAttributedString(string: cath.cathectic + "\n", attributes: [NSAttributedStringKey.foregroundColor: color])
+                    
+                    record.append(rec)
+                }
+                resultStr += result.matchResult + "\n"
             }
+            
+          
+            resultStr.removeLast()
+            
+            nameLB.text = "\(homeMatch)\nVS\n\(viMatch)"
+            
+            timeLB.text = matchInfo.changci
+            ruleLB.text = matchInfo.playType
+            recordLB.attributedText = record
+            resultLB.text = resultStr
+            
         }
     }
     
@@ -46,17 +64,67 @@ class OrderDetailTitleCell: UITableViewCell {
     
     private var sectionTitle : UILabel!
     private var line : UIView!
-    
-    private var oddsIcon: UIImageView!
+
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         initSubview()
-        oddsIcon.isHidden = true
     }
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+        
+        
+    }
+    
+    private func initSubview() {
+        self.selectionStyle = .none
+        
+        line = UIView()
+        line.backgroundColor = ColorF4F4F4
+        
+        sectionTitle = UILabel()
+        sectionTitle.font = Font19
+        sectionTitle.textColor = ColorA0A0A0
+        sectionTitle.textAlignment = .left
+        sectionTitle.text = "方案内容"
+        
+        timeTitle = getTitleLB("场次")
+        timeTitle.textAlignment = .left
+        nameTitle = getTitleLB("赛事")
+        ruleTitle = getTitleLB("玩法")
+        recordTitle = getTitleLB("投注")
+        resultTitle = getTitleLB("赛果")
+        resultTitle.textAlignment = .right
+        
+        timeLB = getDetailLB()
+        timeLB.textAlignment = .left
+        nameLB = getDetailLB()
+        nameLB.numberOfLines = 0
+        ruleLB = getDetailLB()
+        recordLB = getDetailLB()
+        recordLB.numberOfLines = 0
+        resultLB = getDetailLB()
+        resultLB.numberOfLines = 0
+        resultLB.textAlignment = .right
+        
+       
+        
+        self.contentView.addSubview(line)
+        self.contentView.addSubview(sectionTitle)
+        self.contentView.addSubview(timeTitle)
+        self.contentView.addSubview(nameTitle)
+        self.contentView.addSubview(ruleTitle)
+        self.contentView.addSubview(recordTitle)
+        self.contentView.addSubview(resultTitle)
+        
+        self.contentView.addSubview(timeLB)
+        self.contentView.addSubview(nameLB)
+        self.contentView.addSubview(ruleLB)
+        self.contentView.addSubview(recordLB)
+        self.contentView.addSubview(resultLB)
+        
         
         line.snp.makeConstraints { (make) in
             make.top.equalTo(self.contentView).offset(orderSectionHeaderHeight)
@@ -104,83 +172,28 @@ class OrderDetailTitleCell: UITableViewCell {
             make.left.equalTo(self.contentView).offset(leftSpacing)
         }
         nameLB.snp.makeConstraints { (make) in
-            make.top.equalTo(timeLB)
+            make.top.equalTo(timeTitle.snp.bottom).offset(11 * defaultScale)
+            make.bottom.equalTo(self.contentView).offset(-11 * defaultScale)
             make.left.equalTo(timeLB.snp.right).offset(1)
             make.right.equalTo(ruleLB.snp.left).offset(-1)
-            make.bottom.equalTo(timeLB)
         }
-
+        
         ruleLB.snp.makeConstraints { (make) in
             make.top.height.width.equalTo(timeLB)
             make.right.equalTo(recordLB.snp.left).offset(-1)
         }
-
+        
         recordLB.snp.makeConstraints { (make) in
-            make.bottom.equalTo(oddsIcon.snp.top).offset(-5)
-            
+            make.top.equalTo(timeTitle.snp.bottom).offset(11 * defaultScale)
+            make.bottom.equalTo(self.contentView).offset(-5 * defaultScale)
             make.width.equalTo(timeLB)
             make.right.equalTo(resultLB.snp.left).offset(-1)
         }
-
-        oddsIcon.snp.makeConstraints { (make) in
-            make.height.width.equalTo(8)
-            make.centerX.equalTo(recordLB.snp.centerX)
-            make.bottom.equalTo(timeLB)
-        }
+        
         resultLB.snp.makeConstraints { (make) in
             make.top.height.width.equalTo(timeLB)
             make.right.equalTo(self.contentView).offset(-26)
         }
-        
-    }
-    
-    private func initSubview() {
-        self.selectionStyle = .none
-        
-        line = UIView()
-        line.backgroundColor = ColorF4F4F4
-        
-        sectionTitle = UILabel()
-        sectionTitle.font = Font19
-        sectionTitle.textColor = ColorA0A0A0
-        sectionTitle.textAlignment = .left
-        sectionTitle.text = "方案内容"
-        
-        timeTitle = getTitleLB("场次")
-        timeTitle.textAlignment = .left
-        nameTitle = getTitleLB("赛事")
-        ruleTitle = getTitleLB("玩法")
-        recordTitle = getTitleLB("投注")
-        resultTitle = getTitleLB("赛果")
-        resultTitle.textAlignment = .right
-        
-        timeLB = getDetailLB()
-        timeLB.textAlignment = .left
-        nameLB = getDetailLB()
-        nameLB.numberOfLines = 3
-        ruleLB = getDetailLB()
-        recordLB = getDetailLB()
-        recordLB.numberOfLines = 2
-        resultLB = getDetailLB()
-        resultLB.textAlignment = .right
-        
-        oddsIcon = UIImageView()
-        oddsIcon.image = UIImage(named: "guess")
-        
-        self.contentView.addSubview(line)
-        self.contentView.addSubview(sectionTitle)
-        self.contentView.addSubview(timeTitle)
-        self.contentView.addSubview(nameTitle)
-        self.contentView.addSubview(ruleTitle)
-        self.contentView.addSubview(recordTitle)
-        self.contentView.addSubview(resultTitle)
-        
-        self.contentView.addSubview(timeLB)
-        self.contentView.addSubview(nameLB)
-        self.contentView.addSubview(ruleLB)
-        self.contentView.addSubview(recordLB)
-        self.contentView.addSubview(resultLB)
-        self.contentView.addSubview(oddsIcon)
     }
     
     private func getTitleLB(_ text: String) -> UILabel {

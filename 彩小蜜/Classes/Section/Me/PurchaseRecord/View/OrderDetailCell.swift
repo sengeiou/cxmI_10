@@ -12,19 +12,40 @@ class OrderDetailCell: UITableViewCell {
 
     public var matchInfo: MatchInfo! {
         didSet{
-            timeLB.text = matchInfo.changci
-            nameLB.text = matchInfo.match
-            ruleLB.text = matchInfo.playType
-            recordLB.text = matchInfo.cathectic
-            resultLB.text = matchInfo.result
             
-            if matchInfo.matchResult == "0" {
-                recordLB.textColor = Color505050
-                resultLB.textColor = Color505050
-            }else if matchInfo.matchResult == "1" {
-                recordLB.textColor = ColorE95504
-                resultLB.textColor = ColorE95504
+            guard let range = matchInfo.match.range(of: "VS") else { return }
+            
+            let homeMatch = matchInfo.match.prefix(upTo: (range.lowerBound))
+            let viMatch = matchInfo.match.suffix(from: range.upperBound)
+            
+            let record = NSMutableAttributedString()
+            var resultStr = ""
+            for result in matchInfo.cathecticResults {
+                for cath in result.cathectics {
+                    let color : UIColor!
+                    if cath.isGuess == true {
+                        color = ColorEA5504
+                    }else {
+                        color = Color505050
+                    }
+                    
+                    let rec = NSAttributedString(string: cath.cathectic + "\n", attributes: [NSAttributedStringKey.foregroundColor: color])
+                    
+                    record.append(rec)
+                }
+                resultStr += result.matchResult + "\n"
             }
+            
+            resultStr.removeLast()
+            
+            
+            nameLB.text = "\(homeMatch)\nVS\n\(viMatch)"
+            
+            timeLB.text = matchInfo.changci
+            ruleLB.text = matchInfo.playType
+            recordLB.attributedText = record
+            resultLB.text = resultStr
+            
         }
     }
 
@@ -34,7 +55,7 @@ class OrderDetailCell: UITableViewCell {
     private var recordLB: UILabel!
     private var resultLB : UILabel!
     private var line : UIImageView!
-    private var oddsIcon: UIImageView!
+    //private var oddsIcon: UIImageView!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -43,47 +64,6 @@ class OrderDetailCell: UITableViewCell {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        line.snp.makeConstraints { (make) in
-            make.top.equalTo(self.contentView).offset(0)
-            make.left.equalTo(self.contentView).offset(SeparatorLeftSpacing)
-            make.right.equalTo(self.contentView).offset(-SeparatorLeftSpacing)
-            make.height.equalTo(SeparationLineHeight)
-        }
-        
-        timeLB.snp.makeConstraints { (make) in
-            make.top.equalTo(line.snp.bottom).offset(11)
-            make.bottom.equalTo(self.contentView).offset(-11)
-            make.width.equalTo(OrderDetailTitleWidth)
-            make.left.equalTo(self.contentView).offset(leftSpacing)
-        }
-        nameLB.snp.makeConstraints { (make) in
-            make.top.equalTo(timeLB)
-            make.left.equalTo(timeLB.snp.right).offset(1)
-            make.right.equalTo(ruleLB.snp.left).offset(-1)
-            make.bottom.equalTo(timeLB)
-        }
-        ruleLB.snp.makeConstraints { (make) in
-            make.top.height.width.equalTo(timeLB)
-            make.right.equalTo(recordLB.snp.left).offset(-1)
-        }
-        
-        recordLB.snp.makeConstraints { (make) in
-            make.bottom.equalTo(oddsIcon.snp.top).offset(-5)
-            
-            make.width.equalTo(timeLB)
-            make.right.equalTo(resultLB.snp.left).offset(-1)
-        }
-        
-        oddsIcon.snp.makeConstraints { (make) in
-            make.height.width.equalTo(8)
-            make.centerX.equalTo(recordLB.snp.centerX)
-            make.bottom.equalTo(timeLB)
-        }
-        resultLB.snp.makeConstraints { (make) in
-            make.top.height.width.equalTo(timeLB)
-            make.right.equalTo(self.contentView).offset(-26)
-        }
-        
     }
     
     private func initSubview() {
@@ -94,16 +74,19 @@ class OrderDetailCell: UITableViewCell {
         
         timeLB = getDetailLB()
         timeLB.textAlignment = .left
-        nameLB = getDetailLB()
-        nameLB.numberOfLines = 3
-        ruleLB = getDetailLB()
-        recordLB = getDetailLB()
-        recordLB.numberOfLines = 2
-        resultLB = getDetailLB()
-        resultLB.textAlignment = .right
         
-        oddsIcon = UIImageView()
-        oddsIcon.image = UIImage(named: "guess")
+        nameLB = getDetailLB()
+        nameLB.numberOfLines = 0
+        
+        ruleLB = getDetailLB()
+        
+        recordLB = getDetailLB()
+        recordLB.numberOfLines = 0
+        
+        resultLB = getDetailLB()
+        resultLB.numberOfLines = 0
+        resultLB.textAlignment = .right
+        resultLB.sizeToFit()
         
         self.contentView.addSubview(line)
         self.contentView.addSubview(timeLB)
@@ -111,13 +94,52 @@ class OrderDetailCell: UITableViewCell {
         self.contentView.addSubview(ruleLB)
         self.contentView.addSubview(recordLB)
         self.contentView.addSubview(resultLB)
-        self.contentView.addSubview(oddsIcon)
+        
+       
+        
+        line.snp.makeConstraints { (make) in
+            make.top.equalTo(self.contentView).offset(0)
+            make.left.equalTo(self.contentView).offset(SeparatorLeftSpacing)
+            make.right.equalTo(self.contentView).offset(-SeparatorLeftSpacing)
+            make.height.equalTo(SeparationLineHeight)
+        }
+        
+        timeLB.snp.makeConstraints { (make) in
+            make.top.equalTo(self.contentView).offset(11 * defaultScale)
+            make.bottom.equalTo(self.contentView).offset(-11 * defaultScale)
+            make.width.equalTo(OrderDetailTitleWidth)
+            make.left.equalTo(self.contentView).offset(leftSpacing)
+        }
+        nameLB.snp.makeConstraints { (make) in
+            make.top.equalTo(self.contentView).offset(11 * defaultScale)
+            make.bottom.equalTo(self.contentView).offset(-11 * defaultScale)
+            make.left.equalTo(timeLB.snp.right).offset(1)
+            make.right.equalTo(ruleLB.snp.left).offset(-1)
+        }
+        ruleLB.snp.makeConstraints { (make) in
+            make.top.height.width.equalTo(timeLB)
+            make.right.equalTo(recordLB.snp.left).offset(-1)
+        }
+        
+        recordLB.snp.makeConstraints { (make) in
+            make.top.equalTo(line.snp.bottom).offset(11 * defaultScale)
+            make.bottom.equalTo(self.contentView).offset(-5 * defaultScale)
+            make.width.equalTo(timeLB)
+            make.right.equalTo(resultLB.snp.left).offset(-1)
+        }
+        
+        resultLB.snp.makeConstraints { (make) in
+            make.top.height.equalTo(recordLB)
+            make.width.equalTo(timeLB)
+            make.right.equalTo(self.contentView).offset(-26)
+        }
+        
     }
     
     private func getDetailLB() -> UILabel {
         let lab = UILabel()
         lab.font = Font12
-        //lab.text = "白塞"
+      
         lab.textColor = Color505050
         lab.textAlignment = .center
         return lab

@@ -84,8 +84,8 @@ class PurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
         
         weak var weakSelf = self
         _ = userProvider.rx.request(.orderInfoList(fyId: "1", orderStatus: orderStatus, pageNum: pageNum))
-        .asObservable()
-        .mapObject(type: PurchaseRecordListModel.self)
+            .asObservable()
+            .mapObject(type: PurchaseRecordListModel.self)
             .subscribe(onNext: { (data) in
                 weakSelf?.tableView.endrefresh()
                 weakSelf?.recordListModel = data

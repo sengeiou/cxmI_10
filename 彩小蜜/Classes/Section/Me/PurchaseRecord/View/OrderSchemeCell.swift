@@ -12,8 +12,17 @@ class OrderSchemeCell: UITableViewCell {
 
     public var schemeDetail : SchemeDetail! {
         didSet{
+            
+            let contents = schemeDetail.tickeContent.components(separatedBy: "X")
+            
+            var str = ""
+            for content in contents {
+                str += content + "\n"
+            }
+            str.removeLast()
+            
             numLB.text = schemeDetail.number
-            contentLB.text = schemeDetail.tickeContent
+            contentLB.text = str
             passLB.text = schemeDetail.passType
             multipleLB.text = schemeDetail.multiple
         }

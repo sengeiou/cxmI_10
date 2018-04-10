@@ -4,7 +4,7 @@
 //
 //  Created by HX on 2018/3/25.
 //  Copyright © 2018年 韩笑. All rights reserved.
-//
+//  投注方式
 
 import UIKit
 
@@ -37,23 +37,7 @@ class OrderRuleCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        line.snp.makeConstraints { (make) in
-            make.top.equalTo(self.contentView).offset(0)
-            make.left.equalTo(self.contentView).offset(SeparatorLeftSpacing)
-            make.right.equalTo(self.contentView).offset(-SeparatorLeftSpacing)
-            make.height.equalTo(SeparationLineHeight)
-        }
         
-        title.snp.makeConstraints { (make) in
-            make.top.equalTo(line.snp.bottom).offset(16)
-            make.height.equalTo(12)
-            make.left.equalTo(self.contentView).offset(leftSpacing)
-            make.right.equalTo(self.contentView).offset(-rightSpacing)
-        }
-        detail.snp.makeConstraints { (make) in
-            make.bottom.equalTo(self.contentView).offset(-16)
-            make.height.left.right.equalTo(title)
-        }
     }
     
     private func initSubview() {
@@ -77,6 +61,26 @@ class OrderRuleCell: UITableViewCell {
         self.contentView.addSubview(line)
         self.contentView.addSubview(title)
         self.contentView.addSubview(detail)
+        
+        
+        line.snp.makeConstraints { (make) in
+            make.top.equalTo(self.contentView).offset(0)
+            make.left.equalTo(self.contentView).offset(SeparatorLeftSpacing)
+            make.right.equalTo(self.contentView).offset(-SeparatorLeftSpacing)
+            make.height.equalTo(SeparationLineHeight)
+        }
+        
+        title.snp.makeConstraints { (make) in
+            make.top.equalTo(line.snp.bottom).offset(16)
+            make.height.equalTo(12)
+            make.left.equalTo(self.contentView).offset(leftSpacing)
+            make.right.equalTo(self.contentView).offset(-rightSpacing)
+        }
+        detail.snp.makeConstraints { (make) in
+            make.top.equalTo(title.snp.bottom).offset(5 )
+            make.bottom.equalTo(self.contentView).offset(-16)
+            make.height.left.right.equalTo(title)
+        }
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

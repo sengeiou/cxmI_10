@@ -28,11 +28,21 @@ struct OrderInfoModel: HandyJSON {
 }
 
 struct MatchInfo: HandyJSON {
-    var cathectic : String!
+    
+    var cathecticResults: [CathecticResult]!
     var changci: String!
     var match: String!
-    var matchResult: String!
     var playType: String!
     var result: String!
     
+}
+
+struct CathecticResult: HandyJSON {
+    var cathectics : [Cathectic]!
+    var matchResult: String!
+}
+
+struct Cathectic : HandyJSON {
+    var cathectic : String!
+    var isGuess : Bool!
 }

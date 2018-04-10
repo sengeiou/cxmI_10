@@ -24,16 +24,11 @@ enum PaymentNetAPIManager {
 
 extension PaymentNetAPIManager : TargetType {
     var baseURL : URL {
-        return URL(string : baseURLStr)!
+        return URL(string : baseURLStr + "7076" + xpath )!
     }
+    var path : String { return ""}
     
-    var headers: [String : String]? {
-        return ["Content-Type" : "application/json",
-                "token" : UserInfoManager().getToken()
-        ]
-    }
-    
-    var path : String {
+    var xpath : String {
         switch self {
         case .payment:
             return "/payment/app"
@@ -77,7 +72,11 @@ extension PaymentNetAPIManager : TargetType {
             return .post
         }
     }
-    
+    var headers: [String : String]? {
+        return ["Content-Type" : "application/json",
+                "token" : UserInfoManager().getToken()
+        ]
+    }
     var parameterEncoding: ParameterEncoding {
         switch self {
         default:

@@ -32,7 +32,7 @@ enum MeNetAPIManager {
     case couponList (status: String, pageNum: Int)
     /// 单个优惠券
     case coupon (userBonusId: String)
-    /// 订单列表 - 投注记录 -1 -所有订单 2-待开奖 4-已中奖
+    /// 订单列表 - 投注记录 -1 -所有订单 2-待开奖 4-已中奖  fyId :
     case orderInfoList (fyId: String, orderStatus: String, pageNum: Int)
     /// 订单详情
     case orderInfo (orderId: String)

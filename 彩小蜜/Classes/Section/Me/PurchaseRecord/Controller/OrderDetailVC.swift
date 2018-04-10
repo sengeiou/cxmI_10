@@ -56,7 +56,7 @@ class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         weak var weakSelf = self
         guard orderId != nil  else { return }
         
-        _ = userProvider.rx.request(.orderInfo(orderId: orderId))
+        _ = userProvider.rx.request(.orderInfo(orderId: "27024"))
             .asObservable()
             .mapObject(type: OrderInfoModel.self)
             .subscribe(onNext: { (data) in
@@ -91,7 +91,8 @@ class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         let footer = OrderDetailFooterView()
         footer.delegate = self
         table.tableFooterView = footer
-        
+        table.estimatedRowHeight = 80
+        table.rowHeight = UITableViewAutomaticDimension
         
         table.register(OrderDetailTitleCell.self, forCellReuseIdentifier: OrderDetailTitleCellId)
         table.register(OrderDetailCell.self, forCellReuseIdentifier: OrderDetailCellId)
@@ -149,17 +150,10 @@ class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
+
         switch indexPath.section {
         case 0:
-            switch indexPath.row {
-            case 0:
-                 return OrderDetailCellHeight + orderSectionHeaderHeight + 23
-            case orderInfo.matchInfos.count - 1:
-                return OrderDetailCellHeight - 2
-            default:
-                return OrderDetailCellHeight
-            }
+            return UITableViewAutomaticDimension
         case 1:
             return 124
         default:
