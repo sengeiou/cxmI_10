@@ -331,12 +331,36 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         
     }
     // MARK: - 选取比赛 FootballTotalView Delegate
-    func totalSelected(totalCell: FootballPlayCellModel) {
+    func totalSelected(view: FootballTotalView, teamInfo: FootballPlayListModel) {
         
+        var canAdd = true
+        for cell in teamInfo.matchPlays[0].matchCells {
+            if cell.isSelected == true {
+                canAdd = false
+                break
+            }
+        }
+        guard canAdd == true else { return }
+        guard selectPlayList.count < 15 else {
+            view.backSelected()
+            showHUD(message: "最多可选15场比赛")
+            return }
+        guard selectPlayList != nil else { return }
+        selectPlayList.append(teamInfo)
     }
     
-    func totalDeSelected(totalCell: FootballPlayCellModel) {
-        
+    func totalDeSelected(view: FootballTotalView, teamInfo: FootballPlayListModel) {
+        var canRemove = true
+        for cell in teamInfo.matchPlays[0].matchCells {
+            if cell.isSelected == true {
+                canRemove = false
+                break
+            }
+        }
+        guard canRemove == true  else { return }
+       
+        guard selectPlayList != nil else { return }
+        selectPlayList.remove(teamInfo)
     }
     
     

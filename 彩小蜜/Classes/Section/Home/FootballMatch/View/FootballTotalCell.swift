@@ -14,7 +14,7 @@ class FootballTotalCell: UITableViewCell, DateProtocol {
         didSet{
             matchTitle.text = playInfoModel.leagueAddr
             matchTime.text = playInfoModel.changci
-            totalView.totalCellModels = playInfoModel.matchPlays[0].matchCells
+            totalView.teamInfo = playInfoModel
             endTime.text = "截止" + timeStampToHHmm(playInfoModel.betEndTime)
             if playInfoModel.matchPlays[0].single == true {
                 typeIcon.isHidden = false
