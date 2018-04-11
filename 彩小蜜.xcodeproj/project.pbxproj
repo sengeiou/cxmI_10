@@ -8,8 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		0239AFB787326CE28D84A44F /* Pods____UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAE714330A11D581FBF18120 /* Pods____UITests.framework */; };
+		11691806207DB73800C8A287 /* CouponFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11691805207DB73800C8A287 /* CouponFilterViewController.swift */; };
+		11691808207DB82E00C8A287 /* CouponFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11691807207DB82E00C8A287 /* CouponFilterCell.swift */; };
+		1169180A207DBA8B00C8A287 /* PaymentResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11691809207DBA8B00C8A287 /* PaymentResultModel.swift */; };
 		11A250BE207C9C2200780D3D /* FootballTotalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A250BD207C9C2200780D3D /* FootballTotalView.swift */; };
-		11EB8EE2207B6D9B00AFC9C1 /* PanmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EB8EE1207B6D9B00AFC9C1 /* PanmentViewController.swift */; };
+		11EB8EE2207B6D9B00AFC9C1 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EB8EE1207B6D9B00AFC9C1 /* PaymentViewController.swift */; };
 		11EB8EE4207B6E8800AFC9C1 /* PaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EB8EE3207B6E8800AFC9C1 /* PaymentCell.swift */; };
 		11EB8EE6207B791500AFC9C1 /* PaymentMethodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EB8EE5207B791500AFC9C1 /* PaymentMethodCell.swift */; };
 		11EB8EE8207B8A5500AFC9C1 /* FootballSaveBetInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EB8EE7207B8A5500AFC9C1 /* FootballSaveBetInfoModel.swift */; };
@@ -200,8 +203,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		11691805207DB73800C8A287 /* CouponFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponFilterViewController.swift; sourceTree = "<group>"; };
+		11691807207DB82E00C8A287 /* CouponFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponFilterCell.swift; sourceTree = "<group>"; };
+		11691809207DBA8B00C8A287 /* PaymentResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentResultModel.swift; sourceTree = "<group>"; };
 		11A250BD207C9C2200780D3D /* FootballTotalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballTotalView.swift; sourceTree = "<group>"; };
-		11EB8EE1207B6D9B00AFC9C1 /* PanmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanmentViewController.swift; sourceTree = "<group>"; };
+		11EB8EE1207B6D9B00AFC9C1 /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		11EB8EE3207B6E8800AFC9C1 /* PaymentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentCell.swift; sourceTree = "<group>"; };
 		11EB8EE5207B791500AFC9C1 /* PaymentMethodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodCell.swift; sourceTree = "<group>"; };
 		11EB8EE7207B8A5500AFC9C1 /* FootballSaveBetInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballSaveBetInfoModel.swift; sourceTree = "<group>"; };
@@ -1125,7 +1131,8 @@
 		E57375FB2046B23800148622 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				11EB8EE1207B6D9B00AFC9C1 /* PanmentViewController.swift */,
+				11EB8EE1207B6D9B00AFC9C1 /* PaymentViewController.swift */,
+				11691805207DB73800C8A287 /* CouponFilterViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1135,6 +1142,7 @@
 			children = (
 				11EB8EE3207B6E8800AFC9C1 /* PaymentCell.swift */,
 				11EB8EE5207B791500AFC9C1 /* PaymentMethodCell.swift */,
+				11691807207DB82E00C8A287 /* CouponFilterCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1142,6 +1150,7 @@
 		E57375FD2046B23C00148622 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				11691809207DBA8B00C8A287 /* PaymentResultModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1729,6 +1738,7 @@
 				E56CE8062069E5830090A1B5 /* AccountDetailModel.swift in Sources */,
 				E5786FC7206E29730045F7F5 /* FootballProtocol.swift in Sources */,
 				E56CE8022069DFC20090A1B5 /* AccountDetailSectionHeader.swift in Sources */,
+				11691808207DB82E00C8A287 /* CouponFilterCell.swift in Sources */,
 				E58B57B8205634250025E2F1 /* BankCardFooterView.swift in Sources */,
 				E503F5C0207A11B3006D4A0B /* FootballRequestModel.swift in Sources */,
 				E5973DDE204D152F006461CE /* BaseViewController.swift in Sources */,
@@ -1741,6 +1751,7 @@
 				E5D8ABBA20674352002D688B /* OrderRuleCell.swift in Sources */,
 				E512CE402071D0A30095B6DD /* FootballMatchFilterVC.swift in Sources */,
 				E55016F3207208A80056AB1F /* HomeWebViewController.swift in Sources */,
+				11691806207DB73800C8A287 /* CouponFilterViewController.swift in Sources */,
 				E5786FB4206DE19F0045F7F5 /* FootballMatchModel.swift in Sources */,
 				E5973DDC204CEFDB006461CE /* LoginViewController.swift in Sources */,
 				E5973E40204FDD34006461CE /* MeComplaintVC.swift in Sources */,
@@ -1806,10 +1817,11 @@
 				E537397B2057F4270087E4E6 /* UserInfoDataModel.swift in Sources */,
 				E58B57BC205670670025E2F1 /* ServeConstraint.swift in Sources */,
 				E5973E1C204D4A75006461CE /* ScreenConstraint.swift in Sources */,
-				11EB8EE2207B6D9B00AFC9C1 /* PanmentViewController.swift in Sources */,
+				11EB8EE2207B6D9B00AFC9C1 /* PaymentViewController.swift in Sources */,
 				E550D8A120733A0F002DDE23 /* FootballOrder2-1Cell.swift in Sources */,
 				E5103254206500A800A0156C /* PurchaseRecordVC.swift in Sources */,
 				E53739772057B9340087E4E6 /* extension+UserDefaults.swift in Sources */,
+				1169180A207DBA8B00C8A287 /* PaymentResultModel.swift in Sources */,
 				E56CE80E206A22240090A1B5 /* WithdrawalProgressCell.swift in Sources */,
 				E5973E20204E34A3006461CE /* FontConstraint.swift in Sources */,
 				E56CE812206A23070090A1B5 /* WithdrawalProgressHeader.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  PanmentViewController.swift
+//  PaymentViewController.swift
 //  彩小蜜
 //
 //  Created by 笑 on 2018/4/9.
@@ -8,16 +8,26 @@
 
 import UIKit
 
+enum PaymentMethod : String{
+    case 微信 = "app_weixin"
+    case 余额 = ""
+}
+
+
 fileprivate let PaymentCellId = "PaymentCellId"
 fileprivate let PaymentMethodCellId = "PaymentMethodCellId"
 
-class PanmentViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class PaymentViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
 
     public var requestModel: FootballRequestMode!
     
     private var saveBetInfo : FootballSaveBetInfoModel!
     
     private var confirmBut : UIButton!
+    
+    private var paymentMethod : PaymentMethod = .余额
+    
+    private var paymentResult : PaymentResultModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +70,24 @@ class PanmentViewController: BaseViewController, UITableViewDelegate, UITableVie
             }, onCompleted: nil, onDisposed: nil )
     }
     
+    private func paymentRequest() {
+        weak var weakSelf = self
+        _ = paymentProvider.rx.request(.payment(payCode: paymentMethod.rawValue, payToken: self.saveBetInfo.payToken))
+            .asObservable()
+            .mapObject(type: PaymentResultModel.self)
+            .subscribe(onNext: { (data) in
+                weakSelf?.paymentResult = data
+                weakSelf?.showHUD(message: data.showMsg)
+            }, onError: { (error) in
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    print(code!)
+                    weakSelf?.showHUD(message: msg!)
+                default: break
+                }
+            }, onCompleted: nil, onDisposed: nil)
+    }
     
     private func initSubview() {
         self.view.addSubview(tableView)
@@ -174,9 +202,20 @@ class PanmentViewController: BaseViewController, UITableViewDelegate, UITableVie
         return nil
     }
     
-    // MARK : - 点击时间
+    // MARK : - 点击事件
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            if indexPath.row == 2 {
+                let coupon = CouponFilterViewController()
+                present(coupon)
+            }
+        }
+    }
+    
+    // 支付
     @objc private func confirmClicked(_ sender: UIButton) {
-        
+        paymentRequest()
     }
     
     
