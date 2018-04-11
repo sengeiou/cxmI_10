@@ -364,7 +364,9 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         guard selectPlayList != nil else { return }
         selectPlayList.remove(teamInfo)
     }
-    
+    func totalSelectedItem() {
+        
+    }
     
     
     

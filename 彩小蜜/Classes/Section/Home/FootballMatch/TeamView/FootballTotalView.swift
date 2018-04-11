@@ -11,6 +11,7 @@ import UIKit
 protocol FootballTotalViewDelegate: NSObjectProtocol {
     func totalSelected( view: FootballTotalView, teamInfo: FootballPlayListModel) -> Void
     func totalDeSelected( view: FootballTotalView, teamInfo: FootballPlayListModel) -> Void
+    func totalSelectedItem() -> Void
 }
 
 class FootballTotalView: UIView {
@@ -121,17 +122,17 @@ class FootballTotalView: UIView {
         sender.isSelected = !sender.isSelected
         
         setSelected(but: sender, isSelected: sender.isSelected)
+        guard delegate != nil else { return }
         
         if sender.isSelected == true {
-            guard delegate != nil else { return }
             delegate.totalSelected(view: self, teamInfo: teamInfo)
             teamInfo.matchPlays[0].matchCells[sender.tag].isSelected = true
         }else {
             teamInfo.matchPlays[0].matchCells[sender.tag].isSelected = false
-            guard delegate != nil else { return }
             delegate.totalDeSelected(view: self, teamInfo: teamInfo)
         }
         
+        delegate.totalSelectedItem()
     }
     
     private func setButTitle(but : UIButton, isSelected: Bool) {
