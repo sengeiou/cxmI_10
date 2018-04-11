@@ -8,7 +8,10 @@
 
 import UIKit
 
-
+protocol FootballTotalViewDelegate {
+    func totalSelected( totalCell: FootballPlayCellModel) -> Void
+    func totalDeSelected( totalCell: FootballPlayCellModel) -> Void
+}
 
 class FootballTotalView: UIView {
 
@@ -16,6 +19,34 @@ class FootballTotalView: UIView {
     public var totalCellModels : [FootballPlayCellModel]! {
         didSet{
             guard totalCellModels.count == 8 else { return }
+            
+            let att0 = NSAttributedString(string: totalCellModels[0].cellOdds, attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F])
+            let att1 = NSAttributedString(string: totalCellModels[1].cellOdds, attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F])
+            let att2 = NSAttributedString(string: totalCellModels[2].cellOdds, attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F])
+            let att3 = NSAttributedString(string: totalCellModels[3].cellOdds, attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F])
+            let att4 = NSAttributedString(string: totalCellModels[4].cellOdds, attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F])
+            let att5 = NSAttributedString(string: totalCellModels[5].cellOdds, attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F])
+            let att6 = NSAttributedString(string: totalCellModels[6].cellOdds, attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F])
+            let att7 = NSAttributedString(string: totalCellModels[7].cellOdds, attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F])
+            
+            title0.append(att0)
+            title1.append(att1)
+            title2.append(att2)
+            title3.append(att3)
+            title4.append(att4)
+            title5.append(att5)
+            title6.append(att6)
+            title7.append(att7)
+            
+            button0.setAttributedTitle(title0, for: .normal)
+            button1.setAttributedTitle(title1, for: .normal)
+            button2.setAttributedTitle(title2, for: .normal)
+            button3.setAttributedTitle(title3, for: .normal)
+            button4.setAttributedTitle(title4, for: .normal)
+            button5.setAttributedTitle(title5, for: .normal)
+            button6.setAttributedTitle(title6, for: .normal)
+            button7.setAttributedTitle(title7, for: .normal)
+            
             setSelected(but: button0, isSelected: totalCellModels[0].isSelected)
             setSelected(but: button1, isSelected: totalCellModels[1].isSelected)
             setSelected(but: button2, isSelected: totalCellModels[2].isSelected)
@@ -26,6 +57,17 @@ class FootballTotalView: UIView {
             setSelected(but: button7, isSelected: totalCellModels[7].isSelected)
         }
     }
+    
+    public var delegate: FootballTotalViewDelegate!
+    
+    private let title0 = NSMutableAttributedString(string: "0 ")
+    private let title1 = NSMutableAttributedString(string: "1 ")
+    private let title2 = NSMutableAttributedString(string: "2 ")
+    private let title3 = NSMutableAttributedString(string: "3 ")
+    private let title4 = NSMutableAttributedString(string: "4 ")
+    private let title5 = NSMutableAttributedString(string: "5 ")
+    private let title6 = NSMutableAttributedString(string: "6 ")
+    private let title7 = NSMutableAttributedString(string: "7+ ")
     
     private var centerLine : UIView!
     
@@ -54,10 +96,39 @@ class FootballTotalView: UIView {
     private func setSelected(but : UIButton, isSelected: Bool) {
         if isSelected == true {
             but.backgroundColor = ColorEA5504
-            but.setTitleColor(ColorFFFFFF, for: .normal)
+            
+            setButTitle(but: but, isSelected: true)
+            
+            guard delegate != nil else { return }
+            delegate.totalSelected(totalCell: totalCellModels[but.tag])
         }else {
             but.backgroundColor = ColorFFFFFF
-            but.setTitleColor(Color505050, for: .normal)
+            
+            setButTitle(but: but, isSelected: false)
+            
+            guard delegate != nil else { return }
+            delegate.totalDeSelected(totalCell: totalCellModels[but.tag])
+        }
+    }
+    
+    private func setButTitle(but : UIButton, isSelected: Bool) {
+        if isSelected == true {
+            let title = NSMutableAttributedString(attributedString: (but.titleLabel?.attributedText)!)
+            title.addAttribute(NSAttributedStringKey.foregroundColor, value: ColorFFFFFF, range: NSRange.init(location: 0, length: title.length))
+            
+            but.setAttributedTitle(title, for: .normal)
+        }else {
+            var titleAtt : NSMutableAttributedString!
+            
+            if but.tag == 7 {
+                titleAtt = NSMutableAttributedString(string: "\(but.tag)+ ", attributes: [NSAttributedStringKey.foregroundColor: Color505050])
+            }else {
+                titleAtt = NSMutableAttributedString(string: "\(but.tag) ", attributes: [NSAttributedStringKey.foregroundColor: Color505050])
+            }
+            
+            let att = NSAttributedString(string: totalCellModels[but.tag].cellOdds, attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F])
+            titleAtt.append(att)
+            but.setAttributedTitle(titleAtt, for: .normal)
         }
     }
     
@@ -205,6 +276,8 @@ class FootballTotalView: UIView {
         sender.isSelected = !sender.isSelected
         
         setSelected(but: sender, isSelected: sender.isSelected)
+        
+        
     }
     
     

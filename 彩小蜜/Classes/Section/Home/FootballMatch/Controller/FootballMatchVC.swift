@@ -28,7 +28,9 @@ fileprivate let Football2_1CellId = "Football2_1CellId"
 fileprivate let FootballHunheCellId = "FootballHunheCellId"
 
 
-class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballBottomViewDelegate, FootballSectionHeaderDelegate, FootballRequestPro, FootballTeamViewDelegate , FootballMatchFilterVCDelegate{
+class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballBottomViewDelegate, FootballSectionHeaderDelegate, FootballRequestPro, FootballTeamViewDelegate , FootballMatchFilterVCDelegate, FootballTotalViewDelegate{
+    
+    
     
     
     // MARK: - 属性
@@ -180,7 +182,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     }
     private func initTotalCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballTotalCellId, for: indexPath) as! FootballTotalCell
-        //cell.teamView.delegate = self
+        cell.totalView.delegate = self
         
         let matchModel = matchList[indexPath.section]
         cell.playInfoModel = matchModel.playList[indexPath.row]
@@ -279,19 +281,6 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         
     }
     
-    // MARK: - FootballTeamView Delegate 选取比赛，
-    func select(teamInfo: FootballPlayListModel) {
-        guard selectPlayList != nil else { return }
-        selectPlayList.append(teamInfo)
-    }
-    
-    func deSelect(teamInfo: FootballPlayListModel) {
-        guard selectPlayList != nil else { return }
-        selectPlayList.remove(teamInfo)
-    }
-    func selectedItem() {
-        
-    }
     // MARK: - FOOTBALL Bottom delegate
     func delete() {
         weak var weakSelf = self
@@ -327,6 +316,32 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     func filterConfirm(leagueId: String) {
         footballRequest(leagueId: leagueId)
     }
+    
+    // MARK: - 选取比赛 FootballTeamView Delegate ，
+    func select(teamInfo: FootballPlayListModel) {
+        guard selectPlayList != nil else { return }
+        selectPlayList.append(teamInfo)
+    }
+    
+    func deSelect(teamInfo: FootballPlayListModel) {
+        guard selectPlayList != nil else { return }
+        selectPlayList.remove(teamInfo)
+    }
+    func selectedItem() {
+        
+    }
+    // MARK: - 选取比赛 FootballTotalView Delegate
+    func totalSelected(totalCell: FootballPlayCellModel) {
+        
+    }
+    
+    func totalDeSelected(totalCell: FootballPlayCellModel) {
+        
+    }
+    
+    
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
