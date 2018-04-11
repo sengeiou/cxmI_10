@@ -109,32 +109,46 @@ class FootballTotalView: UIView {
     private func setSelected(but : UIButton, isSelected: Bool) {
         if isSelected == true {
             but.backgroundColor = ColorEA5504
-            
             setButTitle(but: but, isSelected: true)
-
-            guard delegate != nil else { return }
-            delegate.totalSelected(view: self, teamInfo: teamInfo)
-            teamInfo.matchPlays[0].matchCells[but.tag].isSelected = true
-            
         }else {
             but.backgroundColor = ColorFFFFFF
-            
             setButTitle(but: but, isSelected: false)
-            teamInfo.matchPlays[0].matchCells[but.tag].isSelected = false
-            guard delegate != nil else { return }
-            delegate.totalDeSelected(view: self, teamInfo: teamInfo)
-            
-            
         }
          but.isSelected = isSelected
     }
     
+    @objc private func buttonClicked(_ sender : UIButton) {
+        sender.isSelected = !sender.isSelected
+        
+        setSelected(but: sender, isSelected: sender.isSelected)
+        
+        if sender.isSelected == true {
+            guard delegate != nil else { return }
+            delegate.totalSelected(view: self, teamInfo: teamInfo)
+            teamInfo.matchPlays[0].matchCells[sender.tag].isSelected = true
+        }else {
+            teamInfo.matchPlays[0].matchCells[sender.tag].isSelected = false
+            guard delegate != nil else { return }
+            delegate.totalDeSelected(view: self, teamInfo: teamInfo)
+        }
+        
+    }
+    
     private func setButTitle(but : UIButton, isSelected: Bool) {
         if isSelected == true {
-            let title = NSMutableAttributedString(attributedString: (but.titleLabel?.attributedText)!)
-            title.addAttribute(NSAttributedStringKey.foregroundColor, value: ColorFFFFFF, range: NSRange.init(location: 0, length: title.length))
+
+            var titleAtt : NSMutableAttributedString!
             
-            but.setAttributedTitle(title, for: .normal)
+            if but.tag == 7 {
+                titleAtt = NSMutableAttributedString(string: "\(but.tag)+ ", attributes: [NSAttributedStringKey.foregroundColor: ColorFFFFFF])
+            }else {
+                titleAtt = NSMutableAttributedString(string: "\(but.tag) ", attributes: [NSAttributedStringKey.foregroundColor: ColorFFFFFF])
+            }
+            
+            let att = NSAttributedString(string: teamInfo.matchPlays[0].matchCells[but.tag].cellOdds, attributes: [NSAttributedStringKey.foregroundColor: ColorFFFFFF])
+            titleAtt.append(att)
+            but.setAttributedTitle(titleAtt, for: .normal)
+            
         }else {
             var titleAtt : NSMutableAttributedString!
             
@@ -292,13 +306,7 @@ class FootballTotalView: UIView {
         return view
     }
     
-    @objc private func buttonClicked(_ sender : UIButton) {
-        sender.isSelected = !sender.isSelected
-        
-        setSelected(but: sender, isSelected: sender.isSelected)
-        
-        
-    }
+   
     
     
     
