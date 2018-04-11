@@ -299,6 +299,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
                 str += filter.titleNum + ","
             }
         }
+        guard str != "" else { return }
         str.removeLast()
         var maxStr : String!
         if str.lengthOfBytes(using: .utf8) > 3 {
