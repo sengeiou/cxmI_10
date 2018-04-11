@@ -80,6 +80,9 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
             .subscribe(onNext: { (data) in
                 weakSelf?.paymentResult = data
                 weakSelf?.showHUD(message: data.showMsg)
+                let order = OrderDetailVC()
+                order.orderId = data.orderId
+                weakSelf?.pushViewController(vc: order)
             }, onError: { (error) in
                 guard let err = error as? HXError else { return }
                 switch err {

@@ -12,5 +12,6 @@ import HandyJSON
 
 struct PaymentResultModel : HandyJSON {
     var showMsg : String!
+    var orderId: String!
 }
 

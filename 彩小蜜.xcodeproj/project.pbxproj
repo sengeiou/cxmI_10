@@ -11,6 +11,7 @@
 		11691806207DB73800C8A287 /* CouponFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11691805207DB73800C8A287 /* CouponFilterViewController.swift */; };
 		11691808207DB82E00C8A287 /* CouponFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11691807207DB82E00C8A287 /* CouponFilterCell.swift */; };
 		1169180A207DBA8B00C8A287 /* PaymentResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11691809207DBA8B00C8A287 /* PaymentResultModel.swift */; };
+		1169180C207E3EC500C8A287 /* FootballScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1169180B207E3EC500C8A287 /* FootballScoreView.swift */; };
 		11A250BE207C9C2200780D3D /* FootballTotalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A250BD207C9C2200780D3D /* FootballTotalView.swift */; };
 		11EB8EE2207B6D9B00AFC9C1 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EB8EE1207B6D9B00AFC9C1 /* PaymentViewController.swift */; };
 		11EB8EE4207B6E8800AFC9C1 /* PaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EB8EE3207B6E8800AFC9C1 /* PaymentCell.swift */; };
@@ -206,6 +207,7 @@
 		11691805207DB73800C8A287 /* CouponFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponFilterViewController.swift; sourceTree = "<group>"; };
 		11691807207DB82E00C8A287 /* CouponFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponFilterCell.swift; sourceTree = "<group>"; };
 		11691809207DBA8B00C8A287 /* PaymentResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentResultModel.swift; sourceTree = "<group>"; };
+		1169180B207E3EC500C8A287 /* FootballScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballScoreView.swift; sourceTree = "<group>"; };
 		11A250BD207C9C2200780D3D /* FootballTotalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballTotalView.swift; sourceTree = "<group>"; };
 		11EB8EE1207B6D9B00AFC9C1 /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		11EB8EE3207B6E8800AFC9C1 /* PaymentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentCell.swift; sourceTree = "<group>"; };
@@ -425,6 +427,7 @@
 			children = (
 				E5786FC3206E13840045F7F5 /* FootballTeamView.swift */,
 				11A250BD207C9C2200780D3D /* FootballTotalView.swift */,
+				1169180B207E3EC500C8A287 /* FootballScoreView.swift */,
 			);
 			path = TeamView;
 			sourceTree = "<group>";
@@ -1849,6 +1852,7 @@
 				E5D8ABB4206737FF002D688B /* OrderDetailVC.swift in Sources */,
 				E56CE81C206A47930090A1B5 /* AboutFooter.swift in Sources */,
 				E51F9A5E205A29D500AB8A21 /* LoginFooterView.swift in Sources */,
+				1169180C207E3EC500C8A287 /* FootballScoreView.swift in Sources */,
 				E537397F2057F8F40087E4E6 /* BankCardInfo.swift in Sources */,
 				E5786FBE206DE9BD0045F7F5 /* FootballBanQuanCCell.swift in Sources */,
 				E50B907120522FFF00417BFE /* RechargeViewController.swift in Sources */,
