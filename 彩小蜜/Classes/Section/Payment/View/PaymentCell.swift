@@ -8,8 +8,15 @@
 
 import UIKit
 
+enum CellStyle  {
+    case detail
+    case defaults
+}
+
 class PaymentCell: UITableViewCell {
 
+    public var cellStyle : CellStyle = .defaults
+    
     public var title : UILabel!
     public var detail : UILabel!
     
@@ -27,22 +34,30 @@ class PaymentCell: UITableViewCell {
             make.right.equalTo(detail.snp.left).offset(-1)
         }
 
-        detail.snp.makeConstraints { (make) in
-            make.top.bottom.equalTo(0)
-            make.right.equalTo(-rightSpacing)
-            make.width.equalTo(100 * defaultScale)
+        if cellStyle == .defaults {
+            detail.snp.makeConstraints { (make) in
+                make.top.bottom.equalTo(0)
+                make.right.equalTo(-rightSpacing)
+                make.width.equalTo(100 * defaultScale)
+            }
+        }else {
+            detail.snp.makeConstraints { (make) in
+                make.top.bottom.equalTo(0)
+                make.right.equalTo(-1)
+                make.width.equalTo(100 * defaultScale)
+            }
         }
     }
     private func initSubview() {
        
         title = UILabel()
-        title.font = Font14
+        title.font = Font13
         title.textColor = Color787878
         title.textAlignment = .left
         
         detail = UILabel()
-        detail.font = Font14
-        detail.textColor = Color787878
+        detail.font = Font13
+        detail.textColor = Color505050
         detail.textAlignment = .right
         
         self.contentView.addSubview(title)

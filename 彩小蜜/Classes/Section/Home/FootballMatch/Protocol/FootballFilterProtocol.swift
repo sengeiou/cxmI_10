@@ -15,12 +15,12 @@ extension FootballFilterPro {
     func filterPlay(with playList: [FootballPlayListModel]) -> [FootballPlayFilterModel]! {
         guard playList.isEmpty == false else { return nil }
         var filterList = [FootballPlayFilterModel]()
-        if playList.count < 2, playList[0].single == true {
+        if playList.count < 2, playList[0].matchPlays[0].single == true {
             let filter = FootballPlayFilterModel()
             filter.title = "单关"
             filter.titleNum = "11"
             filterList.append(filter)
-        }else if playList.count < 2, playList[0].single == false{
+        }else if playList.count < 2, playList[0].matchPlays[0].single == false{
             let filter = FootballPlayFilterModel()
             filter.playTitle = "串关  "
             filter.title = "2串1"

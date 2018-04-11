@@ -307,7 +307,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
 
         guard selectPlayList.count >= 2 else {
             let play = selectPlayList[0]
-            guard play.single == true else {
+            guard play.matchPlays[0].single == true else {
                 showHUD(message: "请至少选择1场单关比赛或者2场非单关比赛")
                 return }
             

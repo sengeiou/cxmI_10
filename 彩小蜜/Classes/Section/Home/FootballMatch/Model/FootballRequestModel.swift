@@ -12,21 +12,23 @@ import HandyJSON
 struct FootballRequestMode : HandyJSON {
     /// 该场次的玩法  几串几
     var betType: String!
+    var bonusId: String!
     /// 彩票种类
     var lotteryClassifyId: String!
     /// 彩票玩法类别，
     var lotteryPlayClassifyId: String!
-    var matchBetCells: [FootballMatchBetCellReq]!
+    
+    var matchBetPlays: [MatchBetPlay]!
+    
     /// 玩法 胜平负，让球胜平负 等
     var playType: String!
     /// 倍数
     var times: String!
 }
 
-struct FootballMatchBetCellReq: HandyJSON {
-    var betCells: [FootballPlayCellModel]!
+struct MatchBetPlay: HandyJSON {
     var changci: String!
-    var isDan: Bool!
+    var isDan: Bool! = false
     var lotteryClassifyId: String!
     var lotteryPlayClassifyId: String!
     var matchId: String!
@@ -36,7 +38,11 @@ struct FootballMatchBetCellReq: HandyJSON {
     var matchTime: Int!
     /// 投注赛事编码 ,
     var playCode: String!
-    /// 玩法 胜平负，让球胜平负 等
-    var playType: String!
+    var matchBetCells: [FootballMatchBetCell]!
+}
+
+struct FootballMatchBetCell: HandyJSON {
+    var betCells: [FootballPlayCellModel]!
+    
 }
 

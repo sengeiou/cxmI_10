@@ -89,6 +89,7 @@ class PanmentViewController: BaseViewController, UITableViewDelegate, UITableVie
     }()
     
     func numberOfSections(in tableView: UITableView) -> Int {
+        guard self.saveBetInfo != nil else { return 0 }
         return 2
     }
     
@@ -121,6 +122,8 @@ class PanmentViewController: BaseViewController, UITableViewDelegate, UITableVie
             case 2:
                 cell.title.text = "优惠券抵扣"
                 cell.detail.text = "- ¥" + self.saveBetInfo.bonusAmount
+                cell.accessoryType = .disclosureIndicator
+                cell.cellStyle = .detail
             case 3:
                 cell.title.text = "还需支付"
                 let money = NSAttributedString(string:"- ¥ " + self.saveBetInfo.thirdPartyPaid, attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
@@ -134,6 +137,7 @@ class PanmentViewController: BaseViewController, UITableViewDelegate, UITableVie
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: PaymentCellId, for: indexPath) as! PaymentCell
                 cell.title.text = "支付方式"
+                cell.title.textColor = Color505050
                 cell.detail.text = ""
                 return cell
             case 1:
@@ -150,7 +154,7 @@ class PanmentViewController: BaseViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44
+        return 44 * defaultScale
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {

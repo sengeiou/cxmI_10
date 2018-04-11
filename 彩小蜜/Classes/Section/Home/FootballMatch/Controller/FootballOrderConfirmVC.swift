@@ -58,6 +58,10 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         }
     } // 倍数  网络请求用
     public var playType : String! // 串关方式 网络请求用
+    
+    // 是否允许弹出下个界面 - 支付界面
+    public var canPush : Bool = false
+    public var showMsg : String!
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -274,8 +278,10 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     // MARK: - Bottow Delegate
     // 确认键
     func orderConfirm(filterList: [FootballPlayFilterModel], times: String) {
-        
-        let requestModel = getRequestModel(betType: self.playType, times: self.times, homeData: self.homeData)
+        guard self.canPush == true else {
+            showHUD(message: self.showMsg)
+            return }
+        let requestModel = getRequestModel(betType: self.playType, times: self.times, bonusId: "", homeData: self.homeData)
         
         let payment = PanmentViewController()
         payment.requestModel = requestModel

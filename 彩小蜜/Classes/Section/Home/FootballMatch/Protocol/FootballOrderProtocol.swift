@@ -13,46 +13,62 @@ protocol FootballOrderProtocol { }
 
 extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
     
-    func getRequestModel(betType: String, times: String, homeData: HomePlayModel) -> FootballRequestMode {
+    func getRequestModel(betType: String, times: String, bonusId: String, homeData: HomePlayModel) -> FootballRequestMode {
         var requestModel = FootballRequestMode()
         
         requestModel.betType = betType
+        requestModel.bonusId = bonusId
         requestModel.lotteryClassifyId = homeData.lotteryId
+        requestModel.lotteryPlayClassifyId = homeData.playClassifyId
+        requestModel.playType = playType
+        requestModel.times = times
         
-        var matchBetCells = [FootballMatchBetCellReq]()
+        
+        var matchBetPlays = [MatchBetPlay]()
         for playInfo in selectPlayList {
-            var matchBetCell = FootballMatchBetCellReq()
-            var betCells = [FootballPlayCellModel]()
-            
-            let matchPlay = playInfo.matchPlays[0]
-            
-            if matchPlay.homeCell.isSelected == true {
-                betCells.append(matchPlay.homeCell)
-            }
-            if matchPlay.flatCell.isSelected == true {
-                betCells.append(matchPlay.flatCell)
-            }
-            if matchPlay.visitingCell.isSelected == true {
-                betCells.append(matchPlay.visitingCell)
-            }
-            
-            matchBetCell.betCells = betCells
+            var matchBetCell = MatchBetPlay()
             matchBetCell.changci = playInfo.changci
             matchBetCell.isDan = playInfo.isDan
             matchBetCell.lotteryClassifyId = homeData.lotteryId
             matchBetCell.lotteryPlayClassifyId = homeData.playClassifyId
             matchBetCell.matchId = playInfo.matchId
-            matchBetCell.matchTeam = matchPlay.homeCell.cellName + "VS" + matchPlay.visitingCell.cellName
+            matchBetCell.matchTeam = playInfo.homeTeamAbbr + "VS" + playInfo.visitingTeamAbbr
             matchBetCell.matchTime = playInfo.matchTime
             matchBetCell.playCode = playInfo.playCode
-            matchBetCell.playType = homeData.playType
             
-            matchBetCells.append(matchBetCell)
+            var matchBetCells = [FootballMatchBetCell]()
+            
+            for matchPlay in playInfo.matchPlays {
+                var matchBetCell = FootballMatchBetCell()
+                
+                var betCells = [FootballPlayCellModel]()
+                
+                if matchPlay.homeCell != nil, matchPlay.homeCell.isSelected {
+                    betCells.append(matchPlay.homeCell)
+                }
+                if matchPlay.flatCell != nil, matchPlay.flatCell.isSelected {
+                    betCells.append(matchPlay.flatCell)
+                }
+                if matchPlay.visitingCell != nil, matchPlay.visitingCell.isSelected {
+                    betCells.append(matchPlay.visitingCell)
+                }
+                
+                if matchPlay.matchCells.isEmpty == false {
+                    for cell in matchPlay.matchCells {
+                        betCells.append(cell)
+                    }
+                }
+                
+                matchBetCell.betCells = betCells
+                
+                matchBetCells.append(matchBetCell)
+            }
+            
+            matchBetCell.matchBetCells = matchBetCells
+            matchBetPlays.append(matchBetCell)
         }
-        
-        requestModel.matchBetCells = matchBetCells
-        requestModel.playType = homeData.playType
-        requestModel.times = times
+       
+        requestModel.matchBetPlays = matchBetPlays
         
         return requestModel
     }
@@ -66,12 +82,12 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
         guard selectPlayList.isEmpty == false else { return }
         
         if selectPlayList.count == 1 {
-            guard selectPlayList[0].single == true else {
+            guard selectPlayList[0].matchPlays[0].single == true else {
                 showHUD(message: "请选择一场单关或2场以上非单关比赛")
                 return }
         }
         
-        let requestModel = getRequestModel(betType: betType, times: times, homeData: self.homeData)
+        let requestModel = getRequestModel(betType: betType, times: times, bonusId: "", homeData: self.homeData)
         
         weak var weakSelf = self
         _ = homeProvider.rx.request(.getBetInfo(requestModel: requestModel))
@@ -79,11 +95,14 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
             .mapObject(type: FootballBetInfoModel.self)
             .subscribe(onNext: { (data) in
                 weakSelf?.betInfo = data
+                weakSelf?.canPush = true
             }, onError: { (error) in
+                weakSelf?.canPush = false
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):
                     print(code!)
+                    self.showMsg = msg
                     self.showHUD(message: msg!)
                 default: break
                 }

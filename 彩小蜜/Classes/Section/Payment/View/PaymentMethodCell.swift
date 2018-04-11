@@ -23,7 +23,7 @@ class PaymentMethodCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         icon.snp.makeConstraints { (make) in
-            make.width.height.equalTo(20)
+            make.width.height.equalTo(20 * defaultScale)
             make.left.equalTo(leftSpacing)
             make.centerY.equalTo(self.contentView.snp.centerY)
         }
@@ -36,7 +36,7 @@ class PaymentMethodCell: UITableViewCell {
         selectedIcon.snp.makeConstraints { (make) in
             make.centerY.equalTo(self.contentView.snp.centerY)
             make.right.equalTo(-rightSpacing)
-            make.width.height.equalTo(20 * defaultScale)
+            make.width.height.equalTo(14 * defaultScale)
         }
     }
     private func initSubview() {

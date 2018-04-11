@@ -48,7 +48,7 @@ class BetCellInfoModel: HandyJSON {
     required init() { }
     
     var changci: String!
-    var isDan: String!
+    var isDan: String! 
     var lotteryClassifyId: String!
     var lotteryPlayClassifyId: String!
     var matchId: String!

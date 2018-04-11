@@ -16,7 +16,7 @@ class FootballSPFCell: UITableViewCell, DateProtocol {
             matchTime.text = playInfoModel.changci
             teamView.teamInfo = playInfoModel
             endTime.text = "截止" + timeStampToHHmm(playInfoModel.betEndTime)
-            if playInfoModel.single == true {
+            if playInfoModel.matchPlays[0].single == true {
                 typeIcon.isHidden = false
             }else {
                 typeIcon.isHidden = true

@@ -32,16 +32,10 @@ class FootballMatchModel:NSObject, HandyJSON {
 class FootballPlayListModel:NSObject, HandyJSON {
     required override init() { }
     
-    /// 让球数
-    //var fixedOdds : Int!
-    /// 单关，1-单关，0不可以 
-    var single: Bool!
-    var isDan : Bool! = false
+ 
     var changci: String!
     var changciId: String!
-//    var flatCell: FootballPlayCellModel!
-//    var homeCell: FootballPlayCellModel!
-//    var visitingCell: FootballPlayCellModel!
+    var isDan : Bool! = false
     var homeTeamAbbr: String!
     var homeTeamId: String!
     var homeTeamRank: String!
@@ -76,7 +70,7 @@ class FootballMatchPlay : NSObject, HandyJSON {
     var playType: String!
     /// 单关，1-单关，0不可以 
     var single: Bool!
-    var isDan : Bool! = false
+    
 }
 
 class FootballPlayCellModel:NSObject, HandyJSON {
