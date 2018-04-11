@@ -17,9 +17,9 @@ fileprivate let FootballOrder2_1CellId = "FootballOrder2_1CellId"
 fileprivate let FootballOrderHunheCellId = "FootballOrderHunheCellId"
 
 
-class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballTeamViewDelegate, FootballOrderBottomViewDelegate, FootballTimesFilterVCDelegate, FootballPlayFilterVCDelegate, FootballFilterPro, FootballOrderProtocol, FootballOrderSPFCellDelegate{
-   
+class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballTeamViewDelegate, FootballOrderBottomViewDelegate, FootballTimesFilterVCDelegate, FootballPlayFilterVCDelegate, FootballFilterPro, FootballOrderProtocol, FootballOrderSPFCellDelegate, FootballTotalViewDelegate{
     
+
     // MARK: - 属性
     public var matchType: FootballMatchType = .胜平负
     public var homeData: HomePlayModel!
@@ -183,7 +183,9 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     }
     private func initTatolCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballOrderTotalCellId, for: indexPath) as! FootballOrderTotalCell
-        
+        cell.delegate = self
+        cell.totalView.delegate = self
+        cell.playInfoModel = playList[indexPath.section]
         return cell
     }
     private func initScoreCell(indexPath: IndexPath) -> UITableViewCell {
@@ -248,33 +250,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         self.tableView.reloadData()
         orderRequest()
     }
-    // MARK: ITEM 选择 delegate
-    func select(teamInfo: FootballPlayListModel) {
-        guard selectPlayList != nil else { return }
-        
-        selectPlayList.append(teamInfo)
-        danMaxNum = 0
-        
-        for play in playList {
-            play.isDan = false
-        }
-        
-        self.tableView.reloadData()
-    }
     
-    func deSelect(teamInfo: FootballPlayListModel) {
-        guard selectPlayList != nil else { return }
-        selectPlayList.remove(teamInfo)
-        danMaxNum = 0
-        for play in playList {
-            play.isDan = false
-        }
-        self.tableView.reloadData()
-    }
-    func selectedItem() {
-        guard homeData != nil else { return }
-        orderRequest ()
-    }
     // MARK: - Bottow Delegate
     // 确认键
     func orderConfirm(filterList: [FootballPlayFilterModel], times: String) {
@@ -354,6 +330,43 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     func playFilterCancel() {
         
     }
+    
+    // MARK: ITEM 选择 delegate
+    func select(teamInfo: FootballPlayListModel) {
+        guard selectPlayList != nil else { return }
+        
+        selectPlayList.append(teamInfo)
+        danMaxNum = 0
+        
+        for play in playList {
+            play.isDan = false
+        }
+        
+        self.tableView.reloadData()
+    }
+    
+    func deSelect(teamInfo: FootballPlayListModel) {
+        guard selectPlayList != nil else { return }
+        selectPlayList.remove(teamInfo)
+        danMaxNum = 0
+        for play in playList {
+            play.isDan = false
+        }
+        self.tableView.reloadData()
+    }
+    func selectedItem() {
+        guard homeData != nil else { return }
+        orderRequest ()
+    }
+    // MARK: - 选取比赛 FootballTotalView Delegate
+    func totalSelected(view: FootballTotalView, teamInfo: FootballPlayListModel) {
+        
+    }
+    
+    func totalDeSelected(view: FootballTotalView, teamInfo: FootballPlayListModel) {
+        
+    }
+    
     // MARK: - right bar item
     private func setRightButtonItem() {
         

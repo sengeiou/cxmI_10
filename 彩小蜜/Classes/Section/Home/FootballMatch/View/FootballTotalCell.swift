@@ -12,6 +12,10 @@ class FootballTotalCell: UITableViewCell, DateProtocol {
 
     public var playInfoModel: FootballPlayListModel! {
         didSet{
+            
+            homeMatch.text = playInfoModel.homeTeamAbbr
+            visitingMatch.text = playInfoModel.visitingTeamAbbr
+            
             matchTitle.text = playInfoModel.leagueAddr
             matchTime.text = playInfoModel.changci
             totalView.teamInfo = playInfoModel

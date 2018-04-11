@@ -55,7 +55,9 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
                 
                 if matchPlay.matchCells.isEmpty == false {
                     for cell in matchPlay.matchCells {
-                        betCells.append(cell)
+                        if cell.isSelected == true {
+                            betCells.append(cell)
+                        }
                     }
                 }
                 

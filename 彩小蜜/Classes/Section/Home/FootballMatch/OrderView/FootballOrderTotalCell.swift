@@ -14,12 +14,10 @@ class FootballOrderTotalCell: UITableViewCell, DateProtocol {
     
     public var playInfoModel: FootballPlayListModel! {
         didSet{
-            let time = timeStampToHHmm(playInfoModel.betEndTime)
-            guard let addr = playInfoModel.leagueAddr else { return }
-            guard let changci = playInfoModel.changci else { return }
             
-            titleLB.text = "\(addr)  \(changci)  截止\(time)"
-            //teamView.teamInfo = playInfoModel
+            homeMatch.text = playInfoModel.homeTeamAbbr
+            visitingMatch.text = playInfoModel.visitingTeamAbbr
+            totalView.teamInfo = playInfoModel
             setupDanBut()
             danIsSelected(isSelected: playInfoModel.isDan)
         }
@@ -27,7 +25,7 @@ class FootballOrderTotalCell: UITableViewCell, DateProtocol {
     
     public var delegate : FootballOrderSPFCellDelegate!
     
-    private var titleLB: UILabel!
+    //private var titleLB: UILabel!
     private var deleteBut : UIButton!
     private var danBut: UIButton!
     
@@ -55,7 +53,15 @@ class FootballOrderTotalCell: UITableViewCell, DateProtocol {
         
         let matchPlay = playInfoModel.matchPlays[0]
         
-        if !matchPlay.homeCell.isSelected && !matchPlay.flatCell.isSelected && !matchPlay.visitingCell.isSelected {
+        var selected = false
+        for cell in matchPlay.matchCells {
+            if cell.isSelected == true {
+                selected = true
+                break
+            }
+        }
+        
+        if selected == false {
             self.playInfoModel.isDan = false
             danBut.isUserInteractionEnabled = false
             danBut.backgroundColor = Color787878
@@ -75,12 +81,12 @@ class FootballOrderTotalCell: UITableViewCell, DateProtocol {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        titleLB.snp.makeConstraints { (make) in
-            make.top.equalTo(0)
-            make.left.equalTo(leftSpacing)
-            make.right.equalTo(-rightSpacing)
-            make.bottom.equalTo(danBut.snp.top)
-        }
+//        titleLB.snp.makeConstraints { (make) in
+//            make.top.equalTo(0)
+//            make.left.equalTo(leftSpacing)
+//            make.right.equalTo(-rightSpacing)
+//            make.bottom.equalTo(danBut.snp.top)
+//        }
         deleteBut.snp.makeConstraints { (make) in
             make.centerY.equalTo(totalView.snp.centerY)
             make.left.equalTo(15 * defaultScale)
@@ -122,10 +128,10 @@ class FootballOrderTotalCell: UITableViewCell, DateProtocol {
         deleteBut.setBackgroundImage(UIImage(named: "Remove"), for: .normal)
         deleteBut.addTarget(self, action: #selector(deleteClicked(_:)), for: .touchUpInside)
         
-        titleLB = UILabel()
-        titleLB.font = Font15
-        titleLB.textColor = Color787878
-        titleLB.textAlignment = .left
+//        titleLB = UILabel()
+//        titleLB.font = Font15
+//        titleLB.textColor = Color787878
+//        titleLB.textAlignment = .left
         
         totalView = FootballTotalView()
         
@@ -144,7 +150,7 @@ class FootballOrderTotalCell: UITableViewCell, DateProtocol {
         visitingMatch = initLabel()
         
         
-        self.contentView.addSubview(titleLB)
+        //self.contentView.addSubview(titleLB)
         self.contentView.addSubview(deleteBut)
         self.contentView.addSubview(totalView)
         self.contentView.addSubview(danBut)
