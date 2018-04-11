@@ -216,7 +216,9 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
                 present(coupon)
             }
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
+    
     
     // 支付
     @objc private func confirmClicked(_ sender: UIButton) {
