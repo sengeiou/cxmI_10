@@ -10,17 +10,30 @@ import UIKit
 
 fileprivate let CouponFilterCellId = "CouponFilterCellId"
 
+protocol CouponFilterViewControllerDelegate {
+    func didSelected(bonus bonusId : String) -> Void
+}
+
 class CouponFilterViewController: BasePopViewController, UITableViewDelegate, UITableViewDataSource {
     
+    public var bonusList: [BonusInfoModel]!
+    
+    public var delegate : CouponFilterViewControllerDelegate!
+    
+    private var bonusId : String!
     
     private var topLine : UIView!
     private var bottomLine : UIView!
     private var titlelb : UILabel!
+    private var confirmBut: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.popStyle = .fromBottom
         initSubview()
+        
+        setEmpty(title: "暂无可用优惠券", tableView)
+        
     }
 
     override func viewDidLayoutSubviews() {
@@ -29,7 +42,7 @@ class CouponFilterViewController: BasePopViewController, UITableViewDelegate, UI
         topLine.snp.makeConstraints { (make) in
             make.top.equalTo(50 * defaultScale)
             make.left.right.equalTo(0)
-            make.height.equalTo(0.5)
+            make.height.equalTo(0.3)
         }
         tableView.snp.makeConstraints { (make) in
             make.top.equalTo(topLine.snp.bottom)
@@ -37,16 +50,20 @@ class CouponFilterViewController: BasePopViewController, UITableViewDelegate, UI
             make.left.right.equalTo(0)
         }
         bottomLine.snp.makeConstraints { (make) in
-            make.bottom.equalTo(-44 * defaultScale)
+            make.bottom.equalTo(-(44 * defaultScale + SafeAreaBottomHeight))
             make.left.right.equalTo(0)
-            make.height.equalTo(0.5)
+            make.height.equalTo(topLine)
         }
         titlelb.snp.makeConstraints { (make) in
             make.top.equalTo(0)
             make.bottom.equalTo(topLine.snp.top)
             make.left.right.equalTo(0)
         }
-        
+        confirmBut.snp.makeConstraints { (make) in
+            make.top.equalTo(bottomLine.snp.bottom)
+            make.left.right.equalTo(0)
+            make.height.equalTo(44 * defaultScale)
+        }
     }
     // MARK: - 初始化
     private func initSubview() {
@@ -64,11 +81,18 @@ class CouponFilterViewController: BasePopViewController, UITableViewDelegate, UI
         titlelb.textAlignment = .center
         titlelb.text = "可用优惠券"
         
+        confirmBut = UIButton(type: .custom)
+        confirmBut.setTitle("确定", for: .normal)
+        confirmBut.setTitleColor(ColorEA5504, for: .normal)
+        confirmBut.backgroundColor = ColorFFFFFF
+        confirmBut.titleLabel?.font = Font13
+        confirmBut.addTarget(self, action: #selector(confirmClicked(_:)), for: .touchUpInside)
+        
         self.pushBgView.addSubview(topLine)
         self.pushBgView.addSubview(bottomLine)
         self.pushBgView.addSubview(titlelb)
         self.pushBgView.addSubview(tableView)
-        
+        self.pushBgView.addSubview(confirmBut)
         
         
     }
@@ -90,11 +114,21 @@ class CouponFilterViewController: BasePopViewController, UITableViewDelegate, UI
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        guard bonusList != nil, bonusList.isEmpty == false else { return 0 }
+        return bonusList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CouponFilterCellId, for: indexPath) as! CouponFilterCell
+        
+        let bonusInfo = bonusList[indexPath.row]
+        cell.bonusInfo = bonusInfo
+        
+        if bonusInfo.isSelected == true {
+            self.bonusId = bonusInfo.userBonusId
+            self.tableView.selectRow(at: indexPath, animated: true , scrollPosition: .none)
+        }
+        
         
         
         return cell
@@ -104,7 +138,7 @@ class CouponFilterViewController: BasePopViewController, UITableViewDelegate, UI
         return 66 * defaultScale
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 1
+        return 0.01
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.01
@@ -116,9 +150,21 @@ class CouponFilterViewController: BasePopViewController, UITableViewDelegate, UI
         return nil
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let bonus = bonusList[indexPath.row]
+        self.bonusId = bonus.userBonusId
+    }
     
+    // MARK: - 点击事件
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        
+    }
     
-    
+    @objc private func confirmClicked(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil )
+        guard delegate != nil, self.bonusId != nil else { return }
+        delegate.didSelected(bonus: self.bonusId)
+    }
     
     
     

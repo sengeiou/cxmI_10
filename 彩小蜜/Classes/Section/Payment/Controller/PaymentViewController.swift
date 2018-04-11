@@ -17,7 +17,8 @@ enum PaymentMethod : String{
 fileprivate let PaymentCellId = "PaymentCellId"
 fileprivate let PaymentMethodCellId = "PaymentMethodCellId"
 
-class PaymentViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class PaymentViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, CouponFilterViewControllerDelegate {
+    
 
     public var requestModel: FootballRequestMode!
     
@@ -58,6 +59,7 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
             .mapObject(type: FootballSaveBetInfoModel.self)
             .subscribe(onNext: { (data) in
                 weakSelf?.saveBetInfo = data
+                data.setBonus() // 设置默认选中的优惠券
                 weakSelf?.tableView.reloadData()
             }, onError: { (error) in
                 guard let err = error as? HXError else { return }
@@ -207,7 +209,10 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
             if indexPath.row == 2 {
+                guard self.saveBetInfo != nil else { return }
                 let coupon = CouponFilterViewController()
+                coupon.delegate = self
+                coupon.bonusList = self.saveBetInfo.bonusList
                 present(coupon)
             }
         }
@@ -217,8 +222,14 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
     @objc private func confirmClicked(_ sender: UIButton) {
         paymentRequest()
     }
-    
-    
+    // 选取的  优惠券
+    func didSelected(bonus bonusId: String) {
+        self.saveBetInfo.bonusId = bonusId
+        self.saveBetInfo.setBonus()
+        
+        self.saveBetInfo.bonusId = bonusId
+        orderRequest()
+    }
     
     
     override func didReceiveMemoryWarning() {

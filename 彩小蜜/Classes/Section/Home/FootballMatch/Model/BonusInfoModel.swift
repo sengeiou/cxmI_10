@@ -12,6 +12,8 @@ import HandyJSON
 class BonusInfoModel: HandyJSON {
     required init() { }
     
+    var isSelected : Bool = false
+    
     var bonusId: String!
     var bonusName: String!
     var bonusPrice: String!

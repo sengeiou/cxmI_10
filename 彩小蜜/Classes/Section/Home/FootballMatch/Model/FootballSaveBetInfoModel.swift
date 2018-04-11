@@ -22,4 +22,13 @@ class FootballSaveBetInfoModel : HandyJSON{
     var surplus: String!
     var thirdPartyPaid: String!
     
+    func setBonus() {
+        for bonus in bonusList {
+            if bonus.userBonusId == bonusId {
+                bonus.isSelected = true
+                return
+            }
+        }
+    }
+    
 }

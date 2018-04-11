@@ -49,7 +49,8 @@ class PaymentCell: UITableViewCell {
         }
     }
     private func initSubview() {
-       
+       self.selectionStyle = .none
+        
         title = UILabel()
         title.font = Font13
         title.textColor = Color787878

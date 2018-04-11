@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import DZNEmptyDataSet
+
 
 enum PopViewStyle {
     case fromCenter
@@ -14,7 +16,7 @@ enum PopViewStyle {
     case fromTop
 }
 
-class BasePopViewController: UIViewController, AlertPro {
+class BasePopViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
 
     public var popStyle : PopViewStyle = .fromCenter{
         didSet{
@@ -37,6 +39,14 @@ class BasePopViewController: UIViewController, AlertPro {
         }
     }
     public var pushBgView : UIView!
+    
+    private var emptyTitle: String!
+    
+    public func setEmpty(title: String, _ tableView: UITableView) {
+        tableView.emptyDataSetDelegate = self
+        tableView.emptyDataSetSource = self
+        self.emptyTitle = title
+    }
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -83,17 +93,33 @@ class BasePopViewController: UIViewController, AlertPro {
         }
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.dismiss(animated: true, completion: nil)
+    
+    
+    
+    //MARK: - 空列表视图
+    func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
+        return UIImage(named: "empty")
     }
-    
-    
-    
+    func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        let att = NSAttributedString(string: emptyTitle, attributes: [NSAttributedStringKey.foregroundColor: ColorA0A0A0, NSAttributedStringKey.font: Font15])
+        return att
+    }
+    func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
+        return ColorF4F4F4
+    }
+//    func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
+//        return -80
+//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

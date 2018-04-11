@@ -10,6 +10,20 @@ import UIKit
 
 class CouponFilterCell: UITableViewCell {
 
+    public var bonusInfo : BonusInfoModel! {
+        didSet{
+            let moneyAtt = NSMutableAttributedString(string: "¥ ")
+            let money = NSAttributedString(string: bonusInfo.bonusPrice, attributes: [NSAttributedStringKey.font: Font24])
+            moneyAtt.append(money)
+            
+            moneylb.attributedText = moneyAtt
+            
+            contentlb.text = bonusInfo.useRange
+            
+            //self.isSelected = true
+            //setSelected(true, animated: true)
+        }
+    }
     
     private var moneylb : UILabel!
     private var contentlb : UILabel!
@@ -19,13 +33,15 @@ class CouponFilterCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         initSubview()
+        
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        
     }
     // MARK: - 初始化
     private func initSubview() {
+        self.selectionStyle = .none
+        
         moneylb = UILabel()
         moneylb.font = Font16
         moneylb.textColor = ColorEA5504
@@ -68,7 +84,11 @@ class CouponFilterCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
+        if selected == true {
+            selectedIcon.image = UIImage(named: "Mentionmoneysteps_sel")
+        }else {
+            selectedIcon.image = UIImage(named: "Mentionmoneysteps_nor")
+        }
     }
 
     required init?(coder aDecoder: NSCoder) {
