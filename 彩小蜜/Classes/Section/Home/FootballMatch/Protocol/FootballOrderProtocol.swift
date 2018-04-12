@@ -20,7 +20,7 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
         requestModel.bonusId = bonusId
         requestModel.lotteryClassifyId = homeData.lotteryId
         requestModel.lotteryPlayClassifyId = homeData.playClassifyId
-        requestModel.playType = playType
+        requestModel.playType = homeData.playType
         requestModel.times = times
         
         
@@ -53,6 +53,42 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
                     betCells.append(matchPlay.visitingCell)
                 }
                 
+                if matchPlay.homeCell != nil {
+                    for cell in matchPlay.homeCell.cellSons {
+                        if cell.isSelected == true {
+                            let ce = FootballPlayCellModel()
+                            ce.cellCode = cell.cellCode
+                            ce.cellName = cell.cellName
+                            ce.cellOdds = cell.cellOdds
+                            betCells.append(ce)
+                        }
+                    }
+                }
+                
+                if matchPlay.flatCell != nil {
+                    for cell in matchPlay.flatCell.cellSons {
+                        if cell.isSelected == true {
+                            let ce = FootballPlayCellModel()
+                            ce.cellCode = cell.cellCode
+                            ce.cellName = cell.cellName
+                            ce.cellOdds = cell.cellOdds
+                            betCells.append(ce)
+                        }
+                    }
+                }
+                
+                if matchPlay.visitingCell != nil {
+                    for cell in matchPlay.visitingCell.cellSons {
+                        if cell.isSelected == true {
+                            let ce = FootballPlayCellModel()
+                            ce.cellCode = cell.cellCode
+                            ce.cellName = cell.cellName
+                            ce.cellOdds = cell.cellOdds
+                            betCells.append(ce)
+                        }
+                    }
+                }
+                
                 if matchPlay.matchCells.isEmpty == false {
                     for cell in matchPlay.matchCells {
                         if cell.isSelected == true {
@@ -62,7 +98,7 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
                 }
                 
                 matchBetCell.betCells = betCells
-                
+                matchBetCell.playType = matchPlay.playType
                 matchBetCells.append(matchBetCell)
             }
             

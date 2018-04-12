@@ -19,6 +19,9 @@ class FootballBanQuanCFilterVC: BasePopViewController, BottomViewDelegate, Footb
             homeTeam.text = teamInfo.homeTeamAbbr
             visitingTeam.text = teamInfo.visitingTeamAbbr
             banScoreView.cells = teamInfo.matchPlays[0].matchCells
+            
+            guard teamInfo.selectedBan != nil else { return }
+            selectedCells = teamInfo.selectedBan
         }
     }
     
@@ -40,7 +43,7 @@ class FootballBanQuanCFilterVC: BasePopViewController, BottomViewDelegate, Footb
     override func viewDidLoad() {
         super.viewDidLoad()
         self.popStyle = .fromBottom
-        
+        selectedCells = [FootballPlayCellModel]()
         initSubview()
     }
     

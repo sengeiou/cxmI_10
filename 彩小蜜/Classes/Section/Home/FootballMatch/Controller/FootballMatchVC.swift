@@ -388,7 +388,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         weak var weakSelf = self
         let score = FootballScoreFilterVC()
         score.teamInfo = teamInfo
-        score.selectedCells = scoreView.selectedCells
+    
         score.selected = { (selectedCells) in
             scoreView.selectedCells = selectedCells
             
@@ -414,8 +414,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         weak var weakSelf = self
         let score = FootballBanQuanCFilterVC()
         score.teamInfo = teamInfo
-        score.selectedCells = scoreView.selectedCellList
-        
+    
         score.selected = { (selectedCells) in
             scoreView.selectedCellList = selectedCells
             

@@ -17,7 +17,9 @@ fileprivate let FootballOrder2_1CellId = "FootballOrder2_1CellId"
 fileprivate let FootballOrderHunheCellId = "FootballOrderHunheCellId"
 
 
-class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballTeamViewDelegate, FootballOrderBottomViewDelegate, FootballTimesFilterVCDelegate, FootballPlayFilterVCDelegate, FootballFilterPro, FootballOrderProtocol, FootballOrderSPFCellDelegate, FootballTotalViewDelegate{
+class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballTeamViewDelegate, FootballOrderBottomViewDelegate, FootballTimesFilterVCDelegate, FootballPlayFilterVCDelegate, FootballFilterPro, FootballOrderProtocol, FootballOrderSPFCellDelegate, FootballTotalViewDelegate, FootballScoreViewDelegate{
+   
+    
     
 
     // MARK: - 属性
@@ -190,7 +192,9 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     }
     private func initScoreCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballOrderScoreCellId, for: indexPath) as! FootballOrderScoreCell
-        
+        cell.delegate = self
+        cell.scoreView.delegate = self
+        cell.playInfoModel = playList[indexPath.section]
         return cell
     }
     private func initBanQuanCCell(indexPath: IndexPath) -> UITableViewCell {
@@ -396,6 +400,76 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         guard homeData != nil else { return }
         orderRequest ()
     }
+    
+    // MARK: - 比分 点击 delegate
+    func didTipScoreView(scoreView: FootballScoreView, teamInfo: FootballPlayListModel) {
+        
+        switch matchType {
+        case .比分:
+            pushScoreView(scoreView: scoreView, teamInfo: teamInfo)
+        case .半全场:
+            pushBanQuanCView(scoreView: scoreView, teamInfo: teamInfo)
+        default: break
+        }
+    }
+    
+    private func pushScoreView(scoreView: FootballScoreView, teamInfo: FootballPlayListModel) {
+        weak var weakSelf = self
+        let score = FootballScoreFilterVC()
+        score.teamInfo = teamInfo
+        
+        score.selected = { (selectedCells) in
+            scoreView.selectedCells = selectedCells
+            
+            if selectedCells.count > 0 {
+                guard scoreView.canAdd == true else { return }
+                guard (weakSelf?.selectPlayList.count)! < 15  else {
+                    scoreView.backSelectedState()
+                    weakSelf?.showHUD(message: "最多可选15场比赛")
+                    return }
+                
+                weakSelf?.selectPlayList.append(teamInfo)
+                scoreView.canAdd = false
+                
+            }else {
+                weakSelf?.selectPlayList.remove(teamInfo)
+                scoreView.canAdd = true
+            }
+            
+            guard weakSelf?.homeData != nil else { return }
+            weakSelf?.orderRequest ()
+        }
+        present(score)
+    }
+    
+    private func pushBanQuanCView(scoreView: FootballScoreView, teamInfo: FootballPlayListModel) {
+        weak var weakSelf = self
+        let score = FootballBanQuanCFilterVC()
+        score.teamInfo = teamInfo
+        
+        score.selected = { (selectedCells) in
+            scoreView.selectedCellList = selectedCells
+            
+            if selectedCells.count > 0 {
+                guard scoreView.canAdd == true else { return }
+                guard (weakSelf?.selectPlayList.count)! < 15  else {
+                    scoreView.backSelectedState()
+                    weakSelf?.showHUD(message: "最多可选15场比赛")
+                    return }
+                
+                weakSelf?.selectPlayList.append(teamInfo)
+                scoreView.canAdd = false
+                
+            }else {
+                weakSelf?.selectPlayList.remove(teamInfo)
+                scoreView.canAdd = true
+            }
+            guard weakSelf?.homeData != nil else { return }
+            weakSelf?.orderRequest ()
+        }
+        present(score)
+    }
+    
     
     // MARK: - right bar item
     private func setRightButtonItem() {

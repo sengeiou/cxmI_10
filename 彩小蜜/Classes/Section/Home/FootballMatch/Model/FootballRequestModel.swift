@@ -43,6 +43,7 @@ struct MatchBetPlay: HandyJSON {
 
 struct FootballMatchBetCell: HandyJSON {
     var betCells: [FootballPlayCellModel]!
+    var playType : String!
     
 }
 

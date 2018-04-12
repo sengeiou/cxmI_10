@@ -19,6 +19,9 @@ class FootballScoreFilterVC: BasePopViewController, BottomViewDelegate, Football
             shengScoreView.cellSons = teamInfo.matchPlays[0].homeCell.cellSons
             pingScoreView.cellSons = teamInfo.matchPlays[0].flatCell.cellSons
             fuScoreView.cellSons = teamInfo.matchPlays[0].visitingCell.cellSons
+            
+            guard teamInfo.selectedScore != nil else { return }
+            selectedCells = teamInfo.selectedScore
         }
     }
 
@@ -44,7 +47,7 @@ class FootballScoreFilterVC: BasePopViewController, BottomViewDelegate, Football
     override func viewDidLoad() {
         super.viewDidLoad()
         self.popStyle = .fromBottom
-
+        selectedCells = [SonCellModel]()
         initSubview()
     }
 
@@ -205,7 +208,6 @@ class FootballScoreFilterVC: BasePopViewController, BottomViewDelegate, Football
         self.selected(selectedCells)
         dismiss(animated: true, completion: nil)
     }
-    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
