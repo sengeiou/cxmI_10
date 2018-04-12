@@ -371,10 +371,32 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     }
     // MARK: - 比分 点击 delegate
     func didTipScoreView(scoreView: FootballScoreView, teamInfo: FootballPlayListModel) {
+        
+        weak var weakSelf = self
         let score = FootballScoreFilterVC()
         score.teamInfo = teamInfo
+        score.selectedCells = scoreView.selectedCells
         score.selected = { (selectedCells) in
             scoreView.selectedCells = selectedCells
+
+            if selectedCells.count > 0 {
+                guard scoreView.canAdd == true else { return }
+                guard (weakSelf?.selectPlayList.count)! < 2  else {
+                    scoreView.backSelectedState()
+                    weakSelf?.showHUD(message: "ssssss")
+                    return }
+               
+                weakSelf?.selectPlayList.append(teamInfo)
+                print(weakSelf?.selectPlayList.count)
+                scoreView.canAdd = false
+                
+            }else {
+                weakSelf?.selectPlayList.remove(teamInfo)
+                print(weakSelf?.selectPlayList.count)
+                scoreView.canAdd = true 
+            }
+            
+            
         }
         present(score)
     }

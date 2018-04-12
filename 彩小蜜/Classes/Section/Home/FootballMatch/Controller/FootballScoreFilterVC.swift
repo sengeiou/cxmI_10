@@ -23,6 +23,7 @@ class FootballScoreFilterVC: BasePopViewController, BottomViewDelegate, Football
     }
 
     public var selected : Selected!
+    public var selectedCells : [SonCellModel]!
     
     private var homeTeam : UILabel!
     private var vslb : UILabel!
@@ -38,12 +39,12 @@ class FootballScoreFilterVC: BasePopViewController, BottomViewDelegate, Football
     
     private var bottomView : BottomView!
     
-    private var selectedCells : [SonCellModel]!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.popStyle = .fromBottom
-        selectedCells = [SonCellModel]()
+
         initSubview()
     }
 
@@ -194,11 +195,15 @@ class FootballScoreFilterVC: BasePopViewController, BottomViewDelegate, Football
     }
     
     func didTipCancel() {
+        guard selected != nil else { return }
+        self.selected(selectedCells)
         dismiss(animated: true, completion: nil)
     }
     
     
-    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

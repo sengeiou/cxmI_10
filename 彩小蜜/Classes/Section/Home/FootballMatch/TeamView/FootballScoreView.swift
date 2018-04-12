@@ -26,26 +26,17 @@ class FootballScoreView: UIView {
         didSet{
             
             if selectedCells.isEmpty == false {
-                var title = ""
-                for cell in selectedCells {
-                    title += cell.cellOdds + " "
-                }
                 
-                titlelb.text = title
                 changeViewState(isSelected: true )
             }else {
-                switch matchType {
-                case .比分:
-                    titlelb.text = "点击进行比分投注"
-                case .半全场:
-                    titlelb.text = "点击进行半全场投注"
-                default: break
-                }
+                
                 changeViewState(isSelected: false)
             }
            
         }
     }
+    
+    public var canAdd : Bool = true 
     
     public var matchType : FootballMatchType = .比分
     
@@ -56,7 +47,7 @@ class FootballScoreView: UIView {
     init() {
         super.init(frame: CGRect.zero)
         initSubview()
-        
+        selectedCells = [SonCellModel]()
         switch matchType {
         case .比分:
             titlelb.text = "点击进行比分投注"
@@ -93,9 +84,30 @@ class FootballScoreView: UIView {
         if isSelected == true {
             self.backgroundColor = ColorEA5504
             self.titlelb.textColor = ColorFFFFFF
+            var title = ""
+            for cell in selectedCells {
+                title += cell.cellOdds + " "
+            }
+            
+            titlelb.text = title
         }else {
             self.backgroundColor = ColorFFFFFF
             self.titlelb.textColor = Color9F9F9F
+            switch matchType {
+            case .比分:
+                titlelb.text = "点击进行比分投注"
+            case .半全场:
+                titlelb.text = "点击进行半全场投注"
+            default: break
+            }
+        }
+    }
+    
+    public func backSelectedState() {
+       
+        changeViewState(isSelected: false)
+        for cell in selectedCells {
+            cell.isSelected = false
         }
     }
     
