@@ -79,9 +79,15 @@ class FootballPlayCellModel:NSObject, HandyJSON {
     var cellCode: String!
     var cellName: String!
     var cellOdds: String!
-    var cellSons: String!
+    var cellSons: [SonCellModel]!
 }
 
-
+class SonCellModel: NSObject, HandyJSON {
+    required override init() { }
+    var isSelected = false
+    var cellCode: String!
+    var cellName: String!
+    var cellOdds: String!
+}
 
 

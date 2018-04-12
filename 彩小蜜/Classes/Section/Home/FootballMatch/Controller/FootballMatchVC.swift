@@ -369,7 +369,15 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     func totalSelectedItem() {
         
     }
-    
+    // MARK: - 比分 点击 delegate
+    func didTipScoreView(scoreView: FootballScoreView, teamInfo: FootballPlayListModel) {
+        let score = FootballScoreFilterVC()
+        score.teamInfo = teamInfo
+        score.selected = { (selectedCells) in
+            scoreView.selectedCells = selectedCells
+        }
+        present(score)
+    }
     
     
     override func didReceiveMemoryWarning() {

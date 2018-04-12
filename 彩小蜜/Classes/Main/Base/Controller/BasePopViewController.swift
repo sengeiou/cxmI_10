@@ -23,18 +23,21 @@ class BasePopViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, 
             switch popStyle {
             case .fromCenter:
                 initCenterLayout()
-            case .fromBottom:
-                initBottomLayout()
+            case .fromBottom: break
+//                initBottomLayout()
             case .fromTop:
                 initTopLayout()
             }
         }
     }
     
-    public var viewHeight : CGFloat = 300 {
+    public var viewHeight : CGFloat! {
         didSet{
-            pushBgView.snp.makeConstraints { (make) in
-                make.height.equalTo(viewHeight)
+            switch popStyle {
+            case .fromBottom:
+                initBottomLayout(height: viewHeight)
+            default: break
+                
             }
         }
     }
@@ -77,11 +80,11 @@ class BasePopViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, 
         }
     }
     
-    private func initBottomLayout() {
+    private func initBottomLayout(height : CGFloat) {
         pushBgView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
             make.bottom.equalTo(0)
-            make.height.equalTo(300)
+            make.height.equalTo(height)
         }
     }
 

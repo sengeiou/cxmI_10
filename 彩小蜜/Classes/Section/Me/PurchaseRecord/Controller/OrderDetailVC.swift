@@ -56,7 +56,7 @@ class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         weak var weakSelf = self
         guard orderId != nil  else { return }
         
-        _ = userProvider.rx.request(.orderInfo(orderId: "27024"))
+        _ = userProvider.rx.request(.orderInfo(orderId: orderId))
             .asObservable()
             .mapObject(type: OrderInfoModel.self)
             .subscribe(onNext: { (data) in
