@@ -28,7 +28,7 @@ fileprivate let Football2_1CellId = "Football2_1CellId"
 fileprivate let FootballHunheCellId = "FootballHunheCellId"
 
 
-class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballBottomViewDelegate, FootballSectionHeaderDelegate, FootballRequestPro, FootballTeamViewDelegate , FootballMatchFilterVCDelegate, FootballTotalViewDelegate{
+class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballBottomViewDelegate, FootballSectionHeaderDelegate, FootballRequestPro, FootballTeamViewDelegate , FootballMatchFilterVCDelegate, FootballTotalViewDelegate, FootballScoreViewDelegate{
     
     
     
@@ -190,7 +190,10 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     }
     private func initScoreCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballScoreCellId, for: indexPath) as! FootballScoreCell
+        cell.scoreView.delegate = self
         
+        let matchModel = matchList[indexPath.section]
+        cell.playInfoModel = matchModel.playList[indexPath.row]
         return cell
     }
     private func initBanQuanCCell(indexPath: IndexPath) -> UITableViewCell {
@@ -227,14 +230,13 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        
         switch matchType {
         case .胜平负, .让球胜平负:
             return 84 * defaultScale
         case .总进球:
             return (84 + 15) * defaultScale
-            
+        case .比分, .半全场:
+            return 84 * defaultScale
         default: return 0
             
         }

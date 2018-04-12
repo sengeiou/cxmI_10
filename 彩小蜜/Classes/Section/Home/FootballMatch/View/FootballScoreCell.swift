@@ -18,7 +18,7 @@ class FootballScoreCell: UITableViewCell, DateProtocol {
             
             matchTitle.text = playInfoModel.leagueAddr
             matchTime.text = playInfoModel.changci
-            totalView.teamInfo = playInfoModel
+            scoreView.teamInfo = playInfoModel
             endTime.text = "截止" + timeStampToHHmm(playInfoModel.betEndTime)
             if playInfoModel.matchPlays[0].single == true {
                 typeIcon.isHidden = false
@@ -28,11 +28,13 @@ class FootballScoreCell: UITableViewCell, DateProtocol {
         }
     }
     
+    public var scoreView: FootballScoreView!
+    
     private var matchTitle: UILabel!
     private var matchTime: UILabel!
     private var endTime: UILabel!
     private var detailBut: UIButton!
-    public var totalView: FootballTotalView!
+   
     private var homeMatch: UILabel!
     private var visitingMatch : UILabel!
     private var vsLb : UILabel!
@@ -84,8 +86,8 @@ class FootballScoreCell: UITableViewCell, DateProtocol {
         
         homeMatch.snp.makeConstraints { (make) in
             make.top.equalTo(0)
-            make.bottom.equalTo(totalView.snp.top)
-            make.left.equalTo(totalView)
+            make.bottom.equalTo(scoreView.snp.top)
+            make.left.equalTo(scoreView)
         }
         vsLb.snp.makeConstraints { (make) in
             make.top.bottom.width.equalTo(homeMatch)
@@ -94,12 +96,12 @@ class FootballScoreCell: UITableViewCell, DateProtocol {
         visitingMatch.snp.makeConstraints { (make) in
             make.top.bottom.width.equalTo(homeMatch)
             make.left.equalTo(vsLb.snp.right)
-            make.right.equalTo(totalView)
+            make.right.equalTo(scoreView)
         }
         
-        totalView.snp.makeConstraints { (make) in
-            make.top.equalTo(35 * defaultScale)
-            make.bottom.equalTo(-15 * defaultScale)
+        scoreView.snp.makeConstraints { (make) in
+            make.bottom.equalTo(-18 * defaultScale)
+            make.height.equalTo(28 * defaultScale)
             make.left.equalTo(endTime.snp.right).offset(10)
             make.right.equalTo(-rightSpacing)
         }
@@ -110,7 +112,7 @@ class FootballScoreCell: UITableViewCell, DateProtocol {
         line = UIImageView()
         line.image = UIImage(named: "line")
         
-        totalView = FootballTotalView()
+        scoreView = FootballScoreView()
         
         typeIcon = UIImageView()
         typeIcon.image = UIImage(named: "Singlefield")
@@ -138,7 +140,7 @@ class FootballScoreCell: UITableViewCell, DateProtocol {
         self.contentView.addSubview(matchTime)
         self.contentView.addSubview(endTime)
         self.contentView.addSubview(detailBut)
-        self.contentView.addSubview(totalView)
+        self.contentView.addSubview(scoreView)
         self.contentView.addSubview(homeMatch)
         self.contentView.addSubview(vsLb)
         self.contentView.addSubview(visitingMatch)
