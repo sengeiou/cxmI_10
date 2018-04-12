@@ -198,7 +198,10 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     }
     private func initBanQuanCCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballBanQuanCCellId, for: indexPath) as! FootballBanQuanCCell
+        cell.scoreView.delegate = self
         
+        let matchModel = matchList[indexPath.section]
+        cell.playInfoModel = matchModel.playList[indexPath.row]
         return cell
     }
     private func init2Cell(indexPath: IndexPath) -> UITableViewCell {
@@ -372,35 +375,67 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     // MARK: - 比分 点击 delegate
     func didTipScoreView(scoreView: FootballScoreView, teamInfo: FootballPlayListModel) {
         
+        switch matchType {
+        case .比分:
+            pushScoreView(scoreView: scoreView, teamInfo: teamInfo)
+        case .半全场:
+            pushBanQuanCView(scoreView: scoreView, teamInfo: teamInfo)
+        default: break
+        }
+    }
+    
+    private func pushScoreView(scoreView: FootballScoreView, teamInfo: FootballPlayListModel) {
         weak var weakSelf = self
         let score = FootballScoreFilterVC()
         score.teamInfo = teamInfo
         score.selectedCells = scoreView.selectedCells
         score.selected = { (selectedCells) in
             scoreView.selectedCells = selectedCells
-
+            
             if selectedCells.count > 0 {
                 guard scoreView.canAdd == true else { return }
-                guard (weakSelf?.selectPlayList.count)! < 2  else {
+                guard (weakSelf?.selectPlayList.count)! < 15  else {
                     scoreView.backSelectedState()
-                    weakSelf?.showHUD(message: "ssssss")
+                    weakSelf?.showHUD(message: "最多可选15场比赛")
                     return }
-               
+                
                 weakSelf?.selectPlayList.append(teamInfo)
-                print(weakSelf?.selectPlayList.count)
                 scoreView.canAdd = false
                 
             }else {
                 weakSelf?.selectPlayList.remove(teamInfo)
-                print(weakSelf?.selectPlayList.count)
-                scoreView.canAdd = true 
+                scoreView.canAdd = true
             }
-            
-            
         }
         present(score)
     }
     
+    private func pushBanQuanCView(scoreView: FootballScoreView, teamInfo: FootballPlayListModel) {
+        weak var weakSelf = self
+        let score = FootballBanQuanCFilterVC()
+        score.teamInfo = teamInfo
+        score.selectedCells = scoreView.selectedCellList
+        
+        score.selected = { (selectedCells) in
+            scoreView.selectedCellList = selectedCells
+            
+            if selectedCells.count > 0 {
+                guard scoreView.canAdd == true else { return }
+                guard (weakSelf?.selectPlayList.count)! < 15  else {
+                    scoreView.backSelectedState()
+                    weakSelf?.showHUD(message: "最多可选15场比赛")
+                    return }
+                
+                weakSelf?.selectPlayList.append(teamInfo)
+                scoreView.canAdd = false
+                
+            }else {
+                weakSelf?.selectPlayList.remove(teamInfo)
+                scoreView.canAdd = true
+            }
+        }
+        present(score)
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

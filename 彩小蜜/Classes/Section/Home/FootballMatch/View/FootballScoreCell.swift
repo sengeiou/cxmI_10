@@ -113,6 +113,7 @@ class FootballScoreCell: UITableViewCell, DateProtocol {
         line.image = UIImage(named: "line")
         
         scoreView = FootballScoreView()
+        scoreView.matchType = .比分
         
         typeIcon = UIImageView()
         typeIcon.image = UIImage(named: "Singlefield")

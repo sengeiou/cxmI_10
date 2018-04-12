@@ -1,5 +1,5 @@
 //
-//  FootballScoreFilterVC.swift
+//  FootballBanQuanCFilterC.swift
 //  彩小蜜
 //
 //  Created by 笑 on 2018/4/12.
@@ -8,35 +8,31 @@
 
 import UIKit
 
-typealias Selected  = (_ selectedCells : [SonCellModel]) -> ()
+typealias SelectedCell  = (_ selectedCells : [FootballPlayCellModel]) -> ()
 
-class FootballScoreFilterVC: BasePopViewController, BottomViewDelegate, FootballCollectionViewDelegate {
+class FootballBanQuanCFilterVC: BasePopViewController, BottomViewDelegate, FootballCollectionViewDelegate {
     
+    
+
     public var teamInfo : FootballPlayListModel! {
         didSet{
             homeTeam.text = teamInfo.homeTeamAbbr
             visitingTeam.text = teamInfo.visitingTeamAbbr
-            shengScoreView.cellSons = teamInfo.matchPlays[0].homeCell.cellSons
-            pingScoreView.cellSons = teamInfo.matchPlays[0].flatCell.cellSons
-            fuScoreView.cellSons = teamInfo.matchPlays[0].visitingCell.cellSons
+            banScoreView.cells = teamInfo.matchPlays[0].matchCells
         }
     }
-
-    public var selected : Selected!
-    public var selectedCells : [SonCellModel]!
+    
+    public var selected : SelectedCell!
+    public var selectedCells : [FootballPlayCellModel]!
     
     private var homeTeam : UILabel!
     private var vslb : UILabel!
     private var visitingTeam : UILabel!
     
-    private var shengScoreView : FootballCollectionView!
-    private var pingScoreView : FootballCollectionView!
-    private var fuScoreView : FootballCollectionView!
+    private var banScoreView : FootballCollectionView!
     
     private var shengTitle: UILabel!
-    private var pingTitle: UILabel!
-    private var fuTitle : UILabel!
-    
+
     private var bottomView : BottomView!
     
     
@@ -44,10 +40,10 @@ class FootballScoreFilterVC: BasePopViewController, BottomViewDelegate, Football
     override func viewDidLoad() {
         super.viewDidLoad()
         self.popStyle = .fromBottom
-
+        
         initSubview()
     }
-
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -72,32 +68,11 @@ class FootballScoreFilterVC: BasePopViewController, BottomViewDelegate, Football
             make.width.equalTo(23 * defaultScale)
         }
         
-        pingTitle.snp.makeConstraints { (make) in
-            make.top.equalTo(shengTitle.snp.bottom).offset(18 * defaultScale)
-            make.left.width.equalTo(shengTitle)
-            make.height.equalTo(44 * defaultScale)
-        }
-        fuTitle.snp.makeConstraints { (make) in
-            make.top.equalTo(pingTitle.snp.bottom).offset(18 * defaultScale)
-            make.left.width.equalTo(shengTitle)
-            make.height.equalTo(132 * defaultScale)
-        }
-        
-        shengScoreView.snp.makeConstraints { (make) in
+        banScoreView.snp.makeConstraints { (make) in
             make.top.equalTo(shengTitle)
             make.left.equalTo(shengTitle.snp.right)
             make.width.equalTo(320 * defaultScale)
             make.height.equalTo(shengTitle)
-        }
-        pingScoreView.snp.makeConstraints { (make) in
-            make.top.equalTo(pingTitle)
-            make.left.width.equalTo(shengScoreView)
-            make.height.equalTo(pingTitle)
-        }
-        fuScoreView.snp.makeConstraints { (make) in
-            make.top.equalTo(fuTitle)
-            make.left.width.equalTo(shengScoreView)
-            make.height.equalTo(fuTitle)
         }
         
         bottomView.snp.makeConstraints { (make) in
@@ -132,35 +107,15 @@ class FootballScoreFilterVC: BasePopViewController, BottomViewDelegate, Football
         shengTitle = UILabel()
         shengTitle.font = Font12
         shengTitle.textColor = ColorFFFFFF
-        shengTitle.backgroundColor = ColorF6AD41
+        shengTitle.backgroundColor = ColorEB6D8E
         shengTitle.textAlignment = .center
-        shengTitle.text = "胜"
+        shengTitle.text = "半全场"
         
-        pingTitle = UILabel()
-        pingTitle.font = Font12
-        pingTitle.textColor = ColorFFFFFF
-        pingTitle.backgroundColor = Color65AADD
-        pingTitle.textAlignment = .center
-        pingTitle.text = "平"
         
-        fuTitle = UILabel()
-        fuTitle.font = Font12
-        fuTitle.textColor = ColorFFFFFF
-        fuTitle.backgroundColor = Color85C36B
-        fuTitle.textAlignment = .center
-        fuTitle.text = "负"
+        banScoreView = FootballCollectionView()
+        banScoreView.scoreType = .半全场
+        banScoreView.delegate = self
         
-        shengScoreView = FootballCollectionView()
-        shengScoreView.scoreType = .胜
-        shengScoreView.delegate = self
-        
-        pingScoreView = FootballCollectionView()
-        pingScoreView.scoreType = .平
-        pingScoreView.delegate = self
-        
-        fuScoreView = FootballCollectionView()
-        fuScoreView.scoreType = .负
-        fuScoreView.delegate = self
         
         bottomView = BottomView()
         bottomView.delegate = self
@@ -169,39 +124,39 @@ class FootballScoreFilterVC: BasePopViewController, BottomViewDelegate, Football
         self.pushBgView.addSubview(vslb)
         self.pushBgView.addSubview(visitingTeam)
         self.pushBgView.addSubview(shengTitle)
-        self.pushBgView.addSubview(pingTitle)
-        self.pushBgView.addSubview(fuTitle)
-        self.pushBgView.addSubview(shengScoreView)
-        self.pushBgView.addSubview(pingScoreView)
-        self.pushBgView.addSubview(fuScoreView)
+        self.pushBgView.addSubview(banScoreView)
         self.pushBgView.addSubview(bottomView)
     }
     
     // MARK: - 选取Item delegate
     func didSelectedItem(cellSon: SonCellModel) {
-        guard selectedCells != nil else { return }
-        selectedCells.append(cellSon)
+        
     }
     
     func didDeSelectedItem(cellSon: SonCellModel) {
-        guard selectedCells != nil else { return }
-        selectedCells.remove(cellSon)
+       
     }
+    
     func didSelectedItem(cell: FootballPlayCellModel) {
+        guard selectedCells != nil else { return }
+        selectedCells.append(cell)
     }
     
     func didDeSelectedItem(cell: FootballPlayCellModel) {
+        guard selectedCells != nil else { return }
+        selectedCells.remove(cell)
     }
+    
     func didTipConfitm() {
         guard selected != nil else { return }
-        self.teamInfo.selectedScore = selectedCells
+        self.teamInfo.selectedBan = selectedCells
         self.selected(selectedCells)
         dismiss(animated: true, completion: nil)
     }
     
     func didTipCancel() {
         guard selected != nil else { return }
-        self.teamInfo.selectedScore = selectedCells
+        self.teamInfo.selectedBan = selectedCells
         self.selected(selectedCells)
         dismiss(animated: true, completion: nil)
     }
@@ -213,10 +168,10 @@ class FootballScoreFilterVC: BasePopViewController, BottomViewDelegate, Football
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-       
+        
     }
     
 
-    
+   
 
 }

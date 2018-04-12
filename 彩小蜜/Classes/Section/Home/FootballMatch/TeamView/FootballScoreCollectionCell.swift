@@ -19,6 +19,14 @@ class FootballScoreCollectionCell: UICollectionViewCell {
         }
     }
     
+    public var cellInfo : FootballPlayCellModel! {
+        didSet{
+            selected(cellInfo.isSelected)
+            titlelb.text = cellInfo.cellName
+            //detaillb.text = cellSon.cellOdds
+        }
+    }
+    
     public var isSelectedItem: Bool! {
         didSet{
             selected(isSelectedItem)

@@ -12,11 +12,14 @@ enum ScoreType: String {
     case 胜 = "胜"
     case 平 = "平"
     case 负 = "负"
+    case 半全场 = "半全场"
 }
 
 protocol FootballCollectionViewDelegate {
     func didSelectedItem(cellSon : SonCellModel) -> Void
     func didDeSelectedItem(cellSon : SonCellModel) -> Void
+    func didSelectedItem(cell : FootballPlayCellModel) -> Void
+    func didDeSelectedItem(cell : FootballPlayCellModel) -> Void
 }
 
 fileprivate let FilterCellHeight: CGFloat = 44 * defaultScale
@@ -32,6 +35,12 @@ fileprivate let FootballScoreCollectionCellId = "FootballScoreCollectionCellId"
 class FootballCollectionView: UIView , UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
 
     public var cellSons : [SonCellModel]! {
+        didSet{
+            self.collectionView.reloadData()
+        }
+    }
+    
+    public var cells : [FootballPlayCellModel]! {
         didSet{
             self.collectionView.reloadData()
         }
@@ -82,21 +91,23 @@ class FootballCollectionView: UIView , UICollectionViewDelegate, UICollectionVie
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return cellSons.count
-//        switch scoreType {
-//        case .胜:
-//            return 13
-//        case .平:
-//            return 5
-//        case .负:
-//            return 13
-//
-//        }
+        switch scoreType {
+        case .半全场:
+            return cells.count
+        default :
+            return cellSons.count
+        }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FootballScoreCollectionCellId, for: indexPath) as! FootballScoreCollectionCell
     
-        cell.cellSon = cellSons[indexPath.row]
+        
+        switch scoreType {
+        case .半全场:
+            cell.cellInfo = cells[indexPath.row]
+        default :
+            cell.cellSon = cellSons[indexPath.row]
+        }
         
         return cell
     }
@@ -118,6 +129,8 @@ class FootballCollectionView: UIView , UICollectionViewDelegate, UICollectionVie
             }else {
                 return CGSize(width: FilterCellWidth, height: FilterCellHeight)
             }
+        case .半全场 :
+            return CGSize(width: FilterCellWidth, height: FilterCellHeight)
         }
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -131,22 +144,42 @@ class FootballCollectionView: UIView , UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        cellSons[indexPath.row].isSelected = !cellSons[indexPath.row].isSelected
-        collectionView.reloadItems(at: [indexPath])
         
-        guard delegate != nil else { return }
-        if cellSons[indexPath.row].isSelected == true {
-            delegate.didSelectedItem(cellSon: cellSons[indexPath.row])
-        }else {
-            delegate.didDeSelectedItem(cellSon: cellSons[indexPath.row])
+        switch scoreType {
+        case .半全场:
+            cells[indexPath.row].isSelected = !cells[indexPath.row].isSelected
+            collectionView.reloadItems(at: [indexPath])
+            
+            guard delegate != nil else { return }
+            if cells[indexPath.row].isSelected == true {
+                delegate.didSelectedItem(cell: cells[indexPath.row])
+            }else {
+                delegate.didDeSelectedItem(cell: cells[indexPath.row])
+            }
+        default:
+            cellSons[indexPath.row].isSelected = !cellSons[indexPath.row].isSelected
+            collectionView.reloadItems(at: [indexPath])
+            
+            guard delegate != nil else { return }
+            if cellSons[indexPath.row].isSelected == true {
+                delegate.didSelectedItem(cellSon: cellSons[indexPath.row])
+            }else {
+                delegate.didDeSelectedItem(cellSon: cellSons[indexPath.row])
+            }
         }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        cellSons[indexPath.row].isSelected = !cellSons[indexPath.row].isSelected
-        collectionView.reloadItems(at: [indexPath])
         
-        
+        switch scoreType {
+        case .半全场:
+            cells[indexPath.row].isSelected = !cells[indexPath.row].isSelected
+            collectionView.reloadItems(at: [indexPath])
+        default:
+            cellSons[indexPath.row].isSelected = !cellSons[indexPath.row].isSelected
+            collectionView.reloadItems(at: [indexPath])
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

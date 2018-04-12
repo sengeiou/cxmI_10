@@ -56,6 +56,9 @@ class FootballPlayListModel:NSObject, HandyJSON {
     var visitingTeamRank: String!
     var matchPlays : [FootballMatchPlay]!
     
+    var selectedScore : [SonCellModel]!
+    var selectedBan : [FootballPlayCellModel]!
+    
 }
 
 class FootballMatchPlay : NSObject, HandyJSON {

@@ -18,10 +18,25 @@ class FootballScoreView: UIView {
     
     public var teamInfo : FootballPlayListModel! {
         didSet{
-            
+            switch matchType {
+            case .比分:
+                if teamInfo.selectedScore != nil, teamInfo.selectedScore.isEmpty == false {
+                    changeViewState(isSelected: true )
+                }else {
+                    changeViewState(isSelected: false)
+                }
+            case .半全场:
+                if teamInfo.selectedBan != nil, teamInfo.selectedBan.isEmpty == false {
+                    changeViewState(isSelected: true )
+                }else {
+                    changeViewState(isSelected: false)
+                }
+            default: break
+                
+            }
         }
     }
-    
+    // 比分
     public var selectedCells : [SonCellModel]! {
         didSet{
             
@@ -36,9 +51,35 @@ class FootballScoreView: UIView {
         }
     }
     
+    // 半全场
+    public var selectedCellList: [FootballPlayCellModel]! {
+        didSet{
+            
+            if selectedCellList.isEmpty == false {
+                
+                changeViewState(isSelected: true )
+            }else {
+                
+                changeViewState(isSelected: false)
+            }
+            
+        }
+    }
+    
     public var canAdd : Bool = true 
     
-    public var matchType : FootballMatchType = .比分
+    public var matchType : FootballMatchType! {
+        didSet{
+            switch matchType {
+            case .比分:
+                titlelb.text = "点击进行比分投注"
+            case .半全场:
+                titlelb.text = "点击进行半全场投注"
+            default: break
+                
+            }
+        }
+    }
     
     public var delegate : FootballScoreViewDelegate!
     
@@ -48,14 +89,7 @@ class FootballScoreView: UIView {
         super.init(frame: CGRect.zero)
         initSubview()
         selectedCells = [SonCellModel]()
-        switch matchType {
-        case .比分:
-            titlelb.text = "点击进行比分投注"
-        case .半全场:
-            titlelb.text = "点击进行半全场投注"
-        default: break
-            
-        }
+        selectedCellList = [FootballPlayCellModel]()
     }
     
     override func layoutSubviews() {
@@ -78,18 +112,24 @@ class FootballScoreView: UIView {
         
         self.addGestureRecognizer(tap)
         self.addSubview(titlelb)
+        
+        
+        
+        
     }
     
     private func changeViewState(isSelected: Bool) {
         if isSelected == true {
             self.backgroundColor = ColorEA5504
             self.titlelb.textColor = ColorFFFFFF
-            var title = ""
-            for cell in selectedCells {
-                title += cell.cellOdds + " "
+            switch matchType {
+            case .比分:
+                changeScoreView(list: self.teamInfo.selectedScore)
+            case .半全场:
+                changeBanView(list: self.teamInfo.selectedBan)
+            default: break
+                
             }
-            
-            titlelb.text = title
         }else {
             self.backgroundColor = ColorFFFFFF
             self.titlelb.textColor = Color9F9F9F
@@ -101,6 +141,23 @@ class FootballScoreView: UIView {
             default: break
             }
         }
+    }
+    
+    private func changeBanView(list : [FootballPlayCellModel]) {
+        var title = ""
+        for cell in list {
+            title += cell.cellName + " "
+        }
+        
+        titlelb.text = title
+    }
+    private func changeScoreView(list : [SonCellModel]) {
+        var title = ""
+        for cell in list {
+            title += cell.cellOdds + " "
+        }
+        
+        titlelb.text = title
     }
     
     public func backSelectedState() {
