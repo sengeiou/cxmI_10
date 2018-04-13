@@ -206,7 +206,10 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     }
     private func init2Cell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Football2_1CellId, for: indexPath) as! Football2_1Cell
+        cell.scoreView.delegate = self
         
+        let matchModel = matchList[indexPath.section]
+        cell.playInfoModel = matchModel.playList[indexPath.row]
         return cell
     }
     private func initHunheCell(indexPath: IndexPath) -> UITableViewCell {

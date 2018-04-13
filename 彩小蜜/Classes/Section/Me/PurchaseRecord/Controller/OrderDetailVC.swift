@@ -13,6 +13,10 @@ fileprivate let OrderDetailCellId = "OrderDetailCellId"
 fileprivate let OrderRuleCellId = "OrderRuleCellId"
 fileprivate let OrderProgrammeCellId = "OrderProgrammeCellId"
 
+enum BackType {
+    case root
+}
+
 class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, OrderDetailFooterViewDelegate {
 
     // MARK: - 点击事件
@@ -29,6 +33,8 @@ class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     // MARK: - 属性
+    public var backType : BackType!
+    
     public var orderId : String!
     private var orderInfo : OrderInfoModel!
     private var header : OrderDetailHeaderView!
@@ -173,6 +179,16 @@ class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return nil
     }
+    
+    override func back(_ sender: UIButton) {
+        switch backType {
+        case .root:
+            popToRootViewController()
+        default:
+            popViewController()
+        }
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

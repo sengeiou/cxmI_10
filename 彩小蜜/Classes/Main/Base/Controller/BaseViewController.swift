@@ -53,6 +53,10 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
     public func popViewController() {
         self.navigationController?.popViewController(animated: true)
     }
+    public func popToRootViewController() {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    
     public func popToLoginViewController() {
         for vc in (self.navigationController?.viewControllers)! {
             if vc .isKind(of: LoginViewController.self) {

@@ -81,6 +81,7 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
                 weakSelf?.paymentResult = data
                 weakSelf?.showHUD(message: data.showMsg)
                 let order = OrderDetailVC()
+                order.backType = .root
                 order.orderId = data.orderId
                 weakSelf?.pushViewController(vc: order)
             }, onError: { (error) in
