@@ -20,11 +20,11 @@ class Football2_1Cell: UITableViewCell , DateProtocol{
             matchTime.text = playInfoModel.changci
             twoOneView.teamInfo = playInfoModel
             endTime.text = "截止" + timeStampToHHmm(playInfoModel.betEndTime)
-//            if playInfoModel.matchPlays[0].single == true {
-//                typeIcon.isHidden = false
-//            }else {
-//                typeIcon.isHidden = true
-//            }
+            if playInfoModel.matchPlays[0].single == true {
+                typeIcon.isHidden = false
+            }else {
+                typeIcon.isHidden = true
+            }
         }
     }
     
