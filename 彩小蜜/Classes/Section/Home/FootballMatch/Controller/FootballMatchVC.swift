@@ -216,7 +216,10 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     }
     private func initHunheCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballHunheCellId, for: indexPath) as! FootballHunheCell
+        cell.teamView.delegate = self
         
+        let matchModel = matchList[indexPath.section]
+        cell.playInfoModel = matchModel.playList[indexPath.row]
         return cell
     }
    
@@ -247,6 +250,8 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
             return 84 * defaultScale
         case .二选一:
             return 84 * defaultScale
+        case .混合过关:
+            return 100 * defaultScale
         default: return 0
             
         }
