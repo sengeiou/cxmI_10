@@ -445,11 +445,22 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     
     // MARK: - 2选1 点击事件
     func didSelectedTwoOneView(view: FootballTwoOneView, teamInfo: FootballPlayListModel) {
-        
+
+        guard teamInfo.matchPlays[0].homeCell.isSelected == false else { return }
+        guard teamInfo.matchPlays[0].visitingCell.isSelected == false else { return }
+        guard selectPlayList.count < 15 else {
+            view.backSelectedState()
+            showHUD(message: "最多可选15场比赛")
+            return }
+        guard selectPlayList != nil else { return }
+        selectPlayList.append(teamInfo)
     }
     
     func didDeSelectedTwoOneView(view: FootballTwoOneView, teamInfo: FootballPlayListModel) {
-        
+        guard teamInfo.matchPlays[0].homeCell.isSelected == false else { return }
+        guard teamInfo.matchPlays[0].visitingCell.isSelected == false else { return }
+        guard selectPlayList != nil else { return }
+        selectPlayList.remove(teamInfo)
     }
     
     

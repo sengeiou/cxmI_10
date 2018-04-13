@@ -44,10 +44,19 @@ class FootballTwoOneView: UIView {
         if isSelected == true {
             but.setTitleColor(ColorFFFFFF, for: .normal)
             but.backgroundColor = ColorEA5504
+            but.isSelected = true
         }else {
             but.setTitleColor(Color787878, for: .normal)
             but.backgroundColor = ColorFFFFFF
+            but.isSelected = false
         }
+    }
+    
+    public func backSelectedState() {
+        changeButState(but: homeBut, isSelected: false)
+        changeButState(but: visitingBut, isSelected: false)
+        teamInfo.matchPlays[0].homeCell.isSelected = false
+        teamInfo.matchPlays[0].visitingCell.isSelected = false
     }
     
     override func layoutSubviews() {
@@ -90,7 +99,9 @@ class FootballTwoOneView: UIView {
         guard delegate != nil else { return }
         if sender.isSelected {
             delegate.didSelectedTwoOneView(view: self, teamInfo: teamInfo)
+            teamInfo.matchPlays[0].homeCell.isSelected = true
         }else {
+            teamInfo.matchPlays[0].homeCell.isSelected = false
             delegate.didDeSelectedTwoOneView(view: self, teamInfo: teamInfo)
         }
     }
@@ -101,7 +112,9 @@ class FootballTwoOneView: UIView {
         guard delegate != nil else { return }
         if sender.isSelected {
             delegate.didSelectedTwoOneView(view: self, teamInfo: teamInfo)
+            teamInfo.matchPlays[0].visitingCell.isSelected = true
         }else {
+            teamInfo.matchPlays[0].visitingCell.isSelected = false
             delegate.didDeSelectedTwoOneView(view: self, teamInfo: teamInfo)
         }
     }
