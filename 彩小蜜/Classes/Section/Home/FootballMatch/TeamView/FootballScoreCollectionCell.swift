@@ -11,6 +11,7 @@ import UIKit
 
 class FootballScoreCollectionCell: UICollectionViewCell {
     
+    //比分
     public var cellSon : SonCellModel! {
         didSet{
             selected(cellSon.isSelected)
@@ -18,12 +19,12 @@ class FootballScoreCollectionCell: UICollectionViewCell {
             detaillb.text = cellSon.cellOdds
         }
     }
-    
+    //半全场
     public var cellInfo : FootballPlayCellModel! {
         didSet{
             selected(cellInfo.isSelected)
             titlelb.text = cellInfo.cellName
-            //detaillb.text = cellSon.cellOdds
+            detaillb.text = cellInfo.cellOdds
         }
     }
     
@@ -47,12 +48,14 @@ class FootballScoreCollectionCell: UICollectionViewCell {
         super.layoutSubviews()
         
         titlelb.snp.makeConstraints { (make) in
-            make.top.left.right.equalTo(0)
+            make.top.equalTo(5)
+            make.left.right.equalTo(0)
             make.height.equalTo(detaillb)
         }
         detaillb.snp.makeConstraints { (make) in
-            make.bottom.left.right.equalTo(0)
+            make.left.right.equalTo(0)
             make.top.equalTo(titlelb.snp.bottom)
+            make.bottom.equalTo(-5)
         }
     }
     private func initSubview() {

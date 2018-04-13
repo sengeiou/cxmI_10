@@ -18,8 +18,9 @@ class FootballOrderRangSPFCell: UITableViewCell, DateProtocol {
             
             titleLB.text = "\(addr)  \(changci)  截止\(time)"
             teamView.teamInfo = playInfoModel
-            setupDanBut()
+            
             danIsSelected(isSelected: playInfoModel.isDan)
+            setupDanBut()
         }
     }
     
@@ -40,19 +41,20 @@ class FootballOrderRangSPFCell: UITableViewCell, DateProtocol {
         if danMaxNum <= 0  {
             if self.playInfoModel.isDan != true {
                 danBut.isUserInteractionEnabled = false
-                danBut.backgroundColor = Color787878
+                danBut.setTitleColor(ColorC8C8C8, for: .normal)
+                danBut.layer.borderColor = ColorC8C8C8.cgColor
             }
         }else {
             danBut.isUserInteractionEnabled = true
             danBut.backgroundColor = ColorFFFFFF
         }
         
-        let matchPlay = playInfoModel.matchPlays[0]
-        
+        let matchPlay = self.playInfoModel.matchPlays[0]
         if !matchPlay.homeCell.isSelected && !matchPlay.flatCell.isSelected && !matchPlay.visitingCell.isSelected {
             self.playInfoModel.isDan = false
             danBut.isUserInteractionEnabled = false
-            danBut.backgroundColor = Color787878
+            danBut.setTitleColor(ColorC8C8C8, for: .normal)
+            danBut.layer.borderColor = ColorC8C8C8.cgColor
         }
     }
     private func danIsSelected(isSelected: Bool) {
@@ -109,6 +111,7 @@ class FootballOrderRangSPFCell: UITableViewCell, DateProtocol {
         teamView = FootballTeamView()
         
         danBut = UIButton(type: .custom)
+        danBut.titleLabel?.font = Font12
         danBut.setTitle("胆", for: .normal)
         danBut.layer.borderWidth = 0.3
         danBut.layer.borderColor = ColorC8C8C8.cgColor

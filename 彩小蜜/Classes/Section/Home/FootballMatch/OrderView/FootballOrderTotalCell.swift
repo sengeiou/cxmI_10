@@ -18,8 +18,9 @@ class FootballOrderTotalCell: UITableViewCell, DateProtocol {
             homeMatch.text = playInfoModel.homeTeamAbbr
             visitingMatch.text = playInfoModel.visitingTeamAbbr
             totalView.teamInfo = playInfoModel
-            setupDanBut()
+            
             danIsSelected(isSelected: playInfoModel.isDan)
+            setupDanBut()
         }
     }
     
@@ -44,7 +45,8 @@ class FootballOrderTotalCell: UITableViewCell, DateProtocol {
         if danMaxNum <= 0  {
             if self.playInfoModel.isDan != true {
                 danBut.isUserInteractionEnabled = false
-                danBut.backgroundColor = Color787878
+                danBut.setTitleColor(ColorC8C8C8, for: .normal)
+                danBut.layer.borderColor = ColorC8C8C8.cgColor
             }
         }else {
             danBut.isUserInteractionEnabled = true
@@ -64,7 +66,8 @@ class FootballOrderTotalCell: UITableViewCell, DateProtocol {
         if selected == false {
             self.playInfoModel.isDan = false
             danBut.isUserInteractionEnabled = false
-            danBut.backgroundColor = Color787878
+            danBut.setTitleColor(ColorC8C8C8, for: .normal)
+            danBut.layer.borderColor = ColorC8C8C8.cgColor
         }
     }
     private func danIsSelected(isSelected: Bool) {
@@ -81,12 +84,7 @@ class FootballOrderTotalCell: UITableViewCell, DateProtocol {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-//        titleLB.snp.makeConstraints { (make) in
-//            make.top.equalTo(0)
-//            make.left.equalTo(leftSpacing)
-//            make.right.equalTo(-rightSpacing)
-//            make.bottom.equalTo(danBut.snp.top)
-//        }
+
         deleteBut.snp.makeConstraints { (make) in
             make.centerY.equalTo(totalView.snp.centerY)
             make.left.equalTo(15 * defaultScale)
@@ -128,14 +126,10 @@ class FootballOrderTotalCell: UITableViewCell, DateProtocol {
         deleteBut.setBackgroundImage(UIImage(named: "Remove"), for: .normal)
         deleteBut.addTarget(self, action: #selector(deleteClicked(_:)), for: .touchUpInside)
         
-//        titleLB = UILabel()
-//        titleLB.font = Font15
-//        titleLB.textColor = Color787878
-//        titleLB.textAlignment = .left
-        
         totalView = FootballTotalView()
         
         danBut = UIButton(type: .custom)
+        danBut.titleLabel?.font = Font12
         danBut.setTitle("胆", for: .normal)
         danBut.layer.borderWidth = 0.3
         danBut.layer.borderColor = ColorC8C8C8.cgColor

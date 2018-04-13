@@ -199,7 +199,9 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     }
     private func initBanQuanCCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballOrderBanQuanCCellId, for: indexPath) as! FootballOrderBanQuanCCell
-        
+        cell.delegate = self
+        cell.scoreView.delegate = self
+        cell.playInfoModel = playList[indexPath.section]
         return cell
     }
     private func init2Cell(indexPath: IndexPath) -> UITableViewCell {
@@ -218,7 +220,14 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 91 * defaultScale
+        
+        
+        switch matchType {
+        case .半全场, .比分:
+            return 84 * defaultScale
+        default:
+            return 91 * defaultScale
+        }
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 5
@@ -381,6 +390,14 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         guard selectPlayList != nil else { return }
         selectPlayList.append(teamInfo)
         
+        
+        danMaxNum = 0
+        
+        for play in playList {
+            play.isDan = false
+        }
+        
+        self.tableView.reloadData()
     }
     
     func totalDeSelected(view: FootballTotalView, teamInfo: FootballPlayListModel) {
@@ -395,6 +412,14 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         
         guard selectPlayList != nil else { return }
         selectPlayList.remove(teamInfo)
+        
+        danMaxNum = 0
+        
+        for play in playList {
+            play.isDan = false
+        }
+        
+        self.tableView.reloadData()
     }
     func totalSelectedItem() {
         guard homeData != nil else { return }

@@ -28,7 +28,7 @@ fileprivate let minimumInteritemSpacing : CGFloat = 0
 fileprivate let topInset : CGFloat = 0
 fileprivate let leftInset: CGFloat = 0
 fileprivate let FilterCellWidth : CGFloat = (320 * defaultScale) / 5
-
+fileprivate let collectionviewwidth : CGFloat = 320 * defaultScale
 
 fileprivate let FootballScoreCollectionCellId = "FootballScoreCollectionCellId"
 
@@ -130,7 +130,7 @@ class FootballCollectionView: UIView , UICollectionViewDelegate, UICollectionVie
                 return CGSize(width: FilterCellWidth, height: FilterCellHeight)
             }
         case .半全场 :
-            return CGSize(width: FilterCellWidth, height: FilterCellHeight)
+            return CGSize(width: collectionviewwidth / 3, height: FilterCellHeight)
         }
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

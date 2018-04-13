@@ -66,13 +66,17 @@ extension Observable where E == Response {
 
             data["showMsg"] = json["msg"] as! String
             
-            print("""
-                ********---------数据----------******
-                
-                \(data)
-                
-                ************************************
-                """)
+            DispatchQueue.global().async {
+                print("""
+                    ********---------数据----------******
+                    
+                    \(data)
+                    
+                    ************************************
+                    """)
+            }
+            
+            
             
             return JSONDeserializer<T>.deserializeFrom(dict: data)!
         }

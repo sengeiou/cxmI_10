@@ -88,7 +88,7 @@ class FootballBanQuanCFilterVC: BasePopViewController, BottomViewDelegate, Footb
     
     private func initSubview() {
         
-        self.viewHeight = (454 + SafeAreaBottomHeight) * defaultScale
+        self.viewHeight = (252 + SafeAreaBottomHeight) * defaultScale
         
         homeTeam = UILabel()
         homeTeam.font = Font14
@@ -112,8 +112,8 @@ class FootballBanQuanCFilterVC: BasePopViewController, BottomViewDelegate, Footb
         shengTitle.textColor = ColorFFFFFF
         shengTitle.backgroundColor = ColorEB6D8E
         shengTitle.textAlignment = .center
-        shengTitle.text = "半全场"
-        
+        shengTitle.text = "半\n全\n场"
+        shengTitle.numberOfLines = (shengTitle.text?.lengthOfBytes(using: .utf8))!
         
         banScoreView = FootballCollectionView()
         banScoreView.scoreType = .半全场

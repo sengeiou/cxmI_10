@@ -16,8 +16,9 @@ class FootballOrderScoreCell: UITableViewCell {
             homeMatch.text = playInfoModel.homeTeamAbbr
             visitingMatch.text = playInfoModel.visitingTeamAbbr
             scoreView.teamInfo = playInfoModel
-            setupDanBut()
+            
             danIsSelected(isSelected: playInfoModel.isDan)
+            setupDanBut()
         }
     }
     
@@ -41,7 +42,8 @@ class FootballOrderScoreCell: UITableViewCell {
         if danMaxNum <= 0  {
             if self.playInfoModel.isDan != true {
                 danBut.isUserInteractionEnabled = false
-                danBut.backgroundColor = Color787878
+                danBut.setTitleColor(ColorC8C8C8, for: .normal)
+                danBut.layer.borderColor = ColorC8C8C8.cgColor
             }
         }else {
             danBut.isUserInteractionEnabled = true
@@ -61,7 +63,8 @@ class FootballOrderScoreCell: UITableViewCell {
         if selected == false {
             self.playInfoModel.isDan = false
             danBut.isUserInteractionEnabled = false
-            danBut.backgroundColor = Color787878
+            danBut.setTitleColor(ColorC8C8C8, for: .normal)
+            danBut.layer.borderColor = ColorC8C8C8.cgColor
         }
     }
     private func danIsSelected(isSelected: Bool) {
@@ -88,7 +91,7 @@ class FootballOrderScoreCell: UITableViewCell {
             make.centerY.equalTo(scoreView.snp.centerY)
             make.width.equalTo(31 * defaultScale)
             make.top.equalTo(self.contentView).offset(27 * defaultScale)
-            make.bottom.equalTo(-11 * defaultScale)
+            make.bottom.equalTo(scoreView)
             make.right.equalTo(-rightSpacing)
         }
         homeMatch.snp.makeConstraints { (make) in
@@ -107,7 +110,7 @@ class FootballOrderScoreCell: UITableViewCell {
         }
         
         scoreView.snp.makeConstraints { (make) in
-            make.top.equalTo(35 * defaultScale)
+            make.top.equalTo(40 * defaultScale)
             make.bottom.equalTo(-15 * defaultScale)
             make.left.equalTo(deleteBut.snp.right).offset(leftSpacing)
             make.right.equalTo(danBut.snp.left).offset(-10 * defaultScale)
@@ -124,6 +127,7 @@ class FootballOrderScoreCell: UITableViewCell {
         scoreView.matchType = .比分
         
         danBut = UIButton(type: .custom)
+        danBut.titleLabel?.font = Font12
         danBut.setTitle("胆", for: .normal)
         danBut.layer.borderWidth = 0.3
         danBut.layer.borderColor = ColorC8C8C8.cgColor
