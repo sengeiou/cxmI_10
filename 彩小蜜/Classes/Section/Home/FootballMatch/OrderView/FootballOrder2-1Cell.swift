@@ -50,17 +50,10 @@ class FootballOrder2_1Cell: UITableViewCell, DateProtocol {
             danBut.backgroundColor = ColorFFFFFF
         }
         
-        var selected = false
+        let matchPlay = playInfoModel.matchPlays[0]
         
-        for cell in playInfoModel.selectedBan {
-            if cell.isSelected == true {
-                selected = true
-                break
-            }
-        }
-        
-        
-        if selected == false {
+        if !matchPlay.homeCell.isSelected &&
+            !matchPlay.visitingCell.isSelected {
             self.playInfoModel.isDan = false
             danBut.isUserInteractionEnabled = false
             danBut.setTitleColor(ColorC8C8C8, for: .normal)

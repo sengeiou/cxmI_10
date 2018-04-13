@@ -11,6 +11,7 @@ import UIKit
 protocol FootballTwoOneViewDelegate {
     func didSelectedTwoOneView(view:FootballTwoOneView, teamInfo: FootballPlayListModel ) -> Void
     func didDeSelectedTwoOneView(view:FootballTwoOneView, teamInfo: FootballPlayListModel ) -> Void
+    func didSelectedTwoOneView() -> Void
 }
 
 class FootballTwoOneView: UIView {
@@ -22,8 +23,8 @@ class FootballTwoOneView: UIView {
             guard let visiCell = matchPlay.visitingCell else { return }
             
             
-            homeBut.setTitle(homeCell.cellOdds, for: .normal)
-            visitingBut.setTitle(visiCell.cellOdds, for: .normal)
+            homeBut.setTitle(homeCell.cellName + homeCell.cellOdds, for: .normal)
+            visitingBut.setTitle(visiCell.cellName + visiCell.cellOdds, for: .normal)
             
             changeButState(but: homeBut, isSelected: homeCell.isSelected)
             changeButState(but: visitingBut, isSelected: visiCell.isSelected)
@@ -104,6 +105,8 @@ class FootballTwoOneView: UIView {
             teamInfo.matchPlays[0].homeCell.isSelected = false
             delegate.didDeSelectedTwoOneView(view: self, teamInfo: teamInfo)
         }
+        
+        delegate.didSelectedTwoOneView()
     }
     @objc private func visitingClicked(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
@@ -117,6 +120,7 @@ class FootballTwoOneView: UIView {
             teamInfo.matchPlays[0].visitingCell.isSelected = false
             delegate.didDeSelectedTwoOneView(view: self, teamInfo: teamInfo)
         }
+        delegate.didSelectedTwoOneView()
     }
     
     

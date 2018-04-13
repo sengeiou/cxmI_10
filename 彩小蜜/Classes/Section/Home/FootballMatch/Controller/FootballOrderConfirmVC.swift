@@ -17,7 +17,9 @@ fileprivate let FootballOrder2_1CellId = "FootballOrder2_1CellId"
 fileprivate let FootballOrderHunheCellId = "FootballOrderHunheCellId"
 
 
-class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballTeamViewDelegate, FootballOrderBottomViewDelegate, FootballTimesFilterVCDelegate, FootballPlayFilterVCDelegate, FootballFilterPro, FootballOrderProtocol, FootballOrderSPFCellDelegate, FootballTotalViewDelegate, FootballScoreViewDelegate{
+class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballTeamViewDelegate, FootballOrderBottomViewDelegate, FootballTimesFilterVCDelegate, FootballPlayFilterVCDelegate, FootballFilterPro, FootballOrderProtocol, FootballOrderSPFCellDelegate, FootballTotalViewDelegate, FootballScoreViewDelegate, FootballTwoOneViewDelegate{
+    
+    
    
     
     
@@ -206,7 +208,9 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     }
     private func init2Cell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballOrder2_1CellId, for: indexPath) as! FootballOrder2_1Cell
-        
+        cell.delegate = self
+        cell.twoOneView.delegate = self
+        cell.playInfoModel = playList[indexPath.section]
         return cell
     }
     private func initHunheCell(indexPath: IndexPath) -> UITableViewCell {
@@ -350,23 +354,13 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         guard selectPlayList != nil else { return }
         
         selectPlayList.append(teamInfo)
-        danMaxNum = 0
-        
-        for play in playList {
-            play.isDan = false
-        }
-        
-        self.tableView.reloadData()
+        self.resetDanState()
     }
     
     func deSelect(teamInfo: FootballPlayListModel) {
         guard selectPlayList != nil else { return }
         selectPlayList.remove(teamInfo)
-        danMaxNum = 0
-        for play in playList {
-            play.isDan = false
-        }
-        self.tableView.reloadData()
+        self.resetDanState()
     }
     func selectedItem() {
         guard homeData != nil else { return }
@@ -391,13 +385,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         selectPlayList.append(teamInfo)
         
         
-        danMaxNum = 0
-        
-        for play in playList {
-            play.isDan = false
-        }
-        
-        self.tableView.reloadData()
+        self.resetDanState()
     }
     
     func totalDeSelected(view: FootballTotalView, teamInfo: FootballPlayListModel) {
@@ -413,13 +401,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         guard selectPlayList != nil else { return }
         selectPlayList.remove(teamInfo)
         
-        danMaxNum = 0
-        
-        for play in playList {
-            play.isDan = false
-        }
-        
-        self.tableView.reloadData()
+        self.resetDanState()
     }
     func totalSelectedItem() {
         guard homeData != nil else { return }
@@ -446,6 +428,9 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         score.selected = { (selectedCells) in
             scoreView.selectedCells = selectedCells
             
+            guard weakSelf?.homeData != nil else { return }
+            weakSelf?.orderRequest()
+            
             if selectedCells.count > 0 {
                 guard scoreView.canAdd == true else { return }
                 guard (weakSelf?.selectPlayList.count)! < 15  else {
@@ -455,14 +440,13 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
                 
                 weakSelf?.selectPlayList.append(teamInfo)
                 scoreView.canAdd = false
+                weakSelf?.resetDanState()
                 
             }else {
                 weakSelf?.selectPlayList.remove(teamInfo)
                 scoreView.canAdd = true
+                weakSelf?.resetDanState()
             }
-            
-            guard weakSelf?.homeData != nil else { return }
-            weakSelf?.orderRequest ()
         }
         present(score)
     }
@@ -474,6 +458,8 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         
         score.selected = { (selectedCells) in
             scoreView.selectedCellList = selectedCells
+            guard weakSelf?.homeData != nil else { return }
+            weakSelf?.orderRequest()
             
             if selectedCells.count > 0 {
                 guard scoreView.canAdd == true else { return }
@@ -484,15 +470,52 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
                 
                 weakSelf?.selectPlayList.append(teamInfo)
                 scoreView.canAdd = false
-                
+                weakSelf?.resetDanState()
             }else {
                 weakSelf?.selectPlayList.remove(teamInfo)
                 scoreView.canAdd = true
+                weakSelf?.resetDanState()
             }
-            guard weakSelf?.homeData != nil else { return }
-            weakSelf?.orderRequest ()
         }
         present(score)
+    }
+    
+    
+    func didSelectedTwoOneView(view: FootballTwoOneView, teamInfo: FootballPlayListModel) {
+        guard teamInfo.matchPlays[0].homeCell.isSelected == false else { return }
+        guard teamInfo.matchPlays[0].visitingCell.isSelected == false else { return }
+        guard selectPlayList.count < 15 else {
+            view.backSelectedState()
+            showHUD(message: "最多可选15场比赛")
+            return }
+        guard selectPlayList != nil else { return }
+        selectPlayList.append(teamInfo)
+        
+        self.resetDanState()
+    }
+    
+    func didDeSelectedTwoOneView(view: FootballTwoOneView, teamInfo: FootballPlayListModel) {
+        guard teamInfo.matchPlays[0].homeCell.isSelected == false else { return }
+        guard teamInfo.matchPlays[0].visitingCell.isSelected == false else { return }
+        guard selectPlayList != nil else { return }
+        selectPlayList.remove(teamInfo)
+        
+        self.resetDanState()
+    }
+    
+    func didSelectedTwoOneView() {
+        guard homeData != nil else { return }
+        orderRequest ()
+    }
+    
+    private func resetDanState() {
+        danMaxNum = 0
+        
+        for play in playList {
+            play.isDan = false
+        }
+        
+        self.tableView.reloadData()
     }
     
     
