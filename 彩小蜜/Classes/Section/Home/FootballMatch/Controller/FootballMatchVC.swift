@@ -396,23 +396,22 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         let score = FootballScoreFilterVC()
         score.teamInfo = teamInfo
     
-        score.selected = { (selectedCells) in
+        score.selected = { (selectedCells, canAdd) in
             scoreView.selectedCells = selectedCells
+            guard canAdd == true else { return }
+            guard (weakSelf?.selectPlayList.count)! < 15  else {
+                scoreView.backSelectedState()
+                weakSelf?.showHUD(message: "最多可选15场比赛")
+                return }
+                
+            weakSelf?.selectPlayList.append(teamInfo)
+        }
+    
+        score.deSelected = { (selectedCells, canRemove) in
+            scoreView.selectedCells = selectedCells
+            guard canRemove == true else { return }
+            weakSelf?.selectPlayList.remove(teamInfo)
             
-            if selectedCells.count > 0 {
-                guard scoreView.canAdd == true else { return }
-                guard (weakSelf?.selectPlayList.count)! < 15  else {
-                    scoreView.backSelectedState()
-                    weakSelf?.showHUD(message: "最多可选15场比赛")
-                    return }
-                
-                weakSelf?.selectPlayList.append(teamInfo)
-                scoreView.canAdd = false
-                
-            }else {
-                weakSelf?.selectPlayList.remove(teamInfo)
-                scoreView.canAdd = true
-            }
         }
         present(score)
     }
@@ -422,23 +421,22 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         let score = FootballBanQuanCFilterVC()
         score.teamInfo = teamInfo
     
-        score.selected = { (selectedCells) in
+        score.selected = { (selectedCells, canAdd) in
             scoreView.selectedCellList = selectedCells
+            guard canAdd == true else { return }
+            guard (weakSelf?.selectPlayList.count)! < 15  else {
+                scoreView.backSelectedState()
+                weakSelf?.showHUD(message: "最多可选15场比赛")
+                return }
             
-            if selectedCells.count > 0 {
-                guard scoreView.canAdd == true else { return }
-                guard (weakSelf?.selectPlayList.count)! < 15  else {
-                    scoreView.backSelectedState()
-                    weakSelf?.showHUD(message: "最多可选15场比赛")
-                    return }
-                
-                weakSelf?.selectPlayList.append(teamInfo)
-                scoreView.canAdd = false
-                
-            }else {
-                weakSelf?.selectPlayList.remove(teamInfo)
-                scoreView.canAdd = true
-            }
+            weakSelf?.selectPlayList.append(teamInfo)
+        }
+        
+        score.deSelected = { (selectedCells, canRemove) in
+            scoreView.selectedCellList = selectedCells
+            guard canRemove == true else { return }
+            weakSelf?.selectPlayList.remove(teamInfo)
+            
         }
         present(score)
     }

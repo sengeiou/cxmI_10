@@ -8,7 +8,9 @@
 
 import UIKit
 
-typealias Selected  = (_ selectedCells : [SonCellModel]) -> ()
+typealias Selected  = (_ selectedCells : [SonCellModel], _ canAdd : Bool) -> ()
+typealias DeSelected = (_ selectedCells : [SonCellModel], _ canRemove : Bool) -> ()
+typealias SelectedItem = () -> ()
 
 class FootballScoreFilterVC: BasePopViewController, BottomViewDelegate, FootballCollectionViewDelegate {
     
@@ -22,11 +24,16 @@ class FootballScoreFilterVC: BasePopViewController, BottomViewDelegate, Football
             
             guard teamInfo.selectedScore != nil else { return }
             selectedCells = teamInfo.selectedScore
+            currentSelectedCells = teamInfo.selectedScore
         }
     }
 
     public var selected : Selected!
-    public var selectedCells : [SonCellModel]!
+    public var deSelected : DeSelected!
+    public var didSelected : SelectedItem!
+    private var selectedCells : [SonCellModel]!
+    
+    private var currentSelectedCells : [SonCellModel]!
     
     private var homeTeam : UILabel!
     private var vslb : UILabel!
@@ -48,6 +55,7 @@ class FootballScoreFilterVC: BasePopViewController, BottomViewDelegate, Football
         super.viewDidLoad()
         self.popStyle = .fromBottom
         selectedCells = [SonCellModel]()
+        currentSelectedCells = [SonCellModel]()
         initSubview()
     }
 
@@ -184,11 +192,40 @@ class FootballScoreFilterVC: BasePopViewController, BottomViewDelegate, Football
     func didSelectedItem(cellSon: SonCellModel) {
         guard selectedCells != nil else { return }
         selectedCells.append(cellSon)
+        self.teamInfo.selectedScore = selectedCells
+        
+        var canAdd = true
+        
+        if teamInfo.selectedScore.count == 1 {
+            canAdd = true
+        }else {
+            canAdd = false
+        }
+
+        self.selected(selectedCells, canAdd)
+
+        guard didSelected != nil else { return }
+        self.didSelected()
     }
     
     func didDeSelectedItem(cellSon: SonCellModel) {
         guard selectedCells != nil else { return }
         selectedCells.remove(cellSon)
+        
+        self.teamInfo.selectedScore = selectedCells
+        
+        var canRemove = true 
+        
+        if self.teamInfo.selectedScore.count == 0 {
+            canRemove = true
+        }else {
+            canRemove = false
+        }
+        
+        self.deSelected(selectedCells, canRemove)
+        
+        guard didSelected != nil else { return }
+        self.didSelected()
     }
     func didSelectedItem(cell: FootballPlayCellModel) {
     }
@@ -198,14 +235,14 @@ class FootballScoreFilterVC: BasePopViewController, BottomViewDelegate, Football
     func didTipConfitm() {
         guard selected != nil else { return }
         self.teamInfo.selectedScore = selectedCells
-        self.selected(selectedCells)
+        //self.selected(selectedCells)
         dismiss(animated: true, completion: nil)
     }
     
     func didTipCancel() {
         guard selected != nil else { return }
         self.teamInfo.selectedScore = selectedCells
-        self.selected(selectedCells)
+        //self.selected(selectedCells)
         dismiss(animated: true, completion: nil)
     }
     

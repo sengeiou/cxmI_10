@@ -8,7 +8,11 @@
 
 import UIKit
 
-typealias SelectedCell  = (_ selectedCells : [FootballPlayCellModel]) -> ()
+
+
+typealias SelectedCell  = (_ selectedCells : [FootballPlayCellModel], _ canAdd : Bool) -> ()
+typealias DeSelectedCell = (_ selectedCells : [FootballPlayCellModel], _ canRemove : Bool) -> ()
+typealias SelectedItemCell = () -> ()
 
 class FootballBanQuanCFilterVC: BasePopViewController, BottomViewDelegate, FootballCollectionViewDelegate {
     
@@ -26,6 +30,8 @@ class FootballBanQuanCFilterVC: BasePopViewController, BottomViewDelegate, Footb
     }
     
     public var selected : SelectedCell!
+    public var deSelected : DeSelectedCell!
+    public var didSelected : SelectedItemCell!
     public var selectedCells : [FootballPlayCellModel]!
     
     private var homeTeam : UILabel!
@@ -141,26 +147,57 @@ class FootballBanQuanCFilterVC: BasePopViewController, BottomViewDelegate, Footb
     }
     
     func didSelectedItem(cell: FootballPlayCellModel) {
+
         guard selectedCells != nil else { return }
         selectedCells.append(cell)
+        self.teamInfo.selectedBan = selectedCells
+        
+        var canAdd = true
+        
+        if teamInfo.selectedBan.count == 1 {
+            canAdd = true
+        }else {
+            canAdd = false
+        }
+        
+        self.selected(selectedCells, canAdd)
+        
+        guard didSelected != nil else { return }
+        self.didSelected()
     }
     
     func didDeSelectedItem(cell: FootballPlayCellModel) {
+      
         guard selectedCells != nil else { return }
         selectedCells.remove(cell)
+        
+        self.teamInfo.selectedBan = selectedCells
+        
+        var canRemove = true
+        
+        if self.teamInfo.selectedBan.count == 0 {
+            canRemove = true
+        }else {
+            canRemove = false
+        }
+        
+        self.deSelected(selectedCells, canRemove)
+        
+        guard didSelected != nil else { return }
+        self.didSelected()
     }
     
     func didTipConfitm() {
         guard selected != nil else { return }
         self.teamInfo.selectedBan = selectedCells
-        self.selected(selectedCells)
+        
         dismiss(animated: true, completion: nil)
     }
     
     func didTipCancel() {
         guard selected != nil else { return }
         self.teamInfo.selectedBan = selectedCells
-        self.selected(selectedCells)
+        
         dismiss(animated: true, completion: nil)
     }
     
