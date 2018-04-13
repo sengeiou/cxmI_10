@@ -18,17 +18,17 @@ class Football2_1Cell: UITableViewCell , DateProtocol{
             
             matchTitle.text = playInfoModel.leagueAddr
             matchTime.text = playInfoModel.changci
-            scoreView.teamInfo = playInfoModel
+            twoOneView.teamInfo = playInfoModel
             endTime.text = "截止" + timeStampToHHmm(playInfoModel.betEndTime)
-            if playInfoModel.matchPlays[0].single == true {
-                typeIcon.isHidden = false
-            }else {
-                typeIcon.isHidden = true
-            }
+//            if playInfoModel.matchPlays[0].single == true {
+//                typeIcon.isHidden = false
+//            }else {
+//                typeIcon.isHidden = true
+//            }
         }
     }
     
-    public var scoreView: FootballScoreView!
+    public var twoOneView: FootballTwoOneView!
     
     private var matchTitle: UILabel!
     private var matchTime: UILabel!
@@ -86,8 +86,8 @@ class Football2_1Cell: UITableViewCell , DateProtocol{
         
         homeMatch.snp.makeConstraints { (make) in
             make.top.equalTo(0)
-            make.bottom.equalTo(scoreView.snp.top)
-            make.left.equalTo(scoreView)
+            make.bottom.equalTo(twoOneView.snp.top)
+            make.left.equalTo(twoOneView)
         }
         vsLb.snp.makeConstraints { (make) in
             make.top.bottom.width.equalTo(homeMatch)
@@ -96,10 +96,10 @@ class Football2_1Cell: UITableViewCell , DateProtocol{
         visitingMatch.snp.makeConstraints { (make) in
             make.top.bottom.width.equalTo(homeMatch)
             make.left.equalTo(vsLb.snp.right)
-            make.right.equalTo(scoreView)
+            make.right.equalTo(twoOneView)
         }
         
-        scoreView.snp.makeConstraints { (make) in
+        twoOneView.snp.makeConstraints { (make) in
             make.bottom.equalTo(-18 * defaultScale)
             make.height.equalTo(28 * defaultScale)
             make.left.equalTo(endTime.snp.right).offset(10)
@@ -112,8 +112,7 @@ class Football2_1Cell: UITableViewCell , DateProtocol{
         line = UIImageView()
         line.image = UIImage(named: "line")
         
-        scoreView = FootballScoreView()
-        scoreView.matchType = .半全场
+        twoOneView = FootballTwoOneView()
         
         typeIcon = UIImageView()
         typeIcon.image = UIImage(named: "Singlefield")
@@ -141,7 +140,7 @@ class Football2_1Cell: UITableViewCell , DateProtocol{
         self.contentView.addSubview(matchTime)
         self.contentView.addSubview(endTime)
         self.contentView.addSubview(detailBut)
-        self.contentView.addSubview(scoreView)
+        self.contentView.addSubview(twoOneView)
         self.contentView.addSubview(homeMatch)
         self.contentView.addSubview(vsLb)
         self.contentView.addSubview(visitingMatch)

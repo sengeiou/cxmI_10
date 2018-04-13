@@ -28,7 +28,9 @@ fileprivate let Football2_1CellId = "Football2_1CellId"
 fileprivate let FootballHunheCellId = "FootballHunheCellId"
 
 
-class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballBottomViewDelegate, FootballSectionHeaderDelegate, FootballRequestPro, FootballTeamViewDelegate , FootballMatchFilterVCDelegate, FootballTotalViewDelegate, FootballScoreViewDelegate{
+class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballBottomViewDelegate, FootballSectionHeaderDelegate, FootballRequestPro, FootballTeamViewDelegate , FootballMatchFilterVCDelegate, FootballTotalViewDelegate, FootballScoreViewDelegate, FootballTwoOneViewDelegate{
+    
+    
     
     
     
@@ -206,7 +208,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     }
     private func init2Cell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Football2_1CellId, for: indexPath) as! Football2_1Cell
-        cell.scoreView.delegate = self
+        cell.twoOneView.delegate = self
         
         let matchModel = matchList[indexPath.section]
         cell.playInfoModel = matchModel.playList[indexPath.row]
@@ -242,6 +244,8 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         case .总进球:
             return (84 + 15) * defaultScale
         case .比分, .半全场:
+            return 84 * defaultScale
+        case .二选一:
             return 84 * defaultScale
         default: return 0
             
@@ -438,6 +442,17 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         }
         present(score)
     }
+    
+    // MARK: - 2选1 点击事件
+    func didSelectedTwoOneView(view: FootballTwoOneView, teamInfo: FootballPlayListModel) {
+        
+    }
+    
+    func didDeSelectedTwoOneView(view: FootballTwoOneView, teamInfo: FootballPlayListModel) {
+        
+    }
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

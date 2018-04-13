@@ -18,6 +18,7 @@
 		116EB212207F332900B32ABD /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116EB211207F332900B32ABD /* BottomView.swift */; };
 		116EB214207F672000B32ABD /* FootballBanQuanCFilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116EB213207F672000B32ABD /* FootballBanQuanCFilterVC.swift */; };
 		11A250BE207C9C2200780D3D /* FootballTotalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A250BD207C9C2200780D3D /* FootballTotalView.swift */; };
+		11A555EC20805D96004641AA /* FootballTwoOneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A555EB20805D96004641AA /* FootballTwoOneView.swift */; };
 		11EB8EE2207B6D9B00AFC9C1 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EB8EE1207B6D9B00AFC9C1 /* PaymentViewController.swift */; };
 		11EB8EE4207B6E8800AFC9C1 /* PaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EB8EE3207B6E8800AFC9C1 /* PaymentCell.swift */; };
 		11EB8EE6207B791500AFC9C1 /* PaymentMethodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EB8EE5207B791500AFC9C1 /* PaymentMethodCell.swift */; };
@@ -219,6 +220,7 @@
 		116EB211207F332900B32ABD /* BottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
 		116EB213207F672000B32ABD /* FootballBanQuanCFilterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballBanQuanCFilterVC.swift; sourceTree = "<group>"; };
 		11A250BD207C9C2200780D3D /* FootballTotalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballTotalView.swift; sourceTree = "<group>"; };
+		11A555EB20805D96004641AA /* FootballTwoOneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballTwoOneView.swift; sourceTree = "<group>"; };
 		11EB8EE1207B6D9B00AFC9C1 /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		11EB8EE3207B6E8800AFC9C1 /* PaymentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentCell.swift; sourceTree = "<group>"; };
 		11EB8EE5207B791500AFC9C1 /* PaymentMethodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodCell.swift; sourceTree = "<group>"; };
@@ -438,6 +440,7 @@
 				E5786FC3206E13840045F7F5 /* FootballTeamView.swift */,
 				11A250BD207C9C2200780D3D /* FootballTotalView.swift */,
 				1169180B207E3EC500C8A287 /* FootballScoreView.swift */,
+				11A555EB20805D96004641AA /* FootballTwoOneView.swift */,
 				116EB20B207F029600B32ABD /* FootballCollectionView.swift */,
 				116EB20D207F064300B32ABD /* FootballScoreCollectionCell.swift */,
 			);
@@ -1788,6 +1791,7 @@
 				E5973E27204E3CB0006461CE /* CountdownButton.swift in Sources */,
 				E5D8ABB6206739CF002D688B /* OrderDetailTitleCell.swift in Sources */,
 				E50B9073205231B500417BFE /* RechargeHeaderView.swift in Sources */,
+				11A555EC20805D96004641AA /* FootballTwoOneView.swift in Sources */,
 				E57376442046BC1300148622 /* LotteryViewController.swift in Sources */,
 				E59CB3DF205BA17F0086DD0E /* HomeHeaderView.swift in Sources */,
 				E514DDE22052B3E000274854 /* WithdrawalViewController.swift in Sources */,
