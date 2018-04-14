@@ -177,18 +177,8 @@ class FootballCollectionView: UIView , UICollectionViewDelegate, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        switch scoreType {
-        case .半全场:
-            cells[indexPath.row].isSelected = !cells[indexPath.row].isSelected
-            collectionView.reloadItems(at: [indexPath])
-            
-            guard delegate != nil else { return }
-            if cells[indexPath.row].isSelected == true {
-                delegate.didSelectedItem(cell: cells[indexPath.row])
-            }else {
-                delegate.didDeSelectedItem(cell: cells[indexPath.row])
-            }
-        default:
+        switch matchType {
+        case .比分, .混合过关:
             cellSons[indexPath.row].isSelected = !cellSons[indexPath.row].isSelected
             collectionView.reloadItems(at: [indexPath])
             
@@ -197,6 +187,17 @@ class FootballCollectionView: UIView , UICollectionViewDelegate, UICollectionVie
                 delegate.didSelectedItem(cellSon: cellSons[indexPath.row])
             }else {
                 delegate.didDeSelectedItem(cellSon: cellSons[indexPath.row])
+            }
+        default:
+            
+            cells[indexPath.row].isSelected = !cells[indexPath.row].isSelected
+            collectionView.reloadItems(at: [indexPath])
+            
+            guard delegate != nil else { return }
+            if cells[indexPath.row].isSelected == true {
+                delegate.didSelectedItem(cell: cells[indexPath.row])
+            }else {
+                delegate.didDeSelectedItem(cell: cells[indexPath.row])
             }
         }
         

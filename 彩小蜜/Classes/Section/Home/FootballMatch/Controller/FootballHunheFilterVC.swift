@@ -67,11 +67,11 @@ class FootballHunheFilterVC: BasePopViewController {
         super.viewDidLayoutSubviews()
         topTitleView.snp.makeConstraints { (make) in
             make.top.left.right.equalTo(0)
-            make.height.equalTo(44 * defaultScale)
+            make.height.equalTo(40 * defaultScale)
         }
         bottomView.snp.makeConstraints { (make) in
             make.bottom.equalTo(-SafeAreaBottomHeight)
-            make.height.equalTo(44 * defaultScale)
+            make.height.equalTo(36 * defaultScale)
             make.left.right.equalTo(0)
         }
         SPFTitlelb.snp.makeConstraints { (make) in
@@ -85,17 +85,17 @@ class FootballHunheFilterVC: BasePopViewController {
             make.left.width.height.equalTo(SPFTitlelb)
         }
         scoreTitlelb.snp.makeConstraints { (make) in
-            make.top.equalTo(rangSPFTitlelb.snp.bottom).offset(9 * defaultScale)
+            make.top.equalTo(rangSPFTitlelb.snp.bottom).offset(8 * defaultScale)
             make.left.width.equalTo(SPFTitlelb)
             make.height.equalTo(266 * defaultScale)
         }
         totalTitlelb.snp.makeConstraints { (make) in
-            make.top.equalTo(scoreTitlelb.snp.bottom).offset(9 * defaultScale)
+            make.top.equalTo(scoreTitlelb.snp.bottom).offset(8 * defaultScale)
             make.left.width.equalTo(SPFTitlelb)
             make.height.equalTo(38 * defaultScale)
         }
         banquanTitlelb.snp.makeConstraints { (make) in
-            make.top.equalTo(totalTitlelb.snp.bottom).offset(9 * defaultScale)
+            make.top.equalTo(totalTitlelb.snp.bottom).offset(8 * defaultScale)
             make.left.width.equalTo(SPFTitlelb)
             make.height.equalTo(114 * defaultScale)
         }
