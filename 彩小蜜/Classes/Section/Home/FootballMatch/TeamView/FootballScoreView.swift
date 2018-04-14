@@ -112,10 +112,7 @@ class FootballScoreView: UIView {
         
         self.addGestureRecognizer(tap)
         self.addSubview(titlelb)
-        
-        
-        
-        
+  
     }
     
     private func changeViewState(isSelected: Bool) {

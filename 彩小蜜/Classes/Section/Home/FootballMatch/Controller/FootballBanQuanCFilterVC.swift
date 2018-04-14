@@ -123,6 +123,7 @@ class FootballBanQuanCFilterVC: BasePopViewController, BottomViewDelegate, Footb
         
         banScoreView = FootballCollectionView()
         banScoreView.scoreType = .半全场
+        banScoreView.matchType = .半全场
         banScoreView.delegate = self
         
         

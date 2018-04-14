@@ -485,7 +485,14 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     }
     // Mark: - 混合 cell 点击更多  delegate
     func didTipMoreButton(teamInfo: FootballPlayListModel) {
+        let hunheFilter = FootballHunheFilterVC()
         
+        hunheFilter.teamInfo = teamInfo
+        
+        
+        
+        
+        present(hunheFilter)
     }
     
     override func didReceiveMemoryWarning() {

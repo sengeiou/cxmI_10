@@ -47,8 +47,13 @@ let Color44AE35 = UIColor(hexColor: "44AE35")
 let Color85C36b = UIColor(hexColor: "85C36b")
 /// 黄橙色
 let ColorF6AD41 = UIColor(hexColor: "F6AD41")
+
 /// 蓝色
 let Color65AADD = UIColor(hexColor: "65AADD")
+/// 浅蓝
+let Color85A5E1 = UIColor(hexColor: "85A5E1")
+/// 浅浅蓝
+let Color6CD6C4 = UIColor(hexColor: "6CD6C4")
 /// 浅绿
 let Color85C36B = UIColor(hexColor: "85C36B")
 /// 浅紫

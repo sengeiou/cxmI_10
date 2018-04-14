@@ -23,6 +23,7 @@ protocol FootballCollectionViewDelegate {
 }
 
 fileprivate let FilterCellHeight: CGFloat = 44 * defaultScale
+fileprivate let HunheCellHeight : CGFloat = 38 * defaultScale
 fileprivate let minimumLineSpacing : CGFloat = 0
 fileprivate let minimumInteritemSpacing : CGFloat = 0
 fileprivate let topInset : CGFloat = 0
@@ -91,22 +92,23 @@ class FootballCollectionView: UIView , UICollectionViewDelegate, UICollectionVie
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        switch scoreType {
-        case .半全场:
-            return cells.count
-        default :
+        switch matchType {
+        case .比分, .混合过关:
             return cellSons.count
+        default :
+            return cells.count
         }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FootballScoreCollectionCellId, for: indexPath) as! FootballScoreCollectionCell
     
         
-        switch scoreType {
-        case .半全场:
-            cell.cellInfo = cells[indexPath.row]
-        default :
+        switch matchType {
+        case .比分, .混合过关:
             cell.cellSon = cellSons[indexPath.row]
+            
+        default :
+            cell.cellInfo = cells[indexPath.row]
         }
         
         return cell
@@ -114,23 +116,53 @@ class FootballCollectionView: UIView , UICollectionViewDelegate, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        switch scoreType {
-        case .胜:
-            if indexPath.row == 12 {
-                return CGSize(width: FilterCellWidth * 3, height: FilterCellHeight)
-            }else {
+        switch matchType {
+        case .胜平负, .让球胜平负:
+            return CGSize(width: collectionviewwidth / 3, height: HunheCellHeight)
+        case .比分:
+            switch scoreType {
+            case .胜:
+                if indexPath.row == 12 {
+                    return CGSize(width: FilterCellWidth * 3, height: FilterCellHeight)
+                }else {
+                    return CGSize(width: FilterCellWidth, height: FilterCellHeight)
+                }
+            case .平:
                 return CGSize(width: FilterCellWidth, height: FilterCellHeight)
+            case .负:
+                if indexPath.row == 12 {
+                    return CGSize(width: FilterCellWidth * 3, height: FilterCellHeight)
+                }else {
+                    return CGSize(width: FilterCellWidth, height: FilterCellHeight)
+                }
+            case .半全场 :
+                return CGSize(width: collectionviewwidth / 3, height: FilterCellHeight)
             }
-        case .平:
-            return CGSize(width: FilterCellWidth, height: FilterCellHeight)
-        case .负:
-            if indexPath.row == 12 {
-                return CGSize(width: FilterCellWidth * 3, height: FilterCellHeight)
-            }else {
-                return CGSize(width: FilterCellWidth, height: FilterCellHeight)
+        case .总进球:
+            return CGSize(width: collectionviewwidth / 8, height: HunheCellHeight)
+        case .半全场:
+            return CGSize(width: collectionviewwidth / 3, height: HunheCellHeight)
+        case .混合过关:
+            switch scoreType {
+            case .胜:
+                if indexPath.row == 12 {
+                    return CGSize(width: FilterCellWidth * 3, height: HunheCellHeight)
+                }else {
+                    return CGSize(width: FilterCellWidth, height: HunheCellHeight)
+                }
+            case .平:
+                return CGSize(width: FilterCellWidth, height: HunheCellHeight)
+            case .负:
+                if indexPath.row == 12 {
+                    return CGSize(width: FilterCellWidth * 3, height: HunheCellHeight)
+                }else {
+                    return CGSize(width: FilterCellWidth, height: HunheCellHeight)
+                }
+            case .半全场 :
+                return CGSize(width: collectionviewwidth / 3, height: HunheCellHeight)
             }
-        case .半全场 :
-            return CGSize(width: collectionviewwidth / 3, height: FilterCellHeight)
+        default: return CGSize(width: 0, height: 0)
+            
         }
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
