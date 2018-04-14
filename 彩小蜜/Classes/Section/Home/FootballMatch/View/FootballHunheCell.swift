@@ -9,7 +9,7 @@
 import UIKit
 
 protocol FootballHunheCellDelegate {
-    func didTipMoreButton(teamInfo : FootballPlayListModel) -> Void
+    func didTipMoreButton(view : FootballHunheView, rangView : FootballHunheView, teamInfo : FootballPlayListModel) -> Void
 }
 
 class FootballHunheCell: UITableViewCell, DateProtocol {
@@ -203,7 +203,7 @@ class FootballHunheCell: UITableViewCell, DateProtocol {
     
     @objc private func moreButClicked(_ sender : UIButton) {
         guard delegate != nil else { return }
-        delegate.didTipMoreButton(teamInfo: playInfoModel)
+        delegate.didTipMoreButton(view: teamView, rangView: rangTeamView, teamInfo: playInfoModel)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

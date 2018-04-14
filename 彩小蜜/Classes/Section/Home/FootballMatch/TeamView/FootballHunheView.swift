@@ -46,6 +46,19 @@ class FootballHunheView: UIView {
         }
     }
     
+    public var selectedCellList: [FootballPlayCellModel]! {
+        didSet{
+            
+            if selectedCellList.isEmpty == false {
+                
+                //changeViewState(isSelected: true )
+            }else {
+                
+                //changeViewState(isSelected: false)
+            }
+            
+        }
+    }
     
     public var delegate: FootballHunheViewDelegate!
     
@@ -226,6 +239,7 @@ class FootballHunheView: UIView {
         }else {
             teamInfo.selectedHunhe.remove(matchPlay.homeCell)
         }
+        matchPlay.homeCell.isSelected = add
     }
     
     private func addFlatCell(_ add : Bool) {
@@ -245,6 +259,7 @@ class FootballHunheView: UIView {
         }else {
             teamInfo.selectedHunhe.remove(matchPlay.flatCell)
         }
+        matchPlay.flatCell.isSelected = add
     }
     private func addVisiCell(_ add : Bool) {
         var index = 0
@@ -263,6 +278,7 @@ class FootballHunheView: UIView {
         }else {
             teamInfo.selectedHunhe.remove(matchPlay.visitingCell)
         }
+        matchPlay.visitingCell.isSelected = add
     }
     
     

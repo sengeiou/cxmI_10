@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FootballHunheFilterVC: BasePopViewController {
+class FootballHunheFilterVC: BasePopViewController, BottomViewDelegate, FootballCollectionViewDelegate {
 
     public var teamInfo : FootballPlayListModel! {
         didSet{
@@ -35,8 +35,19 @@ class FootballHunheFilterVC: BasePopViewController {
             }else {
                 rangSPFTitlelb.text = "让\n球\n+\(teamInfo.matchPlays[0].fixedOdds!)"
             }
+            
+            selectedCells = teamInfo.selectedHunhe
         }
     }
+    
+    public var selectedScore : Selected!
+    public var deSelectedScore : DeSelected!
+    public var didSelectedScore : SelectedItem!
+    
+    public var selected : SelectedCell!
+    public var deSelected : DeSelectedCell!
+    public var didSelected : SelectedItemCell!
+    public var selectedCells : [FootballPlayCellModel]!
     
     // MARK: - 属性 private
     private var topTitleView : TopTitleView!
@@ -59,7 +70,7 @@ class FootballHunheFilterVC: BasePopViewController {
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        selectedCells = [FootballPlayCellModel]()
         self.popStyle = .fromBottom
         initSubview()
     }
@@ -144,6 +155,7 @@ class FootballHunheFilterVC: BasePopViewController {
         
         topTitleView = TopTitleView()
         bottomView = BottomView()
+        bottomView.delegate = self
         
         SPFTitlelb = getLabel()
         SPFTitlelb.font = Font10
@@ -170,28 +182,34 @@ class FootballHunheFilterVC: BasePopViewController {
         
         SPFView = FootballCollectionView()
         SPFView.matchType = .胜平负
+        SPFView.delegate = self 
         
         rangSPFView = FootballCollectionView()
         rangSPFView.matchType = .让球胜平负
+        rangSPFView.delegate = self
         
         scoreHomeView = FootballCollectionView()
         scoreHomeView.matchType = .混合过关
         scoreHomeView.scoreType = .胜
+        scoreHomeView.delegate = self
         
         scoreFlatView = FootballCollectionView()
         scoreFlatView.matchType = .混合过关
         scoreFlatView.scoreType = .平
+        scoreFlatView.delegate = self
         
         scoreVisiView = FootballCollectionView()
         scoreVisiView.matchType = .混合过关
         scoreVisiView.scoreType = .负
+        scoreVisiView.delegate = self
         
         totalView = FootballCollectionView()
         totalView.matchType = .总进球
+        totalView.delegate = self
         
         banquanView = FootballCollectionView()
         banquanView.matchType = .半全场
-        
+        banquanView.delegate = self
         
         self.pushBgView.addSubview(topTitleView)
         self.pushBgView.addSubview(bottomView)
@@ -218,6 +236,114 @@ class FootballHunheFilterVC: BasePopViewController {
         
         return lab
     }
+    
+    // MARK: - 选取Item delegate
+    func didSelectedItem(cellSon: SonCellModel) {
+        guard selectedCells != nil else { return }
+        let cell = FootballPlayCellModel()
+        cell.cellName = cellSon.cellName
+        cell.cellCode = cellSon.cellCode
+        cell.cellOdds = cellSon.cellOdds
+        cell.isSelected = cellSon.isSelected
+        selectedCells.append(cell)
+        self.teamInfo.selectedHunhe = selectedCells
+        
+        var canAdd = true
+        
+        if teamInfo.selectedHunhe.count == 1 {
+            canAdd = true
+        }else {
+            canAdd = false
+        }
+        
+        self.selected(selectedCells, canAdd)
+        
+        guard didSelected != nil else { return }
+        self.didSelected()
+    }
+    
+    func didDeSelectedItem(cellSon: SonCellModel) {
+        guard selectedCells != nil else { return }
+        let cell = FootballPlayCellModel()
+        cell.cellName = cellSon.cellName
+        cell.cellCode = cellSon.cellCode
+        cell.cellOdds = cellSon.cellOdds
+        cell.isSelected = cellSon.isSelected
+        selectedCells.remove(cell)
+        
+        self.teamInfo.selectedHunhe = selectedCells
+        
+        var canRemove = true
+        
+        if self.teamInfo.selectedHunhe.count == 0 {
+            canRemove = true
+        }else {
+            canRemove = false
+        }
+        
+        self.deSelected(selectedCells, canRemove)
+        
+        guard didSelected != nil else { return }
+        self.didSelected()
+    }
+    func didSelectedItem(cell: FootballPlayCellModel) {
+        guard selectedCells != nil else { return }
+        selectedCells.append(cell)
+        self.teamInfo.selectedHunhe = selectedCells
+        
+        var canAdd = true
+        
+        if teamInfo.selectedHunhe.count == 1 {
+            canAdd = true
+        }else {
+            canAdd = false
+        }
+        
+        self.selected(selectedCells, canAdd)
+        
+        guard didSelected != nil else { return }
+        self.didSelected()
+        
+    }
+    
+    func didDeSelectedItem(cell: FootballPlayCellModel) {
+        
+        guard selectedCells != nil else { return }
+        selectedCells.remove(cell)
+        
+        self.teamInfo.selectedHunhe = selectedCells
+        
+        var canRemove = true
+        
+        if self.teamInfo.selectedHunhe.count == 0 {
+            canRemove = true
+        }else {
+            canRemove = false
+        }
+        
+        self.deSelected(selectedCells, canRemove)
+        
+        guard didSelected != nil else { return }
+        self.didSelected()
+    }
+    func didTipConfitm() {
+        
+        self.teamInfo.selectedHunhe = selectedCells
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func didTipCancel() {
+        guard selected != nil else { return }
+        self.teamInfo.selectedHunhe = selectedCells
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
