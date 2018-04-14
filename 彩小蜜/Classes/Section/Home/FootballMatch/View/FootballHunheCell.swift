@@ -22,21 +22,21 @@ class FootballHunheCell: UITableViewCell, DateProtocol {
             rangTeamView.teamInfo = playInfoModel
             topTitleView.teamInfo = playInfoModel
             endTime.text = "截止" + timeStampToHHmm(playInfoModel.betEndTime)
-            if playInfoModel.matchPlays[0].single == true {
+            if playInfoModel.matchPlays[0].single == true ||
+                playInfoModel.matchPlays[1].single == true {
                 typeIcon.isHidden = false
             }else {
                 typeIcon.isHidden = true
             }
             
             // 2 为 胜平负，1为让球胜平负
-            
             guard playInfoModel.matchPlays[0].playType == "1" else { return }
             
             let rangMatchPlay = playInfoModel.matchPlays[0]
             
             rangTeamlb.text = "\(rangMatchPlay.fixedOdds!)"
             if rangMatchPlay.fixedOdds < 0 {
-                rangTeamlb.backgroundColor = Color44AE35
+                rangTeamlb.backgroundColor = Color85C36b
             }else {
                 rangTeamlb.backgroundColor = ColorF6AD41
             }
@@ -109,7 +109,7 @@ class FootballHunheCell: UITableViewCell, DateProtocol {
         }
         teamView.snp.makeConstraints { (make) in
             make.top.equalTo(35 * defaultScale)
-            make.left.equalTo(teamlb)
+            make.left.equalTo(teamlb.snp.right)
             make.right.equalTo(moreBut.snp.left)
         }
         rangTeamView.snp.makeConstraints { (make) in
@@ -120,7 +120,7 @@ class FootballHunheCell: UITableViewCell, DateProtocol {
         
         teamlb.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(teamView)
-            make.width.equalTo(30 * defaultScale)
+            make.width.equalTo(25 * defaultScale)
             make.left.equalTo(endTime.snp.right).offset(10)
         }
         rangTeamlb.snp.makeConstraints { (make) in
@@ -150,7 +150,7 @@ class FootballHunheCell: UITableViewCell, DateProtocol {
         teamlb = initLabel()
         teamlb.text = "0"
         teamlb.textColor = ColorFFFFFF
-        teamlb.backgroundColor = Color9F9F9F
+        teamlb.backgroundColor = ColorC7C7C7
         
         rangTeamlb = initLabel()
         rangTeamlb.textColor = ColorFFFFFF
@@ -171,9 +171,11 @@ class FootballHunheCell: UITableViewCell, DateProtocol {
         detailBut.titleLabel?.numberOfLines = 2
         
         moreBut = UIButton(type: .custom)
-        moreBut.setTitle("更多玩法", for: .normal)
+        moreBut.setTitle("更多\n玩法", for: .normal)
         moreBut.setTitleColor(Color787878, for: .normal)
         moreBut.titleLabel?.font = Font12
+        moreBut.layer.borderWidth = 0.3
+        moreBut.layer.borderColor = ColorC8C8C8.cgColor
         moreBut.addTarget(self, action: #selector(moreButClicked(_:)), for: .touchUpInside)
         
         

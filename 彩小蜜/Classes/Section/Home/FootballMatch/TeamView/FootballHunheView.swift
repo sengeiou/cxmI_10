@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol FootballHunheViewDelegate {
+    func didSelectedHunHeView(view: FootballHunheView, teamInfo: FootballPlayListModel) -> Void
+    func didDeSelectedHunHeView(view: FootballHunheView, teamInfo: FootballPlayListModel) -> Void
+}
+
 class FootballHunheView: UIView {
 
     public var matchType: FootballMatchType = .胜平负
@@ -21,11 +26,19 @@ class FootballHunheView: UIView {
                 guard teamInfo.matchPlays[1].homeCell != nil else { break }
                 let matchPlay = teamInfo.matchPlays[1]
                 setText(matchPlay: matchPlay)
+                changeViewBorderColor(single: matchPlay.single)
+                changeButState(but: homeBut, isSelected: matchPlay.homeCell.isSelected)
+                changeButState(but: drawBut, isSelected: matchPlay.flatCell.isSelected)
+                changeButState(but: awayBut, isSelected: matchPlay.visitingCell.isSelected)
             case .让球胜平负:
                 guard teamInfo.matchPlays[0].playType == "1" else { break }
                 guard teamInfo.matchPlays[0].homeCell != nil else { break }
                 let matchPlay = teamInfo.matchPlays[0]
                 setText(matchPlay: matchPlay)
+                changeViewBorderColor(single: matchPlay.single)
+                changeButState(but: homeBut, isSelected: matchPlay.homeCell.isSelected)
+                changeButState(but: drawBut, isSelected: matchPlay.flatCell.isSelected)
+                changeButState(but: awayBut, isSelected: matchPlay.visitingCell.isSelected)
             default: break
             }
             
@@ -33,20 +46,8 @@ class FootballHunheView: UIView {
         }
     }
     
-    private func setText(matchPlay: FootballMatchPlay) {
-        homeOdds.text = matchPlay.homeCell.cellName + matchPlay.homeCell.cellOdds
-        drawOdds.text = matchPlay.flatCell.cellName + matchPlay.flatCell.cellOdds
-        awayOdds.text = matchPlay.visitingCell.cellName + matchPlay.visitingCell.cellOdds
-    }
     
-    public var delegate: FootballTeamViewDelegate!
-    
-    
-    private var homeOdds: UILabel!
-    
-    private var drawOdds: UILabel!
-    
-    private var awayOdds: UILabel!
+    public var delegate: FootballHunheViewDelegate!
     
     private var homeBut: UIButton!
     private var drawBut: UIButton!
@@ -61,6 +62,11 @@ class FootballHunheView: UIView {
         
     }
     
+    public func backSelectedState(){
+        changeButState(but: homeBut, isSelected: false)
+        changeButState(but: drawBut, isSelected: false)
+        changeButState(but: awayBut, isSelected: false)
+    }
     private func changeButState(but: UIButton, isSelected: Bool) {
         if isSelected {
             but.setTitleColor(ColorFFFFFF, for: .normal)
@@ -69,8 +75,20 @@ class FootballHunheView: UIView {
             but.setTitleColor(Color787878, for: .normal)
             but.backgroundColor = ColorFFFFFF
         }
+        but.isSelected = isSelected
     }
-    
+    private func setText(matchPlay: FootballMatchPlay) {
+        homeBut.setTitle(matchPlay.homeCell.cellName + matchPlay.homeCell.cellOdds, for: .normal)
+        drawBut.setTitle(matchPlay.flatCell.cellName + matchPlay.flatCell.cellOdds, for: .normal)
+        awayBut.setTitle(matchPlay.visitingCell.cellName + matchPlay.visitingCell.cellOdds, for: .normal)
+    }
+    private func changeViewBorderColor(single : Bool) {
+        if single {
+            self.layer.borderColor = ColorEA5504.cgColor
+        }else {
+            self.layer.borderColor = ColorC8C8C8.cgColor
+        }
+    }
     
     
     override func layoutSubviews() {
@@ -100,28 +118,12 @@ class FootballHunheView: UIView {
             make.left.equalTo(lineTwo.snp.right)
             make.right.equalTo(0)
         }
-        
-        homeOdds.snp.makeConstraints { (make) in
-            make.left.equalTo(0)
-            make.top.equalTo(10)
-            make.bottom.equalTo(-10)
-        }
-        
-        drawOdds.snp.makeConstraints { (make) in
-            make.left.equalTo(homeOdds.snp.right)
-            make.top.bottom.width.equalTo(homeOdds)
-        }
-        
-        awayOdds.snp.makeConstraints { (make) in
-            make.left.equalTo(drawOdds.snp.right)
-            make.top.bottom.width.equalTo(drawOdds)
-            make.right.equalTo(0)
-        }
+    
     }
     private func initSubview() {
         self.backgroundColor = ColorFFFFFF
         self.layer.cornerRadius = 1
-        self.layer.borderWidth = 0.5
+        self.layer.borderWidth = 0.3
         self.layer.borderColor = ColorC8C8C8.cgColor
         
         lineOne = UIView()
@@ -129,30 +131,14 @@ class FootballHunheView: UIView {
         lineTwo = UIView()
         lineTwo.backgroundColor = ColorF4F4F4
         
-        homeBut = UIButton(type: .custom)
-        homeBut.backgroundColor = ColorFFFFFF
+        homeBut = getButton()
         homeBut.addTarget(self, action: #selector(homeClicked(_:)), for: .touchUpInside)
-        homeBut.isSelected = false
         
-        drawBut = UIButton(type: .custom)
-        drawBut.backgroundColor = ColorFFFFFF
+        drawBut = getButton()
         drawBut.addTarget(self, action: #selector(drawClicked(_:)), for: .touchUpInside)
         
-        awayBut = UIButton(type: .custom)
-        awayBut.backgroundColor = ColorFFFFFF
+        awayBut = getButton()
         awayBut.addTarget(self, action: #selector(awayClicked(_:)), for: .touchUpInside)
-        
-        homeOdds = initLabel()
-        homeOdds.font = Font10
-        homeOdds.text = "主胜1.57"
-    
-        drawOdds = initLabel()
-        drawOdds.font = Font10
-        drawOdds.text = "平3.6"
-        
-        awayOdds = initLabel()
-        awayOdds.font = Font10
-        awayOdds.text = "客胜1.88"
         
         self.addSubview(homeBut)
         self.addSubview(drawBut)
@@ -160,11 +146,6 @@ class FootballHunheView: UIView {
         self.addSubview(lineOne)
         self.addSubview(lineTwo)
         
-        homeBut.addSubview(homeOdds)
-        
-        drawBut.addSubview(drawOdds)
-        
-        awayBut.addSubview(awayOdds)
     }
     private func initLabel() -> UILabel {
         let lab = UILabel()
@@ -175,31 +156,114 @@ class FootballHunheView: UIView {
         return lab
     }
     
+    private func getButton() -> UIButton {
+        let but = UIButton(type: .custom)
+        but.backgroundColor = ColorFFFFFF
+        but.titleLabel?.font = Font10
+        but.setTitleColor(Color787878, for: .normal)
+        but.contentHorizontalAlignment = .center
+        return but
+    }
+    
+    
+    
     @objc private func homeClicked(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         
         changeButState(but: sender, isSelected: sender.isSelected)
         
         guard delegate != nil else { return }
-        delegate.selectedItem()
+        if sender.isSelected {
+            delegate.didSelectedHunHeView(view: self, teamInfo: teamInfo)
+            addHomeCell(true)
+        }else {
+            addHomeCell(false)
+            delegate.didDeSelectedHunHeView(view: self, teamInfo: teamInfo)
+        }
     }
     @objc private func drawClicked(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         
         changeButState(but: sender, isSelected: sender.isSelected)
         guard delegate != nil else { return }
-        delegate.selectedItem()
+        if sender.isSelected {
+            delegate.didSelectedHunHeView(view: self, teamInfo: teamInfo)
+            addFlatCell(true)
+        }else {
+            addFlatCell(false)
+            delegate.didDeSelectedHunHeView(view: self, teamInfo: teamInfo)
+        }
     }
     @objc private func awayClicked(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         
         changeButState(but: sender, isSelected: sender.isSelected)
         guard delegate != nil else { return }
-        delegate.selectedItem()
+        if sender.isSelected {
+            delegate.didSelectedHunHeView(view: self, teamInfo: teamInfo)
+            addVisiCell(true)
+        }else {
+            addVisiCell(false)
+            delegate.didDeSelectedHunHeView(view: self, teamInfo: teamInfo)
+        }
     }
     
     
+    private func addHomeCell(_ add : Bool) {
+        var index = 0
+        switch matchType {
+        case .胜平负:
+            index = 1
+        case .让球胜平负:
+            index = 0
+        default: break
+        }
+        guard teamInfo.matchPlays[index].playType == "2" else { return }
+        guard teamInfo.matchPlays[index].homeCell != nil else { return }
+        let matchPlay = teamInfo.matchPlays[index]
+        if add {
+            teamInfo.selectedHunhe.append(matchPlay.homeCell)
+        }else {
+            teamInfo.selectedHunhe.remove(matchPlay.homeCell)
+        }
+    }
     
+    private func addFlatCell(_ add : Bool) {
+        var index = 0
+        switch matchType {
+        case .胜平负:
+            index = 1
+        case .让球胜平负:
+            index = 0
+        default: break
+        }
+        guard teamInfo.matchPlays[index].playType == "2" else { return }
+        guard teamInfo.matchPlays[index].homeCell != nil else { return }
+        let matchPlay = teamInfo.matchPlays[index]
+        if add {
+            teamInfo.selectedHunhe.append(matchPlay.flatCell)
+        }else {
+            teamInfo.selectedHunhe.remove(matchPlay.flatCell)
+        }
+    }
+    private func addVisiCell(_ add : Bool) {
+        var index = 0
+        switch matchType {
+        case .胜平负:
+            index = 1
+        case .让球胜平负:
+            index = 0
+        default: break
+        }
+        guard teamInfo.matchPlays[index].playType == "2" else { return }
+        guard teamInfo.matchPlays[index].homeCell != nil else { return }
+        let matchPlay = teamInfo.matchPlays[index]
+        if add {
+            teamInfo.selectedHunhe.append(matchPlay.visitingCell)
+        }else {
+            teamInfo.selectedHunhe.remove(matchPlay.visitingCell)
+        }
+    }
     
     
     required init?(coder aDecoder: NSCoder) {
