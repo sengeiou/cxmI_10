@@ -139,11 +139,11 @@ class FootballBanQuanCFilterVC: BasePopViewController, BottomViewDelegate, Footb
     }
     
     // MARK: - 选取Item delegate
-    func didSelectedItem(cellSon: SonCellModel) {
+    func didSelectedItem(cellSon: FootballPlayCellModel) {
         
     }
     
-    func didDeSelectedItem(cellSon: SonCellModel) {
+    func didDeSelectedItem(cellSon: FootballPlayCellModel) {
        
     }
     

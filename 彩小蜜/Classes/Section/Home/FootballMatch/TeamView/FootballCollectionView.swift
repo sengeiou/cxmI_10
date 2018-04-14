@@ -16,8 +16,8 @@ enum ScoreType: String {
 }
 
 protocol FootballCollectionViewDelegate {
-    func didSelectedItem(cellSon : SonCellModel) -> Void
-    func didDeSelectedItem(cellSon : SonCellModel) -> Void
+    func didSelectedItem(cellSon : FootballPlayCellModel) -> Void
+    func didDeSelectedItem(cellSon : FootballPlayCellModel) -> Void
     func didSelectedItem(cell : FootballPlayCellModel) -> Void
     func didDeSelectedItem(cell : FootballPlayCellModel) -> Void
 }
@@ -35,7 +35,7 @@ fileprivate let FootballScoreCollectionCellId = "FootballScoreCollectionCellId"
 
 class FootballCollectionView: UIView , UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
 
-    public var cellSons : [SonCellModel]! {
+    public var cellSons : [FootballPlayCellModel]! {
         didSet{
             self.collectionView.reloadData()
         }

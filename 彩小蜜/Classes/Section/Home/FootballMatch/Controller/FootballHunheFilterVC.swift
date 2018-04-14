@@ -238,14 +238,10 @@ class FootballHunheFilterVC: BasePopViewController, BottomViewDelegate, Football
     }
     
     // MARK: - 选取Item delegate
-    func didSelectedItem(cellSon: SonCellModel) {
+    func didSelectedItem(cellSon: FootballPlayCellModel) {
         guard selectedCells != nil else { return }
-        let cell = FootballPlayCellModel()
-        cell.cellName = cellSon.cellName
-        cell.cellCode = cellSon.cellCode
-        cell.cellOdds = cellSon.cellOdds
-        cell.isSelected = cellSon.isSelected
-        selectedCells.append(cell)
+
+        selectedCells.append(cellSon)
         self.teamInfo.selectedHunhe = selectedCells
         
         var canAdd = true
@@ -262,14 +258,10 @@ class FootballHunheFilterVC: BasePopViewController, BottomViewDelegate, Football
         self.didSelected()
     }
     
-    func didDeSelectedItem(cellSon: SonCellModel) {
+    func didDeSelectedItem(cellSon: FootballPlayCellModel) {
         guard selectedCells != nil else { return }
-        let cell = FootballPlayCellModel()
-        cell.cellName = cellSon.cellName
-        cell.cellCode = cellSon.cellCode
-        cell.cellOdds = cellSon.cellOdds
-        cell.isSelected = cellSon.isSelected
-        selectedCells.remove(cell)
+
+        selectedCells.remove(cellSon)
         
         self.teamInfo.selectedHunhe = selectedCells
         
@@ -287,6 +279,7 @@ class FootballHunheFilterVC: BasePopViewController, BottomViewDelegate, Football
         self.didSelected()
     }
     func didSelectedItem(cell: FootballPlayCellModel) {
+        cell.isSelected = true
         guard selectedCells != nil else { return }
         selectedCells.append(cell)
         self.teamInfo.selectedHunhe = selectedCells
@@ -307,7 +300,7 @@ class FootballHunheFilterVC: BasePopViewController, BottomViewDelegate, Football
     }
     
     func didDeSelectedItem(cell: FootballPlayCellModel) {
-        
+        cell.isSelected = false
         guard selectedCells != nil else { return }
         selectedCells.remove(cell)
         

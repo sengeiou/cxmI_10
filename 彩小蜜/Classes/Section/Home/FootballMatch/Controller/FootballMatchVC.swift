@@ -471,18 +471,21 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     
     // MARK: - 混合 按钮 点击   delegate
     func didSelectedHunHeView(view: FootballHunheView, teamInfo: FootballPlayListModel) {
+        self.tableView.reloadData()
         guard selectPlayList.count < 15 else {
             view.backSelectedState()
             showHUD(message: "最多可选15场比赛")
             return }
         guard teamInfo.selectedHunhe.count == 0 else { return }
         selectPlayList.append(teamInfo)
+        
     }
-    
     func didDeSelectedHunHeView(view: FootballHunheView, teamInfo: FootballPlayListModel) {
+        self.tableView.reloadData()
         guard teamInfo.selectedHunhe.count == 0 else { return }
         selectPlayList.remove(teamInfo)
     }
+    
     // Mark: - 混合 cell 点击更多  delegate
     func didTipMoreButton(view : FootballHunheView, rangView : FootballHunheView, teamInfo: FootballPlayListModel) {
         let hunheFilter = FootballHunheFilterVC()
@@ -504,8 +507,8 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         }
         
         hunheFilter.deSelected = { (selectedCells, canRemove) in
-            view.selectedCellList = selectedCells
             self.tableView.reloadData()
+            view.selectedCellList = selectedCells
             guard canRemove == true else { return }
             weakSelf?.selectPlayList.remove(teamInfo)
             

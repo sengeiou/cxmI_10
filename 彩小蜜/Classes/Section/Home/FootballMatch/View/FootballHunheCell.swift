@@ -29,6 +29,19 @@ class FootballHunheCell: UITableViewCell, DateProtocol {
                 typeIcon.isHidden = true
             }
             
+            if playInfoModel.selectedHunhe.isEmpty == false {
+                let muAtt = NSMutableAttributedString(string: "已选\n", attributes: [NSAttributedStringKey.foregroundColor: Color505050])
+                let num = NSAttributedString(string: "\(playInfoModel.selectedHunhe.count)", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+                let 项 = NSAttributedString(string: "项", attributes: [NSAttributedStringKey.foregroundColor: Color505050])
+                muAtt.append(num)
+                muAtt.append(项)
+                
+                moreBut.setAttributedTitle(muAtt, for: .normal)
+            }else {
+                let att = NSAttributedString(string: "更多\n玩法", attributes: [NSAttributedStringKey.foregroundColor: Color787878])
+                moreBut.setAttributedTitle(att, for: .normal)
+            }
+            
             // 2 为 胜平负，1为让球胜平负
             guard playInfoModel.matchPlays[0].playType == "1" else { return }
             
@@ -174,6 +187,7 @@ class FootballHunheCell: UITableViewCell, DateProtocol {
         moreBut.setTitle("更多\n玩法", for: .normal)
         moreBut.setTitleColor(Color787878, for: .normal)
         moreBut.titleLabel?.font = Font12
+        moreBut.titleLabel?.numberOfLines = 0
         moreBut.layer.borderWidth = 0.3
         moreBut.layer.borderColor = ColorC8C8C8.cgColor
         moreBut.addTarget(self, action: #selector(moreButClicked(_:)), for: .touchUpInside)

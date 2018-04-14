@@ -12,7 +12,7 @@ import UIKit
 class FootballScoreCollectionCell: UICollectionViewCell {
     
     //比分
-    public var cellSon : SonCellModel! {
+    public var cellSon : FootballPlayCellModel! {
         didSet{
             selected(cellSon.isSelected)
             titlelb.text = cellSon.cellName

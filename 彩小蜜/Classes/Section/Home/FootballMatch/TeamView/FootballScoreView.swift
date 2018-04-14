@@ -37,7 +37,7 @@ class FootballScoreView: UIView {
         }
     }
     // 比分
-    public var selectedCells : [SonCellModel]! {
+    public var selectedCells : [FootballPlayCellModel]! {
         didSet{
             
             if selectedCells.isEmpty == false {
@@ -88,7 +88,7 @@ class FootballScoreView: UIView {
     init() {
         super.init(frame: CGRect.zero)
         initSubview()
-        selectedCells = [SonCellModel]()
+        selectedCells = [FootballPlayCellModel]()
         selectedCellList = [FootballPlayCellModel]()
     }
     
@@ -148,7 +148,7 @@ class FootballScoreView: UIView {
         
         titlelb.text = title
     }
-    private func changeScoreView(list : [SonCellModel]) {
+    private func changeScoreView(list : [FootballPlayCellModel]) {
         var title = ""
         for cell in list {
             title += cell.cellOdds + " "

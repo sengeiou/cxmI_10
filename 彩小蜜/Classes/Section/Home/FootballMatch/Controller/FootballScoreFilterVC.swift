@@ -8,8 +8,8 @@
 
 import UIKit
 
-typealias Selected  = (_ selectedCells : [SonCellModel], _ canAdd : Bool) -> ()
-typealias DeSelected = (_ selectedCells : [SonCellModel], _ canRemove : Bool) -> ()
+typealias Selected  = (_ selectedCells : [FootballPlayCellModel], _ canAdd : Bool) -> ()
+typealias DeSelected = (_ selectedCells : [FootballPlayCellModel], _ canRemove : Bool) -> ()
 typealias SelectedItem = () -> ()
 
 class FootballScoreFilterVC: BasePopViewController, BottomViewDelegate, FootballCollectionViewDelegate {
@@ -31,9 +31,9 @@ class FootballScoreFilterVC: BasePopViewController, BottomViewDelegate, Football
     public var selected : Selected!
     public var deSelected : DeSelected!
     public var didSelected : SelectedItem!
-    private var selectedCells : [SonCellModel]!
+    private var selectedCells : [FootballPlayCellModel]!
     
-    private var currentSelectedCells : [SonCellModel]!
+    private var currentSelectedCells : [FootballPlayCellModel]!
     
     private var homeTeam : UILabel!
     private var vslb : UILabel!
@@ -54,8 +54,8 @@ class FootballScoreFilterVC: BasePopViewController, BottomViewDelegate, Football
     override func viewDidLoad() {
         super.viewDidLoad()
         self.popStyle = .fromBottom
-        selectedCells = [SonCellModel]()
-        currentSelectedCells = [SonCellModel]()
+        selectedCells = [FootballPlayCellModel]()
+        currentSelectedCells = [FootballPlayCellModel]()
         initSubview()
     }
 
@@ -189,7 +189,7 @@ class FootballScoreFilterVC: BasePopViewController, BottomViewDelegate, Football
     }
     
     // MARK: - 选取Item delegate
-    func didSelectedItem(cellSon: SonCellModel) {
+    func didSelectedItem(cellSon: FootballPlayCellModel) {
         guard selectedCells != nil else { return }
         selectedCells.append(cellSon)
         self.teamInfo.selectedScore = selectedCells
@@ -208,7 +208,7 @@ class FootballScoreFilterVC: BasePopViewController, BottomViewDelegate, Football
         self.didSelected()
     }
     
-    func didDeSelectedItem(cellSon: SonCellModel) {
+    func didDeSelectedItem(cellSon: FootballPlayCellModel) {
         guard selectedCells != nil else { return }
         selectedCells.remove(cellSon)
         

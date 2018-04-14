@@ -57,7 +57,7 @@ class FootballPlayListModel:NSObject, HandyJSON {
     var matchPlays : [FootballMatchPlay]!
     
     //var isSelected : Bool! = false
-    var selectedScore : [SonCellModel]!
+    var selectedScore : [FootballPlayCellModel]!
     var selectedBan : [FootballPlayCellModel]!
     var selectedHunhe : [FootballPlayCellModel] = [FootballPlayCellModel]()
 }
@@ -83,15 +83,15 @@ class FootballPlayCellModel:NSObject, HandyJSON {
     var cellCode: String!
     var cellName: String!
     var cellOdds: String!
-    var cellSons: [SonCellModel]!
+    var cellSons: [FootballPlayCellModel]!
 }
 
-class SonCellModel: NSObject, HandyJSON {
-    required override init() { }
-    var isSelected = false
-    var cellCode: String!
-    var cellName: String!
-    var cellOdds: String!
-}
+//class SonCellModel: NSObject, HandyJSON {
+//    required override init() { }
+//    var isSelected = false
+//    var cellCode: String!
+//    var cellName: String!
+//    var cellOdds: String!
+//}
 
 

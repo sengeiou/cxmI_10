@@ -231,7 +231,7 @@ class FootballHunheView: UIView {
             index = 0
         default: break
         }
-        guard teamInfo.matchPlays[index].playType == "2" else { return }
+        
         guard teamInfo.matchPlays[index].homeCell != nil else { return }
         let matchPlay = teamInfo.matchPlays[index]
         if add {
@@ -251,7 +251,6 @@ class FootballHunheView: UIView {
             index = 0
         default: break
         }
-        guard teamInfo.matchPlays[index].playType == "2" else { return }
         guard teamInfo.matchPlays[index].homeCell != nil else { return }
         let matchPlay = teamInfo.matchPlays[index]
         if add {
@@ -270,7 +269,7 @@ class FootballHunheView: UIView {
             index = 0
         default: break
         }
-        guard teamInfo.matchPlays[index].playType == "2" else { return }
+      
         guard teamInfo.matchPlays[index].homeCell != nil else { return }
         let matchPlay = teamInfo.matchPlays[index]
         if add {
