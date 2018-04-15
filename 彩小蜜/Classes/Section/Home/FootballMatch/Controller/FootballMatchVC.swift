@@ -294,8 +294,6 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         header.isSpreading = !header.isSpreading
         
         tableView.reloadSections(IndexSet(integer: section), with: .automatic)
-        
-        
     }
     
     // MARK: - FOOTBALL Bottom delegate  确认 取消

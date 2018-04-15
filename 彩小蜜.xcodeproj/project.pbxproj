@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		0239AFB787326CE28D84A44F /* Pods____UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAE714330A11D581FBF18120 /* Pods____UITests.framework */; };
+		11062B1F2082FFD8001C1D14 /* LotteryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11062B1E2082FFD8001C1D14 /* LotteryHeaderView.swift */; };
+		11062B21208322D0001C1D14 /* LotteryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11062B20208322D0001C1D14 /* LotteryCell.swift */; };
+		11062B2320832B99001C1D14 /* LotterySectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11062B2220832B99001C1D14 /* LotterySectionHeader.swift */; };
+		11062B2520833295001C1D14 /* LotteryResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11062B2420833295001C1D14 /* LotteryResultModel.swift */; };
+		11062B27208344CB001C1D14 /* LotteryDateFilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11062B26208344CB001C1D14 /* LotteryDateFilterVC.swift */; };
+		11062B29208344DC001C1D14 /* LotteryMoreFilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11062B28208344DC001C1D14 /* LotteryMoreFilterVC.swift */; };
+		11062B2D20834A60001C1D14 /* LotteryDateFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11062B2C20834A60001C1D14 /* LotteryDateFilterCell.swift */; };
+		11062B2F20834BFA001C1D14 /* LotteryDateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11062B2E20834BFA001C1D14 /* LotteryDateModel.swift */; };
 		11691806207DB73800C8A287 /* CouponFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11691805207DB73800C8A287 /* CouponFilterViewController.swift */; };
 		11691808207DB82E00C8A287 /* CouponFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11691807207DB82E00C8A287 /* CouponFilterCell.swift */; };
 		1169180A207DBA8B00C8A287 /* PaymentResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11691809207DBA8B00C8A287 /* PaymentResultModel.swift */; };
@@ -213,6 +221,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		11062B1E2082FFD8001C1D14 /* LotteryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryHeaderView.swift; sourceTree = "<group>"; };
+		11062B20208322D0001C1D14 /* LotteryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryCell.swift; sourceTree = "<group>"; };
+		11062B2220832B99001C1D14 /* LotterySectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotterySectionHeader.swift; sourceTree = "<group>"; };
+		11062B2420833295001C1D14 /* LotteryResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryResultModel.swift; sourceTree = "<group>"; };
+		11062B26208344CB001C1D14 /* LotteryDateFilterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryDateFilterVC.swift; sourceTree = "<group>"; };
+		11062B28208344DC001C1D14 /* LotteryMoreFilterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryMoreFilterVC.swift; sourceTree = "<group>"; };
+		11062B2C20834A60001C1D14 /* LotteryDateFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryDateFilterCell.swift; sourceTree = "<group>"; };
+		11062B2E20834BFA001C1D14 /* LotteryDateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryDateModel.swift; sourceTree = "<group>"; };
 		11691805207DB73800C8A287 /* CouponFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponFilterViewController.swift; sourceTree = "<group>"; };
 		11691807207DB82E00C8A287 /* CouponFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponFilterCell.swift; sourceTree = "<group>"; };
 		11691809207DBA8B00C8A287 /* PaymentResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentResultModel.swift; sourceTree = "<group>"; };
@@ -966,6 +982,8 @@
 			isa = PBXGroup;
 			children = (
 				E57376432046BC1300148622 /* LotteryViewController.swift */,
+				11062B26208344CB001C1D14 /* LotteryDateFilterVC.swift */,
+				11062B28208344DC001C1D14 /* LotteryMoreFilterVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -973,6 +991,10 @@
 		E57375E02046AF4F00148622 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				11062B1E2082FFD8001C1D14 /* LotteryHeaderView.swift */,
+				11062B2220832B99001C1D14 /* LotterySectionHeader.swift */,
+				11062B20208322D0001C1D14 /* LotteryCell.swift */,
+				11062B2C20834A60001C1D14 /* LotteryDateFilterCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -980,6 +1002,8 @@
 		E57375E12046AF5200148622 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				11062B2420833295001C1D14 /* LotteryResultModel.swift */,
+				11062B2E20834BFA001C1D14 /* LotteryDateModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1775,6 +1799,7 @@
 				E59CB3DD205BA1650086DD0E /* HomeSportLotteryCell.swift in Sources */,
 				E50B9075205231C800417BFE /* RechargeFooterView.swift in Sources */,
 				11EB8EE4207B6E8800AFC9C1 /* PaymentCell.swift in Sources */,
+				11062B27208344CB001C1D14 /* LotteryDateFilterVC.swift in Sources */,
 				E533BF032060EB3A0037D2D8 /* RechargePaymentTitleCell.swift in Sources */,
 				E5D8ABC020674A07002D688B /* OrderDetailFooterView.swift in Sources */,
 				E5D8ABBC2067443E002D688B /* OrderProgrammeCell.swift in Sources */,
@@ -1800,6 +1825,7 @@
 				E5973E27204E3CB0006461CE /* CountdownButton.swift in Sources */,
 				E5D8ABB6206739CF002D688B /* OrderDetailTitleCell.swift in Sources */,
 				E50B9073205231B500417BFE /* RechargeHeaderView.swift in Sources */,
+				11062B21208322D0001C1D14 /* LotteryCell.swift in Sources */,
 				11A555EC20805D96004641AA /* FootballTwoOneView.swift in Sources */,
 				E57376442046BC1300148622 /* LotteryViewController.swift in Sources */,
 				E59CB3DF205BA17F0086DD0E /* HomeHeaderView.swift in Sources */,
@@ -1809,10 +1835,13 @@
 				E512A96D20480917003F14F4 /* HomeDataModel.swift in Sources */,
 				E51F9A56205A11EA00AB8A21 /* MobileTextFieldCell.swift in Sources */,
 				11A25C502080BC1200085C58 /* FootballHunheFilterVC.swift in Sources */,
+				11062B29208344DC001C1D14 /* LotteryMoreFilterVC.swift in Sources */,
 				E55016FB20724E4E0056AB1F /* FootballFilterModel.swift in Sources */,
 				11EB8EE8207B8A5500AFC9C1 /* FootballSaveBetInfoModel.swift in Sources */,
 				E59CB3E1205BBD900086DD0E /* HomeFootballCell.swift in Sources */,
+				11062B2F20834BFA001C1D14 /* LotteryDateModel.swift in Sources */,
 				E537397D2057F7220087E4E6 /* RealInfoDataModel.swift in Sources */,
+				11062B2520833295001C1D14 /* LotteryResultModel.swift in Sources */,
 				E58B57BA2056364A0025E2F1 /* AddNewBankCardVC.swift in Sources */,
 				E51F9A64205A2A2D00AB8A21 /* ForgetPswVCodeFooterView.swift in Sources */,
 				E55016F7207228220056AB1F /* FootballFilterCell.swift in Sources */,
@@ -1822,6 +1851,7 @@
 				E550D8902073267E002DDE23 /* Extension+Array.swift in Sources */,
 				E5883F5E20690CED00CB3A46 /* AccountDetailsVC.swift in Sources */,
 				E510325A2065044100A0156C /* PurchaseRecordInfoModel.swift in Sources */,
+				11062B1F2082FFD8001C1D14 /* LotteryHeaderView.swift in Sources */,
 				E5786FC0206DEA650045F7F5 /* Football2-1Cell.swift in Sources */,
 				E533BF012060DE600037D2D8 /* RechargeTitleCell.swift in Sources */,
 				E5D5A377206D034100FC865D /* FootballMatchVC.swift in Sources */,
@@ -1859,6 +1889,7 @@
 				E56CE80E206A22240090A1B5 /* WithdrawalProgressCell.swift in Sources */,
 				E5973E20204E34A3006461CE /* FontConstraint.swift in Sources */,
 				E56CE812206A23070090A1B5 /* WithdrawalProgressHeader.swift in Sources */,
+				11062B2D20834A60001C1D14 /* LotteryDateFilterCell.swift in Sources */,
 				E55016F920722E190056AB1F /* FootballFilterTopView.swift in Sources */,
 				E567636A206B2FDA00E2D9A8 /* HHTextView.swift in Sources */,
 				E5973E33204FC1D9006461CE /* MeFooterView.swift in Sources */,
@@ -1931,6 +1962,7 @@
 				E5A2644E205B742B00EE6491 /* HomeViewController.swift in Sources */,
 				E58B57C7205676EC0025E2F1 /* LotteryNetAPIManager.swift in Sources */,
 				E56CE80A2069F4080090A1B5 /* AccountListModel.swift in Sources */,
+				11062B2320832B99001C1D14 /* LotterySectionHeader.swift in Sources */,
 				E51F9A5A205A122000AB8A21 /* VcodeTextFieldCell.swift in Sources */,
 				116EB20C207F029600B32ABD /* FootballCollectionView.swift in Sources */,
 				116EB20E207F064300B32ABD /* FootballScoreCollectionCell.swift in Sources */,

@@ -12,23 +12,26 @@ import RxSwift
 let lotteryProvider = MoyaProvider<LotteryNetAPIManager>(plugins:[RequestLoadingPlugin()])
 
 enum LotteryNetAPIManager {
-    case lottery
+    case lotteryResult (date: String, isAlready: Bool, leagueIds: String)
 }
 
 extension LotteryNetAPIManager : TargetType {
     var baseURL : URL {
-        return URL(string : baseURLStr)!
+        return URL(string : baseURLStr + "7077" + xpath )!
     }
     
-    var headers: [String : String]? {
-        return nil
+    var xpath : String {
+        switch self {
+        case .lotteryResult:
+            return "/lottery/match/queryMatchResult"
+        }
     }
     
     var path : String {
         
         switch self {
         
-        case .lottery:
+        case .lotteryResult:
             return ""
         }
     }
@@ -40,7 +43,11 @@ extension LotteryNetAPIManager : TargetType {
             return .post
         }
     }
-    
+    var headers: [String : String]? {
+        return ["Content-Type" : "application/json",
+                "token" : UserInfoManager().getToken()
+        ]
+    }
     var parameters: [String: Any]? {
         switch self {
         
@@ -51,16 +58,12 @@ extension LotteryNetAPIManager : TargetType {
     
     var task: Task {
         var dic : [String: Any] = [:]
-        dic["loginSource"] = "2"
         
         switch self {
-//        case .register(let mobile ,let password, let vcode):
-//            dic["mobile"] = mobile
-//            dic["password"] = password
-//            dic["smsCode"] = vcode
-//        case .loginByPass(let mobile, let password):
-//            dic["mobile"] = mobile
-//            dic["password"] = password
+        case .lotteryResult(let date, let isAlready, let leagueIds ):
+            dic["dateStr"] = date
+            dic["isAlreadyBuyMatch"] = isAlready
+            dic["leageuIds"] = leagueIds
         default:
             return .requestPlain
         }
