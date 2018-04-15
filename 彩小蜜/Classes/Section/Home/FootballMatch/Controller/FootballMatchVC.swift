@@ -298,7 +298,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         
     }
     
-    // MARK: - FOOTBALL Bottom delegate
+    // MARK: - FOOTBALL Bottom delegate  确认 取消
     func delete() {
         weak var weakSelf = self
         showCXMAlert(title: nil, message: "您正在清空方案列表", action: "清空", cancel: "返回") { (action) in
@@ -313,15 +313,33 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
 
         guard selectPlayList.count >= 2 else {
             let play = selectPlayList[0]
-            guard play.matchPlays[0].single == true else {
-                showHUD(message: "请至少选择1场单关比赛或者2场非单关比赛")
-                return }
+            if play.matchPlays.count == 1 {
+                guard play.matchPlays[0].single == true else {
+                    showHUD(message: "请至少选择1场单关比赛或者2场非单关比赛")
+                    return }
+                
+                let order = FootballOrderConfirmVC()
+                order.matchType = self.matchType
+                order.playList = selectPlayList
+                order.homeData = homeData
+                pushViewController(vc: order)
+            }else {
+                guard play.matchPlays.count == 5 else { return }
+                guard play.matchPlays[0].single == true ||
+                play.matchPlays[1].single == true ||
+                play.matchPlays[2].single == true ||
+                play.matchPlays[3].single == true ||
+                play.matchPlays[4].single == true else {
+                    showHUD(message: "请至少选择1场单关比赛或者2场非单关比赛")
+                    return }
+                
+                let order = FootballOrderConfirmVC()
+                order.matchType = self.matchType
+                order.playList = selectPlayList
+                order.homeData = homeData
+                pushViewController(vc: order)
+            }
             
-            let order = FootballOrderConfirmVC()
-            order.matchType = self.matchType
-            order.playList = selectPlayList
-            order.homeData = homeData
-            pushViewController(vc: order)
             return
         }
         let order = FootballOrderConfirmVC()

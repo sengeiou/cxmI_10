@@ -121,9 +121,21 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
         guard selectPlayList.isEmpty == false else { return }
         
         if selectPlayList.count == 1 {
-            guard selectPlayList[0].matchPlays[0].single == true else {
-                showHUD(message: "请选择一场单关或2场以上非单关比赛")
-                return }
+            let play = selectPlayList[0]
+            if play.matchPlays.count == 1 {
+                guard selectPlayList[0].matchPlays[0].single == true else {
+                    showHUD(message: "请选择一场单关或2场以上非单关比赛")
+                    return }
+            }else {
+                guard play.matchPlays.count == 5 else { return }
+                guard play.matchPlays[0].single == true ||
+                    play.matchPlays[1].single == true ||
+                    play.matchPlays[2].single == true ||
+                    play.matchPlays[3].single == true ||
+                    play.matchPlays[4].single == true else {
+                        showHUD(message: "请至少选择1场单关比赛或者2场非单关比赛")
+                        return }
+            }
         }
         
         let requestModel = getRequestModel(betType: betType, times: times, bonusId: "", homeData: self.homeData)
