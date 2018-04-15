@@ -215,7 +215,9 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     }
     private func initHunheCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballOrderHunheCellId, for: indexPath) as! FootballOrderHunheCell
-        
+        cell.delegate = self
+        cell.scoreView.delegate = self
+        cell.playInfoModel = playList[indexPath.section]
         return cell
     }
     
@@ -416,16 +418,17 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
             pushScoreView(scoreView: scoreView, teamInfo: teamInfo)
         case .半全场:
             pushBanQuanCView(scoreView: scoreView, teamInfo: teamInfo)
+        case .混合过关:
+            pushHunheView(scoreView: scoreView, teamInfo: teamInfo)
         default: break
         }
     }
     
     private func pushScoreView(scoreView: FootballScoreView, teamInfo: FootballPlayListModel) {
-        
         weak var weakSelf = self
         let score = FootballScoreFilterVC()
         score.teamInfo = teamInfo
-        
+
         score.selected = { (selectedCells, canAdd) in
             scoreView.selectedCells = selectedCells
             guard canAdd == true else { return }
@@ -437,7 +440,6 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
             weakSelf?.selectPlayList.append(teamInfo)
             weakSelf?.resetDanState()
         }
-        
         score.deSelected = { (selectedCells, canRemove) in
             scoreView.selectedCells = selectedCells
             guard canRemove == true else { return }
@@ -448,14 +450,10 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
             guard weakSelf?.homeData != nil else { return }
                 weakSelf?.orderRequest()
         }
-        
         present(score)
-        
-    
     }
     
     private func pushBanQuanCView(scoreView: FootballScoreView, teamInfo: FootballPlayListModel) {
-        
         weak var weakSelf = self
         let score = FootballBanQuanCFilterVC()
         score.teamInfo = teamInfo
@@ -471,7 +469,6 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
             weakSelf?.selectPlayList.append(teamInfo)
             weakSelf?.resetDanState()
         }
-        
         score.deSelected = { (selectedCells, canRemove) in
             scoreView.selectedCellList = selectedCells
             guard canRemove == true else { return }
@@ -483,7 +480,34 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
             weakSelf?.orderRequest()
         }
         present(score)
+    }
+    private func pushHunheView(scoreView: FootballScoreView, teamInfo: FootballPlayListModel) {
+        weak var weakSelf = self
+        let score = FootballHunheFilterVC()
+        score.teamInfo = teamInfo
         
+        score.selected = { (selectedCells, canAdd) in
+            scoreView.selectedCellList = selectedCells
+            guard canAdd == true else { return }
+            guard (weakSelf?.selectPlayList.count)! < 15  else {
+                scoreView.backSelectedState()
+                weakSelf?.showHUD(message: "最多可选15场比赛")
+                return }
+            
+            weakSelf?.selectPlayList.append(teamInfo)
+            weakSelf?.resetDanState()
+        }
+        score.deSelected = { (selectedCells, canRemove) in
+            scoreView.selectedCellList = selectedCells
+            guard canRemove == true else { return }
+            weakSelf?.selectPlayList.remove(teamInfo)
+            weakSelf?.resetDanState()
+        }
+        score.didSelected = {
+            guard weakSelf?.homeData != nil else { return }
+            weakSelf?.orderRequest()
+        }
+        present(score)
     }
     
     

@@ -53,7 +53,7 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
                     betCells.append(matchPlay.visitingCell)
                 }
                 
-                if matchPlay.homeCell != nil {
+                if matchPlay.homeCell != nil, matchPlay.homeCell.cellSons.isEmpty == false {
                     for cell in matchPlay.homeCell.cellSons {
                         if cell.isSelected == true {
                             let ce = FootballPlayCellModel()
@@ -65,7 +65,7 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
                     }
                 }
                 
-                if matchPlay.flatCell != nil {
+                if matchPlay.flatCell != nil, matchPlay.flatCell.cellSons.isEmpty == false {
                     for cell in matchPlay.flatCell.cellSons {
                         if cell.isSelected == true {
                             let ce = FootballPlayCellModel()
@@ -77,7 +77,7 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
                     }
                 }
                 
-                if matchPlay.visitingCell != nil {
+                if matchPlay.visitingCell != nil, matchPlay.visitingCell.cellSons.isEmpty == false {
                     for cell in matchPlay.visitingCell.cellSons {
                         if cell.isSelected == true {
                             let ce = FootballPlayCellModel()
@@ -97,6 +97,7 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
                     }
                 }
                 
+                guard betCells.isEmpty == false else { continue }
                 matchBetCell.betCells = betCells
                 matchBetCell.playType = matchPlay.playType
                 matchBetCells.append(matchBetCell)

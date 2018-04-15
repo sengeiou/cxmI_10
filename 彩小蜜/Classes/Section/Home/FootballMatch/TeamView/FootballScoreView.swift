@@ -31,6 +31,12 @@ class FootballScoreView: UIView {
                 }else {
                     changeViewState(isSelected: false)
                 }
+            case .混合过关:
+                if teamInfo.selectedHunhe.isEmpty == false {
+                    changeViewState(isSelected: true )
+                }else {
+                    changeViewState(isSelected: false)
+                }
             default: break
                 
             }
@@ -39,30 +45,22 @@ class FootballScoreView: UIView {
     // 比分
     public var selectedCells : [FootballPlayCellModel]! {
         didSet{
-            
             if selectedCells.isEmpty == false {
-                
                 changeViewState(isSelected: true )
             }else {
-                
                 changeViewState(isSelected: false)
             }
-           
         }
     }
     
     // 半全场
     public var selectedCellList: [FootballPlayCellModel]! {
         didSet{
-            
             if selectedCellList.isEmpty == false {
-                
                 changeViewState(isSelected: true )
             }else {
-                
                 changeViewState(isSelected: false)
             }
-            
         }
     }
     
@@ -75,6 +73,8 @@ class FootballScoreView: UIView {
                 titlelb.text = "点击进行比分投注"
             case .半全场:
                 titlelb.text = "点击进行半全场投注"
+            case .混合过关:
+                titlelb.text = "点击进行混合过关投注"
             default: break
                 
             }
@@ -124,6 +124,8 @@ class FootballScoreView: UIView {
                 changeScoreView(list: self.teamInfo.selectedScore)
             case .半全场:
                 changeBanView(list: self.teamInfo.selectedBan)
+            case .混合过关:
+                changeHunheView(list: self.teamInfo.selectedHunhe)
             default: break
                 
             }
@@ -135,6 +137,8 @@ class FootballScoreView: UIView {
                 titlelb.text = "点击进行比分投注"
             case .半全场:
                 titlelb.text = "点击进行半全场投注"
+            case .混合过关:
+                titlelb.text = "点击进行混合过关投注"
             default: break
             }
         }
@@ -156,6 +160,14 @@ class FootballScoreView: UIView {
         
         titlelb.text = title
     }
+    private func changeHunheView(list : [FootballPlayCellModel]) {
+        var title = ""
+        for cell in list {
+            title += cell.cellOdds + " "
+        }
+        titlelb.text = title
+    }
+    
     
     public func backSelectedState() {
        
