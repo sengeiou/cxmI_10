@@ -71,10 +71,13 @@ class FootballScoreView: UIView {
             switch matchType {
             case .比分:
                 titlelb.text = "点击进行比分投注"
+                titlelb.numberOfLines = 1
             case .半全场:
                 titlelb.text = "点击进行半全场投注"
+                titlelb.numberOfLines = 1
             case .混合过关:
                 titlelb.text = "点击进行混合过关投注"
+                titlelb.numberOfLines = 0
             default: break
                 
             }

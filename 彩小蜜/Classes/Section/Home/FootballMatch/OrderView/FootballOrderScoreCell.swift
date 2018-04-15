@@ -176,8 +176,6 @@ class FootballOrderScoreCell: UITableViewCell {
             guard delegate != nil else { return }
             delegate.danDeSelected()
         }
-        
-        
     }
     
     

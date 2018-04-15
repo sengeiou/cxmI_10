@@ -118,6 +118,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         table.delegate = self
         table.dataSource = self
         table.backgroundColor = ColorF4F4F4
+        table.estimatedRowHeight = 84 * defaultScale
         registerCell(table)
         return table
     }()
@@ -231,6 +232,8 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         switch matchType {
         case .半全场, .比分:
             return 84 * defaultScale
+        case .混合过关:
+            return UITableViewAutomaticDimension + (84 * defaultScale)
         default:
             return 91 * defaultScale
         }

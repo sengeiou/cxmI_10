@@ -80,6 +80,41 @@ class FootballOrderHunheCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
+        
+    }
+    private func initSubview() {
+        self.selectionStyle = .none
+        
+        deleteBut = UIButton(type: .custom)
+        deleteBut.setBackgroundImage(UIImage(named: "Remove"), for: .normal)
+        deleteBut.addTarget(self, action: #selector(deleteClicked(_:)), for: .touchUpInside)
+        
+        scoreView = FootballScoreView()
+        scoreView.matchType = .混合过关
+        
+        danBut = UIButton(type: .custom)
+        danBut.titleLabel?.font = Font12
+        danBut.setTitle("胆", for: .normal)
+        danBut.layer.borderWidth = 0.3
+        danBut.layer.borderColor = ColorC8C8C8.cgColor
+        danBut.setTitleColor(Color505050, for: .normal)
+        //danBut.setTitleColor(ColorEA5504, for: .selected)
+        danBut.contentHorizontalAlignment = .center
+        danBut.addTarget(self , action: #selector(danClicked(_:)), for: .touchUpInside)
+        
+        homeMatch = initLabel()
+        vsLb = initLabel()
+        vsLb.text = "VS"
+        visitingMatch = initLabel()
+        
+        self.contentView.addSubview(deleteBut)
+        self.contentView.addSubview(scoreView)
+        self.contentView.addSubview(danBut)
+        self.contentView.addSubview(homeMatch)
+        self.contentView.addSubview(vsLb)
+        self.contentView.addSubview(visitingMatch)
+        
+        
         deleteBut.snp.makeConstraints { (make) in
             make.centerY.equalTo(scoreView.snp.centerY)
             make.left.equalTo(15 * defaultScale)
@@ -113,38 +148,6 @@ class FootballOrderHunheCell: UITableViewCell {
             make.left.equalTo(deleteBut.snp.right).offset(leftSpacing)
             make.right.equalTo(danBut.snp.left).offset(-10 * defaultScale)
         }
-    }
-    private func initSubview() {
-        self.selectionStyle = .none
-        
-        deleteBut = UIButton(type: .custom)
-        deleteBut.setBackgroundImage(UIImage(named: "Remove"), for: .normal)
-        deleteBut.addTarget(self, action: #selector(deleteClicked(_:)), for: .touchUpInside)
-        
-        scoreView = FootballScoreView()
-        scoreView.matchType = .混合过关
-        
-        danBut = UIButton(type: .custom)
-        danBut.titleLabel?.font = Font12
-        danBut.setTitle("胆", for: .normal)
-        danBut.layer.borderWidth = 0.3
-        danBut.layer.borderColor = ColorC8C8C8.cgColor
-        danBut.setTitleColor(Color505050, for: .normal)
-        //danBut.setTitleColor(ColorEA5504, for: .selected)
-        danBut.contentHorizontalAlignment = .center
-        danBut.addTarget(self , action: #selector(danClicked(_:)), for: .touchUpInside)
-        
-        homeMatch = initLabel()
-        vsLb = initLabel()
-        vsLb.text = "VS"
-        visitingMatch = initLabel()
-        
-        self.contentView.addSubview(deleteBut)
-        self.contentView.addSubview(scoreView)
-        self.contentView.addSubview(danBut)
-        self.contentView.addSubview(homeMatch)
-        self.contentView.addSubview(vsLb)
-        self.contentView.addSubview(visitingMatch)
     }
     
     private func initLabel() -> UILabel {

@@ -102,7 +102,7 @@ class FootballBanQuanCCell: UITableViewCell, DateProtocol {
         scoreView.snp.makeConstraints { (make) in
             make.bottom.equalTo(-18 * defaultScale)
             make.height.equalTo(28 * defaultScale)
-            make.left.equalTo(endTime.snp.right).offset(10)
+            make.width.equalTo(240 * defaultScale)
             make.right.equalTo(-rightSpacing)
         }
     }
