@@ -11,7 +11,7 @@ import UIKit
 protocol LotteryHeaderViewDelegate {
     func didTipDateFilter() -> Void
     func didTipMoreFilter() -> Void
-    func didTipAllFilter() -> Void
+    func didTipAllFilter(all : Bool) -> Void
 }
 
 class LotteryHeaderView: UIView {
@@ -93,7 +93,7 @@ class LotteryHeaderView: UIView {
         moreFilterBut = getButton("更多条件")
         moreFilterBut.addTarget(self, action: #selector(moreButClicked(_:)), for: .touchUpInside)
         
-        finishFilterBut = getButton("全部")
+        finishFilterBut = getButton("已结束")
         finishFilterBut.addTarget(self, action: #selector(finishButClicked(_:)), for: .touchUpInside)
         
         timeIcon = UIImageView()
@@ -133,8 +133,19 @@ class LotteryHeaderView: UIView {
         delegate.didTipMoreFilter()
     }
     @objc private func finishButClicked(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        
+        changeFinishState(sender.isSelected)
+        
         guard delegate != nil else { return }
-        delegate.didTipAllFilter()
+        delegate.didTipAllFilter(all: sender.isSelected)
+    }
+    func changeFinishState(_ isSelected: Bool) {
+        if isSelected {
+            finishFilterBut.setTitle("全部", for: .normal)
+        }else {
+            finishFilterBut.setTitle("已结束", for: .normal)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

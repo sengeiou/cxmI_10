@@ -22,6 +22,7 @@ struct LotteryResultModel : HandyJSON {
     var matchId : String!
     var matchSn: String!
     var matchTime: String!
+    var matchFinish: Bool!
     var showTime: String!
     var visitingTeamAbbr: String!
     var visitingTeamId : String!

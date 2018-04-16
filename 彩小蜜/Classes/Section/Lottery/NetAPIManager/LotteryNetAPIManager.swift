@@ -12,7 +12,7 @@ import RxSwift
 let lotteryProvider = MoyaProvider<LotteryNetAPIManager>(plugins:[RequestLoadingPlugin()])
 
 enum LotteryNetAPIManager {
-    case lotteryResult (date: String, isAlready: Bool, leagueIds: String)
+    case lotteryResult (date: String, isAlready: Bool, leagueIds: String, finished: Bool)
 }
 
 extension LotteryNetAPIManager : TargetType {
@@ -60,14 +60,28 @@ extension LotteryNetAPIManager : TargetType {
         var dic : [String: Any] = [:]
         
         switch self {
-        case .lotteryResult(let date, let isAlready, let leagueIds ):
+        case .lotteryResult(let date, let isAlready, let leagueIds, let finished ):
             dic["dateStr"] = date
             if isAlready == false {
                 dic["isAlreadyBuyMatch"] = ""
             }else {
                 dic["isAlreadyBuyMatch"] = isAlready
             }
-            dic["leageuIds"] = leagueIds
+            if finished {
+                dic["matchFinish"] = finished
+            }else{
+                dic["matchFinish"] = ""
+            }
+            
+            if leagueIds == "" {
+                dic["leageuIds"] = [String]()
+            }else {
+                let leaList = leagueIds.components(separatedBy: ",")
+                
+                dic["leageuIds"] = leaList
+            }
+            
+            
         default:
             return .requestPlain
         }

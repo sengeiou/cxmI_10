@@ -12,8 +12,31 @@ protocol LotterySectionHeaderDelegate {
 }
 class LotterySectionHeader: UITableViewHeaderFooterView {
 
-    public var delegate : LotterySectionHeaderDelegate!
+    public var resultList : [LotteryResultModel]! {
+        didSet{
+            guard resultList != nil else { return }
+            if resultList.count == 0 {
+                title.text = "共有\(resultList.count)场比赛"
+            }else {
+                var count = 0
+                for result in resultList {
+                    if result.matchFinish {
+                        count += 1
+                    }
+                }
+                
+                let att = NSMutableAttributedString(string: "共有\(resultList.count)场比赛 已经结束")
+                
+                let attCount = NSAttributedString(string: "\(count)", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+                let chang = NSAttributedString(string: "场")
+                att.append(attCount)
+                att.append(chang)
+                title.attributedText = att
+            }
+        }
+    }
     
+    public var delegate : LotterySectionHeaderDelegate!
     
     //private var icon : UIImageView!
     private var title : UILabel!
