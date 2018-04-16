@@ -73,14 +73,7 @@ extension LotteryNetAPIManager : TargetType {
                 dic["matchFinish"] = ""
             }
             
-            if leagueIds == "" {
-                dic["leageuIds"] = [String]()
-            }else {
-                let leaList = leagueIds.components(separatedBy: ",")
-                
-                dic["leageuIds"] = leaList
-            }
-            
+            dic["leageuIds"] = leagueIds
             
         default:
             return .requestPlain
