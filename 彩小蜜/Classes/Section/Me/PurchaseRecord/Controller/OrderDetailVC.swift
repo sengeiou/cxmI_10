@@ -29,7 +29,7 @@ class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         if indexPath.section == 1 {
             let scheme = OrderSchemeVC()
             scheme.programmeSn = self.orderInfo.programmeSn
-            scheme.orderSn = self.orderId
+            scheme.orderSn = self.orderInfo.orderSn
             pushViewController(vc: scheme)
         }
     }
