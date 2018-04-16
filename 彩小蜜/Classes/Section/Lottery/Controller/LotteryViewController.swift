@@ -180,6 +180,7 @@ class LotteryViewController: BaseViewController, UITableViewDelegate, UITableVie
         let more = LotteryMoreFilterVC()
         more.delegate = self
         more.filterList = self.filterList
+        more.isAlreadyBuy = self.isAlready
         present(more)
     }
     

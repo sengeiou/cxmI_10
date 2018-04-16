@@ -23,9 +23,13 @@ protocol LotteryMoreFilterVCDelegate {
 
 class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, FootballFilterTopViewDelegate, FootballFilterBottomViewDelegate {
     
-    
+    public var filterList: [FilterModel]! {
+        didSet{
+            self.collectionView.reloadData()
+        }
+    }
     public var delegate : LotteryMoreFilterVCDelegate!
-    private var isAlreadyBuy: Bool = false
+    public var isAlreadyBuy: Bool = false
     private var bottomView: FootballFilterBottomView!
     private var topView : FootballFilterTopView!
     
@@ -35,17 +39,23 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
     private var titleThreelb : UILabel!
     
     private var onlyButBut: UIButton!
-    
-    public var filterList: [FilterModel]! {
-        didSet{
-            self.collectionView.reloadData()
-        }
-    }
+    private var currentFilterList : [FilterModel]!
+    private var currentIsAlreadyBuy : Bool!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.popStyle = .fromCenter
+        currentFilterList = [FilterModel]()
+        self.currentIsAlreadyBuy = isAlreadyBuy
         initSubview()
+        
+        DispatchQueue.global().async {
+            for model in self.filterList {
+                if model.isSelected {
+                    self.currentFilterList.append(model)
+                }
+            }
+        }
     }
     
     // MARK: - 网络请求
@@ -135,7 +145,8 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
         
         onlyButBut = UIButton(type: .custom)
         onlyButBut.titleLabel?.sizeToFit()
-        onlyButBut.setTitle(" 只看已购对阵 ", for: .normal)
+        onlyButBut.titleLabel?.font = Font14
+        onlyButBut.setTitle("  只看已购对阵  ", for: .normal)
         onlyButBut.setTitleColor(Color787878, for: .normal)
         
         onlyButBut.layer.borderWidth = 0.3
@@ -204,6 +215,7 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
         collectionView.reloadItems(at: [indexPath])
         self.isAlreadyBuy = false
         changButState(isSelected: false)
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -286,6 +298,17 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
     }
     
     func filterCancel() {
+        changButState(isSelected: self.currentIsAlreadyBuy)
+        
+        DispatchQueue.global().async {
+            for model in self.filterList {
+                model.isSelected = false
+            }
+            for model in self.currentFilterList {
+                model.isSelected = true
+            }
+        }
+        
         self.dismiss(animated: true, completion: nil)
     }
     

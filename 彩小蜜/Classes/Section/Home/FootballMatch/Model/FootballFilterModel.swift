@@ -15,12 +15,12 @@ class FilterData: HandyJSON {
     required init() { }
 }
 
-class FilterModel: HandyJSON {
+class FilterModel: NSObject, HandyJSON {
     var isSelected : Bool = false
     var leagueAddr: String!
     var leagueId: String!
     var leagueName: String!
-    required init() { }
+    required override init() { }
 }
 
 // 记录串关，
