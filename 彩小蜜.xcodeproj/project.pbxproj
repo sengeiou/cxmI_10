@@ -19,6 +19,8 @@
 		11227C0A20849D9700680CCC /* FootballMatchInfoPopVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11227C0920849D9700680CCC /* FootballMatchInfoPopVC.swift */; };
 		11227C1020849E6700680CCC /* FootballTeamHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11227C0F20849E6700680CCC /* FootballTeamHeader.swift */; };
 		11227C122084BFF900680CCC /* FootballBuyRatioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11227C112084BFF900680CCC /* FootballBuyRatioView.swift */; };
+		11227C142084CBE300680CCC /* FootballMatchInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11227C132084CBE300680CCC /* FootballMatchInfoVC.swift */; };
+		11227C162084D7C900680CCC /* FootballMatchInfoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11227C152084D7C900680CCC /* FootballMatchInfoHeader.swift */; };
 		11691806207DB73800C8A287 /* CouponFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11691805207DB73800C8A287 /* CouponFilterViewController.swift */; };
 		11691808207DB82E00C8A287 /* CouponFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11691807207DB82E00C8A287 /* CouponFilterCell.swift */; };
 		1169180A207DBA8B00C8A287 /* PaymentResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11691809207DBA8B00C8A287 /* PaymentResultModel.swift */; };
@@ -235,6 +237,8 @@
 		11227C0920849D9700680CCC /* FootballMatchInfoPopVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballMatchInfoPopVC.swift; sourceTree = "<group>"; };
 		11227C0F20849E6700680CCC /* FootballTeamHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballTeamHeader.swift; sourceTree = "<group>"; };
 		11227C112084BFF900680CCC /* FootballBuyRatioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballBuyRatioView.swift; sourceTree = "<group>"; };
+		11227C132084CBE300680CCC /* FootballMatchInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballMatchInfoVC.swift; sourceTree = "<group>"; };
+		11227C152084D7C900680CCC /* FootballMatchInfoHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballMatchInfoHeader.swift; sourceTree = "<group>"; };
 		11691805207DB73800C8A287 /* CouponFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponFilterViewController.swift; sourceTree = "<group>"; };
 		11691807207DB82E00C8A287 /* CouponFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponFilterCell.swift; sourceTree = "<group>"; };
 		11691809207DBA8B00C8A287 /* PaymentResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentResultModel.swift; sourceTree = "<group>"; };
@@ -476,6 +480,7 @@
 			isa = PBXGroup;
 			children = (
 				11227C0920849D9700680CCC /* FootballMatchInfoPopVC.swift */,
+				11227C132084CBE300680CCC /* FootballMatchInfoVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -485,6 +490,7 @@
 			children = (
 				11227C0F20849E6700680CCC /* FootballTeamHeader.swift */,
 				11227C112084BFF900680CCC /* FootballBuyRatioView.swift */,
+				11227C152084D7C900680CCC /* FootballMatchInfoHeader.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1873,6 +1879,7 @@
 				E59CB3DF205BA17F0086DD0E /* HomeHeaderView.swift in Sources */,
 				E514DDE22052B3E000274854 /* WithdrawalViewController.swift in Sources */,
 				E5B68AFD205A81A70038A5A2 /* Extension+Color.swift in Sources */,
+				11227C162084D7C900680CCC /* FootballMatchInfoHeader.swift in Sources */,
 				E56CE80C206A21670090A1B5 /* WithdrawalProgressVC.swift in Sources */,
 				E512A96D20480917003F14F4 /* HomeDataModel.swift in Sources */,
 				E51F9A56205A11EA00AB8A21 /* MobileTextFieldCell.swift in Sources */,
@@ -1892,6 +1899,7 @@
 				E58B57C5205676CB0025E2F1 /* MeNetAPIManager.swift in Sources */,
 				E550D8902073267E002DDE23 /* Extension+Array.swift in Sources */,
 				E5883F5E20690CED00CB3A46 /* AccountDetailsVC.swift in Sources */,
+				11227C142084CBE300680CCC /* FootballMatchInfoVC.swift in Sources */,
 				E510325A2065044100A0156C /* PurchaseRecordInfoModel.swift in Sources */,
 				11062B1F2082FFD8001C1D14 /* LotteryHeaderView.swift in Sources */,
 				E5786FC0206DEA650045F7F5 /* Football2-1Cell.swift in Sources */,

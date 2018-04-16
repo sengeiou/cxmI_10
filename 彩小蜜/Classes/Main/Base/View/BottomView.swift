@@ -15,6 +15,12 @@ protocol BottomViewDelegate {
 
 class BottomView: UIView {
 
+    public var confirmTitle : String! {
+        didSet{
+            confirmBut.setTitle(confirmTitle, for: .normal)
+        }
+    }
+    
     public var delegate : BottomViewDelegate!
     
     private var bottomLine : UIView!
@@ -33,13 +39,13 @@ class BottomView: UIView {
         super.layoutSubviews()
         bottomLine.snp.makeConstraints { (make) in
             make.top.equalTo(0)
-            make.height.equalTo(0.3)
+            make.height.equalTo(1)
             make.left.right.equalTo(0)
         }
         
         vLine.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(0)
-            make.width.equalTo(0.3)
+            make.width.equalTo(1)
             make.centerX.equalTo(self.snp.centerX)
         }
         confirmBut.snp.makeConstraints { (make) in

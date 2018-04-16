@@ -28,16 +28,23 @@ fileprivate let Football2_1CellId = "Football2_1CellId"
 fileprivate let FootballHunheCellId = "FootballHunheCellId"
 
 
-class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballBottomViewDelegate, FootballSectionHeaderDelegate, FootballRequestPro, FootballTeamViewDelegate , FootballMatchFilterVCDelegate, FootballTotalViewDelegate, FootballScoreViewDelegate, FootballTwoOneViewDelegate, FootballHunheCellDelegate , FootballHunheViewDelegate , FootballSPFCellDelegate{
+class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballBottomViewDelegate, FootballSectionHeaderDelegate, FootballRequestPro, FootballTeamViewDelegate , FootballMatchFilterVCDelegate, FootballTotalViewDelegate, FootballScoreViewDelegate, FootballTwoOneViewDelegate, FootballHunheCellDelegate , FootballHunheViewDelegate , FootballSPFCellDelegate, FootballMatchInfoPopVCDelegate{
+    
+    
     
     // 胜平负cell delegate
     func didTipSPFCellDetail(teamInfo: FootballPlayListModel) {
         let matchInfo = FootballMatchInfoPopVC()
+        matchInfo.delegate = self
         matchInfo.matchId = teamInfo.matchId
         present(matchInfo)
     }
     
-   
+    func didTipPopConfirm(matchId : String) {
+        let matchInfo = FootballMatchInfoVC()
+        matchInfo.matchId = matchId
+        pushViewController(vc: matchInfo)
+    }
     
     
 
