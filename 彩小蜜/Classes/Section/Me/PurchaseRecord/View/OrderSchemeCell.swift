@@ -21,10 +21,11 @@ class OrderSchemeCell: UITableViewCell {
             }
             str.removeLast()
             
-            numLB.text = schemeDetail.number
+            //numLB.text = schemeDetail.number
             contentLB.text = str
             passLB.text = schemeDetail.passType
             multipleLB.text = schemeDetail.multiple
+            orderState.text = schemeDetail.status
         }
     }
     
@@ -39,11 +40,11 @@ class OrderSchemeCell: UITableViewCell {
     }
     
     private var line : UIImageView!
-    private var numLB : UILabel!
+    //private var numLB : UILabel!
     private var contentLB: UILabel!
     private var passLB: UILabel!
     private var multipleLB: UILabel!
-    
+    private var orderState : UILabel!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -63,18 +64,20 @@ class OrderSchemeCell: UITableViewCell {
         line = UIImageView()
         line.image = UIImage(named:"line")
         
-        numLB = getDetailLB()
-        numLB.textAlignment = .center
+//        numLB = getDetailLB()
+//        numLB.textAlignment = .center
         contentLB = getDetailLB()
         contentLB.numberOfLines = 0
         
         passLB = getDetailLB()
         multipleLB = getDetailLB()
-        multipleLB.textAlignment = .right
-
+        //multipleLB.textAlignment = .right
+        orderState = getDetailLB()
+        orderState.textColor = ColorEA5504
+        orderState.textAlignment = .right
         
         self.contentView.addSubview(line)
-        self.contentView.addSubview(numLB)
+        self.contentView.addSubview(orderState)
         self.contentView.addSubview(contentLB)
         self.contentView.addSubview(passLB)
         self.contentView.addSubview(multipleLB)
@@ -86,15 +89,15 @@ class OrderSchemeCell: UITableViewCell {
             make.height.equalTo(SeparationLineHeight)
         }
         
-        numLB.snp.makeConstraints { (make) in
-            make.centerY.equalTo(contentLB.snp.centerY)
-            make.width.equalTo(OrderDetailTitleWidth - 20)
-            make.left.equalTo(self.contentView).offset(leftSpacing)
-            make.height.equalTo(20)
-        }
+//        numLB.snp.makeConstraints { (make) in
+//            make.centerY.equalTo(contentLB.snp.centerY)
+//            make.width.equalTo(OrderDetailTitleWidth - 20)
+//            make.left.equalTo(self.contentView).offset(leftSpacing)
+//            make.height.equalTo(20)
+//        }
         contentLB.snp.makeConstraints { (make) in
             make.top.equalTo(line.snp.bottom).offset(10)
-            make.left.equalTo(numLB.snp.right).offset(1)
+            make.left.equalTo(self.contentView).offset(leftSpacing)
             make.right.equalTo(passLB.snp.left).offset(-1)
             make.bottom.equalTo(self.contentView).offset(-11)
         }
@@ -108,6 +111,11 @@ class OrderSchemeCell: UITableViewCell {
             make.height.width.equalTo(passLB)
             make.width.equalTo(OrderDetailTitleWidth - 14 )
             make.right.equalTo(self.contentView).offset(-33)
+        }
+        orderState.snp.makeConstraints { (make) in
+            make.top.height.width.equalTo(passLB)
+            make.left.equalTo(multipleLB.snp.right)
+            make.right.equalTo(self.contentView).offset(-rightSpacing)
         }
     }
     

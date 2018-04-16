@@ -38,8 +38,9 @@ class OrderDetailTitleCell: UITableViewCell {
                 resultStr += result.matchResult + "\n"
             }
             
-          
-            resultStr.removeLast()
+            if resultStr != "" {
+                resultStr.removeLast()
+            }
             
             nameLB.text = "\(homeMatch)\nVS\n\(viMatch)"
             

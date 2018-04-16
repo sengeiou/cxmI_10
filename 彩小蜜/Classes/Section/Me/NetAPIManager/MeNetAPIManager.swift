@@ -37,7 +37,7 @@ enum MeNetAPIManager {
     /// 订单详情
     case orderInfo (orderId: String)
     /// 出票方案
-    case orderScheme (programmeSn: String)
+    case orderScheme (programmeSn: String, orderSn: String)
     /// 账户明细列表
     case accountDetailsList (amountType: String, pageNum: Int)
     /// 统计账户信息
@@ -141,7 +141,8 @@ extension MeNetAPIManager : TargetType {
             dic["pageNum"] = pageNum
         case .orderInfo(let orderId):
             dic["orderId"] = orderId
-        case .orderScheme(let programmeSn):
+        case .orderScheme(let programmeSn, let orderSn):
+            dic["orderSn"] = orderSn
             dic["programmeSn"] = programmeSn
         case .accountDetailsList(let amountType, let pageNum):
             dic["amountType"] = amountType

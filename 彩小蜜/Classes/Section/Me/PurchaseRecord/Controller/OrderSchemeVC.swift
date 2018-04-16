@@ -14,6 +14,7 @@ fileprivate let OrderSchemeTitleCellId = "OrderSchemeTitleCellId"
 class OrderSchemeVC: BaseViewController, UITableViewDelegate, UITableViewDataSource {
 
     public var programmeSn : String!
+    public var orderSn: String!
     
     private var orderSchemeInfo : OrderSchemeInfoModel!
     
@@ -37,7 +38,7 @@ class OrderSchemeVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
     // MARK: - 网络请求
     private func orderSchemeRequest() {
         weak var weakSelf = self
-        _ = userProvider.rx.request(.orderScheme(programmeSn: programmeSn))
+        _ = userProvider.rx.request(.orderScheme(programmeSn: programmeSn, orderSn: orderSn))
             .asObservable()
             .mapObject(type: OrderSchemeInfoModel.self)
             .subscribe(onNext: { (data) in

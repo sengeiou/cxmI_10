@@ -15,6 +15,7 @@ fileprivate let OrderProgrammeCellId = "OrderProgrammeCellId"
 
 enum BackType {
     case root
+    case notRoot
 }
 
 class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, OrderDetailFooterViewDelegate {
@@ -28,12 +29,13 @@ class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         if indexPath.section == 1 {
             let scheme = OrderSchemeVC()
             scheme.programmeSn = self.orderInfo.programmeSn
+            scheme.orderSn = self.orderId
             pushViewController(vc: scheme)
         }
     }
     
     // MARK: - 属性
-    public var backType : BackType!
+    public var backType : BackType! = .notRoot
     
     public var orderId : String!
     private var orderInfo : OrderInfoModel!

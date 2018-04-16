@@ -323,19 +323,95 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
                 pushViewController(vc: order)
             }else {
                 guard play.matchPlays.count == 5 else { return }
-                guard play.matchPlays[0].single == true ||
-                play.matchPlays[1].single == true ||
-                play.matchPlays[2].single == true ||
-                play.matchPlays[3].single == true ||
-                play.matchPlays[4].single == true else {
-                    showHUD(message: "请至少选择1场单关比赛或者2场非单关比赛")
-                    return }
+//                guard (play.matchPlays[0].single == true && ( play.matchPlays[0].homeCell.isSelected ||
+//                    play.matchPlays[0].flatCell.isSelected ||
+//                    play.matchPlays[0].visitingCell.isSelected )) ||
+//                play.matchPlays[1].single == true && (play.matchPlays[1].homeCell.isSelected ||
+//                    play.matchPlays[1].flatCell.isSelected ||
+//                    play.matchPlays[1].visitingCell.isSelected ) ||
+//                play.matchPlays[2].single == true ||
+//                play.matchPlays[3].single == true ||
+//                play.matchPlays[4].single == true else {
+//                    showHUD(message: "请至少选择1场单关比赛或者2场非单关比赛")
+//                    return }
                 
-                let order = FootballOrderConfirmVC()
-                order.matchType = self.matchType
-                order.playList = selectPlayList
-                order.homeData = homeData
-                pushViewController(vc: order)
+                
+                var can = false
+                
+                for match in play.matchPlays {
+                    if match.homeCell != nil, match.homeCell.isSelected {
+                        if match.single {
+                            can = true
+                            break
+                        }
+                    }
+                    if match.flatCell != nil, match.flatCell.isSelected {
+                        if match.single {
+                            can = true
+                            break
+                        }
+                    }
+                    if match.visitingCell != nil, match.visitingCell.isSelected {
+                        if match.single {
+                            can = true
+                            break
+                        }
+                    }
+                    if match.homeCell != nil, match.homeCell.cellSons != nil {
+                        for cell in match.homeCell.cellSons {
+                            if cell.isSelected {
+                                if match.single {
+                                    can = true
+                                    break
+                                }
+                            }
+                        }
+                    }
+                    if match.flatCell != nil, match.flatCell.cellSons != nil {
+                        for cell in match.flatCell.cellSons {
+                            if cell.isSelected {
+                                if match.single {
+                                    can = true
+                                    break
+                                }
+                            }
+                        }
+                    }
+                    if match.visitingCell != nil, match.visitingCell.cellSons != nil {
+                        for cell in match.visitingCell.cellSons {
+                            if cell.isSelected {
+                                if match.single {
+                                    can = true
+                                    break
+                                }
+                            }
+                        }
+                    }
+                    
+                    if match.matchCells.isEmpty == false{
+                        for cell in match.matchCells {
+                            if cell.isSelected {
+                                if match.single {
+                                    can = true
+                                    break
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                if can {
+                    let order = FootballOrderConfirmVC()
+                    order.matchType = self.matchType
+                    order.playList = selectPlayList
+                    order.homeData = homeData
+                    pushViewController(vc: order)
+                }else {
+                    showHUD(message: "请至少选择1场单关比赛或者2场非单关比赛")
+                }
+                
+                
+                
             }
             
             return

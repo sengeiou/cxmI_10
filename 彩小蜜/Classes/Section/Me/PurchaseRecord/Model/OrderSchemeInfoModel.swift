@@ -19,4 +19,5 @@ struct SchemeDetail: HandyJSON {
     var number: String!
     var passType: String!
     var tickeContent: String!
+    var status : String!
 }
