@@ -28,7 +28,15 @@ fileprivate let Football2_1CellId = "Football2_1CellId"
 fileprivate let FootballHunheCellId = "FootballHunheCellId"
 
 
-class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballBottomViewDelegate, FootballSectionHeaderDelegate, FootballRequestPro, FootballTeamViewDelegate , FootballMatchFilterVCDelegate, FootballTotalViewDelegate, FootballScoreViewDelegate, FootballTwoOneViewDelegate, FootballHunheCellDelegate , FootballHunheViewDelegate{
+class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballBottomViewDelegate, FootballSectionHeaderDelegate, FootballRequestPro, FootballTeamViewDelegate , FootballMatchFilterVCDelegate, FootballTotalViewDelegate, FootballScoreViewDelegate, FootballTwoOneViewDelegate, FootballHunheCellDelegate , FootballHunheViewDelegate , FootballSPFCellDelegate{
+    
+    // 胜平负cell delegate
+    func didTipSPFCellDetail(teamInfo: FootballPlayListModel) {
+        let matchInfo = FootballMatchInfoPopVC()
+        matchInfo.matchId = teamInfo.matchId
+        present(matchInfo)
+    }
+    
    
     
     
@@ -167,7 +175,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     private func initSPFCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballSPFCellId, for: indexPath) as! FootballSPFCell
         cell.teamView.delegate = self
-       
+        cell.delegate = self
         let matchModel = matchList[indexPath.section]
         cell.playInfoModel = matchModel.playList[indexPath.row]
         

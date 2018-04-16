@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol FootballSPFCellDelegate {
+    func didTipSPFCellDetail(teamInfo : FootballPlayListModel) -> Void
+}
+
 class FootballSPFCell: UITableViewCell, DateProtocol {
 
     public var playInfoModel: FootballPlayListModel! {
@@ -23,6 +27,8 @@ class FootballSPFCell: UITableViewCell, DateProtocol {
             }
         }
     }
+    
+    public var delegate : FootballSPFCellDelegate!
     
     private var matchTitle: UILabel!
     private var matchTime: UILabel!
@@ -101,6 +107,7 @@ class FootballSPFCell: UITableViewCell, DateProtocol {
         detailBut = UIButton(type: .custom)
         detailBut.setImage(UIImage(named: "Collapse"), for: .normal)
         detailBut.titleLabel?.numberOfLines = 2
+        detailBut.addTarget(self, action: #selector(detailButClicked(_:)), for: .touchUpInside)
         
         self.contentView.addSubview(line)
         self.contentView.addSubview(teamView)
@@ -117,6 +124,11 @@ class FootballSPFCell: UITableViewCell, DateProtocol {
         lab.textAlignment = .center
         lab.text = "截止23： 50"
         return lab
+    }
+    
+    @objc private func detailButClicked(_ sender : UIButton ) {
+        guard delegate != nil else { return }
+        delegate.didTipSPFCellDetail(teamInfo: self.playInfoModel)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

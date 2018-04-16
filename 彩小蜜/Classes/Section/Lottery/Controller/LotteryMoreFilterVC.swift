@@ -25,11 +25,16 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
     
     public var filterList: [FilterModel]! {
         didSet{
+            
             self.collectionView.reloadData()
         }
     }
     public var delegate : LotteryMoreFilterVCDelegate!
-    public var isAlreadyBuy: Bool = false
+    public var isAlreadyBuy: Bool = false {
+        didSet{
+            changButState(isSelected: isAlreadyBuy)
+        }
+    }
     private var bottomView: FootballFilterBottomView!
     private var topView : FootballFilterTopView!
     
@@ -50,12 +55,15 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
         initSubview()
         
         DispatchQueue.global().async {
+            guard self.filterList != nil else { return }
             for model in self.filterList {
                 if model.isSelected {
                     self.currentFilterList.append(model)
                 }
             }
         }
+        
+        
     }
     
     // MARK: - 网络请求
@@ -275,6 +283,7 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
             onlyButBut.setTitleColor(Color787878, for: .normal)
             onlyButBut.backgroundColor = ColorFFFFFF
         }
+        onlyButBut.isSelected = isSelected
     }
     
     func filterConfirm() {
