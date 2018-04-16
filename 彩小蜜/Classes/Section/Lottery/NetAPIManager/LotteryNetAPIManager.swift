@@ -62,7 +62,11 @@ extension LotteryNetAPIManager : TargetType {
         switch self {
         case .lotteryResult(let date, let isAlready, let leagueIds ):
             dic["dateStr"] = date
-            dic["isAlreadyBuyMatch"] = isAlready
+            if isAlready == false {
+                dic["isAlreadyBuyMatch"] = ""
+            }else {
+                dic["isAlreadyBuyMatch"] = isAlready
+            }
             dic["leageuIds"] = leagueIds
         default:
             return .requestPlain

@@ -17,6 +17,12 @@ protocol LotteryHeaderViewDelegate {
 class LotteryHeaderView: UIView {
 
     // MARK: - 属性 public
+    public var dateModel : LotteryDateModel! {
+        didSet{
+            timeFilterBut.setTitle(dateModel.date, for: .normal)
+        }
+    }
+    
     public var delegate : LotteryHeaderViewDelegate!
     // MARK: - 属性 private
     private var vLine : UIView!

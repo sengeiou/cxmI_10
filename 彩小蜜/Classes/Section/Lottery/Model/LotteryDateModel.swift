@@ -24,10 +24,6 @@ class LotteryDateModel : NSObject, HandyJSON {
         let currentDate = Date()
         let userCalendar = Calendar.current
         
-        
-        
-       
-        
         for index in -7...0 {
             let date = userCalendar.date(byAdding: .day, value: index, to: currentDate)
             let dateFor = DateFormatter()
@@ -37,7 +33,7 @@ class LotteryDateModel : NSObject, HandyJSON {
             dateModel.date = dateStr
             dates.append(dateModel)
         }
-        
+        dates.last?.isSelected = true
         return dates
     }
 }

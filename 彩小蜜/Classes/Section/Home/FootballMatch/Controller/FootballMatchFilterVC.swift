@@ -37,7 +37,7 @@ class FootballMatchFilterVC: BasePopViewController, UICollectionViewDelegate, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.popStyle = .fromCenter
         initSubview()
         
         filterList = [FilterModel]()
@@ -96,6 +96,8 @@ class FootballMatchFilterVC: BasePopViewController, UICollectionViewDelegate, UI
         
     }
     private func initSubview() {
+        self.viewHeight = 266 * defaultScale
+        
         topView = FootballFilterTopView()
         topView.delegate = self
         bottomView = FootballFilterBottomView()

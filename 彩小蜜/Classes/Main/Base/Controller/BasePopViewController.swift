@@ -21,8 +21,8 @@ class BasePopViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, 
     public var popStyle : PopViewStyle = .fromCenter{
         didSet{
             switch popStyle {
-            case .fromCenter:
-                initCenterLayout()
+            case .fromCenter: break
+                //initCenterLayout()
             case .fromBottom: break
 //                initBottomLayout()
             case .fromTop:
@@ -36,6 +36,8 @@ class BasePopViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, 
             switch popStyle {
             case .fromBottom:
                 initBottomLayout(height: viewHeight)
+            case .fromCenter:
+                initCenterLayout(height: viewHeight)
             default: break
                 
             }
@@ -71,12 +73,12 @@ class BasePopViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, 
         self.view.addSubview(pushBgView)
     }
     
-    private func initCenterLayout() {
+    private func initCenterLayout(height : CGFloat) {
         pushBgView.snp.makeConstraints { (make) in
             make.centerX.equalTo(self.view.snp.centerX)
             make.centerY.equalTo(self.view.snp.centerY)
             make.width.equalTo(326 * defaultScale)
-            make.height.equalTo(266 * defaultScale)
+            make.height.equalTo(height)
         }
     }
     

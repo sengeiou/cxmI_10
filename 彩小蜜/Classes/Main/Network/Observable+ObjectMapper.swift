@@ -114,6 +114,16 @@ extension Observable where E == Response {
                 throw HXError.UnexpectedResult(resultCode: json["code"] as? String , resultMsg: json["msg"] as? String )
             }
             
+            DispatchQueue.global().async {
+                print("""
+                    ********---------数据----------******
+                
+                    \(data)
+                
+                    ************************************
+                """)
+            }
+            
             guard let objcArr : [T] = JSONDeserializer<T>.deserializeModelArrayFrom(array: data) as? [T] else {
                 throw HXError.ParseJSONError
             }

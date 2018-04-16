@@ -11,7 +11,11 @@ import UIKit
 fileprivate let LotteryCellId = "LotteryCellId"
 fileprivate let LotterySectionHeaderId = "LotterySectionHeaderId"
 
-class LotteryViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, LotterySectionHeaderDelegate, LotteryHeaderViewDelegate {
+class LotteryViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, LotterySectionHeaderDelegate, LotteryHeaderViewDelegate, LotteryDateFilterVCDelegate, LotteryMoreFilterVCDelegate {
+   
+    
+   
+    
     
     
     
@@ -21,10 +25,12 @@ class LotteryViewController: BaseViewController, UITableViewDelegate, UITableVie
     // MARK: - 属性 private
     private var dateFilter : String!
     private var isAlready : Bool = false
-    private var leagueIds : String!
-
+    private var leagueIds : String = ""
+    private var selectedDateModel : LotteryDateModel!
+    private var resultList : [LotteryResultModel]!
     private var headerView : LotteryHeaderView!
     private var dateList : [LotteryDateModel]!
+    private var filterList: [FilterModel]!
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,13 +39,15 @@ class LotteryViewController: BaseViewController, UITableViewDelegate, UITableVie
         hideBackBut()
         initSubview()
         
-        DispatchQueue.global().async {
-            self.dateList = LotteryDateModel().getDates()
-        }
+        self.dateList = LotteryDateModel().getDates()
+        self.dateFilter = self.dateList.last?.date
+        self.headerView.dateModel = self.dateList.last
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.isHidenBar = false
+        filterRequest()
+        self.lotteryResultRequest(date: self.dateFilter, isAlready: self.isAlready, leagueIds: self.leagueIds)
     }
     override func viewDidLayoutSubviews() {
         tableView.snp.makeConstraints { (make) in
@@ -66,9 +74,12 @@ class LotteryViewController: BaseViewController, UITableViewDelegate, UITableVie
         weak var weakSelf = self
         _ = lotteryProvider.rx.request(.lotteryResult(date: date, isAlready: isAlready, leagueIds: leagueIds))
             .asObservable()
-            .mapObject(type: LotteryResultModel.self)
+            .mapArray(type: LotteryResultModel.self)
             .subscribe(onNext: { (data) in
-                
+                self.resultList = data
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             }, onError: { (error) in
                 guard let err = error as? HXError else { return }
                 switch err {
@@ -80,6 +91,23 @@ class LotteryViewController: BaseViewController, UITableViewDelegate, UITableVie
             }, onCompleted: nil , onDisposed: nil )
     }
     
+    private func filterRequest() {
+        weak var weakSelf = self
+        _ = homeProvider.rx.request(.filterMatchList)
+            .asObservable()
+            .mapArray(type: FilterModel.self)
+            .subscribe(onNext: { (data) in
+                weakSelf?.filterList = data
+            }, onError: { (error) in
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    print(code!)
+                    weakSelf?.showHUD(message: msg!)
+                default: break
+                }
+            }, onCompleted: nil, onDisposed: nil )
+    }
     //MARK: - 懒加载
     lazy var tableView : UITableView = {
         let table = UITableView(frame: CGRect.zero, style: .grouped)
@@ -96,34 +124,26 @@ class LotteryViewController: BaseViewController, UITableViewDelegate, UITableVie
     }()
     //MARK: - tableView dataSource
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return 5
-        
+        guard resultList != nil else { return 0 }
+        return self.resultList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: LotteryCellId, for: indexPath) as! LotteryCell
-        
+        cell.resultModel = resultList[indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: LotterySectionHeaderId) as! LotterySectionHeader
         header.tag = section
-        header.delegate = self
+        //header.delegate = self
         
-        
-//        if section == 0, self.matchData.hotPlayList.isEmpty == false {
-//            header.headerType = .hotMatch
-//        }else {
-//            header.headerType = .match
-//        }
-//
-//        header.matchModel = matchList[section]
+
         
         return header
     }
@@ -144,27 +164,40 @@ class LotteryViewController: BaseViewController, UITableViewDelegate, UITableVie
     
     //MARK: - 分区头 ，delegate
     func spread(sender: UIButton, section: Int) {
-//        let header = matchList[section]
-//
-//        header.isSpreading = !header.isSpreading
-        
+
         tableView.reloadSections(IndexSet(integer: section), with: .automatic)
     }
     
     // MARK: - 筛选条件 delegate
     func didTipDateFilter() {
         let date = LotteryDateFilterVC()
+        date.delegate = self
         date.dateList = self.dateList
         present(date)
     }
     
     func didTipMoreFilter() {
         let more = LotteryMoreFilterVC()
+        more.delegate = self
+        more.filterList = self.filterList
         present(more)
     }
     
     func didTipAllFilter() {
         
+    }
+    
+    // MARK: - 时间筛选 delegate
+    func didSelectDateItem(filter: LotteryDateFilterVC, dateModel: LotteryDateModel) {
+        self.dateFilter = dateModel.date
+        self.headerView.dateModel = dateModel
+        lotteryResultRequest(date: dateFilter, isAlready: isAlready, leagueIds: leagueIds)
+    }
+    // MARK: - 更多筛选 delegate
+    func filterConfirm(leagueId: String, isAlreadyBuy: Bool) {
+        self.isAlready = isAlreadyBuy
+        self.leagueIds = leagueId
+        lotteryResultRequest(date: self.dateFilter, isAlready: isAlready, leagueIds: self.leagueIds)
     }
     
     override func didReceiveMemoryWarning() {

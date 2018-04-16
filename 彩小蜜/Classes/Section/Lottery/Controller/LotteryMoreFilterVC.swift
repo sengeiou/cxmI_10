@@ -18,65 +18,75 @@ fileprivate let FilterCellWidth : CGFloat = ((326 * defaultScale) - (10 * 2 * de
 fileprivate let FootballFilterCellId = "FootballFilterCellId"
 
 protocol LotteryMoreFilterVCDelegate {
-    func filterConfirm(leagueId: String) -> Void
+    func filterConfirm(leagueId: String, isAlreadyBuy: Bool) -> Void
 }
 
 class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, FootballFilterTopViewDelegate, FootballFilterBottomViewDelegate {
     
     
     public var delegate : LotteryMoreFilterVCDelegate!
-    
+    private var isAlreadyBuy: Bool = false
     private var bottomView: FootballFilterBottomView!
     private var topView : FootballFilterTopView!
     
-    private var bgView: UIView!
     private var titleLB: UILabel!
+    private var topLine : UIImageView!
+    private var titleTwolb : UILabel!
+    private var titleThreelb : UILabel!
     
-    private var filterList: [FilterModel]!
+    private var onlyButBut: UIButton!
+    
+    public var filterList: [FilterModel]! {
+        didSet{
+            self.collectionView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.popStyle = .fromCenter
         initSubview()
-        
-        filterList = [FilterModel]()
-        
-        filterRequest()
     }
     
     // MARK: - 网络请求
-    private func filterRequest() {
-        weak var weakSelf = self
-        _ = homeProvider.rx.request(.filterMatchList)
-            .asObservable()
-            .mapArray(type: FilterModel.self)
-            .subscribe(onNext: { (data) in
-                weakSelf?.filterList = data
-                weakSelf?.collectionView.reloadData()
-            }, onError: { (error) in
-                guard let err = error as? HXError else { return }
-                switch err {
-                case .UnexpectedResult(let code, let msg):
-                    print(code!)
-                    weakSelf?.showHUD(message: msg!)
-                default: break
-                }
-            }, onCompleted: nil, onDisposed: nil )
-    }
+    
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
-        bgView.snp.makeConstraints { (make) in
-            make.top.left.right.bottom.equalTo(0)
-        }
         titleLB.snp.makeConstraints { (make) in
             make.top.left.right.equalTo(0)
-            make.bottom.equalTo(topView.snp.top)
+            make.bottom.equalTo(topLine.snp.top)
         }
         
-        topView.snp.makeConstraints { (make) in
+        topLine.snp.makeConstraints { (make) in
             make.top.equalTo(50 * defaultScale)
+            make.left.right.equalTo(0)
+            make.height.equalTo(0.5)
+        }
+        
+        titleTwolb.snp.makeConstraints { (make) in
+            make.top.equalTo(topLine.snp.bottom).offset(17 * defaultScale)
+            make.height.equalTo(12 * defaultScale)
+            make.left.equalTo(leftSpacing)
+            make.width.equalTo(100)
+        }
+        
+        onlyButBut.snp.makeConstraints { (make) in
+            make.top.equalTo(titleTwolb.snp.bottom).offset(12 * defaultScale)
+            make.left.equalTo(titleTwolb)
+            //make.width.equalTo(100)
+        }
+        titleThreelb.snp.makeConstraints { (make) in
+            make.top.equalTo(onlyButBut.snp.bottom).offset(16 * defaultScale)
+            make.bottom.equalTo(topView.snp.top).offset(-12 * defaultScale)
+            make.height.equalTo(12 * defaultScale)
+            make.left.equalTo(titleTwolb)
+            make.width.equalTo(100)
+        }
+        
+        
+        topView.snp.makeConstraints { (make) in
+            make.top.equalTo(topLine.snp.bottom).offset(110 * defaultScale)
             make.left.equalTo(10 * defaultScale)
             make.right.equalTo(-10 * defaultScale)
             make.height.equalTo(30 * defaultScale)
@@ -95,13 +105,15 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
         
     }
     private func initSubview() {
+        self.viewHeight = 371 * defaultScale
+        
+        topLine = UIImageView()
+        topLine.image = UIImage(named: "line")
+        
         topView = FootballFilterTopView()
         topView.delegate = self
         bottomView = FootballFilterBottomView()
         bottomView.delegate = self
-        
-        bgView = UIView()
-        bgView.backgroundColor = ColorFFFFFF
         
         titleLB = UILabel()
         titleLB.font = Font15
@@ -109,11 +121,36 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
         titleLB.textAlignment = .center
         titleLB.text = "赛事筛选"
         
-        bgView.addSubview(titleLB)
-        bgView.addSubview(topView)
-        bgView.addSubview(bottomView)
-        bgView.addSubview(collectionView)
-        self.pushBgView.addSubview(bgView)
+        titleTwolb = UILabel()
+        titleTwolb.font = Font12
+        titleTwolb.textColor = Color787878
+        titleTwolb.textAlignment = .left
+        titleTwolb.text = "方案筛选"
+        
+        titleThreelb = UILabel()
+        titleThreelb.font = Font12
+        titleThreelb.textColor = Color787878
+        titleThreelb.textAlignment = .left
+        titleThreelb.text = "选择赛事"
+        
+        onlyButBut = UIButton(type: .custom)
+        onlyButBut.titleLabel?.sizeToFit()
+        onlyButBut.setTitle(" 只看已购对阵 ", for: .normal)
+        onlyButBut.setTitleColor(Color787878, for: .normal)
+        
+        onlyButBut.layer.borderWidth = 0.3
+        onlyButBut.layer.borderColor = ColorC8C8C8.cgColor
+        onlyButBut.addTarget(self, action: #selector(onlyBuyButClicked(_:) ), for: .touchUpInside)
+        
+        
+        self.pushBgView.addSubview(topLine)
+        self.pushBgView.addSubview(titleLB)
+        self.pushBgView.addSubview(topView)
+        self.pushBgView.addSubview(bottomView)
+        self.pushBgView.addSubview(collectionView)
+        self.pushBgView.addSubview(titleTwolb)
+        self.pushBgView.addSubview(titleThreelb)
+        self.pushBgView.addSubview(onlyButBut)
     }
     
     // MARK: - 懒加载
@@ -137,6 +174,7 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        guard filterList != nil else { return 0 }
         return filterList.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -164,6 +202,8 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
         let filter = filterList[indexPath.row]
         filter.isSelected = !filter.isSelected
         collectionView.reloadItems(at: [indexPath])
+        self.isAlreadyBuy = false
+        changButState(isSelected: false)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -175,25 +215,54 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
     // MARK: - TOP VIEW Delegate
     // 全选
     func allSelected() {
+        self.isAlreadyBuy = false
         for  index in 0..<filterList.count {
             let indexPath = IndexPath(item: index, section: 0)
             let filter = filterList[indexPath.row]
             filter.isSelected = true
             self.collectionView.reloadItems(at: [indexPath])
         }
+        changButState(isSelected: false)
     }
     // 反选
     func reverseSelected() {
+        self.isAlreadyBuy = false
         for index in 0..<filterList.count {
             let indexPath = IndexPath(item: index, section: 0)
             let filter = filterList[indexPath.row]
             filter.isSelected = !filter.isSelected
             self.collectionView.reloadItems(at: [indexPath])
         }
+        changButState(isSelected: false)
     }
     // 仅五大联赛
     func fiveSelected() {
+        self.isAlreadyBuy = false
+        changButState(isSelected: false)
+    }
+    
+    @objc private func onlyBuyButClicked(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        self.isAlreadyBuy = sender.isSelected
+        changButState(isSelected: sender.isSelected)
         
+        for index in 0..<filterList.count {
+            let indexPath = IndexPath(item: index, section: 0)
+            let filter = filterList[indexPath.row]
+            filter.isSelected = false
+            self.collectionView.reloadItems(at: [indexPath])
+        }
+        
+    }
+    
+    private func changButState(isSelected: Bool) {
+        if isSelected {
+            onlyButBut.setTitleColor(ColorFFFFFF, for: .normal)
+            onlyButBut.backgroundColor = ColorEA5504
+        }else {
+            onlyButBut.setTitleColor(Color787878, for: .normal)
+            onlyButBut.backgroundColor = ColorFFFFFF
+        }
     }
     
     func filterConfirm() {
@@ -206,9 +275,12 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
             }
             i += 1
         }
-        idStr.removeLast()
+        if idStr != "" {
+            idStr.removeLast()
+        }
+        
         guard delegate != nil else { return }
-        delegate.filterConfirm(leagueId: idStr)
+        delegate.filterConfirm(leagueId: idStr, isAlreadyBuy: isAlreadyBuy)
         
         self.dismiss(animated: true, completion: nil)
     }

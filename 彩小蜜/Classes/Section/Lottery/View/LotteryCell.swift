@@ -10,6 +10,19 @@ import UIKit
 
 class LotteryCell: UITableViewCell {
 
+    public var resultModel : LotteryResultModel! {
+        didSet{
+            titlelb.text = resultModel.changci + resultModel.leagueAddr + resultModel.matchTime
+            homeTeamlb.text = resultModel.homeTeamAbbr
+            visiTeamlb.text = resultModel.visitingTeamAbbr
+            if resultModel.firstHalf == "" {
+                resultlb.text = "未开始"
+            }else {
+                resultlb.text = "半场 " + resultModel.firstHalf + " 总比分" + resultModel.whole
+            }
+        }
+    }
+    
     // MARK: - 属性 private
     private var titlelb : UILabel!
     private var homeTeamIcon : UIImageView!
@@ -94,9 +107,9 @@ class LotteryCell: UITableViewCell {
         
         scorelb = getLabel()
         scorelb.font = Font16
-        scorelb.textColor = ColorEA5504
+        scorelb.textColor = Color787878
         scorelb.textAlignment = .center
-        scorelb.text = "1 : 2"
+        scorelb.text = "VS"
         
         resultlb = getLabel()
         resultlb.font = Font12

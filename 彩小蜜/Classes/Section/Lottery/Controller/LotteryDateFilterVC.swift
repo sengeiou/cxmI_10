@@ -10,6 +10,11 @@ import UIKit
 
 fileprivate let LotteryDateFilterCellId = "LotteryDateFilterCellId"
 
+protocol LotteryDateFilterVCDelegate {
+    func didSelectDateItem(filter : LotteryDateFilterVC, dateModel : LotteryDateModel ) -> Void
+    
+}
+
 class LotteryDateFilterVC: BasePopViewController, UITableViewDelegate, UITableViewDataSource {
 
     // MARK : - 属性 public
@@ -18,6 +23,8 @@ class LotteryDateFilterVC: BasePopViewController, UITableViewDelegate, UITableVi
             self.tableView.reloadData()
         }
     }
+    
+    public var delegate : LotteryDateFilterVCDelegate!
     
     // MARK : - 属性 private
     private var dateTitle : UILabel!
@@ -130,11 +137,23 @@ class LotteryDateFilterVC: BasePopViewController, UITableViewDelegate, UITableVi
         return nil
     }
     
-    @objc private func backButClicked(_ sender: UIButton) {
-        
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        for date in dateList {
+            date.isSelected = false
+        }
+        guard delegate != nil else { return }
+        dateList[indexPath.row].isSelected = true 
+        delegate.didSelectDateItem(filter: self, dateModel: dateList[indexPath.row])
+        self.dismiss(animated: true , completion: nil )
     }
     
+    @objc private func backButClicked(_ sender: UIButton) {
+        self.dismiss(animated: true , completion: nil )
+    }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
