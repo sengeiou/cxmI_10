@@ -12,21 +12,51 @@ fileprivate let FootballAnalysisSectionHeaderId = "FootballAnalysisSectionHeader
 fileprivate let FootballMatchInfoCellId = "FootballMatchInfoCellId"
 fileprivate let FootballMatchInfoScaleCellId = "FootballMatchInfoScaleCellId"
 fileprivate let FootballMatchIntegralCellId = "FootballMatchIntegralCellId"
+fileprivate let FootballOddsTitleCellId = "FootballOddsTitleCellId"
+fileprivate let FootballOddsCellId = "FootballOddsCellId"
 
+enum TeamInfoStyle {
+    case analysis
+    case odds
+}
 
-class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballMatchPagerViewDelegate {
+class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballMatchPagerViewDelegate, FootballOddsPagerViewDelegate {
+    
+    // MARK: -  pagerView delegate
     func didTipAnalysisButton() {
+        self.teamInfoStyle = .analysis
         
     }
     
     func didTipOddsButton() {
-        
+        self.teamInfoStyle = .odds
     }
     
-
+    // MARK: - 赔率 pagerView delegate
+    func didTipEuropeOdds() {
+        self.oddsStyle = .欧赔
+    }
+    
+    func didTipAsianOdds() {
+        self.oddsStyle = .亚盘
+    }
+    
+    func didTipBigAndSmallBall() {
+        self.oddsStyle = .大小球
+    }
+    
+    
     public var matchId : String!
-    
-    
+    private var teamInfoStyle : TeamInfoStyle! = .analysis {
+        didSet{
+            self.tableView.reloadData()
+        }
+    }
+    private var oddsStyle : OddsPagerStyle! = .欧赔 {
+        didSet{
+            self.tableView.reloadData()
+        }
+    }
     // MARK: - 属性 private
     private var headerView : FootballMatchInfoHeader!
     private var buyButton : UIButton!
@@ -74,6 +104,8 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
         table.register(FootballMatchInfoCell.self, forCellReuseIdentifier: FootballMatchInfoCellId)
         table.register(FootballMatchInfoScaleCell.self, forCellReuseIdentifier: FootballMatchInfoScaleCellId)
         table.register(FootballMatchIntegralCell.self, forCellReuseIdentifier: FootballMatchIntegralCellId)
+        table.register(FootballOddsTitleCell.self, forCellReuseIdentifier: FootballOddsTitleCellId)
+        table.register(FootballOddsCell.self, forCellReuseIdentifier: FootballOddsCellId)
         table.register(FootballAnalysisSectionHeader.self, forHeaderFooterViewReuseIdentifier: FootballAnalysisSectionHeaderId)
         
         headerView = FootballMatchInfoHeader()
@@ -85,39 +117,55 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
     }()
     //MARK: - tableView dataSource
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        if self.teamInfoStyle == .odds {
+            return 1
+        }else {
+            return 5
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return 1
-        case 1:
+        if self.teamInfoStyle == .odds {
             return 10
-        case 2:
-            return 15
-        case 3:
-            return 15
-        case 4:
-            return 1
-        default:
-            return 0
+        }else {
+            switch section {
+            case 0:
+                return 1
+            case 1:
+                return 10
+            case 2:
+                return 15
+            case 3:
+                return 15
+            case 4:
+                return 1
+            default:
+                return 0
+            }
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        switch indexPath.section {
-        case 0:
-            return initAnalysisScaleCell(indexPath: indexPath)
-        case 1, 2, 3:
-            return initAnalysisMatchInfoCell(indexPath: indexPath)
-        case 4:
-            return initAnalysisIntegralCell(indexPath: indexPath)
-        default:
-            return UITableViewCell()
+        if self.teamInfoStyle == .odds {
+            switch indexPath.row {
+            case 0:
+                return initOddsTitleCell(indexPath: indexPath)
+            default:
+                return initOddsCell(indexPath: indexPath)
+            }
+        }else {
+            switch indexPath.section {
+            case 0:
+                return initAnalysisScaleCell(indexPath: indexPath)
+            case 1, 2, 3:
+                return initAnalysisMatchInfoCell(indexPath: indexPath)
+            case 4:
+                return initAnalysisIntegralCell(indexPath: indexPath)
+            default:
+                return UITableViewCell()
+            }
         }
-        
     }
     /// 分析 统计 Cell
     private func initAnalysisScaleCell(indexPath: IndexPath) -> UITableViewCell {
@@ -137,7 +185,31 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
         
         return cell
     }
-    
+    /// 赔率 title Cell
+    private func initOddsTitleCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: FootballOddsTitleCellId, for: indexPath) as! FootballOddsTitleCell
+        cell.pagerView.delegate = self
+        switch oddsStyle {
+        case .欧赔:
+            cell.titleView.homelb.text = "胜"
+            cell.titleView.flatlb.text = "平"
+        case .亚盘:
+            cell.titleView.homelb.text = "主"
+            cell.titleView.flatlb.text = "盘口"
+        case .大小球:
+            cell.titleView.homelb.text = "主"
+            cell.titleView.flatlb.text = "盘口"
+        default : break
+        
+        }
+        return cell
+    }
+    /// 赔率  Cell
+    private func initOddsCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: FootballOddsCellId, for: indexPath) as! FootballOddsCell
+        
+        return cell
+    }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: FootballAnalysisSectionHeaderId) as! FootballAnalysisSectionHeader
@@ -160,16 +232,28 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        switch indexPath.section {
-        case 0:
-            return 96 * defaultScale
-        case 1, 2, 3:
-            return 36 * defaultScale
-        case 4:
-            return 375 * defaultScale
-        default:
-            return 0
+        if self.teamInfoStyle == .odds {
+            switch indexPath.row {
+            case 0:
+                return 72 * defaultScale
+            default:
+                return 50 * defaultScale
+            }
+        }else {
+            switch indexPath.section {
+            case 0:
+                return 96 * defaultScale
+            case 1, 2, 3:
+                return 36 * defaultScale
+            case 4:
+                return 375 * defaultScale
+            default:
+                return 0
+            }
         }
+        
+        
+        
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
