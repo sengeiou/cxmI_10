@@ -10,6 +10,15 @@ import UIKit
 
 class FootballMatchInfoScaleCell: UITableViewCell {
 
+    // MARK: - 属性 public
+    public var teamInfo : MatchTeamInfoModel! {
+        didSet{
+            homeScale.scaleNum = CGFloat(teamInfo.win / teamInfo.total)
+            flatScale.scaleNum = CGFloat(teamInfo.draw / teamInfo.total)
+            visiScale.scaleNum = CGFloat(teamInfo.lose / teamInfo.total)
+        }
+    }
+    
     // MARK: - 属性 private
     private var homelb : UILabel!
     private var flatlb : UILabel!

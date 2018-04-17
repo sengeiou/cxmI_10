@@ -11,7 +11,27 @@ import UIKit
 class FootballMatchInfoCell: UITableViewCell {
 
     // MARK: - 属性 public
-    private var ttttitit : UILabel!
+    public var teamInfo : TeamInfo! {
+        didSet{
+            matchName.text = teamInfo.leagueAddr
+            matchTime.text = teamInfo.matchDay
+            matchScore.text = "\(teamInfo.homeTeamAbbr!)  \(teamInfo.matchRs!)  \(teamInfo.visitingTeamAbbr!)"
+            
+            guard teamInfo.matchRs != "" else { return }
+            matchResult.text = teamInfo.matchRs
+            if teamInfo.matchRs == "胜" {
+                matchResult.textColor = ColorEA5504
+            }else if teamInfo.matchRs == "平" {
+                matchResult.textColor = Color65AADD
+            }else{
+                matchResult.textColor = Color44AE35
+            }
+        }
+    }
+    
+   
+    
+    
     // MARK: - 属性 private
     private var matchName: UILabel!
     private var matchTime: UILabel!

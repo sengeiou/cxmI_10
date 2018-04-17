@@ -34,6 +34,8 @@
 		114491142085F6FC009F1D09 /* FootballOddsTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114491132085F6FC009F1D09 /* FootballOddsTitleView.swift */; };
 		114491162085FC23009F1D09 /* FootballOddsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114491152085FC23009F1D09 /* FootballOddsCell.swift */; };
 		114491182085FC37009F1D09 /* FootballOddsTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114491172085FC37009F1D09 /* FootballOddsTitleCell.swift */; };
+		1144911B208611A3009F1D09 /* FootballMatchInfoProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1144911A208611A3009F1D09 /* FootballMatchInfoProtocol.swift */; };
+		1144911D2086130D009F1D09 /* FootballMatchInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1144911C2086130D009F1D09 /* FootballMatchInfoModel.swift */; };
 		11691806207DB73800C8A287 /* CouponFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11691805207DB73800C8A287 /* CouponFilterViewController.swift */; };
 		11691808207DB82E00C8A287 /* CouponFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11691807207DB82E00C8A287 /* CouponFilterCell.swift */; };
 		1169180A207DBA8B00C8A287 /* PaymentResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11691809207DBA8B00C8A287 /* PaymentResultModel.swift */; };
@@ -265,6 +267,8 @@
 		114491132085F6FC009F1D09 /* FootballOddsTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballOddsTitleView.swift; sourceTree = "<group>"; };
 		114491152085FC23009F1D09 /* FootballOddsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballOddsCell.swift; sourceTree = "<group>"; };
 		114491172085FC37009F1D09 /* FootballOddsTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballOddsTitleCell.swift; sourceTree = "<group>"; };
+		1144911A208611A3009F1D09 /* FootballMatchInfoProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballMatchInfoProtocol.swift; sourceTree = "<group>"; };
+		1144911C2086130D009F1D09 /* FootballMatchInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballMatchInfoModel.swift; sourceTree = "<group>"; };
 		11691805207DB73800C8A287 /* CouponFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponFilterViewController.swift; sourceTree = "<group>"; };
 		11691807207DB82E00C8A287 /* CouponFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponFilterCell.swift; sourceTree = "<group>"; };
 		11691809207DBA8B00C8A287 /* PaymentResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentResultModel.swift; sourceTree = "<group>"; };
@@ -495,6 +499,7 @@
 		11227C0B20849DFD00680CCC /* FootballMatchTeamInfo */ = {
 			isa = PBXGroup;
 			children = (
+				114491192086117B009F1D09 /* Protocol */,
 				11227C0E20849E3100680CCC /* Model */,
 				11227C0D20849E2B00680CCC /* View */,
 				1144910220859710009F1D09 /* OddsView */,
@@ -534,6 +539,7 @@
 		11227C0E20849E3100680CCC /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1144911C2086130D009F1D09 /* FootballMatchInfoModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -547,6 +553,14 @@
 				114491152085FC23009F1D09 /* FootballOddsCell.swift */,
 			);
 			path = OddsView;
+			sourceTree = "<group>";
+		};
+		114491192086117B009F1D09 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				1144911A208611A3009F1D09 /* FootballMatchInfoProtocol.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 		11A250BC207C9BF100780D3D /* TeamView */ = {
@@ -2014,6 +2028,7 @@
 				E56CE8082069E63E0090A1B5 /* BasePageModel.swift in Sources */,
 				E550D8922073363D002DDE23 /* FootballOrderConfirmVC.swift in Sources */,
 				E58B57B4205622950025E2F1 /* BankCardViewController.swift in Sources */,
+				1144911D2086130D009F1D09 /* FootballMatchInfoModel.swift in Sources */,
 				11227C0A20849D9700680CCC /* FootballMatchInfoPopVC.swift in Sources */,
 				11A250BE207C9C2200780D3D /* FootballTotalView.swift in Sources */,
 				E567636E206B9D6D00E2D9A8 /* ProgressModel.swift in Sources */,
@@ -2037,6 +2052,7 @@
 				114490FD20858CF2009F1D09 /* FootballMatchPagerView.swift in Sources */,
 				E550D8A320733A2D002DDE23 /* FootballOrderHunheCell.swift in Sources */,
 				E5D8ABBE206749F5002D688B /* OrderDetailHeaderView.swift in Sources */,
+				1144911B208611A3009F1D09 /* FootballMatchInfoProtocol.swift in Sources */,
 				114491142085F6FC009F1D09 /* FootballOddsTitleView.swift in Sources */,
 				E581F378206348EB002AB9F7 /* UserInfoManager.swift in Sources */,
 				E5D5A379206D191C00FC865D /* FootballTopView.swift in Sources */,

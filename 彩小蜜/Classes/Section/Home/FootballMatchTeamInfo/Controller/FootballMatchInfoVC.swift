@@ -47,6 +47,8 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
     
     
     public var matchId : String!
+    
+    // MARK: - 属性 private
     private var teamInfoStyle : TeamInfoStyle! = .analysis {
         didSet{
             self.tableView.reloadData()
@@ -57,14 +59,22 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
             self.tableView.reloadData()
         }
     }
-    // MARK: - 属性 private
+    var matchInfoModel: FootballMatchInfoModel!
     private var headerView : FootballMatchInfoHeader!
     private var buyButton : UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "彩小秘 · 查看详情"
         initSubview()
+        
+        matchInfoRequest(matchId: matchId)
     }
+    
+    @objc private func buyButtonClicked(_ sender: UIButton) {
+        
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.snp.makeConstraints { (make) in
@@ -77,10 +87,28 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
             make.left.right.equalTo(0)
         }
     }
-    
-    @objc private func buyButtonClicked(_ sender: UIButton) {
+    // MARK: - 网络请求
+    func matchInfoRequest(matchId: String) {
         
+        weak var weakSelf = self
+        
+        _ = homeProvider.rx.request(.matchTeamInfo(matchId: matchId))
+            .asObservable()
+            .mapObject(type: FootballMatchInfoModel.self)
+            .subscribe(onNext: { (data) in
+                weakSelf?.matchInfoModel = data
+                weakSelf?.tableView.reloadData()
+            }, onError: { (error) in
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    print(code!)
+                    weakSelf?.showHUD(message: msg!)
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil )
     }
+    
     
     private func initSubview() {
         buyButton = UIButton(type: .custom)
@@ -128,15 +156,19 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
         if self.teamInfoStyle == .odds {
             return 10
         }else {
+            guard self.matchInfoModel != nil else { return 0 }
             switch section {
             case 0:
                 return 1
             case 1:
-                return 10
+                guard self.matchInfoModel.hvMatchTeamInfo.matchInfos != nil else { return 0 }
+                return self.matchInfoModel.hvMatchTeamInfo.matchInfos.count
             case 2:
-                return 15
+                guard self.matchInfoModel.hMatchTeamInfo.matchInfos != nil else { return 0 }
+                return self.matchInfoModel.hMatchTeamInfo.matchInfos.count
             case 3:
-                return 15
+                guard self.matchInfoModel.vMatchTeamInfo.matchInfos != nil else { return 0 }
+                return self.matchInfoModel.vMatchTeamInfo.matchInfos.count
             case 4:
                 return 1
             default:
@@ -167,16 +199,25 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
             }
         }
     }
-    /// 分析 统计 Cell
+    /// 分析 统计 历史交锋 Cell
     private func initAnalysisScaleCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballMatchInfoScaleCellId, for: indexPath) as! FootballMatchInfoScaleCell
-        
+        cell.teamInfo = self.matchInfoModel.hvMatchTeamInfo
         return cell
     }
     /// 分析  Cell
     private func initAnalysisMatchInfoCell(indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballMatchInfoCellId, for: indexPath) as! FootballMatchInfoCell
-        
+        switch indexPath.section {
+        case 1:
+            cell.teamInfo = self.matchInfoModel.hvMatchTeamInfo.matchInfos[indexPath.row]
+        case 2:
+            cell.teamInfo = self.matchInfoModel.hMatchTeamInfo.matchInfos[indexPath.row]
+        case 3:
+            cell.teamInfo = self.matchInfoModel.vMatchTeamInfo.matchInfos[indexPath.row]
+        default:
+            break
+        }
         return cell
     }
     /// 分析 积分 Cell
