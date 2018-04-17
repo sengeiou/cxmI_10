@@ -58,6 +58,7 @@ class FootballMatchInfoPopVC: BasePopViewController, BottomViewDelegate {
         lineThree.backgroundColor = ColorC8C8C8
         
         header = FootballTeamHeader()
+        header.headerStyle = .默认
         
         let matchState = getLabel()
         matchState.text = "近期状态"

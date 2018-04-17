@@ -8,8 +8,33 @@
 
 import UIKit
 
+enum TeamHeaderStyle  {
+    case 详情
+    case 默认
+}
+
 class FootballTeamHeader: UIView {
 
+    public var headerStyle : TeamHeaderStyle = .默认 {
+        didSet{
+            if headerStyle == .详情 {
+                bottomLine.snp.makeConstraints { (make) in
+                    make.bottom.equalTo(self)
+                    make.height.equalTo(0.5)
+                    make.left.equalTo(self)
+                    make.right.equalTo(self)
+                }
+            }else {
+                bottomLine.snp.makeConstraints { (make) in
+                    make.bottom.equalTo(0)
+                    make.height.equalTo(0.5)
+                    make.left.equalTo(10 * defaultScale)
+                    make.right.equalTo(-10 * defaultScale)
+                }
+            }
+        }
+    }
+    
     // MARK : - 属性 private
     private var titlelb : UILabel!
     private var homeTeamIcon : UIImageView!
@@ -21,7 +46,7 @@ class FootballTeamHeader: UIView {
     private var flatOdds : UILabel!
     private var flatName : UILabel!
     
-    private var bottomLine : UIView!
+    public var bottomLine : UIView!
     
     init() {
         super.init(frame: CGRect.zero)
@@ -74,12 +99,6 @@ class FootballTeamHeader: UIView {
             make.width.equalTo(flatName)
             make.height.equalTo(homeOdds)
             make.left.equalTo(flatName)
-        }
-        bottomLine.snp.makeConstraints { (make) in
-            make.bottom.equalTo(0)
-            make.height.equalTo(0.5)
-            make.left.equalTo(10 * defaultScale)
-            make.right.equalTo(-10 * defaultScale)
         }
     }
 
