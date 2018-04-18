@@ -462,7 +462,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         score.teamInfo = teamInfo
         
         score.selected = { (selectedCells, canAdd) in
-            scoreView.selectedCellList = selectedCells
+            scoreView.selectedCells = selectedCells
             guard canAdd == true else { return }
             guard (weakSelf?.selectPlayList.count)! < 15  else {
                 scoreView.backSelectedState()
@@ -473,7 +473,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
             weakSelf?.resetDanState()
         }
         score.deSelected = { (selectedCells, canRemove) in
-            scoreView.selectedCellList = selectedCells
+            scoreView.selectedCells = selectedCells
             guard canRemove == true else { return }
             weakSelf?.selectPlayList.remove(teamInfo)
             weakSelf?.resetDanState()
@@ -490,7 +490,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         score.teamInfo = teamInfo
         
         score.selected = { (selectedCells, canAdd) in
-            scoreView.selectedCellList = selectedCells
+            scoreView.selectedCells = selectedCells
             guard canAdd == true else { return }
             guard (weakSelf?.selectPlayList.count)! < 15  else {
                 scoreView.backSelectedState()
@@ -501,7 +501,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
             weakSelf?.resetDanState()
         }
         score.deSelected = { (selectedCells, canRemove) in
-            scoreView.selectedCellList = selectedCells
+            scoreView.selectedCells = selectedCells
             guard canRemove == true else { return }
             weakSelf?.selectPlayList.remove(teamInfo)
             weakSelf?.resetDanState()

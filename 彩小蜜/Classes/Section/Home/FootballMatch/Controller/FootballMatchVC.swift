@@ -63,11 +63,21 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
             self.bottomView.number = selectPlayList.count
         }
     }
+    
+    private var selectPlays : Set<FootballPlayListModel>! {
+        didSet{
+            
+            self.selectPlayList = Array(selectPlays)
+            
+        }
+    }
+    
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = matchType.rawValue
         selectPlayList = [FootballPlayListModel]()
+        selectPlays = Set<FootballPlayListModel>()
         initSubview()
         setEmpty(title: "暂无可选赛事", tableView)
         footballRequest(leagueId: "")
@@ -510,20 +520,17 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     
         score.selected = { (selectedCells, canAdd) in
             scoreView.selectedCells = selectedCells
-            guard canAdd == true else { return }
+            
             guard (weakSelf?.selectPlayList.count)! < 15  else {
                 scoreView.backSelectedState()
                 weakSelf?.showHUD(message: "最多可选15场比赛")
                 return }
-                
-            weakSelf?.selectPlayList.append(teamInfo)
-        }
-    
-        score.deSelected = { (selectedCells, canRemove) in
-            scoreView.selectedCells = selectedCells
-            guard canRemove == true else { return }
-            weakSelf?.selectPlayList.remove(teamInfo)
             
+            if selectedCells.isEmpty == false {
+                self.selectPlays.insert(teamInfo)
+            }else {
+                self.selectPlays.remove(teamInfo)
+            }
         }
         present(score)
     }
@@ -534,22 +541,20 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         score.teamInfo = teamInfo
     
         score.selected = { (selectedCells, canAdd) in
-            scoreView.selectedCellList = selectedCells
-            guard canAdd == true else { return }
+            scoreView.selectedCells = selectedCells
+            
             guard (weakSelf?.selectPlayList.count)! < 15  else {
                 scoreView.backSelectedState()
                 weakSelf?.showHUD(message: "最多可选15场比赛")
                 return }
             
-            weakSelf?.selectPlayList.append(teamInfo)
+            if selectedCells.isEmpty == false {
+                self.selectPlays.insert(teamInfo)
+            }else {
+                self.selectPlays.remove(teamInfo)
+            }
         }
-        
-        score.deSelected = { (selectedCells, canRemove) in
-            scoreView.selectedCellList = selectedCells
-            guard canRemove == true else { return }
-            weakSelf?.selectPlayList.remove(teamInfo)
-            
-        }
+    
         present(score)
     }
     

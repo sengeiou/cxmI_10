@@ -23,9 +23,9 @@ class FootballHunheFilterVC: BasePopViewController, BottomViewDelegate, Football
             rangArr.append(teamInfo.matchPlays[0].visitingCell)
             SPFView.cells = spfArr
             rangSPFView.cells = rangArr
-            scoreHomeView.cellSons = teamInfo.matchPlays[2].homeCell.cellSons
-            scoreFlatView.cellSons = teamInfo.matchPlays[2].flatCell.cellSons
-            scoreVisiView.cellSons = teamInfo.matchPlays[2].visitingCell.cellSons
+            scoreHomeView.cells = teamInfo.matchPlays[2].homeCell.cellSons
+            scoreFlatView.cells = teamInfo.matchPlays[2].flatCell.cellSons
+            scoreVisiView.cells = teamInfo.matchPlays[2].visitingCell.cellSons
             
             totalView.cells = teamInfo.matchPlays[3].matchCells
             banquanView.cells = teamInfo.matchPlays[4].matchCells

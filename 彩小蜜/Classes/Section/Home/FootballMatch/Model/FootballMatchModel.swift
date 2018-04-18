@@ -57,8 +57,8 @@ class FootballPlayListModel:NSObject, HandyJSON {
     var matchPlays : [FootballMatchPlay]!
     
     //var isSelected : Bool! = false
-    var selectedScore : [FootballPlayCellModel]!
-    var selectedBan : [FootballPlayCellModel]!
+//    var selectedScore : [FootballPlayCellModel]!
+//    var selectedBan : [FootballPlayCellModel]!
     var selectedHunhe : [FootballPlayCellModel] = [FootballPlayCellModel]()
 }
 
@@ -77,7 +77,17 @@ class FootballMatchPlay : NSObject, HandyJSON {
     
 }
 
-class FootballPlayCellModel:NSObject, HandyJSON {
+class FootballPlayCellModel: NSObject, NSCopying, HandyJSON {
+    func copy(with zone: NSZone? = nil) -> Any {
+        let model = FootballPlayCellModel()
+        model.isSelected = isSelected
+        model.cellCode = cellCode
+        model.cellName = cellName
+        model.cellOdds = cellOdds
+        model.cellSons = cellSons
+        return model
+    }
+    
     required override init() { }
     var isSelected = false
     var cellCode: String!
@@ -86,12 +96,6 @@ class FootballPlayCellModel:NSObject, HandyJSON {
     var cellSons: [FootballPlayCellModel]!
 }
 
-//class SonCellModel: NSObject, HandyJSON {
-//    required override init() { }
-//    var isSelected = false
-//    var cellCode: String!
-//    var cellName: String!
-//    var cellOdds: String!
-//}
+
 
 

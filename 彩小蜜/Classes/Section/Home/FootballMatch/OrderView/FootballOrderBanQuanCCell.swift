@@ -52,7 +52,7 @@ class FootballOrderBanQuanCCell: UITableViewCell {
         
         var selected = false
         
-        for cell in playInfoModel.selectedBan {
+        for cell in playInfoModel.selectedHunhe {
             if cell.isSelected == true {
                 selected = true
                 break

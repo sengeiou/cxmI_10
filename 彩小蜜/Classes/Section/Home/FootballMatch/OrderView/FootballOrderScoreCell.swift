@@ -52,7 +52,7 @@ class FootballOrderScoreCell: UITableViewCell {
         
         var selected = false
   
-        for cell in playInfoModel.selectedScore {
+        for cell in playInfoModel.selectedHunhe {
             if cell.isSelected == true {
                 selected = true
                 break

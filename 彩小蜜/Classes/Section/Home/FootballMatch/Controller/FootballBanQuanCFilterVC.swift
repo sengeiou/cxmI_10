@@ -24,8 +24,11 @@ class FootballBanQuanCFilterVC: BasePopViewController, BottomViewDelegate, Footb
             visitingTeam.text = teamInfo.visitingTeamAbbr
             banScoreView.cells = teamInfo.matchPlays[0].matchCells
             
-            guard teamInfo.selectedBan != nil else { return }
-            selectedCells = teamInfo.selectedBan
+            oldSelectedCells = teamInfo.matchPlays[0].matchCells.map{ $0.copy() as! FootballPlayCellModel }
+            
+            //guard teamInfo.selectedHunhe != nil else { return }
+            selectedCells = teamInfo.selectedHunhe
+            
         }
     }
     
@@ -34,6 +37,7 @@ class FootballBanQuanCFilterVC: BasePopViewController, BottomViewDelegate, Footb
     public var didSelected : SelectedItemCell!
     public var selectedCells : [FootballPlayCellModel]!
     
+    private var oldSelectedCells : [FootballPlayCellModel]!
     private var homeTeam : UILabel!
     private var vslb : UILabel!
     private var visitingTeam : UILabel!
@@ -139,67 +143,38 @@ class FootballBanQuanCFilterVC: BasePopViewController, BottomViewDelegate, Footb
     }
     
     // MARK: - 选取Item delegate
-    func didSelectedItem(cellSon: FootballPlayCellModel) {
-        
-    }
-    
-    func didDeSelectedItem(cellSon: FootballPlayCellModel) {
-       
-    }
-    
-    func didSelectedItem(cell: FootballPlayCellModel) {
 
+    func didSelectedItem(cell: FootballPlayCellModel) {
         guard selectedCells != nil else { return }
         selectedCells.append(cell)
-        self.teamInfo.selectedBan = selectedCells
+    }
+    
+    func didDeSelectedItem(cell: FootballPlayCellModel) {
+        guard selectedCells != nil else { return }
+        selectedCells.remove(cell)
+    }
+    
+    func didTipConfitm() {
+
+        self.teamInfo.selectedHunhe = selectedCells
+
+        dismiss(animated: true, completion: nil)
         
-        var canAdd = true
-        
-        if teamInfo.selectedBan.count == 1 {
-            canAdd = true
-        }else {
-            canAdd = false
-        }
-        
+        let canAdd = true
         self.selected(selectedCells, canAdd)
         
         guard didSelected != nil else { return }
         self.didSelected()
     }
     
-    func didDeSelectedItem(cell: FootballPlayCellModel) {
-      
-        guard selectedCells != nil else { return }
-        selectedCells.remove(cell)
-        
-        self.teamInfo.selectedBan = selectedCells
-        
-        var canRemove = true
-        
-        if self.teamInfo.selectedBan.count == 0 {
-            canRemove = true
-        }else {
-            canRemove = false
-        }
-        
-        self.deSelected(selectedCells, canRemove)
-        
-        guard didSelected != nil else { return }
-        self.didSelected()
-    }
-    
-    func didTipConfitm() {
-        guard selected != nil else { return }
-        self.teamInfo.selectedBan = selectedCells
-        
-        dismiss(animated: true, completion: nil)
-    }
-    
     func didTipCancel() {
         guard selected != nil else { return }
-        self.teamInfo.selectedBan = selectedCells
-        
+     
         dismiss(animated: true, completion: nil)
+        
+        for index in 0..<oldSelectedCells.count {
+            self.teamInfo.matchPlays[0].matchCells[index].isSelected = oldSelectedCells[index].isSelected
+        }
     }
     
     

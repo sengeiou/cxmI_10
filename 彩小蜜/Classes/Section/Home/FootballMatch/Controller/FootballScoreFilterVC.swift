@@ -18,13 +18,17 @@ class FootballScoreFilterVC: BasePopViewController, BottomViewDelegate, Football
         didSet{
             homeTeam.text = teamInfo.homeTeamAbbr
             visitingTeam.text = teamInfo.visitingTeamAbbr
-            shengScoreView.cellSons = teamInfo.matchPlays[0].homeCell.cellSons
-            pingScoreView.cellSons = teamInfo.matchPlays[0].flatCell.cellSons
-            fuScoreView.cellSons = teamInfo.matchPlays[0].visitingCell.cellSons
+            shengScoreView.cells = teamInfo.matchPlays[0].homeCell.cellSons
+            pingScoreView.cells = teamInfo.matchPlays[0].flatCell.cellSons
+            fuScoreView.cells = teamInfo.matchPlays[0].visitingCell.cellSons
             
-            guard teamInfo.selectedScore != nil else { return }
-            selectedCells = teamInfo.selectedScore
-            currentSelectedCells = teamInfo.selectedScore
+            oldHomeSelectedCells = teamInfo.matchPlays[0].homeCell.cellSons.map{ $0.copy() as! FootballPlayCellModel }
+            oldFlatSelectedCells = teamInfo.matchPlays[0].flatCell.cellSons.map{ $0.copy() as! FootballPlayCellModel }
+            oldVisiSelectedCells = teamInfo.matchPlays[0].visitingCell.cellSons.map{ $0.copy() as! FootballPlayCellModel }
+            
+            //guard teamInfo.selectedHunhe != nil else { return }
+            selectedCells = teamInfo.selectedHunhe
+            
         }
     }
 
@@ -33,7 +37,9 @@ class FootballScoreFilterVC: BasePopViewController, BottomViewDelegate, Football
     public var didSelected : SelectedItem!
     private var selectedCells : [FootballPlayCellModel]!
     
-    private var currentSelectedCells : [FootballPlayCellModel]!
+    private var oldHomeSelectedCells : [FootballPlayCellModel]!
+    private var oldFlatSelectedCells : [FootballPlayCellModel]!
+    private var oldVisiSelectedCells : [FootballPlayCellModel]!
     
     private var homeTeam : UILabel!
     private var vslb : UILabel!
@@ -55,7 +61,7 @@ class FootballScoreFilterVC: BasePopViewController, BottomViewDelegate, Football
         super.viewDidLoad()
         self.popStyle = .fromBottom
         selectedCells = [FootballPlayCellModel]()
-        currentSelectedCells = [FootballPlayCellModel]()
+        
         initSubview()
     }
 
@@ -189,61 +195,43 @@ class FootballScoreFilterVC: BasePopViewController, BottomViewDelegate, Football
     }
     
     // MARK: - 选取Item delegate
-    func didSelectedItem(cellSon: FootballPlayCellModel) {
-        guard selectedCells != nil else { return }
-        selectedCells.append(cellSon)
-        self.teamInfo.selectedScore = selectedCells
-        
-        var canAdd = true
-        
-        if teamInfo.selectedScore.count == 1 {
-            canAdd = true
-        }else {
-            canAdd = false
-        }
-
-        self.selected(selectedCells, canAdd)
-
-        guard didSelected != nil else { return }
-        self.didSelected()
-    }
-    
-    func didDeSelectedItem(cellSon: FootballPlayCellModel) {
-        guard selectedCells != nil else { return }
-        selectedCells.remove(cellSon)
-        
-        self.teamInfo.selectedScore = selectedCells
-        
-        var canRemove = true 
-        
-        if self.teamInfo.selectedScore.count == 0 {
-            canRemove = true
-        }else {
-            canRemove = false
-        }
-        
-        self.deSelected(selectedCells, canRemove)
-        
-        guard didSelected != nil else { return }
-        self.didSelected()
-    }
     func didSelectedItem(cell: FootballPlayCellModel) {
+        guard selectedCells != nil else { return }
+        selectedCells.append(cell)
     }
     
     func didDeSelectedItem(cell: FootballPlayCellModel) {
+        guard selectedCells != nil else { return }
+        selectedCells.remove(cell)
     }
+    
     func didTipConfitm() {
-        guard selected != nil else { return }
-        self.teamInfo.selectedScore = selectedCells
-        //self.selected(selectedCells)
+        
+        self.teamInfo.selectedHunhe = selectedCells
+        
         dismiss(animated: true, completion: nil)
+        
+        let canAdd = true
+        self.selected(selectedCells, canAdd)
+        
+        guard didSelected != nil else { return }
+        self.didSelected()
     }
     
     func didTipCancel() {
         guard selected != nil else { return }
-        self.teamInfo.selectedScore = selectedCells
-        //self.selected(selectedCells)
+        
         dismiss(animated: true, completion: nil)
+        
+        for index in 0..<oldHomeSelectedCells.count {
+            self.teamInfo.matchPlays[0].homeCell.cellSons[index].isSelected = oldHomeSelectedCells[index].isSelected
+        }
+        for index in 0..<oldFlatSelectedCells.count {
+            self.teamInfo.matchPlays[0].flatCell.cellSons[index].isSelected = oldFlatSelectedCells[index].isSelected
+        }
+        for index in 0..<oldVisiSelectedCells.count {
+            self.teamInfo.matchPlays[0].visitingCell.cellSons[index].isSelected = oldVisiSelectedCells[index].isSelected
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

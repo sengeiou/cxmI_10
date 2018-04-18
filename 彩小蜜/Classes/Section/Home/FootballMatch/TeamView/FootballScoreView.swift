@@ -18,45 +18,40 @@ class FootballScoreView: UIView {
     
     public var teamInfo : FootballPlayListModel! {
         didSet{
-            switch matchType {
-            case .比分:
-                if teamInfo.selectedScore != nil, teamInfo.selectedScore.isEmpty == false {
-                    changeViewState(isSelected: true )
-                }else {
-                    changeViewState(isSelected: false)
-                }
-            case .半全场:
-                if teamInfo.selectedBan != nil, teamInfo.selectedBan.isEmpty == false {
-                    changeViewState(isSelected: true )
-                }else {
-                    changeViewState(isSelected: false)
-                }
-            case .混合过关:
-                if teamInfo.selectedHunhe.isEmpty == false {
-                    changeViewState(isSelected: true )
-                }else {
-                    changeViewState(isSelected: false)
-                }
-            default: break
-                
+            
+            if teamInfo.selectedHunhe.isEmpty == false {
+                changeViewState(isSelected: true )
+            }else {
+                changeViewState(isSelected: false)
             }
+//            switch matchType {
+//            case .比分:
+//                if teamInfo.selectedHunhe.isEmpty == false {
+//                    changeViewState(isSelected: true )
+//                }else {
+//                    changeViewState(isSelected: false)
+//                }
+//            case .半全场:
+//                if teamInfo.selectedHunhe.isEmpty == false {
+//                    changeViewState(isSelected: true )
+//                }else {
+//                    changeViewState(isSelected: false)
+//                }
+//            case .混合过关:
+//                if teamInfo.selectedHunhe.isEmpty == false {
+//                    changeViewState(isSelected: true )
+//                }else {
+//                    changeViewState(isSelected: false)
+//                }
+//            default: break
+//
+//            }
         }
     }
     // 比分
     public var selectedCells : [FootballPlayCellModel]! {
         didSet{
             if selectedCells.isEmpty == false {
-                changeViewState(isSelected: true )
-            }else {
-                changeViewState(isSelected: false)
-            }
-        }
-    }
-    
-    // 半全场
-    public var selectedCellList: [FootballPlayCellModel]! {
-        didSet{
-            if selectedCellList.isEmpty == false {
                 changeViewState(isSelected: true )
             }else {
                 changeViewState(isSelected: false)
@@ -92,7 +87,7 @@ class FootballScoreView: UIView {
         super.init(frame: CGRect.zero)
         initSubview()
         selectedCells = [FootballPlayCellModel]()
-        selectedCellList = [FootballPlayCellModel]()
+        
     }
     
     override func layoutSubviews() {
@@ -124,9 +119,9 @@ class FootballScoreView: UIView {
             self.titlelb.textColor = ColorFFFFFF
             switch matchType {
             case .比分:
-                changeScoreView(list: self.teamInfo.selectedScore)
+                changeScoreView(list: self.teamInfo.selectedHunhe)
             case .半全场:
-                changeBanView(list: self.teamInfo.selectedBan)
+                changeBanView(list: self.teamInfo.selectedHunhe)
             case .混合过关:
                 changeHunheView(list: self.teamInfo.selectedHunhe)
             default: break

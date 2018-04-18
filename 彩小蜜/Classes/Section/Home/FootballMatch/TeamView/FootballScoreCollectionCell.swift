@@ -12,13 +12,13 @@ import UIKit
 class FootballScoreCollectionCell: UICollectionViewCell {
     
     //比分
-    public var cellSon : FootballPlayCellModel! {
-        didSet{
-            selected(cellSon.isSelected)
-            titlelb.text = cellSon.cellName
-            detaillb.text = cellSon.cellOdds
-        }
-    }
+//    public var cellSon : FootballPlayCellModel! {
+//        didSet{
+//            selected(cellSon.isSelected)
+//            titlelb.text = cellSon.cellName
+//            detaillb.text = cellSon.cellOdds
+//        }
+//    }
     //半全场
     public var cellInfo : FootballPlayCellModel! {
         didSet{
