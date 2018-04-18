@@ -125,6 +125,8 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
         
         leftBut.setImage(UIImage(named:"ret"), for: .normal)
         
+        leftBut.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 24)
+    
         leftBut.addTarget(self, action: #selector(back(_:)), for: .touchUpInside)
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftBut)
