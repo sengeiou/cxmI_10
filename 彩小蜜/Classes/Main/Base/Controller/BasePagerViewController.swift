@@ -121,9 +121,9 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
     
     private func setLiftButtonItem() {
         let leftBut = UIButton(type: .custom)
-        leftBut.frame = CGRect(x: 0, y: 0, width: 16, height: 16)
+        leftBut.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         
-        leftBut.setBackgroundImage(UIImage(named:"ret"), for: .normal)
+        leftBut.setImage(UIImage(named:"ret"), for: .normal)
         
         leftBut.addTarget(self, action: #selector(back(_:)), for: .touchUpInside)
         
