@@ -31,7 +31,9 @@ class FootballPlayFilterVC: BasePopViewController, FootballFilterBottomViewDeleg
     
     public var filterList: [FootballPlayFilterModel]! {
         didSet{
+            oldFileterList = filterList.map { $0.copy() as! FootballPlayFilterModel }
             self.collectionView.reloadData()
+
         }
     }
     
@@ -43,7 +45,7 @@ class FootballPlayFilterVC: BasePopViewController, FootballFilterBottomViewDeleg
     private var bgView: UIView!
     private var titleLB: UILabel!
     
-    
+    private var oldFileterList: [FootballPlayFilterModel]!
     
     // MARK: - 生命周期
     override func viewDidLoad() {
@@ -164,13 +166,16 @@ class FootballPlayFilterVC: BasePopViewController, FootballFilterBottomViewDeleg
     func filterCancel() {
         guard delegate != nil else { return }
         delegate.playFilterCancel()
+        
         dismiss(animated: true, completion: nil)
+        
+        for index in 0..<filterList.count {
+            filterList[index].isSelected = oldFileterList[index].isSelected
+        }
     }
     
-    
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
+        self.filterCancel()
     }
     
     override func didReceiveMemoryWarning() {

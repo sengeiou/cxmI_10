@@ -24,7 +24,15 @@ class FilterModel: NSObject, HandyJSON {
 }
 
 // 记录串关，
-class FootballPlayFilterModel: NSObject {
+class FootballPlayFilterModel: NSObject, NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        let model = FootballPlayFilterModel()
+        
+        model.isSelected = self.isSelected
+     
+        return model
+    }
+    
     var isSelected : Bool = false
     var playTitle: String = ""
     var title : String!
