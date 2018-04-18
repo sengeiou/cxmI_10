@@ -177,7 +177,7 @@ class FootballTimesFilterVC: BasePopViewController, UITextFieldDelegate, CXMKeyb
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
+        dismiss(animated: true, completion: nil)
     }
     
 
