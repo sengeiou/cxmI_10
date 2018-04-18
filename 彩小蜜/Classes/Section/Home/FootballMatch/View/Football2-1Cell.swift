@@ -80,8 +80,9 @@ class Football2_1Cell: UITableViewCell , DateProtocol{
         }
         detailBut.snp.makeConstraints { (make) in
             make.centerX.equalTo(endTime.snp.centerX)
-            make.width.height.equalTo(20)
-            make.bottom.equalTo(-10)
+            make.top.equalTo(endTime.snp.bottom)
+            make.width.equalTo(endTime)
+            make.bottom.equalTo(-1)
         }
         
         homeMatch.snp.makeConstraints { (make) in
@@ -126,6 +127,7 @@ class Football2_1Cell: UITableViewCell , DateProtocol{
         
         detailBut = UIButton(type: .custom)
         detailBut.setImage(UIImage(named: "Collapse"), for: .normal)
+        detailBut.contentEdgeInsets = UIEdgeInsets(top: 2, left: 0, bottom: 5, right: 0)
         detailBut.titleLabel?.numberOfLines = 2
         
         homeMatch = initLabel()

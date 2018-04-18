@@ -52,7 +52,7 @@ class FootballMatchInfoPopVC: BasePopViewController, BottomViewDelegate {
     // MARK: - 网络请求
     private func matchInfoRequest() {
         weak var weakSelf = self
-        
+        guard matchId != nil else { return }
         homeProvider.rx.request(.matchTeamInfoSum(matchId: matchId))
         .asObservable()
         .mapObject(type: FootballMatchInfoModel.self )

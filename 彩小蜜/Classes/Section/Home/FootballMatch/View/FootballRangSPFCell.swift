@@ -69,17 +69,19 @@ class FootballRangSPFCell: UITableViewCell, DateProtocol {
             make.left.equalTo(leftSpacing)
             make.top.equalTo(matchTime.snp.bottom).offset(2)
             make.bottom.equalTo(detailBut.snp.top).offset(-2)
+            make.right.equalTo(teamView.snp.left)
         }
         detailBut.snp.makeConstraints { (make) in
             make.centerX.equalTo(endTime.snp.centerX)
-            make.width.height.equalTo(20)
-            make.bottom.equalTo(-10)
+            make.top.equalTo(endTime.snp.bottom)
+            make.width.equalTo(endTime)
+            make.bottom.equalTo(-1)
         }
         teamView.snp.makeConstraints { (make) in
             make.top.equalTo(15 * defaultScale)
             make.bottom.equalTo(-15 * defaultScale)
-            make.left.equalTo(endTime.snp.right).offset(10)
             make.right.equalTo(-rightSpacing)
+            make.width.equalTo(275 * defaultScale)
         }
     }
     private func initSubview() {
@@ -103,6 +105,7 @@ class FootballRangSPFCell: UITableViewCell, DateProtocol {
         
         detailBut = UIButton(type: .custom)
         detailBut.setImage(UIImage(named: "Collapse"), for: .normal)
+        detailBut.contentEdgeInsets = UIEdgeInsets(top: 2, left: 0, bottom: 5, right: 0)
         detailBut.titleLabel?.numberOfLines = 2
         
         self.contentView.addSubview(line)
