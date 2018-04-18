@@ -10,6 +10,24 @@ import UIKit
 
 class FootballOddsCell: UITableViewCell {
 
+    public var europeInfo : MatchEuropeModel! {
+        didSet{
+            company.text = europeInfo.comName
+            homelb.text = "\(europeInfo.initWin!)\n\(europeInfo.realWin!)"
+            flatlb.text = "\(europeInfo.initDraw!)\n\(europeInfo.realDraw!)"
+            visilb.text = "\(europeInfo.initLose!)\n\(europeInfo.realLose!)"
+        }
+    }
+    public var asiaInfo : MatchAsiasModel! {
+        didSet{
+            company.text = asiaInfo.comName
+            homelb.text = asiaInfo.ratioH
+            visilb.text = asiaInfo.ratioA
+            flatlb.text = "\(asiaInfo.initRule!)\n\(asiaInfo.realRule!)"
+        }
+    }
+   
+    
     public var homelb : UILabel!
     public var flatlb : UILabel!
     private var oddslb : UILabel!
@@ -57,13 +75,16 @@ class FootballOddsCell: UITableViewCell {
         }
     }
     private func initSubview() {
+        self.selectionStyle = .none
+        
         topLine = UIImageView()
         topLine.image = UIImage(named: "line")
         
         company = getLabel("公司")
         oddslb = getLabel("初赔\n即赔")
-        oddslb.numberOfLines = 0
+        
         homelb = getLabel("胜")
+        
         flatlb = getLabel("平")
         visilb = getLabel("负")
         
@@ -80,7 +101,7 @@ class FootballOddsCell: UITableViewCell {
         lab.font = Font12
         lab.textColor = Color9F9F9F
         lab.textAlignment = .center
-        
+        lab.numberOfLines = 0
         return lab
     }
     

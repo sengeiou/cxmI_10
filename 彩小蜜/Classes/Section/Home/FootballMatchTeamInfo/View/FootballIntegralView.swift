@@ -16,10 +16,50 @@ fileprivate let IntegralCellHeight: CGFloat = 27 * defaultScale
 
 class FootballIntegralView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
+    public var scoreInfo : TeamScoreInfoModel! {
+        didSet{
+            guard let hteam = scoreInfo.hteamScore else { return }
+            guard let lteam = scoreInfo.lteamScore else { return }
+            guard let tteam = scoreInfo.tteamScore else { return }
+            
+            scoreList.removeAll()
+            
+            scoreList.append(tteam.matchNum)
+            scoreList.append(tteam.matchH)
+            scoreList.append(tteam.matchD)
+            scoreList.append(tteam.matchL)
+            scoreList.append("\(tteam.ballIn!)/\(tteam.ballLose)")
+            scoreList.append(tteam.score)
+            scoreList.append(tteam.ranking)
+            
+            scoreList.append(hteam.matchNum)
+            scoreList.append(hteam.matchH)
+            scoreList.append(hteam.matchD)
+            scoreList.append(hteam.matchL)
+            scoreList.append("\(hteam.ballIn!)/\(hteam.ballLose)")
+            scoreList.append(hteam.score)
+            scoreList.append(hteam.ranking)
+            
+            scoreList.append(lteam.matchNum)
+            scoreList.append(lteam.matchH)
+            scoreList.append(lteam.matchD)
+            scoreList.append(lteam.matchL)
+            scoreList.append("\(lteam.ballIn!)/\(lteam.ballLose)")
+            scoreList.append(lteam.score)
+            scoreList.append(lteam.ranking)
+        }
+    }
+    
+    private var scoreList: [String]!
+    
     init() {
         super.init(frame: CGRect.zero)
         initSubview()
+        scoreList = [String]()
         
+        for _ in 0...20 {
+            scoreList.append("88")
+        }
     }
     
     override func layoutSubviews() {
@@ -158,13 +198,20 @@ class FootballIntegralView: UIView, UICollectionViewDelegate, UICollectionViewDa
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
+        guard scoreList.isEmpty == false else { return 0 }
         return 21
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FootballIntegralCollectionCellId, for: indexPath) as! FootballIntegralCollectionCell
         
+        cell.title.text = scoreList[indexPath.row]
+        
+        if indexPath.row == 5 || indexPath.row == 12 || indexPath.row == 19 {
+            cell.title.textColor = ColorEA5504
+        }else {
+            cell.title.textColor = Color505050
+        }
         return cell
     }
     

@@ -12,6 +12,8 @@ import HandyJSON
 struct FootballMatchInfoModel: HandyJSON {
     /// 历史交锋
     var hvMatchTeamInfo: MatchTeamInfoModel!
+    /// 主场主战绩
+    var hhMatchTeamInfo : MatchTeamInfoModel!
     /// 主场战绩
     var hMatchTeamInfo : MatchTeamInfoModel!
     /// 客场战绩
@@ -24,7 +26,9 @@ struct FootballMatchInfoModel: HandyJSON {
     var leagueMatchAsias: [MatchAsiasModel]!
     /// 欧赔
     var leagueMatchEuropes: [MatchEuropeModel]!
-    
+    /// 大小球
+    /// 赛事信息
+    var matchInfo : MatchInfoModel!
     
     
 }
@@ -42,7 +46,7 @@ struct MatchTeamInfoModel : HandyJSON{
     var teamAbbr: String!
     /// 比赛详情
     var matchInfos: [TeamInfo]!
-    
+    var title : String!
 }
 struct TeamScoreInfoModel: HandyJSON {
     /// 主
@@ -132,6 +136,25 @@ struct MatchEuropeModel: HandyJSON {
     /// 最新概率胜
     var winRatio: String!
 }
+struct MatchInfoModel: HandyJSON {
+    var aOdds: String!
+    
+    var changci: String!
+    var changciId: String!
+    var dOdds: String!
+    
+    var hOdds: String!
+    
+    var homeTeamAbbr: String!
+    var homeTeamId: String!
+    var homeTeamPic: String!
+    var leagueAddr: String!
+    var matchId: String!
+    var matchTime: String!
+    var visitingTeamAbbr: String!
+    var visitingTeamId: String!
+    var visitingTeamPic: String!
+}
 struct TeamInfo : HandyJSON {
     /// 主队名称
     var homeTeamAbbr: String!
@@ -149,35 +172,37 @@ struct TeamInfo : HandyJSON {
 
 struct TeamScoreInfo: HandyJSON {
     /// 净球数
-    var ballClean : Int!
+    var ballClean : String!
     /// 进球数
-    var ballIn : Int!
+    var ballIn : String!
     /// 失球数
-    var ballLose: Int!
+    var ballLose: String!
     /// 0总1主2客 ,
     var flag : String!
     /// 平场次数
-    var matchD: Int!
+    var matchD: String!
     /// 胜场次数
-    var matchH: Int!
+    var matchH: String!
     /// 负场次数
-    var matchL: Int!
+    var matchL: String!
     /// 比赛场次数
-    var matchNum: Int!
+    var matchNum: String!
     /// 均得
-    var preH: Int!
+    var preH: String!
     /// 均失
-    var preL: Int!
+    var preL: String!
     /// 平率
-    var ratioD: Int!
+    var ratioD: String!
     /// 胜率
-    var ratioH: Int!
+    var ratioH: String!
     /// 负率 ,
-    var ratioL: Int!
+    var ratioL: String!
     /// 积分
-    var score: Int!
+    var score: String!
     ///
     var teamId: String!
     /// 球队名称
     var teamName: String!
+    /// 名次
+    var ranking : String!
 }

@@ -36,6 +36,7 @@ class FootballMatchInfoPopVC: BasePopViewController, BottomViewDelegate {
         super.viewDidLoad()
         self.popStyle = .fromBottom
         initSubview()
+        matchInfoRequest()
     }
     
     func didTipConfitm() {
@@ -46,6 +47,26 @@ class FootballMatchInfoPopVC: BasePopViewController, BottomViewDelegate {
     
     func didTipCancel() {
         dismiss(animated: true , completion: nil )
+    }
+    
+    // MARK: - 网络请求
+    private func matchInfoRequest() {
+        weak var weakSelf = self
+        
+        homeProvider.rx.request(.matchTeamInfoSum(matchId: matchId))
+        .asObservable()
+        .mapObject(type: FootballMatchInfoModel.self )
+            .subscribe(onNext: { (data) in
+                
+            }, onError: { (error) in
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    print(code!)
+                    weakSelf?.showHUD(message: msg!)
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil )
     }
     
     private func initSubview() {

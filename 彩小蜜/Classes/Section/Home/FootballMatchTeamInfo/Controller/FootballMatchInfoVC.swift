@@ -59,7 +59,11 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
             self.tableView.reloadData()
         }
     }
-    var matchInfoModel: FootballMatchInfoModel!
+    var matchInfoModel: FootballMatchInfoModel! {
+        didSet{
+            headerView.matchInfo = self.matchInfoModel.matchInfo
+        }
+    }
     private var headerView : FootballMatchInfoHeader!
     private var buyButton : UIButton!
     
@@ -153,10 +157,22 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard self.matchInfoModel != nil else { return 0 }
+        
         if self.teamInfoStyle == .odds {
-            return 10
+            switch oddsStyle {
+            case .欧赔:
+                guard self.matchInfoModel.leagueMatchEuropes.isEmpty == false else { return 1 }
+                return self.matchInfoModel.leagueMatchEuropes.count + 1
+            case .亚盘:
+                guard self.matchInfoModel.leagueMatchAsias.isEmpty == false else { return 1 }
+                return self.matchInfoModel.leagueMatchAsias.count + 1
+            case .大小球:
+                return 5
+            default : return 1
+            }
         }else {
-            guard self.matchInfoModel != nil else { return 0 }
+            
             switch section {
             case 0:
                 return 1
@@ -223,7 +239,8 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
     /// 分析 积分 Cell
     private func initAnalysisIntegralCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballMatchIntegralCellId, for: indexPath) as! FootballMatchIntegralCell
-        
+        cell.homeScoreInfo = self.matchInfoModel.homeTeamScoreInfo
+        cell.visiScoreInfo = self.matchInfoModel.visitingTeamScoreInfo
         return cell
     }
     /// 赔率 title Cell
@@ -248,20 +265,34 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
     /// 赔率  Cell
     private func initOddsCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballOddsCellId, for: indexPath) as! FootballOddsCell
-        
+        switch oddsStyle {
+        case .欧赔:
+            cell.europeInfo = self.matchInfoModel.leagueMatchEuropes[indexPath.row - 1]
+        case .亚盘:
+            cell.asiaInfo = self.matchInfoModel.leagueMatchAsias[indexPath.row - 1]
+        case .大小球:
+            break
+        default : break
+        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: FootballAnalysisSectionHeaderId) as! FootballAnalysisSectionHeader
-        
+        guard self.matchInfoModel != nil else { return UIView() }
         switch section {
         case 0:
             header.headerStyle = .标题
+            header.teamInfo = self.matchInfoModel.hvMatchTeamInfo
         case 1:
             header.headerStyle = .赛事
-        case 2, 3:
-            header.headerStyle = .标题与赛事
+            
+        case 2:
+            header.headerStyle = .主队
+            header.teamInfo = self.matchInfoModel.hMatchTeamInfo
+        case 3:
+            header.headerStyle = .客队
+            header.teamInfo = self.matchInfoModel.vMatchTeamInfo
         case 4:
             return UIView()
         default:

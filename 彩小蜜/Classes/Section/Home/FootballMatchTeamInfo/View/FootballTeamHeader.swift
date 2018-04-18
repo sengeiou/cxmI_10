@@ -15,6 +15,21 @@ enum TeamHeaderStyle  {
 
 class FootballTeamHeader: UIView {
 
+    public var matchInfo : MatchInfoModel! {
+        didSet{
+            titlelb.text = matchInfo.changci + " " + matchInfo.leagueAddr + " " + matchInfo.matchTime
+            homeName.text = matchInfo.homeTeamAbbr
+            visiName.text = matchInfo.visitingTeamAbbr
+            homeOdds.text = "主胜" + matchInfo.hOdds
+            flatOdds.text = "平" + matchInfo.dOdds
+            visiOdds.text = "客胜" + matchInfo.aOdds
+            guard let homeurl = URL(string: matchInfo.homeTeamPic) else { return }
+            guard let visiUrl = URL(string: matchInfo.visitingTeamPic) else { return }
+            homeTeamIcon.kf.setImage(with: homeurl)
+            visiTeamIcon.kf.setImage(with: visiUrl)
+        }
+    }
+    
     public var headerStyle : TeamHeaderStyle = .默认 {
         didSet{
             if headerStyle == .详情 {
@@ -152,7 +167,7 @@ class FootballTeamHeader: UIView {
         lab.font = Font13
         lab.textColor = Color9F9F9F
         lab.textAlignment = .center
-        lab.text = "阿森纳"
+        //lab.text = "阿森纳"
         return lab
     }
     

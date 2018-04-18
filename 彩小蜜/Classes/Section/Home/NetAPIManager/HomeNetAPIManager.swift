@@ -27,6 +27,8 @@ enum HomeNetAPIManager {
     case saveBetInfo(requestModel: FootballRequestMode)
     /// 球队分析信息
     case matchTeamInfo(matchId: String)
+    /// 球队分析信息 弹窗
+    case matchTeamInfoSum(matchId: String)
 }
 
 extension HomeNetAPIManager : TargetType {
@@ -52,6 +54,8 @@ extension HomeNetAPIManager : TargetType {
             return "/lottery/match/saveBetInfo"
         case .matchTeamInfo:
             return "/lottery/match/matchTeamInfos"
+        case .matchTeamInfoSum:
+            return "/lottery/match/matchTeamInfosSum"
         }
     }
     
@@ -68,7 +72,8 @@ extension HomeNetAPIManager : TargetType {
             dic["str"] = ""
         case .matchTeamInfo(let matchId) :
             dic["matchId"] = matchId
-            
+        case .matchTeamInfoSum(let matchId) :
+            dic["matchId"] = matchId
         case .getBetInfo(let requestModel) :
             dic = requestModel.toJSON()!
         case .saveBetInfo(let requestModel) :

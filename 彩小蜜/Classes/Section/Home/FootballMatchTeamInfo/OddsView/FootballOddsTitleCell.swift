@@ -29,6 +29,8 @@ class FootballOddsTitleCell: UITableViewCell {
         }
     }
     private func initSubview() {
+        self.selectionStyle = .none
+        
         pagerView = FootballOddsPagerView()
         titleView = FootballOddsTitleView()
         

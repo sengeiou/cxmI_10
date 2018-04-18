@@ -10,6 +10,17 @@ import UIKit
 
 class FootballMatchIntegralCell: UITableViewCell {
 
+    public var homeScoreInfo : TeamScoreInfoModel! {
+        didSet{
+            homeIntegralView.scoreInfo = homeScoreInfo
+        }
+    }
+    public var visiScoreInfo : TeamScoreInfoModel! {
+        didSet{
+            visiIntegralView.scoreInfo = visiScoreInfo
+        }
+    }
+    
     private var title : UILabel!
     private var homeTeamName: UILabel!
     private var visiTeamName: UILabel!
@@ -51,6 +62,8 @@ class FootballMatchIntegralCell: UITableViewCell {
     }
     
     private func initSubview() {
+        self.selectionStyle = .none
+        
         title = getLabel()
         title.textColor = Color9F9F9F
         title.textAlignment = .left

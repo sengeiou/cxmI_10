@@ -10,7 +10,7 @@ import UIKit
 
 class FootballIntegralCollectionCell: UICollectionViewCell {
     
-    private var title : UILabel!
+    public var title : UILabel!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,6 +25,8 @@ class FootballIntegralCollectionCell: UICollectionViewCell {
         }
     }
     private func initSubview(){
+
+        
         title = UILabel()
         title.font = Font12
         title.textColor = Color505050

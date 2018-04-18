@@ -79,6 +79,8 @@ class FootballMatchInfoCell: UITableViewCell {
     }
     
     private func initSubview(){
+        self.selectionStyle = .none
+        
         line = UIImageView()
         line.image = UIImage(named: "line")
         

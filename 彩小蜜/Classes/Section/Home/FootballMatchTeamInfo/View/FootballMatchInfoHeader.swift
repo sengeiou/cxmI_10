@@ -10,6 +10,12 @@ import UIKit
 
 class FootballMatchInfoHeader: UIView {
 
+    public var matchInfo : MatchInfoModel! {
+        didSet{
+            header.matchInfo = matchInfo
+        }
+    }
+    
     public var pagerView: FootballMatchPagerView!
     private var header : FootballTeamHeader!
     private var bottonLine: UIView!

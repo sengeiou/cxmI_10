@@ -67,6 +67,8 @@ class FootballMatchInfoScaleCell: UITableViewCell {
     }
 
     private func initSubview() {
+        self.selectionStyle = .none
+        
         homelb = getLabel("主胜")
         flatlb = getLabel("平")
         visilb = getLabel("客胜")
