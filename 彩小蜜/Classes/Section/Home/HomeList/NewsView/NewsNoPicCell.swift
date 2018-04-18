@@ -30,8 +30,13 @@ class NewsNoPicCell: UITableViewCell {
         self.selectionStyle = .none
         
         titleLb = getLabel()
+        titleLb.text = "一家大幅快乐撒发生的几率附加费"
         detailLb = getLabel()
+        detailLb.text = "一家大幅快乐撒发生的几率附加费一家大幅快乐撒发生的几率附加费一家大幅快乐撒发生的几率附加费一家大幅快乐撒发生的几率附加费一家大幅快乐撒发生的几率附加费一家大幅快乐撒发生的几率附加费一家大幅快乐撒发生的几率附加费"
         detailLb.textColor = Color9F9F9F
+        detailLb.numberOfLines = 2
+        
+        bottomView = NewsBottomView()
         
         self.contentView.addSubview(titleLb)
         self.contentView.addSubview(detailLb)
@@ -49,7 +54,7 @@ class NewsNoPicCell: UITableViewCell {
             make.bottom.equalTo(bottomView.snp.top)
         }
         bottomView.snp.makeConstraints { (make) in
-            make.bottom.equalTo(10 * defaultScale)
+            make.bottom.equalTo(-10 * defaultScale)
             make.left.equalTo(titleLb)
             make.width.equalTo(200 * defaultScale)
         }

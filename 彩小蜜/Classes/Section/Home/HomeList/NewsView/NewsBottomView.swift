@@ -52,7 +52,7 @@ class NewsBottomView: UIView {
         let lab = UILabel()
         lab.text = title
         lab.textColor = Color9F9F9F
-        lab.textAlignment = .center
+        lab.textAlignment = .left
         
         return lab
     }

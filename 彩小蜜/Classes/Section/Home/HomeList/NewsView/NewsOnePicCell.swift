@@ -36,8 +36,11 @@ class NewsOnePicCell: UITableViewCell {
         
         titleLb = getLabel()
         
+        bottomView = NewsBottomView()
+        
         self.contentView.addSubview(icon)
         self.contentView.addSubview(titleLb)
+        self.contentView.addSubview(bottomView)
         
         icon.snp.makeConstraints { (make) in
             make.top.equalTo(leftSpacing)
@@ -52,7 +55,7 @@ class NewsOnePicCell: UITableViewCell {
             make.bottom.equalTo(bottomView.snp.top)
         }
         bottomView.snp.makeConstraints { (make) in
-            make.bottom.equalTo(10 * defaultScale)
+            make.bottom.equalTo(-10 * defaultScale)
             make.left.equalTo(titleLb)
             make.width.equalTo(200 * defaultScale)
         }

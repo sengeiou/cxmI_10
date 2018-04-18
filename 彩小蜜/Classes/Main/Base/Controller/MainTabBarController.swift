@@ -21,11 +21,12 @@ class MainTabBarController: UITabBarController, UserInfoPro {
     {
         // 主页
         let home = HomeViewController()
+        home.homeStyle = .allShow
         
         let homeNav = UINavigationController(rootViewController: home)
         homeNav.tabBarItem.imageInsets = UIEdgeInsets(top: 10, left: 0, bottom: -10, right: 0)
         homeNav.title = ""
-        
+    
         homeNav.view.backgroundColor = UIColor.white
         
         let homeImage = UIImage(named: "tab_home_nor")?.withRenderingMode(.alwaysOriginal)

@@ -7,9 +7,20 @@
 //
 
 import UIKit
+
+enum HomeStyle {
+    case allShow
+    case onlyNews
+}
+
 fileprivate let homeSportsCellIdentifier = "homeSportsCellIdentifier"
 fileprivate let homeActivityCellIdentifier = "homeActivityCellIdentifier"
 fileprivate let homeScrollBarCellIdentifier = "homeScrollBarCellIdentifier"
+
+fileprivate let NewsNoPicCellId = "NewsNoPicCellId"
+fileprivate let NewsOnePicCellId = "NewsOnePicCellId"
+fileprivate let NewsThreePicCellId = "NewsThreePicCellId"
+
 
 
 class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, HomeSportLotteryCellDelegate {
@@ -42,6 +53,18 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         pushViewController(vc: football)
     }
     
+    //MARK: - 属性 public
+    public var homeStyle : HomeStyle! = .onlyNews {
+        didSet{
+            if homeStyle == .onlyNews {
+                
+            }else {
+                homeListRequest()
+            }
+            self.view.addSubview(tableView)
+        }
+    }
+    
     //MARK: - 属性
     private var homeData : HomeDataModel!
     private var header : HomeHeaderView!
@@ -50,9 +73,9 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         self.navigationItem.title = "彩小秘 · 购彩大厅"
         hideBackBut()
-        self.view.addSubview(tableView)
+        
         setRightBarItem()
-        homeListRequest()
+        //homeListRequest()
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -101,6 +124,11 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         table.register(HomeActivityCell.self, forCellReuseIdentifier: homeActivityCellIdentifier)
         table.register(HomeSportLotteryCell.self, forCellReuseIdentifier: homeSportsCellIdentifier)
         
+        table.register(NewsNoPicCell.self, forCellReuseIdentifier: NewsNoPicCellId)
+        table.register(NewsOnePicCell.self, forCellReuseIdentifier: NewsOnePicCellId)
+        table.register(NewsThreePicCell.self, forCellReuseIdentifier: NewsThreePicCellId)
+        
+        
         return table
     }()
     
@@ -117,64 +145,122 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        
+        if homeStyle == .onlyNews {
+            return 1
+        }else {
+            return 3 + 1
+        }
+        
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        
+        if homeStyle == .onlyNews {
+            return 10
+        }else {
+            return 1
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        switch indexPath.section {
-        case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: homeScrollBarCellIdentifier, for: indexPath) as! HomeScrollBarCell
-            if self.homeData != nil, let list = self.homeData.winningMsgs {
-                cell.winningList = list
+        if homeStyle == .onlyNews {
+            if indexPath.row == 0 {
+                return initNewsOnePicCell(indexPath: indexPath)
+            }else if indexPath.row == 1 {
+                return initNewsThreePicCell(indexPath: indexPath)
             }
-            
-            return cell
-        case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: homeActivityCellIdentifier, for: indexPath) as! HomeActivityCell
-            
-            if self.homeData != nil, let activity = self.homeData.activity {
-                cell.activityModel = activity
+            return initNewsNoPicCell(indexPath: indexPath)
+        }else {
+            switch indexPath.section {
+            case 0:
+                return initScrollBarCell(indexPath: indexPath)
+            case 1:
+                return initActivityCell(indexPath: indexPath)
+            case 2:
+                return initSportLotteryCell(indexPath: indexPath)
+            default:
+                let cell = tableView.dequeueReusableCell(withIdentifier: NewsNoPicCellId, for: indexPath) as! NewsNoPicCell
+                
+                return cell
             }
-            
-            return cell
-        case 2:
-            let cell = tableView.dequeueReusableCell(withIdentifier: homeSportsCellIdentifier, for: indexPath) as! HomeSportLotteryCell
-            if self.homeData != nil {
-                cell.playList = self.homeData.dlPlayClassifyDetailDTOs
-            }
-            
-            cell.delegate = self
-            return cell
-        default:
-            return UITableViewCell()
         }
+        
+        
+    }
+    
+    private func initSportLotteryCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: homeSportsCellIdentifier, for: indexPath) as! HomeSportLotteryCell
+        if self.homeData != nil {
+            cell.playList = self.homeData.dlPlayClassifyDetailDTOs
+        }
+        
+        cell.delegate = self
+        return cell
+    }
+    private func initActivityCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: homeActivityCellIdentifier, for: indexPath) as! HomeActivityCell
+        
+        if self.homeData != nil, let activity = self.homeData.activity {
+            cell.activityModel = activity
+        }
+        
+        return cell
+    }
+    
+    private func initScrollBarCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: homeScrollBarCellIdentifier, for: indexPath) as! HomeScrollBarCell
+        if self.homeData != nil, let list = self.homeData.winningMsgs {
+            cell.winningList = list
+        }
+        
+        return cell
+    }
+    
+    private func initNewsNoPicCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: NewsNoPicCellId, for: indexPath) as! NewsNoPicCell
+        
+        return cell
+    }
+    
+    private func initNewsThreePicCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: NewsThreePicCellId, for: indexPath) as! NewsThreePicCell
+        
+        return cell
+    }
+    
+    private func initNewsOnePicCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: NewsOnePicCellId, for: indexPath) as! NewsOnePicCell
+        
+        return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        switch indexPath.section {
-        case 0:
-            return 30
-        case 1:
-            return 80
-        case 2:
-            guard self.homeData != nil else { return 0 }
-            let count = self.homeData.dlPlayClassifyDetailDTOs.count
-            var verticalCount = count / HorizontalItemCount
-            
-            if count % HorizontalItemCount != 0 {
-                verticalCount += 1
+        if homeStyle == .onlyNews {
+            return 150 * defaultScale
+        }else {
+            switch indexPath.section {
+            case 0:
+                return 30
+            case 1:
+                return 80
+            case 2:
+                guard self.homeData != nil else { return 0 }
+                let count = self.homeData.dlPlayClassifyDetailDTOs.count
+                var verticalCount = count / HorizontalItemCount
+                
+                if count % HorizontalItemCount != 0 {
+                    verticalCount += 1
+                }
+                
+                let height : CGFloat = HomesectionTopSpacing * 2 + FootballCellHeight * CGFloat(verticalCount) + FootballCellLineSpacing * CGFloat(verticalCount) + HomeSectionViewHeight
+                
+                return height
+            default:
+                return 80 * defaultScale
             }
-            
-            let height : CGFloat = HomesectionTopSpacing * 2 + FootballCellHeight * CGFloat(verticalCount) + FootballCellLineSpacing * CGFloat(verticalCount) + HomeSectionViewHeight
-            
-            return height
-        default:
-            return 0
         }
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

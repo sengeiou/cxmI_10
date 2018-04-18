@@ -32,8 +32,23 @@ class NewsThreePicCell: UITableViewCell {
         
         self.selectionStyle = .none
         
+        titleLb = getLabel()
         
+        bottomView = NewsBottomView()
+        
+        picOne = UIImageView()
+        picOne.image = UIImage(named: "Racecolorfootball")
+        picTwo = UIImageView()
+        picTwo.image = UIImage(named: "Racecolorfootball")
+        picThree = UIImageView()
+        picThree.image = UIImage(named: "Racecolorfootball")
     
+        self.contentView.addSubview(titleLb)
+        self.contentView.addSubview(bottomView)
+        self.contentView.addSubview(picOne)
+        self.contentView.addSubview(picTwo)
+        self.contentView.addSubview(picThree)
+        
         
         titleLb.snp.makeConstraints { (make) in
             make.top.equalTo(10 * defaultScale)
@@ -43,7 +58,7 @@ class NewsThreePicCell: UITableViewCell {
         }
         
         bottomView.snp.makeConstraints { (make) in
-            make.bottom.equalTo(10 * defaultScale)
+            make.bottom.equalTo(-10 * defaultScale)
             make.left.equalTo(titleLb)
             make.width.equalTo(200 * defaultScale)
         }
