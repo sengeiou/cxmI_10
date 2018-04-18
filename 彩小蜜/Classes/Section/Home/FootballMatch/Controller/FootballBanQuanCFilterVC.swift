@@ -168,8 +168,7 @@ class FootballBanQuanCFilterVC: BasePopViewController, BottomViewDelegate, Footb
     }
     
     func didTipCancel() {
-        guard selected != nil else { return }
-     
+       
         dismiss(animated: true, completion: nil)
         
         for index in 0..<oldSelectedCells.count {

@@ -219,8 +219,7 @@ class FootballScoreFilterVC: BasePopViewController, BottomViewDelegate, Football
     }
     
     func didTipCancel() {
-        guard selected != nil else { return }
-        
+       
         dismiss(animated: true, completion: nil)
         
         for index in 0..<oldHomeSelectedCells.count {

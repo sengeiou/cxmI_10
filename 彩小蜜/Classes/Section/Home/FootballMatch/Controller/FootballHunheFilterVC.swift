@@ -30,6 +30,18 @@ class FootballHunheFilterVC: BasePopViewController, BottomViewDelegate, Football
             totalView.cells = teamInfo.matchPlays[3].matchCells
             banquanView.cells = teamInfo.matchPlays[4].matchCells
             
+            oldSPFSelectedCells = spfArr.map{ $0.copy() as! FootballPlayCellModel }
+            oldRangSPFSelectedCells = rangArr.map{ $0.copy() as! FootballPlayCellModel }
+            
+            oldHomeSelectedCells = teamInfo.matchPlays[2].homeCell.cellSons.map{ $0.copy() as! FootballPlayCellModel }
+            oldFlatSelectedCells = teamInfo.matchPlays[2].flatCell.cellSons.map{ $0.copy() as! FootballPlayCellModel }
+            oldVisiSelectedCells = teamInfo.matchPlays[2].visitingCell.cellSons.map{ $0.copy() as! FootballPlayCellModel }
+            
+            oldBanSelectedCells = teamInfo.matchPlays[4].matchCells.map{ $0.copy() as! FootballPlayCellModel }
+            oldTotalSelectedCells = teamInfo.matchPlays[3].matchCells.map{ $0.copy() as! FootballPlayCellModel }
+            
+            
+            
             if teamInfo.matchPlays[0].fixedOdds < 0 {
                 rangSPFTitlelb.text = "让\n球\n\(teamInfo.matchPlays[0].fixedOdds!)"
             }else {
@@ -43,6 +55,15 @@ class FootballHunheFilterVC: BasePopViewController, BottomViewDelegate, Football
     public var selectedScore : Selected!
     public var deSelectedScore : DeSelected!
     public var didSelectedScore : SelectedItem!
+    
+    
+    private var oldHomeSelectedCells : [FootballPlayCellModel]!
+    private var oldFlatSelectedCells : [FootballPlayCellModel]!
+    private var oldVisiSelectedCells : [FootballPlayCellModel]!
+    private var oldBanSelectedCells : [FootballPlayCellModel]!
+    private var oldTotalSelectedCells:[FootballPlayCellModel]!
+    private var oldSPFSelectedCells: [FootballPlayCellModel]!
+    private var oldRangSPFSelectedCells : [FootballPlayCellModel]!
     
     public var selected : SelectedCell!
     public var deSelected : DeSelectedCell!
@@ -237,100 +258,57 @@ class FootballHunheFilterVC: BasePopViewController, BottomViewDelegate, Football
         return lab
     }
     
-    // MARK: - 选取Item delegate
-    func didSelectedItem(cellSon: FootballPlayCellModel) {
-        guard selectedCells != nil else { return }
-
-        selectedCells.append(cellSon)
-        self.teamInfo.selectedHunhe = selectedCells
-        
-        var canAdd = true
-        
-        if teamInfo.selectedHunhe.count == 1 {
-            canAdd = true
-        }else {
-            canAdd = false
-        }
-        
-        self.selected(selectedCells, canAdd)
-        
-        guard didSelected != nil else { return }
-        self.didSelected()
-    }
-    
-    func didDeSelectedItem(cellSon: FootballPlayCellModel) {
-        guard selectedCells != nil else { return }
-
-        selectedCells.remove(cellSon)
-        
-        self.teamInfo.selectedHunhe = selectedCells
-        
-        var canRemove = true
-        
-        if self.teamInfo.selectedHunhe.count == 0 {
-            canRemove = true
-        }else {
-            canRemove = false
-        }
-        
-        self.deSelected(selectedCells, canRemove)
-        
-        guard didSelected != nil else { return }
-        self.didSelected()
-    }
     func didSelectedItem(cell: FootballPlayCellModel) {
-        cell.isSelected = true
         guard selectedCells != nil else { return }
         selectedCells.append(cell)
-        self.teamInfo.selectedHunhe = selectedCells
-        
-        var canAdd = true
-        
-        if teamInfo.selectedHunhe.count == 1 {
-            canAdd = true
-        }else {
-            canAdd = false
-        }
-        
-        self.selected(selectedCells, canAdd)
-        
-        guard didSelected != nil else { return }
-        self.didSelected()
-        
     }
     
     func didDeSelectedItem(cell: FootballPlayCellModel) {
-        cell.isSelected = false
         guard selectedCells != nil else { return }
         selectedCells.remove(cell)
-        
-        self.teamInfo.selectedHunhe = selectedCells
-        
-        var canRemove = true
-        
-        if self.teamInfo.selectedHunhe.count == 0 {
-            canRemove = true
-        }else {
-            canRemove = false
-        }
-        
-        self.deSelected(selectedCells, canRemove)
-        
-        guard didSelected != nil else { return }
-        self.didSelected()
     }
+    
     func didTipConfitm() {
         
         self.teamInfo.selectedHunhe = selectedCells
         
         dismiss(animated: true, completion: nil)
+        
+        let canAdd = true
+        self.selected(selectedCells, canAdd)
+        
+        guard didSelected != nil else { return }
+        self.didSelected()
     }
     
     func didTipCancel() {
-        guard selected != nil else { return }
-        self.teamInfo.selectedHunhe = selectedCells
         
         dismiss(animated: true, completion: nil)
+        
+        for index in 0..<oldHomeSelectedCells.count {
+            self.teamInfo.matchPlays[2].homeCell.cellSons[index].isSelected = oldHomeSelectedCells[index].isSelected
+        }
+        for index in 0..<oldFlatSelectedCells.count {
+            self.teamInfo.matchPlays[2].flatCell.cellSons[index].isSelected = oldFlatSelectedCells[index].isSelected
+        }
+        for index in 0..<oldVisiSelectedCells.count {
+            self.teamInfo.matchPlays[2].visitingCell.cellSons[index].isSelected = oldVisiSelectedCells[index].isSelected
+        }
+        
+        for index in 0..<oldBanSelectedCells.count {
+            self.teamInfo.matchPlays[4].matchCells[index].isSelected = oldBanSelectedCells[index].isSelected
+        }
+        
+        for index in 0..<oldTotalSelectedCells.count {
+            self.teamInfo.matchPlays[3].matchCells[index].isSelected = oldTotalSelectedCells[index].isSelected
+        }
+        
+        for index in 0..<oldSPFSelectedCells.count {
+            SPFView.cells[index].isSelected = oldSPFSelectedCells[index].isSelected
+        }
+        for index in 0..<oldRangSPFSelectedCells.count {
+            rangSPFView.cells[index].isSelected = oldRangSPFSelectedCells[index].isSelected
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

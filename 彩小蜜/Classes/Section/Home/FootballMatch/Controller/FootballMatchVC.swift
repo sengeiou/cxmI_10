@@ -600,34 +600,55 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     
     // Mark: - 混合 cell 点击更多  delegate
     func didTipMoreButton(view : FootballHunheView, rangView : FootballHunheView, teamInfo: FootballPlayListModel) {
-        let hunheFilter = FootballHunheFilterVC()
-        
-        hunheFilter.teamInfo = teamInfo
-        
+//        let hunheFilter = FootballHunheFilterVC()
+//
+//        hunheFilter.teamInfo = teamInfo
+//
+//        weak var weakSelf = self
+//        hunheFilter.selected = { (selectedCells, canAdd) in
+//            view.selectedCellList = selectedCells
+//            self.tableView.reloadData()
+//            guard canAdd == true else { return }
+//            guard (weakSelf?.selectPlayList.count)! < 15  else {
+//                view.backSelectedState()
+//                rangView.backSelectedState()
+//                weakSelf?.showHUD(message: "最多可选15场比赛")
+//                return }
+//
+//            weakSelf?.selectPlayList.append(teamInfo)
+//        }
+//
+//        hunheFilter.deSelected = { (selectedCells, canRemove) in
+//            self.tableView.reloadData()
+//            view.selectedCellList = selectedCells
+//            guard canRemove == true else { return }
+//            weakSelf?.selectPlayList.remove(teamInfo)
+//
+//        }
+//
+//
+//        present(hunheFilter)
         weak var weakSelf = self
-        hunheFilter.selected = { (selectedCells, canAdd) in
+        
+        let score = FootballHunheFilterVC()
+        score.teamInfo = teamInfo
+        
+        score.selected = { (selectedCells, canAdd) in
             view.selectedCellList = selectedCells
             self.tableView.reloadData()
-            guard canAdd == true else { return }
             guard (weakSelf?.selectPlayList.count)! < 15  else {
                 view.backSelectedState()
-                rangView.backSelectedState()
                 weakSelf?.showHUD(message: "最多可选15场比赛")
                 return }
             
-            weakSelf?.selectPlayList.append(teamInfo)
+            if selectedCells.isEmpty == false {
+                self.selectPlays.insert(teamInfo)
+            }else {
+                self.selectPlays.remove(teamInfo)
+            }
         }
         
-        hunheFilter.deSelected = { (selectedCells, canRemove) in
-            self.tableView.reloadData()
-            view.selectedCellList = selectedCells
-            guard canRemove == true else { return }
-            weakSelf?.selectPlayList.remove(teamInfo)
-            
-        }
-        
-        
-        present(hunheFilter)
+        present(score)
     }
     
     override func didReceiveMemoryWarning() {

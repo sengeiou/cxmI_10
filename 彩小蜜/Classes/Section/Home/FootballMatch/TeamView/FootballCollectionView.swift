@@ -32,12 +32,6 @@ fileprivate let collectionviewwidth : CGFloat = 320 * defaultScale
 fileprivate let FootballScoreCollectionCellId = "FootballScoreCollectionCellId"
 
 class FootballCollectionView: UIView , UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
-
-//    public var cellSons : [FootballPlayCellModel]! {
-//        didSet{
-//            self.collectionView.reloadData()
-//        }
-//    }
     
     public var cells : [FootballPlayCellModel]! {
         didSet{

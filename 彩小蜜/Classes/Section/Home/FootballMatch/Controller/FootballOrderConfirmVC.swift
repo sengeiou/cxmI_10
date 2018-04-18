@@ -44,9 +44,17 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
             self.playType = str
         }
     }
+    
+    public var selectPlays : Set<FootballPlayListModel>! {
+        didSet{
+            self.selectPlayList = Array(selectPlays)
+        }
+    }
+    
     public var playList: [FootballPlayListModel]! {
         didSet{
             selectPlayList = playList
+            selectPlays = Set(playList)
             self.tableView.reloadData()
         }
     }
@@ -73,7 +81,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         initSubview()
         setEmpty(title: "暂无可选赛事", tableView)
         setRightButtonItem()
-        
+        //selectPlays = Set<FootballPlayListModel>()
         orderRequest ()
     }
     override func viewDidLayoutSubviews() {
@@ -434,21 +442,20 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
 
         score.selected = { (selectedCells, canAdd) in
             scoreView.selectedCells = selectedCells
-            guard canAdd == true else { return }
+            
             guard (weakSelf?.selectPlayList.count)! < 15  else {
                 scoreView.backSelectedState()
                 weakSelf?.showHUD(message: "最多可选15场比赛")
                 return }
             
-            weakSelf?.selectPlayList.append(teamInfo)
+            if selectedCells.isEmpty == false {
+                self.selectPlays.insert(teamInfo)
+            }else {
+                self.selectPlays.remove(teamInfo)
+            }
             weakSelf?.resetDanState()
         }
-        score.deSelected = { (selectedCells, canRemove) in
-            scoreView.selectedCells = selectedCells
-            guard canRemove == true else { return }
-            weakSelf?.selectPlayList.remove(teamInfo)
-            weakSelf?.resetDanState()
-        }
+        
         score.didSelected = {
             guard weakSelf?.homeData != nil else { return }
                 weakSelf?.orderRequest()
@@ -463,21 +470,20 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         
         score.selected = { (selectedCells, canAdd) in
             scoreView.selectedCells = selectedCells
-            guard canAdd == true else { return }
+            
             guard (weakSelf?.selectPlayList.count)! < 15  else {
                 scoreView.backSelectedState()
                 weakSelf?.showHUD(message: "最多可选15场比赛")
                 return }
             
-            weakSelf?.selectPlayList.append(teamInfo)
+            if selectedCells.isEmpty == false {
+                self.selectPlays.insert(teamInfo)
+            }else {
+                self.selectPlays.remove(teamInfo)
+            }
             weakSelf?.resetDanState()
         }
-        score.deSelected = { (selectedCells, canRemove) in
-            scoreView.selectedCells = selectedCells
-            guard canRemove == true else { return }
-            weakSelf?.selectPlayList.remove(teamInfo)
-            weakSelf?.resetDanState()
-        }
+        
         score.didSelected = {
             guard weakSelf?.homeData != nil else { return }
             weakSelf?.orderRequest()
@@ -485,25 +491,25 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         present(score)
     }
     private func pushHunheView(scoreView: FootballScoreView, teamInfo: FootballPlayListModel) {
+
         weak var weakSelf = self
+        
         let score = FootballHunheFilterVC()
         score.teamInfo = teamInfo
         
         score.selected = { (selectedCells, canAdd) in
             scoreView.selectedCells = selectedCells
-            guard canAdd == true else { return }
+            self.tableView.reloadData()
             guard (weakSelf?.selectPlayList.count)! < 15  else {
                 scoreView.backSelectedState()
                 weakSelf?.showHUD(message: "最多可选15场比赛")
                 return }
             
-            weakSelf?.selectPlayList.append(teamInfo)
-            weakSelf?.resetDanState()
-        }
-        score.deSelected = { (selectedCells, canRemove) in
-            scoreView.selectedCells = selectedCells
-            guard canRemove == true else { return }
-            weakSelf?.selectPlayList.remove(teamInfo)
+            if selectedCells.isEmpty == false {
+                self.selectPlays.insert(teamInfo)
+            }else {
+                self.selectPlays.remove(teamInfo)
+            }
             weakSelf?.resetDanState()
         }
         score.didSelected = {
