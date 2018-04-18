@@ -21,6 +21,10 @@
 		11227C122084BFF900680CCC /* FootballBuyRatioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11227C112084BFF900680CCC /* FootballBuyRatioView.swift */; };
 		11227C142084CBE300680CCC /* FootballMatchInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11227C132084CBE300680CCC /* FootballMatchInfoVC.swift */; };
 		11227C162084D7C900680CCC /* FootballMatchInfoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11227C152084D7C900680CCC /* FootballMatchInfoHeader.swift */; };
+		113B9CCB20871FD7006AE3F8 /* NewsNoPicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113B9CCA20871FD7006AE3F8 /* NewsNoPicCell.swift */; };
+		113B9CCD2087201E006AE3F8 /* NewsOnePicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113B9CCC2087201E006AE3F8 /* NewsOnePicCell.swift */; };
+		113B9CCF2087204A006AE3F8 /* NewsThreePicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113B9CCE2087204A006AE3F8 /* NewsThreePicCell.swift */; };
+		113B9CD120872226006AE3F8 /* NewsBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113B9CD020872226006AE3F8 /* NewsBottomView.swift */; };
 		114490FD20858CF2009F1D09 /* FootballMatchPagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114490FC20858CF2009F1D09 /* FootballMatchPagerView.swift */; };
 		114491012085970A009F1D09 /* FootballOddsPagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114491002085970A009F1D09 /* FootballOddsPagerView.swift */; };
 		114491042085982B009F1D09 /* FootballAnalysisSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114491032085982B009F1D09 /* FootballAnalysisSectionHeader.swift */; };
@@ -254,6 +258,10 @@
 		11227C112084BFF900680CCC /* FootballBuyRatioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballBuyRatioView.swift; sourceTree = "<group>"; };
 		11227C132084CBE300680CCC /* FootballMatchInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballMatchInfoVC.swift; sourceTree = "<group>"; };
 		11227C152084D7C900680CCC /* FootballMatchInfoHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballMatchInfoHeader.swift; sourceTree = "<group>"; };
+		113B9CCA20871FD7006AE3F8 /* NewsNoPicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsNoPicCell.swift; sourceTree = "<group>"; };
+		113B9CCC2087201E006AE3F8 /* NewsOnePicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsOnePicCell.swift; sourceTree = "<group>"; };
+		113B9CCE2087204A006AE3F8 /* NewsThreePicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsThreePicCell.swift; sourceTree = "<group>"; };
+		113B9CD020872226006AE3F8 /* NewsBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsBottomView.swift; sourceTree = "<group>"; };
 		114490FC20858CF2009F1D09 /* FootballMatchPagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballMatchPagerView.swift; sourceTree = "<group>"; };
 		114491002085970A009F1D09 /* FootballOddsPagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballOddsPagerView.swift; sourceTree = "<group>"; };
 		114491032085982B009F1D09 /* FootballAnalysisSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballAnalysisSectionHeader.swift; sourceTree = "<group>"; };
@@ -542,6 +550,17 @@
 				1144911C2086130D009F1D09 /* FootballMatchInfoModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		113B9CC920871F5C006AE3F8 /* NewsView */ = {
+			isa = PBXGroup;
+			children = (
+				113B9CCA20871FD7006AE3F8 /* NewsNoPicCell.swift */,
+				113B9CCC2087201E006AE3F8 /* NewsOnePicCell.swift */,
+				113B9CCE2087204A006AE3F8 /* NewsThreePicCell.swift */,
+				113B9CD020872226006AE3F8 /* NewsBottomView.swift */,
+			);
+			path = NewsView;
 			sourceTree = "<group>";
 		};
 		1144910220859710009F1D09 /* OddsView */ = {
@@ -1498,6 +1517,7 @@
 			isa = PBXGroup;
 			children = (
 				E57375E42046AF6900148622 /* Model */,
+				113B9CC920871F5C006AE3F8 /* NewsView */,
 				E57375E32046AF6700148622 /* View */,
 				E57375E22046AF6400148622 /* Controller */,
 			);
@@ -1921,6 +1941,7 @@
 				E5973E40204FDD34006461CE /* MeComplaintVC.swift in Sources */,
 				E5786FB2206DDA420045F7F5 /* FootballSectionHeader.swift in Sources */,
 				E5973E22204E34F2006461CE /* ColorConstraint.swift in Sources */,
+				113B9CCB20871FD7006AE3F8 /* NewsNoPicCell.swift in Sources */,
 				E5973E42204FDD6F006461CE /* MeGuaranteeVC.swift in Sources */,
 				E56CE81A206A47860090A1B5 /* AboutHeader.swift in Sources */,
 				E50643AA206C93A70046A2D4 /* BaseWebViewController.swift in Sources */,
@@ -1933,6 +1954,7 @@
 				E5973DD920492DD2006461CE /* UIScrollView+MJRefresh.swift in Sources */,
 				E5973E27204E3CB0006461CE /* CountdownButton.swift in Sources */,
 				E5D8ABB6206739CF002D688B /* OrderDetailTitleCell.swift in Sources */,
+				113B9CCD2087201E006AE3F8 /* NewsOnePicCell.swift in Sources */,
 				E50B9073205231B500417BFE /* RechargeHeaderView.swift in Sources */,
 				11062B21208322D0001C1D14 /* LotteryCell.swift in Sources */,
 				11A555EC20805D96004641AA /* FootballTwoOneView.swift in Sources */,
@@ -2045,6 +2067,7 @@
 				E56298BD20513429006397EA /* AuthenticationVC.swift in Sources */,
 				E58B57BE205671410025E2F1 /* LoginNetAPIManager.swift in Sources */,
 				E56CE8042069E2340090A1B5 /* AccountDetailFooterView.swift in Sources */,
+				113B9CD120872226006AE3F8 /* NewsBottomView.swift in Sources */,
 				E550D899207339B6002DDE23 /* FootballOrderRangSPFCell.swift in Sources */,
 				E5786FC2206DEAB30045F7F5 /* FootballHunheCell.swift in Sources */,
 				E5973E29204E4387006461CE /* ForgetPswPhoneVC.swift in Sources */,
@@ -2071,6 +2094,7 @@
 				E537397420576FEE0087E4E6 /* APIManager.swift in Sources */,
 				E5883F522068DFBF00CB3A46 /* OrderSchemeTitleCell.swift in Sources */,
 				1144910620859B29009F1D09 /* FootballAnalysisMatchView.swift in Sources */,
+				113B9CCF2087204A006AE3F8 /* NewsThreePicCell.swift in Sources */,
 				E57375A320468B8900148622 /* AppDelegate.swift in Sources */,
 				11A25C522080BF2000085C58 /* FootballHunheView.swift in Sources */,
 				E51F9A5C205A29B800AB8A21 /* RegisterFooterView.swift in Sources */,
