@@ -21,6 +21,7 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
         super.viewDidLoad()
         initProgressView()
         initWebView()
+        loadWebView()
     }
 
     override func viewDidLayoutSubviews() {
@@ -38,20 +39,29 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
     }
     
     private func initWebView() {
-        
-        guard let url = URL(string: "https://www.baidu.com") else { fatalError("-------  url 错误  -------")}
-        let request = URLRequest(url: url)
         let webConfiguration = WKWebViewConfiguration()
+        
+        webConfiguration.mediaPlaybackRequiresUserAction = false;//把手动播放设置NO ios(8.0, 9.0)
+        webConfiguration.allowsInlineMediaPlayback = true;//是否允许内联(YES)或使用本机全屏控制器(NO)，默认是NO。
+        webConfiguration.mediaPlaybackAllowsAirPlay = true;
+        
+        
         
         webView = WKWebView(frame: CGRect.zero, configuration: webConfiguration)
         webView.navigationDelegate = self
         webView.uiDelegate = self
-        webView.load(request)
         
         webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
         
         self.view.addSubview(webView)
         
+    }
+    
+    public func loadWebView() {
+        guard let url = URL(string: "https://www.baidu.com") else { fatalError("-------  url 错误  -------")}
+        let request = URLRequest(url: url)
+        
+        webView.load(request)
     }
     
     private func initProgressView() {

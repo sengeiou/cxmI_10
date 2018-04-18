@@ -25,6 +25,7 @@
 		113B9CCD2087201E006AE3F8 /* NewsOnePicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113B9CCC2087201E006AE3F8 /* NewsOnePicCell.swift */; };
 		113B9CCF2087204A006AE3F8 /* NewsThreePicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113B9CCE2087204A006AE3F8 /* NewsThreePicCell.swift */; };
 		113B9CD120872226006AE3F8 /* NewsBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113B9CD020872226006AE3F8 /* NewsBottomView.swift */; };
+		113B9CD320877849006AE3F8 /* rich.txt in Resources */ = {isa = PBXBuildFile; fileRef = 113B9CD220877849006AE3F8 /* rich.txt */; };
 		114490FD20858CF2009F1D09 /* FootballMatchPagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114490FC20858CF2009F1D09 /* FootballMatchPagerView.swift */; };
 		114491012085970A009F1D09 /* FootballOddsPagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114491002085970A009F1D09 /* FootballOddsPagerView.swift */; };
 		114491042085982B009F1D09 /* FootballAnalysisSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114491032085982B009F1D09 /* FootballAnalysisSectionHeader.swift */; };
@@ -262,6 +263,7 @@
 		113B9CCC2087201E006AE3F8 /* NewsOnePicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsOnePicCell.swift; sourceTree = "<group>"; };
 		113B9CCE2087204A006AE3F8 /* NewsThreePicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsThreePicCell.swift; sourceTree = "<group>"; };
 		113B9CD020872226006AE3F8 /* NewsBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsBottomView.swift; sourceTree = "<group>"; };
+		113B9CD220877849006AE3F8 /* rich.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rich.txt; sourceTree = "<group>"; };
 		114490FC20858CF2009F1D09 /* FootballMatchPagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballMatchPagerView.swift; sourceTree = "<group>"; };
 		114491002085970A009F1D09 /* FootballOddsPagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballOddsPagerView.swift; sourceTree = "<group>"; };
 		114491032085982B009F1D09 /* FootballAnalysisSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballAnalysisSectionHeader.swift; sourceTree = "<group>"; };
@@ -1140,6 +1142,7 @@
 			children = (
 				E5A2644D205B742B00EE6491 /* HomeViewController.swift */,
 				E55016F2207208A80056AB1F /* HomeWebViewController.swift */,
+				113B9CD220877849006AE3F8 /* rich.txt */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1715,6 +1718,7 @@
 				E57375AD20468B8900148622 /* LaunchScreen.storyboard in Resources */,
 				E57375AA20468B8900148622 /* Assets.xcassets in Resources */,
 				E57375A820468B8900148622 /* Main.storyboard in Resources */,
+				113B9CD320877849006AE3F8 /* rich.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
