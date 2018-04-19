@@ -77,11 +77,7 @@ class FootballOrderHunheCell: UITableViewCell {
         }
         danBut.isSelected = isSelected
     }
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        
-    }
+    
     private func initSubview() {
         self.selectionStyle = .none
         
@@ -98,7 +94,7 @@ class FootballOrderHunheCell: UITableViewCell {
         danBut.layer.borderWidth = 0.3
         danBut.layer.borderColor = ColorC8C8C8.cgColor
         danBut.setTitleColor(Color505050, for: .normal)
-        //danBut.setTitleColor(ColorEA5504, for: .selected)
+
         danBut.contentHorizontalAlignment = .center
         danBut.addTarget(self , action: #selector(danClicked(_:)), for: .touchUpInside)
         

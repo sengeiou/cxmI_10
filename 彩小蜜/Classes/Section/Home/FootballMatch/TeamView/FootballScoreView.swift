@@ -24,28 +24,6 @@ class FootballScoreView: UIView {
             }else {
                 changeViewState(isSelected: false)
             }
-//            switch matchType {
-//            case .比分:
-//                if teamInfo.selectedHunhe.isEmpty == false {
-//                    changeViewState(isSelected: true )
-//                }else {
-//                    changeViewState(isSelected: false)
-//                }
-//            case .半全场:
-//                if teamInfo.selectedHunhe.isEmpty == false {
-//                    changeViewState(isSelected: true )
-//                }else {
-//                    changeViewState(isSelected: false)
-//                }
-//            case .混合过关:
-//                if teamInfo.selectedHunhe.isEmpty == false {
-//                    changeViewState(isSelected: true )
-//                }else {
-//                    changeViewState(isSelected: false)
-//                }
-//            default: break
-//
-//            }
         }
     }
     // 比分
@@ -92,9 +70,7 @@ class FootballScoreView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        titlelb.snp.makeConstraints { (make) in
-            make.top.left.right.bottom.equalTo(0)
-        }
+        
     }
     private func initSubview() {
         self.layer.borderWidth = 0.3
@@ -111,6 +87,9 @@ class FootballScoreView: UIView {
         self.addGestureRecognizer(tap)
         self.addSubview(titlelb)
   
+        titlelb.snp.makeConstraints { (make) in
+            make.top.left.right.bottom.equalTo(0)
+        }
     }
     
     private func changeViewState(isSelected: Bool) {
@@ -168,6 +147,7 @@ class FootballScoreView: UIView {
                 title += cell.cellName + " "
             }
         }
+        
         titlelb.text = title
     }
     

@@ -266,7 +266,8 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballHunheCellId, for: indexPath) as! FootballHunheCell
         cell.teamView.delegate = self
         cell.rangTeamView.delegate = self
-        cell.delegate = self 
+        cell.delegate = self
+        cell.index = indexPath
         let matchModel = matchList[indexPath.section]
         cell.playInfoModel = matchModel.playList[indexPath.row]
         return cell
@@ -383,9 +384,6 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
                 }else {
                     showHUD(message: "请至少选择1场单关比赛或者2场非单关比赛")
                 }
-                
-                
-                
             }
             
             return
@@ -531,20 +529,25 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     }
     
     // MARK: - 混合 按钮 点击   delegate
-    func didSelectedHunHeView(view: FootballHunheView, teamInfo: FootballPlayListModel) {
-        self.tableView.reloadData()
+    func didSelectedHunHeView(view: FootballHunheView, teamInfo: FootballPlayListModel, index: IndexPath) {
+        
+        //let cell = view.superview?.superview as! FootballHunheCell
+        
+    
+        
+       // self.tableView.reloadData()
+        
+        self.tableView.reloadRows(at: [index], with: .none)
         guard selectPlayList.count < 15 else {
             view.backSelectedState()
             showHUD(message: "最多可选15场比赛")
+            
             return }
-        guard teamInfo.selectedHunhe.count == 0 else { return }
-        selectPlayList.append(teamInfo)
-        
+        selectPlays.insert(teamInfo)
     }
-    func didDeSelectedHunHeView(view: FootballHunheView, teamInfo: FootballPlayListModel) {
+    func didDeSelectedHunHeView(view: FootballHunheView, teamInfo: FootballPlayListModel, index: IndexPath) {
         self.tableView.reloadData()
-        guard teamInfo.selectedHunhe.count == 0 else { return }
-        selectPlayList.remove(teamInfo)
+        selectPlays.remove(teamInfo)
     }
     
     // Mark: - 混合 cell 点击更多  delegate
@@ -556,7 +559,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         score.teamInfo = teamInfo
         
         score.selected = { (selectedCells, canAdd) in
-            view.selectedCellList = selectedCells
+            //view.selectedCellList = selectedCells
             self.tableView.reloadData()
             guard (weakSelf?.selectPlayList.count)! < 15  else {
                 view.backSelectedState()

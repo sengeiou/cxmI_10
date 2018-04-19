@@ -128,7 +128,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         table.delegate = self
         table.dataSource = self
         table.backgroundColor = ColorF4F4F4
-        table.estimatedRowHeight = 84 * defaultScale
+        //table.estimatedRowHeight = 84 * defaultScale
         registerCell(table)
         return table
     }()

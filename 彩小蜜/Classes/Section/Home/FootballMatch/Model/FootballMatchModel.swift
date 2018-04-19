@@ -74,7 +74,7 @@ class FootballMatchPlay : NSObject, HandyJSON {
     var playType: String!
     /// 单关，1-单关，0不可以 
     var single: Bool!
-    
+    var isShow: Bool!
 }
 
 class FootballPlayCellModel: NSObject, NSCopying, HandyJSON {

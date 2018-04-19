@@ -21,14 +21,33 @@ class FootballHunheCell: UITableViewCell, DateProtocol {
             matchTitle.text = playInfoModel.leagueAddr
             matchTime.text = playInfoModel.changci
             teamView.teamInfo = playInfoModel
+            teamView.index = index
             rangTeamView.teamInfo = playInfoModel
+            rangTeamView.index = index
             topTitleView.teamInfo = playInfoModel
             endTime.text = "截止" + timeStampToHHmm(playInfoModel.betEndTime)
-            if playInfoModel.matchPlays[0].single == true ||
-                playInfoModel.matchPlays[1].single == true {
-                typeIcon.isHidden = false
-            }else {
-                typeIcon.isHidden = true
+            
+            typeIcon.isHidden = true
+            
+            for match in playInfoModel.matchPlays {
+                if match.playType == "1" {
+                    if match.single == true {
+                        typeIcon.isHidden = false
+                    }
+                    
+                    if match.fixedOdds < 0 {
+                        rangTeamlb.backgroundColor = Color85C36b
+                        rangTeamlb.text = "\(match.fixedOdds!)"
+                    }else {
+                        rangTeamlb.backgroundColor = ColorF6AD41
+                        rangTeamlb.text = "+\(match.fixedOdds!)"
+                    }
+                }
+                if match.playType == "2" {
+                    if match.single == true {
+                        typeIcon.isHidden = false
+                    }
+                }
             }
             
             if playInfoModel.selectedHunhe.isEmpty == false {
@@ -45,21 +64,23 @@ class FootballHunheCell: UITableViewCell, DateProtocol {
             }
             
             // 2 为 胜平负，1为让球胜平负
-            guard playInfoModel.matchPlays[0].playType == "1" else { return }
-            
-            let rangMatchPlay = playInfoModel.matchPlays[0]
-            
-            rangTeamlb.text = "\(rangMatchPlay.fixedOdds!)"
-            if rangMatchPlay.fixedOdds < 0 {
-                rangTeamlb.backgroundColor = Color85C36b
-            }else {
-                rangTeamlb.backgroundColor = ColorF6AD41
-            }
+//            guard playInfoModel.matchPlays[0].playType == "1" else { return }
+//
+//            let rangMatchPlay = playInfoModel.matchPlays[0]
+//
+//            rangTeamlb.text = "\(rangMatchPlay.fixedOdds!)"
+//            if rangMatchPlay.fixedOdds < 0 {
+//                rangTeamlb.backgroundColor = Color85C36b
+//            }else {
+//                rangTeamlb.backgroundColor = ColorF6AD41
+//            }
             
         }
     }
     
     public var delegate : FootballHunheCellDelegate!
+    
+    public var index : IndexPath!
     
     private var matchTitle: UILabel!
     private var matchTime: UILabel!
