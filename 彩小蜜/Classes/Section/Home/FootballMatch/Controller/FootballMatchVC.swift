@@ -32,11 +32,6 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     
     
     
-    func didTipPopConfirm(matchId : String) {
-        let matchInfo = FootballMatchInfoVC()
-        matchInfo.matchId = matchId
-        pushViewController(vc: matchInfo)
-    }
     
     
 
@@ -75,6 +70,13 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         footballRequest(leagueId: "")
         setRightButtonItem()
         limitNum = 1
+    }
+    
+    // MARK: - 查看详情
+    func didTipPopConfirm(matchId : String) {
+        let matchInfo = FootballMatchInfoVC()
+        matchInfo.matchId = matchId
+        pushViewController(vc: matchInfo)
     }
     
     // MARK: - cell delegate

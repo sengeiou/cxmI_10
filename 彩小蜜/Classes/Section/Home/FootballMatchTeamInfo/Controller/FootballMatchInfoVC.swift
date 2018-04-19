@@ -25,7 +25,6 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
     // MARK: -  pagerView delegate
     func didTipAnalysisButton() {
         self.teamInfoStyle = .analysis
-        
     }
     
     func didTipOddsButton() {
