@@ -95,18 +95,10 @@ extension FootballFilterPro {
                     }
                 }
                 
-//                if match.homeCell != nil {
-//                    if match.homeCell.isSelected || match.flatCell.isSelected || match.visitingCell.isSelected {
-//                        if match.single == false {
-//                            allSin = false
-//                            break
-//                        }
-//                    }
-//                }
-                
+
                 var scoreSin = false
                 
-                if match.homeCell.cellSons != nil {
+                if match.homeCell != nil && match.homeCell.cellSons != nil {
                     for cell in match.homeCell.cellSons {
                         if cell.isSelected {
                             scoreSin = true

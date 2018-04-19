@@ -161,11 +161,15 @@ class FootballScoreView: UIView {
     private func changeHunheView(list : [FootballPlayCellModel]) {
         var title = ""
         for cell in list {
-            title += cell.cellOdds + " "
+            
+            if cell.isRang {
+                title += "让球" + cell.cellName + " "
+            }else {
+                title += cell.cellName + " "
+            }
         }
         titlelb.text = title
     }
-    
     
     public func backSelectedState() {
        

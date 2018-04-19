@@ -17,12 +17,6 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
     
     func orderRequest () {
         guard self.homeData != nil else { return }
-//        if self.playType == nil {
-//            self.orderReuqest(betType: homeData.playType, times: times)
-//        }else {
-//            self.orderReuqest(betType: playType, times: times)
-//        }
-        
         self.orderReuqest(betType: betType, times: times)
     }
     
@@ -113,6 +107,7 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
                 guard betCells.isEmpty == false else { continue }
                 matchBetCell.betCells = betCells
                 matchBetCell.playType = matchPlay.playType
+                matchBetCell.single = matchPlay.single
                 matchBetCells.append(matchBetCell)
             }
             

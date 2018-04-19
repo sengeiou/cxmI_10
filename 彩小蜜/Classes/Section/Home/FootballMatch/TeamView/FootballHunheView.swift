@@ -39,6 +39,10 @@ class FootballHunheView: UIView {
                 changeButState(but: homeBut, isSelected: matchPlay.homeCell.isSelected)
                 changeButState(but: drawBut, isSelected: matchPlay.flatCell.isSelected)
                 changeButState(but: awayBut, isSelected: matchPlay.visitingCell.isSelected)
+                
+                matchPlay.homeCell.isRang = true
+                matchPlay.flatCell.isRang = true
+                matchPlay.visitingCell.isRang = true
             default: break
             }
             

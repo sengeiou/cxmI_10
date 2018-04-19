@@ -85,6 +85,7 @@ class FootballPlayCellModel: NSObject, NSCopying, HandyJSON {
         model.cellName = cellName
         model.cellOdds = cellOdds
         model.cellSons = cellSons
+        model.isRang = isRang
         return model
     }
     
@@ -94,6 +95,7 @@ class FootballPlayCellModel: NSObject, NSCopying, HandyJSON {
     var cellName: String!
     var cellOdds: String!
     var cellSons: [FootballPlayCellModel]!
+    var isRang = false
 }
 
 
