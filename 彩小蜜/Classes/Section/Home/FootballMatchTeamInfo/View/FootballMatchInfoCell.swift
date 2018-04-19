@@ -92,7 +92,7 @@ class FootballMatchInfoCell: UITableViewCell {
         
         matchScore = getLabel("阿森纳  0：1  AC米兰")
         
-        matchResult = getLabel("胜负")
+        matchResult = getLabel("")
         matchResult.sizeToFit()
         
         self.contentView.addSubview(line)

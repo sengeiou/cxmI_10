@@ -16,15 +16,28 @@ class FootballMatchInfoPopVC: BasePopViewController, BottomViewDelegate {
     
     
 
-    public var matchId : String!
+    public var matchId : String! {
+        didSet{
+            matchInfoRequest()
+        }
+    }
     public var delegate : FootballMatchInfoPopVCDelegate!
     // MARK: 属性 private
+    private var teamInfo : FootballMatchInfoModel! {
+        didSet{
+            header.matchInfo = teamInfo.matchInfo
+            ratioView.supportInfo = teamInfo.hadTeamSupport
+            rangRatioView.supportInfo = teamInfo.hhadTeamSupport
+            setUpViewInfo()
+        }
+    }
+    
     private var header : FootballTeamHeader!
-    private var matchDetail : UILabel!
-    private var homeDetail : UILabel!
-    private var visiDetail : UILabel!
-    private var sportDetail: UILabel!
-    private var buyDetail : FootballHunheView!
+    private var matchDetail : UILabel! // 近期状态
+    private var homeDetail : UILabel!  // 主队主场
+    private var visiDetail : UILabel!  // 客队客场
+    private var sportDetail: UILabel!  // 相对交锋
+    private var buyDetail : FootballHunheView! // 投注比例
     private var bottomView : BottomView!
     
     private var ratioView: FootballBuyRatioView!
@@ -36,7 +49,6 @@ class FootballMatchInfoPopVC: BasePopViewController, BottomViewDelegate {
         super.viewDidLoad()
         self.popStyle = .fromBottom
         initSubview()
-        matchInfoRequest()
     }
     
     func didTipConfitm() {
@@ -49,6 +61,33 @@ class FootballMatchInfoPopVC: BasePopViewController, BottomViewDelegate {
         dismiss(animated: true , completion: nil )
     }
     
+    private func setUpViewInfo() {
+        let hhInfo = teamInfo.hhMatchTeamInfo!
+        let vvInfo = teamInfo.vvMatchTeamInfo!
+        let hvInfo = teamInfo.hvMatchTeamInfo!
+        matchDetail.text = "主队\(hhInfo.win!)胜\(hhInfo.draw!)平\(hhInfo.lose!)负 客队\(vvInfo.win!)胜\(vvInfo.draw!)平\(vvInfo.lose!)负"
+        homeDetail.text = "主队\(hhInfo.win!)胜\(hhInfo.draw!)平\(hhInfo.lose!)负"
+        visiDetail.text = "客队\(vvInfo.win!)胜\(vvInfo.draw!)平\(vvInfo.lose!)负"
+        
+        let muAtt = NSMutableAttributedString(string: "共\(hvInfo.total!)次交锋 主队 ")
+        let homeAtt = NSAttributedString(string: "\(hvInfo.win!)胜", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+        let flatAtt = NSAttributedString(string: "\(hvInfo.draw!)平", attributes: [NSAttributedStringKey.foregroundColor: Color0099D9])
+        let visiAtt = NSAttributedString(string: "\(hvInfo.lose!)负", attributes: [NSAttributedStringKey.foregroundColor: Color44AE35])
+        muAtt.append(homeAtt)
+        muAtt.append(flatAtt)
+        muAtt.append(visiAtt)
+        
+        sportDetail.attributedText = muAtt
+        
+        guard teamInfo.hhadTeamSupport != nil else { return }
+        if teamInfo.hhadTeamSupport.fixedOdds < 0 {
+            rangRatioTitle.text = "\(teamInfo.hhadTeamSupport.fixedOdds!)"
+        }else {
+            rangRatioTitle.text = "+\(teamInfo.hhadTeamSupport.fixedOdds!)"
+        }
+        
+    }
+    
     // MARK: - 网络请求
     private func matchInfoRequest() {
         weak var weakSelf = self
@@ -57,7 +96,7 @@ class FootballMatchInfoPopVC: BasePopViewController, BottomViewDelegate {
         .asObservable()
         .mapObject(type: FootballMatchInfoModel.self )
             .subscribe(onNext: { (data) in
-                
+                weakSelf?.teamInfo = data
             }, onError: { (error) in
                 guard let err = error as? HXError else { return }
                 switch err {

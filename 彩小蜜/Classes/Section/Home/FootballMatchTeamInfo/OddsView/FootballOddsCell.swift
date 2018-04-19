@@ -10,23 +10,100 @@ import UIKit
 
 class FootballOddsCell: UITableViewCell {
 
+    /// 欧赔
     public var europeInfo : MatchEuropeModel! {
         didSet{
             company.text = europeInfo.comName
-            homelb.text = "\(europeInfo.initWin!)\n\(europeInfo.realWin!)"
-            flatlb.text = "\(europeInfo.initDraw!)\n\(europeInfo.realDraw!)"
-            visilb.text = "\(europeInfo.initLose!)\n\(europeInfo.realLose!)"
+
+            var homeColor = Color505050
+            var homeUp = ""
+            var visiColor = Color505050
+            var visiUp = ""
+            
+            var flatColor = Color505050
+            var flatUp = ""
+            
+            if europeInfo.winChange == "1" {
+                homeColor = ColorEA5504
+                homeUp = "↑"
+            }else if europeInfo.winChange == "2" {
+                homeColor = Color44AE35
+                homeUp = "↓"
+            }
+            
+            if europeInfo.drawChange == "1" {
+                flatColor = ColorEA5504
+                flatUp = "↑"
+            }else if europeInfo.drawChange == "2" {
+                flatColor = Color44AE35
+                flatUp = "↓"
+            }
+            
+            if europeInfo.loseChange == "1" {
+                visiColor = ColorEA5504
+                visiUp = "↑"
+            }else if europeInfo.loseChange == "2" {
+                visiColor = Color44AE35
+                visiUp = "↓"
+            }
+            
+            let homeMuAtt = NSMutableAttributedString(string: "\(europeInfo.initWin!)\n")
+            let homeAtt = NSAttributedString(string: "\(europeInfo.realWin!)\(homeUp)", attributes: [NSAttributedStringKey.foregroundColor: homeColor])
+            homeMuAtt.append(homeAtt)
+            
+            let flatMuAtt = NSMutableAttributedString(string: "\(europeInfo.initDraw!)\n")
+            let flatAtt = NSAttributedString(string: "\(europeInfo.realDraw!)\(flatUp)", attributes: [NSAttributedStringKey.foregroundColor: flatColor])
+            flatMuAtt.append(flatAtt)
+            
+            let visiMuAtt = NSMutableAttributedString(string: "\(europeInfo.initLose!)\n")
+            let visiAtt = NSAttributedString(string: "\(europeInfo.realLose!)\(visiUp)", attributes: [NSAttributedStringKey.foregroundColor: visiColor])
+            visiMuAtt.append(visiAtt)
+            
+            homelb.attributedText = homeMuAtt
+            flatlb.attributedText = flatMuAtt
+            visilb.attributedText = visiMuAtt
         }
     }
+    /// 亚盘
     public var asiaInfo : MatchAsiasModel! {
         didSet{
             company.text = asiaInfo.comName
-            homelb.text = asiaInfo.ratioH
-            visilb.text = asiaInfo.ratioA
             flatlb.text = "\(asiaInfo.initRule!)\n\(asiaInfo.realRule!)"
+            
+            
+            var homeColor = Color505050
+            var homeUp = ""
+            var visiColor = Color505050
+            var visiUp = ""
+            if asiaInfo.odds1Change == "1" {
+                homeColor = ColorEA5504
+                homeUp = "↑"
+            }else if asiaInfo.odds1Change == "2" {
+                homeColor = Color44AE35
+                homeUp = "↓"
+            }
+            
+            if asiaInfo.odds2Change == "1" {
+                visiColor = ColorEA5504
+                visiUp = "↑"
+            }else if asiaInfo.odds2Change == "2" {
+                visiColor = Color44AE35
+                visiUp = "↓"
+            }
+            
+            let homeMuAtt = NSMutableAttributedString(string: "\(asiaInfo.initOdds1!)\n")
+            let homeAtt = NSAttributedString(string: "\(asiaInfo.realOdds1!)\(homeUp)", attributes: [NSAttributedStringKey.foregroundColor: homeColor])
+            homeMuAtt.append(homeAtt)
+            
+            let visiMuAtt = NSMutableAttributedString(string: "\(asiaInfo.initOdds2!)\n")
+            let visiAtt = NSAttributedString(string: "\(asiaInfo.realOdds2!)\(visiUp)", attributes: [NSAttributedStringKey.foregroundColor: visiColor])
+            visiMuAtt.append(visiAtt)
+            
+            homelb.attributedText = homeMuAtt
+            visilb.attributedText = visiMuAtt
         }
     }
-   
+    /// 大小球
     
     public var homelb : UILabel!
     public var flatlb : UILabel!
@@ -101,7 +178,7 @@ class FootballOddsCell: UITableViewCell {
         lab.font = Font12
         lab.textColor = Color9F9F9F
         lab.textAlignment = .center
-        lab.numberOfLines = 0
+        lab.numberOfLines = 2
         return lab
     }
     

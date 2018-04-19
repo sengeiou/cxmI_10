@@ -10,6 +10,15 @@ import UIKit
 
 class FootballBuyRatioView: UIView {
 
+    public var supportInfo : TeamSupportModel! {
+        didSet{
+            guard supportInfo != nil else { return }
+            homelb.text = supportInfo.hSupport
+            flatlb.text = supportInfo.dSupport
+            visilb.text = supportInfo.aSupport
+        }
+    }
+    
     private var homelb : UILabel!
     private var flatlb : UILabel!
     private var visilb : UILabel!

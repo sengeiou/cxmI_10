@@ -93,7 +93,7 @@ class LotteryHeaderView: UIView {
         moreFilterBut = getButton("更多条件")
         moreFilterBut.addTarget(self, action: #selector(moreButClicked(_:)), for: .touchUpInside)
         
-        finishFilterBut = getButton("已结束")
+        finishFilterBut = getButton("全部")
         finishFilterBut.addTarget(self, action: #selector(finishButClicked(_:)), for: .touchUpInside)
         
         timeIcon = UIImageView()
@@ -142,9 +142,9 @@ class LotteryHeaderView: UIView {
     }
     func changeFinishState(_ isSelected: Bool) {
         if isSelected {
-            finishFilterBut.setTitle("全部", for: .normal)
-        }else {
             finishFilterBut.setTitle("已结束", for: .normal)
+        }else {
+            finishFilterBut.setTitle("全部", for: .normal)
         }
     }
     

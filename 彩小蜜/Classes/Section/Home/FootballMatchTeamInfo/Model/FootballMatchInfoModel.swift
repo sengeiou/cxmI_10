@@ -18,15 +18,22 @@ struct FootballMatchInfoModel: HandyJSON {
     var hMatchTeamInfo : MatchTeamInfoModel!
     /// 客场战绩
     var vMatchTeamInfo: MatchTeamInfoModel!
+    /// 客场客战绩
+    var vvMatchTeamInfo:MatchTeamInfoModel!
     /// 主场积分
     var homeTeamScoreInfo: TeamScoreInfoModel!
     /// 客场积分
     var visitingTeamScoreInfo: TeamScoreInfoModel!
+    /// 胜平负支持率
+    var hadTeamSupport : TeamSupportModel!
+    /// 让球胜平负支持率
+    var hhadTeamSupport: TeamSupportModel!
     /// 亚盘
     var leagueMatchAsias: [MatchAsiasModel]!
     /// 欧赔
     var leagueMatchEuropes: [MatchEuropeModel]!
     /// 大小球
+    
     /// 赛事信息
     var matchInfo : MatchInfoModel!
     
@@ -154,6 +161,16 @@ struct MatchInfoModel: HandyJSON {
     var visitingTeamAbbr: String!
     var visitingTeamId: String!
     var visitingTeamPic: String!
+}
+struct TeamSupportModel: HandyJSON {
+    /// 负支持率
+    var aSupport: String!
+    /// 平支持率
+    var dSupport: String!
+    /// 让球数
+    var fixedOdds: Int!
+    /// 胜支持率
+    var hSupport: String!
 }
 struct TeamInfo : HandyJSON {
     /// 主队名称
