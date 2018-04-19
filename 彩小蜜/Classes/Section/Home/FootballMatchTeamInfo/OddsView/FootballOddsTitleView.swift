@@ -12,9 +12,10 @@ class FootballOddsTitleView: UIView {
 
     public var homelb : UILabel!
     public var flatlb : UILabel!
+    public var visilb : UILabel!
     
     private var company : UILabel!
-    private var visilb : UILabel!
+    
     
     private var bottomLine : UIView!
     init() {

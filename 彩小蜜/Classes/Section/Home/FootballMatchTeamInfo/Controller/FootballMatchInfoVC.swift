@@ -251,12 +251,15 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
         case .欧赔:
             cell.titleView.homelb.text = "胜"
             cell.titleView.flatlb.text = "平"
+            cell.titleView.visilb.text = "负"
         case .亚盘:
             cell.titleView.homelb.text = "主"
             cell.titleView.flatlb.text = "盘口"
+            cell.titleView.visilb.text = "负"
         case .大小球:
-            cell.titleView.homelb.text = "主"
+            cell.titleView.homelb.text = "大"
             cell.titleView.flatlb.text = "盘口"
+            cell.titleView.visilb.text = "小"
         default : break
         
         }
