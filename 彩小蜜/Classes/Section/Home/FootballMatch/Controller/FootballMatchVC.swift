@@ -28,7 +28,7 @@ fileprivate let Football2_1CellId = "Football2_1CellId"
 fileprivate let FootballHunheCellId = "FootballHunheCellId"
 
 
-class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballBottomViewDelegate, FootballSectionHeaderDelegate, FootballRequestPro, FootballTeamViewDelegate , FootballMatchFilterVCDelegate, FootballTotalViewDelegate, FootballScoreViewDelegate, FootballTwoOneViewDelegate , FootballHunheViewDelegate , FootballSPFCellDelegate, FootballMatchInfoPopVCDelegate, FootballCellProtocol{
+class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballBottomViewDelegate, FootballSectionHeaderDelegate, FootballRequestPro, FootballTeamViewDelegate , FootballMatchFilterVCDelegate, FootballTotalViewDelegate, FootballScoreViewDelegate, FootballTwoOneViewDelegate , FootballHunheViewDelegate , FootballSPFCellDelegate, FootballMatchInfoPopVCDelegate, FootballCellProtocol, FootballFilterPro{
     
     
     
@@ -384,69 +384,69 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
 //                    return }
                 
                 
-                var can = false
+                var can = isAllSingle(playList: selectPlayList)
                 
-                for match in play.matchPlays {
-                    if match.homeCell != nil, match.homeCell.isSelected {
-                        if match.single {
-                            can = true
-                            break
-                        }
-                    }
-                    if match.flatCell != nil, match.flatCell.isSelected {
-                        if match.single {
-                            can = true
-                            break
-                        }
-                    }
-                    if match.visitingCell != nil, match.visitingCell.isSelected {
-                        if match.single {
-                            can = true
-                            break
-                        }
-                    }
-                    if match.homeCell != nil, match.homeCell.cellSons != nil {
-                        for cell in match.homeCell.cellSons {
-                            if cell.isSelected {
-                                if match.single {
-                                    can = true
-                                    break
-                                }
-                            }
-                        }
-                    }
-                    if match.flatCell != nil, match.flatCell.cellSons != nil {
-                        for cell in match.flatCell.cellSons {
-                            if cell.isSelected {
-                                if match.single {
-                                    can = true
-                                    break
-                                }
-                            }
-                        }
-                    }
-                    if match.visitingCell != nil, match.visitingCell.cellSons != nil {
-                        for cell in match.visitingCell.cellSons {
-                            if cell.isSelected {
-                                if match.single {
-                                    can = true
-                                    break
-                                }
-                            }
-                        }
-                    }
-                    
-                    if match.matchCells.isEmpty == false{
-                        for cell in match.matchCells {
-                            if cell.isSelected {
-                                if match.single {
-                                    can = true
-                                    break
-                                }
-                            }
-                        }
-                    }
-                }
+//                for match in play.matchPlays {
+//                    if match.homeCell != nil, match.homeCell.isSelected {
+//                        if match.single {
+//                            can = true
+//                            break
+//                        }
+//                    }
+//                    if match.flatCell != nil, match.flatCell.isSelected {
+//                        if match.single {
+//                            can = true
+//                            break
+//                        }
+//                    }
+//                    if match.visitingCell != nil, match.visitingCell.isSelected {
+//                        if match.single {
+//                            can = true
+//                            break
+//                        }
+//                    }
+//                    if match.homeCell != nil, match.homeCell.cellSons != nil {
+//                        for cell in match.homeCell.cellSons {
+//                            if cell.isSelected {
+//                                if match.single {
+//                                    can = true
+//                                    break
+//                                }
+//                            }
+//                        }
+//                    }
+//                    if match.flatCell != nil, match.flatCell.cellSons != nil {
+//                        for cell in match.flatCell.cellSons {
+//                            if cell.isSelected {
+//                                if match.single {
+//                                    can = true
+//                                    break
+//                                }
+//                            }
+//                        }
+//                    }
+//                    if match.visitingCell != nil, match.visitingCell.cellSons != nil {
+//                        for cell in match.visitingCell.cellSons {
+//                            if cell.isSelected {
+//                                if match.single {
+//                                    can = true
+//                                    break
+//                                }
+//                            }
+//                        }
+//                    }
+//
+//                    if match.matchCells.isEmpty == false{
+//                        for cell in match.matchCells {
+//                            if cell.isSelected {
+//                                if match.single {
+//                                    can = true
+//                                    break
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
                 
                 if can {
                     let order = FootballOrderConfirmVC()

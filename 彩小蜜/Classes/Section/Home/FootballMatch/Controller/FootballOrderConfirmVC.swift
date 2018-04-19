@@ -69,7 +69,11 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
             bottomView.times = times
         }
     } // 倍数  网络请求用
-    public var playType : String! // 串关方式 网络请求用
+    public var playType : String! {
+        didSet{
+            orderRequest ()
+        }
+    } // 串关方式 网络请求用
     
     // 是否允许弹出下个界面 - 支付界面
     public var canPush : Bool = false
@@ -82,7 +86,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         setEmpty(title: "暂无可选赛事", tableView)
         setRightButtonItem()
         //selectPlays = Set<FootballPlayListModel>()
-        orderRequest ()
+        
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()

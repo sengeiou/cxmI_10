@@ -15,9 +15,13 @@ class LotteryCell: UITableViewCell {
             titlelb.text = resultModel.changci + resultModel.leagueAddr + resultModel.matchTime
             homeTeamlb.text = resultModel.homeTeamAbbr
             visiTeamlb.text = resultModel.visitingTeamAbbr
-            if resultModel.firstHalf == "" {
+            
+            if resultModel.matchFinish == "3" {
                 resultlb.text = "未开始"
             }else {
+                if resultModel.firstHalf == "" {
+                    resultlb.text = "半场 " + "0:0" + " 总比分" + "0:0"
+                }
                 resultlb.text = "半场 " + resultModel.firstHalf + " 总比分" + resultModel.whole
             }
         }

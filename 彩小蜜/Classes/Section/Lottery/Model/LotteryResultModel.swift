@@ -22,7 +22,8 @@ struct LotteryResultModel : HandyJSON {
     var matchId : String!
     var matchSn: String!
     var matchTime: String!
-    var matchFinish: Bool!
+    /// 赛事状态， 2- 正在比赛  , 1- 已结束 , 3- 未开始
+    var matchFinish: String!
     var showTime: String!
     var visitingTeamAbbr: String!
     var visitingTeamId : String!

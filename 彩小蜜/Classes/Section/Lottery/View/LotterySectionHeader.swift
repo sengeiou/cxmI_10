@@ -20,7 +20,7 @@ class LotterySectionHeader: UITableViewHeaderFooterView {
             }else {
                 var count = 0
                 for result in resultList {
-                    if result.matchFinish {
+                    if result.matchFinish == "1" {
                         count += 1
                     }
                 }

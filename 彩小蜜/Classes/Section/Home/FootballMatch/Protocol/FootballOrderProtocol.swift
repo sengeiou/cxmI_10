@@ -13,6 +13,13 @@ protocol FootballOrderProtocol { }
 
 extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
     
+    
+    
+    func orderRequest () {
+        guard self.homeData != nil else { return }
+        self.orderReuqest(betType: self.playType, times: times)
+    }
+    
     func getRequestModel(betType: String, times: String, bonusId: String, homeData: HomePlayModel) -> FootballRequestMode {
         var requestModel = FootballRequestMode()
         
@@ -106,15 +113,10 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
             matchBetCell.matchBetCells = matchBetCells
             matchBetPlays.append(matchBetCell)
         }
-       
+        
         requestModel.matchBetPlays = matchBetPlays
         
         return requestModel
-    }
-    
-    func orderRequest () {
-        guard self.homeData != nil else { return }
-        self.orderReuqest(betType: self.playType, times: times)
     }
     
     private func orderReuqest(betType: String, times: String) {
