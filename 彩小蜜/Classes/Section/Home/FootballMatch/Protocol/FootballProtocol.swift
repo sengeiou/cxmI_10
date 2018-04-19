@@ -9,6 +9,10 @@
 import Foundation
 
 
+protocol FootballCellProtocol: FootballSPFCellDelegate, FootballRangSPFCellDelegate, FootballTotalCellDelegate, FootballScoreCellDelegate, FootballBanQuanCCellDelegate, Football2_1CellDelegate, FootballHunheCellDelegate{
+    
+}
+
 protocol FootballRequestPro {
     
 }
@@ -62,6 +66,10 @@ extension FootballRequestPro where Self: FootballMatchVC {
             }, onCompleted: nil , onDisposed: nil )
     }
 }
+
+
+
+
 
 
 
