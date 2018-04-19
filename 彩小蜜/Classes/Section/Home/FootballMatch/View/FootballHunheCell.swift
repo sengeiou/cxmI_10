@@ -8,7 +8,9 @@
 
 import UIKit
 
+
 protocol FootballHunheCellDelegate {
+    func didTipHunheCellDetail(teamInfo : FootballPlayListModel) -> Void
     func didTipMoreButton(view : FootballHunheView, rangView : FootballHunheView, teamInfo : FootballPlayListModel) -> Void
 }
 
@@ -184,6 +186,7 @@ class FootballHunheCell: UITableViewCell, DateProtocol {
         detailBut.setImage(UIImage(named: "Collapse"), for: .normal)
         detailBut.contentEdgeInsets = UIEdgeInsets(top: 2, left: 0, bottom: 5, right: 0)
         detailBut.titleLabel?.numberOfLines = 2
+        detailBut.addTarget(self, action: #selector(detailButClicked(_:)), for: .touchUpInside)
         
         moreBut = UIButton(type: .custom)
         moreBut.setTitle("更多\n玩法", for: .normal)
@@ -216,7 +219,10 @@ class FootballHunheCell: UITableViewCell, DateProtocol {
         lab.text = "截止23： 50"
         return lab
     }
-    
+    @objc private func detailButClicked(_ sender : UIButton ) {
+        guard delegate != nil else { return }
+        delegate.didTipHunheCellDetail(teamInfo: self.playInfoModel)
+    }
     @objc private func moreButClicked(_ sender : UIButton) {
         guard delegate != nil else { return }
         delegate.didTipMoreButton(view: teamView, rangView: rangTeamView, teamInfo: playInfoModel)

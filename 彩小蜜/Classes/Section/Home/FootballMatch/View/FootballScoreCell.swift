@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol FootballScoreCellDelegate {
+    func didTipScoreCellDetail(teamInfo : FootballPlayListModel) -> Void
+}
+
 class FootballScoreCell: UITableViewCell, DateProtocol {
 
     public var playInfoModel: FootballPlayListModel! {
@@ -27,6 +31,8 @@ class FootballScoreCell: UITableViewCell, DateProtocol {
             }
         }
     }
+    
+    public var delegate : FootballScoreCellDelegate!
     
     public var scoreView: FootballScoreView!
     
@@ -130,6 +136,7 @@ class FootballScoreCell: UITableViewCell, DateProtocol {
         detailBut.setImage(UIImage(named: "Collapse"), for: .normal)
         detailBut.contentEdgeInsets = UIEdgeInsets(top: 2, left: 0, bottom: 5, right: 0)
         detailBut.titleLabel?.numberOfLines = 2
+        detailBut.addTarget(self, action: #selector(detailButClicked(_:)), for: .touchUpInside)
         
         homeMatch = initLabel()
         vsLb = initLabel()
@@ -156,7 +163,10 @@ class FootballScoreCell: UITableViewCell, DateProtocol {
         lab.text = "截止23： 50"
         return lab
     }
-    
+    @objc private func detailButClicked(_ sender : UIButton ) {
+        guard delegate != nil else { return }
+        delegate.didTipScoreCellDetail(teamInfo: self.playInfoModel)
+    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         

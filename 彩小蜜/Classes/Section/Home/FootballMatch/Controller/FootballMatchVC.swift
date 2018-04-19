@@ -28,17 +28,13 @@ fileprivate let Football2_1CellId = "Football2_1CellId"
 fileprivate let FootballHunheCellId = "FootballHunheCellId"
 
 
-class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballBottomViewDelegate, FootballSectionHeaderDelegate, FootballRequestPro, FootballTeamViewDelegate , FootballMatchFilterVCDelegate, FootballTotalViewDelegate, FootballScoreViewDelegate, FootballTwoOneViewDelegate, FootballHunheCellDelegate , FootballHunheViewDelegate , FootballSPFCellDelegate, FootballMatchInfoPopVCDelegate{
+class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballBottomViewDelegate, FootballSectionHeaderDelegate, FootballRequestPro, FootballTeamViewDelegate , FootballMatchFilterVCDelegate, FootballTotalViewDelegate, FootballScoreViewDelegate, FootballTwoOneViewDelegate, FootballHunheCellDelegate , FootballHunheViewDelegate , FootballSPFCellDelegate, FootballMatchInfoPopVCDelegate, FootballRangSPFCellDelegate, FootballTotalCellDelegate, FootballScoreCellDelegate, FootballBanQuanCCellDelegate, Football2_1CellDelegate{
     
     
     
-    // 胜平负cell delegate
-    func didTipSPFCellDetail(teamInfo: FootballPlayListModel) {
-        let matchInfo = FootballMatchInfoPopVC()
-        matchInfo.matchId = teamInfo.matchId
-        matchInfo.delegate = self
-        present(matchInfo)
-    }
+    
+    
+    
     
     func didTipPopConfirm(matchId : String) {
         let matchInfo = FootballMatchInfoVC()
@@ -84,6 +80,36 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         setRightButtonItem()
         limitNum = 1
     }
+    
+    // MARK: - cell delegate
+    func didTipSPFCellDetail(teamInfo: FootballPlayListModel) {
+        presentMatchInfoPopVC(teamInfo)
+    }
+    func didTipTwoOneCellDetail(teamInfo: FootballPlayListModel) {
+        presentMatchInfoPopVC(teamInfo)
+    }
+    func didTipBanQuanCCellDetail(teamInfo: FootballPlayListModel) {
+        presentMatchInfoPopVC(teamInfo)
+    }
+    func didTipScoreCellDetail(teamInfo: FootballPlayListModel) {
+        presentMatchInfoPopVC(teamInfo)
+    }
+    func didTipTotalCellDetail(teamInfo: FootballPlayListModel) {
+        presentMatchInfoPopVC(teamInfo)
+    }
+    func didTipHunheCellDetail(teamInfo: FootballPlayListModel) {
+        presentMatchInfoPopVC(teamInfo)
+    }
+    func didTipRangSPFCellDetail(teamInfo: FootballPlayListModel) {
+        presentMatchInfoPopVC(teamInfo)
+    }
+    private func presentMatchInfoPopVC(_ teamInfo: FootballPlayListModel) {
+        let matchInfo = FootballMatchInfoPopVC()
+        matchInfo.matchId = teamInfo.matchId
+        matchInfo.delegate = self
+        present(matchInfo)
+    }
+    
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -201,7 +227,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     private func initRangSPFCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballRangSPFCellId, for: indexPath) as! FootballRangSPFCell
         cell.teamView.delegate = self
-        
+        cell.delegate = self
         let matchModel = matchList[indexPath.section]
         cell.playInfoModel = matchModel.playList[indexPath.row]
         return cell
@@ -209,7 +235,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     private func initTotalCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballTotalCellId, for: indexPath) as! FootballTotalCell
         cell.totalView.delegate = self
-        
+        cell.delegate = self
         let matchModel = matchList[indexPath.section]
         cell.playInfoModel = matchModel.playList[indexPath.row]
         return cell
@@ -217,7 +243,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     private func initScoreCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballScoreCellId, for: indexPath) as! FootballScoreCell
         cell.scoreView.delegate = self
-        
+        cell.delegate = self
         let matchModel = matchList[indexPath.section]
         cell.playInfoModel = matchModel.playList[indexPath.row]
         return cell
@@ -225,7 +251,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     private func initBanQuanCCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballBanQuanCCellId, for: indexPath) as! FootballBanQuanCCell
         cell.scoreView.delegate = self
-        
+        cell.delegate = self
         let matchModel = matchList[indexPath.section]
         cell.playInfoModel = matchModel.playList[indexPath.row]
         return cell
@@ -233,7 +259,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     private func init2Cell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Football2_1CellId, for: indexPath) as! Football2_1Cell
         cell.twoOneView.delegate = self
-        
+        cell.delegate = self
         let matchModel = matchList[indexPath.section]
         cell.playInfoModel = matchModel.playList[indexPath.row]
         return cell
@@ -252,7 +278,6 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: FootballSectionHeaderId) as! FootballSectionHeader
         header.tag = section
         header.delegate = self
-
 
         if section == 0, self.matchData.hotPlayList.isEmpty == false {
             header.headerType = .hotMatch

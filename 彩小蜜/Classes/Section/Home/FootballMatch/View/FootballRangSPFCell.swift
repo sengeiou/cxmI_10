@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol FootballRangSPFCellDelegate {
+    func didTipRangSPFCellDetail(teamInfo : FootballPlayListModel) -> Void
+}
+
 class FootballRangSPFCell: UITableViewCell, DateProtocol {
 
     public var playInfoModel: FootballPlayListModel! {
@@ -25,6 +29,8 @@ class FootballRangSPFCell: UITableViewCell, DateProtocol {
             
         }
     }
+    
+    public var delegate : FootballRangSPFCellDelegate!
     
     private var matchTitle: UILabel!
     private var matchTime: UILabel!
@@ -107,6 +113,7 @@ class FootballRangSPFCell: UITableViewCell, DateProtocol {
         detailBut.setImage(UIImage(named: "Collapse"), for: .normal)
         detailBut.contentEdgeInsets = UIEdgeInsets(top: 2, left: 0, bottom: 5, right: 0)
         detailBut.titleLabel?.numberOfLines = 2
+        detailBut.addTarget(self, action: #selector(detailButClicked(_:)), for: .touchUpInside)
         
         self.contentView.addSubview(line)
         self.contentView.addSubview(teamView)
@@ -125,10 +132,15 @@ class FootballRangSPFCell: UITableViewCell, DateProtocol {
         return lab
     }
     
+    @objc private func detailButClicked(_ sender : UIButton ) {
+        guard delegate != nil else { return }
+        delegate.didTipRangSPFCellDetail(teamInfo: self.playInfoModel)
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
-        // Configure the view for the selected state
+        
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

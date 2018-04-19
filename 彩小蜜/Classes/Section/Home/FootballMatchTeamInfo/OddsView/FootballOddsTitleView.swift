@@ -16,7 +16,6 @@ class FootballOddsTitleView: UIView {
     
     private var company : UILabel!
     
-    
     private var bottomLine : UIView!
     init() {
         super.init(frame: CGRect.zero)
