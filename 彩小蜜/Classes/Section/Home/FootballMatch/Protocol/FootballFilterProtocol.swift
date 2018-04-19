@@ -24,14 +24,7 @@ extension FootballFilterPro {
             filter.titleNum = "11"
             filterList.append(filter)
             
-//            if playList.count < 2, playList[0].matchPlays[0].single == false{
-//                let filter = FootballPlayFilterModel()
-//                filter.playTitle = "串关  "
-//                filter.title = "2串1"
-//                filter.titleNum = "21"
-//                filterList.append(filter)
-//            }else
-                if playList.count < 9{
+            if playList.count < 9{
                 for index in 2..<playList.count + 1 {
                     let filter = FootballPlayFilterModel()
                     filter.playTitle = "串关  "
@@ -73,37 +66,7 @@ extension FootballFilterPro {
                     filter.titleNum = "\(index)1"
                     filterList.append(filter)
                 }
-        }
-        
-        
-        
-//        if playList.count < 2, playList[0].matchPlays[0].single == true {
-//            let filter = FootballPlayFilterModel()
-//            filter.title = "单关"
-//            filter.titleNum = "11"
-//            filterList.append(filter)
-//        }else if playList.count < 2, playList[0].matchPlays[0].single == false{
-//            let filter = FootballPlayFilterModel()
-//            filter.playTitle = "串关  "
-//            filter.title = "2串1"
-//            filter.titleNum = "21"
-//            filterList.append(filter)
-//        }else if playList.count < 9{
-//            for index in 2..<playList.count + 1 {
-//                let filter = FootballPlayFilterModel()
-//                filter.playTitle = "串关  "
-//                filter.title = "\(index)串1"
-//                filter.titleNum = "\(index)1"
-//                filterList.append(filter)
-//            }
-//        }else {
-//            for index in 2...8 {
-//                let filter = FootballPlayFilterModel()
-//                filter.playTitle = "串关  "
-//                filter.title = "\(index)串1"
-//                filter.titleNum = "\(index)1"
-//                filterList.append(filter)
-//            }
+            }
         }
         filterList.last?.isSelected = true
         
