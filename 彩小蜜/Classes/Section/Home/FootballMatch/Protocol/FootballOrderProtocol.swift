@@ -17,7 +17,13 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
     
     func orderRequest () {
         guard self.homeData != nil else { return }
-        self.orderReuqest(betType: self.playType, times: times)
+//        if self.playType == nil {
+//            self.orderReuqest(betType: homeData.playType, times: times)
+//        }else {
+//            self.orderReuqest(betType: playType, times: times)
+//        }
+        
+        self.orderReuqest(betType: betType, times: times)
     }
     
     func getRequestModel(betType: String, times: String, bonusId: String, homeData: HomePlayModel) -> FootballRequestMode {

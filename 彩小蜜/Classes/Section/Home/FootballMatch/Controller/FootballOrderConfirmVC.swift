@@ -41,7 +41,9 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
                 }
             }
             str.removeLast()
-            self.playType = str
+            self.betType = str
+            
+            
         }
     }
     
@@ -69,11 +71,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
             bottomView.times = times
         }
     } // 倍数  网络请求用
-    public var playType : String! {
-        didSet{
-            orderRequest ()
-        }
-    } // 串关方式 网络请求用
+    public var betType : String! // 串关方式 网络请求用
     
     // 是否允许弹出下个界面 - 支付界面
     public var canPush : Bool = false
@@ -82,10 +80,10 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "彩小秘 · 投注确认"
+        orderRequest()
         initSubview()
         setEmpty(title: "暂无可选赛事", tableView)
         setRightButtonItem()
-        //selectPlays = Set<FootballPlayListModel>()
         
     }
     override func viewDidLayoutSubviews() {
@@ -291,7 +289,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         guard self.canPush == true else {
             showHUD(message: self.showMsg)
             return }
-        let requestModel = getRequestModel(betType: self.playType, times: self.times, bonusId: "", homeData: self.homeData)
+        let requestModel = getRequestModel(betType: self.betType, times: self.times, bonusId: "", homeData: self.homeData)
         
         let payment = PaymentViewController()
         payment.requestModel = requestModel
@@ -343,7 +341,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         }
         
 
-        self.playType = str
+        self.betType = str
         orderRequest()
         
         for info in playList {
