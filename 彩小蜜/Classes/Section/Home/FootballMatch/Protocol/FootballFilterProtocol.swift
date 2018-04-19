@@ -83,64 +83,84 @@ extension FootballFilterPro {
         
         for play in playList {
             
-            let spf = play.matchPlays[1]
-            let rangSpf = play.matchPlays[0]
-            let score = play.matchPlays[2]
-            let total = play.matchPlays[3]
-            let ban = play.matchPlays[4]
+//            let spf = play.matchPlays[1]
+//            let rangSpf = play.matchPlays[0]
+//            let score = play.matchPlays[2]
+//            let total = play.matchPlays[3]
+//            let ban = play.matchPlays[4]
             
-            if spf.homeCell.isSelected || spf.flatCell.isSelected || spf.visitingCell.isSelected {
-                if spf.single == false {
-                    allSin = false
-                    break
+            for match in play.matchPlays {
+                if match.homeCell != nil {
+                    if match.homeCell.isSelected || match.flatCell.isSelected || match.visitingCell.isSelected {
+                        if match.single == false {
+                            allSin = false
+                            break
+                        }
+                    }
+                }
+                
+                if match.homeCell != nil {
+                    if match.homeCell.isSelected || match.flatCell.isSelected || match.visitingCell.isSelected {
+                        if match.single == false {
+                            allSin = false
+                            break
+                        }
+                    }
+                }
+                
+                
+                
+                var scoreSin = false
+                
+                if match.homeCell != nil && match.homeCell.cellSons != nil {
+                    for cell in match.homeCell.cellSons {
+                        if cell.isSelected {
+                            scoreSin = true
+                            break
+                        }
+                    }
+                    for cell in match.flatCell.cellSons {
+                        if cell.isSelected {
+                            scoreSin = true
+                            break
+                        }
+                    }
+                    for cell in match.visitingCell.cellSons {
+                        if cell.isSelected {
+                            scoreSin = true
+                            break
+                        }
+                    }
+                }
+                
+                if match.matchCells != nil {
+                    for cell in match.matchCells {
+                        if cell.isSelected {
+                            scoreSin = true
+                            break
+                        }
+                    }
+                }
+                if match.matchCells != nil {
+                    for cell in match.matchCells {
+                        if cell.isSelected {
+                            scoreSin = true
+                            break
+                        }
+                    }
+                }
+                
+                
+                
+                allSin = scoreSin
+                
+                if allSin == false {
+                    return allSin
                 }
             }
             
-            if rangSpf.homeCell.isSelected || rangSpf.flatCell.isSelected || rangSpf.visitingCell.isSelected {
-                if rangSpf.single == false {
-                    allSin = false
-                    break
-                }
-            }
             
-            var scoreSin = false
-            for cell in score.homeCell.cellSons {
-                if cell.isSelected {
-                    scoreSin = true
-                    break
-                }
-            }
             
-            for cell in score.flatCell.cellSons {
-                if cell.isSelected {
-                    scoreSin = true
-                    break
-                }
-            }
-            for cell in score.visitingCell.cellSons {
-                if cell.isSelected {
-                    scoreSin = true
-                    break
-                }
-            }
-            for cell in total.matchCells {
-                if cell.isSelected {
-                    scoreSin = true
-                    break
-                }
-            }
-            for cell in ban.matchCells {
-                if cell.isSelected {
-                    scoreSin = true
-                    break
-                }
-            }
-            
-            allSin = scoreSin
-            
-            if allSin == false {
-                return allSin
-            }
             
         }
         return allSin
