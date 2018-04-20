@@ -50,17 +50,17 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
                 
                 var betCells = [FootballPlayCellModel]()
                 
-                if matchPlay.homeCell != nil, matchPlay.homeCell.isSelected {
+                if matchPlay.isShow, matchPlay.homeCell != nil, matchPlay.homeCell.isSelected {
                     betCells.append(matchPlay.homeCell)
                 }
-                if matchPlay.flatCell != nil, matchPlay.flatCell.isSelected {
+                if matchPlay.isShow, matchPlay.flatCell != nil, matchPlay.flatCell.isSelected {
                     betCells.append(matchPlay.flatCell)
                 }
-                if matchPlay.visitingCell != nil, matchPlay.visitingCell.isSelected {
+                if matchPlay.isShow, matchPlay.visitingCell != nil, matchPlay.visitingCell.isSelected {
                     betCells.append(matchPlay.visitingCell)
                 }
                 
-                if matchPlay.homeCell != nil, matchPlay.homeCell.cellSons.isEmpty == false {
+                if matchPlay.isShow, matchPlay.homeCell != nil, matchPlay.homeCell.cellSons.isEmpty == false {
                     for cell in matchPlay.homeCell.cellSons {
                         if cell.isSelected == true {
                             let ce = FootballPlayCellModel()
@@ -72,7 +72,7 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
                     }
                 }
                 
-                if matchPlay.flatCell != nil, matchPlay.flatCell.cellSons.isEmpty == false {
+                if matchPlay.isShow, matchPlay.flatCell != nil, matchPlay.flatCell.cellSons.isEmpty == false {
                     for cell in matchPlay.flatCell.cellSons {
                         if cell.isSelected == true {
                             let ce = FootballPlayCellModel()
@@ -84,7 +84,7 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
                     }
                 }
                 
-                if matchPlay.visitingCell != nil, matchPlay.visitingCell.cellSons.isEmpty == false {
+                if matchPlay.isShow, matchPlay.visitingCell != nil, matchPlay.visitingCell.cellSons.isEmpty == false {
                     for cell in matchPlay.visitingCell.cellSons {
                         if cell.isSelected == true {
                             let ce = FootballPlayCellModel()
@@ -96,7 +96,7 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
                     }
                 }
                 
-                if matchPlay.matchCells.isEmpty == false {
+                if matchPlay.isShow, matchPlay.matchCells.isEmpty == false {
                     for cell in matchPlay.matchCells {
                         if cell.isSelected == true {
                             betCells.append(cell)
