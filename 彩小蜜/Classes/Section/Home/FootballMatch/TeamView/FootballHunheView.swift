@@ -23,6 +23,7 @@ class FootballHunheView: UIView {
             case .胜平负:
                 guard matchInfo.isShow == true else {
                     changeButUserEnabled(enable: false)
+                    
                     return }
                 
                 changeButUserEnabled(enable: true)
@@ -166,6 +167,10 @@ class FootballHunheView: UIView {
             homeBut.isUserInteractionEnabled = false
             drawBut.isUserInteractionEnabled = false
             awayBut.isUserInteractionEnabled = false
+            homeBut.setTitle("未开售", for: .normal)
+            drawBut.setTitle("未开售", for: .normal)
+            awayBut.setTitle("未开售", for: .normal)
+            changeViewBorderColor(single: false)
         }
     }
     

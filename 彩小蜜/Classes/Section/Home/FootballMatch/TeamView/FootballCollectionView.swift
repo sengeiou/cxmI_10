@@ -163,6 +163,9 @@ class FootballCollectionView: UIView , UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard cells[indexPath.row].cellName != "未开售" else { return }
+        
         cells[indexPath.row].isSelected = !cells[indexPath.row].isSelected
         collectionView.reloadItems(at: [indexPath])
         
@@ -199,6 +202,7 @@ class FootballCollectionView: UIView , UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        guard cells[indexPath.row].cellName != "未开售" else { return }
         cells[indexPath.row].isSelected = !cells[indexPath.row].isSelected
         collectionView.reloadItems(at: [indexPath])
 //        switch scoreType {

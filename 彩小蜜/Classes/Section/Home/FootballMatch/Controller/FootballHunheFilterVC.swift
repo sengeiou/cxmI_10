@@ -32,6 +32,20 @@ class FootballHunheFilterVC: BasePopViewController, BottomViewDelegate, Football
                         rangSPFTitlelb.text = "让\n球\n+\(teamInfo.matchPlays[0].fixedOdds!)"
                     }
                 }else if match.playType == "2" {
+                    
+                    guard match.isShow == true else {
+                        var spfArr = [FootballPlayCellModel]()
+                        match.homeCell = getDefaultCell()
+                        match.flatCell = getDefaultCell()
+                        match.visitingCell = getDefaultCell()
+                        
+                        spfArr.append(match.homeCell)
+                        spfArr.append(match.flatCell)
+                        spfArr.append(match.visitingCell)
+                        SPFView.cells = spfArr
+                        //oldSPFSelectedCells = spfArr.map{ $0.copy() as! FootballPlayCellModel }
+                        continue }
+                    
                     var spfArr = [FootballPlayCellModel]()
                     spfArr.append(match.homeCell)
                     spfArr.append(match.flatCell)
@@ -40,6 +54,7 @@ class FootballHunheFilterVC: BasePopViewController, BottomViewDelegate, Football
                     oldSPFSelectedCells = spfArr.map{ $0.copy() as! FootballPlayCellModel }
                 }
                 else if match.playType == "3" {
+                    guard match.isShow == true else { continue }
                     scoreHomeView.cells = match.homeCell.cellSons
                     scoreFlatView.cells = match.flatCell.cellSons
                     scoreVisiView.cells = match.visitingCell.cellSons
@@ -49,9 +64,11 @@ class FootballHunheFilterVC: BasePopViewController, BottomViewDelegate, Football
                     oldVisiSelectedCells = match.visitingCell.cellSons.map{ $0.copy() as! FootballPlayCellModel }
                 }
                 else if match.playType == "4" {
+                    guard match.isShow == true else { continue }
                     totalView.cells = match.matchCells
                     oldTotalSelectedCells = match.matchCells.map{ $0.copy() as! FootballPlayCellModel }
                 }else if match.playType == "5" {
+                    guard match.isShow == true else { continue }
                     banquanView.cells = match.matchCells
                     oldBanSelectedCells = match.matchCells.map{ $0.copy() as! FootballPlayCellModel }
                 }
@@ -96,6 +113,13 @@ class FootballHunheFilterVC: BasePopViewController, BottomViewDelegate, Football
             
             selectedCells = teamInfo.selectedHunhe
         }
+    }
+    
+    private func getDefaultCell() -> FootballPlayCellModel {
+        let cell = FootballPlayCellModel()
+        cell.cellName = "未开售"
+
+        return cell
     }
     
     public var selectedScore : Selected!
