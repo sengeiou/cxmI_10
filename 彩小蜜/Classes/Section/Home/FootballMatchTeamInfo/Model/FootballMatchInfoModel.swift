@@ -33,7 +33,7 @@ struct FootballMatchInfoModel: HandyJSON {
     /// 欧赔
     var leagueMatchEuropes: [MatchEuropeModel]!
     /// 大小球
-    
+    var leagueMatchDaoxiaos: [MatchDaxiaoqModel]!
     /// 赛事信息
     var matchInfo : MatchInfoModel!
     
@@ -143,6 +143,28 @@ struct MatchEuropeModel: HandyJSON {
     /// 最新概率胜
     var winRatio: String!
 }
+
+struct MatchDaxiaoqModel : HandyJSON {
+    var changciId: String!
+    var comName: String!
+    var daoxiaoId: String!
+    var drawChange: String!
+    var initDraw: String!
+    var initLose: String!
+    var initTime: String!
+    var initWin: String!
+    var loseChange: String!
+    var matchDay: String!
+    var orderNum: String!
+    //var playList:[]!
+    var realDraw: String!
+    var realLose: String!
+    var realTime: String!
+    var realWin: String!
+    var winChange: String!
+    
+}
+
 struct MatchInfoModel: HandyJSON {
     var aOdds: String!
     

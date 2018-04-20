@@ -167,7 +167,8 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
                 guard self.matchInfoModel.leagueMatchAsias.isEmpty == false else { return 1 }
                 return self.matchInfoModel.leagueMatchAsias.count + 1
             case .大小球:
-                return 5
+                guard self.matchInfoModel.leagueMatchDaoxiaos.isEmpty == false else { return 1 }
+                return self.matchInfoModel.leagueMatchDaoxiaos.count + 1
             default : return 1
             }
         }else {
@@ -273,7 +274,7 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
         case .亚盘:
             cell.asiaInfo = self.matchInfoModel.leagueMatchAsias[indexPath.row - 1]
         case .大小球:
-            break
+            cell.daxiaoInfo = self.matchInfoModel.leagueMatchDaoxiaos[indexPath.row - 1]
         default : break
         }
         return cell

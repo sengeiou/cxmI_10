@@ -104,6 +104,46 @@ class FootballOddsCell: UITableViewCell {
         }
     }
     /// 大小球
+    public var daxiaoInfo : MatchDaxiaoqModel! {
+        didSet{
+            company.text = daxiaoInfo.comName
+            //flatlb.text = "\(daxiaoInfo.initRule!)\n\(daxiaoInfo.realRule!)"
+            
+            
+            var homeColor = Color505050
+            var homeUp = ""
+            var visiColor = Color505050
+            var visiUp = ""
+            if asiaInfo.odds1Change == "1" {
+                homeColor = ColorEA5504
+                homeUp = "↑"
+            }else if asiaInfo.odds1Change == "2" {
+                homeColor = Color44AE35
+                homeUp = "↓"
+            }
+            
+            if asiaInfo.odds2Change == "1" {
+                visiColor = ColorEA5504
+                visiUp = "↑"
+            }else if asiaInfo.odds2Change == "2" {
+                visiColor = Color44AE35
+                visiUp = "↓"
+            }
+            
+            let homeMuAtt = NSMutableAttributedString(string: "\(asiaInfo.initOdds1!)\n")
+            let homeAtt = NSAttributedString(string: "\(asiaInfo.realOdds1!)\(homeUp)", attributes: [NSAttributedStringKey.foregroundColor: homeColor])
+            homeMuAtt.append(homeAtt)
+            
+            let visiMuAtt = NSMutableAttributedString(string: "\(asiaInfo.initOdds2!)\n")
+            let visiAtt = NSAttributedString(string: "\(asiaInfo.realOdds2!)\(visiUp)", attributes: [NSAttributedStringKey.foregroundColor: visiColor])
+            visiMuAtt.append(visiAtt)
+            
+            homelb.attributedText = homeMuAtt
+            visilb.attributedText = visiMuAtt
+        }
+    }
+    
+    
     
     public var homelb : UILabel!
     public var flatlb : UILabel!
