@@ -57,6 +57,9 @@
 		11A25C522080BF2000085C58 /* FootballHunheView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A25C512080BF2000085C58 /* FootballHunheView.swift */; };
 		11A25C542080C4B500085C58 /* TopTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A25C532080C4B500085C58 /* TopTitleView.swift */; };
 		11A555EC20805D96004641AA /* FootballTwoOneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A555EB20805D96004641AA /* FootballTwoOneView.swift */; };
+		11D9D9DE2089CB3000F78FCF /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D9D9DD2089CB3000F78FCF /* ShareViewController.swift */; };
+		11D9D9E02089CD2500F78FCF /* NewsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D9D9DF2089CD2500F78FCF /* NewsDetailViewController.swift */; };
+		11D9D9E62089D6A200F78FCF /* NewsDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D9D9E52089D6A200F78FCF /* NewsDetailCell.swift */; };
 		11EB8EE2207B6D9B00AFC9C1 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EB8EE1207B6D9B00AFC9C1 /* PaymentViewController.swift */; };
 		11EB8EE4207B6E8800AFC9C1 /* PaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EB8EE3207B6E8800AFC9C1 /* PaymentCell.swift */; };
 		11EB8EE6207B791500AFC9C1 /* PaymentMethodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EB8EE5207B791500AFC9C1 /* PaymentMethodCell.swift */; };
@@ -297,6 +300,9 @@
 		11A25C512080BF2000085C58 /* FootballHunheView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballHunheView.swift; sourceTree = "<group>"; };
 		11A25C532080C4B500085C58 /* TopTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTitleView.swift; sourceTree = "<group>"; };
 		11A555EB20805D96004641AA /* FootballTwoOneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballTwoOneView.swift; sourceTree = "<group>"; };
+		11D9D9DD2089CB3000F78FCF /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		11D9D9DF2089CD2500F78FCF /* NewsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailViewController.swift; sourceTree = "<group>"; };
+		11D9D9E52089D6A200F78FCF /* NewsDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailCell.swift; sourceTree = "<group>"; };
 		11EB8EE1207B6D9B00AFC9C1 /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		11EB8EE3207B6E8800AFC9C1 /* PaymentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentCell.swift; sourceTree = "<group>"; };
 		11EB8EE5207B791500AFC9C1 /* PaymentMethodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodCell.swift; sourceTree = "<group>"; };
@@ -565,6 +571,7 @@
 				113B9CCC2087201E006AE3F8 /* NewsOnePicCell.swift */,
 				113B9CCE2087204A006AE3F8 /* NewsThreePicCell.swift */,
 				113B9CD020872226006AE3F8 /* NewsBottomView.swift */,
+				11D9D9E52089D6A200F78FCF /* NewsDetailCell.swift */,
 			);
 			path = NewsView;
 			sourceTree = "<group>";
@@ -1180,6 +1187,7 @@
 			children = (
 				E5A2644D205B742B00EE6491 /* HomeViewController.swift */,
 				E55016F2207208A80056AB1F /* HomeWebViewController.swift */,
+				11D9D9DF2089CD2500F78FCF /* NewsDetailViewController.swift */,
 				113B9CD220877849006AE3F8 /* rich.txt */,
 			);
 			path = Controller;
@@ -1327,6 +1335,7 @@
 		E57375F82046B20F00148622 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				11D9D9DD2089CB3000F78FCF /* ShareViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1966,6 +1975,7 @@
 				11691808207DB82E00C8A287 /* CouponFilterCell.swift in Sources */,
 				E58B57B8205634250025E2F1 /* BankCardFooterView.swift in Sources */,
 				E503F5C0207A11B3006D4A0B /* FootballRequestModel.swift in Sources */,
+				11D9D9E02089CD2500F78FCF /* NewsDetailViewController.swift in Sources */,
 				E5973DDE204D152F006461CE /* BaseViewController.swift in Sources */,
 				E59CB3DD205BA1650086DD0E /* HomeSportLotteryCell.swift in Sources */,
 				E50B9075205231C800417BFE /* RechargeFooterView.swift in Sources */,
@@ -2067,6 +2077,7 @@
 				E550D8A120733A0F002DDE23 /* FootballOrder2-1Cell.swift in Sources */,
 				E5103254206500A800A0156C /* PurchaseRecordVC.swift in Sources */,
 				E53739772057B9340087E4E6 /* extension+UserDefaults.swift in Sources */,
+				11D9D9E62089D6A200F78FCF /* NewsDetailCell.swift in Sources */,
 				1169180A207DBA8B00C8A287 /* PaymentResultModel.swift in Sources */,
 				E56CE80E206A22240090A1B5 /* WithdrawalProgressCell.swift in Sources */,
 				E5973E20204E34A3006461CE /* FontConstraint.swift in Sources */,
@@ -2135,6 +2146,7 @@
 				E5786FB6206DE87E0045F7F5 /* FootballSPFCell.swift in Sources */,
 				E514DDE02052A37E00274854 /* DataModel.swift in Sources */,
 				E503F5C2207A15A7006D4A0B /* FootballOrderProtocol.swift in Sources */,
+				11D9D9DE2089CB3000F78FCF /* ShareViewController.swift in Sources */,
 				E537397420576FEE0087E4E6 /* APIManager.swift in Sources */,
 				E5883F522068DFBF00CB3A46 /* OrderSchemeTitleCell.swift in Sources */,
 				1144910620859B29009F1D09 /* FootballAnalysisMatchView.swift in Sources */,

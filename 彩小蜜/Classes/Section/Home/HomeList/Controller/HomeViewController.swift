@@ -141,9 +141,9 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
             web.titleStr = activity.actTitle
             pushViewController(vc: web)
         case 3:
-            let web = HomeWebViewController()
+            let web = NewsDetailViewController()
             //web.urlStr = activity.actUrl
-            web.titleStr = "activity.actTitle"
+            //web.titleStr = "activity.actTitle"
             pushViewController(vc: web)
         default: break
         }
