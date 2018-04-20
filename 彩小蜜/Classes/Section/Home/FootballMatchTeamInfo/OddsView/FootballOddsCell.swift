@@ -107,38 +107,53 @@ class FootballOddsCell: UITableViewCell {
     public var daxiaoInfo : MatchDaxiaoqModel! {
         didSet{
             company.text = daxiaoInfo.comName
-            //flatlb.text = "\(daxiaoInfo.initRule!)\n\(daxiaoInfo.realRule!)"
-            
             
             var homeColor = Color505050
             var homeUp = ""
             var visiColor = Color505050
             var visiUp = ""
-            if asiaInfo.odds1Change == "1" {
+            
+            var flatColor = Color505050
+            var flatUp = ""
+            
+            if daxiaoInfo.winChange == "1" {
                 homeColor = ColorEA5504
                 homeUp = "↑"
-            }else if asiaInfo.odds1Change == "2" {
+            }else if daxiaoInfo.winChange == "2" {
                 homeColor = Color44AE35
                 homeUp = "↓"
             }
             
-            if asiaInfo.odds2Change == "1" {
+            if daxiaoInfo.drawChange == "1" {
+                flatColor = ColorEA5504
+                flatUp = "↑"
+            }else if daxiaoInfo.drawChange == "2" {
+                flatColor = Color44AE35
+                flatUp = "↓"
+            }
+            
+            if daxiaoInfo.loseChange == "1" {
                 visiColor = ColorEA5504
                 visiUp = "↑"
-            }else if asiaInfo.odds2Change == "2" {
+            }else if daxiaoInfo.loseChange == "2" {
                 visiColor = Color44AE35
                 visiUp = "↓"
             }
             
-            let homeMuAtt = NSMutableAttributedString(string: "\(asiaInfo.initOdds1!)\n")
-            let homeAtt = NSAttributedString(string: "\(asiaInfo.realOdds1!)\(homeUp)", attributes: [NSAttributedStringKey.foregroundColor: homeColor])
+            let homeMuAtt = NSMutableAttributedString(string: "\(daxiaoInfo.initWin!)\n")
+            let homeAtt = NSAttributedString(string: "\(daxiaoInfo.realWin!)\(homeUp)", attributes: [NSAttributedStringKey.foregroundColor: homeColor])
             homeMuAtt.append(homeAtt)
             
-            let visiMuAtt = NSMutableAttributedString(string: "\(asiaInfo.initOdds2!)\n")
-            let visiAtt = NSAttributedString(string: "\(asiaInfo.realOdds2!)\(visiUp)", attributes: [NSAttributedStringKey.foregroundColor: visiColor])
+            let flatMuAtt = NSMutableAttributedString(string: "\(daxiaoInfo.initDraw!)\n")
+            let flatAtt = NSAttributedString(string: "\(daxiaoInfo.realDraw!)\(flatUp)", attributes: [NSAttributedStringKey.foregroundColor: flatColor])
+            flatMuAtt.append(flatAtt)
+            
+            let visiMuAtt = NSMutableAttributedString(string: "\(daxiaoInfo.initLose!)\n")
+            let visiAtt = NSAttributedString(string: "\(daxiaoInfo.realLose!)\(visiUp)", attributes: [NSAttributedStringKey.foregroundColor: visiColor])
             visiMuAtt.append(visiAtt)
             
             homelb.attributedText = homeMuAtt
+            flatlb.attributedText = flatMuAtt
             visilb.attributedText = visiMuAtt
         }
     }

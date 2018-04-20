@@ -148,7 +148,7 @@ struct MatchDaxiaoqModel : HandyJSON {
     var changciId: String!
     var comName: String!
     var daoxiaoId: String!
-    var drawChange: String!
+    
     var initDraw: String!
     var initLose: String!
     var initTime: String!
@@ -162,7 +162,7 @@ struct MatchDaxiaoqModel : HandyJSON {
     var realTime: String!
     var realWin: String!
     var winChange: String!
-    
+    var drawChange: String!
 }
 
 struct MatchInfoModel: HandyJSON {
