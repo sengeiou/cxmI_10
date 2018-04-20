@@ -156,6 +156,14 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         table.separatorStyle = .none
         table.register(FootballSectionHeader.self, forHeaderFooterViewReuseIdentifier: FootballSectionHeaderId)
         registerCell(table)
+        
+        if #available(iOS 11.0, *) {
+            
+        }else {
+            table.contentInset = UIEdgeInsets(top: -64, left: 0, bottom: 49, right: 0)
+            table.scrollIndicatorInsets = table.contentInset
+        }
+        
         return table
     }()
     private func registerCell(_ table: UITableView) {
@@ -188,6 +196,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         
         if header.isSpreading == true {
             let matchModel = matchList[section]
+        
             return matchModel.playList.count
         }else {
             return 0
@@ -218,6 +227,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         cell.teamView.delegate = self
         cell.delegate = self
         let matchModel = matchList[indexPath.section]
+        
         cell.playInfoModel = matchModel.playList[indexPath.row]
         
         return cell
@@ -547,6 +557,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     }
     func didDeSelectedHunHeView(view: FootballHunheView, teamInfo: FootballPlayListModel, index: IndexPath) {
         self.tableView.reloadData()
+        guard teamInfo.selectedHunhe.count == 0 else { return }
         selectPlays.remove(teamInfo)
     }
     

@@ -67,8 +67,6 @@ class OrderSchemeVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         table.register(OrderSchemeTitleCell.self, forCellReuseIdentifier: OrderSchemeTitleCellId)
         table.register(OrderSchemeCell.self, forCellReuseIdentifier: OrderSchemeCellId)
         
-        
-        
         return table
     }()
     
@@ -77,7 +75,7 @@ class OrderSchemeVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard self.orderSchemeInfo != nil else { return 0 }
+        guard self.orderSchemeInfo != nil && orderSchemeInfo.ticketSchemeDetailDTOs.isEmpty == false else { return 0 }
         return self.orderSchemeInfo.ticketSchemeDetailDTOs.count + 1
     }
     

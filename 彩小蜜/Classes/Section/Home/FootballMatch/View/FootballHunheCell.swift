@@ -34,7 +34,7 @@ class FootballHunheCell: UITableViewCell, DateProtocol {
                     if match.single == true {
                         typeIcon.isHidden = false
                     }
-                    
+
                     if match.fixedOdds < 0 {
                         rangTeamlb.backgroundColor = Color85C36b
                         rangTeamlb.text = "\(match.fixedOdds!)"
@@ -42,11 +42,13 @@ class FootballHunheCell: UITableViewCell, DateProtocol {
                         rangTeamlb.backgroundColor = ColorF6AD41
                         rangTeamlb.text = "+\(match.fixedOdds!)"
                     }
+                    rangTeamView.matchInfo = match
                 }
                 if match.playType == "2" {
                     if match.single == true {
                         typeIcon.isHidden = false
                     }
+                    teamView.matchInfo = match
                 }
             }
             

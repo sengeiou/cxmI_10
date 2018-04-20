@@ -49,12 +49,7 @@ class OrderSchemeTitleCell: UITableViewCell {
             make.left.equalTo(self.contentView).offset(leftSpacing)
             make.right.equalTo(self.contentView).offset(-rightSpacing)
         }
-//        numTitle.snp.makeConstraints { (make) in
-//            make.top.equalTo(line.snp.bottom).offset(10)
-//            make.bottom.equalTo(self.contentView)
-//            make.left.equalTo(self.contentView).offset(26)
-//            make.width.equalTo(OrderDetailTitleWidth - 20)
-//        }
+
         contentTitle.snp.makeConstraints { (make) in
             make.top.equalTo(line.snp.bottom).offset(10)
             make.bottom.equalTo(self.contentView)
@@ -62,18 +57,20 @@ class OrderSchemeTitleCell: UITableViewCell {
             make.right.equalTo(passTitle.snp.left).offset(-1)
         }
         passTitle.snp.makeConstraints { (make) in
-            make.top.height.equalTo(contentTitle)
+            make.centerY.equalTo(contentTitle.snp.centerY)
             make.width.equalTo(OrderDetailTitleWidth)
-            make.right.equalTo(multipleTitle.snp.left).offset(-1)
+            make.right.equalTo(multipleTitle.snp.left).offset(-15)
         }
         multipleTitle.snp.makeConstraints { (make) in
-            make.top.height.width.equalTo(passTitle)
-            //make.right.equalTo(self.contentView).offset(-26)
+            make.centerY.equalTo(contentTitle.snp.centerY)
+            make.height.width.equalTo(passTitle)
+            make.width.equalTo(OrderDetailTitleWidth - 14 )
+            make.right.equalTo(orderState.snp.left).offset(-5)
         }
         orderState.snp.makeConstraints { (make) in
             make.top.height.width.equalTo(passTitle)
             make.left.equalTo(multipleTitle.snp.right)
-            make.right.equalTo(self.contentView).offset(-26)
+            make.right.equalTo(self.contentView).offset(-26 * defaultScale)
         }
     }
     

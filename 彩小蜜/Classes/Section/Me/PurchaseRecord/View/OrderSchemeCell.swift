@@ -40,7 +40,7 @@ class OrderSchemeCell: UITableViewCell {
     }
     
     private var line : UIImageView!
-    //private var numLB : UILabel!
+   
     private var contentLB: UILabel!
     private var passLB: UILabel!
     private var multipleLB: UILabel!
@@ -64,8 +64,6 @@ class OrderSchemeCell: UITableViewCell {
         line = UIImageView()
         line.image = UIImage(named:"line")
         
-//        numLB = getDetailLB()
-//        numLB.textAlignment = .center
         contentLB = getDetailLB()
         contentLB.numberOfLines = 0
         
@@ -89,12 +87,7 @@ class OrderSchemeCell: UITableViewCell {
             make.height.equalTo(SeparationLineHeight)
         }
         
-//        numLB.snp.makeConstraints { (make) in
-//            make.centerY.equalTo(contentLB.snp.centerY)
-//            make.width.equalTo(OrderDetailTitleWidth - 20)
-//            make.left.equalTo(self.contentView).offset(leftSpacing)
-//            make.height.equalTo(20)
-//        }
+
         contentLB.snp.makeConstraints { (make) in
             make.top.equalTo(line.snp.bottom).offset(10)
             make.left.equalTo(self.contentView).offset(leftSpacing)
@@ -110,12 +103,12 @@ class OrderSchemeCell: UITableViewCell {
             make.centerY.equalTo(contentLB.snp.centerY)
             make.height.width.equalTo(passLB)
             make.width.equalTo(OrderDetailTitleWidth - 14 )
-            make.right.equalTo(self.contentView).offset(-33)
+            make.right.equalTo(orderState.snp.left).offset(-5)
         }
         orderState.snp.makeConstraints { (make) in
             make.top.height.width.equalTo(passLB)
             make.left.equalTo(multipleLB.snp.right)
-            make.right.equalTo(self.contentView).offset(-rightSpacing)
+            make.right.equalTo(self.contentView).offset(-26 * defaultScale)
         }
     }
     

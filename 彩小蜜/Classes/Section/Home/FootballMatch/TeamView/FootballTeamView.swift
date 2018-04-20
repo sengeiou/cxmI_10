@@ -32,6 +32,7 @@ class FootballTeamView: UIView , AlertPro{
         didSet{
             
             let matchPlay = teamInfo.matchPlays[0]
+            guard matchPlay.homeCell != nil else { return }
             
             homeName.text = teamInfo.homeTeamAbbr
             homeOdds.text = matchPlay.homeCell.cellName + matchPlay.homeCell.cellOdds
@@ -222,6 +223,7 @@ class FootballTeamView: UIView , AlertPro{
         sender.isSelected = !sender.isSelected
         selectItem(sender.isSelected)
         let matchPlay = teamInfo.matchPlays[0]
+        guard matchPlay.isShow == true else { return }
         matchPlay.homeCell.isSelected = sender.isSelected
         homeIsSelected(sender.isSelected)
         guard delegate != nil else { return }
@@ -231,6 +233,7 @@ class FootballTeamView: UIView , AlertPro{
         sender.isSelected = !sender.isSelected
         selectItem(sender.isSelected)
         let matchPlay = teamInfo.matchPlays[0]
+        guard matchPlay.isShow == true else { return }
         matchPlay.flatCell.isSelected = sender.isSelected
         drawIsSelected(sender.isSelected)
         guard delegate != nil else { return }
@@ -240,6 +243,7 @@ class FootballTeamView: UIView , AlertPro{
         sender.isSelected = !sender.isSelected
         selectItem(sender.isSelected)
         let matchPlay = teamInfo.matchPlays[0]
+        guard matchPlay.isShow == true else { return }
         matchPlay.visitingCell.isSelected = sender.isSelected
         awayIsSelected(sender.isSelected)
         guard delegate != nil else { return }
@@ -288,6 +292,7 @@ class FootballTeamView: UIView , AlertPro{
         
         if isSelected == true {
             let matchPlay = teamInfo.matchPlays[0]
+            guard matchPlay.homeCell != nil else { return }
             guard matchPlay.homeCell.isSelected == false,
                 matchPlay.flatCell.isSelected == false,
                 matchPlay.visitingCell.isSelected == false else { return }

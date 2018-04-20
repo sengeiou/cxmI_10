@@ -12,41 +12,87 @@ class FootballHunheFilterVC: BasePopViewController, BottomViewDelegate, Football
 
     public var teamInfo : FootballPlayListModel! {
         didSet{
-            var spfArr = [FootballPlayCellModel]()
-            spfArr.append(teamInfo.matchPlays[1].homeCell)
-            spfArr.append(teamInfo.matchPlays[1].flatCell)
-            spfArr.append(teamInfo.matchPlays[1].visitingCell)
             
-            var rangArr = [FootballPlayCellModel]()
-            rangArr.append(teamInfo.matchPlays[0].homeCell)
-            rangArr.append(teamInfo.matchPlays[0].flatCell)
-            rangArr.append(teamInfo.matchPlays[0].visitingCell)
-            SPFView.cells = spfArr
-            rangSPFView.cells = rangArr
-            scoreHomeView.cells = teamInfo.matchPlays[2].homeCell.cellSons
-            scoreFlatView.cells = teamInfo.matchPlays[2].flatCell.cellSons
-            scoreVisiView.cells = teamInfo.matchPlays[2].visitingCell.cellSons
-            
-            totalView.cells = teamInfo.matchPlays[3].matchCells
-            banquanView.cells = teamInfo.matchPlays[4].matchCells
-            
-            oldSPFSelectedCells = spfArr.map{ $0.copy() as! FootballPlayCellModel }
-            oldRangSPFSelectedCells = rangArr.map{ $0.copy() as! FootballPlayCellModel }
-            
-            oldHomeSelectedCells = teamInfo.matchPlays[2].homeCell.cellSons.map{ $0.copy() as! FootballPlayCellModel }
-            oldFlatSelectedCells = teamInfo.matchPlays[2].flatCell.cellSons.map{ $0.copy() as! FootballPlayCellModel }
-            oldVisiSelectedCells = teamInfo.matchPlays[2].visitingCell.cellSons.map{ $0.copy() as! FootballPlayCellModel }
-            
-            oldBanSelectedCells = teamInfo.matchPlays[4].matchCells.map{ $0.copy() as! FootballPlayCellModel }
-            oldTotalSelectedCells = teamInfo.matchPlays[3].matchCells.map{ $0.copy() as! FootballPlayCellModel }
-            
-            
-            
-            if teamInfo.matchPlays[0].fixedOdds < 0 {
-                rangSPFTitlelb.text = "让\n球\n\(teamInfo.matchPlays[0].fixedOdds!)"
-            }else {
-                rangSPFTitlelb.text = "让\n球\n+\(teamInfo.matchPlays[0].fixedOdds!)"
+            for match in teamInfo.matchPlays {
+                if match.playType == "1" {
+                    
+                    guard match.isShow == true else { continue }
+                    
+                    var rangArr = [FootballPlayCellModel]()
+                    rangArr.append(match.homeCell)
+                    rangArr.append(match.flatCell)
+                    rangArr.append(match.visitingCell)
+                    rangSPFView.cells = rangArr
+                    
+                    oldRangSPFSelectedCells = rangArr.map{ $0.copy() as! FootballPlayCellModel }
+                    
+                    if teamInfo.matchPlays[0].fixedOdds < 0 {
+                        rangSPFTitlelb.text = "让\n球\n\(teamInfo.matchPlays[0].fixedOdds!)"
+                    }else {
+                        rangSPFTitlelb.text = "让\n球\n+\(teamInfo.matchPlays[0].fixedOdds!)"
+                    }
+                }else if match.playType == "2" {
+                    var spfArr = [FootballPlayCellModel]()
+                    spfArr.append(match.homeCell)
+                    spfArr.append(match.flatCell)
+                    spfArr.append(match.visitingCell)
+                    SPFView.cells = spfArr
+                    oldSPFSelectedCells = spfArr.map{ $0.copy() as! FootballPlayCellModel }
+                }
+                else if match.playType == "3" {
+                    scoreHomeView.cells = match.homeCell.cellSons
+                    scoreFlatView.cells = match.flatCell.cellSons
+                    scoreVisiView.cells = match.visitingCell.cellSons
+                    
+                    oldHomeSelectedCells = match.homeCell.cellSons.map{ $0.copy() as! FootballPlayCellModel }
+                    oldFlatSelectedCells = match.flatCell.cellSons.map{ $0.copy() as! FootballPlayCellModel }
+                    oldVisiSelectedCells = match.visitingCell.cellSons.map{ $0.copy() as! FootballPlayCellModel }
+                }
+                else if match.playType == "4" {
+                    totalView.cells = match.matchCells
+                    oldTotalSelectedCells = match.matchCells.map{ $0.copy() as! FootballPlayCellModel }
+                }else if match.playType == "5" {
+                    banquanView.cells = match.matchCells
+                    oldBanSelectedCells = match.matchCells.map{ $0.copy() as! FootballPlayCellModel }
+                }
             }
+            
+            
+//            var spfArr = [FootballPlayCellModel]()
+//            spfArr.append(teamInfo.matchPlays[1].homeCell)
+//            spfArr.append(teamInfo.matchPlays[1].flatCell)
+//            spfArr.append(teamInfo.matchPlays[1].visitingCell)
+//            
+//            var rangArr = [FootballPlayCellModel]()
+//            rangArr.append(teamInfo.matchPlays[0].homeCell)
+//            rangArr.append(teamInfo.matchPlays[0].flatCell)
+//            rangArr.append(teamInfo.matchPlays[0].visitingCell)
+//            SPFView.cells = spfArr
+//            rangSPFView.cells = rangArr
+//            scoreHomeView.cells = teamInfo.matchPlays[2].homeCell.cellSons
+//            scoreFlatView.cells = teamInfo.matchPlays[2].flatCell.cellSons
+//            scoreVisiView.cells = teamInfo.matchPlays[2].visitingCell.cellSons
+//            
+//            totalView.cells = teamInfo.matchPlays[3].matchCells
+//            banquanView.cells = teamInfo.matchPlays[4].matchCells
+//            
+//            oldSPFSelectedCells = spfArr.map{ $0.copy() as! FootballPlayCellModel }
+//            oldRangSPFSelectedCells = rangArr.map{ $0.copy() as! FootballPlayCellModel }
+//            
+//            oldHomeSelectedCells = teamInfo.matchPlays[2].homeCell.cellSons.map{ $0.copy() as! FootballPlayCellModel }
+//            oldFlatSelectedCells = teamInfo.matchPlays[2].flatCell.cellSons.map{ $0.copy() as! FootballPlayCellModel }
+//            oldVisiSelectedCells = teamInfo.matchPlays[2].visitingCell.cellSons.map{ $0.copy() as! FootballPlayCellModel }
+//            
+//            oldBanSelectedCells = teamInfo.matchPlays[4].matchCells.map{ $0.copy() as! FootballPlayCellModel }
+//            oldTotalSelectedCells = teamInfo.matchPlays[3].matchCells.map{ $0.copy() as! FootballPlayCellModel }
+//            
+//            
+//            
+//            if teamInfo.matchPlays[0].fixedOdds < 0 {
+//                rangSPFTitlelb.text = "让\n球\n\(teamInfo.matchPlays[0].fixedOdds!)"
+//            }else {
+//                rangSPFTitlelb.text = "让\n球\n+\(teamInfo.matchPlays[0].fixedOdds!)"
+//            }
             
             selectedCells = teamInfo.selectedHunhe
         }
@@ -285,30 +331,48 @@ class FootballHunheFilterVC: BasePopViewController, BottomViewDelegate, Football
         
         dismiss(animated: true, completion: nil)
         
-        for index in 0..<oldHomeSelectedCells.count {
-            self.teamInfo.matchPlays[2].homeCell.cellSons[index].isSelected = oldHomeSelectedCells[index].isSelected
-        }
-        for index in 0..<oldFlatSelectedCells.count {
-            self.teamInfo.matchPlays[2].flatCell.cellSons[index].isSelected = oldFlatSelectedCells[index].isSelected
-        }
-        for index in 0..<oldVisiSelectedCells.count {
-            self.teamInfo.matchPlays[2].visitingCell.cellSons[index].isSelected = oldVisiSelectedCells[index].isSelected
+        if oldHomeSelectedCells != nil {
+            for index in 0..<oldHomeSelectedCells.count {
+                self.teamInfo.matchPlays[2].homeCell.cellSons[index].isSelected = oldHomeSelectedCells[index].isSelected
+            }
         }
         
-        for index in 0..<oldBanSelectedCells.count {
-            self.teamInfo.matchPlays[4].matchCells[index].isSelected = oldBanSelectedCells[index].isSelected
+        if oldFlatSelectedCells != nil {
+            for index in 0..<oldFlatSelectedCells.count {
+                self.teamInfo.matchPlays[2].flatCell.cellSons[index].isSelected = oldFlatSelectedCells[index].isSelected
+            }
         }
         
-        for index in 0..<oldTotalSelectedCells.count {
-            self.teamInfo.matchPlays[3].matchCells[index].isSelected = oldTotalSelectedCells[index].isSelected
+        if oldVisiSelectedCells != nil {
+            for index in 0..<oldVisiSelectedCells.count {
+                self.teamInfo.matchPlays[2].visitingCell.cellSons[index].isSelected = oldVisiSelectedCells[index].isSelected
+            }
         }
         
-        for index in 0..<oldSPFSelectedCells.count {
-            SPFView.cells[index].isSelected = oldSPFSelectedCells[index].isSelected
+        if oldBanSelectedCells != nil {
+            for index in 0..<oldBanSelectedCells.count {
+                self.teamInfo.matchPlays[4].matchCells[index].isSelected = oldBanSelectedCells[index].isSelected
+            }
         }
-        for index in 0..<oldRangSPFSelectedCells.count {
-            rangSPFView.cells[index].isSelected = oldRangSPFSelectedCells[index].isSelected
+        
+        if oldTotalSelectedCells != nil {
+            for index in 0..<oldTotalSelectedCells.count {
+                self.teamInfo.matchPlays[3].matchCells[index].isSelected = oldTotalSelectedCells[index].isSelected
+            }
         }
+        
+        if oldSPFSelectedCells != nil {
+            for index in 0..<oldSPFSelectedCells.count {
+                SPFView.cells[index].isSelected = oldSPFSelectedCells[index].isSelected
+            }
+        }
+        
+        if oldRangSPFSelectedCells != nil {
+            for index in 0..<oldRangSPFSelectedCells.count {
+                rangSPFView.cells[index].isSelected = oldRangSPFSelectedCells[index].isSelected
+            }
+        }
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

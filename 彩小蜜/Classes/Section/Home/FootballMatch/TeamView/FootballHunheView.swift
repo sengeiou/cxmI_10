@@ -17,33 +17,68 @@ class FootballHunheView: UIView {
 
     public var matchType: FootballMatchType = .胜平负
     
+    public var matchInfo : FootballMatchPlay! {
+        didSet{
+            switch matchType {
+            case .胜平负:
+                guard matchInfo.isShow == true else {
+                    changeButUserEnabled(enable: false)
+                    return }
+                
+                changeButUserEnabled(enable: true)
+                setText(matchPlay: matchInfo)
+                changeViewBorderColor(single: matchInfo.single)
+                changeButState(but: homeBut, isSelected: matchInfo.homeCell.isSelected)
+                changeButState(but: drawBut, isSelected: matchInfo.flatCell.isSelected)
+                changeButState(but: awayBut, isSelected: matchInfo.visitingCell.isSelected)
+            case .让球胜平负:
+                guard matchInfo.isShow == true else {
+                    changeButUserEnabled(enable: false)
+                    return }
+                
+                changeButUserEnabled(enable: true)
+                
+                setText(matchPlay: matchInfo)
+                changeViewBorderColor(single: matchInfo.single)
+                changeButState(but: homeBut, isSelected: matchInfo.homeCell.isSelected)
+                changeButState(but: drawBut, isSelected: matchInfo.flatCell.isSelected)
+                changeButState(but: awayBut, isSelected: matchInfo.visitingCell.isSelected)
+                
+                matchInfo.homeCell.isRang = true
+                matchInfo.flatCell.isRang = true
+                matchInfo.visitingCell.isRang = true
+            default: break
+            }
+        }
+    }
+    
     public var teamInfo: FootballPlayListModel! {
         didSet{
             
-            for match in teamInfo.matchPlays {
-                if match.playType == "2" , match.homeCell != nil {
-                    //let matchPlay = teamInfo.matchPlays[1]
-                    setText(matchPlay: match)
-                    changeViewBorderColor(single: match.single)
-                    changeButState(but: homeBut, isSelected: match.homeCell.isSelected)
-                    changeButState(but: drawBut, isSelected: match.flatCell.isSelected)
-                    changeButState(but: awayBut, isSelected: match.visitingCell.isSelected)
-                }else if match.playType == "1" , match.homeCell != nil {
-                    setText(matchPlay: match)
-                    changeViewBorderColor(single: match.single)
-                    changeButState(but: homeBut, isSelected: match.homeCell.isSelected)
-                    changeButState(but: drawBut, isSelected: match.flatCell.isSelected)
-                    changeButState(but: awayBut, isSelected: match.visitingCell.isSelected)
-                    
-                    match.homeCell.isRang = true
-                    match.flatCell.isRang = true
-                    match.visitingCell.isRang = true
-                }
-                
-            }
-            
-            
-            
+//            for match in teamInfo.matchPlays {
+//                if match.playType == "2" , match.homeCell != nil {
+//                    //let matchPlay = teamInfo.matchPlays[1]
+//                    setText(matchPlay: match)
+//                    changeViewBorderColor(single: match.single)
+//                    changeButState(but: homeBut, isSelected: match.homeCell.isSelected)
+//                    changeButState(but: drawBut, isSelected: match.flatCell.isSelected)
+//                    changeButState(but: awayBut, isSelected: match.visitingCell.isSelected)
+//                }else if match.playType == "1" , match.homeCell != nil {
+//                    setText(matchPlay: match)
+//                    changeViewBorderColor(single: match.single)
+//                    changeButState(but: homeBut, isSelected: match.homeCell.isSelected)
+//                    changeButState(but: drawBut, isSelected: match.flatCell.isSelected)
+//                    changeButState(but: awayBut, isSelected: match.visitingCell.isSelected)
+//
+//                    match.homeCell.isRang = true
+//                    match.flatCell.isRang = true
+//                    match.visitingCell.isRang = true
+//                }
+//
+//            }
+//
+//
+//
 //            switch matchType {
 //            case .胜平负:
 //                guard teamInfo.matchPlays[1].playType == "2" else { break }
@@ -63,7 +98,7 @@ class FootballHunheView: UIView {
 //                changeButState(but: homeBut, isSelected: matchPlay.homeCell.isSelected)
 //                changeButState(but: drawBut, isSelected: matchPlay.flatCell.isSelected)
 //                changeButState(but: awayBut, isSelected: matchPlay.visitingCell.isSelected)
-//                
+//
 //                matchPlay.homeCell.isRang = true
 //                matchPlay.flatCell.isRang = true
 //                matchPlay.visitingCell.isRang = true
@@ -97,27 +132,43 @@ class FootballHunheView: UIView {
         changeButState(but: awayBut, isSelected: false)
         
         
-        switch matchType {
-        case .胜平负:
-            guard teamInfo.matchPlays[1].playType == "2" else { break }
-            guard teamInfo.matchPlays[1].homeCell != nil else { break }
-    
-            teamInfo.matchPlays[1].homeCell.isSelected = false
-            teamInfo.matchPlays[1].flatCell.isSelected = false
-            teamInfo.matchPlays[1].visitingCell.isSelected = false
-           
-        case .让球胜平负:
-            guard teamInfo.matchPlays[0].playType == "1" else { break }
-            guard teamInfo.matchPlays[0].homeCell != nil else { break }
-
-            teamInfo.matchPlays[0].homeCell.isSelected = false
-            teamInfo.matchPlays[0].flatCell.isSelected = false
-            teamInfo.matchPlays[0].visitingCell.isSelected = false
-            
-        default: break
-        }
+        matchInfo.homeCell.isSelected = false
+        matchInfo.flatCell.isSelected = false
+        matchInfo.visitingCell.isSelected = false
+        
+//        switch matchType {
+//        case .胜平负:
+//            guard teamInfo.matchPlays[1].playType == "2" else { break }
+//            guard teamInfo.matchPlays[1].homeCell != nil else { break }
+//    
+//            teamInfo.matchPlays[1].homeCell.isSelected = false
+//            teamInfo.matchPlays[1].flatCell.isSelected = false
+//            teamInfo.matchPlays[1].visitingCell.isSelected = false
+//
+//        case .让球胜平负:
+//            guard teamInfo.matchPlays[0].playType == "1" else { break }
+//            guard teamInfo.matchPlays[0].homeCell != nil else { break }
+//
+//            teamInfo.matchPlays[0].homeCell.isSelected = false
+//            teamInfo.matchPlays[0].flatCell.isSelected = false
+//            teamInfo.matchPlays[0].visitingCell.isSelected = false
+//
+//        default: break
+//        }
         
     }
+    private func changeButUserEnabled(enable: Bool) {
+        if enable {
+            homeBut.isUserInteractionEnabled = true
+            drawBut.isUserInteractionEnabled = true
+            awayBut.isUserInteractionEnabled = true
+        }else {
+            homeBut.isUserInteractionEnabled = false
+            drawBut.isUserInteractionEnabled = false
+            awayBut.isUserInteractionEnabled = false
+        }
+    }
+    
     private func changeButState(but: UIButton, isSelected: Bool) {
         if isSelected {
             but.setTitleColor(ColorFFFFFF, for: .normal)
@@ -273,14 +324,24 @@ class FootballHunheView: UIView {
         default: break
         }
         
-        guard teamInfo.matchPlays[index].homeCell != nil else { return }
-    
+        guard matchInfo.homeCell != nil else { return }
+        
         if add {
-            teamInfo.selectedHunhe.append(teamInfo.matchPlays[index].homeCell)
+            teamInfo.selectedHunhe.append(matchInfo.homeCell)
         }else {
-            teamInfo.selectedHunhe.remove(teamInfo.matchPlays[index].homeCell)
+            teamInfo.selectedHunhe.remove(matchInfo.homeCell)
         }
-        teamInfo.matchPlays[index].homeCell.isSelected = add
+        matchInfo.homeCell.isSelected = add
+        
+        
+//        guard teamInfo.matchPlays[index].homeCell != nil else { return }
+//
+//        if add {
+//            teamInfo.selectedHunhe.append(teamInfo.matchPlays[index].homeCell)
+//        }else {
+//            teamInfo.selectedHunhe.remove(teamInfo.matchPlays[index].homeCell)
+//        }
+//        teamInfo.matchPlays[index].homeCell.isSelected = add
     }
     
     private func addFlatCell(_ add : Bool) {
@@ -292,14 +353,14 @@ class FootballHunheView: UIView {
             index = 0
         default: break
         }
-        guard teamInfo.matchPlays[index].flatCell != nil else { return }
+        guard matchInfo.flatCell != nil else { return }
         
         if add {
-            teamInfo.selectedHunhe.append(teamInfo.matchPlays[index].flatCell)
+            teamInfo.selectedHunhe.append(matchInfo.flatCell)
         }else {
-            teamInfo.selectedHunhe.remove(teamInfo.matchPlays[index].flatCell)
+            teamInfo.selectedHunhe.remove(matchInfo.flatCell)
         }
-        teamInfo.matchPlays[index].flatCell.isSelected = add
+        matchInfo.flatCell.isSelected = add
     }
     private func addVisiCell(_ add : Bool) {
         var index = 0
@@ -311,14 +372,14 @@ class FootballHunheView: UIView {
         default: break
         }
       
-        guard teamInfo.matchPlays[index].visitingCell != nil else { return }
+        guard matchInfo.visitingCell != nil else { return }
         
         if add {
-            teamInfo.selectedHunhe.append(teamInfo.matchPlays[index].visitingCell)
+            teamInfo.selectedHunhe.append(matchInfo.visitingCell)
         }else {
-            teamInfo.selectedHunhe.remove(teamInfo.matchPlays[index].visitingCell)
+            teamInfo.selectedHunhe.remove(matchInfo.visitingCell)
         }
-        teamInfo.matchPlays[index].visitingCell.isSelected = add
+        matchInfo.visitingCell.isSelected = add
     }
     
     

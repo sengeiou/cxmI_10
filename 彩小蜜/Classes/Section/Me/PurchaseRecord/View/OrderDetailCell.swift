@@ -35,7 +35,7 @@ class OrderDetailCell: UITableViewCell {
                 }
                 resultStr += result.matchResult + "\n"
             }
-            
+            guard resultStr != "" else { return}
             resultStr.removeLast()
             
             

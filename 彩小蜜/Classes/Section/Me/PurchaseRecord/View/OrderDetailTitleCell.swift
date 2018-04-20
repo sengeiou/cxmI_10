@@ -8,7 +8,7 @@
 
 import UIKit
 
-let OrderDetailTitleWidth : CGFloat = 60
+let OrderDetailTitleWidth : CGFloat = 70 * defaultScale
 
 class OrderDetailTitleCell: UITableViewCell {
 
