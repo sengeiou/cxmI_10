@@ -88,7 +88,9 @@ class FootballScoreView: UIView {
         self.addSubview(titlelb)
   
         titlelb.snp.makeConstraints { (make) in
-            make.top.left.right.bottom.equalTo(0)
+            make.left.right.equalTo(0)
+            make.top.equalTo(5)
+            make.bottom.equalTo(-5)
         }
     }
     
