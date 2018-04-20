@@ -16,7 +16,17 @@ class FootballHunheFilterVC: BasePopViewController, BottomViewDelegate, Football
             for match in teamInfo.matchPlays {
                 if match.playType == "1" {
                     
-                    guard match.isShow == true else { continue }
+                    guard match.isShow == true else {
+                        var rangArr = [FootballPlayCellModel]()
+                        match.homeCell = getDefaultCell()
+                        match.flatCell = getDefaultCell()
+                        match.visitingCell = getDefaultCell()
+                        
+                        rangArr.append(match.homeCell)
+                        rangArr.append(match.flatCell)
+                        rangArr.append(match.visitingCell)
+                        rangSPFView.cells = rangArr
+                        continue }
                     
                     var rangArr = [FootballPlayCellModel]()
                     rangArr.append(match.homeCell)
