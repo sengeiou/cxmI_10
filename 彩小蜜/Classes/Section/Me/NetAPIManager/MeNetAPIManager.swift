@@ -46,6 +46,13 @@ enum MeNetAPIManager {
     case messageList (msgType: String, pageNum: Int)
     /// 提现进度
     case withdrawProgressList (withdawSn: String)
+    /// 添加收藏
+    case collectAdd(articledId: String, articleTitle: String, collectFrom: String)
+    /// 删除收藏
+    case collectDelete(collectId : String)
+    /// 收藏列表
+    case collectList(pageNum: Int)
+    
 }
 
 extension MeNetAPIManager : TargetType {
@@ -66,42 +73,46 @@ extension MeNetAPIManager : TargetType {
     
     var xpath: String {
         switch self {
-            case .userInfo:
-                return "7071/user/userInfoExceptPass"
-            case .realNameAuth:
-                return "7071/user/real/realNameAuth"
-            case .realInfo:
-                return "7071/user/real/userRealInfo"
-            case .addBankCard:
-                return "7071/user/bank/addBankCard"
-            case .bankList:
-                return "7071/user/bank/queryUserBankList"
-            case .withDrawDataShow:
-                return "7071/user/bank/queryWithDrawShow"
-            case .setBankDefault:
-                return "7071/user/bank/updateUserBankDefault"
-            case .deleteBank:
-                return "7071/user/bank/deleteUserBank"
-            case .couponList:
-                return "7071/user/bonus/queryBonusListByStatus"
-            case .coupon:
-                return "7071/user/bonus/queryUserBonus"
-            case .orderInfoList:
-                return "7075/order/getOrderInfoList"
-            case .orderInfo:
-                return "7075/order/getOrderDetail"
-            case .orderScheme:
-                return "7075/order/getTicketScheme"
-            case .accountDetailsList:
-                return "7071/user/account/getUserAccountList"
-            case .messageList:
-                return "7071/user/message/list"
-            case .accountStatistics:
-                return "7071/user/account/countMoneyCurrentMonth"
-            case .withdrawProgressList:
-                return "7076/payment/withdraw/list"
-            
-            
+        case .userInfo:
+            return "7071/user/userInfoExceptPass"
+        case .realNameAuth:
+            return "7071/user/real/realNameAuth"
+        case .realInfo:
+            return "7071/user/real/userRealInfo"
+        case .addBankCard:
+            return "7071/user/bank/addBankCard"
+        case .bankList:
+            return "7071/user/bank/queryUserBankList"
+        case .withDrawDataShow:
+            return "7071/user/bank/queryWithDrawShow"
+        case .setBankDefault:
+            return "7071/user/bank/updateUserBankDefault"
+        case .deleteBank:
+            return "7071/user/bank/deleteUserBank"
+        case .couponList:
+            return "7071/user/bonus/queryBonusListByStatus"
+        case .coupon:
+            return "7071/user/bonus/queryUserBonus"
+        case .orderInfoList:
+            return "7075/order/getOrderInfoList"
+        case .orderInfo:
+            return "7075/order/getOrderDetail"
+        case .orderScheme:
+            return "7075/order/getTicketScheme"
+        case .accountDetailsList:
+            return "7071/user/account/getUserAccountList"
+        case .messageList:
+            return "7071/user/message/list"
+        case .accountStatistics:
+            return "7071/user/account/countMoneyCurrentMonth"
+        case .withdrawProgressList:
+            return "7076/payment/withdraw/list"
+        case .collectAdd:
+            return "/user/collect/add"
+        case .collectDelete:
+            return "/user/collect/delete"
+        case .collectList:
+            return "/user/collect/list"
         }
     }
     
@@ -156,7 +167,15 @@ extension MeNetAPIManager : TargetType {
             dic["pageSize"] = "20"
         case .withdrawProgressList(let withdawSn):
             dic["withdawSn"] = withdawSn
-            
+        case .collectAdd(let articledId, let articleTitle, let collectFrom):
+            dic["articledId"] = articledId
+            dic["articleTitle"] = articleTitle
+            dic["collectFrom"] = collectFrom
+        case .collectDelete(let collectId):
+            dic["id"] = collectId
+        case .collectList(let pageNum):
+            dic["pageNum"] = pageNum
+            dic["pageSize"] = "20"
             
         default:
             return .requestPlain
