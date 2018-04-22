@@ -28,7 +28,7 @@ class NewsMeViewController: BaseViewController, UITableViewDelegate, UITableView
     
     public var showType: ShowType!
     //MARK: - 属性
-    private var headerView: MeHeaderView!
+    private var headerView: NewsHeaderView!
     private var footerView: MeFooterView!
     private var userInfo  : UserInfoDataModel!
     //MARK: - 生命周期
@@ -127,7 +127,7 @@ class NewsMeViewController: BaseViewController, UITableViewDelegate, UITableView
         table.backgroundColor = ColorF4F4F4
         table.register(MeCell.self, forCellReuseIdentifier: meCellIdentifier)
         
-        headerView = MeHeaderView()
+        headerView = NewsHeaderView()
         headerView.delegate = self
         
         footerView = MeFooterView()
