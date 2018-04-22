@@ -79,7 +79,7 @@ class FootballMatchInfoPopVC: BasePopViewController, BottomViewDelegate {
         
         sportDetail.attributedText = muAtt
         
-        guard teamInfo.hhadTeamSupport != nil else { return }
+        guard teamInfo.hhadTeamSupport != nil , teamInfo.hhadTeamSupport.fixedOdds != nil else { return }
         if teamInfo.hhadTeamSupport.fixedOdds < 0 {
             rangRatioTitle.text = "\(teamInfo.hhadTeamSupport.fixedOdds!)"
         }else {

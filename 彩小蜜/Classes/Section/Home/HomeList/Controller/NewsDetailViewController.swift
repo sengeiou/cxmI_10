@@ -43,7 +43,8 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
         
     }
     @objc private func shareButClicked(_ sender: UIButton) {
-        
+        let share = ShareViewController()
+        present(share)
     }
     
     override func viewDidLayoutSubviews() {

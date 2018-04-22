@@ -43,6 +43,8 @@
 		1144911D2086130D009F1D09 /* FootballMatchInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1144911C2086130D009F1D09 /* FootballMatchInfoModel.swift */; };
 		114520B32089BCE70004F98B /* MyCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114520B22089BCE70004F98B /* MyCollectionVC.swift */; };
 		114520B82089C1980004F98B /* CollectionListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114520B72089C1980004F98B /* CollectionListModel.swift */; };
+		114800D2208C2C5E00621AFA /* ShareCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114800D1208C2C5E00621AFA /* ShareCell.swift */; };
+		114800D4208C2DD700621AFA /* ShareDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114800D3208C2DD700621AFA /* ShareDataModel.swift */; };
 		11691806207DB73800C8A287 /* CouponFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11691805207DB73800C8A287 /* CouponFilterViewController.swift */; };
 		11691808207DB82E00C8A287 /* CouponFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11691807207DB82E00C8A287 /* CouponFilterCell.swift */; };
 		1169180A207DBA8B00C8A287 /* PaymentResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11691809207DBA8B00C8A287 /* PaymentResultModel.swift */; };
@@ -286,6 +288,8 @@
 		1144911C2086130D009F1D09 /* FootballMatchInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballMatchInfoModel.swift; sourceTree = "<group>"; };
 		114520B22089BCE70004F98B /* MyCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCollectionVC.swift; sourceTree = "<group>"; };
 		114520B72089C1980004F98B /* CollectionListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListModel.swift; sourceTree = "<group>"; };
+		114800D1208C2C5E00621AFA /* ShareCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareCell.swift; sourceTree = "<group>"; };
+		114800D3208C2DD700621AFA /* ShareDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareDataModel.swift; sourceTree = "<group>"; };
 		11691805207DB73800C8A287 /* CouponFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponFilterViewController.swift; sourceTree = "<group>"; };
 		11691807207DB82E00C8A287 /* CouponFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponFilterCell.swift; sourceTree = "<group>"; };
 		11691809207DBA8B00C8A287 /* PaymentResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentResultModel.swift; sourceTree = "<group>"; };
@@ -1343,6 +1347,7 @@
 		E57375F92046B21100148622 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				114800D1208C2C5E00621AFA /* ShareCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1350,6 +1355,7 @@
 		E57375FA2046B21500148622 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				114800D3208C2DD700621AFA /* ShareDataModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2020,6 +2026,7 @@
 				E56CE80C206A21670090A1B5 /* WithdrawalProgressVC.swift in Sources */,
 				E512A96D20480917003F14F4 /* HomeDataModel.swift in Sources */,
 				E51F9A56205A11EA00AB8A21 /* MobileTextFieldCell.swift in Sources */,
+				114800D2208C2C5E00621AFA /* ShareCell.swift in Sources */,
 				1144910E2085D3DF009F1D09 /* FootballIntegralView.swift in Sources */,
 				11A25C502080BC1200085C58 /* FootballHunheFilterVC.swift in Sources */,
 				11062B29208344DC001C1D14 /* LotteryMoreFilterVC.swift in Sources */,
@@ -2114,6 +2121,7 @@
 				E51F9A5E205A29D500AB8A21 /* LoginFooterView.swift in Sources */,
 				1169180C207E3EC500C8A287 /* FootballScoreView.swift in Sources */,
 				E537397F2057F8F40087E4E6 /* BankCardInfo.swift in Sources */,
+				114800D4208C2DD700621AFA /* ShareDataModel.swift in Sources */,
 				E5786FBE206DE9BD0045F7F5 /* FootballBanQuanCCell.swift in Sources */,
 				E50B907120522FFF00417BFE /* RechargeViewController.swift in Sources */,
 				E5973E2B204E442F006461CE /* ForgetPswVCodeVC.swift in Sources */,
