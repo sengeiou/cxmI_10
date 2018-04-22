@@ -19,6 +19,7 @@ class MyCollectionVC: BaseViewController, UITableViewDelegate, UITableViewDataSo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setRightButton()
         setEmpty(title: "暂无收藏", tableView)
         collectList = [NewsInfoModel]()
         collectionRequest(1)
@@ -58,9 +59,7 @@ class MyCollectionVC: BaseViewController, UITableViewDelegate, UITableViewDataSo
     
     // MARK: - 网络请求
     private func collectionRequest(_ pageNum: Int) {
-        
         weak var weakSelf = self
-        
         _ = userProvider.rx.request(.collectList(pageNum: pageNum))
             .asObservable()
             .mapObject(type: NewsListModel.self)
@@ -78,7 +77,27 @@ class MyCollectionVC: BaseViewController, UITableViewDelegate, UITableViewDataSo
                 switch err {
                 case .UnexpectedResult(let code, let msg):
                     print(code!)
-                    self.showHUD(message: msg!)
+                    weakSelf?.showHUD(message: msg!)
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil )
+    }
+    private func collectionDeleteRequest(collectId: String, indexPath: IndexPath) {
+        weak var weakSelf = self
+        _ = userProvider.rx.request(.collectDelete(collectId: collectId))
+        .asObservable()
+        .mapObject(type: DataModel.self)
+            .subscribe(onNext: { (data) in
+                weakSelf?.showHUD(message: data.msg)
+                weakSelf?.collectList.remove(at: indexPath.row)
+                weakSelf?.tableView.deleteRows(at: [indexPath], with: .fade)
+            }, onError: { (error) in
+                weakSelf?.tableView.endrefresh()
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    print(code!)
+                    weakSelf?.showHUD(message: msg!)
                 default: break
                 }
             }, onCompleted: nil , onDisposed: nil )
@@ -91,7 +110,7 @@ class MyCollectionVC: BaseViewController, UITableViewDelegate, UITableViewDataSo
         table.delegate = self
         table.dataSource = self
         table.backgroundColor = ColorF4F4F4
-        
+        table.isEditing = false
         table.register(NewsNoPicCell.self, forCellReuseIdentifier: NewsNoPicCellId)
         table.register(NewsOnePicCell.self, forCellReuseIdentifier: NewsOnePicCellId)
         table.register(NewsThreePicCell.self, forCellReuseIdentifier: NewsThreePicCellId)
@@ -159,6 +178,40 @@ class MyCollectionVC: BaseViewController, UITableViewDelegate, UITableViewDataSo
     }
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return nil
+    }
+    
+    func setEditing(editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: true)
+        tableView.setEditing(editing, animated: true)
+    }
+    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        return "确认删除"
+    }
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return .delete
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.delete {
+//            collectList.remove(at: indexPath.row)
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+            collectionDeleteRequest(collectId: collectList[indexPath.row].articleId, indexPath: indexPath)
+        }
+    }
+    
+    @objc private func editingClicked(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        self.tableView.isEditing = sender.isSelected
+    }
+    
+    private func setRightButton() {
+        let but = UIButton(type: .custom)
+        but.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        but.setTitle("编辑", for: .normal)
+        but.setTitleColor(Color787878, for: .normal)
+        but.addTarget(self, action: #selector(editingClicked(_:)), for: .touchUpInside)
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: but)
     }
     
     override func didReceiveMemoryWarning() {

@@ -168,7 +168,7 @@ extension MeNetAPIManager : TargetType {
         case .withdrawProgressList(let withdawSn):
             dic["withdawSn"] = withdawSn
         case .collectAdd(let articledId, let articleTitle, let collectFrom):
-            dic["articledId"] = articledId
+            dic["articleId"] = articledId
             dic["articleTitle"] = articleTitle
             dic["collectFrom"] = collectFrom
         case .collectDelete(let collectId):

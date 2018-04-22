@@ -25,7 +25,7 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
     
     
     // MARK: - 属性 public
-    
+    public var newsInfo : NewsInfoModel!
     // MARK: - 属性 private
     private var collectBut: UIButton!    // 收藏
     private var shareBut: UIButton!      // 分享
@@ -40,7 +40,7 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
     // MARK: - 点击事件
     
     @objc private func collectButClicked(_ sender: UIButton) {
-        
+        addCollectRequest()
     }
     @objc private func shareButClicked(_ sender: UIButton) {
         let share = ShareViewController()
@@ -75,6 +75,24 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
         let shareItem = UIBarButtonItem(customView: shareBut)
         
         self.navigationItem.rightBarButtonItems = [shareItem, collectItem]
+    }
+    
+    private func addCollectRequest() {
+        weak var weakSelf = self
+        _ = userProvider.rx.request(.collectAdd(articledId: newsInfo.articleId, articleTitle: newsInfo.title, collectFrom: ""))
+            .asObservable()
+            .mapObject(type: DataModel.self)
+            .subscribe(onNext: { (data) in
+                weakSelf?.showHUD(message: data.msg)
+            }, onError: { (error) in
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    print(code!)
+                    weakSelf?.showHUD(message: msg!)
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil )
     }
     
     //MARK: - 懒加载

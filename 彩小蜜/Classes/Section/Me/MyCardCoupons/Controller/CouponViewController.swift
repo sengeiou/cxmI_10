@@ -28,7 +28,6 @@ class CouponViewController: BaseViewController, IndicatorInfoProvider, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.view.addSubview(tableView)
         couponList = []
         couponListRequest(1)
@@ -145,6 +144,8 @@ class CouponViewController: BaseViewController, IndicatorInfoProvider, UITableVi
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return nil
     }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
