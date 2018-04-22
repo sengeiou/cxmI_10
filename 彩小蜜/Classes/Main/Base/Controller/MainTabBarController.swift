@@ -17,7 +17,7 @@ class MainTabBarController: UITabBarController, UserInfoPro {
     }
 
     
-    private func creatSubViewControllers()
+    public func creatSubViewControllers()
     {
         // 主页
         let home = HomeViewController()
@@ -55,7 +55,8 @@ class MainTabBarController: UITabBarController, UserInfoPro {
         var me : BaseViewController!
         
         if getUserData() != nil {
-            me = MeViewController()
+            //me = MeViewController()
+            me = NewsMeViewController()
         }else {
             me = LoginViewController()
         }

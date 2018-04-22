@@ -46,6 +46,7 @@
 		114800D4208C2DD700621AFA /* ShareDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114800D3208C2DD700621AFA /* ShareDataModel.swift */; };
 		114800D6208C622800621AFA /* NewsListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114800D5208C622800621AFA /* NewsListModel.swift */; };
 		114800D8208C80B100621AFA /* NewsRecommendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114800D7208C80B100621AFA /* NewsRecommendVC.swift */; };
+		114800DA208C97B400621AFA /* NewsMeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114800D9208C97B400621AFA /* NewsMeViewController.swift */; };
 		11691806207DB73800C8A287 /* CouponFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11691805207DB73800C8A287 /* CouponFilterViewController.swift */; };
 		11691808207DB82E00C8A287 /* CouponFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11691807207DB82E00C8A287 /* CouponFilterCell.swift */; };
 		1169180A207DBA8B00C8A287 /* PaymentResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11691809207DBA8B00C8A287 /* PaymentResultModel.swift */; };
@@ -292,6 +293,7 @@
 		114800D3208C2DD700621AFA /* ShareDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareDataModel.swift; sourceTree = "<group>"; };
 		114800D5208C622800621AFA /* NewsListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListModel.swift; sourceTree = "<group>"; };
 		114800D7208C80B100621AFA /* NewsRecommendVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsRecommendVC.swift; sourceTree = "<group>"; };
+		114800D9208C97B400621AFA /* NewsMeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsMeViewController.swift; sourceTree = "<group>"; };
 		11691805207DB73800C8A287 /* CouponFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponFilterViewController.swift; sourceTree = "<group>"; };
 		11691807207DB82E00C8A287 /* CouponFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponFilterCell.swift; sourceTree = "<group>"; };
 		11691809207DBA8B00C8A287 /* PaymentResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentResultModel.swift; sourceTree = "<group>"; };
@@ -1134,6 +1136,7 @@
 			isa = PBXGroup;
 			children = (
 				E57376452046BC6400148622 /* MeViewController.swift */,
+				114800D9208C97B400621AFA /* NewsMeViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2094,6 +2097,7 @@
 				E5973E20204E34A3006461CE /* FontConstraint.swift in Sources */,
 				E56CE812206A23070090A1B5 /* WithdrawalProgressHeader.swift in Sources */,
 				11062B2D20834A60001C1D14 /* LotteryDateFilterCell.swift in Sources */,
+				114800DA208C97B400621AFA /* NewsMeViewController.swift in Sources */,
 				E55016F920722E190056AB1F /* FootballFilterTopView.swift in Sources */,
 				E567636A206B2FDA00E2D9A8 /* HHTextView.swift in Sources */,
 				E5973E33204FC1D9006461CE /* MeFooterView.swift in Sources */,
