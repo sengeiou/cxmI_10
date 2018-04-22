@@ -108,11 +108,11 @@ extension MeNetAPIManager : TargetType {
         case .withdrawProgressList:
             return "7076/payment/withdraw/list"
         case .collectAdd:
-            return "/user/collect/add"
+            return "7071/user/collect/add"
         case .collectDelete:
-            return "/user/collect/delete"
+            return "7071/user/collect/delete"
         case .collectList:
-            return "/user/collect/list"
+            return "7071/user/collect/list"
         }
     }
     

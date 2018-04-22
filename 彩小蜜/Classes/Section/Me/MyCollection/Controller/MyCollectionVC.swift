@@ -8,12 +8,19 @@
 
 import UIKit
 
+fileprivate let NewsNoPicCellId = "NewsNoPicCellId"
+fileprivate let NewsOnePicCellId = "NewsOnePicCellId"
+fileprivate let NewsThreePicCellId = "NewsThreePicCellId"
+
 class MyCollectionVC: BaseViewController, UITableViewDelegate, UITableViewDataSource {
 
     private var collectModel: NewsListModel!
+    private var collectList : [NewsInfoModel]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setEmpty(title: "暂无收藏", tableView)
+        collectList = [NewsInfoModel]()
         collectionRequest(1)
         initSubview()
         
@@ -60,6 +67,10 @@ class MyCollectionVC: BaseViewController, UITableViewDelegate, UITableViewDataSo
             .subscribe(onNext: { (data) in
                 weakSelf?.tableView.endrefresh()
                 weakSelf?.collectModel = data
+                if pageNum == 1{
+                    weakSelf?.collectList.removeAll()
+                }
+                weakSelf?.collectList.append(contentsOf: data.list)
                 weakSelf?.tableView.reloadData()
             }, onError: { (error) in
                 weakSelf?.tableView.endrefresh()
@@ -80,8 +91,10 @@ class MyCollectionVC: BaseViewController, UITableViewDelegate, UITableViewDataSo
         table.delegate = self
         table.dataSource = self
         table.backgroundColor = ColorF4F4F4
-        table.register(MeCell.self, forCellReuseIdentifier: "")
         
+        table.register(NewsNoPicCell.self, forCellReuseIdentifier: NewsNoPicCellId)
+        table.register(NewsOnePicCell.self, forCellReuseIdentifier: NewsOnePicCellId)
+        table.register(NewsThreePicCell.self, forCellReuseIdentifier: NewsThreePicCellId)
         return table
     }()
     //MARK: - tableView dataSource
@@ -90,19 +103,50 @@ class MyCollectionVC: BaseViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard self.collectModel != nil else { return 0 }
-        return self.collectModel.list.count
+        guard collectList.isEmpty == false else { return 0 }
+        return collectList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "", for: indexPath) as! MeCell
+        let newsInfo = collectList[indexPath.row]
         
-        
+        if newsInfo.listStyle == "1" || newsInfo.listStyle == "4" {
+            return initNewsOnePicCell(indexPath: indexPath)
+        }else if newsInfo.listStyle == "3" {
+            return initNewsThreePicCell(indexPath: indexPath)
+        }else {
+            return initNewsNoPicCell(indexPath: indexPath)
+        }
+    }
+    
+    private func initNewsNoPicCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: NewsNoPicCellId, for: indexPath) as! NewsNoPicCell
+        cell.newsInfo = self.collectList[indexPath.row]
+        return cell
+    }
+    
+    private func initNewsThreePicCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: NewsThreePicCellId, for: indexPath) as! NewsThreePicCell
+        cell.newsInfo = self.collectList[indexPath.row]
+        return cell
+    }
+    
+    private func initNewsOnePicCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: NewsOnePicCellId, for: indexPath) as! NewsOnePicCell
+        cell.newsInfo = self.collectList[indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44
+    
+        let newsInfo = collectList[indexPath.row]
+        
+        if newsInfo.listStyle == "1" || newsInfo.listStyle == "4" || newsInfo.listStyle == "0" {
+            return 110 * defaultScale
+        }
+        else {
+            return 140 * defaultScale
+        }
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 5

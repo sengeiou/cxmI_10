@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum HomeStyle {
+enum ShowType {
     case allShow
     case onlyNews
 }
@@ -54,7 +54,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     }
     
     //MARK: - 属性 public
-    public var homeStyle : HomeStyle! = .onlyNews {
+    public var homeStyle : ShowType! = .onlyNews {
         didSet{
             if homeStyle == .onlyNews {
                 

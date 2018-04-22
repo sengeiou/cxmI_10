@@ -13,6 +13,34 @@ fileprivate let meCellIdentifier = "meCellIdentifier"
 
 class MeViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, MeHeaderViewDelegate, MeFooterViewDelegate, TTTAttributedLabelDelegate, UserInfoPro {
     
+    
+    
+    public var showType: ShowType!
+    //MARK: - 属性
+    private var headerView: MeHeaderView!
+    private var footerView: MeFooterView!
+    private var userInfo  : UserInfoDataModel!
+    //MARK: - 生命周期
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        hideBackBut()
+        self.navigationItem.title = "彩小秘 · 我的"
+        self.view.addSubview(tableView)
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        userInfoRequest()
+        self.isHidenBar = false
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableView.snp.makeConstraints { (make) in
+            make.top.left.right.bottom.equalTo(self.view)
+        }
+    }
     //MARK: - 点击事件
     // header delegate
     func rechargeClicked() {
@@ -61,16 +89,20 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
                 pushPagerView(pagerType: .accountDetails)
             case 2:
                 pushPagerView(pagerType: .coupon)
-            case 3:
-                pushPagerView(pagerType: .message)
+            
             default :
                 break
             }
         case 1:
             switch indexPath.row {
-            case 0: break
-            case 1: break
-            case 2:
+            case 0:
+                pushPagerView(pagerType: .message)
+            case 1: 
+                let collection = MyCollectionVC()
+                pushViewController(vc: collection)
+            case 2: break
+            case 3: break
+            case 4:
                 let about = MeAboutViewController()
                 pushViewController(vc: about)
             default :
@@ -80,33 +112,6 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
             break
         }
     }
-    
-    //MARK: - 属性
-    private var headerView: MeHeaderView!
-    private var footerView: MeFooterView!
-    private var userInfo  : UserInfoDataModel!
-    //MARK: - 生命周期
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        hideBackBut()
-        self.navigationItem.title = "彩小秘 · 我的"
-        self.view.addSubview(tableView)
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        userInfoRequest()
-        self.isHidenBar = false
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        tableView.snp.makeConstraints { (make) in
-            make.top.left.right.bottom.equalTo(self.view)
-        }
-    }
-    
     //MARK: - 网络请求
     private func userInfoRequest() {
         weak var weakSelf = self
@@ -179,9 +184,9 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return 4
-        case 1:
             return 3
+        case 1:
+            return 5
         default:
             return 0
         }
@@ -203,25 +208,29 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
             case 2:
                 cell.icon.image = UIImage(named: "coupon")
                 cell.title.text = "我的卡券"
-            case 3:
-                cell.icon.image = UIImage(named: "nformationsecurity")
-                cell.title.text = "消息中心"
+            
             default :
                 break
             }
         case 1:
             switch indexPath.row {
             case 0:
+                cell.icon.image = UIImage(named: "nformationsecurity")
+                cell.title.text = "消息中心"
+            case 1:
+                cell.icon.image = UIImage(named: "nformationsecurity")
+                cell.title.text = "我的收藏"
+            case 2:
                 cell.icon.image = UIImage(named: "help")
                 cell.title.text = "帮助中心"
-            case 1:
+            case 3:
                 cell.icon.image = UIImage(named: "serive")
                 cell.title.text = "联系客服"
                 cell.serviceNum = "400-123-1234"
                 
                 cell.detail.delegate = self
                 cell.accessoryType = .none
-            case 2:
+            case 4:
                 cell.icon.image = UIImage(named: "our")
                 cell.title.text = "关于我们"
             default :
