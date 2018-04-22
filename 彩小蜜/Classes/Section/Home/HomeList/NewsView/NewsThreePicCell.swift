@@ -11,6 +11,21 @@ import UIKit
 class NewsThreePicCell: UITableViewCell {
 
     // MARK: - 属性 public
+    public var newsInfo : NewsInfoModel!{
+        didSet{
+            titleLb.text = newsInfo.title
+            
+            guard newsInfo.articleThumb.count >= 3 else { return }
+            guard let url0 = URL(string: newsInfo.articleThumb[0]) else { return }
+            guard let url1 = URL(string: newsInfo.articleThumb[1]) else { return }
+            guard let url2 = URL(string: newsInfo.articleThumb[2]) else { return }
+            
+            picOne.kf.setImage(with: url0)
+            picTwo.kf.setImage(with: url1)
+            picThree.kf.setImage(with: url2)
+        }
+    }
+    
     // MARK: - 属性 private
     private var titleLb : UILabel!
     private var bottomView: NewsBottomView!
@@ -58,9 +73,9 @@ class NewsThreePicCell: UITableViewCell {
         }
         
         bottomView.snp.makeConstraints { (make) in
-            make.bottom.equalTo(-10 * defaultScale)
+            make.bottom.equalTo(-12 * defaultScale)
             make.left.equalTo(titleLb)
-            make.width.equalTo(200 * defaultScale)
+            make.right.equalTo(-12 * defaultScale)
         }
         picOne.snp.makeConstraints { (make) in
             make.top.equalTo(titleLb.snp.bottom).offset(10 * defaultScale)
@@ -82,6 +97,7 @@ class NewsThreePicCell: UITableViewCell {
     
     private func getLabel() -> UILabel {
         let lab = UILabel()
+        lab.font = Font15
         lab.textColor = Color505050
         lab.textAlignment = .left
         lab.numberOfLines = 1

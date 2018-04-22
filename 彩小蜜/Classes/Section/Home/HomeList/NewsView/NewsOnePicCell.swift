@@ -8,15 +8,33 @@
 
 import UIKit
 
-fileprivate let PicWidth : CGFloat = (screenWidth - leftSpacing * 2 - 5 * 2) / 3
+fileprivate let PicWidth : CGFloat = (screenWidth - 12 * 2 - 3 * 2) / 3
 
 class NewsOnePicCell: UITableViewCell {
 
     // MARK: - 属性 public
+    public var newsInfo : NewsInfoModel!{
+        didSet{
+            titleLb.text = newsInfo.title
+            if newsInfo.listStyle == "4" {
+                guard newsInfo.articleThumb.count == 1 else { return }
+                guard let url = URL(string: newsInfo.articleThumb[0]) else { return }
+                icon.kf.setImage(with: url)
+                videoIcon.isHidden = false
+            }else {
+                guard newsInfo.articleThumb.count == 1 else { return }
+                guard let url = URL(string: newsInfo.articleThumb[0]) else { return }
+                icon.kf.setImage(with: url)
+                videoIcon.isHidden = true
+            }
+        }
+    }
+    
     // MARK: - 属性 private
     private var titleLb : UILabel!
     private var icon : UIImageView!
     private var bottomView: NewsBottomView!
+    private var videoIcon : UIImageView!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -34,6 +52,9 @@ class NewsOnePicCell: UITableViewCell {
         icon = UIImageView()
         icon.image = UIImage(named: "Racecolorfootball")
         
+        videoIcon = UIImageView()
+        videoIcon.image = UIImage(named: "Racecolorfootball")
+        
         titleLb = getLabel()
         
         bottomView = NewsBottomView()
@@ -41,32 +62,38 @@ class NewsOnePicCell: UITableViewCell {
         self.contentView.addSubview(icon)
         self.contentView.addSubview(titleLb)
         self.contentView.addSubview(bottomView)
+        icon.addSubview(videoIcon)
         
         icon.snp.makeConstraints { (make) in
-            make.top.equalTo(leftSpacing)
-            make.right.equalTo(-leftSpacing)
-            make.bottom.equalTo(-leftSpacing)
+            make.top.equalTo(12 * defaultScale)
+            make.right.equalTo(-12 * defaultScale)
+            make.bottom.equalTo(-12 * defaultScale)
             make.width.equalTo(PicWidth)
         }
         titleLb.snp.makeConstraints { (make) in
             make.top.equalTo(icon)
             make.left.equalTo(leftSpacing)
-            make.right.equalTo(icon.snp.left).offset(-leftSpacing)
-            make.bottom.equalTo(bottomView.snp.top)
+            make.right.equalTo(icon.snp.left).offset(-21 * defaultScale)
+            make.height.equalTo(30 * defaultScale)
         }
         bottomView.snp.makeConstraints { (make) in
             make.bottom.equalTo(-10 * defaultScale)
             make.left.equalTo(titleLb)
-            make.width.equalTo(200 * defaultScale)
+            make.right.equalTo(titleLb)
+        }
+        videoIcon.snp.makeConstraints { (make) in
+            make.top.left.right.bottom.equalTo(0)
         }
         
     }
     
     private func getLabel() -> UILabel {
         let lab = UILabel()
+        lab.font = Font15
         lab.textColor = Color505050
         lab.textAlignment = .left
         lab.numberOfLines = 2
+        lab.contentMode = .topLeft
         return lab
     }
     

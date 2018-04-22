@@ -68,14 +68,22 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     //MARK: - 属性
     private var homeData : HomeDataModel!
     private var header : HomeHeaderView!
+    private var newsList : [NewsInfoModel]!
+    private var newsListModel: NewsListModel!
     //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "彩小秘 · 购彩大厅"
+        newsList = [NewsInfoModel]()
         hideBackBut()
         
         setRightBarItem()
-        //homeListRequest()
+        self.tableView.headerRefresh {
+            self.loadNewData()
+        }
+        self.tableView.footerRefresh {
+            self.loadNextData()
+        }
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -88,6 +96,21 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         super.viewWillAppear(animated)
         self.isHidenBar = false
     }
+    
+    //MARK: - 加载数据
+    private func loadNewData() {
+        homeListRequest()
+        //newsListRequest(1)
+    }
+    private func loadNextData() {
+        guard self.newsListModel.isLastPage == false else {
+            self.tableView.noMoreData()
+            return }
+        
+        newsListRequest(1)
+    }
+    
+    
     //MARK: - 网络请求
     private func homeListRequest() {
         weak var weakSelf = self
@@ -99,16 +122,45 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                 weakSelf?.tableView.reloadData()
                 guard data.navBanners != nil else { return }
                 weakSelf?.header.bannerList = data.navBanners
+                weakSelf?.newsListRequest(1)
             }, onError: { (error) in
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):
                     print(code!)
-                    self.showHUD(message: msg!)
+                    weakSelf?.showHUD(message: msg!)
+                default: break
+                }
+            }, onCompleted: nil, onDisposed: nil )
+        
+        
+    }
+    
+    private func newsListRequest(_ pageNum : Int) {
+        weak var weakSelf = self
+        _ = homeProvider.rx.request(.newsList(page: pageNum))
+            .asObservable()
+            .mapObject(type: NewsListModel.self)
+            .subscribe(onNext: { (data) in
+                weakSelf?.tableView.endrefresh()
+                self.newsListModel = data
+                if pageNum == 1 {
+                    weakSelf?.newsList.removeAll()
+                }
+                weakSelf?.newsList.append(contentsOf: data.list)
+                weakSelf?.tableView.reloadData()
+            }, onError: { (error) in
+                weakSelf?.tableView.endrefresh()
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    print(code!)
+                    weakSelf?.showHUD(message: msg!)
                 default: break
                 }
             }, onCompleted: nil, onDisposed: nil )
     }
+    
     
     //MARK: - 懒加载
     lazy private var tableView: UITableView = {
@@ -127,7 +179,6 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         table.register(NewsNoPicCell.self, forCellReuseIdentifier: NewsNoPicCellId)
         table.register(NewsOnePicCell.self, forCellReuseIdentifier: NewsOnePicCellId)
         table.register(NewsThreePicCell.self, forCellReuseIdentifier: NewsThreePicCellId)
-        
         
         return table
     }()
@@ -161,9 +212,15 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if homeStyle == .onlyNews {
-            return 10
+            guard newsList.isEmpty == false else { return 0 }
+            return newsList.count
         }else {
-            return 1
+            if section == 3 {
+                guard newsList.isEmpty == false else { return 0 }
+                return newsList.count
+            }else {
+                return 1
+            }
         }
         
     }
@@ -171,12 +228,16 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if homeStyle == .onlyNews {
-            if indexPath.row == 0 {
+            let newsInfo = newsList[indexPath.row]
+            
+            if newsInfo.listStyle == "1" || newsInfo.listStyle == "4" {
                 return initNewsOnePicCell(indexPath: indexPath)
-            }else if indexPath.row == 1 {
+            }else if newsInfo.listStyle == "3" {
                 return initNewsThreePicCell(indexPath: indexPath)
+            }else {
+                return initNewsNoPicCell(indexPath: indexPath)
             }
-            return initNewsNoPicCell(indexPath: indexPath)
+            
         }else {
             switch indexPath.section {
             case 0:
@@ -186,13 +247,17 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
             case 2:
                 return initSportLotteryCell(indexPath: indexPath)
             default:
-                let cell = tableView.dequeueReusableCell(withIdentifier: NewsNoPicCellId, for: indexPath) as! NewsNoPicCell
+                let newsInfo = newsList[indexPath.row]
                 
-                return cell
+                if newsInfo.listStyle == "1" || newsInfo.listStyle == "4" {
+                    return initNewsOnePicCell(indexPath: indexPath)
+                }else if newsInfo.listStyle == "3" {
+                    return initNewsThreePicCell(indexPath: indexPath)
+                }else {
+                    return initNewsNoPicCell(indexPath: indexPath)
+                }
             }
         }
-        
-        
     }
     
     private func initSportLotteryCell(indexPath: IndexPath) -> UITableViewCell {
@@ -225,26 +290,28 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     
     private func initNewsNoPicCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NewsNoPicCellId, for: indexPath) as! NewsNoPicCell
-        
+        cell.newsInfo = self.newsList[indexPath.row]
         return cell
     }
     
     private func initNewsThreePicCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NewsThreePicCellId, for: indexPath) as! NewsThreePicCell
-        
+        cell.newsInfo = self.newsList[indexPath.row]
         return cell
     }
     
     private func initNewsOnePicCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NewsOnePicCellId, for: indexPath) as! NewsOnePicCell
-        
+        cell.newsInfo = self.newsList[indexPath.row]
         return cell
     }
+    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         if homeStyle == .onlyNews {
-            return 150 * defaultScale
+            
+            return 105 * defaultScale
         }else {
             switch indexPath.section {
             case 0:
@@ -264,7 +331,14 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                 
                 return height
             default:
-                return 80 * defaultScale
+                let newsInfo = newsList[indexPath.row]
+                
+                if newsInfo.listStyle == "1" || newsInfo.listStyle == "4" || newsInfo.listStyle == "0" {
+                    return 110 * defaultScale
+                }
+                else {
+                    return 140 * defaultScale
+                }
             }
         }
     }

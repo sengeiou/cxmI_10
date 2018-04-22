@@ -11,6 +11,13 @@ import UIKit
 class NewsNoPicCell: UITableViewCell {
 
     // MARK: - 属性 public
+    public var newsInfo : NewsInfoModel!{
+        didSet{
+            titleLb.text = newsInfo.title
+            detailLb.text = newsInfo.summary
+        }
+    }
+    
     // MARK: - 属性 private
     private var titleLb : UILabel!
     private var detailLb: UILabel!
@@ -32,8 +39,9 @@ class NewsNoPicCell: UITableViewCell {
         titleLb = getLabel()
         titleLb.text = "一家大幅快乐撒发生的几率附加费"
         detailLb = getLabel()
+        detailLb.font = Font13
         detailLb.text = "一家大幅快乐撒发生的几率附加费一家大幅快乐撒发生的几率附加费一家大幅快乐撒发生的几率附加费一家大幅快乐撒发生的几率附加费一家大幅快乐撒发生的几率附加费一家大幅快乐撒发生的几率附加费一家大幅快乐撒发生的几率附加费"
-        detailLb.textColor = Color9F9F9F
+        detailLb.textColor = Color787878
         detailLb.numberOfLines = 2
         
         bottomView = NewsBottomView()
@@ -43,10 +51,10 @@ class NewsNoPicCell: UITableViewCell {
         self.contentView.addSubview(bottomView)
         
         titleLb.snp.makeConstraints { (make) in
-            make.top.equalTo(10 * defaultScale)
-            make.left.equalTo(leftSpacing)
-            make.right.equalTo(-rightSpacing)
-            make.height.equalTo(20 * defaultScale)
+            make.top.equalTo(12 * defaultScale)
+            make.left.equalTo(12 * defaultScale)
+            make.right.equalTo(-12 * defaultScale)
+            make.height.equalTo(15 * defaultScale)
         }
         detailLb.snp.makeConstraints { (make) in
             make.top.equalTo(titleLb.snp.bottom)
@@ -54,14 +62,15 @@ class NewsNoPicCell: UITableViewCell {
             make.bottom.equalTo(bottomView.snp.top)
         }
         bottomView.snp.makeConstraints { (make) in
-            make.bottom.equalTo(-10 * defaultScale)
+            make.bottom.equalTo(-12 * defaultScale)
             make.left.equalTo(titleLb)
-            make.width.equalTo(200 * defaultScale)
+            make.right.equalTo(titleLb)
         }
     }
     
     private func getLabel() -> UILabel {
         let lab = UILabel()
+        lab.font = Font15
         lab.textColor = Color505050
         lab.textAlignment = .left
         lab.numberOfLines = 1

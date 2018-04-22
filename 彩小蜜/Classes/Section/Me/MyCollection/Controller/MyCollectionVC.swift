@@ -10,7 +10,7 @@ import UIKit
 
 class MyCollectionVC: BaseViewController, UITableViewDelegate, UITableViewDataSource {
 
-    private var collectModel: CollectionListModel!
+    private var collectModel: NewsListModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,9 +56,9 @@ class MyCollectionVC: BaseViewController, UITableViewDelegate, UITableViewDataSo
         
         _ = userProvider.rx.request(.collectList(pageNum: pageNum))
             .asObservable()
-            .mapObject(type: CollectionListModel.self)
+            .mapObject(type: NewsListModel.self)
             .subscribe(onNext: { (data) in
-                 weakSelf?.tableView.endrefresh()
+                weakSelf?.tableView.endrefresh()
                 weakSelf?.collectModel = data
                 weakSelf?.tableView.reloadData()
             }, onError: { (error) in

@@ -25,21 +25,23 @@ class NewsBottomView: UIView {
         super.layoutSubviews()
         titleLb.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(0)
-            make.left.equalTo(leftSpacing)
-            make.width.equalTo(80 * defaultScale)
+            make.left.equalTo(0)
+            make.width.equalTo(66 * defaultScale)
         }
         timeLb.snp.makeConstraints { (make) in
             make.top.bottom.width.equalTo(titleLb)
-            make.left.equalTo(titleLb.snp.right).offset(leftSpacing)
+            make.left.equalTo(titleLb.snp.right).offset(16 * defaultScale)
         }
         readNumLb.snp.makeConstraints { (make) in
-            make.top.bottom.width.equalTo(titleLb)
-            make.left.equalTo(timeLb.snp.right).offset(leftSpacing)
+            make.top.bottom.equalTo(titleLb)
+            make.left.equalTo(timeLb.snp.right).offset(16 * defaultScale)
+            make.right.equalTo(0)
         }
     }
     
     private func initSubview() {
         titleLb = getLabel("彩小秘精选")
+        titleLb.sizeToFit()
         timeLb = getLabel("今日04-17")
         readNumLb = getLabel("阅读88888")
         
@@ -50,6 +52,7 @@ class NewsBottomView: UIView {
     
     private func getLabel(_ title : String) -> UILabel {
         let lab = UILabel()
+        lab.font = Font12
         lab.text = title
         lab.textColor = Color9F9F9F
         lab.textAlignment = .left
