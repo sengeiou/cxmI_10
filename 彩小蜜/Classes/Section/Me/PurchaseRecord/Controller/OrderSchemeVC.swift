@@ -82,7 +82,7 @@ class OrderSchemeVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         switch indexPath.row {
-        case 0:
+        case 0: 
             let cell = tableView.dequeueReusableCell(withIdentifier: OrderSchemeTitleCellId, for: indexPath) as! OrderSchemeTitleCell
             cell.schemeInfo = self.orderSchemeInfo
             return cell

@@ -30,9 +30,9 @@ class MainTabBarController: UITabBarController, UserInfoPro {
             .asObservable()
             .mapObject(type: ConfigInfoModel.self)
             .subscribe(onNext: { (data) in
-                //DispatchQueue.main.async {
+                DispatchQueue.main.async {
                     self.creatSubViewControllers(data.turnOn)
-                //}
+                }
             }, onError: { (error) in
                 guard let err = error as? HXError else { return }
                 switch err {
@@ -41,9 +41,9 @@ class MainTabBarController: UITabBarController, UserInfoPro {
                     //self.showHUD(message: msg!)
                 default: break
                 }
-                //DispatchQueue.main.async {
+                DispatchQueue.main.async {
                     self.creatSubViewControllers(true)
-                //}
+                }
                 
             }, onCompleted: nil, onDisposed: nil )
     }
