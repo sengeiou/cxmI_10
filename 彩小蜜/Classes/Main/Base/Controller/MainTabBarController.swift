@@ -10,18 +10,52 @@ import UIKit
 
 class MainTabBarController: UITabBarController, UserInfoPro {
 
+    private var configInfo : ConfigInfoModel!{
+        didSet{
+            guard configInfo != nil && configInfo.turnOn != nil else {
+                self.creatSubViewControllers(false)
+                return }
+            self.creatSubViewControllers(configInfo.turnOn)
+        }
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.creatSubViewControllers()
+        configRequest()
     }
 
+    func configRequest() {
+        weak var weakSelf = self
+        _ = userProvider.rx.request(.configQuety)
+            .asObservable()
+            .mapObject(type: ConfigInfoModel.self)
+            .subscribe(onNext: { (data) in
+                weakSelf?.configInfo = data
+            }, onError: { (error) in
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    print(code!)
+                    //self.showHUD(message: msg!)
+                default: break
+                }
+                self.creatSubViewControllers(false)
+            }, onCompleted: nil, onDisposed: nil )
+    }
     
-    public func creatSubViewControllers()
+    public func creatSubViewControllers(_ turnOn: Bool)
     {
         // 主页
         let home = HomeViewController()
-        home.homeStyle = .allShow
+        
+        if turnOn {
+            home.homeStyle = .allShow
+        }else {
+            home.homeStyle = .onlyNews
+        }
+        
         
         let homeNav = UINavigationController(rootViewController: home)
         homeNav.tabBarItem.imageInsets = UIEdgeInsets(top: 10, left: 0, bottom: -10, right: 0)
@@ -55,8 +89,11 @@ class MainTabBarController: UITabBarController, UserInfoPro {
         var me : BaseViewController!
         
         if getUserData() != nil {
-            //me = MeViewController()
-            me = NewsMeViewController()
+            if turnOn {
+                me = MeViewController()
+            }else {
+                me = NewsMeViewController()
+            }
         }else {
             me = LoginViewController()
         }

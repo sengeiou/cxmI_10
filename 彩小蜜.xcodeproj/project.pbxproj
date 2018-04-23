@@ -70,6 +70,9 @@
 		11EB8EE6207B791500AFC9C1 /* PaymentMethodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EB8EE5207B791500AFC9C1 /* PaymentMethodCell.swift */; };
 		11EB8EE8207B8A5500AFC9C1 /* FootballSaveBetInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EB8EE7207B8A5500AFC9C1 /* FootballSaveBetInfoModel.swift */; };
 		11EB8EEA207B8B1500AFC9C1 /* BonusInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EB8EE9207B8B1500AFC9C1 /* BonusInfoModel.swift */; };
+		11FEB943208D781400926951 /* DeviceInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FEB942208D781400926951 /* DeviceInfoModel.swift */; };
+		11FEB945208D78B900926951 /* ConfigInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FEB944208D78B900926951 /* ConfigInfoModel.swift */; };
+		11FEB947208D79A400926951 /* AppDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FEB946208D79A400926951 /* AppDelegateProtocol.swift */; };
 		2545AF6A97B25DA9BA7C9A3A /* Pods____.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB1F21E30D8FD47C0735B12D /* Pods____.framework */; };
 		E3730DD9CBCC541439A1110F /* Pods____Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D1D20EBEFE94020803D6D7 /* Pods____Tests.framework */; };
 		E503F5BE2079E8D6006D4A0B /* FootballFilterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E503F5BD2079E8D6006D4A0B /* FootballFilterProtocol.swift */; };
@@ -318,6 +321,9 @@
 		11EB8EE5207B791500AFC9C1 /* PaymentMethodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodCell.swift; sourceTree = "<group>"; };
 		11EB8EE7207B8A5500AFC9C1 /* FootballSaveBetInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballSaveBetInfoModel.swift; sourceTree = "<group>"; };
 		11EB8EE9207B8B1500AFC9C1 /* BonusInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusInfoModel.swift; sourceTree = "<group>"; };
+		11FEB942208D781400926951 /* DeviceInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoModel.swift; sourceTree = "<group>"; };
+		11FEB944208D78B900926951 /* ConfigInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigInfoModel.swift; sourceTree = "<group>"; };
+		11FEB946208D79A400926951 /* AppDelegateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateProtocol.swift; sourceTree = "<group>"; };
 		6B0C42B903C8908121D72F5C /* Pods-彩小蜜Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜Tests/Pods-彩小蜜Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		A0D1D20EBEFE94020803D6D7 /* Pods____Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods____Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0F39BAB4469B5128625D7A3 /* Pods-彩小蜜UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜UITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜UITests/Pods-彩小蜜UITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1253,6 +1259,7 @@
 				E57376002046B2E200148622 /* Model */,
 				E57375FF2046B2DF00148622 /* View */,
 				E57375FE2046B2DD00148622 /* Controller */,
+				11FEB946208D79A400926951 /* AppDelegateProtocol.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1422,6 +1429,8 @@
 			children = (
 				E514DDDF2052A37E00274854 /* DataModel.swift */,
 				E56CE8072069E63E0090A1B5 /* BasePageModel.swift */,
+				11FEB942208D781400926951 /* DeviceInfoModel.swift */,
+				11FEB944208D78B900926951 /* ConfigInfoModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2087,6 +2096,7 @@
 				E5883F582068E8C100CB3A46 /* MessageCenterVC.swift in Sources */,
 				E5973E2F204F8B33006461CE /* MeCell.swift in Sources */,
 				E56CE816206A3FBF0090A1B5 /* AccountStatisticsModel.swift in Sources */,
+				11FEB947208D79A400926951 /* AppDelegateProtocol.swift in Sources */,
 				E537397B2057F4270087E4E6 /* UserInfoDataModel.swift in Sources */,
 				E58B57BC205670670025E2F1 /* ServeConstraint.swift in Sources */,
 				E5973E1C204D4A75006461CE /* ScreenConstraint.swift in Sources */,
@@ -2106,6 +2116,7 @@
 				E567636A206B2FDA00E2D9A8 /* HHTextView.swift in Sources */,
 				E5973E33204FC1D9006461CE /* MeFooterView.swift in Sources */,
 				114491162085FC23009F1D09 /* FootballOddsCell.swift in Sources */,
+				11FEB943208D781400926951 /* DeviceInfoModel.swift in Sources */,
 				E581F37C2063573C002AB9F7 /* PaymentNetAPIManager.swift in Sources */,
 				E57376022046B37900148622 /* MainTabBarController.swift in Sources */,
 				E550D89420733891002DDE23 /* FootballOrderBottomView.swift in Sources */,
@@ -2190,6 +2201,7 @@
 				11062B2320832B99001C1D14 /* LotterySectionHeader.swift in Sources */,
 				114491122085E1C8009F1D09 /* FootballIntegralCollectionCell.swift in Sources */,
 				E51F9A5A205A122000AB8A21 /* VcodeTextFieldCell.swift in Sources */,
+				11FEB945208D78B900926951 /* ConfigInfoModel.swift in Sources */,
 				116EB20C207F029600B32ABD /* FootballCollectionView.swift in Sources */,
 				116EB20E207F064300B32ABD /* FootballScoreCollectionCell.swift in Sources */,
 				E550D89F207339F9002DDE23 /* FootballOrderBanQuanCCell.swift in Sources */,

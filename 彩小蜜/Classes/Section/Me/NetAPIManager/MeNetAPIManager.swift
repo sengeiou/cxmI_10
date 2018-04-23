@@ -52,6 +52,8 @@ enum MeNetAPIManager {
     case collectDelete(collectId : String)
     /// 收藏列表
     case collectList(pageNum: Int)
+    /// 切换
+    case configQuety
     
 }
 
@@ -113,6 +115,9 @@ extension MeNetAPIManager : TargetType {
             return "7071/user/collect/delete"
         case .collectList:
             return "7071/user/collect/list"
+        case .configQuety:
+            return "7071/switch/config/query"
+            
         }
     }
     

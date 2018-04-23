@@ -56,11 +56,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     //MARK: - 属性 public
     public var homeStyle : ShowType! = .onlyNews {
         didSet{
-            if homeStyle == .onlyNews {
-                
-            }else {
-                homeListRequest()
-            }
+            homeListRequest()
             self.view.addSubview(tableView)
         }
     }
@@ -110,7 +106,6 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         newsListRequest(1)
     }
     
-    
     //MARK: - 网络请求
     private func homeListRequest() {
         weak var weakSelf = self
@@ -118,12 +113,14 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
             .asObservable()
             .mapObject(type: HomeDataModel.self)
             .subscribe(onNext: { (data) in
+                weakSelf?.tableView.endrefresh()
                 weakSelf?.homeData = data
                 weakSelf?.tableView.reloadData()
                 guard data.navBanners != nil else { return }
                 weakSelf?.header.bannerList = data.navBanners
                 weakSelf?.newsListRequest(1)
             }, onError: { (error) in
+                weakSelf?.tableView.endrefresh()
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):
