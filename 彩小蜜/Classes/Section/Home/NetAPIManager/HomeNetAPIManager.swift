@@ -33,6 +33,8 @@ enum HomeNetAPIManager {
     case newsList(page: Int)
     /// 咨询详情
     case newsDetail(articleId: String)
+    /// 相关文章
+    case newsRecommend(articleId: String, page: Int)
 }
 
 extension HomeNetAPIManager : TargetType {
@@ -64,6 +66,8 @@ extension HomeNetAPIManager : TargetType {
             return "/dl/article/list"
         case .newsDetail:
             return "/dl/article/detail"
+        case .newsRecommend:
+            return "/dl/article/relatedArticles"
             
         }
     }
@@ -92,7 +96,9 @@ extension HomeNetAPIManager : TargetType {
             dic["size"] = "20"
         case .newsDetail(let articleId):
             dic["articleId"] = articleId
-            
+        case .newsRecommend(let articleId, let page):
+            dic["currentArticleId"] = articleId
+            dic["page"] = page
             
         default:
             return .requestPlain

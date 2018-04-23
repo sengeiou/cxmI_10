@@ -14,12 +14,14 @@ fileprivate let NewsThreePicCellId = "NewsThreePicCellId"
 
 class NewsRecommendVC: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
+    public var articleId : String!
+    
     private var collectModel: NewsListModel!
     private var collectList : [NewsInfoModel]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setEmpty(title: "暂无收藏", tableView)
+        setEmpty(title: "暂无相关文章", tableView)
         collectList = [NewsInfoModel]()
         collectionRequest(1)
         initSubview()
@@ -61,7 +63,7 @@ class NewsRecommendVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         
         weak var weakSelf = self
         
-        _ = userProvider.rx.request(.collectList(pageNum: pageNum))
+        _ = homeProvider.rx.request(.newsRecommend(articleId: articleId, page: pageNum))
             .asObservable()
             .mapObject(type: NewsListModel.self)
             .subscribe(onNext: { (data) in

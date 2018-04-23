@@ -18,7 +18,9 @@ fileprivate let NewsThreePicCellId = "NewsThreePicCellId"
 
 class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, NewsDetailCellDelegate, NewsDetailFooterDelegate {
     func didTipLookMore() {
-        
+        let recom = NewsRecommendVC()
+        recom.articleId = newsInfo.articleId
+        pushViewController(vc: recom)
     }
     
     func upDateCellHeight(height: CGFloat) {
