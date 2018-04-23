@@ -13,8 +13,11 @@ class NewsNoPicCell: UITableViewCell {
     // MARK: - 属性 public
     public var newsInfo : NewsInfoModel!{
         didSet{
+            guard newsInfo != nil else { return }
+            bottomView.newsInfo = newsInfo
             titleLb.text = newsInfo.title
             detailLb.text = newsInfo.summary
+           
         }
     }
     

@@ -15,6 +15,9 @@ class NewsOnePicCell: UITableViewCell {
     // MARK: - 属性 public
     public var newsInfo : NewsInfoModel!{
         didSet{
+            guard newsInfo != nil else { return }
+            bottomView.newsInfo = newsInfo
+            
             titleLb.text = newsInfo.title
             if newsInfo.listStyle == "4" {
                 guard newsInfo.articleThumb.count == 1 else { return }

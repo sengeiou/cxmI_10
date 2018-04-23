@@ -13,6 +13,9 @@ class NewsThreePicCell: UITableViewCell {
     // MARK: - 属性 public
     public var newsInfo : NewsInfoModel!{
         didSet{
+            guard newsInfo != nil else { return }
+            bottomView.newsInfo = newsInfo
+            
             titleLb.text = newsInfo.title
             
             guard newsInfo.articleThumb.count >= 3 else { return }

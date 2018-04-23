@@ -11,6 +11,15 @@ import UIKit
 class NewsBottomView: UIView {
 
     // MARK: - 属性 public
+    public var newsInfo : NewsInfoModel! {
+        didSet{
+            guard newsInfo != nil else { return }
+            titleLb.text = newsInfo.extendCat
+            timeLb.text = newsInfo.addTime
+            readNumLb.text = "阅读\(newsInfo.clickNumber!)"
+        }
+    }
+    
     // MARK: - 属性 private
     private var titleLb : UILabel!
     private var timeLb : UILabel!
@@ -26,10 +35,10 @@ class NewsBottomView: UIView {
         titleLb.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(0)
             make.left.equalTo(0)
-            make.width.equalTo(66 * defaultScale)
+            //make.width.equalTo(80 * defaultScale)
         }
         timeLb.snp.makeConstraints { (make) in
-            make.top.bottom.width.equalTo(titleLb)
+            make.top.bottom.equalTo(titleLb)
             make.left.equalTo(titleLb.snp.right).offset(16 * defaultScale)
         }
         readNumLb.snp.makeConstraints { (make) in
@@ -43,6 +52,7 @@ class NewsBottomView: UIView {
         titleLb = getLabel("彩小秘精选")
         titleLb.sizeToFit()
         timeLb = getLabel("今日04-17")
+        timeLb.sizeToFit()
         readNumLb = getLabel("阅读88888")
         
         self.addSubview(titleLb)
