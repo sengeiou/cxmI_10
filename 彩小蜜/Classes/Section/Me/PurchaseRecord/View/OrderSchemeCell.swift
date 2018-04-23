@@ -25,7 +25,28 @@ class OrderSchemeCell: UITableViewCell {
             contentLB.text = str
             passLB.text = schemeDetail.passType
             multipleLB.text = schemeDetail.multiple
-            orderState.text = schemeDetail.status
+            
+            guard schemeDetail.status != nil else { return }
+            switch schemeDetail.status {
+            case "0":
+                orderState.text = "待付款"
+            case "1":
+                orderState.text = "待出票"
+            case "2":
+                orderState.text = "出票失败"
+            case "3":
+                orderState.text = "待开奖"
+            case "4":
+                orderState.text = "未中奖"
+            case "5":
+                orderState.text = "已中奖"
+            case "6":
+                orderState.text = "派奖中"
+            default: break
+                
+            }
+            
+            
         }
     }
     
