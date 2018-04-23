@@ -17,7 +17,9 @@ fileprivate let minimumInteritemSpacing : CGFloat = 20 * defaultScale
 fileprivate let cellWidth : CGFloat = (screenWidth - leftInset * 2 - minimumInteritemSpacing * 4) / 4
 fileprivate let cellHeight : CGFloat = 70 * defaultScale
 
-class ShareViewController: BasePopViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class ShareViewController: BasePopViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, WeixinSharePro {
+    
+    
 
     // MARK: - 属性 private
     private var bottomLine : UIView!
@@ -26,7 +28,7 @@ class ShareViewController: BasePopViewController, UICollectionViewDelegate, UICo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        WeixinCenter.share.shareDelegate = self
         self.popStyle = .fromBottom
         
         shareList = ShareDataManager.share.getShardList()
@@ -61,7 +63,7 @@ class ShareViewController: BasePopViewController, UICollectionViewDelegate, UICo
     }
     
     private func shareWeixin() {
-        
+        share(title: "xxx", url: "ssss", scene: 0)
     }
     private func shareWeixinCircle() {
         
@@ -72,11 +74,22 @@ class ShareViewController: BasePopViewController, UICollectionViewDelegate, UICo
         showHUD(message: "复制连接成功")
     }
     
+    
+    
+    func onShardWeixin(response: SendMessageToWXResp) {
+        switch response.errCode {
+        case 0:
+            showHUD(message: "分享成功")
+            break
+        default:
+            break
+        }
+    }
+    
     // MARK: - 网络请求
     private func shareRequest() {
         
     }
-    
     override func viewDidLayoutSubviews() {
         bottomLine.snp.makeConstraints { (make) in
             make.bottom.equalTo(-36 * defaultScale)

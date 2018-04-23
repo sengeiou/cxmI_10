@@ -74,6 +74,9 @@
 		11FEB945208D78B900926951 /* ConfigInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FEB944208D78B900926951 /* ConfigInfoModel.swift */; };
 		11FEB947208D79A400926951 /* AppDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FEB946208D79A400926951 /* AppDelegateProtocol.swift */; };
 		11FEB95D208D8DA100926951 /* NewsDetailFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FEB95C208D8DA100926951 /* NewsDetailFooter.swift */; };
+		11FEB95F208DD55200926951 /* WeixinCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FEB95E208DD55200926951 /* WeixinCenter.swift */; };
+		11FEB962208DDAAA00926951 /* WeixinShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FEB961208DDAAA00926951 /* WeixinShare.swift */; };
+		11FEB964208DDC2100926951 /* AppKeyConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FEB963208DDC2100926951 /* AppKeyConstraint.swift */; };
 		2545AF6A97B25DA9BA7C9A3A /* Pods____.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB1F21E30D8FD47C0735B12D /* Pods____.framework */; };
 		E3730DD9CBCC541439A1110F /* Pods____Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D1D20EBEFE94020803D6D7 /* Pods____Tests.framework */; };
 		E503F5BE2079E8D6006D4A0B /* FootballFilterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E503F5BD2079E8D6006D4A0B /* FootballFilterProtocol.swift */; };
@@ -334,11 +337,14 @@
 		11FEB957208D7F6200926951 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		11FEB95A208D836D00926951 /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		11FEB95C208D8DA100926951 /* NewsDetailFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailFooter.swift; sourceTree = "<group>"; };
+		11FEB95E208DD55200926951 /* WeixinCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeixinCenter.swift; sourceTree = "<group>"; };
+		11FEB961208DDAAA00926951 /* WeixinShare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeixinShare.swift; sourceTree = "<group>"; };
+		11FEB963208DDC2100926951 /* AppKeyConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKeyConstraint.swift; sourceTree = "<group>"; };
 		6B0C42B903C8908121D72F5C /* Pods-彩小蜜Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜Tests/Pods-彩小蜜Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		A0D1D20EBEFE94020803D6D7 /* Pods____Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods____Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0D1D20EBEFE94020803D6D7 /* Pods____Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods____Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0F39BAB4469B5128625D7A3 /* Pods-彩小蜜UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜UITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜UITests/Pods-彩小蜜UITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A7A8CDA4EA02975014D806E4 /* Pods-彩小蜜.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜.release.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜/Pods-彩小蜜.release.xcconfig"; sourceTree = "<group>"; };
-		AB1F21E30D8FD47C0735B12D /* Pods____.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods____.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB1F21E30D8FD47C0735B12D /* Pods____.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods____.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C46655EB1FBD7C2CB77E79A1 /* Pods-彩小蜜UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜UITests/Pods-彩小蜜UITests.release.xcconfig"; sourceTree = "<group>"; };
 		C6498BCAF23256B536C54738 /* Pods-彩小蜜.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜.debug.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜/Pods-彩小蜜.debug.xcconfig"; sourceTree = "<group>"; };
 		E503F5BD2079E8D6006D4A0B /* FootballFilterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballFilterProtocol.swift; sourceTree = "<group>"; };
@@ -433,10 +439,10 @@
 		E57375A920468B8900148622 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E57375AC20468B8900148622 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E57375B320468B8900148622 /* 彩小蜜Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "彩小蜜Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E57375B720468B8900148622 /* ___Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ___Tests.swift; sourceTree = "<group>"; };
+		E57375B720468B8900148622 /* ___Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "___Tests.swift"; sourceTree = "<group>"; };
 		E57375B920468B8900148622 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E57375BE20468B8900148622 /* 彩小蜜UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "彩小蜜UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E57375C220468B8900148622 /* ___UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ___UITests.swift; sourceTree = "<group>"; };
+		E57375C220468B8900148622 /* ___UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "___UITests.swift"; sourceTree = "<group>"; };
 		E57375C420468B8900148622 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E57375F42046B1AD00148622 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E57376012046B37900148622 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -510,7 +516,7 @@
 		E5D8ABBB2067443E002D688B /* OrderProgrammeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderProgrammeCell.swift; sourceTree = "<group>"; };
 		E5D8ABBD206749F5002D688B /* OrderDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailHeaderView.swift; sourceTree = "<group>"; };
 		E5D8ABBF20674A07002D688B /* OrderDetailFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailFooterView.swift; sourceTree = "<group>"; };
-		EAE714330A11D581FBF18120 /* Pods____UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods____UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EAE714330A11D581FBF18120 /* Pods____UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods____UITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDB760CCFE10D3EA06C79E83 /* Pods-彩小蜜Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜Tests/Pods-彩小蜜Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -682,6 +688,14 @@
 				11FEB946208D79A400926951 /* AppDelegateProtocol.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		11FEB960208DDA7D00926951 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				11FEB961208DDAAA00926951 /* WeixinShare.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		3D53D12139ECA36385ED9222 /* Pods */ = {
@@ -1307,6 +1321,7 @@
 				E5973E21204E34F2006461CE /* ColorConstraint.swift */,
 				E58B57B120561BB80025E2F1 /* Spacing&SizeConstraint.swift */,
 				E58B57BB205670670025E2F1 /* ServeConstraint.swift */,
+				11FEB963208DDC2100926951 /* AppKeyConstraint.swift */,
 			);
 			path = Constraints;
 			sourceTree = "<group>";
@@ -1373,6 +1388,7 @@
 		E57375F62046B1E800148622 /* Share */ = {
 			isa = PBXGroup;
 			children = (
+				11FEB960208DDA7D00926951 /* Utils */,
 				E57375FA2046B21500148622 /* Model */,
 				E57375F92046B21100148622 /* View */,
 				E57375F82046B20F00148622 /* Controller */,
@@ -1477,6 +1493,7 @@
 			isa = PBXGroup;
 			children = (
 				E581F377206348EB002AB9F7 /* UserInfoManager.swift */,
+				11FEB95E208DD55200926951 /* WeixinCenter.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -1997,6 +2014,7 @@
 				E59CB3DF205BA17F0086DD0E /* HomeHeaderView.swift in Sources */,
 				E514DDE22052B3E000274854 /* WithdrawalViewController.swift in Sources */,
 				E5B68AFD205A81A70038A5A2 /* Extension+Color.swift in Sources */,
+				11FEB964208DDC2100926951 /* AppKeyConstraint.swift in Sources */,
 				11227C162084D7C900680CCC /* FootballMatchInfoHeader.swift in Sources */,
 				E56CE80C206A21670090A1B5 /* WithdrawalProgressVC.swift in Sources */,
 				E512A96D20480917003F14F4 /* HomeDataModel.swift in Sources */,
@@ -2011,6 +2029,7 @@
 				11062B2F20834BFA001C1D14 /* LotteryDateModel.swift in Sources */,
 				E537397D2057F7220087E4E6 /* RealInfoDataModel.swift in Sources */,
 				11062B2520833295001C1D14 /* LotteryResultModel.swift in Sources */,
+				11FEB95F208DD55200926951 /* WeixinCenter.swift in Sources */,
 				114491082085A76A009F1D09 /* FootballMatchInfoCell.swift in Sources */,
 				E58B57BA2056364A0025E2F1 /* AddNewBankCardVC.swift in Sources */,
 				E51F9A64205A2A2D00AB8A21 /* ForgetPswVCodeFooterView.swift in Sources */,
@@ -2116,6 +2135,7 @@
 				114490FD20858CF2009F1D09 /* FootballMatchPagerView.swift in Sources */,
 				E550D8A320733A2D002DDE23 /* FootballOrderHunheCell.swift in Sources */,
 				E5D8ABBE206749F5002D688B /* OrderDetailHeaderView.swift in Sources */,
+				11FEB962208DDAAA00926951 /* WeixinShare.swift in Sources */,
 				1144911B208611A3009F1D09 /* FootballMatchInfoProtocol.swift in Sources */,
 				114491142085F6FC009F1D09 /* FootballOddsTitleView.swift in Sources */,
 				E581F378206348EB002AB9F7 /* UserInfoManager.swift in Sources */,
