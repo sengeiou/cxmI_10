@@ -324,6 +324,14 @@
 		11FEB942208D781400926951 /* DeviceInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoModel.swift; sourceTree = "<group>"; };
 		11FEB944208D78B900926951 /* ConfigInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigInfoModel.swift; sourceTree = "<group>"; };
 		11FEB946208D79A400926951 /* AppDelegateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateProtocol.swift; sourceTree = "<group>"; };
+		11FEB94B208D7F1A00926951 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		11FEB94D208D7F2C00926951 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		11FEB94F208D7F3D00926951 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		11FEB951208D7F4800926951 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		11FEB953208D7F5200926951 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		11FEB955208D7F5900926951 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		11FEB957208D7F6200926951 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		11FEB95A208D836D00926951 /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		6B0C42B903C8908121D72F5C /* Pods-彩小蜜Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜Tests/Pods-彩小蜜Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		A0D1D20EBEFE94020803D6D7 /* Pods____Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods____Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0F39BAB4469B5128625D7A3 /* Pods-彩小蜜UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜UITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜UITests/Pods-彩小蜜UITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -655,6 +663,14 @@
 				116EB20D207F064300B32ABD /* FootballScoreCollectionCell.swift */,
 			);
 			path = TeamView;
+			sourceTree = "<group>";
+		};
+		11FEB948208D7E9500926951 /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+				11FEB95A208D836D00926951 /* Header.h */,
+			);
+			path = ThirdParty;
 			sourceTree = "<group>";
 		};
 		3D53D12139ECA36385ED9222 /* Pods */ = {
@@ -1022,6 +1038,7 @@
 			children = (
 				E57375D32046ADEF00148622 /* Main */,
 				E57375D42046AE0000148622 /* Section */,
+				11FEB948208D7E9500926951 /* ThirdParty */,
 				E57375D52046AE1900148622 /* Resource */,
 			);
 			path = Classes;
@@ -1662,6 +1679,13 @@
 		F57F686066089931831C044D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				11FEB957208D7F6200926951 /* CFNetwork.framework */,
+				11FEB955208D7F5900926951 /* CoreTelephony.framework */,
+				11FEB953208D7F5200926951 /* Security.framework */,
+				11FEB951208D7F4800926951 /* libc++.tbd */,
+				11FEB94F208D7F3D00926951 /* libsqlite3.0.tbd */,
+				11FEB94D208D7F2C00926951 /* libz.tbd */,
+				11FEB94B208D7F1A00926951 /* SystemConfiguration.framework */,
 				AB1F21E30D8FD47C0735B12D /* Pods____.framework */,
 				A0D1D20EBEFE94020803D6D7 /* Pods____Tests.framework */,
 				EAE714330A11D581FBF18120 /* Pods____UITests.framework */,
@@ -1681,7 +1705,6 @@
 				E573759C20468B8900148622 /* Frameworks */,
 				E573759D20468B8900148622 /* Resources */,
 				25F43C7BE8B0DD4E14204301 /* [CP] Embed Pods Frameworks */,
-				623303F5366469B92F2470C1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1700,8 +1723,6 @@
 				E57375AF20468B8900148622 /* Sources */,
 				E57375B020468B8900148622 /* Frameworks */,
 				E57375B120468B8900148622 /* Resources */,
-				54D56FDC0BFD83A07D628527 /* [CP] Embed Pods Frameworks */,
-				E68FC5C33B1ED42E83E112C2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1721,8 +1742,6 @@
 				E57375BA20468B8900148622 /* Sources */,
 				E57375BB20468B8900148622 /* Frameworks */,
 				E57375BC20468B8900148622 /* Resources */,
-				2CCAFC087A61EAC820D9BAB2 /* [CP] Embed Pods Frameworks */,
-				BD264850B97AED66792FE8FE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1872,66 +1891,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-彩小蜜/Pods-彩小蜜-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2CCAFC087A61EAC820D9BAB2 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-彩小蜜UITests/Pods-彩小蜜UITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		54D56FDC0BFD83A07D628527 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-彩小蜜Tests/Pods-彩小蜜Tests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		623303F5366469B92F2470C1 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-彩小蜜/Pods-彩小蜜-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BD264850B97AED66792FE8FE /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-彩小蜜UITests/Pods-彩小蜜UITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		DFC20DFC2DF2096E3AD54A9F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1948,21 +1907,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E68FC5C33B1ED42E83E112C2 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-彩小蜜Tests/Pods-彩小蜜Tests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EABDCA905BED886359D05605 /* [CP] Check Pods Manifest.lock */ = {
@@ -2385,6 +2329,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bjfu.goodcall.---";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/彩小蜜/Classes/ThirdParty/Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2402,6 +2347,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bjfu.goodcall.---";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/彩小蜜/Classes/ThirdParty/Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

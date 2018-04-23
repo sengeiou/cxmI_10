@@ -41,7 +41,7 @@ class MainTabBarController: UITabBarController, UserInfoPro {
                     //self.showHUD(message: msg!)
                 default: break
                 }
-                self.creatSubViewControllers(false)
+                self.creatSubViewControllers(true)
             }, onCompleted: nil, onDisposed: nil )
     }
     

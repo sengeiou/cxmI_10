@@ -17,6 +17,7 @@ PODS:
   - SnapKit (4.0.0)
   - SVProgressHUD (2.2.5)
   - TTTAttributedLabel (2.0.0)
+  - WechatOpenSDK (1.8.2)
   - XLPagerTabStrip (8.0.0)
 
 DEPENDENCIES:
@@ -32,7 +33,26 @@ DEPENDENCIES:
   - SnapKit
   - SVProgressHUD
   - TTTAttributedLabel
+  - WechatOpenSDK
   - XLPagerTabStrip (~> 8.0)
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Alamofire
+    - DZNEmptyDataSet
+    - FSPagerView
+    - HandyJSON
+    - Kingfisher
+    - MJRefresh
+    - Moya
+    - PKHUD
+    - Result
+    - RxSwift
+    - SnapKit
+    - SVProgressHUD
+    - TTTAttributedLabel
+    - WechatOpenSDK
+    - XLPagerTabStrip
 
 SPEC CHECKSUMS:
   Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
@@ -48,8 +68,9 @@ SPEC CHECKSUMS:
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
+  WechatOpenSDK: 676feec516a11173eafd1fe64b10d27babf28701
   XLPagerTabStrip: d1ab378af0923320ec0b5eab11d7b2f803d31261
 
-PODFILE CHECKSUM: 17b16d4309fea29f64edb62e9ef66866de9490c3
+PODFILE CHECKSUM: 2b9d3bf7d217ad33d765fa2bb19f7e56e0f9a506
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.0

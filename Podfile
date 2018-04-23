@@ -33,6 +33,7 @@ target '彩小蜜' do
 
   pod 'XLPagerTabStrip', '~> 8.0'
 
+  pod 'WechatOpenSDK'
 
   # Pods for 彩小蜜
 

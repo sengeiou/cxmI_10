@@ -14,5 +14,7 @@ protocol AppDelegateProtocol {
 }
 
 extension AppDelegateProtocol where Self : AppDelegate {
+    func xxxx() {
     
+    }
 }
