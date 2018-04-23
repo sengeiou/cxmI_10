@@ -31,6 +31,8 @@ enum HomeNetAPIManager {
     case matchTeamInfoSum(matchId: String)
     /// 咨询首页列表
     case newsList(page: Int)
+    /// 咨询详情
+    case newsDetail(articleId: String)
 }
 
 extension HomeNetAPIManager : TargetType {
@@ -60,7 +62,8 @@ extension HomeNetAPIManager : TargetType {
             return "/lottery/match/matchTeamInfosSum"
         case .newsList:
             return "/dl/article/list"
-            
+        case .newsDetail:
+            return "/dl/article/detail"
             
         }
     }
@@ -87,6 +90,9 @@ extension HomeNetAPIManager : TargetType {
         case .newsList(let page):
             dic["page"] = page
             dic["size"] = "20"
+        case .newsDetail(let articleId):
+            dic["articleId"] = articleId
+            
             
         default:
             return .requestPlain

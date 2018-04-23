@@ -73,6 +73,7 @@
 		11FEB943208D781400926951 /* DeviceInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FEB942208D781400926951 /* DeviceInfoModel.swift */; };
 		11FEB945208D78B900926951 /* ConfigInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FEB944208D78B900926951 /* ConfigInfoModel.swift */; };
 		11FEB947208D79A400926951 /* AppDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FEB946208D79A400926951 /* AppDelegateProtocol.swift */; };
+		11FEB95D208D8DA100926951 /* NewsDetailFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FEB95C208D8DA100926951 /* NewsDetailFooter.swift */; };
 		2545AF6A97B25DA9BA7C9A3A /* Pods____.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB1F21E30D8FD47C0735B12D /* Pods____.framework */; };
 		E3730DD9CBCC541439A1110F /* Pods____Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D1D20EBEFE94020803D6D7 /* Pods____Tests.framework */; };
 		E503F5BE2079E8D6006D4A0B /* FootballFilterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E503F5BD2079E8D6006D4A0B /* FootballFilterProtocol.swift */; };
@@ -332,6 +333,7 @@
 		11FEB955208D7F5900926951 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		11FEB957208D7F6200926951 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		11FEB95A208D836D00926951 /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
+		11FEB95C208D8DA100926951 /* NewsDetailFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailFooter.swift; sourceTree = "<group>"; };
 		6B0C42B903C8908121D72F5C /* Pods-彩小蜜Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜Tests/Pods-彩小蜜Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		A0D1D20EBEFE94020803D6D7 /* Pods____Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods____Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0F39BAB4469B5128625D7A3 /* Pods-彩小蜜UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜UITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜UITests/Pods-彩小蜜UITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -596,6 +598,7 @@
 				113B9CCE2087204A006AE3F8 /* NewsThreePicCell.swift */,
 				113B9CD020872226006AE3F8 /* NewsBottomView.swift */,
 				11D9D9E52089D6A200F78FCF /* NewsDetailCell.swift */,
+				11FEB95C208D8DA100926951 /* NewsDetailFooter.swift */,
 			);
 			path = NewsView;
 			sourceTree = "<group>";
@@ -671,6 +674,14 @@
 				11FEB95A208D836D00926951 /* Header.h */,
 			);
 			path = ThirdParty;
+			sourceTree = "<group>";
+		};
+		11FEB95B208D853800926951 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				11FEB946208D79A400926951 /* AppDelegateProtocol.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 		3D53D12139ECA36385ED9222 /* Pods */ = {
@@ -1063,6 +1074,7 @@
 				E512A9672047E532003F14F4 /* Network */,
 				E57375E72046AFC900148622 /* Extension */,
 				E57375EC2046B04600148622 /* Constraints */,
+				11FEB95B208D853800926951 /* Protocol */,
 				E581F37620634899002AB9F7 /* Util */,
 				E57375E92046B02C00148622 /* Tool */,
 			);
@@ -1276,7 +1288,6 @@
 				E57376002046B2E200148622 /* Model */,
 				E57375FF2046B2DF00148622 /* View */,
 				E57375FE2046B2DD00148622 /* Controller */,
-				11FEB946208D79A400926951 /* AppDelegateProtocol.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -2131,6 +2142,7 @@
 				E51F9A5C205A29B800AB8A21 /* RegisterFooterView.swift in Sources */,
 				E55016F5207220100056AB1F /* FootballFilterBottomView.swift in Sources */,
 				E5973E1E204D50BC006461CE /* CustomTextField.swift in Sources */,
+				11FEB95D208D8DA100926951 /* NewsDetailFooter.swift in Sources */,
 				E5786FBC206DE98A0045F7F5 /* FootballScoreCell.swift in Sources */,
 				E5D5A37B206D193100FC865D /* FootballBottomView.swift in Sources */,
 				E562989F2050E04C006397EA /* ValidateProtocol.swift in Sources */,

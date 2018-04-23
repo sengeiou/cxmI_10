@@ -38,7 +38,7 @@ struct NewsInfoModel: HandyJSON {
     var articleThumb : [String]!
     /// 阅读量
     var clickNumber: String!
-    var isVideo: Bool!
+    
     /// 分类
     var extendCat: String!
     /// 关键字
@@ -57,4 +57,21 @@ struct NewsInfoModel: HandyJSON {
     var title: String!
     
     
+}
+
+struct NewsDetailModel: HandyJSON {
+    var addTime: String!
+    var articleId: String!
+    var articleThumb: [String]!
+    var articles : [NewsInfoModel]!
+    var clickNumber: String!
+    var extendCat: String!
+    var keywords: String!
+    var content: String!
+    var link: String!
+    var listStyle: String!
+    var matchId: String!
+    var relatedTeam: String!
+    var summary: String!
+    var title: String!
 }

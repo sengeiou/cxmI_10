@@ -11,9 +11,16 @@ import WebKit
 
 fileprivate let NewsDetailCellId = "NewsDetailCellId"
 
+fileprivate let NewsNoPicCellId = "NewsNoPicCellId"
+fileprivate let NewsOnePicCellId = "NewsOnePicCellId"
+fileprivate let NewsThreePicCellId = "NewsThreePicCellId"
 
 
-class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, NewsDetailCellDelegate {
+class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, NewsDetailCellDelegate, NewsDetailFooterDelegate {
+    func didTipLookMore() {
+        
+    }
+    
     func upDateCellHeight(height: CGFloat) {
         
         //tableView.rowHeight = 1000
@@ -27,12 +34,15 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
     // MARK: - 属性 public
     public var newsInfo : NewsInfoModel!
     // MARK: - 属性 private
+    private var detailModel: NewsDetailModel!
     private var collectBut: UIButton!    // 收藏
     private var shareBut: UIButton!      // 分享
     private var cellHeight : CGFloat = 50
+    private var footer : NewsDetailFooter!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        newsDetailRequest()
         setRightItem()
         initSubview()
     }
@@ -77,6 +87,26 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
         self.navigationItem.rightBarButtonItems = [shareItem, collectItem]
     }
     
+    // MARK: - 网络请求
+    private func newsDetailRequest() {
+        weak var weakSelf = self
+        _ = homeProvider.rx.request(.newsDetail(articleId: newsInfo.articleId))
+        .asObservable()
+        .mapObject(type: NewsDetailModel.self)
+            .subscribe(onNext: { (data) in
+                weakSelf?.detailModel = data
+                weakSelf?.tableView.reloadData()
+            }, onError: { (error) in
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    print(code!)
+                    weakSelf?.showHUD(message: msg!)
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil )
+    }
+    
     private func addCollectRequest() {
         weak var weakSelf = self
         _ = userProvider.rx.request(.collectAdd(articledId: newsInfo.articleId, articleTitle: newsInfo.title, collectFrom: ""))
@@ -103,8 +133,13 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
         table.dataSource = self
         table.backgroundColor = ColorF4F4F4
         table.register(NewsDetailCell.self, forCellReuseIdentifier: NewsDetailCellId)
-       
+        table.register(NewsNoPicCell.self, forCellReuseIdentifier: NewsNoPicCellId)
+        table.register(NewsOnePicCell.self, forCellReuseIdentifier: NewsOnePicCellId)
+        table.register(NewsThreePicCell.self, forCellReuseIdentifier: NewsThreePicCellId)
         
+        let footer = NewsDetailFooter()
+        footer.delegate = self
+        table.tableFooterView = footer
         return table
     }()
     //MARK: - tableView dataSource
@@ -113,25 +148,71 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+       
+        if section == 0 {
+            return 1
+        }else {
+            guard self.detailModel != nil, self.detailModel.articles != nil else { return 0 }
+            return self.detailModel.articles.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section ==  0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: NewsDetailCellId, for: indexPath) as! NewsDetailCell
+            cell.detailInfo = self.detailModel
             cell.delegate = self
             
             return cell
         }else {
+            let newsInfo = self.detailModel.articles[indexPath.row]
             
+            if newsInfo.listStyle == "1" || newsInfo.listStyle == "4" {
+                return initNewsOnePicCell(indexPath: indexPath)
+            }else if newsInfo.listStyle == "3" {
+                return initNewsThreePicCell(indexPath: indexPath)
+            }else {
+                return initNewsNoPicCell(indexPath: indexPath)
+            }
         }
         
         return UITableViewCell()
     }
     
+    private func initNewsNoPicCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: NewsNoPicCellId, for: indexPath) as! NewsNoPicCell
+        cell.newsInfo = self.detailModel.articles[indexPath.row]
+        return cell
+    }
+    
+    private func initNewsThreePicCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: NewsThreePicCellId, for: indexPath) as! NewsThreePicCell
+        cell.newsInfo = self.detailModel.articles[indexPath.row]
+        return cell
+    }
+    
+    private func initNewsOnePicCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: NewsOnePicCellId, for: indexPath) as! NewsOnePicCell
+        cell.newsInfo = self.detailModel.articles[indexPath.row]
+        return cell
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return cellHeight
+        
+        if indexPath.section == 0 {
+            return cellHeight
+        }else {
+            let newsInfo = self.detailModel.articles[indexPath.row]
+            
+            if newsInfo.listStyle == "1" || newsInfo.listStyle == "4" || newsInfo.listStyle == "0" {
+                return 110 * defaultScale
+            }
+            else {
+                return 140 * defaultScale
+            }
+        }
+        
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 5
