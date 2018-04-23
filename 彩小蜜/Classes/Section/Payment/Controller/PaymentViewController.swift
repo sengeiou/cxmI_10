@@ -17,7 +17,9 @@ enum PaymentMethod : String{
 fileprivate let PaymentCellId = "PaymentCellId"
 fileprivate let PaymentMethodCellId = "PaymentMethodCellId"
 
-class PaymentViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, CouponFilterViewControllerDelegate {
+class PaymentViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, CouponFilterViewControllerDelegate, WeixinPayDelegate {
+    
+    
     
 
     public var requestModel: FootballRequestMode!
@@ -32,11 +34,15 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        WeixinCenter.share.payDelegate = self
         initSubview()
         orderRequest()
     }
 
+    func onPaybuyWeixin(response: PayResp) {
+        
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.snp.makeConstraints { (make) in
