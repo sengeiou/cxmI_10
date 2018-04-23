@@ -19,26 +19,31 @@ class MainTabBarController: UITabBarController, UserInfoPro {
         //configRequest()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configRequest()
+    }
+    
     func configRequest() {
-        weak var weakSelf = self
+        //weak var weakSelf = self
         _ = userProvider.rx.request(.configQuety)
             .asObservable()
             .mapObject(type: ConfigInfoModel.self)
             .subscribe(onNext: { (data) in
-                DispatchQueue.main.async {
+                //DispatchQueue.main.async {
                     self.creatSubViewControllers(data.turnOn)
-                }
+                //}
             }, onError: { (error) in
                 guard let err = error as? HXError else { return }
                 switch err {
-                case .UnexpectedResult(let code, let msg):
-                    print(code!)
+                case .UnexpectedResult: break
+                    
                     //self.showHUD(message: msg!)
                 default: break
                 }
-                DispatchQueue.main.async {
+                //DispatchQueue.main.async {
                     self.creatSubViewControllers(true)
-                }
+                //}
                 
             }, onCompleted: nil, onDisposed: nil )
     }
