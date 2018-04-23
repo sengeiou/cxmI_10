@@ -8,6 +8,8 @@
 
 import UIKit
 
+let device = DeviceManager.share.device
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, AppDelegateProtocol {
 

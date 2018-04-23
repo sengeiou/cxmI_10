@@ -115,7 +115,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
             .subscribe(onNext: { (data) in
                 weakSelf?.tableView.endrefresh()
                 weakSelf?.homeData = data
-                weakSelf?.tableView.reloadData()
+                //weakSelf?.tableView.reloadData()
                 guard data.navBanners != nil else { return }
                 weakSelf?.header.bannerList = data.navBanners
                 weakSelf?.newsListRequest(1)

@@ -10,20 +10,13 @@ import UIKit
 
 class MainTabBarController: UITabBarController, UserInfoPro {
 
-    private var configInfo : ConfigInfoModel!{
-        didSet{
-            guard configInfo != nil && configInfo.turnOn != nil else {
-                self.creatSubViewControllers(false)
-                return }
-            self.creatSubViewControllers(configInfo.turnOn)
-        }
-    }
+    //private var configInfo : ConfigInfoModel!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configRequest()
+        //configRequest()
     }
 
     func configRequest() {
@@ -32,7 +25,9 @@ class MainTabBarController: UITabBarController, UserInfoPro {
             .asObservable()
             .mapObject(type: ConfigInfoModel.self)
             .subscribe(onNext: { (data) in
-                weakSelf?.configInfo = data
+                DispatchQueue.main.async {
+                    self.creatSubViewControllers(data.turnOn)
+                }
             }, onError: { (error) in
                 guard let err = error as? HXError else { return }
                 switch err {
@@ -41,7 +36,10 @@ class MainTabBarController: UITabBarController, UserInfoPro {
                     //self.showHUD(message: msg!)
                 default: break
                 }
-                self.creatSubViewControllers(true)
+                DispatchQueue.main.async {
+                    self.creatSubViewControllers(true)
+                }
+                
             }, onCompleted: nil, onDisposed: nil )
     }
     

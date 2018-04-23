@@ -35,6 +35,8 @@ target '彩小蜜' do
 
   pod 'WechatOpenSDK'
 
+ 
+
   # Pods for 彩小蜜
 
   target '彩小蜜Tests' do

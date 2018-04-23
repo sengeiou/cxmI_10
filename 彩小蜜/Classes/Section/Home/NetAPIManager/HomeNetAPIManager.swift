@@ -75,6 +75,9 @@ extension HomeNetAPIManager : TargetType {
     var task: Task {
         var dic : [String: Any] = [:]
         
+        
+        
+        dic["divice"] = device?.toJSON()
         switch self {
         case .playList(let fyId):
             dic["lotteryClassifyId"] = fyId
