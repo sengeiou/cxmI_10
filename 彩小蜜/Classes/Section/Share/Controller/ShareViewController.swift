@@ -66,7 +66,7 @@ class ShareViewController: BasePopViewController, UICollectionViewDelegate, UICo
         share(title: "xxx", url: "ssss", scene: 0)
     }
     private func shareWeixinCircle() {
-        
+        share(title: "sss", url: "ssf", scene: 1)
     }
     private func shareLink() {
         let paseboard = UIPasteboard.general
@@ -74,8 +74,7 @@ class ShareViewController: BasePopViewController, UICollectionViewDelegate, UICo
         showHUD(message: "复制连接成功")
     }
     
-    
-    
+    // MARK: - 分享 delegate
     func onShardWeixin(response: SendMessageToWXResp) {
         switch response.errCode {
         case 0:

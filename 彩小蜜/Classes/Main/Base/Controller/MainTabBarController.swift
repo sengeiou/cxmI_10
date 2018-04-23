@@ -16,12 +16,12 @@ class MainTabBarController: UITabBarController, UserInfoPro {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //configRequest()
+        configRequest()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        configRequest()
+        
     }
     
     func configRequest() {

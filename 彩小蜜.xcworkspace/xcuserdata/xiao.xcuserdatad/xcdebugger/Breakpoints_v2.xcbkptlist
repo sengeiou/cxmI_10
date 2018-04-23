@@ -84,12 +84,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Share/Controller/ShareViewController.swift"
-            timestampString = "546168525.228012"
+            timestampString = "546170594.2657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
-            landmarkName = "onShardWeixin(response:)"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
+            landmarkName = "shareWeixin()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -99,13 +99,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Share/Controller/ShareViewController.swift"
-            timestampString = "546168554.067959"
+            filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Main/Base/Controller/MainTabBarController.swift"
+            timestampString = "546170594.265803"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "shareWeixin()"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "configRequest()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
