@@ -15,7 +15,7 @@ class MainTabBarController: UITabBarController, UserInfoPro {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.view.backgroundColor = ColorFFFFFF
         configRequest()
     }
 

@@ -29,6 +29,7 @@ class RechargePaymentTitleCell: UITableViewCell {
     }
     
     private func initSubview() {
+        self.selectionStyle = .none
         title = UILabel()
         title.text = "支付方式"
         title.textColor = Color505050

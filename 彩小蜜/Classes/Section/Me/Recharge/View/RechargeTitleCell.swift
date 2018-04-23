@@ -32,6 +32,8 @@ class RechargeTitleCell: UITableViewCell {
         }
     }
     private func initSubview() {
+        self.selectionStyle = .none
+        
         account = UILabel()
         account.text = "当前账号: 114548655425365"
         account.font = Font15

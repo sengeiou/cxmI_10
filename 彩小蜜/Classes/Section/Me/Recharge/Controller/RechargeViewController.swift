@@ -41,7 +41,7 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
     private var footerView : RechargeFooterView!
     private var rechargeAmount : String?
     private var cardCell : RechargeCardCell!
-    
+    private var textfield : UITextField!
     
     
     //MARK: - 生命周期
@@ -107,6 +107,7 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
             let cell = tableview.dequeueReusableCell(withIdentifier: RechargeCardCellIdentifier, for: indexPath) as! RechargeCardCell
             self.cardCell = cell
             cell.textfield.delegate = self
+            self.textfield = cell.textfield
             return cell
         case 2:
             if indexPath.row == 0 {
@@ -151,6 +152,16 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
     //MARK: - UI
     private func initSubview() {
         
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard self.textfield != nil else { return }
+        self.textfield.resignFirstResponder()
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard self.textfield != nil else { return }
+        self.textfield.resignFirstResponder()
     }
     
     override func didReceiveMemoryWarning() {
