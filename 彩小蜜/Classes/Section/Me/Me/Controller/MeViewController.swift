@@ -46,6 +46,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     func rechargeClicked() {
         print("充值")
         let recharge = RechargeViewController()
+        recharge.userInfo = userInfo
         pushViewController(vc: recharge)
     }
     

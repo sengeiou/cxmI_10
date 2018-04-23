@@ -10,6 +10,13 @@ import UIKit
 
 class RechargeTitleCell: UITableViewCell {
 
+    public var userInfo  : UserInfoDataModel!{
+        didSet{
+            account.text = "当前账号: \(userInfo.mobile!)"
+            balance.text = "当前余额: \(userInfo.userMoney!)"
+        }
+    }
+    
     private var account : UILabel! // 账号
     private var balance : UILabel! // 余额
     

@@ -83,7 +83,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         orderRequest()
         initSubview()
         setEmpty(title: "暂无可选赛事", tableView)
-        setRightButtonItem()
+        //setRightButtonItem()
         
     }
     override func viewDidLayoutSubviews() {

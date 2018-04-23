@@ -73,7 +73,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         newsList = [NewsInfoModel]()
         hideBackBut()
         
-        setRightBarItem()
+        //setRightBarItem()
         self.tableView.headerRefresh {
             self.loadNewData()
         }

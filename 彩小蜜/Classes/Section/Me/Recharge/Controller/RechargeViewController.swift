@@ -14,6 +14,25 @@ fileprivate let RechargePaymentTitleCellId = "RechargePaymentTitleCellId"
 
 class RechargeViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, RechargeFooterViewDelegate, UITextFieldDelegate, ValidatePro {
     
+    
+    
+    public var userInfo  : UserInfoDataModel!
+    
+    //MARK: - 属性
+    private var headerView : RechargeHeaderView!
+    private var footerView : RechargeFooterView!
+    private var rechargeAmount : String?
+    private var cardCell : RechargeCardCell!
+    private var textfield : UITextField!
+    
+    
+    //MARK: - 生命周期
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.title = "彩小秘 · 充值"
+        initSubview()
+    }
+    
     //MARK: - 点击事件
     func recharge() {
         guard validate(.number, str: self.cardCell.textfield.text) else {
@@ -36,20 +55,6 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
         
     }
     
-    //MARK: - 属性
-    private var headerView : RechargeHeaderView!
-    private var footerView : RechargeFooterView!
-    private var rechargeAmount : String?
-    private var cardCell : RechargeCardCell!
-    private var textfield : UITextField!
-    
-    
-    //MARK: - 生命周期
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.title = "彩小秘 · 充值"
-        initSubview()
-    }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableview.snp.makeConstraints { (make) in
@@ -101,7 +106,7 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: RechargeTitleCellIdentifier, for: indexPath) as! RechargeTitleCell
-            
+            cell.userInfo = self.userInfo
             return cell
         case 1:
             let cell = tableview.dequeueReusableCell(withIdentifier: RechargeCardCellIdentifier, for: indexPath) as! RechargeCardCell
