@@ -136,12 +136,12 @@ class FootballHunheView: UIView {
         matchInfo.homeCell.isSelected = false
         matchInfo.flatCell.isSelected = false
         matchInfo.visitingCell.isSelected = false
-        guard matchInfo.homeCell != nil else { return }
-        teamInfo.selectedHunhe.remove(matchInfo.homeCell)
-        guard matchInfo.flatCell != nil else { return }
-        teamInfo.selectedHunhe.remove(matchInfo.flatCell)
-        guard matchInfo.visitingCell != nil else { return }
-        teamInfo.selectedHunhe.remove(matchInfo.visitingCell)
+        
+        for cell in teamInfo.selectedHunhe {
+            cell.isSelected = false
+        }
+        
+        teamInfo.selectedHunhe.removeAll()
         
 //        switch matchType {
 //        case .胜平负:

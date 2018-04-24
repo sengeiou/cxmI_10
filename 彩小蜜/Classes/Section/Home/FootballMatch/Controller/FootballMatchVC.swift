@@ -569,6 +569,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
             guard (weakSelf?.selectPlayList.count)! < 15  else {
                 view.backSelectedState()
                 weakSelf?.showHUD(message: "最多可选15场比赛")
+                //self.tableView.reloadData()
                 return }
             
             if selectedCells.isEmpty == false {
