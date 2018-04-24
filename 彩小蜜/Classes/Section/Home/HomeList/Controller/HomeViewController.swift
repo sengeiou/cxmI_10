@@ -56,7 +56,8 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     //MARK: - 属性 public
     public var homeStyle : ShowType! = .onlyNews {
         didSet{
-            homeListRequest()
+            //homeListRequest()
+            homeListAddNewsRequest(pageNum: 1)
             self.view.addSubview(tableView)
         }
     }
@@ -95,8 +96,9 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     
     //MARK: - 加载数据
     private func loadNewData() {
-        homeListRequest()
+        //homeListRequest()
         //newsListRequest(1)
+        homeListAddNewsRequest(pageNum: 1)
     }
     private func loadNextData() {
         guard self.newsListModel != nil else { return }
@@ -104,60 +106,86 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
             self.tableView.noMoreData()
             return }
         
-        newsListRequest(1)
+        //newsListRequest(1)
+        homeListAddNewsRequest(pageNum: self.newsListModel.nextPage)
     }
     
     //MARK: - 网络请求
-    private func homeListRequest() {
+    private func homeListAddNewsRequest(pageNum: Int) {
         weak var weakSelf = self
-        _ = homeProvider.rx.request(.homeList)
+        _ = homeProvider.rx.request(.hallMixData(page: pageNum))
             .asObservable()
-            .mapObject(type: HomeDataModel.self)
+            .mapObject(type: HomeListModel.self)
             .subscribe(onNext: { (data) in
-                weakSelf?.tableView.endrefresh()
-                weakSelf?.homeData = data
-                //weakSelf?.tableView.reloadData()
-                guard data.navBanners != nil else { return }
-                weakSelf?.header.bannerList = data.navBanners
-                weakSelf?.newsListRequest(1)
-            }, onError: { (error) in
-                weakSelf?.tableView.endrefresh()
-                guard let err = error as? HXError else { return }
-                switch err {
-                case .UnexpectedResult(let code, let msg):
-                    print(code!)
-                    weakSelf?.showHUD(message: msg!)
-                default: break
+                if pageNum == 1 {
+                    weakSelf?.tableView.endrefresh()
+                    weakSelf?.homeData = data.dlHallDTO
+                    //weakSelf?.tableView.reloadData()
+                    guard weakSelf?.homeData.navBanners != nil else { return }
+                    weakSelf?.header.bannerList = weakSelf?.homeData.navBanners
                 }
-            }, onCompleted: nil, onDisposed: nil )
-        
-        
-    }
-    
-    private func newsListRequest(_ pageNum : Int) {
-        weak var weakSelf = self
-        _ = homeProvider.rx.request(.newsList(page: pageNum))
-            .asObservable()
-            .mapObject(type: NewsListModel.self)
-            .subscribe(onNext: { (data) in
-                weakSelf?.tableView.endrefresh()
-                self.newsListModel = data
+                
+                weakSelf?.newsListModel = data.dlArticlePage
                 if pageNum == 1 {
                     weakSelf?.newsList.removeAll()
                 }
-                weakSelf?.newsList.append(contentsOf: data.list)
+                weakSelf?.newsList.append(contentsOf: self.newsListModel.list)
                 weakSelf?.tableView.reloadData()
             }, onError: { (error) in
-                weakSelf?.tableView.endrefresh()
-                guard let err = error as? HXError else { return }
-                switch err {
-                case .UnexpectedResult(let code, let msg):
-                    print(code!)
-                    weakSelf?.showHUD(message: msg!)
-                default: break
-                }
-            }, onCompleted: nil, onDisposed: nil )
+                
+            }, onCompleted: nil , onDisposed: nil )
     }
+    // 以下代码已合并
+//    private func homeListRequest() {
+//        weak var weakSelf = self
+//        _ = homeProvider.rx.request(.homeList)
+//            .asObservable()
+//            .mapObject(type: HomeDataModel.self)
+//            .subscribe(onNext: { (data) in
+//                weakSelf?.tableView.endrefresh()
+//                weakSelf?.homeData = data
+//                //weakSelf?.tableView.reloadData()
+//                guard data.navBanners != nil else { return }
+//                weakSelf?.header.bannerList = data.navBanners
+//                weakSelf?.newsListRequest(1)
+//            }, onError: { (error) in
+//                weakSelf?.tableView.endrefresh()
+//                guard let err = error as? HXError else { return }
+//                switch err {
+//                case .UnexpectedResult(let code, let msg):
+//                    print(code!)
+//                    weakSelf?.showHUD(message: msg!)
+//                default: break
+//                }
+//            }, onCompleted: nil, onDisposed: nil )
+//
+//
+//    }
+//
+//    private func newsListRequest(_ pageNum : Int) {
+//        weak var weakSelf = self
+//        _ = homeProvider.rx.request(.newsList(page: pageNum))
+//            .asObservable()
+//            .mapObject(type: NewsListModel.self)
+//            .subscribe(onNext: { (data) in
+//                weakSelf?.tableView.endrefresh()
+//                self.newsListModel = data
+//                if pageNum == 1 {
+//                    weakSelf?.newsList.removeAll()
+//                }
+//                weakSelf?.newsList.append(contentsOf: data.list)
+//                weakSelf?.tableView.reloadData()
+//            }, onError: { (error) in
+//                weakSelf?.tableView.endrefresh()
+//                guard let err = error as? HXError else { return }
+//                switch err {
+//                case .UnexpectedResult(let code, let msg):
+//                    print(code!)
+//                    weakSelf?.showHUD(message: msg!)
+//                default: break
+//                }
+//            }, onCompleted: nil, onDisposed: nil )
+//    }
     
     
     //MARK: - 懒加载

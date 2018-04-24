@@ -9,6 +9,10 @@
 import UIKit
 import HandyJSON
 
+struct HomeListModel : HandyJSON {
+    var dlHallDTO : HomeDataModel!
+    var dlArticlePage: NewsListModel!
+}
 
 struct HomeDataModel : HandyJSON {
     var activity: HomeActivityModel!
