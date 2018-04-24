@@ -205,7 +205,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
                 cell.title.text = "投注记录"
             case 1:
                 cell.icon.image = UIImage(named: "Details")
-                cell.title.text = "账号明细"
+                cell.title.text = "账户明细"
             case 2:
                 cell.icon.image = UIImage(named: "coupon")
                 cell.title.text = "我的卡券"
@@ -216,10 +216,10 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         case 1:
             switch indexPath.row {
             case 0:
-                cell.icon.image = UIImage(named: "nformationsecurity")
+                cell.icon.image = UIImage(named: "note-1")
                 cell.title.text = "消息中心"
             case 1:
-                cell.icon.image = UIImage(named: "nformationsecurity")
+                cell.icon.image = UIImage(named: "collection")
                 cell.title.text = "我的收藏"
             case 2:
                 cell.icon.image = UIImage(named: "help")

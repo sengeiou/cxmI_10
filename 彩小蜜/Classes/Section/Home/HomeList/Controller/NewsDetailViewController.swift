@@ -17,12 +17,55 @@ fileprivate let NewsThreePicCellId = "NewsThreePicCellId"
 
 
 class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, NewsDetailCellDelegate, NewsDetailFooterDelegate {
+    
+    
+    
+    
+    // MARK: - 属性 public
+    public var newsInfo : NewsInfoModel!
+    // MARK: - 属性 private
+    private var detailModel: NewsDetailModel! {
+        didSet{
+            guard detailModel != nil else { return }
+            if detailModel.isCollect {
+                collectBut.isSelected = true
+            }else {
+                collectBut.isSelected = false
+            }
+        }
+    }
+    private var collectBut: UIButton!    // 收藏
+    private var shareBut: UIButton!      // 分享
+    private var cellHeight : CGFloat = 50
+    private var footer : NewsDetailFooter!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.title = "彩小秘 · 咨询"
+        newsDetailRequest()
+        setRightItem()
+        initSubview()
+    }
+    
+    // MARK: - 点击事件
+    // 收藏
+    @objc private func collectButClicked(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        addOrDeleteCollect(isAdd: sender.isSelected)
+    }
+    // 分享
+    @objc private func shareButClicked(_ sender: UIButton) {
+        let share = ShareViewController()
+        present(share)
+    }
+    // 查看更多
     func didTipLookMore() {
         let recom = NewsRecommendVC()
         recom.articleId = newsInfo.articleId
         pushViewController(vc: recom)
     }
-    
+    // MARK: - delegate
+    // 更新cell 高度
     func upDateCellHeight(height: CGFloat) {
         
         //tableView.rowHeight = 1000
@@ -31,34 +74,13 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
         tableView.endUpdates()
         
     }
-    
-    
-    // MARK: - 属性 public
-    public var newsInfo : NewsInfoModel!
-    // MARK: - 属性 private
-    private var detailModel: NewsDetailModel!
-    private var collectBut: UIButton!    // 收藏
-    private var shareBut: UIButton!      // 分享
-    private var cellHeight : CGFloat = 50
-    private var footer : NewsDetailFooter!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        newsDetailRequest()
-        setRightItem()
-        initSubview()
+    private func addOrDeleteCollect(isAdd: Bool) {
+        if isAdd {
+            addCollectRequest()
+        }else {
+            deleteCollectRequest()
+        }
     }
-    
-    // MARK: - 点击事件
-    
-    @objc private func collectButClicked(_ sender: UIButton) {
-        addCollectRequest()
-    }
-    @objc private func shareButClicked(_ sender: UIButton) {
-        let share = ShareViewController()
-        present(share)
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.snp.makeConstraints { (make) in
@@ -74,7 +96,8 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
     private func setRightItem() {
         collectBut = UIButton(type: .custom)
         collectBut.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-        collectBut.setImage(UIImage(named: "Buysecurity"), for: .normal)
+        collectBut.setImage(UIImage(named: "收藏"), for: .normal)
+        collectBut.setImage(UIImage(named: "se收藏"), for: .selected)
         collectBut.addTarget(self, action: #selector(collectButClicked(_:)), for: .touchUpInside)
         
         shareBut = UIButton(type: .custom)
@@ -112,6 +135,23 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
     private func addCollectRequest() {
         weak var weakSelf = self
         _ = userProvider.rx.request(.collectAdd(articledId: newsInfo.articleId, articleTitle: newsInfo.title, collectFrom: ""))
+            .asObservable()
+            .mapObject(type: DataModel.self)
+            .subscribe(onNext: { (data) in
+                weakSelf?.showHUD(message: data.msg)
+            }, onError: { (error) in
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    print(code!)
+                    weakSelf?.showHUD(message: msg!)
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil )
+    }
+    private func deleteCollectRequest() {
+        weak var weakSelf = self
+        _ = userProvider.rx.request(.collectDelete(collectId: newsInfo.articleId))
             .asObservable()
             .mapObject(type: DataModel.self)
             .subscribe(onNext: { (data) in

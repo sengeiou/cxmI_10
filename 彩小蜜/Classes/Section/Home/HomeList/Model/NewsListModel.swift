@@ -74,4 +74,6 @@ struct NewsDetailModel: HandyJSON {
     var relatedTeam: String!
     var summary: String!
     var title: String!
+    ///0-已收藏 1-未收藏
+    var isCollect : Bool!
 }

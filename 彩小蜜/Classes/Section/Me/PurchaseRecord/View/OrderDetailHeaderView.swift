@@ -79,7 +79,8 @@ class OrderDetailHeaderView: UIView {
         }
         moneyLB.snp.makeConstraints { (make) in
             make.bottom.equalTo(line.snp.top).offset(-16)
-            make.left.right.equalTo(titleLB)
+            make.left.equalTo(titleLB)
+            //make.right.equalTo(forecastMoney.snp.left)
             make.height.equalTo(12)
         }
         state.snp.makeConstraints { (make) in
@@ -90,7 +91,10 @@ class OrderDetailHeaderView: UIView {
         forecastMoney.snp.makeConstraints { (make) in
             make.top.equalTo(state.snp.bottom).offset(1)
             make.bottom.equalTo(line.snp.top).offset(-1)
-            make.right.width.equalTo(state)
+            //make.right.width.equalTo(state)
+            make.width.equalTo(moneyLB)
+            make.left.equalTo(moneyLB.snp.right).offset(10)
+            make.right.equalTo(state)
         }
         programmeTitle.snp.makeConstraints { (make) in
             make.top.equalTo(line.snp.bottom).offset(10)

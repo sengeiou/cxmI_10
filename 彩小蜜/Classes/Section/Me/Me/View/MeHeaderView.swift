@@ -256,7 +256,7 @@ class MeHeaderView: UIView {
         // 可提现标题
         withdrawalTitle = UILabel()
         withdrawalTitle.font = Font12
-        withdrawalTitle.text = "可提现余额"
+        withdrawalTitle.text = "可提现金额"
         withdrawalTitle.textColor = ColorA0A0A0
         withdrawalTitle.textAlignment = .center
         

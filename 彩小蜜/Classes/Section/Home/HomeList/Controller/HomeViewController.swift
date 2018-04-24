@@ -99,6 +99,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         //newsListRequest(1)
     }
     private func loadNextData() {
+        guard self.newsListModel != nil else { return }
         guard self.newsListModel.isLastPage == false else {
             self.tableView.noMoreData()
             return }

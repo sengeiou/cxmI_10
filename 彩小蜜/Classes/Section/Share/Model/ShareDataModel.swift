@@ -38,15 +38,15 @@ class ShareDataManager {
         
         var share = ShareDataModel()
         share.title = "朋友圈"
-        share.iconPic = "Racecolorfootball"
+        share.iconPic = "朋友圈"
         share.shareCode = .ShareWeixinCircle
         var weixin = ShareDataModel()
         weixin.title = "微信"
-        weixin.iconPic = "Racecolorfootball"
+        weixin.iconPic = "微信"
         weixin.shareCode = .ShareWeixin
         var copy = ShareDataModel()
         copy.title = "复制连接"
-        copy.iconPic = "Racecolorfootball"
+        copy.iconPic = "复制"
         copy.shareCode = .ShareLink
         
         shareList.append(share)

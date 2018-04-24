@@ -10,7 +10,7 @@ import UIKit
 import XLPagerTabStrip
 
 enum PagerViewType: String {
-    case coupon = "彩小秘 · 我的优惠券"
+    case coupon = "彩小秘 · 我的卡券"
     case purchaseRecord = "彩小秘 · 购彩记录"
     case message = "彩小秘 · 消息中心"
     case accountDetails = "彩小秘 · 账户明细"

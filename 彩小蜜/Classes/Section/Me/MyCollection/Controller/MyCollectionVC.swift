@@ -19,6 +19,7 @@ class MyCollectionVC: BaseViewController, UITableViewDelegate, UITableViewDataSo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "彩小秘 · 我的收藏"
         setRightButton()
         setEmpty(title: "暂无收藏", tableView)
         collectList = [NewsInfoModel]()
