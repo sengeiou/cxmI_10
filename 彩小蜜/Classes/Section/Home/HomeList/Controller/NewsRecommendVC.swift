@@ -21,7 +21,7 @@ class NewsRecommendVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "彩小秘 · 更多咨询"
+        self.title = "彩小秘 · 更多资讯"
         setEmpty(title: "暂无相关文章", tableView)
         collectList = [NewsInfoModel]()
         collectionRequest(1)
