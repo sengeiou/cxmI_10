@@ -63,7 +63,13 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     //MARK: - 点击事件
     
     @objc private func configNotification(_ notification : Notification) {
-        
+        guard let userinf = notification.userInfo else { return }
+        guard let turn = userinf["showStyle"] as? Bool else { return }
+        if turn {
+            showType = .allShow
+        }else {
+            showType = .onlyNews
+        }
     }
     
     // header delegate
