@@ -287,7 +287,9 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     // 确认键
     func orderConfirm(filterList: [FootballPlayFilterModel], times: String) {
         guard self.canPush == true else {
-            showHUD(message: self.showMsg)
+            if self .showMsg != nil {
+                 showHUD(message: self.showMsg)
+            }
             return }
         let requestModel = getRequestModel(betType: self.betType, times: self.times, bonusId: "", homeData: self.homeData)
         

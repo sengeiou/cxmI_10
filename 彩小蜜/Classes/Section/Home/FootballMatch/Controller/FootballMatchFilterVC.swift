@@ -209,10 +209,11 @@ class FootballMatchFilterVC: BasePopViewController, UICollectionViewDelegate, UI
             }
             i += 1
         }
+        self.dismiss(animated: true, completion: nil)
+        guard idStr != "" else { return }
         idStr.removeLast()
         guard delegate != nil else { return }
         delegate.filterConfirm(leagueId: idStr)
-        
         self.dismiss(animated: true, completion: nil)
     }
     
