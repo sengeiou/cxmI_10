@@ -25,6 +25,7 @@ class NewsNoPicCell: UITableViewCell {
     private var titleLb : UILabel!
     private var detailLb: UILabel!
     private var bottomView: NewsBottomView!
+    private var bottomLine : UIView!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -40,15 +41,18 @@ class NewsNoPicCell: UITableViewCell {
         self.selectionStyle = .none
         
         titleLb = getLabel()
-        titleLb.text = "一家大幅快乐撒发生的几率附加费"
+        //titleLb.text = "一家大幅快乐撒发生的几率附加费"
         detailLb = getLabel()
         detailLb.font = Font13
-        detailLb.text = "一家大幅快乐撒发生的几率附加费一家大幅快乐撒发生的几率附加费一家大幅快乐撒发生的几率附加费一家大幅快乐撒发生的几率附加费一家大幅快乐撒发生的几率附加费一家大幅快乐撒发生的几率附加费一家大幅快乐撒发生的几率附加费"
+        //detailLb.text = "一家大幅快乐撒发生的几率附加费一家大幅快乐撒发生的几率附加费一家大幅快乐撒发生的几率附加费一家大幅快乐撒发生的几率附加费一家大幅快乐撒发生的几率附加费一家大幅快乐撒发生的几率附加费一家大幅快乐撒发生的几率附加费"
         detailLb.textColor = Color787878
         detailLb.numberOfLines = 2
         
         bottomView = NewsBottomView()
         
+        bottomLine = UIView()
+        bottomLine.backgroundColor = ColorC8C8C8
+        self.contentView.addSubview(bottomLine)
         self.contentView.addSubview(titleLb)
         self.contentView.addSubview(detailLb)
         self.contentView.addSubview(bottomView)
@@ -65,9 +69,16 @@ class NewsNoPicCell: UITableViewCell {
             make.bottom.equalTo(bottomView.snp.top)
         }
         bottomView.snp.makeConstraints { (make) in
-            make.bottom.equalTo(-12 * defaultScale)
+            //make.bottom.equalTo(-12 * defaultScale)
             make.left.equalTo(titleLb)
             make.right.equalTo(titleLb)
+            make.bottom.equalTo(bottomLine.snp.top).offset(-12 * defaultScale)
+        }
+        bottomLine.snp.makeConstraints { (make) in
+            make.bottom.equalTo(0)
+            make.left.equalTo(10)
+            make.right.equalTo(-10)
+            make.height.equalTo(0.5)
         }
     }
     

@@ -42,12 +42,12 @@ class HomeFootballCell: UICollectionViewCell {
             make.left.right.equalTo(self.contentView)
             make.bottom.equalTo(self.contentView).offset(-5)
         }
-        activityIcon.snp.makeConstraints { (make) in
-            make.top.equalTo(icon)
-            make.left.equalTo(icon.snp.right).offset(-5)
-            make.height.equalTo(20)
-            make.width.equalTo(20)
-        }
+//        activityIcon.snp.makeConstraints { (make) in
+//            make.top.equalTo(icon)
+//            make.left.equalTo(icon.snp.right).offset(-5)
+//            make.height.equalTo(20)
+//            make.width.equalTo(20)
+//        }
     }
     
     private func initSubview() {
@@ -65,7 +65,7 @@ class HomeFootballCell: UICollectionViewCell {
         
         self.contentView.addSubview(icon)
         self.contentView.addSubview(title)
-        self.contentView.addSubview(activityIcon)
+        //self.contentView.addSubview(activityIcon)
     }
     
     

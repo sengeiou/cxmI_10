@@ -35,7 +35,7 @@ class NewsThreePicCell: UITableViewCell {
     private var picOne : UIImageView!
     private var picTwo : UIImageView!
     private var picThree: UIImageView!
-    
+    private var bottomLine : UIView!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -60,7 +60,11 @@ class NewsThreePicCell: UITableViewCell {
         picTwo.image = UIImage(named: "Racecolorfootball")
         picThree = UIImageView()
         picThree.image = UIImage(named: "Racecolorfootball")
-    
+        
+        bottomLine = UIView()
+        bottomLine.backgroundColor = ColorC8C8C8
+        
+        self.contentView.addSubview(bottomLine)
         self.contentView.addSubview(titleLb)
         self.contentView.addSubview(bottomView)
         self.contentView.addSubview(picOne)
@@ -76,9 +80,16 @@ class NewsThreePicCell: UITableViewCell {
         }
         
         bottomView.snp.makeConstraints { (make) in
-            make.bottom.equalTo(-12 * defaultScale)
+            //make.bottom.equalTo(-12 * defaultScale)
             make.left.equalTo(titleLb)
             make.right.equalTo(-12 * defaultScale)
+            make.bottom.equalTo(bottomLine.snp.top).offset(-12 * defaultScale)
+        }
+        bottomLine.snp.makeConstraints { (make) in
+            make.bottom.equalTo(0)
+            make.left.equalTo(10)
+            make.right.equalTo(-10)
+            make.height.equalTo(0.5)
         }
         picOne.snp.makeConstraints { (make) in
             make.top.equalTo(titleLb.snp.bottom).offset(10 * defaultScale)

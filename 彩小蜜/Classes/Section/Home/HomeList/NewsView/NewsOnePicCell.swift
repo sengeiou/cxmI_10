@@ -38,6 +38,7 @@ class NewsOnePicCell: UITableViewCell {
     private var icon : UIImageView!
     private var bottomView: NewsBottomView!
     private var videoIcon : UIImageView!
+    private var bottomLine : UIView!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -61,7 +62,10 @@ class NewsOnePicCell: UITableViewCell {
         titleLb = getLabel()
         
         bottomView = NewsBottomView()
+        bottomLine = UIView()
+        bottomLine.backgroundColor = ColorC8C8C8
         
+        self.contentView.addSubview(bottomLine)
         self.contentView.addSubview(icon)
         self.contentView.addSubview(titleLb)
         self.contentView.addSubview(bottomView)
@@ -80,9 +84,16 @@ class NewsOnePicCell: UITableViewCell {
             make.height.equalTo(30 * defaultScale)
         }
         bottomView.snp.makeConstraints { (make) in
-            make.bottom.equalTo(-10 * defaultScale)
+           // make.bottom.equalTo(-10 * defaultScale)
             make.left.equalTo(titleLb)
             make.right.equalTo(titleLb)
+            make.bottom.equalTo(bottomLine.snp.top).offset(-12 * defaultScale)
+        }
+        bottomLine.snp.makeConstraints { (make) in
+            make.bottom.equalTo(0)
+            make.left.equalTo(10)
+            make.right.equalTo(-10)
+            make.height.equalTo(0.5)
         }
         videoIcon.snp.makeConstraints { (make) in
             make.top.left.right.bottom.equalTo(0)

@@ -194,7 +194,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         table.delegate = self
         table.dataSource = self
         table.backgroundColor = ColorF4F4F4
-        
+        table.separatorStyle = .none
         header = HomeHeaderView()
         table.tableHeaderView = header
         
