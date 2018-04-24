@@ -541,17 +541,11 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     // MARK: - 混合 按钮 点击   delegate
     func didSelectedHunHeView(view: FootballHunheView, teamInfo: FootballPlayListModel, index: IndexPath) {
         
-        //let cell = view.superview?.superview as! FootballHunheCell
-        
-    
-        
-       // self.tableView.reloadData()
-        
         self.tableView.reloadRows(at: [index], with: .none)
         guard selectPlayList.count < 15 else {
             view.backSelectedState()
             showHUD(message: "最多可选15场比赛")
-            
+            self.tableView.reloadRows(at: [index], with: .none)
             return }
         selectPlays.insert(teamInfo)
     }
