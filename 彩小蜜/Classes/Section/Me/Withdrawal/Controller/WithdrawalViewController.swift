@@ -63,6 +63,9 @@ class WithdrawalViewController: BaseViewController {
         super.viewDidLoad()
         self.title = "彩小秘 · 提现"
         initSubview()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         drawDataRequest()
     }
     //MARK: - 网络请求
