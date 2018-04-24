@@ -15,9 +15,20 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     
     
     
-    public var showType: ShowType!
+    public var showType: ShowType! = .onlyNews{
+        didSet{
+            guard showType != nil else { return }
+            if showType == .onlyNews {
+                tableView.tableHeaderView = newsheaderView
+            }else {
+                tableView.tableHeaderView = headerView
+            }
+            self.tableView.reloadData()
+        }
+    }
     //MARK: - 属性
     private var headerView: MeHeaderView!
+    private var newsheaderView : NewsHeaderView!
     private var footerView: MeFooterView!
     private var userInfo  : UserInfoDataModel!
     //MARK: - 生命周期
@@ -28,6 +39,13 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         self.view.addSubview(tableView)
         
         NotificationCenter.default.addObserver(self, selector: #selector(configNotification(_:)), name: NSNotification.Name(rawValue: NotificationConfig), object: nil)
+        
+        let turnOn = UserDefaults.standard.bool(forKey: TurnOn)
+        if turnOn {
+            showType = .allShow
+        }else {
+            showType = .onlyNews
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -87,37 +105,44 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     
     //MARK: - tableView delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.section {
-        case 0:
-            switch indexPath.row {
+        
+        if showType == .onlyNews {
+            let collection = MyCollectionVC()
+            pushViewController(vc: collection)
+        }else {
+            switch indexPath.section {
             case 0:
-                pushPagerView(pagerType: .purchaseRecord)
+                switch indexPath.row {
+                case 0:
+                    pushPagerView(pagerType: .purchaseRecord)
+                case 1:
+                    pushPagerView(pagerType: .accountDetails)
+                case 2:
+                    pushPagerView(pagerType: .coupon)
+                    
+                default :
+                    break
+                }
             case 1:
-                pushPagerView(pagerType: .accountDetails)
-            case 2:
-                pushPagerView(pagerType: .coupon)
-            
-            default :
+                switch indexPath.row {
+                case 0:
+                    pushPagerView(pagerType: .message)
+                case 1:
+                    let collection = MyCollectionVC()
+                    pushViewController(vc: collection)
+                case 2: break
+                case 3: break
+                case 4:
+                    let about = MeAboutViewController()
+                    pushViewController(vc: about)
+                default :
+                    break
+                }
+            default:
                 break
             }
-        case 1:
-            switch indexPath.row {
-            case 0:
-                pushPagerView(pagerType: .message)
-            case 1: 
-                let collection = MyCollectionVC()
-                pushViewController(vc: collection)
-            case 2: break
-            case 3: break
-            case 4:
-                let about = MeAboutViewController()
-                pushViewController(vc: about)
-            default :
-                break
-            }
-        default:
-            break
         }
+        
     }
     //MARK: - 网络请求
     private func userInfoRequest() {
@@ -129,6 +154,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
                 guard weakSelf != nil else { return }
                 weakSelf!.userInfo = data
                 weakSelf!.headerView.userInfo = data
+                weakSelf?.newsheaderView.userInfo = data
                 weakSelf!.tableView.layoutIfNeeded()
                 weakSelf!.tableView.reloadData()
                 print(data)
@@ -178,74 +204,102 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         footerView = MeFooterView()
         footerView.delegate = self
 
-        table.tableHeaderView = headerView
+        newsheaderView = NewsHeaderView()
+        newsheaderView.delegate = self
+        
+        //table.tableHeaderView = headerView
         table.tableFooterView = footerView
         
         return table
     }()
     //MARK: - tableView dataSource
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        
+        if showType == .onlyNews {
+            return 1
+        }else {
+           return 2
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return 3
-        case 1:
-            return 5
-        default:
-            return 0
+        
+        if showType == .onlyNews {
+            return 1
+        }else {
+            switch section {
+            case 0:
+                return 3
+            case 1:
+                return 5
+            default:
+                return 0
+            }
         }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: meCellIdentifier, for: indexPath) as! MeCell
         cell.accessoryType = .disclosureIndicator
         
-        switch indexPath.section {
-        case 0:
+        if showType == .onlyNews {
             switch indexPath.row {
             case 0:
-                cell.icon.image = UIImage(named: "recording")
-                cell.title.text = "投注记录"
-            case 1:
-                cell.icon.image = UIImage(named: "Details")
-                cell.title.text = "账户明细"
-            case 2:
-                cell.icon.image = UIImage(named: "coupon")
-                cell.title.text = "我的卡券"
-            
-            default :
-                break
-            }
-        case 1:
-            switch indexPath.row {
-            case 0:
-                cell.icon.image = UIImage(named: "note-1")
-                cell.title.text = "消息中心"
-            case 1:
-                cell.icon.image = UIImage(named: "collection")
+                cell.icon.image = UIImage(named: "nformationsecurity")
                 cell.title.text = "我的收藏"
-            case 2:
-                cell.icon.image = UIImage(named: "help")
-                cell.title.text = "帮助中心"
-            case 3:
-                cell.icon.image = UIImage(named: "serive")
-                cell.title.text = "联系客服"
-                cell.serviceNum = "400-123-1234"
-                
-                cell.detail.delegate = self
-                cell.accessoryType = .none
-            case 4:
-                cell.icon.image = UIImage(named: "our")
-                cell.title.text = "关于我们"
             default :
                 break
             }
-        default:
-            break
+            
+        }else {
+            switch indexPath.section {
+            case 0:
+                switch indexPath.row {
+                case 0:
+                    cell.icon.image = UIImage(named: "recording")
+                    cell.title.text = "投注记录"
+                case 1:
+                    cell.icon.image = UIImage(named: "Details")
+                    cell.title.text = "账户明细"
+                case 2:
+                    cell.icon.image = UIImage(named: "coupon")
+                    cell.title.text = "我的卡券"
+                    
+                default :
+                    break
+                }
+            case 1:
+                switch indexPath.row {
+                case 0:
+                    cell.icon.image = UIImage(named: "note-1")
+                    cell.title.text = "消息中心"
+                case 1:
+                    cell.icon.image = UIImage(named: "collection")
+                    cell.title.text = "我的收藏"
+                case 2:
+                    cell.icon.image = UIImage(named: "help")
+                    cell.title.text = "帮助中心"
+                case 3:
+                    cell.icon.image = UIImage(named: "serive")
+                    cell.title.text = "联系客服"
+                    cell.serviceNum = "400-123-1234"
+                    
+                    cell.detail.delegate = self
+                    cell.accessoryType = .none
+                case 4:
+                    cell.icon.image = UIImage(named: "our")
+                    cell.title.text = "关于我们"
+                default :
+                    break
+                }
+            default:
+                break
+            }
         }
+        
+        
         
         return cell
     }

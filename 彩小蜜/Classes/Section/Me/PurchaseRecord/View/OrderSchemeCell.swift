@@ -131,7 +131,7 @@ class OrderSchemeCell: UITableViewCell {
     private func getDetailLB() -> UILabel {
         let lab = UILabel()
         lab.font = Font12
-        lab.text = "白塞"
+        //lab.text = "白塞"
         lab.textColor = Color505050
         lab.textAlignment = .center
         return lab

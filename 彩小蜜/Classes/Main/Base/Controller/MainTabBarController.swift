@@ -9,6 +9,7 @@
 import UIKit
 
 let NotificationConfig = "NotificationConfigName"
+let TurnOn = "TurnOn"
 
 class MainTabBarController: UITabBarController, UserInfoPro {
 
@@ -42,7 +43,7 @@ class MainTabBarController: UITabBarController, UserInfoPro {
                     self.home.homeStyle = .onlyNews
                 }
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationConfig), object: nil, userInfo: ["showStyle": data.turnOn])
-                
+                UserDefaults.standard.set(data.turnOn, forKey: TurnOn)
             }, onError: { (error) in
                 guard let err = error as? HXError else { return }
                 switch err {

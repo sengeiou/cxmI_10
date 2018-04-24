@@ -48,6 +48,8 @@
 		114800D8208C80B100621AFA /* NewsRecommendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114800D7208C80B100621AFA /* NewsRecommendVC.swift */; };
 		114800DA208C97B400621AFA /* NewsMeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114800D9208C97B400621AFA /* NewsMeViewController.swift */; };
 		114800DC208C9AE700621AFA /* NewsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114800DB208C9AE700621AFA /* NewsHeaderView.swift */; };
+		11528AA1208F3F67004CC8B4 /* MeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11528AA0208F3F67004CC8B4 /* MeView.swift */; };
+		11528AA3208F3F76004CC8B4 /* NewsMeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11528AA2208F3F76004CC8B4 /* NewsMeView.swift */; };
 		11691806207DB73800C8A287 /* CouponFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11691805207DB73800C8A287 /* CouponFilterViewController.swift */; };
 		11691808207DB82E00C8A287 /* CouponFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11691807207DB82E00C8A287 /* CouponFilterCell.swift */; };
 		1169180A207DBA8B00C8A287 /* PaymentResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11691809207DBA8B00C8A287 /* PaymentResultModel.swift */; };
@@ -303,6 +305,8 @@
 		114800D7208C80B100621AFA /* NewsRecommendVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsRecommendVC.swift; sourceTree = "<group>"; };
 		114800D9208C97B400621AFA /* NewsMeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsMeViewController.swift; sourceTree = "<group>"; };
 		114800DB208C9AE700621AFA /* NewsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsHeaderView.swift; sourceTree = "<group>"; };
+		11528AA0208F3F67004CC8B4 /* MeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeView.swift; sourceTree = "<group>"; };
+		11528AA2208F3F76004CC8B4 /* NewsMeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsMeView.swift; sourceTree = "<group>"; };
 		11691805207DB73800C8A287 /* CouponFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponFilterViewController.swift; sourceTree = "<group>"; };
 		11691807207DB82E00C8A287 /* CouponFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponFilterCell.swift; sourceTree = "<group>"; };
 		11691809207DBA8B00C8A287 /* PaymentResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentResultModel.swift; sourceTree = "<group>"; };
@@ -1203,6 +1207,8 @@
 				E5973E30204F8FD4006461CE /* MeHeaderView.swift */,
 				114800DB208C9AE700621AFA /* NewsHeaderView.swift */,
 				E5973E32204FC1D9006461CE /* MeFooterView.swift */,
+				11528AA0208F3F67004CC8B4 /* MeView.swift */,
+				11528AA2208F3F76004CC8B4 /* NewsMeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1977,6 +1983,7 @@
 				E503F5C0207A11B3006D4A0B /* FootballRequestModel.swift in Sources */,
 				114800DC208C9AE700621AFA /* NewsHeaderView.swift in Sources */,
 				11D9D9E02089CD2500F78FCF /* NewsDetailViewController.swift in Sources */,
+				11528AA3208F3F76004CC8B4 /* NewsMeView.swift in Sources */,
 				E5973DDE204D152F006461CE /* BaseViewController.swift in Sources */,
 				E59CB3DD205BA1650086DD0E /* HomeSportLotteryCell.swift in Sources */,
 				E50B9075205231C800417BFE /* RechargeFooterView.swift in Sources */,
@@ -2061,6 +2068,7 @@
 				114800D8208C80B100621AFA /* NewsRecommendVC.swift in Sources */,
 				E56CE810206A22E10090A1B5 /* WithdrawalProgressFooter.swift in Sources */,
 				E503F5C4207A1952006D4A0B /* FootballBetInfoModel.swift in Sources */,
+				11528AA1208F3F67004CC8B4 /* MeView.swift in Sources */,
 				E50C99BB20746E6B002D8C2F /* DateProtocol.swift in Sources */,
 				E58B57B220561BB80025E2F1 /* Spacing&SizeConstraint.swift in Sources */,
 				E58B57C9205688570025E2F1 /* UserDataModel.swift in Sources */,
