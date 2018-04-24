@@ -11,10 +11,10 @@ import UIKit
 class WithdrawalViewController: BaseViewController {
 
     //MARK: - 点击事件
-    // 提交
+    // 提交   确认支付
     @objc private func drawMoney(_ sender: UIButton) {
         
-        guard drawDataModel.defaultBankCardLabel != nil, drawDataModel.defaultBankCardLabel != "" else {
+        guard drawDataModel.defaultBankLabel != nil, drawDataModel.defaultBankLabel != "" else {
             showHUD(message: "请添加收款银行卡")
             return
         }
@@ -23,8 +23,9 @@ class WithdrawalViewController: BaseViewController {
             showHUD(message: "请输入提现金额")
             return }
         
-        guard let drawAmount = Int(draw), let amount = Int(drawDataModel.userMoney) else { return }
-        guard drawAmount > amount else {
+        guard let drawAmount = Double(draw) else { return }
+        guard let amount = Double(drawDataModel.userMoney) else { return }
+        guard drawAmount <= amount else {
             showHUD(message: "您输入的金额已超过可提现金额")
             return
         }
@@ -67,7 +68,21 @@ class WithdrawalViewController: BaseViewController {
     //MARK: - 网络请求
     //提现
     private func drawRequest() {
-        
+        guard let money = amountOfMoney.text else { return }
+        _ = paymentProvider.rx.request(.paymentWithdraw(totalAmount: money, userBankId: drawDataModel.userBankId))
+            .asObservable()
+            .mapObject(type: DataModel.self )
+            .subscribe(onNext: { (data) in
+                self.showHUD(message: data.msg)
+            }, onError: { (error) in
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    print(code!)
+                    self.showHUD(message: msg!)
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil )
     }
     //提现信息
     private func drawDataRequest() {
@@ -91,7 +106,7 @@ class WithdrawalViewController: BaseViewController {
     private func setDrawData(data : WithDrawDataModel) {
         moneyLB.text = "可提现金额: \(data.userMoney!)元"
         
-        guard let defaultBank = data.defaultBankCardLabel else {
+        guard let defaultBank = data.defaultBankLabel else {
             bankCardLB.text = "请添加银行卡"
             return
         }
@@ -112,7 +127,7 @@ class WithdrawalViewController: BaseViewController {
         
         moneyLB = UILabel()
         moneyLB.font = Font15
-        moneyLB.text = "可提现金额: 100元"
+        //moneyLB.text = "可提现金额: 100元"
         moneyLB.textColor = Color505050
         moneyLB.textAlignment = .left
         

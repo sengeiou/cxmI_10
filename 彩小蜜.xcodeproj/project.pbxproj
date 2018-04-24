@@ -26,6 +26,7 @@
 		113B9CCF2087204A006AE3F8 /* NewsThreePicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113B9CCE2087204A006AE3F8 /* NewsThreePicCell.swift */; };
 		113B9CD120872226006AE3F8 /* NewsBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113B9CD020872226006AE3F8 /* NewsBottomView.swift */; };
 		113B9CD320877849006AE3F8 /* rich.txt in Resources */ = {isa = PBXBuildFile; fileRef = 113B9CD220877849006AE3F8 /* rich.txt */; };
+		1142DE7D208ED059009E3916 /* PaymentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1142DE7C208ED059009E3916 /* PaymentProtocol.swift */; };
 		114490FD20858CF2009F1D09 /* FootballMatchPagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114490FC20858CF2009F1D09 /* FootballMatchPagerView.swift */; };
 		114491012085970A009F1D09 /* FootballOddsPagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114491002085970A009F1D09 /* FootballOddsPagerView.swift */; };
 		114491042085982B009F1D09 /* FootballAnalysisSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114491032085982B009F1D09 /* FootballAnalysisSectionHeader.swift */; };
@@ -281,6 +282,7 @@
 		113B9CCE2087204A006AE3F8 /* NewsThreePicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsThreePicCell.swift; sourceTree = "<group>"; };
 		113B9CD020872226006AE3F8 /* NewsBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsBottomView.swift; sourceTree = "<group>"; };
 		113B9CD220877849006AE3F8 /* rich.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rich.txt; sourceTree = "<group>"; };
+		1142DE7C208ED059009E3916 /* PaymentProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentProtocol.swift; sourceTree = "<group>"; };
 		114490FC20858CF2009F1D09 /* FootballMatchPagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballMatchPagerView.swift; sourceTree = "<group>"; };
 		114491002085970A009F1D09 /* FootballOddsPagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballOddsPagerView.swift; sourceTree = "<group>"; };
 		114491032085982B009F1D09 /* FootballAnalysisSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballAnalysisSectionHeader.swift; sourceTree = "<group>"; };
@@ -607,6 +609,14 @@
 				11FEB95C208D8DA100926951 /* NewsDetailFooter.swift */,
 			);
 			path = NewsView;
+			sourceTree = "<group>";
+		};
+		1142DE7E208ED06A009E3916 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				1142DE7C208ED059009E3916 /* PaymentProtocol.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 		1144910220859710009F1D09 /* OddsView */ = {
@@ -1501,6 +1511,7 @@
 		E581F379206356A2002AB9F7 /* Payment */ = {
 			isa = PBXGroup;
 			children = (
+				1142DE7E208ED06A009E3916 /* Protocol */,
 				E581F37A206356F2002AB9F7 /* NetAPIManager */,
 				E57375FD2046B23C00148622 /* Model */,
 				E57375FC2046B23A00148622 /* View */,
@@ -2188,6 +2199,7 @@
 				E550D89D207339DF002DDE23 /* FootballOrderScoreCell.swift in Sources */,
 				1144910A2085AEE0009F1D09 /* FootballMatchInfoScaleCell.swift in Sources */,
 				E59CB3D9205BA11A0086DD0E /* HomeScrollBarCell.swift in Sources */,
+				1142DE7D208ED059009E3916 /* PaymentProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2359,7 +2371,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/彩小蜜/Classes/Resource/Plist/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = net.caixiaomi.info;
+				PRODUCT_BUNDLE_IDENTIFIER = net.caixiaomi.tool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/彩小蜜/Classes/ThirdParty/Header.h";
 				SWIFT_VERSION = 4.0;
@@ -2377,7 +2389,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/彩小蜜/Classes/Resource/Plist/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = net.caixiaomi.info;
+				PRODUCT_BUNDLE_IDENTIFIER = net.caixiaomi.tool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/彩小蜜/Classes/ThirdParty/Header.h";
 				SWIFT_VERSION = 4.0;

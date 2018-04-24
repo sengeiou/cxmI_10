@@ -17,6 +17,7 @@ class MainTabBarController: UITabBarController, UserInfoPro {
         super.viewDidLoad()
         self.view.backgroundColor = ColorFFFFFF
         configRequest()
+        //creatSubViewControllers(false)
     }
 
     override func viewWillAppear(_ animated: Bool) {

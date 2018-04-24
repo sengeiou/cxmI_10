@@ -15,3 +15,6 @@ struct PaymentResultModel : HandyJSON {
     var orderId: String!
 }
 
+struct PaymentWeixinModel: HandyJSON {
+    
+}

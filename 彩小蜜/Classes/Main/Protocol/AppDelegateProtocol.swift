@@ -18,6 +18,6 @@ extension AppDelegateProtocol where Self : AppDelegate {
     /// 注册开放平台
     func registerApp() {
         // 注册微信开放平台
-        WXApi.registerApp("xxxxx")
+        WXApi.registerApp(WeixinAppID)
     }
 }

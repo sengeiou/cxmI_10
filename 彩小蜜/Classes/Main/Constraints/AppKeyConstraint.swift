@@ -8,4 +8,4 @@
 
 import Foundation
 
-let WeixinAppID = "wx4a0cbdb8b9e57718"
+let WeixinAppID = "wxb219f2cbb7044c81"
