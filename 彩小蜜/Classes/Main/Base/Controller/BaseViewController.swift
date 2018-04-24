@@ -16,6 +16,7 @@ public var currentVC : UIViewController?
 class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, DateProtocol{
 
     // public
+    
     public func pushLoginVC(from vc: UIViewController) {
         let login = LoginViewController()
         currentVC = vc

@@ -27,6 +27,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         self.navigationItem.title = "彩小秘 · 我的"
         self.view.addSubview(tableView)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(configNotification(_:)), name: NSNotification.Name(rawValue: NotificationConfig), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,6 +43,11 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         }
     }
     //MARK: - 点击事件
+    
+    @objc private func configNotification(_ notification : Notification) {
+        
+    }
+    
     // header delegate
     func rechargeClicked() {
         print("充值")

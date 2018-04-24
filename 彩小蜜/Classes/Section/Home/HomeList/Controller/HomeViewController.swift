@@ -56,9 +56,8 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     //MARK: - 属性 public
     public var homeStyle : ShowType! = .onlyNews {
         didSet{
-            //homeListRequest()
+            guard homeStyle != nil else { return }
             homeListAddNewsRequest(pageNum: 1)
-            self.view.addSubview(tableView)
         }
     }
     
@@ -74,7 +73,8 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         newsList = [NewsInfoModel]()
         hideBackBut()
         
-        //setRightBarItem()
+        self.view.addSubview(tableView)
+        
         self.tableView.headerRefresh {
             self.loadNewData()
         }
@@ -111,6 +111,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     }
     
     //MARK: - 网络请求
+    
     private func homeListAddNewsRequest(pageNum: Int) {
         weak var weakSelf = self
         _ = homeProvider.rx.request(.hallMixData(page: pageNum))
@@ -210,6 +211,8 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     }()
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NotificationConfig"), object: true)
         switch indexPath.section {
         case 1:
             guard homeData != nil, let activity = self.homeData.activity else { return }

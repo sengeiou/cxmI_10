@@ -8,16 +8,21 @@
 
 import UIKit
 
+let NotificationConfig = "NotificationConfigName"
+
 class MainTabBarController: UITabBarController, UserInfoPro {
 
     //private var configInfo : ConfigInfoModel!
     
+    private var home : HomeViewController!
+    private var me : BaseViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = ColorFFFFFF
+        
+        creatSubViewControllers(false)
         configRequest()
-        //creatSubViewControllers(false)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -31,9 +36,13 @@ class MainTabBarController: UITabBarController, UserInfoPro {
             .asObservable()
             .mapObject(type: ConfigInfoModel.self)
             .subscribe(onNext: { (data) in
-                DispatchQueue.main.async {
-                    self.creatSubViewControllers(data.turnOn)
+                if data.turnOn {
+                    self.home.homeStyle = .allShow
+                }else {
+                    self.home.homeStyle = .onlyNews
                 }
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationConfig), object: nil, userInfo: ["showStyle": data.turnOn])
+                
             }, onError: { (error) in
                 guard let err = error as? HXError else { return }
                 switch err {
@@ -42,23 +51,21 @@ class MainTabBarController: UITabBarController, UserInfoPro {
                     //self.showHUD(message: msg!)
                 default: break
                 }
-                DispatchQueue.main.async {
-                    self.creatSubViewControllers(true)
-                }
-                
+                self.home.homeStyle = .allShow
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationConfig), object: nil, userInfo: ["showStyle": true])
             }, onCompleted: nil, onDisposed: nil )
     }
     
     public func creatSubViewControllers(_ turnOn: Bool)
     {
         // 主页
-        let home = HomeViewController()
+        home = HomeViewController()
         
-        if turnOn {
-            home.homeStyle = .allShow
-        }else {
-            home.homeStyle = .onlyNews
-        }
+//        if turnOn {
+//            home.homeStyle = .allShow
+//        }else {
+//            home.homeStyle = .onlyNews
+//        }
         
         
         let homeNav = UINavigationController(rootViewController: home)
@@ -90,14 +97,14 @@ class MainTabBarController: UITabBarController, UserInfoPro {
         lotteryNav.tabBarItem.selectedImage = loSelImg
         
         // me
-        var me : BaseViewController!
+        //me : BaseViewController!
         
         if getUserData() != nil {
-            if turnOn {
-                me = MeViewController()
-            }else {
-                me = NewsMeViewController()
-            }
+//            if turnOn {
+            me = MeViewController()
+//            }else {
+            //me = NewsMeViewController()
+            //}
         }else {
             me = LoginViewController()
         }
