@@ -97,13 +97,13 @@ class LotteryHeaderView: UIView {
         finishFilterBut.addTarget(self, action: #selector(finishButClicked(_:)), for: .touchUpInside)
         
         timeIcon = UIImageView()
-        timeIcon.image = UIImage(named: "Clickable")
+        timeIcon.image = UIImage(named: "下角")
         
         moreIcon = UIImageView()
-        moreIcon.image = UIImage(named: "Clickable")
+        moreIcon.image = UIImage(named: "下角")
         
         finishIcon = UIImageView()
-        finishIcon.image = UIImage(named: "Clickable")
+        finishIcon.image = UIImage(named: "下角")
         
         self.addSubview(vLine)
         self.addSubview(vLineTwo)
