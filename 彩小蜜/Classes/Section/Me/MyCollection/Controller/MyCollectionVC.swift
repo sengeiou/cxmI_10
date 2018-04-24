@@ -208,6 +208,7 @@ class MyCollectionVC: BaseViewController, UITableViewDelegate, UITableViewDataSo
         let but = UIButton(type: .custom)
         but.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         but.setTitle("编辑", for: .normal)
+        but.setTitle("取消", for: .selected)
         but.setTitleColor(Color787878, for: .normal)
         but.addTarget(self, action: #selector(editingClicked(_:)), for: .touchUpInside)
         
