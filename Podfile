@@ -6,14 +6,13 @@ target '彩小蜜' do
   use_frameworks!
 
 
-  
   pod 'Moya/RxSwift'
   
   pod 'RxSwift',    '~> 4.0'
 
   pod 'SnapKit'
 
-  pod 'HandyJSON’,  ‘~> 4.0.0-beta.1’
+  pod 'HandyJSON’, '~> 4.1.1'
 
   pod 'DZNEmptyDataSet'
 
@@ -34,7 +33,8 @@ target '彩小蜜' do
   pod 'XLPagerTabStrip', '~> 8.0'
 
   pod 'WechatOpenSDK'
-
+  
+	
  
 
   # Pods for 彩小蜜

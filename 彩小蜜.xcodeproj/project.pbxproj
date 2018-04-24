@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0239AFB787326CE28D84A44F /* Pods____UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAE714330A11D581FBF18120 /* Pods____UITests.framework */; };
 		11062B1F2082FFD8001C1D14 /* LotteryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11062B1E2082FFD8001C1D14 /* LotteryHeaderView.swift */; };
 		11062B21208322D0001C1D14 /* LotteryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11062B20208322D0001C1D14 /* LotteryCell.swift */; };
 		11062B2320832B99001C1D14 /* LotterySectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11062B2220832B99001C1D14 /* LotterySectionHeader.swift */; };
@@ -58,6 +57,7 @@
 		116EB210207F087D00B32ABD /* FootballScoreFilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116EB20F207F087D00B32ABD /* FootballScoreFilterVC.swift */; };
 		116EB212207F332900B32ABD /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116EB211207F332900B32ABD /* BottomView.swift */; };
 		116EB214207F672000B32ABD /* FootballBanQuanCFilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116EB213207F672000B32ABD /* FootballBanQuanCFilterVC.swift */; };
+		117A6486208EE65500B1769C /* Pods_彩小蜜.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 117A6487208EE65500B1769C /* Pods_彩小蜜.framework */; };
 		11A250BE207C9C2200780D3D /* FootballTotalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A250BD207C9C2200780D3D /* FootballTotalView.swift */; };
 		11A25C502080BC1200085C58 /* FootballHunheFilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A25C4F2080BC1200085C58 /* FootballHunheFilterVC.swift */; };
 		11A25C522080BF2000085C58 /* FootballHunheView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A25C512080BF2000085C58 /* FootballHunheView.swift */; };
@@ -78,8 +78,6 @@
 		11FEB95F208DD55200926951 /* WeixinCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FEB95E208DD55200926951 /* WeixinCenter.swift */; };
 		11FEB962208DDAAA00926951 /* WeixinShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FEB961208DDAAA00926951 /* WeixinShare.swift */; };
 		11FEB964208DDC2100926951 /* AppKeyConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FEB963208DDC2100926951 /* AppKeyConstraint.swift */; };
-		2545AF6A97B25DA9BA7C9A3A /* Pods____.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB1F21E30D8FD47C0735B12D /* Pods____.framework */; };
-		E3730DD9CBCC541439A1110F /* Pods____Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0D1D20EBEFE94020803D6D7 /* Pods____Tests.framework */; };
 		E503F5BE2079E8D6006D4A0B /* FootballFilterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E503F5BD2079E8D6006D4A0B /* FootballFilterProtocol.swift */; };
 		E503F5C0207A11B3006D4A0B /* FootballRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E503F5BF207A11B3006D4A0B /* FootballRequestModel.swift */; };
 		E503F5C2207A15A7006D4A0B /* FootballOrderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E503F5C1207A15A7006D4A0B /* FootballOrderProtocol.swift */; };
@@ -314,6 +312,7 @@
 		116EB20F207F087D00B32ABD /* FootballScoreFilterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballScoreFilterVC.swift; sourceTree = "<group>"; };
 		116EB211207F332900B32ABD /* BottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
 		116EB213207F672000B32ABD /* FootballBanQuanCFilterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballBanQuanCFilterVC.swift; sourceTree = "<group>"; };
+		117A6487208EE65500B1769C /* Pods_彩小蜜.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = "Pods_彩小蜜.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		11A250BD207C9C2200780D3D /* FootballTotalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballTotalView.swift; sourceTree = "<group>"; };
 		11A25C4F2080BC1200085C58 /* FootballHunheFilterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballHunheFilterVC.swift; sourceTree = "<group>"; };
 		11A25C512080BF2000085C58 /* FootballHunheView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballHunheView.swift; sourceTree = "<group>"; };
@@ -343,10 +342,8 @@
 		11FEB961208DDAAA00926951 /* WeixinShare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeixinShare.swift; sourceTree = "<group>"; };
 		11FEB963208DDC2100926951 /* AppKeyConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKeyConstraint.swift; sourceTree = "<group>"; };
 		6B0C42B903C8908121D72F5C /* Pods-彩小蜜Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜Tests/Pods-彩小蜜Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		A0D1D20EBEFE94020803D6D7 /* Pods____Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods____Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0F39BAB4469B5128625D7A3 /* Pods-彩小蜜UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜UITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜UITests/Pods-彩小蜜UITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A7A8CDA4EA02975014D806E4 /* Pods-彩小蜜.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜.release.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜/Pods-彩小蜜.release.xcconfig"; sourceTree = "<group>"; };
-		AB1F21E30D8FD47C0735B12D /* Pods____.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods____.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C46655EB1FBD7C2CB77E79A1 /* Pods-彩小蜜UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜UITests/Pods-彩小蜜UITests.release.xcconfig"; sourceTree = "<group>"; };
 		C6498BCAF23256B536C54738 /* Pods-彩小蜜.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜.debug.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜/Pods-彩小蜜.debug.xcconfig"; sourceTree = "<group>"; };
 		E503F5BD2079E8D6006D4A0B /* FootballFilterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballFilterProtocol.swift; sourceTree = "<group>"; };
@@ -518,7 +515,6 @@
 		E5D8ABBB2067443E002D688B /* OrderProgrammeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderProgrammeCell.swift; sourceTree = "<group>"; };
 		E5D8ABBD206749F5002D688B /* OrderDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailHeaderView.swift; sourceTree = "<group>"; };
 		E5D8ABBF20674A07002D688B /* OrderDetailFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailFooterView.swift; sourceTree = "<group>"; };
-		EAE714330A11D581FBF18120 /* Pods____UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods____UITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDB760CCFE10D3EA06C79E83 /* Pods-彩小蜜Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜Tests/Pods-彩小蜜Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -527,7 +523,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2545AF6A97B25DA9BA7C9A3A /* Pods____.framework in Frameworks */,
+				117A6486208EE65500B1769C /* Pods_彩小蜜.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -535,7 +531,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3730DD9CBCC541439A1110F /* Pods____Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -543,7 +538,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0239AFB787326CE28D84A44F /* Pods____UITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1718,6 +1712,7 @@
 		F57F686066089931831C044D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				117A6487208EE65500B1769C /* Pods_彩小蜜.framework */,
 				11FEB957208D7F6200926951 /* CFNetwork.framework */,
 				11FEB955208D7F5900926951 /* CoreTelephony.framework */,
 				11FEB953208D7F5200926951 /* Security.framework */,
@@ -1725,9 +1720,6 @@
 				11FEB94F208D7F3D00926951 /* libsqlite3.0.tbd */,
 				11FEB94D208D7F2C00926951 /* libz.tbd */,
 				11FEB94B208D7F1A00926951 /* SystemConfiguration.framework */,
-				AB1F21E30D8FD47C0735B12D /* Pods____.framework */,
-				A0D1D20EBEFE94020803D6D7 /* Pods____Tests.framework */,
-				EAE714330A11D581FBF18120 /* Pods____UITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1743,7 +1735,7 @@
 				E573759B20468B8900148622 /* Sources */,
 				E573759C20468B8900148622 /* Frameworks */,
 				E573759D20468B8900148622 /* Resources */,
-				25F43C7BE8B0DD4E14204301 /* [CP] Embed Pods Frameworks */,
+				79A143FE82CCFC3896A4449A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1886,7 +1878,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		25F43C7BE8B0DD4E14204301 /* [CP] Embed Pods Frameworks */ = {
+		79A143FE82CCFC3896A4449A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
