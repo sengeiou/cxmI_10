@@ -55,7 +55,15 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
     }
     // 分享
     @objc private func shareButClicked(_ sender: UIButton) {
+        guard self.detailModel != nil else { return }
+        var content = ShareContentModel()
+        content.title = self.detailModel.title
+        content.description = self.detailModel.summary
+        content.urlStr = self.detailModel.link
+        content.sharePic = UIImage(named:"Racecolorfootball")
+        
         let share = ShareViewController()
+        share.shareContent = content
         present(share)
     }
     // 查看更多

@@ -72,7 +72,9 @@ struct NewsDetailModel: HandyJSON {
     var listStyle: String!
     var matchId: String!
     var relatedTeam: String!
+    /// 文章摘要
     var summary: String!
+    /// 文章标题
     var title: String!
     ///0-已收藏 1-未收藏
     var isCollect : Bool!

@@ -19,7 +19,7 @@ fileprivate let cellHeight : CGFloat = 70 * defaultScale
 
 class ShareViewController: BasePopViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, WeixinSharePro {
     
-    
+    public var shareContent: ShareContentModel!
 
     // MARK: - 属性 private
     private var bottomLine : UIView!
@@ -63,10 +63,12 @@ class ShareViewController: BasePopViewController, UICollectionViewDelegate, UICo
     }
     
     private func shareWeixin() {
-        share(title: "xxx", url: "ssss", scene: 0)
+        guard shareContent != nil else { return }
+        shareImage(content: self.shareContent, scene: WXSceneSession)
     }
     private func shareWeixinCircle() {
-        share(title: "sss", url: "ssf", scene: 1)
+        guard shareContent != nil else { return }
+        shareImage(content: self.shareContent, scene: WXSceneTimeline)
     }
     private func shareLink() {
         let paseboard = UIPasteboard.general

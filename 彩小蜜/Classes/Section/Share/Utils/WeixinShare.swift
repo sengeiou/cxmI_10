@@ -32,7 +32,34 @@ protocol WeixinSharePro: WeixinShareDelegate {
     
 }
 extension WeixinSharePro {
-    func share(title: String, url: String, scene: Int) {
+    
+    func shareImage(content: ShareContentModel, scene : WXScene) {
+        guard content.sharePic != nil else { return }
+        if scene == WXSceneSession {
+            share(title: content.title, description: content.description, image: content.sharePic, url: content.urlStr, scene: scene)
+        }else if scene == WXSceneTimeline {
+            share(title: content.title, description: "", image: content.sharePic, url: content.urlStr, scene: scene)
+        }
+        
+    }
+    
+    func shareVideo(content: ShareContentModel, scene: WXScene) {
+        guard content.sharePic != nil else { return }
+        guard let data = UIImagePNGRepresentation(content.sharePic) else { return }
+        if scene == WXSceneSession {
+            share(title: content.title, description: content.description, imageDate: data, videoUrl: content.urlStr, scene: scene)
+        }else if scene == WXSceneTimeline {
+            share(title: content.title, description: "", imageDate: data, videoUrl: content.urlStr, scene: scene)
+        }
+    }
+    
+    private func share(title: String, description: String, image: UIImage, url: String, scene: WXScene) {
+        guard let data = UIImagePNGRepresentation(image) else { return }
+        share(title: title, description: description, imageDate: data, url: url, scene: scene)
+        
+    }
+    
+    private func share(title: String, description: String, imageDate: Data, url: String, scene: WXScene) {
         WXApi.registerApp(WeixinAppID)
         let mediaObject = WXWebpageObject()
         mediaObject.webpageUrl = url
@@ -40,9 +67,29 @@ extension WeixinSharePro {
         let message = WXMediaMessage()
         message.title = title
         message.mediaObject = mediaObject
-        
+        message.thumbData = imageDate
+        message.description = description
         let request = SendMessageToWXReq()
-        request.scene = Int32(scene)
+        request.scene = Int32(scene.rawValue)
+        request.message = message
+        
+        WXApi.send(request)
+    }
+    
+    private func share(title: String, description: String, imageDate: Data, videoUrl: String, scene: WXScene) {
+        WXApi.registerApp(WeixinAppID)
+
+        
+        let videoObject = WXVideoObject()
+        videoObject.videoUrl = videoUrl
+        
+        let message = WXMediaMessage()
+        message.title = title
+        message.mediaObject = videoObject
+        message.thumbData = imageDate
+        message.description = description
+        let request = SendMessageToWXReq()
+        request.scene = Int32(scene.rawValue)
         request.message = message
         
         WXApi.send(request)
