@@ -25,13 +25,16 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
         settings.style.buttonBarItemBackgroundColor = ColorFFFFFF
         settings.style.selectedBarBackgroundColor = ColorE95504
         settings.style.buttonBarItemTitleColor = Color505050
-            
+
         settings.style.selectedBarHeight = 1
         settings.style.buttonBarItemLeftRightMargin = 1
         settings.style.buttonBarItemsShouldFillAvailableWidth = true
         settings.style.buttonBarMinimumInteritemSpacing = 1
         settings.style.buttonBarMinimumLineSpacing = 0
         settings.style.buttonBarItemFont = Font15
+        settings.style.buttonBarLeftContentInset = 0
+        settings.style.buttonBarRightContentInset = 0
+        
         
         changeCurrentIndexProgressive = { [weak self] (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
             guard changeCurrentIndex == true else { return }
