@@ -8,6 +8,7 @@
 
 import Foundation
 
+fileprivate var maxNum: Set<Int> = [8]
 
 protocol FootballFilterPro { }
 
@@ -24,7 +25,7 @@ extension FootballFilterPro {
             filter.titleNum = "11"
             filterList.append(filter)
             
-            if playList.count < 9{
+            if playList.count <= maxNum.min()!{
                 for index in 2..<playList.count + 1 {
                     let filter = FootballPlayFilterModel()
                     filter.playTitle = "串关  "
@@ -33,7 +34,7 @@ extension FootballFilterPro {
                     filterList.append(filter)
                 }
             }else {
-                for index in 2...8 {
+                for index in 2...maxNum.min()! {
                     let filter = FootballPlayFilterModel()
                     filter.playTitle = "串关  "
                     filter.title = "\(index)串1"
@@ -50,7 +51,7 @@ extension FootballFilterPro {
                 filter.title = "2串1"
                 filter.titleNum = "21"
                 filterList.append(filter)
-            }else if playList.count < 9{
+            }else if playList.count <= maxNum.min()!{
                 for index in 2..<playList.count + 1 {
                     let filter = FootballPlayFilterModel()
                     filter.playTitle = "串关  "
@@ -59,7 +60,7 @@ extension FootballFilterPro {
                     filterList.append(filter)
                 }
             }else {
-                for index in 2...8 {
+                for index in 2...maxNum.min()! {
                     let filter = FootballPlayFilterModel()
                     filter.playTitle = "串关  "
                     filter.title = "\(index)串1"
@@ -80,6 +81,9 @@ extension FootballFilterPro {
     
     func isAllSingle(playList: [FootballPlayListModel]) -> Bool {
         var allSin = true
+        
+        maxNum.removeAll()
+        maxNum.insert(8)
         
         for play in playList {
             
@@ -110,18 +114,21 @@ extension FootballFilterPro {
                     for cell in match.homeCell.cellSons {
                         if cell.isSelected {
                             scoreSin = true
+                            maxNum.insert(4)
                             break
                         }
                     }
                     for cell in match.flatCell.cellSons {
                         if cell.isSelected {
                             scoreSin = true
+                            maxNum.insert(4)
                             break
                         }
                     }
                     for cell in match.visitingCell.cellSons {
                         if cell.isSelected {
                             scoreSin = true
+                            maxNum.insert(4)
                             break
                         }
                     }
@@ -131,18 +138,23 @@ extension FootballFilterPro {
                     for cell in match.matchCells {
                         if cell.isSelected {
                             scoreSin = true
+                            if match.playType == "4" {
+                                maxNum.insert(6)
+                            }else if match.playType == "5" {
+                                maxNum.insert(4)
+                            }
                             break
                         }
                     }
                 }
-                if match.matchCells != nil {
-                    for cell in match.matchCells {
-                        if cell.isSelected {
-                            scoreSin = true
-                            break
-                        }
-                    }
-                }
+//                if match.matchCells != nil {
+//                    for cell in match.matchCells {
+//                        if cell.isSelected {
+//                            scoreSin = true
+//                            break
+//                        }
+//                    }
+//                }
                 
                 
                 
@@ -186,18 +198,21 @@ extension FootballFilterPro {
                     for cell in score.homeCell.cellSons {
                         if cell.isSelected {
                             scoreSin = true
+                            maxNum.insert(4)
                             break
                         }
                     }
                     for cell in score.flatCell.cellSons {
                         if cell.isSelected {
                             scoreSin = true
+                            maxNum.insert(4)
                             break
                         }
                     }
                     for cell in score.visitingCell.cellSons {
                         if cell.isSelected {
                             scoreSin = true
+                            maxNum.insert(4)
                             break
                         }
                     }
@@ -207,6 +222,7 @@ extension FootballFilterPro {
                     for cell in total.matchCells {
                         if cell.isSelected {
                             scoreSin = true
+                            maxNum.insert(6)
                             break
                         }
                     }
@@ -215,6 +231,7 @@ extension FootballFilterPro {
                     for cell in ban.matchCells {
                         if cell.isSelected {
                             scoreSin = true
+                            maxNum.insert(4)
                             break
                         }
                     }
