@@ -172,23 +172,7 @@ extension FootballFilterPro {
                 let total = play.matchPlays[3]
                 let ban = play.matchPlays[4]
                 
-                if spf.homeCell != nil {
-                    if spf.homeCell.isSelected || spf.flatCell.isSelected || spf.visitingCell.isSelected {
-                        if spf.single == false {
-                            allSin = false
-                            break
-                        }
-                    }
-                }
                 
-                if rangSpf.homeCell != nil {
-                    if rangSpf.homeCell.isSelected || rangSpf.flatCell.isSelected || rangSpf.visitingCell.isSelected {
-                        if rangSpf.single == false {
-                            allSin = false
-                            break
-                        }
-                    }
-                }
                 
                 
                 
@@ -237,7 +221,23 @@ extension FootballFilterPro {
                     }
                 }
                 
+                if spf.homeCell != nil {
+                    if spf.homeCell.isSelected || spf.flatCell.isSelected || spf.visitingCell.isSelected {
+                        if spf.single == false {
+                            allSin = false
+                            break
+                        }
+                    }
+                }
                 
+                if rangSpf.homeCell != nil {
+                    if rangSpf.homeCell.isSelected || rangSpf.flatCell.isSelected || rangSpf.visitingCell.isSelected {
+                        if rangSpf.single == false {
+                            allSin = false
+                            break
+                        }
+                    }
+                }
                 
                 allSin = scoreSin
                 
