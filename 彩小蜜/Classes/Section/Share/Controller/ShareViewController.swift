@@ -82,15 +82,15 @@ class ShareViewController: BasePopViewController, UICollectionViewDelegate, UICo
         case 0:
             showHUD(message: "分享成功")
         case WXErrCodeCommon.rawValue:
-            showHUD(message: "分享失败")
+            showHUD(message: "分享失败，请稍后重试")
         case WXErrCodeSentFail.rawValue:
-            showHUD(message: "分享失败,发送失败")
+            showHUD(message: "分享失败，请稍后重试")
         case WXErrCodeUserCancel.rawValue:
-            showHUD(message: "分享失败，用户取消")
+            showHUD(message: "取消分享")
         case WXErrCodeUnsupport.rawValue:
-            showHUD(message: "分享失败，不支持")
+            showHUD(message: "分享失败，不支持的分享类型")
         case WXErrCodeAuthDeny.rawValue:
-            showHUD(message: "分享失败，授权失败")
+            showHUD(message: "分享失败，请稍后重试")
             
         default:
             break
