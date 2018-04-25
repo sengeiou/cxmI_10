@@ -156,7 +156,7 @@ class FootballOrderBottomView: UIView {
         self.backgroundColor = ColorFFFFFF
         
         titleLB = UILabel()
-        titleLB.font = Font10
+        titleLB.font = Font12
         titleLB.textColor = Color9F9F9F
         titleLB.textAlignment = .center
         titleLB.text = "页面盘口，赔率仅供参考，请以出票盘口赔率为准"
@@ -178,11 +178,11 @@ class FootballOrderBottomView: UIView {
         //playBut.titleLabel?.lineBreakMode = .byCharWrapping
         playBut.titleLabel?.lineBreakMode = .byTruncatingTail
         playBut.titleLabel?.numberOfLines = 2
-        playBut.titleLabel?.font = Font12
+        playBut.titleLabel?.font = Font14
         playBut.addTarget(self, action: #selector(playClicked(_:)), for: .touchUpInside)
         
         multipleBut = UIButton(type: .custom)
-        multipleBut.titleLabel?.font = Font12
+        multipleBut.titleLabel?.font = Font14
         multipleBut.setTitle("倍数  5倍", for: .normal)
         multipleBut.setTitleColor(Color505050, for: .normal)
         multipleBut.addTarget(self, action: #selector(multipleClicked(_:)), for: .touchUpInside)
@@ -194,13 +194,13 @@ class FootballOrderBottomView: UIView {
         multCornerIcon.image = UIImage(named: "Clickable")
         
         moneyLB = UILabel()
-        moneyLB.font = Font11
+        moneyLB.font = Font12
         moneyLB.textColor = Color787878
         moneyLB.textAlignment = .left
         //moneyLB.text = "4注5倍 共需： ¥20"
         
         bonusLB = UILabel()
-        bonusLB.font = Font11
+        bonusLB.font = Font12
         bonusLB.textColor = Color787878
         bonusLB.textAlignment = .left
         //bonusLB.text = "预测奖金： 30.06-42.56元"

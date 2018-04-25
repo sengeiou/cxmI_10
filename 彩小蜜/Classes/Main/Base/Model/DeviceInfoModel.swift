@@ -52,7 +52,7 @@ class DeviceManager  {
     
     
     func getMacAddress()->String{
-        let interfaces:NSArray = CNCopySupportedInterfaces()!
+        guard let interfaces:NSArray = CNCopySupportedInterfaces() else { return "" }
         
         //var ssid: String?
         

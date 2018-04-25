@@ -148,7 +148,7 @@ class FootballOrderHunheCell: UITableViewCell {
     
     private func initLabel() -> UILabel {
         let lab = UILabel()
-        lab.font = Font12
+        lab.font = Font14
         lab.textColor = Color787878
         lab.textAlignment = .center
         lab.text = "截止23： 50"

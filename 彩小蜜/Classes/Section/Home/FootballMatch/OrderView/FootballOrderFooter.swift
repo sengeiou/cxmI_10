@@ -41,7 +41,7 @@ class FootballOrderFooter: UIView {
         agreementBut.snp.makeConstraints { (make) in
             make.top.equalTo(16)
             make.right.equalTo(agreement.snp.left).offset(-10)
-            make.height.width.equalTo(25)
+            make.height.width.equalTo(18)
         }
         agreement.snp.makeConstraints { (make) in
             make.centerY.equalTo(agreementBut)
