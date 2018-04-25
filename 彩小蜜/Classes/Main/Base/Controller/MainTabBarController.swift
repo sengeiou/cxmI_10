@@ -32,15 +32,15 @@ class MainTabBarController: UITabBarController, UserInfoPro {
     }
     
     func configRequest() {
-        //weak var weakSelf = self
+        weak var weakSelf = self
         _ = userProvider.rx.request(.configQuety)
             .asObservable()
             .mapObject(type: ConfigInfoModel.self)
             .subscribe(onNext: { (data) in
                 if data.turnOn {
-                    self.home.homeStyle = .allShow
+                    weakSelf?.home.homeStyle = .allShow
                 }else {
-                    self.home.homeStyle = .onlyNews
+                    weakSelf?.home.homeStyle = .onlyNews
                 }
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationConfig), object: nil, userInfo: ["showStyle": data.turnOn])
                 UserDefaults.standard.set(data.turnOn, forKey: TurnOn)
@@ -52,7 +52,7 @@ class MainTabBarController: UITabBarController, UserInfoPro {
                     //self.showHUD(message: msg!)
                 default: break
                 }
-                self.home.homeStyle = .allShow
+                weakSelf?.home.homeStyle = .allShow
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationConfig), object: nil, userInfo: ["showStyle": true])
             }, onCompleted: nil, onDisposed: nil )
     }

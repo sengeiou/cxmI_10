@@ -64,6 +64,7 @@ class DeviceManager  {
             mac = dict["BSSID"] as? String
             }
         }
+        guard mac != nil else { return "" }
         return mac!
     }
 }
