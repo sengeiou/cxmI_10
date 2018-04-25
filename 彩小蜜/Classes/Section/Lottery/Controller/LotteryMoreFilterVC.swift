@@ -1,4 +1,4 @@
-//
+ //
 //  LotteryMoreFilterVC.swift
 //  彩小蜜
 //
@@ -235,6 +235,7 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
     // MARK: - TOP VIEW Delegate
     // 全选
     func allSelected() {
+        guard filterList != nil else { return }
         self.isAlreadyBuy = false
         for  index in 0..<filterList.count {
             let indexPath = IndexPath(item: index, section: 0)
@@ -246,6 +247,7 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
     }
     // 反选
     func reverseSelected() {
+        guard filterList != nil else { return }
         self.isAlreadyBuy = false
         for index in 0..<filterList.count {
             let indexPath = IndexPath(item: index, section: 0)
@@ -262,10 +264,11 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
     }
     
     @objc private func onlyBuyButClicked(_ sender: UIButton) {
+        
         sender.isSelected = !sender.isSelected
         self.isAlreadyBuy = sender.isSelected
         changButState(isSelected: sender.isSelected)
-        
+        guard filterList != nil else { return }
         for index in 0..<filterList.count {
             let indexPath = IndexPath(item: index, section: 0)
             let filter = filterList[indexPath.row]

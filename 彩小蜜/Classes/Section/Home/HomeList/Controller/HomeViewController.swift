@@ -118,8 +118,9 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
             .asObservable()
             .mapObject(type: HomeListModel.self)
             .subscribe(onNext: { (data) in
+                weakSelf?.tableView.endrefresh()
                 if pageNum == 1 {
-                    weakSelf?.tableView.endrefresh()
+                    
                     weakSelf?.homeData = data.dlHallDTO
                     //weakSelf?.tableView.reloadData()
                     guard weakSelf?.homeData.navBanners != nil else { return }
