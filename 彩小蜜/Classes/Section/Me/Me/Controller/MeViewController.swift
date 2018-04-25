@@ -44,7 +44,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         if turnOn {
             showType = .allShow
         }else {
-            showType = .onlyNews
+            showType = .allShow
         }
     }
     

@@ -17,7 +17,9 @@ fileprivate let FootballOrder2_1CellId = "FootballOrder2_1CellId"
 fileprivate let FootballOrderHunheCellId = "FootballOrderHunheCellId"
 
 
-class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballTeamViewDelegate, FootballOrderBottomViewDelegate, FootballTimesFilterVCDelegate, FootballPlayFilterVCDelegate, FootballFilterPro, FootballOrderProtocol, FootballOrderSPFCellDelegate, FootballTotalViewDelegate, FootballScoreViewDelegate, FootballTwoOneViewDelegate{
+class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballTeamViewDelegate, FootballOrderBottomViewDelegate, FootballTimesFilterVCDelegate, FootballPlayFilterVCDelegate, FootballFilterPro, FootballOrderProtocol, FootballOrderSPFCellDelegate, FootballTotalViewDelegate, FootballScoreViewDelegate, FootballTwoOneViewDelegate, FootballOrderFooterDelegate{
+    
+    
     
     
    
@@ -76,6 +78,8 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     // 是否允许弹出下个界面 - 支付界面
     public var canPush : Bool = false
     public var showMsg : String!
+    private var footer: FootballOrderFooter!
+    private var isAgreement : Bool = true
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -128,6 +132,10 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         table.delegate = self
         table.dataSource = self
         table.backgroundColor = ColorF4F4F4
+        
+        footer = FootballOrderFooter()
+        footer.delegate = self 
+        table.tableFooterView = footer
         
         registerCell(table)
         return table
@@ -259,6 +267,15 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         return nil
     }
     
+    // MARK: - FOOTER  delegate
+    func didTipSelectedAgreement(isAgerr: Bool) {
+        self.isAgreement = isAgerr
+    }
+    
+    func didTipAgreement() {
+        let agreement = AgreementViewController()
+        pushViewController(vc: agreement)
+    }
     // MARK: CELL  删除
     func deleteOrderSPFCell(playInfo: FootballPlayListModel) {
         playList.remove(playInfo)
@@ -286,6 +303,9 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     // MARK: - Bottow Delegate
     // 确认键
     func orderConfirm(filterList: [FootballPlayFilterModel], times: String) {
+        guard self.isAgreement == true else {
+            showConfirm(message: "尊敬的用户，购彩需同意并接受《彩小秘彩票服务协议》")
+            return }
         guard self.canPush == true else {
             if self .showMsg != nil {
                  showHUD(message: self.showMsg)

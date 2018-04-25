@@ -51,8 +51,6 @@ extension AlertPro {
     }
     
     
-    
-    
     public func showConfirm(title: String, message: NSAttributedString, action: String, confirm: ((UIAlertAction)->Void)?) {
         if let vc = UIApplication.shared.keyWindow?.rootViewController {
             showConfirm(title: title, message: message, action: action, in: vc, confirm: confirm)

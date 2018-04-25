@@ -173,9 +173,6 @@ extension FootballFilterPro {
                 let ban = play.matchPlays[4]
                 
                 
-                
-                
-                
                 var scoreSin = false
                 
                 if score.homeCell.cellSons != nil {
@@ -225,7 +222,7 @@ extension FootballFilterPro {
                     if spf.homeCell.isSelected || spf.flatCell.isSelected || spf.visitingCell.isSelected {
                         if spf.single == false {
                             allSin = false
-                            break
+                            //break
                         }
                     }
                 }
@@ -234,16 +231,16 @@ extension FootballFilterPro {
                     if rangSpf.homeCell.isSelected || rangSpf.flatCell.isSelected || rangSpf.visitingCell.isSelected {
                         if rangSpf.single == false {
                             allSin = false
-                            break
+                            //break
                         }
                     }
                 }
                 
                 allSin = scoreSin
                 
-                if allSin == false {
-                    return allSin
-                }
+//                if allSin == false {
+//                    return allSin
+//                }
             }
             
             

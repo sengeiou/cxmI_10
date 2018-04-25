@@ -61,6 +61,7 @@
 		116EB212207F332900B32ABD /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116EB211207F332900B32ABD /* BottomView.swift */; };
 		116EB214207F672000B32ABD /* FootballBanQuanCFilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116EB213207F672000B32ABD /* FootballBanQuanCFilterVC.swift */; };
 		117A6486208EE65500B1769C /* Pods_彩小蜜.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 117A6487208EE65500B1769C /* Pods_彩小蜜.framework */; };
+		117CCDF4209055A100B38543 /* FootballOrderFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117CCDF3209055A100B38543 /* FootballOrderFooter.swift */; };
 		11A250BE207C9C2200780D3D /* FootballTotalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A250BD207C9C2200780D3D /* FootballTotalView.swift */; };
 		11A25C502080BC1200085C58 /* FootballHunheFilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A25C4F2080BC1200085C58 /* FootballHunheFilterVC.swift */; };
 		11A25C522080BF2000085C58 /* FootballHunheView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A25C512080BF2000085C58 /* FootballHunheView.swift */; };
@@ -319,6 +320,7 @@
 		116EB211207F332900B32ABD /* BottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
 		116EB213207F672000B32ABD /* FootballBanQuanCFilterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballBanQuanCFilterVC.swift; sourceTree = "<group>"; };
 		117A6487208EE65500B1769C /* Pods_彩小蜜.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = "Pods_彩小蜜.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		117CCDF3209055A100B38543 /* FootballOrderFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballOrderFooter.swift; sourceTree = "<group>"; };
 		11A250BD207C9C2200780D3D /* FootballTotalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballTotalView.swift; sourceTree = "<group>"; };
 		11A25C4F2080BC1200085C58 /* FootballHunheFilterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballHunheFilterVC.swift; sourceTree = "<group>"; };
 		11A25C512080BF2000085C58 /* FootballHunheView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballHunheView.swift; sourceTree = "<group>"; };
@@ -771,6 +773,7 @@
 				E550D8A220733A2D002DDE23 /* FootballOrderHunheCell.swift */,
 				E550D8AA20737594002DDE23 /* FootballPlayFilterCell.swift */,
 				E550D8AC20737C69002DDE23 /* CXMKeyboardView.swift */,
+				117CCDF3209055A100B38543 /* FootballOrderFooter.swift */,
 			);
 			path = OrderView;
 			sourceTree = "<group>";
@@ -2018,6 +2021,7 @@
 				E5973DD920492DD2006461CE /* UIScrollView+MJRefresh.swift in Sources */,
 				E5973E27204E3CB0006461CE /* CountdownButton.swift in Sources */,
 				E5D8ABB6206739CF002D688B /* OrderDetailTitleCell.swift in Sources */,
+				117CCDF4209055A100B38543 /* FootballOrderFooter.swift in Sources */,
 				113B9CCD2087201E006AE3F8 /* NewsOnePicCell.swift in Sources */,
 				E50B9073205231B500417BFE /* RechargeHeaderView.swift in Sources */,
 				11062B21208322D0001C1D14 /* LotteryCell.swift in Sources */,
