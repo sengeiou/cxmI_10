@@ -247,7 +247,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
             return newsList.count
         }else {
             if section == 3 {
-                guard newsList.isEmpty == false else { return 0 }
+                guard newsList != nil, newsList.isEmpty == false else { return 0 }
                 return newsList.count
             }else {
                 return 1

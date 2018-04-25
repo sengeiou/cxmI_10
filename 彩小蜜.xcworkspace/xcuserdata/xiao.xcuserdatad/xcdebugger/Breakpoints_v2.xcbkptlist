@@ -61,5 +61,53 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/XLPagerTabStrip/Sources/ButtonBarPagerTabStripViewController.swift"
+            timestampString = "546352475.318123"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "282"
+            endingLineNumber = "282"
+            landmarkName = "collectionView(_:layout:sizeForItemAtIndexPath:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "XLPagerTabStrip.ButtonBarPagerTabStripViewController.collectionView(__ObjC.UICollectionView, layout: __ObjC.UICollectionViewLayout, sizeForItemAtIndexPath: Foundation.IndexPath) -&gt; __C.CGSize"
+                  moduleName = "XLPagerTabStrip"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/xiao/Desktop/%E5%BD%A9%E5%B0%8F%E7%A7%981.0/Pods/XLPagerTabStrip/Sources/ButtonBarPagerTabStripViewController.swift"
+                  timestampString = "546337726.827019"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "282"
+                  endingLineNumber = "282"
+                  offsetFromSymbolStart = "400">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "XLPagerTabStrip.ButtonBarPagerTabStripViewController.collectionView(__ObjC.UICollectionView, layout: __ObjC.UICollectionViewLayout, sizeForItemAt: Foundation.IndexPath) -&gt; __C.CGSize"
+                  moduleName = "XLPagerTabStrip"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/xiao/Desktop/%E5%BD%A9%E5%B0%8F%E7%A7%981.0/Pods/XLPagerTabStrip/Sources/ButtonBarPagerTabStripViewController.swift"
+                  timestampString = "546337727.173233"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "282"
+                  endingLineNumber = "282"
+                  offsetFromSymbolStart = "42">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
