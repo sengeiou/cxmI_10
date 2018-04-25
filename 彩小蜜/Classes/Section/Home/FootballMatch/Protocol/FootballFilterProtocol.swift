@@ -86,7 +86,7 @@ extension FootballFilterPro {
             
             if play.matchPlays.count == 1 {
                 let match = play.matchPlays[0]
-                if match.homeCell != nil {
+                if match.homeCell != nil && match.visitingCell != nil && match.flatCell != nil {
                     if match.homeCell.isSelected || match.flatCell.isSelected || match.visitingCell.isSelected {
                         if match.single == false {
                             allSin = false
@@ -95,7 +95,15 @@ extension FootballFilterPro {
                     }
                 }
                 
-
+                if match.flatCell == nil && match.homeCell != nil && match.visitingCell != nil {
+                    if match.homeCell.isSelected || match.visitingCell.isSelected {
+                        if match.single == false {
+                            allSin = false
+                            break
+                        }
+                    }
+                }
+                
                 var scoreSin = false
                 
                 if match.homeCell != nil && match.homeCell.cellSons != nil {
