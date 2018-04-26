@@ -322,7 +322,12 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
 
         let childController = viewControllers[indexPath.item] as! IndicatorInfoProvider // swiftlint:disable:this force_cast
         let indicatorInfo = childController.indicatorInfo(for: self)
-
+        if indexPath.row == 0 {
+            cell.leftView.isHidden = true
+        }else {
+            cell.leftView.isHidden = false
+        }
+        
         cell.label.text = indicatorInfo.title
         cell.accessibilityLabel = indicatorInfo.accessibilityLabel
         cell.label.font = settings.style.buttonBarItemFont
