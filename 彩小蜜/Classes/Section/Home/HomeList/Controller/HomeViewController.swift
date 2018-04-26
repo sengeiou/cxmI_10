@@ -57,6 +57,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     public var homeStyle : ShowType! = .onlyNews {
         didSet{
             guard homeStyle != nil else { return }
+            guard newsList != nil else { return }
             homeListAddNewsRequest(pageNum: 1)
         }
     }

@@ -12,11 +12,25 @@ fileprivate let mobileCellIdentifier = "mobileCellIdentifier"
 fileprivate let passwordCellIdentifier = "passwordCellIdentifier"
 fileprivate let vcodeCellIdentifier = "vcodeCellIdentifier"
 
-class RegisterViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, ValidatePro, UserInfoPro, CustomTextFieldDelegate {
+class RegisterViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, ValidatePro, UserInfoPro, CustomTextFieldDelegate, RegisterFooterViewDelegate {
+    
+    
+    func didTipSelectedAgreement(isAgerr: Bool) {
+        self.canRegister = isAgerr
+    }
+    // 跳转注册协议
+    func didTipAgreement() {
+        let regis = RegisterAgreementVC()
+        pushViewController(vc: regis)
+    }
+    
 
     // MARK: - 点击事件
     @objc private func registerClicked(_ sender: UIButton) {
-        
+        guard canRegister else {
+            showHUD(message: "请同意注册协议")
+            return
+        }
         guard validate(.phone, str: self.phoneTF.text) else {
             showHUD(message: "请输入手机号")
             return
@@ -57,7 +71,7 @@ class RegisterViewController: BaseViewController, UITableViewDelegate, UITableVi
     private var phoneTF : CustomTextField!     // 输入手机号
     private var passwordTF : CustomTextField!  // 输入密码
     private var vcodeTF : UITextField!         // 输入验证码
-    
+    private var canRegister: Bool = true
     
     
     // MARK: - 生命周期
@@ -150,6 +164,7 @@ class RegisterViewController: BaseViewController, UITableViewDelegate, UITableVi
         table.register(VcodeTextFieldCell.self, forCellReuseIdentifier: vcodeCellIdentifier)
         
         let footer = RegisterFooterView()
+        footer.delegate = self 
         footer.register.addTarget(self, action: #selector(registerClicked(_:)), for: .touchUpInside)
         table.tableFooterView = footer
         
