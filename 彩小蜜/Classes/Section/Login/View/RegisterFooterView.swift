@@ -17,7 +17,6 @@ class RegisterFooterView: UIView {
 
     public var register : UIButton!
     public var delegate : RegisterFooterViewDelegate!
-    private var registerPro : UILabel!
     
     private var agreementBut: UIButton!
     private var agreement : UIButton!
@@ -48,20 +47,9 @@ class RegisterFooterView: UIView {
         register.backgroundColor = ColorEA5504
         register.layer.cornerRadius = 5
         
-//        let attStr = NSMutableAttributedString(string: "注册表明您已同意", attributes: [NSAttributedStringKey.foregroundColor: ColorA0A0A0])
-//
-//        let attProStr = NSAttributedString(string: "《彩小秘彩票服务协议》", attributes: [NSAttributedStringKey.foregroundColor: Color787878])
-//        attStr.append(attProStr)
-//
-//
-//        registerPro = UILabel()
-//        registerPro.attributedText = attStr
-//        registerPro.textColor = UIColor.black
-//        registerPro.font = Font14
-//        registerPro.textAlignment = .center
         
         let muAtt = NSMutableAttributedString(string: "我已阅读并同意 ", attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F])
-        let att = NSAttributedString(string: "《彩小秘彩票服务协议》", attributes: [NSAttributedStringKey.foregroundColor: Color505050])
+        let att = NSAttributedString(string: "《注册服务协议》", attributes: [NSAttributedStringKey.foregroundColor: Color505050])
         muAtt.append(att)
         
         agreementBut = UIButton(type: .custom)
@@ -82,10 +70,7 @@ class RegisterFooterView: UIView {
         
         self.addSubview(agreementBut)
         self.addSubview(agreement)
-        
-        
         self.addSubview(register)
-//        self.addSubview(registerPro)
     }
 
     override func layoutSubviews() {
@@ -96,12 +81,6 @@ class RegisterFooterView: UIView {
             make.right.equalTo(self).offset(-rightSpacing)
             make.height.equalTo(loginButHeight)
         }
-//        registerPro.snp.makeConstraints { (make) in
-//            make.height.equalTo(30)
-//            make.left.equalTo(self).offset(leftSpacing)
-//            make.right.equalTo(self).offset(-rightSpacing)
-//            make.top.equalTo(register.snp.bottom).offset(12.5)
-//        }
         
         agreementBut.snp.makeConstraints { (make) in
             make.top.equalTo(register.snp.bottom).offset(12.5 * defaultScale)
