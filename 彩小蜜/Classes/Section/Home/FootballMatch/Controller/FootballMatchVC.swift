@@ -359,6 +359,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     func delete() {
         weak var weakSelf = self
         showCXMAlert(title: nil, message: "您正在清空方案列表", action: "清空", cancel: "返回") { (action) in
+            weakSelf?.selectPlayList.removeAll()
             weakSelf?.footballRequest(leagueId: "")
         }
     }
