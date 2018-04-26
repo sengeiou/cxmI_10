@@ -133,7 +133,14 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                 weakSelf?.newsList.append(contentsOf: self.newsListModel.list)
                 weakSelf?.tableView.reloadData()
             }, onError: { (error) in
-                
+                weakSelf?.tableView.endrefresh()
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                print(code!)
+                weakSelf?.showHUD(message: msg!)
+                default: break
+                }
             }, onCompleted: nil , onDisposed: nil )
     }
     // 以下代码已合并

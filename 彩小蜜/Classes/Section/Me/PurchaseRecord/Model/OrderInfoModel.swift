@@ -21,7 +21,7 @@ struct OrderInfoModel: HandyJSON {
     var moneyPaid: String!
     var orderStatus: String!
     var orderStatusDesc: String!
-    var passType: String!
+    var passType: String! 
     var processResult: String!
     var processStatusDesc: String!
     var programmeSn: String!

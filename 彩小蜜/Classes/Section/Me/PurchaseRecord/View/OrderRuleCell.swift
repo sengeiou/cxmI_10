@@ -12,7 +12,9 @@ class OrderRuleCell: UITableViewCell {
 
     public var orderInfo : OrderInfoModel! {
         didSet{
-            
+            if orderInfo.passType == nil || orderInfo.passType == "null" {
+                orderInfo.passType = ""
+            }
             let titleAtt = NSMutableAttributedString(string: "过关方式: ")
             let tit = NSAttributedString(string: orderInfo.passType, attributes: [NSAttributedStringKey.foregroundColor: Color505050])
             titleAtt.append(tit)
