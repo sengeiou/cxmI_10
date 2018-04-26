@@ -26,7 +26,7 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
     // MARK: - 属性 private
     private var detailModel: NewsDetailModel! {
         didSet{
-            guard detailModel != nil else { return }
+            guard detailModel != nil, detailModel.isCollect != nil else { return }
             if detailModel.isCollect {
                 collectBut.isSelected = true
             }else {
