@@ -19,9 +19,54 @@ enum BackType {
 }
 
 class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, OrderDetailFooterViewDelegate {
-
+//    case .胜平负:
+//    request(type: "2", leagueId: leagueId)
+//    case .让球胜平负:
+//    request(type: "1", leagueId: leagueId)
+//    case .总进球:
+//    request(type: "4", leagueId: leagueId)
+//    case .比分:
+//    request(type: "3", leagueId: leagueId)
+//    case .半全场:
+//    request(type: "5", leagueId: leagueId)
+//    case .二选一:
+//    request(type: "7", leagueId: leagueId)
+//    case .混合过关:
+//    request(type: "6", leagueId: leagueId)
     // MARK: - 点击事件
     func goBuy() {
+        guard orderInfo != nil else { return }
+        
+        let football = FootballMatchVC()
+        
+        switch orderInfo.playType {
+        case "2":
+            football.matchType = .胜平负
+        case "1":
+            football.matchType = .让球胜平负
+        case "4":
+            football.matchType = .总进球
+        case "5":
+            football.matchType = .半全场
+        case "3":
+            football.matchType = .比分
+        case "6":
+            football.matchType = .混合过关
+        case "7":
+            football.matchType = .二选一
+        default: break
+            
+        }
+        
+        var homeData = HomePlayModel()
+        homeData.lotteryId = orderInfo.lotteryClassifyId
+        homeData.playClassifyId = orderInfo.lotteryPlayClassifyId
+        homeData.playClassifyImg = orderInfo.lotteryClassifyImg
+        homeData.playClassifyName = orderInfo.lotteryClassifyName
+        homeData.playType = orderInfo.playType
+        
+        football.homeData = homeData
+        pushViewController(vc: football)
         
     }
     

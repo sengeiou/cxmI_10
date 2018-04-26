@@ -13,6 +13,8 @@ struct OrderInfoModel: HandyJSON {
     var acceptTime: String!
     var cathectic : String!
     var createTime: String!
+    var lotteryClassifyId: String!
+    var lotteryPlayClassifyId: String!
     var lotteryClassifyImg: String!
     var lotteryClassifyName: String!
     var matchInfos: [MatchInfo]!
@@ -26,6 +28,7 @@ struct OrderInfoModel: HandyJSON {
     var ticketTime: String!
     var forecastMoney: String!
     var orderSn : String!
+    var playType: String!
 }
 
 struct MatchInfo: HandyJSON {
