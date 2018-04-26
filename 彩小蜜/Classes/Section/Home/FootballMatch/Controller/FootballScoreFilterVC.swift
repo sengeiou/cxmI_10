@@ -16,6 +16,7 @@ class FootballScoreFilterVC: BasePopViewController, BottomViewDelegate, Football
     
     public var teamInfo : FootballPlayListModel! {
         didSet{
+            guard teamInfo != nil else { return }
             homeTeam.text = teamInfo.homeTeamAbbr
             visitingTeam.text = teamInfo.visitingTeamAbbr
             shengScoreView.cells = teamInfo.matchPlays[0].homeCell.cellSons

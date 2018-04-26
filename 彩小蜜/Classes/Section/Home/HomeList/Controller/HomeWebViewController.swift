@@ -19,14 +19,7 @@ class HomeWebViewController: BaseWebViewController {
     }
 
     override func loadWebView() {
-        let jsonPath = Bundle.main.path(forResource: "rich", ofType: "txt")
-        let data = NSData.init(contentsOfFile: jsonPath!)
-       
-        let xxx = String.init(data: data as! Data, encoding: String.Encoding.utf8)
         
-       
-        
-        webView.loadHTMLString(xxx!, baseURL: nil)
        // webView.load(request)
     }
     

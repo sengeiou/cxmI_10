@@ -20,6 +20,7 @@ class FootballBanQuanCFilterVC: BasePopViewController, BottomViewDelegate, Footb
 
     public var teamInfo : FootballPlayListModel! {
         didSet{
+            guard teamInfo != nil else { return }
             homeTeam.text = teamInfo.homeTeamAbbr
             visitingTeam.text = teamInfo.visitingTeamAbbr
             banScoreView.cells = teamInfo.matchPlays[0].matchCells

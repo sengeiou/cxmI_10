@@ -121,6 +121,7 @@ class FootballPlayFilterVC: BasePopViewController, FootballFilterBottomViewDeleg
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        guard filterList != nil else { return 0 }
         return filterList.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
