@@ -120,9 +120,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
             .subscribe(onNext: { (data) in
                 weakSelf?.tableView.endrefresh()
                 if pageNum == 1 {
-                    
                     weakSelf?.homeData = data.dlHallDTO
-                    //weakSelf?.tableView.reloadData()
                     guard weakSelf?.homeData.navBanners != nil else { return }
                     weakSelf?.header.bannerList = weakSelf?.homeData.navBanners
                 }
@@ -232,18 +230,17 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        
+        guard homeStyle != nil else { return 0 }
         if homeStyle == .onlyNews {
             return 1
         }else {
             return 3 + 1
         }
-        
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if homeStyle == .onlyNews {
-            guard newsList.isEmpty == false else { return 0 }
+            guard newsList != nil, newsList.isEmpty == false else { return 0 }
             return newsList.count
         }else {
             if section == 3 {
