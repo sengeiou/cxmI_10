@@ -90,63 +90,78 @@ extension FootballFilterPro {
             
             if play.matchPlays.count == 1 {
                 let match = play.matchPlays[0]
-                if match.homeCell != nil && match.visitingCell != nil && match.flatCell != nil {
-                    if match.homeCell.isSelected || match.flatCell.isSelected || match.visitingCell.isSelected {
-                        if match.single == false {
-                            allSin = false
-                            break
-                        }
-                    }
-                }
                 
-                if match.flatCell == nil && match.homeCell != nil && match.visitingCell != nil {
-                    if match.homeCell.isSelected || match.visitingCell.isSelected {
-                        if match.single == false {
-                            allSin = false
-                            break
-                        }
-                    }
-                }
-                
-                var scoreSin = false
-                
-                if match.homeCell != nil && match.homeCell.cellSons != nil {
-                    for cell in match.homeCell.cellSons {
-                        if cell.isSelected {
-                            scoreSin = true
-                            maxNum.insert(4)
-                            break
-                        }
-                    }
-                    for cell in match.flatCell.cellSons {
-                        if cell.isSelected {
-                            scoreSin = true
-                            maxNum.insert(4)
-                            break
-                        }
-                    }
-                    for cell in match.visitingCell.cellSons {
-                        if cell.isSelected {
-                            scoreSin = true
-                            maxNum.insert(4)
-                            break
-                        }
-                    }
-                }
-                
-                if match.matchCells != nil {
-                    for cell in match.matchCells {
-                        if cell.isSelected {
-                            scoreSin = true
-                            if match.playType == "4" {
-                                maxNum.insert(6)
-                            }else if match.playType == "5" {
-                                maxNum.insert(4)
+                if match.playType == "1" || match.playType == "2" {
+                    if match.homeCell != nil && match.visitingCell != nil && match.flatCell != nil {
+                        if match.homeCell.isSelected || match.flatCell.isSelected || match.visitingCell.isSelected {
+                            if match.single == false {
+                                allSin = false
+                                break
                             }
-                            break
                         }
                     }
+                    
+                    if match.flatCell == nil && match.homeCell != nil && match.visitingCell != nil {
+                        if match.homeCell.isSelected || match.visitingCell.isSelected {
+                            if match.single == false {
+                                allSin = false
+                                break
+                            }
+                        }
+                    }
+                }else {
+                    var scoreSin = false
+                    
+                    if match.homeCell != nil && match.homeCell.cellSons != nil {
+                        for cell in match.homeCell.cellSons {
+                            if cell.isSelected {
+                                scoreSin = true
+                                maxNum.insert(4)
+                                break
+                            }
+                        }
+                        
+                    }
+                    
+                    if match.flatCell != nil && match.flatCell.cellSons != nil {
+                        for cell in match.flatCell.cellSons {
+                            if cell.isSelected {
+                                scoreSin = true
+                                maxNum.insert(4)
+                                break
+                            }
+                        }
+                    }
+                    if match.visitingCell != nil && match.visitingCell.cellSons != nil {
+                        for cell in match.visitingCell.cellSons {
+                            if cell.isSelected {
+                                scoreSin = true
+                                maxNum.insert(4)
+                                break
+                            }
+                        }
+                    }
+                    
+                    if match.matchCells != nil {
+                        for cell in match.matchCells {
+                            if cell.isSelected {
+                                scoreSin = true
+                                if match.playType == "4" {
+                                    maxNum.insert(6)
+                                }else if match.playType == "5" {
+                                    maxNum.insert(4)
+                                }
+                                break
+                            }
+                        }
+                       
+                    }
+                    allSin = scoreSin
                 }
+                
+                
+                
+                
 //                if match.matchCells != nil {
 //                    for cell in match.matchCells {
 //                        if cell.isSelected {
@@ -158,7 +173,7 @@ extension FootballFilterPro {
                 
                 
                 
-                allSin = scoreSin
+                
                 
                 if allSin == false {
                     return allSin
@@ -236,7 +251,7 @@ extension FootballFilterPro {
                     }
                 }
                 
-                allSin = scoreSin
+                //allSin = scoreSin
                 
 //                if allSin == false {
 //                    return allSin

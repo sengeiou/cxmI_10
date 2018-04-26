@@ -42,6 +42,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
                     str += filter.titleNum + ","
                 }
             }
+            guard str != "" else { return }
             str.removeLast()
             self.betType = str
             
