@@ -4,7 +4,7 @@
 //
 //  Created by 笑 on 2018/4/17.
 //  Copyright © 2018年 韩笑. All rights reserved.
-//
+//  积分排名 Cell
 
 import UIKit
 
@@ -13,11 +13,13 @@ class FootballMatchIntegralCell: UITableViewCell {
     public var homeScoreInfo : TeamScoreInfoModel! {
         didSet{
             homeIntegralView.scoreInfo = homeScoreInfo
+            homeTeamName.text = homeScoreInfo.teamName
         }
     }
     public var visiScoreInfo : TeamScoreInfoModel! {
         didSet{
             visiIntegralView.scoreInfo = visiScoreInfo
+            visiTeamName.text = visiScoreInfo.teamName
         }
     }
     
@@ -69,10 +71,10 @@ class FootballMatchIntegralCell: UITableViewCell {
         title.textAlignment = .left
         
         homeTeamName = getLabel()
-        homeTeamName.text = "阿森纳(主场)"
+        homeTeamName.text = "阿森纳"
         
         visiTeamName = getLabel()
-        visiTeamName.text = "阿森纳(客场)"
+        visiTeamName.text = "阿森纳"
         
         homeIntegralView = FootballIntegralView()
         visiIntegralView = FootballIntegralView()
