@@ -32,6 +32,8 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
     
     private var paymentResult : PaymentResultModel!
     
+    private var canPayment : Bool = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         WeixinCenter.share.payDelegate = self
@@ -84,13 +86,16 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
             .asObservable()
             .mapObject(type: PaymentResultModel.self)
             .subscribe(onNext: { (data) in
+                weakSelf?.canPayment = true
                 weakSelf?.paymentResult = data
                 weakSelf?.showHUD(message: data.showMsg)
                 let order = OrderDetailVC()
                 order.backType = .root
                 order.orderId = data.orderId
                 weakSelf?.pushViewController(vc: order)
+                
             }, onError: { (error) in
+                weakSelf?.canPayment = true
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):
@@ -229,9 +234,10 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    
     // 支付
     @objc private func confirmClicked(_ sender: UIButton) {
+        guard canPayment else { return }
+        self.canPayment = false
         paymentRequest()
     }
     // 选取的  优惠券

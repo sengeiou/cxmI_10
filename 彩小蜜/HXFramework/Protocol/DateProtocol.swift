@@ -23,4 +23,11 @@ extension DateProtocol {
         
         return dateFormatter.string(from: date)
     }
+//    func getWeek() -> String {
+//        let calendar: Calendar = Calendar(identifier: .gregorian)
+//        var comps: DateComponents = DateComponents()
+//        comps = calendar.dateComponents([.year,.month,.day, .weekday, .hour, .minute,.second], from: Date())
+//        
+//        return comps.weekday
+//    }
 }
