@@ -63,7 +63,8 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     //MARK: - 网络请求
     private func rechargeRequest(amount: String) {
-       
+       let payment = PaymentWebViewController()
+        pushViewController(vc: payment)
     }
     
     //MARK: - 懒加载
