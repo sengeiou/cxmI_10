@@ -11,7 +11,7 @@ import XLPagerTabStrip
 
 enum PagerViewType: String {
     case coupon = "彩小秘 · 我的卡券"
-    case purchaseRecord = "彩小秘 · 购彩记录"
+    case purchaseRecord = "彩小秘 · 投注记录"
     case message = "彩小秘 · 消息中心"
     case accountDetails = "彩小秘 · 账户明细"
 }

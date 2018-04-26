@@ -15,7 +15,7 @@ enum FootballMatchType: String {
     case 比分 = "彩小秘 · 比分"
     case 半全场 = "彩小秘 · 半全场"
     case 二选一 = "彩小秘 · 2选1"
-    case 混合过关 = "彩小秘 · 混合过关"
+    case 混合过关 = "彩小秘 · 混合投注"
 }
 
 fileprivate let FootballSectionHeaderId = "FootballSectionHeaderId"

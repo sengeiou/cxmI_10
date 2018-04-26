@@ -21,6 +21,7 @@ protocol FootballCollectionViewDelegate {
 }
 
 fileprivate let FilterCellHeight: CGFloat = 44 * defaultScale
+
 fileprivate let HunheCellHeight : CGFloat = 38 * defaultScale
 fileprivate let minimumLineSpacing : CGFloat = 0
 fileprivate let minimumInteritemSpacing : CGFloat = 0
@@ -128,7 +129,7 @@ class FootballCollectionView: UIView , UICollectionViewDelegate, UICollectionVie
         case .总进球:
             return CGSize(width: collectionviewwidth / 8, height: HunheCellHeight)
         case .半全场:
-            return CGSize(width: collectionviewwidth / 3, height: HunheCellHeight)
+            return CGSize(width: collectionviewwidth / 3, height: FilterCellHeight)
         case .混合过关:
             switch scoreType {
             case .胜:

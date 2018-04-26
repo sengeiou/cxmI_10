@@ -309,7 +309,8 @@ class FootballHunheFilterVC: BasePopViewController, BottomViewDelegate, Football
         totalView.delegate = self
         
         banquanView = FootballCollectionView()
-        banquanView.matchType = .半全场
+        banquanView.matchType = .混合过关
+        banquanView.scoreType = .半全场
         banquanView.delegate = self
         
         self.pushBgView.addSubview(topTitleView)
