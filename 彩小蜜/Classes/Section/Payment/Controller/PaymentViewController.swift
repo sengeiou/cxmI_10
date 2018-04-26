@@ -82,6 +82,7 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
     
     private func paymentRequest() {
         weak var weakSelf = self
+        guard self.saveBetInfo != nil else { return }
         _ = paymentProvider.rx.request(.payment(payCode: paymentMethod.rawValue, payToken: self.saveBetInfo.payToken))
             .asObservable()
             .mapObject(type: PaymentResultModel.self)
