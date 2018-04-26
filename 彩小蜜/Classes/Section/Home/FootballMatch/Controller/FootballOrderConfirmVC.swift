@@ -46,8 +46,6 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
             str.removeLast()
             self.betType = str
             
-            self.canPush = true
-            
             if selectPlayList.count == 1 {
                 let play = selectPlayList[0]
                 if play.matchPlays.count == 1 {
@@ -56,14 +54,13 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
                         self.canPush = false
                         return }
                     
-                    self.canPush = true
                 }else {
                     guard play.matchPlays.count == 5 else { return }
                     
                     let can = isAllSingle(playList: selectPlayList)
                     
                     if can {
-                        self.canPush = true
+    
                     }else {
                         self.canPush = false
                         showHUD(message: "请至少选择1场单关比赛或者2场非单关比赛")
