@@ -15,6 +15,7 @@ enum MessageCenterType : String{
 }
 
 fileprivate let MessageCenterCellId = "MessageCenterCellId"
+fileprivate let NoticeCellId = "NoticeCellId"
 
 class MessageCenterVC: BaseViewController, IndicatorInfoProvider, UITableViewDelegate, UITableViewDataSource {
 
@@ -103,6 +104,7 @@ class MessageCenterVC: BaseViewController, IndicatorInfoProvider, UITableViewDel
         table.dataSource = self
         table.separatorStyle = .none
         table.register(MessageCenterCell.self, forCellReuseIdentifier: MessageCenterCellId)
+        table.register(NoticeCell.self, forCellReuseIdentifier: NoticeCellId)
         
         return table
     }()
@@ -116,9 +118,18 @@ class MessageCenterVC: BaseViewController, IndicatorInfoProvider, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: MessageCenterCellId, for: indexPath) as! MessageCenterCell
-        cell.messageModel = messageList[indexPath.section]
-        return cell
+        
+        if messageType == .message {
+            let cell = tableView.dequeueReusableCell(withIdentifier: NoticeCellId, for: indexPath) as! NoticeCell
+            cell.messageModel = messageList[indexPath.section]
+            return cell
+        }else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: MessageCenterCellId, for: indexPath) as! MessageCenterCell
+            cell.messageModel = messageList[indexPath.section]
+            return cell
+        }
+        
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

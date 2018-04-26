@@ -10,6 +10,24 @@ import UIKit
 
 class NoticeCell: UITableViewCell {
 
+    public var messageModel: MessageCenterModel! {
+        didSet{
+//            titleLB.text = messageModel.title
+//            timeLB.text = messageModel.sendTime
+//            moneyLB.text = messageModel.content
+//            detailLB.text = messageModel.msgDesc
+//            stateLB.text = messageModel.contentDesc
+//            
+//            switch messageModel.objectType {
+//            case "0":
+//                moneyLB.textColor = ColorE95504
+//            default:
+//                moneyLB.textColor = Color505050
+//            }
+            
+        }
+    }
+    
     private var title : UILabel!
     private var timelb: UILabel!
     private var detaillb: UILabel!
@@ -21,13 +39,71 @@ class NoticeCell: UITableViewCell {
         initSubview()
     }
     
+    @objc private func detailButClicked(_ sender: UIButton) {
+        
+    }
+    
     private func initSubview() {
         title = getLabel()
+        title.font = Font15
+        title.textColor = Color505050
+        timelb = getLabel()
+        timelb.font = Font12
+        timelb.textAlignment = .right
+        detaillb = getLabel()
+        detaillb.font = Font13
+    
+        
+        detailBut = UIButton(type: .custom)
+        detailBut.setTitle("查看详情〉›>", for: .normal)
+        detailBut.setTitleColor(Color787878, for: .normal)
+        detailBut.titleLabel?.font = Font12
+        detailBut.contentHorizontalAlignment = .right
+        detailBut.addTarget(self, action: #selector(detailButClicked(_:)), for: .touchUpInside)
+        
+        activity = UIImageView()
+        
+        self.contentView.addSubview(timelb)
+        self.contentView.addSubview(title)
+        self.contentView.addSubview(detaillb)
+        self.contentView.addSubview(detailBut)
+        self.contentView.addSubview(activity)
+        
+        title.snp.makeConstraints { (make) in
+            make.top.equalTo(0)
+            make.left.equalTo(activity)
+            make.bottom.equalTo(activity.snp.top)
+            make.right.equalTo(timelb.snp.left)
+        }
+        timelb.snp.makeConstraints { (make) in
+            make.top.bottom.equalTo(title)
+            make.right.equalTo(activity)
+            make.width.equalTo(title)
+        }
+        activity.snp.makeConstraints { (make) in
+            make.top.equalTo(36 * defaultScale)
+            make.bottom.equalTo(-36 * defaultScale)
+            make.left.equalTo(15 * defaultScale)
+            make.right.equalTo(-15 * defaultScale)
+        }
+        detaillb.snp.makeConstraints { (make) in
+            make.left.equalTo(activity)
+            make.top.equalTo(activity.snp.bottom)
+            make.bottom.equalTo(0)
+            make.right.equalTo(detailBut.snp.left)
+        }
+        detailBut.snp.makeConstraints { (make) in
+            make.top.bottom.equalTo(detaillb)
+            make.right.equalTo(activity)
+            make.width.equalTo(90)
+        }
     }
     
     private func getLabel() -> UILabel{
         let lab = UILabel()
-        
+        lab.textColor = Color787878
+        lab.textAlignment = .left
+    
         return lab
     }
     
