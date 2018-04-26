@@ -104,6 +104,13 @@ class MyCollectionVC: BaseViewController, UITableViewDelegate, UITableViewDataSo
             }, onCompleted: nil , onDisposed: nil )
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard self.collectList != nil else { return }
+        let web = NewsDetailViewController()
+        web.articleId = self.collectList[indexPath.row].articleId
+        pushViewController(vc: web)
+    }
+    
     //MARK: - 懒加载
     lazy var tableView : UITableView = {
         let table = UITableView(frame: CGRect.zero, style: .grouped)

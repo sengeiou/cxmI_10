@@ -87,6 +87,12 @@ class NewsRecommendVC: BaseViewController, UITableViewDelegate, UITableViewDataS
             }, onCompleted: nil , onDisposed: nil )
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let web = NewsDetailViewController()
+        web.articleId = articleId
+        pushViewController(vc: web)
+    }
+    
     //MARK: - 懒加载
     lazy var tableView : UITableView = {
         let table = UITableView(frame: CGRect.zero, style: .grouped)

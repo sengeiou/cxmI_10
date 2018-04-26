@@ -22,7 +22,8 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
     
     
     // MARK: - 属性 public
-    public var newsInfo : NewsInfoModel!
+    //public var newsInfo : NewsInfoModel!
+    public var articleId: String!
     // MARK: - 属性 private
     private var detailModel: NewsDetailModel! {
         didSet{
@@ -123,7 +124,7 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
     // MARK: - 网络请求
     private func newsDetailRequest() {
         weak var weakSelf = self
-        _ = homeProvider.rx.request(.newsDetail(articleId: newsInfo.articleId))
+        _ = homeProvider.rx.request(.newsDetail(articleId: articleId))
         .asObservable()
         .mapObject(type: NewsDetailModel.self)
             .subscribe(onNext: { (data) in

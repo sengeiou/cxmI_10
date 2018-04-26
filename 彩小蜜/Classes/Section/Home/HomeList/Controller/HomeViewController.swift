@@ -231,7 +231,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
             let web = NewsDetailViewController()
 //            web.urlStr = activity.actUrl
 //            web.titleStr = "activity.actTitle"
-            web.newsInfo = self.newsList[indexPath.row]
+            web.articleId = self.newsList[indexPath.row].articleId
             pushViewController(vc: web)
         default: break
         }
