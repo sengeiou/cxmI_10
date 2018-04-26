@@ -57,8 +57,8 @@ class FootballOrderFooter: UIView {
         
         agreementBut = UIButton(type: .custom)
         agreementBut.contentHorizontalAlignment = .center
-        agreementBut.setBackgroundImage(UIImage(named: "Mentionmoneysteps_sel"), for: .normal)
-        agreementBut.setBackgroundImage(UIImage(named: "Mentionmoneysteps_nor"), for: .selected)
+        agreementBut.setBackgroundImage(UIImage(named: "tongyi"), for: .normal)
+        agreementBut.setBackgroundImage(UIImage(named: "butongyi"), for: .selected)
         
         agreementBut.addTarget(self, action: #selector(agreementButClicked(_:)), for: .touchUpInside)
         

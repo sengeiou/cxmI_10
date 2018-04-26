@@ -57,7 +57,7 @@ class NewsOnePicCell: UITableViewCell {
         icon.image = UIImage(named: "Racecolorfootball")
         
         videoIcon = UIImageView()
-        videoIcon.image = UIImage(named: "Racecolorfootball")
+        videoIcon.image = UIImage(named: "bofang")
         
         titleLb = getLabel()
         

@@ -173,7 +173,7 @@ class WithdrawalViewController: BaseViewController {
         amountOfMoney.keyboardType = .numberPad
         
         drawMoneyBut = UIButton(type: .custom)
-        drawMoneyBut.setTitle("立即支付", for: .normal)
+        drawMoneyBut.setTitle("立即提现", for: .normal)
         drawMoneyBut.setTitleColor(ColorFFFFFF, for: .normal)
         drawMoneyBut.backgroundColor = ColorEA5504
         drawMoneyBut.layer.cornerRadius = 5

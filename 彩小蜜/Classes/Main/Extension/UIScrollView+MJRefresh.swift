@@ -29,6 +29,8 @@ extension UIScrollView
     }
     
     func endrefresh(){
+        guard self.mj_header != nil, self.mj_footer != nil  else { return }
+        
         self.mj_footer.endRefreshing()
         self.mj_header.endRefreshing()
     }

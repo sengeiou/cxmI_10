@@ -65,6 +65,7 @@ class WithdrawalProgressCell: UITableViewCell {
         }
     }
     private func initSubview() {
+        self.selectionStyle = .none
         icon = UIImageView()
         icon.image = UIImage(named: "Mentionmoneysteps_sel")
         
