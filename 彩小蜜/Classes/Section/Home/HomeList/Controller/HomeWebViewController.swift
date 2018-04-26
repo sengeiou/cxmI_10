@@ -19,8 +19,11 @@ class HomeWebViewController: BaseWebViewController {
     }
 
     override func loadWebView() {
+        guard urlStr != nil else { return }
+        guard let url = URL(string: urlStr) else { fatalError("-------  url 错误  -------")}
+        let request = URLRequest(url: url)
         
-       // webView.load(request)
+        webView.load(request)
     }
     
     override func didReceiveMemoryWarning() {
