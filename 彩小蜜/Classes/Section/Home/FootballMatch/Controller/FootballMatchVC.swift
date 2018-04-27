@@ -29,11 +29,7 @@ fileprivate let FootballHunheCellId = "FootballHunheCellId"
 
 
 class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballBottomViewDelegate, FootballSectionHeaderDelegate, FootballRequestPro, FootballTeamViewDelegate , FootballMatchFilterVCDelegate, FootballTotalViewDelegate, FootballScoreViewDelegate, FootballTwoOneViewDelegate , FootballHunheViewDelegate , FootballSPFCellDelegate, FootballMatchInfoPopVCDelegate, FootballCellProtocol, FootballFilterPro, FootballOrderConfirmVCDelegate{
-    func orderConfirmBack(selectPlayList: [FootballPlayListModel]) {
-        //self.selectPlayList = selectPlayList
-        self.selectPlays = Set(selectPlayList)
-        self.tableView.reloadData()
-    }
+    
     
     
     
@@ -418,6 +414,11 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         pushViewController(vc: order)
     }
     
+    func orderConfirmBack(selectPlayList: [FootballPlayListModel]) {
+        //self.selectPlayList = selectPlayList
+        self.selectPlays = Set(selectPlayList)
+        self.tableView.reloadData()
+    }
     // MARK: - 联赛 筛选 代理
     func filterConfirm(leagueId: String) {
         footballRequest(leagueId: leagueId)
