@@ -90,7 +90,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     }
     
     private func getRealmData() {
-        let realm = try! Realm()
+        guard let realm = try? Realm() else { return }
         
         guard let dataModel : HomeRealmData = realm.objects(HomeRealmData.self).last else { return }
         let dataStr = String(data: dataModel.data, encoding: .utf8)
@@ -161,7 +161,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                 let xxx = data.toJSONString()
                 let dataStr = xxx?.data(using: .utf8)
                 
-                let realm = try! Realm()
+                guard let realm = try? Realm() else { return }
                 let dataRealm = HomeRealmData()
                 dataRealm.data = dataStr!
                 if self.homeStyle == .onlyNews {
