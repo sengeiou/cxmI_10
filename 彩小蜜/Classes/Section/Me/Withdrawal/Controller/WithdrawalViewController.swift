@@ -109,7 +109,7 @@ class WithdrawalViewController: BaseViewController {
     private func setDrawData(data : WithDrawDataModel) {
         moneyLB.text = "可提现金额: \(data.userMoney!)元"
         
-        guard let defaultBank = data.defaultBankLabel else {
+        guard let defaultBank = data.defaultBankLabel , data.defaultBankLabel != "" else {
             bankCardLB.text = "请添加银行卡"
             return
         }
