@@ -75,7 +75,7 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
     }
     
     @objc private func buyButtonClicked(_ sender: UIButton) {
-        
+        popViewController()
     }
     
     override func viewDidLayoutSubviews() {
