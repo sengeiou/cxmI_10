@@ -366,6 +366,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         showCXMAlert(title: nil, message: "您正在清空方案列表", action: "清空", cancel: "返回") { (action) in
             weakSelf?.selectPlayList.removeAll()
             weakSelf?.footballRequest(leagueId: "")
+            limitNum = 1
         }
     }
     // 确认
@@ -417,6 +418,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     func orderConfirmBack(selectPlayList: [FootballPlayListModel]) {
         //self.selectPlayList = selectPlayList
         self.selectPlays = Set(selectPlayList)
+        limitNum = self.selectPlays.count + 1
         self.tableView.reloadData()
     }
     // MARK: - 联赛 筛选 代理

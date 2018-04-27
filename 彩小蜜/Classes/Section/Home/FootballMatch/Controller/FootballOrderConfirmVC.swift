@@ -306,9 +306,8 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     // MARK: CELL  删除
     func deleteOrderSPFCell(playInfo: FootballPlayListModel) {
         
-        
         playList.remove(playInfo)
-        
+        orderRequest()
         if playList.count < 3 {
             danMaxNum = 0
             self.tableView.reloadData()
