@@ -53,7 +53,7 @@ class RegisterViewController: BaseViewController, UITableViewDelegate, UITableVi
             return
         }
         button.isCounting = true
-        sendSmsRequest()
+        sendSmsRequest(button)
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -120,7 +120,7 @@ class RegisterViewController: BaseViewController, UITableViewDelegate, UITableVi
         }
     }
     
-    private func sendSmsRequest() {
+    private func sendSmsRequest(_ button : CountdownButton) {
         _ = loginProvider.rx.request(.sendSms(mobile: self.phoneTF.text!, smsType: "1"))
         .asObservable()
         .mapBaseObject(type: DataModel.self)
@@ -130,8 +130,11 @@ class RegisterViewController: BaseViewController, UITableViewDelegate, UITableVi
                     switch data.code {
                     case "301010" :
                         self.showConfirm(message: data.msg, confirm: { (action) in
-                            self.popViewController()
+                            DispatchQueue.main.async {
+                                 self.popViewController()
+                            }
                         })
+                        button.isCounting = false
                         break
                     default :
                         
