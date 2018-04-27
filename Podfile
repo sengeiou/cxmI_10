@@ -34,6 +34,7 @@ target '彩小蜜' do
 
   pod 'WechatOpenSDK'
   
+  pod 'RealmSwift'
 	
  
 

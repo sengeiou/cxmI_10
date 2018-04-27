@@ -12,6 +12,11 @@ PODS:
     - Moya/Core
     - RxSwift (~> 4.0)
   - PKHUD (5.0.0)
+  - Realm (3.4.0):
+    - Realm/Headers (= 3.4.0)
+  - Realm/Headers (3.4.0)
+  - RealmSwift (3.4.0):
+    - Realm (= 3.4.0)
   - Result (3.2.4)
   - RxSwift (4.1.2)
   - SnapKit (4.0.0)
@@ -28,6 +33,7 @@ DEPENDENCIES:
   - MJRefresh
   - Moya/RxSwift
   - PKHUD
+  - RealmSwift
   - Result
   - RxSwift (~> 4.0)
   - SnapKit
@@ -46,6 +52,8 @@ SPEC REPOS:
     - MJRefresh
     - Moya
     - PKHUD
+    - Realm
+    - RealmSwift
     - Result
     - RxSwift
     - SnapKit
@@ -63,6 +71,8 @@ SPEC CHECKSUMS:
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
   Moya: a725035953bc1c0eb1be505ab903984501d82440
   PKHUD: 3c001512c6e002091184197a8de7a20420786e3b
+  Realm: 9527c7baa2260f3a3aad6823d2d71cafff9b046b
+  RealmSwift: f40a747beaea1cadde7dcef41ee5a34b3001677b
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
   RxSwift: e49536837d9901277638493ea537394d4b55f570
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
@@ -71,6 +81,6 @@ SPEC CHECKSUMS:
   WechatOpenSDK: 676feec516a11173eafd1fe64b10d27babf28701
   XLPagerTabStrip: c908b17cbf42fcd2598ee1adfc49bae25444d88a
 
-PODFILE CHECKSUM: 185ac19d34f9d3d975531645f581ec7375b23e04
+PODFILE CHECKSUM: dca1e3663630655c4bb7b061818c7f894a31cadb
 
 COCOAPODS: 1.5.0
