@@ -13,7 +13,7 @@ class PurchaseRecordCell: UITableViewCell {
     public var recordInfo : PurchaseRecordInfoModel! {
         didSet{
             let moneyAtt = NSMutableAttributedString(string: "¥", attributes: [NSAttributedStringKey.font: Font11])
-            let money = NSAttributedString(string: recordInfo.ticketAmount)
+            let money = NSAttributedString(string: recordInfo.moneyPaid)
             moneyAtt.append(money)
             moneyLB.attributedText = moneyAtt
             

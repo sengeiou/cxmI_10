@@ -21,4 +21,5 @@ struct PurchaseRecordInfoModel: HandyJSON {
     var payTime: String!
     var ticketAmount: String!
     var winningMoner: String!
+    var moneyPaid: String!
 }

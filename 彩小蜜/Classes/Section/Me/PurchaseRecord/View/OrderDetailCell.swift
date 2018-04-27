@@ -18,6 +18,13 @@ class OrderDetailCell: UITableViewCell {
             let homeMatch = matchInfo.match.prefix(upTo: (range.lowerBound))
             let viMatch = matchInfo.match.suffix(from: range.upperBound)
             
+            
+            nameLB.text = "\(homeMatch)\nVS\n\(viMatch)"
+            
+            timeLB.text = matchInfo.changci
+            ruleLB.text = matchInfo.playType
+            
+            
             let record = NSMutableAttributedString()
             var resultStr = ""
             for result in matchInfo.cathecticResults {
@@ -35,15 +42,11 @@ class OrderDetailCell: UITableViewCell {
                 }
                 resultStr += result.matchResult + "\n"
             }
+            
+            recordLB.attributedText = record
+            
             guard resultStr != "" else { return}
             resultStr.removeLast()
-            
-            
-            nameLB.text = "\(homeMatch)\nVS\n\(viMatch)"
-            
-            timeLB.text = matchInfo.changci
-            ruleLB.text = matchInfo.playType
-            recordLB.attributedText = record
             resultLB.text = resultStr
             
         }
