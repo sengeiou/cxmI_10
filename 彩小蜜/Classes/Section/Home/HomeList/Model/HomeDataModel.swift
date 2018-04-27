@@ -9,12 +9,13 @@
 import UIKit
 import HandyJSON
 
+
 struct HomeListModel : HandyJSON {
     var dlHallDTO : HomeDataModel!
     var dlArticlePage: NewsListModel!
 }
 
-struct HomeDataModel : HandyJSON {
+struct HomeDataModel :  HandyJSON {
     var activity: HomeActivityModel!
     var dlPlayClassifyDetailDTOs: [HomePlayModel]!
     var navBanners: [BannerModel]!
@@ -22,7 +23,7 @@ struct HomeDataModel : HandyJSON {
 }
 
 /// 玩法
-struct HomePlayModel: HandyJSON {
+struct HomePlayModel:  HandyJSON {
     var lotteryId: String!
     var playClassifyId: String!
     var playClassifyImg: String!
@@ -33,7 +34,7 @@ struct HomePlayModel: HandyJSON {
 }
 
 /// 活动栏
-struct HomeActivityModel: HandyJSON {
+struct HomeActivityModel:  HandyJSON {
     var actImg: String!
     var actTitle: String!
     var actUrl: String!

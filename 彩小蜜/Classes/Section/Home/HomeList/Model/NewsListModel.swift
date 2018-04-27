@@ -9,6 +9,7 @@
 import Foundation
 import HandyJSON
 
+
 struct NewsListModel: HandyJSON {
     var endRow: String!
     var firstPage: Int!
