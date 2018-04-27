@@ -47,7 +47,7 @@ enum MeNetAPIManager {
     /// 提现进度
     case withdrawProgressList (withdawSn: String)
     /// 添加收藏
-    case collectAdd(articledId: String, articleTitle: String, collectFrom: String)
+    case collectAdd(articledId: String)
     /// 删除收藏
     case collectDelete(collectId : String)
     /// 收藏列表
@@ -172,10 +172,10 @@ extension MeNetAPIManager : TargetType {
             dic["pageSize"] = "20"
         case .withdrawProgressList(let withdawSn):
             dic["withdawSn"] = withdawSn
-        case .collectAdd(let articledId, let articleTitle, let collectFrom):
+        case .collectAdd(let articledId):
             dic["articleId"] = articledId
-            dic["articleTitle"] = articleTitle
-            dic["collectFrom"] = collectFrom
+//            dic["articleTitle"] = articleTitle
+//            dic["collectFrom"] = collectFrom
         case .collectDelete(let collectId):
             dic["id"] = collectId
         case .collectList(let pageNum):

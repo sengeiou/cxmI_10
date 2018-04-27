@@ -70,7 +70,7 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
     // 查看更多
     func didTipLookMore() {
         let recom = NewsRecommendVC()
-        recom.articleId = newsInfo.articleId
+        recom.articleId = articleId
         pushViewController(vc: recom)
     }
     // MARK: - delegate
@@ -143,7 +143,7 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
     
     private func addCollectRequest() {
         weak var weakSelf = self
-        _ = userProvider.rx.request(.collectAdd(articledId: newsInfo.articleId, articleTitle: newsInfo.title, collectFrom: ""))
+        _ = userProvider.rx.request(.collectAdd(articledId: articleId))
             .asObservable()
             .mapObject(type: DataModel.self)
             .subscribe(onNext: { (data) in
@@ -160,7 +160,7 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
     }
     private func deleteCollectRequest() {
         weak var weakSelf = self
-        _ = userProvider.rx.request(.collectDelete(collectId: newsInfo.articleId))
+        _ = userProvider.rx.request(.collectDelete(collectId: articleId))
             .asObservable()
             .mapObject(type: DataModel.self)
             .subscribe(onNext: { (data) in

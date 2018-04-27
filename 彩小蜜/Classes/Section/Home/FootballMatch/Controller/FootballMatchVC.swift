@@ -28,7 +28,12 @@ fileprivate let Football2_1CellId = "Football2_1CellId"
 fileprivate let FootballHunheCellId = "FootballHunheCellId"
 
 
-class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballBottomViewDelegate, FootballSectionHeaderDelegate, FootballRequestPro, FootballTeamViewDelegate , FootballMatchFilterVCDelegate, FootballTotalViewDelegate, FootballScoreViewDelegate, FootballTwoOneViewDelegate , FootballHunheViewDelegate , FootballSPFCellDelegate, FootballMatchInfoPopVCDelegate, FootballCellProtocol, FootballFilterPro{
+class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballBottomViewDelegate, FootballSectionHeaderDelegate, FootballRequestPro, FootballTeamViewDelegate , FootballMatchFilterVCDelegate, FootballTotalViewDelegate, FootballScoreViewDelegate, FootballTwoOneViewDelegate , FootballHunheViewDelegate , FootballSPFCellDelegate, FootballMatchInfoPopVCDelegate, FootballCellProtocol, FootballFilterPro, FootballOrderConfirmVCDelegate{
+    func orderConfirmBack(selectPlayList: [FootballPlayListModel]) {
+        self.selectPlayList = selectPlayList
+        self.tableView.reloadData()
+    }
+    
     
     
     
@@ -108,7 +113,10 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         present(matchInfo)
     }
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+       // self.tableView.reloadData()
+    }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -377,6 +385,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
                     return }
                 
                 let order = FootballOrderConfirmVC()
+                order.delegate = self
                 order.matchType = self.matchType
                 order.playList = selectPlayList
                 order.homeData = homeData
@@ -388,6 +397,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
                 
                 if can {
                     let order = FootballOrderConfirmVC()
+                    order.delegate = self
                     order.homeData = homeData
                     order.matchType = self.matchType
                     order.playList = selectPlayList
@@ -400,6 +410,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
             return
         }
         let order = FootballOrderConfirmVC()
+        order.delegate = self
         order.matchType = self.matchType
         order.playList = selectPlayList
         order.homeData = homeData
@@ -414,12 +425,14 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     // MARK: - 选取比赛 FootballTeamView Delegate ，
     func select(teamInfo: FootballPlayListModel) {
         guard selectPlayList != nil else { return }
-        selectPlayList.append(teamInfo)
+        //selectPlayList.append(teamInfo)
+        selectPlays.insert(teamInfo)
     }
     
     func deSelect(teamInfo: FootballPlayListModel) {
         guard selectPlayList != nil else { return }
-        selectPlayList.remove(teamInfo)
+        //selectPlayList.remove(teamInfo)
+        selectPlays.remove(teamInfo)
     }
     func selectedItem() {
         

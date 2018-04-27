@@ -17,16 +17,18 @@ fileprivate let FootballOrder2_1CellId = "FootballOrder2_1CellId"
 fileprivate let FootballOrderHunheCellId = "FootballOrderHunheCellId"
 
 
+protocol FootballOrderConfirmVCDelegate {
+    func orderConfirmBack(selectPlayList: [FootballPlayListModel]) -> Void
+}
+
 class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballTeamViewDelegate, FootballOrderBottomViewDelegate, FootballTimesFilterVCDelegate, FootballPlayFilterVCDelegate, FootballFilterPro, FootballOrderProtocol, FootballOrderSPFCellDelegate, FootballTotalViewDelegate, FootballScoreViewDelegate, FootballTwoOneViewDelegate, FootballOrderFooterDelegate{
     
     
     
     
-   
-    
-    
-
     // MARK: - 属性
+    public var delegate : FootballOrderConfirmVCDelegate!
+    
     public var matchType: FootballMatchType = .胜平负
     public var homeData: HomePlayModel!
     
@@ -82,7 +84,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     
     public var playList: [FootballPlayListModel]! {
         didSet{
-            selectPlayList = playList
+            
             selectPlays = Set(playList)
             self.tableView.reloadData()
         }
@@ -415,13 +417,15 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     func select(teamInfo: FootballPlayListModel) {
         guard selectPlayList != nil else { return }
         
-        selectPlayList.append(teamInfo)
+        //selectPlayList.append(teamInfo)
+        selectPlays.insert(teamInfo)
         self.resetDanState()
     }
     
     func deSelect(teamInfo: FootballPlayListModel) {
         guard selectPlayList != nil else { return }
-        selectPlayList.remove(teamInfo)
+        //selectPlayList.remove(teamInfo)
+        selectPlays.remove(teamInfo)
         self.resetDanState()
     }
     func selectedItem() {
@@ -635,7 +639,10 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         for play in playList{
             play.isDan = false
         }
+        
         popViewController()
+        guard delegate != nil else { return }
+        delegate.orderConfirmBack(selectPlayList: self.selectPlayList)
     }
     
     
