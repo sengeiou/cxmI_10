@@ -30,7 +30,8 @@ fileprivate let FootballHunheCellId = "FootballHunheCellId"
 
 class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballBottomViewDelegate, FootballSectionHeaderDelegate, FootballRequestPro, FootballTeamViewDelegate , FootballMatchFilterVCDelegate, FootballTotalViewDelegate, FootballScoreViewDelegate, FootballTwoOneViewDelegate , FootballHunheViewDelegate , FootballSPFCellDelegate, FootballMatchInfoPopVCDelegate, FootballCellProtocol, FootballFilterPro, FootballOrderConfirmVCDelegate{
     func orderConfirmBack(selectPlayList: [FootballPlayListModel]) {
-        self.selectPlayList = selectPlayList
+        //self.selectPlayList = selectPlayList
+        self.selectPlays = Set(selectPlayList)
         self.tableView.reloadData()
     }
     

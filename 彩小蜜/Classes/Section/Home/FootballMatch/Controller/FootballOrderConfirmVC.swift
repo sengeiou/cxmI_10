@@ -305,11 +305,50 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     }
     // MARK: CELL  删除
     func deleteOrderSPFCell(playInfo: FootballPlayListModel) {
+        
+        
         playList.remove(playInfo)
         
         if playList.count < 3 {
             danMaxNum = 0
             self.tableView.reloadData()
+        }
+        resetSelected(playInfo: playInfo)
+    }
+    
+    private func resetSelected(playInfo: FootballPlayListModel) {
+        for match in playInfo.matchPlays {
+            if match.homeCell != nil {
+                match.homeCell.isSelected = false
+                if match.homeCell.cellSons != nil {
+                    for cell in match.homeCell.cellSons {
+                        cell.isSelected = false
+                    }
+                }
+            }
+            if match.flatCell != nil {
+                match.flatCell.isSelected = false
+                if match.flatCell.cellSons != nil {
+                    for cell in match.flatCell.cellSons {
+                        cell.isSelected = false
+                    }
+                }
+            }
+            if match.visitingCell != nil {
+                match.visitingCell.isSelected = false
+                if match.visitingCell.cellSons != nil {
+                    for cell in match.visitingCell.cellSons {
+                        cell.isSelected = false
+                    }
+                }
+            }
+            
+            if match.matchCells != nil {
+                for play in match.matchCells {
+                    play.isSelected = false
+                }
+            }
+            
         }
     }
     // MARK: CELL 选择胆
