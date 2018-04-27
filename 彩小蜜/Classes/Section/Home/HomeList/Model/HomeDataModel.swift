@@ -8,7 +8,12 @@
 
 import UIKit
 import HandyJSON
+import RealmSwift
 
+class HomeRealmData : Object {
+    @objc dynamic var data : Data = Data()
+    @objc dynamic var homeStyle = 0
+}
 
 struct HomeListModel : HandyJSON {
     var dlHallDTO : HomeDataModel!

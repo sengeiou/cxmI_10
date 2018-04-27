@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RealmSwift
+import HandyJSON
 
 enum ShowType {
     case allShow
@@ -58,7 +60,9 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         didSet{
             guard homeStyle != nil else { return }
             guard newsList != nil else { return }
-            homeListAddNewsRequest(pageNum: 1)
+            
+            loadNewData()
+            //homeListAddNewsRequest(pageNum: 1)
         }
     }
     
@@ -82,6 +86,29 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         self.tableView.footerRefresh {
             self.loadNextData()
         }
+        getRealmData()
+    }
+    
+    private func getRealmData() {
+        let realm = try! Realm()
+        
+        guard let dataModel : HomeRealmData = realm.objects(HomeRealmData.self).last else { return }
+        let dataStr = String(data: dataModel.data, encoding: .utf8)
+        
+        guard let data = JSONDeserializer<HomeListModel>.deserializeFrom(json: dataStr) else { return }
+        
+        homeData = data.dlHallDTO
+        guard homeData.navBanners != nil else { return }
+        header.bannerList = homeData.navBanners
+        newsListModel = data.dlArticlePage
+        if dataModel.homeStyle == 0 {
+            self.homeStyle = .onlyNews
+        }else {
+            self.homeStyle = .allShow
+        }
+        
+        newsList.append(contentsOf: self.newsListModel.list)
+        tableView.reloadData()
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -97,8 +124,6 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     
     //MARK: - 加载数据
     private func loadNewData() {
-        //homeListRequest()
-        //newsListRequest(1)
         homeListAddNewsRequest(pageNum: 1)
     }
     private func loadNextData() {
@@ -132,6 +157,22 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                 }
                 weakSelf?.newsList.append(contentsOf: self.newsListModel.list)
                 weakSelf?.tableView.reloadData()
+                
+                let xxx = data.toJSONString()
+                let dataStr = xxx?.data(using: .utf8)
+                
+                let realm = try! Realm()
+                let dataRealm = HomeRealmData()
+                dataRealm.data = dataStr!
+                if self.homeStyle == .onlyNews {
+                    dataRealm.homeStyle = 0
+                }else {
+                    dataRealm.homeStyle = 1
+                }
+                try! realm.write {
+                    realm.add(dataRealm)
+                }
+                
             }, onError: { (error) in
                 weakSelf?.tableView.endrefresh()
                 guard let err = error as? HXError else { return }
@@ -283,6 +324,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
             case 2:
                 return initSportLotteryCell(indexPath: indexPath)
             default:
+                
                 let newsInfo = newsList[indexPath.row]
                 
                 if newsInfo.listStyle == "1" || newsInfo.listStyle == "4" {
