@@ -92,9 +92,9 @@ class FootballMatchInfoPopVC: BasePopViewController, BottomViewDelegate {
     private func matchInfoRequest() {
         weak var weakSelf = self
         guard matchId != nil else { return }
-        homeProvider.rx.request(.matchTeamInfoSum(matchId: matchId))
-        .asObservable()
-        .mapObject(type: FootballMatchInfoModel.self )
+        _ = homeProvider.rx.request(.matchTeamInfoSum(matchId: matchId))
+            .asObservable()
+            .mapObject(type: FootballMatchInfoModel.self )
             .subscribe(onNext: { (data) in
                 weakSelf?.teamInfo = data
             }, onError: { (error) in
@@ -109,7 +109,7 @@ class FootballMatchInfoPopVC: BasePopViewController, BottomViewDelegate {
     }
     
     private func initSubview() {
-        self.viewHeight = 440 * defaultScale
+        self.viewHeight = 440 * defaultScale + SafeAreaBottomHeight
         
         let line = getLine()
         let lineOne = getLine()
@@ -278,7 +278,7 @@ class FootballMatchInfoPopVC: BasePopViewController, BottomViewDelegate {
         }
         
         bottomView.snp.makeConstraints { (make) in
-            make.bottom.equalTo(0)
+            make.bottom.equalTo(-SafeAreaBottomHeight)
             make.left.right.equalTo(0)
             make.height.equalTo(36 * defaultScale)
         }
