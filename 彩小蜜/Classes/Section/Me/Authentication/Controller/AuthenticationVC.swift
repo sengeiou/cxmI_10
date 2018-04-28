@@ -163,6 +163,7 @@ class AuthenticationVC: BaseViewController, UITextFieldDelegate, ValidatePro {
             .subscribe(onNext: { (data) in
                 self.showHUD(message: "身份认证成功")
                 print(data)
+                popViewController()
             }, onError: { (error) in
                 guard let err = error as? HXError else { return }
                 switch err {
