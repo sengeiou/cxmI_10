@@ -31,7 +31,8 @@ extension DateProtocol {
         var comps: DateComponents = DateComponents()
         comps = calendar.dateComponents([.year,.month,.day, .weekday, .hour, .minute,.second], from: Date())
         guard let index = comps.weekday else { return "" }
-        return weaks[index]
+        
+        return weaks[index - 1]
     }
 }
 

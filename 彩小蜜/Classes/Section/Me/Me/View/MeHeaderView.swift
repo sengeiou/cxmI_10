@@ -65,7 +65,8 @@ class MeHeaderView: UIView {
     private func setupAuth() {
         if userInfo.isReal {
             self.addSubview(authenticationView)
-            
+            authenticationView.isHidden = false
+            notAuthenticationView.isHidden = true
             authenticationView.snp.makeConstraints { (make) in
                 make.width.equalTo(80)
                 make.height.equalTo(18)
@@ -75,6 +76,8 @@ class MeHeaderView: UIView {
             
         }else {
             self.addSubview(notAuthenticationView)
+            notAuthenticationView.isHidden = false
+            authenticationView.isHidden = true
             notAuthenticationView.snp.makeConstraints { (make) in
                 make.width.equalTo(226)
                 make.height.equalTo(18)

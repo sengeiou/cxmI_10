@@ -170,7 +170,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                     dataRealm.homeStyle = 1
                 }
                 try! realm.write {
-                    realm.add(dataRealm)
+                    realm.add(dataRealm, update: true)
                 }
                 
             }, onError: { (error) in

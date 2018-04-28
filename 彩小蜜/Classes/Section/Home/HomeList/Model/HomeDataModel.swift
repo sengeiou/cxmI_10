@@ -14,7 +14,7 @@ class HomeRealmData : Object {
     @objc dynamic var data : Data = Data()
     @objc dynamic var homeStyle = 0
     @objc dynamic var idStr = "UUID().uuidString"
-    
+
     override class func primaryKey() -> String? {
         return "idStr"
     }

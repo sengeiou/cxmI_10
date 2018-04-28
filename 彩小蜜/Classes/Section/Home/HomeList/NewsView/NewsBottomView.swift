@@ -51,9 +51,9 @@ class NewsBottomView: UIView {
     private func initSubview() {
         titleLb = getLabel("彩小秘精选")
         titleLb.sizeToFit()
-        timeLb = getLabel("今日04-17")
+        timeLb = getLabel("")
         timeLb.sizeToFit()
-        readNumLb = getLabel("阅读88888")
+        readNumLb = getLabel("")
         
         self.addSubview(titleLb)
         self.addSubview(timeLb)
