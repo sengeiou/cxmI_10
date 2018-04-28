@@ -360,7 +360,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         let filter = FootballMatchFilterVC()
         //filter.popStyle = .fromCenter
         filter.delegate = self
-        filter.filterList = self.matchData.leagueInfos
+        //filter.filterList = self.matchData.leagueInfos
         present(filter)
     }
     
