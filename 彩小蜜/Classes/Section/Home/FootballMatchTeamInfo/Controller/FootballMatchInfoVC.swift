@@ -186,7 +186,7 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
                 guard self.matchInfoModel.vMatchTeamInfo.matchInfos != nil else { return 0 }
                 return self.matchInfoModel.vMatchTeamInfo.matchInfos.count
             case 4:
-                return 1
+                return 0 // 暂时隐藏 积分排名，如需打开  return 1
             default:
                 return 0
             }
