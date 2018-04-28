@@ -46,6 +46,8 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     public var matchList : [FootballMatchModel]!
     
     public var matchData : FootballMatchData!
+    // 筛选列表
+    public var filterList: [FilterModel]!
     
     public var selectPlayList: [FootballPlayListModel]! {
         didSet{
@@ -70,6 +72,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         initSubview()
         setEmpty(title: "暂无可选赛事", tableView)
         footballRequest(leagueId: "")
+        filterRequest()
         setRightButtonItem()
         limitNum = 1
     }
@@ -140,6 +143,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         self.view.addSubview(bottomView)
     }
     // MARK: - 网络请求
+    
     // MARK: - 懒加载
     lazy public var topView: FootballTopView = {
         let topView = FootballTopView()
@@ -358,9 +362,8 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     }
     @objc private func showMenu(_ sender: UIButton) {
         let filter = FootballMatchFilterVC()
-        //filter.popStyle = .fromCenter
         filter.delegate = self
-        //filter.filterList = self.matchData.leagueInfos
+        filter.filterList = filterList
         present(filter)
     }
     

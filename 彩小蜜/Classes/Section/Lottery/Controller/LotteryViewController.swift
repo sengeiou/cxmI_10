@@ -184,7 +184,7 @@ class LotteryViewController: BaseViewController, UITableViewDelegate, UITableVie
     func didTipMoreFilter() {
         let more = LotteryMoreFilterVC()
         more.delegate = self
-        //more.filterList = self.filterList
+        more.filterList = self.filterList
         more.isAlreadyBuy = self.isAlready
         present(more)
     }

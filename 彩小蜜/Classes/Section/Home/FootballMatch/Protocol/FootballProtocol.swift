@@ -67,6 +67,24 @@ extension FootballRequestPro where Self: FootballMatchVC {
                 }
             }, onCompleted: nil , onDisposed: nil )
     }
+    
+    func filterRequest() {
+        weak var weakSelf = self
+        _ = homeProvider.rx.request(.filterMatchList)
+            .asObservable()
+            .mapArray(type: FilterModel.self)
+            .subscribe(onNext: { (data) in
+                weakSelf?.filterList = data
+            }, onError: { (error) in
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    print(code!)
+                    weakSelf?.showHUD(message: msg!)
+                default: break
+                }
+            }, onCompleted: nil, onDisposed: nil )
+    }
 }
 
 

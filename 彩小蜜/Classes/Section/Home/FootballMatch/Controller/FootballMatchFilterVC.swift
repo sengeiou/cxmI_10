@@ -33,37 +33,42 @@ class FootballMatchFilterVC: BasePopViewController, UICollectionViewDelegate, UI
     private var bgView: UIView!
     private var titleLB: UILabel!
     
-    public var filterList: [FilterModel]! 
+    public var filterList: [FilterModel]! {
+        didSet{
+            guard filterList != nil else { return }
+            self.collectionView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.popStyle = .fromCenter
         initSubview()
         
-        filterList = [FilterModel]()
+        //filterList = [FilterModel]()
 
-        filterRequest()
+        //filterRequest()
     }
     
     // MARK: - 网络请求
-    private func filterRequest() {
-        weak var weakSelf = self
-        _ = homeProvider.rx.request(.filterMatchList)
-            .asObservable()
-            .mapArray(type: FilterModel.self)
-            .subscribe(onNext: { (data) in
-                weakSelf?.filterList = data
-                weakSelf?.collectionView.reloadData()
-            }, onError: { (error) in
-                guard let err = error as? HXError else { return }
-                switch err {
-                case .UnexpectedResult(let code, let msg):
-                    print(code!)
-                    weakSelf?.showHUD(message: msg!)
-                default: break
-                }
-            }, onCompleted: nil, onDisposed: nil )
-    }
+//    private func filterRequest() {
+//        weak var weakSelf = self
+//        _ = homeProvider.rx.request(.filterMatchList)
+//            .asObservable()
+//            .mapArray(type: FilterModel.self)
+//            .subscribe(onNext: { (data) in
+//                weakSelf?.filterList = data
+//                weakSelf?.collectionView.reloadData()
+//            }, onError: { (error) in
+//                guard let err = error as? HXError else { return }
+//                switch err {
+//                case .UnexpectedResult(let code, let msg):
+//                    print(code!)
+//                    weakSelf?.showHUD(message: msg!)
+//                default: break
+//                }
+//            }, onCompleted: nil, onDisposed: nil )
+//    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
