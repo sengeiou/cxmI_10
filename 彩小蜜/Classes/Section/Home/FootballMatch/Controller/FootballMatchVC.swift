@@ -428,7 +428,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         order.homeData = homeData
         pushViewController(vc: order)
     }
-    
+    // MARK: - 确认订单页， 返回
     func orderConfirmBack(selectPlayList: [FootballPlayListModel]) {
         //self.selectPlayList = selectPlayList
         self.selectPlays = Set(selectPlayList)

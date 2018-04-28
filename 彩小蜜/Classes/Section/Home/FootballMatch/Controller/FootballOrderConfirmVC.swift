@@ -273,7 +273,6 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        
         switch matchType {
         case .半全场, .比分:
             return 84 * defaultScale
@@ -307,12 +306,15 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     func deleteOrderSPFCell(playInfo: FootballPlayListModel) {
         
         playList.remove(playInfo)
+        
         orderRequest()
         if playList.count < 3 {
             danMaxNum = 0
             self.tableView.reloadData()
         }
         resetSelected(playInfo: playInfo)
+        
+        playInfo.selectedHunhe.removeAll()
     }
     
     private func resetSelected(playInfo: FootballPlayListModel) {
