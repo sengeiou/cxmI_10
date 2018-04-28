@@ -371,7 +371,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     // 确认键
     func orderConfirm(filterList: [FootballPlayFilterModel], times: String) {
         guard self.isAgreement == true else {
-            showConfirm(message: "尊敬的用户，购彩需同意并接受《彩小秘彩票服务协议》")
+            showConfirm(message: "尊敬的用户，购彩需同意并接受《彩小秘投注服务协议》")
             return }
         guard self.canPush == true else {
             if self .showMsg != nil {

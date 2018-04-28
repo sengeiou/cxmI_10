@@ -75,8 +75,8 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
     }
     // MARK: - 去投注
     @objc private func buyButtonClicked(_ sender: UIButton) {
-        //popViewController()
         popToRootViewController()
+        self.tabBarController?.selectedIndex = 0
     }
     
     override func viewDidLayoutSubviews() {
