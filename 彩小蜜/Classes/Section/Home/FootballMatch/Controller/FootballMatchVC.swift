@@ -341,13 +341,26 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         
         rightBut.addTarget(self, action: #selector(showMenu(_:)), for: .touchUpInside)
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightBut)
+        let helpBut = UIButton(type: .custom)
+        helpBut.frame = CGRect(x: 0, y: 0, width: 40, height: 30)
+        helpBut.setTitle("帮助", for: .normal)
+        helpBut.setTitleColor(Color787878, for: .normal)
+        helpBut.addTarget(self, action: #selector(helpClicked(_:)), for: .touchUpInside)
+        
+        //self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightBut)
+        let rightItem = UIBarButtonItem(customView: rightBut)
+        let helpItem = UIBarButtonItem(customView: helpBut)
+        self.navigationItem.rightBarButtonItems = [helpItem, rightItem]
     }
-    
+    // MARK: - 帮助
+    @objc private func helpClicked(_ sender: UIButton) {
+        
+    }
     @objc private func showMenu(_ sender: UIButton) {
         let filter = FootballMatchFilterVC()
-        filter.popStyle = .fromCenter
+        //filter.popStyle = .fromCenter
         filter.delegate = self
+        filter.filterList = self.matchData.leagueInfos
         present(filter)
     }
     

@@ -14,7 +14,7 @@ class FootballMatchData :NSObject, HandyJSON {
     var allMatchCount: String!
     var playList: [FootballMatchModel]!
     var hotPlayList: [FootballPlayListModel]!
-    
+    var leagueInfos: [FilterModel]!
 }
 
 class FootballMatchModel:NSObject, HandyJSON {

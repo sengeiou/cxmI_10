@@ -35,7 +35,11 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
         super.viewDidLoad()
         self.isHidenBar = true
         accountList = []
+        
         self.view.addSubview(tableView)
+        footer = AccountDetailFooterView()
+        self.view.addSubview(footer)
+        
         setEmpty(title: "暂无记录！", tableView)
         self.tableView.headerRefresh {
             self.loadNewData()
@@ -50,7 +54,13 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.snp.makeConstraints { (make) in
-            make.top.left.right.bottom.equalTo(self.view)
+            make.top.left.right.equalTo(self.view)
+            make.bottom.equalTo(footer.snp.top)
+        }
+        footer.snp.makeConstraints { (make) in
+            make.bottom.equalTo(-SafeAreaBottomHeight)
+            make.left.right.equalTo(0)
+            make.height.equalTo(44 * defaultScale)
         }
     }
     
@@ -97,14 +107,18 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
                 weakSelf?.accountList.append(contentsOf: data.list)
                 weakSelf?.tableView.reloadData()
                 if weakSelf?.accountList.count == 0 {
-                    weakSelf?.tableView.tableFooterView?.isHidden = true
+                    weakSelf?.footer.isHidden = true
+                }else {
+                    weakSelf?.footer.isHidden = false
                 }
                 
-                let xxx = AccountListModel.getAccountList(data.list)
-                print(xxx)
+//                let xxx = AccountListModel.getAccountList(data.list)
+//                print(xxx)
             }, onError: { (error) in
                 if weakSelf?.accountList.count == 0 {
-                    weakSelf?.tableView.tableFooterView?.isHidden = true
+                    weakSelf?.footer.isHidden = true
+                }else {
+                    weakSelf?.footer.isHidden = false
                 }
                 weakSelf?.tableView.endrefresh()
                 guard let err = error as? HXError else { return }
@@ -145,11 +159,11 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
         table.delegate = self
         table.dataSource = self
         table.separatorStyle = .none
-        footer = AccountDetailFooterView()
+        
         
         table.estimatedRowHeight = 80 * defaultScale
         
-        table.tableFooterView = footer
+        //table.tableFooterView = footer
         
         table.register(AccountDetailsCell.self, forCellReuseIdentifier: AccountDetailsCellId)
         table.register(AccountDetailSectionHeader.self, forHeaderFooterViewReuseIdentifier: AccountDetailSectionHeaderId)

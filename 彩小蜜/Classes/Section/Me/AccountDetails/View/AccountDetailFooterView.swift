@@ -36,16 +36,17 @@ class AccountDetailFooterView: UIView {
     private var bgView: UIView!
     
     init() {
-        super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: loginButHeight + loginButTopSpacing))
+        super.init(frame: CGRect.zero)
         initSubview()
     }
     override func layoutSubviews() {
         super.layoutSubviews()
         
         bgView.snp.makeConstraints { (make) in
-            make.top.equalTo(loginButTopSpacing)
+            make.top.equalTo(1)
             make.left.right.equalTo(self)
-            make.height.equalTo(loginButHeight)
+            //make.height.equalTo(loginButHeight)
+            make.bottom.equalTo(0)
         }
         
         titleLB.snp.makeConstraints { (make) in
