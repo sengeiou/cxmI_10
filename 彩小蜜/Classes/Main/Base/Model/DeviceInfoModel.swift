@@ -20,6 +20,27 @@ class DeviceManager  {
         getDeviceInfo()
     }
     private func getDeviceInfo() {
+        var net = ""
+        if let reachability = Reachability() {
+            try? reachability.startNotifier()
+            
+            if reachability.connection == .none {
+                
+            }
+            
+            switch reachability.connection {
+            case .wifi:
+                net = "wifi"
+            case .cellular:
+                net = "mobile"
+            case .none:
+                net = "UNKNOWN"
+           
+            }
+        }
+        
+    
+        
         var device = DeviceInfoModel()
         
         var systemInfo = utsname()
@@ -41,7 +62,7 @@ class DeviceManager  {
         device.os = String(UIDevice.current.systemVersion)
         device.mid = identifier
         device.build = UIDevice.current.systemVersion
-        device.net = ""
+        device.net = net
         device.channel = ""
         
         
