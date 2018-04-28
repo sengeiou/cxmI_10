@@ -18,7 +18,13 @@ class LotteryViewController: BaseViewController, UITableViewDelegate, UITableVie
     
     
     
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard resultList != nil else { return }
+        guard let matchId = resultList[indexPath.row].matchId else { return }
+        let matchInfo = FootballMatchInfoVC()
+        matchInfo.matchId = matchId
+        pushViewController(vc: matchInfo)
+    }
     
 
     // MARK: - 属性 public
