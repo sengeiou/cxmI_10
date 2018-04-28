@@ -14,7 +14,7 @@ fileprivate let NewsDetailCellId = "NewsDetailCellId"
 fileprivate let NewsNoPicCellId = "NewsNoPicCellId"
 fileprivate let NewsOnePicCellId = "NewsOnePicCellId"
 fileprivate let NewsThreePicCellId = "NewsThreePicCellId"
-
+fileprivate let NewsDeatilTitleCellId = "NewsDeatilTitleCellId"
 
 class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, NewsDetailCellDelegate, NewsDetailFooterDelegate {
     
@@ -73,6 +73,17 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
         recom.articleId = articleId
         pushViewController(vc: recom)
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section != 0 {
+            if indexPath.row != 0 {
+                let web = NewsDetailViewController()
+                web.articleId = articleId
+                pushViewController(vc: web)
+            }
+        }
+    }
+    
     // MARK: - delegate
     // 更新cell 高度
     func upDateCellHeight(height: CGFloat) {
@@ -187,6 +198,7 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
         table.register(NewsNoPicCell.self, forCellReuseIdentifier: NewsNoPicCellId)
         table.register(NewsOnePicCell.self, forCellReuseIdentifier: NewsOnePicCellId)
         table.register(NewsThreePicCell.self, forCellReuseIdentifier: NewsThreePicCellId)
+        table.register(NewsDeatilTitleCell.self, forCellReuseIdentifier: NewsDeatilTitleCellId)
         
         let footer = NewsDetailFooter()
         footer.delegate = self
@@ -204,7 +216,7 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
             return 1
         }else {
             guard self.detailModel != nil, self.detailModel.articles != nil else { return 0 }
-            return self.detailModel.articles.count
+            return self.detailModel.articles.count + 1
         }
     }
     
@@ -217,15 +229,21 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
             
             return cell
         }else {
-            let newsInfo = self.detailModel.articles[indexPath.row]
-            
-            if newsInfo.listStyle == "1" || newsInfo.listStyle == "4" {
-                return initNewsOnePicCell(indexPath: indexPath)
-            }else if newsInfo.listStyle == "3" {
-                return initNewsThreePicCell(indexPath: indexPath)
+            if indexPath.row == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: NewsDeatilTitleCellId, for: indexPath) as! NewsDeatilTitleCell
+                return cell
             }else {
-                return initNewsNoPicCell(indexPath: indexPath)
+                let newsInfo = self.detailModel.articles[indexPath.row - 1]
+                
+                if newsInfo.listStyle == "1" || newsInfo.listStyle == "4" {
+                    return initNewsOnePicCell(indexPath: indexPath)
+                }else if newsInfo.listStyle == "3" {
+                    return initNewsThreePicCell(indexPath: indexPath)
+                }else {
+                    return initNewsNoPicCell(indexPath: indexPath)
+                }
             }
+            
         }
         
         return UITableViewCell()
@@ -233,19 +251,19 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
     
     private func initNewsNoPicCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NewsNoPicCellId, for: indexPath) as! NewsNoPicCell
-        cell.newsInfo = self.detailModel.articles[indexPath.row]
+        cell.newsInfo = self.detailModel.articles[indexPath.row - 1]
         return cell
     }
     
     private func initNewsThreePicCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NewsThreePicCellId, for: indexPath) as! NewsThreePicCell
-        cell.newsInfo = self.detailModel.articles[indexPath.row]
+        cell.newsInfo = self.detailModel.articles[indexPath.row - 1]
         return cell
     }
     
     private func initNewsOnePicCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NewsOnePicCellId, for: indexPath) as! NewsOnePicCell
-        cell.newsInfo = self.detailModel.articles[indexPath.row]
+        cell.newsInfo = self.detailModel.articles[indexPath.row - 1]
         return cell
     }
     
@@ -254,13 +272,18 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
         if indexPath.section == 0 {
             return cellHeight
         }else {
-            let newsInfo = self.detailModel.articles[indexPath.row]
             
-            if newsInfo.listStyle == "1" || newsInfo.listStyle == "4" || newsInfo.listStyle == "0" {
-                return 110 * defaultScale
-            }
-            else {
-                return 140 * defaultScale
+            if indexPath.row == 0 {
+                return 55 * defaultScale
+            }else {
+                let newsInfo = self.detailModel.articles[indexPath.row - 1]
+                
+                if newsInfo.listStyle == "1" || newsInfo.listStyle == "4" || newsInfo.listStyle == "0" {
+                    return 110 * defaultScale
+                }
+                else {
+                    return 140 * defaultScale
+                }
             }
         }
         
