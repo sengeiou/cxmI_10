@@ -25,7 +25,7 @@ class BankCardFooterView: UIView {
     private var detailIcon : UIImageView!
     
     init() {
-        super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 100))
+        super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 45 * defaultScale))
         
         initSubview()
     }
@@ -60,9 +60,11 @@ class BankCardFooterView: UIView {
         }
         
         addCardBut.snp.makeConstraints { (make) in
-            make.height.equalTo(32)
+            make.top.equalTo(1)
+            make.bottom.equalTo(0)
+            //make.height.equalTo(32)
             make.left.right.equalTo(self)
-            make.top.equalTo(self).offset(sectionHeaderHeight)
+            //make.top.equalTo(self).offset(sectionHeaderHeight)
         }
     }
     
