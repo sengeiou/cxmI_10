@@ -9,6 +9,7 @@
 import Foundation
 import SystemConfiguration.CaptiveNetwork
 import HandyJSON
+import Reachability
 
 class DeviceManager  {
     static let share = DeviceManager()

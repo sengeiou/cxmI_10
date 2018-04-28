@@ -36,7 +36,7 @@ target '彩小蜜' do
   
   pod 'RealmSwift'
 	
- 
+  pod 'ReachabilitySwift'
 
   # Pods for 彩小蜜
 

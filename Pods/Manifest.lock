@@ -12,6 +12,7 @@ PODS:
     - Moya/Core
     - RxSwift (~> 4.0)
   - PKHUD (5.0.0)
+  - ReachabilitySwift (4.1.0)
   - Realm (3.4.0):
     - Realm/Headers (= 3.4.0)
   - Realm/Headers (3.4.0)
@@ -33,6 +34,7 @@ DEPENDENCIES:
   - MJRefresh
   - Moya/RxSwift
   - PKHUD
+  - ReachabilitySwift
   - RealmSwift
   - Result
   - RxSwift (~> 4.0)
@@ -52,6 +54,7 @@ SPEC REPOS:
     - MJRefresh
     - Moya
     - PKHUD
+    - ReachabilitySwift
     - Realm
     - RealmSwift
     - Result
@@ -71,6 +74,7 @@ SPEC CHECKSUMS:
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
   Moya: a725035953bc1c0eb1be505ab903984501d82440
   PKHUD: 3c001512c6e002091184197a8de7a20420786e3b
+  ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
   Realm: 9527c7baa2260f3a3aad6823d2d71cafff9b046b
   RealmSwift: f40a747beaea1cadde7dcef41ee5a34b3001677b
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
@@ -81,6 +85,6 @@ SPEC CHECKSUMS:
   WechatOpenSDK: 676feec516a11173eafd1fe64b10d27babf28701
   XLPagerTabStrip: c908b17cbf42fcd2598ee1adfc49bae25444d88a
 
-PODFILE CHECKSUM: dca1e3663630655c4bb7b061818c7f894a31cadb
+PODFILE CHECKSUM: 879aa224bf996372ad74f8094c6ba93ab5015141
 
 COCOAPODS: 1.5.0
