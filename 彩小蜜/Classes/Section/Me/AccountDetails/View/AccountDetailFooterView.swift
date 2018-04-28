@@ -14,12 +14,18 @@ class AccountDetailFooterView: UIView {
         didSet{
             let rechargeAtt = NSMutableAttributedString(string: "充值 ")
             let recharge = NSAttributedString(string: dataModel.rechargeMoney + "元", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+            let withTitle = NSAttributedString(string: ",提现")
             let with = NSAttributedString(string: dataModel.withDrawMoney + "元", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
-            let buy = NSAttributedString(string: dataModel.buyMoney + "元", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
-            let reward = NSAttributedString(string: dataModel.rewardMoney + "元", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+            let buyTitle = NSAttributedString(string: ",购彩")
+            let buy = NSAttributedString(string:"" + dataModel.buyMoney + "元", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+            let reTitle = NSAttributedString(string: ",中奖")
+            let reward = NSAttributedString(string:"" + dataModel.rewardMoney + "元", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
             rechargeAtt.append(recharge)
+            rechargeAtt.append(withTitle)
             rechargeAtt.append(with)
+            rechargeAtt.append(buyTitle)
             rechargeAtt.append(buy)
+            rechargeAtt.append(reTitle)
             rechargeAtt.append(reward)
             
             
@@ -59,7 +65,8 @@ class AccountDetailFooterView: UIView {
             make.top.equalTo(titleLB.snp.bottom).offset(1)
             make.left.equalTo(leftSpacing)
             make.right.equalTo(-rightSpacing)
-            make.height.equalTo(20)
+            make.bottom.equalTo(-5)
+            //make.height.equalTo(20)
         }
 //        withdrawalLB.snp.makeConstraints { (make) in
 //            make.top.equalTo(rechargeLB)
@@ -80,6 +87,7 @@ class AccountDetailFooterView: UIView {
         titleLB = getLB()
         titleLB.text = "当月合计: "
         rechargeLB = getLB()
+        rechargeLB.numberOfLines = 0
 //        buyLB = getLB()
 //        winLB = getLB()
 //        withdrawalLB = getLB()
