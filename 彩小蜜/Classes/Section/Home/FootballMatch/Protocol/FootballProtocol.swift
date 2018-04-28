@@ -38,6 +38,7 @@ extension FootballRequestPro where Self: FootballMatchVC {
     }
     
     private func request(type: String, leagueId: String) {
+        
         weak var weakSelf = self
         _ = homeProvider.rx.request(.matchList(playType: type, leagueId: leagueId))
             .asObservable()
