@@ -23,12 +23,8 @@ protocol LotteryMoreFilterVCDelegate {
 
 class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, FootballFilterTopViewDelegate, FootballFilterBottomViewDelegate {
     
-    public var filterList: [FilterModel]! {
-        didSet{
-            
-            self.collectionView.reloadData()
-        }
-    }
+    public var filterList: [FilterModel]!
+    
     public var delegate : LotteryMoreFilterVCDelegate!
     public var isAlreadyBuy: Bool = false {
         didSet{
@@ -54,20 +50,38 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
         self.currentIsAlreadyBuy = isAlreadyBuy
         initSubview()
         
-        DispatchQueue.global().async {
-            guard self.filterList != nil else { return }
-            for model in self.filterList {
-                if model.isSelected {
-                    self.currentFilterList.append(model)
-                }
-            }
-        }
+        filterRequest()
+//        DispatchQueue.global().async {
+//            guard self.filterList != nil else { return }
+//            for model in self.filterList {
+//                if model.isSelected {
+//                    self.currentFilterList.append(model)
+//                }
+//            }
+//        }
         
         
     }
     
     // MARK: - 网络请求
-    
+    private func filterRequest() {
+        weak var weakSelf = self
+        _ = homeProvider.rx.request(.filterMatchList)
+            .asObservable()
+            .mapArray(type: FilterModel.self)
+            .subscribe(onNext: { (data) in
+                weakSelf?.filterList = data
+                weakSelf?.collectionView.reloadData()
+            }, onError: { (error) in
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    print(code!)
+                    weakSelf?.showHUD(message: msg!)
+                default: break
+                }
+            }, onCompleted: nil, onDisposed: nil )
+    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
