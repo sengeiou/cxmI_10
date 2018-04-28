@@ -11,7 +11,7 @@ import SystemConfiguration.CaptiveNetwork
 import HandyJSON
 import Reachability
 
-class DeviceManager  {
+class DeviceManager: AlertPro  {
     static let share = DeviceManager()
     
     var device : DeviceInfoModel!
@@ -35,7 +35,6 @@ class DeviceManager  {
                 net = "mobile"
             case .none:
                 net = "UNKNOWN"
-           
             }
         }
         

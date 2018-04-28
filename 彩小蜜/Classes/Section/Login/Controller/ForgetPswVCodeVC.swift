@@ -56,6 +56,8 @@ class ForgetPswVCodeVC: BaseViewController, UITextFieldDelegate, ValidatePro,Cus
         super.viewDidLoad()
         self.title = "彩小秘 · 找回密码"
         self.view.addSubview(tableView)
+        guard countdownBut != nil else { return }
+        countdownBut.isCounting = true
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -153,6 +155,10 @@ class ForgetPswVCodeVC: BaseViewController, UITextFieldDelegate, ValidatePro,Cus
             let cell = tableView.dequeueReusableCell(withIdentifier: vcodeCellIdentifier, for: indexPath) as! VcodeTextFieldCell
             cell.textfield.delegate = self
             cell.textfield.customDelegate = self
+            if cell.textfield.countdownBut != nil {
+                self.countdownBut = cell.textfield.countdownBut
+                self.countdownBut.isCounting = true 
+            }
             self.vcodeTF = cell.textfield
             return cell
         default:

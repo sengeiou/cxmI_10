@@ -44,6 +44,7 @@ class CustomTextField: UITextField, CountdownButtonDelegate {
     
     private var defaultImg : String!
     private var imageView : UIImageView!
+    public var countdownBut: CountdownButton!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -131,7 +132,7 @@ class CustomTextField: UITextField, CountdownButtonDelegate {
         self.rightView = cusRightView
         self.rightViewMode = .always
         
-        let countdownBut = CountdownButton()
+        countdownBut = CountdownButton()
         countdownBut.delegate = self
         countdownBut.layer.cornerRadius = 5
         
