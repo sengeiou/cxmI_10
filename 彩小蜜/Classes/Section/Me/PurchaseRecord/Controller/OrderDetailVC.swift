@@ -85,12 +85,13 @@ class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
     public var orderId : String!
     private var orderInfo : OrderInfoModel!
     private var header : OrderDetailHeaderView!
+    private var footer : OrderDetailFooterView!
     
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "彩小秘 · 订单详情"
-        self.view.addSubview(tableView)
+        
         orderInfoRequest()
         initSubview()
     }
@@ -101,7 +102,13 @@ class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.snp.makeConstraints { (make) in
-            make.top.left.right.bottom.equalTo(self.view)
+            make.top.left.right.equalTo(self.view)
+            make.bottom.equalTo(footer.snp.top)
+        }
+        footer.snp.makeConstraints { (make) in
+            make.bottom.equalTo(-SafeAreaBottomHeight)
+            make.left.right.equalTo(0)
+            make.height.equalTo(44 * defaultScale)
         }
     }
     // MARK: - 网络请求
@@ -128,7 +135,11 @@ class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
     }
     // MARK: - 初始化
     private func initSubview() {
+        footer = OrderDetailFooterView()
+        footer.delegate = self
         
+        self.view.addSubview(tableView)
+        self.view.addSubview(footer)
     }
 
     // MARK: - 懒加载
@@ -141,9 +152,7 @@ class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         header = OrderDetailHeaderView()
         
         table.tableHeaderView = header
-        let footer = OrderDetailFooterView()
-        footer.delegate = self
-        table.tableFooterView = footer
+        
         table.estimatedRowHeight = 80
         table.rowHeight = UITableViewAutomaticDimension
         

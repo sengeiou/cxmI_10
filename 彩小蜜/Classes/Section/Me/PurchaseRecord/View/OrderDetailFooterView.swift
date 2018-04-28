@@ -23,16 +23,18 @@ class OrderDetailFooterView: UIView {
     private var button : UIButton!
     
     init() {
-        super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: OrderHeaderViewHeight))
+        //super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: OrderHeaderViewHeight))
+        super.init(frame: CGRect.zero)
         initSubview()
     }
     override func layoutSubviews() {
         super.layoutSubviews()
         button.snp.makeConstraints { (make) in
-            make.top.equalTo(self).offset(loginButTopSpacing)
+            make.top.equalTo(self).offset(1)
             make.left.equalTo(self).offset(0)
             make.right.equalTo(self).offset(-0)
-            make.height.equalTo(loginButHeight)
+            make.bottom.equalTo(0)
+            //make.height.equalTo(loginButHeight)
         }
     }
     
