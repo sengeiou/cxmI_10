@@ -43,7 +43,7 @@ class ScaleView: UIView {
     private func layoutScale() {
         acaleView.snp.makeConstraints { (make) in
             make.top.bottom.left.equalTo(0)
-            make.width.equalTo((306 * scaleNum) * defaultScale)
+            make.width.equalTo((306 * defaultScale ) * scaleNum)
         }
     }
     

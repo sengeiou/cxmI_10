@@ -4,7 +4,7 @@
 //
 //  Created by 笑 on 2018/4/17.
 //  Copyright © 2018年 韩笑. All rights reserved.
-//
+//  历史交锋
 
 import UIKit
 
@@ -13,6 +13,7 @@ class FootballMatchInfoScaleCell: UITableViewCell {
     // MARK: - 属性 public
     public var teamInfo : MatchTeamInfoModel! {
         didSet{
+            guard teamInfo != nil else { return }
             homeScale.scaleNum = CGFloat(teamInfo.win / teamInfo.total)
             flatScale.scaleNum = CGFloat(teamInfo.draw / teamInfo.total)
             visiScale.scaleNum = CGFloat(teamInfo.lose / teamInfo.total)
@@ -75,13 +76,13 @@ class FootballMatchInfoScaleCell: UITableViewCell {
         
         homeScale = ScaleView()
         homeScale.scaleColor = ColorEA5504
-        homeScale.scaleNum = 0.2
+        //homeScale.scaleNum = 0.2
         flatScale = ScaleView()
         flatScale.scaleColor = Color65AADD
-        flatScale.scaleNum = 0.4
+        //flatScale.scaleNum = 0.4
         visiScale = ScaleView()
         visiScale.scaleColor = Color44AE35
-        visiScale.scaleNum = 1.0
+        //visiScale.scaleNum = 1.0
         
         self.contentView.addSubview(homelb)
         self.contentView.addSubview(flatlb)
