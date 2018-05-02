@@ -10,11 +10,11 @@ import UIKit
 
 class HomeWebViewController: BaseWebViewController {
 
-    public var titleStr : String!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = titleStr
+        
         
     }
 

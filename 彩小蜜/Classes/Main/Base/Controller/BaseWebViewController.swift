@@ -15,10 +15,13 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
     
     public var webView: WKWebView!
     
+    public var titleStr : String! = ""
+    
     private var progressView : UIProgressView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = titleStr
         initProgressView()
         initWebView()
         loadWebView()
@@ -58,7 +61,8 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
     }
     
     public func loadWebView() {
-        guard let url = URL(string: "https://www.baidu.com") else { fatalError("-------  url 错误  -------")}
+        
+        guard let url = URL(string: urlStr) else { fatalError("-------  url 错误  -------")}
         let request = URLRequest(url: url)
         
         webView.load(request)

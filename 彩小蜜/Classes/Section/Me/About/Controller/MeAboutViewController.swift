@@ -58,13 +58,15 @@ class MeAboutViewController: BaseViewController, UITableViewDelegate, UITableVie
     }()
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch  indexPath.section {
+        switch  indexPath.row {
         case 0:
             let complaint = MeComplaintVC()
             pushViewController(vc: complaint)
         case 1:
-            let guarantee = MeGuaranteeVC()
-            pushViewController(vc: guarantee)
+            let web = MeWebViewController()
+            web.urlStr = webInsurance
+            web.titleStr = "彩小秘 · 安全保障"
+            pushViewController(vc: web)
         default: break
         
         }

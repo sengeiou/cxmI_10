@@ -12,6 +12,14 @@
 //let baseURLStr = "http://39.106.18.39:"
 
 let baseURLStr = "http://39.106.18.39:8765/api"
+
 //let baseURLStr = "http://39.106.18.39:7075"
 //let baseURLStr = "http://39.106.18.39:7076"
 
+
+/// 安全保障
+let webInsurance = "http://m.caixiaomi.net/#/user/insurance"
+/// 帮助中心
+let webHelp = "http://m.caixiaomi.net/#/user/help"
+/// 玩法帮助
+let webPlayHelp = "http://m.caixiaomi.net/#/freebuy/inToplay"

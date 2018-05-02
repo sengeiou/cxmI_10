@@ -136,7 +136,11 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
                 case 1:
                     let collection = MyCollectionVC()
                     pushViewController(vc: collection)
-                case 2: break
+                case 2:
+                    let web = MeWebViewController()
+                    web.urlStr = webHelp
+                    web.titleStr = "彩小秘 · 帮助中心"
+                    pushViewController(vc: web)
                 case 3: break
                 case 4:
                     let about = MeAboutViewController()
