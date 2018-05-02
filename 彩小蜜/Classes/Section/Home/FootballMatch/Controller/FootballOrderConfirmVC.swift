@@ -300,7 +300,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     
     func didTipAgreement() {
         let agreement = WebViewController()
-        
+        agreement.urlStr = webBuyAgreement
         pushViewController(vc: agreement)
     }
     // MARK: CELL  删除

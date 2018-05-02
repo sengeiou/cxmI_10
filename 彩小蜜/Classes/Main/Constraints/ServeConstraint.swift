@@ -23,3 +23,7 @@ let webInsurance = "http://m.caixiaomi.net/#/user/insurance"
 let webHelp = "http://m.caixiaomi.net/#/user/help"
 /// 玩法帮助
 let webPlayHelp = "http://m.caixiaomi.net/#/freebuy/inToplay"
+/// 购彩协议
+let webBuyAgreement = "http://m.caixiaomi.net/#/user/service"
+/// 注册协议
+let webRegisterAgreement = "http://m.caixiaomi.net/#/user/service"

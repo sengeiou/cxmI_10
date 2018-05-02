@@ -20,7 +20,8 @@ class RegisterViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     // 跳转注册协议
     func didTipAgreement() {
-        let regis = RegisterAgreementVC()
+        let regis = WebViewController()
+        regis.urlStr = webRegisterAgreement
         pushViewController(vc: regis)
     }
     
