@@ -24,13 +24,15 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
     private var rechargeAmount : String?
     private var cardCell : RechargeCardCell!
     private var textfield : UITextField!
-    
+    private var paymentAllList : [PaymentList]!
+    private var paymentModel : PaymentList!
     
     //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "彩小秘 · 充值"
         initSubview()
+        allPaymentRequest()
     }
     
     //MARK: - 点击事件
@@ -52,7 +54,9 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
     
     //MARK: - Tableview Delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        if indexPath.section == 2 {
+            self.paymentModel = self.paymentAllList[indexPath.row - 1]
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -65,6 +69,34 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
     private func rechargeRequest(amount: String) {
        let payment = PaymentWebViewController()
         pushViewController(vc: payment)
+    }
+    private func allPaymentRequest() {
+        weak var weakSelf = self
+        _ = paymentProvider.rx.request(.paymentAll)
+            .asObservable()
+            .mapArray(type: PaymentList.self)
+            .subscribe(onNext: { (data) in
+                weakSelf?.paymentAllList = data
+                weakSelf?.tableview.reloadData()
+            }, onError: { (error) in
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        weakSelf?.removeUserData()
+                        weakSelf?.pushLoginVC(from: self)
+                    default : break
+                    }
+                    
+                    if 300000...310000 ~= code {
+                        
+                        self.showHUD(message: msg!)
+                    }
+                    print("\(code)   \(msg!)")
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil )
     }
     
     //MARK: - 懒加载
@@ -97,7 +129,8 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 2:
-            return 2
+            guard self.paymentAllList != nil else { return 1 }
+            return self.paymentAllList.count + 1
         default:
             return 1
         }
@@ -120,13 +153,17 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
                 let cell = tableview.dequeueReusableCell(withIdentifier: RechargePaymentTitleCellId, for: indexPath) as! RechargePaymentTitleCell
                 return cell
             }
+            
             let cell = tableview.dequeueReusableCell(withIdentifier: RechargeCellIdentifier, for: indexPath) as! RechargePaymentCell
+            cell.paymentInfo = self.paymentAllList[indexPath.row - 1]
+            if indexPath.row == 1 {
+                tableView.selectRow(at: indexPath, animated: true , scrollPosition: .none)
+                self.paymentModel = self.paymentAllList[indexPath.row - 1]
+            }
             return cell
         default:
             return UITableViewCell()
         }
-        
-        
     }
     
     

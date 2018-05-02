@@ -11,6 +11,12 @@ import UIKit
 let RechargeCellIdentifier = "rechargeCellIdentifier"
 class RechargePaymentCell: UITableViewCell {
 
+    public var paymentInfo : PaymentList! {
+        didSet{
+            title.text = paymentInfo.payName
+            
+        }
+    }
     
     //MARK: - 属性
     private var icon : UIImageView!
@@ -64,14 +70,18 @@ class RechargePaymentCell: UITableViewCell {
         }
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
+        if selected {
+            selectorIcon.image = UIImage(named: "chargesure")
+        }else {
+            selectorIcon.image = UIImage(named: "butongyi")
+        }
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
 }
