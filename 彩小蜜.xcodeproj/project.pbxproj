@@ -58,6 +58,8 @@
 		1169180A207DBA8B00C8A287 /* PaymentResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11691809207DBA8B00C8A287 /* PaymentResultModel.swift */; };
 		1169180C207E3EC500C8A287 /* FootballScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1169180B207E3EC500C8A287 /* FootballScoreView.swift */; };
 		116C5CD7209054E800BD6656 /* AgreementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116C5CD6209054E800BD6656 /* AgreementViewController.swift */; };
+		116E0F292099739E009FE44E /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116E0F282099739E009FE44E /* Router.swift */; };
+		116E0F2B209973BD009FE44E /* RouterMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116E0F2A209973BD009FE44E /* RouterMatcher.swift */; };
 		116EB20C207F029600B32ABD /* FootballCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116EB20B207F029600B32ABD /* FootballCollectionView.swift */; };
 		116EB20E207F064300B32ABD /* FootballScoreCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116EB20D207F064300B32ABD /* FootballScoreCollectionCell.swift */; };
 		116EB210207F087D00B32ABD /* FootballScoreFilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116EB20F207F087D00B32ABD /* FootballScoreFilterVC.swift */; };
@@ -320,6 +322,8 @@
 		11691809207DBA8B00C8A287 /* PaymentResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentResultModel.swift; sourceTree = "<group>"; };
 		1169180B207E3EC500C8A287 /* FootballScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballScoreView.swift; sourceTree = "<group>"; };
 		116C5CD6209054E800BD6656 /* AgreementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementViewController.swift; sourceTree = "<group>"; };
+		116E0F282099739E009FE44E /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		116E0F2A209973BD009FE44E /* RouterMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterMatcher.swift; sourceTree = "<group>"; };
 		116EB20B207F029600B32ABD /* FootballCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballCollectionView.swift; sourceTree = "<group>"; };
 		116EB20D207F064300B32ABD /* FootballScoreCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballScoreCollectionCell.swift; sourceTree = "<group>"; };
 		116EB20F207F087D00B32ABD /* FootballScoreFilterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballScoreFilterVC.swift; sourceTree = "<group>"; };
@@ -561,6 +565,8 @@
 		111A982C20948128003CA901 /* Router */ = {
 			isa = PBXGroup;
 			children = (
+				116E0F282099739E009FE44E /* Router.swift */,
+				116E0F2A209973BD009FE44E /* RouterMatcher.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -2075,6 +2081,7 @@
 				114491082085A76A009F1D09 /* FootballMatchInfoCell.swift in Sources */,
 				E58B57BA2056364A0025E2F1 /* AddNewBankCardVC.swift in Sources */,
 				E51F9A64205A2A2D00AB8A21 /* ForgetPswVCodeFooterView.swift in Sources */,
+				116E0F292099739E009FE44E /* Router.swift in Sources */,
 				E55016F7207228220056AB1F /* FootballFilterCell.swift in Sources */,
 				E56CE814206A33310090A1B5 /* MessageCenterModel.swift in Sources */,
 				114491012085970A009F1D09 /* FootballOddsPagerView.swift in Sources */,
@@ -2137,6 +2144,7 @@
 				E581F37C2063573C002AB9F7 /* PaymentNetAPIManager.swift in Sources */,
 				E57376022046B37900148622 /* MainTabBarController.swift in Sources */,
 				E550D89420733891002DDE23 /* FootballOrderBottomView.swift in Sources */,
+				116E0F2B209973BD009FE44E /* RouterMatcher.swift in Sources */,
 				E581F38C2063B446002AB9F7 /* CouponCell.swift in Sources */,
 				E536386B2068A99200457EB5 /* OrderInfoModel.swift in Sources */,
 				E51032482064A99700A0156C /* CouponListModel.swift in Sources */,

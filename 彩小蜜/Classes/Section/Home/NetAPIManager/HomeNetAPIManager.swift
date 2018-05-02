@@ -80,7 +80,7 @@ extension HomeNetAPIManager : TargetType {
     var task: Task {
         var dic : [String: Any] = [:]
         
-        dic["divice"] = device?.toJSON()
+        dic["device"] = DeviceManager.share.device.toJSON()
         
         switch self {
         case .playList(let fyId):
