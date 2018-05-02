@@ -20,6 +20,8 @@ enum PaymentNetAPIManager {
     case paymentRecharge (payCode: String, totalAmount: String)
     /// 提现
     case paymentWithdraw (totalAmount: String, userBankId: String)
+    /// 可用第三方支付方式 list
+    case paymentAll
 }
 
 extension PaymentNetAPIManager : TargetType {
@@ -38,7 +40,8 @@ extension PaymentNetAPIManager : TargetType {
             return "/payment/recharge"
         case .paymentWithdraw:
             return "/payment/withdraw"
-            
+        case .paymentAll:
+            return "/payment/allPayment"
             
         }
     }
