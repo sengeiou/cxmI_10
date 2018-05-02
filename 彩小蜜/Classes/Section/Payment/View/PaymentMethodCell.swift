@@ -40,6 +40,8 @@ class PaymentMethodCell: UITableViewCell {
         }
     }
     private func initSubview() {
+        self.selectionStyle = .none
+        
         icon = UIImageView()
         icon.image = UIImage(named: "WeChatrecharge")
         
@@ -60,7 +62,11 @@ class PaymentMethodCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
-        // Configure the view for the selected state
+        if selected {
+            selectedIcon.image = UIImage(named: "chargesure")
+        }else {
+            selectedIcon.image = UIImage(named: "butongyi")
+        }
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

@@ -39,6 +39,7 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "彩小秘 · "
         WeixinCenter.share.payDelegate = self
         initSubview()
         allPaymentRequest()
@@ -264,6 +265,10 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
                 let cell = tableView.dequeueReusableCell(withIdentifier: PaymentMethodCellId, for: indexPath) as! PaymentMethodCell
                 let paymentModel = paymentAllList[indexPath.row - 1 ]
                 cell.title.text = paymentModel.payName
+                if indexPath.row == 1 {
+                    tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+                    self.paymentModel = paymentModel
+                }
                 
                 return cell
             }
@@ -309,7 +314,7 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
         }else if indexPath.section == 1 {
             self.paymentModel = paymentAllList[indexPath.row - 1 ]
         }
-        tableView.deselectRow(at: indexPath, animated: true)
+        //tableView.deselectRow(at: indexPath, animated: true)
     }
     
     // 支付
