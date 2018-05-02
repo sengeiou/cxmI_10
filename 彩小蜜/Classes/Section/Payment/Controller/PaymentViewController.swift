@@ -115,9 +115,10 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
                     }
                     
                     if 300000...310000 ~= code {
-                        print(code)
+                        
                         self.showHUD(message: msg!)
                     }
+                    print("\(code)   \(msg!)")
                 default: break
                 }
             }, onCompleted: nil , onDisposed: nil )
@@ -245,9 +246,9 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
 //                return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: PaymentMethodCellId, for: indexPath) as! PaymentMethodCell
-                let paymentModel = paymentAllList[indexPath.row]
+                let paymentModel = paymentAllList[indexPath.row - 1 ]
                 cell.title.text = paymentModel.payName
-                self.paymentModel = paymentModel
+                
                 return cell
             }
         default: break
@@ -289,6 +290,8 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
                 coupon.bonusList = self.saveBetInfo.bonusList
                 present(coupon)
             }
+        }else if indexPath.section == 1 {
+            self.paymentModel = paymentAllList[indexPath.row - 1 ]
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }

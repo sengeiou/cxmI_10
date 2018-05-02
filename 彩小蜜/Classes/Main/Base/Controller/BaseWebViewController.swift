@@ -79,7 +79,7 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        webView.evaluateJavaScript("helpTitle()") { (data, error) in
+        webView.evaluateJavaScript("getCxmTitle()") { (data, error) in
             if let title = data as? String {
                 self.title = title
             }else {

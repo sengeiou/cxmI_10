@@ -13,6 +13,18 @@ import HandyJSON
 struct PaymentResultModel : HandyJSON {
     var showMsg : String!
     var orderId: String!
+    var wxAppPayInfo: PaymentInfoModel!
+}
+
+struct PaymentInfoModel: HandyJSON {
+    var appid: String!
+    var noncestr: String!
+    var packageValue: String!
+    var partnerid: String!
+    var prepayid: String!
+    var sign: String!
+    var timestamp: String!
+    
 }
 
 struct PaymentWeixinModel: HandyJSON {

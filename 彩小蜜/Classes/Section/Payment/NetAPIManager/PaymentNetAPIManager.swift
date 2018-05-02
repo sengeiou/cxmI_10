@@ -59,8 +59,10 @@ extension PaymentNetAPIManager : TargetType {
         case .paymentWithdraw(let totalAmount, let userBankId):
             dic["totalAmount"] = totalAmount
             dic["userBankId"] = userBankId
+        case .paymentAll:
+            break
         default:
-            return .requestPlain
+            break
         }
         
         var dict : [String: Any] = [:]
