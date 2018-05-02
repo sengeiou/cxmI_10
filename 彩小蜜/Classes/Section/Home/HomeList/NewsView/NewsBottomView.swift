@@ -16,7 +16,10 @@ class NewsBottomView: UIView {
             guard newsInfo != nil else { return }
             titleLb.text = newsInfo.extendCat
             timeLb.text = newsInfo.addTime
-            readNumLb.text = "阅读\(newsInfo.clickNumber!)"
+            if newsInfo.clickNumber != nil {
+                readNumLb.text = "阅读\(newsInfo.clickNumber!)"
+            }
+            
         }
     }
     
