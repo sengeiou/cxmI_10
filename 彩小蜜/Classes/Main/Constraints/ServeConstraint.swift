@@ -24,6 +24,6 @@ let webHelp = "http://m.caixiaomi.net/#/user/help"
 /// 玩法帮助
 let webPlayHelp = "http://m.caixiaomi.net/#/freebuy/inToplay"
 /// 购彩协议
-let webBuyAgreement = "http://m.caixiaomi.net/#/user/service"
+let webBuyAgreement = "http://m.caixiaomi.net/#/freebuy/protocol"
 /// 注册协议
 let webRegisterAgreement = "http://m.caixiaomi.net/#/user/service"
