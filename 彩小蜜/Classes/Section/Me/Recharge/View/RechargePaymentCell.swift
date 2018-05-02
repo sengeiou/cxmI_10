@@ -14,7 +14,9 @@ class RechargePaymentCell: UITableViewCell {
     public var paymentInfo : PaymentList! {
         didSet{
             title.text = paymentInfo.payName
-            
+            if let url = URL(string: paymentInfo.payImg) {
+                icon.kf.setImage(with: url)
+            }
         }
     }
     

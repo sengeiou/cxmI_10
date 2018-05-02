@@ -264,7 +264,7 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: PaymentMethodCellId, for: indexPath) as! PaymentMethodCell
                 let paymentModel = paymentAllList[indexPath.row - 1 ]
-                cell.title.text = paymentModel.payName
+                cell.paymentInfo = paymentModel
                 if indexPath.row == 1 {
                     tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
                     self.paymentModel = paymentModel
