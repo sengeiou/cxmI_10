@@ -49,7 +49,6 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
         webConfiguration.mediaPlaybackAllowsAirPlay = true;
         
         
-        
         webView = WKWebView(frame: CGRect.zero, configuration: webConfiguration)
         webView.navigationDelegate = self
         webView.uiDelegate = self
