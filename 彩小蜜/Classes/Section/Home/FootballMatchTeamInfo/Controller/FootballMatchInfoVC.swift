@@ -106,7 +106,7 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):
-                    print(code!)
+                    print(code)
                     weakSelf?.showHUD(message: msg!)
                 default: break
                 }

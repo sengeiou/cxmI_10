@@ -95,7 +95,7 @@ class CouponViewController: BaseViewController, IndicatorInfoProvider, UITableVi
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):
-                    print(code!)
+                    print(code)
                     self.showHUD(message: msg!)
                 default: break
                 }

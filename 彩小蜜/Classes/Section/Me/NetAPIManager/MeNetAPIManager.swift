@@ -76,47 +76,47 @@ extension MeNetAPIManager : TargetType {
     var xpath: String {
         switch self {
         case .userInfo:
-            return "7071/user/userInfoExceptPass"
+            return "/member/user/userInfoExceptPass"
         case .realNameAuth:
-            return "7071/user/real/realNameAuth"
+            return "/member/user/real/realNameAuth"
         case .realInfo:
-            return "7071/user/real/userRealInfo"
+            return "/member/user/real/userRealInfo"
         case .addBankCard:
-            return "7071/user/bank/addBankCard"
+            return "/member/user/bank/addBankCard"
         case .bankList:
-            return "7071/user/bank/queryUserBankList"
+            return "/member/user/bank/queryUserBankList"
         case .withDrawDataShow:
-            return "7071/user/bank/queryWithDrawShow"
+            return "/member/user/bank/queryWithDrawShow"
         case .setBankDefault:
-            return "7071/user/bank/updateUserBankDefault"
+            return "/member/user/bank/updateUserBankDefault"
         case .deleteBank:
-            return "7071/user/bank/deleteUserBank"
+            return "/member/user/bank/deleteUserBank"
         case .couponList:
-            return "7071/user/bonus/queryBonusListByStatus"
+            return "/member/user/bonus/queryBonusListByStatus"
         case .coupon:
-            return "7071/user/bonus/queryUserBonus"
+            return "/member/user/bonus/queryUserBonus"
         case .orderInfoList:
-            return "7075/order/getOrderInfoList"
+            return "/order/order/getOrderInfoList"
         case .orderInfo:
-            return "7075/order/getOrderDetail"
+            return "/order/order/getOrderDetail"
         case .orderScheme:
-            return "7075/order/getTicketScheme"
+            return "/order/order/getTicketScheme"
         case .accountDetailsList:
-            return "7071/user/account/getUserAccountList"
+            return "/member/user/account/getUserAccountList"
         case .messageList:
-            return "7071/user/message/list"
+            return "/member/user/message/list"
         case .accountStatistics:
-            return "7071/user/account/countMoneyCurrentMonth"
+            return "/member/user/account/countMoneyCurrentMonth"
         case .withdrawProgressList:
-            return "7076/payment/withdraw/list"
+            return "/payment/payment/withdraw/list"
         case .collectAdd:
-            return "7071/user/collect/add"
+            return "/member/user/collect/add"
         case .collectDelete:
-            return "7071/user/collect/delete"
+            return "/member/user/collect/delete"
         case .collectList:
-            return "7071/user/collect/list"
+            return "/member/user/collect/list"
         case .configQuety:
-            return "7071/switch/config/query"
+            return "/member/switch/config/query"
             
         }
     }

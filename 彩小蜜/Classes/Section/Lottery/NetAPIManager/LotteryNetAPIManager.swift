@@ -17,7 +17,7 @@ enum LotteryNetAPIManager {
 
 extension LotteryNetAPIManager : TargetType {
     var baseURL : URL {
-        return URL(string : baseURLStr + "7077" + xpath )!
+        return URL(string : baseURLStr + "/lottery" + xpath )!
     }
     
     var xpath : String {

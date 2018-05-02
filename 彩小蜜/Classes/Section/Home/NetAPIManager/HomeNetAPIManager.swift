@@ -42,7 +42,7 @@ enum HomeNetAPIManager {
 extension HomeNetAPIManager : TargetType {
     
     var baseURL : URL {
-        return URL(string : baseURLStr + "7077" + xpath )!
+        return URL(string : baseURLStr + "/lottery" + xpath )!
     }
     var path : String { return ""}
     

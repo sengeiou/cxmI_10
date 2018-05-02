@@ -61,7 +61,11 @@ extension Observable where E == Response {
                 """)
             
             guard json["code"] as! String == "0", var data = json["data"] as? [String: Any] else {
-                throw HXError.UnexpectedResult(resultCode: json["code"] as? String , resultMsg: json["msg"] as? String )
+                
+                guard let codeStr = json["code"] as? String else { throw HXError.ParseCodeError }
+                guard let code = Int(codeStr) else { throw HXError.ParseCodeError }
+                
+                throw HXError.UnexpectedResult(resultCode: code , resultMsg: json["msg"] as? String )
             }
 
             data["showMsg"] = json["msg"] as! String
@@ -111,7 +115,11 @@ extension Observable where E == Response {
                 """)
             
             guard json["code"] as! String == "0", let data = json["data"] as? [[String: Any]] else {
-                throw HXError.UnexpectedResult(resultCode: json["code"] as? String , resultMsg: json["msg"] as? String )
+                
+                guard let codeStr = json["code"] as? String else { throw HXError.ParseCodeError }
+                guard let code = Int(codeStr) else { throw HXError.ParseCodeError }
+            
+                throw HXError.UnexpectedResult(resultCode: code , resultMsg: json["msg"] as? String )
             }
             
             DispatchQueue.global().async {
@@ -151,14 +159,16 @@ extension Response {
 
 
 enum HXError : Swift.Error {
-    // 解析失败
+    /// code 解析错误
+    case ParseCodeError
+    /// 解析失败
     case ParseJSONError
-    // 网络请求发生错误
+    /// 网络请求发生错误
     case RequestFailed
-    // 接收到的返回没有data
+    /// 接收到的返回没有data
     case NoResponse
     //服务器返回了一个错误代码
-    case UnexpectedResult(resultCode: String?, resultMsg: String?)
+    case UnexpectedResult(resultCode: Int, resultMsg: String?)
 }
 
 enum RequestStatus: Int {

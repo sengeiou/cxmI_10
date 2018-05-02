@@ -26,7 +26,7 @@ enum LoginNetAPIManager {
 
 extension LoginNetAPIManager: TargetType {
     var baseURL : URL {
-        return URL(string: baseURLStr + xpath)!
+        return URL(string: baseURLStr + "/member" + xpath)!
     }
     
     var headers: [String : String]? {
@@ -42,21 +42,21 @@ extension LoginNetAPIManager: TargetType {
         switch self {
        
         case .loginByPass:
-            return "7071/login/loginByPass"
+            return "/login/loginByPass"
         case .loginBySms:
-            return "7071/login/loginBySms"
+            return "/login/loginBySms"
         case .logout:
-            return "7071/login/logout"
+            return "/login/logout"
         case .register:
-            return "7071/user/register"
+            return "/user/register"
         case .resetPass:
             return ""
         case .validateMobile:
-            return "7071/user/validateMobile"
+            return "/user/validateMobile"
         case .updatePass:
-            return "7071/user/updateLoginPass"
+            return "/user/updateLoginPass"
         case .sendSms:
-            return "7071/sms/sendSmsCode"
+            return "/sms/sendSmsCode"
             
             
             

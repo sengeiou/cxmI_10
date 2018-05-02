@@ -20,7 +20,7 @@ public final class RequestLoadingPlugin:PluginType{
             ^^^^^^^^****************************
             
             token   :    \(String(describing: request.request?.allHTTPHeaderFields!["token"]))
-            
+            url     :    \(String(describing: request.request?.url))
             
             ************************************
             
@@ -30,7 +30,6 @@ public final class RequestLoadingPlugin:PluginType{
     }
     
     public func didReceive(_ result: Result<Response, MoyaError>, target: TargetType) {
-        
         self.dismissHUD();
     }
     //MARK:-是否显示请求加载框

@@ -99,7 +99,7 @@ class PurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):
-                    print(code!)
+                    print(code)
                     self.showHUD(message: msg!)
                 default: break
                 }

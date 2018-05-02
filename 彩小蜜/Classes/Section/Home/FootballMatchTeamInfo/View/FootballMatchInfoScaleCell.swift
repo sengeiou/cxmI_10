@@ -14,9 +14,9 @@ class FootballMatchInfoScaleCell: UITableViewCell {
     public var teamInfo : MatchTeamInfoModel! {
         didSet{
             guard teamInfo != nil else { return }
-            homeScale.scaleNum = CGFloat(teamInfo.win / teamInfo.total)
-            flatScale.scaleNum = CGFloat(teamInfo.draw / teamInfo.total)
-            visiScale.scaleNum = CGFloat(teamInfo.lose / teamInfo.total)
+            homeScale.scaleNum = CGFloat(teamInfo.win) / CGFloat(teamInfo.total)
+            flatScale.scaleNum = CGFloat(teamInfo.draw) / CGFloat(teamInfo.total)
+            visiScale.scaleNum = CGFloat(teamInfo.lose) / CGFloat(teamInfo.total)
         }
     }
     

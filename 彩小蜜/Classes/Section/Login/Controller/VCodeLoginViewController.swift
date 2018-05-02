@@ -86,7 +86,7 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
                     guard let hxerror = error as? HXError else { return }
                     switch hxerror {
                     case .UnexpectedResult(let code, let resultMsg) :
-                        if code == "301016", let resultMsg = resultMsg {
+                        if code == 301016, let resultMsg = resultMsg {
                             self.showConfirm(message: resultMsg)
                         }else {
                             self.showConfirm(message: resultMsg!, confirm: { (action) in
@@ -116,7 +116,7 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
                     guard let hxError = error as? HXError else { return }
                     switch hxError {
                     case .UnexpectedResult(let code, let resultMsg):
-                        if code == "301016", let resultMsg = resultMsg {
+                        if code == 301016, let resultMsg = resultMsg {
                             self.showConfirm(message: resultMsg)
                         }else {
                             self.showConfirm(message: resultMsg!, confirm: { (action) in

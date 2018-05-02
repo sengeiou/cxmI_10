@@ -10,8 +10,9 @@ import UIKit
 
 class ScaleView: UIView {
     
-    public var scaleNum : CGFloat = 0.0 {
+    public var scaleNum : CGFloat! {
         didSet{
+            guard scaleNum != nil else { return }
             layoutScale()
         }
     }
