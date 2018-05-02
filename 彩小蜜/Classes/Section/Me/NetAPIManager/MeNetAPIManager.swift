@@ -129,7 +129,7 @@ extension MeNetAPIManager : TargetType {
         
         var dic : [String: Any] = [:]
         //dic["header"] = DeviceManager.share.device
-        dic["device"] = device?.toJSON()
+        
         switch self {
         case .realNameAuth(let idcode, let realName):
             dic["idcode"] = idcode
@@ -194,9 +194,11 @@ extension MeNetAPIManager : TargetType {
             return .requestPlain
         }
         
+        var dict : [String: Any] = [:]
+        dict["body"] = dic
+        dict["device"] = DeviceManager.share.device.toJSON()
         
-        
-        let jsonStr = try? JSONSerialization.data(withJSONObject: dic, options: .prettyPrinted)
+        let jsonStr = try? JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted)
     
         
         return .requestData(jsonStr!)

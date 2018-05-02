@@ -60,7 +60,11 @@ extension PaymentNetAPIManager : TargetType {
             return .requestPlain
         }
         
-        let jsonStr = try? JSONSerialization.data(withJSONObject: dic, options: .prettyPrinted)
+        var dict : [String: Any] = [:]
+        dict["body"] = dic
+        dict["device"] = DeviceManager.share.device.toJSON()
+        
+        let jsonStr = try? JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted)
         
         
         return .requestData(jsonStr!)

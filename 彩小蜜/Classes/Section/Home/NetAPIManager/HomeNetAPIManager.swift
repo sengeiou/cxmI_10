@@ -80,7 +80,7 @@ extension HomeNetAPIManager : TargetType {
     var task: Task {
         var dic : [String: Any] = [:]
         
-        dic["device"] = DeviceManager.share.device.toJSON()
+        
         
         switch self {
         case .playList(let fyId):
@@ -115,7 +115,11 @@ extension HomeNetAPIManager : TargetType {
             return .requestPlain
         }
         
-        let jsonStr = try? JSONSerialization.data(withJSONObject: dic, options: .prettyPrinted)
+        var dict : [String: Any] = [:]
+        dict["body"] = dic
+        dict["device"] = DeviceManager.share.device.toJSON()
+        
+        let jsonStr = try? JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted)
         
         return .requestData(jsonStr!)
     }
