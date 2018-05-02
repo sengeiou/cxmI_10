@@ -46,6 +46,7 @@ class AddNewBankCardVC: BaseViewController, UITextFieldDelegate, ValidatePro {
     //MARK: - 网络请求
     // 实名认证信息
     private func realInfoRequest() {
+        weak var weakSelf = self
         _ = userProvider.rx.request(.realInfo)
             .asObservable()
             .mapObject(type: RealInfoDataModel.self)
@@ -56,14 +57,24 @@ class AddNewBankCardVC: BaseViewController, UITextFieldDelegate, ValidatePro {
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):
-                    print(code)
-                    self.showHUD(message: msg!)
+                    switch code {
+                    case 600:
+                        weakSelf?.removeUserData()
+                        weakSelf?.pushLoginVC(from: self)
+                    default : break
+                    }
+                    
+                    if 30000...31000 ~= code {
+                        print(code)
+                        self.showHUD(message: msg!)
+                    }
                 default: break
                 }
             }, onCompleted: nil, onDisposed: nil )
     }
     
     private func addBankCardRequest() {
+        weak var weakSelf = self
         _ = userProvider.rx.request(.addBankCard(bankCardNo: self.cardNumTF.text!))
         .asObservable()
         .mapObject(type: BankCardInfo.self)
@@ -74,8 +85,17 @@ class AddNewBankCardVC: BaseViewController, UITextFieldDelegate, ValidatePro {
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):
-                    print(code)
-                    self.showHUD(message: msg!)
+                    switch code {
+                    case 600:
+                        weakSelf?.removeUserData()
+                        weakSelf?.pushLoginVC(from: self)
+                    default : break
+                    }
+                    
+                    if 30000...31000 ~= code {
+                        print(code)
+                        self.showHUD(message: msg!)
+                    }
                 default: break
                 }
             }, onCompleted: nil, onDisposed: nil)

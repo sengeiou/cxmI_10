@@ -70,6 +70,7 @@ class BankCardViewController: BaseViewController, UITableViewDelegate, UITableVi
     
     //MARK: - 网络请求
     private func bankListRequest() {
+        weak var weakSelf = self
         _ = userProvider.rx.request(.bankList)
         .asObservable()
         .mapArray(type: BankCardInfo.self)
@@ -81,8 +82,17 @@ class BankCardViewController: BaseViewController, UITableViewDelegate, UITableVi
             guard let err = error as? HXError else { return }
             switch err {
             case .UnexpectedResult(let code, let msg):
-                print(code)
-                self.showHUD(message: msg!)
+                switch code {
+                case 600:
+                    weakSelf?.removeUserData()
+                    weakSelf?.pushLoginVC(from: self)
+                default : break
+                }
+                
+                if 30000...31000 ~= code {
+                    print(code)
+                    self.showHUD(message: msg!)
+                }
             default: break
             }
         }, onCompleted: nil, onDisposed: nil)
@@ -101,8 +111,17 @@ class BankCardViewController: BaseViewController, UITableViewDelegate, UITableVi
             guard let err = error as? HXError else { return }
             switch err {
             case .UnexpectedResult(let code, let msg):
-                print(code)
-                self.showHUD(message: msg!)
+                switch code {
+                case 600:
+                    weakSelf?.removeUserData()
+                    weakSelf?.pushLoginVC(from: self)
+                default : break
+                }
+                
+                if 30000...31000 ~= code {
+                    print(code)
+                    self.showHUD(message: msg!)
+                }
             default: break
             }
         }, onCompleted: nil, onDisposed: nil)
@@ -136,8 +155,17 @@ class BankCardViewController: BaseViewController, UITableViewDelegate, UITableVi
             guard let err = error as? HXError else { return }
             switch err {
             case .UnexpectedResult(let code, let msg):
-                print(code)
-                self.showHUD(message: msg!)
+                switch code {
+                case 600:
+                    weakSelf?.removeUserData()
+                    weakSelf?.pushLoginVC(from: self)
+                default : break
+                }
+                
+                if 30000...31000 ~= code {
+                    print(code)
+                    self.showHUD(message: msg!)
+                }
             default: break
             }
         }, onCompleted: nil, onDisposed: nil)

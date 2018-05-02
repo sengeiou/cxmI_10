@@ -25,7 +25,6 @@ public final class RequestLoadingPlugin:PluginType{
             ************************************
             
             """)
-        
         self.showHUD()
     }
     

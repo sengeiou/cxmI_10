@@ -11,7 +11,7 @@ import TTTAttributedLabel
 
 fileprivate let meCellIdentifier = "meCellIdentifier"
 
-class MeViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, MeHeaderViewDelegate, MeFooterViewDelegate, TTTAttributedLabelDelegate, UserInfoPro {
+class MeViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, MeHeaderViewDelegate, MeFooterViewDelegate, TTTAttributedLabelDelegate {
     
     
     
@@ -199,8 +199,16 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        weakSelf?.removeUserData()
+                        weakSelf?.pushLoginVC(from: self)
+                    default : break
+                    }
+                    if 30000...31000 ~= code {
+                        self.showHUD(message: msg!)
+                    }
                     print(code)
-                    self.showHUD(message: msg!)
                 default: break
                 }
             }, onCompleted: nil, onDisposed: nil )

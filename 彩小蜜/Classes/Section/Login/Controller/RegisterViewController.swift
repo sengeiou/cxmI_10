@@ -12,7 +12,7 @@ fileprivate let mobileCellIdentifier = "mobileCellIdentifier"
 fileprivate let passwordCellIdentifier = "passwordCellIdentifier"
 fileprivate let vcodeCellIdentifier = "vcodeCellIdentifier"
 
-class RegisterViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, ValidatePro, UserInfoPro, CustomTextFieldDelegate, RegisterFooterViewDelegate {
+class RegisterViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, ValidatePro, CustomTextFieldDelegate, RegisterFooterViewDelegate {
     
     
     func didTipSelectedAgreement(isAgerr: Bool) {

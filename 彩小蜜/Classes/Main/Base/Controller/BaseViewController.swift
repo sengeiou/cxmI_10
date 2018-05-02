@@ -13,7 +13,7 @@ import DZNEmptyDataSet
 
 public var currentVC : UIViewController?
 
-class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, DateProtocol{
+class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, DateProtocol, UserInfoPro{
 
     // public
     

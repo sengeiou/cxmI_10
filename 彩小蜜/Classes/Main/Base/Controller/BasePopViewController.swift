@@ -16,7 +16,7 @@ enum PopViewStyle {
     case fromTop
 }
 
-class BasePopViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+class BasePopViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, UserInfoPro {
 
     public var popStyle : PopViewStyle = .fromCenter{
         didSet{

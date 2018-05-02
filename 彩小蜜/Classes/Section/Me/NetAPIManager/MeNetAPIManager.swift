@@ -63,8 +63,10 @@ extension MeNetAPIManager : TargetType {
     }
     
     var headers: [String : String]? {
-        return ["Content-Type" : "application/json",
-                "token" : UserInfoManager().getToken()
+        return [
+            "Content-Type" : "application/json",
+            "token" : UserInfoManager().getToken()
+            
             //"token" : "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxZDg4OTYxZDUtYjI0Yi00NzAxLWJhZWMtNzBkZmUxY2MwMDAzIiwidXNlcklkIjoiNDAwMDY4In0.1aBwA_Rasiew0kiLK8uR3AiUGj1iJ6ZZ8Hvup5v8tNUVMpQWWHVQBSrUBGCxZ28Lmsk0I-cQGQkOcAdoJKJQE1GGjDqSfAWGD951Kyq187C_axWKNazkRK1b-RIuuXV4ZSSSYhn0o45KsLCUh1YO76Q19oFnuVCbrF8DTvXTbSY"
         ]
     }
@@ -124,6 +126,7 @@ extension MeNetAPIManager : TargetType {
     
     var task: Task {
         var dic : [String: Any] = [:]
+        dic["header"] = DeviceManager.share.device
         
         switch self {
         case .realNameAuth(let idcode, let realName):

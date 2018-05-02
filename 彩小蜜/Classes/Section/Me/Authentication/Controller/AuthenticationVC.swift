@@ -157,6 +157,7 @@ class AuthenticationVC: BaseViewController, UITextFieldDelegate, ValidatePro {
     
     //MARK: - 网络请求
     private func authenticationRequest() {
+        weak var weakSelf = self
         _ = userProvider.rx.request(.realNameAuth(idcode: self.IDNumberTF.text!, realName: self.nameTF.text!))
             .asObservable()
             .mapObject(type: RealInfoDataModel.self)
@@ -168,8 +169,17 @@ class AuthenticationVC: BaseViewController, UITextFieldDelegate, ValidatePro {
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):
-                    print(code)
-                    self.showHUD(message: msg!)
+                    switch code {
+                    case 600:
+                        weakSelf?.removeUserData()
+                        weakSelf?.pushLoginVC(from: self)
+                    default : break
+                    }
+                    
+                    if 30000...31000 ~= code {
+                        print(code)
+                        self.showHUD(message: msg!)
+                    }
                 default: break
                 }
             }, onCompleted: nil, onDisposed: nil)

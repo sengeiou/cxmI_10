@@ -99,8 +99,17 @@ class PurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):
-                    print(code)
-                    self.showHUD(message: msg!)
+                    switch code {
+                    case 600:
+                        weakSelf?.removeUserData()
+                        weakSelf?.pushLoginVC(from: self)
+                    default : break
+                    }
+                    
+                    if 30000...31000 ~= code {
+                        print(code)
+                        self.showHUD(message: msg!)
+                    }
                 default: break
                 }
             }, onCompleted: nil , onDisposed: nil )

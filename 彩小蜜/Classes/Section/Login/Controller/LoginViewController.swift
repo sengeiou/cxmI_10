@@ -13,7 +13,7 @@ fileprivate let mobileCellIdentifier = "mobileCellIdentifier"
 fileprivate let passwordCellIdentifier = "passwordCellIdentifier"
 fileprivate let vcodeCellIdentifier = "vcodeCellIdentifier"
 
-class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro, UserInfoPro, UITableViewDelegate, UITableViewDataSource {
+class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro, UITableViewDelegate, UITableViewDataSource {
 
     //MARK: - 按钮 点击 事件
     @objc private func loginClicked(_ sender : UIButton) {

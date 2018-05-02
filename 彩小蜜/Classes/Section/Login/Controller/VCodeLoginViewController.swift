@@ -11,7 +11,7 @@ fileprivate let mobileCellIdentifier = "mobileCellIdentifier"
 fileprivate let passwordCellIdentifier = "passwordCellIdentifier"
 fileprivate let vcodeCellIdentifier = "vcodeCellIdentifier"
 
-class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro, UserInfoPro, CustomTextFieldDelegate , UITableViewDataSource, UITableViewDelegate{
+class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro, CustomTextFieldDelegate , UITableViewDataSource, UITableViewDelegate{
     
     
     
