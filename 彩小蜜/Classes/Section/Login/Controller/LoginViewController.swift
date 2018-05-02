@@ -91,13 +91,19 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro,
             case .next(let data):
                 
                 self.showHUD(message: data.showMsg)
+                self.save(userInfo: data)
+//                if self.getUserData() == nil {
+//
+//
+//                }else {
+//
+//                    self.popToCurrentVC()
+//                }
                 
-                if self.getUserData() == nil {
-                    self.save(userInfo: data)
-                    self.pushRootViewController()
-                }else {
-                    self.save(userInfo: data)
+                if self.currentVC != nil {
                     self.popToCurrentVC()
+                }else {
+                    self.pushRootViewController()
                 }
                 
                 print(data)
@@ -169,7 +175,15 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro,
     }
     
     @objc override func back(_ sender: UIButton) {
-        pushRootViewController()
+        //pushRootViewController()
+        //popToLoginViewController()
+        
+        if currentVC != nil {
+            popToCurrentVC()
+        }else {
+            pushRootViewController()
+        }
+        
     }
     
     override func didReceiveMemoryWarning() {

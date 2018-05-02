@@ -7,3 +7,17 @@
 //
 
 import Foundation
+
+enum PushController {
+    case fd
+}
+
+protocol RouterMatcher {
+    
+}
+
+extension RouterMatcher {
+    func matcherHttp() -> PushController {
+        return .fd
+    }
+}

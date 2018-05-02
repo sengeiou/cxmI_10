@@ -11,24 +11,19 @@ import SnapKit
 
 import DZNEmptyDataSet
 
-public var currentVC : UIViewController?
+
 
 class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, DateProtocol, UserInfoPro{
 
     // public
+    public var currentVC : UIViewController?
     
     public func pushLoginVC(from vc: UIViewController) {
         let login = LoginViewController()
-        currentVC = vc
+        login.currentVC = vc
         self.navigationController?.pushViewController(login, animated: true)
     }
-    public func popToCurrentVC() {
-        for vc in (self.navigationController?.viewControllers)! {
-            if currentVC != nil, vc == currentVC {
-                self.navigationController?.popToViewController(vc, animated: true)
-            }
-        }
-    }
+    
     
     public func pushPagerView(pagerType: PagerViewType) {
         let storyboard = UIStoryboard(name: "Storyboard", bundle: Bundle.main)
@@ -58,7 +53,13 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
     public func popToRootViewController() {
         self.navigationController?.popToRootViewController(animated: true)
     }
-    
+    public func popToCurrentVC() {
+        for vc in (self.navigationController?.viewControllers)! {
+            if currentVC != nil, vc == currentVC {
+                self.navigationController?.popToViewController(vc, animated: true)
+            }
+        }
+    }
     public func popToLoginViewController() {
         for vc in (self.navigationController?.viewControllers)! {
             if vc .isKind(of: LoginViewController.self) {

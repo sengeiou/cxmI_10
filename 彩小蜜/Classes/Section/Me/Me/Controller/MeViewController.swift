@@ -202,12 +202,6 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):
-                    switch code {
-                    case 600:
-                        weakSelf?.removeUserData()
-                        weakSelf?.pushLoginVC(from: self)
-                    default : break
-                    }
                     if 300000...310000 ~= code {
                         self.showHUD(message: msg!)
                     }
