@@ -91,7 +91,7 @@ extension Observable where E == Response {
             guard ((200...209) ~= response.statusCode) else {
                 print("""
                     ************************************
-                    
+                    url          :    \(String(describing: response.request?.url))
                     statusCode   :    \(response.statusCode)
                     
                     ************************************

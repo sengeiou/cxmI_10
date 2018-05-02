@@ -8,10 +8,10 @@
 
 import UIKit
 
-enum PaymentMethod : String{
-    case 微信 = "app_weixin"
-    case 余额 = ""
-}
+//enum PaymentMethod : String{
+//    case 微信 = "app_weixin"
+//    case 余额 = ""
+//}
 
 
 fileprivate let PaymentCellId = "PaymentCellId"
@@ -28,7 +28,10 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
     
     private var confirmBut : UIButton!
     
-    private var paymentMethod : PaymentMethod = .余额
+    //private var paymentMethod : PaymentMethod = .余额
+    private var paymentAllList : [PaymentList]!
+    
+    private var paymentModel : PaymentList!
     
     private var paymentResult : PaymentResultModel!
     
@@ -38,6 +41,7 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
         super.viewDidLoad()
         WeixinCenter.share.payDelegate = self
         initSubview()
+        allPaymentRequest()
         orderRequest()
     }
 
@@ -60,6 +64,8 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
     }
     
     // MARK: - 网络请求
+    
+    
     private func orderRequest() {
         weak var weakSelf = self
         _ = homeProvider.rx.request(.saveBetInfo(requestModel: self.requestModel))
@@ -80,7 +86,7 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
                     default : break
                     }
                     
-                    if 30000...31000 ~= code {
+                    if 300000...310000 ~= code {
                         print(code)
                         self.showHUD(message: msg!)
                     }
@@ -89,10 +95,38 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
             }, onCompleted: nil, onDisposed: nil )
     }
     
+    private func allPaymentRequest() {
+        weak var weakSelf = self
+        _ = paymentProvider.rx.request(.paymentAll)
+            .asObservable()
+            .mapArray(type: PaymentList.self)
+            .subscribe(onNext: { (data) in
+                weakSelf?.paymentAllList = data
+                weakSelf?.tableView.reloadData()
+            }, onError: { (error) in
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        weakSelf?.removeUserData()
+                        weakSelf?.pushLoginVC(from: self)
+                    default : break
+                    }
+                    
+                    if 300000...310000 ~= code {
+                        print(code)
+                        self.showHUD(message: msg!)
+                    }
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil )
+    }
+    
     private func paymentRequest() {
         weak var weakSelf = self
         guard self.saveBetInfo != nil else { return }
-        _ = paymentProvider.rx.request(.payment(payCode: paymentMethod.rawValue, payToken: self.saveBetInfo.payToken))
+        _ = paymentProvider.rx.request(.payment(payCode: paymentModel.payCode, payToken: self.saveBetInfo.payToken))
             .asObservable()
             .mapObject(type: PaymentResultModel.self)
             .subscribe(onNext: { (data) in
@@ -116,7 +150,7 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
                     default : break
                     }
                     
-                    if 30000...31000 ~= code {
+                    if 300000...310000 ~= code {
                         print(code)
                         self.showHUD(message: msg!)
                     }
@@ -162,7 +196,8 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
         case 0:
             return 4
         case 1:
-            return 2
+            guard paymentAllList != nil else { return 1 }
+            return paymentAllList.count + 1
         default:
             return 0
         }
@@ -204,11 +239,16 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
                 cell.title.textColor = Color505050
                 cell.detail.text = ""
                 return cell
-            case 1:
+//            case 1:
+//                let cell = tableView.dequeueReusableCell(withIdentifier: PaymentMethodCellId, for: indexPath) as! PaymentMethodCell
+//                cell.title.text = "微信支付"
+//                return cell
+            default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: PaymentMethodCellId, for: indexPath) as! PaymentMethodCell
-                cell.title.text = "微信支付"
+                let paymentModel = paymentAllList[indexPath.row]
+                cell.title.text = paymentModel.payName
+                self.paymentModel = paymentModel
                 return cell
-            default: break
             }
         default: break
             

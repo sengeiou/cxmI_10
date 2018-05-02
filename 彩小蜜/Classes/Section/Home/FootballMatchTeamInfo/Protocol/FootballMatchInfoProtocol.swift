@@ -34,7 +34,7 @@ extension FootballMatchInfoProtocol where Self : FootballMatchInfoVC {
                     default : break
                     }
                     
-                    if 30000...31000 ~= code {
+                    if 300000...310000 ~= code {
                         print(code)
                         self.showHUD(message: msg!)
                     }

@@ -180,7 +180,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
                     default : break
                     }
                     
-                    if 30000...31000 ~= code {
+                    if 300000...310000 ~= code {
                         print(code)
                         self.showHUD(message: msg!)
                     }
@@ -209,7 +209,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
                         weakSelf?.pushLoginVC(from: self)
                     default : break
                     }
-                    if 30000...31000 ~= code {
+                    if 300000...310000 ~= code {
                         self.showHUD(message: msg!)
                     }
                     print(code)
