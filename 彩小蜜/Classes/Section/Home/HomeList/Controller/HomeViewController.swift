@@ -272,7 +272,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         switch indexPath.section {
         case 1:
             guard homeData != nil, let activity = self.homeData.activity else { return }
-            let web = HomeWebViewController()
+            let web = WebViewController()
             web.urlStr = activity.actUrl
             web.titleStr = activity.actTitle
             pushViewController(vc: web)

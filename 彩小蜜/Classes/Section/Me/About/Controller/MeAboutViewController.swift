@@ -63,7 +63,7 @@ class MeAboutViewController: BaseViewController, UITableViewDelegate, UITableVie
             let complaint = MeComplaintVC()
             pushViewController(vc: complaint)
         case 1:
-            let web = MeWebViewController()
+            let web = WebViewController()
             web.urlStr = webInsurance
             web.titleStr = "彩小秘 · 安全保障"
             pushViewController(vc: web)

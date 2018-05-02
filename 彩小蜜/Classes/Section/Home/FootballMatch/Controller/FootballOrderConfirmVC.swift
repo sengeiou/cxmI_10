@@ -299,7 +299,8 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     func didTipAgreement() {
-        let agreement = AgreementViewController()
+        let agreement = WebViewController()
+        
         pushViewController(vc: agreement)
     }
     // MARK: CELL  删除

@@ -1,5 +1,5 @@
 //
-//  MeWebViewController.swift
+//  WebViewController.swift
 //  彩小蜜
 //
 //  Created by 笑 on 2018/5/2.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MeWebViewController: BaseWebViewController {
+class WebViewController: BaseWebViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,11 +16,9 @@ class MeWebViewController: BaseWebViewController {
         
     }
 
-    
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
     }
     
 
