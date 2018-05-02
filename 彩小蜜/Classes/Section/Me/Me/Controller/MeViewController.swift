@@ -139,7 +139,6 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
                 case 2:
                     let web = WebViewController()
                     web.urlStr = webHelp
-                    web.titleStr = "彩小秘 · 帮助中心"
                     pushViewController(vc: web)
                 case 3: break
                 case 4:

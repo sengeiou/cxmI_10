@@ -15,13 +15,13 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
     
     public var webView: WKWebView!
     
-    public var titleStr : String! = ""
+    //public var titleStr : String! = ""
     
     private var progressView : UIProgressView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = titleStr
+        
         initProgressView()
         initWebView()
         loadWebView()
@@ -76,6 +76,16 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
     
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        webView.evaluateJavaScript("helpTitle()") { (data, error) in
+            if let title = data as? String {
+                self.title = title
+            }else {
+                self.title = webView.title
+            }
+        }
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {

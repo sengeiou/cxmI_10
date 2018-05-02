@@ -65,7 +65,6 @@ class MeAboutViewController: BaseViewController, UITableViewDelegate, UITableVie
         case 1:
             let web = WebViewController()
             web.urlStr = webInsurance
-            web.titleStr = "彩小秘 · 安全保障"
             pushViewController(vc: web)
         default: break
         

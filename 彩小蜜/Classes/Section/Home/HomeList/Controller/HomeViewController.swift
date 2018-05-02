@@ -274,7 +274,6 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
             guard homeData != nil, let activity = self.homeData.activity else { return }
             let web = WebViewController()
             web.urlStr = activity.actUrl
-            web.titleStr = activity.actTitle
             pushViewController(vc: web)
         case 3:
             let web = NewsDetailViewController()

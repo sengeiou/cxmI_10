@@ -360,7 +360,6 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     @objc private func helpClicked(_ sender: UIButton) {
         let homeWeb = WebViewController()
         homeWeb.urlStr = webPlayHelp
-        homeWeb.titleStr = "彩小秘 · 更多玩法"
         pushViewController(vc: homeWeb)
     }
     @objc private func showMenu(_ sender: UIButton) {
