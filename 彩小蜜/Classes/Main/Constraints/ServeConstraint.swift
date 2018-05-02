@@ -18,12 +18,12 @@ let baseURLStr = "http://39.106.18.39:8765/api"
 
 
 /// 安全保障
-let webInsurance = "http://m.caixiaomi.net/#/user/insurance?showTitle=1"
+let webInsurance = "http://m.caixiaomi.net/#/user/insurance?showtitle=1"
 /// 帮助中心
-let webHelp = "http://m.caixiaomi.net/#/user/help?showTitle=1"
+let webHelp = "http://192.168.31.205:8080/#/user/help?showtitle=1"
 /// 玩法帮助
-let webPlayHelp = "http://m.caixiaomi.net/#/freebuy/inToplay?showTitle=1"
+let webPlayHelp = "http://m.caixiaomi.net/#/freebuy/inToplay?showtitle=1"
 /// 购彩协议
-let webBuyAgreement = "http://m.caixiaomi.net/#/freebuy/protocol?showTitle=1"
+let webBuyAgreement = "http://m.caixiaomi.net/#/freebuy/protocol?showtitle=1"
 /// 注册协议
-let webRegisterAgreement = "http://m.caixiaomi.net/#/user/service?showTitle=1"
+let webRegisterAgreement = "http://m.caixiaomi.net/#/user/service?showtitle=1"

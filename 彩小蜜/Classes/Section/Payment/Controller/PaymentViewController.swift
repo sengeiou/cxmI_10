@@ -127,17 +127,24 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
     private func paymentRequest() {
         weak var weakSelf = self
         guard self.saveBetInfo != nil else { return }
+        guard self.paymentModel != nil else { return }
         _ = paymentProvider.rx.request(.payment(payCode: paymentModel.payCode, payToken: self.saveBetInfo.payToken))
             .asObservable()
             .mapObject(type: PaymentResultModel.self)
             .subscribe(onNext: { (data) in
+                
+                self.paymentResult = data
+                
+                self.pushViewC()
+                
+                
                 weakSelf?.canPayment = true
-                weakSelf?.paymentResult = data
-                weakSelf?.showHUD(message: data.showMsg)
-                let order = OrderDetailVC()
-                order.backType = .root
-                order.orderId = data.orderId
-                weakSelf?.pushViewController(vc: order)
+//                weakSelf?.paymentResult = data
+//                weakSelf?.showHUD(message: data.showMsg)
+//                let order = OrderDetailVC()
+//                order.backType = .root
+//                order.orderId = data.orderId
+//                weakSelf?.pushViewController(vc: order)
                 
             }, onError: { (error) in
                 weakSelf?.canPayment = true
@@ -158,6 +165,15 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
                 default: break
                 }
             }, onCompleted: nil, onDisposed: nil)
+    }
+    
+    private func pushViewC() {
+        guard self.paymentResult != nil else { return }
+        if let payUrl = self.paymentResult.payUrl {
+            let web = WebViewController()
+            web.urlStr = payUrl
+            pushViewController(vc: web)
+        }
     }
     
     private func initSubview() {
