@@ -28,7 +28,7 @@ class FootballOddsPagerView: UIView {
     // MARK: - 属性 private
     private var europeOddsBut : UIButton!
     private var asianOddsBut: UIButton!
-    private var bigSmallBut: UIButton!
+    //private var bigSmallBut: UIButton! // 暂时不用大小球
     
     private var vlineOne : UIView!
     private var vlineTwo : UIView!
@@ -44,14 +44,14 @@ class FootballOddsPagerView: UIView {
         sender.isSelected = !sender.isSelected
         changeButState(sender: sender, isSelected: true)
         changeButState(sender: asianOddsBut, isSelected: false)
-        changeButState(sender: bigSmallBut, isSelected: false)
+        //changeButState(sender: bigSmallBut, isSelected: false)
         guard delegate != nil else { return }
         delegate.didTipEuropeOdds()
     }
     @objc private func asianOddsClicked(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         changeButState(sender: sender, isSelected: true)
-        changeButState(sender: bigSmallBut, isSelected: false)
+        //changeButState(sender: bigSmallBut, isSelected: false)
         changeButState(sender: europeOddsBut, isSelected: false)
         guard delegate != nil else { return }
         delegate.didTipAsianOdds()
@@ -90,13 +90,14 @@ class FootballOddsPagerView: UIView {
         asianOddsBut.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(europeOddsBut)
             make.left.equalTo(europeOddsBut.snp.right).offset(1)
-            make.width.equalTo(bigSmallBut)
-        }
-        bigSmallBut.snp.makeConstraints { (make) in
-            make.top.bottom.equalTo(europeOddsBut)
-            make.left.equalTo(asianOddsBut.snp.right).offset(1)
+            //make.width.equalTo(bigSmallBut)
             make.right.equalTo(0)
         }
+//        bigSmallBut.snp.makeConstraints { (make) in
+//            make.top.bottom.equalTo(europeOddsBut)
+//            make.left.equalTo(asianOddsBut.snp.right).offset(1)
+//            make.right.equalTo(0)
+//        }
         vlineOne.snp.makeConstraints { (make) in
             make.left.equalTo(europeOddsBut.snp.right)
             make.width.equalTo(1)
@@ -119,14 +120,14 @@ class FootballOddsPagerView: UIView {
         asianOddsBut = getButton("亚盘")
         asianOddsBut.addTarget(self, action: #selector(asianOddsClicked(_:)), for: .touchUpInside)
         
-        bigSmallBut = getButton("大小球")
-        bigSmallBut.addTarget(self, action: #selector(bigSmallClicked(_:)), for: .touchUpInside)
+//        bigSmallBut = getButton("大小球")
+//        bigSmallBut.addTarget(self, action: #selector(bigSmallClicked(_:)), for: .touchUpInside)
         
         self.addSubview(vlineOne)
         self.addSubview(vlineTwo)
         self.addSubview(europeOddsBut)
         self.addSubview(asianOddsBut)
-        self.addSubview(bigSmallBut)
+        //self.addSubview(bigSmallBut)
         self.addSubview(bottomLine)
     }
     private func getButton(_ title : String) -> UIButton {
