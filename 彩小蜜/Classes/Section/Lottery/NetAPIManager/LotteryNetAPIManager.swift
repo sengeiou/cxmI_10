@@ -65,7 +65,7 @@ extension LotteryNetAPIManager : TargetType {
             if isAlready == false {
                 dic["isAlreadyBuyMatch"] = ""
             }else {
-                dic["isAlreadyBuyMatch"] = isAlready
+                dic["isAlreadyBuyMatch"] = "1"
             }
             if finished {
                 dic["matchFinish"] = "1"
