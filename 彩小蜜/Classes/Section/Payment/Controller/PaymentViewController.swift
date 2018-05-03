@@ -159,10 +159,14 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
     }
     // 查询支付结果
     private func queryPaymentResultRequest() {
-        paymentProvider.rx.request(.paymentQuery)
-        .asObservable()
-        //.mapObject(type: <#T##HandyJSON.Protocol#>)
-        
+        _ = paymentProvider.rx.request(.paymentQuery)
+            .asObservable()
+            .mapObject(type: DataModel.self)
+            .subscribe(onNext: { (data) in
+                
+            }, onError: { (error) in
+                
+            }, onCompleted: nil , onDisposed: nil )
     }
     
     private func handlePaymentResult() {

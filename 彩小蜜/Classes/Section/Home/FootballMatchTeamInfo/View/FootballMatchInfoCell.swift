@@ -15,7 +15,7 @@ class FootballMatchInfoCell: UITableViewCell {
         didSet{
             matchName.text = teamInfo.leagueAddr
             matchTime.text = teamInfo.matchDay
-            matchScore.text = "\(teamInfo.homeTeamAbbr!)  \(teamInfo.matchRs!)  \(teamInfo.visitingTeamAbbr!)"
+            matchScore.text = "\(teamInfo.homeTeamAbbr!)  \(teamInfo.whole!)  \(teamInfo.visitingTeamAbbr!)"
             
             guard teamInfo.matchRs != "" else { return }
             matchResult.text = teamInfo.matchRs
