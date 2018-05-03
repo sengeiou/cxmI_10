@@ -4,7 +4,7 @@
 //
 //  Created by HX on 2018/3/7.
 //  Copyright © 2018年 韩笑. All rights reserved.
-//
+//  投诉建议
 
 import UIKit
 
@@ -91,7 +91,7 @@ class MeComplaintVC: BaseViewController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.textView.resignFirstResponder()
+        self.textView.textView.resignFirstResponder()
     }
     
     override func didReceiveMemoryWarning() {

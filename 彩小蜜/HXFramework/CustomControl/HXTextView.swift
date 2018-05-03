@@ -22,7 +22,7 @@ class HXTextView: UIView, UITextViewDelegate {
         }
     }
     
-    private var textView: HHTextView!
+    public var textView: HHTextView!
     private var numLB: UILabel!
     
     init() {
