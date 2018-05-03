@@ -4,7 +4,7 @@
 //
 //  Created by HX on 2018/3/12.
 //  Copyright © 2018年 韩笑. All rights reserved.
-//
+//  添加银行卡
 
 import UIKit
 
@@ -80,7 +80,7 @@ class AddNewBankCardVC: BaseViewController, UITextFieldDelegate, ValidatePro {
         .mapObject(type: BankCardInfo.self)
             .subscribe(onNext: { (data) in
                 self.showHUD(message: data.showMsg)
-                print(data)
+                self.popViewController()
             }, onError: { (error) in
                 guard let err = error as? HXError else { return }
                 switch err {

@@ -73,7 +73,7 @@ extension LotteryNetAPIManager : TargetType {
                 dic["matchFinish"] = ""
             }
             
-            dic["leageuIds"] = leagueIds
+            dic["leagueIds"] = leagueIds
             
         default:
             return .requestPlain

@@ -71,8 +71,9 @@ class ShareViewController: BasePopViewController, UICollectionViewDelegate, UICo
         shareImage(content: self.shareContent, scene: WXSceneTimeline)
     }
     private func shareLink() {
+        guard self.shareContent.urlStr != nil else { return }
         let paseboard = UIPasteboard.general
-        paseboard.string = "ssss"
+        paseboard.string = self.shareContent.urlStr
         showHUD(message: "复制连接成功")
     }
     

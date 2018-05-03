@@ -134,7 +134,7 @@ class FootballScoreView: UIView {
     private func changeScoreView(list : [FootballPlayCellModel]) {
         var title = ""
         for cell in list {
-            title += cell.cellOdds + " "
+            title += cell.cellName + " "
         }
         
         titlelb.text = title

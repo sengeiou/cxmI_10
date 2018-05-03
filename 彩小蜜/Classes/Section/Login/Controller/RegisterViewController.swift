@@ -33,11 +33,11 @@ class RegisterViewController: BaseViewController, UITableViewDelegate, UITableVi
             return
         }
         guard validate(.phone, str: self.phoneTF.text) else {
-            showHUD(message: "请输入手机号")
+            showHUD(message: "请输入正确的手机号")
             return
         }
         guard validate(.password, str: self.passwordTF.text) else{
-            showHUD(message: "请输入密码")
+            showHUD(message: "输入密码格式错误")
             return
         }
         guard self.vcodeTF.text != nil else {
