@@ -20,6 +20,8 @@ protocol FootballCollectionViewDelegate {
     func didDeSelectedItem(cell : FootballPlayCellModel) -> Void
 }
 
+let collectionViewWidth: CGFloat = 315
+
 fileprivate let FilterCellHeight: CGFloat = 44 * defaultScale
 
 fileprivate let HunheCellHeight : CGFloat = 38 * defaultScale
@@ -27,8 +29,8 @@ fileprivate let minimumLineSpacing : CGFloat = 0
 fileprivate let minimumInteritemSpacing : CGFloat = 0
 fileprivate let topInset : CGFloat = 0
 fileprivate let leftInset: CGFloat = 0
-fileprivate let FilterCellWidth : CGFloat = (320 * defaultScale) / 5
-fileprivate let collectionviewwidth : CGFloat = 320 * defaultScale
+fileprivate let FilterCellWidth : CGFloat = (collectionViewWidth * defaultScale) / 5
+fileprivate let collectionviewwidth : CGFloat = collectionViewWidth * defaultScale
 
 fileprivate let FootballScoreCollectionCellId = "FootballScoreCollectionCellId"
 
@@ -69,7 +71,7 @@ class FootballCollectionView: UIView , UICollectionViewDelegate, UICollectionVie
         layout.scrollDirection = .vertical
         
         let collection = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        collection.backgroundColor = ColorFFFFFF
+        collection.backgroundColor = ColorC8C8C8
         collection.dataSource = self
         collection.delegate = self
         collection.isScrollEnabled = true

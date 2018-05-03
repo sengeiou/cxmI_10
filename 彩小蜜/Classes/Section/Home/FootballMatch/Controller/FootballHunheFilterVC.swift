@@ -214,7 +214,7 @@ class FootballHunheFilterVC: BasePopViewController, BottomViewDelegate, Football
         SPFView.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(SPFTitlelb)
             make.left.equalTo(SPFTitlelb.snp.right)
-            make.width.equalTo(320 * defaultScale)
+            make.width.equalTo(collectionViewWidth * defaultScale)
         }
         rangSPFView.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(rangSPFTitlelb)

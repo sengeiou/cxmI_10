@@ -94,7 +94,7 @@ class ForgetPswVCodeVC: BaseViewController, UITextFieldDelegate, ValidatePro,Cus
     }
     
     private func sendSmsRequest() {
-        _ = loginProvider.rx.request(.sendSms(mobile: self.phoneNum, smsType: "1"))
+        _ = loginProvider.rx.request(.sendSms(mobile: self.phoneNum, smsType: "2"))
             .asObservable()
             .mapBaseObject(type: DataModel.self)
             .subscribe { (event) in

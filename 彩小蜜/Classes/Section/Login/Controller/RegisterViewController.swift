@@ -37,7 +37,7 @@ class RegisterViewController: BaseViewController, UITableViewDelegate, UITableVi
             return
         }
         guard validate(.password, str: self.passwordTF.text) else{
-            showHUD(message: "输入密码格式错误")
+            showHUD(message: "密码格式错误，请重新输入")
             return
         }
         guard self.vcodeTF.text != nil else {
