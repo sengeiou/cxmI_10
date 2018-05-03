@@ -9,8 +9,9 @@
 import UIKit
 import SnapKit
 import DZNEmptyDataSet
+import SVProgressHUD
 
-class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, DateProtocol, UserInfoPro{
+class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, DateProtocol, UserInfoPro {
 
     // public
     public var currentVC : UIViewController?

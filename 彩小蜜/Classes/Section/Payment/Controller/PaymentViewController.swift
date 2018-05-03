@@ -13,6 +13,7 @@ import UIKit
 //    case 余额 = ""
 //}
 
+import SVProgressHUD
 
 fileprivate let PaymentCellId = "PaymentCellId"
 fileprivate let PaymentMethodCellId = "PaymentMethodCellId"
@@ -54,9 +55,7 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
     func onPaybuyWeixin(response: PayResp) {
         
     }
-    
-    
-    
+
     // MARK: - 网络请求
     
     
@@ -127,11 +126,8 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
             .asObservable()
             .mapObject(type: PaymentResultModel.self)
             .subscribe(onNext: { (data) in
-                
                 self.paymentResult = data
-                
-                self.pushViewC()
-                
+                self.handlePaymentResult()
                 
                 weakSelf?.canPayment = true
 //                weakSelf?.paymentResult = data
@@ -161,8 +157,22 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
                 }
             }, onCompleted: nil, onDisposed: nil)
     }
+    // 查询支付结果
+    private func queryPaymentResultRequest() {
+        paymentProvider.rx.request(.paymentQuery)
+        .asObservable()
+        //.mapObject(type: <#T##HandyJSON.Protocol#>)
+        
+    }
     
-    private func pushViewC() {
+    private func handlePaymentResult() {
+        SVProgressHUD.show()
+        guard self.saveBetInfo != nil else { return }
+        guard self.saveBetInfo.thirdPartyPaid != nil else { return }
+        guard self.saveBetInfo.thirdPartyPaid == 0 else {
+            showHUD(message: self.paymentResult.showMsg)
+            return
+        }
         
         guard self.paymentResult != nil else { return }
         guard let payUrl = self.paymentResult.payUrl else { return }
@@ -265,7 +275,7 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
                 cell.cellStyle = .detail
             case 3:
                 cell.title.text = "还需支付"
-                let money = NSAttributedString(string:"- ¥ " + self.saveBetInfo.thirdPartyPaid, attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+                let money = NSAttributedString(string:"- ¥ " + "\(self.saveBetInfo.thirdPartyPaid!)", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
                 cell.detail.attributedText = money
             default: break
             }

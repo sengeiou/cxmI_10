@@ -13,7 +13,6 @@ import SVProgressHUD
 
 public final class RequestLoadingPlugin:PluginType{
     
-    
     public func willSend(_ request: RequestType, target: TargetType) {
         print("""
             

@@ -20,7 +20,7 @@ class FootballSaveBetInfoModel : HandyJSON{
     var orderMoney: String!
     var payToken: String!
     var surplus: String!
-    var thirdPartyPaid: String!
+    var thirdPartyPaid: Double!
     
     func setBonus() {
         for bonus in bonusList {

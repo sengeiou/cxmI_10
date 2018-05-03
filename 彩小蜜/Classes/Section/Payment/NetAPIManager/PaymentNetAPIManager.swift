@@ -22,6 +22,7 @@ enum PaymentNetAPIManager {
     case paymentWithdraw (totalAmount: String, userBankId: String)
     /// 可用第三方支付方式 list
     case paymentAll
+    
 }
 
 extension PaymentNetAPIManager : TargetType {
@@ -42,6 +43,7 @@ extension PaymentNetAPIManager : TargetType {
             return "/payment/withdraw"
         case .paymentAll:
             return "/payment/allPayment"
+         
             
         }
     }
