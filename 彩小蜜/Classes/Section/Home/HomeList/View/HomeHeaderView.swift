@@ -11,6 +11,10 @@ import FSPagerView
 
 fileprivate let headerCellIdentifier = "headerCellIdentifier"
 
+protocol HomeHeaderViewDelegate {
+    func didTipBanner(banner: BannerModel) -> Void
+}
+
 class HomeHeaderView: UIView, FSPagerViewDataSource, FSPagerViewDelegate {
 
     public var bannerList : [BannerModel]! {
@@ -18,6 +22,8 @@ class HomeHeaderView: UIView, FSPagerViewDataSource, FSPagerViewDelegate {
             self.viewPager.reloadData()
         }
     }
+    
+    public var delegate : HomeHeaderViewDelegate!
     
     init() {
         super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: bannerHeight))
@@ -91,9 +97,10 @@ class HomeHeaderView: UIView, FSPagerViewDataSource, FSPagerViewDelegate {
     }
     
     func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
-        if  bannerList != nil {
-            let banner = bannerList[index]
-        }
+        guard bannerList != nil else { return }
+        guard delegate != nil else { return }
+        
+        delegate.didTipBanner(banner: bannerList[index])
     }
     
     required init?(coder aDecoder: NSCoder) {

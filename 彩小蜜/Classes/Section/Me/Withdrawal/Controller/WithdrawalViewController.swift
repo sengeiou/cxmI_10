@@ -197,10 +197,9 @@ class WithdrawalViewController: BaseViewController {
         instructions.text = """
         说明：
         1.中奖金额在1小时后可提现；
-        2.提现不收手续费；
-        3.为防止洗钱等不法行为，充值金额只能用于消费或退款；
-        4.每天提现不超过3次，每次最低3元；
-        5.活动赠送金额不可提现；
+        2.提现金额最低3元，每天提现不超过3次；
+        3.提现暂不收取手续费；
+        4.为防止恶意提款、洗钱等不法行为，充值金额及活动赠送金额只能用于消费，不可提现；
         """
         
         bgView.addSubview(moneyLB)

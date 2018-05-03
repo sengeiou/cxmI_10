@@ -25,10 +25,15 @@ fileprivate let NewsThreePicCellId = "NewsThreePicCellId"
 
 
 
-class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, HomeSportLotteryCellDelegate {
+class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, HomeSportLotteryCellDelegate, HomeHeaderViewDelegate {
     
+    // MARK: - banner 点击
+    func didTipBanner(banner: BannerModel) {
+        let web = WebViewController()
+        web.urlStr = banner.bannerLink
+        pushViewController(vc: web)
+    }
     
-
     //MARK: - 点击事件
     func didSelectItem(playType: String, index: Int) {
         let football = FootballMatchVC()
@@ -192,59 +197,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                 }
             }, onCompleted: nil , onDisposed: nil )
     }
-    // 以下代码已合并
-//    private func homeListRequest() {
-//        weak var weakSelf = self
-//        _ = homeProvider.rx.request(.homeList)
-//            .asObservable()
-//            .mapObject(type: HomeDataModel.self)
-//            .subscribe(onNext: { (data) in
-//                weakSelf?.tableView.endrefresh()
-//                weakSelf?.homeData = data
-//                //weakSelf?.tableView.reloadData()
-//                guard data.navBanners != nil else { return }
-//                weakSelf?.header.bannerList = data.navBanners
-//                weakSelf?.newsListRequest(1)
-//            }, onError: { (error) in
-//                weakSelf?.tableView.endrefresh()
-//                guard let err = error as? HXError else { return }
-//                switch err {
-//                case .UnexpectedResult(let code, let msg):
-//                    print(code!)
-//                    weakSelf?.showHUD(message: msg!)
-//                default: break
-//                }
-//            }, onCompleted: nil, onDisposed: nil )
-//
-//
-//    }
-//
-//    private func newsListRequest(_ pageNum : Int) {
-//        weak var weakSelf = self
-//        _ = homeProvider.rx.request(.newsList(page: pageNum))
-//            .asObservable()
-//            .mapObject(type: NewsListModel.self)
-//            .subscribe(onNext: { (data) in
-//                weakSelf?.tableView.endrefresh()
-//                self.newsListModel = data
-//                if pageNum == 1 {
-//                    weakSelf?.newsList.removeAll()
-//                }
-//                weakSelf?.newsList.append(contentsOf: data.list)
-//                weakSelf?.tableView.reloadData()
-//            }, onError: { (error) in
-//                weakSelf?.tableView.endrefresh()
-//                guard let err = error as? HXError else { return }
-//                switch err {
-//                case .UnexpectedResult(let code, let msg):
-//                    print(code!)
-//                    weakSelf?.showHUD(message: msg!)
-//                default: break
-//                }
-//            }, onCompleted: nil, onDisposed: nil )
-//    }
-    
-    
+
     //MARK: - 懒加载
     lazy private var tableView: UITableView = {
         let table = UITableView(frame: CGRect.zero, style: .grouped)
@@ -253,6 +206,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         table.backgroundColor = ColorF4F4F4
         table.separatorStyle = .none
         header = HomeHeaderView()
+        header.delegate = self
         table.tableHeaderView = header
         
         table.register(HomeScrollBarCell.self, forCellReuseIdentifier: homeScrollBarCellIdentifier)
@@ -267,21 +221,23 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     }()
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NotificationConfig"), object: true)
-        switch indexPath.section {
-        case 1:
-            guard homeData != nil, let activity = self.homeData.activity else { return }
-            let web = WebViewController()
-            web.urlStr = activity.actUrl
-            pushViewController(vc: web)
-        case 3:
+        if homeStyle == .onlyNews {
             let web = NewsDetailViewController()
-//            web.urlStr = activity.actUrl
-//            web.titleStr = "activity.actTitle"
             web.articleId = self.newsList[indexPath.row].articleId
             pushViewController(vc: web)
-        default: break
+        }else {
+            switch indexPath.section {
+            case 1:
+                guard homeData != nil, let activity = self.homeData.activity else { return }
+                let web = WebViewController()
+                web.urlStr = activity.actUrl
+                pushViewController(vc: web)
+            case 3:
+                let web = NewsDetailViewController()
+                web.articleId = self.newsList[indexPath.row].articleId
+                pushViewController(vc: web)
+            default: break
+            }
         }
     }
     

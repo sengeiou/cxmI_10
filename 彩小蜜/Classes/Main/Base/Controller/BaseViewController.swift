@@ -8,10 +8,7 @@
 
 import UIKit
 import SnapKit
-
 import DZNEmptyDataSet
-
-
 
 class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, DateProtocol, UserInfoPro{
 
@@ -154,8 +151,4 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    
-
 }

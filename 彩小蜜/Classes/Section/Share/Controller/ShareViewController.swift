@@ -185,16 +185,8 @@ class ShareViewController: BasePopViewController, UICollectionViewDelegate, UICo
         return minimumInteritemSpacing
     }
     
-    
-    
-    
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
     }
-    
-
-   
-
 }

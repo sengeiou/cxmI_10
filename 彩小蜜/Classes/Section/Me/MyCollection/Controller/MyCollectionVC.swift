@@ -96,7 +96,7 @@ class MyCollectionVC: BaseViewController, UITableViewDelegate, UITableViewDataSo
         weak var weakSelf = self
         _ = userProvider.rx.request(.collectDelete(collectId: collectId))
         .asObservable()
-        .mapObject(type: DataModel.self)
+        .mapBaseObject(type: DataModel.self)
             .subscribe(onNext: { (data) in
                 weakSelf?.showHUD(message: data.msg)
                 weakSelf?.collectList.remove(at: indexPath.row)

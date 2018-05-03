@@ -623,8 +623,4 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         super.didReceiveMemoryWarning()
         
     }
-    
-
-    
-
 }

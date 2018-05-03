@@ -40,18 +40,20 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         
         NotificationCenter.default.addObserver(self, selector: #selector(configNotification(_:)), name: NSNotification.Name(rawValue: NotificationConfig), object: nil)
         
-        let turnOn = UserDefaults.standard.bool(forKey: TurnOn)
-        if turnOn {
-            showType = .allShow
-        }else {
-            showType = .allShow
-        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         userInfoRequest()
         self.isHidenBar = false
+        
+        let turnOn = UserDefaults.standard.bool(forKey: TurnOn)
+        if turnOn {
+            showType = .allShow
+        }else {
+            showType = .allShow
+        }
     }
     
     override func viewDidLayoutSubviews() {

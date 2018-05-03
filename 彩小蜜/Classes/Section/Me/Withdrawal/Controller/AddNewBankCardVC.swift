@@ -210,10 +210,9 @@ class AddNewBankCardVC: BaseViewController, UITextFieldDelegate, ValidatePro {
         instructions.isUserInteractionEnabled = false
         instructions.text = """
         温馨提示
-        1.建议使用：中国银行 工商银行 招商银行 建设银行卡，提现更快捷；
-        2.请务必确保银行卡开户名与实名认证的姓名一致；
-        3.请使用储蓄卡作为收款银行卡；
-        4.添加银行卡可能会有信息延迟，请耐心等待，如添加未成功请再次添加；
+        1.请务必确保您的卡号和实名认证的姓名保持一致，否则将无法绑定成功；
+        2.建议您绑定以下银行的卡片：中国、农业、工商、建设、兴业、光大、民生、邮储、交通、中信、平安、华夏、浦发、广发、招商、北京、上海银行，到账速度更快。目前暂不支持信用卡和存折账号提款，绑定时请使用银行借记卡（储蓄卡）；
+        3.添加银行卡可能会有信息延迟，请耐心等待，如添加未成功请稍等片刻再添加或联系我们的客服人员；
         """
         
         self.view.addSubview(bgView)

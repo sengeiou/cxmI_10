@@ -13,11 +13,7 @@ fileprivate let LotterySectionHeaderId = "LotterySectionHeaderId"
 
 class LotteryViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, LotterySectionHeaderDelegate, LotteryHeaderViewDelegate, LotteryDateFilterVCDelegate, LotteryMoreFilterVCDelegate {
    
-    
-   
-    
-    
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard resultList != nil else { return }
         guard let matchId = resultList[indexPath.row].matchId else { return }
@@ -229,8 +225,4 @@ class LotteryViewController: BaseViewController, UITableViewDelegate, UITableVie
         super.didReceiveMemoryWarning()
         
     }
-    
-
-    
-
 }
