@@ -83,13 +83,15 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
         super.viewDidLayoutSubviews()
         tableView.snp.makeConstraints { (make) in
             make.top.left.right.equalTo(0)
-            make.bottom.equalTo(buyButton.snp.top)
-        }
-        buyButton.snp.makeConstraints { (make) in
+            //make.bottom.equalTo(buyButton.snp.top)
             make.bottom.equalTo(-SafeAreaBottomHeight)
-            make.height.equalTo(36 * defaultScale)
-            make.left.right.equalTo(0)
         }
+        // 暂时隐藏
+//        buyButton.snp.makeConstraints { (make) in
+//            make.bottom.equalTo(-SafeAreaBottomHeight)
+//            make.height.equalTo(36 * defaultScale)
+//            make.left.right.equalTo(0)
+//        }
     }
     // MARK: - 网络请求
     func matchInfoRequest(matchId: String) {
@@ -131,7 +133,7 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
         buyButton.addTarget(self, action: #selector(buyButtonClicked(_:)), for: .touchUpInside)
         
         self.view.addSubview(tableView)
-        self.view.addSubview(buyButton)
+        //self.view.addSubview(buyButton)
     }
     
     //MARK: - 懒加载
