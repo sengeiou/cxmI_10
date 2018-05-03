@@ -333,11 +333,13 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
         changButState(isSelected: self.currentIsAlreadyBuy)
         
         DispatchQueue.global().async {
-            for model in self.filterList {
-                model.isSelected = false
-            }
-            for model in self.currentFilterList {
-                model.isSelected = true
+            if self.filterList != nil {
+                for model in self.filterList {
+                    model.isSelected = false
+                }
+                for model in self.currentFilterList {
+                    model.isSelected = true
+                }
             }
         }
         

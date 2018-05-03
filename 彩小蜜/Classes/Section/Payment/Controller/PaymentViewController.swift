@@ -42,27 +42,20 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
         self.title = "彩小秘 · "
         WeixinCenter.share.payDelegate = self
         initSubview()
-        allPaymentRequest()
-        orderRequest()
+        //allPaymentRequest()
+        
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        orderRequest()
+    }
+    
     func onPaybuyWeixin(response: PayResp) {
         
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        tableView.snp.makeConstraints { (make) in
-            make.top.equalTo(SafeAreaTopHeight)
-            make.left.right.equalTo(0)
-            make.bottom.equalTo(confirmBut.snp.top)
-        }
-        confirmBut.snp.makeConstraints { (make) in
-            make.left.right.equalTo(0)
-            make.height.equalTo(44 * defaultScale)
-            make.bottom.equalTo(-SafeAreaBottomHeight)
-        }
-    }
+    
     
     // MARK: - 网络请求
     
@@ -75,7 +68,8 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
             .subscribe(onNext: { (data) in
                 weakSelf?.saveBetInfo = data
                 data.setBonus() // 设置默认选中的优惠券
-                weakSelf?.tableView.reloadData()
+                //weakSelf?.tableView.reloadData()
+                weakSelf?.allPaymentRequest()
             }, onError: { (error) in
                 guard let err = error as? HXError else { return }
                 switch err {
@@ -192,7 +186,19 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
 //            pushViewController(vc: web)
 //        }
     }
-    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableView.snp.makeConstraints { (make) in
+            make.top.equalTo(SafeAreaTopHeight)
+            make.left.right.equalTo(0)
+            make.bottom.equalTo(confirmBut.snp.top)
+        }
+        confirmBut.snp.makeConstraints { (make) in
+            make.left.right.equalTo(0)
+            make.height.equalTo(44 * defaultScale)
+            make.bottom.equalTo(-SafeAreaBottomHeight)
+        }
+    }
     private func initSubview() {
         self.view.addSubview(tableView)
         initBottowView()

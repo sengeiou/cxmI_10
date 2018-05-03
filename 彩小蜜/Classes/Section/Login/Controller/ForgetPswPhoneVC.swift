@@ -64,10 +64,7 @@ class ForgetPswPhoneVC: BaseViewController, UITextFieldDelegate, ValidatePro, UI
                     switch data.code {
                     case "0":
                         self.sendSmsRequest()
-                        self.showHUD(message: "验证码已发送，请注意查收")
-                        let vcode = ForgetPswVCodeVC()
-                        vcode.phoneNum = self.phoneTF.text
-                        self.pushViewController(vc: vcode)
+                        
                     case "301014":
                         self.showConfirm(message: data.msg, action: "去注册", confirm: { (action) in
                             guard weakSelf != nil else { return }
@@ -84,7 +81,7 @@ class ForgetPswPhoneVC: BaseViewController, UITextFieldDelegate, ValidatePro, UI
         }
     }
     private func sendSmsRequest() {
-        _ = loginProvider.rx.request(.sendSms(mobile: self.phoneTF.text!, smsType: "1"))
+        _ = loginProvider.rx.request(.sendSms(mobile: self.phoneTF.text!, smsType: "2"))
             .asObservable()
             .mapBaseObject(type: DataModel.self)
             .subscribe { (event) in
@@ -92,7 +89,12 @@ class ForgetPswPhoneVC: BaseViewController, UITextFieldDelegate, ValidatePro, UI
                 case .next(let data):
                     switch data.code {
                     case "0" :
-                        break
+                        self.showHUD(message: "验证码已发送，请注意查收")
+                        let vcode = ForgetPswVCodeVC()
+                        vcode.phoneNum = self.phoneTF.text
+                        self.pushViewController(vc: vcode)
+                    case "301010":
+                        self.showHUD(message: data.msg)
                     default : break
                     }
                 case .error(let error):
