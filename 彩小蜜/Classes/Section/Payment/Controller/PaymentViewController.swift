@@ -129,7 +129,7 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
                 self.paymentResult = data
                 self.handlePaymentResult()
                 
-                weakSelf?.canPayment = true
+                
 //                weakSelf?.paymentResult = data
 //                weakSelf?.showHUD(message: data.showMsg)
 //                let order = OrderDetailVC()
@@ -173,24 +173,36 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
         SVProgressHUD.show()
         guard self.saveBetInfo != nil else { return }
         guard self.saveBetInfo.thirdPartyPaid != nil else { return }
-        guard self.saveBetInfo.thirdPartyPaid == 0 else {
+        guard self.saveBetInfo.thirdPartyPaid != 0 else {
             showHUD(message: self.paymentResult.showMsg)
+            SVProgressHUD.dismiss()
+            self.canPayment = true
             return
         }
         
         guard self.paymentResult != nil else { return }
-        guard let payUrl = self.paymentResult.payUrl else { return }
-        guard let url = URL(string: payUrl) else { return }
-        //根据iOS系统版本，分别处理
-        if #available(iOS 10, *) {
-            UIApplication.shared.open(url, options: [:],
-                                      completionHandler: {
-                                        (success) in
-            })
-        } else {
-            UIApplication.shared.openURL(url)
+        
+        if let payUrl = self.paymentResult.payUrl {
+            guard let url = URL(string: payUrl) else { return }
+            //根据iOS系统版本，分别处理
+            if #available(iOS 10, *) {
+                UIApplication.shared.open(url, options: [:],
+                                          completionHandler: {
+                                            (success) in
+                })
+            } else {
+                UIApplication.shared.openURL(url)
+            }
+            self.queryPaymentResultRequest()
+        }else {
+            self.queryPaymentResultRequest()
         }
+        
+        
+        
     
+        
+        
 //        if let payUrl = self.paymentResult.payUrl {
 //
 //
