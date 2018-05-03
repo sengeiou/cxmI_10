@@ -189,6 +189,7 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
                 UIApplication.shared.open(url, options: [:],
                                           completionHandler: {
                                             (success) in
+                                            
                 })
             } else {
                 UIApplication.shared.openURL(url)
