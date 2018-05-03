@@ -169,12 +169,28 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
     }
     
     private func pushViewC() {
+        
         guard self.paymentResult != nil else { return }
-        if let payUrl = self.paymentResult.payUrl {
-            let web = WebViewController()
-            web.urlStr = payUrl
-            pushViewController(vc: web)
+        guard let payUrl = self.paymentResult.payUrl else { return }
+        guard let url = URL(string: payUrl) else { return }
+        //根据iOS系统版本，分别处理
+        if #available(iOS 10, *) {
+            UIApplication.shared.open(url, options: [:],
+                                      completionHandler: {
+                                        (success) in
+            })
+        } else {
+            UIApplication.shared.openURL(url)
         }
+    
+//        if let payUrl = self.paymentResult.payUrl {
+//
+//
+//
+//            let web = WebViewController()
+//            web.urlStr = payUrl
+//            pushViewController(vc: web)
+//        }
     }
     
     private func initSubview() {

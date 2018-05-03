@@ -69,6 +69,9 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
     private func rechargeRequest(amount: String) {
        let payment = PaymentWebViewController()
         pushViewController(vc: payment)
+        
+        
+        
     }
     private func allPaymentRequest() {
         weak var weakSelf = self
