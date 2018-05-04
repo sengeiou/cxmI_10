@@ -19,6 +19,7 @@ protocol FootballRequestPro {
 
 extension FootballRequestPro where Self: FootballMatchVC {
     func footballRequest(leagueId: String) {
+        
         switch matchType {
         case .胜平负:
             request(type: "2", leagueId: leagueId)
@@ -38,13 +39,13 @@ extension FootballRequestPro where Self: FootballMatchVC {
     }
     
     private func request(type: String, leagueId: String) {
-        self.showProgressHUD()
+        
         weak var weakSelf = self
         _ = homeProvider.rx.request(.matchList(playType: type, leagueId: leagueId))
             .asObservable()
             .mapObject(type: FootballMatchData.self)
             .subscribe(onNext: { (data) in
-                self.dismissProgressHud()
+                
                 print(data)
                 weakSelf?.matchData = data
                 weakSelf?.matchList = data.playList
@@ -56,8 +57,10 @@ extension FootballRequestPro where Self: FootballMatchVC {
                     weakSelf?.matchList.insert(footb, at: 0)
                 }
                 self.topView.number = data.allMatchCount
+                //self.dismissProgressHud()
                 DispatchQueue.main.async {
                     weakSelf?.tableView.reloadData()
+                    
                 }
                 
             }, onError: { (error) in

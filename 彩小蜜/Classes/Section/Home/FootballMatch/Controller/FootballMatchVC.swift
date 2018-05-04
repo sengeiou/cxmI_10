@@ -72,6 +72,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         selectPlays = Set<FootballPlayListModel>()
         initSubview()
         setEmpty(title: "暂无可选赛事", tableView)
+        self.showProgressHUD()
         footballRequest(leagueId: "")
         filterRequest()
         setRightButtonItem()

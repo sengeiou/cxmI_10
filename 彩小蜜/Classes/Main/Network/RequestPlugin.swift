@@ -31,14 +31,14 @@ public final class RequestLoadingPlugin:PluginType{
         //self.dismissHUD();
     }
     //MARK:-是否显示请求加载框
-    fileprivate  func  showHUD(_ isShow:Bool = true){
-        if(isShow){
-            SVProgressHUD.show();
-        }
-    }
-    
-    //MARK:-隐藏请求加载框
-    fileprivate  func dismissHUD(){
-        SVProgressHUD.dismiss();
-    }
+//    fileprivate  func  showHUD(_ isShow:Bool = true){
+//        if(isShow){
+//            SVProgressHUD.show();
+//        }
+//    }
+//
+//    //MARK:-隐藏请求加载框
+//    fileprivate  func dismissHUD(){
+//        SVProgressHUD.dismiss();
+//    }
 }

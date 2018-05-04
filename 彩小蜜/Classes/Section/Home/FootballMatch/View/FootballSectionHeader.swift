@@ -94,7 +94,7 @@ class FootballSectionHeader: UITableViewHeaderFooterView, DateProtocol {
         icon.snp.makeConstraints { (make) in
             make.centerY.equalTo(bgView.snp.centerY)
             make.left.equalTo(leftSpacing)
-            make.width.height.equalTo(30)
+            make.width.height.equalTo(20)
         }
         title.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(0)
