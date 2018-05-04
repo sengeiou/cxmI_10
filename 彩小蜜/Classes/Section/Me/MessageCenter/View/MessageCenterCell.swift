@@ -16,8 +16,8 @@ class MessageCenterCell: UITableViewCell {
             titleLB.text = messageModel.title
             timeLB.text = messageModel.sendTime
             moneyLB.text = messageModel.content
-            detailLB.text = messageModel.msgDesc + "\n2525252\nssssssss\n5rrter"
-            stateLB.text = messageModel.contentDesc + "ssssss"
+            detailLB.text = messageModel.msgDesc
+            stateLB.text = messageModel.contentDesc
             
             moneyLB.textColor = ColorE95504
 //            switch messageModel.objectType {
