@@ -49,7 +49,8 @@ extension FootballRequestPro where Self: FootballMatchVC {
                 print(data)
                 weakSelf?.matchData = data
                 weakSelf?.matchList = data.playList
-                print("----------------------\(Date())")
+            
+                NSLog("-----------解析结束-----------\(Date())")
                 if data.hotPlayList.count > 0 {
                     let footb = FootballMatchModel()
                     footb.playList = data.hotPlayList
@@ -60,7 +61,6 @@ extension FootballRequestPro where Self: FootballMatchVC {
                 self.dismissProgressHud()
                 DispatchQueue.main.async {
                     weakSelf?.tableView.reloadData()
-                    
                 }
                 self.filterRequest()
             }, onError: { (error) in
