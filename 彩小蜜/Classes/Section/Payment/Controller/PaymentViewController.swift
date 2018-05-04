@@ -203,6 +203,7 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
                         self.canPayment = true
                     })
                     SVProgressHUD.dismiss()
+                case "304036":
                     break
                     
                 default: break
