@@ -432,6 +432,12 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
         orderRequest()
     }
     
+    override func back(_ sender: UIButton) {
+        timer.invalidate()
+        timer = nil
+        self.dismissProgressHud()
+        self.popViewController()
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
