@@ -68,12 +68,13 @@ class MessageCenterVC: BaseViewController, IndicatorInfoProvider, UITableViewDel
         case .notice:
             type = "0"
         }
-        
+        self.showProgressHUD()
         weak var weakSelf = self
         _ = userProvider.rx.request(.messageList(msgType: type, pageNum: pageNum))
             .asObservable()
             .mapObject(type: BasePageModel<MessageCenterModel>.self)
             .subscribe(onNext: { (data) in
+                self.dismissProgressHud()
                 weakSelf?.tableView.endrefresh()
                 weakSelf?.messageModel = data
                 if pageNum == 1 {
@@ -82,6 +83,7 @@ class MessageCenterVC: BaseViewController, IndicatorInfoProvider, UITableViewDel
                 weakSelf?.messageList.append(contentsOf: data.list)
                 weakSelf?.tableView.reloadData()
             }, onError: { (error) in
+                self.dismissProgressHud()
                 weakSelf?.tableView.endrefresh()
                 guard let err = error as? HXError else { return }
                 switch err {

@@ -74,16 +74,19 @@ class LotteryViewController: BaseViewController, UITableViewDelegate, UITableVie
     
     //MARK: - 网络请求
     private func lotteryResultRequest(date : String, isAlready: Bool, leagueIds: String, finished : Bool) {
+        self.showProgressHUD()
         weak var weakSelf = self
         _ = lotteryProvider.rx.request(.lotteryResult(date: date, isAlready: isAlready, leagueIds: leagueIds, finished: finished))
             .asObservable()
             .mapArray(type: LotteryResultModel.self)
             .subscribe(onNext: { (data) in
+                self.dismissProgressHud()
                 self.resultList = data
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
             }, onError: { (error) in
+                self.dismissProgressHud()
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):

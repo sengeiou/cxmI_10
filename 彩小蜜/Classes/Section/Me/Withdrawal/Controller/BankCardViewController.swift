@@ -70,15 +70,18 @@ class BankCardViewController: BaseViewController, UITableViewDelegate, UITableVi
     
     //MARK: - 网络请求
     private func bankListRequest() {
+        self.showProgressHUD()
         weak var weakSelf = self
         _ = userProvider.rx.request(.bankList)
         .asObservable()
         .mapArray(type: BankCardInfo.self)
         .subscribe(onNext: { (data) in
+            self.dismissProgressHud()
             print(data)
             self.bankCardList = data
             self.tableview.reloadData()
         }, onError: { (error) in
+            self.dismissProgressHud()
             guard let err = error as? HXError else { return }
             switch err {
             case .UnexpectedResult(let code, let msg):
@@ -99,15 +102,18 @@ class BankCardViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     // 设置默认银行卡
     private func bankCardDefaultRequest(cardId: String) {
+        self.showProgressHUD()
         weak var weakSelf = self
         _ = userProvider.rx.request(.setBankDefault(cardId: cardId))
         .asObservable()
         .mapBaseObject(type: DataModel.self)
         .subscribe(onNext: { (data) in
+            self.dismissProgressHud()
             guard weakSelf != nil else { return }
             weakSelf?.showHUD(message: data.msg)
             weakSelf?.bankListRequest()
         }, onError: { (error) in
+            self.dismissProgressHud()
             guard let err = error as? HXError else { return }
             switch err {
             case .UnexpectedResult(let code, let msg):
@@ -128,11 +134,13 @@ class BankCardViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     // 删除银行卡
     private func deleteBankCardRequest(status: String, cardId: String) {
+        self.showProgressHUD()
         weak var weakSelf = self
         _ = userProvider.rx.request(.deleteBank(status: status, cardId: cardId))
         .asObservable()
         .mapObject(type: BankCardInfo.self)
         .subscribe(onNext: { (data) in
+            self.dismissProgressHud()
             if data.userBankId == nil {
                 weakSelf?.showHUD(message: data.showMsg)
                 weakSelf?.bankListRequest()
@@ -152,6 +160,7 @@ class BankCardViewController: BaseViewController, UITableViewDelegate, UITableVi
             
             
         }, onError: { (error) in
+            self.dismissProgressHud()
             guard let err = error as? HXError else { return }
             switch err {
             case .UnexpectedResult(let code, let msg):

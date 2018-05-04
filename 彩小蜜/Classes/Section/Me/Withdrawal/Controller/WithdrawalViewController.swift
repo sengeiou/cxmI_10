@@ -34,6 +34,7 @@ class WithdrawalViewController: BaseViewController {
     }
     // 全部提现
     @objc private func allDraw(_ sender: UIButton) {
+        guard drawDataModel != nil else { return }
         amountOfMoney.text = drawDataModel.userMoney
     }
     // 管理
@@ -71,14 +72,19 @@ class WithdrawalViewController: BaseViewController {
     //MARK: - 网络请求
     //提现
     private func drawRequest() {
+        self.showProgressHUD()
         weak var weakSelf = self
+        guard amountOfMoney != nil else { return }
+        guard drawDataModel != nil else { return }
         guard let money = amountOfMoney.text else { return }
         _ = paymentProvider.rx.request(.paymentWithdraw(totalAmount: money, userBankId: drawDataModel.userBankId))
             .asObservable()
             .mapObject(type: DataModel.self )
             .subscribe(onNext: { (data) in
+                self.dismissProgressHud()
                 self.showHUD(message: data.msg)
             }, onError: { (error) in
+                self.dismissProgressHud()
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):
@@ -99,14 +105,17 @@ class WithdrawalViewController: BaseViewController {
     }
     //提现信息
     private func drawDataRequest() {
+        self.showProgressHUD()
         weak var weakSelf = self
         _ = userProvider.rx.request(.withDrawDataShow)
         .asObservable()
         .mapObject(type: WithDrawDataModel.self)
             .subscribe(onNext: { (data) in
+                self.dismissProgressHud()
                 weakSelf?.drawDataModel = data
                 weakSelf?.setDrawData(data: data)
             }, onError: { (error) in
+                self.dismissProgressHud()
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):

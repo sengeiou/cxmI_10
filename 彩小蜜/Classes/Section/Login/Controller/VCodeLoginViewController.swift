@@ -66,10 +66,12 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
     }
     //MARK: - 网络请求
     private func loginRequest() {
+        self.showProgressHUD()
         _ = loginProvider.rx.request(.loginBySms(mobile: self.userNameTF.text!, smsCode: self.vcodeTF.text!))
             .asObservable()
             .mapObject(type: UserDataModel.self)
             .subscribe { (event) in
+                self.dismissProgressHud()
                 switch event {
                 case .next(let data):
                     self.showHUD(message: data.showMsg)
@@ -101,10 +103,12 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
         }
     }
     private func sendSmsRequest() {
+        self.showProgressHUD()
         _ = loginProvider.rx.request(.sendSms(mobile: self.userNameTF.text!, smsType: "0"))
             .asObservable()
             .mapBaseObject(type: DataModel.self)
             .subscribe { (event) in
+                self.dismissProgressHud()
                 switch event {
                 case .next(let data):
                     switch data.code {

@@ -46,14 +46,17 @@ class AddNewBankCardVC: BaseViewController, UITextFieldDelegate, ValidatePro {
     //MARK: - 网络请求
     // 实名认证信息
     private func realInfoRequest() {
+        self.showProgressHUD()
         weak var weakSelf = self
         _ = userProvider.rx.request(.realInfo)
             .asObservable()
             .mapObject(type: RealInfoDataModel.self)
             .subscribe(onNext: { (data) in
+                self.dismissProgressHud()
                 self.realInfo = data
                 self.nameLB.text = data.realName
             }, onError: { (error) in
+                self.dismissProgressHud()
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):

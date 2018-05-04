@@ -143,15 +143,17 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
         }
         
         let requestModel = getRequestModel(betType: betType, times: times, bonusId: "", homeData: self.homeData)
-        
+        self.showProgressHUD()
         weak var weakSelf = self
         _ = homeProvider.rx.request(.getBetInfo(requestModel: requestModel))
             .asObservable()
             .mapObject(type: FootballBetInfoModel.self)
             .subscribe(onNext: { (data) in
+                self.dismissProgressHud()
                 weakSelf?.betInfo = data
                 weakSelf?.canPush = true
             }, onError: { (error) in
+                self.dismissProgressHud()
                 weakSelf?.canPush = false
                 guard let err = error as? HXError else { return }
                 switch err {

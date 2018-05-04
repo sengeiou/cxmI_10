@@ -157,15 +157,18 @@ class AuthenticationVC: BaseViewController, UITextFieldDelegate, ValidatePro {
     
     //MARK: - 网络请求
     private func authenticationRequest() {
+        self.showProgressHUD()
         weak var weakSelf = self
         _ = userProvider.rx.request(.realNameAuth(idcode: self.IDNumberTF.text!, realName: self.nameTF.text!))
             .asObservable()
             .mapObject(type: RealInfoDataModel.self)
             .subscribe(onNext: { (data) in
+                self.dismissProgressHud()
                 self.showHUD(message: "身份认证成功")
                 print(data)
                 self.popViewController()
             }, onError: { (error) in
+                self.dismissProgressHud()
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):

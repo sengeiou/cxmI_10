@@ -81,6 +81,13 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
         tableView.emptyDataSetSource = self
         self.emptyTitle = title
     }
+    public func showProgressHUD() {
+        SVProgressHUD.show()
+    }
+    public func dismissProgressHud() {
+        SVProgressHUD.dismiss()
+    }
+    
     
     //MARK: - 属性
     public var isHidenBar : Bool! {
@@ -148,6 +155,9 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
     @objc func back(_ sender: UIButton) {
         popViewController()
     }
+    
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -77,12 +77,13 @@ class CouponViewController: BaseViewController, IndicatorInfoProvider, UITableVi
         case .overdue:
             status = "2"
         }
-        
+        self.showProgressHUD()
         weak var weakSelf = self
         _ = userProvider.rx.request(.couponList(status: status, pageNum: pageNum))
            .asObservable()
            .mapObject(type: CouponListModel.self)
            .subscribe(onNext: { (data) in
+            self.dismissProgressHud()
                 weakSelf?.tableView.endrefresh()
                 weakSelf?.couponListModel = data
                 if pageNum == 1 {
@@ -91,6 +92,7 @@ class CouponViewController: BaseViewController, IndicatorInfoProvider, UITableVi
                 weakSelf?.couponList.append(contentsOf: data.list)
                 weakSelf?.tableView.reloadData()
            }, onError: { (error) in
+                self.dismissProgressHud()
                 weakSelf?.tableView.endrefresh()
                 guard let err = error as? HXError else { return }
                 switch err {

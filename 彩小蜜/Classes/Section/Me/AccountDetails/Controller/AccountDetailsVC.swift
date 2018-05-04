@@ -93,12 +93,13 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
         case .coupon:
             type = "5"
         }
-        
+        self.showProgressHUD()
         weak var weakSelf = self
         _ = userProvider.rx.request(.accountDetailsList(amountType: type, pageNum: pageNum))
             .asObservable()
             .mapObject(type: BasePageModel<AccountDetailModel>.self)
             .subscribe(onNext: { (data) in
+                self.dismissProgressHud()
                 weakSelf?.tableView.endrefresh()
                 weakSelf?.pageDataModel = data
                 if pageNum == 1 {
@@ -115,6 +116,7 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
 //                let xxx = AccountListModel.getAccountList(data.list)
 //                print(xxx)
             }, onError: { (error) in
+                self.dismissProgressHud()
                 if weakSelf?.accountList.count == 0 {
                     weakSelf?.footer.isHidden = true
                 }else {
@@ -141,14 +143,17 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
     }
     
     private func statisticsRequest() {
+        self.showProgressHUD()
         weak var weakSelf = self
         _ = userProvider.rx.request(.accountStatistics)
             .asObservable()
             .mapObject(type: AccountStatisticsModel.self)
             .subscribe(onNext: { (data) in
+                self.dismissProgressHud()
                 //weakSelf?.statisticsModel = data
                 weakSelf?.footer.dataModel = data
             }, onError: { (error) in
+                self.dismissProgressHud()
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):

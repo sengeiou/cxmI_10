@@ -54,10 +54,12 @@ class ForgetPswPhoneVC: BaseViewController, UITextFieldDelegate, ValidatePro, UI
     }
     //MARK: - 网络请求
     private func validateMobileRequest() {
+        self.showProgressHUD()
         _ = loginProvider.rx.request(.validateMobile(mobile: self.phoneTF.text!))
             .asObservable()
             .mapBaseObject(type: DataModel.self)
             .subscribe { (event) in
+                self.dismissProgressHud()
                 switch event {
                 case .next(let data):
                     weak var weakSelf = self
@@ -81,10 +83,12 @@ class ForgetPswPhoneVC: BaseViewController, UITextFieldDelegate, ValidatePro, UI
         }
     }
     private func sendSmsRequest() {
+        self.showProgressHUD()
         _ = loginProvider.rx.request(.sendSms(mobile: self.phoneTF.text!, smsType: "2"))
             .asObservable()
             .mapBaseObject(type: DataModel.self)
             .subscribe { (event) in
+                self.dismissProgressHud()
                 switch event {
                 case .next(let data):
                     switch data.code {

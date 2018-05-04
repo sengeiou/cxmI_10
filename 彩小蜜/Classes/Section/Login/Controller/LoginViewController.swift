@@ -83,10 +83,12 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro,
     }
     //MARK: - 网络请求
     private func loginRequest() {
+        self.showProgressHUD()
        _ = loginProvider.rx.request(.loginByPass(mobile: userNameTF.text!, password: passwordTF.text!))
         .asObservable()
         .mapObject(type: UserDataModel.self)
         .subscribe { (event) in
+            self.dismissProgressHud()
             switch event {
             case .next(let data):
                 

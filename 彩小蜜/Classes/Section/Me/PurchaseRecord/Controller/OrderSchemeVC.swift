@@ -37,14 +37,17 @@ class OrderSchemeVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
     
     // MARK: - 网络请求
     private func orderSchemeRequest() {
+        self.showProgressHUD()
         weak var weakSelf = self
         _ = userProvider.rx.request(.orderScheme(programmeSn: programmeSn, orderSn: orderSn))
             .asObservable()
             .mapObject(type: OrderSchemeInfoModel.self)
             .subscribe(onNext: { (data) in
+                self.dismissProgressHud()
                 weakSelf?.orderSchemeInfo = data
                 weakSelf?.tableView.reloadData()
             }, onError: { (error) in
+                self.dismissProgressHud()
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):

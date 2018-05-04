@@ -35,16 +35,19 @@ class WithdrawalProgressVC: BaseViewController, UITableViewDelegate, UITableView
     }
     //MARK: - 网络请求
     private func progressRequest() {
+        self.showProgressHUD()
         weak var weakSelf = self
         _ = userProvider.rx.request(.withdrawProgressList(withdawSn: withdawalSn))
             .asObservable()
             .mapObject(type: ProgressModel.self)
             .subscribe(onNext: { (data) in
+                self.dismissProgressHud()
                 weakSelf?.progressModel = data
                 weakSelf?.header.progressModel = data
                 weakSelf?.footer.progressModel = data
                 weakSelf?.tableView.reloadData()
             }, onError: { (error) in
+                self.dismissProgressHud()
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):

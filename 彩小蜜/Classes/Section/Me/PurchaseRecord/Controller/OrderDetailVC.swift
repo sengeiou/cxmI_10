@@ -115,15 +115,17 @@ class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
     private func orderInfoRequest() {
         weak var weakSelf = self
         guard orderId != nil  else { return }
-        
+        self.showProgressHUD()
         _ = userProvider.rx.request(.orderInfo(orderId: orderId))
             .asObservable()
             .mapObject(type: OrderInfoModel.self)
             .subscribe(onNext: { (data) in
+                self.dismissProgressHud()
                 weakSelf?.orderInfo = data
                 weakSelf?.header.orderInfo = self.orderInfo
                 weakSelf?.tableView.reloadData()
             }, onError: { (error) in
+                self.dismissProgressHud()
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):

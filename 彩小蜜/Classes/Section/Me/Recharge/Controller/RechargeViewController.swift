@@ -74,14 +74,17 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
         
     }
     private func allPaymentRequest() {
+        self.dismissProgressHud()
         weak var weakSelf = self
         _ = paymentProvider.rx.request(.paymentAll)
             .asObservable()
             .mapArray(type: PaymentList.self)
             .subscribe(onNext: { (data) in
+                self.dismissProgressHud()
                 weakSelf?.paymentAllList = data
                 weakSelf?.tableview.reloadData()
             }, onError: { (error) in
+                self.dismissProgressHud()
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):

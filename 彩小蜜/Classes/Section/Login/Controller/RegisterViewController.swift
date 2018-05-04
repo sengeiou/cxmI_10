@@ -91,10 +91,12 @@ class RegisterViewController: BaseViewController, UITableViewDelegate, UITableVi
     
     // MARK: 网络请求
     private func registerRequest() {
+        self.showProgressHUD()
         _ = loginProvider.rx.request(.register(mobile: self.phoneTF.text!, password: self.passwordTF.text!, vcode: vcodeTF.text!))
         .asObservable()
         .mapObject(type: UserDataModel.self)
         .subscribe { (event) in
+            self.dismissProgressHud()
             switch event {
             case .next(let data):
                 self.showHUD(message: data.showMsg)
@@ -122,10 +124,12 @@ class RegisterViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     private func sendSmsRequest(_ button : CountdownButton) {
+        self.showProgressHUD()
         _ = loginProvider.rx.request(.sendSms(mobile: self.phoneTF.text!, smsType: "1"))
-        .asObservable()
-        .mapBaseObject(type: DataModel.self)
+            .asObservable()
+            .mapBaseObject(type: DataModel.self)
             .subscribe { (event) in
+                self.dismissProgressHud()
                 switch event {
                 case .next(let data):
                     switch data.code {

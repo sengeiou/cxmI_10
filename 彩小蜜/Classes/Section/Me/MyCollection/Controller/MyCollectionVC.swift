@@ -60,11 +60,13 @@ class MyCollectionVC: BaseViewController, UITableViewDelegate, UITableViewDataSo
     
     // MARK: - 网络请求
     private func collectionRequest(_ pageNum: Int) {
+        self.showProgressHUD()
         weak var weakSelf = self
         _ = userProvider.rx.request(.collectList(pageNum: pageNum))
             .asObservable()
             .mapObject(type: NewsListModel.self)
             .subscribe(onNext: { (data) in
+                self.dismissProgressHud()
                 weakSelf?.tableView.endrefresh()
                 weakSelf?.collectModel = data
                 if pageNum == 1{
@@ -73,6 +75,7 @@ class MyCollectionVC: BaseViewController, UITableViewDelegate, UITableViewDataSo
                 weakSelf?.collectList.append(contentsOf: data.list)
                 weakSelf?.tableView.reloadData()
             }, onError: { (error) in
+                self.dismissProgressHud()
                 weakSelf?.tableView.endrefresh()
                 guard let err = error as? HXError else { return }
                 switch err {

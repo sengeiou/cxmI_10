@@ -97,16 +97,18 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
     }
     // MARK: - 网络请求
     func matchInfoRequest(matchId: String) {
-        
+        self.showProgressHUD()
         weak var weakSelf = self
         
         _ = homeProvider.rx.request(.matchTeamInfo(matchId: matchId))
             .asObservable()
             .mapObject(type: FootballMatchInfoModel.self)
             .subscribe(onNext: { (data) in
+                self.dismissProgressHud()
                 weakSelf?.matchInfoModel = data
                 weakSelf?.tableView.reloadData()
             }, onError: { (error) in
+                self.dismissProgressHud()
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):

@@ -68,10 +68,12 @@ class ForgetPswVCodeVC: BaseViewController, UITextFieldDelegate, ValidatePro,Cus
     }
     //MARK: - 网络请求
     private func updatePassRequest() {
+        self.showProgressHUD()
         _ = loginProvider.rx.request(.updatePass(mobile: self.phoneNum, password: self.passwordTF.text!))
             .asObservable()
             .mapBaseObject(type: DataModel.self)
             .subscribe({ (event) in
+                self.dismissProgressHud()
                 switch event {
                 case .next(let data):
                     switch data.code {
@@ -94,10 +96,12 @@ class ForgetPswVCodeVC: BaseViewController, UITextFieldDelegate, ValidatePro,Cus
     }
     
     private func sendSmsRequest() {
+        self.showProgressHUD()
         _ = loginProvider.rx.request(.sendSms(mobile: self.phoneNum, smsType: "2"))
             .asObservable()
             .mapBaseObject(type: DataModel.self)
             .subscribe { (event) in
+                self.dismissProgressHud()
                 switch event {
                 case .next(let data):
                     switch data.code {
