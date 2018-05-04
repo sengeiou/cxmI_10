@@ -57,8 +57,7 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
     }
 
     // MARK: - 网络请求
-    
-    
+    // 订单
     private func orderRequest() {
         weak var weakSelf = self
         _ = homeProvider.rx.request(.saveBetInfo(requestModel: self.requestModel))
@@ -88,7 +87,7 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
                 }
             }, onCompleted: nil, onDisposed: nil )
     }
-    
+    // 支付方式
     private func allPaymentRequest() {
         weak var weakSelf = self
         _ = paymentProvider.rx.request(.paymentAll)
@@ -117,7 +116,7 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
                 }
             }, onCompleted: nil , onDisposed: nil )
     }
-    
+    // 支付
     private func paymentRequest() {
         weak var weakSelf = self
         guard self.saveBetInfo != nil else { return }
@@ -156,13 +155,30 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
     }
     // 查询支付结果
     private func queryPaymentResultRequest() {
-        _ = paymentProvider.rx.request(.paymentQuery)
+        guard self.paymentResult.orderId != nil else { return }
+        weak var weakSelf = self
+        _ = paymentProvider.rx.request(.paymentQuery(payLogId: self.paymentResult.orderId))
             .asObservable()
-            .mapObject(type: DataModel.self)
+            .mapBaseObject(type: DataModel.self)
             .subscribe(onNext: { (data) in
                 
             }, onError: { (error) in
-                
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        weakSelf?.removeUserData()
+                        weakSelf?.pushLoginVC(from: self)
+                    default : break
+                    }
+                    
+                    if 300000...310000 ~= code {
+                        print(code)
+                        self.showHUD(message: msg!)
+                    }
+                default: break
+                }
             }, onCompleted: nil , onDisposed: nil )
     }
     
@@ -195,6 +211,7 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
             } else {
                 UIApplication.shared.openURL(url)
             }
+        
             self.queryPaymentResultRequest()
         }else {
             self.queryPaymentResultRequest()

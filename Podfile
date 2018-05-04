@@ -38,7 +38,14 @@ target '彩小蜜' do
 	
   pod 'ReachabilitySwift'
 
+  pod 'GTSDK', '2.2.0.0-noidfa'
+
+  
+
   # Pods for 彩小蜜
+
+  
+
 
   target '彩小蜜Tests' do
     inherit! :search_paths

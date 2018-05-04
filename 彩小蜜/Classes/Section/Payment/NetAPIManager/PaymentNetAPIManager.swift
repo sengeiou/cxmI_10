@@ -15,7 +15,7 @@ enum PaymentNetAPIManager {
     /// 支付
     case payment (payCode: String, payToken: String)
     /// 支付订单结果
-    case paymentQuery
+    case paymentQuery(payLogId: String)
     /// 充值
     case paymentRecharge (payCode: String, totalAmount: String)
     /// 提现
@@ -61,6 +61,8 @@ extension PaymentNetAPIManager : TargetType {
         case .paymentWithdraw(let totalAmount, let userBankId):
             dic["totalAmount"] = totalAmount
             dic["userBankId"] = userBankId
+        case .paymentQuery(let payLogId):
+            dic["payLogId"] = payLogId
         case .paymentAll:
             break
         default:
