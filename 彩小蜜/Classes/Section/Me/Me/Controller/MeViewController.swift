@@ -31,6 +31,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     private var newsheaderView : NewsHeaderView!
     private var footerView: MeFooterView!
     private var userInfo  : UserInfoDataModel!
+    private var phoneNum : String = "010-84505099"
     //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -142,7 +143,8 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
                     let web = WebViewController()
                     web.urlStr = webHelp
                     pushViewController(vc: web)
-                case 3: break
+                case 3:
+                    UIApplication.shared.openURL(URL(string: "telprompt://\(phoneNum)")!)
                 case 4:
                     let about = MeAboutViewController()
                     pushViewController(vc: about)
@@ -307,7 +309,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
                 case 3:
                     cell.icon.image = UIImage(named: "serive")
                     cell.title.text = "联系客服"
-                    cell.serviceNum = "010-84505099"
+                    cell.serviceNum = phoneNum
                     
                     cell.detail.delegate = self
                     cell.accessoryType = .none
