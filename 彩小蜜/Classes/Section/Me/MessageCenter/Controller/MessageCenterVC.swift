@@ -116,7 +116,7 @@ class MessageCenterVC: BaseViewController, IndicatorInfoProvider, UITableViewDel
         table.separatorStyle = .none
         table.register(MessageCenterCell.self, forCellReuseIdentifier: MessageCenterCellId)
         table.register(NoticeCell.self, forCellReuseIdentifier: NoticeCellId)
-        
+        table.estimatedRowHeight = 40
         return table
     }()
     
