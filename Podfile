@@ -45,7 +45,7 @@ target '彩小蜜' do
   # Pods for 彩小蜜
 
   
-
+  
 
   target '彩小蜜Tests' do
     inherit! :search_paths
@@ -56,5 +56,6 @@ target '彩小蜜' do
     inherit! :search_paths
     # Pods for testing
   end
+
 
 end

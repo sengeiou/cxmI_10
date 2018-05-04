@@ -2,6 +2,7 @@ PODS:
   - Alamofire (4.7.2)
   - DZNEmptyDataSet (1.8.1)
   - FSPagerView (0.7.1)
+  - GTSDK (2.2.0.0-noidfa)
   - HandyJSON (4.1.1)
   - Kingfisher (4.7.0)
   - MJRefresh (3.1.15.3)
@@ -29,6 +30,7 @@ PODS:
 DEPENDENCIES:
   - DZNEmptyDataSet
   - FSPagerView
+  - GTSDK (= 2.2.0.0-noidfa)
   - HandyJSON (~> 4.1.1)
   - Kingfisher
   - MJRefresh
@@ -49,6 +51,7 @@ SPEC REPOS:
     - Alamofire
     - DZNEmptyDataSet
     - FSPagerView
+    - GTSDK
     - HandyJSON
     - Kingfisher
     - MJRefresh
@@ -69,6 +72,7 @@ SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   FSPagerView: 958aba39684e1573755ddcfcc29f7eebb8413cee
+  GTSDK: 2cb8f5df1fbb250f596698443edd0191f77024f1
   HandyJSON: 3a3de917c4118767ffe41c29b5acba23409649f4
   Kingfisher: da6b005aa96d37698e3e4f1ccfe96a5b9bbf27d6
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
@@ -85,6 +89,6 @@ SPEC CHECKSUMS:
   WechatOpenSDK: 676feec516a11173eafd1fe64b10d27babf28701
   XLPagerTabStrip: c908b17cbf42fcd2598ee1adfc49bae25444d88a
 
-PODFILE CHECKSUM: 879aa224bf996372ad74f8094c6ba93ab5015141
+PODFILE CHECKSUM: 8703149ebc63c447badaaf91f64efc112ede7a18
 
 COCOAPODS: 1.5.0

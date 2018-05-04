@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import UserNotifications
+import PushKit
+
 
 let device = DeviceManager.share.device
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, AppDelegateProtocol {
+class AppDelegate: UIResponder, UIApplicationDelegate, AppDelegateProtocol, GeTuiSdkDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
     
