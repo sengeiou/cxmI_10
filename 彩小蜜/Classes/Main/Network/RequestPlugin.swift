@@ -41,6 +41,7 @@ public final class RequestLoadingPlugin:PluginType, AlertPro{
     
     public func didReceive(_ result: Result<Response, MoyaError>, target: TargetType) {
         //self.dismissHUD();
+        print("----------------------\(Date())")
     }
     //MARK:-是否显示请求加载框
 //    fileprivate  func  showHUD(_ isShow:Bool = true){

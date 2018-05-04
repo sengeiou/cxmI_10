@@ -49,7 +49,7 @@ extension FootballRequestPro where Self: FootballMatchVC {
                 print(data)
                 weakSelf?.matchData = data
                 weakSelf?.matchList = data.playList
-                
+                print("----------------------\(Date())")
                 if data.hotPlayList.count > 0 {
                     let footb = FootballMatchModel()
                     footb.playList = data.hotPlayList
