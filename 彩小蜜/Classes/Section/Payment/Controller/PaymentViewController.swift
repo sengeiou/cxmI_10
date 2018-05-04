@@ -44,7 +44,7 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "彩小秘 · "
+        self.title = "彩小秘 · 支付订单"
         WeixinCenter.share.payDelegate = self
         initSubview()
         
