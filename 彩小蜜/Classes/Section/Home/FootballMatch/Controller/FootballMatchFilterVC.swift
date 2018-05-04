@@ -206,6 +206,7 @@ class FootballMatchFilterVC: BasePopViewController, UICollectionViewDelegate, UI
     }
     
     func filterConfirm() {
+        guard self.filterList != nil else { return }
         var idStr : String = ""
         var i = 0
         for filter in self.filterList {

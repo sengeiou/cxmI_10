@@ -38,6 +38,7 @@ extension AlertPro {
             showAlert(message: message, action: action, in: vc, confirm: confirm)
         }
     }
+    
     public func showAlert(message: String, action : String, in viewController: UIViewController, confirm: ((UIAlertAction)->Void)?) {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: action, style: .default, handler: confirm)
@@ -125,6 +126,20 @@ extension AlertPro {
         alert.addAction(cancel)
         alert.addAction(action)
         viewController.present(alert, animated: true)
+    }
+    
+    /// 彩小秘  知道了
+    public func showCXMCancelAlert(title: String?, message: String, cancel: String) {
+        if let vc = UIApplication.shared.keyWindow?.rootViewController {
+            
+            let attStr = NSAttributedString(string: message, attributes: [NSAttributedStringKey.foregroundColor: Color787878])
+            let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+            alert.setValue(attStr, forKey: "attributedMessage")
+            let cancel = UIAlertAction(title: cancel, style: .cancel, handler: nil)
+            cancel.setValue(Color505050, forKey: "titleTextColor")
+            alert.addAction(cancel)
+            vc.present(alert, animated: true)
+        }
     }
     
     public func showCXMAlert(title: String?, message: String, action: String, cancel: String,confirm: ((UIAlertAction)->Void)?) {

@@ -23,8 +23,8 @@ fileprivate let PaymentMethodCellId = "PaymentMethodCellId"
 class PaymentViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, CouponFilterViewControllerDelegate, WeixinPayDelegate {
     
     
-    
-
+    private var maxTimes = 20
+    private var timeInterval : Double = 3
     public var requestModel: FootballRequestMode!
     
     private var saveBetInfo : FootballSaveBetInfoModel!
@@ -48,7 +48,7 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
         WeixinCenter.share.payDelegate = self
         initSubview()
         
-//        timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(pollingStart), userInfo: nil, repeats: true)
+
         
         timer = Timer(timeInterval: 3, target: self, selector: #selector(pollingStart), userInfo: nil, repeats: true)
         
@@ -63,11 +63,19 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
     
     @objc private func startPollingTimer() {
         if canPayment == false {
+            timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(pollingStart), userInfo: nil, repeats: true)
             timer.fire()
         }
     }
     // 轮询
     @objc private func pollingStart() {
+        
+        guard maxTimes > 0 else {
+            timer.invalidate()
+            SVProgressHUD.dismiss()
+            showCXMCancelAlert(title: "查询失败", message: "暂未查询到您的支付结果，如果您已经确认支付并成功扣款，可能存在延迟到账的情况，请到账户明细中查看或联系客服查询", cancel: "知道了" )
+            return }
+        maxTimes -= 3
         queryPaymentResultRequest()
     }
     
@@ -180,6 +188,7 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
                     self.canPayment = true
                     self.timer.invalidate()
                     self.showHUD(message: data.msg)
+                    SVProgressHUD.dismiss()
                 }
             }, onError: { (error) in
                 guard let err = error as? HXError else { return }

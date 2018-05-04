@@ -13,6 +13,7 @@ class FootballHunheFilterVC: BasePopViewController, BottomViewDelegate, Football
     public var teamInfo : FootballPlayListModel! {
         didSet{
             guard teamInfo != nil else { return }
+            topTitleView.teamInfo = teamInfo
             for match in teamInfo.matchPlays {
                 if match.playType == "1" {
                     

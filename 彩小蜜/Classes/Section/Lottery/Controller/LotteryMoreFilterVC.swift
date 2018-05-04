@@ -310,6 +310,7 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
     }
     
     func filterConfirm() {
+        guard self.filterList != nil else { return }
         var idStr : String = ""
         var i = 0
         for filter in self.filterList {
