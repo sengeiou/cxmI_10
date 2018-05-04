@@ -142,6 +142,7 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
             }, onCompleted: nil , onDisposed: nil )
     }
     
+    // 统计账户信息
     private func statisticsRequest() {
         self.showProgressHUD()
         weak var weakSelf = self
@@ -219,10 +220,10 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section > 0 {
-            let acc = accountList[section]
-            let axx = accountList[section - 1]
+            let account = accountList[section]
+            let accountNext = accountList[section - 1]
 
-            if acc.addTime == axx.addTime {
+            if account.addTime == accountNext.addTime {
                 return 0.01
             }else {
                 return orderSectionHeaderHeight

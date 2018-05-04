@@ -37,7 +37,8 @@ class AccountDetailsCell: UITableViewCell {
                 icon.image = UIImage(named: "withdrawal")
             case "5":
                 icon.image = UIImage(named: "")
-    
+            case "6":
+                icon.image = UIImage(named: "used")
             default: break
             }
             
