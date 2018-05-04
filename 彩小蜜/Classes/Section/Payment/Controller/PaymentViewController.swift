@@ -301,6 +301,12 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
         table.separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         table.register(PaymentCell.self, forCellReuseIdentifier: PaymentCellId)
         table.register(PaymentMethodCell.self, forCellReuseIdentifier: PaymentMethodCellId)
+        if #available(iOS 11.0, *) {
+            
+        }else {
+            table.contentInset = UIEdgeInsets(top: -64, left: 0, bottom: 49, right: 0)
+            table.scrollIndicatorInsets = table.contentInset
+        }
         return table
     }()
     

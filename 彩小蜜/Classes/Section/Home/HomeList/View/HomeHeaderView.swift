@@ -21,6 +21,7 @@ class HomeHeaderView: UIView, FSPagerViewDataSource, FSPagerViewDelegate {
         didSet{
             guard bannerList != nil else { return }
             self.viewPager.reloadData()
+            pageControl.numberOfPages = bannerList.count
         }
     }
     
@@ -42,11 +43,11 @@ class HomeHeaderView: UIView, FSPagerViewDataSource, FSPagerViewDelegate {
         viewPager.snp.makeConstraints { (make) in
             make.top.left.right.bottom.equalTo(self)
         }
-//        pageControl.snp.makeConstraints { (make) in
-//            make.left.right.equalTo(viewPager)
-//            make.bottom.equalTo(viewPager).offset(-5)
-//            make.height.equalTo(20)
-//        }
+        pageControl.snp.makeConstraints { (make) in
+            make.left.right.equalTo(viewPager)
+            make.bottom.equalTo(viewPager).offset(-5)
+            make.height.equalTo(20)
+        }
     }
     
     lazy var viewPager: FSPagerView = {
@@ -68,7 +69,7 @@ class HomeHeaderView: UIView, FSPagerViewDataSource, FSPagerViewDelegate {
     
     lazy var pageControl:FSPageControl = {
         let pageControl = FSPageControl()
-        pageControl.numberOfPages = 5
+        
         pageControl.contentHorizontalAlignment = .right
         pageControl.contentInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         pageControl.hidesForSinglePage = true
@@ -103,6 +104,10 @@ class HomeHeaderView: UIView, FSPagerViewDataSource, FSPagerViewDelegate {
         
         delegate.didTipBanner(banner: bannerList[index])
     }
+    
+//    func pagerView(_ pagerView: FSPagerView, willDisplay cell: FSPagerViewCell, forItemAt index: Int) {
+//        self.pageControl.currentPage = index
+//    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

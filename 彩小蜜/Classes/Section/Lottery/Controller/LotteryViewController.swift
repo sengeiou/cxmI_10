@@ -143,7 +143,12 @@ class LotteryViewController: BaseViewController, UITableViewDelegate, UITableVie
         table.backgroundColor = ColorF4F4F4
         table.register(LotteryCell.self, forCellReuseIdentifier: LotteryCellId)
         table.register(LotterySectionHeader.self, forHeaderFooterViewReuseIdentifier: LotterySectionHeaderId)
-        
+        if #available(iOS 11.0, *) {
+            
+        }else {
+            table.contentInset = UIEdgeInsets(top: -64, left: 0, bottom: 49, right: 0)
+            table.scrollIndicatorInsets = table.contentInset
+        }
         return table
     }()
     //MARK: - tableView dataSource
@@ -181,7 +186,7 @@ class LotteryViewController: BaseViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UIView()
+        return nil
     }
     
     //MARK: - 分区头 ，delegate

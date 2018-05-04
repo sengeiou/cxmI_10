@@ -166,7 +166,12 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         footer = FootballOrderFooter()
         footer.delegate = self 
         table.tableFooterView = footer
-        
+        if #available(iOS 11.0, *) {
+            
+        }else {
+            table.contentInset = UIEdgeInsets(top: -64, left: 0, bottom: 49, right: 0)
+            table.scrollIndicatorInsets = table.contentInset
+        }
         registerCell(table)
         return table
     }()
