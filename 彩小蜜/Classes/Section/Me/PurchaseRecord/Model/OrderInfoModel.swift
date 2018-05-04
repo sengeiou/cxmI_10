@@ -44,6 +44,7 @@ struct MatchInfo: HandyJSON {
 struct CathecticResult: HandyJSON {
     var cathectics : [Cathectic]!
     var matchResult: String!
+    var playType: String!
 }
 
 struct Cathectic : HandyJSON {

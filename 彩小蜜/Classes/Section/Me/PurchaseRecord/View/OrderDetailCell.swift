@@ -22,11 +22,12 @@ class OrderDetailCell: UITableViewCell {
             nameLB.text = "\(homeMatch)\nVS\n\(viMatch)"
             
             timeLB.text = matchInfo.changci
-            ruleLB.text = matchInfo.playType
+           // ruleLB.text = matchInfo.playType
             
             
             let record = NSMutableAttributedString()
             var resultStr = ""
+            var ruleStr = ""
             for result in matchInfo.cathecticResults {
                 for cath in result.cathectics {
                     let color : UIColor!
@@ -41,9 +42,15 @@ class OrderDetailCell: UITableViewCell {
                     record.append(rec)
                 }
                 resultStr += result.matchResult + "\n"
+                ruleStr += result.playType + "\n"
             }
             
             recordLB.attributedText = record
+            
+            if ruleStr != "" {
+                ruleStr.removeLast()
+                ruleLB.text = ruleStr
+            }
             
             guard resultStr != "" else { return}
             resultStr.removeLast()
@@ -82,6 +89,7 @@ class OrderDetailCell: UITableViewCell {
         nameLB.numberOfLines = 0
         
         ruleLB = getDetailLB()
+        ruleLB.numberOfLines = 0
         
         recordLB = getDetailLB()
         recordLB.numberOfLines = 0

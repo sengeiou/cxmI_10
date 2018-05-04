@@ -22,6 +22,7 @@ class OrderDetailTitleCell: UITableViewCell {
             
             let record = NSMutableAttributedString()
             var resultStr = ""
+            var ruleStr = ""
             for result in matchInfo.cathecticResults {
                 for cath in result.cathectics {
                     let color : UIColor!
@@ -36,8 +37,12 @@ class OrderDetailTitleCell: UITableViewCell {
                     record.append(rec)
                 }
                 resultStr += result.matchResult + "\n"
+                ruleStr += result.playType + "\n"
             }
-            
+            if ruleStr != "" {
+                ruleStr.removeLast()
+                ruleLB.text = ruleStr
+            }
             if resultStr != "" {
                 resultStr.removeLast()
             }
@@ -45,7 +50,6 @@ class OrderDetailTitleCell: UITableViewCell {
             nameLB.text = "\(homeMatch)\nVS\n\(viMatch)"
             
             timeLB.text = matchInfo.changci
-            ruleLB.text = matchInfo.playType
             recordLB.attributedText = record
             resultLB.text = resultStr
             
@@ -95,6 +99,7 @@ class OrderDetailTitleCell: UITableViewCell {
         timeTitle.textAlignment = .left
         nameTitle = getTitleLB("赛事")
         ruleTitle = getTitleLB("玩法")
+       
         recordTitle = getTitleLB("投注")
         resultTitle = getTitleLB("赛果")
         resultTitle.textAlignment = .right
@@ -104,6 +109,7 @@ class OrderDetailTitleCell: UITableViewCell {
         nameLB = getDetailLB()
         nameLB.numberOfLines = 0
         ruleLB = getDetailLB()
+        ruleLB.numberOfLines = 0
         recordLB = getDetailLB()
         recordLB.numberOfLines = 0
         resultLB = getDetailLB()
