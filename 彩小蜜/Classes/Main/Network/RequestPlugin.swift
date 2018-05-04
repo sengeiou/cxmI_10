@@ -34,8 +34,6 @@ public final class RequestLoadingPlugin:PluginType, AlertPro{
             if reachability.connection == .none {
                 showHUD(message: "网络异常请稍后重试")
             }
-            
-           
         }
         NSLog("---------请求开始-------------\(Date())")
     }

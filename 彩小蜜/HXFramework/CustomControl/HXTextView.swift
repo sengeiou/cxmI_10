@@ -68,19 +68,58 @@ class HXTextView: UIView, UITextViewDelegate {
         self.addSubview(numLB)
     }
     
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-
-        if range.location >= limitNumber {
-            return false
-        }
-        if text == "" {
-            leftNum = limitNumber - (range.location + 0)
+    func textViewDidChange(_ textView: UITextView) {
+        if textView.text.count > limitNumber {
+            
+            //获得已输出字数与正输入字母数
+            let selectRange = textView.markedTextRange
+            
+            //获取高亮部分 － 如果有联想词则解包成功
+            if let selectRange = selectRange {
+                let position =  textView.position(from: (selectRange.start), offset: 0)
+                if (position != nil) {
+                    return
+                }
+            }
+            
+            let textContent = textView.text
+            let textNum : Int = (textContent?.count)!
+            
+            //截取200个字
+            if textNum > limitNumber {
+                let index = textContent?.index((textContent?.startIndex)!, offsetBy: limitNumber)
+                let str = textContent?.prefix(upTo: index!)
+                textView.text = str?.description
+            }
         }else {
-            leftNum = limitNumber - (range.location + 1)
+            let textContent = textView.text
+            let textNum : Int = (textContent?.count)!
+            self.leftNum = limitNumber - textNum
         }
         
-        return true
     }
+    
+//    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+//
+//        let xxx = textView.text as! NSString
+//        let xxxx = xxx.length
+//
+//        if range.location >= limitNumber || textView.text.lengthOfBytes(using: .utf8) >= limitNumber {
+//
+//            return false
+//        }
+//
+//
+//
+//
+//        if text == "" {
+//            leftNum = limitNumber - (range.location + 0)
+//        }else {
+//            leftNum = limitNumber - (range.location + 1)
+//        }
+//
+//        return true
+//    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
