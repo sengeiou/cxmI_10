@@ -9,7 +9,9 @@
 import Moya
 import RxSwift
 
-let homeProvider = MoyaProvider<HomeNetAPIManager>(plugins:[RequestLoadingPlugin()])
+
+
+let homeProvider = MoyaProvider<HomeNetAPIManager>(requestClosure: requestClosure,plugins:[RequestLoadingPlugin()])
 
 
 enum HomeNetAPIManager {

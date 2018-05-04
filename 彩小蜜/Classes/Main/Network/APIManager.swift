@@ -16,3 +16,13 @@ let publicParamEndpointClosure = { (target: LoginNetAPIManager) -> Endpoint in
     let endpoint = Endpoint(url: url, sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, task: target.task, httpHeaderFields: target.parameterEncoding as? [String : String])
     return endpoint.adding(newHTTPHeaderFields: ["Content-Type" : "application/json"])
 }
+
+let requestClosure = { (endpoint: Endpoint, done: @escaping MoyaProvider<HomeNetAPIManager>.RequestResultClosure) in
+    
+    var requests = try! endpoint.urlRequest()
+    
+    requests.timeoutInterval = 20    //设置请求超时时间
+    done(.success(requests))
+}
+
+
