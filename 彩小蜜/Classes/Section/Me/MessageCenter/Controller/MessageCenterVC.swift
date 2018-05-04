@@ -144,7 +144,13 @@ class MessageCenterVC: BaseViewController, IndicatorInfoProvider, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 121 * defaultScale
+       
+        if messageType == .message {
+            return 121 * defaultScale
+        }else {
+            return UITableViewAutomaticDimension
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

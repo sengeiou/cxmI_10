@@ -116,7 +116,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Home/FootballMatch/Controller/FootballOrderConfirmVC.swift"
-            timestampString = "547119772.539373"
+            timestampString = "547122376.9389811"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "466"
@@ -132,7 +132,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Home/FootballMatch/Controller/FootballOrderConfirmVC.swift"
-            timestampString = "547119772.539463"
+            timestampString = "547122376.939135"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "473"
@@ -148,7 +148,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Home/FootballMatch/Controller/FootballOrderConfirmVC.swift"
-            timestampString = "547119772.539517"
+            timestampString = "547122376.939211"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "227"
@@ -163,24 +163,8 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Me/MessageCenter/View/MessageCenterCell.swift"
-            timestampString = "547119772.539571"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
-            landmarkName = "messageModel"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Payment/Controller/PaymentViewController.swift"
-            timestampString = "547119772.539625"
+            timestampString = "547122376.939293"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "190"
@@ -196,13 +180,29 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Payment/Controller/PaymentViewController.swift"
-            timestampString = "547119772.53969"
+            timestampString = "547122376.9393981"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "197"
             endingLineNumber = "197"
             landmarkName = "queryPaymentResultRequest()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Me/MessageCenter/View/MessageCenterCell.swift"
+            timestampString = "547122376.939504"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
+            landmarkName = "messageModel"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

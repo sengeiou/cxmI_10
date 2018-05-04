@@ -16,15 +16,16 @@ class MessageCenterCell: UITableViewCell {
             titleLB.text = messageModel.title
             timeLB.text = messageModel.sendTime
             moneyLB.text = messageModel.content
-            detailLB.text = messageModel.msgDesc
+            detailLB.text = messageModel.msgDesc + "\n2525252\nssssssss\n5rrter"
             stateLB.text = messageModel.contentDesc + "ssssss"
             
-            switch messageModel.objectType {
-            case "0":
-                moneyLB.textColor = ColorE95504
-            default:
-                moneyLB.textColor = Color505050
-            }
+            moneyLB.textColor = ColorE95504
+//            switch messageModel.objectType {
+//            case "0":
+//                moneyLB.textColor = ColorE95504
+//            default:
+//                moneyLB.textColor = Color505050
+//            }
             
         }
     }
@@ -45,46 +46,7 @@ class MessageCenterCell: UITableViewCell {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        titleLB.snp.makeConstraints { (make) in
-            make.top.equalTo(self.contentView).offset(16 * defaultScale)
-            make.left.equalTo(self.contentView).offset(leftSpacing)
-            make.width.equalTo(100 * defaultScale)
-            make.height.equalTo(15 * defaultScale)
-        }
-        moneyLB.snp.makeConstraints { (make) in
-            make.top.equalTo(titleLB.snp.bottom).offset(5)
-            make.left.height.equalTo(titleLB)
-            make.right.equalTo(self.contentView.snp.centerX).offset(-20)
-        }
-        timeLB.snp.makeConstraints { (make) in
-            make.top.equalTo(titleLB).offset(5)
-            make.left.equalTo(titleLB.snp.right).offset(10)
-            make.right.equalTo(self.contentView).offset(-rightSpacing)
-            make.height.equalTo(10 * defaultScale)
-        }
-        stateLB.snp.makeConstraints { (make) in
-            make.top.equalTo(moneyLB)
-            make.left.equalTo(self.contentView.snp.centerX).offset(-20)
-            make.height.equalTo(12 * defaultScale)
-            make.right.equalTo(self.contentView).offset(-rightSpacing)
-        }
-        detailLB.snp.makeConstraints { (make) in
-            make.top.equalTo(moneyLB.snp.bottom)
-            make.bottom.equalTo(self.contentView).offset(-10 * defaultScale)
-            make.left.equalTo(moneyLB)
-            make.right.equalTo(detailTitle.snp.left).offset(-10)
-        }
-        detailTitle.snp.makeConstraints { (make) in
-            make.bottom.equalTo(-16 * defaultScale)
-            make.height.equalTo(timeLB)
-            make.width.equalTo(100)
-            make.right.equalTo(detailIcon.snp.left).offset(1)
-        }
-        detailIcon.snp.makeConstraints { (make) in
-            make.centerY.equalTo(detailTitle.snp.centerY)
-            make.right.equalTo(self.contentView).offset(-rightSpacing)
-            make.height.width.equalTo(12)
-        }
+        
     }
     
     private func initSubview() {
@@ -92,25 +54,25 @@ class MessageCenterCell: UITableViewCell {
         
         titleLB = UILabel()
         titleLB.font = Font15
-        titleLB.textColor = Color787878
+        titleLB.textColor = Color9F9F9F
         titleLB.textAlignment = .left
         //titleLB.text = "中奖通知"
         
         moneyLB = UILabel()
-        moneyLB.font = Font15
-        moneyLB.textColor = ColorE95504
+        moneyLB.font = Font13
+        moneyLB.textColor = ColorEA5504
         moneyLB.textAlignment = .left
         //moneyLB.text = "中奖3000.00元"
         
         timeLB = UILabel()
-        timeLB.font = Font10
-        timeLB.textColor = ColorC8C8C8
-        timeLB.textAlignment = .left
+        timeLB.font = Font12
+        timeLB.textColor = Color787878
+        timeLB.textAlignment = .right
         //timeLB.text = "01月30日 08： 30"
         
         detailLB = UILabel()
-        detailLB.font = Font10
-        detailLB.textColor = ColorC8C8C8
+        detailLB.font = Font12
+        detailLB.textColor = Color9F9F9F
         detailLB.textAlignment = .left
         detailLB.numberOfLines = 0
 //        detailLB.text =
@@ -121,14 +83,14 @@ class MessageCenterCell: UITableViewCell {
 //        """
         
         stateLB = UILabel()
-        stateLB.font = Font12
+        stateLB.font = Font13
         stateLB.textColor = Color787878
         stateLB.textAlignment = .left
         //stateLB.text = "奖金已打入您的可用余额"
         
         detailTitle = UILabel()
-        detailTitle.font = Font10
-        detailTitle.textColor = Color787878
+        detailTitle.font = Font13
+        detailTitle.textColor = Color9F9F9F
         detailTitle.textAlignment = .right
         detailTitle.text = "查看详情"
         
@@ -142,6 +104,49 @@ class MessageCenterCell: UITableViewCell {
         self.contentView.addSubview(detailLB)
         self.contentView.addSubview(detailTitle)
         self.contentView.addSubview(detailIcon)
+        
+        titleLB.snp.makeConstraints { (make) in
+            make.top.equalTo(self.contentView).offset(13 * defaultScale)
+            make.left.equalTo(self.contentView).offset(leftSpacing)
+            make.width.equalTo(100 * defaultScale)
+            make.height.equalTo(15 * defaultScale)
+        }
+        moneyLB.snp.makeConstraints { (make) in
+            make.top.equalTo(titleLB.snp.bottom).offset(5)
+            make.left.height.equalTo(titleLB)
+            make.right.equalTo(self.contentView.snp.centerX).offset(-20)
+        }
+        timeLB.snp.makeConstraints { (make) in
+            make.top.equalTo(titleLB)
+            make.left.equalTo(titleLB.snp.right).offset(10)
+            make.right.equalTo(self.contentView).offset(-23 * defaultScale)
+            make.height.equalTo(10 * defaultScale)
+        }
+        
+        detailLB.snp.makeConstraints { (make) in
+            make.top.equalTo(moneyLB.snp.bottom).offset(13 * defaultScale)
+            make.left.equalTo(moneyLB)
+            make.right.equalTo(stateLB)
+            make.bottom.equalTo(stateLB.snp.top).offset(-13 * defaultScale)
+        }
+        
+        stateLB.snp.makeConstraints { (make) in
+            make.left.equalTo(detailLB)
+            make.height.equalTo(12 * defaultScale)
+            make.bottom.equalTo(-10 * defaultScale)
+            make.right.equalTo(detailTitle.snp.left).offset(-10)
+        }
+        detailTitle.snp.makeConstraints { (make) in
+            make.bottom.equalTo(stateLB)
+            make.height.equalTo(timeLB)
+            make.width.equalTo(100)
+            make.right.equalTo(detailIcon.snp.left).offset(1)
+        }
+        detailIcon.snp.makeConstraints { (make) in
+            make.centerY.equalTo(detailTitle.snp.centerY)
+            make.right.equalTo(self.contentView).offset(-rightSpacing)
+            make.height.width.equalTo(12)
+        }
     }
     
     
