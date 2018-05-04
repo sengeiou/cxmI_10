@@ -173,7 +173,7 @@ class OrderDetailTitleCell: UITableViewCell {
         }
         
         timeLB.snp.makeConstraints { (make) in
-            make.top.equalTo(timeTitle.snp.bottom).offset(0)
+            make.top.equalTo(timeTitle.snp.bottom).offset(11 * defaultScale)
             make.bottom.equalTo(self.contentView).offset(-11)
             make.width.equalTo(timeTitle)
             make.left.equalTo(self.contentView).offset(leftSpacing)
