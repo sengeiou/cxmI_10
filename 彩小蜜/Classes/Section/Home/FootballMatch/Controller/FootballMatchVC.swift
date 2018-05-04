@@ -51,13 +51,14 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     
     public var selectPlayList: [FootballPlayListModel]! {
         didSet{
+            guard selectPlayList != nil else { return }
             self.bottomView.number = selectPlayList.count
         }
     }
     
     private var selectPlays : Set<FootballPlayListModel>! {
         didSet{
-            
+            guard selectPlays != nil else { return }
             self.selectPlayList = Array(selectPlays)
             
         }

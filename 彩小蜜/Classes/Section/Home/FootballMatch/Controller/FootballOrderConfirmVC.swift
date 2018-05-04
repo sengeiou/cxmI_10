@@ -34,6 +34,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     
     public var selectPlayList: [FootballPlayListModel]! {
         didSet{
+            guard selectPlayList != nil else { return }
             guard let filters = filterPlay(with: selectPlayList) else { return }
             bottomView.filterList = filters
             topView.playModelList = selectPlayList
@@ -78,19 +79,21 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     
     public var selectPlays : Set<FootballPlayListModel>! {
         didSet{
+            guard selectPlays != nil else { return }
             self.selectPlayList = Array(selectPlays)
         }
     }
     
     public var playList: [FootballPlayListModel]! {
         didSet{
-            
+            guard playList != nil else { return }
             selectPlays = Set(playList)
             self.tableView.reloadData()
         }
     }
     public var betInfo : FootballBetInfoModel! {
         didSet{
+            guard betInfo != nil else { return }
             bottomView.betInfo = betInfo
         }
     }

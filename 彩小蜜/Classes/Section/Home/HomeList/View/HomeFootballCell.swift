@@ -12,6 +12,7 @@ class HomeFootballCell: UICollectionViewCell {
     
     public var playModel: HomePlayModel! {
         didSet{
+            guard playModel != nil else { return }
             if let url = URL(string: playModel.playClassifyImg) {
                 icon.kf.setImage(with: url)
             }

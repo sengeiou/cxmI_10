@@ -52,8 +52,18 @@ class MainTabBarController: UITabBarController, UserInfoPro {
                     //self.showHUD(message: msg!)
                 default: break
                 }
-                weakSelf?.home.homeStyle = .onlyNews
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationConfig), object: nil, userInfo: ["showStyle": false])
+                
+                let turnOn = UserDefaults.standard.bool(forKey: TurnOn)
+                
+                if turnOn  {
+                    weakSelf?.home.homeStyle = .allShow
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationConfig), object: nil, userInfo: ["showStyle": true])
+                }else {
+                    weakSelf?.home.homeStyle = .onlyNews
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationConfig), object: nil, userInfo: ["showStyle": false])
+                }
+                
+                
             }, onCompleted: nil, onDisposed: nil )
     }
     

@@ -180,45 +180,125 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Payment/Controller/PaymentViewController.swift"
-            timestampString = "547097522.32555"
+            timestampString = "547107421.620652"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
             landmarkName = "queryPaymentResultRequest()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (&#x5f69;&#x5c0f;&#x871c;.DataModel) -&gt; () in &#x5f69;&#x5c0f;&#x871c;.PaymentViewController.(queryPaymentResultRequest in _00A546BA14E6A4052411135BEFE49859)() -&gt; ()"
-                  moduleName = "&#x5f69;&#x5c0f;&#x871c;"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/xiao/Desktop/%E5%BD%A9%E5%B0%8F%E7%A7%981.0/%E5%BD%A9%E5%B0%8F%E8%9C%9C/Classes/Section/Payment/Controller/PaymentViewController.swift"
-                  timestampString = "547099658.0698431"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "165"
-                  endingLineNumber = "165"
-                  offsetFromSymbolStart = "16">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Swift.Error) -&gt; () in &#x5f69;&#x5c0f;&#x871c;.PaymentViewController.(queryPaymentResultRequest in _00A546BA14E6A4052411135BEFE49859)() -&gt; ()"
-                  moduleName = "&#x5f69;&#x5c0f;&#x871c;"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/xiao/Desktop/%E5%BD%A9%E5%B0%8F%E7%A7%981.0/%E5%BD%A9%E5%B0%8F%E8%9C%9C/Classes/Section/Payment/Controller/PaymentViewController.swift"
-                  timestampString = "547099658.0714951"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "159"
-                  endingLineNumber = "159"
-                  offsetFromSymbolStart = "20">
-               </Location>
-            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Payment/Controller/PaymentViewController.swift"
+            timestampString = "547107421.621027"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "185"
+            endingLineNumber = "185"
+            landmarkName = "queryPaymentResultRequest()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Payment/Controller/PaymentViewController.swift"
+            timestampString = "547107421.621287"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
+            landmarkName = "startPollingTimer()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Payment/Controller/PaymentViewController.swift"
+            timestampString = "547107421.6215301"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
+            landmarkName = "queryPaymentResultRequest()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Payment/Controller/PaymentViewController.swift"
+            timestampString = "547107421.621766"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "pollingStart()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Main/Base/Controller/MainTabBarController.swift"
+            timestampString = "547107421.622002"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "configRequest()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Main/Base/Controller/MainTabBarController.swift"
+            timestampString = "547107421.622057"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "configRequest()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Main/Base/Controller/MainTabBarController.swift"
+            timestampString = "547107421.622106"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "configRequest()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

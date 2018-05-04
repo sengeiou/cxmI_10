@@ -15,6 +15,7 @@ class HomeScrollBarCell: UITableViewCell, FSPagerViewDataSource, FSPagerViewDele
 
     public var winningList : [WinningMsgModel]! {
         didSet{
+            guard winningList != nil else { return }
             self.viewPager.reloadData()
         }
     }

@@ -22,6 +22,7 @@ class FootballScoreCollectionCell: UICollectionViewCell {
     //半全场
     public var cellInfo : FootballPlayCellModel! {
         didSet{
+            guard cellInfo != nil else { return }
             selected(cellInfo.isSelected)
             titlelb.text = cellInfo.cellName
             detaillb.text = cellInfo.cellOdds
@@ -30,6 +31,7 @@ class FootballScoreCollectionCell: UICollectionViewCell {
     
     public var isSelectedItem: Bool! {
         didSet{
+            guard isSelectedItem != nil else { return }
             selected(isSelectedItem)
         }
     }

@@ -18,7 +18,7 @@ class FootballScoreView: UIView {
     
     public var teamInfo : FootballPlayListModel! {
         didSet{
-            
+            guard teamInfo != nil else { return }
             if teamInfo.selectedHunhe.isEmpty == false {
                 changeViewState(isSelected: true )
             }else {
@@ -29,6 +29,7 @@ class FootballScoreView: UIView {
     // 比分
     public var selectedCells : [FootballPlayCellModel]! {
         didSet{
+            guard selectedCells != nil else { return }
             if selectedCells.isEmpty == false {
                 changeViewState(isSelected: true )
             }else {
@@ -41,6 +42,7 @@ class FootballScoreView: UIView {
     
     public var matchType : FootballMatchType! {
         didSet{
+            guard matchType != nil else { return }
             switch matchType {
             case .比分:
                 titlelb.text = "点击进行比分投注"

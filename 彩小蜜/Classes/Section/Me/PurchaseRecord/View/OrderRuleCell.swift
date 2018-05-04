@@ -12,6 +12,7 @@ class OrderRuleCell: UITableViewCell {
 
     public var orderInfo : OrderInfoModel! {
         didSet{
+            guard orderInfo != nil else { return }
             if orderInfo.passType == nil || orderInfo.passType == "null" {
                 orderInfo.passType = ""
             }

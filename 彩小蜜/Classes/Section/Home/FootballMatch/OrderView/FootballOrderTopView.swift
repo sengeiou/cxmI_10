@@ -12,6 +12,7 @@ class FootballOrderTopView: UIView, DateProtocol {
 
     public var playModelList : [FootballPlayListModel]! {
         didSet{
+            guard playModelList != nil else { return }
             guard playModelList.isEmpty == false else { return }
             
             var arr = [Int]()

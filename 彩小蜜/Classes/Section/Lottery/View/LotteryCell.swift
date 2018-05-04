@@ -12,6 +12,7 @@ class LotteryCell: UITableViewCell {
 
     public var resultModel : LotteryResultModel! {
         didSet{
+            guard resultModel != nil else { return }
             titlelb.text = resultModel.changci + resultModel.leagueAddr + resultModel.matchTime
             homeTeamlb.text = resultModel.homeTeamAbbr
             visiTeamlb.text = resultModel.visitingTeamAbbr

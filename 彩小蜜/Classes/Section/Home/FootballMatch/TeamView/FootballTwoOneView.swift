@@ -18,6 +18,7 @@ class FootballTwoOneView: UIView {
 
     public var teamInfo : FootballPlayListModel! {
         didSet{
+            guard teamInfo != nil else { return }
             let matchPlay = teamInfo.matchPlays[0]
             guard let homeCell = matchPlay.homeCell else { return }
             guard let visiCell = matchPlay.visitingCell else { return }

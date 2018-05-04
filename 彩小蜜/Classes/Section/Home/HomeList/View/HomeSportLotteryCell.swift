@@ -29,6 +29,7 @@ class HomeSportLotteryCell: UITableViewCell, UICollectionViewDataSource, UIColle
     
     public var playList : [HomePlayModel]! {
         didSet{
+            guard playList != nil else { return }
             self.collectionView.reloadData()
         }
     }

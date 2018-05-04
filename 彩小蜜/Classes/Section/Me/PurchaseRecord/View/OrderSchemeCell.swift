@@ -12,7 +12,7 @@ class OrderSchemeCell: UITableViewCell {
 
     public var schemeDetail : SchemeDetail! {
         didSet{
-            
+            guard schemeDetail != nil else { return }
             let contents = schemeDetail.tickeContent.components(separatedBy: "X")
             
             var str = ""
@@ -47,6 +47,7 @@ class OrderSchemeCell: UITableViewCell {
     
     public var ishidenLine : Bool! {
         didSet{
+            guard ishidenLine != nil else { return }
             if ishidenLine == true {
                 self.line.isHidden = true
             }else {

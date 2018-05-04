@@ -19,6 +19,7 @@ class HomeHeaderView: UIView, FSPagerViewDataSource, FSPagerViewDelegate {
 
     public var bannerList : [BannerModel]! {
         didSet{
+            guard bannerList != nil else { return }
             self.viewPager.reloadData()
         }
     }

@@ -21,6 +21,7 @@ class FootballSectionHeader: UITableViewHeaderFooterView, DateProtocol {
 
     public var matchModel : FootballMatchModel! {
         didSet{
+            guard matchModel != nil else { return }
             if matchModel.title != nil {
                 title.text = "热门比赛"
                 title.textColor = ColorEA5504
@@ -41,6 +42,7 @@ class FootballSectionHeader: UITableViewHeaderFooterView, DateProtocol {
     
     public var headerType: FootballHeaderType = .match {
         didSet{
+            
             switch headerType {
             case .hotMatch:
                 title.textColor = ColorE85504

@@ -12,6 +12,7 @@ class FootballMatchInfoHeader: UIView {
 
     public var matchInfo : MatchInfoModel! {
         didSet{
+            guard matchInfo != nil else { return }
             header.matchInfo = matchInfo
         }
     }

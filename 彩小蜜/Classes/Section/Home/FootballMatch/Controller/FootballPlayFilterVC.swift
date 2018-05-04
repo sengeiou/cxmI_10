@@ -31,6 +31,7 @@ class FootballPlayFilterVC: BasePopViewController, FootballFilterBottomViewDeleg
     
     public var filterList: [FootballPlayFilterModel]! {
         didSet{
+            guard filterList != nil else { return }
             oldFileterList = filterList.map { $0.copy() as! FootballPlayFilterModel }
             self.collectionView.reloadData()
 

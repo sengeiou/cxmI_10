@@ -15,6 +15,8 @@ import UIKit
 
 import SVProgressHUD
 
+let NotificationWillEnterForeground = "NotificationWillEnterForeground"
+
 fileprivate let PaymentCellId = "PaymentCellId"
 fileprivate let PaymentMethodCellId = "PaymentMethodCellId"
 
@@ -38,18 +40,35 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
     
     private var canPayment : Bool = true
     
+    private var timer : Timer!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "彩小秘 · "
         WeixinCenter.share.payDelegate = self
         initSubview()
-        //allPaymentRequest()
         
+//        timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(pollingStart), userInfo: nil, repeats: true)
+        
+        timer = Timer(timeInterval: 3, target: self, selector: #selector(pollingStart), userInfo: nil, repeats: true)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(startPollingTimer), name: NSNotification.Name(rawValue: NotificationWillEnterForeground), object: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         orderRequest()
+        
+    }
+    
+    @objc private func startPollingTimer() {
+        if canPayment == false {
+            timer.fire()
+        }
+    }
+    // 轮询
+    @objc private func pollingStart() {
+        queryPaymentResultRequest()
     }
     
     func onPaybuyWeixin(response: PayResp) {
@@ -127,12 +146,7 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
             .subscribe(onNext: { (data) in
                 self.paymentResult = data
                 self.handlePaymentResult()
-                
-                
-//                weakSelf?.paymentResult = data
-//                weakSelf?.showHUD(message: data.showMsg)
-
-                
+   
             }, onError: { (error) in
                 weakSelf?.canPayment = true
                 guard let err = error as? HXError else { return }
@@ -155,13 +169,18 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
     }
     // 查询支付结果
     private func queryPaymentResultRequest() {
-        guard self.paymentResult.orderId != nil else { return }
+        guard self.paymentResult != nil else { return }
+        guard self.paymentResult.payLogId != nil else { return }
         weak var weakSelf = self
-        _ = paymentProvider.rx.request(.paymentQuery(payLogId: self.paymentResult.orderId))
+        _ = paymentProvider.rx.request(.paymentQuery(payLogId: self.paymentResult.payLogId))
             .asObservable()
             .mapBaseObject(type: DataModel.self)
             .subscribe(onNext: { (data) in
-                
+                if data.code == "0" {
+                    self.canPayment = true
+                    self.timer.invalidate()
+                    self.showHUD(message: data.msg)
+                }
             }, onError: { (error) in
                 guard let err = error as? HXError else { return }
                 switch err {
@@ -211,25 +230,11 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
             } else {
                 UIApplication.shared.openURL(url)
             }
-        
-            self.queryPaymentResultRequest()
+            //timer.fire()
+            //self.queryPaymentResultRequest()
         }else {
-            self.queryPaymentResultRequest()
+            //self.queryPaymentResultRequest()
         }
-        
-        
-        
-    
-        
-        
-//        if let payUrl = self.paymentResult.payUrl {
-//
-//
-//
-//            let web = WebViewController()
-//            web.urlStr = payUrl
-//            pushViewController(vc: web)
-//        }
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()

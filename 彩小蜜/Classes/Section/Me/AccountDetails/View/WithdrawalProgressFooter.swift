@@ -12,6 +12,7 @@ class WithdrawalProgressFooter: UIView {
 
     public var progressModel: ProgressModel! {
         didSet{
+            guard progressModel != nil else { return }
             detailLB.text = progressModel.card
         }
     }

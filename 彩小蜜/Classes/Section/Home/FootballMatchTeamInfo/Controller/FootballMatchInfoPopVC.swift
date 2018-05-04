@@ -18,6 +18,7 @@ class FootballMatchInfoPopVC: BasePopViewController, BottomViewDelegate {
 
     public var matchId : String! {
         didSet{
+            guard matchId != nil else { return }
             matchInfoRequest()
         }
     }
@@ -25,6 +26,7 @@ class FootballMatchInfoPopVC: BasePopViewController, BottomViewDelegate {
     // MARK: 属性 private
     private var teamInfo : FootballMatchInfoModel! {
         didSet{
+            guard teamInfo != nil else { return }
             header.matchInfo = teamInfo.matchInfo
             ratioView.supportInfo = teamInfo.hadTeamSupport
             rangRatioView.supportInfo = teamInfo.hhadTeamSupport

@@ -12,6 +12,7 @@ class AccountDetailsCell: UITableViewCell {
 
     public var accountDetail : AccountDetailModel! {
         didSet{
+            guard accountDetail != nil else { return }
             titleLB.text = accountDetail.processTypeName
             detailLB.text = accountDetail.note
             moneyLB.text = accountDetail.changeAmount

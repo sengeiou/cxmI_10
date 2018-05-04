@@ -19,6 +19,7 @@ class FootballTotalView: UIView {
    
     public var teamInfo : FootballPlayListModel! {
         didSet{
+            guard teamInfo != nil else { return }
             guard teamInfo.matchPlays[0].matchCells.count == 8 else { return }
             
             guard let totalCellModels = teamInfo.matchPlays[0].matchCells else { return }

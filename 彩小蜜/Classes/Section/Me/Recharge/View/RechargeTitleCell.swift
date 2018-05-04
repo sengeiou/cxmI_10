@@ -12,6 +12,7 @@ class RechargeTitleCell: UITableViewCell {
 
     public var userInfo  : UserInfoDataModel!{
         didSet{
+            guard userInfo != nil else { return }
             account.text = "当前账号: \(userInfo.mobile!)"
             balance.text = "当前余额: \(userInfo.userMoney!)"
         }

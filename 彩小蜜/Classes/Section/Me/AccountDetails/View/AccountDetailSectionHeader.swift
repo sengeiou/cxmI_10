@@ -12,6 +12,7 @@ class AccountDetailSectionHeader: UITableViewHeaderFooterView {
 
     public var accountDetail: AccountDetailModel! {
         didSet{
+            guard accountDetail != nil else { return }
             title.text = accountDetail.addTime
         }
     }

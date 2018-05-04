@@ -12,6 +12,7 @@ class WithdrawalProgressCell: UITableViewCell {
 
     public var progressModel: ProgressLogModel! {
         didSet{
+            guard progressModel != nil else { return }
             titleLB.text = progressModel.logName
             timeLB.text = progressModel.logTime
             

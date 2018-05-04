@@ -12,6 +12,7 @@ class CouponFilterCell: UITableViewCell {
 
     public var bonusInfo : BonusInfoModel! {
         didSet{
+            guard bonusInfo != nil else { return }
             let moneyAtt = NSMutableAttributedString(string: "¥ ")
             let money = NSAttributedString(string: bonusInfo.bonusPrice, attributes: [NSAttributedStringKey.font: Font24])
             moneyAtt.append(money)

@@ -36,6 +36,7 @@ class MeHeaderView: UIView {
     //MARK: - 设置界面显示信息
     public var userInfo : UserInfoDataModel! {
         didSet{
+            guard userInfo != nil else { return }
             self.phoneLB.text = userInfo.mobile
 //            let url = URL(string: userInfo.headimg)
 //            self.icon.kf.setImage(with: url)

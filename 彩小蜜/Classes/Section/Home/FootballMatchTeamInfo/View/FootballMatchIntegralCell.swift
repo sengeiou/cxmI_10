@@ -12,12 +12,14 @@ class FootballMatchIntegralCell: UITableViewCell {
 
     public var homeScoreInfo : TeamScoreInfoModel! {
         didSet{
+            guard homeScoreInfo != nil else { return }
             homeIntegralView.scoreInfo = homeScoreInfo
             homeTeamName.text = homeScoreInfo.teamName
         }
     }
     public var visiScoreInfo : TeamScoreInfoModel! {
         didSet{
+            guard visiScoreInfo != nil else { return }
             visiIntegralView.scoreInfo = visiScoreInfo
             visiTeamName.text = visiScoreInfo.teamName
         }

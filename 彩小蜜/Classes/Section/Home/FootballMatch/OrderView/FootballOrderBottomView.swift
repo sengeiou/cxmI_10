@@ -43,6 +43,7 @@ class FootballOrderBottomView: UIView {
     
     public var betInfo : FootballBetInfoModel! {
         didSet{
+            guard betInfo != nil else { return }
             guard let betNum = betInfo.betNum else { return }
             guard let times = betInfo.times else { return }
             guard let money = betInfo.money else { return }

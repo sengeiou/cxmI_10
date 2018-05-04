@@ -38,6 +38,7 @@ class FootballCollectionView: UIView , UICollectionViewDelegate, UICollectionVie
     
     public var cells : [FootballPlayCellModel]! {
         didSet{
+            guard cells != nil else { return }
             self.collectionView.reloadData()
         }
     }

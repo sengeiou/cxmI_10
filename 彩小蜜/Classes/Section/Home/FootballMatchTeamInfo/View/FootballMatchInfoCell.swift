@@ -13,6 +13,7 @@ class FootballMatchInfoCell: UITableViewCell {
     // MARK: - 属性 public
     public var teamInfo : TeamInfo! {
         didSet{
+            guard teamInfo != nil else { return }
             matchName.text = teamInfo.leagueAddr
             matchTime.text = teamInfo.matchDay
             matchScore.text = "\(teamInfo.homeTeamAbbr!)  \(teamInfo.whole!)  \(teamInfo.visitingTeamAbbr!)"

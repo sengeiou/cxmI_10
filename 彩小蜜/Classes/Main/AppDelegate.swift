@@ -47,6 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AppDelegateProtocol, GeTu
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         self.rootViewController.configRequest()
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationWillEnterForeground), object: nil)
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {

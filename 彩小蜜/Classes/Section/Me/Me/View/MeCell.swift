@@ -20,6 +20,7 @@ class MeCell: UITableViewCell {
     
     public var serviceNum : String! {
         didSet{
+            guard serviceNum != nil else { return }
             self.detail.text = serviceNum
             //self.detail.addLink(toPhoneNumber: serviceNum, with: NSRange.init(location: 0, length: serviceNum.lengthOfBytes(using: .utf8)))
         }

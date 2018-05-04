@@ -17,6 +17,7 @@ class BottomView: UIView {
 
     public var confirmTitle : String! {
         didSet{
+            guard confirmTitle != nil else { return }
             confirmBut.setTitle(confirmTitle, for: .normal)
         }
     }

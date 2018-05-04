@@ -12,7 +12,7 @@ class OrderDetailCell: UITableViewCell {
 
     public var matchInfo: MatchInfo! {
         didSet{
-            
+            guard matchInfo != nil else { return }
             guard let range = matchInfo.match.range(of: "VS") else { return }
             
             let homeMatch = matchInfo.match.prefix(upTo: (range.lowerBound))

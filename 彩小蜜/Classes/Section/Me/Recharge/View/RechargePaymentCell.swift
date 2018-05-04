@@ -13,6 +13,7 @@ class RechargePaymentCell: UITableViewCell {
 
     public var paymentInfo : PaymentList! {
         didSet{
+            guard paymentInfo != nil else { return }
             title.text = paymentInfo.payName
             if let url = URL(string: paymentInfo.payImg) {
                 icon.kf.setImage(with: url)

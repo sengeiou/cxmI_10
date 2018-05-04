@@ -12,6 +12,7 @@ class OrderSchemeTitleCell: UITableViewCell {
 
     public var schemeInfo: OrderSchemeInfoModel! {
         didSet{
+            guard schemeInfo != nil else { return }
             let titleAtt = NSMutableAttributedString(string: "方案编号: ")
             let title = NSAttributedString(string: schemeInfo.programmeSn, attributes: [NSAttributedStringKey.foregroundColor: Color505050])
             titleAtt.append(title)

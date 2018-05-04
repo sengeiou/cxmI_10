@@ -30,7 +30,7 @@ class FootballTeamView: UIView , AlertPro{
     
     public var teamInfo: FootballPlayListModel! {
         didSet{
-            
+            guard teamInfo != nil else { return }
             let matchPlay = teamInfo.matchPlays[0]
             guard matchPlay.homeCell != nil else { return }
             

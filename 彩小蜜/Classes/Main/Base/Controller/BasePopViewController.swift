@@ -33,6 +33,7 @@ class BasePopViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, 
     
     public var viewHeight : CGFloat! {
         didSet{
+            guard viewHeight != nil else { return }
             switch popStyle {
             case .fromBottom:
                 initBottomLayout(height: viewHeight)

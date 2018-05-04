@@ -19,6 +19,7 @@ class FootballHunheView: UIView {
     
     public var matchInfo : FootballMatchPlay! {
         didSet{
+            guard matchInfo != nil else { return }
             switch matchType {
             case .胜平负:
                 guard matchInfo.isShow == true else {

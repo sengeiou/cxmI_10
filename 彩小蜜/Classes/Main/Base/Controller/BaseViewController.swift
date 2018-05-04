@@ -85,6 +85,7 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
     //MARK: - 属性
     public var isHidenBar : Bool! {
         didSet{
+            guard isHidenBar != nil else { return }
             if isHidenBar == true {
                 hideTabBar()
             }else {

@@ -12,6 +12,7 @@ class TopTitleView: UIView {
 
     public var teamInfo: FootballPlayListModel! {
         didSet{
+            guard teamInfo != nil else { return }
             homeMatch.text = teamInfo.homeTeamAbbr
             visitingMatch.text = teamInfo.visitingTeamAbbr
         }

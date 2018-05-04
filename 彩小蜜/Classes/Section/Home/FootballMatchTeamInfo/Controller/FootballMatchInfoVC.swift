@@ -50,6 +50,7 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
     // MARK: - 属性 private
     private var teamInfoStyle : TeamInfoStyle! = .analysis {
         didSet{
+            
             self.tableView.reloadData()
         }
     }
@@ -60,6 +61,7 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
     }
     var matchInfoModel: FootballMatchInfoModel! {
         didSet{
+            guard matchInfoModel != nil else { return }
             headerView.matchInfo = self.matchInfoModel.matchInfo
         }
     }

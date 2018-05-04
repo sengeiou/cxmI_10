@@ -12,7 +12,7 @@ class CouponCell: UITableViewCell {
 
     public var couponInfo: CouponInfoModel! {
         didSet{
-            
+            guard couponInfo != nil else { return }
             var moneyColor : UIColor!
             
             switch couponInfo.bonusStatus {

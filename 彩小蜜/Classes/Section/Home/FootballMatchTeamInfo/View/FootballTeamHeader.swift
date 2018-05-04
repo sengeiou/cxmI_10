@@ -17,6 +17,7 @@ class FootballTeamHeader: UIView {
 
     public var matchInfo : MatchInfoModel! {
         didSet{
+            guard matchInfo != nil else { return }
             titlelb.text = matchInfo.changci + " " + matchInfo.leagueAddr + " " + matchInfo.matchTime
             homeName.text = matchInfo.homeTeamAbbr
             visiName.text = matchInfo.visitingTeamAbbr
@@ -32,6 +33,7 @@ class FootballTeamHeader: UIView {
     
     public var headerStyle : TeamHeaderStyle = .默认 {
         didSet{
+            
             if headerStyle == .详情 {
                 bottomLine.snp.makeConstraints { (make) in
                     make.bottom.equalTo(self)

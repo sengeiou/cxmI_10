@@ -12,6 +12,7 @@ class WithdrawalProgressHeader: UIView {
 
     public var progressModel: ProgressModel! {
         didSet{
+            guard progressModel != nil else { return }
             moneyLB.text = progressModel.amount
             stateLB.text = progressModel.status
         }

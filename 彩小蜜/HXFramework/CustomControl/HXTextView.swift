@@ -12,6 +12,7 @@ class HXTextView: UIView, UITextViewDelegate {
 
     public var limitNumber: Int! {
         didSet{
+            guard limitNumber != nil else { return }
             leftNum = limitNumber
         }
     }

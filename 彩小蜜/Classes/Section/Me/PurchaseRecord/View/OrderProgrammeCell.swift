@@ -12,6 +12,7 @@ class OrderProgrammeCell: UITableViewCell {
 
     public var orderInfo : OrderInfoModel! {
         didSet{
+            guard orderInfo != nil else { return }
             let noAtt = NSMutableAttributedString(string: "方案编号: ")
             let timeAtt = NSMutableAttributedString(string: "创建时间: ")
             let orderAtt = NSMutableAttributedString(string: "店主接单: ")

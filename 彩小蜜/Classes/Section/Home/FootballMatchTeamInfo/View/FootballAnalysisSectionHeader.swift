@@ -20,6 +20,7 @@ class FootballAnalysisSectionHeader: UITableViewHeaderFooterView {
 
     public var teamInfo : MatchTeamInfoModel! {
         didSet{
+            guard teamInfo != nil else { return }
             let homeAtt = NSAttributedString(string: "\(teamInfo.win!)胜", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
             let flatAtt = NSAttributedString(string: "\(teamInfo.draw!)平", attributes: [NSAttributedStringKey.foregroundColor: Color65AADD])
             let visiAtt = NSAttributedString(string: "\(teamInfo.lose!)负", attributes: [NSAttributedStringKey.foregroundColor: Color44AE35])
@@ -64,6 +65,7 @@ class FootballAnalysisSectionHeader: UITableViewHeaderFooterView {
     
     public var headerStyle : AnalysisHeaderStyle! {
         didSet{
+            guard headerStyle != nil else { return }
             switch headerStyle {
             case .标题:
                 layoutTitleView()

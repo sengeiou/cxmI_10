@@ -12,6 +12,7 @@ class AccountDetailFooterView: UIView {
 
     public var dataModel : AccountStatisticsModel! {
         didSet{
+            guard dataModel != nil else { return }
             let rechargeAtt = NSMutableAttributedString(string: "充值 ")
             let recharge = NSAttributedString(string: dataModel.rechargeMoney + "元", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
             let withTitle = NSAttributedString(string: ",提现")

@@ -12,6 +12,7 @@ class ShareCell: UICollectionViewCell {
     
     public var shareData : ShareDataModel! {
         didSet{
+            guard shareData != nil else { return }
             icon.image = UIImage(named : shareData.iconPic)
             title.text = shareData.title
         }

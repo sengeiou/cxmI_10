@@ -12,6 +12,7 @@ class MessageCenterCell: UITableViewCell {
 
     public var messageModel: MessageCenterModel! {
         didSet{
+            guard messageModel != nil else { return }
             titleLB.text = messageModel.title
             timeLB.text = messageModel.sendTime
             moneyLB.text = messageModel.content

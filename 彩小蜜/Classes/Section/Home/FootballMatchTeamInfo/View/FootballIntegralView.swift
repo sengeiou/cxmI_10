@@ -18,6 +18,7 @@ class FootballIntegralView: UIView, UICollectionViewDelegate, UICollectionViewDa
 
     public var scoreInfo : TeamScoreInfoModel! {
         didSet{
+            guard scoreInfo != nil else { return }
             guard let hteam = scoreInfo.hteamScore else { return }
             guard let lteam = scoreInfo.lteamScore else { return }
             guard let tteam = scoreInfo.tteamScore else { return }

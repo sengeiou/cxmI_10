@@ -19,6 +19,7 @@ class ScaleView: UIView {
     
     public var scaleColor: UIColor! {
         didSet{
+            guard scaleColor != nil else { return }
             acaleView.backgroundColor = scaleColor
         }
     }

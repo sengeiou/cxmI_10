@@ -12,6 +12,7 @@ class FootballFilterCell: UICollectionViewCell {
     
     public var filterModel : FilterModel! {
         didSet{
+            guard filterModel != nil else { return }
             selected(filterModel.isSelected)
             title.text = filterModel.leagueAddr
         }
@@ -19,6 +20,7 @@ class FootballFilterCell: UICollectionViewCell {
     
     public var isSelectedItem: Bool! {
         didSet{
+            guard isSelectedItem != nil else { return }
             selected(isSelectedItem)
         }
     }

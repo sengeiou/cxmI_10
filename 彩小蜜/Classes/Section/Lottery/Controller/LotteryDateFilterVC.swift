@@ -20,6 +20,7 @@ class LotteryDateFilterVC: BasePopViewController, UITableViewDelegate, UITableVi
     // MARK : - 属性 public
     public var dateList : [LotteryDateModel]! {
         didSet{
+            guard dateList != nil else { return }
             self.tableView.reloadData()
         }
     }

@@ -13,6 +13,7 @@ class FootballOddsCell: UITableViewCell {
     /// 欧赔
     public var europeInfo : MatchEuropeModel! {
         didSet{
+            guard europeInfo != nil else { return }
             company.text = europeInfo.comName
 
             var homeColor = Color505050
@@ -67,6 +68,7 @@ class FootballOddsCell: UITableViewCell {
     /// 亚盘
     public var asiaInfo : MatchAsiasModel! {
         didSet{
+            guard asiaInfo != nil else { return }
             company.text = asiaInfo.comName
             flatlb.text = "\(asiaInfo.initRule!)\n\(asiaInfo.realRule!)"
             
@@ -106,6 +108,7 @@ class FootballOddsCell: UITableViewCell {
     /// 大小球
     public var daxiaoInfo : MatchDaxiaoqModel! {
         didSet{
+            guard daxiaoInfo != nil else { return }
             company.text = daxiaoInfo.comName
             
             var homeColor = Color505050

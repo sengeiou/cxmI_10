@@ -11,6 +11,7 @@ import UIKit
 class FootballPlayFilterCell: UICollectionViewCell {
     public var filterModel : FootballPlayFilterModel! {
         didSet{
+            guard filterModel != nil else { return }
             selected(filterModel.isSelected)
             title.text = filterModel.title
         }
@@ -18,6 +19,7 @@ class FootballPlayFilterCell: UICollectionViewCell {
     
     public var isSelectedItem: Bool! {
         didSet{
+            guard isSelectedItem != nil else { return }
             selected(isSelectedItem)
         }
     }

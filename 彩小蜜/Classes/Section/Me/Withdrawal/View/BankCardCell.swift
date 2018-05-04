@@ -34,6 +34,7 @@ class BankCardCell: UITableViewCell {
     
     public var bankInfo : BankCardInfo! {
         didSet{
+            guard bankInfo != nil else { return }
             if let url = URL(string: bankInfo.bankLogo) {
                 bankIcon.kf.setImage(with: url)
             }

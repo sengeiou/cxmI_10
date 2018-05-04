@@ -12,6 +12,7 @@ class HomeActivityCell: UITableViewCell {
 
     public var activityModel : HomeActivityModel! {
         didSet{
+            guard activityModel != nil else { return }
             if let url = URL(string: activityModel.actImg) {
                 icon.kf.setImage(with: url)
             }
