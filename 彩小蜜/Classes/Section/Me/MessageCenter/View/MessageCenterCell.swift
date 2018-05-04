@@ -16,7 +16,7 @@ class MessageCenterCell: UITableViewCell {
             timeLB.text = messageModel.sendTime
             moneyLB.text = messageModel.content
             detailLB.text = messageModel.msgDesc
-            stateLB.text = messageModel.contentDesc
+            stateLB.text = messageModel.contentDesc + "ssssss"
             
             switch messageModel.objectType {
             case "0":

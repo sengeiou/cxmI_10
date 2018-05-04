@@ -132,10 +132,7 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
                 
 //                weakSelf?.paymentResult = data
 //                weakSelf?.showHUD(message: data.showMsg)
-//                let order = OrderDetailVC()
-//                order.backType = .root
-//                order.orderId = data.orderId
-//                weakSelf?.pushViewController(vc: order)
+
                 
             }, onError: { (error) in
                 weakSelf?.canPayment = true
@@ -177,6 +174,10 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
             showHUD(message: self.paymentResult.showMsg)
             SVProgressHUD.dismiss()
             self.canPayment = true
+            let order = OrderDetailVC()
+            order.backType = .root
+            order.orderId = paymentResult.orderId
+            pushViewController(vc: order)
             return
         }
         

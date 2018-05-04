@@ -41,11 +41,11 @@ class HomeHeaderView: UIView, FSPagerViewDataSource, FSPagerViewDelegate {
         viewPager.snp.makeConstraints { (make) in
             make.top.left.right.bottom.equalTo(self)
         }
-        pageControl.snp.makeConstraints { (make) in
-            make.left.right.equalTo(viewPager)
-            make.bottom.equalTo(viewPager).offset(-5)
-            make.height.equalTo(20)
-        }
+//        pageControl.snp.makeConstraints { (make) in
+//            make.left.right.equalTo(viewPager)
+//            make.bottom.equalTo(viewPager).offset(-5)
+//            make.height.equalTo(20)
+//        }
     }
     
     lazy var viewPager: FSPagerView = {
