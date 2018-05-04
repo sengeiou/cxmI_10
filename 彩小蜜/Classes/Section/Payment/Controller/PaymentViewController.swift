@@ -73,9 +73,12 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
         guard maxTimes > 0 else {
             timer.invalidate()
             SVProgressHUD.dismiss()
-            showCXMCancelAlert(title: "查询失败", message: "暂未查询到您的支付结果，如果您已经确认支付并成功扣款，可能存在延迟到账的情况，请到账户明细中查看或联系客服查询", cancel: "知道了" )
-            return }
+            showCXMCancelAlert(title: "查询失败", message: "暂未查询到您的支付结果，如果您已经确认支付并成功扣款，可能存在延迟到账的情况，请到账户明细中查看或联系客服查询", action: "知道了") { (action) in
+            }
+            return
+        }
         maxTimes -= 3
+        print(maxTimes)
         queryPaymentResultRequest()
     }
     
