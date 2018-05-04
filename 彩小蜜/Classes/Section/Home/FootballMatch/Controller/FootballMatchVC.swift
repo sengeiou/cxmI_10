@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 enum FootballMatchType: String {
     case 胜平负 = "彩小秘 · 胜平负"
@@ -72,9 +73,9 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         selectPlays = Set<FootballPlayListModel>()
         initSubview()
         setEmpty(title: "暂无可选赛事", tableView)
-        self.showProgressHUD()
+        
         footballRequest(leagueId: "")
-        filterRequest()
+        //filterRequest()
         setRightButtonItem()
         limitNum = 1
     }

@@ -39,7 +39,7 @@ extension FootballRequestPro where Self: FootballMatchVC {
     }
     
     private func request(type: String, leagueId: String) {
-        
+        self.showProgressHUD()
         weak var weakSelf = self
         _ = homeProvider.rx.request(.matchList(playType: type, leagueId: leagueId))
             .asObservable()
@@ -57,12 +57,12 @@ extension FootballRequestPro where Self: FootballMatchVC {
                     weakSelf?.matchList.insert(footb, at: 0)
                 }
                 self.topView.number = data.allMatchCount
-                //self.dismissProgressHud()
+                self.dismissProgressHud()
                 DispatchQueue.main.async {
                     weakSelf?.tableView.reloadData()
                     
                 }
-                
+                self.filterRequest()
             }, onError: { (error) in
                 self.dismissProgressHud()
                 guard let err = error as? HXError else { return }
@@ -85,16 +85,13 @@ extension FootballRequestPro where Self: FootballMatchVC {
     }
     
     func filterRequest() {
-        self.showProgressHUD()
         weak var weakSelf = self
         _ = homeProvider.rx.request(.filterMatchList)
             .asObservable()
             .mapArray(type: FilterModel.self)
             .subscribe(onNext: { (data) in
                 weakSelf?.filterList = data
-                self.dismissProgressHud()
             }, onError: { (error) in
-                self.dismissProgressHud()
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):
