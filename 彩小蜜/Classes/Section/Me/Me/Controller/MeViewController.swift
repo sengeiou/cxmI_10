@@ -94,8 +94,10 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         weak var weakSelf = self
         showConfirm(message: "您正在退出登录", action: "继续退出", cancel: "返回") { (action) in
             weakSelf?.logoutRequest()
+            weakSelf?.removeUserData()
+            weakSelf?.pushRootViewController(2)
         }
-        pushLoginVC(from: self)
+        //pushLoginVC(from: self)
         
     }
     // 未认证 警告条
@@ -199,8 +201,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         .asObservable()
         .mapBaseObject(type: DataModel.self)
             .subscribe(onNext: { (data) in
-                weakSelf?.removeUserData()
-                weakSelf?.pushRootViewController(2)
+                
             }, onError: { (error) in
                 print(error)
                 guard let err = error as? HXError else { return }
