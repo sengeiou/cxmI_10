@@ -12,8 +12,16 @@ import HandyJSON
 
 enum PushControllerType {
     case 首页
+    case 网页
     case 足球胜平负
     case 足球让球胜平负
+    case 足球总进球
+    case 足球半全场
+    case 足球比分
+    case 足球混合过关
+    case 足球二选一
+    case 商品详情
+    
     case none
 }
 
@@ -39,11 +47,42 @@ extension RouterMatcher {
         switch urlModel?.type {
         case "0":
             return .首页
+        case "1":
+            return .网页
+        case "3":
+            if urlModel?.id == "1", urlModel?.subid != nil {
+                return matcherFootballPlay(subid: (urlModel?.subid)!)
+            }else {
+                return .none
+            }
         default:
             return .none
         }
         
        
+    }
+    
+    
+    private func matcherFootballPlay(subid: String) -> PushControllerType {
+        switch subid {
+        case "1":
+            return .足球让球胜平负
+        case "2":
+            return .足球胜平负
+        case "3":
+            return .足球比分
+        case "4":
+            return .足球总进球
+        case "5":
+            return .足球半全场
+        case "6":
+            return .足球混合过关
+        case "7":
+            return .足球二选一
+       
+        default:
+            return .none
+        }
     }
 }
 

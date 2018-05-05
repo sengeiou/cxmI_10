@@ -179,7 +179,7 @@ class AuthenticationVC: BaseViewController, UITextFieldDelegate, ValidatePro {
                     default : break
                     }
                     
-                    if 300000...310000 ~= code {
+                    if 300000...310000 ~= code || code == 0{
                         print(code)
                         self.showHUD(message: msg!)
                     }
