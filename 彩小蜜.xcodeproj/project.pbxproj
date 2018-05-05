@@ -66,6 +66,7 @@
 		116EB212207F332900B32ABD /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116EB211207F332900B32ABD /* BottomView.swift */; };
 		116EB214207F672000B32ABD /* FootballBanQuanCFilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116EB213207F672000B32ABD /* FootballBanQuanCFilterVC.swift */; };
 		117A6486208EE65500B1769C /* Pods_彩小蜜.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 117A6487208EE65500B1769C /* Pods_彩小蜜.framework */; };
+		117A817E209DDD5E003ED9C3 /* URLParseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117A817D209DDD5E003ED9C3 /* URLParseProtocol.swift */; };
 		117CCDF4209055A100B38543 /* FootballOrderFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117CCDF3209055A100B38543 /* FootballOrderFooter.swift */; };
 		11A250BE207C9C2200780D3D /* FootballTotalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A250BD207C9C2200780D3D /* FootballTotalView.swift */; };
 		11A25C502080BC1200085C58 /* FootballHunheFilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A25C4F2080BC1200085C58 /* FootballHunheFilterVC.swift */; };
@@ -329,6 +330,7 @@
 		116EB211207F332900B32ABD /* BottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
 		116EB213207F672000B32ABD /* FootballBanQuanCFilterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballBanQuanCFilterVC.swift; sourceTree = "<group>"; };
 		117A6487208EE65500B1769C /* Pods_彩小蜜.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = "Pods_彩小蜜.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		117A817D209DDD5E003ED9C3 /* URLParseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLParseProtocol.swift; sourceTree = "<group>"; };
 		117CCDF3209055A100B38543 /* FootballOrderFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballOrderFooter.swift; sourceTree = "<group>"; };
 		11A250BD207C9C2200780D3D /* FootballTotalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballTotalView.swift; sourceTree = "<group>"; };
 		11A25C4F2080BC1200085C58 /* FootballHunheFilterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballHunheFilterVC.swift; sourceTree = "<group>"; };
@@ -565,6 +567,7 @@
 			children = (
 				116E0F282099739E009FE44E /* Router.swift */,
 				116E0F2A209973BD009FE44E /* RouterMatcher.swift */,
+				117A817D209DDD5E003ED9C3 /* URLParseProtocol.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -2177,6 +2180,7 @@
 				E5786FBE206DE9BD0045F7F5 /* FootballBanQuanCCell.swift in Sources */,
 				E50B907120522FFF00417BFE /* RechargeViewController.swift in Sources */,
 				E5973E2B204E442F006461CE /* ForgetPswVCodeVC.swift in Sources */,
+				117A817E209DDD5E003ED9C3 /* URLParseProtocol.swift in Sources */,
 				E5786FBA206DE9620045F7F5 /* FootballTotalCell.swift in Sources */,
 				E550D8AB20737594002DDE23 /* FootballPlayFilterCell.swift in Sources */,
 				E56298BD20513429006397EA /* AuthenticationVC.swift in Sources */,

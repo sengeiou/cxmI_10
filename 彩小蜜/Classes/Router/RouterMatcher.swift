@@ -7,17 +7,51 @@
 //
 
 import Foundation
+import HandyJSON
+
 
 enum PushControllerType {
-    case fd
+    case 首页
+    case 足球胜平负
+    case 足球让球胜平负
+    case none
 }
 
-protocol RouterMatcher {
+struct URLModel : HandyJSON{
+    var type: String!
+    var id: String!
+    var subid: String!
+}
+
+protocol RouterMatcher: URLParseProtocol {
     
 }
 
 extension RouterMatcher {
-    func matcherHttp() -> PushControllerType {
-        return .fd
+    
+    
+    func matcherHttp(urlStr: String) -> PushControllerType {
+        let urlStr = "cxmxc=scm&type=0&id=http:baidu.com&subid=1"
+        guard urlStr.contains("cxmxc=scm") else { return .none }
+        
+        let urlModel = parseUrl(urlStr: urlStr)
+        
+        switch urlModel?.type {
+        case "0":
+            return .首页
+        default:
+            return .none
+        }
+        
+       
     }
 }
+
+
+
+
+
+
+
+
+

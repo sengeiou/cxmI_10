@@ -284,6 +284,13 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
         changButState(isSelected: false)
         
         guard self.filterList != nil else { return }
+        for  index in 0..<filterList.count {
+            let indexPath = IndexPath(item: index, section: 0)
+            let filter = filterList[indexPath.row]
+            filter.isSelected = false
+            self.collectionView.reloadItems(at: [indexPath])
+        }
+        
         for name in fiveMatchs {
             
             for  index in 0..<filterList.count {
