@@ -115,33 +115,38 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
             // 2选1 玩法转换
             if requestModel.playType == "7" {
                 
-                let betCells = matchBetCells
+                let mbetCells = matchBetCells
                 matchBetCells.removeAll()
-                for betCell in betCells {
-                    
+                for betCell in mbetCells {
+                    //let cell =
                     for cell in betCell.betCells {
                         var matchBetCell = FootballMatchBetCell()
                         var betCells = [FootballPlayCellModel]()
-                        
+                        let cellc = FootballPlayCellModel()
                         if cell.cellCode == "30" || cell.cellCode == "0" {
+                            
                             matchBetCell.playType = "2"
-                            cell.cellCode = "0"
-                            cell.cellName = "客胜"
+                            cellc.cellCode = "0"
+                            cellc.cellName = "客胜"
+                            cellc.cellOdds = cell.cellOdds
                         }else if cell.cellCode == "31" || cell.cellCode == "3" {
                             matchBetCell.playType = "2"
-                            cell.cellCode = "3"
-                            cell.cellName = "主胜"
+                            cellc.cellCode = "3"
+                            cellc.cellName = "主胜"
+                            cellc.cellOdds = cell.cellOdds
                         }else if cell.cellCode == "32" || cell.cellCode == "3" {
                             matchBetCell.playType = "1"
-                            cell.cellCode = "3"
-                            cell.cellName = "让球主胜"
+                            cellc.cellCode = "3"
+                            cellc.cellName = "让球主胜"
+                            cellc.cellOdds = cell.cellOdds
                         }else if cell.cellCode == "33" || cell.cellCode == "0" {
                             matchBetCell.playType = "1"
-                            cell.cellCode = "0"
-                            cell.cellName = "让球客胜"
+                            cellc.cellCode = "0"
+                            cellc.cellName = "让球客胜"
+                            cellc.cellOdds = cell.cellOdds
                         }
                         
-                        betCells.append(cell)
+                        betCells.append(cellc)
                         matchBetCell.betCells = betCells
                         matchBetCells.append(matchBetCell)
                     }
