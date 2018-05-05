@@ -385,9 +385,16 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
             return }
         let requestModel = getRequestModel(betType: self.betType, times: self.times, bonusId: "", homeData: self.homeData)
         
-        let payment = PaymentViewController()
-        payment.requestModel = requestModel
-        pushViewController(vc: payment)
+        if getUserData() != nil {
+            let payment = PaymentViewController()
+            payment.requestModel = requestModel
+            pushViewController(vc: payment)
+        }else {
+            pushLoginVC(from: self)
+        }
+        
+        
+        
         
     }
     // 串关 弹窗
