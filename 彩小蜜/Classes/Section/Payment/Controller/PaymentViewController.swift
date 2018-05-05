@@ -42,6 +42,8 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
     
     private var timer : Timer!
     
+    private var selectedIndex : IndexPath!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "彩小秘 · 支付订单"
@@ -374,6 +376,7 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
                 if indexPath.row == 1 {
                     tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
                     self.paymentModel = paymentModel
+                    self.selectedIndex = indexPath
                 }
                 
                 return cell
@@ -411,14 +414,19 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
             if indexPath.row == 2 {
-                guard self.saveBetInfo != nil else { return }
+                guard self.saveBetInfo != nil, self.saveBetInfo.bonusList.isEmpty == false else { return }
                 let coupon = CouponFilterViewController()
                 coupon.delegate = self
                 coupon.bonusList = self.saveBetInfo.bonusList
                 present(coupon)
+                guard self.selectedIndex != nil else { return }
+                tableView.selectRow(at: self.selectedIndex, animated: true, scrollPosition: .none)
             }
         }else if indexPath.section == 1 {
-            self.paymentModel = paymentAllList[indexPath.row - 1 ]
+            if indexPath.row != 0 {
+                self.paymentModel = paymentAllList[indexPath.row - 1 ]
+                self.selectedIndex = indexPath
+            }
         }
         //tableView.deselectRow(at: indexPath, animated: true)
     }

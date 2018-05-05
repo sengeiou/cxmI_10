@@ -13,7 +13,7 @@ class WithdrawalViewController: BaseViewController {
     //MARK: - 点击事件
     // 提交   确认支付
     @objc private func drawMoney(_ sender: UIButton) {
-        
+        guard drawDataModel != nil else { return }
         guard drawDataModel.defaultBankLabel != nil, drawDataModel.defaultBankLabel != "" else {
             showHUD(message: "请添加收款银行卡")
             return

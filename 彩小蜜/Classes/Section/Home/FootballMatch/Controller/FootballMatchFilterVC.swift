@@ -186,6 +186,7 @@ class FootballMatchFilterVC: BasePopViewController, UICollectionViewDelegate, UI
     // MARK: - TOP VIEW Delegate
     // 全选
     func allSelected() {
+        guard self.filterList != nil else { return }
         for  index in 0..<filterList.count {
             let indexPath = IndexPath(item: index, section: 0)
             let filter = filterList[indexPath.row]
@@ -195,6 +196,7 @@ class FootballMatchFilterVC: BasePopViewController, UICollectionViewDelegate, UI
     }
     // 反选
     func reverseSelected() {
+        guard self.filterList != nil else { return }
         for index in 0..<filterList.count {
             let indexPath = IndexPath(item: index, section: 0)
             let filter = filterList[indexPath.row]

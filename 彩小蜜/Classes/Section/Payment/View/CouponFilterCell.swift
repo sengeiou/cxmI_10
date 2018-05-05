@@ -21,11 +21,13 @@ class CouponFilterCell: UITableViewCell {
             
             contentlb.text = bonusInfo.useRange
             
+            titleLb.text = bonusInfo.minGoodsAmount
             //self.isSelected = true
             //setSelected(true, animated: true)
         }
     }
     
+    private var titleLb : UILabel!
     private var moneylb : UILabel!
     private var contentlb : UILabel!
     private var selectedIcon : UIImageView!
@@ -43,6 +45,11 @@ class CouponFilterCell: UITableViewCell {
     private func initSubview() {
         self.selectionStyle = .none
         
+        titleLb = UILabel()
+        titleLb.font = Font13
+        titleLb.textColor = Color505050
+        titleLb.textAlignment = .center
+        
         moneylb = UILabel()
         moneylb.font = Font16
         moneylb.textColor = ColorEA5504
@@ -56,9 +63,16 @@ class CouponFilterCell: UITableViewCell {
         selectedIcon = UIImageView()
         selectedIcon.image = UIImage(named: "Mentionmoneysteps_nor")
         
+        self.contentView.addSubview(titleLb)
         self.contentView.addSubview(moneylb)
         self.contentView.addSubview(contentlb)
         self.contentView.addSubview(selectedIcon)
+        
+        titleLb.snp.makeConstraints { (make) in
+            make.top.equalTo(15 * defaultScale)
+            make.left.right.equalTo(contentlb)
+            make.height.equalTo(contentlb)
+        }
         
         moneylb.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(0)
@@ -66,7 +80,7 @@ class CouponFilterCell: UITableViewCell {
             make.width.equalTo(137 * defaultScale)
         }
         contentlb.snp.makeConstraints { (make) in
-            make.top.equalTo(15 * defaultScale)
+            make.top.equalTo(titleLb.snp.bottom).offset(5)
             make.bottom.equalTo(-15 * defaultScale)
             make.left.equalTo(moneylb.snp.right)
             make.right.equalTo(selectedIcon.snp.left).offset(-15 * defaultScale)
