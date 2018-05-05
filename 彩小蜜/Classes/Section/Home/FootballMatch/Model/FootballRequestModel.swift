@@ -38,6 +38,7 @@ struct MatchBetPlay: HandyJSON {
     var matchTime: Int!
     /// 投注赛事编码 ,
     var playCode: String!
+    
     var matchBetCells: [FootballMatchBetCell]!
 }
 

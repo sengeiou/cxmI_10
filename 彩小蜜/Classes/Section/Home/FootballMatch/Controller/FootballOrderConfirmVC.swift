@@ -301,7 +301,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         return nil
     }
     
-    // MARK: - FOOTER  delegate
+    // MARK: - FOOTER  delegate 协议
     func didTipSelectedAgreement(isAgerr: Bool) {
         self.isAgreement = isAgerr
     }

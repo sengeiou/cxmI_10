@@ -109,14 +109,55 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
                 matchBetCell.betCells = betCells
                 matchBetCell.playType = matchPlay.playType
                 matchBetCell.single = matchPlay.single
+                
                 matchBetCells.append(matchBetCell)
             }
+            // 2选1 玩法转换
+            if requestModel.playType == "7" {
+                
+                let betCells = matchBetCells
+                matchBetCells.removeAll()
+                for betCell in betCells {
+                    
+                    for cell in betCell.betCells {
+                        var matchBetCell = FootballMatchBetCell()
+                        var betCells = [FootballPlayCellModel]()
+                        
+                        if cell.cellCode == "30" {
+                            matchBetCell.playType = "2"
+                            cell.cellCode = "0"
+                            cell.cellName = "客胜"
+                        }else if cell.cellCode == "31" {
+                            matchBetCell.playType = "2"
+                            cell.cellCode = "3"
+                            cell.cellName = "主胜"
+                        }else if cell.cellCode == "32" {
+                            matchBetCell.playType = "1"
+                            cell.cellCode = "3"
+                            cell.cellName = "让球主胜"
+                        }else if cell.cellCode == "33" {
+                            matchBetCell.playType = "1"
+                            cell.cellCode = "0"
+                            cell.cellName = "让球客胜"
+                        }
+                        
+                        betCells.append(cell)
+                        matchBetCell.betCells = betCells
+                        matchBetCells.append(matchBetCell)
+                    }
+                   
+                }
+            }
+            
             
             matchBetCell.matchBetCells = matchBetCells
             matchBetPlays.append(matchBetCell)
         }
         
         requestModel.matchBetPlays = matchBetPlays
+        if requestModel.playType == "7" {
+            requestModel.playType = "6"
+        }
         
         return requestModel
     }
