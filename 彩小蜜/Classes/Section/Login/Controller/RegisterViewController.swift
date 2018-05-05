@@ -171,13 +171,18 @@ class RegisterViewController: BaseViewController, UITableViewDelegate, UITableVi
         table.register(PasswordTextFieldCell.self, forCellReuseIdentifier: passwordCellIdentifier)
         table.register(VcodeTextFieldCell.self, forCellReuseIdentifier: vcodeCellIdentifier)
         
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didTipTap))
+        table.addGestureRecognizer(tap)
         let footer = RegisterFooterView()
-        footer.delegate = self 
+        
+        footer.delegate = self
         footer.register.addTarget(self, action: #selector(registerClicked(_:)), for: .touchUpInside)
         table.tableFooterView = footer
         
         return table
     }()
+    
     //MARK: - tableview dataSource
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -212,6 +217,17 @@ class RegisterViewController: BaseViewController, UITableViewDelegate, UITableVi
         return CGFloat(loginTextFieldHeight)
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.passwordTF.resignFirstResponder()
+        self.phoneTF.resignFirstResponder()
+        self.vcodeTF.resignFirstResponder()
+    }
+    
+    @objc private func didTipTap() {
+        self.passwordTF.resignFirstResponder()
+        self.phoneTF.resignFirstResponder()
+        self.vcodeTF.resignFirstResponder()
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

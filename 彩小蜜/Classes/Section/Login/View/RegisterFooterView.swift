@@ -21,11 +21,8 @@ class RegisterFooterView: UIView {
     private var agreementBut: UIButton!
     private var agreement : UIButton!
     
-    
-    
     init() {
         super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 100))
-        
         initSubview()
     }
     
