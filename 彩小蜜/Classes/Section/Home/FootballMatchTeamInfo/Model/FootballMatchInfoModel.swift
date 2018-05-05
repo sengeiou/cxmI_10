@@ -179,7 +179,7 @@ struct MatchInfoModel: HandyJSON {
     var homeTeamPic: String!
     var leagueAddr: String!
     var matchId: String!
-    var matchTime: String!
+    var matchTime: Int!
     var visitingTeamAbbr: String!
     var visitingTeamId: String!
     var visitingTeamPic: String!

@@ -39,7 +39,7 @@ class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         
         let football = FootballMatchVC()
         
-        switch orderInfo.playType {
+        switch orderInfo.lotteryPlayClassifyId {
         case "2":
             football.matchType = .胜平负
         case "1":

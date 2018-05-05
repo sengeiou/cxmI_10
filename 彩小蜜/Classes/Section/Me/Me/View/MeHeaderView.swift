@@ -16,7 +16,7 @@ protocol MeHeaderViewDelegate {
     func alertClicked() -> Void
 }
 
-class MeHeaderView: UIView {
+class MeHeaderView: UIView , UserInfoPro{
 
     // MARK: - 点击事件
     @objc private func rechargeClicked(_ sender: UIButton) {
@@ -119,7 +119,6 @@ class MeHeaderView: UIView {
         let stateView = UIImageView()
         
         stateView.image = UIImage(named: "V")
-        
         
         return stateView
     }() // 认证状态
@@ -245,6 +244,12 @@ class MeHeaderView: UIView {
         phoneLB = UILabel()
         phoneLB.font = Font16
         phoneLB.tintColor = Color505050
+        
+        if let userInfo = getUserData() {
+            if userInfo.mobile != nil {
+                phoneLB.text = userInfo.mobile
+            }
+        }
 //        var phoneNum = "18500237152"
 //
 //        phoneNum.replaceSubrange(phoneNum.index(phoneNum.startIndex, offsetBy: 3)...phoneNum.index(phoneNum.startIndex, offsetBy: 6), with: "****")
@@ -267,14 +272,14 @@ class MeHeaderView: UIView {
         // 账户余额
         accountBalanceLB = UILabel()
         accountBalanceLB.font = Font21
-        //accountBalanceLB.text = "888元"
+        accountBalanceLB.text = "0.00元"
         accountBalanceLB.textAlignment = .center
         accountBalanceLB.textColor = ColorE95504
         
         // 可提现余额
         withdrawalBalanceLB = UILabel()
         withdrawalBalanceLB.font = Font21
-        //withdrawalBalanceLB.text = "88元"
+        withdrawalBalanceLB.text = "0.00元"
         withdrawalBalanceLB.textAlignment = .center
         withdrawalBalanceLB.textColor = ColorE95504
         

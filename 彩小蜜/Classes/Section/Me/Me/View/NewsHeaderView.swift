@@ -8,9 +8,7 @@
 
 import UIKit
 
-class NewsHeaderView: UIView {
-    
-    
+class NewsHeaderView: UIView, UserInfoPro {
     
     //MARK: - 设置界面显示信息
     public var userInfo : UserInfoDataModel! {
@@ -221,6 +219,11 @@ class NewsHeaderView: UIView {
         phoneLB = UILabel()
         phoneLB.font = Font16
         phoneLB.tintColor = Color505050
+        if let userInfo = getUserData() {
+            if userInfo.mobile != nil {
+                phoneLB.text = userInfo.mobile
+            }
+        }
         //        var phoneNum = "18500237152"
         //
         //        phoneNum.replaceSubrange(phoneNum.index(phoneNum.startIndex, offsetBy: 3)...phoneNum.index(phoneNum.startIndex, offsetBy: 6), with: "****")

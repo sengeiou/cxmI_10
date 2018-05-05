@@ -57,8 +57,6 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        
     }
     
     override func didLogin(isLogin: Bool) {

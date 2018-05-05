@@ -23,6 +23,16 @@ extension DateProtocol {
         
         return dateFormatter.string(from: date)
     }
+    func timeStampToMDHHmm(_ timeStamp : Int) -> String {
+        let timeInterval : TimeInterval = TimeInterval(timeStamp)
+        
+        let date = Date(timeIntervalSince1970: timeInterval)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM-dd HH: mm"
+        
+        return dateFormatter.string(from: date)
+    }
     func getWeek() -> String {
         
         let weaks = ["星期日", "星期一","星期二","星期三","星期四","星期五","星期六"]

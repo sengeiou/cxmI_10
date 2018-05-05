@@ -13,12 +13,13 @@ enum TeamHeaderStyle  {
     case 默认
 }
 
-class FootballTeamHeader: UIView {
+class FootballTeamHeader: UIView, DateProtocol {
 
     public var matchInfo : MatchInfoModel! {
         didSet{
             guard matchInfo != nil else { return }
-            titlelb.text = matchInfo.changci + " " + matchInfo.leagueAddr + " " + matchInfo.matchTime
+            let time = timeStampToHHmm(matchInfo.matchTime)
+            titlelb.text = matchInfo.changci + " " + matchInfo.leagueAddr + " " + time
             homeName.text = matchInfo.homeTeamAbbr
             visiName.text = matchInfo.visitingTeamAbbr
             homeOdds.text = "主胜" + matchInfo.hOdds
