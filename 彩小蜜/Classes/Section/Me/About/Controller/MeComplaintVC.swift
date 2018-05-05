@@ -15,6 +15,11 @@ class MeComplaintVC: BaseViewController {
     // MARK: - 点击事件
     @objc private func sendClicked(_ sender: UIButton) {
         print("发送")
+        guard self.textView.textView.text != nil, self.textView.textView.isEmpty == false else {
+            showHUD(message: "请输入您的宝贵意见")
+            return
+        }
+        complainRequest()
     }
     
     // MARK: - 属性
@@ -30,6 +35,41 @@ class MeComplaintVC: BaseViewController {
         initSubview()
     }
 
+    // MARK: = 网络请求
+    private func complainRequest() {
+        self.showProgressHUD()
+        weak var weakSelf = self
+        guard let text = self.textView.textView.text else { return }
+        _ = userProvider.rx.request(.complain(content: text))
+            .asObservable()
+            .mapBaseObject(type: DataModel.self)
+            .subscribe(onNext: { (data) in
+                self.dismissProgressHud()
+                self.showHUD(message: data.msg)
+                self.popViewController()
+            }, onError: { (error) in
+                self.dismissProgressHud()
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        weakSelf?.removeUserData()
+                        weakSelf?.pushLoginVC(from: self)
+                    default : break
+                    }
+                    
+                    if 300000...310000 ~= code {
+                        
+                        self.showHUD(message: msg!)
+                    }
+                    print("\(code)   \(msg!)")
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil )
+    }
+    
+    
     private func initSubview() {
         self.view.backgroundColor = ColorF4F4F4
         

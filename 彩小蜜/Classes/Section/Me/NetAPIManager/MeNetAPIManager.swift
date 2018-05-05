@@ -54,7 +54,8 @@ enum MeNetAPIManager {
     case collectList(pageNum: Int)
     /// 切换
     case configQuety
-    
+    /// 用户投诉
+    case complain(content: String)
 }
 
 extension MeNetAPIManager : TargetType {
@@ -119,7 +120,8 @@ extension MeNetAPIManager : TargetType {
             return "/member/user/collect/list"
         case .configQuety:
             return "/member/switch/config/query"
-            
+        case .complain:
+            return "/dl/complain/add"
         }
     }
     
@@ -188,7 +190,8 @@ extension MeNetAPIManager : TargetType {
             dic["pageSize"] = "20"
         case .configQuety:
             dic["str"] = "ssss"
-            
+        case .complain(let content):
+            dic["complainContent"] = content
             
         default:
             return .requestPlain
