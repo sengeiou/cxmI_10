@@ -62,7 +62,6 @@ extension FootballRequestPro where Self: FootballMatchVC {
                 DispatchQueue.main.async {
                     weakSelf?.tableView.reloadData()
                 }
-                self.filterRequest()
             }, onError: { (error) in
                 self.dismissProgressHud()
                 guard let err = error as? HXError else { return }

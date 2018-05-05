@@ -75,7 +75,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         setEmpty(title: "暂无可选赛事", tableView)
         
         footballRequest(leagueId: "")
-        //filterRequest()
+        filterRequest()
         setRightButtonItem()
         limitNum = 1
     }
