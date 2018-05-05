@@ -123,19 +123,19 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
                         var matchBetCell = FootballMatchBetCell()
                         var betCells = [FootballPlayCellModel]()
                         
-                        if cell.cellCode == "30" {
+                        if cell.cellCode == "30" || cell.cellCode == "0" {
                             matchBetCell.playType = "2"
                             cell.cellCode = "0"
                             cell.cellName = "客胜"
-                        }else if cell.cellCode == "31" {
+                        }else if cell.cellCode == "31" || cell.cellCode == "3" {
                             matchBetCell.playType = "2"
                             cell.cellCode = "3"
                             cell.cellName = "主胜"
-                        }else if cell.cellCode == "32" {
+                        }else if cell.cellCode == "32" || cell.cellCode == "3" {
                             matchBetCell.playType = "1"
                             cell.cellCode = "3"
                             cell.cellName = "让球主胜"
-                        }else if cell.cellCode == "33" {
+                        }else if cell.cellCode == "33" || cell.cellCode == "0" {
                             matchBetCell.playType = "1"
                             cell.cellCode = "0"
                             cell.cellName = "让球客胜"

@@ -33,6 +33,8 @@ class FootballMatchFilterVC: BasePopViewController, UICollectionViewDelegate, UI
     private var bgView: UIView!
     private var titleLB: UILabel!
     
+    private var fiveMatchs = ["英超","西甲","法甲","意甲","德甲"]
+    
     public var filterList: [FilterModel]! {
         didSet{
             guard filterList != nil else { return }
@@ -202,7 +204,19 @@ class FootballMatchFilterVC: BasePopViewController, UICollectionViewDelegate, UI
     }
     // 仅五大联赛
     func fiveSelected() {
-        
+        guard self.filterList != nil else { return }
+        for name in fiveMatchs {
+            
+            for  index in 0..<filterList.count {
+                let indexPath = IndexPath(item: index, section: 0)
+                let filter = filterList[indexPath.row]
+                if name == filter.leagueAddr {
+                    filter.isSelected = true
+                    self.collectionView.reloadItems(at: [indexPath])
+                    break
+                }
+            }
+        }
     }
     
     func filterConfirm() {
