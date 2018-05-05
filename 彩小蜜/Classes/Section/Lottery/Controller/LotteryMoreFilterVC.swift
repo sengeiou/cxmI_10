@@ -47,6 +47,7 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
     private var onlyButBut: UIButton!
     private var currentFilterList : [FilterModel]!
     private var currentIsAlreadyBuy : Bool!
+    private var fiveMatchs = ["英超","西甲","法甲","意甲","德甲"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -281,6 +282,20 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
     func fiveSelected() {
         self.isAlreadyBuy = false
         changButState(isSelected: false)
+        
+        guard self.filterList != nil else { return }
+        for name in fiveMatchs {
+            
+            for  index in 0..<filterList.count {
+                let indexPath = IndexPath(item: index, section: 0)
+                let filter = filterList[indexPath.row]
+                if name == filter.leagueAddr {
+                    filter.isSelected = true
+                    self.collectionView.reloadItems(at: [indexPath])
+                    break
+                }
+            }
+        }
     }
     
     @objc private func onlyBuyButClicked(_ sender: UIButton) {
