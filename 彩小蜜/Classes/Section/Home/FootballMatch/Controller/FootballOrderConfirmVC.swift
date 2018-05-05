@@ -53,7 +53,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
                 let play = selectPlayList[0]
                 if play.matchPlays.count == 1 {
                     guard play.matchPlays[0].single == true else {
-                        showHUD(message: "请至少选择1场单关比赛或者2场非单关比赛")
+                        showHUD(message: "请至少选择1场单关比赛或者2场比赛")
                         self.canPush = false
                         return }
                     
@@ -66,7 +66,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     
                     }else {
                         self.canPush = false
-                        showHUD(message: "请至少选择1场单关比赛或者2场非单关比赛")
+                        showHUD(message: "请至少选择1场单关比赛或者2场比赛")
                     }
                 }
             }

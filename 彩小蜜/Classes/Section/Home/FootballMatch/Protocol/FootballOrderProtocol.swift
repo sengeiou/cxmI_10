@@ -183,7 +183,7 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
                     play.matchPlays[2].single == true ||
                     play.matchPlays[3].single == true ||
                     play.matchPlays[4].single == true else {
-                        showHUD(message: "请至少选择1场单关比赛或者2场非单关比赛")
+                        showHUD(message: "请至少选择1场单关比赛或者2场比赛")
                         return }
             }
         }

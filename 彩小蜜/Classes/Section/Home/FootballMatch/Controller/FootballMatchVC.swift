@@ -394,14 +394,14 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     // 确认
     func confirm() {
         guard selectPlayList.isEmpty == false else {
-            showHUD(message: "请至少选择1场单关比赛或者2场非单关比赛")
+            showHUD(message: "请至少选择1场单关比赛或者2场比赛")
             return }
 
         guard selectPlayList.count >= 2 else {
             let play = selectPlayList[0]
             if play.matchPlays.count == 1 {
                 guard play.matchPlays[0].single == true else {
-                    showHUD(message: "请至少选择1场单关比赛或者2场非单关比赛")
+                    showHUD(message: "请至少选择1场单关比赛或者2场比赛")
                     return }
                 
                 let order = FootballOrderConfirmVC()
@@ -423,7 +423,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
                     order.playList = selectPlayList
                     pushViewController(vc: order)
                 }else {
-                    showHUD(message: "请至少选择1场单关比赛或者2场非单关比赛")
+                    showHUD(message: "请至少选择1场单关比赛或者2场比赛")
                 }
             }
             

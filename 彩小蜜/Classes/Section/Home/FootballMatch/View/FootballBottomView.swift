@@ -18,10 +18,10 @@ class FootballBottomView: UIView {
     public var number : Int! {
         didSet{
             guard number != 0 else {
-            titleLB.text = "请至少选择1场单关比赛或者2场非单关比赛"
+            titleLB.text = "请至少选择1场单关比赛或者2场比赛"
                 return }
             
-            titleLB.text = "您共选择\(number!)场非单关比赛"
+            titleLB.text = "您共选择\(number!)场比赛"
         }
     }
     
@@ -83,7 +83,7 @@ class FootballBottomView: UIView {
         titleLB.textColor = Color787878
         titleLB.textAlignment = .left
         titleLB.numberOfLines = 2
-        titleLB.text = "请至少选择1场单关比赛或者2场非单关比赛"
+        titleLB.text = "请至少选择1场单关比赛或者2场比赛"
         
         deleteBut = UIButton(type: .custom)
         deleteBut.setBackgroundImage(UIImage(named: "trashbin"), for: .normal)
