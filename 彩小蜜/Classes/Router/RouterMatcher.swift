@@ -10,17 +10,17 @@ import Foundation
 import HandyJSON
 
 
-enum PushControllerType {
+enum PushControllerType : String{
     case 首页
     case 网页
     case 浏览器
-    case 足球胜平负
-    case 足球让球胜平负
-    case 足球总进球
-    case 足球半全场
-    case 足球比分
-    case 足球混合过关
-    case 足球二选一
+    case 足球胜平负 = "2"
+    case 足球让球胜平负 = "1"
+    case 足球总进球 = "4"
+    case 足球半全场 = "5"
+    case 足球比分 = "3"
+    case 足球混合过关 = "6"
+    case 足球二选一 = "7"
     case 球队详情
     case 咨询详情
     case 登录

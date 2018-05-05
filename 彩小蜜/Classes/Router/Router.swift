@@ -30,6 +30,7 @@ struct Router : RouterMatcher {
                 UIApplication.shared.openURL(url)
             }
         case .足球胜平负:
+            
             break
         case .足球让球胜平负:
             break
