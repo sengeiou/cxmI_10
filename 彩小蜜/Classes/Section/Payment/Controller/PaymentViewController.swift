@@ -49,7 +49,7 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
         self.title = "彩小秘 · 支付订单"
         WeixinCenter.share.payDelegate = self
         initSubview()
-        
+        orderRequest()
         timer = Timer(timeInterval: 3, target: self, selector: #selector(pollingStart), userInfo: nil, repeats: true)
         
         NotificationCenter.default.addObserver(self, selector: #selector(startPollingTimer), name: NSNotification.Name(rawValue: NotificationWillEnterForeground), object: nil)
@@ -57,8 +57,14 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        orderRequest()
         
+        
+    }
+    
+    override func didLogin(isLogin: Bool) {
+        if isLogin == false {
+            self.popViewController()
+        }
     }
     
     @objc private func startPollingTimer() {

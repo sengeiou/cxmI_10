@@ -13,6 +13,10 @@ fileprivate let mobileCellIdentifier = "mobileCellIdentifier"
 fileprivate let passwordCellIdentifier = "passwordCellIdentifier"
 fileprivate let vcodeCellIdentifier = "vcodeCellIdentifier"
 
+protocol LoginProtocol {
+    func didLogin(isLogin: Bool) -> Void
+}
+
 class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro, UITableViewDelegate, UITableViewDataSource {
 
     //MARK: - 按钮 点击 事件
@@ -38,8 +42,8 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro,
     
     @objc private func VCodeClicked(_ sender : UIButton) {
         let vcode = VCodeLoginViewController()
-        
-        self.navigationController?.pushViewController(vcode, animated: true)
+        vcode.currentVC = self
+        pushViewController(vc: vcode)
     }
     
     //MARK: - textField DELEGATE
@@ -52,7 +56,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro,
         return true
     }
     
-    
+    public var loginDelegate : LoginProtocol!
     //Mark: - 属性
     private var userNameTF : UITextField!
     private var passwordTF : UITextField!
@@ -104,6 +108,8 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro,
                 
                 if self.currentVC != nil {
                     self.popToCurrentVC()
+                    guard self.loginDelegate != nil else { return }
+                    self.loginDelegate.didLogin(isLogin: true)
                 }else {
                     self.pushRootViewController()
                 }
@@ -111,6 +117,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro,
                 print(data)
                 
             case .error(let error):
+                
                 guard let hxerror = error as? HXError else { return }
                 switch hxerror {
                 case .UnexpectedResult(_, let resultMsg) :
@@ -182,6 +189,8 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro,
         
         if currentVC != nil {
             popToCurrentVC()
+            guard self.loginDelegate != nil else { return }
+            self.loginDelegate.didLogin(isLogin: false)
         }else {
             pushRootViewController()
         }

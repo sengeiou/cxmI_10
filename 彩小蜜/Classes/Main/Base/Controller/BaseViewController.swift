@@ -11,7 +11,11 @@ import SnapKit
 import DZNEmptyDataSet
 import SVProgressHUD
 
-class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, DateProtocol, UserInfoPro {
+class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, DateProtocol, UserInfoPro , LoginProtocol{
+    func didLogin(isLogin: Bool) {
+        
+    }
+    
 
     // public
     public var currentVC : UIViewController?
@@ -19,6 +23,7 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
     public func pushLoginVC(from vc: UIViewController) {
         let login = LoginViewController()
         login.currentVC = vc
+        login.loginDelegate = vc as! LoginProtocol
         self.navigationController?.pushViewController(login, animated: true)
     }
     

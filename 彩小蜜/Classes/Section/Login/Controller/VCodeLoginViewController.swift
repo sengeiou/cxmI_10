@@ -76,12 +76,18 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
                 case .next(let data):
                     self.showHUD(message: data.showMsg)
                     
-                    if self.getUserData() == nil {
-                        self.save(userInfo: data)
-                        self.pushRootViewController()
-                    }else {
-                        self.save(userInfo: data)
+//                    if self.getUserData() == nil {
+//                        self.save(userInfo: data)
+//                        self.pushRootViewController()
+//                    }else {
+//                        self.save(userInfo: data)
+//                        self.popToCurrentVC()
+//                    }
+                    
+                    if self.currentVC != nil {
                         self.popToCurrentVC()
+                    }else {
+                        self.pushRootViewController()
                     }
                     print(data)
                 case .error(let error):
