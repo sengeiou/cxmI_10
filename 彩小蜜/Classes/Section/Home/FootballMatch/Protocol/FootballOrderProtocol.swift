@@ -174,7 +174,7 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
             let play = selectPlayList[0]
             if play.matchPlays.count == 1 {
                 guard selectPlayList[0].matchPlays[0].single == true else {
-                    showHUD(message: "请选择一场单关或2场以上非单关比赛")
+                    showHUD(message: "您还需要再选择一场比赛")
                     return }
             }else {
                 guard play.matchPlays.count == 5 else { return }
@@ -183,7 +183,7 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
                     play.matchPlays[2].single == true ||
                     play.matchPlays[3].single == true ||
                     play.matchPlays[4].single == true else {
-                        showHUD(message: "请至少选择1场单关比赛或者2场比赛")
+                        showHUD(message: "您还需要再选择一场比赛")
                         return }
             }
         }

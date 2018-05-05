@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum PushController {
+enum PushControllerType {
     case fd
 }
 
@@ -17,7 +17,7 @@ protocol RouterMatcher {
 }
 
 extension RouterMatcher {
-    func matcherHttp() -> PushController {
+    func matcherHttp() -> PushControllerType {
         return .fd
     }
 }
