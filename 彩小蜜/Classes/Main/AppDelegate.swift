@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AppDelegateProtocol, GeTu
         
         self.window?.rootViewController = rootViewController
         
-        Router().matcherHttp(urlStr: "")
+        
         
         registerApp()
         return true

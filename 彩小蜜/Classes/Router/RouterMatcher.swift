@@ -20,7 +20,8 @@ enum PushControllerType {
     case 足球比分
     case 足球混合过关
     case 足球二选一
-    case 商品详情
+    case 球队详情
+    case 咨询详情
     case 登录
     case 注册
     case none
@@ -57,12 +58,13 @@ extension RouterMatcher {
                 return .none
             }
         case "4":
-            return .商品详情
+            return .球队详情
         case "5":
             return .登录
         case "6":
             return .注册
-            
+        case "8":
+            return .咨询详情
         default:
             return .none
         }
