@@ -13,6 +13,7 @@ import HandyJSON
 enum PushControllerType {
     case 首页
     case 网页
+    case 浏览器
     case 足球胜平负
     case 足球让球胜平负
     case 足球总进球
@@ -42,7 +43,7 @@ extension RouterMatcher {
     
     func matcherHttp(urlStr: String) -> PushControllerType {
         let urlStr = "cxmxc=scm&type=0&id=http:baidu.com&subid=1"
-        guard urlStr.contains("cxmxc=scm") else { return .none }
+        guard urlStr.contains("cxmxc=scm") else { return .浏览器 }
         
         let urlModel = parseUrl(urlStr: urlStr)
         

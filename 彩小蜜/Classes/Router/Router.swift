@@ -22,9 +22,13 @@ struct Router : RouterMatcher {
             break
         case .网页:
             let web = WebViewController()
-            
-           
+            web.urlStr = urlStr
+            pushViewController(web)
             break
+        case .浏览器:
+            if let url = URL(string: urlStr) {
+                UIApplication.shared.openURL(url)
+            }
         case .足球胜平负:
             break
         case .足球让球胜平负:
