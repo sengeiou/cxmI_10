@@ -21,7 +21,8 @@ enum PushControllerType {
     case 足球混合过关
     case 足球二选一
     case 商品详情
-    
+    case 登录
+    case 注册
     case none
 }
 
@@ -55,13 +56,17 @@ extension RouterMatcher {
             }else {
                 return .none
             }
+        case "4":
+            return .商品详情
+        case "5":
+            return .登录
+        case "6":
+            return .注册
+            
         default:
             return .none
         }
-        
-       
     }
-    
     
     private func matcherFootballPlay(subid: String) -> PushControllerType {
         switch subid {
