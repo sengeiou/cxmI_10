@@ -355,7 +355,7 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
                 cell.cellStyle = .detail
             case 3:
                 cell.title.text = "还需支付"
-                let money = NSAttributedString(string:"- ¥ " + "\(self.saveBetInfo.thirdPartyPaid!)", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+                let money = NSAttributedString(string:"¥ " + "\(self.saveBetInfo.thirdPartyPaid!)", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
                 cell.detail.attributedText = money
             default: break
             }

@@ -392,10 +392,6 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         }else {
             pushLoginVC(from: self)
         }
-        
-        
-        
-        
     }
     // 串关 弹窗
     func orderPlay(filterList: [FootballPlayFilterModel]) {
