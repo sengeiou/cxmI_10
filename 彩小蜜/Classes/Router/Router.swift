@@ -30,20 +30,19 @@ struct Router : RouterMatcher {
                 UIApplication.shared.openURL(url)
             }
         case .足球胜平负:
-            
-            break
+            pushFootballVC(type.rawValue)
         case .足球让球胜平负:
-            break
+            pushFootballVC(type.rawValue)
         case .足球比分:
-            break
+            pushFootballVC(type.rawValue)
         case .足球半全场:
-            break
+            pushFootballVC(type.rawValue)
         case .足球总进球:
-            break
+            pushFootballVC(type.rawValue)
         case .足球混合过关:
-            break
+            pushFootballVC(type.rawValue)
         case .足球二选一:
-            break
+            pushFootballVC(type.rawValue)
             
         default:
             break
@@ -56,6 +55,29 @@ struct Router : RouterMatcher {
         }
     }
     
+    private func pushFootballVC(_ playType: String) {
+        let football = FootballMatchVC()
+        
+        switch playType {
+        case "1":
+            football.matchType = .让球胜平负
+        case "2":
+            football.matchType = .胜平负
+        case "3":
+            football.matchType = .比分
+        case "4":
+            football.matchType = .总进球
+        case "5":
+            football.matchType = .半全场
+        case "6":
+            football.matchType = .混合过关
+        case "7":
+            football.matchType = .二选一
+        default:
+            break
+        }
+        pushViewController(football)
+    }
     
     func getCurrentVC()->UIViewController{
         
