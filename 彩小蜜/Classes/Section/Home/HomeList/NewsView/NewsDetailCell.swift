@@ -91,7 +91,7 @@ class NewsDetailCell: UITableViewCell, WKUIDelegate, WKNavigationDelegate {
         webView = WKWebView(frame: CGRect.zero, configuration: webConfiguration)
         webView.navigationDelegate = self
         webView.uiDelegate = self
-        webView.autoresizingMask = .flexibleHeight
+       // webView.autoresizingMask = .flexibleHeight
         
         webView.scrollView.isScrollEnabled = false
         webView.scrollView.bounces = false
@@ -131,22 +131,20 @@ class NewsDetailCell: UITableViewCell, WKUIDelegate, WKNavigationDelegate {
     }
 
     
-    
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
         
         
         /// 获取html动态高度
-        webView.evaluateJavaScript("document.body.scrollHeight") { (result, error) in
+        webView.evaluateJavaScript("document.body.offsetHeight") { (result, error) in
             if error == nil {
                 var newFrame = webView.frame
                 newFrame.size.height = result as! CGFloat
                 webView.frame = newFrame
                 
-                
-                self.delegate.upDateCellHeight(height: result as! CGFloat + 90)
+                self.delegate.upDateCellHeight(height: result as! CGFloat + 150 * defaultScale)
 
-                webView.evaluateJavaScript("document.getElementsByTagName('style')[0].img{max-width: 100%; width:auto; height:auto;}", completionHandler: nil)
+                webView.evaluateJavaScript("document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '100%'", completionHandler: nil)
             }
         }
     }

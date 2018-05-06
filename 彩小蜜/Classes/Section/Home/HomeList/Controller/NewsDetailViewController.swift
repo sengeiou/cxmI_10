@@ -236,7 +236,7 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
     func numberOfSections(in tableView: UITableView) -> Int {
         guard self.detailModel != nil else { return 0 }
         guard self.detailModel.articles != nil, self.detailModel.articles.isEmpty == false else {
-            tableView.tableFooterView = nil 
+            tableView.tableFooterView = nil
             return 1 }
         return 2
     }
@@ -301,7 +301,7 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         if indexPath.section == 0 {
-            return cellHeight
+            return cellHeight 
         }else {
             
             if indexPath.row == 0 {
