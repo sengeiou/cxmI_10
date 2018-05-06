@@ -145,6 +145,12 @@ class BankCardViewController: BaseViewController, UITableViewDelegate, UITableVi
                 weakSelf?.showHUD(message: data.showMsg)
                 weakSelf?.bankListRequest()
             }else {
+                guard data.lastCardNo4 != nil else {
+                    weakSelf?.showCXMAlert(title: "删除成功！", message: "", action: "知道了", cancel: nil, confirm: { (action) in
+                        weakSelf?.bankListRequest()
+                    })
+                    return }
+                
                 let attStr = NSMutableAttributedString(string: "默认收款卡已设置为", attributes: [NSAttributedStringKey.foregroundColor: ColorA0A0A0])
                 
                 let bankCardNo = NSAttributedString(string: "尾号为\(data.lastCardNo4!)", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])

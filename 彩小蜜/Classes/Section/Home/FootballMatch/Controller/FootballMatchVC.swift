@@ -9,7 +9,7 @@
 import UIKit
 import SVProgressHUD
 
-let MaxSelectedNum = 2
+let MaxSelectedNum = 15
 
 enum FootballMatchType: String {
     case 胜平负 = "彩小秘 · 胜平负"
