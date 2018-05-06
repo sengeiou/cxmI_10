@@ -112,9 +112,22 @@ class NewsDetailCell: UITableViewCell, WKUIDelegate, WKNavigationDelegate {
 //
 //        let xxx = String.init(data: data! as Data, encoding: String.Encoding.utf8)
         
+        let html = """
+                <html>
+                <head>
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, user-scalable=no">
+                <style>
+                img{max-width: 100%; width:auto; height:auto;}
+                </style>
+                </head>
+                <body>
+                \(htmlStr)
+                </body>
+                </html>
+"""
         
-        
-        webView.loadHTMLString(htmlStr, baseURL: nil)
+        webView.loadHTMLString(html, baseURL: nil)
     }
 
     
@@ -133,7 +146,7 @@ class NewsDetailCell: UITableViewCell, WKUIDelegate, WKNavigationDelegate {
                 
                 self.delegate.upDateCellHeight(height: result as! CGFloat + 90)
 
-                webView.evaluateJavaScript("document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '100%'", completionHandler: nil)
+                webView.evaluateJavaScript("document.getElementsByTagName('style')[0].img{max-width: 100%; width:auto; height:auto;}", completionHandler: nil)
             }
         }
     }

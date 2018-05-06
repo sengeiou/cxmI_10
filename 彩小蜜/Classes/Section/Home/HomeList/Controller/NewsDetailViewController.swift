@@ -234,6 +234,10 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
     }()
     //MARK: - tableView dataSource
     func numberOfSections(in tableView: UITableView) -> Int {
+        guard self.detailModel != nil else { return 0 }
+        guard self.detailModel.articles != nil, self.detailModel.articles.isEmpty == false else {
+            tableView.tableFooterView = nil 
+            return 1 }
         return 2
     }
     

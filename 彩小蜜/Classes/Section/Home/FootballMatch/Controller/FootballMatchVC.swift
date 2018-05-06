@@ -361,11 +361,9 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     }
     // MARK: - 帮助
     @objc private func helpClicked(_ sender: UIButton) {
-//        let homeWeb = WebViewController()
-//        homeWeb.urlStr = webPlayHelp
-//        pushViewController(vc: homeWeb)
-        
-        pushRouterVC(urlStr: "", from: self)
+        let homeWeb = WebViewController()
+        homeWeb.urlStr = webPlayHelp
+        pushViewController(vc: homeWeb)
     }
     @objc private func showMenu(_ sender: UIButton) {
         let filter = FootballMatchFilterVC()
