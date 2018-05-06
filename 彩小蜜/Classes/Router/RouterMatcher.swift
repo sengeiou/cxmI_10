@@ -42,7 +42,7 @@ extension RouterMatcher {
     
     
     func matcherHttp(urlStr: String) -> PushControllerType {
-        let urlStr = "cxmxc=scm&type=0&id=http:baidu.com&subid=1"
+        let urlStr = "cxmxc=scm&type=3&id=1&subid=1"
         guard urlStr.contains("cxmxc=scm") else { return .浏览器 }
         
         let urlModel = parseUrl(urlStr: urlStr)

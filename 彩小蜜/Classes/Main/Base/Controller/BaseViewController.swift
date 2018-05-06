@@ -11,7 +11,7 @@ import SnapKit
 import DZNEmptyDataSet
 import SVProgressHUD
 
-class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, DateProtocol, UserInfoPro , LoginProtocol{
+class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, DateProtocol, UserInfoPro , LoginProtocol, RouterPro{
     func didLogin(isLogin: Bool) {
         
     }
