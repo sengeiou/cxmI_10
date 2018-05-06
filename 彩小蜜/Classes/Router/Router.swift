@@ -48,7 +48,9 @@ extension RouterPro {
         case .咨询详情:
             guard let id = type.1?.id else { return }
             pushNewsDetail( articleId: id, from: vc )
-            
+        case .球队详情:
+            guard let id = type.1?.id else { return }
+            pushMatchInfo(matchId: id, from: vc)
         default:
             break
         }
@@ -58,6 +60,12 @@ extension RouterPro {
         let detail = NewsDetailViewController()
         detail.articleId = articleId
         pushViewController(detail, from: vc)
+    }
+    
+    private func pushMatchInfo(matchId: String, from vc : UIViewController) {
+        let match = FootballMatchInfoVC()
+        match.matchId = matchId
+        pushViewController(match, from: vc)
     }
     
     private func pushFootballVC(_ playType: String, from vc : UIViewController) {
@@ -133,7 +141,7 @@ struct Router : RouterMatcher {
     
 //    func pushRouterVC(urlStr: String) {
 //        let type = matcherHttp(urlStr: urlStr)
-//        
+//
 //        switch type {
 //        case .首页:
 //            break
@@ -164,7 +172,7 @@ struct Router : RouterMatcher {
 //            pushFootballVC(type.rawValue)
 //        case .足球二选一:
 //            pushFootballVC(type.rawValue)
-//            
+//
 //        default:
 //            break
 //        }
