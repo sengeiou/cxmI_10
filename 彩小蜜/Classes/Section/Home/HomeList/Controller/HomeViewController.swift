@@ -57,6 +57,26 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         football.homeData = homeData.dlPlayClassifyDetailDTOs[index]
         pushViewController(vc: football)
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if homeStyle == .onlyNews {
+            let web = NewsDetailViewController()
+            web.articleId = self.newsList[indexPath.row].articleId
+            pushViewController(vc: web)
+        }else {
+            switch indexPath.section {
+            case 1:
+                guard homeData != nil, let activity = self.homeData.activity else { return }
+                let web = WebViewController()
+                web.urlStr = activity.actUrl
+                pushViewController(vc: web)
+            case 3:
+                let web = NewsDetailViewController()
+                web.articleId = self.newsList[indexPath.row].articleId
+                pushViewController(vc: web)
+            default: break
+            }
+        }
+    }
     
     //MARK: - 属性 public
     public var homeStyle : ShowType! = .onlyNews {
@@ -219,26 +239,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         return table
     }()
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if homeStyle == .onlyNews {
-            let web = NewsDetailViewController()
-            web.articleId = self.newsList[indexPath.row].articleId
-            pushViewController(vc: web)
-        }else {
-            switch indexPath.section {
-            case 1:
-                guard homeData != nil, let activity = self.homeData.activity else { return }
-                let web = WebViewController()
-                web.urlStr = activity.actUrl
-                pushViewController(vc: web)
-            case 3:
-                let web = NewsDetailViewController()
-                web.articleId = self.newsList[indexPath.row].articleId
-                pushViewController(vc: web)
-            default: break
-            }
-        }
-    }
+    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         guard homeStyle != nil else { return 0 }

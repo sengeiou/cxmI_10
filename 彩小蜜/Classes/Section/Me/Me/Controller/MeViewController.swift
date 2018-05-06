@@ -94,6 +94,9 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     
     func withdrawalClicked() {
         print("提现")
+        guard self.userInfo.isReal else {
+            showHUD(message: "请先实名认证")
+            return }
         let draw = WithdrawalViewController()
         pushViewController(vc: draw)
     }
