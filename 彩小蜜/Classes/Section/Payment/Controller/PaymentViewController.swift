@@ -439,6 +439,7 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
     @objc private func confirmClicked(_ sender: UIButton) {
         guard canPayment else { return }
         self.canPayment = false
+        maxTimes = 20
         paymentRequest()
     }
     // 选取的  优惠券

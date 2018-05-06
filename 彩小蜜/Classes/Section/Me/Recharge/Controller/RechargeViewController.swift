@@ -18,6 +18,8 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
     
     public var userInfo  : UserInfoDataModel!
     
+    private var maxTimes = 20
+    private var timeInterval : Double = 3
     //MARK: - 属性
     private var headerView : RechargeHeaderView!
     private var footerView : RechargeFooterView!
@@ -26,6 +28,9 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
     private var textfield : UITextField!
     private var paymentAllList : [PaymentList]!
     private var paymentModel : PaymentList!
+    private var paymentResult : PaymentResultModel!
+    private var canPayment : Bool = true
+    private var timer : Timer!
     
     //MARK: - 生命周期
     override func viewDidLoad() {
@@ -33,14 +38,42 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
         self.title = "彩小秘 · 充值"
         initSubview()
         allPaymentRequest()
+        
+        timer = Timer(timeInterval: 3, target: self, selector: #selector(pollingStart), userInfo: nil, repeats: true)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(startPollingTimer), name: NSNotification.Name(rawValue: NotificationWillEnterForeground), object: nil)
     }
     
     //MARK: - 点击事件
+    @objc private func startPollingTimer() {
+        if canPayment == false {
+            timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(pollingStart), userInfo: nil, repeats: true)
+            timer.fire()
+        }
+    }
+    // 轮询
+    @objc private func pollingStart() {
+        
+        guard maxTimes > 0 else {
+            timer.invalidate()
+            self.dismissProgressHud()
+            showCXMCancelAlert(title: "查询失败", message: "暂未查询到您的支付结果，如果您已经确认支付并成功扣款，可能存在延迟到账的情况，请到账户明细中查看或联系客服查询", action: "知道了") { (action) in
+                self.canPayment = true
+            }
+            return
+        }
+        maxTimes -= 3
+        print(maxTimes)
+        queryPaymentResultRequest()
+    }
+    
     func recharge() {
         guard validate(.number, str: self.cardCell.textfield.text) else {
             showAlert(message: "请输入正确的金额")
             return
         }
+        maxTimes = 20
+        self.canPayment = false
         rechargeRequest(amount: self.cardCell.textfield.text!)
     }
     
@@ -67,12 +100,117 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     //MARK: - 网络请求
     private func rechargeRequest(amount: String) {
-       let payment = PaymentWebViewController()
-        pushViewController(vc: payment)
+      
+        guard self.paymentModel != nil else { return }
+        weak var weakSelf = self
+        
+        _ = paymentProvider.rx.request(.paymentRecharge(payCode: self.paymentModel.payCode, totalAmount: amount))
+            .asObservable()
+            .mapObject(type: PaymentResultModel.self)
+            .subscribe(onNext: { (data) in
+                self.paymentResult = data
+                self.handlePaymentResult()
+                
+            }, onError: { (error) in
+                weakSelf?.canPayment = true
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        weakSelf?.removeUserData()
+                        weakSelf?.pushLoginVC(from: self)
+                    default : break
+                    }
+                    
+                    if 300000...310000 ~= code {
+                        print(code)
+                        self.showHUD(message: msg!)
+                    }
+                default: break
+                }
+            }, onCompleted: nil, onDisposed: nil)
         
         
         
     }
+    
+    // 查询支付结果
+    private func queryPaymentResultRequest() {
+        guard self.paymentResult != nil else { return }
+        guard self.paymentResult.payLogId != nil else { return }
+        weak var weakSelf = self
+        _ = paymentProvider.rx.request(.paymentQuery(payLogId: self.paymentResult.payLogId))
+            .asObservable()
+            .mapBaseObject(type: DataModel.self)
+            .subscribe(onNext: { (data) in
+                switch data.code {
+                case "0":
+                    self.canPayment = true
+                    self.timer.invalidate()
+                    self.showHUD(message: data.msg)
+                    self.dismissProgressHud()
+                    let order = OrderDetailVC()
+                    order.backType = .root
+                    order.orderId = self.paymentResult.orderId
+                    self.pushViewController(vc: order)
+                case "304035":
+                    self.canPayment = true
+                    self.showHUD(message: data.msg)
+                    self.showCXMCancelAlert(title: "支付失败", message: "如果您已经确认支付并成功扣款，可能存在延迟到账的情况，请到账户明细中查看或联系客服查询", action: "知道了", confirm: { (action) in
+                        self.canPayment = true
+                    })
+                    self.dismissProgressHud()
+                case "304036":
+                    break
+                    
+                default: break
+                }
+                
+            }, onError: { (error) in
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        weakSelf?.removeUserData()
+                        weakSelf?.pushLoginVC(from: self)
+                    default : break
+                    }
+                    
+                    if 300000...310000 ~= code {
+                        print(code)
+                        self.showHUD(message: msg!)
+                    }
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil )
+    }
+    
+    private func handlePaymentResult() {
+        self.showProgressHUD()
+        
+        guard self.paymentResult != nil else { return }
+        
+        if let payUrl = self.paymentResult.payUrl {
+            guard let url = URL(string: payUrl) else { return }
+            //根据iOS系统版本，分别处理
+            if #available(iOS 10, *) {
+                UIApplication.shared.open(url, options: [:],
+                                          completionHandler: {
+                                            (success) in
+                                            
+                })
+            } else {
+                UIApplication.shared.openURL(url)
+            }
+            //timer.fire()
+            //self.queryPaymentResultRequest()
+        }else {
+            //self.queryPaymentResultRequest()
+        }
+    }
+    
     private func allPaymentRequest() {
         self.dismissProgressHud()
         weak var weakSelf = self
@@ -104,6 +242,8 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
                 }
             }, onCompleted: nil , onDisposed: nil )
     }
+    
+
     
     //MARK: - 懒加载
     lazy private var tableview : UITableView! = {

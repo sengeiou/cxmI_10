@@ -107,7 +107,8 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro,
                 }else {
                     self.pushRootViewController()
                 }
-                
+                self.userNameTF.resignFirstResponder()
+                self.passwordTF.resignFirstResponder()
                 print(data)
                 
             case .error(let error):
