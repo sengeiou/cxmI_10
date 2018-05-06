@@ -17,7 +17,7 @@ class AddNewBankCardVC: BaseViewController, UITextFieldDelegate, ValidatePro {
         str = str?.replacingOccurrences(of: " ", with: "")
         
         guard validate(.bankCard, str: str) else {
-            showAlert(message: " 银行卡不正确，请核对后重新添加")
+            showHUD(message: "银行卡不正确，请核对后重新添加")
             return
         }
         print(str!)

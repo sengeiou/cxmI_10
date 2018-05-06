@@ -96,7 +96,11 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         print("提现")
         guard self.userInfo != nil else { return }
         guard self.userInfo.isReal else {
-            showHUD(message: "请先实名认证")
+
+            showCXMAlert(title: nil, message: "请先实名认证后再申请提现", action: "去认证", cancel: "知道了") { (action) in
+                let authentication = AuthenticationVC()
+                self.pushViewController(vc: authentication)
+            }
             return }
         let draw = WithdrawalViewController()
         pushViewController(vc: draw)
@@ -105,7 +109,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     func signOutClicked() {
         print("退出登录")
         weak var weakSelf = self
-        showConfirm(message: "您正在退出登录", action: "继续退出", cancel: "返回") { (action) in
+        self.showCXMAlert(title: nil, message: "您正在退出登录", action: "继续退出", cancel: "返回") { (action) in
             weakSelf?.logoutRequest()
             weakSelf?.removeUserData()
             weakSelf?.pushRootViewController(2)
@@ -113,7 +117,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         //pushLoginVC(from: self)
         
     }
-    // 未认证 警告条
+    // 未认证 警告条 去认证
     func alertClicked() {
         let authentication = AuthenticationVC()
         pushViewController(vc: authentication)

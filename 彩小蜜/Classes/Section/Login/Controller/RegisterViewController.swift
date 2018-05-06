@@ -112,7 +112,7 @@ class RegisterViewController: BaseViewController, UITableViewDelegate, UITableVi
                 guard let hxError = error as? HXError else { return }
                 switch hxError {
                 case .UnexpectedResult(_, let resultMsg):
-                    self.showConfirm(message: resultMsg!, confirm: { (action) in
+                    self.showCXMAlert(title: nil, message: resultMsg!, action: "确定", cancel: nil , confirm: { (action) in
                         self.popViewController()
                     })
                 default : break
@@ -134,11 +134,10 @@ class RegisterViewController: BaseViewController, UITableViewDelegate, UITableVi
                 case .next(let data):
                     switch data.code {
                     case "301010" :
-                        self.showConfirm(message: data.msg, confirm: { (action) in
-                            DispatchQueue.main.async {
-                                 self.popViewController()
-                            }
+                        self.showCXMAlert(title: nil, message: data.msg, action: "确定", cancel: nil, confirm: { (action) in
+                            self.popViewController()
                         })
+                        
                         button.isCounting = false
                         break
                     default :
@@ -149,7 +148,7 @@ class RegisterViewController: BaseViewController, UITableViewDelegate, UITableVi
                     guard let hxError = error as? HXError else { return }
                     switch hxError {
                     case .UnexpectedResult(_, let resultMsg):
-                        self.showConfirm(message: resultMsg!, confirm: { (action) in
+                        self.showCXMAlert(title: nil, message: resultMsg!, action: "确定", cancel: nil, confirm: { (action) in
                             self.popViewController()
                         })
                     default : break

@@ -19,7 +19,7 @@ class ForgetPswPhoneVC: BaseViewController, UITextFieldDelegate, ValidatePro, UI
     @objc private func confirmButClicked(_ sender : UIButton) {
 
         guard validate(.phone, str: self.phoneTF.text) == true else {
-            showAlert(message: "请输入合法的手机号")
+            showHUD(message: "请输入合法的手机号")
             return
         }
         validateMobileRequest()
@@ -68,7 +68,7 @@ class ForgetPswPhoneVC: BaseViewController, UITextFieldDelegate, ValidatePro, UI
                         self.sendSmsRequest()
                         
                     case "301014":
-                        self.showConfirm(message: data.msg, action: "去注册", confirm: { (action) in
+                        self.showCXMAlert(title: nil, message: data.msg, action: "去注册", cancel: nil, confirm: { (action) in
                             guard weakSelf != nil else { return }
                             let register = RegisterViewController()
                             weakSelf?.pushViewController(vc: register)
@@ -105,7 +105,7 @@ class ForgetPswPhoneVC: BaseViewController, UITextFieldDelegate, ValidatePro, UI
                     guard let hxError = error as? HXError else { return }
                     switch hxError {
                     case .UnexpectedResult(_, let resultMsg):
-                        self.showConfirm(message: resultMsg!, confirm: { (action) in
+                        self.showCXMAlert(title: nil, message: resultMsg!, action: "确认", cancel: nil, confirm: { (action) in
                             self.popViewController()
                         })
                     default : break

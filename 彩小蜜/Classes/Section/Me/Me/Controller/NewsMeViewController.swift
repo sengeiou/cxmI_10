@@ -58,7 +58,7 @@ class NewsMeViewController: BaseViewController, UITableViewDelegate, UITableView
     func signOutClicked() {
         print("退出登录")
         weak var weakSelf = self
-        showConfirm(message: "您正在退出登录", action: "继续退出", cancel: "返回") { (action) in
+        showCXMAlert(title: nil, message: "您正在退出登录", action: "继续退出", cancel: "返回") { (action) in
             weakSelf?.logoutRequest()
         }
         pushLoginVC(from: self)

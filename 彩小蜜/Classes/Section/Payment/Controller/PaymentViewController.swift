@@ -77,7 +77,7 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
         guard maxTimes > 0 else {
             timer.invalidate()
             SVProgressHUD.dismiss()
-            showCXMCancelAlert(title: "查询失败", message: "暂未查询到您的支付结果，如果您已经确认支付并成功扣款，可能存在延迟到账的情况，请到账户明细中查看或联系客服查询", action: "知道了") { (action) in
+            showCXMAlert(title: "查询失败", message: "暂未查询到您的支付结果，如果您已经确认支付并成功扣款，可能存在延迟到账的情况，请到账户明细中查看或联系客服查询", action: "知道了", cancel: nil) { (action) in
                 self.canPayment = true
             }
             return
@@ -204,10 +204,10 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
                     self.pushViewController(vc: order)
                 case "304035":
                     self.canPayment = true
-                    self.showHUD(message: data.msg)
-                    self.showCXMCancelAlert(title: "支付失败", message: "如果您已经确认支付并成功扣款，可能存在延迟到账的情况，请到账户明细中查看或联系客服查询", action: "知道了", confirm: { (action) in
+                    //self.showHUD(message: data.msg)
+                    self.showCXMAlert(title: "查询失败", message: "暂未查询到您的支付结果，如果您已经确认支付并成功扣款，可能存在延迟到账的情况，请到账户明细中查看或联系客服查询", action: "知道了", cancel: nil) { (action) in
                         self.canPayment = true
-                    })
+                    }
                     SVProgressHUD.dismiss()
                 case "304036":
                     break

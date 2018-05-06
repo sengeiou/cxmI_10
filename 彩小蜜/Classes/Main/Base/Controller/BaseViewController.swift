@@ -41,7 +41,9 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
     }
     
     public func pushViewController(vc: UIViewController) {
-        self.navigationController?.pushViewController(vc, animated: true)
+        DispatchQueue.main.async {
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     public func pushRootViewController() {

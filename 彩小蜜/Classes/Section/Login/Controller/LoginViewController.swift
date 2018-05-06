@@ -116,7 +116,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro,
                 guard let hxerror = error as? HXError else { return }
                 switch hxerror {
                 case .UnexpectedResult(_, let resultMsg) :
-                    self.showConfirm(message: resultMsg!, confirm: { (action) in
+                    self.showCXMAlert(title: nil, message: resultMsg!, action: "确定", cancel: nil, confirm: { (action) in
                         self.popViewController()
                     })
                 default: break

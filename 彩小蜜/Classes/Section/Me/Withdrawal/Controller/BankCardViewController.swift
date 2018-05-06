@@ -31,11 +31,11 @@ class BankCardViewController: BaseViewController, UITableViewDelegate, UITableVi
                         这张卡为默认收款卡，
                           您确认要删除吗？
                       """
-            showDeleteAlert(message: str, action: "删除", confirm: { (action) in
+            showCXMAlert(title: nil , message: str, action: "删除", cancel: nil) { (action) in
                 weakSelf?.deleteBankCardRequest(status: bankInfo.status, cardId: bankInfo.userBankId)
-            })
+            }
         }else {
-            showDeleteAlert(message: "请确认删除这张银行卡", action: "删除") { (action) in
+            showCXMAlert(title: nil , message: "请确认删除这张银行卡", action: "删除", cancel: nil) { (action) in
                 weakSelf?.deleteBankCardRequest(status: bankInfo.status, cardId: bankInfo.userBankId)
             }
         }
@@ -153,7 +153,8 @@ class BankCardViewController: BaseViewController, UITableViewDelegate, UITableVi
                 attStr.append(bankCardNo)
                 attStr.append(的)
                 attStr.append(cardName)
-                weakSelf?.showConfirm(title: "删除成功！", message: attStr, action: "知道了", confirm: { (action) in
+                
+                weakSelf?.showCXMAlert(title: "删除成功！", message: attStr, action: "知道了", cancel: nil, confirm: { (action) in
                     weakSelf?.bankListRequest()
                 })
             }

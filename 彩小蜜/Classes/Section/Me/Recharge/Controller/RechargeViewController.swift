@@ -57,7 +57,7 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
         guard maxTimes > 0 else {
             timer.invalidate()
             self.dismissProgressHud()
-            showCXMCancelAlert(title: "查询失败", message: "暂未查询到您的支付结果，如果您已经确认支付并成功扣款，可能存在延迟到账的情况，请到账户明细中查看或联系客服查询", action: "知道了") { (action) in
+            showCXMAlert(title: "查询失败", message: "暂未查询到您的支付结果，如果您已经确认支付并成功扣款，可能存在延迟到账的情况，请到账户明细中查看或联系客服查询", action: "知道了", cancel: nil) { (action) in
                 self.canPayment = true
             }
             return
@@ -69,7 +69,7 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
     
     func recharge() {
         guard validate(.number, str: self.cardCell.textfield.text) else {
-            showAlert(message: "请输入正确的金额")
+            showHUD(message: "请输入正确的金额")
             return
         }
         maxTimes = 20
@@ -153,10 +153,10 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
                     
                 case "304035":
                     self.canPayment = true
-                    self.showHUD(message: data.msg)
-                    self.showCXMCancelAlert(title: "支付失败", message: "如果您已经确认支付并成功扣款，可能存在延迟到账的情况，请到账户明细中查看或联系客服查询", action: "知道了", confirm: { (action) in
+                    //self.showHUD(message: data.msg)
+                    self.showCXMAlert(title: "查询失败", message: "暂未查询到您的支付结果，如果您已经确认支付并成功扣款，可能存在延迟到账的情况，请到账户明细中查看或联系客服查询", action: "知道了", cancel: nil) { (action) in
                         self.canPayment = true
-                    })
+                    }
                     self.dismissProgressHud()
                 case "304036":
                     break

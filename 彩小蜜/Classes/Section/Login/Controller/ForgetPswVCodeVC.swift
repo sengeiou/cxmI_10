@@ -85,7 +85,7 @@ class ForgetPswVCodeVC: BaseViewController, UITextFieldDelegate, ValidatePro,Cus
                     guard let hxError = error as? HXError else { return }
                     switch hxError {
                     case .UnexpectedResult(_, let resultMsg):
-                        self.showConfirm(message: resultMsg!, confirm: { (action) in
+                        self.showCXMAlert(title: nil, message: resultMsg!, action: "确定", cancel: nil, confirm: { (action) in
                             
                         })
                     default : break
@@ -113,7 +113,7 @@ class ForgetPswVCodeVC: BaseViewController, UITextFieldDelegate, ValidatePro,Cus
                     guard let hxError = error as? HXError else { return }
                     switch hxError {
                     case .UnexpectedResult(_, let resultMsg):
-                        self.showConfirm(message: resultMsg!, confirm: { (action) in
+                        self.showCXMAlert(title: nil, message: resultMsg!, action: "确定", cancel: nil , confirm: { (action) in
                             self.popViewController()
                         })
                     default : break

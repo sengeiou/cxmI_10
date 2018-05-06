@@ -15,11 +15,11 @@ class AuthenticationVC: BaseViewController, UITextFieldDelegate, ValidatePro {
     @objc private func authenticationClicked(_ sender: UIButton) {
         
         guard validate(.chinese, str: nameTF.text) == true else {
-            showAlert(message: "请输入正确的姓名")
+            showHUD(message: "请输入正确的姓名")
             return
         }
         guard validate(.IDNumber, str: IDNumberTF.text) == true else {
-            showAlert(message: "请输入正确的身份证号码")
+            showHUD(message: "请输入正确的身份证号码")
             return
         }
         
@@ -33,7 +33,7 @@ class AuthenticationVC: BaseViewController, UITextFieldDelegate, ValidatePro {
         if nameTF.isFirstResponder == false {
             guard validate(.chinese, str: nameTF.text) == true else {
                 nameTF.becomeFirstResponder()
-                showAlert(message: "请输入正确的姓名")
+                showHUD(message: "请输入正确的姓名")
                 return
             }
         }
@@ -47,14 +47,14 @@ class AuthenticationVC: BaseViewController, UITextFieldDelegate, ValidatePro {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == nameTF {
             guard validate(.chinese, str: textField.text) == true else {
-                showAlert(message: "请输入正确的姓名")
+                showHUD(message: "请输入正确的姓名")
                 return false
             }
             IDNumberTF.becomeFirstResponder()
         }
         if textField == IDNumberTF {
             guard validate(.IDNumber, str: textField.text) == true else {
-                showAlert(message: "请输入正确的身份证号码")
+                showHUD(message: "请输入正确的身份证号码")
                 return false
             }
             textField.resignFirstResponder()

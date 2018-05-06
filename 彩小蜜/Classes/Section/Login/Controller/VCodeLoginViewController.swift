@@ -95,9 +95,9 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
                     switch hxerror {
                     case .UnexpectedResult(let code, let resultMsg) :
                         if code == 301016, let resultMsg = resultMsg {
-                            self.showConfirm(message: resultMsg)
+                            self.showHUD(message: resultMsg)
                         }else {
-                            self.showConfirm(message: resultMsg!, confirm: { (action) in
+                            self.showCXMAlert(title: nil, message: resultMsg!, action: "确定", cancel: nil, confirm: { (action) in
                                 self.popViewController()
                             })
                         }
@@ -127,9 +127,9 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
                     switch hxError {
                     case .UnexpectedResult(let code, let resultMsg):
                         if code == 301016, let resultMsg = resultMsg {
-                            self.showConfirm(message: resultMsg)
+                            self.showHUD(message: resultMsg)
                         }else {
-                            self.showConfirm(message: resultMsg!, confirm: { (action) in
+                            self.showCXMAlert(title: nil, message: resultMsg!, action: "确定", cancel: nil, confirm: { (action ) in
                                 self.popViewController()
                             })
                         }
