@@ -179,14 +179,14 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Payment/View/CouponFilterCell.swift"
-            timestampString = "547216018.668137"
+            filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Payment/Controller/CouponFilterViewController.swift"
+            timestampString = "547285980.03132"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
-            landmarkName = "bonusInfo"
-            landmarkType = "24">
+            startingLineNumber = "183"
+            endingLineNumber = "183"
+            landmarkName = "tableView(_:didDeselectRowAt:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -195,13 +195,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Payment/Controller/CouponFilterViewController.swift"
-            timestampString = "547284102.022737"
+            filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Home/HomeList/Controller/HomeViewController.swift"
+            timestampString = "547285980.031698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
-            landmarkName = "tableView(_:didDeselectRowAt:)"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "didTipBanner(banner:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

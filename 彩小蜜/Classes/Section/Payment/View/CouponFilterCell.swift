@@ -22,8 +22,17 @@ class CouponFilterCell: UITableViewCell {
             contentlb.text = bonusInfo.useRange
             
             titleLb.text = bonusInfo.minGoodsAmount
-            //self.isSelected = true
-            //setSelected(true, animated: true)
+           
+            changeIcon(isSelected: bonusInfo.isSelected)
+            
+        }
+    }
+    
+    private func changeIcon (isSelected: Bool) {
+        if isSelected == true {
+            selectedIcon.image = UIImage(named: "Mentionmoneysteps_sel")
+        }else {
+            selectedIcon.image = UIImage(named: "Mentionmoneysteps_nor")
         }
     }
     
@@ -99,11 +108,7 @@ class CouponFilterCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        if selected == true {
-            selectedIcon.image = UIImage(named: "Mentionmoneysteps_sel")
-        }else {
-            selectedIcon.image = UIImage(named: "Mentionmoneysteps_nor")
-        }
+        
     }
 
     required init?(coder aDecoder: NSCoder) {

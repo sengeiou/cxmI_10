@@ -26,7 +26,7 @@ class CouponFilterViewController: BasePopViewController, UITableViewDelegate, UI
     private var bottomLine : UIView!
     private var titlelb : UILabel!
     private var confirmBut: UIButton!
-    
+    private var selectedIndex : IndexPath!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.popStyle = .fromBottom
@@ -126,7 +126,9 @@ class CouponFilterViewController: BasePopViewController, UITableViewDelegate, UI
         
         if bonusInfo.isSelected == true {
             self.bonusId = bonusInfo.userBonusId
+            bonusInfo.isSelected = true
             self.tableView.selectRow(at: indexPath, animated: true , scrollPosition: .none)
+            //self.selectedIndex = indexPath
         }
         return cell
     }
@@ -149,14 +151,20 @@ class CouponFilterViewController: BasePopViewController, UITableViewDelegate, UI
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let bonus = bonusList[indexPath.row]
-        self.bonusId = bonus.userBonusId
-        
+
         bonus.isSelected = !bonus.isSelected
         
         if bonus.isSelected {
-            tableView.deselectRow(at: indexPath, animated: true)
+            self.bonusId = bonus.userBonusId
+            for bonuss in bonusList {
+                if bonuss.userBonusId != bonus.userBonusId {
+                     bonuss.isSelected = false
+                }
+            }
+        }else {
+            self.bonusId = ""
         }
-        
+        tableView.reloadData()
     }
     
     // MARK: - 点击事件

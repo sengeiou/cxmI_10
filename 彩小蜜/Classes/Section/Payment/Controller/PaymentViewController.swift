@@ -446,7 +446,6 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
         self.saveBetInfo.bonusId = bonusId
         self.saveBetInfo.setBonus()
         
-        
         self.requestModel.bonusId = bonusId
         orderRequest()
     }
