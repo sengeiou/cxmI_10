@@ -178,14 +178,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro,
     }
     
     @objc override func back(_ sender: UIButton) {
-        //pushRootViewController()
-        //popToLoginViewController()
-        
-//        if popRoot {
-//            pushRootViewController()
-//        }
-//
-//        else
+
         if currentVC != nil {
             popToCurrentVC()
             guard self.loginDelegate != nil else { return }

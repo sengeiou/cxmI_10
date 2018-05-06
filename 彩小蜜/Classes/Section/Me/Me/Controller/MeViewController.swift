@@ -64,12 +64,6 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         }else {
             showType = .onlyNews
         }
-        
-        if getUserData() != nil {
-            self.tableView.isHidden = false
-        }else {
-            self.tableView.isHidden = true
-        }
     }
     
     override func viewDidLayoutSubviews() {
