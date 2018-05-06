@@ -57,6 +57,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro,
     }
     
     public var loginDelegate : LoginProtocol!
+    
     //Mark: - 属性
     private var userNameTF : UITextField!
     private var passwordTF : UITextField!
@@ -98,14 +99,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro,
                 
                 self.showHUD(message: data.showMsg)
                 self.save(userInfo: data)
-//                if self.getUserData() == nil {
-//
-//
-//                }else {
-//
-//                    self.popToCurrentVC()
-//                }
-                
+
                 if self.currentVC != nil {
                     self.popToCurrentVC()
                     guard self.loginDelegate != nil else { return }
@@ -187,6 +181,11 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro,
         //pushRootViewController()
         //popToLoginViewController()
         
+//        if popRoot {
+//            pushRootViewController()
+//        }
+//
+//        else
         if currentVC != nil {
             popToCurrentVC()
             guard self.loginDelegate != nil else { return }

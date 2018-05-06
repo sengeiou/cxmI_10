@@ -42,6 +42,15 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         NotificationCenter.default.addObserver(self, selector: #selector(configNotification(_:)), name: NSNotification.Name(rawValue: NotificationConfig), object: nil)
         
         
+//        if getUserData() != nil {
+//            
+//        }else {
+//            let login = LoginViewController()
+//            
+//            self.view = login.view
+//        }
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,6 +63,12 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
             showType = .allShow
         }else {
             showType = .onlyNews
+        }
+        
+        if getUserData() != nil {
+            self.tableView.isHidden = false
+        }else {
+            self.tableView.isHidden = true
         }
     }
     
@@ -181,7 +196,8 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
                     switch code {
                     case 600:
                         weakSelf?.removeUserData()
-                        weakSelf?.pushLoginVC(from: self)
+                        let login = LoginViewController()
+                        weakSelf?.pushViewController(vc: login)
                     default : break
                     }
                     

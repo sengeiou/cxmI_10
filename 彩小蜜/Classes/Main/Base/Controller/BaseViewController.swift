@@ -16,9 +16,13 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
         
     }
     
-
+    public var popRoot : Bool = false
     // public
-    public var currentVC : UIViewController?
+    public var currentVC : UIViewController? {
+        didSet{
+            
+        }
+    }
     
     public func pushLoginVC(from vc: UIViewController) {
         let login = LoginViewController()

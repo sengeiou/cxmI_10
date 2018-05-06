@@ -11,17 +11,17 @@ import UIKit
 let NotificationConfig = "NotificationConfigName"
 let TurnOn = "TurnOn"
 
-class MainTabBarController: UITabBarController, UserInfoPro {
+class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerDelegate {
 
     //private var configInfo : ConfigInfoModel!
     
     private var home : HomeViewController!
-    private var me : BaseViewController!
+    public var me : BaseViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = ColorFFFFFF
-        
+        self.delegate = self
         creatSubViewControllers(false)
         configRequest()
     }
@@ -110,15 +110,25 @@ class MainTabBarController: UITabBarController, UserInfoPro {
         // me
         //me : BaseViewController!
         
-        if getUserData() != nil {
-//            if turnOn {
-            me = MeViewController()
-//            }else {
-            //me = NewsMeViewController()
-            //}
-        }else {
-            me = LoginViewController()
-        }
+        let meNav = creatMeVC()
+        
+        
+        self.viewControllers = [homeNav, lotteryNav, meNav]
+        
+    }
+    
+    public func creatMeVC () -> UINavigationController{
+//        if getUserData() != nil {
+//            //            if turnOn {
+//            me = MeViewController()
+//            //            }else {
+//            //me = NewsMeViewController()
+//            //}
+//        }else {
+//            me = LoginViewController()
+//        }
+        
+        me = MeViewController()
         
         let meNav = UINavigationController(rootViewController: me)
         meNav.tabBarItem.imageInsets = UIEdgeInsets(top: 10, left: 0, bottom: -10, right: 0)
@@ -130,10 +140,33 @@ class MainTabBarController: UITabBarController, UserInfoPro {
         meNav.tabBarItem.image = meImg
         meNav.tabBarItem.selectedImage = meSelImg
         
-        
-        self.viewControllers = [homeNav, lotteryNav, meNav]
-        
+        return meNav
     }
+    
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        if viewController == self.viewControllers![2] {
+            if getUserData() == nil {
+                me = LoginViewController()
+                //me.popRoot = true
+                let meNav = UINavigationController(rootViewController: me)
+                meNav.tabBarItem.imageInsets = UIEdgeInsets(top: 10, left: 0, bottom: -10, right: 0)
+                meNav.view.backgroundColor = UIColor.white
+                
+                let meImg = UIImage(named: "tab_min_nor")?.withRenderingMode(.alwaysOriginal)
+                let meSelImg = UIImage(named: "tab_min_sel")?.withRenderingMode(.alwaysOriginal)
+                
+                meNav.tabBarItem.image = meImg
+                meNav.tabBarItem.selectedImage = meSelImg
+                
+                self.present(meNav, animated: true, completion: nil)
+                return false
+            }
+        }
+        
+        
+        return true
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
