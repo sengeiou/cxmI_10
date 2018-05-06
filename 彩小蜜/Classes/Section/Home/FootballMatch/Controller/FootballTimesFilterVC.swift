@@ -18,6 +18,12 @@ class FootballTimesFilterVC: BasePopViewController, UITextFieldDelegate, CXMKeyb
     
     public var delegate : FootballTimesFilterVCDelegate!
 
+    public var times : String! {
+        didSet{
+            self.textField.text = times
+        }
+    }
+    
     private var keyboardView: CXMKeyboardView!
     private var backBut: UIButton!
     private var timesTitle: UILabel!
@@ -25,6 +31,8 @@ class FootballTimesFilterVC: BasePopViewController, UITextFieldDelegate, CXMKeyb
     private var timesView: UIView!
     
     private var isFirst: Bool = true
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

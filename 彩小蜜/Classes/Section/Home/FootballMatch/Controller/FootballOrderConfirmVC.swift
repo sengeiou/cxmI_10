@@ -406,6 +406,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     func orderMultiple() {
         let times = FootballTimesFilterVC()
         times.delegate = self
+        times.times = self.times
         present(times)
     }
     
