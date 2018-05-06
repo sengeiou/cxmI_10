@@ -117,6 +117,7 @@ class FootballTotalView: UIView {
             setButTitle(but: but, isSelected: false)
         }
          but.isSelected = isSelected
+        teamInfo.matchPlays[0].matchCells[but.tag].isSelected = isSelected
     }
     
     @objc private func buttonClicked(_ sender : UIButton) {
@@ -126,8 +127,9 @@ class FootballTotalView: UIView {
         guard delegate != nil else { return }
         
         if sender.isSelected == true {
-            delegate.totalSelected(view: self, teamInfo: teamInfo)
             teamInfo.matchPlays[0].matchCells[sender.tag].isSelected = true
+            delegate.totalSelected(view: self, teamInfo: teamInfo)
+            
         }else {
             teamInfo.matchPlays[0].matchCells[sender.tag].isSelected = false
             delegate.totalDeSelected(view: self, teamInfo: teamInfo)

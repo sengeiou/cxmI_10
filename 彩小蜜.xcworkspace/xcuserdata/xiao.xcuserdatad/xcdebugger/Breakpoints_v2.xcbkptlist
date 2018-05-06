@@ -112,43 +112,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Home/FootballMatch/Controller/FootballOrderConfirmVC.swift"
-            timestampString = "547289833.378204"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "470"
-            endingLineNumber = "470"
-            landmarkName = "select(teamInfo:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Home/FootballMatch/Controller/FootballOrderConfirmVC.swift"
-            timestampString = "547289833.378274"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "477"
-            endingLineNumber = "477"
-            landmarkName = "deSelect(teamInfo:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Home/FootballMatch/Controller/FootballOrderConfirmVC.swift"
-            timestampString = "547289833.378327"
+            timestampString = "547291752.020789"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "228"
@@ -180,7 +148,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Payment/Controller/CouponFilterViewController.swift"
-            timestampString = "547289833.378404"
+            timestampString = "547291752.020884"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "172"
@@ -196,7 +164,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Home/HomeList/Controller/HomeViewController.swift"
-            timestampString = "547289833.3784651"
+            timestampString = "547291752.020952"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "36"

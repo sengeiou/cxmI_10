@@ -90,7 +90,7 @@ class FootballPlayCellModel: NSObject, NSCopying, HandyJSON {
     }
     
     required override init() { }
-    var isSelected = false
+    var isSelected = false 
     var cellCode: String!
     var cellName: String!
     var cellOdds: String!

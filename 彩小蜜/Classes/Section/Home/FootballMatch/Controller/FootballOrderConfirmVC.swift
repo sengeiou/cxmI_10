@@ -483,14 +483,14 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     // MARK: - 选取比赛 FootballTotalView Delegate
     func totalSelected(view: FootballTotalView, teamInfo: FootballPlayListModel) {
 
-        var canAdd = true
-        for cell in teamInfo.matchPlays[0].matchCells {
-            if cell.isSelected == true {
-                canAdd = false
-                break
-            }
-        }
-        guard canAdd == true else { return }
+//        var canAdd = true
+//        for cell in teamInfo.matchPlays[0].matchCells {
+//            if cell.isSelected == true {
+//                canAdd = false
+//                break
+//            }
+//        }
+//        guard canAdd == true else { return }
         guard selectPlayList.count < MaxSelectedNum else {
             var change = true
             
@@ -674,8 +674,8 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     
     
     func didSelectedTwoOneView(view: FootballTwoOneView, teamInfo: FootballPlayListModel) {
-        guard teamInfo.matchPlays[0].homeCell.isSelected == false else { return }
-        guard teamInfo.matchPlays[0].visitingCell.isSelected == false else { return }
+//        guard teamInfo.matchPlays[0].homeCell.isSelected == false else { return }
+//        guard teamInfo.matchPlays[0].visitingCell.isSelected == false else { return }
         guard selectPlayList.count < MaxSelectedNum else {
             
             var change = true

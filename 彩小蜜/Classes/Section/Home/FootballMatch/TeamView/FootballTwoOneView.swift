@@ -19,16 +19,16 @@ class FootballTwoOneView: UIView {
     public var teamInfo : FootballPlayListModel! {
         didSet{
             guard teamInfo != nil else { return }
-            let matchPlay = teamInfo.matchPlays[0]
-            guard let homeCell = matchPlay.homeCell else { return }
-            guard let visiCell = matchPlay.visitingCell else { return }
+              let matchPlay = teamInfo.matchPlays[0]
+//            guard let homeCell = matchPlay.homeCell else { return }
+//            guard let visiCell = matchPlay.visitingCell else { return }
             
             
-            homeBut.setTitle(homeCell.cellName + homeCell.cellOdds, for: .normal)
-            visitingBut.setTitle(visiCell.cellName + visiCell.cellOdds, for: .normal)
+            homeBut.setTitle(matchPlay.homeCell.cellName + matchPlay.homeCell.cellOdds, for: .normal)
+            visitingBut.setTitle(matchPlay.visitingCell.cellName + matchPlay.visitingCell.cellOdds, for: .normal)
             
-            changeButState(but: homeBut, isSelected: homeCell.isSelected)
-            changeButState(but: visitingBut, isSelected: visiCell.isSelected)
+            changeButState(but: homeBut, isSelected: matchPlay.homeCell.isSelected)
+            changeButState(but: visitingBut, isSelected: matchPlay.visitingCell.isSelected)
         }
     }
     
@@ -100,8 +100,9 @@ class FootballTwoOneView: UIView {
         
         guard delegate != nil else { return }
         if sender.isSelected {
-            delegate.didSelectedTwoOneView(view: self, teamInfo: teamInfo)
             teamInfo.matchPlays[0].homeCell.isSelected = true
+            delegate.didSelectedTwoOneView(view: self, teamInfo: teamInfo)
+            
         }else {
             teamInfo.matchPlays[0].homeCell.isSelected = false
             delegate.didDeSelectedTwoOneView(view: self, teamInfo: teamInfo)
@@ -115,8 +116,9 @@ class FootballTwoOneView: UIView {
         
         guard delegate != nil else { return }
         if sender.isSelected {
-            delegate.didSelectedTwoOneView(view: self, teamInfo: teamInfo)
             teamInfo.matchPlays[0].visitingCell.isSelected = true
+            delegate.didSelectedTwoOneView(view: self, teamInfo: teamInfo)
+            
         }else {
             teamInfo.matchPlays[0].visitingCell.isSelected = false
             delegate.didDeSelectedTwoOneView(view: self, teamInfo: teamInfo)
