@@ -150,10 +150,7 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
                     self.timer.invalidate()
                     self.showHUD(message: data.msg)
                     self.dismissProgressHud()
-                    let order = OrderDetailVC()
-                    order.backType = .root
-                    order.orderId = self.paymentResult.orderId
-                    self.pushViewController(vc: order)
+                    
                 case "304035":
                     self.canPayment = true
                     self.showHUD(message: data.msg)
