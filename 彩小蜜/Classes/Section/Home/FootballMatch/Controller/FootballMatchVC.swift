@@ -9,6 +9,8 @@
 import UIKit
 import SVProgressHUD
 
+let MaxSelectedNum = 2
+
 enum FootballMatchType: String {
     case 胜平负 = "彩小秘 · 胜平负"
     case 让球胜平负 = "彩小秘 · 让球胜平负"
@@ -466,20 +468,31 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     // MARK: - 选取比赛 FootballTotalView Delegate
     func totalSelected(view: FootballTotalView, teamInfo: FootballPlayListModel) {
         
-        var canAdd = true
-        for cell in teamInfo.matchPlays[0].matchCells {
-            if cell.isSelected == true {
-                canAdd = false
-                break
+        //var canAdd = true
+//        for cell in teamInfo.matchPlays[0].matchCells {
+//            if cell.isSelected == true {
+//                canAdd = false
+//                break
+//            }
+//        }
+        //guard canAdd == true else { return }
+        guard selectPlayList.count < MaxSelectedNum else {
+            
+            var change = true
+            
+            for team in selectPlayList {
+                if team == teamInfo {
+                    change = false
+                    break
+                }
             }
-        }
-        guard canAdd == true else { return }
-        guard selectPlayList.count < 15 else {
-            view.backSelected()
-            showHUD(message: "最多可选15场比赛")
+            if change {
+                view.backSelected()
+                showHUD(message: "最多可选15场比赛")
+            }
+
             return }
-        guard selectPlayList != nil else { return }
-        selectPlayList.append(teamInfo)
+        selectPlays.insert(teamInfo)
     }
     
     func totalDeSelected(view: FootballTotalView, teamInfo: FootballPlayListModel) {
@@ -492,8 +505,9 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         }
         guard canRemove == true  else { return }
        
-        guard selectPlayList != nil else { return }
-        selectPlayList.remove(teamInfo)
+        //guard selectPlayList != nil else { return }
+        //selectPlayList.remove(teamInfo)
+        selectPlays.remove(teamInfo)
     }
     func totalSelectedItem() {
         
@@ -518,9 +532,24 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         score.selected = { (selectedCells, canAdd) in
             scoreView.selectedCells = selectedCells
             
-            guard (weakSelf?.selectPlayList.count)! < 15  else {
-                scoreView.backSelectedState()
-                weakSelf?.showHUD(message: "最多可选15场比赛")
+            guard (weakSelf?.selectPlayList.count)! < MaxSelectedNum  else {
+                
+                var change = true
+                
+                for team in self.selectPlayList {
+                    if team == teamInfo {
+                        change = false
+                        break
+                    }
+                }
+                if change {
+                    scoreView.backSelectedState()
+                    weakSelf?.showHUD(message: "最多可选15场比赛")
+                    
+                }
+                
+//                scoreView.backSelectedState()
+//                weakSelf?.showHUD(message: "最多可选15场比赛")
                 return }
             
             if selectedCells.isEmpty == false {
@@ -540,9 +569,20 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         score.selected = { (selectedCells, canAdd) in
             scoreView.selectedCells = selectedCells
             
-            guard (weakSelf?.selectPlayList.count)! < 15  else {
-                scoreView.backSelectedState()
-                weakSelf?.showHUD(message: "最多可选15场比赛")
+            guard (weakSelf?.selectPlayList.count)! < MaxSelectedNum  else {
+                
+                var change = true
+                
+                for team in (weakSelf?.selectPlayList)! {
+                    if team == teamInfo {
+                        change = false
+                        break
+                    }
+                }
+                if change {
+                    scoreView.backSelectedState()
+                    weakSelf?.showHUD(message: "最多可选15场比赛")
+                }
                 return }
             
             if selectedCells.isEmpty == false {
@@ -558,14 +598,23 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     // MARK: - 2选1 点击事件
     func didSelectedTwoOneView(view: FootballTwoOneView, teamInfo: FootballPlayListModel) {
 
-        guard teamInfo.matchPlays[0].homeCell.isSelected == false else { return }
-        guard teamInfo.matchPlays[0].visitingCell.isSelected == false else { return }
-        guard selectPlayList.count < 15 else {
-            view.backSelectedState()
-            showHUD(message: "最多可选15场比赛")
+        guard selectPlayList.count < MaxSelectedNum else {
+            
+            var change = true
+            
+            for team in selectPlayList {
+                if team == teamInfo {
+                    change = false
+                    break
+                }
+            }
+            if change {
+                view.backSelectedState()
+                showHUD(message: "最多可选15场比赛")
+            }
+           
             return }
-        guard selectPlayList != nil else { return }
-        selectPlayList.append(teamInfo)
+        selectPlays.insert(teamInfo)
     }
     
     func didDeSelectedTwoOneView(view: FootballTwoOneView, teamInfo: FootballPlayListModel) {
@@ -582,12 +631,25 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     func didSelectedHunHeView(view: FootballHunheView, teamInfo: FootballPlayListModel, index: IndexPath) {
         
         self.tableView.reloadRows(at: [index], with: .none)
-        guard selectPlayList.count < 15 else {
-            view.backSelectedState()
-            showHUD(message: "最多可选15场比赛")
-            self.tableView.reloadRows(at: [index], with: .none)
+        guard selectPlayList.count < MaxSelectedNum else {
+            
+            var change = true
+            
+            for team in selectPlayList {
+                if team == teamInfo {
+                    change = false
+                    break
+                }
+            }
+            if change {
+                view.backSelectedState()
+                showHUD(message: "最多可选15场比赛")
+                self.tableView.reloadRows(at: [index], with: .none)
+            }
+            
             return }
         selectPlays.insert(teamInfo)
+        
     }
     func didDeSelectedHunHeView(view: FootballHunheView, teamInfo: FootballPlayListModel, index: IndexPath) {
         self.tableView.reloadData()
@@ -606,9 +668,23 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         score.selected = { (selectedCells, canAdd) in
             //view.selectedCellList = selectedCells
             self.tableView.reloadData()
-            guard (weakSelf?.selectPlayList.count)! < 15  else {
-                view.backSelectedState()
-                weakSelf?.showHUD(message: "最多可选15场比赛")
+            guard (weakSelf?.selectPlayList.count)! < MaxSelectedNum  else {
+                
+                var change = true
+                
+                for team in self.selectPlayList {
+                    if team == teamInfo {
+                        change = false
+                        break
+                    }
+                }
+                if change {
+                    view.backSelectedState()
+                    weakSelf?.showHUD(message: "最多可选15场比赛")
+                }
+                
+//                view.backSelectedState()
+//                weakSelf?.showHUD(message: "最多可选15场比赛")
                 //self.tableView.reloadData()
                 return }
             

@@ -491,9 +491,21 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
             }
         }
         guard canAdd == true else { return }
-        guard selectPlayList.count < 15 else {
-            view.backSelected()
-            showHUD(message: "最多可选15场比赛")
+        guard selectPlayList.count < MaxSelectedNum else {
+            var change = true
+            
+            for team in selectPlayList {
+                if team == teamInfo {
+                    change = false
+                    break
+                }
+            }
+            if change {
+                view.backSelected()
+                showHUD(message: "最多可选15场比赛")
+            }
+//            view.backSelected()
+//            showHUD(message: "最多可选15场比赛")
             return }
         guard selectPlayList != nil else { return }
         selectPlayList.append(teamInfo)
@@ -544,9 +556,22 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         score.selected = { (selectedCells, canAdd) in
             scoreView.selectedCells = selectedCells
             
-            guard (weakSelf?.selectPlayList.count)! < 15  else {
-                scoreView.backSelectedState()
-                weakSelf?.showHUD(message: "最多可选15场比赛")
+            guard (weakSelf?.selectPlayList.count)! < MaxSelectedNum  else {
+                
+                var change = true
+                
+                for team in self.selectPlayList {
+                    if team == teamInfo {
+                        change = false
+                        break
+                    }
+                }
+                if change {
+                    scoreView.backSelectedState()
+                    weakSelf?.showHUD(message: "最多可选15场比赛")
+                }
+//                scoreView.backSelectedState()
+//                weakSelf?.showHUD(message: "最多可选15场比赛")
                 return }
             
             if selectedCells.isEmpty == false {
@@ -572,9 +597,22 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         score.selected = { (selectedCells, canAdd) in
             scoreView.selectedCells = selectedCells
             
-            guard (weakSelf?.selectPlayList.count)! < 15  else {
-                scoreView.backSelectedState()
-                weakSelf?.showHUD(message: "最多可选15场比赛")
+            guard (weakSelf?.selectPlayList.count)! < MaxSelectedNum  else {
+                
+                var change = true
+                
+                for team in self.selectPlayList {
+                    if team == teamInfo {
+                        change = false
+                        break
+                    }
+                }
+                if change {
+                    scoreView.backSelectedState()
+                    weakSelf?.showHUD(message: "最多可选15场比赛")
+                }
+//                scoreView.backSelectedState()
+//                weakSelf?.showHUD(message: "最多可选15场比赛")
                 return }
             
             if selectedCells.isEmpty == false {
@@ -601,9 +639,23 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         score.selected = { (selectedCells, canAdd) in
             scoreView.selectedCells = selectedCells
             self.tableView.reloadData()
-            guard (weakSelf?.selectPlayList.count)! < 15  else {
-                scoreView.backSelectedState()
-                weakSelf?.showHUD(message: "最多可选15场比赛")
+            guard (weakSelf?.selectPlayList.count)! < MaxSelectedNum  else {
+                
+                var change = true
+                
+                for team in self.selectPlayList {
+                    if team == teamInfo {
+                        change = false
+                        break
+                    }
+                }
+                if change {
+                    scoreView.backSelectedState()
+                    weakSelf?.showHUD(message: "最多可选15场比赛")
+                }
+                
+//                scoreView.backSelectedState()
+//                weakSelf?.showHUD(message: "最多可选15场比赛")
                 return }
             
             if selectedCells.isEmpty == false {
@@ -624,9 +676,23 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     func didSelectedTwoOneView(view: FootballTwoOneView, teamInfo: FootballPlayListModel) {
         guard teamInfo.matchPlays[0].homeCell.isSelected == false else { return }
         guard teamInfo.matchPlays[0].visitingCell.isSelected == false else { return }
-        guard selectPlayList.count < 15 else {
-            view.backSelectedState()
-            showHUD(message: "最多可选15场比赛")
+        guard selectPlayList.count < MaxSelectedNum else {
+            
+            var change = true
+            
+            for team in selectPlayList {
+                if team == teamInfo {
+                    change = false
+                    break
+                }
+            }
+            if change {
+                view.backSelectedState()
+                showHUD(message: "最多可选15场比赛")
+            }
+            
+//            view.backSelectedState()
+//            showHUD(message: "最多可选15场比赛")
             return }
         guard selectPlayList != nil else { return }
         selectPlayList.append(teamInfo)
