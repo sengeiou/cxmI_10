@@ -19,7 +19,7 @@ class ForgetPswVCodeVC: BaseViewController, UITextFieldDelegate, ValidatePro,Cus
         guard validate(.password, str: self.passwordTF.text) == true else {
             showHUD(message: "请输入6-20位的密码")
             return }
-        guard validate(.vcode, str: self.vcodeTF.text) else {
+        guard validate(.number, str: self.vcodeTF.text) else {
             showHUD(message: "请输入验证码")
             return }
         
