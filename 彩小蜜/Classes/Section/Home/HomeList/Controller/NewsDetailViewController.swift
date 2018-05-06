@@ -75,10 +75,11 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section != 0 {
+        if indexPath.section == 1 {
             if indexPath.row != 0 {
+                guard self.detailModel != nil else { return }
                 let web = NewsDetailViewController()
-                web.articleId = articleId
+                web.articleId = self.detailModel.articles[indexPath.row - 1 ].articleId
                 pushViewController(vc: web)
             }
         }
