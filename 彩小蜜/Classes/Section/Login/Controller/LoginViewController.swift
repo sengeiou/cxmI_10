@@ -42,7 +42,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro,
     
     @objc private func VCodeClicked(_ sender : UIButton) {
         let vcode = VCodeLoginViewController()
-        vcode.currentVC = self
+        vcode.currentVC = self.currentVC
         pushViewController(vc: vcode)
     }
     

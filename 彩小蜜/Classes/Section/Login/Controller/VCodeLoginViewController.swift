@@ -75,20 +75,14 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
                 switch event {
                 case .next(let data):
                     self.showHUD(message: data.showMsg)
-                    
-//                    if self.getUserData() == nil {
-//                        self.save(userInfo: data)
-//                        self.pushRootViewController()
-//                    }else {
-//                        self.save(userInfo: data)
-//                        self.popToCurrentVC()
-//                    }
-                    
+                    self.save(userInfo: data)
                     if self.currentVC != nil {
                         self.popToCurrentVC()
                     }else {
                         self.pushRootViewController()
                     }
+                    self.userNameTF.resignFirstResponder()
+                    self.vcodeTF.resignFirstResponder()
                     print(data)
                 case .error(let error):
                     guard let hxerror = error as? HXError else { return }
