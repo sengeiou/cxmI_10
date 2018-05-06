@@ -13,19 +13,11 @@ class NoticeCell: UITableViewCell {
     public var messageModel: MessageCenterModel! {
         didSet{
             guard messageModel != nil else { return }
-//            titleLB.text = messageModel.title
-//            timeLB.text = messageModel.sendTime
-//            moneyLB.text = messageModel.content
-//            detailLB.text = messageModel.msgDesc
-//            stateLB.text = messageModel.contentDesc
-//            
-//            switch messageModel.objectType {
-//            case "0":
-//                moneyLB.textColor = ColorE95504
-//            default:
-//                moneyLB.textColor = Color505050
-//            }
-            
+            title.text = messageModel.title
+            timelb.text = messageModel.sendTime
+            detaillb.text = messageModel.contentDesc + "s"
+            guard let url = URL(string: messageModel.msgUrl) else { return }
+            activity.kf.setImage(with: url)
         }
     }
     
