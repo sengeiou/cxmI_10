@@ -128,9 +128,6 @@ class CouponFilterViewController: BasePopViewController, UITableViewDelegate, UI
             self.bonusId = bonusInfo.userBonusId
             self.tableView.selectRow(at: indexPath, animated: true , scrollPosition: .none)
         }
-        
-        
-        
         return cell
     }
     
@@ -153,6 +150,13 @@ class CouponFilterViewController: BasePopViewController, UITableViewDelegate, UI
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let bonus = bonusList[indexPath.row]
         self.bonusId = bonus.userBonusId
+        
+        bonus.isSelected = !bonus.isSelected
+        
+        if bonus.isSelected {
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
+        
     }
     
     // MARK: - 点击事件

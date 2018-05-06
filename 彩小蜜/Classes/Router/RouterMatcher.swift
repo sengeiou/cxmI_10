@@ -26,6 +26,7 @@ enum PushControllerType : String{
     case 登录
     case 注册
     case none
+    
 }
 
 struct URLModel : HandyJSON{
@@ -41,55 +42,57 @@ protocol RouterMatcher: URLParseProtocol {
 extension RouterMatcher {
     
     
-    func matcherHttp(urlStr: String) -> PushControllerType {
-        let urlStr = "cxmxc=scm&type=3&id=1&subid=1"
-        guard urlStr.contains("cxmxc=scm") else { return .浏览器 }
+    func matcherHttp(urlStr: String) -> (PushControllerType, URLModel? ){
+        //let urlStr = "cxmxc=scm&type=3&id=1&subid=1"
+        guard urlStr != nil , urlStr != "" else { return (.none, nil) }
+        guard urlStr.contains("cxmxc=scm") else { return (.浏览器, nil) }
         
-        let urlModel = parseUrl(urlStr: urlStr)
+        guard let urlModel = parseUrl(urlStr: urlStr) else { return (.none, nil ) }
         
-        switch urlModel?.type {
+        switch urlModel.type {
         case "0":
-            return .首页
+            return (.首页, urlModel)
         case "1":
-            return .网页
+            return (.网页, urlModel)
         case "3":
-            if urlModel?.id == "1", urlModel?.subid != nil {
-                return matcherFootballPlay(subid: (urlModel?.subid)!)
+            if urlModel.id == "1", urlModel.subid != nil {
+                return matcherFootballPlay(subid: (urlModel.subid)!)
             }else {
-                return .none
+                return (.none, urlModel)
             }
+            
         case "4":
-            return .球队详情
+            return (.球队详情, urlModel)
         case "5":
-            return .登录
+            return (.登录, urlModel)
         case "6":
-            return .注册
+            return (.注册, urlModel)
         case "8":
-            return .咨询详情
+            return (.咨询详情, urlModel)
         default:
-            return .none
+            return (.none, urlModel)
         }
     }
     
-    private func matcherFootballPlay(subid: String) -> PushControllerType {
+    private func matcherFootballPlay(subid: String) -> (PushControllerType, URLModel? ) {
         switch subid {
         case "1":
-            return .足球让球胜平负
+            return (.足球让球胜平负, nil )
         case "2":
-            return .足球胜平负
+            return (.足球胜平负, nil )
         case "3":
-            return .足球比分
+            return (.足球比分, nil )
         case "4":
-            return .足球总进球
+            return (.足球总进球, nil )
         case "5":
-            return .足球半全场
+            return (.足球半全场, nil )
         case "6":
-            return .足球混合过关
+            return (.足球混合过关, nil )
         case "7":
-            return .足球二选一
+            return (.足球二选一, nil )
        
         default:
-            return .none
+            return (.none, nil )
         }
     }
 }

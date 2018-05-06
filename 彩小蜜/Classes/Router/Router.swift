@@ -15,7 +15,7 @@ extension RouterPro {
     func pushRouterVC(urlStr: String, from vc : UIViewController) {
         let type = matcherHttp(urlStr: urlStr)
         
-        switch type {
+        switch type.0 {
         case .首页:
             break
         case .登录:
@@ -32,26 +32,33 @@ extension RouterPro {
                 UIApplication.shared.openURL(url)
             }
         case .足球胜平负:
-            pushFootballVC(type.rawValue, from: vc)
+            pushFootballVC(type.0.rawValue, from: vc)
         case .足球让球胜平负:
-            pushFootballVC(type.rawValue, from: vc)
+            pushFootballVC(type.0.rawValue, from: vc)
         case .足球比分:
-            pushFootballVC(type.rawValue, from: vc)
+            pushFootballVC(type.0.rawValue, from: vc)
         case .足球半全场:
-            pushFootballVC(type.rawValue, from: vc)
+            pushFootballVC(type.0.rawValue, from: vc)
         case .足球总进球:
-            pushFootballVC(type.rawValue, from: vc)
+            pushFootballVC(type.0.rawValue, from: vc)
         case .足球混合过关:
-            pushFootballVC(type.rawValue, from: vc)
+            pushFootballVC(type.0.rawValue, from: vc)
         case .足球二选一:
-            pushFootballVC(type.rawValue, from: vc)
+            pushFootballVC(type.0.rawValue, from: vc)
+        case .咨询详情:
+            guard let id = type.1?.id else { return }
+            pushNewsDetail( articleId: id, from: vc )
             
         default:
             break
         }
     }
     
-    
+    private func pushNewsDetail(articleId: String, from vc : UIViewController) {
+        let detail = NewsDetailViewController()
+        detail.articleId = articleId
+        pushViewController(detail, from: vc)
+    }
     
     private func pushFootballVC(_ playType: String, from vc : UIViewController) {
         let football = FootballMatchVC()
@@ -124,44 +131,44 @@ struct Router : RouterMatcher {
     
    
     
-    func pushRouterVC(urlStr: String) {
-        let type = matcherHttp(urlStr: urlStr)
-        
-        switch type {
-        case .首页:
-            break
-        case .登录:
-            break
-        case .注册:
-            break
-        case .网页:
-            let web = WebViewController()
-            web.urlStr = urlStr
-            pushViewController(web)
-            break
-        case .浏览器:
-            if let url = URL(string: urlStr) {
-                UIApplication.shared.openURL(url)
-            }
-        case .足球胜平负:
-            pushFootballVC(type.rawValue)
-        case .足球让球胜平负:
-            pushFootballVC(type.rawValue)
-        case .足球比分:
-            pushFootballVC(type.rawValue)
-        case .足球半全场:
-            pushFootballVC(type.rawValue)
-        case .足球总进球:
-            pushFootballVC(type.rawValue)
-        case .足球混合过关:
-            pushFootballVC(type.rawValue)
-        case .足球二选一:
-            pushFootballVC(type.rawValue)
-            
-        default:
-            break
-        }
-    }
+//    func pushRouterVC(urlStr: String) {
+//        let type = matcherHttp(urlStr: urlStr)
+//        
+//        switch type {
+//        case .首页:
+//            break
+//        case .登录:
+//            break
+//        case .注册:
+//            break
+//        case .网页:
+//            let web = WebViewController()
+//            web.urlStr = urlStr
+//            pushViewController(web)
+//            break
+//        case .浏览器:
+//            if let url = URL(string: urlStr) {
+//                UIApplication.shared.openURL(url)
+//            }
+//        case .足球胜平负:
+//            pushFootballVC(type.rawValue)
+//        case .足球让球胜平负:
+//            pushFootballVC(type.rawValue)
+//        case .足球比分:
+//            pushFootballVC(type.rawValue)
+//        case .足球半全场:
+//            pushFootballVC(type.rawValue)
+//        case .足球总进球:
+//            pushFootballVC(type.rawValue)
+//        case .足球混合过关:
+//            pushFootballVC(type.rawValue)
+//        case .足球二选一:
+//            pushFootballVC(type.rawValue)
+//            
+//        default:
+//            break
+//        }
+//    }
     
     private func pushViewController(_ vc: UIViewController) {
         if let rootVC = UIApplication.shared.keyWindow?.rootViewController {

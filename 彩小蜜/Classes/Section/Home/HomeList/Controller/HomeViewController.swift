@@ -29,9 +29,11 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     
     // MARK: - banner 点击
     func didTipBanner(banner: BannerModel) {
-        let web = WebViewController()
-        web.urlStr = banner.bannerLink
-        pushViewController(vc: web)
+//        let web = WebViewController()
+//        web.urlStr = banner.bannerLink
+//        pushViewController(vc: web)
+        
+        pushRouterVC(urlStr: banner.bannerLink, from: self)
     }
     
     //MARK: - 点击事件
