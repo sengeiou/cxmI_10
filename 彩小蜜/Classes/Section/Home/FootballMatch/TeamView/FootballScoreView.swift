@@ -161,6 +161,7 @@ class FootballScoreView: UIView {
         for cell in selectedCells {
             cell.isSelected = false
         }
+        self.teamInfo.selectedHunhe.removeAll()
     }
     
     @objc private func selfClicked() {
