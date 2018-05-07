@@ -369,9 +369,6 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
                 return 0
             }
         }
-        
-        
-        
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         

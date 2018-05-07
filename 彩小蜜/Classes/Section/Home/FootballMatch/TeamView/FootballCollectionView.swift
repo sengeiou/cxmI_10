@@ -157,9 +157,9 @@ class FootballCollectionView: UIView , UICollectionViewDelegate, UICollectionVie
             case .胜:
                 let width  = Int(collectionViewWidth / 5)
                 if indexPath.row == 12 {
-                    return CGSize(width: CGFloat(width * 3), height: FilterCellHeight)
+                    return CGSize(width: CGFloat(width * 3), height: HunheCellHeight)
                 }else {
-                    return CGSize(width: CGFloat(width), height: FilterCellHeight)
+                    return CGSize(width: CGFloat(width), height: HunheCellHeight)
                 }
             case .平:
                 let width  = Int(collectionViewWidth / 5)
@@ -167,9 +167,9 @@ class FootballCollectionView: UIView , UICollectionViewDelegate, UICollectionVie
             case .负:
                 let width  = Int(collectionViewWidth / 5)
                 if indexPath.row == 12 {
-                    return CGSize(width: CGFloat(width * 3), height: FilterCellHeight)
+                    return CGSize(width: CGFloat(width * 3), height: HunheCellHeight)
                 }else {
-                    return CGSize(width: CGFloat(width), height: FilterCellHeight)
+                    return CGSize(width: CGFloat(width), height: HunheCellHeight)
                 }
             case .半全场 :
                 return CGSize(width: CGFloat(collectionViewWidth / 3), height: HunheCellHeight)

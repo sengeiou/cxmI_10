@@ -38,6 +38,14 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     public var selectPlayList: [FootballPlayListModel]! {
         didSet{
             guard selectPlayList != nil else { return }
+            
+            
+            if selectPlayList.isEmpty == true {
+                self.popViewController()
+                guard delegate != nil else { return }
+                delegate.orderConfirmBack(selectPlayList: self.selectPlayList)
+            }
+            
             guard let filters = filterPlay(with: selectPlayList) else { return }
             bottomView.filterList = filters
             topView.playModelList = selectPlayList
