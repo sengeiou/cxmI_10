@@ -111,7 +111,7 @@ class FootballSectionHeader: UITableViewHeaderFooterView, DateProtocol {
         self.contentView.backgroundColor = ColorF4F4F4
         
         line = UIView()
-        line.backgroundColor = ColorC8C8C8
+        line.backgroundColor = ColorEAEAEA
         
         bgView = UIView()
         bgView.backgroundColor = ColorFFFFFF

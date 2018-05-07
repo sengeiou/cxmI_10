@@ -155,16 +155,17 @@ class FootballCollectionView: UIView , UICollectionViewDelegate, UICollectionVie
         case .混合过关:
             switch scoreType {
             case .胜:
-                let width = cellWidth * 24
+                let width  = Int(collectionViewWidth / 5)
                 if indexPath.row == 12 {
                     return CGSize(width: CGFloat(width * 3), height: FilterCellHeight)
                 }else {
                     return CGSize(width: CGFloat(width), height: FilterCellHeight)
                 }
             case .平:
-                return CGSize(width: CGFloat(cellWidth * 24), height: HunheCellHeight)
+                let width  = Int(collectionViewWidth / 5)
+                return CGSize(width: CGFloat(width), height: HunheCellHeight)
             case .负:
-                let width = cellWidth * 24
+                let width  = Int(collectionViewWidth / 5)
                 if indexPath.row == 12 {
                     return CGSize(width: CGFloat(width * 3), height: FilterCellHeight)
                 }else {

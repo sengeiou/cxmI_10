@@ -97,9 +97,15 @@ class HomeScrollBarCell: UITableViewCell, FSPagerViewDataSource, FSPagerViewDele
         
         let winning = winningList[index]
         
-        cell.textLabel?.text = winning.winningMsg
+        let muAtt = NSMutableAttributedString(string: winning.winningMsg, attributes: [NSAttributedStringKey.foregroundColor: Color787878])
+        let att = NSAttributedString(string: "\(winning.winningMoney!)", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+        let at = NSAttributedString(string: "元", attributes: [NSAttributedStringKey.foregroundColor: Color787878])
+        
+        muAtt.append(att)
+        muAtt.append(at)
+        
+        cell.textLabel?.attributedText = muAtt
         cell.textLabel?.font = Font14
-        cell.textLabel?.textColor = ColorA0A0A0
         cell.textLabel?.superview?.backgroundColor = ColorFFFFFF
         cell.contentView.backgroundColor = ColorFFFFFF
         cell.contentView.layer.shadowColor = ColorFFFFFF.cgColor

@@ -356,7 +356,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         }else {
             switch indexPath.section {
             case 0:
-                return 30
+                return 35
             case 1:
                 return 80
             case 2:

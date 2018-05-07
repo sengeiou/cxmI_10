@@ -330,7 +330,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         }
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 36 * defaultScale
+        return 38 * defaultScale
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.01

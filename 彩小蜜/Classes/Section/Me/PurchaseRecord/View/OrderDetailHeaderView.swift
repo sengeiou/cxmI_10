@@ -151,7 +151,7 @@ class OrderDetailHeaderView: UIView {
         
         
         line = UIView()
-        line.backgroundColor = ColorF4F4F4
+        line.backgroundColor = ColorC7C7C7
         
         programmeTitle = UILabel()
         programmeTitle.font = Font12

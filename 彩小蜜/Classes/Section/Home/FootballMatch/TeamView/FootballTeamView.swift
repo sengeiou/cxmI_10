@@ -53,12 +53,23 @@ class FootballTeamView: UIView , AlertPro{
                 let vsAtt = NSMutableAttributedString(string: "VS")
                 let matchPlay = teamInfo.matchPlays[0]
                 if matchPlay.fixedOdds < 0 {
-                    let att = NSAttributedString(string:" " + String(matchPlay.fixedOdds), attributes: [NSAttributedStringKey.foregroundColor: Color44AE35])
-                    vsAtt.append(att)
+                    if matchPlay.flatCell.isSelected {
+                        let att = NSAttributedString(string:" " + String(matchPlay.fixedOdds), attributes: [NSAttributedStringKey.foregroundColor: ColorFFFFFF])
+                        vsAtt.append(att)
+                    }else {
+                        let att = NSAttributedString(string:" " + String(matchPlay.fixedOdds), attributes: [NSAttributedStringKey.foregroundColor: Color44AE35])
+                        vsAtt.append(att)
+                    }
                     
                 }else if matchPlay.fixedOdds > 0 {
-                    let att = NSAttributedString(string:" +" + String(matchPlay.fixedOdds), attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
-                    vsAtt.append(att)
+                    if matchPlay.flatCell.isSelected {
+                        let att = NSAttributedString(string:" +" + String(matchPlay.fixedOdds), attributes: [NSAttributedStringKey.foregroundColor: ColorFFFFFF])
+                        vsAtt.append(att)
+                    }else {
+                        let att = NSAttributedString(string:" +" + String(matchPlay.fixedOdds), attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+                        vsAtt.append(att)
+                    }
+                    
                 }
                 VSLB.attributedText = vsAtt
             default: break
@@ -212,7 +223,7 @@ class FootballTeamView: UIView , AlertPro{
     }
     private func initLabel() -> UILabel {
         let lab = UILabel()
-        lab.font = Font12
+        lab.font = Font14
         lab.textColor = Color787878
         lab.textAlignment = .center
         
@@ -270,8 +281,37 @@ class FootballTeamView: UIView , AlertPro{
             drawOdds.textColor = ColorFFFFFF
         }else {
             drawBut.backgroundColor = ColorFFFFFF
-            VSLB.textColor = Color505050
+            
             drawOdds.textColor = Color787878
+            switch matchType {
+            case .胜平负:
+                VSLB.textColor = Color505050
+            case .让球胜平负:
+                let vsAtt = NSMutableAttributedString(string: "VS", attributes: [NSAttributedStringKey.foregroundColor: Color505050])
+                let matchPlay = teamInfo.matchPlays[0]
+                
+                if matchPlay.fixedOdds < 0 {
+                    if matchPlay.flatCell.isSelected {
+                        let att = NSAttributedString(string:" " + String(matchPlay.fixedOdds), attributes: [NSAttributedStringKey.foregroundColor: ColorFFFFFF])
+                        vsAtt.append(att)
+                    }else {
+                        let att = NSAttributedString(string:" " + String(matchPlay.fixedOdds), attributes: [NSAttributedStringKey.foregroundColor: Color44AE35])
+                        vsAtt.append(att)
+                    }
+                    
+                }else if matchPlay.fixedOdds > 0 {
+                    if matchPlay.flatCell.isSelected {
+                        let att = NSAttributedString(string:" +" + String(matchPlay.fixedOdds), attributes: [NSAttributedStringKey.foregroundColor: ColorFFFFFF])
+                        vsAtt.append(att)
+                    }else {
+                        let att = NSAttributedString(string:" +" + String(matchPlay.fixedOdds), attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+                        vsAtt.append(att)
+                    }
+                }
+                VSLB.attributedText = vsAtt
+            default: break
+            }
+            
         }
         drawBut.isSelected = isSelected
     }

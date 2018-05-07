@@ -65,7 +65,7 @@ class FootballRangSPFCell: UITableViewCell, DateProtocol {
         
         matchTitle.snp.makeConstraints { (make) in
             make.top.equalTo(13.5 * defaultScale)
-            make.left.equalTo(leftSpacing)
+            make.left.equalTo(10 * defaultScale)
             make.width.height.equalTo(endTime)
         }
         matchTime.snp.makeConstraints { (make) in
@@ -73,10 +73,10 @@ class FootballRangSPFCell: UITableViewCell, DateProtocol {
             make.left.width.height.equalTo(endTime)
         }
         endTime.snp.makeConstraints { (make) in
-            make.left.equalTo(leftSpacing)
+            make.left.equalTo(matchTitle)
             make.top.equalTo(matchTime.snp.bottom).offset(2)
             make.bottom.equalTo(detailBut.snp.top).offset(-2)
-            make.right.equalTo(teamView.snp.left)
+            make.right.equalTo(teamView.snp.left).offset(-8 * defaultScale)
         }
         detailBut.snp.makeConstraints { (make) in
             make.centerX.equalTo(endTime.snp.centerX)

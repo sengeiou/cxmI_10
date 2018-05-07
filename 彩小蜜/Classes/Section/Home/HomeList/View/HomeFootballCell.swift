@@ -34,8 +34,8 @@ class HomeFootballCell: UICollectionViewCell {
         super.layoutSubviews()
         icon.snp.makeConstraints { (make) in
             make.top.equalTo(self.contentView).offset(5)
-            make.left.equalTo(self.contentView).offset(10 * defaultScale)
-            make.right.equalTo(self.contentView).offset(-10 * defaultScale)
+            make.left.equalTo(self.contentView).offset(15 * defaultScale)
+            make.right.equalTo(self.contentView).offset(-15 * defaultScale)
             make.height.equalTo(icon.snp.width)
         }
         title.snp.makeConstraints { (make) in
@@ -56,8 +56,8 @@ class HomeFootballCell: UICollectionViewCell {
         icon.image = UIImage(named: "足球")
         
         title = UILabel()
-        title.font = Font11
-        title.textColor = ColorA0A0A0
+        title.font = Font14
+        title.textColor = Color505050
         title.text = "单关固定"
         title.textAlignment = .center
         

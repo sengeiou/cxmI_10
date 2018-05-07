@@ -21,6 +21,9 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = ColorFFFFFF
+        self.tabBar.backgroundColor = ColorFFFFFF
+        self.tabBar.barTintColor = ColorFFFFFF
+        
         self.delegate = self
         creatSubViewControllers(false)
         configRequest()

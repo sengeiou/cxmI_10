@@ -16,7 +16,7 @@ let HomeSectionViewHeight : CGFloat = 44 * defaultScale
 let HorizontalItemCount = 4
 
 let FootballCellLineSpacing: CGFloat = 10 * defaultScale
-let FootballCellInteritemSpacing: CGFloat = 20 * defaultScale
+let FootballCellInteritemSpacing: CGFloat = 10 * defaultScale
 let FootballCellWidth : CGFloat = (screenWidth - (FootballCellInteritemSpacing * CGFloat(HorizontalItemCount - 1)) - sectionLeftSpacing * 2) / CGFloat(HorizontalItemCount)
 let FootballCellHeight : CGFloat = 90 * defaultScale
 
@@ -78,7 +78,7 @@ class HomeSportLotteryCell: UITableViewCell, UICollectionViewDataSource, UIColle
         title.text = "竞彩足球"
         
         line = UIView()
-        line.backgroundColor = ColorF4F4F4
+        line.backgroundColor = ColorC7C7C7
         
         self.contentView.addSubview(line)
         self.contentView.addSubview(title)
