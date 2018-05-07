@@ -11,12 +11,42 @@ import UIKit
 class FootballMatchInfoCell: UITableViewCell {
 
     // MARK: - 属性 public
+    
+    public var homeMatch : String!
+    public var visiMatch : String!
+    
     public var teamInfo : TeamInfo! {
         didSet{
             guard teamInfo != nil else { return }
             matchName.text = teamInfo.leagueAddr
             matchTime.text = teamInfo.matchDay
-            matchScore.text = "\(teamInfo.homeTeamAbbr!)  \(teamInfo.whole!)  \(teamInfo.visitingTeamAbbr!)"
+            //matchScore.text = "\(teamInfo.homeTeamAbbr!)  \(teamInfo.whole!)  \(teamInfo.visitingTeamAbbr!)"
+            
+            let muAtt = NSMutableAttributedString(string: "")
+            
+            let homeColor : UIColor!
+            let visiColor : UIColor!
+            
+            if teamInfo.homeTeamAbbr == homeMatch || teamInfo.homeTeamAbbr == visiMatch{
+                homeColor = Color505050
+            }else {
+                homeColor = Color9F9F9F
+            }
+            
+            if teamInfo.visitingTeamAbbr == visiMatch || teamInfo.visitingTeamAbbr == homeMatch{
+                visiColor = Color505050
+            }else {
+                visiColor = Color9F9F9F
+            }
+            let homeAtt = NSAttributedString(string: "\(teamInfo.homeTeamAbbr!)  ", attributes: [NSAttributedStringKey.foregroundColor: homeColor])
+            let wholeAtt = NSAttributedString(string: "\(teamInfo.whole!)  ", attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F])
+            let visiAtt = NSAttributedString(string: teamInfo.visitingTeamAbbr!, attributes: [NSAttributedStringKey.foregroundColor: visiColor])
+            
+            muAtt.append(homeAtt)
+            muAtt.append(wholeAtt)
+            muAtt.append(visiAtt)
+            
+            matchScore.attributedText = muAtt
             
             guard teamInfo.matchRs != "" else { return }
             matchResult.text = teamInfo.matchRs

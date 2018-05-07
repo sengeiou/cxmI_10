@@ -240,6 +240,8 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
     /// 分析  Cell
     private func initAnalysisMatchInfoCell(indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballMatchInfoCellId, for: indexPath) as! FootballMatchInfoCell
+        cell.homeMatch = self.matchInfoModel.matchInfo.homeTeamAbbr
+        cell.visiMatch = self.matchInfoModel.matchInfo.visitingTeamAbbr
         switch indexPath.section {
         case 1:
             cell.teamInfo = self.matchInfoModel.hvMatchTeamInfo.matchInfos[indexPath.row]
