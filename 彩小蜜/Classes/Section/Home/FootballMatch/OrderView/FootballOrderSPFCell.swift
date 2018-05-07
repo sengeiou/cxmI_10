@@ -10,6 +10,8 @@ import UIKit
 
 var danMaxNum = 0
 
+let playDeleteButtonSize = 20
+
 protocol FootballOrderSPFCellDelegate {
     func deleteOrderSPFCell(playInfo: FootballPlayListModel) -> Void
     func danSelected() -> Void
@@ -91,7 +93,7 @@ class FootballOrderSPFCell: UITableViewCell , DateProtocol{
         deleteBut.snp.makeConstraints { (make) in
             make.centerY.equalTo(teamView.snp.centerY)
             make.left.equalTo(15 * defaultScale)
-            make.width.height.equalTo(24 * defaultScale)
+            make.width.height.equalTo(playDeleteButtonSize * defaultScale)
         }
         danBut.snp.makeConstraints { (make) in
             make.centerY.equalTo(teamView.snp.centerY)

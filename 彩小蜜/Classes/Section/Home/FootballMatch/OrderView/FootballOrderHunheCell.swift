@@ -114,7 +114,7 @@ class FootballOrderHunheCell: UITableViewCell {
         deleteBut.snp.makeConstraints { (make) in
             make.centerY.equalTo(scoreView.snp.centerY)
             make.left.equalTo(15 * defaultScale)
-            make.width.height.equalTo(24 * defaultScale)
+            make.width.height.equalTo(playDeleteButtonSize * defaultScale)
         }
         danBut.snp.makeConstraints { (make) in
             make.centerY.equalTo(scoreView.snp.centerY)
