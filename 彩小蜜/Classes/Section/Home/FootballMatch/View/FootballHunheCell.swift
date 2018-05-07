@@ -122,7 +122,7 @@ class FootballHunheCell: UITableViewCell, DateProtocol {
         }
         
         matchTitle.snp.makeConstraints { (make) in
-            make.top.equalTo(13.5 * defaultScale)
+            make.top.equalTo(20 * defaultScale)
             make.left.equalTo(leftSpacing)
             make.width.height.equalTo(endTime)
         }
@@ -131,7 +131,7 @@ class FootballHunheCell: UITableViewCell, DateProtocol {
             make.left.width.height.equalTo(endTime)
         }
         endTime.snp.makeConstraints { (make) in
-            make.left.equalTo(leftSpacing)
+            make.left.equalTo(10 * defaultScale)
             make.top.equalTo(matchTime.snp.bottom).offset(2)
             make.bottom.equalTo(detailBut.snp.top).offset(-2)
             make.width.equalTo(70 * defaultScale)
@@ -140,7 +140,7 @@ class FootballHunheCell: UITableViewCell, DateProtocol {
             make.centerX.equalTo(endTime.snp.centerX)
             make.top.equalTo(endTime.snp.bottom)
             make.width.equalTo(endTime)
-            make.bottom.equalTo(-1)
+            make.bottom.equalTo(-20 * defaultScale)
         }
         topTitleView.snp.makeConstraints { (make) in
             make.top.equalTo(0)
@@ -161,7 +161,7 @@ class FootballHunheCell: UITableViewCell, DateProtocol {
         teamlb.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(teamView)
             make.width.equalTo(25 * defaultScale)
-            make.left.equalTo(endTime.snp.right).offset(10)
+            make.left.equalTo(endTime.snp.right).offset(5)
         }
         rangTeamlb.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(rangTeamView)

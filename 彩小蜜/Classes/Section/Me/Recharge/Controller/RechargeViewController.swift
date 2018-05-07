@@ -150,7 +150,7 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
                     self.timer.invalidate()
                     self.showHUD(message: data.msg)
                     self.dismissProgressHud()
-                    
+                    self.userInfoRequest()
                 case "304035":
                     self.canPayment = true
                     //self.showHUD(message: data.msg)
@@ -240,7 +240,38 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
             }, onCompleted: nil , onDisposed: nil )
     }
     
-
+    //MARK: - 网络请求
+    private func userInfoRequest() {
+        weak var weakSelf = self
+        _ = userProvider.rx.request(.userInfo)
+            .asObservable()
+            .mapObject(type: UserInfoDataModel.self)
+            .subscribe(onNext: { (data) in
+                guard weakSelf != nil else { return }
+                weakSelf!.userInfo = data
+                weakSelf?.tableview.reloadData()
+            }, onError: { (error) in
+                print(error)
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        weakSelf?.removeUserData()
+                        let login = LoginViewController()
+                        weakSelf?.pushViewController(vc: login)
+                    default : break
+                    }
+                    
+                    if 300000...310000 ~= code {
+                        print(code)
+                        self.showHUD(message: msg!)
+                    }
+                    
+                default: break
+                }
+            }, onCompleted: nil, onDisposed: nil)
+    }
     
     //MARK: - 懒加载
     lazy private var tableview : UITableView! = {

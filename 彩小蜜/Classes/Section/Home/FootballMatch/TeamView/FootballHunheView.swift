@@ -225,7 +225,7 @@ class FootballHunheView: UIView {
         drawBut.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(homeBut)
             make.centerX.equalTo(self.snp.centerX)
-            make.width.equalTo(55 * defaultScale)
+            make.width.equalTo(65 * defaultScale)
         }
         awayBut.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(homeBut)
@@ -273,7 +273,7 @@ class FootballHunheView: UIView {
     private func getButton() -> UIButton {
         let but = UIButton(type: .custom)
         but.backgroundColor = ColorFFFFFF
-        but.titleLabel?.font = Font10
+        but.titleLabel?.font = Font12
         but.setTitleColor(Color787878, for: .normal)
         but.contentHorizontalAlignment = .center
         return but

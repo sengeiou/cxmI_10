@@ -36,10 +36,9 @@ extension AlertPro {
             let action = UIAlertAction(title: action, style: .default, handler: confirm)
             action.setValue(ColorEA5504, forKey:"titleTextColor")
             
-            let cancelAct = UIAlertAction(title: cancel, style: .cancel, handler: nil)
-            cancelAct.setValue(Color505050, forKey: "titleTextColor")
-            
             if cancel != nil {
+                let cancelAct = UIAlertAction(title: cancel, style: .cancel, handler: nil)
+                cancelAct.setValue(Color505050, forKey: "titleTextColor")
                 alert.addAction(cancelAct)
             }
             
@@ -59,10 +58,9 @@ extension AlertPro {
             let action = UIAlertAction(title: action, style: .default, handler: confirm)
             action.setValue(ColorEA5504, forKey:"titleTextColor")
         
-            let cancelAct = UIAlertAction(title: cancel, style: .cancel, handler: nil)
-            cancelAct.setValue(Color505050, forKey: "titleTextColor")
-            
             if cancel != nil {
+                let cancelAct = UIAlertAction(title: cancel, style: .cancel, handler: nil)
+                cancelAct.setValue(Color505050, forKey: "titleTextColor")
                 alert.addAction(cancelAct)
             }
         

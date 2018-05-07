@@ -30,7 +30,7 @@ class HomeFootballCell: UICollectionViewCell {
             case "4":
                 activityIcon.image = UIImage(named: "Popular-1")
             default:
-                break
+                activityIcon.image = UIImage(named: "")
             }
         }
     }
@@ -58,7 +58,7 @@ class HomeFootballCell: UICollectionViewCell {
             make.bottom.equalTo(self.contentView).offset(-5)
         }
         activityIcon.snp.makeConstraints { (make) in
-            make.top.equalTo(icon)
+            make.top.equalTo(0)
             make.left.equalTo(icon.snp.right).offset(-5)
             make.width.height.equalTo(32 * defaultScale)
         }
@@ -75,7 +75,7 @@ class HomeFootballCell: UICollectionViewCell {
         title.textAlignment = .center
         
         activityIcon = UIImageView()
-        activityIcon.image = UIImage(named: "足球")
+        //activityIcon.image = UIImage(named: "足球")
         
         self.contentView.addSubview(icon)
         self.contentView.addSubview(title)
