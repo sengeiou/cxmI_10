@@ -67,7 +67,7 @@ class FootballScoreCell: UITableViewCell, DateProtocol {
         
         typeIcon.snp.makeConstraints { (make) in
             make.top.left.equalTo(0)
-            make.width.height.equalTo(20)
+            make.width.height.equalTo(typeIconSize * defaultScale)
         }
         
         matchTitle.snp.makeConstraints { (make) in
@@ -83,7 +83,7 @@ class FootballScoreCell: UITableViewCell, DateProtocol {
             make.left.equalTo(matchTitle)
             make.top.equalTo(matchTime.snp.bottom).offset(2)
             make.bottom.equalTo(detailBut.snp.top).offset(-2)
-            
+            make.width.equalTo(70 * defaultScale)
         }
         detailBut.snp.makeConstraints { (make) in
             make.centerX.equalTo(endTime.snp.centerX)
@@ -110,8 +110,9 @@ class FootballScoreCell: UITableViewCell, DateProtocol {
         scoreView.snp.makeConstraints { (make) in
             make.bottom.equalTo(-18 * defaultScale)
             make.height.equalTo(28 * defaultScale)
-            make.width.equalTo(240 * defaultScale)
+           // make.width.equalTo(240 * defaultScale)
             make.right.equalTo(-rightSpacing)
+            make.left.equalTo(endTime.snp.right).offset(10 * defaultScale)
         }
     }
     private func initSubview() {
@@ -140,9 +141,15 @@ class FootballScoreCell: UITableViewCell, DateProtocol {
         detailBut.addTarget(self, action: #selector(detailButClicked(_:)), for: .touchUpInside)
         
         homeMatch = initLabel()
+        homeMatch.font = Font14
+        homeMatch.textColor = Color505050
         vsLb = initLabel()
         vsLb.text = "VS"
+        vsLb.font = Font14
+        vsLb.textColor = Color787878
         visitingMatch = initLabel()
+        visitingMatch.font = Font14
+        visitingMatch.textColor = Color505050
         
         
         self.contentView.addSubview(line)

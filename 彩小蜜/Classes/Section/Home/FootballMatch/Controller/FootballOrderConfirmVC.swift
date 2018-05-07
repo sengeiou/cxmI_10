@@ -162,6 +162,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         table.dataSource = self
         table.backgroundColor = ColorF4F4F4
         table.estimatedRowHeight = 40
+        table.separatorStyle = .none
         footer = FootballOrderFooter()
         footer.delegate = self 
         table.tableFooterView = footer

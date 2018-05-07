@@ -50,7 +50,7 @@ class FootballTeamView: UIView , AlertPro{
             case .胜平负:
                 VSLB.text = "VS"
             case .让球胜平负:
-                let vsAtt = NSMutableAttributedString(string: "VS")
+                let vsAtt = NSMutableAttributedString(string: "VS", attributes: [NSAttributedStringKey.foregroundColor: Color787878])
                 let matchPlay = teamInfo.matchPlays[0]
                 if matchPlay.fixedOdds < 0 {
                     if matchPlay.flatCell.isSelected {
@@ -191,7 +191,7 @@ class FootballTeamView: UIView , AlertPro{
         homeOdds.text = "主胜1.57"
         
         VSLB = initLabel()
-        VSLB.textColor = Color505050
+        VSLB.textColor = Color787878
         VSLB.text = "VS"
         
         drawOdds = initLabel()
@@ -285,9 +285,9 @@ class FootballTeamView: UIView , AlertPro{
             drawOdds.textColor = Color787878
             switch matchType {
             case .胜平负:
-                VSLB.textColor = Color505050
+                VSLB.textColor = Color787878
             case .让球胜平负:
-                let vsAtt = NSMutableAttributedString(string: "VS", attributes: [NSAttributedStringKey.foregroundColor: Color505050])
+                let vsAtt = NSMutableAttributedString(string: "VS", attributes: [NSAttributedStringKey.foregroundColor: Color787878])
                 let matchPlay = teamInfo.matchPlays[0]
                 
                 if matchPlay.fixedOdds < 0 {

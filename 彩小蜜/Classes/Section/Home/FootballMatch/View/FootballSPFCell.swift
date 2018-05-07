@@ -8,6 +8,8 @@
 
 import UIKit
 
+let typeIconSize : CGFloat = 24
+
 protocol FootballSPFCellDelegate {
     func didTipSPFCellDetail(teamInfo : FootballPlayListModel) -> Void
 }
@@ -58,7 +60,7 @@ class FootballSPFCell: UITableViewCell, DateProtocol {
         
         typeIcon.snp.makeConstraints { (make) in
             make.top.left.equalTo(0)
-            make.width.height.equalTo(20)
+            make.width.height.equalTo(typeIconSize * defaultScale)
         }
         
         matchTitle.snp.makeConstraints { (make) in

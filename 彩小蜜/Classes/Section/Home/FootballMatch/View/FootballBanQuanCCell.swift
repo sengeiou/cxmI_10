@@ -67,7 +67,7 @@ class FootballBanQuanCCell: UITableViewCell, DateProtocol {
         
         typeIcon.snp.makeConstraints { (make) in
             make.top.left.equalTo(0)
-            make.width.height.equalTo(20)
+            make.width.height.equalTo(typeIconSize * defaultScale)
         }
         
         matchTitle.snp.makeConstraints { (make) in
@@ -83,6 +83,7 @@ class FootballBanQuanCCell: UITableViewCell, DateProtocol {
             make.left.equalTo(leftSpacing)
             make.top.equalTo(matchTime.snp.bottom).offset(2)
             make.bottom.equalTo(detailBut.snp.top).offset(-2)
+            make.width.equalTo(70 * defaultScale)
         }
         detailBut.snp.makeConstraints { (make) in
             make.centerX.equalTo(endTime.snp.centerX)
@@ -139,9 +140,15 @@ class FootballBanQuanCCell: UITableViewCell, DateProtocol {
         detailBut.addTarget(self, action: #selector(detailButClicked(_:)), for: .touchUpInside)
         
         homeMatch = initLabel()
+        homeMatch.font = Font14
+        homeMatch.textColor = Color505050
         vsLb = initLabel()
         vsLb.text = "VS"
+        vsLb.font = Font14
+        vsLb.textColor = Color787878
         visitingMatch = initLabel()
+        visitingMatch.font = Font14
+        visitingMatch.textColor = Color505050
         
         
         self.contentView.addSubview(line)

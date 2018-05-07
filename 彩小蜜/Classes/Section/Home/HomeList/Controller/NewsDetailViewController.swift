@@ -24,6 +24,7 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
     // MARK: - 属性 public
     //public var newsInfo : NewsInfoModel!
     public var articleId: String!
+    
     // MARK: - 属性 private
     private var detailModel: NewsDetailModel! {
         didSet{
@@ -39,6 +40,7 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
     private var shareBut: UIButton!      // 分享
     private var cellHeight : CGFloat = 50
     private var footer : NewsDetailFooter!
+    private var webView : WKWebView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -258,7 +260,7 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
             let cell = tableView.dequeueReusableCell(withIdentifier: NewsDetailCellId, for: indexPath) as! NewsDetailCell
             cell.detailInfo = self.detailModel
             cell.delegate = self
-            
+            self.webView = cell.webView
             return cell
         }else {
             if indexPath.row == 0 {
@@ -331,6 +333,13 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
     }
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return nil
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView == self.tableView {
+            guard self.webView != nil else { return }
+            self.webView.setNeedsLayout()
+        }
     }
     
     override func didReceiveMemoryWarning() {
