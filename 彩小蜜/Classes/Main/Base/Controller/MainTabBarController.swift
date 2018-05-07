@@ -24,6 +24,13 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
         self.tabBar.backgroundColor = ColorFFFFFF
         self.tabBar.barTintColor = ColorFFFFFF
         
+        let TabBarLine = UITabBar.appearance()
+//        TabBarLine.shadowImage = UIImage()
+//        TabBarLine.backgroundImage = UIImage()
+        
+        
+        self.tabBar.shadowImage = UIImage(named : "line")
+        self.tabBar.backgroundImage = UIImage()
         self.delegate = self
         creatSubViewControllers(false)
         configRequest()
