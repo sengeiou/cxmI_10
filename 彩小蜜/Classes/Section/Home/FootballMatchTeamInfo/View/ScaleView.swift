@@ -12,7 +12,7 @@ class ScaleView: UIView {
     
     public var scaleNum : CGFloat! {
         didSet{
-            guard scaleNum != nil else { return }
+            guard scaleNum != nil, scaleNum.isNaN == false else { return }
             layoutScale()
         }
     }

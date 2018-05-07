@@ -54,6 +54,8 @@ class NewsOnePicCell: UITableViewCell {
         self.selectionStyle = .none
         
         icon = UIImageView()
+        icon.layer.borderWidth = 0.5
+        icon.layer.borderColor = ColorEAEAEA.cgColor
         icon.image = UIImage(named: "Racecolorfootball")
         
         videoIcon = UIImageView()

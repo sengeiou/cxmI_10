@@ -76,13 +76,13 @@ class FootballMatchInfoScaleCell: UITableViewCell {
         
         homeScale = ScaleView()
         homeScale.scaleColor = ColorEA5504
-        //homeScale.scaleNum = 0.2
+        
         flatScale = ScaleView()
         flatScale.scaleColor = Color65AADD
-        //flatScale.scaleNum = 0.4
+        
         visiScale = ScaleView()
         visiScale.scaleColor = Color44AE35
-        //visiScale.scaleNum = 1.0
+        
         
         self.contentView.addSubview(homelb)
         self.contentView.addSubview(flatlb)
