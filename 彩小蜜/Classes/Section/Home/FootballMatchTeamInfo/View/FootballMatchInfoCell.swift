@@ -39,7 +39,7 @@ class FootballMatchInfoCell: UITableViewCell {
                 visiColor = Color9F9F9F
             }
             let homeAtt = NSAttributedString(string: "\(teamInfo.homeTeamAbbr!)  ", attributes: [NSAttributedStringKey.foregroundColor: homeColor])
-            let wholeAtt = NSAttributedString(string: "\(teamInfo.whole!)  ", attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F])
+            let wholeAtt = NSAttributedString(string: "\(teamInfo.whole!)  ", attributes: [NSAttributedStringKey.foregroundColor: Color505050])
             let visiAtt = NSAttributedString(string: teamInfo.visitingTeamAbbr!, attributes: [NSAttributedStringKey.foregroundColor: visiColor])
             
             muAtt.append(homeAtt)
