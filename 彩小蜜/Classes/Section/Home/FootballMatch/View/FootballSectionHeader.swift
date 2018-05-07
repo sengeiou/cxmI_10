@@ -22,18 +22,9 @@ class FootballSectionHeader: UITableViewHeaderFooterView, DateProtocol {
     public var matchModel : FootballMatchModel! {
         didSet{
             guard matchModel != nil else { return }
-//            if matchModel.title != nil {
-//                title.text = "热门比赛"
-//                title.textColor = ColorEA5504
-//                //self.headerType = .hotMatch
-//            }else{
-                //let xx = getWeek()
-                title.text = matchModel.matchDay + "共有"
-                + "\(matchModel.playList.count)" + "场比赛可投"
-                title.textColor = Color787878
-                //self.headerType = .match
-            //}
-            
+
+            title.text = matchModel.matchDay + "共有" + "\(matchModel.playList.count)" + "场比赛可投"
+    
             if matchModel.isSpreading == true {
                 spreadBut.setImage(UIImage(named: "Unfold"), for: .normal)
             }else {
@@ -131,9 +122,9 @@ class FootballSectionHeader: UITableViewHeaderFooterView, DateProtocol {
         //icon.image = UIImage(named: "Popular")
         
         title = UILabel()
-        title.font = Font15
+        title.font = Font13
         title.textAlignment = .left
-        title.textColor = ColorE85504
+        title.textColor = Color787878
         title.text = "热门比赛"
         
         spreadBut = UIButton(type: .custom)
