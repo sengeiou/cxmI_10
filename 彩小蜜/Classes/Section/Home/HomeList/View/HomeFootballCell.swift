@@ -18,6 +18,20 @@ class HomeFootballCell: UICollectionViewCell {
             }
             
             title.text = playModel.playClassifyName
+            
+            
+            switch playModel.playClassifyLabelId {
+            case "1":
+                activityIcon.image = UIImage(named: "Singlepass")
+            case "2":
+                activityIcon.image = UIImage(named: "Lottery")
+            case "3":
+                activityIcon.image = UIImage(named: "Awards")
+            case "4":
+                activityIcon.image = UIImage(named: "Popular-1")
+            default:
+                break
+            }
         }
     }
     
@@ -43,12 +57,11 @@ class HomeFootballCell: UICollectionViewCell {
             make.left.right.equalTo(self.contentView)
             make.bottom.equalTo(self.contentView).offset(-5)
         }
-//        activityIcon.snp.makeConstraints { (make) in
-//            make.top.equalTo(icon)
-//            make.left.equalTo(icon.snp.right).offset(-5)
-//            make.height.equalTo(20)
-//            make.width.equalTo(20)
-//        }
+        activityIcon.snp.makeConstraints { (make) in
+            make.top.equalTo(icon)
+            make.left.equalTo(icon.snp.right).offset(-5)
+            make.width.height.equalTo(32 * defaultScale)
+        }
     }
     
     private func initSubview() {
@@ -66,7 +79,7 @@ class HomeFootballCell: UICollectionViewCell {
         
         self.contentView.addSubview(icon)
         self.contentView.addSubview(title)
-        //self.contentView.addSubview(activityIcon)
+        self.contentView.addSubview(activityIcon)
     }
     
     

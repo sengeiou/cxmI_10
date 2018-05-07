@@ -69,7 +69,7 @@ class FootballTotalCell: UITableViewCell, DateProtocol {
         }
         
         matchTitle.snp.makeConstraints { (make) in
-            make.top.equalTo(15 * defaultScale)
+            make.top.equalTo(20 * defaultScale)
             make.left.equalTo(10 * defaultScale)
             make.width.height.equalTo(endTime)
         }
@@ -87,7 +87,7 @@ class FootballTotalCell: UITableViewCell, DateProtocol {
             make.centerX.equalTo(endTime.snp.centerX)
             make.width.height.equalTo(20)
             make.top.equalTo(endTime.snp.bottom)
-            make.bottom.equalTo(-10 * defaultScale)
+            make.bottom.equalTo(-20 * defaultScale)
         }
         
         homeMatch.snp.makeConstraints { (make) in
@@ -137,9 +137,15 @@ class FootballTotalCell: UITableViewCell, DateProtocol {
         detailBut.addTarget(self, action: #selector(detailButClicked(_:)), for: .touchUpInside)
         
         homeMatch = initLabel()
+        homeMatch.font = Font14
+        homeMatch.textColor = Color505050
         vsLb = initLabel()
         vsLb.text = "VS"
+        vsLb.font = Font14
+        vsLb.textColor = Color787878
         visitingMatch = initLabel()
+        visitingMatch.font = Font14
+        visitingMatch.textColor = Color505050
         
         
         self.contentView.addSubview(line)

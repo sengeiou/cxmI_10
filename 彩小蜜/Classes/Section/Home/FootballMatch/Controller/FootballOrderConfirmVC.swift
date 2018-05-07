@@ -284,6 +284,8 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         switch matchType {
         case .半全场, .比分:
             return 84 * defaultScale
+        case .总进球:
+            return 115 * defaultScale
         case .混合过关:
             return UITableViewAutomaticDimension
         default:

@@ -130,9 +130,15 @@ class FootballOrder2_1Cell: UITableViewCell, DateProtocol {
         danBut.addTarget(self , action: #selector(danClicked(_:)), for: .touchUpInside)
         
         homeMatch = initLabel()
+        homeMatch.font = Font14
+        homeMatch.textColor = Color505050
         vsLb = initLabel()
         vsLb.text = "VS"
+        vsLb.font = Font14
+        vsLb.textColor = Color787878
         visitingMatch = initLabel()
+        visitingMatch.font = Font14
+        visitingMatch.textColor = Color505050
         
         
         //self.contentView.addSubview(titleLB)

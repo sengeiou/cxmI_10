@@ -93,8 +93,9 @@ class FootballOrderTotalCell: UITableViewCell, DateProtocol {
         danBut.snp.makeConstraints { (make) in
             make.centerY.equalTo(totalView.snp.centerY)
             make.width.equalTo(31 * defaultScale)
-            make.top.equalTo(self.contentView).offset(27 * defaultScale)
-            make.bottom.equalTo(-11 * defaultScale)
+//            make.top.equalTo(self.contentView).offset(27 * defaultScale)
+//            make.bottom.equalTo(-11 * defaultScale)
+            make.height.equalTo(53 * defaultScale)
             make.right.equalTo(-rightSpacing)
         }
         homeMatch.snp.makeConstraints { (make) in
@@ -139,9 +140,15 @@ class FootballOrderTotalCell: UITableViewCell, DateProtocol {
         danBut.addTarget(self , action: #selector(danClicked(_:)), for: .touchUpInside)
         
         homeMatch = initLabel()
+        homeMatch.font = Font14
+        homeMatch.textColor = Color505050
         vsLb = initLabel()
         vsLb.text = "VS"
+        vsLb.font = Font14
+        vsLb.textColor = Color787878
         visitingMatch = initLabel()
+        visitingMatch.font = Font14
+        visitingMatch.textColor = Color505050
         
         
         //self.contentView.addSubview(titleLB)

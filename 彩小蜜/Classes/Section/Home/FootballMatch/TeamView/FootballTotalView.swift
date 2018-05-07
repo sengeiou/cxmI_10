@@ -176,7 +176,7 @@ class FootballTotalView: UIView {
         centerLine.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
             make.centerY.equalTo(self.snp.centerY)
-            make.height.equalTo(0.4)
+            make.height.equalTo(0.5)
         }
         
         button0.snp.makeConstraints { (make) in
@@ -295,7 +295,7 @@ class FootballTotalView: UIView {
     private func getButton(tag: Int) -> UIButton {
         let but = UIButton(type: .custom)
         but.tag = tag
-        but.titleLabel?.font = Font10
+        but.titleLabel?.font = Font12
         but.titleLabel?.textColor = Color505050
         but.setTitle("\(tag)", for: .normal)
         but.setTitleColor(Color505050, for: .normal)

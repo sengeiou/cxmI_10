@@ -323,7 +323,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         case .胜平负, .让球胜平负:
             return 84 * defaultScale
         case .总进球:
-            return (84 + 15) * defaultScale
+            return (100 + 15) * defaultScale
         case .比分, .半全场:
             return 84 * defaultScale
         case .二选一:
