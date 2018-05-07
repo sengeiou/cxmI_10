@@ -47,7 +47,7 @@ class HomeScrollBarCell: UITableViewCell, FSPagerViewDataSource, FSPagerViewDele
         
         viewPager.snp.makeConstraints { (make) in
             make.top.equalTo(1)
-            make.bottom.equalTo(0)
+            make.bottom.equalTo(4)
             make.left.equalTo(0)
             make.right.equalTo(0)
         }
