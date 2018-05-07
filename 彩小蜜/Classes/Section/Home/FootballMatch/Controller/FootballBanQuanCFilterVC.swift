@@ -78,14 +78,14 @@ class FootballBanQuanCFilterVC: BasePopViewController, BottomViewDelegate, Footb
         shengTitle.snp.makeConstraints { (make) in
             make.top.equalTo(43 * defaultScale)
             make.height.equalTo(132 * defaultScale)
-            make.left.equalTo(16 * defaultScale)
-            make.width.equalTo(23 * defaultScale)
+            make.left.equalTo(filterleftSpacing)
+            make.width.equalTo(filterTitleWidth)
         }
         
         banScoreView.snp.makeConstraints { (make) in
             make.top.equalTo(shengTitle)
             make.left.equalTo(shengTitle.snp.right)
-            make.width.equalTo(320 * defaultScale)
+            make.width.equalTo(banquanViewWidth)
             make.height.equalTo(shengTitle)
         }
         

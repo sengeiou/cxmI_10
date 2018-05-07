@@ -98,7 +98,7 @@ class HomeScrollBarCell: UITableViewCell, FSPagerViewDataSource, FSPagerViewDele
         let winning = winningList[index]
         
         cell.textLabel?.text = winning.winningMsg
-        cell.textLabel?.font = Font10
+        cell.textLabel?.font = Font14
         cell.textLabel?.textColor = ColorA0A0A0
         cell.textLabel?.superview?.backgroundColor = ColorFFFFFF
         cell.contentView.backgroundColor = ColorFFFFFF

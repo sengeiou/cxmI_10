@@ -189,8 +189,8 @@ class FootballHunheFilterVC: BasePopViewController, BottomViewDelegate, Football
         }
         SPFTitlelb.snp.makeConstraints { (make) in
             make.top.equalTo(topTitleView.snp.bottom)
-            make.left.equalTo(leftSpacing)
-            make.width.equalTo(23 * defaultScale)
+            make.left.equalTo(filterleftSpacing)
+            make.width.equalTo(filterTitleWidth)
             make.height.equalTo(38 * defaultScale)
         }
         rangSPFTitlelb.snp.makeConstraints { (make) in
@@ -215,7 +215,7 @@ class FootballHunheFilterVC: BasePopViewController, BottomViewDelegate, Football
         SPFView.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(SPFTitlelb)
             make.left.equalTo(SPFTitlelb.snp.right)
-            make.width.equalTo(collectionViewWidth * defaultScale)
+            make.width.equalTo(collectionViewWidth)
         }
         rangSPFView.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(rangSPFTitlelb)
