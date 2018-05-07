@@ -72,7 +72,7 @@ class FootballTimesFilterVC: BasePopViewController, UITextFieldDelegate, CXMKeyb
     }
     
     private func initSubview() {
-        self.viewHeight = 240 * defaultScale
+        self.viewHeight = 242 * defaultScale
         
         keyboardView = CXMKeyboardView()
         keyboardView.delegate = self
@@ -82,7 +82,7 @@ class FootballTimesFilterVC: BasePopViewController, UITextFieldDelegate, CXMKeyb
         backBut.addTarget(self, action: #selector(backClicked(_:)), for: .touchUpInside)
         
         timesTitle = UILabel()
-        timesTitle.font = Font13
+        timesTitle.font = Font14
         timesTitle.textColor = Color505050
         timesTitle.textAlignment = .right
         timesTitle.sizeToFit()
@@ -93,6 +93,7 @@ class FootballTimesFilterVC: BasePopViewController, UITextFieldDelegate, CXMKeyb
         textField.delegate = self
         textField.textColor = Color505050
         textField.layer.borderWidth = 0.3
+        textField.textAlignment = .center
         textField.layer.borderColor = ColorC8C8C8.cgColor
         
         timesView = UIView()
@@ -123,7 +124,7 @@ class FootballTimesFilterVC: BasePopViewController, UITextFieldDelegate, CXMKeyb
         let but = UIButton(type: .custom)
         but.setTitleColor(Color505050, for: .normal)
         but.layer.borderWidth = 0.3
-        but.titleLabel?.font = Font12
+        but.titleLabel?.font = Font14
         but.layer.borderColor = ColorC8C8C8.cgColor
         but.addTarget(self, action: #selector(timesClicked(_:)), for: .touchUpInside)
         return but

@@ -10,7 +10,7 @@ import UIKit
 
 var danMaxNum = 0
 
-let playDeleteButtonSize = 20
+let playDeleteButtonSize : CGFloat = 20
 
 protocol FootballOrderSPFCellDelegate {
     func deleteOrderSPFCell(playInfo: FootballPlayListModel) -> Void
@@ -116,8 +116,8 @@ class FootballOrderSPFCell: UITableViewCell , DateProtocol{
         deleteBut.addTarget(self, action: #selector(deleteClicked(_:)), for: .touchUpInside)
         
         titleLB = UILabel()
-        titleLB.font = Font15
-        titleLB.textColor = Color787878
+        titleLB.font = Font12
+        titleLB.textColor = Color9F9F9F
         titleLB.textAlignment = .left
         
         teamView = FootballTeamView()

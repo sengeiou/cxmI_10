@@ -8,7 +8,7 @@
 
 import UIKit
 
-let KeyboardHeight : CGFloat = 120 * defaultScale
+let KeyboardHeight : CGFloat = 144 * defaultScale
 
 fileprivate let itemWidth: CGFloat = screenWidth / 4
 fileprivate let itemHeight : CGFloat = KeyboardHeight / 4
@@ -104,7 +104,7 @@ class CXMKeyboardView: UIView {
         let but = UIButton(type: .custom)
         but.setTitleColor(Color505050, for: .normal)
         but.layer.borderWidth = 0.3
-        but.titleLabel?.font = Font12
+        but.titleLabel?.font = Font14
         but.layer.borderColor = ColorC8C8C8.cgColor
         but.addTarget(self, action: #selector(didTipItem(_:)), for: .touchUpInside)
         return but

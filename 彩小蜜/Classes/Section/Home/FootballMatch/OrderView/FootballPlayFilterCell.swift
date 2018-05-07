@@ -45,7 +45,7 @@ class FootballPlayFilterCell: UICollectionViewCell {
         self.backgroundColor = ColorFFFFFF
         
         title = UILabel()
-        title.font = Font12
+        title.font = Font14
         title.textColor = Color505050
         title.textAlignment = .center
         

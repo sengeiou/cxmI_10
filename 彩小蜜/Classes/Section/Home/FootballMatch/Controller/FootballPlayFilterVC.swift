@@ -90,7 +90,7 @@ class FootballPlayFilterVC: BasePopViewController, FootballFilterBottomViewDeleg
         bgView.backgroundColor = ColorFFFFFF
         
         titleLB = UILabel()
-        titleLB.font = Font12
+        titleLB.font = Font14
         titleLB.textColor = Color9F9F9F
         titleLB.textAlignment = .center
         titleLB.text = "可选串关方式"
