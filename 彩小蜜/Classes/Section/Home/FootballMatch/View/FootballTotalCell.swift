@@ -69,7 +69,7 @@ class FootballTotalCell: UITableViewCell, DateProtocol {
         }
         
         matchTitle.snp.makeConstraints { (make) in
-            make.top.equalTo(13.5 * defaultScale)
+            make.top.equalTo(15 * defaultScale)
             make.left.equalTo(10 * defaultScale)
             make.width.height.equalTo(endTime)
         }
@@ -81,13 +81,13 @@ class FootballTotalCell: UITableViewCell, DateProtocol {
             make.left.equalTo(matchTitle)
             make.top.equalTo(matchTime.snp.bottom).offset(2)
             make.bottom.equalTo(detailBut.snp.top).offset(-2)
-            make.right.equalTo(totalView.snp.left).offset(-8 * defaultScale)
+            make.width.equalTo(70 * defaultScale)
         }
         detailBut.snp.makeConstraints { (make) in
             make.centerX.equalTo(endTime.snp.centerX)
             make.width.height.equalTo(20)
             make.top.equalTo(endTime.snp.bottom)
-            make.bottom.equalTo(-1)
+            make.bottom.equalTo(-10 * defaultScale)
         }
         
         homeMatch.snp.makeConstraints { (make) in
@@ -108,7 +108,7 @@ class FootballTotalCell: UITableViewCell, DateProtocol {
         totalView.snp.makeConstraints { (make) in
             make.top.equalTo(35 * defaultScale)
             make.bottom.equalTo(-15 * defaultScale)
-            make.width.equalTo(275 * defaultScale)
+            make.left.equalTo(endTime.snp.right).offset(10 * defaultScale)
             make.right.equalTo(-rightSpacing)
         }
     }

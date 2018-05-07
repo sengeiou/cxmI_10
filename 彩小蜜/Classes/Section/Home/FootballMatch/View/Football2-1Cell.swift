@@ -110,8 +110,8 @@ class Football2_1Cell: UITableViewCell , DateProtocol{
         twoOneView.snp.makeConstraints { (make) in
             make.bottom.equalTo(-18 * defaultScale)
             make.height.equalTo(28 * defaultScale)
-            make.left.equalTo(endTime.snp.right).offset(10)
             make.right.equalTo(-rightSpacing)
+            make.left.equalTo(endTime.snp.right).offset(10 * defaultScale)
         }
     }
     private func initSubview() {

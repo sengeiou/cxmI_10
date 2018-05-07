@@ -76,7 +76,7 @@ class FootballSPFCell: UITableViewCell, DateProtocol {
             make.left.equalTo(matchTitle)
             make.top.equalTo(matchTime.snp.bottom).offset(2)
             make.bottom.equalTo(detailBut.snp.top).offset(-2)
-            make.right.equalTo(teamView.snp.left).offset(-8 * defaultScale)
+            make.width.equalTo(70 * defaultScale)
         }
         detailBut.snp.makeConstraints { (make) in
             make.centerX.equalTo(endTime.snp.centerX)
@@ -88,7 +88,7 @@ class FootballSPFCell: UITableViewCell, DateProtocol {
             make.top.equalTo(15 * defaultScale)
             make.bottom.equalTo(-15 * defaultScale)
             make.right.equalTo(-rightSpacing)
-            make.width.equalTo(275 * defaultScale)
+            make.left.equalTo(endTime.snp.right).offset(10 * defaultScale)
         }
     }
     private func initSubview() {
