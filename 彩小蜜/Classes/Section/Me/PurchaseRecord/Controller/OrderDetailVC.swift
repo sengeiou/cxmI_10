@@ -63,9 +63,9 @@ class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         homeData.playClassifyId = orderInfo.lotteryPlayClassifyId
         homeData.playClassifyImg = orderInfo.lotteryClassifyImg
         homeData.playClassifyName = orderInfo.lotteryClassifyName
-        homeData.playType = orderInfo.playType
+        homeData.playType = orderInfo.lotteryPlayClassifyId
         
-        football.homeData = homeData
+        
         pushViewController(vc: football)
         
     }

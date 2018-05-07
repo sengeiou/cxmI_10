@@ -30,7 +30,10 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     public var delegate : FootballOrderConfirmVCDelegate!
     
     public var matchType: FootballMatchType = .胜平负
-    public var homeData: HomePlayModel!
+    //public var homeData: HomePlayModel!
+    
+    public var playclassFyId : String!
+    public var classFyId : String!
     
     public var selectPlayList: [FootballPlayListModel]! {
         didSet{
@@ -385,7 +388,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
                  showHUD(message: self.showMsg)
             }
             return }
-        let requestModel = getRequestModel(betType: self.betType, times: self.times, bonusId: "", homeData: self.homeData)
+        let requestModel = getRequestModel(betType: self.betType, times: self.times, bonusId: "")
         
         if getUserData() != nil {
             let payment = PaymentViewController()
@@ -480,7 +483,9 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         self.resetDanState()
     }
     func selectedItem() {
-        guard homeData != nil else { return }
+       // guard homeData != nil else { return }
+        guard self.playclassFyId != nil, self.classFyId != nil else { return }
+        
         orderRequest ()
     }
     // MARK: - 选取比赛 FootballTotalView Delegate
@@ -533,7 +538,8 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         self.resetDanState()
     }
     func totalSelectedItem() {
-        guard homeData != nil else { return }
+        //guard homeData != nil else { return }
+        guard self.classFyId != nil , self.playclassFyId != nil else { return }
         orderRequest ()
     }
     
@@ -586,7 +592,8 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         }
         
         score.didSelected = {
-            guard weakSelf?.homeData != nil else { return }
+            //guard weakSelf?.homeData != nil else { return }
+            guard weakSelf?.playclassFyId != nil , weakSelf?.classFyId != nil else { return }
                 weakSelf?.orderRequest()
         }
         present(score)
@@ -627,7 +634,8 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         }
         
         score.didSelected = {
-            guard weakSelf?.homeData != nil else { return }
+            //guard weakSelf?.homeData != nil else { return }
+            guard weakSelf?.playclassFyId != nil , weakSelf?.classFyId != nil else { return }
             weakSelf?.orderRequest()
         }
         present(score)
@@ -669,7 +677,8 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
             weakSelf?.resetDanState()
         }
         score.didSelected = {
-            guard weakSelf?.homeData != nil else { return }
+            //guard weakSelf?.homeData != nil else { return }
+            guard weakSelf?.playclassFyId != nil , weakSelf?.classFyId != nil else { return }
             weakSelf?.orderRequest()
         }
         present(score)
@@ -713,7 +722,8 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     func didSelectedTwoOneView() {
-        guard homeData != nil else { return }
+        //guard homeData != nil else { return }
+        guard self.playclassFyId != nil , self.classFyId != nil else { return }
         orderRequest ()
     }
     

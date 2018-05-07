@@ -54,7 +54,8 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         default: break
             
         }
-        football.homeData = homeData.dlPlayClassifyDetailDTOs[index]
+        //football.homeData = homeData.dlPlayClassifyDetailDTOs[index]
+        
         pushViewController(vc: football)
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

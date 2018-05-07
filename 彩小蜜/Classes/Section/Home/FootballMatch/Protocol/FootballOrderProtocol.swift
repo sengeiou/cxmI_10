@@ -16,19 +16,19 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
     
     
     func orderRequest () {
-        guard self.homeData != nil else { return }
+        //guard self.homeData != nil else { return }
         guard self.betType != nil else { return }
         self.orderReuqest(betType: betType, times: times)
     }
     
-    func getRequestModel(betType: String, times: String, bonusId: String, homeData: HomePlayModel) -> FootballRequestMode {
+    func getRequestModel(betType: String, times: String, bonusId: String) -> FootballRequestMode {
         var requestModel = FootballRequestMode()
         
         requestModel.betType = betType
         requestModel.bonusId = bonusId
-        requestModel.lotteryClassifyId = homeData.lotteryId
-        requestModel.lotteryPlayClassifyId = homeData.playClassifyId
-        requestModel.playType = homeData.playType
+        requestModel.lotteryClassifyId = self.classFyId
+        requestModel.lotteryPlayClassifyId = self.playclassFyId
+        requestModel.playType = self.playclassFyId
         requestModel.times = times
         
         
@@ -37,8 +37,8 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
             var matchBetCell = MatchBetPlay()
             matchBetCell.changci = playInfo.changci
             matchBetCell.isDan = playInfo.isDan
-            matchBetCell.lotteryClassifyId = homeData.lotteryId
-            matchBetCell.lotteryPlayClassifyId = homeData.playClassifyId
+            matchBetCell.lotteryClassifyId = self.classFyId
+            matchBetCell.lotteryPlayClassifyId = self.playclassFyId
             matchBetCell.matchId = playInfo.matchId
             matchBetCell.matchTeam = playInfo.homeTeamAbbr + "VS" + playInfo.visitingTeamAbbr
             matchBetCell.matchTime = playInfo.matchTime
@@ -188,7 +188,7 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
             }
         }
         
-        let requestModel = getRequestModel(betType: betType, times: times, bonusId: "", homeData: self.homeData)
+        let requestModel = getRequestModel(betType: betType, times: times, bonusId: "")
         self.showProgressHUD()
         weak var weakSelf = self
         _ = homeProvider.rx.request(.getBetInfo(requestModel: requestModel))

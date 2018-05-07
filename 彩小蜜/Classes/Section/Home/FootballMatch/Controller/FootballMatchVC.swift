@@ -44,7 +44,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     // MARK: - 属性
     public var matchType: FootballMatchType = .胜平负
     
-    public var homeData : HomePlayModel!
+    //public var homeData : HomePlayModel!
     
     public var matchList : [FootballMatchModel]!
     
@@ -410,7 +410,8 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
                 order.delegate = self
                 order.matchType = self.matchType
                 order.playList = selectPlayList
-                order.homeData = homeData
+                order.playclassFyId = self.matchData.lotteryPlayClassifyId
+                order.classFyId = self.matchData.lotteryClassifyId
                 pushViewController(vc: order)
             }else {
                 guard play.matchPlays.count == 5 else { return }
@@ -420,7 +421,8 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
                 if can {
                     let order = FootballOrderConfirmVC()
                     order.delegate = self
-                    order.homeData = homeData
+                    order.playclassFyId = self.matchData.lotteryPlayClassifyId
+                    order.classFyId = self.matchData.lotteryClassifyId
                     order.matchType = self.matchType
                     order.playList = selectPlayList
                     pushViewController(vc: order)
@@ -435,7 +437,9 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         order.delegate = self
         order.matchType = self.matchType
         order.playList = selectPlayList
-        order.homeData = homeData
+        order.classFyId = self.matchData.lotteryClassifyId
+        order.playclassFyId = self.matchData.lotteryPlayClassifyId
+        //order.homeData = homeData
         pushViewController(vc: order)
     }
     // MARK: - 确认订单页， 返回
