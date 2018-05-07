@@ -68,10 +68,10 @@ class FootballBuyRatioView: UIView {
         visilb = getLabel()
         
         vline = UIView()
-        vline.backgroundColor = ColorC8C8C8
+        vline.backgroundColor = ColorEAEAEA
         
         vlineOne = UIView()
-        vlineOne.backgroundColor = ColorC8C8C8
+        vlineOne.backgroundColor = ColorEAEAEA
         
         self.addSubview(homelb)
         self.addSubview(flatlb)

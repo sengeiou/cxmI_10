@@ -337,7 +337,7 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
             case 0:
                 return 96 * defaultScale
             case 1, 2, 3:
-                return 36 * defaultScale
+                return 42 * defaultScale
             case 4:
                 return 375 * defaultScale
             default:
@@ -353,7 +353,7 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
         case 0:
             return 44 * defaultScale
         case 1:
-            return 36 * defaultScale
+            return 44 * defaultScale
         case 2, 3:
             return 80 * defaultScale
         case 4:

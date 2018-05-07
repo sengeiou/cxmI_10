@@ -116,7 +116,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Home/FootballMatch/Controller/FootballOrderConfirmVC.swift"
-            timestampString = "547371307.064337"
+            timestampString = "547373740.800071"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "231"
@@ -179,61 +179,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Home/FootballMatchTeamInfo/View/FootballMatchInfoCell.swift"
-            timestampString = "547359787.121601"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
-            landmarkName = "teamInfo"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Me/PurchaseRecord/Controller/OrderDetailVC.swift"
-            timestampString = "547371307.064474"
+            timestampString = "547373740.800204"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "68"
             endingLineNumber = "68"
             landmarkName = "goBuy()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Home/HomeList/Controller/HomeViewController.swift"
-            timestampString = "547371307.064531"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "didSelectItem(playModel:index:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Home/HomeList/Controller/HomeViewController.swift"
-            timestampString = "547371307.064834"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
-            landmarkName = "didTipBanner(banner:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

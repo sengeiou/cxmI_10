@@ -63,9 +63,9 @@ class BottomView: UIView {
     }
     private func initSubview() {
         bottomLine = UIView()
-        bottomLine.backgroundColor = ColorC8C8C8
+        bottomLine.backgroundColor = ColorEAEAEA
         vLine = UIView()
-        vLine.backgroundColor = ColorC8C8C8
+        vLine.backgroundColor = ColorEAEAEA
         
         confirmBut = UIButton(type: .custom)
         confirmBut.setTitle("确定", for: .normal)

@@ -58,7 +58,7 @@ class BasePopViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, 
         super.init(nibName: nil, bundle: nil)
         self.modalTransitionStyle = .crossDissolve
         self.modalPresentationStyle = .custom
-        self.view.backgroundColor = UIColor(white: 0.3, alpha: 0.2)
+        self.view.backgroundColor = UIColor(white: 0.5, alpha: 0.5)
     }
     
     override func viewDidLoad() {

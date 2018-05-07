@@ -38,15 +38,19 @@ class FootballMatchInfoCell: UITableViewCell {
             }else {
                 visiColor = Color9F9F9F
             }
-            let homeAtt = NSAttributedString(string: "\(teamInfo.homeTeamAbbr!)  ", attributes: [NSAttributedStringKey.foregroundColor: homeColor])
-            let wholeAtt = NSAttributedString(string: "\(teamInfo.whole!)  ", attributes: [NSAttributedStringKey.foregroundColor: Color505050])
+            let homeAtt = NSAttributedString(string: "\(teamInfo.homeTeamAbbr!)", attributes: [NSAttributedStringKey.foregroundColor: homeColor])
+            let wholeAtt = NSAttributedString(string: "\(teamInfo.whole!)", attributes: [NSAttributedStringKey.foregroundColor: Color505050])
             let visiAtt = NSAttributedString(string: teamInfo.visitingTeamAbbr!, attributes: [NSAttributedStringKey.foregroundColor: visiColor])
             
             muAtt.append(homeAtt)
             muAtt.append(wholeAtt)
             muAtt.append(visiAtt)
             
-            matchScore.attributedText = muAtt
+            //matchScore.attributedText = muAtt
+            
+            homeScore.attributedText = homeAtt
+            matchScore.attributedText = wholeAtt
+            visiScore.attributedText = visiAtt
             
             guard teamInfo.matchRs != "" else { return }
             matchResult.text = teamInfo.matchRs
@@ -68,6 +72,9 @@ class FootballMatchInfoCell: UITableViewCell {
     private var matchTime: UILabel!
     private var matchScore: UILabel!
     private var matchResult: UILabel!
+    
+    private var homeScore : UILabel!
+    private var visiScore : UILabel!
     
     private var line : UIImageView!
     
@@ -102,9 +109,22 @@ class FootballMatchInfoCell: UITableViewCell {
             make.width.equalTo(30 * defaultScale)
         }
         
-        matchScore.snp.makeConstraints { (make) in
+        homeScore.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(matchName)
             make.left.equalTo(matchTime.snp.right)
+            make.right.equalTo(matchScore.snp.left)
+            make.width.equalTo(visiScore)
+        }
+        
+        matchScore.snp.makeConstraints { (make) in
+            make.top.bottom.equalTo(matchName)
+//            make.left.equalTo(matchTime.snp.right)
+//            make.right.equalTo(matchResult.snp.left)
+            make.width.equalTo(30 * defaultScale)
+        }
+        visiScore.snp.makeConstraints { (make) in
+            make.top.bottom.equalTo(matchName)
+            make.left.equalTo(matchScore.snp.right)
             make.right.equalTo(matchResult.snp.left)
         }
     }
@@ -122,14 +142,22 @@ class FootballMatchInfoCell: UITableViewCell {
         matchTime.sizeToFit()
         
         matchScore = getLabel("阿森纳  0：1  AC米兰")
+    
+        homeScore = getLabel("")
+        homeScore.textAlignment = .right
+        visiScore = getLabel("")
+        visiScore.textAlignment = .left
         
         matchResult = getLabel("")
+        
         matchResult.sizeToFit()
         
         self.contentView.addSubview(line)
         self.contentView.addSubview(matchName)
         self.contentView.addSubview(matchTime)
         self.contentView.addSubview(matchScore)
+        self.contentView.addSubview(homeScore)
+        self.contentView.addSubview(visiScore)
         self.contentView.addSubview(matchResult)
     }
     

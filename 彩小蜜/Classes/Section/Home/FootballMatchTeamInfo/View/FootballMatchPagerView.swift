@@ -45,7 +45,7 @@ class FootballMatchPagerView: UIView {
     }
     private func initSubview() {
         vLine = UIView()
-        vLine.backgroundColor = ColorC8C8C8
+        vLine.backgroundColor = ColorEAEAEA
         
         analysisBut = getButton("分析")
         analysisBut.addTarget(self, action: #selector(analysisButClicked(_:)), for: .touchUpInside)
@@ -64,7 +64,7 @@ class FootballMatchPagerView: UIView {
         but.setTitleColor(Color505050, for: .normal)
         //but.setTitleColor(ColorEA5504, for: .selected)
         
-        but.titleLabel?.font = Font14
+        but.titleLabel?.font = Font16
         return but
     }
     

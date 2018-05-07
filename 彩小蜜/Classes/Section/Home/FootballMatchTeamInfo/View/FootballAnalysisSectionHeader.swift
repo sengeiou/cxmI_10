@@ -96,7 +96,7 @@ class FootballAnalysisSectionHeader: UITableViewHeaderFooterView {
         line.backgroundColor = ColorC8C8C8
         
         title = UILabel()
-        title.font = Font16
+        title.font = Font14
         title.textColor = Color505050
         title.textAlignment = .left
         title.text = "历史交锋"
@@ -110,7 +110,8 @@ class FootballAnalysisSectionHeader: UITableViewHeaderFooterView {
         self.contentView.addSubview(title)
         self.contentView.addSubview(line)
         title.snp.makeConstraints { (make) in
-            make.top.left.right.equalTo(0)
+            make.left.equalTo(16 * defaultScale)
+            make.top.right.equalTo(0)
             make.bottom.equalTo(line.snp.top)
         }
         line.snp.makeConstraints { (make) in
@@ -125,7 +126,8 @@ class FootballAnalysisSectionHeader: UITableViewHeaderFooterView {
         self.contentView.addSubview(line)
         
         title.snp.makeConstraints { (make) in
-            make.top.left.right.equalTo(0)
+            make.left.equalTo(16 * defaultScale)
+            make.top.right.equalTo(0)
             make.height.equalTo(44 * defaultScale)
         }
         line.snp.makeConstraints { (make) in

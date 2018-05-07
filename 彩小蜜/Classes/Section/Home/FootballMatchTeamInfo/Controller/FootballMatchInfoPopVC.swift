@@ -114,13 +114,13 @@ class FootballMatchInfoPopVC: BasePopViewController, BottomViewDelegate {
     }
     
     private func initSubview() {
-        self.viewHeight = 440 * defaultScale + SafeAreaBottomHeight
+        self.viewHeight = 450 * defaultScale + SafeAreaBottomHeight
         
         let line = getLine()
         let lineOne = getLine()
         let lineTwo = getLine()
         let lineThree = UIView()
-        lineThree.backgroundColor = ColorC8C8C8
+        lineThree.backgroundColor = ColorEAEAEA
         
         header = FootballTeamHeader()
         header.headerStyle = .默认
@@ -155,14 +155,18 @@ class FootballMatchInfoPopVC: BasePopViewController, BottomViewDelegate {
         bottomView.confirmTitle = "查看详情"
         bottomView.delegate = self
         
+        // 胜平负 title
         ratioTitle = getLabel()
         ratioTitle.text = "0"
+        ratioTitle.textColor = ColorFFFFFF
         ratioTitle.textAlignment = .center
         ratioTitle.backgroundColor = ColorC7C7C7
         ratioView = FootballBuyRatioView()
         
+        // 让球 title
         rangRatioTitle = getLabel()
         rangRatioTitle.text = "-1"
+        rangRatioTitle.textColor = ColorFFFFFF
         rangRatioTitle.textAlignment = .center
         rangRatioTitle.backgroundColor = ColorF6AD41
         rangRatioView = FootballBuyRatioView()
@@ -262,7 +266,7 @@ class FootballMatchInfoPopVC: BasePopViewController, BottomViewDelegate {
         }
         
         ratioTitle.snp.makeConstraints { (make) in
-            make.top.equalTo(lineThree.snp.bottom).offset(8 * defaultScale)
+            make.top.equalTo(lineThree.snp.bottom).offset(12 * defaultScale)
             make.height.equalTo(36 * defaultScale)
             make.left.equalTo(buyTitle.snp.right).offset(29 * defaultScale)
             make.width.equalTo(20 * defaultScale)
@@ -304,9 +308,9 @@ class FootballMatchInfoPopVC: BasePopViewController, BottomViewDelegate {
         return lab
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-    }
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        
+//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

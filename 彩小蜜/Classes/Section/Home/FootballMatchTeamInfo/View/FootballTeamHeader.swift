@@ -151,7 +151,7 @@ class FootballTeamHeader: UIView, DateProtocol {
         visiTeamIcon.image = UIImage(named : "Racecolorfootball")
         
         bottomLine = UIView()
-        bottomLine.backgroundColor = ColorC8C8C8
+        bottomLine.backgroundColor = ColorEAEAEA
         
         self.addSubview(titlelb)
         self.addSubview(homeName)
