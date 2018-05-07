@@ -329,7 +329,6 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
                     cell.icon.image = UIImage(named: "serive")
                     cell.title.text = "联系客服"
                     cell.serviceNum = phoneNum
-                    
                     cell.detail.delegate = self
                     cell.accessoryType = .none
                 case 4:

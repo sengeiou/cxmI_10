@@ -301,25 +301,50 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: FootballAnalysisSectionHeaderId) as! FootballAnalysisSectionHeader
         guard self.matchInfoModel != nil else { return UIView() }
-        switch section {
-        case 0:
-            header.headerStyle = .标题
-            header.teamInfo = self.matchInfoModel.hvMatchTeamInfo
-        case 1:
-            header.headerStyle = .赛事
-            
-        case 2:
-            header.headerStyle = .主队
-            header.teamInfo = self.matchInfoModel.hMatchTeamInfo
-        case 3:
-            header.headerStyle = .客队
-            header.teamInfo = self.matchInfoModel.vMatchTeamInfo
-        case 4:
-            return UIView()
-        default:
-            break
         
+        if self.teamInfoStyle == .odds {
+            switch section {
+//            case 0:
+//                header.headerStyle = .标题
+//                header.teamInfo = self.matchInfoModel.hvMatchTeamInfo
+            case 1:
+                header.headerStyle = .赛事
+                
+            case 2:
+                header.headerStyle = .主队
+                header.teamInfo = self.matchInfoModel.hMatchTeamInfo
+            case 3:
+                header.headerStyle = .客队
+                header.teamInfo = self.matchInfoModel.vMatchTeamInfo
+            case 4:
+                return UIView()
+            default:
+                return UIView()
+                
+            }
+        }else {
+            switch section {
+            case 0:
+                header.headerStyle = .标题
+                header.teamInfo = self.matchInfoModel.hvMatchTeamInfo
+            case 1:
+                header.headerStyle = .赛事
+                
+            case 2:
+                header.headerStyle = .主队
+                header.teamInfo = self.matchInfoModel.hMatchTeamInfo
+            case 3:
+                header.headerStyle = .客队
+                header.teamInfo = self.matchInfoModel.vMatchTeamInfo
+            case 4:
+                return UIView()
+            default:
+                break
+                
+            }
         }
+        
+        
         return header
     }
     
@@ -349,17 +374,22 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
         
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        switch section {
-        case 0:
-            return 44 * defaultScale
-        case 1:
-            return 44 * defaultScale
-        case 2, 3:
-            return 80 * defaultScale
-        case 4:
-            return 0.01
-        default:
+        
+        if self.teamInfoStyle == .odds{
             return 0
+        }else {
+            switch section {
+            case 0:
+                return 44 * defaultScale
+            case 1:
+                return 44 * defaultScale
+            case 2, 3:
+                return 80 * defaultScale
+            case 4:
+                return 0.01
+            default:
+                return 0
+            }
         }
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

@@ -70,6 +70,7 @@ class MeCell: UITableViewCell {
         detail = TTTAttributedLabel(frame: CGRect.zero)
         detail.textAlignment = .right
         detail.font = Font12
+        detail.textColor = Color787878
         detail.lineBreakMode = .byWordWrapping
         detail.linkAttributes =  [NSAttributedStringKey.foregroundColor: Color787878]
         

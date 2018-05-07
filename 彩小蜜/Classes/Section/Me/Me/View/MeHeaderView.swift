@@ -185,7 +185,7 @@ class MeHeaderView: UIView , UserInfoPro{
         }
         
         accountBalanceLB.snp.makeConstraints { (make) in
-            make.top.equalTo(icon.snp.bottom).offset(5)
+            make.top.equalTo(icon.snp.bottom).offset(15 * defaultScale)
             make.left.equalTo(self)
             make.right.equalTo(withdrawalBalanceLB.snp.left).offset(1)
             make.height.equalTo(20)
