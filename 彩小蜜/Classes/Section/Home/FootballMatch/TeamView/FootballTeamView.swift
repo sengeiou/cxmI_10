@@ -50,28 +50,38 @@ class FootballTeamView: UIView , AlertPro{
             case .胜平负:
                 VSLB.text = "VS"
             case .让球胜平负:
-                let vsAtt = NSMutableAttributedString(string: "VS", attributes: [NSAttributedStringKey.foregroundColor: Color787878])
+                
+                
                 let matchPlay = teamInfo.matchPlays[0]
                 if matchPlay.fixedOdds < 0 {
+                    
                     if matchPlay.flatCell.isSelected {
+                        let vsAtt = NSMutableAttributedString(string: "VS", attributes: [NSAttributedStringKey.foregroundColor: ColorFFFFFF])
                         let att = NSAttributedString(string:" " + String(matchPlay.fixedOdds), attributes: [NSAttributedStringKey.foregroundColor: ColorFFFFFF])
                         vsAtt.append(att)
+                        VSLB.attributedText = vsAtt
                     }else {
+                        let vsAtt = NSMutableAttributedString(string: "VS", attributes: [NSAttributedStringKey.foregroundColor: Color787878])
                         let att = NSAttributedString(string:" " + String(matchPlay.fixedOdds), attributes: [NSAttributedStringKey.foregroundColor: Color44AE35])
                         vsAtt.append(att)
+                        VSLB.attributedText = vsAtt
                     }
                     
                 }else if matchPlay.fixedOdds > 0 {
                     if matchPlay.flatCell.isSelected {
+                        let vsAtt = NSMutableAttributedString(string: "VS", attributes: [NSAttributedStringKey.foregroundColor: ColorFFFFFF])
                         let att = NSAttributedString(string:" +" + String(matchPlay.fixedOdds), attributes: [NSAttributedStringKey.foregroundColor: ColorFFFFFF])
                         vsAtt.append(att)
+                        VSLB.attributedText = vsAtt
                     }else {
+                        let vsAtt = NSMutableAttributedString(string: "VS", attributes: [NSAttributedStringKey.foregroundColor: Color787878])
                         let att = NSAttributedString(string:" +" + String(matchPlay.fixedOdds), attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
                         vsAtt.append(att)
+                        VSLB.attributedText = vsAtt
                     }
                     
                 }
-                VSLB.attributedText = vsAtt
+                
             default: break
                 
             }
@@ -287,28 +297,37 @@ class FootballTeamView: UIView , AlertPro{
             case .胜平负:
                 VSLB.textColor = Color787878
             case .让球胜平负:
-                let vsAtt = NSMutableAttributedString(string: "VS", attributes: [NSAttributedStringKey.foregroundColor: Color787878])
+               
                 let matchPlay = teamInfo.matchPlays[0]
                 
                 if matchPlay.fixedOdds < 0 {
+                    
                     if matchPlay.flatCell.isSelected {
+                        let vsAtt = NSMutableAttributedString(string: "VS", attributes: [NSAttributedStringKey.foregroundColor: ColorFFFFFF])
                         let att = NSAttributedString(string:" " + String(matchPlay.fixedOdds), attributes: [NSAttributedStringKey.foregroundColor: ColorFFFFFF])
                         vsAtt.append(att)
+                        VSLB.attributedText = vsAtt
                     }else {
+                        let vsAtt = NSMutableAttributedString(string: "VS", attributes: [NSAttributedStringKey.foregroundColor: Color787878])
                         let att = NSAttributedString(string:" " + String(matchPlay.fixedOdds), attributes: [NSAttributedStringKey.foregroundColor: Color44AE35])
                         vsAtt.append(att)
+                        VSLB.attributedText = vsAtt
                     }
                     
                 }else if matchPlay.fixedOdds > 0 {
                     if matchPlay.flatCell.isSelected {
+                        let vsAtt = NSMutableAttributedString(string: "VS", attributes: [NSAttributedStringKey.foregroundColor: ColorFFFFFF])
                         let att = NSAttributedString(string:" +" + String(matchPlay.fixedOdds), attributes: [NSAttributedStringKey.foregroundColor: ColorFFFFFF])
                         vsAtt.append(att)
+                        VSLB.attributedText = vsAtt
                     }else {
+                        let vsAtt = NSMutableAttributedString(string: "VS", attributes: [NSAttributedStringKey.foregroundColor: Color787878])
                         let att = NSAttributedString(string:" +" + String(matchPlay.fixedOdds), attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
                         vsAtt.append(att)
+                        VSLB.attributedText = vsAtt
                     }
+                    
                 }
-                VSLB.attributedText = vsAtt
             default: break
             }
             
