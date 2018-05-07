@@ -366,13 +366,10 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: PaymentCellId, for: indexPath) as! PaymentCell
                 cell.title.text = "支付方式"
+                cell.title.font = Font16
                 cell.title.textColor = Color505050
                 cell.detail.text = ""
                 return cell
-//            case 1:
-//                let cell = tableView.dequeueReusableCell(withIdentifier: PaymentMethodCellId, for: indexPath) as! PaymentMethodCell
-//                cell.title.text = "微信支付"
-//                return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: PaymentMethodCellId, for: indexPath) as! PaymentMethodCell
                 let paymentModel = paymentAllList[indexPath.row - 1 ]
@@ -393,7 +390,7 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44 * defaultScale
+        return 55 * defaultScale
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {

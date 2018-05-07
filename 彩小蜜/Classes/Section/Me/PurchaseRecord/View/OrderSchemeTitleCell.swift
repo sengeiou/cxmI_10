@@ -82,7 +82,7 @@ class OrderSchemeTitleCell: UITableViewCell {
         line.backgroundColor = ColorF4F4F4
         
         sectionTitle = UILabel()
-        sectionTitle.font = Font19
+        sectionTitle.font = Font13
         sectionTitle.textColor = ColorA0A0A0
         sectionTitle.textAlignment = .left
         sectionTitle.text = "方案编号"

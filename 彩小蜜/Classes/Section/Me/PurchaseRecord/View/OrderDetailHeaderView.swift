@@ -83,7 +83,8 @@ class OrderDetailHeaderView: UIView {
         moneyLB.snp.makeConstraints { (make) in
             make.bottom.equalTo(line.snp.top).offset(-16)
             make.left.equalTo(titleLB)
-            //make.right.equalTo(forecastMoney.snp.left)
+           
+            //make.right.equalTo(self.snp.centerX).offset(-50)
             make.height.equalTo(12)
         }
         state.snp.makeConstraints { (make) in
@@ -95,7 +96,7 @@ class OrderDetailHeaderView: UIView {
             make.top.equalTo(state.snp.bottom).offset(1)
             make.bottom.equalTo(line.snp.top).offset(-1)
             //make.right.width.equalTo(state)
-            make.width.equalTo(moneyLB)
+            //make.width.equalTo(moneyLB)
             make.left.equalTo(moneyLB.snp.right).offset(10)
             make.right.equalTo(state)
         }
@@ -144,14 +145,14 @@ class OrderDetailHeaderView: UIView {
         //state.text = "等待开奖"
         
         forecastMoney = UILabel()
-        forecastMoney.font = Font10
-        forecastMoney.textColor = ColorA0A0A0
+        forecastMoney.font = Font12
+        forecastMoney.textColor = ColorEA5504
         forecastMoney.textAlignment = .right
         
         
         
         line = UIView()
-        line.backgroundColor = ColorC7C7C7
+        line.backgroundColor = ColorE9E9E9
         
         programmeTitle = UILabel()
         programmeTitle.font = Font12

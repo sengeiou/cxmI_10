@@ -61,7 +61,7 @@ class NewsDetailCell: UITableViewCell, WKUIDelegate, WKNavigationDelegate {
     
     private func initSubview() {
         title = getLabel()
-        title.numberOfLines = 0
+        title.numberOfLines = 2
         
         detail = getLabel()
         detail.font = Font12

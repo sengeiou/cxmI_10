@@ -52,12 +52,12 @@ class PaymentCell: UITableViewCell {
        self.selectionStyle = .none
         
         title = UILabel()
-        title.font = Font13
+        title.font = Font14
         title.textColor = Color787878
         title.textAlignment = .left
         
         detail = UILabel()
-        detail.font = Font13
+        detail.font = Font14
         detail.textColor = Color505050
         detail.textAlignment = .right
         

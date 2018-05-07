@@ -33,20 +33,20 @@ class PaymentMethodCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         icon.snp.makeConstraints { (make) in
-            make.width.height.equalTo(20 * defaultScale)
+            make.width.height.equalTo(28 * defaultScale)
             make.left.equalTo(leftSpacing)
             make.centerY.equalTo(self.contentView.snp.centerY)
         }
         title.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(0)
-            make.left.equalTo(icon.snp.right).offset(leftSpacing)
+            make.left.equalTo(icon.snp.right).offset(15 * defaultScale)
             make.right.equalTo(selectedIcon.snp.left).offset(-1)
         }
         
         selectedIcon.snp.makeConstraints { (make) in
             make.centerY.equalTo(self.contentView.snp.centerY)
             make.right.equalTo(-rightSpacing)
-            make.width.height.equalTo(14 * defaultScale)
+            make.width.height.equalTo(24 * defaultScale)
         }
     }
     private func initSubview() {

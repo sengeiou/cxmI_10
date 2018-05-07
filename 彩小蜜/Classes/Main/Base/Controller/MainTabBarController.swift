@@ -90,7 +90,7 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
         
         
         let homeNav = UINavigationController(rootViewController: home)
-        homeNav.tabBarItem.imageInsets = UIEdgeInsets(top: 10, left: 0, bottom: -10, right: 0)
+        homeNav.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
         homeNav.title = ""
     
         homeNav.view.backgroundColor = UIColor.white
@@ -107,7 +107,7 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
         let lottery = LotteryViewController()
         
         let lotteryNav = UINavigationController(rootViewController: lottery)
-        lotteryNav.tabBarItem.imageInsets = UIEdgeInsets(top: 10, left: 0, bottom: -10, right: 0)
+        lotteryNav.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
         
         lotteryNav.view.backgroundColor = UIColor.white
         
@@ -141,7 +141,7 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
         me = MeViewController()
         
         let meNav = UINavigationController(rootViewController: me)
-        meNav.tabBarItem.imageInsets = UIEdgeInsets(top: 10, left: 0, bottom: -10, right: 0)
+        meNav.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
         meNav.view.backgroundColor = UIColor.white
         
         let meImg = UIImage(named: "tab_min_nor")?.withRenderingMode(.alwaysOriginal)
