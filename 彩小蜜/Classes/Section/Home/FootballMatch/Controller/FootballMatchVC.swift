@@ -22,6 +22,7 @@ enum FootballMatchType: String {
 }
 
 fileprivate let FootballSectionHeaderId = "FootballSectionHeaderId"
+fileprivate let FootballHotSectionHeaderId = "FootballHotSectionHeaderId"
 fileprivate let FootballSPFCellId = "FootballSPFCellId"
 fileprivate let FootballRangSPFCellId = "FootballRangSPFCellId"
 fileprivate let FootballTotalCellId = "FootballTotalCellId"
@@ -31,7 +32,9 @@ fileprivate let Football2_1CellId = "Football2_1CellId"
 fileprivate let FootballHunheCellId = "FootballHunheCellId"
 
 
-class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballBottomViewDelegate, FootballSectionHeaderDelegate, FootballRequestPro, FootballTeamViewDelegate , FootballMatchFilterVCDelegate, FootballTotalViewDelegate, FootballScoreViewDelegate, FootballTwoOneViewDelegate , FootballHunheViewDelegate , FootballSPFCellDelegate, FootballMatchInfoPopVCDelegate, FootballCellProtocol, FootballFilterPro, FootballOrderConfirmVCDelegate{
+class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballBottomViewDelegate, FootballSectionHeaderDelegate, FootballRequestPro, FootballTeamViewDelegate , FootballMatchFilterVCDelegate, FootballTotalViewDelegate, FootballScoreViewDelegate, FootballTwoOneViewDelegate , FootballHunheViewDelegate , FootballSPFCellDelegate, FootballMatchInfoPopVCDelegate, FootballCellProtocol, FootballFilterPro, FootballOrderConfirmVCDelegate, FootballHotSectionHeaderDelegate{
+    
+    
     
     
     
@@ -170,7 +173,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         table.separatorStyle = .none
         table.register(FootballSectionHeader.self, forHeaderFooterViewReuseIdentifier: FootballSectionHeaderId)
         registerCell(table)
-        
+        table.register(FootballHotSectionHeader.self, forHeaderFooterViewReuseIdentifier: FootballHotSectionHeaderId)
         if #available(iOS 11.0, *) {
             
         }else {
@@ -298,19 +301,21 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     }
    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: FootballSectionHeaderId) as! FootballSectionHeader
-        header.tag = section
-        header.delegate = self
-
+    
         if section == 0, self.matchData.hotPlayList.isEmpty == false {
-            header.headerType = .hotMatch
+    
+            let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: FootballHotSectionHeaderId) as! FootballHotSectionHeader
+            header.tag = section
+            header.delegate = self
+            header.matchModel = matchList[section]
+            return header
         }else {
-            header.headerType = .match
+            let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: FootballSectionHeaderId) as! FootballSectionHeader
+            header.tag = section
+            header.delegate = self
+            header.matchModel = matchList[section]
+            return header
         }
-        
-        header.matchModel = matchList[section]
-        
-        return header
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -375,6 +380,14 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     }
     
     // MARK: - delegate
+    func spreadHot(sender: UIButton, section: Int) {
+        let header = matchList[section]
+        
+        header.isSpreading = !header.isSpreading
+        
+        tableView.reloadSections(IndexSet(integer: section), with: .automatic)
+    }
+    
     func spread(sender: UIButton, section: Int) {
         let header = matchList[section]
         

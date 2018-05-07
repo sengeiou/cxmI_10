@@ -1,38 +1,25 @@
 //
-//  FootballSectionHeader.swift
+//  FootballHotSectionHeader.swift
 //  彩小蜜
 //
-//  Created by HX on 2018/3/30.
+//  Created by 笑 on 2018/5/7.
 //  Copyright © 2018年 韩笑. All rights reserved.
 //
 
 import UIKit
 
-enum FootballHeaderType {
-    case hotMatch
-    case match
+
+protocol FootballHotSectionHeaderDelegate {
+    func spreadHot(sender: UIButton, section : Int) -> Void
 }
 
-protocol FootballSectionHeaderDelegate {
-    func spread(sender: UIButton, section : Int) -> Void
-}
-
-class FootballSectionHeader: UITableViewHeaderFooterView, DateProtocol {
-
+class FootballHotSectionHeader: UITableViewHeaderFooterView, DateProtocol {
+    
     public var matchModel : FootballMatchModel! {
         didSet{
             guard matchModel != nil else { return }
-//            if matchModel.title != nil {
-//                title.text = "热门比赛"
-//                title.textColor = ColorEA5504
-//                //self.headerType = .hotMatch
-//            }else{
-                //let xx = getWeek()
-                title.text = matchModel.matchDay + "共有"
-                + "\(matchModel.playList.count)" + "场比赛可投"
-                title.textColor = Color787878
-                //self.headerType = .match
-            //}
+            
+            title.text = matchModel.title
             
             if matchModel.isSpreading == true {
                 spreadBut.setImage(UIImage(named: "Unfold"), for: .normal)
@@ -42,38 +29,10 @@ class FootballSectionHeader: UITableViewHeaderFooterView, DateProtocol {
         }
     }
     
-//    public var headerType: FootballHeaderType = .match {
-//        didSet{
-//
-//            switch headerType {
-//            case .hotMatch:
-//                title.textColor = ColorE85504
-//                icon.isHidden = false
-////                icon.snp.makeConstraints { (make) in
-////                    make.centerY.equalTo(bgView.snp.centerY)
-////                    make.left.equalTo(leftSpacing)
-////                    make.width.height.equalTo(20)
-////                }
-////                title.snp.updateConstraints { (make) in
-////                    make.top.bottom.equalTo(0)
-////                    make.left.equalTo(icon.snp.right).offset(10)
-////                    make.right.equalTo(spreadBut.snp.left).offset(-10)
-////                }
-//            case .match:
-//                title.textColor = Color9F9F9F
-//                icon.isHidden = true
-////                title.snp.makeConstraints { (make) in
-////                    make.top.bottom.equalTo(0)
-////                    make.left.equalTo(leftSpacing)
-////                    make.right.equalTo(spreadBut.snp.left).offset(-10)
-////                }
-//            }
-//        }
-//    }
-    public var delegate : FootballSectionHeaderDelegate!
     
+    public var delegate : FootballHotSectionHeaderDelegate!
     
-    //private var icon : UIImageView!
+    private var icon : UIImageView!
     private var title : UILabel!
     private var spreadBut : UIButton!
     private var bgView: UIView!
@@ -83,8 +42,6 @@ class FootballSectionHeader: UITableViewHeaderFooterView, DateProtocol {
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         initSubview()
-        
-        
     }
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -102,14 +59,14 @@ class FootballSectionHeader: UITableViewHeaderFooterView, DateProtocol {
             make.height.equalTo(0.6)
         }
         
-//        icon.snp.makeConstraints { (make) in
-//            make.centerY.equalTo(bgView.snp.centerY)
-//            make.left.equalTo(leftSpacing)
-//            make.width.height.equalTo(20)
-//        }
+        icon.snp.makeConstraints { (make) in
+            make.centerY.equalTo(bgView.snp.centerY)
+            make.left.equalTo(leftSpacing)
+            make.width.height.equalTo(20)
+        }
         title.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(0)
-            make.left.equalTo(leftSpacing)
+            make.left.equalTo(icon.snp.right).offset(10)
             make.right.equalTo(spreadBut.snp.left).offset(-10)
         }
         spreadBut.snp.makeConstraints { (make) in
@@ -127,8 +84,8 @@ class FootballSectionHeader: UITableViewHeaderFooterView, DateProtocol {
         bgView = UIView()
         bgView.backgroundColor = ColorFFFFFF
         
-        //icon = UIImageView()
-        //icon.image = UIImage(named: "Popular")
+        icon = UIImageView()
+        icon.image = UIImage(named: "Popular")
         
         title = UILabel()
         title.font = Font15
@@ -142,7 +99,7 @@ class FootballSectionHeader: UITableViewHeaderFooterView, DateProtocol {
         spreadBut.isSelected = true
         
         
-        //bgView.addSubview(icon)
+        bgView.addSubview(icon)
         bgView.addSubview(title)
         bgView.addSubview(spreadBut)
         self.contentView.addSubview(line)
@@ -152,7 +109,7 @@ class FootballSectionHeader: UITableViewHeaderFooterView, DateProtocol {
     @objc private func spreadClicked(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         guard delegate != nil else { return }
-        delegate.spread(sender: sender, section: self.tag)
+        delegate.spreadHot(sender: sender, section: self.tag)
     }
     
     required init?(coder aDecoder: NSCoder) {
