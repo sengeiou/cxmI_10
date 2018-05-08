@@ -200,7 +200,7 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
                 self.dismissProgressHud()
                 weakSelf?.betInfo = data
                
-                if data.showMsg == nil || data.showMsg == "" || data.maxLotteryMoney <= 20000 || data.betNum <= 10000 {
+                if (data.showMsg == nil || data.showMsg == "") && (data.maxLotteryMoney <= 20000 && data.betNum <= 10000) {
                     weakSelf?.canPush = true
                 }else {
                     weakSelf?.canPush = false
