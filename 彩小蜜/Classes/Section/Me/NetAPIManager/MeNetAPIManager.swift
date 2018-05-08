@@ -121,7 +121,7 @@ extension MeNetAPIManager : TargetType {
         case .configQuety:
             return "/member/switch/config/query"
         case .complain:
-            return "/dl/complain/add"
+            return "/member/dl/complain/add"
         }
     }
     
