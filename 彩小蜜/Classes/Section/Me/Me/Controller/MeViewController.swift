@@ -95,7 +95,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     func withdrawalClicked() {
         print("提现")
         guard self.userInfo != nil else { return }
-        guard self.userInfo.isReal else {
+        guard self.userInfo != nil, self.userInfo.isReal else {
 
             showCXMAlert(title: nil, message: "请先实名认证后再申请提现", action: "去认证", cancel: "知道了") { (action) in
                 let authentication = AuthenticationVC()

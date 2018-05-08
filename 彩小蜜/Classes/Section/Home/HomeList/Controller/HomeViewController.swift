@@ -69,9 +69,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
             switch indexPath.section {
             case 1:
                 guard homeData != nil, let activity = self.homeData.activity else { return }
-                let web = WebViewController()
-                web.urlStr = activity.actUrl
-                pushViewController(vc: web)
+                pushRouterVC(urlStr: activity.actUrl, from: self)
             case 3:
                 let web = NewsDetailViewController()
                 web.articleId = self.newsList[indexPath.row].articleId

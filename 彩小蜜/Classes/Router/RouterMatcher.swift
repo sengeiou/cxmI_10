@@ -43,8 +43,8 @@ extension RouterMatcher {
     
     
     func matcherHttp(urlStr: String) -> (PushControllerType, URLModel? ){
-        //let urlStr = "cxmxc=scm&type=3&id=1&subid=1"
-        guard urlStr != nil , urlStr != "" else { return (.none, nil) }
+        
+        guard urlStr != "" else { return (.none, nil) }
         guard urlStr.contains("cxmxc=scm") else { return (.浏览器, nil) }
         
         guard let urlModel = parseUrl(urlStr: urlStr) else { return (.none, nil ) }
