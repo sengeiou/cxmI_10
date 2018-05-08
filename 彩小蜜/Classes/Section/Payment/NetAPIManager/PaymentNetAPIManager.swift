@@ -40,7 +40,7 @@ extension PaymentNetAPIManager : TargetType {
         case .paymentRecharge:
             return "/payment/recharge"
         case .paymentWithdraw:
-            return "/payment/withdraw"
+            return "/cash/withdraw"
         case .paymentAll:
             return "/payment/allPayment"
          

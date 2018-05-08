@@ -79,16 +79,36 @@ class WithdrawalViewController: BaseViewController {
         guard let money = amountOfMoney.text else { return }
         _ = paymentProvider.rx.request(.paymentWithdraw(totalAmount: money, userBankId: drawDataModel.userBankId))
             .asObservable()
-            .mapObject(type: DataModel.self )
+            .mapBaseObject(type: DataModel.self )
             .subscribe(onNext: { (data) in
-                self.dismissProgressHud()
-                self.showHUD(message: data.msg)
+                
+                if let code = Int(data.code) {
+                    switch code {
+                    case 0:
+                        self.dismissProgressHud()
+                        self.showHUD(message: data.msg)
+                        self.drawDataRequest()
+                    case 600:
+                        weakSelf?.removeUserData()
+                        weakSelf?.pushLoginVC(from: self)
+                    default : break
+                    }
+                    
+                    if 300000...310000 ~= code {
+                        print(code)
+                        self.showHUD(message:  data.msg)
+                    }
+                }
+                
             }, onError: { (error) in
                 self.dismissProgressHud()
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):
                     switch code {
+                    case 0:
+                        self.dismissProgressHud()
+                        self.showHUD(message: msg!)
                     case 600:
                         weakSelf?.removeUserData()
                         weakSelf?.pushLoginVC(from: self)
@@ -125,6 +145,39 @@ class WithdrawalViewController: BaseViewController {
                 }
             }, onCompleted: nil, onDisposed: nil)
     }
+    
+//    private func userInfoRequest() {
+//        weak var weakSelf = self
+//        _ = userProvider.rx.request(.userInfo)
+//            .asObservable()
+//            .mapObject(type: UserInfoDataModel.self)
+//            .subscribe(onNext: { (data) in
+//                guard weakSelf != nil else { return }
+//                weakSelf!.userInfo = data
+//                weakSelf?.tableview.reloadData()
+//            }, onError: { (error) in
+//                print(error)
+//                guard let err = error as? HXError else { return }
+//                switch err {
+//                case .UnexpectedResult(let code, let msg):
+//                    switch code {
+//                    case 600:
+//                        weakSelf?.removeUserData()
+//                        let login = LoginViewController()
+//                        weakSelf?.pushViewController(vc: login)
+//                    default : break
+//                    }
+//
+//                    if 300000...310000 ~= code {
+//                        print(code)
+//                        self.showHUD(message: msg!)
+//                    }
+//
+//                default: break
+//                }
+//            }, onCompleted: nil, onDisposed: nil)
+//    }
+    
     private func setDrawData(data : WithDrawDataModel) {
         moneyLB.text = "可提现金额: \(data.userMoney!)元"
         
