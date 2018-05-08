@@ -95,7 +95,7 @@ class AddNewBankCardVC: BaseViewController, UITextFieldDelegate, ValidatePro {
                     default : break
                     }
                     
-                    if 30000...31000 ~= code {
+                    if 300000...310000 ~= code {
                         print(code)
                         self.showHUD(message: msg!)
                     }
@@ -273,7 +273,9 @@ class AddNewBankCardVC: BaseViewController, UITextFieldDelegate, ValidatePro {
         // Dispose of any resources that can be recreated.
     }
     
-
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.cardNumTF.resignFirstResponder()
+    }
     /*
     // MARK: - Navigation
 
