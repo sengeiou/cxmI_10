@@ -133,10 +133,12 @@ class FootballTimesFilterVC: BasePopViewController, UITextFieldDelegate, CXMKeyb
     // MARK: - 键盘  Delegate
     func keyboardDidTipItem(num: String) {
         
-        guard let number = Int(self.textField.text!) else { return }
-        guard number < 10000 else {
-            self.textField.text = "99999"
-            return }
+        //guard let number = Int(self.textField.text!) else { return }
+        
+        guard (self.textField.text?.count)! <= 4 else { return }
+//        guard number < 10000 else {
+//            self.textField.text = "99999"
+//            return }
         
         if isFirst == true {
             textField.text = nil
@@ -157,16 +159,20 @@ class FootballTimesFilterVC: BasePopViewController, UITextFieldDelegate, CXMKeyb
     // 删除
     func keyboardDelete() {
         guard textField.text != nil else { return }
-        guard textField.text?.lengthOfBytes(using: .utf8) != 1 else {
-            self.textField.text = "1"
-            return
-        }
+//        guard textField.text?.lengthOfBytes(using: .utf8) != 1 else {
+//            self.textField.text = "1"
+//            return
+//        }
+        guard textField.text != "" else { return }
         self.textField.text?.removeLast()
     }
     // 确定
     func keyboardConfirm() {
         guard delegate != nil else { return }
         guard let times = self.textField.text else { return }
+        if self.textField.text == nil || self.textField.text == "" {
+            self.times = "1"
+        }
         delegate.timesConfirm(times: times)
         dismiss(animated: true, completion: nil)
     }

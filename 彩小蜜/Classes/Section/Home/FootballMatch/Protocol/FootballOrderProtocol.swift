@@ -190,14 +190,17 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
         
         let requestModel = getRequestModel(betType: betType, times: times, bonusId: "")
         self.showProgressHUD()
+        self.view.isUserInteractionEnabled = false
         weak var weakSelf = self
         _ = homeProvider.rx.request(.getBetInfo(requestModel: requestModel))
             .asObservable()
             .mapObject(type: FootballBetInfoModel.self)
             .subscribe(onNext: { (data) in
+                self.view.isUserInteractionEnabled = true
                 self.dismissProgressHud()
                 weakSelf?.betInfo = data
-                if data.showMsg == nil || data.showMsg == "" {
+               
+                if data.showMsg == nil || data.showMsg == "" || data.maxLotteryMoney <= 20000 || data.betNum <= 10000 {
                     weakSelf?.canPush = true
                 }else {
                     weakSelf?.canPush = false
@@ -206,6 +209,7 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
                 }
                 
             }, onError: { (error) in
+                self.view.isUserInteractionEnabled = true
                 self.dismissProgressHud()
                 weakSelf?.canPush = false
                 guard let err = error as? HXError else { return }
