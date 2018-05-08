@@ -38,14 +38,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     public var selectPlayList: [FootballPlayListModel]! {
         didSet{
             guard selectPlayList != nil else { return }
-            
-            
-            if selectPlayList.isEmpty == true {
-                self.popViewController()
-                guard delegate != nil else { return }
-                delegate.orderConfirmBack(selectPlayList: self.selectPlayList)
-            }
-            
+ 
             guard let filters = filterPlay(with: selectPlayList) else { return }
             bottomView.filterList = filters
             topView.playModelList = selectPlayList
@@ -94,7 +87,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     public var playList: [FootballPlayListModel]! {
         didSet{
             guard playList != nil else { return }
-            selectPlays = Set(playList)
+            //selectPlays = Set(playList)
             self.tableView.reloadData()
         }
     }
@@ -125,7 +118,9 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         initSubview()
         setEmpty(title: "暂无可选赛事", tableView)
         //setRightButtonItem()
+        selectPlayList = [FootballPlayListModel]()
         
+        selectPlays = Set(playList)
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -325,6 +320,9 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     func deleteOrderSPFCell(playInfo: FootballPlayListModel) {
         
         playList.remove(playInfo)
+        if selectPlays != nil {
+            selectPlays.remove(playInfo)
+        }
         
         orderRequest()
         if playList.count < 3 {
@@ -334,6 +332,12 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         resetSelected(playInfo: playInfo)
         
         playInfo.selectedHunhe.removeAll()
+        
+        if playList.isEmpty == true {
+            self.popViewController()
+            guard delegate != nil else { return }
+            delegate.orderConfirmBack(selectPlayList: self.selectPlayList)
+        }
     }
     
     private func resetSelected(playInfo: FootballPlayListModel) {

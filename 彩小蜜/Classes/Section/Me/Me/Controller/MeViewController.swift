@@ -233,6 +233,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
                 }
             }, onCompleted: nil, onDisposed: nil )
     }
+    
     //MARK: - 懒加载
     lazy var tableView : UITableView = {
         let table = UITableView(frame: CGRect.zero, style: .grouped)
@@ -253,7 +254,6 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         
         //table.tableHeaderView = headerView
         table.tableFooterView = footerView
-        
         return table
     }()
     //MARK: - tableView dataSource
