@@ -31,8 +31,9 @@ class OrderDetailTitleCell: UITableViewCell {
                     }else {
                         color = Color505050
                     }
-                    
-                    let rec = NSAttributedString(string: cath.cathectic + "\n", attributes: [NSAttributedStringKey.foregroundColor: color])
+                   let cathectic = cath.cathectic.replacingOccurrences(of: "null", with: "")
+            
+                    let rec = NSAttributedString(string: cathectic + "\n", attributes: [NSAttributedStringKey.foregroundColor: color])
                     
                     record.append(rec)
                 }
