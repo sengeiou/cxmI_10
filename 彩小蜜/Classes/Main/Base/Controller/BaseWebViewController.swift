@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDelegate {
+class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler {
 
     public var urlStr : String!
     
@@ -67,6 +67,10 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
         webView.load(request)
     }
     
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        
+    }
+    
     private func initProgressView() {
         progressView = UIProgressView()
         progressView.progressTintColor = ColorEA5504
@@ -85,6 +89,23 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
                 self.title = webView.title
             }
         }
+        
+        let model = JSDataModel()
+        let jsData = model.toJSONString()
+        
+        webView.evaluateJavaScript("actionMessage('\(jsData!)')") { (data, error) in
+            
+        }
+    
+    }
+    
+    func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
+        
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) -> Void in
+            completionHandler()
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
@@ -100,6 +121,7 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
         }
         return nil
     }
+    //MARK: - 监听，加载进度
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         guard keyPath == "estimatedProgress" else { return }
         
