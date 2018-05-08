@@ -76,26 +76,23 @@ class ForgetPswVCodeVC: BaseViewController, UITextFieldDelegate, ValidatePro,Cus
                 self.dismissProgressHud()
                 switch event {
                 case .next(let data):
-                    
-                    let code = Int(data.code)!
-                    
-                    switch code {
-                    case 0:
-                        self.showHUD(message: data.msg)
-                    default:
-                        break
+                    if let code = Int(data.code) {
+                        switch code {
+                        case 0:
+                            self.showHUD(message: data.msg)
+                        default:
+                            break
+                        }
+                        
+                        if 300000...310000 ~= code {
+                            self.showHUD(message: data.msg)
+                        }
                     }
-                    
-                    
-                    if 300000...310000 ~= code {
-                        self.showHUD(message: data.msg)
-                    }
-
                 case .error(let error):
                     guard let hxError = error as? HXError else { return }
                     switch hxError {
                     case .UnexpectedResult(_, let resultMsg):
-                        self.showCXMAlert(title: nil, message: resultMsg!, action: "确定", cancel: nil, confirm: { (action) in
+                        self.showCXMAlert(title: nil, message: resultMsg!, action: "确定", cancel: nil, on: self, confirm: { (action) in
                             
                         })
                     default : break
@@ -110,27 +107,39 @@ class ForgetPswVCodeVC: BaseViewController, UITextFieldDelegate, ValidatePro,Cus
         _ = loginProvider.rx.request(.sendSms(mobile: self.phoneNum, smsType: "2"))
             .asObservable()
             .mapBaseObject(type: DataModel.self)
-            .subscribe { (event) in
+            .subscribe(onNext: { (data) in
                 self.dismissProgressHud()
-                switch event {
-                case .next(let data):
-                    switch data.code {
-                    case "0" :
-                        break
-                    default : break
+                if let code = Int(data.code) {
+                    if code == 0 {
+                        self.showHUD(message: data.msg)
                     }
-                case .error(let error):
-                    guard let hxError = error as? HXError else { return }
-                    switch hxError {
-                    case .UnexpectedResult(_, let resultMsg):
-                        self.showCXMAlert(title: nil, message: resultMsg!, action: "确定", cancel: nil , confirm: { (action) in
-                            self.popViewController()
-                        })
-                    default : break
+                    if 300000...310000 ~= code{
+                        self.showHUD(message: data.msg)
+                        //                            switch code {
+                        //                            case 301010 :
+                        //                                self.showCXMAlert(title: nil, message: data.msg, action: "确定", cancel: nil, confirm: { (action) in
+                        //                                    self.popViewController()
+                        //                                })
+                        //
+                        //
+                        //                            default :
+                        //                                self.showHUD(message: data.msg)
+                        //                            }
                     }
-                case .completed : break
                 }
-        }
+            }, onError: { (error) in
+                self.dismissProgressHud()
+                guard let hxError = error as? HXError else { return }
+                switch hxError {
+                case .UnexpectedResult(_, let resultMsg):
+                    self.showCXMAlert(title: nil, message: resultMsg!, action: "确定", cancel: nil, on: self, confirm: { (action) in
+                        //self.popViewController()
+                    })
+                    
+                default : break
+                }
+            }, onCompleted: nil , onDisposed: nil )
+        
     }
     //MARK: - 懒加载
     lazy private var tableView : UITableView = {

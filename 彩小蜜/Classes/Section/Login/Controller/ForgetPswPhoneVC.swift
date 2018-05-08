@@ -54,65 +54,69 @@ class ForgetPswPhoneVC: BaseViewController, UITextFieldDelegate, ValidatePro, UI
     }
     //MARK: - 网络请求
     private func validateMobileRequest() {
+        weak var weakSelf = self
         self.showProgressHUD()
         _ = loginProvider.rx.request(.validateMobile(mobile: self.phoneTF.text!))
             .asObservable()
             .mapBaseObject(type: DataModel.self)
-            .subscribe { (event) in
+            .subscribe(onNext: { (data) in
                 self.dismissProgressHud()
-                switch event {
-                case .next(let data):
-                    weak var weakSelf = self
-                    switch data.code {
-                    case "0":
-                        self.sendSmsRequest()
-                        
-                    case "301014":
-                        self.showCXMAlert(title: nil, message: data.msg, action: "去注册", cancel: nil, confirm: { (action) in
-                            guard weakSelf != nil else { return }
-                            let register = RegisterViewController()
-                            weakSelf?.pushViewController(vc: register)
-                        })
-                    default :
-                        break
-                    }
-                case .error(let error) :
-                    print(error)
-                case .completed: break
+                if data.code == "0" {
+                    self.sendSmsRequest()
                 }
-        }
+                
+                if let code = Int(data.code) {
+                    
+                    if 300000...310000 ~= code {
+                        if code == 301014 {
+                            self.showCXMAlert(title: nil, message: data.msg, action: "确定", cancel: nil, on: self, confirm: { (action) in
+                                guard weakSelf != nil else { return }
+                                let register = RegisterViewController()
+                                weakSelf?.pushViewController(vc: register)
+                            })
+                        }else {
+                            weakSelf?.showHUD(message: data.msg)
+                        }
+                    }
+                }
+            }, onError: { (error) in
+                self.dismissProgressHud()
+            }, onCompleted: nil , onDisposed: nil )
+        
     }
     private func sendSmsRequest() {
         self.showProgressHUD()
         _ = loginProvider.rx.request(.sendSms(mobile: self.phoneTF.text!, smsType: "2"))
             .asObservable()
             .mapBaseObject(type: DataModel.self)
-            .subscribe { (event) in
+            .subscribe(onNext: { (data) in
                 self.dismissProgressHud()
-                switch event {
-                case .next(let data):
-                    switch data.code {
-                    case "0" :
-                        self.showHUD(message: "验证码已发送，请注意查收")
-                        let vcode = ForgetPswVCodeVC()
-                        vcode.phoneNum = self.phoneTF.text
-                        self.pushViewController(vc: vcode)
-                    case "301010":
-                        self.showHUD(message: data.msg)
-                    default : break
-                    }
-                case .error(let error):
-                    guard let hxError = error as? HXError else { return }
-                    switch hxError {
-                    case .UnexpectedResult(_, let resultMsg):
-                        self.showCXMAlert(title: nil, message: resultMsg!, action: "确认", cancel: nil, confirm: { (action) in
-                            self.popViewController()
-                        })
-                    default : break
-                    }
-                case .completed : break
+                switch data.code {
+                case "0" :
+                    self.showHUD(message: "验证码已发送，请注意查收")
+                    let vcode = ForgetPswVCodeVC()
+                    vcode.phoneNum = self.phoneTF.text
+                    self.pushViewController(vc: vcode)
+                default : break
                 }
-        }
+                
+                if let code = Int(data.code) {
+                    if 300000...310000 ~= code {
+                        self.showHUD(message: data.msg)
+                    }
+                }
+            }, onError: { (error) in
+                self.dismissProgressHud()
+                guard let hxError = error as? HXError else { return }
+                switch hxError {
+                case .UnexpectedResult(_, let resultMsg):
+                    self.showCXMAlert(title: nil, message: resultMsg!, action: "确定", cancel: nil, on: self, confirm: { (action) in
+                        self.popViewController()
+                    })
+                default : break
+                }
+            }, onCompleted: nil , onDisposed: nil )
+        
     }
     
     //MARK: - 懒加载

@@ -92,39 +92,36 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro,
        _ = loginProvider.rx.request(.loginByPass(mobile: userNameTF.text!, password: passwordTF.text!))
         .asObservable()
         .mapObject(type: UserDataModel.self)
-        .subscribe { (event) in
+        .subscribe(onNext: { (data) in
             self.dismissProgressHud()
-            switch event {
-            case .next(let data):
-                
-                self.showHUD(message: data.showMsg)
-                self.save(userInfo: data)
-
-                if self.currentVC != nil {
-                    self.popToCurrentVC()
-                    guard self.loginDelegate != nil else { return }
-                    self.loginDelegate.didLogin(isLogin: true)
-                }else {
-                    self.pushRootViewController()
-                }
-                self.userNameTF.resignFirstResponder()
-                self.passwordTF.resignFirstResponder()
-                print(data)
-                
-            case .error(let error):
-                
-                guard let hxerror = error as? HXError else { return }
-                switch hxerror {
-                case .UnexpectedResult(_, let resultMsg) :
-                    self.showCXMAlert(title: nil, message: resultMsg!, action: "确定", cancel: nil, confirm: { (action) in
-                        self.popViewController()
-                    })
-                default: break
-                }
-            case .completed:
-                break
+            self.showHUD(message: data.showMsg)
+            self.save(userInfo: data)
+            
+            if self.currentVC != nil {
+                self.popToCurrentVC()
+                guard self.loginDelegate != nil else { return }
+                self.loginDelegate.didLogin(isLogin: true)
+            }else {
+                self.pushRootViewController()
             }
-        }
+            self.userNameTF.resignFirstResponder()
+            self.passwordTF.resignFirstResponder()
+            print(data)
+        }, onError: { (error) in
+            self.dismissProgressHud()
+            guard let hxerror = error as? HXError else { return }
+            switch hxerror {
+            case .UnexpectedResult(let code, let resultMsg) :
+                
+                if 300000...310000 ~= code {
+                    self.showCXMAlert(title: nil, message: resultMsg!, action: "确定", cancel: nil, on: self, confirm: { (action) in
+                        
+                    })
+                }
+                
+            default: break
+            }
+        }, onCompleted: nil , onDisposed: nil )
         
     }
     
@@ -187,7 +184,8 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro,
         }else {
             pushRootViewController()
         }
-        
+        self.passwordTF.resignFirstResponder()
+        self.userNameTF.resignFirstResponder()
     }
     
     override func didReceiveMemoryWarning() {

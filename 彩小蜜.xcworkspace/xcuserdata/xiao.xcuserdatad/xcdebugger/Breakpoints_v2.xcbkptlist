@@ -132,7 +132,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Payment/Controller/CouponFilterViewController.swift"
-            timestampString = "547481851.426121"
+            timestampString = "547484797.110988"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "172"
@@ -196,7 +196,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Main/Base/Controller/BaseWebViewController.swift"
-            timestampString = "547481851.42628"
+            timestampString = "547484797.111156"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "76"
@@ -212,7 +212,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Main/Base/Controller/BaseWebViewController.swift"
-            timestampString = "547481851.426356"
+            timestampString = "547484797.1112339"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "116"
@@ -228,11 +228,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Login/Controller/ForgetPswVCodeVC.swift"
-            timestampString = "547481851.426406"
+            timestampString = "547484797.111288"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
             landmarkName = "updatePassRequest()"
             landmarkType = "7">
          </BreakpointContent>
@@ -243,13 +243,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Login/Controller/ForgetPswVCodeVC.swift"
-            timestampString = "547481851.426451"
+            filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Login/Controller/LoginViewController.swift"
+            timestampString = "547484797.111346"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
-            landmarkName = "updatePassRequest()"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "loginRequest()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x5f69;&#x5c0f;&#x871c;/Classes/Section/Login/Controller/VCodeLoginViewController.swift"
+            timestampString = "547484797.111671"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
+            landmarkName = "loginRequest()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

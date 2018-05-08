@@ -88,12 +88,16 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
                     guard let hxerror = error as? HXError else { return }
                     switch hxerror {
                     case .UnexpectedResult(let code, let resultMsg) :
-                        if code == 301016, let resultMsg = resultMsg {
-                            self.showHUD(message: resultMsg)
-                        }else {
-                            self.showCXMAlert(title: nil, message: resultMsg!, action: "确定", cancel: nil, confirm: { (action) in
-                                self.popViewController()
-                            })
+                        
+                        if 300000...310000 ~= code {
+                            if code == 301016, let resultMsg = resultMsg {
+                                self.showHUD(message: resultMsg)
+                            }else {
+                                
+                                self.showCXMAlert(title: nil, message: resultMsg!, action: "确定", cancel: nil, on: self, confirm: { (action) in
+                                    
+                                })
+                            }
                         }
                     default: break
                     }
@@ -107,31 +111,41 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
         _ = loginProvider.rx.request(.sendSms(mobile: self.userNameTF.text!, smsType: "0"))
             .asObservable()
             .mapBaseObject(type: DataModel.self)
-            .subscribe { (event) in
+            .subscribe(onNext: { (data) in
                 self.dismissProgressHud()
-                switch event {
-                case .next(let data):
-                    switch data.code {
-                    case "0" :
+                if let code = Int(data.code) {
+                    if code == 0 {
                         self.showHUD(message: data.msg)
-                    default : break
                     }
-                case .error(let error):
-                    guard let hxError = error as? HXError else { return }
-                    switch hxError {
-                    case .UnexpectedResult(let code, let resultMsg):
-                        if code == 301016, let resultMsg = resultMsg {
-                            self.showHUD(message: resultMsg)
-                        }else {
-                            self.showCXMAlert(title: nil, message: resultMsg!, action: "确定", cancel: nil, confirm: { (action ) in
-                                self.popViewController()
-                            })
-                        }
-                    default : break
+                    if 300000...310000 ~= code{
+                        self.showHUD(message: data.msg)
+                        //                            switch code {
+                        //                            case 301010 :
+                        //                                self.showCXMAlert(title: nil, message: data.msg, action: "确定", cancel: nil, confirm: { (action) in
+                        //                                    self.popViewController()
+                        //                                })
+                        //                            default :
+                        //                                self.showHUD(message: data.msg)
+                        //                            }
                     }
-                case .completed : break
                 }
-        }
+            }, onError: { (error) in
+                self.dismissProgressHud()
+                guard let hxError = error as? HXError else { return }
+                switch hxError {
+                case .UnexpectedResult(let code, let resultMsg):
+                    if code == 301016, let resultMsg = resultMsg {
+                        self.showHUD(message: resultMsg)
+                    }else {
+                        self.showCXMAlert(title: nil, message: resultMsg!, action: "确定", cancel: nil, on: self, confirm: { (action) in
+                            
+                        })
+                    }
+                default : break
+                }
+            }, onCompleted: nil , onDisposed: nil )
+        
+
     }
     
     //MARK: - 懒加载
