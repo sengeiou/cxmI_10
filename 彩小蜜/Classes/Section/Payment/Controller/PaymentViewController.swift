@@ -155,7 +155,10 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
     private func paymentRequest() {
         weak var weakSelf = self
         guard self.saveBetInfo != nil else { return }
-        guard self.paymentModel != nil else { return }
+        if paymentModel == nil {
+            paymentModel = PaymentList()
+            paymentModel.payCode = ""
+        }
         _ = paymentProvider.rx.request(.payment(payCode: paymentModel.payCode, payToken: self.saveBetInfo.payToken))
             .asObservable()
             .mapObject(type: PaymentResultModel.self)
@@ -326,6 +329,8 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
         case 0:
             return 4
         case 1:
+            guard self.saveBetInfo != nil else { return 0 }
+            guard self.saveBetInfo.thirdPartyPaid > 0 else { return 0 }
             guard paymentAllList != nil else { return 1 }
             return paymentAllList.count + 1
         default:

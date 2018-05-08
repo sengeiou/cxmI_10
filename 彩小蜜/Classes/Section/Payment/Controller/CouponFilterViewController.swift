@@ -162,7 +162,7 @@ class CouponFilterViewController: BasePopViewController, UITableViewDelegate, UI
                 }
             }
         }else {
-            self.bonusId = ""
+            self.bonusId = "-1"
         }
         tableView.reloadData()
     }

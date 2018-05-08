@@ -143,7 +143,16 @@ class FootballTimesFilterVC: BasePopViewController, UITextFieldDelegate, CXMKeyb
             isFirst = false
         }
         
-        self.textField.text = self.textField.text! + num
+        if self.textField.text == nil || self.textField.text == "" {
+            if num == "0" {
+                self.textField.text = "1"
+            }else {
+                self.textField.text = self.textField.text! + num
+            }
+        }else {
+            self.textField.text = self.textField.text! + num
+        }
+        
     }
     // 删除
     func keyboardDelete() {
