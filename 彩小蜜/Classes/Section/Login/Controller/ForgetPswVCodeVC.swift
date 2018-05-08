@@ -76,11 +76,21 @@ class ForgetPswVCodeVC: BaseViewController, UITextFieldDelegate, ValidatePro,Cus
                 self.dismissProgressHud()
                 switch event {
                 case .next(let data):
-                    switch data.code {
-                    case "0":
+                    
+                    let code = Int(data.code)!
+                    
+                    switch code {
+                    case 0:
+                        self.showHUD(message: data.msg)
+                    default:
                         break
-                    default: break
-                }
+                    }
+                    
+                    
+                    if 300000...310000 ~= code {
+                        self.showHUD(message: data.msg)
+                    }
+
                 case .error(let error):
                     guard let hxError = error as? HXError else { return }
                     switch hxError {

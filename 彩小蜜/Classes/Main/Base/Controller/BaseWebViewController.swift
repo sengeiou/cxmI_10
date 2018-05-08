@@ -27,6 +27,11 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
         loadWebView()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.webView.reload()
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         progressView.snp.makeConstraints { (make) in
@@ -78,7 +83,16 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
     }
     
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        let urlStr = "\(webView.url!)"
         
+        let type = matcherHttp(urlStr: urlStr)
+        
+        switch type.0 {
+        case .登录:
+            pushLoginVC(from: self)
+            
+        default: break
+        }
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
@@ -93,9 +107,13 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
         let model = JSDataModel()
         let jsData = model.toJSONString()
         
-        webView.evaluateJavaScript("actionMessage('\(jsData!)')") { (data, error) in
-            
+        let urlStr = "\(webView.url!)"
+        if urlStr.contains("usinfo=1") {
+            webView.evaluateJavaScript("actionMessage('\(jsData!)')") { (data, error) in
+                
+            }
         }
+        
     
     }
     
