@@ -202,6 +202,7 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
                 }else {
                     weakSelf?.canPush = false
                     weakSelf?.showMsg = data.showMsg
+                    weakSelf?.showHUD(message: data.showMsg)
                 }
                 
             }, onError: { (error) in

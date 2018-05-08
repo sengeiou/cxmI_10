@@ -114,13 +114,12 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "彩小秘 · 投注确认"
-        orderRequest()
         initSubview()
         setEmpty(title: "暂无可选赛事", tableView)
-        //setRightButtonItem()
-        selectPlayList = [FootballPlayListModel]()
         
+        selectPlayList = [FootballPlayListModel]()
         selectPlays = Set(playList)
+        orderRequest()
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
