@@ -49,6 +49,8 @@ class OrderDetailTitleCell: UITableViewCell {
             
             nameLB.text = "\(homeMatch)\nVS\n\(viMatch)"
             
+            matchInfo.changci.insert("\n", at: matchInfo.changci.index(matchInfo.changci.startIndex, offsetBy: 2))
+            
             timeLB.text = matchInfo.changci
             recordLB.attributedText = record
             resultLB.text = resultStr
@@ -106,6 +108,7 @@ class OrderDetailTitleCell: UITableViewCell {
         
         timeLB = getDetailLB()
         timeLB.textAlignment = .left
+        timeLB.numberOfLines = 0
         nameLB = getDetailLB()
         nameLB.numberOfLines = 0
         ruleLB = getDetailLB()
@@ -150,25 +153,29 @@ class OrderDetailTitleCell: UITableViewCell {
         timeTitle.snp.makeConstraints { (make) in
             make.top.equalTo(line.snp.bottom).offset(11)
             make.left.equalTo(self.contentView).offset(26)
-            make.width.equalTo(OrderDetailTitleWidth)
+            make.width.equalTo(40 * defaultScale)
             make.height.equalTo(12)
         }
         nameTitle.snp.makeConstraints { (make) in
             make.top.height.equalTo(timeTitle)
             make.left.equalTo(timeTitle.snp.right).offset(1)
-            make.right.equalTo(ruleTitle.snp.left).offset(-1)
+            //make.right.equalTo(ruleTitle.snp.left).offset(-1)
         }
         ruleTitle.snp.makeConstraints { (make) in
-            make.top.height.width.equalTo(timeTitle)
+            make.top.height.equalTo(timeTitle)
+            make.width.equalTo(nameTitle)
+            make.left.equalTo(nameTitle.snp.right).offset(1)
             make.right.equalTo(recordTitle.snp.left).offset(-1)
         }
         recordTitle.snp.makeConstraints { (make) in
-            make.top.height.width.equalTo(timeTitle)
+            make.top.height.equalTo(timeTitle)
+            make.width.equalTo(OrderDetailTitleWidth)
             make.right.equalTo(resultTitle.snp.left).offset(-1)
         }
         
         resultTitle.snp.makeConstraints { (make) in
-            make.top.height.width.equalTo(timeTitle)
+            make.top.height.equalTo(timeTitle)
+            make.width.equalTo(OrderDetailTitleWidth - 30)
             make.right.equalTo(self.contentView).offset(-26)
         }
         
@@ -186,19 +193,21 @@ class OrderDetailTitleCell: UITableViewCell {
         }
         
         ruleLB.snp.makeConstraints { (make) in
-            make.top.height.width.equalTo(timeLB)
+            make.top.height.equalTo(timeLB)
+            make.width.equalTo(nameLB)
             make.right.equalTo(recordLB.snp.left).offset(-1)
         }
         
         recordLB.snp.makeConstraints { (make) in
             make.top.equalTo(timeTitle.snp.bottom).offset(11 * defaultScale)
             make.bottom.equalTo(self.contentView).offset(-5 * defaultScale)
-            make.width.equalTo(timeLB)
+            make.width.equalTo(OrderDetailTitleWidth)
             make.right.equalTo(resultLB.snp.left).offset(-1)
         }
         
         resultLB.snp.makeConstraints { (make) in
-            make.top.height.width.equalTo(timeLB)
+            make.top.height.equalTo(timeLB)
+            make.width.equalTo(OrderDetailTitleWidth - 30)
             make.right.equalTo(self.contentView).offset(-26)
         }
     }
@@ -208,6 +217,7 @@ class OrderDetailTitleCell: UITableViewCell {
         lab.font = Font12
         lab.text = text
         lab.textColor = ColorA0A0A0
+        
         lab.textAlignment = .center
         return lab
     }

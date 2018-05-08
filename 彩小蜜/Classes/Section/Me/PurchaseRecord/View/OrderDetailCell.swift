@@ -21,6 +21,8 @@ class OrderDetailCell: UITableViewCell {
             
             nameLB.text = "\(homeMatch)\nVS\n\(viMatch)"
             
+            matchInfo.changci.insert("\n", at: matchInfo.changci.index(matchInfo.changci.startIndex, offsetBy: 2))
+            
             timeLB.text = matchInfo.changci
            // ruleLB.text = matchInfo.playType
             
@@ -84,6 +86,7 @@ class OrderDetailCell: UITableViewCell {
         
         timeLB = getDetailLB()
         timeLB.textAlignment = .left
+        timeLB.numberOfLines = 0
         
         nameLB = getDetailLB()
         nameLB.numberOfLines = 0
@@ -118,7 +121,7 @@ class OrderDetailCell: UITableViewCell {
         timeLB.snp.makeConstraints { (make) in
             make.top.equalTo(self.contentView).offset(11 * defaultScale)
             make.bottom.equalTo(self.contentView).offset(-11 * defaultScale)
-            make.width.equalTo(OrderDetailTitleWidth)
+            make.width.equalTo(40 * defaultScale)
             make.left.equalTo(self.contentView).offset(leftSpacing)
         }
         nameLB.snp.makeConstraints { (make) in
@@ -128,20 +131,21 @@ class OrderDetailCell: UITableViewCell {
             make.right.equalTo(ruleLB.snp.left).offset(-1)
         }
         ruleLB.snp.makeConstraints { (make) in
-            make.top.height.width.equalTo(timeLB)
+            make.top.height.equalTo(timeLB)
+            make.width.equalTo(nameLB)
             make.right.equalTo(recordLB.snp.left).offset(-1)
         }
         
         recordLB.snp.makeConstraints { (make) in
             make.top.equalTo(line.snp.bottom).offset(11 * defaultScale)
             make.bottom.equalTo(self.contentView).offset(-5 * defaultScale)
-            make.width.equalTo(timeLB)
+            make.width.equalTo(OrderDetailTitleWidth)
             make.right.equalTo(resultLB.snp.left).offset(-1)
         }
         
         resultLB.snp.makeConstraints { (make) in
             make.top.height.equalTo(recordLB)
-            make.width.equalTo(timeLB)
+             make.width.equalTo(OrderDetailTitleWidth - 30)
             make.right.equalTo(self.contentView).offset(-26)
         }
         
