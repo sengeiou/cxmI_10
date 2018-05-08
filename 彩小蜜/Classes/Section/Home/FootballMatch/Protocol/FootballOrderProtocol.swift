@@ -197,7 +197,13 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
             .subscribe(onNext: { (data) in
                 self.dismissProgressHud()
                 weakSelf?.betInfo = data
-                weakSelf?.canPush = true
+                if data.showMsg == nil || data.showMsg == "" {
+                    weakSelf?.canPush = true
+                }else {
+                    weakSelf?.canPush = false
+                    weakSelf?.showMsg = data.showMsg
+                }
+                
             }, onError: { (error) in
                 self.dismissProgressHud()
                 weakSelf?.canPush = false

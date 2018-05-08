@@ -12,6 +12,8 @@ import HandyJSON
 class FootballBetInfoModel : HandyJSON{
     required init() { }
     
+    var showMsg : String!
+    
     var betCells: [BetCellModel]!
     var betNum: String!
     var betType: String!
