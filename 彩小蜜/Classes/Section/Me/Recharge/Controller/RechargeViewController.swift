@@ -87,7 +87,7 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
     
     //MARK: - Tableview Delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 2 {
+        if indexPath.section == 2, indexPath.row != 0 {
             self.paymentModel = self.paymentAllList[indexPath.row - 1]
         }
     }
