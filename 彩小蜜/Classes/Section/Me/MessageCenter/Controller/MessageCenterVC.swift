@@ -17,7 +17,12 @@ enum MessageCenterType : String{
 fileprivate let MessageCenterCellId = "MessageCenterCellId"
 fileprivate let NoticeCellId = "NoticeCellId"
 
-class MessageCenterVC: BaseViewController, IndicatorInfoProvider, UITableViewDelegate, UITableViewDataSource {
+class MessageCenterVC: BaseViewController, IndicatorInfoProvider, UITableViewDelegate, UITableViewDataSource, NoticeCellDelegate {
+    
+    func didTipNoticeDetail(messageModel: MessageCenterModel) {
+        guard messageModel.msgUrl != nil else { return }
+        pushRouterVC(urlStr: messageModel.msgUrl, from: self)
+    }
 
     public var messageType: MessageCenterType = .notice
     
@@ -133,14 +138,13 @@ class MessageCenterVC: BaseViewController, IndicatorInfoProvider, UITableViewDel
         if messageType == .message {
             let cell = tableView.dequeueReusableCell(withIdentifier: NoticeCellId, for: indexPath) as! NoticeCell
             cell.messageModel = messageList[indexPath.section]
+            cell.delegate = self
             return cell
         }else {
             let cell = tableView.dequeueReusableCell(withIdentifier: MessageCenterCellId, for: indexPath) as! MessageCenterCell
             cell.messageModel = messageList[indexPath.section]
             return cell
         }
-        
-        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -150,7 +154,6 @@ class MessageCenterVC: BaseViewController, IndicatorInfoProvider, UITableViewDel
         }else {
             return UITableViewAutomaticDimension
         }
-        
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

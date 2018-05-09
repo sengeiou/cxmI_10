@@ -4,9 +4,13 @@
 //
 //  Created by 笑 on 2018/4/26.
 //  Copyright © 2018年 韩笑. All rights reserved.
-//
+//  消息
 
 import UIKit
+
+protocol NoticeCellDelegate {
+    func didTipNoticeDetail(messageModel: MessageCenterModel) -> Void
+}
 
 class NoticeCell: UITableViewCell {
 
@@ -15,17 +19,20 @@ class NoticeCell: UITableViewCell {
             guard messageModel != nil else { return }
             title.text = messageModel.title
             timelb.text = messageModel.sendTime
-            detaillb.text = messageModel.contentDesc + "s"
+            detaillb.text = messageModel.contentDesc
             guard let url = URL(string: messageModel.msgUrl) else { return }
             activity.kf.setImage(with: url)
         }
     }
+    
+    public var delegate : NoticeCellDelegate!
     
     private var title : UILabel!
     private var timelb: UILabel!
     private var detaillb: UILabel!
     private var detailBut: UIButton!
     private var activity: UIImageView!
+    private var detailIcon : UIImageView!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -33,7 +40,9 @@ class NoticeCell: UITableViewCell {
     }
     
     @objc private func detailButClicked(_ sender: UIButton) {
-        
+        guard self.messageModel != nil else { return }
+        guard delegate != nil else { return }
+        delegate.didTipNoticeDetail(messageModel: self.messageModel)
     }
     
     private func initSubview() {
@@ -48,11 +57,14 @@ class NoticeCell: UITableViewCell {
     
         
         detailBut = UIButton(type: .custom)
-        detailBut.setTitle("查看详情〉›>", for: .normal)
+        detailBut.setTitle("查看详情", for: .normal)
         detailBut.setTitleColor(Color787878, for: .normal)
         detailBut.titleLabel?.font = Font12
         detailBut.contentHorizontalAlignment = .right
         detailBut.addTarget(self, action: #selector(detailButClicked(_:)), for: .touchUpInside)
+        
+        detailIcon = UIImageView()
+        detailIcon.image = UIImage(named: "jump")
         
         activity = UIImageView()
         
@@ -61,6 +73,7 @@ class NoticeCell: UITableViewCell {
         self.contentView.addSubview(detaillb)
         self.contentView.addSubview(detailBut)
         self.contentView.addSubview(activity)
+        self.contentView.addSubview(detailIcon)
         
         title.snp.makeConstraints { (make) in
             make.top.equalTo(0)
@@ -87,8 +100,13 @@ class NoticeCell: UITableViewCell {
         }
         detailBut.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(detaillb)
-            make.right.equalTo(activity)
+            make.right.equalTo(detailIcon.snp.left).offset(1)
             make.width.equalTo(90)
+        }
+        detailIcon.snp.makeConstraints { (make) in
+            make.centerY.equalTo(detailBut.snp.centerY)
+            make.right.equalTo(self.contentView).offset(-rightSpacing)
+            make.height.width.equalTo(12)
         }
     }
     
