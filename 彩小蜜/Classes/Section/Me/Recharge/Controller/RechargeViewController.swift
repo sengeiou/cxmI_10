@@ -385,6 +385,13 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
         self.textfield.resignFirstResponder()
     }
     
+    override func back(_ sender: UIButton) {
+        timer.invalidate()
+        timer = nil
+        self.dismissProgressHud()
+        self.popViewController()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
