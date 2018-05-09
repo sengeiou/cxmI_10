@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WithdrawalViewController: BaseViewController {
+class WithdrawalViewController: BaseViewController, ValidatePro {
 
     //MARK: - 点击事件
     // 提交   确认支付
@@ -29,6 +29,11 @@ class WithdrawalViewController: BaseViewController {
         guard let amount = Double(drawDataModel.userMoney) else { return }
         guard drawAmount <= amount else {
             showHUD(message: "您输入的金额已超过可提现金额")
+            return
+        }
+        
+        guard validate(.money, str: self.amountOfMoney.text) else {
+            showHUD(message: "请输入正确的金额")
             return
         }
        
@@ -244,7 +249,7 @@ class WithdrawalViewController: BaseViewController {
         amountOfMoney.placeholder = "请输入提现金额"
         amountOfMoney.rightView = allDrawBut
         amountOfMoney.rightViewMode = .always
-        amountOfMoney.keyboardType = .numberPad
+        amountOfMoney.keyboardType = .numbersAndPunctuation
         
         drawMoneyBut = UIButton(type: .custom)
         drawMoneyBut.setTitle("立即提现", for: .normal)
