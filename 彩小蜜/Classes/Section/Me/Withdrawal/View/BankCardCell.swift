@@ -155,7 +155,7 @@ class BankCardCell: UITableViewCell {
         deleteBut = UIButton(type: .custom)
         //deleteBut.setBackgroundImage(UIImage(named: "shut"), for: .normal)
         deleteBut.setImage(UIImage(named: "shut"), for: .normal)
-        deleteBut.imageEdgeInsets = UIEdgeInsets(top: 0, left: 28, bottom: 28, right: 0)
+        deleteBut.imageEdgeInsets = UIEdgeInsets(top: 0, left: BankCardDeleteWidth * 2, bottom: BankCardDeleteWidth * 2, right: 0)
         deleteBut.addTarget(self, action: #selector(deleteCard(_:)), for: .touchUpInside)
         
         self.contentView.addSubview(bgView)
