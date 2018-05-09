@@ -32,6 +32,8 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
     private var canPayment : Bool = true
     private var timer : Timer!
     
+    private var selectedIndex : IndexPath!
+    
     //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,6 +93,10 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 2, indexPath.row != 0 {
             self.paymentModel = self.paymentAllList[indexPath.row - 1]
+            self.selectedIndex = indexPath
+        }else {
+            guard self.selectedIndex != nil else { return }
+            tableView.selectRow(at: self.selectedIndex, animated: false, scrollPosition: .none)
         }
     }
     
@@ -335,8 +341,12 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
             let cell = tableview.dequeueReusableCell(withIdentifier: RechargeCellIdentifier, for: indexPath) as! RechargePaymentCell
             cell.paymentInfo = self.paymentAllList[indexPath.row - 1]
             if indexPath.row == 1 {
-                tableView.selectRow(at: indexPath, animated: true , scrollPosition: .none)
-                self.paymentModel = self.paymentAllList[indexPath.row - 1]
+                if selectedIndex == nil {
+                    self.selectedIndex = indexPath
+                    self.paymentModel = self.paymentAllList[indexPath.row - 1]
+                }
+                tableView.selectRow(at: self.selectedIndex, animated: true , scrollPosition: .none)
+                
             }
             return cell
         default:

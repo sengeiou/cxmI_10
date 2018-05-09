@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FootballOrderHunheCell: UITableViewCell {
+class FootballOrderHunheCell: UITableViewCell, DateProtocol {
 
     public var playInfoModel: FootballPlayListModel! {
         didSet{
@@ -19,6 +19,11 @@ class FootballOrderHunheCell: UITableViewCell {
             
             danIsSelected(isSelected: playInfoModel.isDan)
             setupDanBut()
+            
+            let time = timeStampToHHmm(playInfoModel.betEndTime)
+            guard let addr = playInfoModel.leagueAddr else { return }
+            guard let changci = playInfoModel.changci else { return }
+            titleLB.text = "\(addr)  \(changci)  截止\(time)"
         }
     }
     
@@ -26,7 +31,7 @@ class FootballOrderHunheCell: UITableViewCell {
     
     private var deleteBut : UIButton!
     private var danBut: UIButton!
-    
+    private var titleLB: UILabel!
     public var scoreView: FootballScoreView!
     private var homeMatch: UILabel!
     private var visitingMatch : UILabel!
@@ -81,6 +86,11 @@ class FootballOrderHunheCell: UITableViewCell {
     private func initSubview() {
         self.selectionStyle = .none
         
+        titleLB = UILabel()
+        titleLB.font = Font12
+        titleLB.textColor = Color9F9F9F
+        titleLB.textAlignment = .left
+        
         deleteBut = UIButton(type: .custom)
         deleteBut.setBackgroundImage(UIImage(named: "Remove"), for: .normal)
         deleteBut.addTarget(self, action: #selector(deleteClicked(_:)), for: .touchUpInside)
@@ -109,6 +119,7 @@ class FootballOrderHunheCell: UITableViewCell {
         visitingMatch.font = Font14
         visitingMatch.textColor = Color505050
         
+        self.contentView.addSubview(titleLB)
         self.contentView.addSubview(deleteBut)
         self.contentView.addSubview(scoreView)
         self.contentView.addSubview(danBut)
@@ -122,6 +133,14 @@ class FootballOrderHunheCell: UITableViewCell {
             make.left.equalTo(15 * defaultScale)
             make.width.height.equalTo(playDeleteButtonSize * defaultScale)
         }
+        
+        titleLB.snp.makeConstraints { (make) in
+            make.top.equalTo(6 * defaultScale)
+            make.left.equalTo(leftSpacing)
+            make.right.equalTo(-rightSpacing)
+            make.height.equalTo(14 * defaultScale)
+        }
+        
         danBut.snp.makeConstraints { (make) in
             make.centerY.equalTo(self.snp.centerY)
             make.width.equalTo(31 * defaultScale)
@@ -131,7 +150,7 @@ class FootballOrderHunheCell: UITableViewCell {
             make.height.equalTo(53 * defaultScale)
         }
         homeMatch.snp.makeConstraints { (make) in
-            make.top.equalTo(0)
+            make.top.equalTo(titleLB.snp.bottom).offset(3 * defaultScale)
             make.bottom.equalTo(scoreView.snp.top)
             make.left.equalTo(scoreView)
         }
@@ -146,7 +165,7 @@ class FootballOrderHunheCell: UITableViewCell {
         }
         
         scoreView.snp.makeConstraints { (make) in
-            make.top.equalTo(40 * defaultScale)
+            make.top.equalTo(60 * defaultScale)
             make.bottom.equalTo(-15 * defaultScale)
             make.left.equalTo(deleteBut.snp.right).offset(leftSpacing)
             make.right.equalTo(danBut.snp.left).offset(-10 * defaultScale)

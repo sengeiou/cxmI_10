@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FootballOrderBanQuanCCell: UITableViewCell {
+class FootballOrderBanQuanCCell: UITableViewCell, DateProtocol {
 
     public var playInfoModel: FootballPlayListModel! {
         didSet{
@@ -19,6 +19,17 @@ class FootballOrderBanQuanCCell: UITableViewCell {
             
             danIsSelected(isSelected: playInfoModel.isDan)
             setupDanBut()
+            
+            if playInfoModel.matchPlays[0].single == true {
+                typeIcon.isHidden = false
+            }else {
+                typeIcon.isHidden = true
+            }
+            
+            let time = timeStampToHHmm(playInfoModel.betEndTime)
+            guard let addr = playInfoModel.leagueAddr else { return }
+            guard let changci = playInfoModel.changci else { return }
+            titleLB.text = "\(addr)  \(changci)  截止\(time)"
         }
     }
     
@@ -26,11 +37,13 @@ class FootballOrderBanQuanCCell: UITableViewCell {
     
     private var deleteBut : UIButton!
     private var danBut: UIButton!
-    
+    private var titleLB: UILabel!
     public var scoreView: FootballScoreView!
     private var homeMatch: UILabel!
     private var visitingMatch : UILabel!
     private var vsLb : UILabel!
+    // 单关图标
+    private var typeIcon : UIImageView!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -82,6 +95,18 @@ class FootballOrderBanQuanCCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
+        typeIcon.snp.makeConstraints { (make) in
+            make.top.left.equalTo(0)
+            make.width.height.equalTo(typeIconSize * defaultScale)
+        }
+        
+        titleLB.snp.makeConstraints { (make) in
+            make.top.equalTo(6 * defaultScale)
+            make.left.equalTo(typeIcon.snp.right).offset(2 * defaultScale)
+            make.right.equalTo(-rightSpacing)
+            make.height.equalTo(14 * defaultScale)
+        }
+        
         deleteBut.snp.makeConstraints { (make) in
             make.centerY.equalTo(scoreView.snp.centerY)
             make.left.equalTo(15 * defaultScale)
@@ -95,7 +120,7 @@ class FootballOrderBanQuanCCell: UITableViewCell {
             make.right.equalTo(-rightSpacing)
         }
         homeMatch.snp.makeConstraints { (make) in
-            make.top.equalTo(0)
+            make.top.equalTo(titleLB.snp.bottom).offset(3 * defaultScale)
             make.bottom.equalTo(scoreView.snp.top)
             make.left.equalTo(scoreView)
         }
@@ -110,7 +135,7 @@ class FootballOrderBanQuanCCell: UITableViewCell {
         }
         
         scoreView.snp.makeConstraints { (make) in
-            make.top.equalTo(40 * defaultScale)
+            make.top.equalTo(60 * defaultScale)
             make.bottom.equalTo(-15 * defaultScale)
             make.left.equalTo(deleteBut.snp.right).offset(leftSpacing)
             make.right.equalTo(danBut.snp.left).offset(-10 * defaultScale)
@@ -118,6 +143,14 @@ class FootballOrderBanQuanCCell: UITableViewCell {
     }
     private func initSubview() {
         self.selectionStyle = .none
+        
+        typeIcon = UIImageView()
+        typeIcon.image = UIImage(named: "Singlefield")
+        
+        titleLB = UILabel()
+        titleLB.font = Font12
+        titleLB.textColor = Color9F9F9F
+        titleLB.textAlignment = .left
         
         deleteBut = UIButton(type: .custom)
         deleteBut.setBackgroundImage(UIImage(named: "Remove"), for: .normal)
@@ -148,7 +181,8 @@ class FootballOrderBanQuanCCell: UITableViewCell {
         visitingMatch.textColor = Color505050
         
         
-        //self.contentView.addSubview(titleLB)
+        self.contentView.addSubview(titleLB)
+        self.contentView.addSubview(typeIcon)
         self.contentView.addSubview(deleteBut)
         self.contentView.addSubview(scoreView)
         self.contentView.addSubview(danBut)

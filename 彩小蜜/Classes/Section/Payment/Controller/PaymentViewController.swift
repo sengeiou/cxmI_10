@@ -382,9 +382,12 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
                 let paymentModel = paymentAllList[indexPath.row - 1 ]
                 cell.paymentInfo = paymentModel
                 if indexPath.row == 1 {
-                    tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
-                    self.paymentModel = paymentModel
-                    self.selectedIndex = indexPath
+                    
+                    if self.selectedIndex == nil {
+                        self.selectedIndex = indexPath
+                        self.paymentModel = paymentModel
+                    }
+                    tableView.selectRow(at: selectedIndex, animated: true, scrollPosition: .none)
                 }
                 
                 return cell
@@ -423,22 +426,28 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
         if indexPath.section == 0 {
             if indexPath.row == 2 {
                 guard self.saveBetInfo != nil, self.saveBetInfo.bonusList.isEmpty == false else {
-                    guard self.selectedIndex != nil else { return }
-                    tableView.selectRow(at: self.selectedIndex, animated: true, scrollPosition: .none)
+                    
                     return }
                 let coupon = CouponFilterViewController()
                 coupon.delegate = self
                 coupon.bonusList = self.saveBetInfo.bonusList
                 present(coupon)
-                guard self.selectedIndex != nil else { return }
-                tableView.selectRow(at: self.selectedIndex, animated: true, scrollPosition: .none)
+                
             }
+            
+            guard self.selectedIndex != nil else { return }
+            tableView.selectRow(at: self.selectedIndex, animated: true, scrollPosition: .none)
         }else if indexPath.section == 1 {
+            
             if indexPath.row != 0 {
                 self.paymentModel = paymentAllList[indexPath.row - 1 ]
                 self.selectedIndex = indexPath
+            }else {
+                guard self.selectedIndex != nil else { return }
+                tableView.selectRow(at: self.selectedIndex, animated: true, scrollPosition: .none)
             }
         }
+        
         //tableView.deselectRow(at: indexPath, animated: true)
     }
     

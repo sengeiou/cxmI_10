@@ -46,6 +46,8 @@ class NoticeCell: UITableViewCell {
     }
     
     private func initSubview() {
+        self.selectionStyle = .none
+        
         title = getLabel()
         title.font = Font15
         title.textColor = Color505050

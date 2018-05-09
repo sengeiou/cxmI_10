@@ -32,6 +32,12 @@ class FootballOrderSPFCell: UITableViewCell , DateProtocol{
             
             danIsSelected(isSelected: playInfoModel.isDan)
             setupDanBut()
+            
+            if playInfoModel.matchPlays[0].single == true {
+                typeIcon.isHidden = false
+            }else {
+                typeIcon.isHidden = true
+            }
         }
     }
     
@@ -41,6 +47,8 @@ class FootballOrderSPFCell: UITableViewCell , DateProtocol{
     private var titleLB: UILabel!
     private var deleteBut : UIButton!
     private var danBut: UIButton!
+    // 单关图标
+    private var typeIcon : UIImageView!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -84,6 +92,12 @@ class FootballOrderSPFCell: UITableViewCell , DateProtocol{
     }
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+        typeIcon.snp.makeConstraints { (make) in
+            make.top.left.equalTo(0)
+            make.width.height.equalTo(typeIconSize * defaultScale)
+        }
+        
         titleLB.snp.makeConstraints { (make) in
             make.top.equalTo(0)
             make.left.equalTo(leftSpacing)
@@ -111,6 +125,9 @@ class FootballOrderSPFCell: UITableViewCell , DateProtocol{
     private func initSubview() {
         self.selectionStyle = .none
         
+        typeIcon = UIImageView()
+        typeIcon.image = UIImage(named: "Singlefield")
+        
         deleteBut = UIButton(type: .custom)
         deleteBut.setBackgroundImage(UIImage(named: "Remove"), for: .normal)
         deleteBut.addTarget(self, action: #selector(deleteClicked(_:)), for: .touchUpInside)
@@ -132,6 +149,7 @@ class FootballOrderSPFCell: UITableViewCell , DateProtocol{
         danBut.contentHorizontalAlignment = .center
         danBut.addTarget(self , action: #selector(danClicked(_:)), for: .touchUpInside)
         
+        self.contentView.addSubview(typeIcon)
         self.contentView.addSubview(titleLB)
         self.contentView.addSubview(deleteBut)
         self.contentView.addSubview(teamView)
