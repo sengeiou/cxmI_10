@@ -16,7 +16,7 @@ class FootballBetInfoModel : HandyJSON{
     
     var maxLotteryMoney: Double!
     var betCells: [BetCellModel]!
-    var betNum: Double!
+    var betNum: Int!
     var betType: String!
     var lotteryPrints: [LotteryPrintsModel]!
     var maxBonus: String!

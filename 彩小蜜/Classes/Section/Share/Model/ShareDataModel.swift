@@ -45,7 +45,7 @@ class ShareDataManager {
         weixin.iconPic = "微信"
         weixin.shareCode = .ShareWeixin
         var copy = ShareDataModel()
-        copy.title = "复制连接"
+        copy.title = "复制链接"
         copy.iconPic = "复制"
         copy.shareCode = .ShareLink
         

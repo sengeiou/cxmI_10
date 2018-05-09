@@ -74,7 +74,7 @@ class ShareViewController: BasePopViewController, UICollectionViewDelegate, UICo
         guard self.shareContent.urlStr != nil else { return }
         let paseboard = UIPasteboard.general
         paseboard.string = self.shareContent.urlStr
-        showHUD(message: "复制连接成功")
+        showHUD(message: "复制链接成功")
     }
     
     // MARK: - 分享 delegate

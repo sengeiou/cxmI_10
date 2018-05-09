@@ -483,7 +483,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     
     // MARK: ITEM 选择 delegate
     func select(teamInfo: FootballPlayListModel) {
-        guard selectPlayList != nil else { return }
+        guard selectPlays != nil else { return }
         
         //selectPlayList.append(teamInfo)
         selectPlays.insert(teamInfo)
@@ -491,7 +491,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     func deSelect(teamInfo: FootballPlayListModel) {
-        guard selectPlayList != nil else { return }
+        guard selectPlays != nil else { return }
         //selectPlayList.remove(teamInfo)
         selectPlays.remove(teamInfo)
         self.resetDanState()
@@ -529,9 +529,8 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
 //            view.backSelected()
 //            showHUD(message: "最多可选15场比赛")
             return }
-        guard selectPlayList != nil else { return }
-        selectPlayList.append(teamInfo)
-        
+        guard selectPlays != nil else { return }
+        selectPlays.insert(teamInfo)
         
         self.resetDanState()
     }
@@ -546,8 +545,8 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         }
         guard canRemove == true  else { return }
         
-        guard selectPlayList != nil else { return }
-        selectPlayList.remove(teamInfo)
+        guard selectPlays != nil else { return }
+        selectPlays.remove(teamInfo)
         
         self.resetDanState()
     }
@@ -698,7 +697,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         present(score)
     }
     
-    
+    // MARK: - 二选一
     func didSelectedTwoOneView(view: FootballTwoOneView, teamInfo: FootballPlayListModel) {
 //        guard teamInfo.matchPlays[0].homeCell.isSelected == false else { return }
 //        guard teamInfo.matchPlays[0].visitingCell.isSelected == false else { return }
@@ -720,17 +719,17 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
 //            view.backSelectedState()
 //            showHUD(message: "最多可选15场比赛")
             return }
-        guard selectPlayList != nil else { return }
-        selectPlayList.append(teamInfo)
+        guard selectPlays != nil else { return }
         
+        selectPlays.insert(teamInfo)
         self.resetDanState()
     }
     
     func didDeSelectedTwoOneView(view: FootballTwoOneView, teamInfo: FootballPlayListModel) {
         guard teamInfo.matchPlays[0].homeCell.isSelected == false else { return }
         guard teamInfo.matchPlays[0].visitingCell.isSelected == false else { return }
-        guard selectPlayList != nil else { return }
-        selectPlayList.remove(teamInfo)
+        guard selectPlays != nil else { return }
+        selectPlays.remove(teamInfo)
         
         self.resetDanState()
     }
