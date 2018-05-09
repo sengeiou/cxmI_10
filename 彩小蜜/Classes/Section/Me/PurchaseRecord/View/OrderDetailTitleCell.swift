@@ -23,6 +23,8 @@ class OrderDetailTitleCell: UITableViewCell {
             let record = NSMutableAttributedString()
             var resultStr = ""
             var ruleStr = ""
+            
+            var i = 1
             for result in matchInfo.cathecticResults {
                 for cath in result.cathectics {
                     let color : UIColor!
@@ -31,14 +33,21 @@ class OrderDetailTitleCell: UITableViewCell {
                     }else {
                         color = Color505050
                     }
-                   let cathectic = cath.cathectic.replacingOccurrences(of: "null", with: "")
-            
-                    let rec = NSAttributedString(string: cathectic + "\n", attributes: [NSAttributedStringKey.foregroundColor: color])
-                    
-                    record.append(rec)
+                    let cathectic = cath.cathectic.replacingOccurrences(of: "null", with: "")
+                    if i == matchInfo.cathecticResults.count {
+                        let rec = NSAttributedString(string: cathectic, attributes: [NSAttributedStringKey.foregroundColor: color])
+                        
+                        record.append(rec)
+                    }else {
+                        let rec = NSAttributedString(string: cathectic + "\n", attributes: [NSAttributedStringKey.foregroundColor: color])
+                        
+                        record.append(rec)
+                    }
                 }
                 resultStr += result.matchResult + "\n"
                 ruleStr += result.playType + "\n"
+                
+                i += 1
             }
             if ruleStr != "" {
                 ruleStr.removeLast()
@@ -47,6 +56,7 @@ class OrderDetailTitleCell: UITableViewCell {
             if resultStr != "" {
                 resultStr.removeLast()
             }
+            
             
             nameLB.text = "\(homeMatch)\nVS\n\(viMatch)"
             
@@ -200,8 +210,7 @@ class OrderDetailTitleCell: UITableViewCell {
         }
         
         recordLB.snp.makeConstraints { (make) in
-            make.top.equalTo(timeTitle.snp.bottom).offset(11 * defaultScale)
-            make.bottom.equalTo(self.contentView).offset(-11 * defaultScale)
+            make.top.height.equalTo(timeLB)
             make.width.equalTo(OrderDetailTitleWidth)
             make.right.equalTo(resultLB.snp.left).offset(-1)
         }
@@ -228,6 +237,7 @@ class OrderDetailTitleCell: UITableViewCell {
         lab.font = Font12
         lab.textColor = Color505050
         lab.textAlignment = .center
+        //lab.backgroundColor = ColorEA5504
         return lab
     }
     

@@ -30,6 +30,7 @@ class OrderDetailCell: UITableViewCell {
             let record = NSMutableAttributedString()
             var resultStr = ""
             var ruleStr = ""
+            var i = 1
             for result in matchInfo.cathecticResults {
                 for cath in result.cathectics {
                     let color : UIColor!
@@ -39,12 +40,19 @@ class OrderDetailCell: UITableViewCell {
                         color = Color505050
                     }
                     
-                    let rec = NSAttributedString(string: cath.cathectic + "\n", attributes: [NSAttributedStringKey.foregroundColor: color])
-                    
-                    record.append(rec)
+                    if i == matchInfo.cathecticResults.count {
+                        let rec = NSAttributedString(string: cath.cathectic, attributes: [NSAttributedStringKey.foregroundColor: color])
+                        
+                        record.append(rec)
+                    }else {
+                        let rec = NSAttributedString(string: cath.cathectic + "\n", attributes: [NSAttributedStringKey.foregroundColor: color])
+                        
+                        record.append(rec)
+                    }
                 }
                 resultStr += result.matchResult + "\n"
                 ruleStr += result.playType + "\n"
+                i += 1
             }
             
             recordLB.attributedText = record
