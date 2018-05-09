@@ -158,6 +158,8 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
                         self.canPayment = true
                     }
                     self.dismissProgressHud()
+                case "304037":
+                    self.showHUD(message: data.msg)
                 case "304036":
                     break
                     

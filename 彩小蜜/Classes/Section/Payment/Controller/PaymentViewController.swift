@@ -212,6 +212,8 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
                         self.canPayment = true
                     }
                     SVProgressHUD.dismiss()
+                case "304037":
+                    self.showHUD(message: data.msg)
                 case "304036":
                     break
                     
@@ -420,7 +422,10 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
             if indexPath.row == 2 {
-                guard self.saveBetInfo != nil, self.saveBetInfo.bonusList.isEmpty == false else { return }
+                guard self.saveBetInfo != nil, self.saveBetInfo.bonusList.isEmpty == false else {
+                    guard self.selectedIndex != nil else { return }
+                    tableView.selectRow(at: self.selectedIndex, animated: true, scrollPosition: .none)
+                    return }
                 let coupon = CouponFilterViewController()
                 coupon.delegate = self
                 coupon.bonusList = self.saveBetInfo.bonusList
