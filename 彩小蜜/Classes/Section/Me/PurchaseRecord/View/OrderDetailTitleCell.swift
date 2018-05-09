@@ -182,7 +182,7 @@ class OrderDetailTitleCell: UITableViewCell {
         
         timeLB.snp.makeConstraints { (make) in
             make.top.equalTo(timeTitle.snp.bottom).offset(11 * defaultScale)
-            make.bottom.equalTo(self.contentView).offset(-11)
+            make.bottom.equalTo(self.contentView).offset(-11 * defaultScale)
             make.width.equalTo(timeTitle)
             make.left.equalTo(self.contentView).offset(leftSpacing)
         }
@@ -201,7 +201,7 @@ class OrderDetailTitleCell: UITableViewCell {
         
         recordLB.snp.makeConstraints { (make) in
             make.top.equalTo(timeTitle.snp.bottom).offset(11 * defaultScale)
-            make.bottom.equalTo(self.contentView).offset(-5 * defaultScale)
+            make.bottom.equalTo(self.contentView).offset(-11 * defaultScale)
             make.width.equalTo(OrderDetailTitleWidth)
             make.right.equalTo(resultLB.snp.left).offset(-1)
         }

@@ -138,14 +138,14 @@ class OrderDetailCell: UITableViewCell {
         
         recordLB.snp.makeConstraints { (make) in
             make.top.equalTo(line.snp.bottom).offset(11 * defaultScale)
-            make.bottom.equalTo(self.contentView).offset(-5 * defaultScale)
+            make.bottom.equalTo(self.contentView).offset(-11 * defaultScale)
             make.width.equalTo(OrderDetailTitleWidth)
             make.right.equalTo(resultLB.snp.left).offset(-1)
         }
         
         resultLB.snp.makeConstraints { (make) in
             make.top.height.equalTo(recordLB)
-             make.width.equalTo(OrderDetailTitleWidth - 30)
+            make.width.equalTo(OrderDetailTitleWidth - 30)
             make.right.equalTo(self.contentView).offset(-26)
         }
         
