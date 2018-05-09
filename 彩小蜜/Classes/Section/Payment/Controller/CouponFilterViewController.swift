@@ -168,7 +168,8 @@ class CouponFilterViewController: BasePopViewController, UITableViewDelegate, UI
     }
     
     // MARK: - 点击事件
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+  
+    @objc public override func backPopVC() {
         
     }
     

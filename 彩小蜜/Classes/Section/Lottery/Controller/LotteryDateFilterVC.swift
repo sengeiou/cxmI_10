@@ -151,10 +151,11 @@ class LotteryDateFilterVC: BasePopViewController, UITableViewDelegate, UITableVi
     @objc private func backButClicked(_ sender: UIButton) {
         self.dismiss(animated: true , completion: nil )
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+  
+    @objc public override func backPopVC() {
         
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         

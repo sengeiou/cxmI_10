@@ -14,7 +14,7 @@ class NewsBottomView: UIView {
     public var newsInfo : NewsInfoModel! {
         didSet{
             guard newsInfo != nil else { return }
-            titleLb.text = newsInfo.extendCat
+            titleLb.text = newsInfo.author
             timeLb.text = newsInfo.addTime
             if newsInfo.clickNumber != nil {
                 readNumLb.text = "阅读\(newsInfo.clickNumber!)"
@@ -66,7 +66,7 @@ class NewsBottomView: UIView {
     private func getLabel(_ title : String) -> UILabel {
         let lab = UILabel()
         lab.font = Font12
-        lab.text = title
+        //lab.text = title
         lab.textColor = Color9F9F9F
         lab.textAlignment = .left
         

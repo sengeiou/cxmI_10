@@ -176,9 +176,10 @@ class FootballPlayFilterVC: BasePopViewController, FootballFilterBottomViewDeleg
         }
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    @objc public override func backPopVC() {
         self.filterCancel()
     }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

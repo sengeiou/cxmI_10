@@ -234,7 +234,7 @@ class FootballScoreFilterVC: BasePopViewController, BottomViewDelegate, Football
         }
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    @objc public override func backPopVC() {
         
     }
     
