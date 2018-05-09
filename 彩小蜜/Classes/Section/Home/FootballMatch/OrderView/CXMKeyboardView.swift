@@ -80,13 +80,15 @@ class CXMKeyboardView: UIView {
                
                 
                 item.frame = CGRect(x: CGFloat(ind) * itemWidth + 0.1, y: CGFloat(index) * itemHeight + 0.1, width: itemWidth, height: itemHeight)
-
+                
                 if i == 10 {
                     item.tag = 0
                     item.setTitle("\(item.tag)", for: .normal)
                 }else if i == 11 {
+                    item.tag = i
                     item.setTitle("", for: .normal)
                 }else if i == 12 {
+                    item.tag = i
                     item.setTitle("", for: .normal)
                 }else {
                     item.tag = i
@@ -119,6 +121,7 @@ class CXMKeyboardView: UIView {
         delegate.keyboardConfirm()
     }
     @objc private func didTipItem(_ sender: UIButton) {
+        guard sender.tag != 11, sender.tag != 12 else { return }
         guard delegate != nil else { return }
         delegate.keyboardDidTipItem(num: "\(sender.tag)")
     }
