@@ -72,34 +72,32 @@ class ForgetPswVCodeVC: BaseViewController, UITextFieldDelegate, ValidatePro,Cus
         _ = loginProvider.rx.request(.updatePass(mobile: self.phoneNum, password: self.passwordTF.text!))
             .asObservable()
             .mapBaseObject(type: DataModel.self)
-            .subscribe({ (event) in
+            .subscribe(onNext: { (data) in
                 self.dismissProgressHud()
-                switch event {
-                case .next(let data):
-                    if let code = Int(data.code) {
-                        switch code {
-                        case 0:
-                            self.showHUD(message: data.msg)
-                        default:
-                            break
-                        }
-                        
-                        if 300000...310000 ~= code {
-                            self.showHUD(message: data.msg)
-                        }
+                if let code = Int(data.code) {
+                    switch code {
+                    case 0:
+                        self.showHUD(message: data.msg)
+                    default:
+                        break
                     }
-                case .error(let error):
-                    guard let hxError = error as? HXError else { return }
-                    switch hxError {
-                    case .UnexpectedResult(_, let resultMsg):
-                        self.showCXMAlert(title: nil, message: resultMsg!, action: "确定", cancel: nil, on: self, confirm: { (action) in
-                            
-                        })
-                    default : break
+                    
+                    if 300000...310000 ~= code {
+                        self.showHUD(message: data.msg)
                     }
-                case .completed : break
                 }
-            })
+            }, onError: { (error) in
+                self.dismissProgressHud()
+                guard let hxError = error as? HXError else { return }
+                switch hxError {
+                case .UnexpectedResult(_, let resultMsg):
+                    self.showCXMAlert(title: nil, message: resultMsg!, action: "确定", cancel: nil, on: self, confirm: { (action) in
+                        
+                    })
+                default : break
+                }
+            }, onCompleted: nil , onDisposed: nil )
+        
     }
     
     private func sendSmsRequest() {
@@ -115,16 +113,6 @@ class ForgetPswVCodeVC: BaseViewController, UITextFieldDelegate, ValidatePro,Cus
                     }
                     if 300000...310000 ~= code{
                         self.showHUD(message: data.msg)
-                        //                            switch code {
-                        //                            case 301010 :
-                        //                                self.showCXMAlert(title: nil, message: data.msg, action: "确定", cancel: nil, confirm: { (action) in
-                        //                                    self.popViewController()
-                        //                                })
-                        //
-                        //
-                        //                            default :
-                        //                                self.showHUD(message: data.msg)
-                        //                            }
                     }
                 }
             }, onError: { (error) in

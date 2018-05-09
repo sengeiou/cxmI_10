@@ -93,12 +93,10 @@ class RegisterViewController: BaseViewController, UITableViewDelegate, UITableVi
     private func registerRequest() {
         self.showProgressHUD()
         _ = loginProvider.rx.request(.register(mobile: self.phoneTF.text!, password: self.passwordTF.text!, vcode: vcodeTF.text!))
-        .asObservable()
-        .mapObject(type: UserDataModel.self)
-        .subscribe { (event) in
-            self.dismissProgressHud()
-            switch event {
-            case .next(let data):
+            .asObservable()
+            .mapObject(type: UserDataModel.self)
+            .subscribe(onNext: { (data) in
+                self.dismissProgressHud()
                 self.showHUD(message: data.showMsg)
                 
                 if self.getUserData() == nil {
@@ -108,7 +106,8 @@ class RegisterViewController: BaseViewController, UITableViewDelegate, UITableVi
                     self.save(userInfo: data)
                     self.popToCurrentVC()
                 }
-            case .error(let error):
+            }, onError: { (error) in
+                self.dismissProgressHud()
                 guard let hxError = error as? HXError else { return }
                 switch hxError {
                 case .UnexpectedResult(_, let resultMsg):
@@ -117,10 +116,7 @@ class RegisterViewController: BaseViewController, UITableViewDelegate, UITableVi
                     })
                 default : break
                 }
-            case .completed:
-                break
-            }
-        }
+            }, onCompleted: nil , onDisposed: nil )
     }
     
     private func sendSmsRequest(_ button : CountdownButton) {
