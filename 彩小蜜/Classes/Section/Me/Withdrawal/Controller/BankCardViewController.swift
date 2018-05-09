@@ -31,11 +31,11 @@ class BankCardViewController: BaseViewController, UITableViewDelegate, UITableVi
                         这张卡为默认收款卡，
                           您确认要删除吗？
                       """
-            showCXMAlert(title: nil , message: str, action: "删除", cancel: nil) { (action) in
+            showCXMAlert(title: nil , message: str, action: "删除", cancel: "返回") { (action) in
                 weakSelf?.deleteBankCardRequest(status: bankInfo.status, cardId: bankInfo.userBankId)
             }
         }else {
-            showCXMAlert(title: nil , message: "请确认删除这张银行卡", action: "删除", cancel: nil) { (action) in
+            showCXMAlert(title: nil , message: "请确认删除这张银行卡", action: "删除", cancel: "返回") { (action) in
                 weakSelf?.deleteBankCardRequest(status: bankInfo.status, cardId: bankInfo.userBankId)
             }
         }

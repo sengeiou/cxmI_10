@@ -109,7 +109,7 @@ class BankCardCell: UITableViewCell {
             make.bottom.equalTo(bgView).offset(-verticalSpacing)
         }
         deleteBut.snp.makeConstraints { (make) in
-            make.height.width.equalTo(BankCardDeleteWidth)
+            make.height.width.equalTo(BankCardDeleteWidth * 3)
             make.right.equalTo(bgView).offset(-7)
             make.top.equalTo(bgView).offset(7)
         }
@@ -153,7 +153,9 @@ class BankCardCell: UITableViewCell {
         bankCardState.addTarget(self, action: #selector(settingDefaultCard(_:)), for: .touchUpInside)
         
         deleteBut = UIButton(type: .custom)
-        deleteBut.setBackgroundImage(UIImage(named: "shut"), for: .normal)
+        //deleteBut.setBackgroundImage(UIImage(named: "shut"), for: .normal)
+        deleteBut.setImage(UIImage(named: "shut"), for: .normal)
+        deleteBut.imageEdgeInsets = UIEdgeInsets(top: 0, left: 28, bottom: 28, right: 0)
         deleteBut.addTarget(self, action: #selector(deleteCard(_:)), for: .touchUpInside)
         
         self.contentView.addSubview(bgView)
