@@ -23,12 +23,13 @@ protocol FootballCollectionViewDelegate {
 let filterTitleWidth : Int = 23
 let filterleftSpacing : Int = 16
 
-
+let HunheFilterTitleWidth: CGFloat = 23
+let HunheFilterleftSpacing: CGFloat = 16
 
 
 fileprivate let FilterCellHeight: CGFloat = 44 * defaultScale
 
-fileprivate let HunheCellHeight : CGFloat = 38 * defaultScale
+let HunheCellHeight : CGFloat = 38
 fileprivate let minimumLineSpacing : CGFloat = 0
 fileprivate let minimumInteritemSpacing : CGFloat = 0
 fileprivate let topInset : CGFloat = 0
@@ -47,6 +48,12 @@ let banquanCellWidth : Int = Int(cellWidth * 40)
 let banquanViewWidth : Int = banquanCellWidth * 3
 
 fileprivate let rightInset : CGFloat = 0
+
+let HunheCollectionViewWidth : CGFloat = screenWidth - HunheFilterleftSpacing * 2 - HunheFilterTitleWidth
+
+let HunheSPFCellWidth: CGFloat = (HunheCollectionViewWidth - 0.3) / 3
+let HunheScoreCellWidth: CGFloat = HunheCollectionViewWidth / 5
+
 
 fileprivate let FootballScoreCollectionCellId = "FootballScoreCollectionCellId"
 
@@ -88,7 +95,7 @@ class FootballCollectionView: UIView , UICollectionViewDelegate, UICollectionVie
         layout.scrollDirection = .vertical
         
         let collection = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        collection.backgroundColor = ColorC8C8C8
+        collection.backgroundColor = ColorFFFFFF
         collection.dataSource = self
         collection.delegate = self
         collection.isScrollEnabled = true
@@ -125,7 +132,7 @@ class FootballCollectionView: UIView , UICollectionViewDelegate, UICollectionVie
         
         switch matchType {
         case .胜平负, .让球胜平负:
-            return CGSize(width: CGFloat(collectionViewWidth / 3) , height: HunheCellHeight)
+            return CGSize(width: CGFloat(HunheSPFCellWidth) , height: HunheCellHeight)
         case .比分:
             switch scoreType {
             case .胜:
@@ -155,24 +162,25 @@ class FootballCollectionView: UIView , UICollectionViewDelegate, UICollectionVie
         case .混合过关:
             switch scoreType {
             case .胜:
-                let width  = Int(collectionViewWidth / 5)
+                print(HunheScoreCellWidth)
+                print(HunheSPFCellWidth)
                 if indexPath.row == 12 {
-                    return CGSize(width: CGFloat(width * 3), height: HunheCellHeight)
+                    return CGSize(width: CGFloat(HunheScoreCellWidth), height: HunheCellHeight)
                 }else {
-                    return CGSize(width: CGFloat(width), height: HunheCellHeight)
+                    return CGSize(width: CGFloat(HunheScoreCellWidth), height: HunheCellHeight)
                 }
             case .平:
-                let width  = Int(collectionViewWidth / 5)
-                return CGSize(width: CGFloat(width), height: HunheCellHeight)
+                
+                return CGSize(width: CGFloat(HunheScoreCellWidth), height: HunheCellHeight)
             case .负:
-                let width  = Int(collectionViewWidth / 5)
+                
                 if indexPath.row == 12 {
-                    return CGSize(width: CGFloat(width * 3), height: HunheCellHeight)
+                    return CGSize(width: CGFloat(HunheScoreCellWidth ), height: HunheCellHeight)
                 }else {
-                    return CGSize(width: CGFloat(width), height: HunheCellHeight)
+                    return CGSize(width: CGFloat(HunheScoreCellWidth), height: HunheCellHeight)
                 }
             case .半全场 :
-                return CGSize(width: CGFloat(collectionViewWidth / 3), height: HunheCellHeight)
+                return CGSize(width: CGFloat(HunheSPFCellWidth), height: HunheCellHeight)
             }
         default: return CGSize(width: 0, height: 0)
             

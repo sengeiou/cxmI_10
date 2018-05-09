@@ -23,7 +23,9 @@ class WithdrawalViewController: BaseViewController {
             showHUD(message: "请输入提现金额")
             return }
         
-        guard let drawAmount = Double(draw) else { return }
+        guard let drawAmount = Double(draw) else {
+            showHUD(message: "请输入提现金额")
+            return }
         guard let amount = Double(drawDataModel.userMoney) else { return }
         guard drawAmount <= amount else {
             showHUD(message: "您输入的金额已超过可提现金额")
@@ -81,7 +83,7 @@ class WithdrawalViewController: BaseViewController {
             .asObservable()
             .mapBaseObject(type: DataModel.self )
             .subscribe(onNext: { (data) in
-                
+                self.dismissProgressHud()
                 if let code = Int(data.code) {
                     switch code {
                     case 0:
@@ -128,8 +130,8 @@ class WithdrawalViewController: BaseViewController {
         self.showProgressHUD()
         weak var weakSelf = self
         _ = userProvider.rx.request(.withDrawDataShow)
-        .asObservable()
-        .mapObject(type: WithDrawDataModel.self)
+            .asObservable()
+            .mapObject(type: WithDrawDataModel.self)
             .subscribe(onNext: { (data) in
                 self.dismissProgressHud()
                 weakSelf?.drawDataModel = data

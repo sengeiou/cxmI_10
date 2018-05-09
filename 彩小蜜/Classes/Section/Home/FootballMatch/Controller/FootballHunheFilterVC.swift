@@ -180,18 +180,19 @@ class FootballHunheFilterVC: BasePopViewController, BottomViewDelegate, Football
         super.viewDidLayoutSubviews()
         topTitleView.snp.makeConstraints { (make) in
             make.top.left.right.equalTo(0)
-            make.height.equalTo(40 * defaultScale)
+            make.height.equalTo(40 )
         }
         bottomView.snp.makeConstraints { (make) in
             make.bottom.equalTo(-SafeAreaBottomHeight)
-            make.height.equalTo(36 * defaultScale)
+            make.height.equalTo(36 )
             make.left.right.equalTo(0)
         }
+        
         SPFTitlelb.snp.makeConstraints { (make) in
             make.top.equalTo(topTitleView.snp.bottom)
-            make.left.equalTo(filterleftSpacing)
-            make.width.equalTo(filterTitleWidth)
-            make.height.equalTo(38 * defaultScale)
+            make.left.equalTo(HunheFilterleftSpacing)
+            make.width.equalTo(HunheFilterTitleWidth)
+            make.height.equalTo(38 )
         }
         rangSPFTitlelb.snp.makeConstraints { (make) in
             make.top.equalTo(SPFTitlelb.snp.bottom)
@@ -200,22 +201,23 @@ class FootballHunheFilterVC: BasePopViewController, BottomViewDelegate, Football
         scoreTitlelb.snp.makeConstraints { (make) in
             make.top.equalTo(rangSPFTitlelb.snp.bottom).offset(8 * defaultScale)
             make.left.width.equalTo(SPFTitlelb)
-            make.height.equalTo(266 * defaultScale)
+            make.height.equalTo(HunheCellHeight * 7)
         }
         totalTitlelb.snp.makeConstraints { (make) in
             make.top.equalTo(scoreTitlelb.snp.bottom).offset(8 * defaultScale)
             make.left.width.equalTo(SPFTitlelb)
-            make.height.equalTo(38 * defaultScale)
+            make.height.equalTo(38 )
         }
         banquanTitlelb.snp.makeConstraints { (make) in
             make.top.equalTo(totalTitlelb.snp.bottom).offset(8 * defaultScale)
             make.left.width.equalTo(SPFTitlelb)
-            make.height.equalTo(114 * defaultScale)
+            make.height.equalTo(114 )
         }
         SPFView.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(SPFTitlelb)
             make.left.equalTo(SPFTitlelb.snp.right)
-            make.width.equalTo(collectionViewWidth)
+            //make.width.equalTo(collectionViewWidth)
+            make.right.equalTo(-HunheFilterleftSpacing)
         }
         rangSPFView.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(rangSPFTitlelb)
@@ -225,19 +227,20 @@ class FootballHunheFilterVC: BasePopViewController, BottomViewDelegate, Football
         scoreHomeView.snp.makeConstraints { (make) in
             make.top.equalTo(scoreTitlelb)
             make.left.equalTo(scoreTitlelb.snp.right)
-            make.right.equalTo(SPFView)
+            make.height.equalTo(HunheCellHeight * 3)
+            make.right.equalTo(-HunheFilterleftSpacing)
         }
         scoreFlatView.snp.makeConstraints { (make) in
             make.top.equalTo(scoreHomeView.snp.bottom)
-            make.height.equalTo(38 * defaultScale)
+            make.height.equalTo(HunheCellHeight)
             make.left.equalTo(scoreHomeView)
-            make.right.equalTo(scoreHomeView)
+            make.right.equalTo(SPFView)
         }
         scoreVisiView.snp.makeConstraints { (make) in
             make.top.equalTo(scoreFlatView.snp.bottom)
-            make.left.right.equalTo(scoreHomeView)
+            make.left.equalTo(scoreHomeView)
+            make.right.equalTo(scoreHomeView)
             make.height.equalTo(scoreHomeView)
-            make.bottom.equalTo(scoreTitlelb)
         }
         totalView.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(totalTitlelb)
@@ -253,7 +256,7 @@ class FootballHunheFilterVC: BasePopViewController, BottomViewDelegate, Football
     
     // MARK: - 初始化子视图
     private func initSubview() {
-        self.viewHeight = 621 * defaultScale
+        self.viewHeight = 621
         
         topTitleView = TopTitleView()
         bottomView = BottomView()

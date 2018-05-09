@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Reachability
+
 
 let NotificationConfig = "NotificationConfigName"
 let TurnOn = "TurnOn"
@@ -24,16 +26,31 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
         self.tabBar.backgroundColor = ColorFFFFFF
         self.tabBar.barTintColor = ColorFFFFFF
         
-        let TabBarLine = UITabBar.appearance()
-//        TabBarLine.shadowImage = UIImage()
-//        TabBarLine.backgroundImage = UIImage()
-        
-        
-        self.tabBar.shadowImage = UIImage(named : "line")
+        self.tabBar.shadowImage = UIImage(named : "line1")
         self.tabBar.backgroundImage = UIImage()
         self.delegate = self
         creatSubViewControllers(false)
-        configRequest()
+        
+        guard getUserData() != nil else {
+            configRequest()
+            return }
+        
+        if let reachability = Reachability() {
+            do {
+                try reachability.startNotifier()
+            } catch {
+                print("Unable to start notifier")
+            }
+            
+            reachability.whenReachable = { reachability in
+                self.configRequest()
+            }
+            reachability.whenUnreachable = { _ in
+                
+            }
+        }
+        
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {

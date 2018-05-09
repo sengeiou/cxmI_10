@@ -96,7 +96,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
             guard newsList != nil else { return }
             
             loadNewData()
-            //homeListAddNewsRequest(pageNum: 1)
+//            homeListAddNewsRequest(pageNum: 1)
         }
     }
     
@@ -121,6 +121,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
             self.loadNextData()
         }
         getRealmData()
+        
     }
     
     private func getRealmData() {
@@ -158,6 +159,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     
     //MARK: - 加载数据
     private func loadNewData() {
+        //configRequest()
         homeListAddNewsRequest(pageNum: 1)
     }
     private func loadNextData() {
