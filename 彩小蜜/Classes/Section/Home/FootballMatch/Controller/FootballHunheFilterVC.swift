@@ -417,7 +417,18 @@ class FootballHunheFilterVC: BasePopViewController, BottomViewDelegate, Football
     @objc public override func backPopVC() {
         
     }
-    
+    override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if touch.view !== self.SPFView ||
+            touch.view !== self.rangSPFView ||
+            touch.view !== self.scoreHomeView ||
+            touch.view !== self.scoreFlatView ||
+            touch.view !== self.scoreVisiView ||
+            touch.view !== self.totalView ||
+            touch.view !== self.banquanView {
+            return false
+        }
+        return true
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

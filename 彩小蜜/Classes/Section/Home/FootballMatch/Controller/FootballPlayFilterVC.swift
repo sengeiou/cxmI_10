@@ -180,6 +180,12 @@ class FootballPlayFilterVC: BasePopViewController, FootballFilterBottomViewDeleg
         self.filterCancel()
     }
     
+    override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if touch.view !== self.collectionView {
+            return false
+        }
+        return true
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

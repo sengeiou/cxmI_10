@@ -162,8 +162,6 @@ class FootballCollectionView: UIView , UICollectionViewDelegate, UICollectionVie
         case .混合过关:
             switch scoreType {
             case .胜:
-                print(HunheScoreCellWidth)
-                print(HunheSPFCellWidth)
                 if indexPath.row == 12 {
                     return CGSize(width: CGFloat(HunheScoreCellWidth), height: HunheCellHeight)
                 }else {

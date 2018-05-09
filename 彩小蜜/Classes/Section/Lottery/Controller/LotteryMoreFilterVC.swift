@@ -378,6 +378,13 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
     @objc public override func backPopVC() {
         
     }
+    
+    override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if touch.view !== self.collectionView {
+            return false
+        }
+        return true
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         

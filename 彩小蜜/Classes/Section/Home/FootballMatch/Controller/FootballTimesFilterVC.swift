@@ -204,4 +204,9 @@ class FootballTimesFilterVC: BasePopViewController, UITextFieldDelegate, CXMKeyb
         dismiss(animated: true, completion: nil)
     }
 
+    override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+
+        return true
+    }
+    
 }

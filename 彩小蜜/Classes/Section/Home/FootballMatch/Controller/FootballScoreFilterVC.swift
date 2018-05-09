@@ -237,6 +237,13 @@ class FootballScoreFilterVC: BasePopViewController, BottomViewDelegate, Football
     @objc public override func backPopVC() {
         
     }
+    override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if touch.view !== self.shengScoreView || touch.view !== self.pingScoreView || touch.view !== self.fuScoreView {
+            return false
+        }
+        return true
+    }
+   
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

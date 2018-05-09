@@ -16,7 +16,7 @@ enum PopViewStyle {
     case fromTop
 }
 
-class BasePopViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, UserInfoPro {
+class BasePopViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, UserInfoPro, UIGestureRecognizerDelegate {
 
     public var popStyle : PopViewStyle = .fromCenter{
         didSet{
@@ -45,7 +45,7 @@ class BasePopViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, 
         }
     }
     public var pushBgView : UIView!
-    
+    public var tap : UITapGestureRecognizer!
     private var emptyTitle: String!
     
     public func setEmpty(title: String, _ tableView: UITableView) {
@@ -66,9 +66,16 @@ class BasePopViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, 
         initPushBgView()
         
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(backPopVC))
-        
+        tap = UITapGestureRecognizer(target: self, action: #selector(backPopVC))
+        tap.delegate = self
         self.view.addGestureRecognizer(tap)
+        
+    }
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if NSStringFromClass((touch.view?.classForCoder)!) == "UITableViewCellContentView" {
+            return false
+        }
+        return true
     }
     
     @objc public func backPopVC() {

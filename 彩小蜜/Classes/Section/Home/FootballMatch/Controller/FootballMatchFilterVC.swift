@@ -256,7 +256,12 @@ class FootballMatchFilterVC: BasePopViewController, UICollectionViewDelegate, UI
     @objc public override func backPopVC() {
         //self.dismiss(animated: true, completion: nil)
     }
-    
+    override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if touch.view !== self.collectionView {
+            return false
+        }
+        return true
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
