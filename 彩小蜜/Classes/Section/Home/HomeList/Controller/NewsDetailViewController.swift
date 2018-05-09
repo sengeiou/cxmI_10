@@ -176,6 +176,8 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
                 switch err {
                 case .UnexpectedResult(let code, let msg):
                     switch code {
+                    case 0:
+                        weakSelf?.showHUD(message: msg!)
                     case 600:
                         weakSelf?.removeUserData()
                         weakSelf?.pushLoginVC(from: self)
@@ -202,6 +204,8 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
                 switch err {
                 case .UnexpectedResult(let code, let msg):
                     switch code {
+                    case 0:
+                        weakSelf?.showHUD(message: msg!)
                     case 600:
                         weakSelf?.removeUserData()
                         weakSelf?.pushLoginVC(from: self)

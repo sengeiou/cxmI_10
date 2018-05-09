@@ -69,7 +69,7 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
     
     func recharge() {
         guard validate(.number, str: self.cardCell.textfield.text) else {
-            showHUD(message: "请输入正确的金额")
+            showHUD(message: "请输入整数的充值金额")
             return
         }
         maxTimes = 20
@@ -78,6 +78,8 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+       
         
         if let tex = textField as? CustomTextField {
             tex.changeBorderColor(string)

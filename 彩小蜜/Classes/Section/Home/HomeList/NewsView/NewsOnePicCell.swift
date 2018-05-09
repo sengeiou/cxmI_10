@@ -28,6 +28,7 @@ class NewsOnePicCell: UITableViewCell {
                 guard newsInfo.articleThumb.count == 1 else { return }
                 guard let url = URL(string: newsInfo.articleThumb[0]) else { return }
                 icon.kf.setImage(with: url)
+                //uploadFiles/uploadImgs/20180509/5bd9485354f14941a976ec6f39fd9ef5.png
                 videoIcon.isHidden = true
             }
         }
