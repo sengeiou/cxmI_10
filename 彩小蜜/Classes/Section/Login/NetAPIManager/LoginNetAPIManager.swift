@@ -18,7 +18,7 @@ enum LoginNetAPIManager {
     case register (mobile: String, password: String, vcode: String)
     case resetPass
     case validateMobile (mobile: String)
-    case updatePass (mobile: String, password: String)
+    case updatePass (mobile: String, password: String, smsCode: String)
     /// smsType: 短信类型:0-短信登录验证码 1-注册验证码 2-忘记密码验证码
     case sendSms (mobile: String, smsType: String)
 
@@ -92,9 +92,10 @@ extension LoginNetAPIManager: TargetType {
             dic["loginSource"] = "2"
         case .validateMobile(let mobile ):
             dic["mobileNumber"] = mobile
-        case .updatePass(let mobile, let password):
+        case .updatePass(let mobile, let password, let vCode):
             dic["mobileNumber"] = mobile
             dic["userLoginPass"] = password
+            dic["smsCode"] = vCode
         case .sendSms(let mobile, let smsType):
             dic["mobile"] = mobile
             dic["smsType"] = smsType

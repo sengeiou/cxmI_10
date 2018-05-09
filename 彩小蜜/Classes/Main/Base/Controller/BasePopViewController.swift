@@ -78,7 +78,9 @@ class BasePopViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, 
         pushBgView.snp.makeConstraints { (make) in
             make.centerX.equalTo(self.view.snp.centerX)
             make.centerY.equalTo(self.view.snp.centerY)
-            make.width.equalTo(326 * defaultScale)
+            //make.width.equalTo(326 * defaultScale)
+            make.left.equalTo(20)
+            make.right.equalTo(-20)
             make.height.equalTo(height)
         }
     }

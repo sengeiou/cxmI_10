@@ -16,6 +16,7 @@ class ForgetPswVCodeVC: BaseViewController, UITextFieldDelegate, ValidatePro,Cus
     
     //MARK: - 点击事件
     @objc private func confirmButClicked(_ sender: UIButton) {
+       
         guard validate(.password, str: self.passwordTF.text) == true else {
             showHUD(message: "请输入6-20位的密码")
             return }
@@ -69,7 +70,7 @@ class ForgetPswVCodeVC: BaseViewController, UITextFieldDelegate, ValidatePro,Cus
     //MARK: - 网络请求
     private func updatePassRequest() {
         self.showProgressHUD()
-        _ = loginProvider.rx.request(.updatePass(mobile: self.phoneNum, password: self.passwordTF.text!))
+        _ = loginProvider.rx.request(.updatePass(mobile: self.phoneNum, password: self.passwordTF.text!, smsCode: self.vcodeTF.text! ))
             .asObservable()
             .mapBaseObject(type: DataModel.self)
             .subscribe(onNext: { (data) in
@@ -78,6 +79,7 @@ class ForgetPswVCodeVC: BaseViewController, UITextFieldDelegate, ValidatePro,Cus
                     switch code {
                     case 0:
                         self.showHUD(message: data.msg)
+                        self.popToLoginViewController()
                     default:
                         break
                     }

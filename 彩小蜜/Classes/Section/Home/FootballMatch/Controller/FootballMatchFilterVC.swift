@@ -14,7 +14,7 @@ fileprivate let minimumLineSpacing : CGFloat = 12
 fileprivate let minimumInteritemSpacing : CGFloat = 9
 fileprivate let topInset : CGFloat = 10
 fileprivate let leftInset: CGFloat = 0
-fileprivate let FilterCellWidth : CGFloat = ((326 * defaultScale) - (10 * 2 * defaultScale) - (minimumInteritemSpacing * 2 * defaultScale) - 1) / 3
+fileprivate let FilterCellWidth : CGFloat = (screenWidth - 20 * 2 - 10 * 2 - minimumLineSpacing * 2) / 3
 
 fileprivate let FootballFilterCellId = "FootballFilterCellId"
 
@@ -92,8 +92,8 @@ class FootballMatchFilterVC: BasePopViewController, UICollectionViewDelegate, UI
         collectionView.snp.makeConstraints { (make) in
             make.top.equalTo(topView.snp.bottom)
             make.bottom.equalTo(bottomView.snp.top)
-            make.left.equalTo(10 * defaultScale)
-            make.right.equalTo(-10 * defaultScale)
+            make.left.equalTo(10)
+            make.right.equalTo(-10)
         }
         bottomView.snp.makeConstraints { (make) in
             make.bottom.equalTo(0)
