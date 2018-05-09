@@ -25,6 +25,13 @@ class LotteryCell: UITableViewCell {
                 }
                 resultlb.text = "半场 " + resultModel.firstHalf + " 总比分" + resultModel.whole
             }
+            guard resultModel.homeTeamLogo != nil, resultModel.visitingTeamLogo != nil else { return }
+            if let url = URL(string: resultModel.homeTeamLogo) {
+                homeTeamIcon.kf.setImage(with: url)
+            }
+            if let url = URL(string: resultModel.homeTeamLogo) {
+                visiTeamIcon.kf.setImage(with: url)
+            }
         }
     }
     

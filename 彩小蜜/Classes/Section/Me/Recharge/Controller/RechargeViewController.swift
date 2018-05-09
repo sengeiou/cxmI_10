@@ -41,16 +41,18 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
         initSubview()
         allPaymentRequest()
         
-        timer = Timer(timeInterval: 3, target: self, selector: #selector(pollingStart), userInfo: nil, repeats: true)
         
+        timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(pollingStart), userInfo: nil, repeats: true)
+        //timer.invalidate()
+        timer.fire()
+        timer.fireDate = Date.distantFuture
         NotificationCenter.default.addObserver(self, selector: #selector(startPollingTimer), name: NSNotification.Name(rawValue: NotificationWillEnterForeground), object: nil)
     }
     
     //MARK: - 点击事件
     @objc private func startPollingTimer() {
         if canPayment == false {
-            timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(pollingStart), userInfo: nil, repeats: true)
-            timer.fire()
+            timer.fireDate = Date.distantPast
         }
     }
     // 轮询
@@ -169,6 +171,7 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
                 case "304037":
                     self.showHUD(message: data.msg)
                 case "304036":
+                    
                     break
                     
                 default: break
@@ -395,9 +398,21 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
         self.textfield.resignFirstResponder()
     }
     
-    override func back(_ sender: UIButton) {
+    deinit {
+        NotificationCenter.default.removeObserver(self)
         timer.invalidate()
         timer = nil
+        
+    }
+    
+    override func back(_ sender: UIButton) {
+        NotificationCenter.default.removeObserver(self)
+        if timer != nil {
+            timer.invalidate()
+            timer = nil
+        }
+        
+        
         self.dismissProgressHud()
         self.popViewController()
     }

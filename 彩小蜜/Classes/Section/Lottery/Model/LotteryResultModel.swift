@@ -17,6 +17,7 @@ struct LotteryResultModel : HandyJSON {
     var homeTeamAbbr: String!
     var homeTeamId: String!
     var homeTeamName: String!
+    var homeTeamLogo: String!
     var leagueAddr: String!
     var leagueName: String!
     var matchId : String!
@@ -28,5 +29,6 @@ struct LotteryResultModel : HandyJSON {
     var visitingTeamAbbr: String!
     var visitingTeamId : String!
     var visitingTeamName: String!
+    var visitingTeamLogo: String!
     var whole : String!
 }
