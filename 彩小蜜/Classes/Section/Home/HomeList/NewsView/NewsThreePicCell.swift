@@ -55,11 +55,12 @@ class NewsThreePicCell: UITableViewCell {
         bottomView = NewsBottomView()
         
         picOne = UIImageView()
-        picOne.image = UIImage(named: "Racecolorfootball")
+        
+        //picOne.image = UIImage(named: "Racecolorfootball")
         picTwo = UIImageView()
-        picTwo.image = UIImage(named: "Racecolorfootball")
+        //picTwo.image = UIImage(named: "Racecolorfootball")
         picThree = UIImageView()
-        picThree.image = UIImage(named: "Racecolorfootball")
+        //picThree.image = UIImage(named: "Racecolorfootball")
         
         bottomLine = UIView()
         bottomLine.backgroundColor = ColorC8C8C8

@@ -89,7 +89,7 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
                 case .UnexpectedResult(let code, let resultMsg) :
                     if 300000...310000 ~= code {
                         if code == 301016, let resultMsg = resultMsg {
-                            self.showHUD(message: resultMsg)
+                            self.showHUD(message: resultMsg)// 输入正确的验证码
                         }else {
                             self.showCXMAlert(title: nil, message: resultMsg!, action: "确定", cancel: nil, on: self, confirm: { (action) in
                                 

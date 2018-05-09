@@ -74,15 +74,15 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                 guard homeData != nil, let activity = self.homeData.activity else { return }
                 pushRouterVC(urlStr: activity.actUrl, from: self)
             case 3:
-//                let web = NewsDetailViewController()
-//                web.articleId = self.newsList[indexPath.row].articleId
-//                pushViewController(vc: web)
+                let web = NewsDetailViewController()
+                web.articleId = self.newsList[indexPath.row].articleId
+                pushViewController(vc: web)
                 
                 // 测试web 传入Token
-                let web = WebViewController()
-
-                web.urlStr = "http://192.168.1.150:8080/#/user/activity"
-                pushViewController(vc: web)
+//                let web = WebViewController()
+//
+//                web.urlStr = "http://192.168.1.150:8080/#/user/activity"
+//                pushViewController(vc: web)
             default: break
             }
         }
