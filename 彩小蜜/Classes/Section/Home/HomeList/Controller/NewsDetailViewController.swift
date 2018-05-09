@@ -44,7 +44,7 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "彩小秘 · 资讯"
+        self.title = "彩小秘 · 资讯详情"
         newsDetailRequest()
         setRightItem()
         initSubview()

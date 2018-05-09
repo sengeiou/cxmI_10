@@ -26,6 +26,7 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
     public var filterList: [FilterModel]! {
         didSet{
             guard filterList != nil else { return }
+            
             self.collectionView.reloadData()
         }
     }
@@ -67,7 +68,12 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
             }
         }
         
+        let turnOn = UserDefaults.standard.bool(forKey: TurnOn)
         
+        if turnOn == false {
+            self.titleTwolb.isHidden = true
+            self.onlyButBut.isHidden = true
+        }
     }
     
     // MARK: - 网络请求
