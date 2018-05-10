@@ -22,7 +22,7 @@ class AccountDetailsCell: UITableViewCell {
             
             stateLB.isHidden = true
             stateIcon.isHidden = true
-           // 0-全部 1-奖金 2-充值 3-购彩 4-提现 5-红包
+           // 0-全部 1-奖金 2-充值 3-购彩 4-提现 5-红包 6- 退款
             
             switch accountDetail.processType {
             case "1":
@@ -38,7 +38,7 @@ class AccountDetailsCell: UITableViewCell {
             case "5":
                 icon.image = UIImage(named: "")
             case "6":
-                icon.image = UIImage(named: "used")
+                icon.image = UIImage(named: "refund")
             default: break
             }
             
