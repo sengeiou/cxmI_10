@@ -290,6 +290,8 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
             return 115 * defaultScale
         case .混合过关:
             return UITableViewAutomaticDimension
+        case .二选一:
+            return 101 * defaultScale
         default:
             return 91 * defaultScale
         }
