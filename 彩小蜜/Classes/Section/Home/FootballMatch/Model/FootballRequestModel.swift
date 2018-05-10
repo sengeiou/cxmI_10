@@ -28,6 +28,7 @@ struct FootballRequestMode : HandyJSON {
 
 struct MatchBetPlay: HandyJSON {
     var changci: String!
+    var changciId: String!
     var isDan: Bool! = false
     var lotteryClassifyId: String!
     var lotteryPlayClassifyId: String!
@@ -46,5 +47,6 @@ struct FootballMatchBetCell: HandyJSON {
     var betCells: [FootballPlayCellModel]!
     var playType : String!
     var single: Bool!
+    var fixedodds : Int!
 }
 

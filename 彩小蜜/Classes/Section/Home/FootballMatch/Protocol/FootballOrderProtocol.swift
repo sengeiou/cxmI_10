@@ -43,6 +43,8 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
             matchBetCell.matchTeam = playInfo.homeTeamAbbr + "VS" + playInfo.visitingTeamAbbr
             matchBetCell.matchTime = playInfo.matchTime
             matchBetCell.playCode = playInfo.playCode
+            matchBetCell.changciId = playInfo.changciId
+            
             
             var matchBetCells = [FootballMatchBetCell]()
             
@@ -109,7 +111,7 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
                 matchBetCell.betCells = betCells
                 matchBetCell.playType = matchPlay.playType
                 matchBetCell.single = matchPlay.single
-                
+                matchBetCell.fixedodds = matchPlay.fixedOdds
                 matchBetCells.append(matchBetCell)
             }
             // 2选1 玩法转换
@@ -164,6 +166,10 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
             requestModel.playType = "6"
         }
         
+        let xxx = requestModel.toJSONString()
+        
+        //NSLog(xxx!)
+        print(xxx!)
         return requestModel
     }
     
