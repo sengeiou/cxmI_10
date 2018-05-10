@@ -250,11 +250,9 @@ extension FootballFilterPro {
                     }
                 }
                 
-//                if homeScore && flatScore && visiScore && totalSin && banSin {
-//                    allSin = true
-//                }else {
-//                    allSin = false
-//                }
+                if homeScore == false || flatScore == false || visiScore == false || totalSin == false || banSin == false {
+                    allSin = false
+                }
                 
                 if spf.homeCell != nil {
                     if spf.homeCell.isSelected || spf.flatCell.isSelected || spf.visitingCell.isSelected {
