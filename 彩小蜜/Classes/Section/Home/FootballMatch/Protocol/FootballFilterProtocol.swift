@@ -190,24 +190,38 @@ extension FootballFilterPro {
                 
                 var scoreSin = false
                 
+                var selected :Bool = false
+                
+                var homeScore = true
+                var flatScore = true
+                var visiScore = true
+                var totalSin = true
+                var banSin = true
+                
                 if score.homeCell.cellSons != nil {
                     for cell in score.homeCell.cellSons {
                         if cell.isSelected {
-                            scoreSin = true
+                            homeScore = score.single
+                            
+                            selected = true
                             maxNum.insert(4)
                             break
                         }
                     }
                     for cell in score.flatCell.cellSons {
                         if cell.isSelected {
-                            scoreSin = true
+//                            scoreSin = true
+//                            selected = true
+                            flatScore = score.single
+                            selected = true
                             maxNum.insert(4)
                             break
                         }
                     }
                     for cell in score.visitingCell.cellSons {
                         if cell.isSelected {
-                            scoreSin = true
+                            visiScore = score.single
+                            selected = true
                             maxNum.insert(4)
                             break
                         }
@@ -217,7 +231,8 @@ extension FootballFilterPro {
                 if total.matchCells != nil {
                     for cell in total.matchCells {
                         if cell.isSelected {
-                            scoreSin = true
+                            totalSin = total.single
+                            selected = true
                             maxNum.insert(6)
                             break
                         }
@@ -226,11 +241,18 @@ extension FootballFilterPro {
                 if ban.matchCells != nil {
                     for cell in ban.matchCells {
                         if cell.isSelected {
-                            scoreSin = true
+                            banSin = ban.single
+                            selected = true
                             maxNum.insert(4)
                             break
                         }
                     }
+                }
+                
+                if homeScore && flatScore && visiScore && totalSin && banSin {
+                    allSin = true
+                }else {
+                    allSin = false
                 }
                 
                 if spf.homeCell != nil {
@@ -251,7 +273,7 @@ extension FootballFilterPro {
                     }
                 }
                 
-                //allSin = scoreSin
+                //
                 
 //                if allSin == false {
 //                    return allSin

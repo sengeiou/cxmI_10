@@ -29,7 +29,7 @@ class LotteryCell: UITableViewCell {
             if let url = URL(string: resultModel.homeTeamLogo) {
                 homeTeamIcon.kf.setImage(with: url)
             }
-            if let url = URL(string: resultModel.homeTeamLogo) {
+            if let url = URL(string: resultModel.visitingTeamLogo) {
                 visiTeamIcon.kf.setImage(with: url)
             }
         }

@@ -389,8 +389,8 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         orderRequest()
     }
     
-    // MARK: - Bottow Delegate
-    // 确认键
+    // MARK: - Bottow Delegate 确认键
+    //
     func orderConfirm(filterList: [FootballPlayFilterModel], times: String) {
         guard self.isAgreement == true else {
             showCXMAlert(title: nil, message: "尊敬的用户，购彩需同意并接受《彩小秘投注服务协议》", action: "确定", cancel: nil) { (action) in
