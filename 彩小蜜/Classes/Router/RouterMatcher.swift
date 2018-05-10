@@ -44,7 +44,7 @@ extension RouterMatcher {
     
     func matcherHttp(urlStr: String) -> (PushControllerType, URLModel? ){
         
-        guard urlStr != "" else { return (.none, nil) }
+        guard let urlStr = urlStr.removingPercentEncoding else { return (.none, nil) }
         guard urlStr.contains("cxmxc=scm") else { return (.浏览器, nil) }
         
         guard let urlModel = parseUrl(urlStr: urlStr) else { return (.none, nil ) }

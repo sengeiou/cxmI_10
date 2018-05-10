@@ -65,7 +65,7 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
     }
     
     public func loadWebView() {
-        
+        guard let urlStr = urlStr.removingPercentEncoding else { fatalError("-------  url 解码错误  -------") }
         guard let url = URL(string: urlStr) else { fatalError("-------  url 错误  -------")}
         let request = URLRequest(url: url)
         
