@@ -59,13 +59,13 @@ class WithdrawalProgressFooter: UIView {
         titleLB.font = Font14
         titleLB.textColor = Color505050
         titleLB.textAlignment = .left
-        titleLB.text = "提取到"
+        //titleLB.text = "提取到"
         
         detailLB = UILabel()
         detailLB.font = Font14
         detailLB.textColor = ColorA0A0A0
         detailLB.textAlignment = .right
-        detailLB.text = "招商银行（尾号1234）"
+        //detailLB.text = "招商银行（尾号1234）"
         
         self.addSubview(line)
         self.addSubview(titleLB)

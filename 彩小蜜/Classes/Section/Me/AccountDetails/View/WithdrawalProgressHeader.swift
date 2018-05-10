@@ -47,7 +47,7 @@ class WithdrawalProgressHeader: UIView {
         moneyLB.font = Font36
         moneyLB.textColor = ColorEA5504
         moneyLB.textAlignment = .center
-        moneyLB.text = "100.00"
+        //moneyLB.text = "100.00"
         
         let moneyAtt = NSMutableAttributedString(string: "¥", attributes: [NSAttributedStringKey.font: Font14])
         
@@ -57,7 +57,7 @@ class WithdrawalProgressHeader: UIView {
         stateLB.font = Font24
         stateLB.textColor = Color787878
         stateLB.textAlignment = .center
-        stateLB.text = "处理中"
+        //stateLB.text = "处理中"
         
         self.addSubview(moneyLB)
         self.addSubview(stateLB)
