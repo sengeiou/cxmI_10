@@ -80,4 +80,5 @@ struct NewsDetailModel: HandyJSON {
     var title: String!
     ///0-已收藏 1-未收藏
     var isCollect : Bool!
+    var author : String!
 }

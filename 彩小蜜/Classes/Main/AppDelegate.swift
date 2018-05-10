@@ -68,8 +68,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AppDelegateProtocol, GeTu
         return true
     }
     //MARK: - 个推
-    func geTuiSdkDidReceivePayloadData(_ payloadData: Data!, andTaskId taskId: String!, andMsgId msgId: String!, andOffLine offLine: Bool, fromGtAppId appId: String!) {
+    func geTuiSdkDidSendMessage(_ messageId: String!, result: Int32) {
         
+    }
+    func geTuiSdkDidReceivePayloadData(_ payloadData: Data!, andTaskId taskId: String!, andMsgId msgId: String!, andOffLine offLine: Bool, fromGtAppId appId: String!) {
+        var payloadMsg = ""
+        if payloadData != nil {
+            payloadMsg = String.init(data: payloadData, encoding: String.Encoding.utf8)!
+        }
+        
+        let msg:String = "Receive Payload: \(payloadMsg), taskId:\(taskId), messageId:\(msgId)"
     }
 
 }

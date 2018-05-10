@@ -20,9 +20,12 @@ class NewsDetailCell: UITableViewCell, WKUIDelegate, WKNavigationDelegate {
             guard detailInfo != nil, detailInfo.content != nil else { return }
             self.loadWebView(htmlStr: detailInfo.content!)
             self.title.text = detailInfo.title
-            self.detail.text = "\(detailInfo.extendCat!)  \(detailInfo.addTime!)"
+            
+            guard let author = detailInfo.author, let addTime = detailInfo.addTime else { return }
+            self.detail.text = "\(author)  \(addTime)"
         }
     }
+    
     
     public var urlStr : String!
     
