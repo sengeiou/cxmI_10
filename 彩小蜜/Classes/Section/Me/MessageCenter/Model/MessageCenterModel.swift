@@ -22,5 +22,7 @@ struct MessageCenterModel: HandyJSON {
     var msgDesc: String!
     var msgId: String!
     var receiver: String!
+    var contentUrl: String!
+    
 }
 

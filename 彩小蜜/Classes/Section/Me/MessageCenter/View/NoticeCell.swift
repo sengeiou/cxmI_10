@@ -20,7 +20,7 @@ class NoticeCell: UITableViewCell {
             title.text = messageModel.title
             timelb.text = messageModel.sendTime
             detaillb.text = messageModel.contentDesc
-            guard let url = URL(string: messageModel.msgUrl) else { return }
+            guard let url = URL(string: messageModel.contentUrl) else { return }
             activity.kf.setImage(with: url)
         }
     }
