@@ -178,7 +178,7 @@ extension MeNetAPIManager : TargetType {
             dic["pageNum"] = pageNum
             dic["pageSize"] = "20"
         case .withdrawProgressList(let withdawSn):
-            dic["withdraw_sn"] = withdawSn
+            dic["withdrawSn"] = withdawSn
         case .collectAdd(let articledId):
             dic["articleId"] = articledId
 //            dic["articleTitle"] = articleTitle

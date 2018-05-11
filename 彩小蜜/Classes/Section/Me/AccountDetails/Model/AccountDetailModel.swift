@@ -22,5 +22,6 @@ struct AccountDetailModel: HandyJSON {
     var shotTime: String!
     var status: String!
     var id : String!
+    var payId: String!
     
 }

@@ -37,6 +37,7 @@ class WithdrawalProgressVC: BaseViewController, UITableViewDelegate, UITableView
     private func progressRequest() {
         self.showProgressHUD()
         weak var weakSelf = self
+        //withdawalSn = "2018051114558208280020"
         _ = userProvider.rx.request(.withdrawProgressList(withdawSn: withdawalSn))
             .asObservable()
             .mapObject(type: ProgressModel.self)

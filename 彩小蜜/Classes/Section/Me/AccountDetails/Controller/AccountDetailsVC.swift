@@ -193,7 +193,7 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
         guard account.processType == "4" else { return }
        
         let progress = WithdrawalProgressVC()
-        progress.withdawalSn = account.accountSn
+        progress.withdawalSn = account.payId
         pushViewController(vc: progress)
     }
     
