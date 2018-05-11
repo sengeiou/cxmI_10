@@ -43,7 +43,7 @@ class WithdrawalProgressCell: UITableViewCell {
         }
         topLine.snp.makeConstraints { (make) in
             make.top.equalTo(0)
-            make.width.equalTo(0.4)
+            make.width.equalTo(1)
             make.centerX.equalTo(icon.snp.centerX)
             make.bottom.equalTo(icon.snp.top).offset(-1)
         }

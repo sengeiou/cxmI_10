@@ -96,12 +96,13 @@ class WithdrawalProgressVC: BaseViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: WithdrawalProgressCellId, for: indexPath) as! WithdrawalProgressCell
+        
         if indexPath.section == 0 {
             cell.topLine.isHidden = true
         }else {
             cell.topLine.isHidden = false
         }
-        if indexPath.section == 2 {
+        if indexPath.section == progressModel.userWithdrawLogs.count - 1 {
             cell.bottomLine.isHidden = true
         }else {
             cell.bottomLine.isHidden = false
