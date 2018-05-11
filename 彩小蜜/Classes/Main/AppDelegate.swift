@@ -13,6 +13,8 @@ import PushKit
 
 let device = DeviceManager.share.device
 
+fileprivate let ShowGuided = "IsShowGuided"
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, AppDelegateProtocol, GeTuiSdkDelegate, UNUserNotificationCenterDelegate {
 
@@ -23,13 +25,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AppDelegateProtocol, GeTu
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
+        
+        if UserDefaults.standard.bool(forKey: ShowGuided) == false {
+            let guide = GuideViewController()
+            
+            self.window?.rootViewController = guide
+        }else {
+            rootViewController = MainTabBarController()
+            
+            self.window?.rootViewController = rootViewController
+        }
+        
         self.window?.makeKeyAndVisible()
-        
-        rootViewController = MainTabBarController()
-        
-        self.window?.rootViewController = rootViewController
-        
-        
         
         registerApp()
         return true
@@ -48,8 +55,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AppDelegateProtocol, GeTu
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-        self.rootViewController.configRequest()
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationWillEnterForeground), object: nil)
+        if UserDefaults.standard.bool(forKey: ShowGuided) {
+            self.rootViewController.configRequest()
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationWillEnterForeground), object: nil)
+        }
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
