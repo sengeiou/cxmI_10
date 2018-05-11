@@ -8,13 +8,19 @@
 
 import UIKit
 
+protocol GuideViewControllerDelegate {
+    func didTipGuide() -> Void
+}
+
 class GuideViewController: UIViewController, UIScrollViewDelegate {
 
-    var imageList : [String] = ["guide", "guide", "guide"]
+    public var delegate : GuideViewControllerDelegate!
     
-    var scrollView : UIScrollView!
+    private var imageList : [String] = ["guide", "guide", "guide"]
     
-    var startBut: UIButton!
+    private var scrollView : UIScrollView!
+    
+    private var startBut: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +30,8 @@ class GuideViewController: UIViewController, UIScrollViewDelegate {
     }
  
     @objc private func startButClicked(_ sender: UIButton) {
-        
+        guard delegate != nil else { return }
+        delegate.didTipGuide()
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
