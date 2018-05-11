@@ -23,7 +23,10 @@ class WithdrawalViewController: BaseViewController, ValidatePro {
         guard let draw = amountOfMoney.text else {
             showHUD(message: "请输入提现金额")
             return }
-        
+        guard validate(.money, str: self.amountOfMoney.text) else {
+            showHUD(message: "请输入正确的金额")
+            return
+        }
         guard let drawAmount = Double(draw) else { return }
         guard let amount = Double(drawDataModel.userMoney) else { return }
         guard drawAmount <= amount else {
@@ -31,10 +34,7 @@ class WithdrawalViewController: BaseViewController, ValidatePro {
             return
         }
         
-        guard validate(.money, str: self.amountOfMoney.text) else {
-            showHUD(message: "请输入正确的金额")
-            return
-        }
+        
         self.canWithDraw = false
         drawRequest()
     }
