@@ -58,7 +58,8 @@ struct NewsInfoModel: HandyJSON {
     var title: String!
     /// 作者
     var author: String!
-    
+    /// 副标题
+    var subheading : String!
 }
 
 struct NewsDetailModel: HandyJSON {
