@@ -24,9 +24,7 @@ class WithdrawalViewController: BaseViewController, ValidatePro {
             showHUD(message: "请输入提现金额")
             return }
         
-        guard let drawAmount = Double(draw) else {
-            showHUD(message: "请输入提现金额")
-            return }
+        guard let drawAmount = Double(draw) else { return }
         guard let amount = Double(drawDataModel.userMoney) else { return }
         guard drawAmount <= amount else {
             showHUD(message: "您输入的金额已超过可提现金额")
