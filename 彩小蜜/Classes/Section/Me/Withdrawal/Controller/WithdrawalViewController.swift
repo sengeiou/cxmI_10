@@ -13,6 +13,7 @@ class WithdrawalViewController: BaseViewController, ValidatePro {
     //MARK: - 点击事件
     // 提交   确认支付
     @objc private func drawMoney(_ sender: UIButton) {
+        guard canWithDraw else { return }
         guard drawDataModel != nil else { return }
         guard drawDataModel.defaultBankLabel != nil, drawDataModel.defaultBankLabel != "" else {
             showHUD(message: "请添加收款银行卡")
@@ -36,7 +37,7 @@ class WithdrawalViewController: BaseViewController, ValidatePro {
             showHUD(message: "请输入正确的金额")
             return
         }
-       
+        self.canWithDraw = false
         drawRequest()
     }
     // 全部提现
@@ -52,7 +53,7 @@ class WithdrawalViewController: BaseViewController, ValidatePro {
     }
     //MARK: - 属性
     private var bgView: UIView! // 背景图
-    
+    private var canWithDraw : Bool = true
     private var moneyLB : UILabel! // 可提现金额
     private var bankCardLB : UILabel! // 银行卡
     private var bankCardBut : UIButton! // 银行卡管理
@@ -89,6 +90,7 @@ class WithdrawalViewController: BaseViewController, ValidatePro {
             .mapBaseObject(type: DataModel.self )
             .subscribe(onNext: { (data) in
                 self.dismissProgressHud()
+                self.canWithDraw = true
                 if let code = Int(data.code) {
                     switch code {
                     case 0:
@@ -108,6 +110,7 @@ class WithdrawalViewController: BaseViewController, ValidatePro {
                 }
                 
             }, onError: { (error) in
+                self.canWithDraw = true
                 self.dismissProgressHud()
                 guard let err = error as? HXError else { return }
                 switch err {

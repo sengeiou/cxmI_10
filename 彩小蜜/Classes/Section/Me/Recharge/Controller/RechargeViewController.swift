@@ -72,6 +72,7 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     func recharge() {
+        guard self.canPayment else { return }
         guard validate(.number, str: self.cardCell.textfield.text) else {
             showHUD(message: "请输入整数的充值金额")
             return
@@ -109,6 +110,7 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
         }
     }
     //MARK: - 网络请求
+    // 充值
     private func rechargeRequest(amount: String) {
       
         guard self.paymentModel != nil else { return }
