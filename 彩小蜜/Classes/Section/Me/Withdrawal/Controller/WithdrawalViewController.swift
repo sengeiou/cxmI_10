@@ -265,7 +265,7 @@ class WithdrawalViewController: BaseViewController, ValidatePro {
         instructions.font = Font13
         instructions.backgroundColor = UIColor.clear
         instructions.text = """
-        说明：
+        温馨提示：
         1.中奖金额在1小时后可提现；
         2.提现金额最低3元，每天提现不超过3次；
         3.提现暂不收取手续费；
