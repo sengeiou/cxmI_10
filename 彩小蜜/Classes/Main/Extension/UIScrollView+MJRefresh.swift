@@ -17,7 +17,7 @@ extension UIScrollView
     func headerRefresh(block: @escaping () -> ()) -> (){
         let header = MJRefreshNormalHeader(refreshingBlock: block)
         header?.setTitle("下拉可以刷新", for: .refreshing)
-        
+    
         self.mj_header = header
     }
     
@@ -29,13 +29,19 @@ extension UIScrollView
     }
     
     func endrefresh(){
-        guard self.mj_header != nil, self.mj_footer != nil  else { return }
+        if self.mj_header != nil {
+            self.mj_header.endRefreshing()
+        }
         
-        self.mj_footer.endRefreshing()
-        self.mj_header.endRefreshing()
+        if self.mj_footer != nil {
+            self.mj_footer.endRefreshing()
+        }
     }
     func noMoreData() {
         self.mj_footer.endRefreshingWithNoMoreData()
+    }
+    func beginRefreshing() {
+        self.mj_header.beginRefreshing()
     }
 }
 

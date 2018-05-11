@@ -92,7 +92,7 @@ class LotterySectionHeader: UITableViewHeaderFooterView {
         title.font = Font14
         title.textAlignment = .left
         title.textColor = Color9F9F9F
-        title.text = "共有14场比赛 "
+        title.text = "共有0场比赛 "
         
         spreadBut = UIButton(type: .custom)
         spreadBut.setImage(UIImage(named: "Unfold"), for: .normal)

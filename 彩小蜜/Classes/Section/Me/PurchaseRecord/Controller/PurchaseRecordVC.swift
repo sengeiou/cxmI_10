@@ -47,6 +47,7 @@ class PurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
         }
         self.recordList = []
         recordRequest(1)
+        
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -81,13 +82,13 @@ class PurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
         case .winning :
             orderStatus = "5"
         }
-        self.showProgressHUD()
+        //self.showProgressHUD()
         weak var weakSelf = self
         _ = userProvider.rx.request(.orderInfoList(fyId: "1", orderStatus: orderStatus, pageNum: pageNum))
             .asObservable()
             .mapObject(type: PurchaseRecordListModel.self)
             .subscribe(onNext: { (data) in
-                self.dismissProgressHud()
+                //self.dismissProgressHud()
                 weakSelf?.tableView.endrefresh()
                 weakSelf?.recordListModel = data
                 if pageNum == 1 {
@@ -96,7 +97,7 @@ class PurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
                 weakSelf?.recordList.append(contentsOf: data.list)
                 weakSelf?.tableView.reloadData()
             }, onError: { (error) in
-                self.dismissProgressHud()
+                //self.dismissProgressHud()
                 weakSelf?.tableView.endrefresh()
                 guard let err = error as? HXError else { return }
                 switch err {

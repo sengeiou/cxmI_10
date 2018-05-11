@@ -45,12 +45,19 @@ class LotteryViewController: BaseViewController, UITableViewDelegate, UITableVie
         self.dateList = LotteryDateModel().getDates()
         self.dateFilter = self.dateList.last?.date
         self.headerView.dateModel = self.dateList.last
+        
+        //filterRequest()
+        //self.lotteryResultRequest(date: self.dateFilter, isAlready: self.isAlready, leagueIds: self.leagueIds, finished: self.finished)
+        
+        self.tableView.headerRefresh {
+            self.loadNewData()
+        }
+        self.tableView.beginRefreshing()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.isHidenBar = false
-        filterRequest()
-        self.lotteryResultRequest(date: self.dateFilter, isAlready: self.isAlready, leagueIds: self.leagueIds, finished: self.finished)
+        
     }
     override func viewDidLayoutSubviews() {
         tableView.snp.makeConstraints { (make) in
@@ -72,21 +79,31 @@ class LotteryViewController: BaseViewController, UITableViewDelegate, UITableVie
         self.view.addSubview(headerView)
     }
     
+    private func loadNewData() {
+        //filterRequest()
+        self.lotteryResultRequest(date: self.dateFilter, isAlready: self.isAlready, leagueIds: self.leagueIds, finished: self.finished)
+    }
+    
     //MARK: - 网络请求
     private func lotteryResultRequest(date : String, isAlready: Bool, leagueIds: String, finished : Bool) {
-        self.showProgressHUD()
+        //self.showProgressHUD()
         weak var weakSelf = self
         _ = lotteryProvider.rx.request(.lotteryResult(date: date, isAlready: isAlready, leagueIds: leagueIds, finished: finished))
             .asObservable()
             .mapArray(type: LotteryResultModel.self)
             .subscribe(onNext: { (data) in
-                self.dismissProgressHud()
+                self.tableView.endrefresh()
+                //self.dismissProgressHud()
+                
                 self.resultList = data
+                self.filterRequest()
                 DispatchQueue.main.async {
+                    
                     self.tableView.reloadData()
                 }
             }, onError: { (error) in
-                self.dismissProgressHud()
+                //self.dismissProgressHud()
+                self.tableView.endrefresh()
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):
@@ -112,8 +129,11 @@ class LotteryViewController: BaseViewController, UITableViewDelegate, UITableVie
             .asObservable()
             .mapArray(type: FilterModel.self)
             .subscribe(onNext: { (data) in
+                //self.tableView.endrefresh()
                 weakSelf?.filterList = data
+                
             }, onError: { (error) in
+                //self.tableView.endrefresh()
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):
