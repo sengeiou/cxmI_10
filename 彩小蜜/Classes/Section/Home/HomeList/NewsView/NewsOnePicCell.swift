@@ -84,7 +84,7 @@ class NewsOnePicCell: UITableViewCell {
             make.top.equalTo(icon)
             make.left.equalTo(leftSpacing)
             make.right.equalTo(icon.snp.left).offset(-21 * defaultScale)
-            make.height.equalTo(40 * defaultScale)
+           // make.height.equalTo(40 * defaultScale)
         }
         bottomView.snp.makeConstraints { (make) in
            // make.bottom.equalTo(-10 * defaultScale)

@@ -38,7 +38,7 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
     }
     private var collectBut: UIButton!    // 收藏
     private var shareBut: UIButton!      // 分享
-    private var cellHeight : CGFloat = 50
+    private var cellHeight : CGFloat = 100
     private var footer : NewsDetailFooter!
     private var webView : WKWebView!
     

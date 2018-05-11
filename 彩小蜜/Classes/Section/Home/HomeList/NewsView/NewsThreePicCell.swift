@@ -77,7 +77,7 @@ class NewsThreePicCell: UITableViewCell {
             make.top.equalTo(10 * defaultScale)
             make.left.equalTo(leftSpacing)
             make.right.equalTo(-leftSpacing)
-            make.height.equalTo(40 * defaultScale)
+            //make.height.equalTo(40 * defaultScale)
         }
         
         bottomView.snp.makeConstraints { (make) in

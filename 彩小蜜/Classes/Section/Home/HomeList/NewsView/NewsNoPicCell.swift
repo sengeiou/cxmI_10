@@ -64,9 +64,9 @@ class NewsNoPicCell: UITableViewCell {
             make.height.equalTo(15 * defaultScale)
         }
         detailLb.snp.makeConstraints { (make) in
-            make.top.equalTo(titleLb.snp.bottom)
+            make.top.equalTo(titleLb.snp.bottom).offset(10)
             make.left.right.equalTo(titleLb)
-            make.bottom.equalTo(bottomView.snp.top)
+            //make.bottom.equalTo(bottomView.snp.top)
         }
         bottomView.snp.makeConstraints { (make) in
             //make.bottom.equalTo(-12 * defaultScale)
