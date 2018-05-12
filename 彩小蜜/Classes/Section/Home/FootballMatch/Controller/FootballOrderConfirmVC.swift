@@ -774,7 +774,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     
     override func back(_ sender: UIButton) {
         danMaxNum = 0
-        
+        self.dismissProgressHud()
         guard playList != nil else {
             popViewController()
             return }

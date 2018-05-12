@@ -166,6 +166,7 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
     
     @objc func back(_ sender: UIButton) {
         popViewController()
+        
         self.dismissProgressHud()
     }
     
