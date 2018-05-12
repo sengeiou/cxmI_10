@@ -496,6 +496,7 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
             timer.invalidate()
             timer = nil
         }
+        
         self.backed = true
         self.dismissProgressHud()
         self.popViewController()
