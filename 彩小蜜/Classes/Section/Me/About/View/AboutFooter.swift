@@ -40,13 +40,13 @@ class AboutFooter: UIView {
         serviceLB.font = Font13
         serviceLB.textColor = ColorEA5504
         serviceLB.textAlignment = .left
-        serviceLB.text = "客服热线： 400-000-1234"
+        serviceLB.text = "客服热线： 010-84505099"
         
         webLB = UILabel()
         webLB.font = Font13
         webLB.textColor = ColorEA5504
         webLB.textAlignment = .left
-        webLB.text = "官网： http://www.caixiaomi.com"
+        webLB.text = "官网： http://www.caixiaomi.net"
         webLB.sizeToFit()
         
         self.addSubview(serviceLB)
