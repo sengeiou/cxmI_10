@@ -178,11 +178,7 @@ class FootballBanQuanCFilterVC: BasePopViewController, BottomViewDelegate, Footb
     }
     
     @objc public override func backPopVC() {
-        dismiss(animated: true, completion: nil)
-        
-        for index in 0..<oldSelectedCells.count {
-            self.teamInfo.matchPlays[0].matchCells[index].isSelected = oldSelectedCells[index].isSelected
-        }
+        self.didTipCancel()
     }
     
     override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {

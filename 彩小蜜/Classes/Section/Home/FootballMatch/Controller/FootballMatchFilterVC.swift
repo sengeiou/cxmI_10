@@ -254,17 +254,7 @@ class FootballMatchFilterVC: BasePopViewController, UICollectionViewDelegate, UI
     }
     
     @objc public override func backPopVC() {
-        self.dismiss(animated: true, completion: nil)
-        DispatchQueue.global().async {
-            if self.filterList != nil {
-                for model in self.filterList {
-                    model.isSelected = false
-                }
-                for model in self.currentFilterList {
-                    model.isSelected = true
-                }
-            }
-        }
+        self.filterCancel()
     }
     override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         if touch.view === self.pushBgView.superview {

@@ -181,6 +181,9 @@ class FootballPlayFilterVC: BasePopViewController, FootballFilterBottomViewDeleg
     }
     
     override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if touch.view === self.pushBgView.superview {
+            return true
+        }
         if touch.view !== self.collectionView {
             return false
         }

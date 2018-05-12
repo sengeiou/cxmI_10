@@ -377,10 +377,13 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
     }
  
     @objc public override func backPopVC() {
-        
+        self.filterCancel()
     }
     
     override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if touch.view === self.pushBgView.superview {
+            return true
+        }
         if touch.view !== self.collectionView {
             return false
         }
