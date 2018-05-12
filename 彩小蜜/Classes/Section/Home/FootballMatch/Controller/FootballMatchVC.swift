@@ -469,13 +469,13 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     
     // MARK: - 选取比赛 FootballTeamView Delegate ，
     func select(teamInfo: FootballPlayListModel) {
-        guard selectPlayList != nil else { return }
+        guard selectPlays != nil else { return }
         //selectPlayList.append(teamInfo)
         selectPlays.insert(teamInfo)
     }
     
     func deSelect(teamInfo: FootballPlayListModel) {
-        guard selectPlayList != nil else { return }
+        guard selectPlays != nil else { return }
         //selectPlayList.remove(teamInfo)
         selectPlays.remove(teamInfo)
     }
@@ -522,8 +522,8 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         }
         guard canRemove == true  else { return }
        
-        //guard selectPlayList != nil else { return }
-        //selectPlayList.remove(teamInfo)
+        guard selectPlays != nil else { return }
+        
         selectPlays.remove(teamInfo)
     }
     func totalSelectedItem() {
@@ -637,8 +637,8 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     func didDeSelectedTwoOneView(view: FootballTwoOneView, teamInfo: FootballPlayListModel) {
         guard teamInfo.matchPlays[0].homeCell.isSelected == false else { return }
         guard teamInfo.matchPlays[0].visitingCell.isSelected == false else { return }
-        guard selectPlayList != nil else { return }
-        selectPlayList.remove(teamInfo)
+        guard selectPlays != nil else { return }
+        selectPlays.remove(teamInfo)
     }
     func didSelectedTwoOneView() {
         

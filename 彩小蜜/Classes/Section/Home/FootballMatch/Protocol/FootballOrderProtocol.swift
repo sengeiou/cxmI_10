@@ -121,6 +121,7 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
                 matchBetCells.removeAll()
                 for betCell in mbetCells {
                     //let cell =
+                    
                     for cell in betCell.betCells {
                         var matchBetCell = FootballMatchBetCell()
                         var betCells = [FootballPlayCellModel]()
@@ -150,6 +151,8 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
                         
                         betCells.append(cellc)
                         matchBetCell.betCells = betCells
+                        matchBetCell.fixedodds = betCell.fixedodds
+                        matchBetCell.single = betCell.single
                         matchBetCells.append(matchBetCell)
                     }
                    

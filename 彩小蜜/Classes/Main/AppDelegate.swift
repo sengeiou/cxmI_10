@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AppDelegateProtocol, GeTu
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        UserDefaults.standard.set(false, forKey: ShowGuided)
+        //UserDefaults.standard.set(false, forKey: ShowGuided)
         if UserDefaults.standard.bool(forKey: ShowGuided) == false {
             UserDefaults.standard.set(true, forKey: ShowGuided)
             let guide = GuideViewController()
@@ -62,6 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AppDelegateProtocol, GeTu
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         if UserDefaults.standard.bool(forKey: ShowGuided) {
+            guard self.rootViewController != nil else { return }
             self.rootViewController.configRequest()
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationWillEnterForeground), object: nil)
         }
