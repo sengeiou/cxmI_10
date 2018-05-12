@@ -8,7 +8,7 @@
 
 import UIKit
 
-//enum PaymentMethod : String{
+//enum Paymenvarthod : String{
 //    case 微信 = "app_weixin"
 //    case 余额 = ""
 //}
@@ -43,6 +43,8 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
     private var timer : Timer!
     
     private var selectedIndex : IndexPath!
+    
+    private var backed  = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -164,9 +166,13 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
             .asObservable()
             .mapObject(type: PaymentResultModel.self)
             .subscribe(onNext: { (data) in
-                self.paymentResult = data
-                self.handlePaymentResult()
-   
+                if !self.backed {
+                    self.paymentResult = data
+                    self.handlePaymentResult()
+                }else {
+                    self.popViewController()
+                }
+                
             }, onError: { (error) in
                 weakSelf?.canPayment = true
                 guard let err = error as? HXError else { return }
@@ -490,6 +496,7 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
             timer.invalidate()
             timer = nil
         }
+        self.backed = true
         self.dismissProgressHud()
         self.popViewController()
     }
