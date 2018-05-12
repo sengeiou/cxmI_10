@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Moya
+
 
 //enum Paymenvarthod : String{
 //    case 微信 = "app_weixin"

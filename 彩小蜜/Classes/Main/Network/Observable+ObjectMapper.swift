@@ -153,6 +153,9 @@ extension Response {
     func mapModel<T: HandyJSON>(_ type: T.Type) -> T {
         
         let jsonString = String.init(data: data, encoding: .utf8)
+        
+        
+        
         return JSONDeserializer<T>.deserializeFrom(json: jsonString, designatedPath : "data")!
     }
 }
