@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AppDelegateProtocol, GeTu
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        //UserDefaults.standard.set(false, forKey: ShowGuided)
+        UserDefaults.standard.set(false, forKey: ShowGuided)
         if UserDefaults.standard.bool(forKey: ShowGuided) == false {
             UserDefaults.standard.set(true, forKey: ShowGuided)
             let guide = GuideViewController()

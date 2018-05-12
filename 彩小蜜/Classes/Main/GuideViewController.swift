@@ -61,7 +61,7 @@ class GuideViewController: UIViewController, UIScrollViewDelegate {
         
         for i in 0..<self.imageList.count {
             var image = imageList[i]
-            
+            image = image + "\(i + 1)"
             if isIphoneX {
                 
             }else {

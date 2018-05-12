@@ -647,7 +647,11 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     // MARK: - 混合 按钮 点击   delegate
     func didSelectedHunHeView(view: FootballHunheView, teamInfo: FootballPlayListModel, index: IndexPath) {
         
-        self.tableView.reloadRows(at: [index], with: .none)
+        let cell = self.tableView.cellForRow(at: index) as! FootballHunheCell
+        let matchModel = matchList[index.section]
+        cell.playInfoModel = matchModel.playList[index.row]
+        
+        //self.tableView.reloadRows(at: [index], with: .none)
         guard selectPlayList.count < MaxSelectedNum else {
             
             var change = true
@@ -669,7 +673,12 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         
     }
     func didDeSelectedHunHeView(view: FootballHunheView, teamInfo: FootballPlayListModel, index: IndexPath) {
-        self.tableView.reloadData()
+        //self.tableView.reloadRows(at: [index], with: .none)
+        
+        let cell = self.tableView.cellForRow(at: index) as! FootballHunheCell
+        let matchModel = matchList[index.section]
+        cell.playInfoModel = matchModel.playList[index.row]
+        
         guard teamInfo.selectedHunhe.count == 0 else { return }
         selectPlays.remove(teamInfo)
     }

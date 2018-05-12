@@ -24,7 +24,6 @@ class FootballHunheView: UIView {
             case .胜平负:
                 guard matchInfo.isShow == true else {
                     changeButUserEnabled(enable: false)
-                    
                     return }
                 
                 changeButUserEnabled(enable: true)
@@ -56,57 +55,7 @@ class FootballHunheView: UIView {
     
     public var teamInfo: FootballPlayListModel! {
         didSet{
-            
-//            for match in teamInfo.matchPlays {
-//                if match.playType == "2" , match.homeCell != nil {
-//                    //let matchPlay = teamInfo.matchPlays[1]
-//                    setText(matchPlay: match)
-//                    changeViewBorderColor(single: match.single)
-//                    changeButState(but: homeBut, isSelected: match.homeCell.isSelected)
-//                    changeButState(but: drawBut, isSelected: match.flatCell.isSelected)
-//                    changeButState(but: awayBut, isSelected: match.visitingCell.isSelected)
-//                }else if match.playType == "1" , match.homeCell != nil {
-//                    setText(matchPlay: match)
-//                    changeViewBorderColor(single: match.single)
-//                    changeButState(but: homeBut, isSelected: match.homeCell.isSelected)
-//                    changeButState(but: drawBut, isSelected: match.flatCell.isSelected)
-//                    changeButState(but: awayBut, isSelected: match.visitingCell.isSelected)
-//
-//                    match.homeCell.isRang = true
-//                    match.flatCell.isRang = true
-//                    match.visitingCell.isRang = true
-//                }
-//
-//            }
-//
-//
-//
-//            switch matchType {
-//            case .胜平负:
-//                guard teamInfo.matchPlays[1].playType == "2" else { break }
-//                guard teamInfo.matchPlays[1].homeCell != nil else { break }
-//                let matchPlay = teamInfo.matchPlays[1]
-//                setText(matchPlay: matchPlay)
-//                changeViewBorderColor(single: matchPlay.single)
-//                changeButState(but: homeBut, isSelected: matchPlay.homeCell.isSelected)
-//                changeButState(but: drawBut, isSelected: matchPlay.flatCell.isSelected)
-//                changeButState(but: awayBut, isSelected: matchPlay.visitingCell.isSelected)
-//            case .让球胜平负:
-//                guard teamInfo.matchPlays[0].playType == "1" else { break }
-//                guard teamInfo.matchPlays[0].homeCell != nil else { break }
-//                let matchPlay = teamInfo.matchPlays[0]
-//                setText(matchPlay: matchPlay)
-//                changeViewBorderColor(single: matchPlay.single)
-//                changeButState(but: homeBut, isSelected: matchPlay.homeCell.isSelected)
-//                changeButState(but: drawBut, isSelected: matchPlay.flatCell.isSelected)
-//                changeButState(but: awayBut, isSelected: matchPlay.visitingCell.isSelected)
-//
-//                matchPlay.homeCell.isRang = true
-//                matchPlay.flatCell.isRang = true
-//                matchPlay.visitingCell.isRang = true
-//            default: break
-//            }
-            
+
            
         }
     }
@@ -178,6 +127,9 @@ class FootballHunheView: UIView {
             drawBut.setTitle("未开售", for: .normal)
             awayBut.setTitle("未开售", for: .normal)
             changeViewBorderColor(single: false)
+            changeButState(but: homeBut, isSelected: false)
+            changeButState(but: drawBut, isSelected: false)
+            changeButState(but: awayBut, isSelected: false)
         }
     }
     
