@@ -28,6 +28,7 @@
 		11411D05209171FE0009E6CE /* NoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11411D04209171FE0009E6CE /* NoticeCell.swift */; };
 		11411D092091B56C0009E6CE /* PaymentWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11411D082091B56C0009E6CE /* PaymentWebViewController.swift */; };
 		1142DE7D208ED059009E3916 /* PaymentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1142DE7C208ED059009E3916 /* PaymentProtocol.swift */; };
+		1143928520A68A4100A64075 /* UIImage+Scale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1143928420A68A4100A64075 /* UIImage+Scale.swift */; };
 		114490FD20858CF2009F1D09 /* FootballMatchPagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114490FC20858CF2009F1D09 /* FootballMatchPagerView.swift */; };
 		114491012085970A009F1D09 /* FootballOddsPagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114491002085970A009F1D09 /* FootballOddsPagerView.swift */; };
 		114491042085982B009F1D09 /* FootballAnalysisSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114491032085982B009F1D09 /* FootballAnalysisSectionHeader.swift */; };
@@ -295,6 +296,7 @@
 		11411D04209171FE0009E6CE /* NoticeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeCell.swift; sourceTree = "<group>"; };
 		11411D082091B56C0009E6CE /* PaymentWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentWebViewController.swift; sourceTree = "<group>"; };
 		1142DE7C208ED059009E3916 /* PaymentProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentProtocol.swift; sourceTree = "<group>"; };
+		1143928420A68A4100A64075 /* UIImage+Scale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Scale.swift"; sourceTree = "<group>"; };
 		114490FC20858CF2009F1D09 /* FootballMatchPagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballMatchPagerView.swift; sourceTree = "<group>"; };
 		114491002085970A009F1D09 /* FootballOddsPagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballOddsPagerView.swift; sourceTree = "<group>"; };
 		114491032085982B009F1D09 /* FootballAnalysisSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballAnalysisSectionHeader.swift; sourceTree = "<group>"; };
@@ -1345,6 +1347,7 @@
 			isa = PBXGroup;
 			children = (
 				E5973DD820492DD2006461CE /* UIScrollView+MJRefresh.swift */,
+				1143928420A68A4100A64075 /* UIImage+Scale.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -2068,6 +2071,7 @@
 				E5973DD920492DD2006461CE /* UIScrollView+MJRefresh.swift in Sources */,
 				E5973E27204E3CB0006461CE /* CountdownButton.swift in Sources */,
 				E5D8ABB6206739CF002D688B /* OrderDetailTitleCell.swift in Sources */,
+				1143928520A68A4100A64075 /* UIImage+Scale.swift in Sources */,
 				117CCDF4209055A100B38543 /* FootballOrderFooter.swift in Sources */,
 				113B9CCD2087201E006AE3F8 /* NewsOnePicCell.swift in Sources */,
 				E50B9073205231B500417BFE /* RechargeHeaderView.swift in Sources */,

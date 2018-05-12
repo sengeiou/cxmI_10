@@ -17,4 +17,4 @@ let screenWidth  = UIScreen.main.bounds.width
 let SafeAreaTopHeight    = screenHeight == 812.0 ? 88 : 64
 let SafeAreaBottomHeight: CGFloat = screenHeight == 812.0 ? 24 : 0
 
-
+let isIphoneX = screenHeight == 812.0 ? true : false
