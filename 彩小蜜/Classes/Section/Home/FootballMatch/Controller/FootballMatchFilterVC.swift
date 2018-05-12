@@ -34,7 +34,7 @@ class FootballMatchFilterVC: BasePopViewController, UICollectionViewDelegate, UI
     private var titleLB: UILabel!
     
     private var fiveMatchs = ["英超","西甲","法甲","意甲","德甲"]
-    
+    private var currentFilterList : [FilterModel]!
     public var filterList: [FilterModel]! {
         didSet{
             guard filterList != nil else { return }
@@ -46,31 +46,19 @@ class FootballMatchFilterVC: BasePopViewController, UICollectionViewDelegate, UI
         super.viewDidLoad()
         self.popStyle = .fromCenter
         initSubview()
-        
-        //filterList = [FilterModel]()
-
-        //filterRequest()
+        // 保存当前选中的
+        currentFilterList = [FilterModel]()
+        DispatchQueue.global().async {
+            guard self.filterList != nil else { return }
+            for model in self.filterList {
+                if model.isSelected {
+                    self.currentFilterList.append(model)
+                }
+            }
+        }
     }
     
-    // MARK: - 网络请求
-//    private func filterRequest() {
-//        weak var weakSelf = self
-//        _ = homeProvider.rx.request(.filterMatchList)
-//            .asObservable()
-//            .mapArray(type: FilterModel.self)
-//            .subscribe(onNext: { (data) in
-//                weakSelf?.filterList = data
-//                weakSelf?.collectionView.reloadData()
-//            }, onError: { (error) in
-//                guard let err = error as? HXError else { return }
-//                switch err {
-//                case .UnexpectedResult(let code, let msg):
-//                    print(code!)
-//                    weakSelf?.showHUD(message: msg!)
-//                default: break
-//                }
-//            }, onCompleted: nil, onDisposed: nil )
-//    }
+
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -250,13 +238,38 @@ class FootballMatchFilterVC: BasePopViewController, UICollectionViewDelegate, UI
     }
     
     func filterCancel() {
+        
         self.dismiss(animated: true, completion: nil)
+        
+        DispatchQueue.global().async {
+            if self.filterList != nil {
+                for model in self.filterList {
+                    model.isSelected = false
+                }
+                for model in self.currentFilterList {
+                    model.isSelected = true
+                }
+            }
+        }
     }
     
     @objc public override func backPopVC() {
-        //self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
+        DispatchQueue.global().async {
+            if self.filterList != nil {
+                for model in self.filterList {
+                    model.isSelected = false
+                }
+                for model in self.currentFilterList {
+                    model.isSelected = true
+                }
+            }
+        }
     }
     override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if touch.view === self.pushBgView.superview {
+            return true
+        }
         if touch.view !== self.collectionView {
             return false
         }

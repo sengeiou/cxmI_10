@@ -69,7 +69,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
             
         }
     }
-    
+
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()

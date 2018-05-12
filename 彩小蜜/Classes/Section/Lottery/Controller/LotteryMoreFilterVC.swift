@@ -53,12 +53,13 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
     override func viewDidLoad() {
         super.viewDidLoad()
         self.popStyle = .fromCenter
-        currentFilterList = [FilterModel]()
+        
         self.currentIsAlreadyBuy = isAlreadyBuy
         initSubview()
         
         //filterRequest()
         // 保存当前选中的
+        currentFilterList = [FilterModel]()
         DispatchQueue.global().async {
             guard self.filterList != nil else { return }
             for model in self.filterList {
