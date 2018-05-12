@@ -23,6 +23,8 @@ enum HomeNetAPIManager {
     case matchList (playType: String, leagueId: String)
     /// 赛事筛选 联赛列表
     case filterMatchList
+    /// 筛选条件，开奖
+    case filterList(dateStr: String)
     /// 计算投注信息
     case getBetInfo (requestModel: FootballRequestMode)
     /// 保存投注信息
@@ -56,8 +58,11 @@ extension HomeNetAPIManager : TargetType {
             return "/lottery/hall/getPlayClassifyList"
         case .matchList:
             return "/lottery/match/getMatchList"
+            
         case .filterMatchList:
             return "/lottery/match/filterConditions"
+        case .filterList:
+            return "/lottery/match/getFilterConditionsSomeDay"
         case .getBetInfo:
             return "/lottery/match/getBetInfo"
         case .saveBetInfo:
@@ -92,6 +97,8 @@ extension HomeNetAPIManager : TargetType {
             dic["leagueId"] = leagueId
         case .filterMatchList:
             dic["str"] = ""
+        case .filterList(let dateStr):
+            dic["dateStr"] = dateStr
         case .matchTeamInfo(let matchId) :
             dic["matchId"] = matchId
         case .matchTeamInfoSum(let matchId) :

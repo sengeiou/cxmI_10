@@ -47,6 +47,6 @@ struct FootballMatchBetCell: HandyJSON {
     var betCells: [FootballPlayCellModel]!
     var playType : String!
     var single: Bool!
-    var fixedodds : Int!
+    var fixedOdds : Int!
 }
 

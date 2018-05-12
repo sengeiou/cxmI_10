@@ -45,7 +45,7 @@ class LotteryViewController: BaseViewController, UITableViewDelegate, UITableVie
         self.dateList = LotteryDateModel().getDates()
         self.dateFilter = self.dateList.last?.date
         self.headerView.dateModel = self.dateList.last
-        
+        self.selectedDateModel = self.dateList.last
         //filterRequest()
         //self.lotteryResultRequest(date: self.dateFilter, isAlready: self.isAlready, leagueIds: self.leagueIds, finished: self.finished)
         
@@ -80,7 +80,8 @@ class LotteryViewController: BaseViewController, UITableViewDelegate, UITableVie
     }
     
     private func loadNewData() {
-        //filterRequest()
+        filterRequest()
+        
         self.lotteryResultRequest(date: self.dateFilter, isAlready: self.isAlready, leagueIds: self.leagueIds, finished: self.finished)
     }
     
@@ -96,7 +97,7 @@ class LotteryViewController: BaseViewController, UITableViewDelegate, UITableVie
                 //self.dismissProgressHud()
                 
                 self.resultList = data
-                self.filterRequest()
+            
                 DispatchQueue.main.async {
                     
                     self.tableView.reloadData()
@@ -124,8 +125,9 @@ class LotteryViewController: BaseViewController, UITableViewDelegate, UITableVie
     }
     
     private func filterRequest() {
+        guard self.selectedDateModel != nil, self.selectedDateModel.date != nil else { return }
         weak var weakSelf = self
-        _ = homeProvider.rx.request(.filterMatchList)
+        _ = homeProvider.rx.request(.filterList(dateStr: self.selectedDateModel.date))
             .asObservable()
             .mapArray(type: FilterModel.self)
             .subscribe(onNext: { (data) in
@@ -240,6 +242,8 @@ class LotteryViewController: BaseViewController, UITableViewDelegate, UITableVie
     func didSelectDateItem(filter: LotteryDateFilterVC, dateModel: LotteryDateModel) {
         self.dateFilter = dateModel.date
         self.headerView.dateModel = dateModel
+        self.selectedDateModel = dateModel
+        filterRequest()
         lotteryResultRequest(date: dateFilter, isAlready: isAlready, leagueIds: leagueIds, finished: finished)
     }
     // MARK: - 更多筛选 delegate

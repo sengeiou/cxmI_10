@@ -186,9 +186,11 @@ class FootballBanQuanCFilterVC: BasePopViewController, BottomViewDelegate, Footb
     }
     
     override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        if touch.view?.subviews.last !== self.banScoreView {
+        if touch.view !== self.banScoreView {
             return false
         }
+    
+        
         return true
     }
     override func didReceiveMemoryWarning() {
