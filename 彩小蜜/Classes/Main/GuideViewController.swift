@@ -75,18 +75,30 @@ class GuideViewController: UIViewController, UIScrollViewDelegate {
         
         startBut = UIButton()
         
-        startBut.setTitle("点我，你点我呀", for: .normal)
-        startBut.setTitleColor(ColorEA5504, for: .normal)
+        //startBut.setTitle("点我，你点我呀", for: .normal)
+        //startBut.setTitleColor(ColorEA5504, for: .normal)
+        startBut.setBackgroundImage(UIImage(named: "guide"), for: .normal)
         startBut.addTarget(self, action: #selector(startButClicked(_:)), for: .touchUpInside)
         
         self.view.addSubview(startBut)
         
-        startBut.snp.makeConstraints { (make) in
-            make.bottom.equalTo(-100)
-            make.height.equalTo(44 * defaultScale)
-            make.width.equalTo(150 * defaultScale)
-            make.centerX.equalTo(self.view.snp.centerX)
+        if isIphoneX {
+            startBut.snp.makeConstraints { (make) in
+                make.bottom.equalTo(-140)
+                make.height.equalTo(40 * defaultScale)
+                make.width.equalTo(140 * defaultScale)
+                make.centerX.equalTo(self.view.snp.centerX)
+            }
+        }else {
+            startBut.snp.makeConstraints { (make) in
+                make.bottom.equalTo(-70 * defaultScale)
+                make.height.equalTo(40 * defaultScale)
+                make.width.equalTo(140 * defaultScale)
+                make.centerX.equalTo(self.view.snp.centerX)
+            }
         }
+        
+        
     }
     
     private func initImageView(image: String) -> UIImageView {
