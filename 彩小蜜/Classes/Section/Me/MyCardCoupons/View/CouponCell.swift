@@ -17,9 +17,14 @@ class CouponCell: UITableViewCell {
             
             switch couponInfo.bonusStatus {
             case "0":
-                titleLB.textColor = Color505050
-                stateIcon.image = UIImage(named: "Expiresoon")
-                moneyColor = ColorE95504
+                // 快过期标志：1-显示 0-隐藏
+                if couponInfo.soonExprireBz == "1" {
+                    titleLB.textColor = Color505050
+                    stateIcon.image = UIImage(named: "Expiresoon")
+                    moneyColor = ColorE95504
+                }else {
+                    moneyColor = ColorE95504
+                }
             case "1":
                 moneyColor = Color787878
                 titleLB.textColor = Color505050
@@ -31,6 +36,8 @@ class CouponCell: UITableViewCell {
             default: break
                 
             }
+            
+           
             
             let moneyAtt = NSMutableAttributedString(string: "¥", attributes: [NSAttributedStringKey.font: Font18, NSAttributedStringKey.foregroundColor: moneyColor])
             let money = NSAttributedString(string: couponInfo.bonusPrice, attributes: [NSAttributedStringKey.foregroundColor: moneyColor])

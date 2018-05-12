@@ -20,4 +20,6 @@ struct CouponInfoModel: HandyJSON {
     var minGoodsAmount : String!
     var useRange : String!
     var userBonusId : String!
+    ///快过期标志：1-显示 0-隐藏
+    var soonExprireBz: String!
 }
