@@ -59,7 +59,7 @@ class WithdrawalProgressFooter: UIView {
         titleLB.font = Font14
         titleLB.textColor = Color505050
         titleLB.textAlignment = .left
-        //titleLB.text = "提取到"
+        titleLB.text = "提取到"
         
         detailLB = UILabel()
         detailLB.font = Font14

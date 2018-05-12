@@ -47,9 +47,9 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
         self.tableView.footerRefresh {
             self.loadNextData()
         }
-        
-        accountListRequest(1)
-        statisticsRequest()
+        self.tableView.beginRefreshing()
+//        accountListRequest(1)
+//        statisticsRequest()
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -93,30 +93,30 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
         case .coupon:
             type = "5"
         }
-        self.showProgressHUD()
+        //self.showProgressHUD()
         weak var weakSelf = self
         _ = userProvider.rx.request(.accountDetailsList(amountType: type, pageNum: pageNum))
             .asObservable()
             .mapObject(type: BasePageModel<AccountDetailModel>.self)
             .subscribe(onNext: { (data) in
-                self.dismissProgressHud()
-                weakSelf?.tableView.endrefresh()
+               
+                //weakSelf?.tableView.endrefresh()
                 weakSelf?.pageDataModel = data
                 if pageNum == 1 {
                     weakSelf?.accountList.removeAll()
                 }
                 weakSelf?.accountList.append(contentsOf: data.list)
-                weakSelf?.tableView.reloadData()
+                
                 if weakSelf?.accountList.count == 0 {
                     weakSelf?.footer.isHidden = true
                 }else {
                     weakSelf?.footer.isHidden = false
                 }
-                
-//                let xxx = AccountListModel.getAccountList(data.list)
-//                print(xxx)
+                self.statisticsRequest()
+                //self.dismissProgressHud()
+
             }, onError: { (error) in
-                self.dismissProgressHud()
+                //self.dismissProgressHud()
                 if weakSelf?.accountList.count == 0 {
                     weakSelf?.footer.isHidden = true
                 }else {
@@ -144,17 +144,20 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
     
     // 统计账户信息
     private func statisticsRequest() {
-        self.showProgressHUD()
+        //self.showProgressHUD()
         weak var weakSelf = self
         _ = userProvider.rx.request(.accountStatistics)
             .asObservable()
             .mapObject(type: AccountStatisticsModel.self)
             .subscribe(onNext: { (data) in
-                self.dismissProgressHud()
+                //self.dismissProgressHud()
+                self.tableView.endrefresh()
                 //weakSelf?.statisticsModel = data
                 weakSelf?.footer.dataModel = data
+                weakSelf?.tableView.reloadData()
             }, onError: { (error) in
-                self.dismissProgressHud()
+                //self.dismissProgressHud()
+                self.tableView.endrefresh()
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):

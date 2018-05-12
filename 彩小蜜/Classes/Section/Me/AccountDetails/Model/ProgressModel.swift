@@ -11,7 +11,7 @@ import HandyJSON
 struct ProgressLogModel: HandyJSON {
     var logCode: String!
     var logName: String!
-    var logTime: String!
+    var logTime: Int!
     var withdrawSn: String!
     var amount: String!
     var card: String!

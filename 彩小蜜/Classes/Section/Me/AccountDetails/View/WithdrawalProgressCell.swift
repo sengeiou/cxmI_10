@@ -8,15 +8,18 @@
 
 import UIKit
 
-class WithdrawalProgressCell: UITableViewCell {
+class WithdrawalProgressCell: UITableViewCell, DateProtocol {
 
     public var progressModel: ProgressLogModel! {
         didSet{
             guard progressModel != nil else { return }
             titleLB.text = progressModel.logName
-            timeLB.text = progressModel.logTime
             
-            if progressModel.logTime != nil , progressModel.logTime != "" {
+            let time = timeStampToMDHHmm(progressModel.logTime)
+            
+            timeLB.text = time
+            
+            if progressModel.logTime != nil {
                 icon.image = UIImage(named: "Mentionmoneysteps_sel")
             }else {
                 icon.image = UIImage(named: "Mentionmoneysteps_nor")
