@@ -358,9 +358,17 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
                 cell.detail.text = "- ¥" + self.saveBetInfo.surplus
             case 2:
                 cell.title.text = "优惠券抵扣"
-                cell.detail.text = "- ¥" + self.saveBetInfo.bonusAmount
-                cell.accessoryType = .disclosureIndicator
-                cell.cellStyle = .detail
+                
+                if self.saveBetInfo.bonusList.isEmpty {
+                    cell.detail.text = "暂无优惠券"
+                    cell.accessoryType = .none
+                    cell.cellStyle = .defaults
+                }else {
+                    cell.detail.text = "- ¥" + self.saveBetInfo.bonusAmount
+                    cell.accessoryType = .disclosureIndicator
+                    cell.cellStyle = .detail
+                }
+                
             case 3:
                 cell.title.text = "还需支付"
                 let money = NSAttributedString(string:"¥ " + "\(self.saveBetInfo.thirdPartyPaid!)", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
