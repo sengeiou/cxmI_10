@@ -20,12 +20,19 @@ class FootballTwoOneView: UIView {
         didSet{
             guard teamInfo != nil else { return }
               let matchPlay = teamInfo.matchPlays[0]
-//            guard let homeCell = matchPlay.homeCell else { return }
-//            guard let visiCell = matchPlay.visitingCell else { return }
-            
-            
-            homeBut.setTitle(matchPlay.homeCell.cellName + matchPlay.homeCell.cellOdds, for: .normal)
-            visitingBut.setTitle(matchPlay.visitingCell.cellName + matchPlay.visitingCell.cellOdds, for: .normal)
+            guard let homeCell = matchPlay.homeCell, let visitingCell = matchPlay.visitingCell else {
+                homeBut.setTitle("", for: .normal)
+                visitingBut.setTitle("", for: .normal)
+                changeButState(but: homeBut, isSelected: false)
+                changeButState(but: visitingBut, isSelected: false)
+                homeBut.isUserInteractionEnabled = false
+                visitingBut.isUserInteractionEnabled = false
+                return }
+           
+            homeBut.isUserInteractionEnabled = true
+            visitingBut.isUserInteractionEnabled = true
+            homeBut.setTitle(homeCell.cellName + homeCell.cellOdds, for: .normal)
+            visitingBut.setTitle(visitingCell.cellName + visitingCell.cellOdds, for: .normal)
             
             changeButState(but: homeBut, isSelected: matchPlay.homeCell.isSelected)
             changeButState(but: visitingBut, isSelected: matchPlay.visitingCell.isSelected)

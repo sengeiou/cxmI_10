@@ -480,9 +480,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
             maxStr = str
         }
         
-        
         self.betType = str
-        
         
         for info in playList {
             info.isDan = false
@@ -490,14 +488,12 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         let numStr = str.first?.description
         let num = Int(numStr!)
         
-        
         // 取最后一个串关方式
         let lastStr = maxStr.first?.description
         let lastNum = Int(lastStr!)
         if lastNum! < selectPlayList.count {
             danMaxNum = num! - 1
         }
-        
     }
     
     func playFilterCancel() {
