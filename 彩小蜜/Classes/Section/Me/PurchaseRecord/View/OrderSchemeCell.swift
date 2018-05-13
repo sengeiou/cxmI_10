@@ -16,10 +16,16 @@ class OrderSchemeCell: UITableViewCell {
             let contents = schemeDetail.tickeContent.components(separatedBy: "X")
             
             var str = ""
+            var i = 0
             for content in contents {
-                str += content + "\n"
+                if i == contents.count - 1 {
+                    str += content
+                }else {
+                    str += content + "X\n"
+                }
+                i += 1
             }
-            str.removeLast()
+            //str.removeLast()
             
             //numLB.text = schemeDetail.number
             contentLB.text = str

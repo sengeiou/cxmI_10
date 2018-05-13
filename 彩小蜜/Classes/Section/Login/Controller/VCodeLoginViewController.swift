@@ -111,7 +111,12 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
                 if let code = Int(data.code) {
                     if code == 0 {
                         self.showHUD(message: data.msg)
+                    }else if data.code == "301014" {
+                        self.showHUD(message: data.msg)
+                        self.popViewController()
+                        //self.countdownBut.isCounting = false
                     }
+                    
                     if 300000...310000 ~= code{
                         self.showHUD(message: data.msg)
                     }
@@ -173,6 +178,7 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
             let cell = tableView.dequeueReusableCell(withIdentifier: vcodeCellIdentifier, for: indexPath) as! VcodeTextFieldCell
             cell.textfield.delegate = self
             cell.textfield.customDelegate = self
+            self.countdownBut = cell.textfield.countdownBut
             self.vcodeTF = cell.textfield
             return cell
         default:

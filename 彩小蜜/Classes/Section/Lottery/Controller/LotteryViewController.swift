@@ -37,7 +37,7 @@ class LotteryViewController: BaseViewController, UITableViewDelegate, UITableVie
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "彩小秘 · 开奖"
+        self.navigationItem.title = "彩小秘 · 比赛结果"
         
         hideBackBut()
         initSubview()
@@ -243,6 +243,9 @@ class LotteryViewController: BaseViewController, UITableViewDelegate, UITableVie
         self.dateFilter = dateModel.date
         self.headerView.dateModel = dateModel
         self.selectedDateModel = dateModel
+        self.isAlready = false
+        self.leagueIds = ""
+        self.finished = false
         filterRequest()
         lotteryResultRequest(date: dateFilter, isAlready: isAlready, leagueIds: leagueIds, finished: finished)
     }

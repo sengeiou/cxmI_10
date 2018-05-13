@@ -19,6 +19,7 @@ fileprivate let NoticeCellId = "NoticeCellId"
 
 class MessageCenterVC: BaseViewController, IndicatorInfoProvider, UITableViewDelegate, UITableViewDataSource, NoticeCellDelegate {
     
+    // MARK: - 查看详情
     func didTipNoticeDetail(messageModel: MessageCenterModel) {
         guard messageModel.msgUrl != nil else { return }
         pushRouterVC(urlStr: messageModel.msgUrl, from: self)

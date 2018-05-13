@@ -88,6 +88,10 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         didSet{
             guard playList != nil else { return }
             //selectPlays = Set(playList)
+            
+            
+            
+            
             self.tableView.reloadData()
         }
     }
@@ -116,6 +120,10 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         self.title = "彩小秘 · 投注确认"
         initSubview()
         setEmpty(title: "暂无可选赛事", tableView)
+        
+        playList = playList.sorted { s1 , s2 in
+            return s1.playCode < s2.playCode
+        }
         
         selectPlayList = [FootballPlayListModel]()
         selectPlays = Set(playList)

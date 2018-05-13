@@ -10,7 +10,7 @@ import Foundation
 
 enum ValidateType : String {
     case phone = "[0-9]{11}"
-    case number = "[1-9]\\d*?"
+    case number = "^[0-9]*"
     case password = "[A-Za-z0-9]{6,20}+$"
     case chinese = "[\u{4e00}-\u{9fa5}]+"
     case IDNumber = "(^[0-9]{15}$)|([0-9]{17}([0-9]|[0-9a-zA-Z])$)"

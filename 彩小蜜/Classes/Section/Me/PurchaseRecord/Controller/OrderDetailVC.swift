@@ -91,9 +91,14 @@ class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "彩小秘 · 订单详情"
-        
-        orderInfoRequest()
         initSubview()
+        
+        //orderInfoRequest()
+        self.tableView.headerRefresh {
+            self.loadNewData()
+        }
+        self.tableView.beginRefreshing()
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -112,20 +117,26 @@ class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         }
     }
     // MARK: - 网络请求
+    private func loadNewData() {
+        orderInfoRequest()
+    }
+    
     private func orderInfoRequest() {
         weak var weakSelf = self
         guard orderId != nil  else { return }
-        self.showProgressHUD()
+        //self.showProgressHUD()
         _ = userProvider.rx.request(.orderInfo(orderId: orderId))
             .asObservable()
             .mapObject(type: OrderInfoModel.self)
             .subscribe(onNext: { (data) in
-                self.dismissProgressHud()
+                //self.dismissProgressHud()
+                weakSelf?.tableView.endrefresh()
                 weakSelf?.orderInfo = data
                 weakSelf?.header.orderInfo = self.orderInfo
                 weakSelf?.tableView.reloadData()
             }, onError: { (error) in
-                self.dismissProgressHud()
+                //self.dismissProgressHud()
+                weakSelf?.tableView.endrefresh()
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):
@@ -254,6 +265,7 @@ class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         default:
             popViewController()
         }
+        self.tableView.endrefresh()
     }
     
     

@@ -37,7 +37,8 @@ class MyCollectionVC: BaseViewController, UITableViewDelegate, UITableViewDataSo
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.tableView.snp.makeConstraints { (make) in
-            make.top.left.right.bottom.equalTo(0)
+            make.top.left.right.equalTo(0)
+            make.bottom.equalTo(-SafeAreaBottomHeight)
         }
     }
     

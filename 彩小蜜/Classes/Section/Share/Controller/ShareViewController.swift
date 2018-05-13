@@ -104,7 +104,7 @@ class ShareViewController: BasePopViewController, UICollectionViewDelegate, UICo
     }
     override func viewDidLayoutSubviews() {
         bottomLine.snp.makeConstraints { (make) in
-            make.bottom.equalTo(-36 * defaultScale)
+            make.bottom.equalTo(-(36 * defaultScale + SafeAreaBottomHeight))
             make.left.right.equalTo(0)
             make.height.equalTo(1)
         }
@@ -112,7 +112,7 @@ class ShareViewController: BasePopViewController, UICollectionViewDelegate, UICo
         cancelBut.snp.makeConstraints { (make) in
             make.top.equalTo(bottomLine.snp.bottom)
             make.left.right.equalTo(0)
-            make.bottom.equalTo(0)
+            make.bottom.equalTo(-SafeAreaBottomHeight)
         }
         
         collectionView.snp.makeConstraints { (make) in
@@ -122,7 +122,7 @@ class ShareViewController: BasePopViewController, UICollectionViewDelegate, UICo
     }
 
     private func initSubview() {
-        self.viewHeight = 160 * defaultScale
+        self.viewHeight = 160 * defaultScale + SafeAreaBottomHeight
         
         bottomLine = UIView()
         bottomLine.backgroundColor = ColorC8C8C8
@@ -184,6 +184,16 @@ class ShareViewController: BasePopViewController, UICollectionViewDelegate, UICo
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return minimumInteritemSpacing
+    }
+    
+    override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if touch.view === self.pushBgView.superview {
+            return true
+        }
+        if touch.view !== self.collectionView {
+            return false
+        }
+        return true
     }
     
     override func didReceiveMemoryWarning() {

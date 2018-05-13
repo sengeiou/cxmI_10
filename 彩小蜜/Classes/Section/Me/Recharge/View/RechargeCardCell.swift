@@ -48,7 +48,7 @@ class RechargeCardCell: UITableViewCell {
         
         textfield = CustomTextField()
         textfield.font = Font14
-        textfield.placeholder = "请输入充值金额"
+        textfield.placeholder = "请输入整数的充值金额"
         textfield.borderStyle = .roundedRect
         textfield.keyboardType = .numberPad
         textfield.layer.cornerRadius = 5

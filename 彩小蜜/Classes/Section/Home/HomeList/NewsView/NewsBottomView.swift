@@ -19,7 +19,6 @@ class NewsBottomView: UIView {
             if newsInfo.clickNumber != nil {
                 readNumLb.text = "阅读\(newsInfo.clickNumber!)"
             }
-            
         }
     }
     

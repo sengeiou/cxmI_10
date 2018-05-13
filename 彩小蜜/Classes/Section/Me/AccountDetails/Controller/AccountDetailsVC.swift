@@ -58,7 +58,7 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
             make.bottom.equalTo(footer.snp.top)
         }
         footer.snp.makeConstraints { (make) in
-            make.bottom.equalTo(-SafeAreaBottomHeight)
+            make.bottom.equalTo(-0)
             make.left.right.equalTo(0)
             make.height.equalTo(50 * defaultScale)
         }
