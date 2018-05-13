@@ -200,7 +200,6 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     private func handlePaymentResult() {
-        self.showProgressHUD()
         
         guard self.paymentResult != nil else { return }
         
@@ -209,12 +208,17 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
             //根据iOS系统版本，分别处理
             if #available(iOS 10, *) {
                 UIApplication.shared.open(url, options: [:],
-                                          completionHandler: {
-                                            (success) in
-                                            
+                                          completionHandler: { (success) in
+                  
+                    if success {
+                        self.showProgressHUD()
+                    }
                 })
             } else {
-                UIApplication.shared.openURL(url)
+               let success = UIApplication.shared.openURL(url)
+                if success {
+                    self.showProgressHUD()
+                }
             }
         }else {
             
