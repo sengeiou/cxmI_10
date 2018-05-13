@@ -67,7 +67,9 @@ class FootballMatchInfoPopVC: BasePopViewController, BottomViewDelegate {
         let hhInfo = teamInfo.hhMatchTeamInfo!
         let vvInfo = teamInfo.vvMatchTeamInfo!
         let hvInfo = teamInfo.hvMatchTeamInfo!
-        matchDetail.text = "主队\(hhInfo.win!)胜\(hhInfo.draw!)平\(hhInfo.lose!)负 客队\(vvInfo.win!)胜\(vvInfo.draw!)平\(vvInfo.lose!)负"
+        let vmInfo = teamInfo.vMatchTeamInfo!
+        let hmInfo = teamInfo.hMatchTeamInfo!
+        matchDetail.text = "主队\(hmInfo.win!)胜\(hmInfo.draw!)平\(hmInfo.lose!)负 客队\(vmInfo.win!)胜\(vmInfo.draw!)平\(vmInfo.lose!)负"
         homeDetail.text = "主队\(hhInfo.win!)胜\(hhInfo.draw!)平\(hhInfo.lose!)负"
         visiDetail.text = "客队\(vvInfo.win!)胜\(vvInfo.draw!)平\(vvInfo.lose!)负"
         
