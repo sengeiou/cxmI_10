@@ -216,10 +216,8 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
             } else {
                 UIApplication.shared.openURL(url)
             }
-            //timer.fire()
-            //self.queryPaymentResultRequest()
         }else {
-            //self.queryPaymentResultRequest()
+            
         }
     }
     
