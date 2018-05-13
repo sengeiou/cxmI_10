@@ -37,6 +37,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     
     public var selectPlayList: [FootballPlayListModel]! {
         didSet{
+            
             guard selectPlayList != nil else { return }
  
             guard let filters = filterPlay(with: selectPlayList) else { return }
@@ -52,6 +53,8 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
             guard str != "" else { return }
             str.removeLast()
             self.betType = str
+            
+            setDan(filterList: filters)
             
             if selectPlayList.count == 1 {
                 let play = selectPlayList[0]
@@ -88,10 +91,6 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         didSet{
             guard playList != nil else { return }
             //selectPlays = Set(playList)
-            
-            
-            
-            
             self.tableView.reloadData()
         }
     }
@@ -448,7 +447,21 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     // MARK: - 串关弹窗 delegate
     func playFilterConfirm(filterList: [FootballPlayFilterModel]) {
         bottomView.filterList = filterList
-
+    
+        // 选择串关时，，胆的选中状态要改变
+        danMaxNum = 0
+        for play in playList {
+            play.isDan = false
+        }
+        
+        setDan(filterList: filterList)
+        
+        orderRequest()
+        self.tableView.reloadData()
+    }
+    
+    // MARK: - 胆 逻辑
+    private func setDan(filterList: [FootballPlayFilterModel]) {
         guard filterList.isEmpty == false else { return }
         var str : String = ""
         
@@ -467,9 +480,9 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
             maxStr = str
         }
         
-
+        
         self.betType = str
-        orderRequest()
+        
         
         for info in playList {
             info.isDan = false
@@ -477,13 +490,13 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         let numStr = str.first?.description
         let num = Int(numStr!)
         
+        
         // 取最后一个串关方式
         let lastStr = maxStr.first?.description
         let lastNum = Int(lastStr!)
         if lastNum! < selectPlayList.count {
             danMaxNum = num! - 1
         }
-        self.tableView.reloadData()
         
     }
     
