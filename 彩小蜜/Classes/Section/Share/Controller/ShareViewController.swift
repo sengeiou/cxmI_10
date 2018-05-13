@@ -37,7 +37,7 @@ class ShareViewController: BasePopViewController, UICollectionViewDelegate, UICo
     }
     
     @objc private func cancelClicked(_ sender: UIButton) {
-        
+        dismiss(animated: true , completion: nil )
     }
     
     //MARK: - collectionView delegate
