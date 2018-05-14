@@ -24,8 +24,6 @@ class OrderDetailTitleCell: UITableViewCell {
             var resultStr = ""
             var ruleStr = ""
             
-            var rec = ""
-            
             var i = 1
             for result in matchInfo.cathecticResults {
                 for cath in result.cathectics {
@@ -37,7 +35,7 @@ class OrderDetailTitleCell: UITableViewCell {
                     }
                     let cathectic = cath.cathectic.replacingOccurrences(of: "null", with: "")
 
-                    let rec = NSAttributedString(string: "\(cathectic!)\n", attributes: [NSAttributedStringKey.foregroundColor: color])
+                    let rec = NSAttributedString(string: "\(cathectic)\n", attributes: [NSAttributedStringKey.foregroundColor: color])
                         
                     record.append(rec)
                 }
@@ -61,7 +59,6 @@ class OrderDetailTitleCell: UITableViewCell {
             
             timeLB.text = matchInfo.changci
             recordLB.attributedText = record
-            //recordLB.text = rec
             resultLB.text = resultStr
             
         }
@@ -208,7 +205,8 @@ class OrderDetailTitleCell: UITableViewCell {
         }
         
         recordLB.snp.makeConstraints { (make) in
-            make.top.height.equalTo(timeLB)
+            make.top.equalTo(timeLB)
+            make.bottom.equalTo(self.contentView).offset(1)
             make.width.equalTo(OrderDetailTitleWidth)
             make.right.equalTo(resultLB.snp.left).offset(-1)
         }
