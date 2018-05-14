@@ -50,6 +50,11 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
         initSubview()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //newsDetailRequest()
+    }
+    
     // MARK: - 点击事件
     // 收藏
     @objc private func collectButClicked(_ sender: UIButton) {
@@ -152,6 +157,7 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
                     case 600:
                         weakSelf?.removeUserData()
                         weakSelf?.pushLoginVC(from: self)
+                        
                     default : break
                     }
                     
@@ -181,6 +187,7 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
                     case 600:
                         weakSelf?.removeUserData()
                         weakSelf?.pushLoginVC(from: self)
+                        weakSelf?.collectBut.isSelected = false
                     default : break
                     }
                     

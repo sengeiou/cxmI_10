@@ -176,7 +176,9 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro,
     }
     
     @objc override func back(_ sender: UIButton) {
-
+        self.passwordTF.resignFirstResponder()
+        self.userNameTF.resignFirstResponder()
+        
         if currentVC != nil {
             popToCurrentVC()
             guard self.loginDelegate != nil else { return }
@@ -184,8 +186,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro,
         }else {
             pushRootViewController()
         }
-        self.passwordTF.resignFirstResponder()
-        self.userNameTF.resignFirstResponder()
+        
     }
     
     override func didReceiveMemoryWarning() {
