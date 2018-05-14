@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AppDelegateProtocol, GeTu
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
+        rootViewController = MainTabBarController()
         //UserDefaults.standard.set(false, forKey: ShowGuided)
         if UserDefaults.standard.bool(forKey: ShowGuided) == false {
             UserDefaults.standard.set(true, forKey: ShowGuided)
@@ -32,8 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AppDelegateProtocol, GeTu
             guide.delegate = self
             self.window?.rootViewController = guide
         }else {
-            rootViewController = MainTabBarController()
-            
             self.window?.rootViewController = rootViewController
         }
         
