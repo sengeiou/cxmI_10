@@ -390,7 +390,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                     return 110 * defaultScale
                 }
                 else {
-                    return 140 * defaultScale
+                    return 150 * defaultScale
                 }
             }
         }
