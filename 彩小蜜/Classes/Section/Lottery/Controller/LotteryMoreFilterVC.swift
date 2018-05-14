@@ -77,26 +77,6 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
         }
     }
     
-    // MARK: - 网络请求
-//    private func filterRequest() {
-//        weak var weakSelf = self
-//        _ = homeProvider.rx.request(.filterMatchList)
-//            .asObservable()
-//            .mapArray(type: FilterModel.self)
-//            .subscribe(onNext: { (data) in
-//                weakSelf?.filterList = data
-//                weakSelf?.collectionView.reloadData()
-//            }, onError: { (error) in
-//                guard let err = error as? HXError else { return }
-//                switch err {
-//                case .UnexpectedResult(let code, let msg):
-//                    print(code!)
-//                    weakSelf?.showHUD(message: msg!)
-//                default: break
-//                }
-//            }, onCompleted: nil, onDisposed: nil )
-//    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         titleLB.snp.makeConstraints { (make) in
@@ -324,7 +304,6 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
             filter.isSelected = false
             self.collectionView.reloadItems(at: [indexPath])
         }
-        
     }
     
     private func changButState(isSelected: Bool) {

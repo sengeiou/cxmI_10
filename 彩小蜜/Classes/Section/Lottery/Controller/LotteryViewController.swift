@@ -111,6 +111,7 @@ class LotteryViewController: BaseViewController, UITableViewDelegate, UITableVie
                     switch code {
                     case 600:
                         weakSelf?.removeUserData()
+                        weakSelf?.isAlready = false 
                         weakSelf?.pushLoginVC(from: self)
                     default : break
                     }
