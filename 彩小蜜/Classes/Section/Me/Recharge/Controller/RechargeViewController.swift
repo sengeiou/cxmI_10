@@ -115,12 +115,12 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
       
         guard self.paymentModel != nil else { return }
         
-        if self.paymentModel.payCode == "app_weixin" {
-            if WXApi.isWXAppInstalled() == false {
-                showHUD(message: "请先安装微信")
-                return
-            }
-        }
+//        if self.paymentModel.payCode == "app_weixin" {
+//            if WXApi.isWXAppInstalled() == false {
+//                showHUD(message: "请先安装微信")
+//                return
+//            }
+//        }
         
         weak var weakSelf = self
         
