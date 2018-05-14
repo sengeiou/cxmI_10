@@ -84,21 +84,21 @@ class FootballScoreFilterVC: BasePopViewController, BottomViewDelegate, Football
         }
         
         shengTitle.snp.makeConstraints { (make) in
-            make.top.equalTo(43 * defaultScale)
-            make.height.equalTo(132 * defaultScale)
+            make.top.equalTo(43 )
+            make.height.equalTo(132)
             make.left.equalTo(filterleftSpacing)
             make.width.equalTo(filterTitleWidth)
         }
         
         pingTitle.snp.makeConstraints { (make) in
-            make.top.equalTo(shengTitle.snp.bottom).offset(18 * defaultScale)
+            make.top.equalTo(shengTitle.snp.bottom).offset(18)
             make.left.width.equalTo(shengTitle)
-            make.height.equalTo(44 * defaultScale)
+            make.height.equalTo(44)
         }
         fuTitle.snp.makeConstraints { (make) in
-            make.top.equalTo(pingTitle.snp.bottom).offset(18 * defaultScale)
+            make.top.equalTo(pingTitle.snp.bottom).offset(18)
             make.left.width.equalTo(shengTitle)
-            make.height.equalTo(132 * defaultScale)
+            make.height.equalTo(132)
         }
         
         shengScoreView.snp.makeConstraints { (make) in
@@ -128,7 +128,7 @@ class FootballScoreFilterVC: BasePopViewController, BottomViewDelegate, Football
     
     private func initSubview() {
         
-        self.viewHeight = (454 + SafeAreaBottomHeight) * defaultScale
+        self.viewHeight = (454 + SafeAreaBottomHeight)
         
         homeTeam = UILabel()
         homeTeam.font = Font14

@@ -27,7 +27,7 @@ let HunheFilterTitleWidth: CGFloat = 23
 let HunheFilterleftSpacing: CGFloat = 16
 
 
-fileprivate let FilterCellHeight: CGFloat = 44 * defaultScale
+fileprivate let FilterCellHeight: CGFloat = 44
 
 let HunheCellHeight : CGFloat = 38
 fileprivate let minimumLineSpacing : CGFloat = 0

@@ -77,7 +77,7 @@ class FootballBanQuanCFilterVC: BasePopViewController, BottomViewDelegate, Footb
         
         shengTitle.snp.makeConstraints { (make) in
             make.top.equalTo(43 * defaultScale)
-            make.height.equalTo(132 * defaultScale)
+            make.height.equalTo(132)
             make.left.equalTo(filterleftSpacing)
             make.width.equalTo(filterTitleWidth)
         }
@@ -92,14 +92,14 @@ class FootballBanQuanCFilterVC: BasePopViewController, BottomViewDelegate, Footb
         bottomView.snp.makeConstraints { (make) in
             make.bottom.equalTo(-SafeAreaBottomHeight)
             make.left.right.equalTo(0)
-            make.height.equalTo(45 * defaultScale)
+            make.height.equalTo(45)
         }
         
     }
     
     private func initSubview() {
         
-        self.viewHeight = (252 + SafeAreaBottomHeight) * defaultScale
+        self.viewHeight = (252 + SafeAreaBottomHeight)
         
         homeTeam = UILabel()
         homeTeam.font = Font14
