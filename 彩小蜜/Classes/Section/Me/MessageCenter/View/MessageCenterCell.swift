@@ -16,10 +16,18 @@ class MessageCenterCell: UITableViewCell {
             titleLB.text = messageModel.title
             timeLB.text = messageModel.sendTime
             moneyLB.text = messageModel.content
-            detailLB.text = messageModel.msgDesc
+           
             stateLB.text = messageModel.contentDesc
             
             moneyLB.textColor = ColorE95504
+            
+            let msgDescs = messageModel.msgDesc.components(separatedBy: "#")
+            var msgD = ""
+            for msg in msgDescs {
+                msgD += msg + "\n"
+            }
+            
+            detailLB.text = msgD
 //            switch messageModel.objectType {
 //            case "0":
 //                moneyLB.textColor = ColorE95504
