@@ -49,8 +49,12 @@ class ShareDataManager {
         copy.iconPic = "复制"
         copy.shareCode = .ShareLink
         
-        shareList.append(share)
-        shareList.append(weixin)
+        if WXApi.isWXAppInstalled(){
+            shareList.append(share)
+            shareList.append(weixin)
+        }
+        
+        
         shareList.append(copy)
         
         return shareList

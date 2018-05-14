@@ -63,6 +63,7 @@ class ShareViewController: BasePopViewController, UICollectionViewDelegate, UICo
     }
     
     private func shareWeixin() {
+        
         guard shareContent != nil else { return }
         shareImage(content: self.shareContent, scene: WXSceneSession)
     }
