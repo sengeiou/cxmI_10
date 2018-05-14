@@ -23,10 +23,11 @@ class AccountDetailsCell: UITableViewCell {
             stateLB.isHidden = true
             stateIcon.isHidden = true
             // 0-全部 1-奖金 2-充值 3-购彩 4-提现 5-红包 6- 退款
-            
+            moneyLB.textColor = Color505050
             switch accountDetail.processType {
             case "1":
                 icon.image = UIImage(named: "Thewinning")
+                moneyLB.textColor = ColorEA5504
             case "2":
                 icon.image = UIImage(named: "top-up")
             case "3":
