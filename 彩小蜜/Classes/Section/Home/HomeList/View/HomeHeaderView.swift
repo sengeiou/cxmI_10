@@ -62,8 +62,9 @@ class HomeHeaderView: UIView, FSPagerViewDataSource, FSPagerViewDelegate {
         //设置可以无限翻页，默认值为false，false时从尾部向前滚动到头部再继续循环滚动，true时可以无限滚动
         viewPager.isInfinite = true
         //设置转场的模式
-        viewPager.transformer = FSPagerViewTransformer(type: FSPagerViewTransformerType.linear)
+        //viewPager.transformer = FSPagerViewTransformer(type: FSPagerViewTransformerType.linear)
         
+        viewPager.removesInfiniteLoopForSingleItem = true
         return viewPager
     }()
     
