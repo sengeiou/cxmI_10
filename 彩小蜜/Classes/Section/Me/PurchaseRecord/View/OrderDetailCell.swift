@@ -39,16 +39,11 @@ class OrderDetailCell: UITableViewCell {
                     }else {
                         color = Color505050
                     }
-                    
-                    if i == matchInfo.cathecticResults.count {
-                        let rec = NSAttributedString(string: cath.cathectic, attributes: [NSAttributedStringKey.foregroundColor: color])
+                    let cathectic = cath.cathectic.replacingOccurrences(of: "null", with: "")
+
+                    let rec = NSAttributedString(string: cathectic + "\n", attributes: [NSAttributedStringKey.foregroundColor: color])
                         
-                        record.append(rec)
-                    }else {
-                        let rec = NSAttributedString(string: cath.cathectic + "\n", attributes: [NSAttributedStringKey.foregroundColor: color])
-                        
-                        record.append(rec)
-                    }
+                    record.append(rec)
                 }
                 resultStr += result.matchResult + "\n"
                 ruleStr += result.playType + "\n"

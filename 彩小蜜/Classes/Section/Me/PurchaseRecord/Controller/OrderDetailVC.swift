@@ -176,7 +176,7 @@ class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         table.tableHeaderView = header
         
         table.estimatedRowHeight = 80
-        table.rowHeight = UITableViewAutomaticDimension
+        //table.rowHeight = UITableViewAutomaticDimension
         
         table.register(OrderDetailTitleCell.self, forCellReuseIdentifier: OrderDetailTitleCellId)
         table.register(OrderDetailCell.self, forCellReuseIdentifier: OrderDetailCellId)

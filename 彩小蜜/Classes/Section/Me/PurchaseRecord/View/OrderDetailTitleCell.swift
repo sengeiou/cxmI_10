@@ -24,6 +24,8 @@ class OrderDetailTitleCell: UITableViewCell {
             var resultStr = ""
             var ruleStr = ""
             
+            var rec = ""
+            
             var i = 1
             for result in matchInfo.cathecticResults {
                 for cath in result.cathectics {
@@ -34,15 +36,10 @@ class OrderDetailTitleCell: UITableViewCell {
                         color = Color505050
                     }
                     let cathectic = cath.cathectic.replacingOccurrences(of: "null", with: "")
-                    if i == matchInfo.cathecticResults.count {
-                        let rec = NSAttributedString(string: cathectic, attributes: [NSAttributedStringKey.foregroundColor: color])
+
+                    let rec = NSAttributedString(string: "\(cathectic!)\n", attributes: [NSAttributedStringKey.foregroundColor: color])
                         
-                        record.append(rec)
-                    }else {
-                        let rec = NSAttributedString(string: cathectic + "\n", attributes: [NSAttributedStringKey.foregroundColor: color])
-                        
-                        record.append(rec)
-                    }
+                    record.append(rec)
                 }
                 resultStr += result.matchResult + "\n"
                 ruleStr += result.playType + "\n"
@@ -64,6 +61,7 @@ class OrderDetailTitleCell: UITableViewCell {
             
             timeLB.text = matchInfo.changci
             recordLB.attributedText = record
+            //recordLB.text = rec
             resultLB.text = resultStr
             
         }
@@ -73,11 +71,11 @@ class OrderDetailTitleCell: UITableViewCell {
     private var timeLB : UILabel!
     private var nameTitle: UILabel!
     private var nameLB : UILabel!
-    private var ruleTitle: UILabel!
+    private var ruleTitle: UILabel!    // 玩法
     private var ruleLB : UILabel!
-    private var recordTitle: UILabel!
+    private var recordTitle: UILabel!  // 投注
     private var recordLB: UILabel!
-    private var resultTitle: UILabel!
+    private var resultTitle: UILabel!  // 赛果
     private var resultLB : UILabel!
     
     private var sectionTitle : UILabel!
