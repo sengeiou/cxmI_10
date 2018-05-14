@@ -114,6 +114,14 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
     private func rechargeRequest(amount: String) {
       
         guard self.paymentModel != nil else { return }
+        
+        if self.paymentModel.payCode == "app_weixin" {
+            if WXApi.isWXAppInstalled() == false {
+                showHUD(message: "请先安装微信")
+                return
+            }
+        }
+        
         weak var weakSelf = self
         
         _ = paymentProvider.rx.request(.paymentRecharge(payCode: self.paymentModel.payCode, totalAmount: amount))
