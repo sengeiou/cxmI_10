@@ -11,7 +11,7 @@ import Moya
 import Result
 import SVProgressHUD
 import Reachability
-
+import PKHUD
 
 public final class RequestLoadingPlugin:PluginType, AlertPro{
     
@@ -32,7 +32,7 @@ public final class RequestLoadingPlugin:PluginType, AlertPro{
             try? reachability.startNotifier()
             
             if reachability.connection == .none {
-                showHUD(message: "网络异常请稍后重试")
+                HUD.flash(.label("网络异常请稍后重试"), delay: 1.5)
             }
         }
         NSLog("---------请求开始-------------\(Date())")
