@@ -111,7 +111,7 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
                 matchBetCell.betCells = betCells
                 matchBetCell.playType = matchPlay.playType
                 matchBetCell.single = matchPlay.single
-                matchBetCell.fixedOdds = matchPlay.fixedOdds
+                matchBetCell.fixedOdds = String(matchPlay.fixedOdds)
                 matchBetCells.append(matchBetCell)
             }
             // 2选1 玩法转换
@@ -151,7 +151,7 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
                         
                         betCells.append(cellc)
                         matchBetCell.betCells = betCells
-                        matchBetCell.fixedOdds = betCell.fixedOdds
+                        matchBetCell.fixedOdds = String(betCell.fixedOdds)
                         matchBetCell.single = betCell.single
                         matchBetCells.append(matchBetCell)
                     }
