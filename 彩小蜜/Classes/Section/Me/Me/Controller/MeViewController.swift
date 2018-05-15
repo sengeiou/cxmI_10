@@ -31,7 +31,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     private var newsheaderView : NewsHeaderView!
     private var footerView: MeFooterView!
     private var userInfo  : UserInfoDataModel!
-    private var phoneNum : String = "010-84505099"
+    
     //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()

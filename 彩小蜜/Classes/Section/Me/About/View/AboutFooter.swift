@@ -40,7 +40,7 @@ class AboutFooter: UIView {
         serviceLB.font = Font13
         serviceLB.textColor = ColorEA5504
         serviceLB.textAlignment = .left
-        serviceLB.text = "客服热线： 010-84505099"
+        serviceLB.text = "客服热线： \(phoneNum)"
         
         webLB = UILabel()
         webLB.font = Font13
