@@ -14,6 +14,7 @@ class MeComplaintVC: BaseViewController {
     
     // MARK: - 点击事件
     @objc private func sendClicked(_ sender: UIButton) {
+        self.textView.textView.resignFirstResponder()
         print("发送")
         guard self.textView.textView.text != nil, self.textView.textView.isEmpty == false else {
             showHUD(message: "请输入您的宝贵意见")

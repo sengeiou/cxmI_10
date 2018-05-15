@@ -16,7 +16,8 @@ class ForgetPswVCodeVC: BaseViewController, UITextFieldDelegate, ValidatePro,Cus
     
     //MARK: - 点击事件
     @objc private func confirmButClicked(_ sender: UIButton) {
-       
+        self.passwordTF.resignFirstResponder()
+        self.vcodeTF.resignFirstResponder()
         guard validate(.password, str: self.passwordTF.text) == true else {
             showHUD(message: "请输入6-20位的密码")
             return }

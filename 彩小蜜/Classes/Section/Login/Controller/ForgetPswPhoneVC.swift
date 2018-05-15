@@ -17,7 +17,7 @@ class ForgetPswPhoneVC: BaseViewController, UITextFieldDelegate, ValidatePro, UI
 
     //MARK: - 点击事件
     @objc private func confirmButClicked(_ sender : UIButton) {
-
+        self.phoneTF.resignFirstResponder()
         guard validate(.phone, str: self.phoneTF.text) == true else {
             showHUD(message: "请输入合法的手机号")
             return

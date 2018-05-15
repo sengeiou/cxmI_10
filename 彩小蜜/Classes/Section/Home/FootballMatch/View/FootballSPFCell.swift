@@ -57,12 +57,12 @@ class FootballSPFCell: UITableViewCell, DateProtocol {
             make.right.equalTo(-rightSpacing)
             make.height.equalTo(1)
         }
-        
+
         typeIcon.snp.makeConstraints { (make) in
             make.top.left.equalTo(0)
             make.width.height.equalTo(typeIconSize * defaultScale)
         }
-        
+
         matchTitle.snp.makeConstraints { (make) in
             make.top.equalTo(13.5 * defaultScale)
             make.left.equalTo(10 * defaultScale)

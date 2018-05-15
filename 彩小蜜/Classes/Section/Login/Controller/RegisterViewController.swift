@@ -28,6 +28,10 @@ class RegisterViewController: BaseViewController, UITableViewDelegate, UITableVi
 
     // MARK: - 点击事件
     @objc private func registerClicked(_ sender: UIButton) {
+        self.passwordTF.resignFirstResponder()
+        self.phoneTF.resignFirstResponder()
+        self.vcodeTF.resignFirstResponder()
+        
         guard canRegister else {
             showHUD(message: "请同意注册协议")
             return

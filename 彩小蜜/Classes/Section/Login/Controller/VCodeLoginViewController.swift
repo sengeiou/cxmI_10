@@ -17,6 +17,9 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
     
     //MARK: - 按钮 点击 事件
     @objc private func loginClicked(_ sender : UIButton) {
+        self.userNameTF.resignFirstResponder()
+        self.vcodeTF.resignFirstResponder()
+        
         guard validate(.phone, str: self.userNameTF.text) == true else {
             showHUD(message: "请输入正确的手机号")
             return }
@@ -79,8 +82,7 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
                 }else {
                     self.pushRootViewController()
                 }
-                self.userNameTF.resignFirstResponder()
-                self.vcodeTF.resignFirstResponder()
+                
                 print(data)
             }, onError: { (error) in
                 self.dismissProgressHud()

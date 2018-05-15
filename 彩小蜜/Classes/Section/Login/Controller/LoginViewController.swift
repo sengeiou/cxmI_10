@@ -21,6 +21,8 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro,
 
     //MARK: - 按钮 点击 事件
     @objc private func loginClicked(_ sender : UIButton) {
+        self.passwordTF.resignFirstResponder()
+        self.userNameTF.resignFirstResponder()
         guard validate(.phone, str: self.userNameTF.text) == true else {
             showHUD(message: "请输入正确的手机号")
             return }
