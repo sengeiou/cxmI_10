@@ -169,9 +169,10 @@ class FootballTimesFilterVC: BasePopViewController, UITextFieldDelegate, CXMKeyb
     // 确定
     func keyboardConfirm() {
         guard delegate != nil else { return }
-        guard let times = self.textField.text else { return }
+        guard var times = self.textField.text else { return }
         if self.textField.text == nil || self.textField.text == "" {
             self.times = "1"
+            times = "1"
         }
         delegate.timesConfirm(times: times)
         dismiss(animated: true, completion: nil)

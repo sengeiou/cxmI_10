@@ -30,13 +30,13 @@ class AuthenticationVC: BaseViewController, UITextFieldDelegate, ValidatePro {
     //MARK: - TextField Delegate
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if nameTF.isFirstResponder == false {
-            guard validate(.chinese, str: nameTF.text) == true else {
-                nameTF.becomeFirstResponder()
-                showHUD(message: "请输入正确的姓名")
-                return
-            }
-        }
+//        if nameTF.isFirstResponder == false {
+//            guard validate(.chinese, str: nameTF.text) == true else {
+//                nameTF.becomeFirstResponder()
+//                showHUD(message: "请输入正确的姓名")
+//                return
+//            }
+//        }
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -45,20 +45,20 @@ class AuthenticationVC: BaseViewController, UITextFieldDelegate, ValidatePro {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == nameTF {
-            guard validate(.chinese, str: textField.text) == true else {
-                showHUD(message: "请输入正确的姓名")
-                return false
-            }
-            IDNumberTF.becomeFirstResponder()
-        }
-        if textField == IDNumberTF {
-            guard validate(.IDNumber, str: textField.text) == true else {
-                showHUD(message: "请输入正确的身份证号码")
-                return false
-            }
-            textField.resignFirstResponder()
-        }
+//        if textField == nameTF {
+//            guard validate(.chinese, str: textField.text) == true else {
+//                showHUD(message: "请输入正确的姓名")
+//                return false
+//            }
+//            IDNumberTF.becomeFirstResponder()
+//        }
+//        if textField == IDNumberTF {
+//            guard validate(.IDNumber, str: textField.text) == true else {
+//                showHUD(message: "请输入正确的身份证号码")
+//                return false
+//            }
+//            textField.resignFirstResponder()
+//        }
         
         return true
     }

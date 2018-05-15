@@ -12,7 +12,7 @@
 
 //let baseURLStr = "http://39.106.18.39:8765/api"
 let baseURLStr = "http://api.caixiaomi.net/api"
-//let baseURLStr = "http://39.106.18.39:7075"
+
 
 
 
