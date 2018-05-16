@@ -86,6 +86,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AppDelegateProtocol, GeTu
     func geTuiSdkDidSendMessage(_ messageId: String!, result: Int32) {
         
     }
+    // 透传消息
     func geTuiSdkDidReceivePayloadData(_ payloadData: Data!, andTaskId taskId: String!, andMsgId msgId: String!, andOffLine offLine: Bool, fromGtAppId appId: String!) {
         var payloadMsg = ""
         if payloadData != nil {
@@ -93,6 +94,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AppDelegateProtocol, GeTu
         }
         
         let msg:String = "Receive Payload: \(payloadMsg), taskId:\(taskId), messageId:\(msgId)"
+    }
+    
+    /** 远程通知注册成功委托 */
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let deviceToken_ns = NSData.init(data: deviceToken);    // 转换成NSData类型
+        var token = deviceToken_ns.description.trimmingCharacters(in: CharacterSet(charactersIn: "<>"));
+        token = token.replacingOccurrences(of: " ", with: "")
+        
+        // [ GTSdk ]：向个推服务器注册deviceToken
+        GeTuiSdk.registerDeviceToken(token);
+        
+        NSLog("\n>>>[DeviceToken Success]:%@\n\n",token);
     }
 
 }

@@ -1854,6 +1854,14 @@
 					E573759E20468B8900148622 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 0;
+							};
+						};
 					};
 					E57375B220468B8900148622 = {
 						CreatedOnToolsVersion = 9.2;
@@ -2441,7 +2449,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = WU947P5UTQ;
+				DEVELOPMENT_TEAM = DYGBA9J6K8;
 				INFOPLIST_FILE = "$(SRCROOT)/彩小蜜/Classes/Resource/Plist/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2462,7 +2470,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = WU947P5UTQ;
+				DEVELOPMENT_TEAM = DYGBA9J6K8;
 				INFOPLIST_FILE = "$(SRCROOT)/彩小蜜/Classes/Resource/Plist/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

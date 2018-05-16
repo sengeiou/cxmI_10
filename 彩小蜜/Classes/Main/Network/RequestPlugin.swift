@@ -27,13 +27,13 @@ public final class RequestLoadingPlugin:PluginType, AlertPro{
             
             """)
         //self.showHUD()
-        if let reachability = Reachability() {
-            try? reachability.startNotifier()
-            
-            if reachability.connection == .none {
-                HUD.flash(.label("网络异常请稍后重试"), delay: 1.5)
-            }
-        }
+//        if let reachability = Reachability() {
+//            try? reachability.startNotifier()
+//            
+//            if reachability.connection == .none {
+//                HUD.flash(.label("网络异常请稍后重试"), delay: 1.5)
+//            }
+//        }
         
         NSLog("---------请求开始-------------\(Date())")
     }

@@ -15,4 +15,9 @@ let GetuiAppKey = "yIPfqwq6OMAPp6dkqgLpG5"
 let GetuiSecrct = "G0aBqAD6t79JfzTB6Z5lo5"
 
 
-let phoneNum = "4000126600"
+let phoneNum = "400-012-6600"
+
+// test
+//let GetuiAppID  = "1HziAbTy9p8YJV5oIHDqk1"
+//let GetuiAppKey = "dRfGPZQARX7PykyeW02VfA"
+//let GetuiSecrct = "xeRmBvYBM6AHGzfaV2tX43"
