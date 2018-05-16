@@ -21,7 +21,7 @@ class MyCollectionVC: BaseViewController, UITableViewDelegate, UITableViewDataSo
         super.viewDidLoad()
         self.title = "彩小秘 · 我的收藏"
         setRightButton()
-        setEmpty(title: "暂无收藏", tableView)
+        setEmpty(title: "暂无收藏内容", tableView)
         collectList = [NewsInfoModel]()
         collectionRequest(1)
         initSubview()

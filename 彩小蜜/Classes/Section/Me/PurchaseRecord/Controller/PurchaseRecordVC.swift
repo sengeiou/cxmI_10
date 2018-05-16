@@ -35,9 +35,9 @@ class PurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "彩小秘 · 购彩记录"
+        //self.title = "彩小秘 · 购彩记录"
         self.view.addSubview(self.tableView)
-        setEmpty(title: "暂无记录！", tableView)
+        setEmpty(title: "暂无投注记录", tableView)
         
         self.tableView.headerRefresh {
             self.loadNewData()

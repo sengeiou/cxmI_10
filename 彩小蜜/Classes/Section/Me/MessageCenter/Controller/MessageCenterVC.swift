@@ -32,7 +32,7 @@ class MessageCenterVC: BaseViewController, IndicatorInfoProvider, UITableViewDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setEmpty(title: "暂无消息", tableView)
+        setEmpty(title: "暂无数据", tableView)
         self.view.addSubview(self.tableView)
         
         messageList = []

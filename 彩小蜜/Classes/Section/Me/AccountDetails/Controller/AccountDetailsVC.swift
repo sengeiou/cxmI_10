@@ -40,7 +40,7 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
         footer = AccountDetailFooterView()
         self.view.addSubview(footer)
         
-        setEmpty(title: "暂无记录！", tableView)
+        setEmpty(title: "暂无明细数据", tableView)
         self.tableView.headerRefresh {
             self.loadNewData()
         }

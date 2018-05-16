@@ -32,7 +32,7 @@ class CouponViewController: BaseViewController, IndicatorInfoProvider, UITableVi
         couponList = []
         couponListRequest(1)
         
-        setEmpty(title: "您还没有优惠券！", tableView)
+        setEmpty(title: "暂无数据", tableView)
         
         self.tableView.headerRefresh {
             self.loadNewData()
