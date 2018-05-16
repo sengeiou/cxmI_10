@@ -27,7 +27,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro,
             showHUD(message: "请输入正确的手机号")
             return }
         guard validate(.password, str: self.passwordTF.text) == true else {
-            showHUD(message: "请输入正确的密码")
+            showHUD(message: "请输入6-20位数字和字母组合的密码")
             return }
         loginRequest()
     }

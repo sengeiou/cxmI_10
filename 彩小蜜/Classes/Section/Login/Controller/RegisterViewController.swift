@@ -41,7 +41,7 @@ class RegisterViewController: BaseViewController, UITableViewDelegate, UITableVi
             return
         }
         guard validate(.password, str: self.passwordTF.text) else{
-            showHUD(message: "密码格式错误，请重新输入")
+            showHUD(message: "请输入6-20位数字和字母组合的密码")
             return
         }
         guard self.vcodeTF.text != nil else {

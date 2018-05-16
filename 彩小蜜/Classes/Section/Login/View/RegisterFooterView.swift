@@ -45,15 +45,17 @@ class RegisterFooterView: UIView {
         register.layer.cornerRadius = 5
         
         
-        let muAtt = NSMutableAttributedString(string: "我已阅读并同意 ", attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F])
+        let muAtt = NSMutableAttributedString(string: "我已满18周岁并同意接受 ", attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F])
         let att = NSAttributedString(string: "《注册服务协议》", attributes: [NSAttributedStringKey.foregroundColor: Color505050])
         muAtt.append(att)
         
         agreementBut = UIButton(type: .custom)
         agreementBut.contentHorizontalAlignment = .center
-        agreementBut.setBackgroundImage(UIImage(named: "tongyi"), for: .normal)
-        agreementBut.setBackgroundImage(UIImage(named: "butongyi"), for: .selected)
-        
+//        agreementBut.setBackgroundImage(UIImage(named: "tongyi"), for: .normal)
+//        agreementBut.setBackgroundImage(UIImage(named: "butongyi"), for: .selected)
+        agreementBut.setImage(UIImage(named: "tongyi"), for: .normal)
+        agreementBut.setImage(UIImage(named: "butongyi"), for: .selected)
+        agreementBut.imageEdgeInsets = UIEdgeInsets(top: 11, left: 22, bottom: 11, right: 0)
         agreementBut.addTarget(self, action: #selector(agreementButClicked(_:)), for: .touchUpInside)
         
         agreement = UIButton(type: .custom)
@@ -82,7 +84,8 @@ class RegisterFooterView: UIView {
         agreementBut.snp.makeConstraints { (make) in
             make.top.equalTo(register.snp.bottom).offset(12.5 * defaultScale)
             make.right.equalTo(agreement.snp.left).offset(-10)
-            make.height.width.equalTo(18)
+            make.width.equalTo(40)
+            make.height.equalTo(40)
         }
         agreement.snp.makeConstraints { (make) in
             make.centerY.equalTo(agreementBut)

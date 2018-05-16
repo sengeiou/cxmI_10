@@ -19,7 +19,7 @@ class ForgetPswVCodeVC: BaseViewController, UITextFieldDelegate, ValidatePro,Cus
         self.passwordTF.resignFirstResponder()
         self.vcodeTF.resignFirstResponder()
         guard validate(.password, str: self.passwordTF.text) == true else {
-            showHUD(message: "请输入6-20位的密码")
+            showHUD(message: "请输入6-20位数字和字母组合的密码")
             return }
         guard validate(.number, str: self.vcodeTF.text) else {
             showHUD(message: "请输入验证码")
@@ -29,7 +29,7 @@ class ForgetPswVCodeVC: BaseViewController, UITextFieldDelegate, ValidatePro,Cus
     }
     func countdown(button:CountdownButton) {
         guard validate(.password, str: self.passwordTF.text) == true else {
-            showHUD(message: "请输入6-20位的密码")
+            showHUD(message: "请输入6-20位数字和字母组合的密码")
             return }
         button.isCounting = true
         sendSmsRequest()
