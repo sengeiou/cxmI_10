@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import DZNEmptyDataSet
 import SVProgressHUD
-
+import Reachability
 class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, DateProtocol, UserInfoPro , LoginProtocol, RouterPro{
     func didLogin(isLogin: Bool) {
         
@@ -121,6 +121,8 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
         self.view.backgroundColor = ColorF4F4F4
         setNavigation()
         self.isHidenBar = true
+        
+        
     }
 
     private func setNavigation() {

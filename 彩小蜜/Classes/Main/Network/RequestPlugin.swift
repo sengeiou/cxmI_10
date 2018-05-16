@@ -27,7 +27,6 @@ public final class RequestLoadingPlugin:PluginType, AlertPro{
             
             """)
         //self.showHUD()
-        
         if let reachability = Reachability() {
             try? reachability.startNotifier()
             
@@ -35,6 +34,7 @@ public final class RequestLoadingPlugin:PluginType, AlertPro{
                 HUD.flash(.label("网络异常请稍后重试"), delay: 1.5)
             }
         }
+        
         NSLog("---------请求开始-------------\(Date())")
     }
     

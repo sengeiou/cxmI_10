@@ -12,7 +12,7 @@ import Moya
 import HandyJSON
 import PKHUD
 
-fileprivate let Show500Title = "程序猿小哥哥正在修复\n马上就好"
+fileprivate let Show500Title = "出问题了程序猿小哥哥正在修复"
 
 extension Observable where E == Response {
     func mapBaseObject<T: HandyJSON>(type: T.Type) -> Observable<T> {

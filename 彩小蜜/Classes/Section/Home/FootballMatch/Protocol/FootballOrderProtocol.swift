@@ -112,12 +112,14 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
                 matchBetCell.playType = matchPlay.playType
                 matchBetCell.single = matchPlay.single
                 
-                matchBetCells.append(matchBetCell)
                 if matchPlay.fixedOdds != nil {
                     matchBetCell.fixedOdds = String(matchPlay.fixedOdds)
                 }else {
                     matchBetCell.fixedOdds = nil
                 }
+                
+                matchBetCells.append(matchBetCell)
+                
             }
             // 2选1 玩法转换
             if requestModel.playType == "7" {
@@ -157,13 +159,14 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
                         betCells.append(cellc)
                         matchBetCell.betCells = betCells
                         matchBetCell.single = betCell.single
-                        matchBetCells.append(matchBetCell)
                         
                         if betCell.fixedOdds != nil {
                             matchBetCell.fixedOdds = String(betCell.fixedOdds)
                         }else {
                             matchBetCell.fixedOdds = nil
                         }
+                        
+                        matchBetCells.append(matchBetCell)
                     }
                    
                 }
@@ -244,8 +247,9 @@ extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
                     if 300000...310000 ~= code {
                         print(code)
                         self.showHUD(message: msg!)
+                        self.showMsg = msg
                     }
-                    self.showMsg = msg
+                    
                 default: break
                 }
             }, onCompleted: nil, onDisposed: nil)
