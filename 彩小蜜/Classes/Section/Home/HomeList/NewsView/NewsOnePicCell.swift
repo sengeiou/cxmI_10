@@ -36,7 +36,7 @@ class NewsOnePicCell: UITableViewCell {
     
     // MARK: - 属性 private
     private var titleLb : UILabel!
-    private var icon : UIImageView!
+    public var icon : UIImageView!
     private var bottomView: NewsBottomView!
     private var videoIcon : UIImageView!
     private var bottomLine : UIView!
@@ -44,6 +44,7 @@ class NewsOnePicCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initSubview()
+        
     }
     
     override func layoutSubviews() {
@@ -75,9 +76,9 @@ class NewsOnePicCell: UITableViewCell {
         icon.addSubview(videoIcon)
         
         icon.snp.makeConstraints { (make) in
-            make.top.equalTo(12 * defaultScale)
+            make.top.equalTo(14 * defaultScale)
             make.right.equalTo(-12 * defaultScale)
-            make.bottom.equalTo(-12 * defaultScale)
+            make.bottom.equalTo(-14 * defaultScale)
             make.width.equalTo(PicWidth)
         }
         titleLb.snp.makeConstraints { (make) in

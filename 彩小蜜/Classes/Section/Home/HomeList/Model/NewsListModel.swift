@@ -32,7 +32,7 @@ struct NewsListModel: HandyJSON {
 
 struct NewsInfoModel: HandyJSON {
     /// 发布时间
-    var addTime: String!
+    var addTime: Int!
     ///
     var articleId: String!
     /// 文章缩略图，用“，”分隔

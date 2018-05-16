@@ -8,14 +8,15 @@
 
 import UIKit
 
-class NewsBottomView: UIView {
+class NewsBottomView: UIView, DateProtocol {
 
     // MARK: - 属性 public
     public var newsInfo : NewsInfoModel! {
         didSet{
             guard newsInfo != nil else { return }
             titleLb.text = newsInfo.author
-            timeLb.text = newsInfo.addTime
+            timeLb.text = timeStampToMDHHmm(newsInfo.addTime)
+            
             if newsInfo.clickNumber != nil {
                 readNumLb.text = "阅读\(newsInfo.clickNumber!)"
             }
