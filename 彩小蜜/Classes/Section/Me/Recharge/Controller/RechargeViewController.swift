@@ -123,17 +123,18 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
 //                return
 //            }
 //        }
-        
+        self.showProgressHUD()
         weak var weakSelf = self
         
         _ = paymentProvider.rx.request(.paymentRecharge(payCode: self.paymentModel.payCode, totalAmount: amount))
             .asObservable()
             .mapObject(type: PaymentResultModel.self)
             .subscribe(onNext: { (data) in
+                self.dismissProgressHud()
                 self.paymentResult = data
                 self.handlePaymentResult()
-                
             }, onError: { (error) in
+                self.dismissProgressHud()
                 weakSelf?.canPayment = true
                 guard let err = error as? HXError else { return }
                 switch err {

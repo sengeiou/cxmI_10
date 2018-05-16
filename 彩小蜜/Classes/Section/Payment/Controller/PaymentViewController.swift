@@ -164,10 +164,12 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
             paymentModel = PaymentList()
             paymentModel.payCode = ""
         }
+        self.showProgressHUD()
         _ = paymentProvider.rx.request(.payment(payCode: paymentModel.payCode, payToken: self.saveBetInfo.payToken))
             .asObservable()
             .mapObject(type: PaymentResultModel.self)
             .subscribe(onNext: { (data) in
+                self.dismissProgressHud()
                 if !self.backed {
                     self.paymentResult = data
                     self.handlePaymentResult()
@@ -176,6 +178,7 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
                 }
                 
             }, onError: { (error) in
+                self.dismissProgressHud()
                 weakSelf?.canPayment = true
                 guard let err = error as? HXError else { return }
                 switch err {
