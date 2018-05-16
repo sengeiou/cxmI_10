@@ -8,7 +8,7 @@
 
 import UIKit
 
-fileprivate let PicWidth : CGFloat = (screenWidth - 12 * 2 - 3 * 2) / 3
+fileprivate let PicWidth : CGFloat = (screenWidth - leftSpacing * 2 - 5 * 2) / 3
 
 class NewsOnePicCell: UITableViewCell {
 

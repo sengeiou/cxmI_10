@@ -8,6 +8,8 @@
 
 import UIKit
 
+let QueryMaxTimes = 5
+
 fileprivate let RechargeCardCellIdentifier = "RechargeCardCellIdentifier"
 fileprivate let RechargeTitleCellIdentifier = "RechargeTitleCellIdentifier"
 fileprivate let RechargePaymentTitleCellId = "RechargePaymentTitleCellId"
@@ -18,7 +20,7 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
     
     public var userInfo  : UserInfoDataModel!
     
-    private var maxTimes = 20
+    private var maxTimes = QueryMaxTimes
     private var timeInterval : Double = 3
     //MARK: - 属性
     private var headerView : RechargeHeaderView!
@@ -77,7 +79,7 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
             showHUD(message: "请输入整数的充值金额")
             return
         }
-        maxTimes = 20
+        maxTimes = QueryMaxTimes
         self.canPayment = false
         rechargeRequest(amount: self.cardCell.textfield.text!)
     }
