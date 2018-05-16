@@ -62,9 +62,7 @@ class DeviceManager: AlertPro  {
         device.mid = identifier
         device.build = UIDevice.current.systemVersion
         device.net = net
-        device.channel = ""
-        
-        
+        device.channel = "c16010"
         
         self.device = device
         
