@@ -25,7 +25,7 @@ fileprivate let PaymentMethodCellId = "PaymentMethodCellId"
 class PaymentViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, CouponFilterViewControllerDelegate, WeixinPayDelegate {
     
     
-    private var maxTimes = 20
+    private var maxTimes = QueryMaxTimes
     private var timeInterval : Double = 3
     public var requestModel: FootballRequestMode!
     
@@ -472,7 +472,7 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
     @objc private func confirmClicked(_ sender: UIButton) {
         guard canPayment else { return }
         self.canPayment = false
-        maxTimes = 20
+        maxTimes = QueryMaxTimes
         paymentRequest()
     }
     // 选取的  优惠券
