@@ -8,7 +8,8 @@
 
 import UIKit
 
-fileprivate let PicWidth : CGFloat = (screenWidth - leftSpacing * 2 - 5 * 2) / 3
+let PicHeight : CGFloat = 80 * defaultScale
+fileprivate let PicWidth : CGFloat = (screenWidth - 12 * 2 - 5 * 2) / 3
 
 class NewsOnePicCell: UITableViewCell {
 
@@ -76,10 +77,13 @@ class NewsOnePicCell: UITableViewCell {
         icon.addSubview(videoIcon)
         
         icon.snp.makeConstraints { (make) in
-            make.top.equalTo(14 * defaultScale)
+            //make.top.equalTo(14 * defaultScale)
+            
+            //make.bottom.equalTo(-14 * defaultScale)
+            make.centerY.equalTo(self.contentView.snp.centerY)
             make.right.equalTo(-12 * defaultScale)
-            make.bottom.equalTo(-14 * defaultScale)
             make.width.equalTo(PicWidth)
+            make.height.equalTo(PicHeight)
         }
         titleLb.snp.makeConstraints { (make) in
             make.top.equalTo(icon)

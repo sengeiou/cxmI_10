@@ -15,4 +15,4 @@ let GetuiAppKey = "yIPfqwq6OMAPp6dkqgLpG5"
 let GetuiSecrct = "G0aBqAD6t79JfzTB6Z5lo5"
 
 
-let phoneNum = "400126600"
+let phoneNum = "4000126600"

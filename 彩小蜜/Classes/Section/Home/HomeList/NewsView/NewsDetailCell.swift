@@ -13,7 +13,7 @@ protocol NewsDetailCellDelegate {
     func upDateCellHeight(height: CGFloat) -> Void
 }
 
-class NewsDetailCell: UITableViewCell, WKUIDelegate, WKNavigationDelegate {
+class NewsDetailCell: UITableViewCell, WKUIDelegate, WKNavigationDelegate, DateProtocol {
 
     public var detailInfo : NewsDetailModel! {
         didSet{
@@ -21,7 +21,8 @@ class NewsDetailCell: UITableViewCell, WKUIDelegate, WKNavigationDelegate {
             self.loadWebView(htmlStr: detailInfo.content!)
             self.title.text = detailInfo.title
             
-            guard let author = detailInfo.author, let addTime = detailInfo.addTime else { return }
+            guard let author = detailInfo.author else { return }
+            let addTime = timeStampToYMDHHmm(detailInfo.addTime)
             self.detail.text = "\(author)  \(addTime)"
         }
     }

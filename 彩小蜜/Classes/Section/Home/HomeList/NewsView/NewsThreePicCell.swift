@@ -84,7 +84,8 @@ class NewsThreePicCell: UITableViewCell {
             //make.bottom.equalTo(-12 * defaultScale)
             make.left.equalTo(titleLb)
             make.right.equalTo(-12 * defaultScale)
-            make.bottom.equalTo(bottomLine.snp.top).offset(-12 * defaultScale)
+            make.height.equalTo(titleLb)
+            make.bottom.equalTo(bottomLine.snp.top).offset(-10 * defaultScale)
         }
         bottomLine.snp.makeConstraints { (make) in
             make.bottom.equalTo(0)
@@ -93,10 +94,12 @@ class NewsThreePicCell: UITableViewCell {
             make.height.equalTo(0.5)
         }
         picOne.snp.makeConstraints { (make) in
-            make.top.equalTo(titleLb.snp.bottom).offset(10 * defaultScale)
-            make.bottom.equalTo(bottomView.snp.top).offset(-10 * defaultScale)
-            make.left.equalTo(leftSpacing)
+            //make.top.equalTo(titleLb.snp.bottom).offset(10 * defaultScale)
+            //make.bottom.equalTo(bottomView.snp.top).offset(-10 * defaultScale)
+            make.centerY.equalTo(self.contentView.snp.centerY)
+            make.left.equalTo(12 * defaultScale)
             make.width.equalTo(picThree)
+            make.height.equalTo(PicHeight)
         }
         picTwo.snp.makeConstraints { (make) in
             make.top.bottom.width.equalTo(picThree)
@@ -105,7 +108,7 @@ class NewsThreePicCell: UITableViewCell {
         picThree.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(picOne)
             make.left.equalTo(picTwo.snp.right).offset(5)
-            make.right.equalTo(-leftSpacing)
+            make.right.equalTo(-12 * defaultScale)
         }
         
     }

@@ -63,7 +63,7 @@ struct NewsInfoModel: HandyJSON {
 }
 
 struct NewsDetailModel: HandyJSON {
-    var addTime: String!
+    var addTime: Int!
     var articleId: String!
     var articleThumb: [String]!
     var articles : [NewsInfoModel]!
