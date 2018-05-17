@@ -8,7 +8,7 @@
 
 import UIKit
 
-let QueryMaxTimes = 10
+let QueryMaxTimes = 5
 
 fileprivate let RechargeCardCellIdentifier = "RechargeCardCellIdentifier"
 fileprivate let RechargeTitleCellIdentifier = "RechargeTitleCellIdentifier"
