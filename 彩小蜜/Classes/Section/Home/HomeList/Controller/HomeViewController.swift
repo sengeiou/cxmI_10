@@ -30,7 +30,8 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     // MARK: - banner 点击
     func didTipBanner(banner: BannerModel) {
         
-        
+        //
+        //dsafdsafasdfsafasd
         
         pushRouterVC(urlStr: banner.bannerLink, from: self)
     }
