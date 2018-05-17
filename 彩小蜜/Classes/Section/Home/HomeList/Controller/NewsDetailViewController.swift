@@ -67,7 +67,15 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
         var content = ShareContentModel()
         content.title = self.detailModel.title
         content.description = self.detailModel.summary
-        content.urlStr = self.detailModel.link
+        let turnOn = UserDefaults.standard.bool(forKey: TurnOn)
+        
+        var turn = "0"
+        
+        if turnOn {
+            turn  = "1"
+        }
+        
+        content.urlStr = self.detailModel.link + "frz=\(turn)"
         content.sharePic = UIImage(named:"fenxiangtubiao")
         
         let share = ShareViewController()

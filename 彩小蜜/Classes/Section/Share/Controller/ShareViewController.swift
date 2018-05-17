@@ -74,6 +74,7 @@ class ShareViewController: BasePopViewController, UICollectionViewDelegate, UICo
     private func shareLink() {
         guard self.shareContent.urlStr != nil else { return }
         let paseboard = UIPasteboard.general
+        
         paseboard.string = self.shareContent.urlStr
         showHUD(message: "复制链接成功")
     }
