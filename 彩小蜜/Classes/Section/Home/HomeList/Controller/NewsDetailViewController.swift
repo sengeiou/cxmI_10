@@ -75,7 +75,7 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
             turn  = "1"
         }
         
-        content.urlStr = self.detailModel.link + "frz=\(turn)"
+        content.urlStr = self.detailModel.link + "&frz=\(turn)"
         content.sharePic = UIImage(named:"fenxiangtubiao")
         
         let share = ShareViewController()
