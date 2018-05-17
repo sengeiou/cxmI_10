@@ -8,7 +8,7 @@
 
 import UIKit
 
-let QueryMaxTimes = 5
+let QueryMaxTimes = 10
 
 fileprivate let RechargeCardCellIdentifier = "RechargeCardCellIdentifier"
 fileprivate let RechargeTitleCellIdentifier = "RechargeTitleCellIdentifier"
@@ -43,18 +43,20 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
         initSubview()
         allPaymentRequest()
         
-        
-        timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(pollingStart), userInfo: nil, repeats: true)
-        //timer.invalidate()
-        timer.fire()
-        timer.fireDate = Date.distantFuture
         NotificationCenter.default.addObserver(self, selector: #selector(startPollingTimer), name: NSNotification.Name(rawValue: NotificationWillEnterForeground), object: nil)
     }
     
     //MARK: - 点击事件
     @objc private func startPollingTimer() {
+        
         if canPayment == false {
-            timer.fireDate = Date.distantPast
+            if timer != nil {
+                timer.invalidate()
+                timer = nil
+            }
+            timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(pollingStart), userInfo: nil, repeats: true)
+            
+            timer.fire()
         }
     }
     // 轮询

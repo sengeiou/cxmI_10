@@ -54,9 +54,6 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
         WeixinCenter.share.payDelegate = self
         initSubview()
         orderRequest()
-        timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(pollingStart), userInfo: nil, repeats: true)
-        timer.fire()
-        timer.fireDate = Date.distantFuture
         
         NotificationCenter.default.addObserver(self, selector: #selector(startPollingTimer), name: NSNotification.Name(rawValue: NotificationWillEnterForeground), object: nil)
     }
@@ -73,7 +70,13 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
     
     @objc private func startPollingTimer() {
         if canPayment == false {
-           timer.fireDate = Date.distantPast
+            if timer != nil {
+                timer.invalidate()
+                timer = nil
+            }
+            timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(pollingStart), userInfo: nil, repeats: true)
+            
+            timer.fire()
         }
     }
     // 轮询
