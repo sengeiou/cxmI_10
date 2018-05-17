@@ -136,11 +136,14 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         guard homeData.navBanners != nil else { return }
         header.bannerList = homeData.navBanners
         newsListModel = data.dlArticlePage
+        
         if dataModel.homeStyle == 0 {
             self.homeStyle = .onlyNews
         }else {
             self.homeStyle = .allShow
         }
+      
+        
         
         newsList.append(contentsOf: self.newsListModel.list)
         tableView.reloadData()
@@ -176,7 +179,15 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     
     private func homeListAddNewsRequest(pageNum: Int) {
         weak var weakSelf = self
-        _ = homeProvider.rx.request(.hallMixData(page: pageNum))
+        
+        var isTransaction : String
+        if homeStyle == .allShow {
+            isTransaction = "2"
+        }else {
+            isTransaction = "1"
+        }
+        
+        _ = homeProvider.rx.request(.hallMixData(page: pageNum, isTransaction: isTransaction))
             .asObservable()
             .mapObject(type: HomeListModel.self)
             .subscribe(onNext: { (data) in
@@ -200,11 +211,15 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                 guard let realm = try? Realm() else { return }
                 let dataRealm = HomeRealmData()
                 dataRealm.data = dataStr!
-                if self.homeStyle == .onlyNews {
-                    dataRealm.homeStyle = 0
-                }else {
+                
+                let turnOn = UserDefaults.standard.bool(forKey: TurnOn)
+            
+                if turnOn {
                     dataRealm.homeStyle = 1
+                }else {
+                    dataRealm.homeStyle = 0
                 }
+                
                 try! realm.write {
                     realm.add(dataRealm, update: true)
                 }
