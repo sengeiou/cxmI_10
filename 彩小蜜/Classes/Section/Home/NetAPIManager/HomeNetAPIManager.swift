@@ -116,8 +116,8 @@ extension HomeNetAPIManager : TargetType {
             dic["currentArticleId"] = articleId
             dic["page"] = page
         case .hallMixData(let page, let isTransaction ):
-            dic["pageNum"] = page
-            dic["pageSize"] = "20"
+            dic["page"] = page
+            dic["size"] = "20"
             dic["isTransaction"] = isTransaction
             
         default:
