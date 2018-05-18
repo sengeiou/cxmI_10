@@ -9,6 +9,18 @@
 import UIKit
 import TTTAttributedLabel
 
+enum MePushType {
+    case 投注记录
+    case 账户明细
+    case 我的卡券
+    case 消息中心
+    case 我的收藏
+    case 帮助中心
+    case 联系客服
+    case 关于我们
+    case 活动
+}
+
 fileprivate let meCellIdentifier = "meCellIdentifier"
 
 class MeViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, MeHeaderViewDelegate, MeFooterViewDelegate, TTTAttributedLabelDelegate {
@@ -31,6 +43,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     private var newsheaderView : NewsHeaderView!
     private var footerView: MeFooterView!
     private var userInfo  : UserInfoDataModel!
+    private var activityList : [MeActivityData]!
     
     //MARK: - 生命周期
     override func viewDidLoad() {
@@ -215,7 +228,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     }
     // 退出登录
     private func logoutRequest() {
-        weak var weakSelf = self
+        //weak var weakSelf = self
         _ = loginProvider.rx.request(.logout)
         .asObservable()
         .mapBaseObject(type: DataModel.self)
@@ -263,9 +276,11 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         if showType == .onlyNews {
             return 1
         }else {
-           return 2
+            if self.activityList != nil, self.activityList.isEmpty == false {
+                return 2 + 1
+            }
+            return 2
         }
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -273,13 +288,27 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         if showType == .onlyNews {
             return 1
         }else {
-            switch section {
-            case 0:
-                return 3
-            case 1:
-                return 5
-            default:
-                return 0
+            
+            if self.activityList != nil, self.activityList.isEmpty == false {
+                switch section {
+                case 0:
+                    return 3
+                case 1:
+                    return self.activityList.count
+                case 2:
+                    return 5
+                default:
+                    return 0
+                }
+            }else {
+                switch section {
+                case 0:
+                    return 3
+                case 1:
+                    return 5
+                default:
+                    return 0
+                }
             }
         }
         

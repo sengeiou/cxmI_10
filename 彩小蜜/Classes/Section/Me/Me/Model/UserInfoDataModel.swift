@@ -43,3 +43,10 @@ struct UserInfoDataModel: HandyJSON {
     var userType : String!
     var totalMoney: String!
 }
+
+struct MeActivityData: HandyJSON {
+    var title : String!
+    var detail : String!
+    var iconUrl: String!
+    var pushUrl: String!
+}
