@@ -58,9 +58,11 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // sfsdfsfsfsfsf
+        //dsafsafasfa
     }
     
     func configRequest() {
+        //ssssss
         weak var weakSelf = self
         _ = userProvider.rx.request(.configQuety)
             .asObservable()
