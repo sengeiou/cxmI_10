@@ -453,17 +453,13 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
             }
             
             if indexPath.row == 2 {
-                guard self.saveBetInfo != nil, self.saveBetInfo.bonusList.isEmpty == false else {
-                    
-                    return }
+                guard self.saveBetInfo != nil, self.saveBetInfo.bonusList.isEmpty == false else { return }
                 
                 let coupon = CouponFilterViewController()
                 coupon.delegate = self
                 coupon.bonusList = self.saveBetInfo.bonusList
                 present(coupon)
-                
             }
-            
             
         }else if indexPath.section == 1 {
             
