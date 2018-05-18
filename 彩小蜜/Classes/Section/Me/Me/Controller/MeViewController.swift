@@ -176,7 +176,8 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
             let about = MeAboutViewController()
             pushViewController(vc: about)
         case .活动:
-            
+            guard model.actUrl != nil else { return }
+            pushRouterVC(urlStr: model.actUrl, from: self)
             
             break
         default: break
@@ -309,7 +310,12 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
             let row  = section.list[indexPath.row]
             
             if row.pushType == .活动 {
-                
+                if row.icon != nil, row.title != nil {
+                    if let url = URL(string: row.icon) {
+                        cell.icon.kf.setImage(with: url)
+                    }
+                    cell.title.text = row.title
+                }
             }else if row.pushType == .联系客服 {
                 cell.icon.image = UIImage(named: section.list[indexPath.row].iconStr)
                 cell.title.text = section.list[indexPath.row].title

@@ -12,6 +12,7 @@ import UIKit
 protocol RouterPro : RouterMatcher { }
 
 extension RouterPro {
+    /// 路由跳转
     func pushRouterVC(urlStr: String, from vc : UIViewController) {
         let type = matcherHttp(urlStr: urlStr)
         
