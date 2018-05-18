@@ -20,6 +20,16 @@ class CountdownButton: UIButton {
     
     public weak var delegate : CountdownButtonDelegate!
     
+    public var stop = true {
+        didSet{
+            if stop {
+                isCounting = false
+                let title = NSAttributedString(string: "获取短信验证码", attributes: [NSAttributedStringKey.foregroundColor: ColorA0A0A0])
+                self.setAttributedTitle(title, for: .normal)
+            }
+        }
+    }
+    
     public var isCounting = false {
         willSet {
             if newValue {
@@ -30,6 +40,7 @@ class CountdownButton: UIButton {
             } else {
                 countdownTimer?.invalidate()
                 countdownTimer = nil
+                
             }
             
             self.isEnabled = !newValue
@@ -47,8 +58,8 @@ class CountdownButton: UIButton {
             self.setAttributedTitle(title, for: .normal)
             
             if newValue <= 0 {
-                let title = NSAttributedString(string: "重新获取验证码", attributes: [NSAttributedStringKey.foregroundColor: ColorA0A0A0])
-                self.setAttributedTitle(title, for: .normal)
+//                let title = NSAttributedString(string: "重新获取验证码", attributes: [NSAttributedStringKey.foregroundColor: ColorA0A0A0])
+//                self.setAttributedTitle(title, for: .normal)
                 isCounting = false
             }
         }

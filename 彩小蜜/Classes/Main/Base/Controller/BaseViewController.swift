@@ -74,10 +74,18 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
             }
         }
     }
-    public func popToLoginViewController() {
+    public func popToVCodeLoginViewController() {
         guard self.navigationController?.viewControllers != nil else { return }
         for vc in (self.navigationController?.viewControllers)! {
             if vc .isKind(of: VCodeLoginViewController.self) {
+                self.navigationController?.popToViewController(vc, animated: true)
+            }
+        }
+    }
+    public func popToLoginViewController() {
+        guard self.navigationController?.viewControllers != nil else { return }
+        for vc in (self.navigationController?.viewControllers)! {
+            if vc .isKind(of: LoginViewController.self) {
                 self.navigationController?.popToViewController(vc, animated: true)
             }
         }

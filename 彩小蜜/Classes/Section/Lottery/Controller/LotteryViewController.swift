@@ -42,10 +42,7 @@ class LotteryViewController: BaseViewController, UITableViewDelegate, UITableVie
         hideBackBut()
         initSubview()
         
-        self.dateList = LotteryDateModel().getDates()
-        self.dateFilter = self.dateList.last?.date
-        self.headerView.dateModel = self.dateList.last
-        self.selectedDateModel = self.dateList.last
+        
         //filterRequest()
         //self.lotteryResultRequest(date: self.dateFilter, isAlready: self.isAlready, leagueIds: self.leagueIds, finished: self.finished)
         
@@ -57,7 +54,10 @@ class LotteryViewController: BaseViewController, UITableViewDelegate, UITableVie
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.isHidenBar = false
-        
+        self.dateList = LotteryDateModel().getDates()
+        self.dateFilter = self.dateList.last?.date
+        self.headerView.dateModel = self.dateList.last
+        self.selectedDateModel = self.dateList.last
     }
     override func viewDidLayoutSubviews() {
         tableView.snp.makeConstraints { (make) in

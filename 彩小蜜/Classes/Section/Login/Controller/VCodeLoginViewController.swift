@@ -30,11 +30,13 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
     }
     
     @objc private func registerClicked(_ sender : UIButton) {
+        self.countdownBut.stop = true
         let register = RegisterViewController()
         pushViewController(vc: register)
     }
     
     @objc private func pswLoginClicked(_ sender : UIButton) {
+        self.countdownBut.stop = true
         let vcode = LoginViewController()
         vcode.currentVC = self.currentVC
         pushViewController(vc: vcode)
@@ -89,6 +91,9 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
                 self.dismissProgressHud()
                 self.showHUD(message: data.showMsg)
                 self.save(userInfo: data)
+                
+                self.countdownBut.stop = true
+                
                 if self.currentVC != nil {
                     self.popToCurrentVC()
                     guard self.loginDelegate != nil else { return }
@@ -128,9 +133,12 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
                     if code == 0 {
                         self.showHUD(message: data.msg)
                     }else if data.code == "301014" {
-                        self.showHUD(message: data.msg)
-                        self.popViewController()
-                        //self.countdownBut.isCounting = false
+                        //self.showHUD(message: data.msg)
+                        //self.popViewController()
+                        self.countdownBut.stop = true
+                        self.showCXMAlert(title: nil, message: data.msg, action: "确定", cancel: nil, on: self, confirm: { (action) in
+                            
+                        })
                     }
                     
                     if 300000...310000 ~= code{
