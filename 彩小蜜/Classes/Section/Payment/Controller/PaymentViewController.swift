@@ -447,10 +447,16 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
+            
+            if self.selectedIndex != nil {
+                tableView.selectRow(at: self.selectedIndex, animated: true, scrollPosition: .none)
+            }
+            
             if indexPath.row == 2 {
                 guard self.saveBetInfo != nil, self.saveBetInfo.bonusList.isEmpty == false else {
                     
                     return }
+                
                 let coupon = CouponFilterViewController()
                 coupon.delegate = self
                 coupon.bonusList = self.saveBetInfo.bonusList
@@ -458,8 +464,7 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
                 
             }
             
-            guard self.selectedIndex != nil else { return }
-            tableView.selectRow(at: self.selectedIndex, animated: true, scrollPosition: .none)
+            
         }else if indexPath.section == 1 {
             
             if indexPath.row != 0 {
