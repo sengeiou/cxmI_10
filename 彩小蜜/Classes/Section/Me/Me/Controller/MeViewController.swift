@@ -43,7 +43,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     private var newsheaderView : NewsHeaderView!
     private var footerView: MeFooterView!
     private var userInfo  : UserInfoDataModel!
-    private var activityList : [MeActivityData]!
+    private var meSectionList : [MeSectionModel]!
     
     //MARK: - 生命周期
     override func viewDidLoad() {
@@ -53,17 +53,71 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         self.view.addSubview(tableView)
         
         NotificationCenter.default.addObserver(self, selector: #selector(configNotification(_:)), name: NSNotification.Name(rawValue: NotificationConfig), object: nil)
+
+        self.meSectionList = getData()
+        self.tableView.reloadData()
+        
+    }
+    
+    private func getData() -> [MeSectionModel] {
+        var list = [MeSectionModel]()
+        
+        var section1 = MeSectionModel()
+        var section2 = MeSectionModel()
+        
+        var item1 = MeListDataModel()
+        item1.title = "投注记录"
+        item1.iconStr = "recording"
+        item1.pushType = .投注记录
+        section1.list.append(item1)
+        
+        var item2 = MeListDataModel()
+        item2.title = "账户明细"
+        item2.iconStr = "Details"
+        item2.pushType = .投注记录
+        section1.list.append(item2)
+        
+        var item3 = MeListDataModel()
+        item3.title = "我的卡券"
+        item3.iconStr = "coupon"
+        item3.pushType = .投注记录
+        section1.list.append(item3)
+        
+        var item4 = MeListDataModel()
+        item4.title = "消息中心"
+        item4.iconStr = "note-1"
+        item4.pushType = .投注记录
+        section2.list.append(item4)
+        
+        var item5 = MeListDataModel()
+        item5.title = "我的收藏"
+        item5.iconStr = "collection"
+        item5.pushType = .投注记录
+        section2.list.append(item5)
+        
+        var item6 = MeListDataModel()
+        item6.title = "帮助中心"
+        item6.iconStr = "help"
+        item6.pushType = .投注记录
+        section2.list.append(item6)
+        
+        var item7 = MeListDataModel()
+        item7.title = "联系客服"
+        item7.iconStr = "serive"
+        item7.pushType = .投注记录
+        section2.list.append(item7)
+        
+        var item8 = MeListDataModel()
+        item8.title = "关于我们"
+        item8.iconStr = "our"
+        item8.pushType = .投注记录
+        section2.list.append(item8)
         
         
-//        if getUserData() != nil {
-//            
-//        }else {
-//            let login = LoginViewController()
-//            
-//            self.view = login.view
-//        }
+        list.append(section1)
+        list.append(section2)
         
-        
+        return list
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -151,44 +205,81 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
             let collection = MyCollectionVC()
             pushViewController(vc: collection)
         }else {
-            switch indexPath.section {
-            case 0:
-                switch indexPath.row {
-                case 0:
-                    pushPagerView(pagerType: .purchaseRecord)
-                case 1:
-                    pushPagerView(pagerType: .accountDetails)
-                case 2:
-                    pushPagerView(pagerType: .coupon)
-                    
-                default :
-                    break
-                }
-            case 1:
-                switch indexPath.row {
-                case 0:
-                    pushPagerView(pagerType: .message)
-                case 1:
-                    let collection = MyCollectionVC()
-                    pushViewController(vc: collection)
-                case 2:
-                    let web = WebViewController()
-                    web.urlStr = webHelp
-                    pushViewController(vc: web)
-                case 3:
-                    UIApplication.shared.openURL(URL(string: "telprompt://\(phoneNum)")!)
-                case 4:
-                    let about = MeAboutViewController()
-                    pushViewController(vc: about)
-                default :
-                    break
-                }
-            default:
-                break
-            }
+            let section = self.meSectionList[indexPath.section]
+            
+            let row  = section.list[indexPath.row]
+            
+            pushMeViewController(type: row.pushType)
+            
+//            switch indexPath.section {
+//            case 0:
+//                switch indexPath.row {
+//                case 0:
+//                    pushPagerView(pagerType: .purchaseRecord)
+//                case 1:
+//                    pushPagerView(pagerType: .accountDetails)
+//                case 2:
+//                    pushPagerView(pagerType: .coupon)
+//
+//                default :
+//                    break
+//                }
+//            case 1:
+//                switch indexPath.row {
+//                case 0:
+//                    pushPagerView(pagerType: .message)
+//                case 1:
+//                    let collection = MyCollectionVC()
+//                    pushViewController(vc: collection)
+//                case 2:
+//                    let web = WebViewController()
+//                    web.urlStr = webHelp
+//                    pushViewController(vc: web)
+//                case 3:
+//                    UIApplication.shared.openURL(URL(string: "telprompt://\(phoneNum)")!)
+//                case 4:
+//                    let about = MeAboutViewController()
+//                    pushViewController(vc: about)
+//                default :
+//                    break
+//                }
+//            default:
+//                break
+//            }
         }
         
     }
+    
+    private func pushMeViewController (type: MePushType) {
+        switch type {
+        case .投注记录:
+            pushPagerView(pagerType: .purchaseRecord)
+        case .账户明细:
+            pushPagerView(pagerType: .accountDetails)
+        case .我的卡券:
+            pushPagerView(pagerType: .coupon)
+        case .消息中心:
+            pushPagerView(pagerType: .message)
+        case .我的收藏:
+            let collection = MyCollectionVC()
+            pushViewController(vc: collection)
+        case .帮助中心:
+            let web = WebViewController()
+            web.urlStr = webHelp
+            pushViewController(vc: web)
+        case .联系客服:
+            UIApplication.shared.openURL(URL(string: "telprompt://\(phoneNum)")!)
+        case .关于我们:
+            let about = MeAboutViewController()
+            pushViewController(vc: about)
+        case .活动:
+            break
+        default: break
+            
+        }
+    }
+    
+    
     //MARK: - 网络请求
     private func userInfoRequest() {
         weak var weakSelf = self
@@ -276,10 +367,9 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         if showType == .onlyNews {
             return 1
         }else {
-            if self.activityList != nil, self.activityList.isEmpty == false {
-                return 2 + 1
-            }
-            return 2
+            guard self.meSectionList != nil else { return 0 }
+            return self.meSectionList.count
+            //return 2
         }
     }
     
@@ -288,28 +378,8 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         if showType == .onlyNews {
             return 1
         }else {
-            
-            if self.activityList != nil, self.activityList.isEmpty == false {
-                switch section {
-                case 0:
-                    return 3
-                case 1:
-                    return self.activityList.count
-                case 2:
-                    return 5
-                default:
-                    return 0
-                }
-            }else {
-                switch section {
-                case 0:
-                    return 3
-                case 1:
-                    return 5
-                default:
-                    return 0
-                }
-            }
+            guard self.meSectionList != nil else { return 0 }
+            return self.meSectionList[section].list.count
         }
         
     }
@@ -328,48 +398,24 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
             }
             
         }else {
-            switch indexPath.section {
-            case 0:
-                switch indexPath.row {
-                case 0:
-                    cell.icon.image = UIImage(named: "recording")
-                    cell.title.text = "投注记录"
-                case 1:
-                    cell.icon.image = UIImage(named: "Details")
-                    cell.title.text = "账户明细"
-                case 2:
-                    cell.icon.image = UIImage(named: "coupon")
-                    cell.title.text = "我的卡券"
-                    
-                default :
-                    break
-                }
-            case 1:
-                switch indexPath.row {
-                case 0:
-                    cell.icon.image = UIImage(named: "note-1")
-                    cell.title.text = "消息中心"
-                case 1:
-                    cell.icon.image = UIImage(named: "collection")
-                    cell.title.text = "我的收藏"
-                case 2:
-                    cell.icon.image = UIImage(named: "help")
-                    cell.title.text = "帮助中心"
-                case 3:
-                    cell.icon.image = UIImage(named: "serive")
-                    cell.title.text = "联系客服"
-                    cell.serviceNum = phoneNum
-                    cell.detail.delegate = self
-                    cell.accessoryType = .none
-                case 4:
-                    cell.icon.image = UIImage(named: "our")
-                    cell.title.text = "关于我们"
-                default :
-                    break
-                }
-            default:
-                break
+            
+            let section = self.meSectionList[indexPath.section]
+            
+            let row  = section.list[indexPath.row]
+            
+            if row.pushType == .活动 {
+                
+            }else if row.pushType == .联系客服 {
+                cell.icon.image = UIImage(named: section.list[indexPath.row].iconStr)
+                cell.title.text = section.list[indexPath.row].title
+                cell.serviceNum = phoneNum
+                cell.detail.delegate = self
+                cell.accessoryType = .none
+            }else {
+                cell.icon.image = UIImage(named: section.list[indexPath.row].iconStr)
+                cell.title.text = section.list[indexPath.row].title
             }
+            
         }
         
         

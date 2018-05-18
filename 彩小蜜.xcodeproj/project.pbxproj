@@ -21,6 +21,7 @@
 		11227C122084BFF900680CCC /* FootballBuyRatioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11227C112084BFF900680CCC /* FootballBuyRatioView.swift */; };
 		11227C142084CBE300680CCC /* FootballMatchInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11227C132084CBE300680CCC /* FootballMatchInfoVC.swift */; };
 		11227C162084D7C900680CCC /* FootballMatchInfoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11227C152084D7C900680CCC /* FootballMatchInfoHeader.swift */; };
+		11259B9A20AE8B9D00CCADD4 /* MeListDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11259B9920AE8B9D00CCADD4 /* MeListDataModel.swift */; };
 		113B9CCB20871FD7006AE3F8 /* NewsNoPicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113B9CCA20871FD7006AE3F8 /* NewsNoPicCell.swift */; };
 		113B9CCD2087201E006AE3F8 /* NewsOnePicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113B9CCC2087201E006AE3F8 /* NewsOnePicCell.swift */; };
 		113B9CCF2087204A006AE3F8 /* NewsThreePicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113B9CCE2087204A006AE3F8 /* NewsThreePicCell.swift */; };
@@ -289,6 +290,7 @@
 		11227C112084BFF900680CCC /* FootballBuyRatioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballBuyRatioView.swift; sourceTree = "<group>"; };
 		11227C132084CBE300680CCC /* FootballMatchInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballMatchInfoVC.swift; sourceTree = "<group>"; };
 		11227C152084D7C900680CCC /* FootballMatchInfoHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballMatchInfoHeader.swift; sourceTree = "<group>"; };
+		11259B9920AE8B9D00CCADD4 /* MeListDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeListDataModel.swift; sourceTree = "<group>"; };
 		113B9CCA20871FD7006AE3F8 /* NewsNoPicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsNoPicCell.swift; sourceTree = "<group>"; };
 		113B9CCC2087201E006AE3F8 /* NewsOnePicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsOnePicCell.swift; sourceTree = "<group>"; };
 		113B9CCE2087204A006AE3F8 /* NewsThreePicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsThreePicCell.swift; sourceTree = "<group>"; };
@@ -1265,6 +1267,7 @@
 			children = (
 				E58B57C8205688570025E2F1 /* UserDataModel.swift */,
 				E537397A2057F4270087E4E6 /* UserInfoDataModel.swift */,
+				11259B9920AE8B9D00CCADD4 /* MeListDataModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2062,6 +2065,7 @@
 				11691806207DB73800C8A287 /* CouponFilterViewController.swift in Sources */,
 				E5786FB4206DE19F0045F7F5 /* FootballMatchModel.swift in Sources */,
 				E5973DDC204CEFDB006461CE /* LoginViewController.swift in Sources */,
+				11259B9A20AE8B9D00CCADD4 /* MeListDataModel.swift in Sources */,
 				E5973E40204FDD34006461CE /* MeComplaintVC.swift in Sources */,
 				E5786FB2206DDA420045F7F5 /* FootballSectionHeader.swift in Sources */,
 				E5973E22204E34F2006461CE /* ColorConstraint.swift in Sources */,
