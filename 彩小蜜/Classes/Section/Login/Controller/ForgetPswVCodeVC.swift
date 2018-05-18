@@ -80,7 +80,8 @@ class ForgetPswVCodeVC: BaseViewController, UITextFieldDelegate, ValidatePro,Cus
                     switch code {
                     case 0:
                         self.showHUD(message: data.msg)
-                        self.popToLoginViewController()
+                        //self.popToLoginViewController()
+                        self.popViewController()
                     default:
                         break
                     }

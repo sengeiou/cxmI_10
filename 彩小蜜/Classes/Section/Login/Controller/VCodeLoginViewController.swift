@@ -29,6 +29,17 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
         loginRequest()
     }
     
+    @objc private func registerClicked(_ sender : UIButton) {
+        let register = RegisterViewController()
+        pushViewController(vc: register)
+    }
+    
+    @objc private func pswLoginClicked(_ sender : UIButton) {
+        let vcode = LoginViewController()
+        vcode.currentVC = self.currentVC
+        pushViewController(vc: vcode)
+    }
+    
     func countdown(button:CountdownButton) {
         guard validate(.phone, str: self.userNameTF.text) == true else {
             showHUD(message: "请输入正确的手机号")
@@ -46,6 +57,7 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
         return true
     }
     
+    public var loginDelegate : LoginProtocol!
     //MARK: - 属性
     private var userNameTF : UITextField!
     private var vcodeTF    : UITextField!
@@ -79,6 +91,8 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
                 self.save(userInfo: data)
                 if self.currentVC != nil {
                     self.popToCurrentVC()
+                    guard self.loginDelegate != nil else { return }
+                    self.loginDelegate.didLogin(isLogin: true)
                 }else {
                     self.pushRootViewController()
                 }
@@ -156,8 +170,10 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
         
         let footer = VCodeLoginFooterView()
         footer.login.addTarget(self, action: #selector(loginClicked(_:)), for: .touchUpInside)
-        table.tableFooterView = footer
+        footer.register.addTarget(self, action: #selector(registerClicked(_:)), for: .touchUpInside)
+        footer.pswLogin.addTarget(self, action: #selector(pswLoginClicked(_:)), for: .touchUpInside)
         
+        table.tableFooterView = footer
         return table
     }()
     
@@ -192,7 +208,19 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
     }
     
     
-    
+    @objc override func back(_ sender: UIButton) {
+        self.vcodeTF.resignFirstResponder()
+        self.userNameTF.resignFirstResponder()
+        
+        if currentVC != nil {
+            popToCurrentVC()
+            guard self.loginDelegate != nil else { return }
+            self.loginDelegate.didLogin(isLogin: false)
+        }else {
+            pushRootViewController()
+        }
+        
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

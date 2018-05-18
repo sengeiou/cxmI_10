@@ -288,7 +288,7 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
                     switch code {
                     case 600:
                         weakSelf?.removeUserData()
-                        let login = LoginViewController()
+                        let login = VCodeLoginViewController()
                         weakSelf?.pushViewController(vc: login)
                     default : break
                     }

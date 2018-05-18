@@ -198,8 +198,9 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
                     switch code {
                     case 600:
                         weakSelf?.removeUserData()
-                        let login = LoginViewController()
+                        let login = VCodeLoginViewController()
                         weakSelf?.pushViewController(vc: login)
+                        
                     default : break
                     }
                     

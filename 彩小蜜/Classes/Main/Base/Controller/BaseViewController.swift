@@ -25,7 +25,12 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
     }
     
     public func pushLoginVC(from vc: UIViewController) {
-        let login = LoginViewController()
+//        let login = LoginViewController()
+//        login.currentVC = vc
+//        login.loginDelegate = vc as! LoginProtocol
+//        self.navigationController?.pushViewController(login, animated: true)
+        
+        let login = VCodeLoginViewController()
         login.currentVC = vc
         login.loginDelegate = vc as! LoginProtocol
         self.navigationController?.pushViewController(login, animated: true)
@@ -72,7 +77,7 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
     public func popToLoginViewController() {
         guard self.navigationController?.viewControllers != nil else { return }
         for vc in (self.navigationController?.viewControllers)! {
-            if vc .isKind(of: LoginViewController.self) {
+            if vc .isKind(of: VCodeLoginViewController.self) {
                 self.navigationController?.popToViewController(vc, animated: true)
             }
         }

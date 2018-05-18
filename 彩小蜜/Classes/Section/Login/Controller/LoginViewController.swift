@@ -177,19 +177,19 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro,
         return CGFloat(loginTextFieldHeight)
     }
     
-    @objc override func back(_ sender: UIButton) {
-        self.passwordTF.resignFirstResponder()
-        self.userNameTF.resignFirstResponder()
-        
-        if currentVC != nil {
-            popToCurrentVC()
-            guard self.loginDelegate != nil else { return }
-            self.loginDelegate.didLogin(isLogin: false)
-        }else {
-            pushRootViewController()
-        }
-        
-    }
+//    @objc override func back(_ sender: UIButton) {
+//        self.passwordTF.resignFirstResponder()
+//        self.userNameTF.resignFirstResponder()
+//        
+//        if currentVC != nil {
+//            popToCurrentVC()
+//            guard self.loginDelegate != nil else { return }
+//            self.loginDelegate.didLogin(isLogin: false)
+//        }else {
+//            pushRootViewController()
+//        }
+//        
+//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

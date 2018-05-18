@@ -175,7 +175,7 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         if viewController == self.viewControllers![2] {
             if getUserData() == nil {
-                me = LoginViewController()
+                me = VCodeLoginViewController()
                 //me.popRoot = true
                 let meNav = UINavigationController(rootViewController: me)
                 meNav.tabBarItem.imageInsets = UIEdgeInsets(top: 10, left: 0, bottom: -10, right: 0)
