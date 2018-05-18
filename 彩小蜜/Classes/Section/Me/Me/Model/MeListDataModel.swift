@@ -19,5 +19,5 @@ struct MeListDataModel: HandyJSON {
     var iconUrl: String!
     var pushUrl: String!
     var iconStr: String!
-    var pushType: MePushType!
+    var pushType: MePushType! = .活动
 }

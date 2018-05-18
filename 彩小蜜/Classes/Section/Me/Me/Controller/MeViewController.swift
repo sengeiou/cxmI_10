@@ -59,67 +59,6 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         
     }
     
-    private func getData() -> [MeSectionModel] {
-        var list = [MeSectionModel]()
-        
-        var section1 = MeSectionModel()
-        var section2 = MeSectionModel()
-        
-        var item1 = MeListDataModel()
-        item1.title = "投注记录"
-        item1.iconStr = "recording"
-        item1.pushType = .投注记录
-        section1.list.append(item1)
-        
-        var item2 = MeListDataModel()
-        item2.title = "账户明细"
-        item2.iconStr = "Details"
-        item2.pushType = .投注记录
-        section1.list.append(item2)
-        
-        var item3 = MeListDataModel()
-        item3.title = "我的卡券"
-        item3.iconStr = "coupon"
-        item3.pushType = .投注记录
-        section1.list.append(item3)
-        
-        var item4 = MeListDataModel()
-        item4.title = "消息中心"
-        item4.iconStr = "note-1"
-        item4.pushType = .投注记录
-        section2.list.append(item4)
-        
-        var item5 = MeListDataModel()
-        item5.title = "我的收藏"
-        item5.iconStr = "collection"
-        item5.pushType = .投注记录
-        section2.list.append(item5)
-        
-        var item6 = MeListDataModel()
-        item6.title = "帮助中心"
-        item6.iconStr = "help"
-        item6.pushType = .投注记录
-        section2.list.append(item6)
-        
-        var item7 = MeListDataModel()
-        item7.title = "联系客服"
-        item7.iconStr = "serive"
-        item7.pushType = .投注记录
-        section2.list.append(item7)
-        
-        var item8 = MeListDataModel()
-        item8.title = "关于我们"
-        item8.iconStr = "our"
-        item8.pushType = .投注记录
-        section2.list.append(item8)
-        
-        
-        list.append(section1)
-        list.append(section2)
-        
-        return list
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         userInfoRequest()
@@ -172,6 +111,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         let draw = WithdrawalViewController()
         pushViewController(vc: draw)
     }
+    
     // footer delegate
     func signOutClicked() {
         print("退出登录")
@@ -209,49 +149,12 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
             
             let row  = section.list[indexPath.row]
             
-            pushMeViewController(type: row.pushType)
-            
-//            switch indexPath.section {
-//            case 0:
-//                switch indexPath.row {
-//                case 0:
-//                    pushPagerView(pagerType: .purchaseRecord)
-//                case 1:
-//                    pushPagerView(pagerType: .accountDetails)
-//                case 2:
-//                    pushPagerView(pagerType: .coupon)
-//
-//                default :
-//                    break
-//                }
-//            case 1:
-//                switch indexPath.row {
-//                case 0:
-//                    pushPagerView(pagerType: .message)
-//                case 1:
-//                    let collection = MyCollectionVC()
-//                    pushViewController(vc: collection)
-//                case 2:
-//                    let web = WebViewController()
-//                    web.urlStr = webHelp
-//                    pushViewController(vc: web)
-//                case 3:
-//                    UIApplication.shared.openURL(URL(string: "telprompt://\(phoneNum)")!)
-//                case 4:
-//                    let about = MeAboutViewController()
-//                    pushViewController(vc: about)
-//                default :
-//                    break
-//                }
-//            default:
-//                break
-//            }
+            pushMeViewController(row)
         }
-        
     }
     
-    private func pushMeViewController (type: MePushType) {
-        switch type {
+    private func pushMeViewController (_ model: MeListDataModel) {
+        switch model.pushType {
         case .投注记录:
             pushPagerView(pagerType: .purchaseRecord)
         case .账户明细:
@@ -273,6 +176,8 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
             let about = MeAboutViewController()
             pushViewController(vc: about)
         case .活动:
+            
+            
             break
         default: break
             
@@ -417,9 +322,6 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
             }
             
         }
-        
-        
-        
         return cell
     }
     
@@ -439,7 +341,67 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         return nil
     }
     
-    
+    // MARK: - 数据
+    private func getData() -> [MeSectionModel] {
+        var list = [MeSectionModel]()
+        
+        var section1 = MeSectionModel()
+        var section2 = MeSectionModel()
+        
+        var item1 = MeListDataModel()
+        item1.title = "投注记录"
+        item1.iconStr = "recording"
+        item1.pushType = .投注记录
+        section1.list.append(item1)
+        
+        var item2 = MeListDataModel()
+        item2.title = "账户明细"
+        item2.iconStr = "Details"
+        item2.pushType = .账户明细
+        section1.list.append(item2)
+        
+        var item3 = MeListDataModel()
+        item3.title = "我的卡券"
+        item3.iconStr = "coupon"
+        item3.pushType = .我的卡券
+        section1.list.append(item3)
+        
+        var item4 = MeListDataModel()
+        item4.title = "消息中心"
+        item4.iconStr = "note-1"
+        item4.pushType = .消息中心
+        section2.list.append(item4)
+        
+        var item5 = MeListDataModel()
+        item5.title = "我的收藏"
+        item5.iconStr = "collection"
+        item5.pushType = .我的收藏
+        section2.list.append(item5)
+        
+        var item6 = MeListDataModel()
+        item6.title = "帮助中心"
+        item6.iconStr = "help"
+        item6.pushType = .帮助中心
+        section2.list.append(item6)
+        
+        var item7 = MeListDataModel()
+        item7.title = "联系客服"
+        item7.iconStr = "serive"
+        item7.pushType = .联系客服
+        section2.list.append(item7)
+        
+        var item8 = MeListDataModel()
+        item8.title = "关于我们"
+        item8.iconStr = "our"
+        item8.pushType = .关于我们
+        section2.list.append(item8)
+        
+        
+        list.append(section1)
+        list.append(section2)
+        
+        return list
+    }
     
     
     override func didReceiveMemoryWarning() {
