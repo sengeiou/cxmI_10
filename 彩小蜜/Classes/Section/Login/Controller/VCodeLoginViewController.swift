@@ -132,17 +132,20 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
                 if let code = Int(data.code) {
                     if code == 0 {
                         self.showHUD(message: data.msg)
-                    }else if data.code == "301014" {
-                        //self.showHUD(message: data.msg)
-                        //self.popViewController()
-                        self.countdownBut.stop = true
-                        self.showCXMAlert(title: nil, message: data.msg, action: "确定", cancel: nil, on: self, confirm: { (action) in
-                            
-                        })
                     }
                     
                     if 300000...310000 ~= code{
-                        self.showHUD(message: data.msg)
+                        if code == 301014 {
+                            //self.showHUD(message: data.msg)
+                            //self.popViewController()
+                            self.countdownBut.stop = true
+                            self.showCXMAlert(title: nil, message: data.msg, action: "确定", cancel: nil, on: self, confirm: { (action) in
+                                
+                            })
+                            
+                        }else{
+                                self.showHUD(message: data.msg)
+                        }
                     }
                 }
             }, onError: { (error) in
