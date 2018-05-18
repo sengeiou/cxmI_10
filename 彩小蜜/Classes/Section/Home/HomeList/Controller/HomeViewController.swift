@@ -379,8 +379,14 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         if homeStyle == .onlyNews {
-            
-            return 105 * defaultScale
+            let newsInfo = newsList[indexPath.row]
+            if newsInfo.listStyle == "1" || newsInfo.listStyle == "4" || newsInfo.listStyle == "0" {
+                return 110 * defaultScale
+            }
+            else {
+                return 150 * defaultScale
+            }
+            //return 105 * defaultScale
         }else {
             switch indexPath.section {
             case 0:
