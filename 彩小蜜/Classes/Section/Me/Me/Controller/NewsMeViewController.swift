@@ -62,7 +62,7 @@ class NewsMeViewController: BaseViewController, UITableViewDelegate, UITableView
             weakSelf?.logoutRequest()
         }
         pushLoginVC(from: self)
-        //
+        
     }
     
     
