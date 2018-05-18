@@ -22,7 +22,6 @@
 		11227C142084CBE300680CCC /* FootballMatchInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11227C132084CBE300680CCC /* FootballMatchInfoVC.swift */; };
 		11227C162084D7C900680CCC /* FootballMatchInfoHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11227C152084D7C900680CCC /* FootballMatchInfoHeader.swift */; };
 		11259B9A20AE8B9D00CCADD4 /* MeListDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11259B9920AE8B9D00CCADD4 /* MeListDataModel.swift */; };
-		1125A09320AECDB800CCADD4 /* sssss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1125A09220AECDB800CCADD4 /* sssss.swift */; };
 		113B9CCB20871FD7006AE3F8 /* NewsNoPicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113B9CCA20871FD7006AE3F8 /* NewsNoPicCell.swift */; };
 		113B9CCD2087201E006AE3F8 /* NewsOnePicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113B9CCC2087201E006AE3F8 /* NewsOnePicCell.swift */; };
 		113B9CCF2087204A006AE3F8 /* NewsThreePicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113B9CCE2087204A006AE3F8 /* NewsThreePicCell.swift */; };
@@ -292,7 +291,6 @@
 		11227C132084CBE300680CCC /* FootballMatchInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballMatchInfoVC.swift; sourceTree = "<group>"; };
 		11227C152084D7C900680CCC /* FootballMatchInfoHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballMatchInfoHeader.swift; sourceTree = "<group>"; };
 		11259B9920AE8B9D00CCADD4 /* MeListDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeListDataModel.swift; sourceTree = "<group>"; };
-		1125A09220AECDB800CCADD4 /* sssss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sssss.swift; sourceTree = "<group>"; };
 		113B9CCA20871FD7006AE3F8 /* NewsNoPicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsNoPicCell.swift; sourceTree = "<group>"; };
 		113B9CCC2087201E006AE3F8 /* NewsOnePicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsOnePicCell.swift; sourceTree = "<group>"; };
 		113B9CCE2087204A006AE3F8 /* NewsThreePicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsThreePicCell.swift; sourceTree = "<group>"; };
@@ -582,7 +580,6 @@
 				116E0F282099739E009FE44E /* Router.swift */,
 				116E0F2A209973BD009FE44E /* RouterMatcher.swift */,
 				117A817D209DDD5E003ED9C3 /* URLParseProtocol.swift */,
-				1125A09220AECDB800CCADD4 /* sssss.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -2075,7 +2072,6 @@
 				113B9CCB20871FD7006AE3F8 /* NewsNoPicCell.swift in Sources */,
 				E5973E42204FDD6F006461CE /* MeGuaranteeVC.swift in Sources */,
 				E56CE81A206A47860090A1B5 /* AboutHeader.swift in Sources */,
-				1125A09320AECDB800CCADD4 /* sssss.swift in Sources */,
 				E50643AA206C93A70046A2D4 /* BaseWebViewController.swift in Sources */,
 				E58B57B6205623B30025E2F1 /* BankCardCell.swift in Sources */,
 				E57376462046BC6400148622 /* MeViewController.swift in Sources */,
