@@ -248,6 +248,7 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
         table.register(NewsOnePicCell.self, forCellReuseIdentifier: NewsOnePicCellId)
         table.register(NewsThreePicCell.self, forCellReuseIdentifier: NewsThreePicCellId)
         table.register(NewsDeatilTitleCell.self, forCellReuseIdentifier: NewsDeatilTitleCellId)
+        table.separatorStyle = .none
         
         let footer = NewsDetailFooter()
         footer.delegate = self

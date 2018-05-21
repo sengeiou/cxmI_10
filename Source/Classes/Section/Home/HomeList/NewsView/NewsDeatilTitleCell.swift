@@ -11,6 +11,7 @@ import UIKit
 class NewsDeatilTitleCell: UITableViewCell {
 
     private var title : UILabel!
+    private var bottomLine: UIView!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -19,6 +20,9 @@ class NewsDeatilTitleCell: UITableViewCell {
     }
 
     private func initSubview() {
+        bottomLine = UIView()
+        bottomLine.backgroundColor = ColorC8C8C8
+        
         title = UILabel()
         title.text = "相关文章"
         title.font = Font18
@@ -26,9 +30,16 @@ class NewsDeatilTitleCell: UITableViewCell {
         title.textAlignment = .center
         
         self.contentView.addSubview(title)
-        
+        self.contentView.addSubview(bottomLine)
         title.snp.makeConstraints { (make) in
             make.top.bottom.left.right.equalTo(0)
+        }
+        
+        bottomLine.snp.makeConstraints { (make) in
+            make.bottom.equalTo(0)
+            make.left.equalTo(0)
+            make.right.equalTo(-0)
+            make.height.equalTo(0.5)
         }
     }
     
