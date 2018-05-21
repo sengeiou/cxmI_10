@@ -10,9 +10,9 @@ import Foundation
 
 let WeixinAppID = "wx6c3f43ecb1ff2be2"
 
-let GetuiAppID  = "iMahVVxurw6BNr7XSn9EF2"
-let GetuiAppKey = "yIPfqwq6OMAPp6dkqgLpG5"
-let GetuiSecrct = "G0aBqAD6t79JfzTB6Z5lo5"
+let GetuiAppID  = "zH0e8aiYaa73oVVsElXX"
+let GetuiAppKey = "R4iI9PslDe5LSXjpd7XSy"
+let GetuiSecrct = "24e2HwXbm064CiewPXklE6"
 
 
 let phoneNum = "400-012-6600"
