@@ -198,17 +198,23 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
                 weakSelf!.headerView.userInfo = data
                 weakSelf?.newsheaderView.userInfo = data
                 
+                if self.meSectionList != nil {
+                    self.meSectionList.removeAll()
+                }
+                
+                self.meSectionList = self.getData()
+                
                 if data.activityDTOList != nil {
                     var section = MeSectionModel()
                     
                     for activity in data.activityDTOList {
                         section.list.append(activity)
                     }
+                    
                     if self.meSectionList.count == 2 {
                         self.meSectionList.insert(section, at: 1)
                     }
                 }
-                
                 
                 weakSelf!.tableView.layoutIfNeeded()
                 weakSelf!.tableView.reloadData()
