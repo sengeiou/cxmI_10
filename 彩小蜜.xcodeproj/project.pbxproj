@@ -1077,6 +1077,7 @@
 		E573759620468B8900148622 = {
 			isa = PBXGroup;
 			children = (
+				1197542420B26BA500AD0665 /* Source */,
 				E57375A120468B8900148622 /* 彩小蜜 */,
 				E57375B620468B8900148622 /* 彩小蜜Tests */,
 				E57375C120468B8900148622 /* 彩小蜜UITests */,
@@ -1099,7 +1100,6 @@
 		E57375A120468B8900148622 /* 彩小蜜 */ = {
 			isa = PBXGroup;
 			children = (
-				1197542420B26BA500AD0665 /* Source */,
 				E57375D52046AE1900148622 /* Resource */,
 			);
 			path = "彩小蜜";
@@ -2468,7 +2468,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.caixiaomi.info;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/彩小蜜/Source/Classes/ThirdParty/Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Source/Classes/ThirdParty/Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2489,7 +2489,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.caixiaomi.info;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/彩小蜜/Source/Classes/ThirdParty/Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Source/Classes/ThirdParty/Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
