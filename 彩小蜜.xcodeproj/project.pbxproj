@@ -713,6 +713,17 @@
 			path = WebView;
 			sourceTree = "<group>";
 		};
+		1197542420B26BA500AD0665 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				E57375D12046AD8000148622 /* HXFramework */,
+				E57375D02046AC0500148622 /* Classes */,
+				11B179222090AFC40061226C /* Storyboard.storyboard */,
+				E57375AB20468B8900148622 /* LaunchScreen.storyboard */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
 		11A250BC207C9BF100780D3D /* TeamView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1088,8 +1099,8 @@
 		E57375A120468B8900148622 /* 彩小蜜 */ = {
 			isa = PBXGroup;
 			children = (
-				E57375D12046AD8000148622 /* HXFramework */,
-				E57375D02046AC0500148622 /* Classes */,
+				1197542420B26BA500AD0665 /* Source */,
+				E57375D52046AE1900148622 /* Resource */,
 			);
 			path = "彩小蜜";
 			sourceTree = "<group>";
@@ -1119,7 +1130,6 @@
 				E57375D32046ADEF00148622 /* Main */,
 				E57375D42046AE0000148622 /* Section */,
 				11FEB948208D7E9500926951 /* ThirdParty */,
-				E57375D52046AE1900148622 /* Resource */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1169,8 +1179,6 @@
 		E57375D52046AE1900148622 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				11B179222090AFC40061226C /* Storyboard.storyboard */,
-				E57375AB20468B8900148622 /* LaunchScreen.storyboard */,
 				E57375D62046AE2300148622 /* Image */,
 				E57375D72046AE2C00148622 /* Plist */,
 			);
@@ -2453,14 +2461,14 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = WU947P5UTQ;
-				INFOPLIST_FILE = "$(SRCROOT)/彩小蜜/Classes/Resource/Plist/Info.plist";
+				DEVELOPMENT_TEAM = U75729U74B;
+				INFOPLIST_FILE = "$(SRCROOT)/彩小蜜/Resource/Plist/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.caixiaomi.info;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/彩小蜜/Classes/ThirdParty/Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/彩小蜜/Source/Classes/ThirdParty/Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2474,14 +2482,14 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = WU947P5UTQ;
-				INFOPLIST_FILE = "$(SRCROOT)/彩小蜜/Classes/Resource/Plist/Info.plist";
+				DEVELOPMENT_TEAM = U75729U74B;
+				INFOPLIST_FILE = "$(SRCROOT)/彩小蜜/Resource/Plist/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.caixiaomi.info;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/彩小蜜/Classes/ThirdParty/Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/彩小蜜/Source/Classes/ThirdParty/Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
