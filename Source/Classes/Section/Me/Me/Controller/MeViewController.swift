@@ -306,7 +306,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: meCellIdentifier, for: indexPath) as! MeCell
         cell.accessoryType = .disclosureIndicator
-        
+        cell.serviceNum = ""
         if showType == .onlyNews {
             switch indexPath.row {
             case 0:
