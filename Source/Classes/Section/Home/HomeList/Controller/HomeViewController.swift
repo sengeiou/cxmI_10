@@ -164,7 +164,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     //MARK: - 加载数据
     private func loadNewData() {
         //configRequest()
-        homeListAddNewsRequest(pageNum: 1)
+        homeListAndNewsRequest(pageNum: 1)
     }
     private func loadNextData() {
         guard self.newsListModel != nil else { return }
@@ -173,12 +173,12 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
             return }
         
         //newsListRequest(1)
-        homeListAddNewsRequest(pageNum: self.newsListModel.nextPage)
+        homeListAndNewsRequest(pageNum: self.newsListModel.nextPage)
     }
     
     //MARK: - 网络请求
     
-    private func homeListAddNewsRequest(pageNum: Int) {
+    private func homeListAndNewsRequest(pageNum: Int) {
         weak var weakSelf = self
         
         var isTransaction : String
