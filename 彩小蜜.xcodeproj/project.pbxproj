@@ -339,7 +339,6 @@
 		117A6487208EE65500B1769C /* Pods_彩小蜜.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = "Pods_彩小蜜.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		117A817D209DDD5E003ED9C3 /* URLParseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLParseProtocol.swift; sourceTree = "<group>"; };
 		117CCDF3209055A100B38543 /* FootballOrderFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballOrderFooter.swift; sourceTree = "<group>"; };
-		1197542520B2A69700AD0665 /* 彩小蜜.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "彩小蜜.entitlements"; sourceTree = "<group>"; };
 		11A250BD207C9C2200780D3D /* FootballTotalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballTotalView.swift; sourceTree = "<group>"; };
 		11A25C4F2080BC1200085C58 /* FootballHunheFilterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballHunheFilterVC.swift; sourceTree = "<group>"; };
 		11A25C512080BF2000085C58 /* FootballHunheView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballHunheView.swift; sourceTree = "<group>"; };
@@ -348,6 +347,7 @@
 		11B179232090AFC40061226C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Storyboard.storyboard; sourceTree = "<group>"; };
 		11B68C6A20A1A862002D74F0 /* JSDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSDataModel.swift; sourceTree = "<group>"; };
 		11CA4AD420A0562D00FB32D1 /* FootballHotSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballHotSectionHeader.swift; sourceTree = "<group>"; };
+		11D0646520B2ABBA00C526BE /* 彩小蜜.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "彩小蜜.entitlements"; sourceTree = "<group>"; };
 		11D2EB5520A5D3F000EBB937 /* GuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
 		11D9D9DD2089CB3000F78FCF /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		11D9D9DF2089CD2500F78FCF /* NewsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailViewController.swift; sourceTree = "<group>"; };
@@ -1101,7 +1101,7 @@
 		E57375A120468B8900148622 /* 彩小蜜 */ = {
 			isa = PBXGroup;
 			children = (
-				1197542520B2A69700AD0665 /* 彩小蜜.entitlements */,
+				11D0646520B2ABBA00C526BE /* 彩小蜜.entitlements */,
 				E57375D52046AE1900148622 /* Resource */,
 			);
 			path = "彩小蜜";
