@@ -28,6 +28,16 @@
 				<string>wx6c3f43ecb1ff2be2</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>None</string>
+			<key>CFBundleURLName</key>
+			<string>net.caixiaomi.infotool</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>caixm</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>2</string>
