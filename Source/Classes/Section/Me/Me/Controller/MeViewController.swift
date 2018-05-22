@@ -266,7 +266,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     
     //MARK: - 懒加载
     lazy var tableView : UITableView = {
-        let table = UITableView(frame: CGRect.zero, style: .grouped)
+        let table = UITableView(frame: CGRect.zero, style: .plain)
         
         table.delegate = self
         table.dataSource = self
@@ -282,7 +282,6 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         newsheaderView = NewsHeaderView()
         newsheaderView.delegate = self
         
-        //table.tableHeaderView = headerView
         table.tableFooterView = footerView
         return table
     }()
@@ -354,7 +353,10 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         return 44
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 5
+        if section == 0 {
+            return 7
+        }
+        return 4
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.01

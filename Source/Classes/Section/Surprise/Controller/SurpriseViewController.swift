@@ -4,7 +4,8 @@
 //
 //  Created by 笑 on 2018/5/22.
 //  Copyright © 2018年 韩笑. All rights reserved.
-//
+//  v1.0.4 版本添加发现功能
+
 
 import UIKit
 
