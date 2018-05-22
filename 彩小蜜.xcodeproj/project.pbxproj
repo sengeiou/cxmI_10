@@ -78,6 +78,52 @@
 		11B179242090AFC50061226C /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11B179222090AFC40061226C /* Storyboard.storyboard */; };
 		11B68C6B20A1A862002D74F0 /* JSDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B68C6A20A1A862002D74F0 /* JSDataModel.swift */; };
 		11CA4AD520A0562D00FB32D1 /* FootballHotSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CA4AD420A0562D00FB32D1 /* FootballHotSectionHeader.swift */; };
+		11D13F1A20B3039E00E2813F /* MDMaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13EEB20B3039E00E2813F /* MDMaskView.swift */; };
+		11D13F1B20B3039E00E2813F /* FWNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13EEC20B3039E00E2813F /* FWNavigationController.swift */; };
+		11D13F1C20B3039E00E2813F /* MDBannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13EED20B3039E00E2813F /* MDBannerModel.swift */; };
+		11D13F1D20B3039E00E2813F /* MDBannerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13EEE20B3039E00E2813F /* MDBannerCollectionViewCell.swift */; };
+		11D13F1E20B3039E00E2813F /* IBTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13EEF20B3039E00E2813F /* IBTestViewController.swift */; };
+		11D13F1F20B3039E00E2813F /* MytestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11D13EF020B3039E00E2813F /* MytestView.xib */; };
+		11D13F2020B3039E00E2813F /* MDShockBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13EF120B3039E00E2813F /* MDShockBannerView.swift */; };
+		11D13F2120B3039E00E2813F /* TabItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13EF220B3039E00E2813F /* TabItemView.swift */; };
+		11D13F2220B3039E00E2813F /* FrameAnimiationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13EF320B3039E00E2813F /* FrameAnimiationViewController.swift */; };
+		11D13F2320B3039E00E2813F /* GhostFireAnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13EF420B3039E00E2813F /* GhostFireAnimationViewController.swift */; };
+		11D13F2420B3039E00E2813F /* SwiftSimpleAnimations.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 11D13EF520B3039E00E2813F /* SwiftSimpleAnimations.xcdatamodeld */; };
+		11D13F2520B3039E00E2813F /* BlackHoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13EF720B3039E00E2813F /* BlackHoleView.swift */; };
+		11D13F2620B3039E00E2813F /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13EF820B3039E00E2813F /* LineChartView.swift */; };
+		11D13F2720B3039E00E2813F /* SwipeMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13EF920B3039E00E2813F /* SwipeMenuViewController.swift */; };
+		11D13F2820B3039E00E2813F /* ContentScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13EFA20B3039E00E2813F /* ContentScrollView.swift */; };
+		11D13F2920B3039E00E2813F /* VolumeBeatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13EFB20B3039E00E2813F /* VolumeBeatViewController.swift */; };
+		11D13F2A20B3039E00E2813F /* SwipeMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13EFC20B3039E00E2813F /* SwipeMenuView.swift */; };
+		11D13F2B20B3039E00E2813F /* AdvertisementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13EFD20B3039E00E2813F /* AdvertisementView.swift */; };
+		11D13F2C20B3039E00E2813F /* UIView+MDExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13EFE20B3039E00E2813F /* UIView+MDExtension.swift */; };
+		11D13F2D20B3039E00E2813F /* FoldingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13EFF20B3039E00E2813F /* FoldingCell.swift */; };
+		11D13F2E20B3039E00E2813F /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13F0020B3039E00E2813F /* TabView.swift */; };
+		11D13F2F20B3039E00E2813F /* MytestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13F0120B3039E00E2813F /* MytestView.swift */; };
+		11D13F3020B3039E00E2813F /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13F0220B3039E00E2813F /* NewsViewController.swift */; };
+		11D13F3120B3039E00E2813F /* ButtonMoveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13F0320B3039E00E2813F /* ButtonMoveViewController.swift */; };
+		11D13F3220B3039E00E2813F /* GradientAniViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13F0420B3039E00E2813F /* GradientAniViewController.swift */; };
+		11D13F3320B3039E00E2813F /* TransitionAnim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13F0520B3039E00E2813F /* TransitionAnim.swift */; };
+		11D13F3420B3039E00E2813F /* GradientLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13F0620B3039E00E2813F /* GradientLabel.swift */; };
+		11D13F3520B3039E00E2813F /* String+MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13F0720B3039E00E2813F /* String+MD5.swift */; };
+		11D13F3620B3039E00E2813F /* RegisterSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13F0820B3039E00E2813F /* RegisterSliderView.swift */; };
+		11D13F3720B3039E00E2813F /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13F0920B3039E00E2813F /* CalculatorView.swift */; };
+		11D13F3820B3039E00E2813F /* ShoppingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13F0A20B3039E00E2813F /* ShoppingViewController.swift */; };
+		11D13F3920B3039E00E2813F /* CircleAnimateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13F0B20B3039E00E2813F /* CircleAnimateViewController.swift */; };
+		11D13F3A20B3039E00E2813F /* PlaneSportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13F0C20B3039E00E2813F /* PlaneSportViewController.swift */; };
+		11D13F3B20B3039E00E2813F /* FWSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13F0D20B3039E00E2813F /* FWSegmentedControl.swift */; };
+		11D13F3C20B3039E00E2813F /* TurnAroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13F0E20B3039E00E2813F /* TurnAroundViewController.swift */; };
+		11D13F3D20B3039E00E2813F /* QLDrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13F0F20B3039E00E2813F /* QLDrawView.swift */; };
+		11D13F3E20B3039E00E2813F /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13F1020B3039E00E2813F /* HomeTableViewController.swift */; };
+		11D13F3F20B3039E00E2813F /* BarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13F1120B3039E00E2813F /* BarChartView.swift */; };
+		11D13F4020B3039E00E2813F /* JJMarqueeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13F1220B3039E00E2813F /* JJMarqueeView.swift */; };
+		11D13F4120B3039E00E2813F /* TransitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13F1320B3039E00E2813F /* TransitionViewController.swift */; };
+		11D13F4220B3039E00E2813F /* ZYStarRateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13F1420B3039E00E2813F /* ZYStarRateView.swift */; };
+		11D13F4320B3039E00E2813F /* ImageTransformViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13F1520B3039E00E2813F /* ImageTransformViewController.swift */; };
+		11D13F4420B3039E00E2813F /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13F1620B3039E00E2813F /* ChartViewController.swift */; };
+		11D13F4520B3039E00E2813F /* GifImageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13F1720B3039E00E2813F /* GifImageOperation.swift */; };
+		11D13F4620B3039E00E2813F /* TransitionNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D13F1820B3039E00E2813F /* TransitionNewViewController.swift */; };
+		11D13F4720B3039E00E2813F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11D13F1920B3039E00E2813F /* Info.plist */; };
 		11D2EB5620A5D3F000EBB937 /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D2EB5520A5D3F000EBB937 /* GuideViewController.swift */; };
 		11D9D9DE2089CB3000F78FCF /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D9D9DD2089CB3000F78FCF /* ShareViewController.swift */; };
 		11D9D9E02089CD2500F78FCF /* NewsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D9D9DF2089CD2500F78FCF /* NewsDetailViewController.swift */; };
@@ -348,6 +394,52 @@
 		11B68C6A20A1A862002D74F0 /* JSDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSDataModel.swift; sourceTree = "<group>"; };
 		11CA4AD420A0562D00FB32D1 /* FootballHotSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballHotSectionHeader.swift; sourceTree = "<group>"; };
 		11D0646520B2ABBA00C526BE /* 彩小蜜.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "彩小蜜.entitlements"; sourceTree = "<group>"; };
+		11D13EEB20B3039E00E2813F /* MDMaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDMaskView.swift; sourceTree = "<group>"; };
+		11D13EEC20B3039E00E2813F /* FWNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FWNavigationController.swift; sourceTree = "<group>"; };
+		11D13EED20B3039E00E2813F /* MDBannerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDBannerModel.swift; sourceTree = "<group>"; };
+		11D13EEE20B3039E00E2813F /* MDBannerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDBannerCollectionViewCell.swift; sourceTree = "<group>"; };
+		11D13EEF20B3039E00E2813F /* IBTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IBTestViewController.swift; sourceTree = "<group>"; };
+		11D13EF020B3039E00E2813F /* MytestView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MytestView.xib; sourceTree = "<group>"; };
+		11D13EF120B3039E00E2813F /* MDShockBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDShockBannerView.swift; sourceTree = "<group>"; };
+		11D13EF220B3039E00E2813F /* TabItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabItemView.swift; sourceTree = "<group>"; };
+		11D13EF320B3039E00E2813F /* FrameAnimiationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrameAnimiationViewController.swift; sourceTree = "<group>"; };
+		11D13EF420B3039E00E2813F /* GhostFireAnimationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GhostFireAnimationViewController.swift; sourceTree = "<group>"; };
+		11D13EF620B3039E00E2813F /* SwiftSimpleAnimations.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SwiftSimpleAnimations.xcdatamodel; sourceTree = "<group>"; };
+		11D13EF720B3039E00E2813F /* BlackHoleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlackHoleView.swift; sourceTree = "<group>"; };
+		11D13EF820B3039E00E2813F /* LineChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineChartView.swift; sourceTree = "<group>"; };
+		11D13EF920B3039E00E2813F /* SwipeMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeMenuViewController.swift; sourceTree = "<group>"; };
+		11D13EFA20B3039E00E2813F /* ContentScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentScrollView.swift; sourceTree = "<group>"; };
+		11D13EFB20B3039E00E2813F /* VolumeBeatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolumeBeatViewController.swift; sourceTree = "<group>"; };
+		11D13EFC20B3039E00E2813F /* SwipeMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeMenuView.swift; sourceTree = "<group>"; };
+		11D13EFD20B3039E00E2813F /* AdvertisementView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdvertisementView.swift; sourceTree = "<group>"; };
+		11D13EFE20B3039E00E2813F /* UIView+MDExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+MDExtension.swift"; sourceTree = "<group>"; };
+		11D13EFF20B3039E00E2813F /* FoldingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoldingCell.swift; sourceTree = "<group>"; };
+		11D13F0020B3039E00E2813F /* TabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabView.swift; sourceTree = "<group>"; };
+		11D13F0120B3039E00E2813F /* MytestView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MytestView.swift; sourceTree = "<group>"; };
+		11D13F0220B3039E00E2813F /* NewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
+		11D13F0320B3039E00E2813F /* ButtonMoveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonMoveViewController.swift; sourceTree = "<group>"; };
+		11D13F0420B3039E00E2813F /* GradientAniViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientAniViewController.swift; sourceTree = "<group>"; };
+		11D13F0520B3039E00E2813F /* TransitionAnim.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionAnim.swift; sourceTree = "<group>"; };
+		11D13F0620B3039E00E2813F /* GradientLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientLabel.swift; sourceTree = "<group>"; };
+		11D13F0720B3039E00E2813F /* String+MD5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+MD5.swift"; sourceTree = "<group>"; };
+		11D13F0820B3039E00E2813F /* RegisterSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterSliderView.swift; sourceTree = "<group>"; };
+		11D13F0920B3039E00E2813F /* CalculatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
+		11D13F0A20B3039E00E2813F /* ShoppingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingViewController.swift; sourceTree = "<group>"; };
+		11D13F0B20B3039E00E2813F /* CircleAnimateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleAnimateViewController.swift; sourceTree = "<group>"; };
+		11D13F0C20B3039E00E2813F /* PlaneSportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaneSportViewController.swift; sourceTree = "<group>"; };
+		11D13F0D20B3039E00E2813F /* FWSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FWSegmentedControl.swift; sourceTree = "<group>"; };
+		11D13F0E20B3039E00E2813F /* TurnAroundViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurnAroundViewController.swift; sourceTree = "<group>"; };
+		11D13F0F20B3039E00E2813F /* QLDrawView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QLDrawView.swift; sourceTree = "<group>"; };
+		11D13F1020B3039E00E2813F /* HomeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
+		11D13F1120B3039E00E2813F /* BarChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarChartView.swift; sourceTree = "<group>"; };
+		11D13F1220B3039E00E2813F /* JJMarqueeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JJMarqueeView.swift; sourceTree = "<group>"; };
+		11D13F1320B3039E00E2813F /* TransitionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionViewController.swift; sourceTree = "<group>"; };
+		11D13F1420B3039E00E2813F /* ZYStarRateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYStarRateView.swift; sourceTree = "<group>"; };
+		11D13F1520B3039E00E2813F /* ImageTransformViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTransformViewController.swift; sourceTree = "<group>"; };
+		11D13F1620B3039E00E2813F /* ChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
+		11D13F1720B3039E00E2813F /* GifImageOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GifImageOperation.swift; sourceTree = "<group>"; };
+		11D13F1820B3039E00E2813F /* TransitionNewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionNewViewController.swift; sourceTree = "<group>"; };
+		11D13F1920B3039E00E2813F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		11D2EB5520A5D3F000EBB937 /* GuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
 		11D9D9DD2089CB3000F78FCF /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		11D9D9DF2089CD2500F78FCF /* NewsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailViewController.swift; sourceTree = "<group>"; };
@@ -739,6 +831,59 @@
 			path = TeamView;
 			sourceTree = "<group>";
 		};
+		11D13EEA20B3039E00E2813F /* za */ = {
+			isa = PBXGroup;
+			children = (
+				11D13EEB20B3039E00E2813F /* MDMaskView.swift */,
+				11D13EEC20B3039E00E2813F /* FWNavigationController.swift */,
+				11D13EED20B3039E00E2813F /* MDBannerModel.swift */,
+				11D13EEE20B3039E00E2813F /* MDBannerCollectionViewCell.swift */,
+				11D13EEF20B3039E00E2813F /* IBTestViewController.swift */,
+				11D13EF020B3039E00E2813F /* MytestView.xib */,
+				11D13EF120B3039E00E2813F /* MDShockBannerView.swift */,
+				11D13EF220B3039E00E2813F /* TabItemView.swift */,
+				11D13EF320B3039E00E2813F /* FrameAnimiationViewController.swift */,
+				11D13EF420B3039E00E2813F /* GhostFireAnimationViewController.swift */,
+				11D13EF520B3039E00E2813F /* SwiftSimpleAnimations.xcdatamodeld */,
+				11D13EF720B3039E00E2813F /* BlackHoleView.swift */,
+				11D13EF820B3039E00E2813F /* LineChartView.swift */,
+				11D13EF920B3039E00E2813F /* SwipeMenuViewController.swift */,
+				11D13EFA20B3039E00E2813F /* ContentScrollView.swift */,
+				11D13EFB20B3039E00E2813F /* VolumeBeatViewController.swift */,
+				11D13EFC20B3039E00E2813F /* SwipeMenuView.swift */,
+				11D13EFD20B3039E00E2813F /* AdvertisementView.swift */,
+				11D13EFE20B3039E00E2813F /* UIView+MDExtension.swift */,
+				11D13EFF20B3039E00E2813F /* FoldingCell.swift */,
+				11D13F0020B3039E00E2813F /* TabView.swift */,
+				11D13F0120B3039E00E2813F /* MytestView.swift */,
+				11D13F0220B3039E00E2813F /* NewsViewController.swift */,
+				11D13F0320B3039E00E2813F /* ButtonMoveViewController.swift */,
+				11D13F0420B3039E00E2813F /* GradientAniViewController.swift */,
+				11D13F0520B3039E00E2813F /* TransitionAnim.swift */,
+				11D13F0620B3039E00E2813F /* GradientLabel.swift */,
+				11D13F0720B3039E00E2813F /* String+MD5.swift */,
+				11D13F0820B3039E00E2813F /* RegisterSliderView.swift */,
+				11D13F0920B3039E00E2813F /* CalculatorView.swift */,
+				11D13F0A20B3039E00E2813F /* ShoppingViewController.swift */,
+				11D13F0B20B3039E00E2813F /* CircleAnimateViewController.swift */,
+				11D13F0C20B3039E00E2813F /* PlaneSportViewController.swift */,
+				11D13F0D20B3039E00E2813F /* FWSegmentedControl.swift */,
+				11D13F0E20B3039E00E2813F /* TurnAroundViewController.swift */,
+				11D13F0F20B3039E00E2813F /* QLDrawView.swift */,
+				11D13F1020B3039E00E2813F /* HomeTableViewController.swift */,
+				11D13F1120B3039E00E2813F /* BarChartView.swift */,
+				11D13F1220B3039E00E2813F /* JJMarqueeView.swift */,
+				11D13F1320B3039E00E2813F /* TransitionViewController.swift */,
+				11D13F1420B3039E00E2813F /* ZYStarRateView.swift */,
+				11D13F1520B3039E00E2813F /* ImageTransformViewController.swift */,
+				11D13F1620B3039E00E2813F /* ChartViewController.swift */,
+				11D13F1720B3039E00E2813F /* GifImageOperation.swift */,
+				11D13F1820B3039E00E2813F /* TransitionNewViewController.swift */,
+				11D13F1920B3039E00E2813F /* Info.plist */,
+			);
+			path = za;
+			sourceTree = "<group>";
+		};
 		11FEB948208D7E9500926951 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
@@ -1101,6 +1246,7 @@
 		E57375A120468B8900148622 /* 彩小蜜 */ = {
 			isa = PBXGroup;
 			children = (
+				11D13EEA20B3039E00E2813F /* za */,
 				11D0646520B2ABBA00C526BE /* 彩小蜜.entitlements */,
 				E57375D52046AE1900148622 /* Resource */,
 			);
@@ -1914,6 +2060,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E57375F52046B1AD00148622 /* Info.plist in Resources */,
+				11D13F1F20B3039E00E2813F /* MytestView.xib in Resources */,
+				11D13F4720B3039E00E2813F /* Info.plist in Resources */,
 				E57375AD20468B8900148622 /* LaunchScreen.storyboard in Resources */,
 				E57375AA20468B8900148622 /* Assets.xcassets in Resources */,
 				11B179242090AFC50061226C /* Storyboard.storyboard in Resources */,
@@ -2048,17 +2196,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11D13F4620B3039E00E2813F /* TransitionNewViewController.swift in Sources */,
 				E5973E35204FCCF2006461CE /* MeAboutViewController.swift in Sources */,
 				E51032502064FD2D00A0156C /* BasePagerViewController.swift in Sources */,
 				E56CE8062069E5830090A1B5 /* AccountDetailModel.swift in Sources */,
+				11D13F1A20B3039E00E2813F /* MDMaskView.swift in Sources */,
+				11D13F2520B3039E00E2813F /* BlackHoleView.swift in Sources */,
+				11D13F3F20B3039E00E2813F /* BarChartView.swift in Sources */,
 				E5786FC7206E29730045F7F5 /* FootballProtocol.swift in Sources */,
 				114800D6208C622800621AFA /* NewsListModel.swift in Sources */,
+				11D13F1C20B3039E00E2813F /* MDBannerModel.swift in Sources */,
+				11D13F2B20B3039E00E2813F /* AdvertisementView.swift in Sources */,
 				E56CE8022069DFC20090A1B5 /* AccountDetailSectionHeader.swift in Sources */,
 				11227C1020849E6700680CCC /* FootballTeamHeader.swift in Sources */,
 				11691808207DB82E00C8A287 /* CouponFilterCell.swift in Sources */,
 				E58B57B8205634250025E2F1 /* BankCardFooterView.swift in Sources */,
 				E503F5C0207A11B3006D4A0B /* FootballRequestModel.swift in Sources */,
 				114800DC208C9AE700621AFA /* NewsHeaderView.swift in Sources */,
+				11D13F3020B3039E00E2813F /* NewsViewController.swift in Sources */,
 				11D9D9E02089CD2500F78FCF /* NewsDetailViewController.swift in Sources */,
 				11528AA3208F3F76004CC8B4 /* NewsMeView.swift in Sources */,
 				E5973DDE204D152F006461CE /* BaseViewController.swift in Sources */,
@@ -2087,6 +2242,7 @@
 				E57376462046BC6400148622 /* MeViewController.swift in Sources */,
 				E533BEFF2060BF950037D2D8 /* WithDrawDataModel.swift in Sources */,
 				116E0F3020999E3B009FE44E /* WebViewController.swift in Sources */,
+				11D13F1B20B3039E00E2813F /* FWNavigationController.swift in Sources */,
 				E5786FB8206DE9080045F7F5 /* FootballRangSPFCell.swift in Sources */,
 				E510324A2064A9C000A0156C /* CouponInfoModel.swift in Sources */,
 				E5883F4E2068DA2300CB3A46 /* OrderSchemeCell.swift in Sources */,
@@ -2095,12 +2251,14 @@
 				E5D8ABB6206739CF002D688B /* OrderDetailTitleCell.swift in Sources */,
 				1143928520A68A4100A64075 /* UIImage+Scale.swift in Sources */,
 				117CCDF4209055A100B38543 /* FootballOrderFooter.swift in Sources */,
+				11D13F2F20B3039E00E2813F /* MytestView.swift in Sources */,
 				113B9CCD2087201E006AE3F8 /* NewsOnePicCell.swift in Sources */,
 				E50B9073205231B500417BFE /* RechargeHeaderView.swift in Sources */,
 				11062B21208322D0001C1D14 /* LotteryCell.swift in Sources */,
 				11A555EC20805D96004641AA /* FootballTwoOneView.swift in Sources */,
 				114491182085FC37009F1D09 /* FootballOddsTitleCell.swift in Sources */,
 				E57376442046BC1300148622 /* LotteryViewController.swift in Sources */,
+				11D13F4020B3039E00E2813F /* JJMarqueeView.swift in Sources */,
 				114491102085D93F009F1D09 /* FootballMatchIntegralCell.swift in Sources */,
 				E59CB3DF205BA17F0086DD0E /* HomeHeaderView.swift in Sources */,
 				E514DDE22052B3E000274854 /* WithdrawalViewController.swift in Sources */,
@@ -2126,13 +2284,17 @@
 				E51F9A64205A2A2D00AB8A21 /* ForgetPswVCodeFooterView.swift in Sources */,
 				116E0F292099739E009FE44E /* Router.swift in Sources */,
 				E55016F7207228220056AB1F /* FootballFilterCell.swift in Sources */,
+				11D13F3720B3039E00E2813F /* CalculatorView.swift in Sources */,
 				E56CE814206A33310090A1B5 /* MessageCenterModel.swift in Sources */,
 				114491012085970A009F1D09 /* FootballOddsPagerView.swift in Sources */,
 				E56CE818206A47720090A1B5 /* AboutCell.swift in Sources */,
 				E58B57C5205676CB0025E2F1 /* MeNetAPIManager.swift in Sources */,
 				E550D8902073267E002DDE23 /* Extension+Array.swift in Sources */,
+				11D13F2820B3039E00E2813F /* ContentScrollView.swift in Sources */,
+				11D13F3520B3039E00E2813F /* String+MD5.swift in Sources */,
 				E5883F5E20690CED00CB3A46 /* AccountDetailsVC.swift in Sources */,
 				11227C142084CBE300680CCC /* FootballMatchInfoVC.swift in Sources */,
+				11D13F2A20B3039E00E2813F /* SwipeMenuView.swift in Sources */,
 				E510325A2065044100A0156C /* PurchaseRecordInfoModel.swift in Sources */,
 				11062B1F2082FFD8001C1D14 /* LotteryHeaderView.swift in Sources */,
 				E5786FC0206DEA650045F7F5 /* Football2-1Cell.swift in Sources */,
@@ -2141,35 +2303,50 @@
 				E550D897207339A4002DDE23 /* FootballOrderSPFCell.swift in Sources */,
 				E5883F4C2068DA0800CB3A46 /* OrderSchemeVC.swift in Sources */,
 				E50B9077205235BF00417BFE /* RechargeCardCell.swift in Sources */,
+				11D13F1E20B3039E00E2813F /* IBTestViewController.swift in Sources */,
 				E5883F5A2068EA5700CB3A46 /* MessageCenterCell.swift in Sources */,
 				11EB8EEA207B8B1500AFC9C1 /* BonusInfoModel.swift in Sources */,
 				11B68C6B20A1A862002D74F0 /* JSDataModel.swift in Sources */,
 				E512A9692047E598003F14F4 /* Observable+ObjectMapper.swift in Sources */,
 				116EB210207F087D00B32ABD /* FootballScoreFilterVC.swift in Sources */,
+				11D13F3C20B3039E00E2813F /* TurnAroundViewController.swift in Sources */,
+				11D13F2320B3039E00E2813F /* GhostFireAnimationViewController.swift in Sources */,
 				E5973E31204F8FD4006461CE /* MeHeaderView.swift in Sources */,
+				11D13F4220B3039E00E2813F /* ZYStarRateView.swift in Sources */,
 				E550D8A72073719A002DDE23 /* FootballPlayFilterVC.swift in Sources */,
+				11D13F2720B3039E00E2813F /* SwipeMenuViewController.swift in Sources */,
 				114800D8208C80B100621AFA /* NewsRecommendVC.swift in Sources */,
 				E56CE810206A22E10090A1B5 /* WithdrawalProgressFooter.swift in Sources */,
 				E503F5C4207A1952006D4A0B /* FootballBetInfoModel.swift in Sources */,
+				11D13F2D20B3039E00E2813F /* FoldingCell.swift in Sources */,
 				11528AA1208F3F67004CC8B4 /* MeView.swift in Sources */,
 				E50C99BB20746E6B002D8C2F /* DateProtocol.swift in Sources */,
 				116E0F322099A601009FE44E /* PaymentList.swift in Sources */,
+				11D13F3120B3039E00E2813F /* ButtonMoveViewController.swift in Sources */,
 				E58B57B220561BB80025E2F1 /* Spacing&SizeConstraint.swift in Sources */,
 				E58B57C9205688570025E2F1 /* UserDataModel.swift in Sources */,
 				E51F9A62205A2A1500AB8A21 /* ForgetPswModileFooterView.swift in Sources */,
+				11D13F2220B3039E00E2813F /* FrameAnimiationViewController.swift in Sources */,
 				E5973E24204E3687006461CE /* VCodeLoginViewController.swift in Sources */,
 				E5B68AFB205A81940038A5A2 /* Extension+String.swift in Sources */,
+				11D13F3D20B3039E00E2813F /* QLDrawView.swift in Sources */,
 				E512A96620479FD7003F14F4 /* HomeNetAPIManager.swift in Sources */,
 				E50643AE206CBE3C0046A2D4 /* WinningMsgModel.swift in Sources */,
 				114491042085982B009F1D09 /* FootballAnalysisSectionHeader.swift in Sources */,
+				11D13F4320B3039E00E2813F /* ImageTransformViewController.swift in Sources */,
+				11D13F3220B3039E00E2813F /* GradientAniViewController.swift in Sources */,
+				11D13F3E20B3039E00E2813F /* HomeTableViewController.swift in Sources */,
 				E5883F582068E8C100CB3A46 /* MessageCenterVC.swift in Sources */,
 				11D2EB5620A5D3F000EBB937 /* GuideViewController.swift in Sources */,
 				E5973E2F204F8B33006461CE /* MeCell.swift in Sources */,
+				11D13F3620B3039E00E2813F /* RegisterSliderView.swift in Sources */,
+				11D13F3320B3039E00E2813F /* TransitionAnim.swift in Sources */,
 				E56CE816206A3FBF0090A1B5 /* AccountStatisticsModel.swift in Sources */,
 				11FEB947208D79A400926951 /* AppDelegateProtocol.swift in Sources */,
 				E537397B2057F4270087E4E6 /* UserInfoDataModel.swift in Sources */,
 				E58B57BC205670670025E2F1 /* ServeConstraint.swift in Sources */,
 				E5973E1C204D4A75006461CE /* ScreenConstraint.swift in Sources */,
+				11D13F3820B3039E00E2813F /* ShoppingViewController.swift in Sources */,
 				11EB8EE2207B6D9B00AFC9C1 /* PaymentViewController.swift in Sources */,
 				116EB214207F672000B32ABD /* FootballBanQuanCFilterVC.swift in Sources */,
 				E550D8A120733A0F002DDE23 /* FootballOrder2-1Cell.swift in Sources */,
@@ -2182,8 +2359,10 @@
 				E56CE812206A23070090A1B5 /* WithdrawalProgressHeader.swift in Sources */,
 				11062B2D20834A60001C1D14 /* LotteryDateFilterCell.swift in Sources */,
 				114800DA208C97B400621AFA /* NewsMeViewController.swift in Sources */,
+				11D13F3920B3039E00E2813F /* CircleAnimateViewController.swift in Sources */,
 				E55016F920722E190056AB1F /* FootballFilterTopView.swift in Sources */,
 				E567636A206B2FDA00E2D9A8 /* HHTextView.swift in Sources */,
+				11D13F2020B3039E00E2813F /* MDShockBannerView.swift in Sources */,
 				E5973E33204FC1D9006461CE /* MeFooterView.swift in Sources */,
 				114491162085FC23009F1D09 /* FootballOddsCell.swift in Sources */,
 				11FEB943208D781400926951 /* DeviceInfoModel.swift in Sources */,
@@ -2195,10 +2374,12 @@
 				E536386B2068A99200457EB5 /* OrderInfoModel.swift in Sources */,
 				E51032482064A99700A0156C /* CouponListModel.swift in Sources */,
 				E512A96B2047EF67003F14F4 /* RequestPlugin.swift in Sources */,
+				11D13F4420B3039E00E2813F /* ChartViewController.swift in Sources */,
 				E550D89B207339CD002DDE23 /* FootballOrderTotalCell.swift in Sources */,
 				E550D8A92073726D002DDE23 /* FootballTimesFilterVC.swift in Sources */,
 				E51032582065037700A0156C /* PurchaseRecordListModel.swift in Sources */,
 				E5786FC4206E13840045F7F5 /* FootballTeamView.swift in Sources */,
+				11D13F2920B3039E00E2813F /* VolumeBeatViewController.swift in Sources */,
 				E533BF0520610D170037D2D8 /* BasePopViewController.swift in Sources */,
 				E5103256206502DA00A0156C /* PurchaseRecordCell.swift in Sources */,
 				11A25C542080C4B500085C58 /* TopTitleView.swift in Sources */,
@@ -2220,6 +2401,7 @@
 				E50B907120522FFF00417BFE /* RechargeViewController.swift in Sources */,
 				E5973E2B204E442F006461CE /* ForgetPswVCodeVC.swift in Sources */,
 				11CA4AD520A0562D00FB32D1 /* FootballHotSectionHeader.swift in Sources */,
+				11D13F2120B3039E00E2813F /* TabItemView.swift in Sources */,
 				117A817E209DDD5E003ED9C3 /* URLParseProtocol.swift in Sources */,
 				E5786FBA206DE9620045F7F5 /* FootballTotalCell.swift in Sources */,
 				E550D8AB20737594002DDE23 /* FootballPlayFilterCell.swift in Sources */,
@@ -2227,6 +2409,10 @@
 				E58B57BE205671410025E2F1 /* LoginNetAPIManager.swift in Sources */,
 				E56CE8042069E2340090A1B5 /* AccountDetailFooterView.swift in Sources */,
 				113B9CD120872226006AE3F8 /* NewsBottomView.swift in Sources */,
+				11D13F4120B3039E00E2813F /* TransitionViewController.swift in Sources */,
+				11D13F1D20B3039E00E2813F /* MDBannerCollectionViewCell.swift in Sources */,
+				11D13F4520B3039E00E2813F /* GifImageOperation.swift in Sources */,
+				11D13F3420B3039E00E2813F /* GradientLabel.swift in Sources */,
 				E550D899207339B6002DDE23 /* FootballOrderRangSPFCell.swift in Sources */,
 				E5786FC2206DEAB30045F7F5 /* FootballHunheCell.swift in Sources */,
 				E5973E29204E4387006461CE /* ForgetPswPhoneVC.swift in Sources */,
@@ -2234,6 +2420,7 @@
 				114490FD20858CF2009F1D09 /* FootballMatchPagerView.swift in Sources */,
 				E550D8A320733A2D002DDE23 /* FootballOrderHunheCell.swift in Sources */,
 				E5D8ABBE206749F5002D688B /* OrderDetailHeaderView.swift in Sources */,
+				11D13F2E20B3039E00E2813F /* TabView.swift in Sources */,
 				11FEB962208DDAAA00926951 /* WeixinShare.swift in Sources */,
 				1144911B208611A3009F1D09 /* FootballMatchInfoProtocol.swift in Sources */,
 				114491142085F6FC009F1D09 /* FootballOddsTitleView.swift in Sources */,
@@ -2245,6 +2432,7 @@
 				E51F9A60205A29EE00AB8A21 /* VCodeLoginFooterView.swift in Sources */,
 				E550D8A52073598E002DDE23 /* FootballOrderTopView.swift in Sources */,
 				E5883F6020690E8B00CB3A46 /* AccountDetailsCell.swift in Sources */,
+				11D13F2620B3039E00E2813F /* LineChartView.swift in Sources */,
 				E51F9A58205A120A00AB8A21 /* PasswordTextFieldCell.swift in Sources */,
 				E50643B0206CBE800046A2D4 /* BannerModel.swift in Sources */,
 				E59CB3DB205BA1300086DD0E /* HomeActivityCell.swift in Sources */,
@@ -2253,10 +2441,12 @@
 				E514DDE02052A37E00274854 /* DataModel.swift in Sources */,
 				E503F5C2207A15A7006D4A0B /* FootballOrderProtocol.swift in Sources */,
 				11D9D9DE2089CB3000F78FCF /* ShareViewController.swift in Sources */,
+				11D13F3A20B3039E00E2813F /* PlaneSportViewController.swift in Sources */,
 				E537397420576FEE0087E4E6 /* APIManager.swift in Sources */,
 				E5883F522068DFBF00CB3A46 /* OrderSchemeTitleCell.swift in Sources */,
 				1144910620859B29009F1D09 /* FootballAnalysisMatchView.swift in Sources */,
 				113B9CCF2087204A006AE3F8 /* NewsThreePicCell.swift in Sources */,
+				11D13F2C20B3039E00E2813F /* UIView+MDExtension.swift in Sources */,
 				E57375A320468B8900148622 /* AppDelegate.swift in Sources */,
 				11A25C522080BF2000085C58 /* FootballHunheView.swift in Sources */,
 				E51F9A5C205A29B800AB8A21 /* RegisterFooterView.swift in Sources */,
@@ -2271,8 +2461,10 @@
 				E550D8AD20737C69002DDE23 /* CXMKeyboardView.swift in Sources */,
 				E5D8ABB820674283002D688B /* OrderDetailCell.swift in Sources */,
 				E5883F502068DC2100CB3A46 /* OrderSchemeInfoModel.swift in Sources */,
+				11D13F2420B3039E00E2813F /* SwiftSimpleAnimations.xcdatamodeld in Sources */,
 				E5A2644E205B742B00EE6491 /* HomeViewController.swift in Sources */,
 				E58B57C7205676EC0025E2F1 /* LotteryNetAPIManager.swift in Sources */,
+				11D13F3B20B3039E00E2813F /* FWSegmentedControl.swift in Sources */,
 				E56CE80A2069F4080090A1B5 /* AccountListModel.swift in Sources */,
 				11062B2320832B99001C1D14 /* LotterySectionHeader.swift in Sources */,
 				114491122085E1C8009F1D09 /* FootballIntegralCollectionCell.swift in Sources */,
@@ -2473,7 +2665,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Source/Classes/ThirdParty/Header.h";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -2495,7 +2687,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Source/Classes/ThirdParty/Header.h";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -2609,6 +2801,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		11D13EF520B3039E00E2813F /* SwiftSimpleAnimations.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				11D13EF620B3039E00E2813F /* SwiftSimpleAnimations.xcdatamodel */,
+			);
+			currentVersion = 11D13EF620B3039E00E2813F /* SwiftSimpleAnimations.xcdatamodel */;
+			path = SwiftSimpleAnimations.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = E573759720468B8900148622 /* Project object */;
 }
