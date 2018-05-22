@@ -14,6 +14,7 @@ let GetuiAppID  = "zH0e8aiYaa73oVVsElXX"
 let GetuiAppKey = "R4iI9PslDe5LSXjpd7XSy"
 let GetuiSecrct = "24e2HwXbm064CiewPXklE6"
 
+let BaiduAppKey = "8b4996b71f"
 
 let phoneNum = "400-012-6600"
 

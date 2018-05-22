@@ -16,3 +16,4 @@
 #import "WXApiObject.h"
 #import <CommonCrypto/CommonCrypto.h>
 #import <GTSDK/GeTuiSdk.h>
+#import "BaiduMobStat.h"

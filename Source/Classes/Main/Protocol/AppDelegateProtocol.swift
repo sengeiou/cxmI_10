@@ -26,6 +26,9 @@ extension AppDelegateProtocol where Self : AppDelegate {
         
         // 注册APNS
         registerRemoteNotification()
+        
+        // 百度统计
+        BaiduMobStat.default().start(withAppId: BaiduAppKey)
     }
     
     func registerRemoteNotification() {
