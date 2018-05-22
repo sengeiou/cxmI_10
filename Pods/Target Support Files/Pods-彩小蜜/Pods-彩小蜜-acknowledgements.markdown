@@ -24,6 +24,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
+## BaiduMobStat
+
+Copyright 2018 Baidu. All rights reserved.
+
 ## DZNEmptyDataSet
 
 The MIT License (MIT)

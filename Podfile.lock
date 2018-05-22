@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (4.7.2)
+  - BaiduMobStat (4.7.2)
   - DZNEmptyDataSet (1.8.1)
   - FSPagerView (0.7.1)
   - GTSDK (2.2.0.0-noidfa)
@@ -28,6 +29,7 @@ PODS:
   - XLPagerTabStrip (8.0.1)
 
 DEPENDENCIES:
+  - BaiduMobStat
   - DZNEmptyDataSet
   - FSPagerView
   - GTSDK (= 2.2.0.0-noidfa)
@@ -49,6 +51,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Alamofire
+    - BaiduMobStat
     - DZNEmptyDataSet
     - FSPagerView
     - GTSDK
@@ -70,6 +73,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
+  BaiduMobStat: e84187c7057f87daac852e05692fd94c8d656bd3
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   FSPagerView: 958aba39684e1573755ddcfcc29f7eebb8413cee
   GTSDK: 2cb8f5df1fbb250f596698443edd0191f77024f1
@@ -89,6 +93,6 @@ SPEC CHECKSUMS:
   WechatOpenSDK: 676feec516a11173eafd1fe64b10d27babf28701
   XLPagerTabStrip: c908b17cbf42fcd2598ee1adfc49bae25444d88a
 
-PODFILE CHECKSUM: 8703149ebc63c447badaaf91f64efc112ede7a18
+PODFILE CHECKSUM: 04c964c3158181d6c785a27aaab8728bea1a2771
 
 COCOAPODS: 1.5.0

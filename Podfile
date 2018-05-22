@@ -40,6 +40,7 @@ target '彩小蜜' do
 
   pod 'GTSDK', '2.2.0.0-noidfa'
 
+  pod 'BaiduMobStat'
   
 
   # Pods for 彩小蜜
