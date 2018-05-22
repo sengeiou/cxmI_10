@@ -29,17 +29,22 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro,
         guard validate(.password, str: self.passwordTF.text) == true else {
             showHUD(message: "请输入6-20位数字和字母组合的密码")
             return }
+        
         loginRequest()
+        
+        TongJi.log(.登录, label: "ios", att: .终端)
     }
     
     @objc private func registerClicked(_ sender : UIButton) {
         let register = RegisterViewController()
         pushViewController(vc: register)
+        TongJi.log(.新用户注册, label: nil)
     }
     
     @objc private func forgetPasswordClicked(_ sender : UIButton) {
         let forget = ForgetPswPhoneVC()
-        self.navigationController?.pushViewController(forget, animated: true)
+        pushViewController(vc: forget)
+        TongJi.log(.忘记密码, label: nil)
     }
     
     @objc private func VCodeClicked(_ sender : UIButton) {

@@ -23,6 +23,7 @@ class RegisterViewController: BaseViewController, UITableViewDelegate, UITableVi
         let regis = WebViewController()
         regis.urlStr = webRegisterAgreement
         pushViewController(vc: regis)
+        TongJi.log(.注册用户协议, label: nil )
     }
     
 
@@ -50,6 +51,7 @@ class RegisterViewController: BaseViewController, UITableViewDelegate, UITableVi
         }
         
         registerRequest()
+        TongJi.log(.注册, label: "ios", att: .终端)
     }
     
     func countdown(button:CountdownButton) {
@@ -59,6 +61,7 @@ class RegisterViewController: BaseViewController, UITableViewDelegate, UITableVi
         }
         button.isCounting = true
         sendSmsRequest(button)
+        TongJi.log(.注册获取验证码, label: "ios", att: .终端)
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -69,7 +72,17 @@ class RegisterViewController: BaseViewController, UITableViewDelegate, UITableVi
         
         return true
     }
-    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == phoneTF {
+            TongJi.log(.注册输手机号, label: nil)
+        }
+        else if textField == passwordTF {
+            TongJi.log(.注册输密码, label: "ios", att: .终端)
+        }
+        else if textField == vcodeTF {
+            TongJi.log(.注册输入验证码, label: "ios", att: .终端)
+        }
+    }
     
     
     // MARK: - 属性
@@ -229,6 +242,11 @@ class RegisterViewController: BaseViewController, UITableViewDelegate, UITableVi
         self.passwordTF.resignFirstResponder()
         self.phoneTF.resignFirstResponder()
         self.vcodeTF.resignFirstResponder()
+    }
+    
+    override func back(_ sender: UIButton) {
+        super.back(sender)
+        TongJi.log(.注册页返回, label: nil)
     }
     
     override func didReceiveMemoryWarning() {

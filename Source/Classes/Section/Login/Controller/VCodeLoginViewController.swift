@@ -27,6 +27,7 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
             showHUD(message: "请输入验证码")
             return }
         loginRequest()
+        TongJi.log(.验证码登录页登录, label: "ios", att: .终端)
     }
     
     @objc private func registerClicked(_ sender : UIButton) {
@@ -49,6 +50,7 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
         button.isCounting = true
         //showHUD(message: "验证码已发送，请注意查收")
         sendSmsRequest()
+        TongJi.log(.验证码登录获取验证码, label: "ios", att: .终端)
     }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
@@ -57,6 +59,15 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
         }
         
         return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == userNameTF {
+            TongJi.log(.验证码登录输手机号, label: nil)
+        }
+        else if textField == vcodeTF {
+            TongJi.log(.验证码登录输入验证码, label: "ios", att: .终端)
+        }
     }
     
     public var loginDelegate : LoginProtocol!
@@ -230,7 +241,7 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
         }else {
             pushRootViewController()
         }
-        
+        TongJi.log(.验证码登录返回, label: nil)
     }
     
     override func didReceiveMemoryWarning() {
