@@ -103,6 +103,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     
     public var times : String = "5" {
         didSet{
+            TongJi.log(.倍数选择, label: times, att: .倍数)
             bottomView.times = times
         }
     } // 倍数  网络请求用
@@ -417,12 +418,14 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
             let payment = PaymentViewController()
             payment.requestModel = requestModel
             pushViewController(vc: payment)
+            TongJi.log(.投注确认, label: self.matchType.rawValue, att: .彩种)
         }else {
             pushLoginVC(from: self)
         }
     }
     // 串关 弹窗
     func orderPlay(filterList: [FootballPlayFilterModel]) {
+        TongJi.log(.串关, label: self.matchType.rawValue, att: .彩种)
         let play = FootballPlayFilterVC()
         play.delegate = self
         play.filterList = filterList
@@ -430,6 +433,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     }
     // 倍数弹窗
     func orderMultiple() {
+        TongJi.log(.倍数, label: self.matchType.rawValue, att: .彩种)
         let times = FootballTimesFilterVC()
         times.delegate = self
         times.times = self.times
@@ -438,6 +442,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     
     // MARK: - 倍数弹窗 delegate
     func timesConfirm(times: String) {
+        TongJi.log(.倍数确定, label: self.matchType.rawValue, att: .彩种)
         print(times)
         self.times = times
         bottomView.times = times
@@ -446,6 +451,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     
     // MARK: - 串关弹窗 delegate
     func playFilterConfirm(filterList: [FootballPlayFilterModel]) {
+        
         bottomView.filterList = filterList
     
         // 选择串关时，，胆的选中状态要改变
@@ -464,11 +470,12 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     private func setDan(filterList: [FootballPlayFilterModel]) {
         guard filterList.isEmpty == false else { return }
         var str : String = ""
-        
+        var name : String = ""
         
         for filter in filterList {
             if filter.isSelected == true {
                 str += filter.titleNum + ","
+                name += filter.title + ","
             }
         }
         guard str != "" else { return }
@@ -482,6 +489,8 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         
         self.betType = str
         
+        
+        
         for info in playList {
             info.isDan = false
         }
@@ -494,6 +503,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         if lastNum! < selectPlayList.count {
             danMaxNum = num! - 1
         }
+        TongJi.log(.串关种类, label: name, att: .串关)
     }
     
     func playFilterCancel() {
@@ -798,7 +808,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         for play in playList{
             play.isDan = false
         }
-        
+        TongJi.log(.投注返回, label: self.matchType.rawValue, att: .彩种)
         popViewController()
         guard delegate != nil else { return }
         delegate.orderConfirmBack(selectPlayList: self.selectPlayList)

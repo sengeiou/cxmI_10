@@ -377,11 +377,13 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     }
     // MARK: - 帮助
     @objc private func helpClicked(_ sender: UIButton) {
+        TongJi.log(.帮助, label: self.matchType.rawValue, att: .彩种)
         let homeWeb = WebViewController()
         homeWeb.urlStr = webPlayHelp
         pushViewController(vc: homeWeb)
     }
     @objc private func showMenu(_ sender: UIButton) {
+        TongJi.log(.赛事筛选, label: self.matchType.rawValue, att: .彩种)
         let filter = FootballMatchFilterVC()
         filter.delegate = self
         filter.filterList = filterList
@@ -417,6 +419,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     }
     // 确认
     func confirm() {
+        
         guard selectPlayList.isEmpty == false else {
             showHUD(message: "您还未选择比赛")
             return }
@@ -427,7 +430,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
                 guard play.matchPlays[0].single == true else {
                     showHUD(message: "您还需要再选择一场比赛")
                     return }
-                
+                TongJi.log(.场次确认, label: self.matchType.rawValue, att: .彩种)
                 let order = FootballOrderConfirmVC()
                 order.delegate = self
                 order.matchType = self.matchType
@@ -441,6 +444,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
                 let can = isAllSingle(playList: selectPlayList)
                 
                 if can {
+                    TongJi.log(.场次确认, label: self.matchType.rawValue, att: .彩种)
                     let order = FootballOrderConfirmVC()
                     order.delegate = self
                     order.playclassFyId = self.matchData.lotteryPlayClassifyId
@@ -455,6 +459,7 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
             
             return
         }
+        TongJi.log(.场次确认, label: self.matchType.rawValue, att: .彩种)
         let order = FootballOrderConfirmVC()
         order.delegate = self
         order.matchType = self.matchType
@@ -731,6 +736,11 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         }
         
         present(score)
+    }
+    
+    override func back(_ sender: UIButton) {
+        super.back(sender)
+        TongJi.log(.场次返回, label: self.matchType.rawValue, att: .彩种)
     }
     
     override func didReceiveMemoryWarning() {

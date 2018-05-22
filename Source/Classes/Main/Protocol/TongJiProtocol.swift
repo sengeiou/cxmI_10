@@ -125,5 +125,9 @@ enum TongJi : String {
 
 enum TongJiFenLei : String {
     case 彩种 = "彩种"
+    case 赛事 = "赛事"
+    case 串关 = "串关"
+    case 倍数 = "倍数"
+    case 终端 = "终端"
     case url = "url"
 }

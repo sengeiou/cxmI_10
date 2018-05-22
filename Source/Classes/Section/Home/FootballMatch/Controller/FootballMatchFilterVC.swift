@@ -219,19 +219,23 @@ class FootballMatchFilterVC: BasePopViewController, UICollectionViewDelegate, UI
     func filterConfirm() {
         guard self.filterList != nil else { return }
         var idStr : String = ""
+        var name : String = ""
         var i = 0
         for filter in self.filterList {
             if filter.isSelected == true {
                 print(i)
                 idStr += filter.leagueId + ","
+                name += filter.leagueAddr + ","
             }
             i += 1
         }
         
-        
         if idStr != "" {
             idStr.removeLast()
         }
+        
+        TongJi.log(.比赛筛选, label: name, att: .赛事)
+        
         guard delegate != nil else { return }
         delegate.filterConfirm(leagueId: idStr)
         self.dismiss(animated: true, completion: nil)
