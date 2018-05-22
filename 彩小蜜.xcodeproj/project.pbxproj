@@ -77,6 +77,7 @@
 		11A555EC20805D96004641AA /* FootballTwoOneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A555EB20805D96004641AA /* FootballTwoOneView.swift */; };
 		11B179242090AFC50061226C /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11B179222090AFC40061226C /* Storyboard.storyboard */; };
 		11B68C6B20A1A862002D74F0 /* JSDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B68C6A20A1A862002D74F0 /* JSDataModel.swift */; };
+		11BD5CEF20B3BA8000A3AE6A /* SurpriseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BD5CEE20B3BA8000A3AE6A /* SurpriseViewController.swift */; };
 		11CA4AD520A0562D00FB32D1 /* FootballHotSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CA4AD420A0562D00FB32D1 /* FootballHotSectionHeader.swift */; };
 		11D2EB5620A5D3F000EBB937 /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D2EB5520A5D3F000EBB937 /* GuideViewController.swift */; };
 		11D9D9DE2089CB3000F78FCF /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D9D9DD2089CB3000F78FCF /* ShareViewController.swift */; };
@@ -346,6 +347,7 @@
 		11A555EB20805D96004641AA /* FootballTwoOneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballTwoOneView.swift; sourceTree = "<group>"; };
 		11B179232090AFC40061226C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Storyboard.storyboard; sourceTree = "<group>"; };
 		11B68C6A20A1A862002D74F0 /* JSDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSDataModel.swift; sourceTree = "<group>"; };
+		11BD5CEE20B3BA8000A3AE6A /* SurpriseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurpriseViewController.swift; sourceTree = "<group>"; };
 		11CA4AD420A0562D00FB32D1 /* FootballHotSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballHotSectionHeader.swift; sourceTree = "<group>"; };
 		11D0646520B2ABBA00C526BE /* 彩小蜜.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "彩小蜜.entitlements"; sourceTree = "<group>"; };
 		11D2EB5520A5D3F000EBB937 /* GuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
@@ -737,6 +739,38 @@
 				116EB20D207F064300B32ABD /* FootballScoreCollectionCell.swift */,
 			);
 			path = TeamView;
+			sourceTree = "<group>";
+		};
+		11BD5CEA20B3BA3A00A3AE6A /* Surprise */ = {
+			isa = PBXGroup;
+			children = (
+				11BD5CED20B3BA5800A3AE6A /* Model */,
+				11BD5CEC20B3BA5500A3AE6A /* View */,
+				11BD5CEB20B3BA5200A3AE6A /* Controller */,
+			);
+			path = Surprise;
+			sourceTree = "<group>";
+		};
+		11BD5CEB20B3BA5200A3AE6A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				11BD5CEE20B3BA8000A3AE6A /* SurpriseViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		11BD5CEC20B3BA5500A3AE6A /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		11BD5CED20B3BA5800A3AE6A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		11FEB948208D7E9500926951 /* ThirdParty */ = {
@@ -1168,6 +1202,7 @@
 			children = (
 				E57375DA2046AE7B00148622 /* Home */,
 				E57375D92046AE7700148622 /* Lottery */,
+				11BD5CEA20B3BA3A00A3AE6A /* Surprise */,
 				E57375D82046AE7000148622 /* Me */,
 				E57375E52046AF8000148622 /* Login */,
 				E581F379206356A2002AB9F7 /* Payment */,
@@ -2120,6 +2155,7 @@
 				11062B2F20834BFA001C1D14 /* LotteryDateModel.swift in Sources */,
 				E537397D2057F7220087E4E6 /* RealInfoDataModel.swift in Sources */,
 				11062B2520833295001C1D14 /* LotteryResultModel.swift in Sources */,
+				11BD5CEF20B3BA8000A3AE6A /* SurpriseViewController.swift in Sources */,
 				11FEB95F208DD55200926951 /* WeixinCenter.swift in Sources */,
 				114491082085A76A009F1D09 /* FootballMatchInfoCell.swift in Sources */,
 				E58B57BA2056364A0025E2F1 /* AddNewBankCardVC.swift in Sources */,
