@@ -84,7 +84,14 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         setRightButtonItem()
         limitNum = 1
     }
-    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //TongJi.start(self.matchType.rawValue)
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        //TongJi.end(self.matchType.rawValue)
+    }
     // MARK: - 查看详情
     func didTipPopConfirm(matchId : String) {
         let matchInfo = FootballMatchInfoVC()

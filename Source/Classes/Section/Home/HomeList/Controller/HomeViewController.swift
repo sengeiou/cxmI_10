@@ -38,31 +38,9 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     
     //MARK: - 点击事件
     func didSelectItem(playModel: HomePlayModel, index: Int) {
+        
         guard playModel.redirectUrl != nil , playModel.redirectUrl != "" else { return }
         pushRouterVC(urlStr: playModel.redirectUrl, from: self)
-        
-//        let football = FootballMatchVC()
-//        switch playType {
-//        case "2":
-//            football.matchType = .胜平负
-//        case "1":
-//            football.matchType = .让球胜平负
-//        case "4":
-//            football.matchType = .总进球
-//        case "5":
-//            football.matchType = .半全场
-//        case "3":
-//            football.matchType = .比分
-//        case "6":
-//            football.matchType = .混合过关
-//        case "7":
-//            football.matchType = .二选一
-//        default: break
-//
-//        }
-//        //football.homeData = homeData.dlPlayClassifyDetailDTOs[index]
-//
-//        pushViewController(vc: football)
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if homeStyle == .onlyNews {
@@ -143,8 +121,6 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         }else {
             self.homeStyle = .allShow
         }
-      
-        
         
         newsList.append(contentsOf: self.newsListModel.list)
         tableView.reloadData()
@@ -159,6 +135,14 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.isHidenBar = false
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+         TongJi.start("大厅")
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+         TongJi.end("大厅")
     }
     
     //MARK: - 加载数据

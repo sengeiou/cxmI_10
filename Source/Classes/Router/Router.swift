@@ -90,6 +90,8 @@ extension RouterPro {
         default:
             break
         }
+    
+        TongJi.log(.足彩彩种, label: football.matchType.rawValue, att: .彩种)
         pushViewController(football, from: vc)
     }
     
