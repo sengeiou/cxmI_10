@@ -56,7 +56,7 @@ class MyCollectionVC: BaseViewController, UITableViewDelegate, UITableViewDataSo
             self.tableView.noMoreData()
             return }
 
-        collectionRequest(1)
+        collectionRequest(self.collectModel.nextPage)
     }
     
     // MARK: - 网络请求
