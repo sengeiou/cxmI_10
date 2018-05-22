@@ -28,7 +28,7 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
     private var maxTimes = QueryMaxTimes
     private var timeInterval : Double = 3
     public var requestModel: FootballRequestMode!
-    
+    public var matchType: FootballMatchType!
     private var saveBetInfo : FootballSaveBetInfoModel!
     
     private var confirmBut : UIButton!
@@ -260,6 +260,10 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
         guard self.saveBetInfo != nil else { return }
         guard self.saveBetInfo.thirdPartyPaid != nil else { return }
         guard self.saveBetInfo.thirdPartyPaid != 0 else {
+//            if self.matchType != nil {
+//                TongJi.log(.余额抵扣, label: self.matchType.rawValue, att: .彩种)
+//            }
+            
             showHUD(message: self.paymentResult.showMsg)
             SVProgressHUD.dismiss()
             self.canPayment = true
@@ -466,6 +470,12 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
             if indexPath.row != 0 {
                 self.paymentModel = paymentAllList[indexPath.row - 1 ]
                 self.selectedIndex = indexPath
+                if indexPath.row == 1 {
+                    if self.matchType != nil {
+                        TongJi.log(.微信支付, label: self.matchType.rawValue, att: .彩种)
+                    }
+                }
+                
             }else {
                 guard self.selectedIndex != nil else { return }
                 tableView.selectRow(at: self.selectedIndex, animated: true, scrollPosition: .none)
@@ -481,14 +491,23 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
         self.canPayment = false
         maxTimes = QueryMaxTimes
         paymentRequest()
+        
+        if self.matchType != nil {
+            TongJi.log(.确认支付, label: self.matchType.rawValue, att: .彩种)
+        }
     }
     // 选取的  优惠券
     func didSelected(bonus bonusId: String) {
+        
         self.saveBetInfo.bonusId = bonusId
         self.saveBetInfo.setBonus()
         
         self.requestModel.bonusId = bonusId
         orderRequest()
+        
+        if self.matchType != nil {
+            TongJi.log(.优惠券抵扣, label: self.matchType.rawValue, att: .彩种)
+        }
     }
     
     deinit {
@@ -509,6 +528,10 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
         self.backed = true
         self.dismissProgressHud()
         self.popViewController()
+        
+        if self.matchType != nil {
+            TongJi.log(.支付返回, label: self.matchType.rawValue, att: .彩种)
+        }
     }
     
     override func didReceiveMemoryWarning() {

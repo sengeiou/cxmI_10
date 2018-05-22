@@ -58,6 +58,15 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro,
         return true
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == userNameTF {
+            TongJi.log(.登录输手机号, label: nil)
+        }
+        if textField == passwordTF {
+            TongJi.log(.登录输密码, label: nil )
+        }
+    }
+    
     public var loginDelegate : LoginProtocol!
     
     //Mark: - 属性
@@ -190,6 +199,11 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro,
 //        }
 //        
 //    }
+    
+    override func back(_ sender: UIButton) {
+        super.back(sender)
+        TongJi.log(.登录返回, label: nil)
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

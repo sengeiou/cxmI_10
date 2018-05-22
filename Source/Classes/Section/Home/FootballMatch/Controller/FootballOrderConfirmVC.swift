@@ -416,6 +416,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         
         if getUserData() != nil {
             let payment = PaymentViewController()
+            payment.matchType = self.matchType
             payment.requestModel = requestModel
             pushViewController(vc: payment)
             TongJi.log(.投注确认, label: self.matchType.rawValue, att: .彩种)
