@@ -26,7 +26,6 @@ class RegisterViewController: BaseViewController, UITableViewDelegate, UITableVi
         TongJi.log(.注册用户协议, label: "注册用户协议" )
     }
     
-
     // MARK: - 点击事件
     @objc private func registerClicked(_ sender: UIButton) {
         self.passwordTF.resignFirstResponder()
