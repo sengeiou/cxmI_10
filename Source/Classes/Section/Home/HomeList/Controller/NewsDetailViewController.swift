@@ -114,7 +114,7 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
 //            self.bagView.backgroundColor = UIColor.clear
 //        }
         
-        UIView.animate(withDuration: 0.2, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
             self.bagView.backgroundColor = UIColor.clear
         }) { (finish) in
             if finish {
@@ -145,8 +145,6 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
         
         self.view.addSubview(tableView)
         self.view.addSubview(bagView)
-        
-        
     }
     
     private func setRightItem() {
