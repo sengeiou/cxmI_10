@@ -32,8 +32,8 @@ class ShareCell: UICollectionViewCell {
         super.layoutSubviews()
         icon.snp.makeConstraints { (make) in
             make.top.equalTo(0)
-            make.left.equalTo(10 * defaultScale)
-            make.right.equalTo(-10 * defaultScale)
+            make.left.equalTo(1 * defaultScale)
+            make.right.equalTo(-1 * defaultScale)
             make.height.equalTo(icon.snp.width)
         }
         title.snp.makeConstraints { (make) in

@@ -119,12 +119,12 @@ class ShareViewController: BasePopViewController, UICollectionViewDelegate, UICo
         
         collectionView.snp.makeConstraints { (make) in
             make.top.left.right.equalTo(0)
-            make.bottom.equalTo(bottomLine.snp.top)
+            make.bottom.equalTo(bottomLine.snp.top).offset(-10)
         }
     }
 
     private func initSubview() {
-        self.viewHeight = 160 * defaultScale + SafeAreaBottomHeight
+        self.viewHeight = 170 * defaultScale + SafeAreaBottomHeight
         
         bottomLine = UIView()
         bottomLine.backgroundColor = ColorC8C8C8
