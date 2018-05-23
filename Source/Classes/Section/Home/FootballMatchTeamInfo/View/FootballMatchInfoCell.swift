@@ -32,10 +32,13 @@ class FootballMatchInfoCell: UITableViewCell {
             matchResult.text = teamInfo.matchRs
             if teamInfo.matchRs == "胜" {
                 matchResult.textColor = ColorEA5504
+                wholeColor = ColorEA5504
             }else if teamInfo.matchRs == "平" {
                 matchResult.textColor = Color65AADD
+                wholeColor = Color65AADD
             }else{
                 matchResult.textColor = Color44AE35
+                wholeColor = Color44AE35
             }
             
             
@@ -171,6 +174,7 @@ class FootballMatchInfoCell: UITableViewCell {
             make.top.bottom.equalTo(matchName)
             make.left.equalTo(matchScore.snp.right)
             make.right.equalTo(matchResult.snp.left)
+            
         }
     }
     
@@ -189,9 +193,9 @@ class FootballMatchInfoCell: UITableViewCell {
         matchScore = getLabel("阿森纳  0：1  AC米兰")
     
         homeScore = getLabel("")
-        homeScore.textAlignment = .right
+        //homeScore.textAlignment = .right
         visiScore = getLabel("")
-        visiScore.textAlignment = .left
+        //visiScore.textAlignment = .left
         
         matchResult = getLabel("")
         
