@@ -41,6 +41,7 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
     private var cellHeight : CGFloat = 100
     private var footer : NewsDetailFooter!
     private var webView : WKWebView!
+    private var bagView : UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,6 +110,17 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
         tableView.beginUpdates()
         tableView.endUpdates()
         
+//        UIView.animate(withDuration: 2) {
+//            self.bagView.backgroundColor = UIColor.clear
+//        }
+        
+        UIView.animate(withDuration: 0.2, animations: {
+            self.bagView.backgroundColor = UIColor.clear
+        }) { (finish) in
+            if finish {
+                self.bagView.isHidden = true
+            }
+        }
     }
     private func addOrDeleteCollect(isAdd: Bool) {
         if isAdd {
@@ -122,11 +134,19 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
         tableView.snp.makeConstraints { (make) in
             make.top.left.right.bottom.equalTo(0)
         }
+        bagView.snp.makeConstraints { (make) in
+            make.top.left.right.bottom.equalTo(0)
+        }
     }
     
     private func initSubview() {
+        bagView = UIView()
+        bagView.backgroundColor = ColorFFFFFF
         
         self.view.addSubview(tableView)
+        self.view.addSubview(bagView)
+        
+        
     }
     
     private func setRightItem() {
