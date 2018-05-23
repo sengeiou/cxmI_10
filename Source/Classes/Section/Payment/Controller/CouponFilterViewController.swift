@@ -33,9 +33,10 @@ class CouponFilterViewController: BasePopViewController, UITableViewDelegate, UI
         initSubview()
         
         setEmpty(title: "暂无可用优惠券", tableView)
-        
     }
 
+    
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -126,7 +127,7 @@ class CouponFilterViewController: BasePopViewController, UITableViewDelegate, UI
         
         if bonusInfo.isSelected == true {
             self.bonusId = bonusInfo.userBonusId
-            bonusInfo.isSelected = true
+            //bonusInfo.isSelected = true
             self.tableView.selectRow(at: indexPath, animated: true , scrollPosition: .none)
             //self.selectedIndex = indexPath
         }
@@ -151,20 +152,22 @@ class CouponFilterViewController: BasePopViewController, UITableViewDelegate, UI
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let bonus = bonusList[indexPath.row]
-
-        bonus.isSelected = !bonus.isSelected
+        self.bonusId = bonus.userBonusId
+//
+//        bonus.isSelected = !bonus.isSelected
+//        
+//        if bonus.isSelected {
+//            self.bonusId = bonus.userBonusId
+//            for bonuss in bonusList {
+//                if bonuss.userBonusId != bonus.userBonusId {
+//                     bonuss.isSelected = false
+//                }
+//            }
+//        }else {
+//            self.bonusId = "-1"
+//        }
         
-        if bonus.isSelected {
-            self.bonusId = bonus.userBonusId
-            for bonuss in bonusList {
-                if bonuss.userBonusId != bonus.userBonusId {
-                     bonuss.isSelected = false
-                }
-            }
-        }else {
-            self.bonusId = "-1"
-        }
-        tableView.reloadData()
+        //tableView.reloadData()
     }
     
     // MARK: - 点击事件
@@ -172,8 +175,6 @@ class CouponFilterViewController: BasePopViewController, UITableViewDelegate, UI
     @objc public override func backPopVC() {
         
     }
-    
-   
     
     @objc private func confirmClicked(_ sender: UIButton) {
         dismiss(animated: true, completion: nil )

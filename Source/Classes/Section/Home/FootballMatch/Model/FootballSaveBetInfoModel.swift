@@ -24,7 +24,7 @@ class FootballSaveBetInfoModel : HandyJSON{
     
     func setBonus() {
         for bonus in bonusList {
-            if bonus.userBonusId == bonusId {
+            if bonus.userBonusId == bonusId || bonus.bonusId == bonusId{
                 bonus.isSelected = true
                 return
             }

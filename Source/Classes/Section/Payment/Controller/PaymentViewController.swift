@@ -108,6 +108,20 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
             .mapObject(type: FootballSaveBetInfoModel.self)
             .subscribe(onNext: { (data) in
                 weakSelf?.saveBetInfo = data
+                
+                if weakSelf?.saveBetInfo.bonusList.count != 0 {
+                    
+                    let bonus = BonusInfoModel()
+                    bonus.bonusId = ""
+                    bonus.userBonusId = "-1"
+                    bonus.bonusPrice = ""
+                    bonus.bonusName = "暂不使用"
+                    bonus.bonusStatus = "暂不使用"
+                    bonus.useRange = "暂不使用"
+                    bonus.minGoodsAmount = "暂不使用"
+                    weakSelf?.saveBetInfo.bonusList.append(bonus)
+                }
+                
                 data.setBonus() // 设置默认选中的优惠券
                 //weakSelf?.tableView.reloadData()
                 weakSelf?.allPaymentRequest()
