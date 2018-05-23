@@ -1,5 +1,5 @@
 //
-//  ClearCaching.swift
+//  ClearCache.swift
 //  彩小蜜
 //
 //  Created by 笑 on 2018/5/23.
@@ -7,7 +7,3 @@
 //
 
 import Foundation
-
-protocol ClearCache {
-    
-}
