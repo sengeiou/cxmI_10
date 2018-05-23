@@ -146,8 +146,8 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
         let surpriseImg = UIImage(named: "tab_lot_nor")?.withRenderingMode(.alwaysOriginal)
         let surpriseSelImg = UIImage(named: "tab_lot_sel")?.withRenderingMode(.alwaysOriginal)
         
-        lotteryNav.tabBarItem.image = surpriseImg
-        lotteryNav.tabBarItem.selectedImage = surpriseSelImg
+        surpriseNav.tabBarItem.image = surpriseImg
+        surpriseNav.tabBarItem.selectedImage = surpriseSelImg
         
         // me
         //me : BaseViewController!
