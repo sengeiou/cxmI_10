@@ -26,6 +26,7 @@ class ForgetPswVCodeVC: BaseViewController, UITextFieldDelegate, ValidatePro,Cus
             return }
         
         updatePassRequest()
+        TongJi.log(.忘记密码确定, label: "ios", att: .终端)
     }
     func countdown(button:CountdownButton) {
         guard validate(.password, str: self.passwordTF.text) == true else {
@@ -33,6 +34,7 @@ class ForgetPswVCodeVC: BaseViewController, UITextFieldDelegate, ValidatePro,Cus
             return }
         button.isCounting = true
         sendSmsRequest()
+        TongJi.log(.忘记密码获取验证码, label: "ios", att: .终端)
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -41,6 +43,12 @@ class ForgetPswVCodeVC: BaseViewController, UITextFieldDelegate, ValidatePro,Cus
             textf.changeImg(string)
         }
         return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == vcodeTF {
+            TongJi.log(.忘记密码输入验证码, label: "ios", att: .终端)
+        }
     }
     
     //MARK: - 属性

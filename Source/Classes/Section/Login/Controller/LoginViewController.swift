@@ -42,6 +42,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro,
     }
     
     @objc private func forgetPasswordClicked(_ sender : UIButton) {
+        TongJi.log(.忘记密码, label: nil)
         let forget = ForgetPswPhoneVC()
         pushViewController(vc: forget)
         TongJi.log(.忘记密码, label: nil)

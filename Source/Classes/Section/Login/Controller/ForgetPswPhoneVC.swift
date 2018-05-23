@@ -23,6 +23,7 @@ class ForgetPswPhoneVC: BaseViewController, UITextFieldDelegate, ValidatePro, UI
             return
         }
         validateMobileRequest()
+        TongJi.log(.忘记密码下一步, label: nil)
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -33,6 +34,12 @@ class ForgetPswPhoneVC: BaseViewController, UITextFieldDelegate, ValidatePro, UI
         
         return true
     }
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == phoneTF {
+            TongJi.log(.忘记密码输入手机号, label: nil)
+        }
+    }
+    
     
     //MARK: - 属性
     private var phoneTF : CustomTextField!
@@ -161,7 +168,10 @@ class ForgetPswPhoneVC: BaseViewController, UITextFieldDelegate, ValidatePro, UI
     }
     
     
-    
+    override func back(_ sender: UIButton) {
+        super.back(sender)
+        TongJi.log(.忘记密码页返回, label: nil )
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
