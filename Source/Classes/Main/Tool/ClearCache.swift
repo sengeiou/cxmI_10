@@ -13,7 +13,10 @@ protocol ClearCache {
     
 }
 
+/// 清除缓存
 extension ClearCache {
+    
+    /// 清理 kingfisher 图片缓存
     func clearImageCache() {
         let cache = ImageCache.default
         cache.clearDiskCache()
