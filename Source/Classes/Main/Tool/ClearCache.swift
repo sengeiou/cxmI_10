@@ -9,9 +9,7 @@
 import Foundation
 import Kingfisher
 
-protocol ClearCache {
-    
-}
+protocol ClearCache { }
 
 /// 清除缓存
 extension ClearCache {
@@ -22,5 +20,13 @@ extension ClearCache {
         cache.clearDiskCache()
         //cache.clearMemoryCache()
         cache.cleanExpiredDiskCache()
+    }
+    
+    func clearUserInfo() {
+        
+    }
+    
+    func clearLoginCache() {
+        
     }
 }

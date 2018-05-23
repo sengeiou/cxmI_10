@@ -114,21 +114,6 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         TongJi.log(.提现, label: "提现")
     }
     
-    //MARK: - tableView delegate
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if showType == .onlyNews {
-            let collection = MyCollectionVC()
-            pushViewController(vc: collection)
-        }else {
-            let section = self.meSectionList[indexPath.section]
-            
-            let row  = section.list[indexPath.row]
-            
-            pushMeViewController(row)
-        }
-    }
-    
     // footer delegate
     func signOutClicked() {
         print("退出登录")
@@ -150,6 +135,22 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWithPhoneNumber phoneNumber: String!) {
         UIApplication.shared.openURL(URL(string: "telprompt://\(phoneNumber!)")!)
     }
+    
+    //MARK: - tableView delegate
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if showType == .onlyNews {
+            let collection = MyCollectionVC()
+            pushViewController(vc: collection)
+        }else {
+            let section = self.meSectionList[indexPath.section]
+            
+            let row  = section.list[indexPath.row]
+            
+            pushMeViewController(row)
+        }
+    }
+    
     //MARK: - 设置用户信息
     private func setupUserInfo() {
         
