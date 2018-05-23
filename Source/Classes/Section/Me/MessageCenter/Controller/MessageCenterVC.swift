@@ -25,7 +25,16 @@ class MessageCenterVC: BaseViewController, IndicatorInfoProvider, UITableViewDel
         pushRouterVC(urlStr: messageModel.msgUrl, from: self)
     }
 
-    public var messageType: MessageCenterType = .notice
+    public var messageType: MessageCenterType = .notice {
+        didSet{
+            switch messageType {
+            case .notice:
+                TongJi.log(.消息中心通知, label: nil)
+            case .message:
+                TongJi.log(.消息中心消息, label: nil)
+            }
+        }
+    }
     
     private var messageModel : BasePageModel<MessageCenterModel>!
     private var messageList: [MessageCenterModel]!
@@ -170,6 +179,10 @@ class MessageCenterVC: BaseViewController, IndicatorInfoProvider, UITableViewDel
         return nil
     }
     
+    override func back(_ sender: UIButton) {
+        super.back(sender)
+        TongJi.log(.消息中心返回, label: nil)
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

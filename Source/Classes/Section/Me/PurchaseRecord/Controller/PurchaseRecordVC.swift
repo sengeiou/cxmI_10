@@ -27,7 +27,19 @@ class PurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
         pushViewController(vc: order)
     }
     
-    public var recordType : PurchaseRecordType = .all
+    public var recordType : PurchaseRecordType = .all {
+        didSet{
+            
+            switch recordType {
+            case .all:
+                TongJi.log(.投注记录全部, label: nil)
+            case .prize:
+                TongJi.log(.投注记录待开奖, label: nil)
+            case .winning :
+                TongJi.log(.投注记录中奖, label: nil)
+            }
+        }
+    }
     
     //MARK: - 属性
     private var recordListModel : PurchaseRecordListModel!
@@ -77,10 +89,13 @@ class PurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
         switch recordType {
         case .all:
             orderStatus = "-1"
+            
         case .prize:
             orderStatus = "3"
+            
         case .winning :
             orderStatus = "5"
+            
         }
         //self.showProgressHUD()
         weak var weakSelf = self
@@ -160,6 +175,10 @@ class PurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
         return nil
     }
     
+    override func back(_ sender: UIButton) {
+        super.back(sender)
+        TongJi.log(.投注记录返回, label: nil)
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

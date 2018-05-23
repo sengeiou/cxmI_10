@@ -96,6 +96,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         let recharge = RechargeViewController()
         recharge.userInfo = userInfo
         pushViewController(vc: recharge)
+        TongJi.log(.充值, label: nil)
     }
     
     func withdrawalClicked() {
@@ -110,32 +111,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
             return }
         let draw = WithdrawalViewController()
         pushViewController(vc: draw)
-    }
-    
-    // footer delegate
-    func signOutClicked() {
-        print("退出登录")
-        weak var weakSelf = self
-        self.showCXMAlert(title: nil, message: "您正在退出登录", action: "继续退出", cancel: "返回") { (action) in
-            weakSelf?.logoutRequest()
-            weakSelf?.removeUserData()
-            weakSelf?.pushRootViewController(2)
-        }
-        //pushLoginVC(from: self)
-        
-    }
-    // 未认证 警告条 去认证
-    func alertClicked() {
-        let authentication = AuthenticationVC()
-        pushViewController(vc: authentication)
-    }
-    // 客服电话
-    func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWithPhoneNumber phoneNumber: String!) {
-        UIApplication.shared.openURL(URL(string: "telprompt://\(phoneNumber!)")!)
-    }
-    //MARK: - 设置用户信息
-    private func setupUserInfo() {
-        
+        TongJi.log(.提现, label: nil)
     }
     
     //MARK: - tableView delegate
@@ -153,28 +129,64 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    // footer delegate
+    func signOutClicked() {
+        print("退出登录")
+        weak var weakSelf = self
+        self.showCXMAlert(title: nil, message: "您正在退出登录", action: "继续退出", cancel: "返回") { (action) in
+            weakSelf?.logoutRequest()
+            weakSelf?.removeUserData()
+            weakSelf?.pushRootViewController(2)
+            TongJi.log(.退出登录, label: nil)
+        }
+        //pushLoginVC(from: self)
+        
+    }
+    // 未认证 警告条 去认证
+    func alertClicked() {
+        TongJi.log(.实名认证, label: nil)
+        let authentication = AuthenticationVC()
+        pushViewController(vc: authentication)
+    }
+    // 客服电话
+    func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWithPhoneNumber phoneNumber: String!) {
+        UIApplication.shared.openURL(URL(string: "telprompt://\(phoneNumber!)")!)
+    }
+    //MARK: - 设置用户信息
+    private func setupUserInfo() {
+        
+    }
+    
     private func pushMeViewController (_ model: MeListDataModel) {
         switch model.pushType {
         case .投注记录:
             pushPagerView(pagerType: .purchaseRecord)
+            TongJi.log(.投注记录, label: nil)
         case .账户明细:
             pushPagerView(pagerType: .accountDetails)
+            TongJi.log(.账户明细, label: nil)
         case .我的卡券:
             pushPagerView(pagerType: .coupon)
+            TongJi.log(.我的卡券, label: nil)
         case .消息中心:
             pushPagerView(pagerType: .message)
+            TongJi.log(.消息中心, label: nil)
         case .我的收藏:
             let collection = MyCollectionVC()
             pushViewController(vc: collection)
+            TongJi.log(.我的收藏, label: nil)
         case .帮助中心:
             let web = WebViewController()
             web.urlStr = webHelp
             pushViewController(vc: web)
+            TongJi.log(.帮助中心, label: nil)
         case .联系客服:
             UIApplication.shared.openURL(URL(string: "telprompt://\(phoneNum)")!)
+            TongJi.log(.联系客服, label: nil)
         case .关于我们:
             let about = MeAboutViewController()
             pushViewController(vc: about)
+            TongJi.log(.关于我们, label: nil)
         case .活动:
             guard model.actUrl != nil else { return }
             pushRouterVC(urlStr: model.actUrl, from: self)

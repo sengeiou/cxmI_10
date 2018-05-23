@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WithdrawalViewController: BaseViewController, ValidatePro {
+class WithdrawalViewController: BaseViewController, ValidatePro, UITextFieldDelegate {
 
     //MARK: - 点击事件
     // 提交   确认支付
@@ -34,9 +34,9 @@ class WithdrawalViewController: BaseViewController, ValidatePro {
             return
         }
         
-        
         self.canWithDraw = false
         drawRequest()
+        TongJi.log(.提现提交, label: "ios", att: .终端)
     }
     // 全部提现
     @objc private func allDraw(_ sender: UIButton) {
@@ -49,6 +49,13 @@ class WithdrawalViewController: BaseViewController, ValidatePro {
         let bankCard = BankCardViewController()
         pushViewController(vc: bankCard)
     }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == amountOfMoney {
+            TongJi.log(.输入提现金额, label: nil)
+        }
+    }
+    
     //MARK: - 属性
     private var bgView: UIView! // 背景图
     private var canWithDraw : Bool = true
@@ -247,6 +254,7 @@ class WithdrawalViewController: BaseViewController, ValidatePro {
         
         amountOfMoney = UITextField()
         amountOfMoney.font = Font15
+        amountOfMoney.delegate = self 
         amountOfMoney.placeholder = "请输入提现金额"
         amountOfMoney.rightView = allDrawBut
         amountOfMoney.rightViewMode = .always

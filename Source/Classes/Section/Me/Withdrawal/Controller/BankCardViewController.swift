@@ -15,6 +15,7 @@ class BankCardViewController: BaseViewController, UITableViewDelegate, UITableVi
     func addNewBankCard() {
         let add = AddNewBankCardVC()
         pushViewController(vc: add)
+        TongJi.log(.添加银行卡, label: nil )
     }
     
     //MARK: - BankCardCellDelegate
@@ -41,6 +42,7 @@ class BankCardViewController: BaseViewController, UITableViewDelegate, UITableVi
         }
 
     }
+    
     
     // tableView delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

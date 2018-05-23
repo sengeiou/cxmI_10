@@ -245,6 +245,11 @@ class MyCollectionVC: BaseViewController, UITableViewDelegate, UITableViewDataSo
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: but)
     }
     
+    override func back(_ sender: UIButton) {
+        super.back(sender)
+        TongJi.log(.我的收藏返回, label: nil)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         

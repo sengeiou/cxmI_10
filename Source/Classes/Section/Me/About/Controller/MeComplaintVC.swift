@@ -21,6 +21,7 @@ class MeComplaintVC: BaseViewController {
             return
         }
         complainRequest()
+        TongJi.log(.投诉建议发送, label: nil)
     }
     
     // MARK: - 属性
@@ -133,6 +134,11 @@ class MeComplaintVC: BaseViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.textView.textView.resignFirstResponder()
+    }
+    
+    override func back(_ sender: UIButton) {
+        super.back(sender)
+        TongJi.log(.投诉建议返回, label: nil)
     }
     
     override func didReceiveMemoryWarning() {

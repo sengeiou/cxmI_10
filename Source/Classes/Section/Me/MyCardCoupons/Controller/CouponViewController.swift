@@ -21,7 +21,18 @@ enum CouponType: String {
 
 class CouponViewController: BaseViewController, IndicatorInfoProvider, UITableViewDelegate, UITableViewDataSource {
 
-    public var couponType : CouponType = .unUsed
+    public var couponType : CouponType = .unUsed {
+        didSet{
+            switch couponType {
+            case .unUsed:
+                TongJi.log(.我的卡券未使用, label: nil)
+            case .used:
+                TongJi.log(.我的卡券已使用, label: nil)
+            case .overdue:
+                TongJi.log(.我的卡券已过期, label: nil)
+            }
+        }
+    }
     
     private var couponListModel : CouponListModel!
     private var couponList : [CouponInfoModel]!
@@ -156,7 +167,10 @@ class CouponViewController: BaseViewController, IndicatorInfoProvider, UITableVi
         return nil
     }
     
-    
+    override func back(_ sender: UIButton) {
+        super.back(sender)
+        TongJi.log(.我的卡券返回, label: nil)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

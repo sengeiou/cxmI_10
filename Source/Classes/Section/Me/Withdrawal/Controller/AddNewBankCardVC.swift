@@ -22,7 +22,15 @@ class AddNewBankCardVC: BaseViewController, UITextFieldDelegate, ValidatePro {
         }
         print(str!)
         addBankCardRequest()
+        TongJi.log(.银行卡添加, label: "ios", att: .终端)
     }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == cardNumTF {
+            TongJi.log(.输入银行卡, label: nil)
+        }
+    }
+    
     //MARK: - 属性
     private var nameLB : UILabel! // 名字
     private var nameTitle : UILabel!

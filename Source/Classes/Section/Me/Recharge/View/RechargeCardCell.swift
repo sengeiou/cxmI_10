@@ -24,6 +24,7 @@ class RechargeCardCell: UITableViewCell {
     //MARK: 点击事件
     @objc private func cartButClicked(_ sender: UIButton) {
         self.textfield.text = "\(sender.tag)"
+        TongJi.log(.充值固定金额, label: nil)
     }
     
     //MARK: - 属性

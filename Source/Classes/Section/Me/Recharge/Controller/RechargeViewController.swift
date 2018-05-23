@@ -84,16 +84,21 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
         maxTimes = QueryMaxTimes
         self.canPayment = false
         rechargeRequest(amount: self.cardCell.textfield.text!)
+        TongJi.log(.充值支付, label: "ios", att: .终端)
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
-       
         
         if let tex = textField as? CustomTextField {
             tex.changeBorderColor(string)
         }
         return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == self.textfield {
+            TongJi.log(.充值输入金额, label: nil)
+        }
     }
     
     //MARK: - Tableview Delegate
@@ -373,8 +378,6 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
             return UITableViewCell()
         }
     }
-    
-    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {

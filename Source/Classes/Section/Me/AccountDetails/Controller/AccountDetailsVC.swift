@@ -23,7 +23,24 @@ fileprivate let AccountDetailSectionHeaderId = "AccountDetailSectionHeaderId"
 
 class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDelegate, UITableViewDataSource {
 
-    public var accountType : AccountDetailsType = .all
+    public var accountType : AccountDetailsType = .all {
+        didSet{
+            switch accountType {
+            case .all:
+                TongJi.log(.账户明细全部, label: nil)
+            case .bonus:
+                TongJi.log(.账户明细奖金, label: nil)
+            case .recharge:
+                TongJi.log(.账户明细充值, label: nil)
+            case .buy:
+                TongJi.log(.账户明细购彩, label: nil)
+            case .withdrawal:
+                TongJi.log(.账户明细提现, label: nil)
+            case .coupon:
+                TongJi.log(.账户明细红包, label: nil)
+            }
+        }
+    }
     
     private var pageDataModel: BasePageModel<AccountDetailModel>!
     private var accountList: [AccountDetailModel]!
@@ -273,6 +290,10 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
         return nil
     }
     
+    override func back(_ sender: UIButton) {
+        super.back(sender)
+        TongJi.log(.账户明细返回, label: nil)
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

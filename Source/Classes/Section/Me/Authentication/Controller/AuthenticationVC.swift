@@ -24,19 +24,18 @@ class AuthenticationVC: BaseViewController, UITextFieldDelegate, ValidatePro {
         }
         
         authenticationRequest() // 认证请求
+        TongJi.log(.实名认证认证, label: "ios", att: .终端)
         
     }
     
     //MARK: - TextField Delegate
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-//        if nameTF.isFirstResponder == false {
-//            guard validate(.chinese, str: nameTF.text) == true else {
-//                nameTF.becomeFirstResponder()
-//                showHUD(message: "请输入正确的姓名")
-//                return
-//            }
-//        }
+        if textField == nameTF {
+            TongJi.log(.实名认证输入姓名, label: nil )
+        }else if textField == IDNumberTF {
+            TongJi.log(.实名认证输入身份证, label: nil)
+        }
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

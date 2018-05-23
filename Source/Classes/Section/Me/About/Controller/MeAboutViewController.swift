@@ -62,10 +62,12 @@ class MeAboutViewController: BaseViewController, UITableViewDelegate, UITableVie
         case 0:
             let complaint = MeComplaintVC()
             pushViewController(vc: complaint)
+            TongJi.log(.关于我们投诉建议, label: nil)
         case 1:
             let web = WebViewController()
             web.urlStr = webInsurance
             pushViewController(vc: web)
+            TongJi.log(.关于我们安全保障, label: nil)
         default: break
         
         }
@@ -104,6 +106,11 @@ class MeAboutViewController: BaseViewController, UITableViewDelegate, UITableVie
     }
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return nil
+    }
+    
+    override func back(_ sender: UIButton) {
+        super.back(sender)
+        TongJi.log(.关于我们返回, label: nil)
     }
     
     override func didReceiveMemoryWarning() {
