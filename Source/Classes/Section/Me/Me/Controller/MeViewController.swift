@@ -139,8 +139,6 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
             weakSelf?.pushRootViewController(2)
             TongJi.log(.退出登录, label: nil)
         }
-        //pushLoginVC(from: self)
-        
     }
     // 未认证 警告条 去认证
     func alertClicked() {
