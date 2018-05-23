@@ -7,3 +7,17 @@
 //
 
 import Foundation
+import Kingfisher
+
+protocol ClearCache {
+    
+}
+
+extension ClearCache {
+    func clearImageCache() {
+        let cache = ImageCache.default
+        cache.clearDiskCache()
+        //cache.clearMemoryCache()
+        cache.cleanExpiredDiskCache()
+    }
+}
