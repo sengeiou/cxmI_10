@@ -343,6 +343,9 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
         
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 0.01
+        }
         return 5
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

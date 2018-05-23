@@ -32,15 +32,6 @@ class SurpriseViewController: BaseWebViewController {
         
     }
     
-//    override func loadWebView() {
-//        guard urlStr != "", urlStr != nil else { return }
-//        guard let urlStr = urlStr.removingPercentEncoding else { fatalError("-------  url 解码错误  -------") }
-//        guard let url = URL(string: urlStr) else { fatalError("-------  url 错误  -------")}
-//        let request = URLRequest(url: url)
-//        
-//        webView.load(request)
-//    }
-    
     override func back(_ sender: UIButton) {
         super.back(sender)
     }
