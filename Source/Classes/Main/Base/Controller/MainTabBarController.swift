@@ -137,7 +137,7 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
         
         // 发现
         let surprise = SurpriseViewController()
-        
+        surprise.urlStr = "http://www.baidu.com"
         let surpriseNav = UINavigationController(rootViewController: surprise)
         surpriseNav.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
         

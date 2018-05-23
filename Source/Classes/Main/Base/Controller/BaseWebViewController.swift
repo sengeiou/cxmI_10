@@ -65,6 +65,7 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
     }
     
     public func loadWebView() {
+        guard urlStr != "", urlStr != nil else { return }
         guard let urlStr = urlStr.removingPercentEncoding else { fatalError("-------  url 解码错误  -------") }
         guard let url = URL(string: urlStr) else { fatalError("-------  url 错误  -------")}
         let request = URLRequest(url: url)
@@ -97,10 +98,12 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         webView.evaluateJavaScript("getCxmTitle()") { (data, error) in
-            if let title = data as? String {
-                self.title = title
-            }else {
-                self.title = webView.title
+            if self.navigationItem.title == nil {
+                if let title = data as? String {
+                    self.navigationItem.title = title
+                }else {
+                    self.navigationItem.title = webView.title
+                }
             }
         }
         
@@ -113,8 +116,6 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
                 
             }
         }
-        
-    
     }
     
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
@@ -126,10 +127,10 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
         self.present(alert, animated: true, completion: nil)
     }
     
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        
-        decisionHandler(.allow)
-    }
+//    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+//        
+//        decisionHandler(.allow)
+//    }
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
         if navigationAction.targetFrame == nil {
             let url = navigationAction.request.url

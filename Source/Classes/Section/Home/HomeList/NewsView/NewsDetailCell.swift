@@ -87,7 +87,6 @@ class NewsDetailCell: UITableViewCell, WKUIDelegate, WKNavigationDelegate, DateP
     private func initWebView() {
         let webConfiguration = WKWebViewConfiguration()
         
-        //webConfiguration.mediaPlaybackRequiresUserAction = false;//把手动播放设置NO ios(8.0, 9.0)
         webConfiguration.allowsInlineMediaPlayback = true;//是否允许内联(YES)或使用本机全屏控制器(NO)，默认是NO。
         webConfiguration.mediaPlaybackAllowsAirPlay = true;
         
@@ -95,27 +94,16 @@ class NewsDetailCell: UITableViewCell, WKUIDelegate, WKNavigationDelegate, DateP
         webView = WKWebView(frame: CGRect.zero, configuration: webConfiguration)
         webView.navigationDelegate = self
         webView.uiDelegate = self
-       // webView.autoresizingMask = .flexibleHeight
         
         webView.scrollView.isScrollEnabled = false
         webView.scrollView.bounces = false
         webView.scrollView.showsVerticalScrollIndicator = false
     
         self.contentView.addSubview(webView)
-        
-//        webView.snp.makeConstraints { (make) in
-//            make.top.left.right.equalTo(0)
-//            make.bottom.equalTo(0)
-//        }
-
     }
     
     public func loadWebView(htmlStr : String) {
-//        let jsonPath = Bundle.main.path(forResource: "rich", ofType: "txt")
-//        let data = NSData.init(contentsOfFile: jsonPath!)
-//
-//        let xxx = String.init(data: data! as Data, encoding: String.Encoding.utf8)
-        
+
         let html = """
                 <html>
                 <head>
@@ -134,7 +122,6 @@ class NewsDetailCell: UITableViewCell, WKUIDelegate, WKNavigationDelegate, DateP
         webView.loadHTMLString(html, baseURL: nil)
     }
 
-    
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
         

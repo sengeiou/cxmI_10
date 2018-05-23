@@ -355,6 +355,26 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
         return nil
     }
     
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        webView.evaluateJavaScript("getCxmTitle()") { (data, error) in
+            if let title = data as? String {
+                self.title = title
+            }else {
+                self.title = webView.title
+            }
+        }
+        
+        let model = JSDataModel()
+        let jsData = model.toJSONString()
+        
+        let urlStr = "\(webView.url!)"
+        if urlStr.contains("usinfo=1") {
+            webView.evaluateJavaScript("actionMessage('\(jsData!)')") { (data, error) in
+                
+            }
+        }
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == self.tableView {
             guard self.webView != nil else { return }
