@@ -23,9 +23,14 @@ class PurchaseRecordCell: UITableViewCell {
             detailLB.text = recordInfo.orderStatusInfo
             stateBut.text = recordInfo.orderStatusDesc
             
+            detailLB.font = Font10
+            detailLB.textColor = ColorA0A0A0
+            
             switch recordInfo.orderStatus {
             case "0": break
-            case "1": break
+            case "1":
+                stateBut.textColor = Color505050
+                stateIcon.image = UIImage(named: "jump")
             case "2": // 出票失败
                 stateBut.textColor = ColorA0A0A0
                 stateIcon.image = UIImage(named: "jump")
@@ -37,6 +42,8 @@ class PurchaseRecordCell: UITableViewCell {
                 stateIcon.image = UIImage(named: "jump")
             case "5": // 已中奖
                 stateBut.textColor = ColorE95504
+                detailLB.font = Font15
+                detailLB.textColor = ColorE95504
                 stateIcon.image = UIImage(named: "redarrow")
             default: break
                 
