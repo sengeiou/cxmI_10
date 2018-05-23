@@ -124,7 +124,7 @@ class ShareViewController: BasePopViewController, UICollectionViewDelegate, UICo
     }
 
     private func initSubview() {
-        self.viewHeight = 170 * defaultScale + SafeAreaBottomHeight
+        self.viewHeight = 173 * defaultScale + SafeAreaBottomHeight
         
         bottomLine = UIView()
         bottomLine.backgroundColor = ColorC8C8C8
