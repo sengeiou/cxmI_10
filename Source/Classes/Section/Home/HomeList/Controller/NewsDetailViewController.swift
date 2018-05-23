@@ -109,11 +109,7 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
         self.cellHeight = height
         tableView.beginUpdates()
         tableView.endUpdates()
-        
-//        UIView.animate(withDuration: 2) {
-//            self.bagView.backgroundColor = UIColor.clear
-//        }
-        
+
         UIView.animate(withDuration: 0.5, animations: {
             self.bagView.backgroundColor = UIColor.clear
         }) { (finish) in
