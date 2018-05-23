@@ -135,13 +135,27 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
         lotteryNav.tabBarItem.image = loImg
         lotteryNav.tabBarItem.selectedImage = loSelImg
         
+        // 发现
+        let surprise = SurpriseViewController()
+        
+        let surpriseNav = UINavigationController(rootViewController: surprise)
+        surpriseNav.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
+        
+        surpriseNav.view.backgroundColor = UIColor.white
+        
+        let surpriseImg = UIImage(named: "tab_lot_nor")?.withRenderingMode(.alwaysOriginal)
+        let surpriseSelImg = UIImage(named: "tab_lot_sel")?.withRenderingMode(.alwaysOriginal)
+        
+        lotteryNav.tabBarItem.image = surpriseImg
+        lotteryNav.tabBarItem.selectedImage = surpriseSelImg
+        
         // me
         //me : BaseViewController!
         
         let meNav = creatMeVC()
         
         
-        self.viewControllers = [homeNav, lotteryNav, meNav]
+        self.viewControllers = [homeNav, lotteryNav, surpriseNav, meNav]
         
     }
     
