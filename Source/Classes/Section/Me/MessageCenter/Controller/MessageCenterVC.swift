@@ -29,9 +29,9 @@ class MessageCenterVC: BaseViewController, IndicatorInfoProvider, UITableViewDel
         didSet{
             switch messageType {
             case .notice:
-                TongJi.log(.消息中心通知, label: nil)
+                TongJi.log(.消息中心通知, label: "消息中心通知")
             case .message:
-                TongJi.log(.消息中心消息, label: nil)
+                TongJi.log(.消息中心消息, label: "消息中心消息")
             }
         }
     }
@@ -181,7 +181,7 @@ class MessageCenterVC: BaseViewController, IndicatorInfoProvider, UITableViewDel
     
     override func back(_ sender: UIButton) {
         super.back(sender)
-        TongJi.log(.消息中心返回, label: nil)
+        TongJi.log(.消息中心返回, label: "消息中心返回")
     }
     
     override func didReceiveMemoryWarning() {

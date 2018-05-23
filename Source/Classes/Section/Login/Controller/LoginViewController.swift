@@ -38,20 +38,20 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro,
     @objc private func registerClicked(_ sender : UIButton) {
         let register = RegisterViewController()
         pushViewController(vc: register)
-        TongJi.log(.新用户注册, label: nil)
+        TongJi.log(.新用户注册, label: "新用户注册")
     }
     
     @objc private func forgetPasswordClicked(_ sender : UIButton) {
-        TongJi.log(.忘记密码, label: nil)
         let forget = ForgetPswPhoneVC()
         pushViewController(vc: forget)
-        TongJi.log(.忘记密码, label: nil)
+        TongJi.log(.忘记密码, label: "忘记密码")
     }
     
     @objc private func VCodeClicked(_ sender : UIButton) {
         let vcode = VCodeLoginViewController()
         vcode.currentVC = self.currentVC
         pushViewController(vc: vcode)
+        TongJi.log(.短信验证码登录, label: "短信验证码登录")
     }
     
     //MARK: - textField DELEGATE
@@ -66,10 +66,10 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro,
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == userNameTF {
-            TongJi.log(.登录输手机号, label: nil)
+            TongJi.log(.登录输手机号, label: "登录输手机号")
         }
         if textField == passwordTF {
-            TongJi.log(.登录输密码, label: nil )
+            TongJi.log(.登录输密码, label: "登录输密码" )
         }
     }
     
@@ -208,7 +208,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro,
     
     override func back(_ sender: UIButton) {
         super.back(sender)
-        TongJi.log(.登录返回, label: nil)
+        TongJi.log(.登录返回, label: "登录返回")
     }
     
     override func didReceiveMemoryWarning() {

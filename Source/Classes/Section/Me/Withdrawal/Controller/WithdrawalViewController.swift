@@ -52,7 +52,7 @@ class WithdrawalViewController: BaseViewController, ValidatePro, UITextFieldDele
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == amountOfMoney {
-            TongJi.log(.输入提现金额, label: nil)
+            TongJi.log(.输入提现金额, label: "输入提现金额")
         }
     }
     

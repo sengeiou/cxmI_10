@@ -63,7 +63,7 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == userNameTF {
-            TongJi.log(.验证码登录输手机号, label: nil)
+            TongJi.log(.验证码登录输手机号, label: "验证码登录输手机号")
         }
         else if textField == vcodeTF {
             TongJi.log(.验证码登录输入验证码, label: "ios", att: .终端)
@@ -241,7 +241,7 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
         }else {
             pushRootViewController()
         }
-        TongJi.log(.验证码登录返回, label: nil)
+        TongJi.log(.验证码登录返回, label: "验证码登录返回")
     }
     
     override func didReceiveMemoryWarning() {

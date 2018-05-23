@@ -27,17 +27,17 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
         didSet{
             switch accountType {
             case .all:
-                TongJi.log(.账户明细全部, label: nil)
+                TongJi.log(.账户明细全部, label: "账户明细全部")
             case .bonus:
-                TongJi.log(.账户明细奖金, label: nil)
+                TongJi.log(.账户明细奖金, label: "账户明细奖金")
             case .recharge:
-                TongJi.log(.账户明细充值, label: nil)
+                TongJi.log(.账户明细充值, label: "账户明细充值")
             case .buy:
-                TongJi.log(.账户明细购彩, label: nil)
+                TongJi.log(.账户明细购彩, label: "账户明细购彩")
             case .withdrawal:
-                TongJi.log(.账户明细提现, label: nil)
+                TongJi.log(.账户明细提现, label: "账户明细提现")
             case .coupon:
-                TongJi.log(.账户明细红包, label: nil)
+                TongJi.log(.账户明细红包, label: "账户明细红包")
             }
         }
     }
@@ -292,7 +292,7 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
     
     override func back(_ sender: UIButton) {
         super.back(sender)
-        TongJi.log(.账户明细返回, label: nil)
+        TongJi.log(.账户明细返回, label: "账户明细返回")
     }
     
     override func didReceiveMemoryWarning() {

@@ -32,11 +32,11 @@ class PurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
             
             switch recordType {
             case .all:
-                TongJi.log(.投注记录全部, label: nil)
+                TongJi.log(.投注记录全部, label: "投注记录全部")
             case .prize:
-                TongJi.log(.投注记录待开奖, label: nil)
+                TongJi.log(.投注记录待开奖, label: "投注记录待开奖")
             case .winning :
-                TongJi.log(.投注记录中奖, label: nil)
+                TongJi.log(.投注记录中奖, label: "投注记录中奖")
             }
         }
     }
@@ -177,7 +177,7 @@ class PurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
     
     override func back(_ sender: UIButton) {
         super.back(sender)
-        TongJi.log(.投注记录返回, label: nil)
+        TongJi.log(.投注记录返回, label: "投注记录返回")
     }
     
     override func didReceiveMemoryWarning() {

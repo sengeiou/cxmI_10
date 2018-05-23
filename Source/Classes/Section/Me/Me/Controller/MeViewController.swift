@@ -96,7 +96,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         let recharge = RechargeViewController()
         recharge.userInfo = userInfo
         pushViewController(vc: recharge)
-        TongJi.log(.充值, label: nil)
+        TongJi.log(.充值, label: "充值")
     }
     
     func withdrawalClicked() {
@@ -111,7 +111,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
             return }
         let draw = WithdrawalViewController()
         pushViewController(vc: draw)
-        TongJi.log(.提现, label: nil)
+        TongJi.log(.提现, label: "提现")
     }
     
     //MARK: - tableView delegate
@@ -137,12 +137,12 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
             weakSelf?.logoutRequest()
             weakSelf?.removeUserData()
             weakSelf?.pushRootViewController(2)
-            TongJi.log(.退出登录, label: nil)
+            TongJi.log(.退出登录, label: "退出登录")
         }
     }
     // 未认证 警告条 去认证
     func alertClicked() {
-        TongJi.log(.实名认证, label: nil)
+        TongJi.log(.实名认证, label: "实名认证")
         let authentication = AuthenticationVC()
         pushViewController(vc: authentication)
     }
@@ -159,32 +159,32 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         switch model.pushType {
         case .投注记录:
             pushPagerView(pagerType: .purchaseRecord)
-            TongJi.log(.投注记录, label: nil)
+            TongJi.log(.投注记录, label: "投注记录")
         case .账户明细:
             pushPagerView(pagerType: .accountDetails)
-            TongJi.log(.账户明细, label: nil)
+            TongJi.log(.账户明细, label: "账户明细")
         case .我的卡券:
             pushPagerView(pagerType: .coupon)
-            TongJi.log(.我的卡券, label: nil)
+            TongJi.log(.我的卡券, label: "我的卡券")
         case .消息中心:
             pushPagerView(pagerType: .message)
-            TongJi.log(.消息中心, label: nil)
+            TongJi.log(.消息中心, label: "消息中心")
         case .我的收藏:
             let collection = MyCollectionVC()
             pushViewController(vc: collection)
-            TongJi.log(.我的收藏, label: nil)
+            TongJi.log(.我的收藏, label: "我的收藏")
         case .帮助中心:
             let web = WebViewController()
             web.urlStr = webHelp
             pushViewController(vc: web)
-            TongJi.log(.帮助中心, label: nil)
+            TongJi.log(.帮助中心, label: "帮助中心")
         case .联系客服:
             UIApplication.shared.openURL(URL(string: "telprompt://\(phoneNum)")!)
-            TongJi.log(.联系客服, label: nil)
+            TongJi.log(.联系客服, label: "联系客服")
         case .关于我们:
             let about = MeAboutViewController()
             pushViewController(vc: about)
-            TongJi.log(.关于我们, label: nil)
+            TongJi.log(.关于我们, label: "关于我们")
         case .活动:
             guard model.actUrl != nil else { return }
             pushRouterVC(urlStr: model.actUrl, from: self)

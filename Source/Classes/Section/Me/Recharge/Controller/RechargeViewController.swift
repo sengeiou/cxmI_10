@@ -97,7 +97,7 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == self.textfield {
-            TongJi.log(.充值输入金额, label: nil)
+            TongJi.log(.充值输入金额, label: "充值输入金额")
         }
     }
     

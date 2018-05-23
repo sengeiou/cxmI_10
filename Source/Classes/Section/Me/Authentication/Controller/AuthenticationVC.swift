@@ -32,9 +32,9 @@ class AuthenticationVC: BaseViewController, UITextFieldDelegate, ValidatePro {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == nameTF {
-            TongJi.log(.实名认证输入姓名, label: nil )
+            TongJi.log(.实名认证输入姓名, label: "实名认证输入姓名" )
         }else if textField == IDNumberTF {
-            TongJi.log(.实名认证输入身份证, label: nil)
+            TongJi.log(.实名认证输入身份证, label: "实名认证输入身份证")
         }
     }
     

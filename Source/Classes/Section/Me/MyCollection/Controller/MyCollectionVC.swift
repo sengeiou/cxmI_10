@@ -247,7 +247,7 @@ class MyCollectionVC: BaseViewController, UITableViewDelegate, UITableViewDataSo
     
     override func back(_ sender: UIButton) {
         super.back(sender)
-        TongJi.log(.我的收藏返回, label: nil)
+        TongJi.log(.我的收藏返回, label: "我的收藏返回")
     }
     
     override func didReceiveMemoryWarning() {

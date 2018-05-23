@@ -9,7 +9,7 @@
 import Foundation
 
 enum TongJi : String {
-    static func log(_ eventId : TongJi, label: String? = "") {
+    static func log(_ eventId : TongJi, label: String! = "") {
         BaiduMobStat.default().logEvent(eventId.rawValue, eventLabel: label)
     }
     

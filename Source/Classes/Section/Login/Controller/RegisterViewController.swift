@@ -23,7 +23,7 @@ class RegisterViewController: BaseViewController, UITableViewDelegate, UITableVi
         let regis = WebViewController()
         regis.urlStr = webRegisterAgreement
         pushViewController(vc: regis)
-        TongJi.log(.注册用户协议, label: nil )
+        TongJi.log(.注册用户协议, label: "注册用户协议" )
     }
     
 
@@ -74,7 +74,7 @@ class RegisterViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == phoneTF {
-            TongJi.log(.注册输手机号, label: nil)
+            TongJi.log(.注册输手机号, label: "注册输手机号")
         }
         else if textField == passwordTF {
             TongJi.log(.注册输密码, label: "ios", att: .终端)
@@ -246,7 +246,7 @@ class RegisterViewController: BaseViewController, UITableViewDelegate, UITableVi
     
     override func back(_ sender: UIButton) {
         super.back(sender)
-        TongJi.log(.注册页返回, label: nil)
+        TongJi.log(.注册页返回, label: "注册页返回")
     }
     
     override func didReceiveMemoryWarning() {

@@ -15,7 +15,7 @@ class BankCardViewController: BaseViewController, UITableViewDelegate, UITableVi
     func addNewBankCard() {
         let add = AddNewBankCardVC()
         pushViewController(vc: add)
-        TongJi.log(.添加银行卡, label: nil )
+        TongJi.log(.添加银行卡, label: "添加银行卡" )
     }
     
     //MARK: - BankCardCellDelegate

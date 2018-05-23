@@ -25,11 +25,11 @@ class CouponViewController: BaseViewController, IndicatorInfoProvider, UITableVi
         didSet{
             switch couponType {
             case .unUsed:
-                TongJi.log(.我的卡券未使用, label: nil)
+                TongJi.log(.我的卡券未使用, label: "我的卡券未使用")
             case .used:
-                TongJi.log(.我的卡券已使用, label: nil)
+                TongJi.log(.我的卡券已使用, label: "我的卡券已使用")
             case .overdue:
-                TongJi.log(.我的卡券已过期, label: nil)
+                TongJi.log(.我的卡券已过期, label: "我的卡券已过期")
             }
         }
     }
@@ -169,7 +169,7 @@ class CouponViewController: BaseViewController, IndicatorInfoProvider, UITableVi
     
     override func back(_ sender: UIButton) {
         super.back(sender)
-        TongJi.log(.我的卡券返回, label: nil)
+        TongJi.log(.我的卡券返回, label: "我的卡券返回")
     }
 
     override func didReceiveMemoryWarning() {

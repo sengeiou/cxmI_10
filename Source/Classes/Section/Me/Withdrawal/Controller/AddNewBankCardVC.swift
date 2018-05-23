@@ -27,7 +27,7 @@ class AddNewBankCardVC: BaseViewController, UITextFieldDelegate, ValidatePro {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == cardNumTF {
-            TongJi.log(.输入银行卡, label: nil)
+            TongJi.log(.输入银行卡, label: "输入银行卡")
         }
     }
     
