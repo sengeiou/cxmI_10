@@ -91,7 +91,7 @@ class CouponCell: UITableViewCell {
         titleLB.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(moneyLB)
             make.left.equalTo(moneyLB.snp.right).offset(10)
-            make.right.equalTo(stateIcon.snp.left).offset(-10)
+            make.right.equalTo(stateIcon.snp.left).offset(-1)
         }
         stateIcon.snp.makeConstraints { (make) in
             make.height.width.equalTo(40)
@@ -123,6 +123,8 @@ class CouponCell: UITableViewCell {
         moneyLB.textColor = ColorE95504
         
         titleLB = UILabel()
+        titleLB.font = Font15
+        titleLB.textColor = Color505050
         titleLB.numberOfLines = 0
         
         timeLB = UILabel()
