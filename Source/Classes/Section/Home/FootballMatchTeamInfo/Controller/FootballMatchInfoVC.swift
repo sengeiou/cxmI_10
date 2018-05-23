@@ -244,11 +244,17 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
         cell.visiMatch = self.matchInfoModel.matchInfo.visitingTeamAbbr
         switch indexPath.section {
         case 1:
-            cell.teamInfo = self.matchInfoModel.hvMatchTeamInfo.matchInfos[indexPath.row]
+            var teamInfo = self.matchInfoModel.hvMatchTeamInfo.matchInfos[indexPath.row]
+            teamInfo.teamType = "1"
+            cell.teamInfo = teamInfo
         case 2:
-            cell.teamInfo = self.matchInfoModel.hMatchTeamInfo.matchInfos[indexPath.row]
+            var teamInfo = self.matchInfoModel.hMatchTeamInfo.matchInfos[indexPath.row]
+            teamInfo.teamType = "2"
+            cell.teamInfo = teamInfo
         case 3:
-            cell.teamInfo = self.matchInfoModel.vMatchTeamInfo.matchInfos[indexPath.row]
+            var teamInfo = self.matchInfoModel.vMatchTeamInfo.matchInfos[indexPath.row]
+            teamInfo.teamType = "3"
+            cell.teamInfo = teamInfo
         default:
             break
         }

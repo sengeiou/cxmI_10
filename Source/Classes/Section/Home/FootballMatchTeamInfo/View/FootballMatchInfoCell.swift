@@ -22,35 +22,11 @@ class FootballMatchInfoCell: UITableViewCell {
             matchTime.text = teamInfo.matchDay
             //matchScore.text = "\(teamInfo.homeTeamAbbr!)  \(teamInfo.whole!)  \(teamInfo.visitingTeamAbbr!)"
             
-            let muAtt = NSMutableAttributedString(string: "")
+            //let muAtt = NSMutableAttributedString(string: "")
             
-            let homeColor : UIColor!
-            let visiColor : UIColor!
-            
-            if teamInfo.homeTeamAbbr == homeMatch || teamInfo.homeTeamAbbr == visiMatch{
-                homeColor = Color505050
-            }else {
-                homeColor = Color9F9F9F
-            }
-            
-            if teamInfo.visitingTeamAbbr == visiMatch || teamInfo.visitingTeamAbbr == homeMatch{
-                visiColor = Color505050
-            }else {
-                visiColor = Color9F9F9F
-            }
-            let homeAtt = NSAttributedString(string: "\(teamInfo.homeTeamAbbr!)", attributes: [NSAttributedStringKey.foregroundColor: homeColor])
-            let wholeAtt = NSAttributedString(string: "\(teamInfo.whole!)", attributes: [NSAttributedStringKey.foregroundColor: Color505050])
-            let visiAtt = NSAttributedString(string: teamInfo.visitingTeamAbbr!, attributes: [NSAttributedStringKey.foregroundColor: visiColor])
-            
-            muAtt.append(homeAtt)
-            muAtt.append(wholeAtt)
-            muAtt.append(visiAtt)
-            
-            //matchScore.attributedText = muAtt
-            
-            homeScore.attributedText = homeAtt
-            matchScore.attributedText = wholeAtt
-            visiScore.attributedText = visiAtt
+            var homeColor : UIColor = Color9F9F9F
+            var visiColor : UIColor = Color9F9F9F
+            var wholeColor: UIColor = Color9F9F9F
             
             guard teamInfo.matchRs != "" else { return }
             matchResult.text = teamInfo.matchRs
@@ -61,6 +37,75 @@ class FootballMatchInfoCell: UITableViewCell {
             }else{
                 matchResult.textColor = Color44AE35
             }
+            
+            
+            switch teamInfo.teamType {
+            case "1":
+                wholeColor = matchResult.textColor
+            case "2":
+                if teamInfo.homeTeamAbbr == homeMatch {
+                    homeColor = matchResult.textColor
+                }
+                if teamInfo.visitingTeamAbbr == homeMatch {
+                    visiColor = matchResult.textColor
+                }
+            case "3":
+                
+                if teamInfo.homeTeamAbbr == visiMatch {
+                    homeColor = matchResult.textColor
+                }
+                if teamInfo.visitingTeamAbbr == visiMatch {
+                    visiColor = matchResult.textColor
+                }
+                
+            default: break
+            }
+            
+            
+//            if teamInfo.homeTeamAbbr == homeMatch || teamInfo.visitingTeamAbbr == homeMatch {
+//                switch teamInfo.teamType {
+//                case "1":
+//                    wholeColor = matchResult.textColor
+//                case "2":
+//                    homeColor = matchResult.textColor
+//                case "3":
+//                    visiColor = matchResult.textColor
+//                default: break
+//                }
+//            }else {
+//                homeColor = Color9F9F9F
+//            }
+//
+//            if teamInfo.visitingTeamAbbr == visiMatch || teamInfo.homeTeamAbbr == visiMatch{
+//                switch teamInfo.teamType {
+//                case "1":
+//                    wholeColor = matchResult.textColor
+//                case "2":
+//                    homeColor = matchResult.textColor
+//                case "3":
+//                    visiColor = matchResult.textColor
+//                default: break
+//                }
+//            }else {
+//                visiColor = Color9F9F9F
+//            }
+            
+            let homeAtt = NSAttributedString(string: "\(teamInfo.homeTeamAbbr!)", attributes: [NSAttributedStringKey.foregroundColor: homeColor])
+            let wholeAtt = NSAttributedString(string: "\(teamInfo.whole!)", attributes: [NSAttributedStringKey.foregroundColor: wholeColor])
+            let visiAtt = NSAttributedString(string: teamInfo.visitingTeamAbbr!, attributes: [NSAttributedStringKey.foregroundColor: visiColor])
+            
+//            muAtt.append(homeAtt)
+//            muAtt.append(wholeAtt)
+//            muAtt.append(visiAtt)
+            
+            //matchScore.attributedText = muAtt
+            
+            homeScore.attributedText = homeAtt
+            matchScore.attributedText = wholeAtt
+            visiScore.attributedText = visiAtt
+            
+            
+            
         }
     }
     

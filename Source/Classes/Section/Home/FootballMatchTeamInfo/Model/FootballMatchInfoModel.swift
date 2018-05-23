@@ -207,6 +207,10 @@ struct TeamInfo : HandyJSON {
     var visitingTeamAbbr: String!
     ///  比赛比分
     var whole: String!
+    
+    
+    /// 1- 交锋 2- 主队 3- 客队
+    var teamType : String!
 }
 
 struct TeamScoreInfo: HandyJSON {
