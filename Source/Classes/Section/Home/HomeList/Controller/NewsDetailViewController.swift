@@ -16,7 +16,7 @@ fileprivate let NewsOnePicCellId = "NewsOnePicCellId"
 fileprivate let NewsThreePicCellId = "NewsThreePicCellId"
 fileprivate let NewsDeatilTitleCellId = "NewsDeatilTitleCellId"
 
-class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, NewsDetailCellDelegate, NewsDetailFooterDelegate {
+class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, NewsDetailCellDelegate, NewsDetailFooterDelegate, ShareProtocol {
     
     
     
@@ -68,20 +68,12 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
         var content = ShareContentModel()
         content.title = self.detailModel.title
         content.description = self.detailModel.summary
-        let turnOn = UserDefaults.standard.bool(forKey: TurnOn)
-        
-        var turn = "0"
-        
-        if turnOn {
-            turn  = "1"
-        }
-        
-        content.urlStr = self.detailModel.link + "&frz=\(turn)"
+       
+        content.urlStr = self.detailModel.link
         content.sharePic = UIImage(named:"fenxiangtubiao")
         
-        let share = ShareViewController()
-        share.shareContent = content
-        present(share)
+        share(content, from: self)
+        
     }
     // 查看更多
     func didTipLookMore() {
