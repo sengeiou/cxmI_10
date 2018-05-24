@@ -121,7 +121,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         self.showCXMAlert(title: nil, message: "您正在退出登录", action: "继续退出", cancel: "返回") { (action) in
             weakSelf?.logoutRequest()
             weakSelf?.removeUserData()
-            weakSelf?.pushRootViewController(2)
+            weakSelf?.pushRootViewController(3)
             TongJi.log(.退出登录, label: "退出登录")
         }
     }

@@ -150,8 +150,9 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
     }
     
     deinit {
-        self.webView.removeObserver(self, forKeyPath: "estimatedProgress")
-        
+        if self.webView != nil {
+            self.webView.removeObserver(self, forKeyPath: "estimatedProgress")
+        }
     }
     
     override func didReceiveMemoryWarning() {

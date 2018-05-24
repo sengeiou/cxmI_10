@@ -102,6 +102,7 @@ class WithdrawalViewController: BaseViewController, ValidatePro, UITextFieldDele
                         self.dismissProgressHud()
                         self.showHUD(message: data.msg)
                         self.drawDataRequest()
+                        self.popViewController()
                     case 600:
                         weakSelf?.removeUserData()
                         weakSelf?.pushLoginVC(from: self)
