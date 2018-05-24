@@ -71,12 +71,16 @@ class SurpriseViewController: BaseWebViewController {
     // MARK: - webView delegate
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        guard self.showDelete else {
+            decisionHandler(.allow)
+            return}
+        
         if let url = webView.url {
-            let urlStr = "\(url)" + "type=1"
+            let urlStr = "\(url)"
             if urlStr.contains("type=1") {
-                
                 let surprise = SurpriseViewController()
                 surprise.showDelete = true
+                surprise.urlStr = urlStr
                 pushViewController(vc: surprise)
                 
                 decisionHandler(.cancel)
