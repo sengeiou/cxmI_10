@@ -33,7 +33,8 @@ class OrderDetailCell: UITableViewCell {
             }
             
             let record = NSMutableAttributedString()
-            var resultStr = ""
+            let resultAtt = NSMutableAttributedString()
+            //var resultStr = ""
             var ruleStr = ""
             var i = 1
             for result in matchInfo.cathecticResults {
@@ -47,24 +48,27 @@ class OrderDetailCell: UITableViewCell {
                     let cathectic = cath.cathectic.replacingOccurrences(of: "null", with: "")
 
                     let rec = NSAttributedString(string: cathectic + "\n", attributes: [NSAttributedStringKey.foregroundColor: color])
-                        
+                    
+                    let res = NSAttributedString(string: result.matchResult + "\n", attributes: [NSAttributedStringKey.foregroundColor: color])
                     record.append(rec)
+                    resultAtt.append(res)
                 }
-                resultStr += result.matchResult + "\n"
+                //resultStr += result.matchResult + "\n"
                 ruleStr += result.playType + "\n"
                 i += 1
             }
             
             recordLB.attributedText = record
+            resultLB.attributedText = resultAtt
             
             if ruleStr != "" {
                 ruleStr.removeLast()
                 ruleLB.text = ruleStr
             }
             
-            guard resultStr != "" else { return}
-            resultStr.removeLast()
-            resultLB.text = resultStr
+//            guard resultStr != "" else { return}
+//            resultStr.removeLast()
+//            resultLB.text = resultStr
             
         }
     }
@@ -165,8 +169,9 @@ class OrderDetailCell: UITableViewCell {
         }
         
         resultLB.snp.makeConstraints { (make) in
+            make.top.bottom.equalTo(recordLB)
             //make.top.height.equalTo(recordLB)
-            make.top.height.equalTo(timeLB)
+            //make.top.height.equalTo(timeLB)
             make.width.equalTo(OrderDetailTitleWidth - 30)
             make.right.equalTo(self.contentView).offset(-26)
         }
