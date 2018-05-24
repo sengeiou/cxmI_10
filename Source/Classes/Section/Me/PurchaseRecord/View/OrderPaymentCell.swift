@@ -16,14 +16,13 @@ class OrderPaymentCell: UITableViewCell {
             if orderInfo.passType == nil || orderInfo.passType == "null" {
                 orderInfo.passType = ""
             }
-//            let titleAtt = NSMutableAttributedString(string: "支付方式: ")
-//            let tit = NSAttributedString(string: orderInfo.passType, attributes: [NSAttributedStringKey.foregroundColor: Color505050])
-//            titleAtt.append(tit)
-//            title.attributedText = titleAtt
-            
-            let detailAtt = NSMutableAttributedString(string: "红包: \ndsfs\nsfsfs")
+
+            //银行卡支付  ， 优惠券抵现
+            let detailAtt = NSMutableAttributedString(string: "余额支付")
+            let money = NSAttributedString(string: " 20.00", attributes: [NSAttributedStringKey.foregroundColor: Color505050])
             let details = NSAttributedString(string: orderInfo.cathectic, attributes: [NSAttributedStringKey.foregroundColor: Color505050])
             detailAtt.append(details)
+            detailAtt.append(money)
             detail.attributedText = detailAtt
         }
     }
