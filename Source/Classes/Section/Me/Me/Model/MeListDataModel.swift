@@ -20,4 +20,5 @@ struct MeListDataModel: HandyJSON {
     var actUrl: String!
     var iconStr: String!
     var pushType: MePushType = .活动
+    var showNotic : Bool = false
 }

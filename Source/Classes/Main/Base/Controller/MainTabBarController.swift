@@ -103,7 +103,13 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
             .asObservable()
             .mapObject(type: QueryUserNoticeDataModel.self)
             .subscribe(onNext: { (data) in
-                
+                UserDefaults.standard.set(data.bonusNotice, forKey: BonusNotice)
+                UserDefaults.standard.set(data.messageNotice, forKey: MessageNotice)
+                if data.bonusNotice != "0" || data.messageNotice != "0" {
+                    self.tabBar.showBadgeOnItemIndex(index: 3)
+                }else {
+                    self.tabBar.hideBadgeOnItemIndex(index: 3)
+                }
             }, onError: { (error) in
                 
             }, onCompleted: nil , onDisposed: nil )

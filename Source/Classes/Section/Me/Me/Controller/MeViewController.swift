@@ -57,8 +57,6 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         self.view.addSubview(tableView)
         
         NotificationCenter.default.addObserver(self, selector: #selector(configNotification(_:)), name: NSNotification.Name(rawValue: NotificationConfig), object: nil)
-        
-        self.tabBarController?.tabBar.showBadgeOnItemIndex(index: 3)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -432,12 +430,27 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         item3.title = "我的卡券"
         item3.iconStr = "coupon"
         item3.pushType = .我的卡券
+        if let bonusNo = UserDefaults.standard.value(forKey: BonusNotice) as? String {
+            if let bonusNom = Int(bonusNo) {
+                if bonusNom > 0 {
+                    item3.showNotic = true
+                }
+            }
+        }
         section1.list.append(item3)
         
         var item4 = MeListDataModel()
         item4.title = "消息中心"
         item4.iconStr = "note-1"
         item4.pushType = .消息中心
+        if let bonusNo = UserDefaults.standard.value(forKey: MessageNotice) as? String {
+            if let bonusNom = Int(bonusNo) {
+                if bonusNom > 0 {
+                    item4.showNotic = true
+                }
+            }
+            
+        }
         section2.list.append(item4)
         
         var item5 = MeListDataModel()
