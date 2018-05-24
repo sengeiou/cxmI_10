@@ -25,7 +25,7 @@ enum MePushType {
 
 fileprivate let meCellIdentifier = "meCellIdentifier"
 
-class MeViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, MeHeaderViewDelegate, MeFooterViewDelegate, TTTAttributedLabelDelegate {
+class MeViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, MeHeaderViewDelegate, MeFooterViewDelegate, TTTAttributedLabelDelegate, ClearCache {
     
     
     
@@ -145,9 +145,9 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
 //            pushViewController(vc: collection)
 //        }else {
 //            let section = self.meSectionList[indexPath.section]
-//            
+//
 //            let row  = section.list[indexPath.row]
-//            
+//
 //            pushMeViewController(row)
 //        }
         
@@ -197,8 +197,19 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
             guard model.actUrl != nil else { return }
             pushRouterVC(urlStr: model.actUrl, from: self)
             
+        case .清除缓存:
+            showCXMAlert(title: "清除缓存", message: "确认要清除吗？", action: "确定", cancel: "取消") { (action) in
+                self.showProgressHUD()
+                self.clearImageCache {
+                    self.dismissProgressHud()
+                    self.showHUD(message: "清理成功")
+                }
+            }
+        case .投诉建议:
+            let complaint = MeComplaintVC()
+            pushViewController(vc: complaint)
+            TongJi.log(.关于我们投诉建议, label: "关于我们投诉建议")
             break
-        default: break
             
         }
     }

@@ -18,7 +18,12 @@ class MeAboutViewController: BaseViewController, UITableViewDelegate, UITableVie
   
     
     // MARK: - 属性
-   
+    public var showType: ShowType! = .onlyNews {
+        didSet{
+            guard showType != nil else { return }
+            tableView.reloadData()
+        }
+    }
     
     // MARK: - 生命周期
     override func viewDidLoad() {
@@ -74,7 +79,8 @@ class MeAboutViewController: BaseViewController, UITableViewDelegate, UITableVie
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-       
+        guard showType != nil else { return 0}
+        guard showType == .allShow else { return 0}
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

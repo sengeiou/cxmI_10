@@ -15,11 +15,13 @@ protocol ClearCache { }
 extension ClearCache {
     
     /// 清理 kingfisher 图片缓存
-    func clearImageCache() {
+    func clearImageCache(finished: @escaping () -> ()) {
         let cache = ImageCache.default
-        cache.clearDiskCache()
-        //cache.clearMemoryCache()
-        cache.cleanExpiredDiskCache()
+        
+        //cache.cleanExpiredDiskCache()
+        cache.clearDiskCache {
+            finished()
+        }
     }
     
     func clearUserInfo() {
