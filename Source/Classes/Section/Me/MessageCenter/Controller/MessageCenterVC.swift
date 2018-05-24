@@ -43,7 +43,7 @@ class MessageCenterVC: BaseViewController, IndicatorInfoProvider, UITableViewDel
         super.viewDidLoad()
         setEmpty(title: "暂无数据", tableView)
         self.view.addSubview(self.tableView)
-        
+        updateUnReadNoticeRequest() // 更新未读消息提示
         messageList = []
         
         messageListRequest(1)
@@ -117,6 +117,17 @@ class MessageCenterVC: BaseViewController, IndicatorInfoProvider, UITableViewDel
                 default: break
                 }
             }, onCompleted: nil , onDisposed: nil )
+    }
+    
+    private func updateUnReadNoticeRequest() {
+        _ = userProvider.rx.request(.updateUnReadNotic(type: "2"))
+            .asObservable()
+            .mapBaseObject(type: DataModel.self)
+            .subscribe(onNext: { (data) in
+                
+            }, onError: { (error) in
+                
+            }, onCompleted: nil, onDisposed: nil )
     }
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {

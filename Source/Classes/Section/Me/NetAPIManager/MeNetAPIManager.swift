@@ -129,7 +129,7 @@ extension MeNetAPIManager : TargetType {
         case .queryUserNotice:
             return "/member/user/queryUserNotice"
         case .updateUnReadNotic:
-            return "/user/updateUnReadNotice"
+            return "/member/user/updateUnReadNotice"
         }
     }
     

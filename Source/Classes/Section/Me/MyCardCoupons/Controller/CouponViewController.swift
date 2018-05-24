@@ -42,7 +42,7 @@ class CouponViewController: BaseViewController, IndicatorInfoProvider, UITableVi
         self.view.addSubview(tableView)
         couponList = []
         couponListRequest(1)
-        
+        updateUnReadNoticeRequest() // 更新未读消息提示
         setEmpty(title: "暂无数据", tableView)
         
         self.tableView.headerRefresh {
@@ -122,6 +122,34 @@ class CouponViewController: BaseViewController, IndicatorInfoProvider, UITableVi
                 default: break
                 }
            }, onCompleted: nil , onDisposed: nil )
+    }
+    
+    private func updateUnReadNoticeRequest() {
+        weak var weakSelf = self
+        _ = userProvider.rx.request(.updateUnReadNotic(type: "1"))
+            .asObservable()
+            .mapBaseObject(type: DataModel.self)
+            .subscribe(onNext: { (data) in
+                print(data)
+            }, onError: { (error) in
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+//                    switch code {
+//                    case 600:
+////                        weakSelf?.removeUserData()
+////                        weakSelf?.pushLoginVC(from: self)
+//                    default : break
+//                    }
+//
+//                    if 300000...310000 ~= code {
+////                        print(code)
+////                        self.showHUD(message: msg!)
+//                    }
+                    break
+                default: break
+                }
+            }, onCompleted: nil, onDisposed: nil )
     }
     
     //MARK: - 懒加载

@@ -21,6 +21,13 @@ extension Observable where E == Response {
             // 检查状态码
             guard ((200...209) ~= response.statusCode) else {
                 HUD.flash(.label(Show500Title), delay: 1.5)
+                print("""
+                    ************statusCode****************
+                    
+                    statusCode   :    \(response.statusCode)
+                    
+                    ************************************
+                    """)
                 throw HXError.RequestFailed
             }
             
