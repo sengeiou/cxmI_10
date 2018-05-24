@@ -53,6 +53,16 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
         
     }
 
+    override func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        super.webView(webView, didFinish: navigation)
+        
+        webView.evaluateJavaScript("") { (data, error) in
+            guard error == nil else { return }
+            
+            
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
