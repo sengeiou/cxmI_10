@@ -180,7 +180,8 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
                     self.timer.invalidate()
                     self.showHUD(message: data.msg)
                     self.dismissProgressHud()
-                    self.userInfoRequest()
+                    //self.userInfoRequest()
+                    self.popViewController()
                 case "304035":
                     self.canPayment = true
                     //self.showHUD(message: data.msg)
