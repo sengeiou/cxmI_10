@@ -124,7 +124,7 @@ class MessageCenterVC: BaseViewController, IndicatorInfoProvider, UITableViewDel
             .asObservable()
             .mapBaseObject(type: DataModel.self)
             .subscribe(onNext: { (data) in
-                
+                UserDefaults.standard.set("0", forKey: MessageNotice)
             }, onError: { (error) in
                 
             }, onCompleted: nil, onDisposed: nil )

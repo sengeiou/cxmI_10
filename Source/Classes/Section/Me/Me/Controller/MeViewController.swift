@@ -321,7 +321,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         let cell = tableView.dequeueReusableCell(withIdentifier: meCellIdentifier, for: indexPath) as! MeCell
         cell.accessoryType = .disclosureIndicator
         cell.serviceNum = ""
-
+        cell.noticeIcon.isHidden = true
         let section = self.meSectionList[indexPath.section]
         
         let row  = section.list[indexPath.row]
@@ -342,6 +342,9 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         }else {
             cell.icon.image = UIImage(named: section.list[indexPath.row].iconStr)
             cell.title.text = section.list[indexPath.row].title
+            if row.showNotic {
+                cell.noticeIcon.isHidden = false
+            }
         }
         return cell
     }
@@ -449,7 +452,6 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
                     item4.showNotic = true
                 }
             }
-            
         }
         section2.list.append(item4)
         

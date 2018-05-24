@@ -72,6 +72,8 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
                 }
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationConfig), object: nil, userInfo: ["showStyle": data.turnOn])
                 UserDefaults.standard.set(data.turnOn, forKey: TurnOn)
+                
+                self.queryUserNotice(data.turnOn)
             }, onError: { (error) in
                 guard let err = error as? HXError else { return }
                 switch err {
@@ -94,22 +96,27 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
                 
             }, onCompleted: nil, onDisposed: nil )
         
-        self.queryUserNotice()
+        
     }
     
     // 获取用户 卡券或消息提示
-    public func queryUserNotice() {
+    public func queryUserNotice(_ turnOn : Bool) {
         _ = userProvider.rx.request(.queryUserNotice)
             .asObservable()
             .mapObject(type: QueryUserNoticeDataModel.self)
             .subscribe(onNext: { (data) in
-                UserDefaults.standard.set(data.bonusNotice, forKey: BonusNotice)
+                UserDefaults.standard.set("1", forKey: BonusNotice)
                 UserDefaults.standard.set(data.messageNotice, forKey: MessageNotice)
-                if data.bonusNotice != "0" || data.messageNotice != "0" {
-                    self.tabBar.showBadgeOnItemIndex(index: 3)
+                if turnOn {
+                    if data.bonusNotice != "0" || data.messageNotice != "0" {
+                        self.tabBar.showBadgeOnItemIndex(index: 3)
+                    }else {
+                        self.tabBar.hideBadgeOnItemIndex(index: 3)
+                    }
                 }else {
                     self.tabBar.hideBadgeOnItemIndex(index: 3)
                 }
+                
             }, onError: { (error) in
                 
             }, onCompleted: nil , onDisposed: nil )

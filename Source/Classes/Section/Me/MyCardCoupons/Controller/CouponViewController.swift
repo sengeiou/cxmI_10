@@ -131,6 +131,7 @@ class CouponViewController: BaseViewController, IndicatorInfoProvider, UITableVi
             .mapBaseObject(type: DataModel.self)
             .subscribe(onNext: { (data) in
                 print(data)
+                UserDefaults.standard.set("0", forKey: BonusNotice)
             }, onError: { (error) in
                 guard let err = error as? HXError else { return }
                 switch err {
