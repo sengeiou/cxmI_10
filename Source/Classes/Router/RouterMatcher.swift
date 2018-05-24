@@ -33,6 +33,7 @@ struct URLModel : HandyJSON{
     var type: String!
     var id: String!
     var subid: String!
+    var cmshare: String!
 }
 
 protocol RouterMatcher: URLParseProtocol {

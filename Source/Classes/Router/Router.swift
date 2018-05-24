@@ -25,7 +25,8 @@ extension RouterPro {
             break
         case .网页:
             let web = ActivityViewController()
-            web.urlStr = urlStr
+            //web.urlStr = urlStr
+            web.urlStr = "http://m.caixiaomi.net/#/user/activity/one?cxmxc=scm&type=1"
             pushViewController(web, from: vc)
             break
         case .浏览器:

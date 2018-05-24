@@ -43,12 +43,16 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
     // MARK: - webView delegate
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        
         decisionHandler(.allow)
         guard let url = webView.url else { return}
-        let urlStr = "\(url)" + "cxmxc=scmcmshare=1"
-        guard urlStr.contains("cxmxc=scm") else { return }
-        guard urlStr.contains("cmshare=1") else { return }
         
+        let urlStr = "\(url)" + "&cmshare=1"
+
+        guard let model = parseUrl(urlStr: urlStr) else { return }
+        guard model.cmshare == "1" else {
+            self.navigationItem.rightBarButtonItem = nil
+            return }
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: shareBut)
         
     }
