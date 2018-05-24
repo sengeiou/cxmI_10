@@ -22,7 +22,6 @@ class MeCell: UITableViewCell {
         didSet{
             guard serviceNum != nil else { return }
             self.detail.text = serviceNum
-            //self.detail.addLink(toPhoneNumber: serviceNum, with: NSRange.init(location: 0, length: serviceNum.lengthOfBytes(using: .utf8)))
         }
     }
     
@@ -30,6 +29,7 @@ class MeCell: UITableViewCell {
     public var icon : UIImageView!
     public var title : UILabel!
     public var detail : TTTAttributedLabel!
+    public var noticeIcon : UIImageView!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -44,16 +44,22 @@ class MeCell: UITableViewCell {
             make.height.width.equalTo(18)
         }
         title.snp.makeConstraints { (make) in
-            make.width.equalTo(100)
+            //make.width.equalTo(100)
             make.top.equalTo(self.contentView).offset(10)
             make.left.equalTo(icon.snp.right).offset(8)
             make.bottom.equalTo(self.contentView).offset(-10)
         }
         detail.snp.makeConstraints { (make) in
             make.top.equalTo(self.contentView).offset(10)
-            make.left.equalTo(title.snp.right).offset(10)
+            //make.left.equalTo(title.snp.right).offset(10)
+            make.width.equalTo(150)
             make.right.equalTo(self.contentView).offset(-22.5)
             make.bottom.equalTo(self.contentView).offset(-10)
+        }
+        noticeIcon.snp.makeConstraints { (make) in
+            make.centerY.equalTo(title.snp.centerY)
+            make.right.equalTo(20)
+            make.height.width.equalTo(5)
         }
     }
     
@@ -61,11 +67,15 @@ class MeCell: UITableViewCell {
         self.selectionStyle = .none
         
         icon = UIImageView()
+        noticeIcon = UIImageView()
+        noticeIcon.image = UIImage(named: "info")
         
         title = UILabel()
         title.textAlignment = .left
         title.textColor = Color787878
         title.font = Font14
+        //title.text = "关于我们"
+        title.sizeToFit()
         
         detail = TTTAttributedLabel(frame: CGRect.zero)
         detail.textAlignment = .right
@@ -77,17 +87,11 @@ class MeCell: UITableViewCell {
         self.contentView.addSubview(icon)
         self.contentView.addSubview(title)
         self.contentView.addSubview(detail)
-        
+        title.addSubview(noticeIcon)
     }
-    
-    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
-
-    
 
 }
