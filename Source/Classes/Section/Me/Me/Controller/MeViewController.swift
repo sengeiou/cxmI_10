@@ -15,6 +15,8 @@ enum MePushType {
     case 我的卡券
     case 消息中心
     case 我的收藏
+    case 清除缓存
+    case 投诉建议
     case 帮助中心
     case 联系客服
     case 关于我们
@@ -32,8 +34,10 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
             guard showType != nil else { return }
             if showType == .onlyNews {
                 tableView.tableHeaderView = newsheaderView
+                self.meSectionList = getNewsData()
             }else {
                 tableView.tableHeaderView = headerView
+                self.meSectionList = getBuyData()
             }
             self.tableView.reloadData()
         }
@@ -53,10 +57,6 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         self.view.addSubview(tableView)
         
         NotificationCenter.default.addObserver(self, selector: #selector(configNotification(_:)), name: NSNotification.Name(rawValue: NotificationConfig), object: nil)
-
-        self.meSectionList = getData()
-        self.tableView.reloadData()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,7 +66,8 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         
         let turnOn = UserDefaults.standard.bool(forKey: TurnOn)
         if turnOn {
-            showType = .allShow
+            //showType = .allShow
+            showType = .onlyNews
         }else {
             showType = .onlyNews
         }
@@ -139,16 +140,22 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     //MARK: - tableView delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if showType == .onlyNews {
-            let collection = MyCollectionVC()
-            pushViewController(vc: collection)
-        }else {
-            let section = self.meSectionList[indexPath.section]
-            
-            let row  = section.list[indexPath.row]
-            
-            pushMeViewController(row)
-        }
+//        if showType == .onlyNews {
+//            let collection = MyCollectionVC()
+//            pushViewController(vc: collection)
+//        }else {
+//            let section = self.meSectionList[indexPath.section]
+//            
+//            let row  = section.list[indexPath.row]
+//            
+//            pushMeViewController(row)
+//        }
+        
+        let section = self.meSectionList[indexPath.section]
+        
+        let row  = section.list[indexPath.row]
+        
+        pushMeViewController(row)
     }
     
     //MARK: - 设置用户信息
@@ -212,19 +219,21 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
                 if self.meSectionList != nil {
                     self.meSectionList.removeAll()
                 }
-                
-                self.meSectionList = self.getData()
-                
-                if data.activityDTOList != nil {
-                    var section = MeSectionModel()
-                    
-                    for activity in data.activityDTOList {
-                        section.list.append(activity)
+                if self.showType == .allShow {
+                    self.meSectionList = self.getBuyData()
+                    if data.activityDTOList != nil {
+                        var section = MeSectionModel()
+                        
+                        for activity in data.activityDTOList {
+                            section.list.append(activity)
+                        }
+                        
+                        if self.meSectionList.count == 2 {
+                            self.meSectionList.insert(section, at: 1)
+                        }
                     }
-                    
-                    if self.meSectionList.count == 2 {
-                        self.meSectionList.insert(section, at: 1)
-                    }
+                }else {
+                    self.meSectionList = self.getNewsData()
                 }
                 
                 weakSelf!.tableView.layoutIfNeeded()
@@ -299,23 +308,32 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     //MARK: - tableView dataSource
     func numberOfSections(in tableView: UITableView) -> Int {
         
-        if showType == .onlyNews {
-            return 1
-        }else {
-            guard self.meSectionList != nil else { return 0 }
-            return self.meSectionList.count
-            //return 2
-        }
+//        if showType == .onlyNews {
+//            return 2
+//        }else {
+//            guard self.meSectionList != nil else { return 0 }
+//            return self.meSectionList.count
+//            //return 2
+//        }
+        
+        guard self.meSectionList != nil else { return 0 }
+        return self.meSectionList.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if showType == .onlyNews {
-            return 1
-        }else {
-            guard self.meSectionList != nil else { return 0 }
-            return self.meSectionList[section].list.count
-        }
+//        if showType == .onlyNews {
+//            if section == 0{
+//                return 2
+//            }
+//            return 3
+//        }else {
+//            guard self.meSectionList != nil else { return 0 }
+//            return self.meSectionList[section].list.count
+//        }
+        
+        guard self.meSectionList != nil else { return 0 }
+        return self.meSectionList[section].list.count
         
     }
     
@@ -323,39 +341,62 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         let cell = tableView.dequeueReusableCell(withIdentifier: meCellIdentifier, for: indexPath) as! MeCell
         cell.accessoryType = .disclosureIndicator
         cell.serviceNum = ""
-        if showType == .onlyNews {
-            switch indexPath.row {
-            case 0:
-                cell.icon.image = UIImage(named: "nformationsecurity")
-                cell.title.text = "我的收藏"
-            default :
-                break
-            }
-            
-        }else {
-            
-            let section = self.meSectionList[indexPath.section]
-            
-            let row  = section.list[indexPath.row]
-            
-            if row.pushType == .活动 {
-                if row.icon != nil, row.title != nil {
-                    if let url = URL(string: row.icon) {
-                        cell.icon.kf.setImage(with: url)
-                    }
-                    cell.title.text = row.title
+//        if showType == .onlyNews {
+//            switch indexPath.row {
+//            case 0:
+//                cell.icon.image = UIImage(named: "nformationsecurity")
+//                cell.title.text = "我的收藏"
+//            default :
+//                break
+//            }
+//
+//        }else {
+//
+//            let section = self.meSectionList[indexPath.section]
+//
+//            let row  = section.list[indexPath.row]
+//
+//            if row.pushType == .活动 {
+//                if row.icon != nil, row.title != nil {
+//                    if let url = URL(string: row.icon) {
+//                        cell.icon.kf.setImage(with: url)
+//                    }
+//                    cell.title.text = row.title
+//                }
+//            }else if row.pushType == .联系客服 {
+//                cell.icon.image = UIImage(named: section.list[indexPath.row].iconStr)
+//                cell.title.text = section.list[indexPath.row].title
+//                cell.serviceNum = phoneNum
+//                cell.detail.delegate = self
+//                cell.accessoryType = .none
+//            }else {
+//                cell.icon.image = UIImage(named: section.list[indexPath.row].iconStr)
+//                cell.title.text = section.list[indexPath.row].title
+//            }
+//
+//        }
+        
+        
+        let section = self.meSectionList[indexPath.section]
+        
+        let row  = section.list[indexPath.row]
+        
+        if row.pushType == .活动 {
+            if row.icon != nil, row.title != nil {
+                if let url = URL(string: row.icon) {
+                    cell.icon.kf.setImage(with: url)
                 }
-            }else if row.pushType == .联系客服 {
-                cell.icon.image = UIImage(named: section.list[indexPath.row].iconStr)
-                cell.title.text = section.list[indexPath.row].title
-                cell.serviceNum = phoneNum
-                cell.detail.delegate = self
-                cell.accessoryType = .none
-            }else {
-                cell.icon.image = UIImage(named: section.list[indexPath.row].iconStr)
-                cell.title.text = section.list[indexPath.row].title
+                cell.title.text = row.title
             }
-            
+        }else if row.pushType == .联系客服 {
+            cell.icon.image = UIImage(named: section.list[indexPath.row].iconStr)
+            cell.title.text = section.list[indexPath.row].title
+            cell.serviceNum = phoneNum
+            cell.detail.delegate = self
+            cell.accessoryType = .none
+        }else {
+            cell.icon.image = UIImage(named: section.list[indexPath.row].iconStr)
+            cell.title.text = section.list[indexPath.row].title
         }
         return cell
     }
@@ -380,7 +421,49 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     }
     
     // MARK: - 数据
-    private func getData() -> [MeSectionModel] {
+    private func getNewsData() -> [MeSectionModel] {
+        var list = [MeSectionModel]()
+        
+        var section1 = MeSectionModel()
+        var section2 = MeSectionModel()
+        
+        var item5 = MeListDataModel()
+        item5.title = "我的收藏"
+        item5.iconStr = "collection"
+        item5.pushType = .我的收藏
+        section1.list.append(item5)
+        
+        var item9 = MeListDataModel()
+        item9.title = "清除缓存"
+        item9.iconStr = "help"
+        item9.pushType = .清除缓存
+        section1.list.append(item9)
+        
+        var item7 = MeListDataModel()
+        item7.title = "联系客服"
+        item7.iconStr = "serive"
+        item7.pushType = .联系客服
+        section2.list.append(item7)
+        
+        var item6 = MeListDataModel()
+        item6.title = "投诉建议"
+        item6.iconStr = "help"
+        item6.pushType = .投诉建议
+        section2.list.append(item6)
+        
+        var item8 = MeListDataModel()
+        item8.title = "关于我们"
+        item8.iconStr = "our"
+        item8.pushType = .关于我们
+        section2.list.append(item8)
+        
+        
+        list.append(section1)
+        list.append(section2)
+        
+        return list
+    }
+    private func getBuyData() -> [MeSectionModel] {
         var list = [MeSectionModel]()
         
         var section1 = MeSectionModel()
@@ -415,6 +498,12 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         item5.iconStr = "collection"
         item5.pushType = .我的收藏
         section2.list.append(item5)
+        
+        var item9 = MeListDataModel()
+        item9.title = "清除缓存"
+        item9.iconStr = "help"
+        item9.pushType = .清除缓存
+        section2.list.append(item9)
         
         var item6 = MeListDataModel()
         item6.title = "帮助中心"
