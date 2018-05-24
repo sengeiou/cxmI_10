@@ -51,13 +51,13 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
                 
             }
         }
-        
-        
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
+    
+    // MARK: - 网络请求
     
     func configRequest() {
         weak var weakSelf = self
@@ -93,20 +93,28 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
                 
                 
             }, onCompleted: nil, onDisposed: nil )
+        
+        self.queryUserNotice()
     }
+    
+    // 获取用户 卡券或消息提示
+    public func queryUserNotice() {
+        _ = userProvider.rx.request(.queryUserNotice)
+            .asObservable()
+            .mapObject(type: QueryUserNoticeDataModel.self)
+            .subscribe(onNext: { (data) in
+                
+            }, onError: { (error) in
+                
+            }, onCompleted: nil , onDisposed: nil )
+    }
+    
     
     public func creatSubViewControllers(_ turnOn: Bool)
     {
         // 主页
         home = HomeViewController()
-        
-//        if turnOn {
-//            home.homeStyle = .allShow
-//        }else {
-//            home.homeStyle = .onlyNews
-//        }
-        
-        
+    
         let homeNav = UINavigationController(rootViewController: home)
         homeNav.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
         homeNav.title = ""
@@ -160,16 +168,7 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
     }
     
     public func creatMeVC () -> UINavigationController{
-//        if getUserData() != nil {
-//            //            if turnOn {
-//            me = MeViewController()
-//            //            }else {
-//            //me = NewsMeViewController()
-//            //}
-//        }else {
-//            me = LoginViewController()
-//        }
-        
+
         me = MeViewController()
         
         let meNav = UINavigationController(rootViewController: me)

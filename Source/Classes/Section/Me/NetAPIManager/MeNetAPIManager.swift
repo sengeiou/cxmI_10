@@ -202,7 +202,8 @@ extension MeNetAPIManager : TargetType {
             dic["complainContent"] = content
         case .updateUnReadNotic(let type):
             dic["type"] = type
-            
+        case .queryUserNotice:
+            dic["str"] = "d14fs54df4sf韩笑孟宪征"
         default:
             return .requestPlain
         }
