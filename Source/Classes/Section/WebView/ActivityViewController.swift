@@ -31,10 +31,10 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
         //        guard self.detailModel != nil else { return }
         var content = ShareContentModel()
         content.title = "cece"
-        //        content.description = self.detailModel.summary
-        //
-        //        content.urlStr = self.detailModel.link
-        //        content.sharePic = UIImage(named:"fenxiangtubiao")
+        content.description = "self.detailModel.summary"
+    
+        content.urlStr = "xxxxx"
+        content.sharePic = UIImage(named:"fenxiangtubiao")
         
         share(content, from: self)
         
@@ -43,8 +43,14 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
     // MARK: - webView delegate
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        
         decisionHandler(.allow)
+        guard let url = webView.url else { return}
+        let urlStr = "\(url)" + "cxmxc=scmcmshare=1"
+        guard urlStr.contains("cxmxc=scm") else { return }
+        guard urlStr.contains("cmshare=1") else { return }
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: shareBut)
+        
     }
 
     override func didReceiveMemoryWarning() {
