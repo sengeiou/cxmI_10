@@ -182,7 +182,7 @@ class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return orderInfo.matchInfos.count + 2
+            return orderInfo.matchInfos.count + 3
         default:
             return 1
         }
@@ -195,24 +195,28 @@ class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
             switch indexPath.row {
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: OrderDetailTitleCellId, for: indexPath) as! OrderDetailTitleCell
+                return cell
+            case 1:
+                let cell = tableView.dequeueReusableCell(withIdentifier: OrderDetailCellId, for: indexPath) as! OrderDetailCell
                 if self.orderInfo.matchInfos.count >= 1 {
                     cell.matchInfo = self.orderInfo.matchInfos[indexPath.row]
                 }
+                cell.line.isHidden = true
                 return cell
-                
-            case orderInfo.matchInfos.count :
+            case orderInfo.matchInfos.count + 1 :
                 let cell = tableView.dequeueReusableCell(withIdentifier: OrderRuleCellId, for: indexPath) as! OrderRuleCell
                 cell.orderInfo = self.orderInfo
                 return cell
-            case orderInfo.matchInfos.count + 1:
+            case orderInfo.matchInfos.count + 2:
                 let cell = tableView.dequeueReusableCell(withIdentifier: OrderPaymentCellId, for: indexPath) as! OrderPaymentCell
                 cell.orderInfo = self.orderInfo
                 return cell
             default :
                 let cell = tableView.dequeueReusableCell(withIdentifier: OrderDetailCellId, for: indexPath) as! OrderDetailCell
                 if self.orderInfo.matchInfos.count >= 1 {
-                    cell.matchInfo = self.orderInfo.matchInfos[indexPath.row]
+                    cell.matchInfo = self.orderInfo.matchInfos[indexPath.row - 1]
                 }
+                cell.line.isHidden = false
                 return cell
             }
             
@@ -226,10 +230,13 @@ class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-
         switch indexPath.section {
         case 0:
-            return UITableViewAutomaticDimension
+            if indexPath.row == 0 {
+                return 65
+            }else {
+                return UITableViewAutomaticDimension
+            }
         case 1:
             return 124
         default:

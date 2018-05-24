@@ -69,7 +69,7 @@ class OrderDetailCell: UITableViewCell {
     private var ruleLB : UILabel!
     private var recordLB: UILabel!
     private var resultLB : UILabel!
-    private var line : UIImageView!
+    public var line : UIImageView!
     //private var oddsIcon: UIImageView!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {

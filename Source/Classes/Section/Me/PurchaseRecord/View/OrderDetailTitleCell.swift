@@ -52,7 +52,6 @@ class OrderDetailTitleCell: UITableViewCell {
                 resultStr.removeLast()
             }
             
-            
             nameLB.text = "\(homeMatch)\nVS\n\(viMatch)"
             
             matchInfo.changci.insert("\n", at: matchInfo.changci.index(matchInfo.changci.startIndex, offsetBy: 2))
@@ -112,18 +111,18 @@ class OrderDetailTitleCell: UITableViewCell {
         resultTitle = getTitleLB("赛果")
         resultTitle.textAlignment = .right
         
-        timeLB = getDetailLB()
-        timeLB.textAlignment = .left
-        timeLB.numberOfLines = 0
-        nameLB = getDetailLB()
-        nameLB.numberOfLines = 0
-        ruleLB = getDetailLB()
-        ruleLB.numberOfLines = 0
-        recordLB = getDetailLB()
-        recordLB.numberOfLines = 0
-        resultLB = getDetailLB()
-        resultLB.numberOfLines = 0
-        resultLB.textAlignment = .right
+//        timeLB = getDetailLB()
+//        timeLB.textAlignment = .left
+//        timeLB.numberOfLines = 0
+//        nameLB = getDetailLB()
+//        nameLB.numberOfLines = 0
+//        ruleLB = getDetailLB()
+//        ruleLB.numberOfLines = 0
+//        recordLB = getDetailLB()
+//        recordLB.numberOfLines = 0
+//        resultLB = getDetailLB()
+//        resultLB.numberOfLines = 0
+//        resultLB.textAlignment = .right
         
        
         
@@ -135,11 +134,11 @@ class OrderDetailTitleCell: UITableViewCell {
         self.contentView.addSubview(recordTitle)
         self.contentView.addSubview(resultTitle)
         
-        self.contentView.addSubview(timeLB)
-        self.contentView.addSubview(nameLB)
-        self.contentView.addSubview(ruleLB)
-        self.contentView.addSubview(recordLB)
-        self.contentView.addSubview(resultLB)
+//        self.contentView.addSubview(timeLB)
+//        self.contentView.addSubview(nameLB)
+//        self.contentView.addSubview(ruleLB)
+//        self.contentView.addSubview(recordLB)
+//        self.contentView.addSubview(resultLB)
         
         
         line.snp.makeConstraints { (make) in
@@ -160,7 +159,8 @@ class OrderDetailTitleCell: UITableViewCell {
             make.top.equalTo(line.snp.bottom).offset(11)
             make.left.equalTo(self.contentView).offset(26)
             make.width.equalTo(40 * defaultScale)
-            make.height.equalTo(12)
+            //make.height.equalTo(12)
+            make.bottom.equalTo(-11)
         }
         nameTitle.snp.makeConstraints { (make) in
             make.top.height.equalTo(timeTitle)
@@ -185,37 +185,37 @@ class OrderDetailTitleCell: UITableViewCell {
             make.right.equalTo(self.contentView).offset(-26)
         }
         
-        timeLB.snp.makeConstraints { (make) in
-            make.top.equalTo(timeTitle.snp.bottom).offset(11 * defaultScale)
-            make.bottom.equalTo(self.contentView).offset(-11 * defaultScale)
-            make.width.equalTo(timeTitle)
-            make.left.equalTo(self.contentView).offset(leftSpacing)
-        }
-        nameLB.snp.makeConstraints { (make) in
-            make.top.equalTo(timeTitle.snp.bottom).offset(11 * defaultScale)
-            make.bottom.equalTo(self.contentView).offset(-11 * defaultScale)
-            make.left.equalTo(timeLB.snp.right).offset(1)
-            make.right.equalTo(ruleLB.snp.left).offset(-1)
-        }
-        
-        ruleLB.snp.makeConstraints { (make) in
-            make.top.height.equalTo(timeLB)
-            make.width.equalTo(nameLB)
-            make.right.equalTo(recordLB.snp.left).offset(-1)
-        }
-        
-        recordLB.snp.makeConstraints { (make) in
-            make.top.equalTo(timeLB)
-            make.bottom.equalTo(self.contentView).offset(1)
-            make.width.equalTo(OrderDetailTitleWidth)
-            make.right.equalTo(resultLB.snp.left).offset(-1)
-        }
-        
-        resultLB.snp.makeConstraints { (make) in
-            make.top.height.equalTo(timeLB)
-            make.width.equalTo(OrderDetailTitleWidth - 30)
-            make.right.equalTo(self.contentView).offset(-26)
-        }
+//        timeLB.snp.makeConstraints { (make) in
+//            make.top.equalTo(timeTitle.snp.bottom).offset(11 * defaultScale)
+//            make.bottom.equalTo(self.contentView).offset(-11 * defaultScale)
+//            make.width.equalTo(timeTitle)
+//            make.left.equalTo(self.contentView).offset(leftSpacing)
+//        }
+//        nameLB.snp.makeConstraints { (make) in
+//            make.top.equalTo(timeTitle.snp.bottom).offset(11 * defaultScale)
+//            make.bottom.equalTo(self.contentView).offset(-11 * defaultScale)
+//            make.left.equalTo(timeLB.snp.right).offset(1)
+//            make.right.equalTo(ruleLB.snp.left).offset(-1)
+//        }
+//
+//        ruleLB.snp.makeConstraints { (make) in
+//            make.top.height.equalTo(timeLB)
+//            make.width.equalTo(nameLB)
+//            make.right.equalTo(recordLB.snp.left).offset(-1)
+//        }
+//
+//        recordLB.snp.makeConstraints { (make) in
+//            make.top.equalTo(timeLB)
+//            make.bottom.equalTo(self.contentView).offset(1)
+//            make.width.equalTo(OrderDetailTitleWidth)
+//            make.right.equalTo(resultLB.snp.left).offset(-1)
+//        }
+//
+//        resultLB.snp.makeConstraints { (make) in
+//            make.top.height.equalTo(timeLB)
+//            make.width.equalTo(OrderDetailTitleWidth - 30)
+//            make.right.equalTo(self.contentView).offset(-26)
+//        }
     }
     
     private func getTitleLB(_ text: String) -> UILabel {
