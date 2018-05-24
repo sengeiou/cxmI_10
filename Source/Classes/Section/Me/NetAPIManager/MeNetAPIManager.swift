@@ -56,6 +56,10 @@ enum MeNetAPIManager {
     case configQuety
     /// 用户投诉
     case complain(content: String)
+    /// 查询用户卡券or消息提示
+    case queryUserNotice
+    /// 更新未读消息提示  type: 1我的卡券，2消息中心
+    case updateUnReadNotic(type: String)
 }
 
 extension MeNetAPIManager : TargetType {
@@ -122,6 +126,10 @@ extension MeNetAPIManager : TargetType {
             return "/member/switch/config/query"
         case .complain:
             return "/member/dl/complain/add"
+        case .queryUserNotice:
+            return "/member/user/queryUserNotice"
+        case .updateUnReadNotic:
+            return "/user/updateUnReadNotice"
         }
     }
     
@@ -192,6 +200,8 @@ extension MeNetAPIManager : TargetType {
             dic["str"] = "ssss"
         case .complain(let content):
             dic["complainContent"] = content
+        case .updateUnReadNotic(let type):
+            dic["type"] = type
             
         default:
             return .requestPlain
