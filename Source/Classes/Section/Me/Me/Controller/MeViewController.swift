@@ -57,6 +57,8 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         self.view.addSubview(tableView)
         
         NotificationCenter.default.addObserver(self, selector: #selector(configNotification(_:)), name: NSNotification.Name(rawValue: NotificationConfig), object: nil)
+        
+        self.tabBarController?.tabBar.showBadgeOnItemIndex(index: 3)
     }
     
     override func viewWillAppear(_ animated: Bool) {

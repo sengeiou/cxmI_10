@@ -16,12 +16,12 @@ class OrderPaymentCell: UITableViewCell {
             if orderInfo.passType == nil || orderInfo.passType == "null" {
                 orderInfo.passType = ""
             }
-            let titleAtt = NSMutableAttributedString(string: "支付方式: ")
-            let tit = NSAttributedString(string: orderInfo.passType, attributes: [NSAttributedStringKey.foregroundColor: Color505050])
-            titleAtt.append(tit)
-            title.attributedText = titleAtt
+//            let titleAtt = NSMutableAttributedString(string: "支付方式: ")
+//            let tit = NSAttributedString(string: orderInfo.passType, attributes: [NSAttributedStringKey.foregroundColor: Color505050])
+//            titleAtt.append(tit)
+//            title.attributedText = titleAtt
             
-            let detailAtt = NSMutableAttributedString(string: "红包: ")
+            let detailAtt = NSMutableAttributedString(string: "红包: \ndsfs\nsfsfs")
             let details = NSAttributedString(string: orderInfo.cathectic, attributes: [NSAttributedStringKey.foregroundColor: Color505050])
             detailAtt.append(details)
             detail.attributedText = detailAtt
@@ -53,13 +53,15 @@ class OrderPaymentCell: UITableViewCell {
         title.font = Font12
         title.textColor = ColorA0A0A0
         title.textAlignment = .left
-        title.text = "过关方式： 2串1 3串1"
+        title.text = "支付方式:"
+        title.sizeToFit()
         
         detail = UILabel()
         detail.font = Font12
         detail.textColor = ColorA0A0A0
         detail.textAlignment = .left
-        detail.text = "4注2倍"
+        //detail.text = "4注2倍"
+        detail.numberOfLines = 0
         
         self.contentView.addSubview(line)
         self.contentView.addSubview(title)
@@ -75,14 +77,17 @@ class OrderPaymentCell: UITableViewCell {
         
         title.snp.makeConstraints { (make) in
             make.top.equalTo(line.snp.bottom).offset(16)
-            make.height.equalTo(12)
+            make.height.equalTo(15)
             make.left.equalTo(self.contentView).offset(leftSpacing)
-            make.right.equalTo(self.contentView).offset(-rightSpacing)
+            make.width.equalTo(55)
+            
+            //make.right.equalTo(self.contentView).offset(-rightSpacing)
         }
         detail.snp.makeConstraints { (make) in
-            make.top.equalTo(title.snp.bottom).offset(5 )
+            make.top.equalTo(title)
             make.bottom.equalTo(self.contentView).offset(-16)
-            make.height.left.right.equalTo(title)
+            make.right.equalTo(0)
+            make.left.equalTo(title.snp.right).offset(10)
         }
     }
     

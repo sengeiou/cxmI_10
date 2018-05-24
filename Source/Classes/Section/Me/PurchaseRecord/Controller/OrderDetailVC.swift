@@ -199,7 +199,7 @@ class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
             case 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: OrderDetailCellId, for: indexPath) as! OrderDetailCell
                 if self.orderInfo.matchInfos.count >= 1 {
-                    cell.matchInfo = self.orderInfo.matchInfos[indexPath.row]
+                    cell.matchInfo = self.orderInfo.matchInfos[indexPath.row - 1]
                 }
                 cell.line.isHidden = true
                 return cell
