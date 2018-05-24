@@ -7,13 +7,44 @@
 //
 
 import UIKit
+import WebKit
 
-class ActivityViewController: BaseWebViewController {
+class ActivityViewController: BaseWebViewController, ShareProtocol {
 
+    lazy private var shareBut: UIButton = {
+        let shareBut = UIButton(type: .custom)
+        shareBut.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        shareBut.setTitle("分享", for: .normal)
+        shareBut.setTitleColor(Color9F9F9F, for: .normal)
+        shareBut.addTarget(self, action: #selector(shareButClicked(_:)), for: .touchUpInside)
+        return shareBut
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
+        
+    }
+    
+    // MARK: - 点击事件
+    @objc private func shareButClicked(_ sender: UIButton) {
+        //        guard self.detailModel != nil else { return }
+        var content = ShareContentModel()
+        content.title = "cece"
+        //        content.description = self.detailModel.summary
+        //
+        //        content.urlStr = self.detailModel.link
+        //        content.sharePic = UIImage(named:"fenxiangtubiao")
+        
+        share(content, from: self)
+        
+    }
+    
+    // MARK: - webView delegate
+    
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        
+        decisionHandler(.allow)
     }
 
     override func didReceiveMemoryWarning() {

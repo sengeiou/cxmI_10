@@ -10,24 +10,18 @@ import UIKit
 import WebKit
 class WebViewController: BaseWebViewController {
 
-    lazy private var shareBut: UIButton = {
-        let share = UIButton(type: .custom)
-        //share.setImage(<#T##image: UIImage?##UIImage?#>, for: <#T##UIControlState#>)
-        return share
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         
     }
 
+    // MARK: - webView delegate
+    
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         
         decisionHandler(.allow)
     }
-    
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
