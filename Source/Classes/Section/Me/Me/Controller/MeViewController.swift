@@ -66,8 +66,8 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         
         let turnOn = UserDefaults.standard.bool(forKey: TurnOn)
         if turnOn {
-            //showType = .allShow
-            showType = .onlyNews
+            showType = .allShow
+            //showType = .onlyNews
         }else {
             showType = .onlyNews
         }
@@ -140,17 +140,6 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     //MARK: - tableView delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-//        if showType == .onlyNews {
-//            let collection = MyCollectionVC()
-//            pushViewController(vc: collection)
-//        }else {
-//            let section = self.meSectionList[indexPath.section]
-//
-//            let row  = section.list[indexPath.row]
-//
-//            pushMeViewController(row)
-//        }
-        
         let section = self.meSectionList[indexPath.section]
         
         let row  = section.list[indexPath.row]
@@ -191,6 +180,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
             TongJi.log(.联系客服, label: "联系客服")
         case .关于我们:
             let about = MeAboutViewController()
+            about.showType = self.showType
             pushViewController(vc: about)
             TongJi.log(.关于我们, label: "关于我们")
         case .活动:
@@ -318,76 +308,20 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     }()
     //MARK: - tableView dataSource
     func numberOfSections(in tableView: UITableView) -> Int {
-        
-//        if showType == .onlyNews {
-//            return 2
-//        }else {
-//            guard self.meSectionList != nil else { return 0 }
-//            return self.meSectionList.count
-//            //return 2
-//        }
-        
         guard self.meSectionList != nil else { return 0 }
         return self.meSectionList.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-//        if showType == .onlyNews {
-//            if section == 0{
-//                return 2
-//            }
-//            return 3
-//        }else {
-//            guard self.meSectionList != nil else { return 0 }
-//            return self.meSectionList[section].list.count
-//        }
-        
         guard self.meSectionList != nil else { return 0 }
         return self.meSectionList[section].list.count
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: meCellIdentifier, for: indexPath) as! MeCell
         cell.accessoryType = .disclosureIndicator
         cell.serviceNum = ""
-//        if showType == .onlyNews {
-//            switch indexPath.row {
-//            case 0:
-//                cell.icon.image = UIImage(named: "nformationsecurity")
-//                cell.title.text = "我的收藏"
-//            default :
-//                break
-//            }
-//
-//        }else {
-//
-//            let section = self.meSectionList[indexPath.section]
-//
-//            let row  = section.list[indexPath.row]
-//
-//            if row.pushType == .活动 {
-//                if row.icon != nil, row.title != nil {
-//                    if let url = URL(string: row.icon) {
-//                        cell.icon.kf.setImage(with: url)
-//                    }
-//                    cell.title.text = row.title
-//                }
-//            }else if row.pushType == .联系客服 {
-//                cell.icon.image = UIImage(named: section.list[indexPath.row].iconStr)
-//                cell.title.text = section.list[indexPath.row].title
-//                cell.serviceNum = phoneNum
-//                cell.detail.delegate = self
-//                cell.accessoryType = .none
-//            }else {
-//                cell.icon.image = UIImage(named: section.list[indexPath.row].iconStr)
-//                cell.title.text = section.list[indexPath.row].title
-//            }
-//
-//        }
-        
-        
+
         let section = self.meSectionList[indexPath.section]
         
         let row  = section.list[indexPath.row]
