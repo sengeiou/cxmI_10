@@ -38,7 +38,7 @@ struct MatchInfo: HandyJSON {
     var match: String!
     var playType: String!
     var result: String!
-    
+    var isDan : Bool!
 }
 
 struct CathecticResult: HandyJSON {

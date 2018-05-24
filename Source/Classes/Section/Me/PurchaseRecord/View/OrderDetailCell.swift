@@ -26,6 +26,11 @@ class OrderDetailCell: UITableViewCell {
             timeLB.text = matchInfo.changci
            // ruleLB.text = matchInfo.playType
             
+            if matchInfo.isDan {
+                self.danIcon.isHidden = false
+            }else {
+                self.danIcon.isHidden = true
+            }
             
             let record = NSMutableAttributedString()
             var resultStr = ""
@@ -63,13 +68,16 @@ class OrderDetailCell: UITableViewCell {
             
         }
     }
-
+    
+    public var line : UIImageView!
+    
     private var timeLB : UILabel!
     private var nameLB : UILabel!
     private var ruleLB : UILabel!
     private var recordLB: UILabel!
     private var resultLB : UILabel!
-    public var line : UIImageView!
+    
+    private var danIcon : UIImageView!
     //private var oddsIcon: UIImageView!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -105,13 +113,16 @@ class OrderDetailCell: UITableViewCell {
         resultLB.textAlignment = .right
         resultLB.sizeToFit()
         
+        danIcon = UIImageView()
+        danIcon.image = UIImage(named: "Singlefield")
+        
         self.contentView.addSubview(line)
         self.contentView.addSubview(timeLB)
         self.contentView.addSubview(nameLB)
         self.contentView.addSubview(ruleLB)
         self.contentView.addSubview(recordLB)
         self.contentView.addSubview(resultLB)
-        
+        self.contentView.addSubview(danIcon)
        
         
         line.snp.makeConstraints { (make) in
@@ -119,6 +130,12 @@ class OrderDetailCell: UITableViewCell {
             make.left.equalTo(self.contentView).offset(SeparatorLeftSpacing)
             make.right.equalTo(self.contentView).offset(-SeparatorLeftSpacing)
             make.height.equalTo(SeparationLineHeight)
+        }
+        
+        danIcon.snp.makeConstraints { (make) in
+            make.top.equalTo(0)
+            make.left.equalTo(0)
+            make.height.width.equalTo(15)
         }
         
         timeLB.snp.makeConstraints { (make) in
