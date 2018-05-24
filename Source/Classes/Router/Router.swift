@@ -24,7 +24,7 @@ extension RouterPro {
         case .注册:
             break
         case .网页:
-            let web = ActivityViewController()
+            let web = WebViewController()
             web.urlStr = urlStr
             pushViewController(web, from: vc)
             break
