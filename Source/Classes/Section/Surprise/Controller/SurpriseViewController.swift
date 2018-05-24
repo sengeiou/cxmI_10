@@ -71,9 +71,6 @@ class SurpriseViewController: BaseWebViewController {
     // MARK: - webView delegate
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        guard self.showDelete else {
-            decisionHandler(.allow)
-            return}
         
         if let url = webView.url {
             let urlStr = "\(url)"
