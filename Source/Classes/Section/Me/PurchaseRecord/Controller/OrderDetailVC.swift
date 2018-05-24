@@ -11,6 +11,7 @@ import UIKit
 fileprivate let OrderDetailTitleCellId = "OrderDetailTitleCellId"
 fileprivate let OrderDetailCellId = "OrderDetailCellId"
 fileprivate let OrderRuleCellId = "OrderRuleCellId"
+fileprivate let OrderPaymentCellId = "OrderPaymentCellId"
 fileprivate let OrderProgrammeCellId = "OrderProgrammeCellId"
 
 enum BackType {
@@ -19,20 +20,7 @@ enum BackType {
 }
 
 class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, OrderDetailFooterViewDelegate {
-//    case .胜平负:
-//    request(type: "2", leagueId: leagueId)
-//    case .让球胜平负:
-//    request(type: "1", leagueId: leagueId)
-//    case .总进球:
-//    request(type: "4", leagueId: leagueId)
-//    case .比分:
-//    request(type: "3", leagueId: leagueId)
-//    case .半全场:
-//    request(type: "5", leagueId: leagueId)
-//    case .二选一:
-//    request(type: "7", leagueId: leagueId)
-//    case .混合过关:
-//    request(type: "6", leagueId: leagueId)
+
     // MARK: - 点击事件
     func goBuy() {
         guard orderInfo != nil else { return }
@@ -181,6 +169,7 @@ class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         table.register(OrderDetailTitleCell.self, forCellReuseIdentifier: OrderDetailTitleCellId)
         table.register(OrderDetailCell.self, forCellReuseIdentifier: OrderDetailCellId)
         table.register(OrderRuleCell.self, forCellReuseIdentifier: OrderRuleCellId)
+        table.register(OrderPaymentCell.self, forCellReuseIdentifier: OrderPaymentCellId)
         table.register(OrderProgrammeCell.self, forCellReuseIdentifier: OrderProgrammeCellId)
         
         return table
@@ -193,7 +182,7 @@ class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return orderInfo.matchInfos.count + 1
+            return orderInfo.matchInfos.count + 2
         default:
             return 1
         }
@@ -215,7 +204,10 @@ class OrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
                 let cell = tableView.dequeueReusableCell(withIdentifier: OrderRuleCellId, for: indexPath) as! OrderRuleCell
                 cell.orderInfo = self.orderInfo
                 return cell
-                
+            case orderInfo.matchInfos.count + 1:
+                let cell = tableView.dequeueReusableCell(withIdentifier: OrderPaymentCellId, for: indexPath) as! OrderPaymentCell
+                cell.orderInfo = self.orderInfo
+                return cell
             default :
                 let cell = tableView.dequeueReusableCell(withIdentifier: OrderDetailCellId, for: indexPath) as! OrderDetailCell
                 if self.orderInfo.matchInfos.count >= 1 {
