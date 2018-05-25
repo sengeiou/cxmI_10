@@ -20,24 +20,17 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
         return shareBut
     }()
     
+    private var shareContent : ShareContentModel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
     }
     
     // MARK: - 点击事件
     @objc private func shareButClicked(_ sender: UIButton) {
-        //        guard self.detailModel != nil else { return }
-        var content = ShareContentModel()
-        content.title = "cece"
-        content.description = "self.detailModel.summary"
-    
-        content.urlStr = "xxxxx"
-        content.sharePic = UIImage(named:"fenxiangtubiao")
-        
-        share(content, from: self)
-        
+        guard self.shareContent != nil else { return }
+        share(self.shareContent, from: self)
     }
     
     // MARK: - webView delegate
@@ -47,7 +40,7 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
         decisionHandler(.allow)
         guard let url = webView.url else { return}
         
-        let urlStr = "\(url)" + "&cmshare=1"
+        let urlStr = "\(url)"
 
         guard let model = parseUrl(urlStr: urlStr) else { return }
         guard model.cmshare == "1" else {
@@ -60,8 +53,14 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
     override func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         super.webView(webView, didFinish: navigation)
         
-        webView.evaluateJavaScript("") { (data, error) in
+        webView.evaluateJavaScript("getCxmShare()") { (data, error) in
             guard error == nil else { return }
+            guard let dic = data as? [String: String] else { return }
+            
+            self.shareContent = ShareContentModel()
+            self.shareContent.title = dic["title"]
+            self.shareContent.description = dic["describe"]
+            self.shareContent.urlStr = dic["url"]
             
             
         }

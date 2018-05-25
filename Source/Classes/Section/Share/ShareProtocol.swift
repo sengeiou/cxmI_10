@@ -26,6 +26,10 @@ extension ShareProtocol {
         
         contentModel.urlStr = content.urlStr + "&frz=\(turn)"
         
+        if contentModel.sharePic == nil {
+            contentModel.sharePic = UIImage(named: "fenxiangtubiao")
+        }
+        
         let share = ShareViewController()
         share.shareContent = contentModel
         vc.present(share)

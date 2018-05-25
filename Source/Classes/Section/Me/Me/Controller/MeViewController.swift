@@ -71,6 +71,19 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         }else {
             showType = .onlyNews
         }
+        
+        hidenNotic()
+    }
+    
+    private func hidenNotic() {
+        guard let bonusNo = UserDefaults.standard.value(forKey: BonusNotice) as? String else { return }
+        guard let messaNo = UserDefaults.standard.value(forKey: MessageNotice) as? String else { return }
+        guard let bonusNum = Int(bonusNo) else { return }
+        guard let messaNum = Int(messaNo) else { return }
+        
+        if bonusNum <= 0 && messaNum <= 0 {
+            self.tabBar.hideBadgeOnItemIndex(index: 3)
+        }
     }
     
     override func viewDidLayoutSubviews() {
