@@ -20,11 +20,36 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
         return shareBut
     }()
     
+    // MARK: - 懒加载
+    lazy private var deleteBut : UIButton = {
+        let but = UIButton(type: .custom)
+        but.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        but.setImage(UIImage(named: "Remove"), for: .normal)
+        but.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 24)
+        but.addTarget(self, action: #selector(deleteClicked(_:)), for: .touchUpInside)
+        return but
+    }()
+    
+    lazy private var backBut: UIButton = {
+        let leftBut = UIButton(type: .custom)
+        leftBut.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        
+        leftBut.setImage(UIImage(named:"ret"), for: .normal)
+        
+        leftBut.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 24)
+        
+        leftBut.addTarget(self, action: #selector(back(_:)), for: .touchUpInside)
+        
+        return leftBut
+    }()
+    
     private var shareContent : ShareContentModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        deleteBut.isHidden = true
+        let dele = UIBarButtonItem(customView: deleteBut)
+        self.navigationItem.leftBarButtonItems?.append(dele)
     }
     
     // MARK: - 点击事件
@@ -33,12 +58,15 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
         share(self.shareContent, from: self)
     }
     
+    @objc private func deleteClicked(_ sender: UIButton) {
+        self.popToRootViewController()
+    }
     // MARK: - webView delegate
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         
         decisionHandler(.allow)
-        guard let url = webView.url else { return}
+        guard let url = navigationAction.request.url else { return}
         
         let urlStr = "\(url)"
 
@@ -53,6 +81,12 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
     override func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         super.webView(webView, didFinish: navigation)
         
+        if webView.canGoBack {
+            self.deleteBut.isHidden = false
+        }else {
+            self.deleteBut.isHidden = true
+        }
+        
         webView.evaluateJavaScript("getCxmShare()") { (data, error) in
             guard error == nil else { return }
             guard let dic = data as? [String: String] else { return }
@@ -61,6 +95,15 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
             self.shareContent.title = dic["title"]
             self.shareContent.description = dic["description"]
             self.shareContent.urlStr = dic["url"]
+        }
+    }
+    
+    override func back(_ sender: UIButton) {
+        
+        if webView.canGoBack {
+            webView.goBack()
+        }else {
+            self.popViewController()
         }
     }
     
