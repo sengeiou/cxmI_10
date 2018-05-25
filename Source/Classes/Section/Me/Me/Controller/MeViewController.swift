@@ -82,7 +82,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         guard let messaNum = Int(messaNo) else { return }
         
         if bonusNum <= 0 && messaNum <= 0 {
-            self.tabBar.hideBadgeOnItemIndex(index: 3)
+            self.tabBarController?.tabBar.hideBadgeOnItemIndex(index: 3)
         }
     }
     
