@@ -17,9 +17,11 @@ class CouponFilterCell: UITableViewCell {
             let moneyAtt = NSMutableAttributedString(string: "")
             let moneyAt = NSAttributedString(string: "¥ ")
             var money : NSAttributedString!
+            var endTitle = ""
             if bonusInfo.bonusPrice != "不使用优惠券" {
                 moneyAtt.append(moneyAt)
                 money = NSAttributedString(string: bonusInfo.bonusPrice, attributes: [NSAttributedStringKey.font: Font24])
+                endTitle = "有效期至"
             }else {
                 money = NSAttributedString(string: bonusInfo.bonusPrice, attributes: [NSAttributedStringKey.font: Font15])
             }
@@ -33,7 +35,7 @@ class CouponFilterCell: UITableViewCell {
             
             let overdueAtt = NSMutableAttributedString(string: "\(bonusInfo.leaveTime) ", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
             
-            let time = NSAttributedString(string: bonusInfo.bonusEndTime, attributes: [NSAttributedStringKey.foregroundColor: ColorC8C8C8])
+            let time = NSAttributedString(string:"\(endTitle) \(bonusInfo.bonusEndTime)", attributes: [NSAttributedStringKey.foregroundColor: ColorC8C8C8])
             overdueAtt.append(time)
             overdueLb.attributedText = overdueAtt
             
@@ -108,9 +110,9 @@ class CouponFilterCell: UITableViewCell {
         
         moneylb.snp.makeConstraints { (make) in
             make.top.equalTo(titleLb)
-            make.height.equalTo(30)
+            make.height.equalTo(24)
             make.left.equalTo(16 * defaultScale)
-            make.width.equalTo(137 * defaultScale)
+            make.width.equalTo(100 * defaultScale)
         }
         contentlb.snp.makeConstraints { (make) in
             make.top.equalTo(titleLb.snp.bottom).offset(5)

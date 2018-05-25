@@ -103,12 +103,13 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
     // 订单
     private func orderRequest() {
         weak var weakSelf = self
+        self.showProgressHUD()
         _ = homeProvider.rx.request(.saveBetInfo(requestModel: self.requestModel))
             .asObservable()
             .mapObject(type: FootballSaveBetInfoModel.self)
             .subscribe(onNext: { (data) in
                 weakSelf?.saveBetInfo = data
-                
+                weakSelf?.dismissProgressHud()
                 if weakSelf?.saveBetInfo.bonusList.count != 0 {
                     
                     let bonus = BonusInfoModel()
@@ -127,6 +128,7 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
                 //weakSelf?.tableView.reloadData()
                 weakSelf?.allPaymentRequest()
             }, onError: { (error) in
+                weakSelf?.dismissProgressHud()
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):
