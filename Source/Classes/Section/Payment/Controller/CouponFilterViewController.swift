@@ -135,7 +135,10 @@ class CouponFilterViewController: BasePopViewController, UITableViewDelegate, UI
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 66 * defaultScale
+        if indexPath.row + 1 == self.bonusList.count {
+            return 64 * defaultScale
+        }
+        return 80 * defaultScale
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0.01

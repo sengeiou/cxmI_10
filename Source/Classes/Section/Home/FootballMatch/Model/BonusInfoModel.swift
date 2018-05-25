@@ -20,10 +20,11 @@ class BonusInfoModel: HandyJSON {
     var bonusStatus: String!
     var bonusType: String!
     var isCanReceive: String!
-    var limitTime: String!
+    var limitTime: String! = ""
     var lotteryId: [String]!
     var minGoodsAmount: String!
     var useHelp: String!
     var useRange: String!
     var userBonusId: String!
+    var leaveTime: String = ""
 }

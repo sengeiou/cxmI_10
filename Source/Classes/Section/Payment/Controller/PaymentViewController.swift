@@ -114,11 +114,12 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
                     let bonus = BonusInfoModel()
                     bonus.bonusId = ""
                     bonus.userBonusId = "-1"
-                    bonus.bonusPrice = ""
+                    bonus.bonusPrice = "不使用优惠券"
                     bonus.bonusName = "暂不使用"
                     bonus.bonusStatus = "暂不使用"
-                    bonus.useRange = "暂不使用"
-                    bonus.minGoodsAmount = "暂不使用"
+                    bonus.useRange = ""
+                    bonus.minGoodsAmount = ""
+                    bonus.leaveTime = ""
                     weakSelf?.saveBetInfo.bonusList.append(bonus)
                 }
                 

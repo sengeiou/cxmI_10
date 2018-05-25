@@ -13,8 +13,16 @@ class CouponFilterCell: UITableViewCell {
     public var bonusInfo : BonusInfoModel! {
         didSet{
             guard bonusInfo != nil else { return }
-            let moneyAtt = NSMutableAttributedString(string: "¥ ")
-            let money = NSAttributedString(string: bonusInfo.bonusPrice, attributes: [NSAttributedStringKey.font: Font24])
+            
+            let moneyAtt = NSMutableAttributedString(string: "")
+            let moneyAt = NSAttributedString(string: "¥ ")
+            var money : NSAttributedString!
+            if bonusInfo.bonusPrice != "不使用优惠券" {
+                moneyAtt.append(moneyAt)
+                money = NSAttributedString(string: bonusInfo.bonusPrice, attributes: [NSAttributedStringKey.font: Font24])
+            }else {
+                money = NSAttributedString(string: bonusInfo.bonusPrice, attributes: [NSAttributedStringKey.font: Font15])
+            }
             moneyAtt.append(money)
             
             moneylb.attributedText = moneyAtt
@@ -22,7 +30,14 @@ class CouponFilterCell: UITableViewCell {
             contentlb.text = bonusInfo.useRange
             
             titleLb.text = bonusInfo.minGoodsAmount
-           
+            
+            let overdueAtt = NSMutableAttributedString(string: "\(bonusInfo.leaveTime) ", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+            
+            let time = NSAttributedString(string: bonusInfo.limitTime, attributes: [NSAttributedStringKey.foregroundColor: ColorC8C8C8])
+            overdueAtt.append(time)
+            overdueLb.attributedText = overdueAtt
+            
+            
             //changeIcon(isSelected: bonusInfo.isSelected)
             
         }
@@ -36,10 +51,11 @@ class CouponFilterCell: UITableViewCell {
         }
     }
     
-    private var titleLb : UILabel!
-    private var moneylb : UILabel!
-    private var contentlb : UILabel!
+    private var titleLb : UILabel!    //
+    private var moneylb : UILabel!    // 金额
+    private var contentlb : UILabel!  // 红包使用限制
     private var selectedIcon : UIImageView!
+    private var overdueLb : UILabel!  // 剩余过期时间
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -57,7 +73,7 @@ class CouponFilterCell: UITableViewCell {
         titleLb = UILabel()
         titleLb.font = Font13
         titleLb.textColor = Color505050
-        titleLb.textAlignment = .center
+        titleLb.textAlignment = .left
         
         moneylb = UILabel()
         moneylb.font = Font16
@@ -67,7 +83,13 @@ class CouponFilterCell: UITableViewCell {
         contentlb = UILabel()
         contentlb.font = Font13
         contentlb.textColor = Color505050
-        contentlb.textAlignment = .center
+        contentlb.textAlignment = .left
+        
+        overdueLb = UILabel()
+        overdueLb.font = Font11
+        overdueLb.textColor = ColorC8C8C8
+        overdueLb.textAlignment = .left
+        overdueLb.text = "5天后过期，有效期至2018/07/09"
         
         selectedIcon = UIImageView()
         selectedIcon.image = UIImage(named: "Mentionmoneysteps_nor")
@@ -76,6 +98,7 @@ class CouponFilterCell: UITableViewCell {
         self.contentView.addSubview(moneylb)
         self.contentView.addSubview(contentlb)
         self.contentView.addSubview(selectedIcon)
+        self.contentView.addSubview(overdueLb)
         
         titleLb.snp.makeConstraints { (make) in
             make.top.equalTo(15 * defaultScale)
@@ -84,15 +107,22 @@ class CouponFilterCell: UITableViewCell {
         }
         
         moneylb.snp.makeConstraints { (make) in
-            make.top.bottom.equalTo(0)
+            make.top.equalTo(titleLb)
+            make.height.equalTo(30)
             make.left.equalTo(16 * defaultScale)
             make.width.equalTo(137 * defaultScale)
         }
         contentlb.snp.makeConstraints { (make) in
             make.top.equalTo(titleLb.snp.bottom).offset(5)
-            make.bottom.equalTo(-15 * defaultScale)
+            //make.bottom.equalTo(-15 * defaultScale)
+            make.height.equalTo(overdueLb)
             make.left.equalTo(moneylb.snp.right)
             make.right.equalTo(selectedIcon.snp.left).offset(-15 * defaultScale)
+        }
+        overdueLb.snp.makeConstraints { (make) in
+            make.top.equalTo(contentlb.snp.bottom).offset(5)
+            make.bottom.equalTo(-15 * defaultScale)
+            make.left.right.equalTo(contentlb)
         }
         selectedIcon.snp.makeConstraints { (make) in
             make.height.width.equalTo(14 * defaultScale)
