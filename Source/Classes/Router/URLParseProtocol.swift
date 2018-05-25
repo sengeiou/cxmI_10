@@ -39,6 +39,8 @@ extension URLParseProtocol {
                 urlModel.subid = value
             }else if key == "cmshare" {
                 urlModel.cmshare = value
+            }else if key == "usinfo" {
+                urlModel.usInfo = value
             }
             
             i += 1

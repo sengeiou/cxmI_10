@@ -96,6 +96,8 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
         }
     }
     
+    
+    
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         webView.evaluateJavaScript("getCxmTitle()") { (data, error) in
             if self.navigationItem.title == nil {
@@ -111,7 +113,15 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
         let jsData = model.toJSONString()
         
         let urlStr = "\(webView.url!)"
-        if urlStr.contains("usinfo=1") {
+        
+        guard let urlModel = parseUrl(urlStr: urlStr) else { return }
+        
+        if urlModel.usInfo == "1" {
+            guard model.token != "" else {
+                let login = VCodeLoginViewController()
+                pushViewController(vc: login)
+                return
+            }
             webView.evaluateJavaScript("actionMessage('\(jsData!)')") { (data, error) in
                 
             }

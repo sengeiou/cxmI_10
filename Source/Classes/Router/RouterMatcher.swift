@@ -34,6 +34,8 @@ struct URLModel : HandyJSON{
     var id: String!
     var subid: String!
     var cmshare: String!
+    /// 是否需要传token
+    var usInfo: String!
 }
 
 protocol RouterMatcher: URLParseProtocol {

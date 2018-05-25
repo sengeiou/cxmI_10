@@ -27,4 +27,6 @@ class BonusInfoModel: HandyJSON {
     var useRange: String!
     var userBonusId: String!
     var leaveTime: String = ""
+    /// 截止时间
+    var bonusEndTime: String = ""
 }

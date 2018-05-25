@@ -33,7 +33,7 @@ class CouponFilterCell: UITableViewCell {
             
             let overdueAtt = NSMutableAttributedString(string: "\(bonusInfo.leaveTime) ", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
             
-            let time = NSAttributedString(string: bonusInfo.limitTime, attributes: [NSAttributedStringKey.foregroundColor: ColorC8C8C8])
+            let time = NSAttributedString(string: bonusInfo.bonusEndTime, attributes: [NSAttributedStringKey.foregroundColor: ColorC8C8C8])
             overdueAtt.append(time)
             overdueLb.attributedText = overdueAtt
             
