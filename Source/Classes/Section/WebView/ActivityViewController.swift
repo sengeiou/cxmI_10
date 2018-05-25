@@ -59,10 +59,8 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
             
             self.shareContent = ShareContentModel()
             self.shareContent.title = dic["title"]
-            self.shareContent.description = dic["describe"]
+            self.shareContent.description = dic["description"]
             self.shareContent.urlStr = dic["url"]
-            
-            
         }
     }
     

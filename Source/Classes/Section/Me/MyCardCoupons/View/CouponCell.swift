@@ -62,14 +62,13 @@ class CouponCell: UITableViewCell {
         }
     }
     
-    
     private var bgImageView : UIImageView!
     private var moneyLB : UILabel!
     private var titleLB : UILabel!
     private var timeLB : UILabel!
-    private var instructions : UILabel!
+    private var instructions : UILabel! // 使用说明
     private var stateIcon : UIImageView!
-    
+    private var overdue: UILabel!
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -103,14 +102,19 @@ class CouponCell: UITableViewCell {
         timeLB.snp.makeConstraints { (make) in
             make.height.equalTo(10)
             make.left.equalTo(moneyLB)
-            make.right.equalTo(bgImageView)
+            make.right.equalTo(overdue.snp.left).offset(5)
             make.bottom.equalTo(instructions.snp.top).offset(-5)
         }
         instructions.snp.makeConstraints { (make) in
             make.bottom.equalTo(bgImageView).offset(-17.5)
             make.left.right.height.equalTo(timeLB)
         }
-        
+        overdue.snp.makeConstraints { (make) in
+            make.bottom.equalTo(instructions)
+            make.top.equalTo(timeLB)
+            make.right.equalTo(-rightSpacing)
+            make.width.equalTo(100)
+        }
     }
     
     
@@ -139,7 +143,11 @@ class CouponCell: UITableViewCell {
         
         stateIcon = UIImageView()
         
-        
+        overdue = UILabel()
+        overdue.font = Font12
+        overdue.textColor = ColorA0A0A0
+        overdue.textAlignment = .right
+        overdue.text = "剩余2天到期"
         
         self.contentView.addSubview(bgImageView)
         bgImageView.addSubview(moneyLB)
@@ -147,6 +155,7 @@ class CouponCell: UITableViewCell {
         bgImageView.addSubview(timeLB)
         bgImageView.addSubview(instructions)
         bgImageView.addSubview(stateIcon)
+        bgImageView.addSubview(overdue)
         
     }
     
