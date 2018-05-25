@@ -14,7 +14,7 @@ class CouponCell: UITableViewCell {
         didSet{
             guard couponInfo != nil else { return }
             var moneyColor : UIColor!
-            
+            overdue.text = ""
             switch couponInfo.bonusStatus {
             case "0":
                 // 快过期标志：1-显示 0-隐藏
@@ -27,6 +27,7 @@ class CouponCell: UITableViewCell {
                     
                 }
                 moneyColor = ColorE95504
+                overdue.text = couponInfo.leaveTime
             case "1":
                 moneyColor = Color787878
                 titleLB.textColor = Color505050

@@ -22,4 +22,6 @@ struct CouponInfoModel: HandyJSON {
     var userBonusId : String!
     ///快过期标志：1-显示 0-隐藏
     var soonExprireBz: String!
+    /// 剩余过期天数
+    var leaveTime: String = ""
 }
