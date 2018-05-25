@@ -21,10 +21,12 @@ class CouponCell: UITableViewCell {
                 if couponInfo.soonExprireBz == "1" {
                     titleLB.textColor = Color505050
                     stateIcon.image = UIImage(named: "Expiresoon")
-                    moneyColor = ColorE95504
+                }else if couponInfo.soonExprireBz == "2" {
+                    stateIcon.image = UIImage(named: "Expiresoon")
                 }else {
-                    moneyColor = ColorE95504
+                    
                 }
+                moneyColor = ColorE95504
             case "1":
                 moneyColor = Color787878
                 titleLB.textColor = Color505050
