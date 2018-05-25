@@ -15,8 +15,6 @@ class SurpriseViewController: BaseWebViewController {
     // MARK: - 属性 public
     public var showDelete : Bool = false
     
-    
- 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "彩小秘 · 发现"
@@ -34,8 +32,6 @@ class SurpriseViewController: BaseWebViewController {
         }
     }
     
-    
-    
     // MARK: - webView delegate
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
@@ -52,8 +48,6 @@ class SurpriseViewController: BaseWebViewController {
                 decisionHandler(.allow)
             }
         }
-        
-        //decisionHandler(.allow)
     }
     
     override func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
