@@ -43,7 +43,7 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
         let urlStr = "\(url)"
 
         guard let model = parseUrl(urlStr: urlStr) else { return }
-        guard model.cmshare == "1" else {
+        guard urlStr.contains("cxmxc=scm") && model.cmshare == "1" else {
             self.navigationItem.rightBarButtonItem = nil
             return }
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: shareBut)

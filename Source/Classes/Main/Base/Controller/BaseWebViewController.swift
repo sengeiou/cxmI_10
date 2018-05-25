@@ -116,7 +116,7 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
         
         guard let urlModel = parseUrl(urlStr: urlStr) else { return }
         
-        if urlModel.usInfo == "1" {
+        if urlStr.contains("cxmxc=scm") && urlModel.usInfo == "1" {
             guard model.token != "" else {
                 let login = VCodeLoginViewController()
                 pushViewController(vc: login)

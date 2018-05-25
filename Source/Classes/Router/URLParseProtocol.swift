@@ -17,6 +17,7 @@ extension URLParseProtocol {
     func parseUrl(urlStr: String) -> URLModel?{
         var urlModel = URLModel()
         
+        
         guard urlStr.contains("&") else { return nil }
     
         let urlComponents = urlStr.components(separatedBy: "&")
