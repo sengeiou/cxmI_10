@@ -50,6 +50,10 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
         deleteBut.isHidden = true
         let dele = UIBarButtonItem(customView: deleteBut)
         self.navigationItem.leftBarButtonItems?.append(dele)
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: shareBut)
+        
+        shareBut.isHidden = true
     }
     
     // MARK: - 点击事件
@@ -72,9 +76,9 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
 
         guard let model = parseUrl(urlStr: urlStr) else { return }
         guard urlStr.contains("cxmxc=scm") && model.cmshare == "1" else {
-            self.navigationItem.rightBarButtonItem = nil
+            shareBut.isHidden = true
             return }
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: shareBut)
+        shareBut.isHidden = false
         
     }
 

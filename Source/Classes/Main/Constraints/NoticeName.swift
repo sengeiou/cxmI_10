@@ -10,3 +10,4 @@ import Foundation
 
 let MessageNotice = "MessageNotice"
 let BonusNotice = "BonusNotice"
+let ClientId = "ClientId"

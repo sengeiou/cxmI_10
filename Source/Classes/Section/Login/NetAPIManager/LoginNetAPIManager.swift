@@ -86,10 +86,12 @@ extension LoginNetAPIManager: TargetType {
             dic["mobile"]   = mobile
             dic["password"] = password
             dic["loginSource"] = "2"
+            dic["pushKey"] = UserDefaults.standard.object(forKey: ClientId)
         case .loginBySms(let mobile, let smsCode):
             dic["mobile"]   = mobile
             dic["smsCode"]  = smsCode
             dic["loginSource"] = "2"
+            dic["pushKey"] = UserDefaults.standard.object(forKey: ClientId)
         case .validateMobile(let mobile ):
             dic["mobileNumber"] = mobile
         case .updatePass(let mobile, let password, let vCode):

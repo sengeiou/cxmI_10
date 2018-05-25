@@ -107,6 +107,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AppDelegateProtocol, GeTu
         
         NSLog("\n>>>[DeviceToken Success]:%@\n\n",token);
     }
+    
+    func geTuiSdkDidRegisterClient(_ clientId: String!) {
+        UserDefaults.standard.set(clientId, forKey: ClientId)
+        NSLog("\n>>>[GeTuiSdk RegisterClient]:%@\n\n", clientId);
+    }
 
 }
 

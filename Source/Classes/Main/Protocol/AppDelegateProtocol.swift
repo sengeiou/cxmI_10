@@ -24,12 +24,14 @@ extension AppDelegateProtocol where Self : AppDelegate {
         // 启动个推
         GeTuiSdk.start(withAppId: GetuiAppID, appKey: GetuiAppKey, appSecret: GetuiSecrct, delegate: self)
         
+        
         // 注册APNS
         registerRemoteNotification()
         
         // 百度统计
         BaiduMobStat.default().start(withAppId: BaiduAppKey)
         BaiduMobStat.default().getTestDeviceId()
+        
     }
     
     func registerRemoteNotification() {
@@ -49,7 +51,9 @@ extension AppDelegateProtocol where Self : AppDelegate {
                 center.delegate = self;
                 center.requestAuthorization(options: [.alert,.badge,.sound], completionHandler: { (granted:Bool, error:Error?) -> Void in
                     if (granted) {
+                        
                         print("注册通知成功") //点击允许
+                        
                     } else {
                         print("注册通知失败") //点击不允许
                     }
