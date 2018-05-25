@@ -17,12 +17,12 @@ class CouponCell: UITableViewCell {
             overdue.text = ""
             switch couponInfo.bonusStatus {
             case "0":
-                // 快过期标志：1-显示 0-隐藏
+                // 快过期标志：1-显示 0-隐藏 2- 未生效优惠券
                 if couponInfo.soonExprireBz == "1" {
                     titleLB.textColor = Color505050
                     stateIcon.image = UIImage(named: "Expiresoon")
                 }else if couponInfo.soonExprireBz == "2" {
-                    stateIcon.image = UIImage(named: "Expiresoon")
+                    stateIcon.image = UIImage(named: "weishengxiao")
                 }else {
                     
                 }
