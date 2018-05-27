@@ -68,12 +68,21 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
     // MARK: - webView delegate
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        
-        decisionHandler(.allow)
+
         guard let url = navigationAction.request.url else { return}
         
         let urlStr = "\(url)"
 
+        let type = matcherHttp(urlStr: urlStr)
+        
+        switch type.0 {
+        case .登录:
+            pushLoginVC(from: self)
+            decisionHandler(.cancel)
+        default:
+            decisionHandler(.allow)
+        }
+        
         guard let model = parseUrl(urlStr: urlStr) else { return }
         guard urlStr.contains("cxmxc=scm") && model.cmshare == "1" else {
             shareBut.isHidden = true

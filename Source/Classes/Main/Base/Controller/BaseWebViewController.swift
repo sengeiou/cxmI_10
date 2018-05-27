@@ -89,19 +89,17 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
     }
     
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        let urlStr = "\(webView.url!)"
-        
-        let type = matcherHttp(urlStr: urlStr)
-        
-        switch type.0 {
-        case .登录:
-            pushLoginVC(from: self)
-            
-        default: break
-        }
+//        let urlStr = "\(webView.url!)"
+//
+//        let type = matcherHttp(urlStr: urlStr)
+//
+//        switch type.0 {
+//        case .登录:
+//            pushLoginVC(from: self)
+//
+//        default: break
+//        }
     }
-    
-    
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         webView.evaluateJavaScript("getCxmTitle()") { (data, error) in
