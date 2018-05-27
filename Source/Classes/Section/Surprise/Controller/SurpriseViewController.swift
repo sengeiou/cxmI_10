@@ -43,6 +43,7 @@ class SurpriseViewController: BaseWebViewController {
             if urlStr.contains("type=1") {
                 
                 let surprise = ActivityViewController()
+                surprise.shouldReload = false
                 surprise.urlStr = urlStr
                 pushViewController(vc: surprise)
                 

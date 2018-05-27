@@ -25,7 +25,7 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
         let but = UIButton(type: .custom)
         but.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         but.setImage(UIImage(named: "Remove"), for: .normal)
-        but.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 24)
+        but.contentEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 34)
         but.addTarget(self, action: #selector(deleteClicked(_:)), for: .touchUpInside)
         return but
     }()
@@ -47,7 +47,7 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        deleteBut.isHidden = true
+        
         let dele = UIBarButtonItem(customView: deleteBut)
         self.navigationItem.leftBarButtonItems?.append(dele)
         
@@ -85,11 +85,11 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
     override func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         super.webView(webView, didFinish: navigation)
         
-        if webView.canGoBack {
-            self.deleteBut.isHidden = false
-        }else {
-            self.deleteBut.isHidden = true
-        }
+//        if webView.canGoBack {
+//            self.deleteBut.isHidden = false
+//        }else {
+//            self.deleteBut.isHidden = true
+//        }
         
         webView.evaluateJavaScript("getCxmShare()") { (data, error) in
             guard error == nil else { return }
