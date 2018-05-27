@@ -101,7 +101,7 @@ class FootballOrderHunheCell: UITableViewCell, DateProtocol {
         danBut = UIButton(type: .custom)
         danBut.titleLabel?.font = Font12
         danBut.setTitle("胆", for: .normal)
-        danBut.layer.borderWidth = 0.3
+        danBut.layer.borderWidth = 0.5
         danBut.layer.borderColor = ColorC8C8C8.cgColor
         danBut.setTitleColor(Color505050, for: .normal)
 
