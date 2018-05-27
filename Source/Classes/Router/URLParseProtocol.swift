@@ -28,7 +28,7 @@ extension URLParseProtocol {
                 continue }
             
             let components = keyValue.components(separatedBy: "=")
-            guard components.count == 2 else { return nil }
+            //guard components.count == 2 else { return nil }
             
             let key = components.first ?? ""
             let value = components.last ?? ""
