@@ -21,7 +21,9 @@ class SurpriseViewController: BaseWebViewController {
         
         hideBackBut()
         self.shouldReload = false
-        
+        self.webView.scrollView.headerRefresh {
+            self.webView.reload()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,6 +54,11 @@ class SurpriseViewController: BaseWebViewController {
                 decisionHandler(.allow)
             }
         }
+    }
+    
+    override func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        super.webView(webView, didFinish: navigation)
+        self.webView.scrollView.endrefresh()
     }
     
     override func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
