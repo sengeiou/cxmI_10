@@ -15,9 +15,12 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
     
     public var webView: WKWebView!
     
+    public var shouldReload = true
     //public var titleStr : String! = ""
     
     private var progressView : UIProgressView!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +32,9 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.webView.reload()
+        if shouldReload {
+            self.webView.reload()
+        }
     }
     
     override func viewDidLayoutSubviews() {

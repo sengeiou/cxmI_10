@@ -20,7 +20,7 @@ class SurpriseViewController: BaseWebViewController {
         self.navigationItem.title = "彩小秘 · 发现"
         
         hideBackBut()
-        
+        self.shouldReload = false
         
     }
     
@@ -38,9 +38,10 @@ class SurpriseViewController: BaseWebViewController {
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         
-        if let url = webView.url {
+        if let url = navigationAction.request.url {
             let urlStr = "\(url)"
             if urlStr.contains("type=1") {
+                
                 let surprise = ActivityViewController()
                 surprise.urlStr = urlStr
                 pushViewController(vc: surprise)
