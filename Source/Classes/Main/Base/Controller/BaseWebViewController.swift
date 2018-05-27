@@ -123,8 +123,9 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
         
         if urlStr.contains("cxmxc=scm") && urlModel.usInfo == "1" {
             guard model.token != "" else {
-                let login = VCodeLoginViewController()
-                pushViewController(vc: login)
+//                let login = VCodeLoginViewController()
+//                pushViewController(vc: login)
+                pushLoginVC(from: self)
                 return
             }
             webView.evaluateJavaScript("actionMessage('\(jsData!)')") { (data, error) in

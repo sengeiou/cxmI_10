@@ -12,7 +12,6 @@ class WebViewController: BaseWebViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
     }
 

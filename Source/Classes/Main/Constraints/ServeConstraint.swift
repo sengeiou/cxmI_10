@@ -8,16 +8,17 @@
 
 
 
-
-
+#if DEBUG
 let baseURLStr = "http://39.106.18.39:8765/api"
-//let baseURLStr = "http://api.caixiaomi.net/api"
-
-
-
-
+let baseWeb = "http://192.168.31.205:8080"
+#else
+let baseURLStr = "http://api.caixiaomi.net/api"
 let baseWeb = "http://m.caixiaomi.net"
-//let baseWeb = "http://192.168.31.205:8080"
+#endif
+
+
+
+
 /// 安全保障
 let webInsurance = "\(baseWeb)/#/user/insurance?showtitle=1"
 /// 帮助中心
