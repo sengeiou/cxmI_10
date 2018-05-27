@@ -20,6 +20,8 @@ class SurpriseViewController: BaseWebViewController {
         self.navigationItem.title = "彩小秘 · 发现"
         
         hideBackBut()
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

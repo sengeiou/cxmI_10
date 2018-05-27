@@ -10,15 +10,22 @@ import Foundation
 
 let WeixinAppID = "wx6c3f43ecb1ff2be2"
 
-let GetuiAppID  = "zH0e8aiYaa73oVVsElXX"
-let GetuiAppKey = "R4iI9PslDe5LSXjpd7XSy"
-let GetuiSecrct = "24e2HwXbm064CiewPXklE6"
+
 
 let BaiduAppKey = "8b4996b71f"
 
 let phoneNum = "400-012-6600"
 
+#if DEBUG
+    let GetuiAppID  = "BWgBz2PhAq5ZxmZ7e4yINA"
+    let GetuiAppKey = "o74Y1SjdzI73MhkkAwuXp4"
+    let GetuiSecrct = "vaBGD6ddiO7LrnarEJO5hA"
+
+#else
+    let GetuiAppID  = "zH0e8aiYaa73oVVsElXX"
+    let GetuiAppKey = "R4iI9PslDe5LSXjpd7XSy"
+    let GetuiSecrct = "24e2HwXbm064CiewPXklE6"
+#endif
+
 // test
-//let GetuiAppID  = "1HziAbTy9p8YJV5oIHDqk1"
-//let GetuiAppKey = "dRfGPZQARX7PykyeW02VfA"
-//let GetuiSecrct = "xeRmBvYBM6AHGzfaV2tX43"
+

@@ -29,4 +29,4 @@ let webBuyAgreement = "\(baseWeb)/#/freebuy/protocol?showtitle=1"
 /// 注册协议
 let webRegisterAgreement = "\(baseWeb)/#/user/service?showtitle=1"
 /// 发现
-let SurpriseUrl = "\(baseWeb)/find?showBar=1"
+let SurpriseUrl = "\(baseWeb)/find?showBar=1&showtitle=1&from=app_find"

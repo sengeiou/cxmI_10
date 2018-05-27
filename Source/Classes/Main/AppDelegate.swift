@@ -108,10 +108,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AppDelegateProtocol, GeTu
         NSLog("\n>>>[DeviceToken Success]:%@\n\n",token);
     }
     
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        
+    }
+    
     func geTuiSdkDidRegisterClient(_ clientId: String!) {
         UserDefaults.standard.set(clientId, forKey: ClientId)
         NSLog("\n>>>[GeTuiSdk RegisterClient]:%@\n\n", clientId);
     }
-
 }
 

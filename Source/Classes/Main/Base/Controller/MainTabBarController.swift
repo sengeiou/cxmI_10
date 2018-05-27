@@ -156,7 +156,7 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
         
         // 发现
         let surprise = SurpriseViewController()
-        surprise.urlStr = "http://192.168.31.205:8080/find?showBar=1&showtitle=1"
+        surprise.urlStr = "http://192.168.31.205:8080/find?showBar=1&showtitle=1&from=app_find"
         //surprise.urlStr = SurpriseUrl
         let surpriseNav = UINavigationController(rootViewController: surprise)
         surpriseNav.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
@@ -197,7 +197,7 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
     }
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        if viewController == self.viewControllers![2] {
+        if viewController == self.viewControllers![3] {
             if getUserData() == nil {
                 me = VCodeLoginViewController()
                 //me.popRoot = true
