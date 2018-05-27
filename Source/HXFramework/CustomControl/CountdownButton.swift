@@ -40,7 +40,6 @@ class CountdownButton: UIButton {
             } else {
                 countdownTimer?.invalidate()
                 countdownTimer = nil
-                
             }
             
             self.isEnabled = !newValue
@@ -58,8 +57,8 @@ class CountdownButton: UIButton {
             self.setAttributedTitle(title, for: .normal)
             
             if newValue <= 0 {
-//                let title = NSAttributedString(string: "重新获取验证码", attributes: [NSAttributedStringKey.foregroundColor: ColorA0A0A0])
-//                self.setAttributedTitle(title, for: .normal)
+                let title = NSAttributedString(string: "重新获取验证码", attributes: [NSAttributedStringKey.foregroundColor: ColorA0A0A0])
+                self.setAttributedTitle(title, for: .normal)
                 isCounting = false
             }
         }

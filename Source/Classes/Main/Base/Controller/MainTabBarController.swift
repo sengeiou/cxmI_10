@@ -95,8 +95,6 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
                 
                 
             }, onCompleted: nil, onDisposed: nil )
-        
-        
     }
     
     // 获取用户 卡券或消息提示
@@ -105,7 +103,7 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
             .asObservable()
             .mapObject(type: QueryUserNoticeDataModel.self)
             .subscribe(onNext: { (data) in
-                UserDefaults.standard.set("1", forKey: BonusNotice)
+                UserDefaults.standard.set(data.bonusNotice, forKey: BonusNotice)
                 UserDefaults.standard.set(data.messageNotice, forKey: MessageNotice)
                 if turnOn {
                     if data.bonusNotice != "0" || data.messageNotice != "0" {
@@ -158,15 +156,15 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
         
         // 发现
         let surprise = SurpriseViewController()
-        surprise.urlStr = "http://192.168.31.205:8080/find?showBar=1"
+        surprise.urlStr = "http://192.168.31.205:8080/find?showBar=1&showtitle=1"
         //surprise.urlStr = SurpriseUrl
         let surpriseNav = UINavigationController(rootViewController: surprise)
         surpriseNav.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
         
         surpriseNav.view.backgroundColor = UIColor.white
         
-        let surpriseImg = UIImage(named: "tab_lot_nor")?.withRenderingMode(.alwaysOriginal)
-        let surpriseSelImg = UIImage(named: "tab_lot_sel")?.withRenderingMode(.alwaysOriginal)
+        let surpriseImg = UIImage(named: "tab_dis_nor")?.withRenderingMode(.alwaysOriginal)
+        let surpriseSelImg = UIImage(named: "tab_dis_sel")?.withRenderingMode(.alwaysOriginal)
         
         surpriseNav.tabBarItem.image = surpriseImg
         surpriseNav.tabBarItem.selectedImage = surpriseSelImg

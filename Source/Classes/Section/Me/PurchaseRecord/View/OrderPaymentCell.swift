@@ -18,11 +18,31 @@ class OrderPaymentCell: UITableViewCell {
             }
 
             //银行卡支付  ， 优惠券抵现
-            let detailAtt = NSMutableAttributedString(string: "余额支付")
-            let money = NSAttributedString(string: " 20.00", attributes: [NSAttributedStringKey.foregroundColor: Color505050])
-            let details = NSAttributedString(string: orderInfo.cathectic, attributes: [NSAttributedStringKey.foregroundColor: Color505050])
-            detailAtt.append(details)
-            detailAtt.append(money)
+            let detailAtt = NSMutableAttributedString(string: "")
+            
+            if orderInfo.surplus > 0 {
+                let surplusAtt = NSMutableAttributedString(string: "余额支付 ")
+                let surplus = NSAttributedString(string: "\(orderInfo.surplus)", attributes: [NSAttributedStringKey.foregroundColor: Color505050])
+                surplusAtt.append(surplus)
+                detailAtt.append(surplusAtt)
+            }
+            if orderInfo.thirdPartyPaid > 0 {
+                let paidAtt = NSMutableAttributedString(string: "\n银行卡支付 ")
+                let paid = NSAttributedString(string: "\(orderInfo.thirdPartyPaid)", attributes: [NSAttributedStringKey.foregroundColor: Color505050])
+                paidAtt.append(paid)
+                detailAtt.append(paidAtt)
+            }
+            if orderInfo.bonus > 0 {
+                let bonusAtt = NSMutableAttributedString(string: "\n优惠券抵现 ")
+                let bonus = NSAttributedString(string: "\(orderInfo.bonus)", attributes: [NSAttributedStringKey.foregroundColor: Color505050])
+                bonusAtt.append(bonus)
+                detailAtt.append(bonusAtt)
+            }
+            
+//            let money = NSAttributedString(string: " 20.00", attributes: [NSAttributedStringKey.foregroundColor: Color505050])
+//            let details = NSAttributedString(string: orderInfo.cathectic, attributes: [NSAttributedStringKey.foregroundColor: Color505050])
+//            detailAtt.append(details)
+//            detailAtt.append(money)
             detail.attributedText = detailAtt
         }
     }

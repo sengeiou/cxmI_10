@@ -29,6 +29,15 @@ struct OrderInfoModel: HandyJSON {
     var forecastMoney: String!
     var orderSn : String!
     var playType: String!
+    /// 余额支付金额
+    var surplus : Double = 0
+    /// 第三方支付金额
+    var thirdPartyPaid: Double = 0
+    /// 红包金额
+    var bonus : Double = 0
+    /// 彩票购买总金额
+    var ticketAmount : String!
+    
 }
 
 struct MatchInfo: HandyJSON {

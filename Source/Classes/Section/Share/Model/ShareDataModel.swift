@@ -69,12 +69,12 @@ struct ShareDataModel {
 
 struct ShareContentModel {
     /// 标题
-    var title : String!
+    var title : String! = ""
     /// 链接
     var urlStr: String!
     /// 图片
     var sharePic: UIImage!
     var sharePicUrl: String!
     /// 描述
-    var description: String!
+    var description: String! = ""
 }
