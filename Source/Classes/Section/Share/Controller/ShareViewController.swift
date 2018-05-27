@@ -192,7 +192,7 @@ class ShareViewController: BasePopViewController, UICollectionViewDelegate, UICo
         if touch.view === self.pushBgView.superview {
             return true
         }
-        if touch.view !== self.collectionView {
+        if touch.view !== self.collectionView || touch.view !== self.pushBgView {
             return false
         }
         return true
