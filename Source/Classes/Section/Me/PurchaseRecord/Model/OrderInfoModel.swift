@@ -37,6 +37,8 @@ struct OrderInfoModel: HandyJSON {
     var bonus : Double = 0
     /// 彩票购买总金额
     var ticketAmount : String!
+    /// 支付方式
+    var payName : String = ""
     
 }
 
