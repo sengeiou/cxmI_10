@@ -19,6 +19,7 @@ enum MePushType {
     case 投诉建议
     case 帮助中心
     case 联系客服
+    case 注册协议
     case 关于我们
     case 活动
 }
@@ -64,11 +65,12 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         userInfoRequest()
         self.isHidenBar = false
         
-        let turnOn = UserDefaults.standard.bool(forKey: TurnOn)
-        if turnOn && self.showType == .onlyNews{
+        var  turnOn = UserDefaults.standard.bool(forKey: TurnOn)
+        turnOn = false
+        if turnOn && self.showType != .allShow{
             showType = .allShow
             //showType = .onlyNews
-        }else if turnOn == false && self.showType == .allShow {
+        }else if turnOn == false && self.showType != .onlyNews {
             showType = .onlyNews
         }
         
@@ -213,7 +215,11 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
             pushViewController(vc: complaint)
             TongJi.log(.关于我们投诉建议, label: "关于我们投诉建议")
             break
-            
+        case .注册协议:
+            let regis = WebViewController()
+            regis.urlStr = webRegisterAgreement
+            pushViewController(vc: regis)
+            TongJi.log(.注册用户协议, label: "注册用户协议" )
         }
     }
     
@@ -229,51 +235,26 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
                 weakSelf!.userInfo = data
                 weakSelf!.headerView.userInfo = data
                 weakSelf?.newsheaderView.userInfo = data
-                
-//                if self.meSectionList != nil {
-//                    self.meSectionList.removeAll()
-//                }
-                
-                
-                
-                
+
                 if self.showType == .allShow {
-                    if self.meSectionList.count == 3{
-                        self.meSectionList = self.getBuyData()
-                        if data.activityDTOList != nil {
-                            var section = MeSectionModel()
-                            
-                            for activity in data.activityDTOList {
-                                section.list.append(activity)
-                            }
-                            
-                            if self.meSectionList.count == 2 {
-                                self.meSectionList.insert(section, at: 1)
-                            }
+                    self.meSectionList = self.getBuyData()
+                    if data.activityDTOList != nil {
+                        var section = MeSectionModel()
+                        
+                        for activity in data.activityDTOList {
+                            section.list.append(activity)
                         }
-                        weakSelf?.tableView.reloadSections(IndexSet(integer: 1), with: .none)
-                    }else{
-                        self.meSectionList = self.getBuyData()
-                        if data.activityDTOList != nil {
-                            var section = MeSectionModel()
-                            
-                            for activity in data.activityDTOList {
-                                section.list.append(activity)
-                            }
-                            
-                            if self.meSectionList.count == 2 {
-                                self.meSectionList.insert(section, at: 1)
-                            }
+                        
+                        if self.meSectionList.count == 2 {
+                            self.meSectionList.insert(section, at: 1)
                         }
-                        weakSelf!.tableView.reloadData()
                     }
                 }else {
                     self.meSectionList = self.getNewsData()
-                    weakSelf!.tableView.reloadData()
                 }
                 //weakSelf!.tableView.layoutIfNeeded()
                 
-                
+                weakSelf!.tableView.reloadData()
                 print(data)
             }, onError: { (error) in
                 print(error)
@@ -337,6 +318,14 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
 
         newsheaderView = NewsHeaderView()
         newsheaderView.delegate = self
+        
+        if showType != nil {
+            if showType == .onlyNews {
+                table.tableHeaderView = newsheaderView
+            }else {
+                table.tableHeaderView = headerView
+            }
+        }
         
         table.tableFooterView = footerView
         return table
@@ -427,6 +416,12 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         item7.iconStr = "serive"
         item7.pushType = .联系客服
         section2.list.append(item7)
+        
+        var item1 = MeListDataModel()
+        item1.title = "注册协议"
+        item1.iconStr = "serive"
+        item1.pushType = .注册协议
+        section2.list.append(item1)
         
         var item6 = MeListDataModel()
         item6.title = "投诉建议"
