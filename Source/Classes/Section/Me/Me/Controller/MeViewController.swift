@@ -65,10 +65,10 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         self.isHidenBar = false
         
         let turnOn = UserDefaults.standard.bool(forKey: TurnOn)
-        if turnOn {
+        if turnOn && self.showType == .onlyNews{
             showType = .allShow
             //showType = .onlyNews
-        }else {
+        }else if turnOn == false && self.showType == .allShow {
             showType = .onlyNews
         }
         
@@ -230,28 +230,50 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
                 weakSelf!.headerView.userInfo = data
                 weakSelf?.newsheaderView.userInfo = data
                 
-                if self.meSectionList != nil {
-                    self.meSectionList.removeAll()
-                }
+//                if self.meSectionList != nil {
+//                    self.meSectionList.removeAll()
+//                }
+                
+                
+                
+                
                 if self.showType == .allShow {
-                    self.meSectionList = self.getBuyData()
-                    if data.activityDTOList != nil {
-                        var section = MeSectionModel()
-                        
-                        for activity in data.activityDTOList {
-                            section.list.append(activity)
+                    if self.meSectionList.count == 3{
+                        self.meSectionList = self.getBuyData()
+                        if data.activityDTOList != nil {
+                            var section = MeSectionModel()
+                            
+                            for activity in data.activityDTOList {
+                                section.list.append(activity)
+                            }
+                            
+                            if self.meSectionList.count == 2 {
+                                self.meSectionList.insert(section, at: 1)
+                            }
                         }
-                        
-                        if self.meSectionList.count == 2 {
-                            self.meSectionList.insert(section, at: 1)
+                        weakSelf?.tableView.reloadSections(IndexSet(integer: 1), with: .none)
+                    }else{
+                        self.meSectionList = self.getBuyData()
+                        if data.activityDTOList != nil {
+                            var section = MeSectionModel()
+                            
+                            for activity in data.activityDTOList {
+                                section.list.append(activity)
+                            }
+                            
+                            if self.meSectionList.count == 2 {
+                                self.meSectionList.insert(section, at: 1)
+                            }
                         }
+                        weakSelf!.tableView.reloadData()
                     }
                 }else {
                     self.meSectionList = self.getNewsData()
+                    weakSelf!.tableView.reloadData()
                 }
+                //weakSelf!.tableView.layoutIfNeeded()
                 
-                weakSelf!.tableView.layoutIfNeeded()
-                weakSelf!.tableView.reloadData()
+                
                 print(data)
             }, onError: { (error) in
                 print(error)
