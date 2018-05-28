@@ -10,8 +10,6 @@ import Foundation
 
 let WeixinAppID = "wx6c3f43ecb1ff2be2"
 
-
-
 let BaiduAppKey = "8b4996b71f"
 
 let phoneNum = "400-012-6600"
