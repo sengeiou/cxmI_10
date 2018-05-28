@@ -20,7 +20,7 @@ class SurpriseViewController: BaseWebViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "彩小秘 · 发现"
-        
+    
         hideBackBut()
         self.shouldReload = false
         self.webView.scrollView.headerRefresh {
@@ -41,10 +41,6 @@ class SurpriseViewController: BaseWebViewController {
     
     // MARK: - webView delegate
     
-    func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
-        
-    }
-    
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         
         guard let url = navigationAction.request.url else {
@@ -60,6 +56,11 @@ class SurpriseViewController: BaseWebViewController {
             decisionHandler(.allow)
             self.isFirst = false
         }
+    }
+    
+    override func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        super.webView(webView, didFailProvisionalNavigation: navigation, withError: error)
+        self.webView.scrollView.endrefresh()
     }
     
     override func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {

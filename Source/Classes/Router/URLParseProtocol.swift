@@ -18,17 +18,14 @@ extension URLParseProtocol {
         var urlModel = URLModel()
         
         
-        guard urlStr.contains("&") else { return nil }
+        guard urlStr.contains("&"), urlStr.contains("?") else { return nil }
     
-        let urlComponents = urlStr.components(separatedBy: "&")
+        guard let com = urlStr.components(separatedBy: "?").last else { return nil }
+        let urlComponents = com.components(separatedBy: "&")
         
         var i = 0
         for keyValue in urlComponents {
-            guard i != 0 else { i += 1
-                continue }
-            
             let components = keyValue.components(separatedBy: "=")
-            //guard components.count == 2 else { return nil }
             
             let key = components.first ?? ""
             let value = components.last ?? ""

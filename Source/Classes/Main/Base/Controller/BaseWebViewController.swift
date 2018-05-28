@@ -131,7 +131,9 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
             }
         }
     }
-    
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        
+    }
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
     }
     
