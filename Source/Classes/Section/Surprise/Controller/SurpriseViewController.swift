@@ -9,11 +9,13 @@
 
 import UIKit
 import WebKit
+import Reachability
 
 class SurpriseViewController: BaseWebViewController {
 
     // MARK: - 属性 public
     public var showDelete : Bool = false
+    private var isFirst = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +24,7 @@ class SurpriseViewController: BaseWebViewController {
         hideBackBut()
         self.shouldReload = false
         self.webView.scrollView.headerRefresh {
+            self.isFirst = true 
             self.webView.reload()
         }
     }
@@ -38,26 +41,34 @@ class SurpriseViewController: BaseWebViewController {
     
     // MARK: - webView delegate
     
+    func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
+        
+    }
+    
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         
-        if let url = navigationAction.request.url {
-            let urlStr = "\(url)"
-            if urlStr.contains("type=1") {
-                
-                let surprise = ActivityViewController()
-                surprise.shouldReload = false
-                surprise.urlStr = urlStr
-                pushViewController(vc: surprise)
-                
-                decisionHandler(.cancel)
-            }else {
-                decisionHandler(.allow)
-            }
+        guard let url = navigationAction.request.url else {
+            decisionHandler(.cancel)
+            return }
+        
+        let urlStr = "\(url)"
+        
+        if isFirst == false {
+            pushRouterVC(urlStr: urlStr, from: self)
+            decisionHandler(.cancel)
+        }else {
+            decisionHandler(.allow)
+            self.isFirst = false
         }
     }
     
     override func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         super.webView(webView, didFinish: navigation)
+        self.webView.scrollView.endrefresh()
+    }
+    
+    override func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        super.webView(webView, didFail: navigation, withError: error)
         self.webView.scrollView.endrefresh()
     }
     

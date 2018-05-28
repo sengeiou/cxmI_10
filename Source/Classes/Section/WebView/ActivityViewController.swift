@@ -30,19 +30,6 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
         return but
     }()
     
-    lazy private var backBut: UIButton = {
-        let leftBut = UIButton(type: .custom)
-        leftBut.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-        
-        leftBut.setImage(UIImage(named:"ret"), for: .normal)
-        
-        leftBut.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 24)
-        
-        leftBut.addTarget(self, action: #selector(back(_:)), for: .touchUpInside)
-        
-        return leftBut
-    }()
-    
     private var shareContent : ShareContentModel!
     
     override func viewDidLoad() {

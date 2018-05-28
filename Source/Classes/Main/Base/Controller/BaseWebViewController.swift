@@ -132,6 +132,9 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
         }
     }
     
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+    }
+    
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
         
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
