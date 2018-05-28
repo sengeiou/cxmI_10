@@ -11,6 +11,15 @@ import WebKit
 
 class ActivityViewController: BaseWebViewController, ShareProtocol {
 
+    override func didLogin(isLogin: Bool) {
+        if isLogin {
+            self.webView.reload()
+        }
+//       else {
+//            self.popViewController()
+//        }
+    }
+    
     lazy private var shareBut: UIButton = {
         let shareBut = UIButton(type: .custom)
         shareBut.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
@@ -80,6 +89,8 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
         
     }
 
+    
+    
     override func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         super.webView(webView, didFinish: navigation)
         
