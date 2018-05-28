@@ -65,8 +65,8 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         userInfoRequest()
         self.isHidenBar = false
         
-        var  turnOn = UserDefaults.standard.bool(forKey: TurnOn)
-        turnOn = false
+        let turnOn = UserDefaults.standard.bool(forKey: TurnOn)
+        //turnOn = false
         if turnOn && self.showType != .allShow{
             showType = .allShow
             //showType = .onlyNews
@@ -407,7 +407,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         
         var item9 = MeListDataModel()
         item9.title = "清除缓存"
-        item9.iconStr = "help"
+        item9.iconStr = "rem"
         item9.pushType = .清除缓存
         section1.list.append(item9)
         
@@ -419,7 +419,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         
         var item1 = MeListDataModel()
         item1.title = "注册协议"
-        item1.iconStr = "serive"
+        item1.iconStr = "pro"
         item1.pushType = .注册协议
         section2.list.append(item1)
         
@@ -493,7 +493,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         
         var item9 = MeListDataModel()
         item9.title = "清除缓存"
-        item9.iconStr = "help"
+        item9.iconStr = "rem"
         item9.pushType = .清除缓存
         section2.list.append(item9)
         

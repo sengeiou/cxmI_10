@@ -75,6 +75,7 @@ struct ShareContentModel {
     /// 图片
     var sharePic: UIImage!
     var sharePicUrl: String!
+    var sharePicData: Data!
     /// 描述
     var description: String! = ""
 }

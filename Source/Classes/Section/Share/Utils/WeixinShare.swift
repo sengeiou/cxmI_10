@@ -40,7 +40,6 @@ extension WeixinSharePro {
         }else if scene == WXSceneTimeline {
             share(title: content.title, description: "", image: content.sharePic, url: content.urlStr, scene: scene)
         }
-        
     }
     
     func shareVideo(content: ShareContentModel, scene: WXScene) {
@@ -72,7 +71,6 @@ extension WeixinSharePro {
         let request = SendMessageToWXReq()
         request.scene = Int32(scene.rawValue)
         request.message = message
-        
         WXApi.send(request)
     }
     
