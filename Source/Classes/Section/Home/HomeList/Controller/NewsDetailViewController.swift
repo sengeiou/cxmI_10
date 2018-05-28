@@ -68,7 +68,6 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
         var content = ShareContentModel()
         content.title = self.detailModel.title
         content.description = self.detailModel.summary
-       
         content.urlStr = self.detailModel.link
         content.sharePic = UIImage(named:"fenxiangtubiao")
         
