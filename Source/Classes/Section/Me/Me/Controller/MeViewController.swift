@@ -98,10 +98,11 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     
     @objc private func configNotification(_ notification : Notification) {
         guard let userinf = notification.userInfo else { return }
-        guard let turn = userinf["showStyle"] as? Bool else { return }
-        if turn {
+        guard let turnOn = userinf["showStyle"] as? Bool else { return }
+        if turnOn && self.showType != .allShow{
             showType = .allShow
-        }else {
+            //showType = .onlyNews
+        }else if turnOn == false && self.showType != .onlyNews {
             showType = .onlyNews
         }
     }
