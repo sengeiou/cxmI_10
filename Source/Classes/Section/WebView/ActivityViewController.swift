@@ -25,7 +25,7 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
         let but = UIButton(type: .custom)
         but.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         but.setImage(UIImage(named: "Remove"), for: .normal)
-        but.contentEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 34)
+        but.contentEdgeInsets = UIEdgeInsets(top: 0, left: -15, bottom: 0, right: 39)
         but.addTarget(self, action: #selector(deleteClicked(_:)), for: .touchUpInside)
         return but
     }()

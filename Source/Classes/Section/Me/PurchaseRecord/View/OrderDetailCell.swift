@@ -118,7 +118,7 @@ class OrderDetailCell: UITableViewCell {
         resultLB.sizeToFit()
         
         danIcon = UIImageView()
-        danIcon.image = UIImage(named: "Singlefield")
+        danIcon.image = UIImage(named: "dan")
         
         self.contentView.addSubview(line)
         self.contentView.addSubview(timeLB)
@@ -139,7 +139,7 @@ class OrderDetailCell: UITableViewCell {
         danIcon.snp.makeConstraints { (make) in
             make.top.equalTo(0)
             make.left.equalTo(0)
-            make.height.width.equalTo(15)
+            make.height.width.equalTo(16)
         }
         
         timeLB.snp.makeConstraints { (make) in
