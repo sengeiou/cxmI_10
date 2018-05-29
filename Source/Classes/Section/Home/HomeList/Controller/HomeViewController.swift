@@ -377,7 +377,11 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
             case 0:
                 return 35
             case 1:
-                return 80
+                if self.homeData.activity == nil {
+                    return 0
+                }else {
+                    return 80
+                }
             case 2:
                 guard self.homeData != nil else { return 0 }
                 let count = self.homeData.dlPlayClassifyDetailDTOs.count
@@ -403,7 +407,20 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         }
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 5
+        
+        if homeStyle == .onlyNews {
+            return 5
+        }else {
+            if section == 1 {
+                if self.homeData.activity == nil {
+                    return 0
+                }else {
+                    return 5
+                }
+            }
+            return 5
+        }
+        
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.01
