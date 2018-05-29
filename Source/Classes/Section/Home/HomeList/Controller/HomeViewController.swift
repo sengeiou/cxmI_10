@@ -116,13 +116,15 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         header.bannerList = homeData.navBanners
         newsListModel = data.dlArticlePage
         
-        if dataModel.homeStyle == 0 {
+        newsList.append(contentsOf: self.newsListModel.list)
+        
+        let turnOn = UserDefaults.standard.bool(forKey: TurnOn)
+        
+        if turnOn == false {
             self.homeStyle = .onlyNews
         }else {
             self.homeStyle = .allShow
         }
-        
-        newsList.append(contentsOf: self.newsListModel.list)
         tableView.reloadData()
     }
     override func viewDidLayoutSubviews() {
@@ -274,7 +276,6 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                 return 1
             }
         }
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
