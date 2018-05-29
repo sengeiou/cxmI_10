@@ -50,8 +50,6 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: shareBut)
         
         shareBut.isHidden = true
-        
-        
     }
     
     // MARK: - 点击事件
