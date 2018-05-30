@@ -147,7 +147,7 @@ class BankCardViewController: BaseViewController, UITableViewDelegate, UITableVi
                 weakSelf?.showHUD(message: data.showMsg)
                 weakSelf?.bankListRequest()
             }else {
-                guard data.lastCardNo4 != nil else {
+                guard data.lastCardNo4 != nil && data.lastCardNo4 != "" else {
                     weakSelf?.showCXMAlert(title: "删除成功！", message: "", action: "知道了", cancel: nil, confirm: { (action) in
                         weakSelf?.bankListRequest()
                     })
