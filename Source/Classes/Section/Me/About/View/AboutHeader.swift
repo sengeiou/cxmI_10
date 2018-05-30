@@ -13,7 +13,6 @@ class AboutHeader: UIView {
     private var icon : UIImageView!
     private var versionLB: UILabel!
     
-    
     init() {
         super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 192 * defaultScale))
         
@@ -24,9 +23,9 @@ class AboutHeader: UIView {
         super.layoutSubviews()
         icon.snp.makeConstraints { (make) in
             make.top.equalTo(49 * defaultScale)
-            make.width.equalTo(162 * defaultScale)
-            make.height.equalTo(46 * defaultScale)
-            make.centerX.equalTo(self.snp.centerX)
+            make.width.equalTo(124 * defaultScale)
+            make.height.equalTo(40 * defaultScale)
+            make.centerX.equalTo(self.snp.centerX).offset(-10)
         }
         versionLB.snp.makeConstraints { (make) in
             make.bottom.equalTo(icon.snp.bottom)
@@ -39,12 +38,13 @@ class AboutHeader: UIView {
         self.backgroundColor = ColorFFFFFF
         
         icon = UIImageView()
-        icon.image = UIImage(named: "Versionofthelogo")
+        icon.image = UIImage(named: "logo")
         
         versionLB = UILabel()
-        versionLB.font = Font10
+        versionLB.font = Font12
         versionLB.textColor = ColorEA5504
         versionLB.textAlignment = .left
+        versionLB.text = "v" + DeviceManager.share.device.appv
         
         self.addSubview(icon)
         self.addSubview(versionLB)
