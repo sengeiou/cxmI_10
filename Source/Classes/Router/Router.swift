@@ -14,6 +14,7 @@ protocol RouterPro : RouterMatcher { }
 extension RouterPro {
     /// 路由跳转
     func pushRouterVC(urlStr: String, from vc : UIViewController) {
+        
         let type = matcherHttp(urlStr: urlStr)
         
         switch type.0 {
@@ -25,7 +26,12 @@ extension RouterPro {
             break
         case .网页:
             let web = ActivityViewController()
-            web.urlStr = urlStr
+            if urlStr.contains("?") {
+                web.urlStr = urlStr + "&cfrom=app"
+            }else {
+                web.urlStr = urlStr + "?cfrom=app"
+            }
+            
             //web.urlStr = "http://192.168.31.205:8080/activity/discount?cxmxc=scm&usinfo=1&cmshare=1&from=app&showtitle=1"
             //web.urlStr = "http://192.168.31.205:8080/user/activity/one?cxmxc=scm&usinfo=1&from=app&showtitle=1&cmshare=1"
             pushViewController(web, from: vc)
@@ -38,7 +44,7 @@ extension RouterPro {
             let web = ActivityViewController()
             //web.urlStr = urlStr
             //web.urlStr = "http://192.168.31.205:8080/activity/discount?cxmxc=scm&usinfo=1&cmshare=1&from=app&showtitle=1"
-            web.urlStr = "http://192.168.31.205:8080/user/activity/one?cxmxc=scm&usinfo=1&from=app&showtitle=1&cmshare=1"
+            web.urlStr = "http://192.168.31.205:8080/user/activity/one?cxmxc=scm&usinfo=1&from=app&showtitle=1&cmshare=1"  + "&cfrom=app"
             pushViewController(web, from: vc)
             //pushFootballVC(type.0.rawValue, from: vc)
         case .足球让球胜平负:
