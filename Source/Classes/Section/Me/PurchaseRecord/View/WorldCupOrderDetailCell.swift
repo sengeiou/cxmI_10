@@ -23,9 +23,6 @@ class WorldCupOrderDetailCell: UITableViewCell {
             
             matchInfo.changci.insert("\n", at: matchInfo.changci.index(matchInfo.changci.startIndex, offsetBy: 2))
             
-            timeLB.text = matchInfo.changci
-            // ruleLB.text = matchInfo.playType
-            
             if matchInfo.isDan {
                 self.danIcon.isHidden = false
             }else {
@@ -58,22 +55,19 @@ class WorldCupOrderDetailCell: UITableViewCell {
                 i += 1
             }
             
-            recordLB.attributedText = record
             resultLB.attributedText = resultAtt
             
             if ruleStr != "" {
                 ruleStr.removeLast()
-                ruleLB.text = ruleStr
+                oddLB.text = ruleStr
             }
         }
     }
     
     public var line : UIImageView!
     
-    private var timeLB : UILabel!
     private var nameLB : UILabel!
-    private var ruleLB : UILabel!
-    private var recordLB: UILabel!
+    private var oddLB : UILabel!
     private var resultLB : UILabel!
     
     private var danIcon : UIImageView!
@@ -81,7 +75,6 @@ class WorldCupOrderDetailCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
         initSubview()
     }
     override func layoutSubviews() {
@@ -94,32 +87,23 @@ class WorldCupOrderDetailCell: UITableViewCell {
         line = UIImageView()
         line.image = UIImage(named:"line")
         
-        timeLB = getDetailLB()
-        timeLB.textAlignment = .left
-        timeLB.numberOfLines = 0
-        
         nameLB = getDetailLB()
         nameLB.numberOfLines = 0
         
-        ruleLB = getDetailLB()
-        ruleLB.numberOfLines = 0
-        
-        recordLB = getDetailLB()
-        recordLB.numberOfLines = 0
+        oddLB = getDetailLB()
+        oddLB.numberOfLines = 0
         
         resultLB = getDetailLB()
         resultLB.numberOfLines = 0
-        resultLB.textAlignment = .right
+        //resultLB.textAlignment = .right
         resultLB.sizeToFit()
         
         danIcon = UIImageView()
         danIcon.image = UIImage(named: "dan")
         
         self.contentView.addSubview(line)
-        self.contentView.addSubview(timeLB)
         self.contentView.addSubview(nameLB)
-        self.contentView.addSubview(ruleLB)
-        self.contentView.addSubview(recordLB)
+        self.contentView.addSubview(oddLB)
         self.contentView.addSubview(resultLB)
         self.contentView.addSubview(danIcon)
         
@@ -137,35 +121,21 @@ class WorldCupOrderDetailCell: UITableViewCell {
             make.height.width.equalTo(16)
         }
         
-        timeLB.snp.makeConstraints { (make) in
-            make.top.equalTo(self.contentView).offset(11 * defaultScale)
-            make.bottom.equalTo(self.contentView).offset(-11 * defaultScale)
-            make.width.equalTo(40 * defaultScale)
-            make.left.equalTo(self.contentView).offset(leftSpacing)
-        }
         nameLB.snp.makeConstraints { (make) in
             make.top.equalTo(self.contentView).offset(11 * defaultScale)
             make.bottom.equalTo(self.contentView).offset(-11 * defaultScale)
-            make.left.equalTo(timeLB.snp.right).offset(1)
-            make.right.equalTo(ruleLB.snp.left).offset(-1)
+            make.left.equalTo(16)
+            make.width.equalTo(resultLB)
         }
-        ruleLB.snp.makeConstraints { (make) in
-            make.top.height.equalTo(timeLB)
-            make.width.equalTo(nameLB)
-            make.right.equalTo(recordLB.snp.left).offset(-1)
+        oddLB.snp.makeConstraints { (make) in
+            make.top.height.equalTo(nameLB)
+            make.width.equalTo(80)
+            make.left.equalTo(nameLB.snp.right).offset(1)
         }
-        
-        recordLB.snp.makeConstraints { (make) in
-            make.top.equalTo(line.snp.bottom).offset(12 * defaultScale)
-            make.bottom.equalTo(self.contentView).offset(1)
-            make.width.equalTo(OrderDetailTitleWidth)
-            make.right.equalTo(resultLB.snp.left).offset(-1)
-        }
-        
         resultLB.snp.makeConstraints { (make) in
-            make.top.bottom.equalTo(recordLB)
-            make.width.equalTo(OrderDetailTitleWidth - 30)
-            make.right.equalTo(self.contentView).offset(-26)
+            make.top.bottom.equalTo(nameLB)
+            make.left.equalTo(oddLB.snp.right).offset(1)
+            make.right.equalTo(self.contentView).offset(-5)
         }
         
     }

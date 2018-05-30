@@ -38,10 +38,10 @@ class WorldCupOrderDetailTitleCell: UITableViewCell {
         sectionTitle.textColor = ColorA0A0A0
         sectionTitle.textAlignment = .left
         sectionTitle.text = "方案内容"
-        nameTitle = getTitleLB("赛事")
-        oddTitle = getTitleLB("玩法")
+        nameTitle = getTitleLB("猜冠军球队")
+        oddTitle = getTitleLB("赔率")
         resultTitle = getTitleLB("赛果")
-        resultTitle.textAlignment = .right
+        //resultTitle.textAlignment = .right
         
         self.contentView.addSubview(line)
         self.contentView.addSubview(sectionTitle)
@@ -63,20 +63,19 @@ class WorldCupOrderDetailTitleCell: UITableViewCell {
         }
         nameTitle.snp.makeConstraints { (make) in
             make.top.equalTo(line.snp.bottom).offset(11)
-            make.left.equalTo(self.contentView).offset(26)
-            make.width.equalTo(40 * defaultScale)
+            make.left.equalTo(self.contentView).offset(16)
+            make.width.equalTo(resultTitle)
             make.bottom.equalTo(-11)
         }
         oddTitle.snp.makeConstraints { (make) in
             make.top.height.equalTo(nameTitle)
-            make.width.equalTo(nameTitle)
+            make.width.equalTo(80)
             make.left.equalTo(nameTitle.snp.right).offset(1)
-            make.right.equalTo(nameTitle.snp.left).offset(-1)
+            make.right.equalTo(resultTitle.snp.left).offset(-1)
         }
         resultTitle.snp.makeConstraints { (make) in
             make.top.height.equalTo(nameTitle)
-            make.width.equalTo(OrderDetailTitleWidth - 30)
-            make.right.equalTo(self.contentView).offset(-26)
+            make.right.equalTo(self.contentView).offset(-5)
         }
     }
     

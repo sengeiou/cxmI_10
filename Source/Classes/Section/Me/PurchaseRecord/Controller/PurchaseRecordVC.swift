@@ -22,7 +22,7 @@ class PurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
     //MARK: - 点击事件
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let recordInfo = recordList[indexPath.section]
-        let order = OrderDetailVC()
+        let order = WorldCupOrderDetailVC()
         order.orderId = recordInfo.orderId
         pushViewController(vc: order)
     }
