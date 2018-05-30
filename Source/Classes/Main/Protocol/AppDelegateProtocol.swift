@@ -25,13 +25,18 @@ extension AppDelegateProtocol where Self : AppDelegate {
         GeTuiSdk.start(withAppId: GetuiAppID, appKey: GetuiAppKey, appSecret: GetuiSecrct, delegate: self)
         
         
-        // 注册APNS
-        registerRemoteNotification()
+        
         
         // 百度统计
         BaiduMobStat.default().start(withAppId: BaiduAppKey)
         BaiduMobStat.default().getTestDeviceId()
         
+        // 智齿客服
+        ZCLibClient.setZCLibUncaughtExceptionHandler() // 错误日志收集
+        ZCLibClient.getZCLibClient().initSobotSDK(ZhiChiAppKey)
+        
+        // 注册APNS
+        registerRemoteNotification()
     }
     
     func registerRemoteNotification() {

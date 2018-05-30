@@ -19,6 +19,7 @@ enum MePushType {
     case 投诉建议
     case 帮助中心
     case 联系客服
+    case 在线客服
     case 注册协议
     case 关于我们
     case 活动
@@ -221,9 +222,37 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
             regis.urlStr = webRegisterAgreement
             pushViewController(vc: regis)
             TongJi.log(.注册用户协议, label: "注册用户协议" )
+        case .在线客服:
+            initZhiChiService()
+            
+            
         }
     }
     
+    private func initZhiChiService() {
+        let initInfo = ZCLibInitInfo()
+        
+        initInfo.appKey = ZhiChiAppKey
+        initInfo.userId = ""
+        
+        let uiInfo = ZCKitInfo()
+        
+        uiInfo.isShowTansfer = true
+        
+        uiInfo.customBannerColor = ColorEA5504
+        
+        uiInfo.topViewTextColor = ColorF6AD41
+        
+        uiInfo.serviceNameTextColor = Color0099D9
+        
+        
+        
+        ZCLibClient.getZCLibClient().libInitInfo = initInfo
+        
+        ZCSobot.startZCChatVC(uiInfo, with: self, target: nil, pageBlock: { (chatVC, type) in
+            
+        }, messageLinkClick: nil)
+    }
     
     //MARK: - 网络请求
     private func userInfoRequest() {
@@ -509,6 +538,12 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         item7.iconStr = "serive"
         item7.pushType = .联系客服
         section2.list.append(item7)
+        
+        var service = MeListDataModel()
+        service.title = "在线客服"
+        service.iconStr = "serive"
+        service.pushType = .在线客服
+        section2.list.append(service)
         
         var item8 = MeListDataModel()
         item8.title = "关于我们"

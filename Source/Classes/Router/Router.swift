@@ -27,7 +27,7 @@ extension RouterPro {
             let web = ActivityViewController()
             web.urlStr = urlStr
             //web.urlStr = "http://192.168.31.205:8080/activity/discount?cxmxc=scm&usinfo=1&cmshare=1&from=app&showtitle=1"
-            //web.urlStr = "http://192.168.31.232:8080/activity/tuiguang?cxmxc=scm&usinfo=1"
+            //web.urlStr = "http://192.168.31.205:8080/user/activity/one?cxmxc=scm&usinfo=1&from=app&showtitle=1&cmshare=1"
             pushViewController(web, from: vc)
             break
         case .浏览器:
@@ -35,7 +35,12 @@ extension RouterPro {
                 UIApplication.shared.openURL(url)
             }
         case .足球胜平负:
-            pushFootballVC(type.0.rawValue, from: vc)
+            let web = ActivityViewController()
+            //web.urlStr = urlStr
+            //web.urlStr = "http://192.168.31.205:8080/activity/discount?cxmxc=scm&usinfo=1&cmshare=1&from=app&showtitle=1"
+            web.urlStr = "http://192.168.31.205:8080/user/activity/one?cxmxc=scm&usinfo=1&from=app&showtitle=1&cmshare=1"
+            pushViewController(web, from: vc)
+            //pushFootballVC(type.0.rawValue, from: vc)
         case .足球让球胜平负:
             pushFootballVC(type.0.rawValue, from: vc)
         case .足球比分:

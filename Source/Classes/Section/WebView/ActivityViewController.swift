@@ -76,6 +76,10 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
         case .登录:
             pushLoginVC(from: self)
             decisionHandler(.cancel)
+        case .注册:
+            let register = RegisterViewController()
+            pushViewController(vc: register)
+            decisionHandler(.cancel)
         default:
             decisionHandler(.allow)
         }

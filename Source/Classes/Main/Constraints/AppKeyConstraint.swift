@@ -8,9 +8,14 @@
 
 import Foundation
 
+/// 微信分享
 let WeixinAppID = "wx6c3f43ecb1ff2be2"
 
+/// 百度统计
 let BaiduAppKey = "8b4996b71f"
+
+/// 智齿客服
+let ZhiChiAppKey = "37ecff6d518143ecac351b6c93410ee8"
 
 let phoneNum = "400-012-6600"
 

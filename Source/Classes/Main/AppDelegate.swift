@@ -105,8 +105,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AppDelegateProtocol, GeTu
         // [ GTSdk ]：向个推服务器注册deviceToken
         GeTuiSdk.registerDeviceToken(token);
         
-        NSLog("\n>>>[DeviceToken Success]:%@\n\n",token);
+        // 智齿客服 注册token
+        ZCLibClient.getZCLibClient().token = deviceToken
     }
+    
+    
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         
