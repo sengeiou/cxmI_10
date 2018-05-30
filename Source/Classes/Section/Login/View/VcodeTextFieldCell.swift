@@ -26,6 +26,7 @@ class VcodeTextFieldCell: UITableViewCell {
         textfield.borderStyle = .none
         textfield.selectImg = "tes_sel"
         textfield.placeholder = "输入验证码"
+        textfield.keyboardType = .numberPad
         self.contentView.addSubview(textfield)
         
     }
