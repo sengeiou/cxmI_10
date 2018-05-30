@@ -239,11 +239,13 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         
         uiInfo.isShowTansfer = true
         
-        uiInfo.customBannerColor = ColorEA5504
+        uiInfo.customBannerColor = ColorFFFFFF
         
-        uiInfo.topViewTextColor = ColorF6AD41
+        uiInfo.topViewTextColor = UIColor.black
         
-        uiInfo.serviceNameTextColor = Color0099D9
+        uiInfo.titleFont = Font15
+        
+        //uiInfo.serviceNameTextColor = Color0099D9
         
         
         

@@ -119,17 +119,28 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
         
         guard let urlModel = parseUrl(urlStr: urlStr) else { return }
         
+        // usInfo == "1" 进入此页面发现无token时 弹出登录页
         if urlStr.contains("cxmxc=scm") && urlModel.usInfo == "1" {
             guard model.token != "" else {
-//                let login = VCodeLoginViewController()
-//                pushViewController(vc: login)
                 pushLoginVC(from: self)
                 return
             }
             webView.evaluateJavaScript("actionMessage('\(jsData!)')") { (data, error) in
                 
             }
+            
         }
+            // usInfo == "2" 进入此页面发现无token时 不弹出登录页
+        else if urlStr.contains("cxmxc=scm") && urlModel.usInfo == "2" {
+            guard model.token != "" else {
+                
+                return
+            }
+            webView.evaluateJavaScript("actionMessage('\(jsData!)')") { (data, error) in
+                
+            }
+        }
+        
     }
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         
