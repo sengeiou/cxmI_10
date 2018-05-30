@@ -50,7 +50,7 @@ extension AlertPro {
     public func showCXMAlert(title: String?, message: String, action: String, cancel: String?, on vc : UIViewController , confirm: ((UIAlertAction)->Void)?) {
         let attStr = NSAttributedString(string: message, attributes: [NSAttributedStringKey.foregroundColor: Color787878])
         
-        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.setValue(attStr, forKey: "attributedMessage")
         
         let action = UIAlertAction(title: action, style: .default, handler: confirm)
@@ -72,7 +72,7 @@ extension AlertPro {
             
             let attStr = NSAttributedString(string: message, attributes: [NSAttributedStringKey.foregroundColor: Color787878])
             
-            let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alert.setValue(attStr, forKey: "attributedMessage")
             
             let action = UIAlertAction(title: action, style: .default, handler: confirm)
