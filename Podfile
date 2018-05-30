@@ -42,6 +42,7 @@ target '彩小蜜' do
 
   pod 'BaiduMobStat'
   
+  pod 'SobotKit'
 
   # Pods for 彩小蜜
 
