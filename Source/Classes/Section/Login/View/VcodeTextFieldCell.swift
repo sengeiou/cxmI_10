@@ -28,7 +28,6 @@ class VcodeTextFieldCell: UITableViewCell {
         textfield.placeholder = "输入验证码"
         textfield.keyboardType = .numberPad
         self.contentView.addSubview(textfield)
-        
     }
     
     override func layoutSubviews() {

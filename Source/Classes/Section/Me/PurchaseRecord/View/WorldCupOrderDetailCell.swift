@@ -1,14 +1,14 @@
 //
-//  OrderDetailCell.swift
+//  WorldCupOrderDetailCell.swift
 //  彩小蜜
 //
-//  Created by HX on 2018/3/25.
+//  Created by 笑 on 2018/5/30.
 //  Copyright © 2018年 韩笑. All rights reserved.
 //
 
 import UIKit
 
-class OrderDetailCell: UITableViewCell {
+class WorldCupOrderDetailCell: UITableViewCell {
 
     public var matchInfo: MatchInfo! {
         didSet{
@@ -24,7 +24,7 @@ class OrderDetailCell: UITableViewCell {
             matchInfo.changci.insert("\n", at: matchInfo.changci.index(matchInfo.changci.startIndex, offsetBy: 2))
             
             timeLB.text = matchInfo.changci
-           // ruleLB.text = matchInfo.playType
+            // ruleLB.text = matchInfo.playType
             
             if matchInfo.isDan {
                 self.danIcon.isHidden = false
@@ -46,7 +46,7 @@ class OrderDetailCell: UITableViewCell {
                         color = Color505050
                     }
                     let cathectic = cath.cathectic.replacingOccurrences(of: "null", with: "")
-
+                    
                     let rec = NSAttributedString(string: cathectic + "\n", attributes: [NSAttributedStringKey.foregroundColor: color])
                     
                     let res = NSAttributedString(string: result.matchResult + "\n", attributes: [NSAttributedStringKey.foregroundColor: color])
@@ -122,7 +122,7 @@ class OrderDetailCell: UITableViewCell {
         self.contentView.addSubview(recordLB)
         self.contentView.addSubview(resultLB)
         self.contentView.addSubview(danIcon)
-       
+        
         
         line.snp.makeConstraints { (make) in
             make.top.equalTo(self.contentView).offset(0)
@@ -157,7 +157,6 @@ class OrderDetailCell: UITableViewCell {
         
         recordLB.snp.makeConstraints { (make) in
             make.top.equalTo(line.snp.bottom).offset(12 * defaultScale)
-            //make.top.height.equalTo(timeLB)
             make.bottom.equalTo(self.contentView).offset(1)
             make.width.equalTo(OrderDetailTitleWidth)
             make.right.equalTo(resultLB.snp.left).offset(-1)
@@ -165,8 +164,6 @@ class OrderDetailCell: UITableViewCell {
         
         resultLB.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(recordLB)
-            //make.top.height.equalTo(recordLB)
-            //make.top.height.equalTo(timeLB)
             make.width.equalTo(OrderDetailTitleWidth - 30)
             make.right.equalTo(self.contentView).offset(-26)
         }
@@ -176,7 +173,7 @@ class OrderDetailCell: UITableViewCell {
     private func getDetailLB() -> UILabel {
         let lab = UILabel()
         lab.font = Font12
-      
+        
         lab.textColor = Color505050
         lab.textAlignment = .center
         return lab

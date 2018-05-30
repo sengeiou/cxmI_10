@@ -19,6 +19,31 @@ enum FootballMatchType: String {
     case 半全场 = "彩小秘 · 半全场"
     case 二选一 = "彩小秘 · 2选1"
     case 混合过关 = "彩小秘 · 混合投注"
+    
+    func getMatchType(type: String) -> FootballMatchType {
+        var matchType : FootballMatchType = .胜平负
+        
+        switch type {
+        case "2":
+            matchType = .胜平负
+        case "1":
+            matchType = .让球胜平负
+        case "4":
+            matchType = .总进球
+        case "5":
+            matchType = .半全场
+        case "3":
+            matchType = .比分
+        case "6":
+            matchType = .混合过关
+        case "7":
+            matchType = .二选一
+        default: break
+            
+        }
+        
+        return matchType
+    }
 }
 
 fileprivate let FootballSectionHeaderId = "FootballSectionHeaderId"
