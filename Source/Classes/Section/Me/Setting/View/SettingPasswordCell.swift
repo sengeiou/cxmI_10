@@ -26,7 +26,7 @@ class SettingPasswordCell: UITableViewCell {
         title.textAlignment = .left
         
         textField = UITextField()
-        
+        textField.font = Font13
         
         self.contentView.addSubview(title)
         self.contentView.addSubview(textField)
@@ -34,7 +34,7 @@ class SettingPasswordCell: UITableViewCell {
         title.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(0)
             make.left.equalTo(16 * defaultScale)
-            make.width.equalTo(80)
+            make.width.equalTo(60)
         }
         textField.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(title)

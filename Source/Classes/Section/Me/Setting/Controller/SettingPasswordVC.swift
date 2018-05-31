@@ -37,6 +37,14 @@ class SettingPasswordVC: BaseViewController, UITableViewDelegate, UITableViewDat
         }
     }
 
+    // MARK: - 点击事件
+    @objc private func confirmClicked(_ sender: UIButton) {
+        
+    }
+    
+    // MARK: - 网络请求
+    
+    
     //MARK: - 懒加载
     lazy var tableView : UITableView = {
         let table = UITableView(frame: CGRect.zero, style: .plain)
@@ -45,6 +53,18 @@ class SettingPasswordVC: BaseViewController, UITableViewDelegate, UITableViewDat
         table.dataSource = self
         table.backgroundColor = ColorF4F4F4
         table.register(SettingPasswordCell.self, forCellReuseIdentifier: SettingPasswordCellId)
+        
+        let footer = SettingPasswordFooter()
+        footer.confirmBut.addTarget(self, action: #selector(confirmClicked(_:)), for: .touchUpInside)
+        
+        if settingType == .设置 {
+            footer.confirmBut.setTitle("确认设置", for: .normal)
+        }else {
+            footer.confirmBut.setTitle("确认修改", for: .normal)
+        }
+        
+        table.tableFooterView = footer
+        
         return table
     }()
     //MARK: - tableView dataSource
@@ -65,11 +85,11 @@ class SettingPasswordVC: BaseViewController, UITableViewDelegate, UITableViewDat
         
         if settingType == .设置 {
             switch indexPath.row {
-            case 1:
+            case 0:
                 self.newTF = cell.textField
                 cell.title.text = "新密码"
                 cell.textField.placeholder = "6-20位数字和字母组成"
-            case 2:
+            case 1:
                 self.confirmTF = cell.textField
                 cell.title.text = "确认密码"
                 cell.textField.placeholder = "请再次输入登录密码"
@@ -77,15 +97,15 @@ class SettingPasswordVC: BaseViewController, UITableViewDelegate, UITableViewDat
             }
         }else {
             switch indexPath.row {
-            case 1:
+            case 0:
                 self.oldTF = cell.textField
                 cell.title.text = "原密码"
                 cell.textField.placeholder = "输入原密码"
-            case 2:
+            case 1:
                 self.newTF = cell.textField
                 cell.title.text = "新密码"
                 cell.textField.placeholder = "输入新密码"
-            case 3:
+            case 2:
                 self.confirmTF = cell.textField
                 cell.title.text = "确认密码"
                 cell.textField.placeholder = "请再次输入登录密码"

@@ -10,7 +10,7 @@ import UIKit
 
 enum UserInfoSettingPushType {
     case 设置密码
-    
+    case 修改密码
 }
 
 fileprivate let UserInfoSettingCellId = "UserInfoSettingCellId"
@@ -44,7 +44,6 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
         let section = self.dataList[indexPath.section]
         let row = section.list[indexPath.row]
         
-        guard row.pushType != nil else { return }
         pushSettingVC(row.pushType)
     }
     
@@ -52,8 +51,12 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
         switch model {
         case .设置密码:
             let pass = SettingPasswordVC()
+            pass.settingType = .设置
             pushViewController(vc: pass)
-        
+        case .修改密码:
+            let pass = SettingPasswordVC()
+            pass.settingType = .修改
+            pushViewController(vc: pass)
         }
     }
     
