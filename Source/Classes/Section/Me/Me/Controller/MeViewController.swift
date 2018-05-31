@@ -62,7 +62,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        userInfoRequest()
+        
         self.isHidenBar = false
         
         let turnOn = UserDefaults.standard.bool(forKey: TurnOn)
@@ -75,6 +75,8 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         }
         
         hidenNotic()
+        
+        userInfoRequest()
     }
     
     private func hidenNotic() {

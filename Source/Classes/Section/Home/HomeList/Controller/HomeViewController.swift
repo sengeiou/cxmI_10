@@ -70,10 +70,6 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     //MARK: - 属性 public
     public var homeStyle : ShowType! = .onlyNews {
         didSet{
-            
-            guard homeStyle != nil else { return }
-            guard newsList != nil else { return }
-            
             loadNewData()
 //            homeListAddNewsRequest(pageNum: 1)
         }
