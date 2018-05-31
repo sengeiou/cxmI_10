@@ -102,7 +102,7 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
         tableView.endUpdates()
 
         UIView.animate(withDuration: 0.5, animations: {
-            self.bagView.backgroundColor = UIColor.clear
+            self.bagView.backgroundColor = UIColor(patternImage: UIImage(named: "guide1")!)
         }) { (finish) in
             if finish {
                 self.bagView.isHidden = true
@@ -124,11 +124,12 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
         bagView.snp.makeConstraints { (make) in
             make.top.left.right.bottom.equalTo(0)
         }
+        
     }
     
     private func initSubview() {
         bagView = UIView()
-        bagView.backgroundColor = ColorFFFFFF
+        bagView.backgroundColor = UIColor(patternImage: UIImage(named: "guide1")!)
         
         self.view.addSubview(tableView)
         self.view.addSubview(bagView)
