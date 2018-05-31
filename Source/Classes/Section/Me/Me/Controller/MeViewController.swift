@@ -569,8 +569,9 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     private func setRightBut() {
         let but = UIButton(type: .custom)
         but.setTitle("设置", for: .normal)
+        but.titleLabel?.font = Font17
         but.setTitleColor(Color787878, for: .normal)
-        but.frame = CGRect(x: 0, y: 0, width: 60, height: 40)
+        but.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         but.addTarget(self, action: #selector(setting), for: .touchUpInside)
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: but)
