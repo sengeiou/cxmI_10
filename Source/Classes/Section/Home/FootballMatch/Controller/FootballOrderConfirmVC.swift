@@ -119,6 +119,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         super.viewDidLoad()
         self.title = "彩小秘 · 投注确认"
         initSubview()
+        setRightButtonItem()
         setEmpty(title: "暂无可选赛事", tableView)
         
         playList = playList.sorted { s1 , s2 in
@@ -787,7 +788,10 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         let rightBut = UIButton(type: .custom)
         rightBut.frame = CGRect(x: 0, y: 0, width: 16, height: 16)
         
-        rightBut.setBackgroundImage(UIImage(named:"Details"), for: .normal)
+        //rightBut.setBackgroundImage(UIImage(named:"Details"), for: .normal)
+        
+        rightBut.setTitle("dan?", for: .normal)
+        rightBut.setTitleColor(Color787878, for: .normal)
         
         rightBut.addTarget(self, action: #selector(showMenu(_:)), for: .touchUpInside)
         
@@ -795,9 +799,9 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     @objc private func showMenu(_ sender: UIButton) {
-        let filter = FootballMatchFilterVC()
-        filter.popStyle = .fromCenter
-        present(filter)
+        let web = WebViewController()
+        web.urlStr = danExplainUrl
+        pushViewController(vc: web)
     }
     
     override func back(_ sender: UIButton) {
