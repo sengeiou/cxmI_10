@@ -103,12 +103,10 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         webView.evaluateJavaScript("getCxmTitle()") { (data, error) in
-            if self.navigationItem.title == nil {
-                if let title = data as? String {
-                    self.navigationItem.title = title
-                }else {
-                    self.navigationItem.title = webView.title
-                }
+            if let title = data as? String {
+                self.navigationItem.title = title
+            }else {
+                self.navigationItem.title = webView.title
             }
         }
         
