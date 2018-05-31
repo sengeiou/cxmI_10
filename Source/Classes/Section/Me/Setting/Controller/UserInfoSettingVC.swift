@@ -20,7 +20,7 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
 
     public var userInfo : UserInfoDataModel!
     
-    private var dataList: [MeSectionModel]!
+    private var dataList: [SettingSectionModel]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +39,13 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
+    // MARK: - 点击事件
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let section = self.dataList[indexPath.section]
+        let row = section.list[indexPath.row]
+        
+        
+    }
     
     //MARK: - 懒加载
     lazy var tableView : UITableView = {
@@ -97,19 +104,19 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
     }
     
     
-    private func getDataList() -> [MeSectionModel]? {
-        var dataList = [MeSectionModel]()
+    private func getDataList() -> [SettingSectionModel]? {
+        var dataList = [SettingSectionModel]()
         
         guard userInfo != nil else { return nil }
-        var section1 = MeSectionModel()
+        var section1 = SettingSectionModel()
         section1.sectionTitle = "账户安全"
         
-        var phone = MeListDataModel()
+        var phone = SettingListDataModel()
         phone.title = "手机认证"
         phone.detail = userInfo?.mobile
         section1.list.append(phone)
         
-        var pass = MeListDataModel()
+        var pass = SettingListDataModel()
         pass.title = "登录密码"
         pass.detail = "设置密码"
         section1.list.append(pass)

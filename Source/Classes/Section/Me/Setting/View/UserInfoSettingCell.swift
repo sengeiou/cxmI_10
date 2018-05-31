@@ -10,7 +10,7 @@ import UIKit
 
 class UserInfoSettingCell: UITableViewCell {
 
-    public var model : MeListDataModel! {
+    public var model : SettingListDataModel! {
         didSet{
             title.text = model.title
             detail.text = model.detail
