@@ -91,7 +91,7 @@ class GuideViewController: UIViewController, UIScrollViewDelegate {
             }
         }else {
             startBut.snp.makeConstraints { (make) in
-                make.bottom.equalTo(-70 * defaultScale)
+                make.bottom.equalTo(-100 * defaultScale)
                 make.height.equalTo(40 * defaultScale)
                 make.width.equalTo(140 * defaultScale)
                 make.centerX.equalTo(self.view.snp.centerX)
