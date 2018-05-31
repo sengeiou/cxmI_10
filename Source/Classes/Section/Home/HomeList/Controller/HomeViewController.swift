@@ -175,6 +175,9 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
             .mapObject(type: HomeListModel.self)
             .subscribe(onNext: { (data) in
                 weakSelf?.tableView.endrefresh()
+                if weakSelf?.newsList == nil {
+                    weakSelf?.newsList = [NewsInfoModel]()
+                }
                 if pageNum == 1 {
                     weakSelf?.homeData = data.dlHallDTO
                     guard weakSelf?.homeData.navBanners != nil else { return }
