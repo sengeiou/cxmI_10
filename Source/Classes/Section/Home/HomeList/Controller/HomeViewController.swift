@@ -70,12 +70,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     //MARK: - 属性 public
     public var homeStyle : ShowType! = .onlyNews {
         didSet{
-            
-            guard homeStyle != nil else { return }
-            guard newsList != nil else { return }
-            
             loadNewData()
-//            homeListAddNewsRequest(pageNum: 1)
         }
     }
     
@@ -166,6 +161,10 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     
     private func homeListAndNewsRequest(pageNum: Int) {
         weak var weakSelf = self
+        
+        if newsList == nil {
+            newsList = [NewsInfoModel]()
+        }
         
         var isTransaction : String
         if homeStyle == .allShow {
