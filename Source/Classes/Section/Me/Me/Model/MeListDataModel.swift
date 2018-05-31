@@ -10,6 +10,7 @@ import Foundation
 import HandyJSON
 
 struct MeSectionModel: HandyJSON {
+    var sectionTitle : String! = ""
     var list : [MeListDataModel] = [MeListDataModel]()
 }
 

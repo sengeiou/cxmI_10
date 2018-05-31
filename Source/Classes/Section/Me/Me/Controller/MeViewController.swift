@@ -55,6 +55,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         hideBackBut()
+        setRightBut()
         self.navigationItem.title = "彩小秘 · 我的"
         self.view.addSubview(tableView)
         
@@ -96,6 +97,11 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         }
     }
     //MARK: - 点击事件
+    @objc private func setting() {
+        let setting = UserInfoSettingVC()
+        setting.userInfo = self.userInfo
+        pushViewController(vc: setting)
+    }
     
     @objc private func configNotification(_ notification : Notification) {
         guard let userinf = notification.userInfo else { return }
@@ -559,6 +565,17 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         
         return list
     }
+    
+    private func setRightBut() {
+        let but = UIButton(type: .custom)
+        but.setTitle("设置", for: .normal)
+        but.setTitleColor(Color787878, for: .normal)
+        but.frame = CGRect(x: 0, y: 0, width: 60, height: 40)
+        but.addTarget(self, action: #selector(setting), for: .touchUpInside)
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: but)
+    }
+    
     
     
     override func didReceiveMemoryWarning() {
