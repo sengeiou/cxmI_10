@@ -44,7 +44,17 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
         let section = self.dataList[indexPath.section]
         let row = section.list[indexPath.row]
         
+        guard row.pushType != nil else { return }
+        pushSettingVC(row.pushType)
+    }
+    
+    private func pushSettingVC(_ model : UserInfoSettingPushType) {
+        switch model {
+        case .设置密码:
+            let pass = SettingPasswordVC()
+            pushViewController(vc: pass)
         
+        }
     }
     
     //MARK: - 懒加载
@@ -111,12 +121,12 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
         var section1 = SettingSectionModel()
         section1.sectionTitle = "账户安全"
         
-        var phone = SettingListDataModel()
+        var phone = SettingRowDataModel()
         phone.title = "手机认证"
         phone.detail = userInfo?.mobile
         section1.list.append(phone)
         
-        var pass = SettingListDataModel()
+        var pass = SettingRowDataModel()
         pass.title = "登录密码"
         pass.detail = "设置密码"
         section1.list.append(pass)

@@ -12,10 +12,10 @@ import HandyJSON
 
 struct SettingSectionModel: HandyJSON {
     var sectionTitle : String! = ""
-    var list : [SettingListDataModel] = [SettingListDataModel]()
+    var list : [SettingRowDataModel] = [SettingRowDataModel]()
 }
 
-struct SettingListDataModel: HandyJSON {
+struct SettingRowDataModel: HandyJSON {
     var title : String!
     var detail : String!
     var icon: String!
