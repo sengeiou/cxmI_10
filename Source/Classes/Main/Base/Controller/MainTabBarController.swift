@@ -22,8 +22,7 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        Thread.sleep(forTimeInterval: 1.0)
-        
+                
         self.view.backgroundColor = ColorFFFFFF
         self.tabBar.backgroundColor = ColorFFFFFF
         self.tabBar.barTintColor = ColorFFFFFF
