@@ -131,7 +131,13 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
         
         var pass = SettingRowDataModel()
         pass.title = "登录密码"
-        pass.detail = "设置密码"
+        if userInfo.seted {
+            pass.detail = "更改密码"
+            pass.pushType = .修改密码
+        }else {
+            pass.detail = "请设置密码"
+            pass.pushType = .设置密码
+        }
         section1.list.append(pass)
         
         dataList.append(section1)

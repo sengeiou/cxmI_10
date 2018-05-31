@@ -43,6 +43,7 @@ struct UserInfoDataModel: HandyJSON {
     var userType : String!
     var totalMoney: String!
     var activityDTOList : [MeListDataModel]!
+    var seted = false
 }
 
 

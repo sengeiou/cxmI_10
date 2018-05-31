@@ -15,7 +15,7 @@ enum SettingType : String {
 
 fileprivate let SettingPasswordCellId = "SettingPasswordCellId"
 
-class SettingPasswordVC: BaseViewController, UITableViewDelegate, UITableViewDataSource{
+class SettingPasswordVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, ValidatePro{
 
     public var settingType : SettingType!
     
@@ -27,7 +27,7 @@ class SettingPasswordVC: BaseViewController, UITableViewDelegate, UITableViewDat
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(self.tableView)
-        
+        self.title = settingType.rawValue
     }
     
     override func viewDidLayoutSubviews() {
@@ -39,7 +39,28 @@ class SettingPasswordVC: BaseViewController, UITableViewDelegate, UITableViewDat
 
     // MARK: - 点击事件
     @objc private func confirmClicked(_ sender: UIButton) {
-        
+        if settingType == .设置 {
+            guard validate(.password, str: self.newTF.text) else {
+                showHUD(message: "请输入6-20位数字和字母组合的密码")
+                return }
+            guard self.newTF.text == self.confirmTF.text else {
+                showHUD(message: "两次输入的密码不一致")
+                return }
+            
+            
+        }else {
+            guard validate(.password, str: self.oldTF.text) else {
+                showHUD(message: "请输入6-20位数字和字母组合的密码")
+                return }
+            guard validate(.password, str: self.newTF.text) else {
+                showHUD(message: "请输入6-20位数字和字母组合的密码")
+                return }
+            guard self.newTF.text == self.confirmTF.text else {
+                showHUD(message: "两次输入的密码不一致")
+                return }
+            
+            
+        }
     }
     
     // MARK: - 网络请求
