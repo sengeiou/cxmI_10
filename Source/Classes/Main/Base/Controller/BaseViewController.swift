@@ -74,6 +74,10 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
             }
         }
     }
+    public func popToHome() {
+        self.navigationController?.popToRootViewController(animated: true)
+        self.navigationController?.tabBarController?.selectedIndex = 0
+    }
     public func popToVCodeLoginViewController() {
         guard self.navigationController?.viewControllers != nil else { return }
         for vc in (self.navigationController?.viewControllers)! {
