@@ -20,7 +20,7 @@ class FootballTeamHeader: UIView, DateProtocol {
             guard matchInfo != nil else { return }
             let time = timeStampToHHmm(matchInfo.matchTime)
             titlelb.text = matchInfo.changci + " " + matchInfo.leagueAddr + " " + time
-            homeName.text = matchInfo.homeTeamAbbr
+            homeName.text = "[s]" + matchInfo.homeTeamAbbr
             visiName.text = matchInfo.visitingTeamAbbr
             homeOdds.text = "主胜" + matchInfo.hOdds
             flatOdds.text = "平" + matchInfo.dOdds

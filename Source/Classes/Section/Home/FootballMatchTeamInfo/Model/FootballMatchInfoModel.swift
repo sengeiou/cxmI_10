@@ -64,6 +64,7 @@ struct TeamScoreInfoModel: HandyJSON {
     var tteamScore : TeamScoreInfo!
     var teamId : String!
     var teamName: String!
+    var rank : String!
 }
 struct MatchAsiasModel: HandyJSON {
     /// 亚盘对应竞彩网id

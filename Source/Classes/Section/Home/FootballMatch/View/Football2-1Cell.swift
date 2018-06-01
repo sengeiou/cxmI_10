@@ -17,8 +17,17 @@ class Football2_1Cell: UITableViewCell , DateProtocol{
     public var playInfoModel: FootballPlayListModel! {
         didSet{
             guard playInfoModel != nil else { return }
-            homeMatch.text = playInfoModel.homeTeamAbbr
-            visitingMatch.text = playInfoModel.visitingTeamAbbr
+            if playInfoModel.homeTeamRank != nil && playInfoModel.homeTeamRank != "" {
+                homeMatch.text = "[\(playInfoModel.homeTeamRank!)]" + playInfoModel.homeTeamAbbr
+            }else {
+                homeMatch.text = playInfoModel.homeTeamAbbr
+            }
+            
+            if playInfoModel.visitingTeamRank != nil && playInfoModel.visitingTeamRank != "" {
+                visitingMatch.text = "[\(playInfoModel.visitingTeamRank!)]" + playInfoModel.visitingTeamAbbr
+            }else {
+                visitingMatch.text = playInfoModel.visitingTeamAbbr
+            }
             
             matchTitle.text = playInfoModel.leagueAddr
             matchTime.text = playInfoModel.changci
@@ -96,13 +105,15 @@ class Football2_1Cell: UITableViewCell , DateProtocol{
             make.top.equalTo(0)
             make.bottom.equalTo(twoOneView.snp.top)
             make.left.equalTo(twoOneView)
+            make.right.equalTo(vsLb.snp.left)
         }
         vsLb.snp.makeConstraints { (make) in
-            make.top.bottom.width.equalTo(homeMatch)
-            make.left.equalTo(homeMatch.snp.right)
+            make.top.bottom.equalTo(homeMatch)
+            make.width.equalTo(50 * defaultScale)
+            make.centerX.equalTo(twoOneView.snp.centerX)
         }
         visitingMatch.snp.makeConstraints { (make) in
-            make.top.bottom.width.equalTo(homeMatch)
+            make.top.bottom.equalTo(homeMatch)
             make.left.equalTo(vsLb.snp.right)
             make.right.equalTo(twoOneView)
         }

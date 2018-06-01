@@ -40,6 +40,7 @@ class FootballPlayListModel:NSObject, HandyJSON {
     var isDan : Bool! = false
     var homeTeamAbbr: String!
     var homeTeamId: String!
+    /// 排名
     var homeTeamRank: String!
     var isHot : Bool!
     var leagueAddr: String!
@@ -55,6 +56,7 @@ class FootballPlayListModel:NSObject, HandyJSON {
     var visitingTeamAbbr: String!
     var visitingTeamId: String!
     var visitingTeamName: String!
+    /// 排名
     var visitingTeamRank: String!
     var matchPlays : [FootballMatchPlay]!
     

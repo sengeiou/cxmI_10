@@ -13,8 +13,19 @@ class TopTitleView: UIView {
     public var teamInfo: FootballPlayListModel! {
         didSet{
             guard teamInfo != nil else { return }
-            homeMatch.text = teamInfo.homeTeamAbbr
-            visitingMatch.text = teamInfo.visitingTeamAbbr
+//            homeMatch.text = teamInfo.homeTeamAbbr
+//            visitingMatch.text = teamInfo.visitingTeamAbbr
+            if teamInfo.homeTeamRank != nil && teamInfo.homeTeamRank != "" {
+                homeMatch.text = "[\(teamInfo.homeTeamRank!)]" + teamInfo.homeTeamAbbr
+            }else {
+                homeMatch.text = teamInfo.homeTeamAbbr
+            }
+            
+            if teamInfo.visitingTeamRank != nil && teamInfo.visitingTeamRank != "" {
+                visitingMatch.text = "[\(teamInfo.visitingTeamRank!)]" + teamInfo.visitingTeamAbbr
+            }else {
+                visitingMatch.text = teamInfo.visitingTeamAbbr
+            }
         }
     }
     
@@ -30,13 +41,15 @@ class TopTitleView: UIView {
         super.layoutSubviews()
         homeMatch.snp.makeConstraints { (make) in
             make.top.bottom.left.equalTo(0)
+            make.right.equalTo(vsLb.snp.left)
         }
         vsLb.snp.makeConstraints { (make) in
-            make.top.bottom.width.equalTo(homeMatch)
-            make.left.equalTo(homeMatch.snp.right)
+            make.width.equalTo(25 * defaultScale)
+            make.top.bottom.equalTo(homeMatch)
+            make.centerX.equalTo(self.snp.centerX)
         }
         visitingMatch.snp.makeConstraints { (make) in
-            make.top.bottom.width.equalTo(homeMatch)
+            make.top.bottom.equalTo(homeMatch)
             make.left.equalTo(vsLb.snp.right)
             make.right.equalTo(0)
         }
