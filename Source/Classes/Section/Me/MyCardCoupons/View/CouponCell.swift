@@ -19,6 +19,7 @@ class CouponCell: UITableViewCell {
             guard couponInfo != nil else { return }
             var moneyColor : UIColor!
             overdue.text = ""
+            useBut.isHidden = true
             switch couponInfo.bonusStatus {
             case "0":
                 // 快过期标志：1-显示 0-隐藏 2- 未生效优惠券
@@ -37,6 +38,7 @@ class CouponCell: UITableViewCell {
                 }
                 moneyColor = ColorE95504
                 overdue.text = couponInfo.leaveTime
+                useBut.isHidden = false
             case "1":
                 moneyColor = Color787878
                 titleLB.textColor = Color505050
@@ -129,10 +131,11 @@ class CouponCell: UITableViewCell {
             make.bottom.equalTo(-17.5)
         }
         useBut.snp.makeConstraints { (make) in
-            make.bottom.equalTo(-17.5)
+            //make.bottom.equalTo(-17.5)
+            make.centerY.equalTo(instructions.snp.centerY)
             make.right.equalTo(-rightSpacing)
             make.width.equalTo(80)
-            make.top.equalTo(timeLB)
+            //make.top.equalTo(timeLB)
         }
     }
     
@@ -172,9 +175,8 @@ class CouponCell: UITableViewCell {
         useBut = UIButton(type: .custom)
         useBut.setTitle("立即使用", for: .normal)
         useBut.contentHorizontalAlignment = .right
-        useBut.contentVerticalAlignment = .center
+        useBut.contentVerticalAlignment = .bottom
         useBut.titleLabel?.font = Font14
-        //useBut.titleLabel?.sizeToFit()
         useBut.setTitleColor(ColorEA5504, for: .normal)
         useBut.addTarget(self, action: #selector(useButClicked(_:)), for: .touchUpInside)
         
