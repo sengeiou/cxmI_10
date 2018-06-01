@@ -15,8 +15,18 @@ class FootballOrderTotalCell: UITableViewCell, DateProtocol {
     public var playInfoModel: FootballPlayListModel! {
         didSet{
             guard playInfoModel != nil else { return }
-            homeMatch.text = playInfoModel.homeTeamAbbr
-            visitingMatch.text = playInfoModel.visitingTeamAbbr
+            if playInfoModel.homeTeamRank != nil && playInfoModel.homeTeamRank != "" {
+                homeMatch.text = "[\(playInfoModel.homeTeamRank!)]" + playInfoModel.homeTeamAbbr
+            }else {
+                homeMatch.text = playInfoModel.homeTeamAbbr
+            }
+            
+            if playInfoModel.visitingTeamRank != nil && playInfoModel.visitingTeamRank != "" {
+                visitingMatch.text = "[\(playInfoModel.visitingTeamRank!)]" + playInfoModel.visitingTeamAbbr
+            }else {
+                visitingMatch.text = playInfoModel.visitingTeamAbbr
+            }
+            
             totalView.teamInfo = playInfoModel
             
             
