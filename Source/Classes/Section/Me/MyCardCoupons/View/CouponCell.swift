@@ -26,14 +26,14 @@ class CouponCell: UITableViewCell {
                     titleLB.textColor = Color505050
                     stateIcon.image = UIImage(named: "Expiresoon")
                     useBut.setTitleColor(ColorEA5504, for: .normal)
-                    //useBut.isUserInteractionEnabled = true
+                    useBut.isUserInteractionEnabled = true
                 }else if couponInfo.soonExprireBz == "2" {
                     stateIcon.image = UIImage(named: "weishengxiao")
                     useBut.setTitleColor(ColorA0A0A0, for: .normal)
-                    //useBut.isUserInteractionEnabled = false
+                    useBut.isUserInteractionEnabled = false
                 }else {
                     useBut.setTitleColor(ColorEA5504, for: .normal)
-                    //useBut.isUserInteractionEnabled = true
+                    useBut.isUserInteractionEnabled = true
                 }
                 moneyColor = ColorE95504
                 overdue.text = couponInfo.leaveTime
@@ -129,10 +129,9 @@ class CouponCell: UITableViewCell {
             make.bottom.equalTo(-17.5)
         }
         useBut.snp.makeConstraints { (make) in
-        
-            make.bottom.equalTo(instructions)
+            make.bottom.equalTo(-17.5)
             make.right.equalTo(-rightSpacing)
-            //make.width.equalTo(100)
+            make.width.equalTo(80)
             make.top.equalTo(timeLB)
         }
     }
@@ -142,6 +141,7 @@ class CouponCell: UITableViewCell {
         self.selectionStyle = .none
         
         bgImageView = UIImageView()
+        bgImageView.isUserInteractionEnabled = true
         bgImageView.image = UIImage(named: "couponBg")
         
         moneyLB = UILabel()
@@ -172,8 +172,9 @@ class CouponCell: UITableViewCell {
         useBut = UIButton(type: .custom)
         useBut.setTitle("立即使用", for: .normal)
         useBut.contentHorizontalAlignment = .right
-        useBut.titleLabel?.font = Font12
-        useBut.titleLabel?.sizeToFit()
+        useBut.contentVerticalAlignment = .center
+        useBut.titleLabel?.font = Font14
+        //useBut.titleLabel?.sizeToFit()
         useBut.setTitleColor(ColorEA5504, for: .normal)
         useBut.addTarget(self, action: #selector(useButClicked(_:)), for: .touchUpInside)
         

@@ -51,7 +51,7 @@ let BankCardIconWidth : CGFloat = 26 * defaultScale
 let BankCardDeleteWidth: CGFloat = 14 * defaultScale
 
 //MARK: - 优惠券
-let CouponCellHeight : CGFloat = 121 * defaultScale
+let CouponCellHeight : CGFloat = 131 * defaultScale
 
 //MARK: - 购彩记录
 let RecordCellHeight : CGFloat = 71 * defaultScale
