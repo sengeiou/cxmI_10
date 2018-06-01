@@ -20,8 +20,20 @@ class FootballTeamHeader: UIView, DateProtocol {
             guard matchInfo != nil else { return }
             let time = timeStampToHHmm(matchInfo.matchTime)
             titlelb.text = matchInfo.changci + " " + matchInfo.leagueAddr + " " + time
-            homeName.text = "[s]" + matchInfo.homeTeamAbbr
-            visiName.text = matchInfo.visitingTeamAbbr
+            
+            
+            if matchInfo.homeTeamRank != nil && matchInfo.homeTeamRank != "" {
+                homeName.text = "[\(matchInfo.homeTeamRank!)]" + matchInfo.homeTeamAbbr
+            }else {
+                homeName.text = matchInfo.homeTeamAbbr
+            }
+            
+            if matchInfo.visitingTeamRank != nil && matchInfo.visitingTeamRank != "" {
+                visiName.text = "[\(matchInfo.visitingTeamRank!)]" + matchInfo.visitingTeamAbbr
+            }else {
+                visiName.text = matchInfo.visitingTeamAbbr
+            }
+            
             homeOdds.text = "主胜" + matchInfo.hOdds
             flatOdds.text = "平" + matchInfo.dOdds
             visiOdds.text = "客胜" + matchInfo.aOdds
