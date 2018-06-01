@@ -572,7 +572,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     private func setRightBut() {
         let but = UIButton(type: .custom)
         but.setTitle("设置", for: .normal)
-        but.titleLabel?.font = Font17
+        but.titleLabel?.font = Font15
         but.setTitleColor(Color787878, for: .normal)
         but.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         but.addTarget(self, action: #selector(setting), for: .touchUpInside)

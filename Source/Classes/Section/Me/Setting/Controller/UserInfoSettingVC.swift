@@ -24,7 +24,7 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.title = "彩小秘 · 个人信息"
         self.view.addSubview(tableView)
         
         self.dataList = getDataList()
