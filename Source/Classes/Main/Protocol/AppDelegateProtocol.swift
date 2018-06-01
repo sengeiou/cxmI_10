@@ -30,6 +30,7 @@ extension AppDelegateProtocol where Self : AppDelegate {
         // 百度统计
         BaiduMobStat.default().start(withAppId: BaiduAppKey)
         BaiduMobStat.default().getTestDeviceId()
+        BaiduMobStat.default().channelId = "c16010"
         
         // 智齿客服
         ZCLibClient.setZCLibUncaughtExceptionHandler() // 错误日志收集

@@ -66,7 +66,7 @@ class CouponViewController: BaseViewController, IndicatorInfoProvider, UITableVi
     
     //MARK: - 点击事件
     func didTipUseButtong(_ cell: CouponCell, couponInfo: CouponInfoModel) {
-        
+        print(couponInfo)
     }
     
     //MARK: - 加载数据

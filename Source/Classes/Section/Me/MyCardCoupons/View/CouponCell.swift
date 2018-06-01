@@ -26,11 +26,14 @@ class CouponCell: UITableViewCell {
                     titleLB.textColor = Color505050
                     stateIcon.image = UIImage(named: "Expiresoon")
                     useBut.setTitleColor(ColorEA5504, for: .normal)
+                    //useBut.isUserInteractionEnabled = true
                 }else if couponInfo.soonExprireBz == "2" {
                     stateIcon.image = UIImage(named: "weishengxiao")
                     useBut.setTitleColor(ColorA0A0A0, for: .normal)
+                    //useBut.isUserInteractionEnabled = false
                 }else {
                     useBut.setTitleColor(ColorEA5504, for: .normal)
+                    //useBut.isUserInteractionEnabled = true
                 }
                 moneyColor = ColorE95504
                 overdue.text = couponInfo.leaveTime
@@ -112,25 +115,25 @@ class CouponCell: UITableViewCell {
         timeLB.snp.makeConstraints { (make) in
             make.height.equalTo(10)
             make.left.equalTo(moneyLB)
-            make.right.equalTo(overdue.snp.left).offset(5)
+            make.right.equalTo(useBut.snp.left).offset(5)
             make.bottom.equalTo(instructions.snp.top).offset(-5)
         }
         instructions.snp.makeConstraints { (make) in
-            make.bottom.equalTo(bgImageView).offset(-17.5)
+            make.bottom.equalTo(overdue.snp.top).offset(-5)
             make.left.right.height.equalTo(timeLB)
+            
         }
         overdue.snp.makeConstraints { (make) in
             //make.bottom.equalTo(instructions)
-            make.top.equalTo(timeLB)
-            make.right.equalTo(-rightSpacing)
-            make.bottom.equalTo(timeLB)
-            make.width.equalTo(100)
+            make.left.right.height.equalTo(timeLB)
+            make.bottom.equalTo(-17.5)
         }
         useBut.snp.makeConstraints { (make) in
+        
             make.bottom.equalTo(instructions)
             make.right.equalTo(-rightSpacing)
             //make.width.equalTo(100)
-            make.top.equalTo(overdue.snp.bottom).offset(5)
+            make.top.equalTo(timeLB)
         }
     }
     
@@ -163,7 +166,7 @@ class CouponCell: UITableViewCell {
         overdue = UILabel()
         overdue.font = Font12
         overdue.textColor = ColorA0A0A0
-        overdue.textAlignment = .right
+        overdue.textAlignment = .left
         overdue.text = "剩余2天到期"
         
         useBut = UIButton(type: .custom)
