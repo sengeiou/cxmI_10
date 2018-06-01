@@ -41,7 +41,7 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
     private var cellHeight : CGFloat = 100
     private var footer : NewsDetailFooter!
     private var webView : WKWebView!
-    private var bagView : UIImageView!
+    private var bagView : UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -128,11 +128,20 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
     }
     
     private func initSubview() {
-        bagView = UIImageView()
-        bagView.image = UIImage(named: "guide1")
+        bagView = UIView()
+        bagView.backgroundColor = ColorFFFFFF
+        let ima = UIImageView()
+        ima.image = UIImage(named: "默认加载")
+        
+        bagView.addSubview(ima)
+        
         
         self.view.addSubview(tableView)
         self.view.addSubview(bagView)
+        
+        ima.snp.makeConstraints { (make) in
+            make.top.left.right.bottom.equalTo(0)
+        }
     }
     
     private func setRightItem() {
