@@ -19,7 +19,7 @@ enum CouponType: String {
     case overdue = "已过期"
 }
 
-class CouponViewController: BaseViewController, IndicatorInfoProvider, UITableViewDelegate, UITableViewDataSource {
+class CouponViewController: BaseViewController, IndicatorInfoProvider, UITableViewDelegate, UITableViewDataSource, CouponCellDelegate {
 
     public var couponType : CouponType = .unUsed {
         didSet{
@@ -62,6 +62,11 @@ class CouponViewController: BaseViewController, IndicatorInfoProvider, UITableVi
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: couponType.rawValue)
+    }
+    
+    //MARK: - 点击事件
+    func didTipUseButtong(_ cell: CouponCell, couponInfo: CouponInfoModel) {
+        
     }
     
     //MARK: - 加载数据
@@ -176,6 +181,7 @@ class CouponViewController: BaseViewController, IndicatorInfoProvider, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CouponCellId, for: indexPath) as! CouponCell
         cell.couponInfo = couponList[indexPath.section]
+        cell.delegate = self
         return cell
     }
     

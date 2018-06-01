@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol CouponCellDelegate {
+    func didTipUseButtong(_ cell : CouponCell, couponInfo: CouponInfoModel) -> Void
+}
+
 class CouponCell: UITableViewCell {
 
     public var couponInfo: CouponInfoModel! {
@@ -21,10 +25,12 @@ class CouponCell: UITableViewCell {
                 if couponInfo.soonExprireBz == "1" {
                     titleLB.textColor = Color505050
                     stateIcon.image = UIImage(named: "Expiresoon")
+                    useBut.setTitleColor(ColorEA5504, for: .normal)
                 }else if couponInfo.soonExprireBz == "2" {
                     stateIcon.image = UIImage(named: "weishengxiao")
+                    useBut.setTitleColor(ColorA0A0A0, for: .normal)
                 }else {
-                    
+                    useBut.setTitleColor(ColorEA5504, for: .normal)
                 }
                 moneyColor = ColorE95504
                 overdue.text = couponInfo.leaveTime
@@ -63,14 +69,17 @@ class CouponCell: UITableViewCell {
         }
     }
     
+    public var delegate : CouponCellDelegate!
+    
     private var bgImageView : UIImageView!
     private var moneyLB : UILabel!
     private var titleLB : UILabel!
     private var timeLB : UILabel!
     private var instructions : UILabel! // 使用说明
     private var stateIcon : UIImageView!
-    private var overdue: UILabel!
-
+    private var overdue: UILabel!       // 快过期时间
+    private var useBut: UIButton!       // 立即使用
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.contentView.backgroundColor = ColorF4F4F4
@@ -111,10 +120,17 @@ class CouponCell: UITableViewCell {
             make.left.right.height.equalTo(timeLB)
         }
         overdue.snp.makeConstraints { (make) in
-            make.bottom.equalTo(instructions)
+            //make.bottom.equalTo(instructions)
             make.top.equalTo(timeLB)
             make.right.equalTo(-rightSpacing)
+            make.bottom.equalTo(timeLB)
             make.width.equalTo(100)
+        }
+        useBut.snp.makeConstraints { (make) in
+            make.bottom.equalTo(instructions)
+            make.right.equalTo(-rightSpacing)
+            //make.width.equalTo(100)
+            make.top.equalTo(overdue.snp.bottom).offset(5)
         }
     }
     
@@ -150,6 +166,14 @@ class CouponCell: UITableViewCell {
         overdue.textAlignment = .right
         overdue.text = "剩余2天到期"
         
+        useBut = UIButton(type: .custom)
+        useBut.setTitle("立即使用", for: .normal)
+        useBut.contentHorizontalAlignment = .right
+        useBut.titleLabel?.font = Font12
+        useBut.titleLabel?.sizeToFit()
+        useBut.setTitleColor(ColorEA5504, for: .normal)
+        useBut.addTarget(self, action: #selector(useButClicked(_:)), for: .touchUpInside)
+        
         self.contentView.addSubview(bgImageView)
         bgImageView.addSubview(moneyLB)
         bgImageView.addSubview(titleLB)
@@ -157,10 +181,14 @@ class CouponCell: UITableViewCell {
         bgImageView.addSubview(instructions)
         bgImageView.addSubview(stateIcon)
         bgImageView.addSubview(overdue)
+        bgImageView.addSubview(useBut)
         
     }
     
-    
+    @objc private func useButClicked(_ sender: UIButton ) {
+        guard delegate != nil else { return }
+        delegate.didTipUseButtong(self, couponInfo: self.couponInfo)
+    }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
