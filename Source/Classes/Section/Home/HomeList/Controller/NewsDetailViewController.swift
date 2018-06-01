@@ -41,7 +41,7 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
     private var cellHeight : CGFloat = 100
     private var footer : NewsDetailFooter!
     private var webView : WKWebView!
-    private var bagView : UIView!
+    private var bagView : UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,7 +102,7 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
         tableView.endUpdates()
 
         UIView.animate(withDuration: 0.5, animations: {
-            self.bagView.backgroundColor = UIColor(patternImage: UIImage(named: "guide1")!)
+            self.bagView.alpha = 0
         }) { (finish) in
             if finish {
                 self.bagView.isHidden = true
@@ -128,8 +128,8 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
     }
     
     private func initSubview() {
-        bagView = UIView()
-        bagView.backgroundColor = UIColor(patternImage: UIImage(named: "guide1")!)
+        bagView = UIImageView()
+        bagView.image = UIImage(named: "guide1")
         
         self.view.addSubview(tableView)
         self.view.addSubview(bagView)
