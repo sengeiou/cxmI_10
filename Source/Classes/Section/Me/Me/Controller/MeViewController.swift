@@ -98,6 +98,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     }
     //MARK: - 点击事件
     @objc private func setting() {
+        guard self.userInfo != nil else { return }
         let setting = UserInfoSettingVC()
         setting.userInfo = self.userInfo
         pushViewController(vc: setting)

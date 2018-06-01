@@ -47,7 +47,7 @@ class SettingPasswordVC: BaseViewController, UITableViewDelegate, UITableViewDat
                 showHUD(message: "两次输入的密码不一致")
                 return }
             
-            
+            setLoginPassRequest("1", oldPass: nil, newPass: self.newTF.text!)
         }else {
             guard validate(.password, str: self.oldTF.text) else {
                 showHUD(message: "请输入6-20位数字和字母组合的密码")
@@ -59,12 +59,41 @@ class SettingPasswordVC: BaseViewController, UITableViewDelegate, UITableViewDat
                 showHUD(message: "两次输入的密码不一致")
                 return }
             
+            setLoginPassRequest("0", oldPass: self.oldTF.text!, newPass: self.newTF.text!)
             
         }
     }
     
     // MARK: - 网络请求
-    
+    private func setLoginPassRequest(_ type: String, oldPass: String?, newPass: String) {
+        weak var weakSelf = self
+        _ = userProvider.rx.request(.setLoginPass(oldPass: oldPass, newPass: newPass, type: type))
+            .asObservable()
+            .mapBaseObject(type: DataModel.self)
+            .subscribe(onNext: { (data) in
+                weakSelf?.showHUD(message: data.msg)
+            }, onError: { (error) in
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        weakSelf?.removeUserData()
+                        let login = VCodeLoginViewController()
+                        weakSelf?.pushViewController(vc: login)
+                        
+                    default : break
+                    }
+                    
+                    if 300000...310000 ~= code {
+                        print(code)
+                        self.showHUD(message: msg!)
+                    }
+                    
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil )
+    }
     
     //MARK: - 懒加载
     lazy var tableView : UITableView = {

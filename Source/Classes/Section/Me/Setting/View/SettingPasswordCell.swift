@@ -11,7 +11,7 @@ import UIKit
 class SettingPasswordCell: UITableViewCell {
 
     public var title : UILabel!
-    public var textField : UITextField!
+    public var textField : CustomTextField!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -25,7 +25,8 @@ class SettingPasswordCell: UITableViewCell {
         title.textColor = Color787878
         title.textAlignment = .left
         
-        textField = UITextField()
+        textField = CustomTextField()
+        textField.style = .password
         textField.font = Font13
         
         self.contentView.addSubview(title)
@@ -38,7 +39,7 @@ class SettingPasswordCell: UITableViewCell {
         }
         textField.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(title)
-            make.right.equalTo(-16 * defaultScale)
+            make.right.equalTo(0)
             make.left.equalTo(title.snp.right).offset(10)
         }
     }

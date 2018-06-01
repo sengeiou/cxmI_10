@@ -60,6 +60,8 @@ enum MeNetAPIManager {
     case queryUserNotice
     /// 更新未读消息提示  type: 1我的卡券，2消息中心
     case updateUnReadNotic(type: String)
+    /// 设置用户登录密码、修改用户登录密码
+    case setLoginPass(oldPass: String?, newPass: String, type : String)
 }
 
 extension MeNetAPIManager : TargetType {
@@ -130,6 +132,8 @@ extension MeNetAPIManager : TargetType {
             return "/member/user/queryUserNotice"
         case .updateUnReadNotic:
             return "/member/user/updateUnReadNotice"
+        case .setLoginPass:
+            return "/member/user/setLoginPass"
         }
     }
     
@@ -204,6 +208,11 @@ extension MeNetAPIManager : TargetType {
             dic["type"] = type
         case .queryUserNotice:
             dic["str"] = "d14fs54df4sf韩笑孟宪征"
+        case .setLoginPass(let oldPass, let newPass, let type):
+            dic["oldLoginPass"] = oldPass
+            dic["userLoginPass"] = newPass
+            dic["type"] = type
+            
         default:
             return .requestPlain
         }
