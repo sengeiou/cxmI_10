@@ -26,14 +26,14 @@ extension RouterPro {
             break
         case .网页:
             let web = ActivityViewController()
-//            if urlStr.contains("?") {
-//                web.urlStr = urlStr + "&cfrom=app"
-//            }else {
-//                web.urlStr = urlStr + "?cfrom=app"
-//            }
+            if urlStr.contains("?") {
+                web.urlStr = urlStr + "&cfrom=app"
+            }else {
+                web.urlStr = urlStr + "?cfrom=app"
+            }
             
             //web.urlStr = "http://192.168.31.205:8080/activity/discount?cxmxc=scm&usinfo=1&cmshare=1&from=app&showtitle=1"
-            web.urlStr = "http://192.168.31.232:8080/activity/tuiguang?cxmxc=scm&type=1&usinfo=1&showtitle=1"
+            //web.urlStr = "http://192.168.31.232:8080/activity/tuiguang?cxmxc=scm&type=1&usinfo=1&showtitle=1"
             pushViewController(web, from: vc)
             break
         case .浏览器:
