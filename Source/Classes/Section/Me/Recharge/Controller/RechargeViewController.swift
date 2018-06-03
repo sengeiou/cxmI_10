@@ -51,8 +51,7 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
     func didTipShowDetail(vc: ActivityRechargeResultVC) {
         vc.backPopVC()
         
-        let card = CouponViewController()
-        pushViewController(vc: card)
+        pushPagerView(pagerType: .coupon)
     }
     func didTipReceive(vc: ActivityRechargeCouponVC) {
         vc.backPopVC()
@@ -194,25 +193,29 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
                 case "0":
                     self.canPayment = true
                     self.timer.invalidate()
-                    self.showHUD(message: data.msg)
+                    
                     self.dismissProgressHud()
                     
                     guard self.paymentMethodModel != nil else { return }
                     
-                    if self.paymentMethodModel.rechargeUserDTO != nil {
-                        if self.paymentMethodModel.rechargeUserDTO.oldUserBz == "0" { // 新用户
-                            let activity = ActivityRechargeResultVC()
-                            activity.delegate = self
-                            activity.payLogId = self.paymentResult.payLogId
-                            self.present(activity)
-                        }else if self.paymentMethodModel.rechargeUserDTO.oldUserBz == "1" { // 老用户
-                            let activity = ActivityRechargeCouponVC()
-                            activity.delegate = self
-                            activity.payLogId = self.paymentResult.payLogId
-                            self.present(activity)
-                        }
-                    }else {
+                    /// 是否有充值活动
+                    guard self.paymentMethodModel.isHaveRechargeAct else {
+                        self.showHUD(message: data.msg)
                         self.popViewController()
+                        return
+                    }
+                    
+                    guard self.paymentMethodModel.rechargeUserDTO != nil else { return }
+                    if self.paymentMethodModel.rechargeUserDTO.oldUserBz == "0" { // 新用户
+                        let activity = ActivityRechargeResultVC()
+                        activity.delegate = self
+                        activity.payLogId = self.paymentResult.payLogId
+                        self.present(activity)
+                    }else if self.paymentMethodModel.rechargeUserDTO.oldUserBz == "1" { // 老用户
+                        let activity = ActivityRechargeCouponVC()
+                        activity.delegate = self
+                        activity.payLogId = self.paymentResult.payLogId
+                        self.present(activity)
                     }
                     
                 case "304035":

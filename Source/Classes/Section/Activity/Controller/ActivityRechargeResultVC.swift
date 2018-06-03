@@ -25,7 +25,12 @@ class ActivityRechargeResultVC: BasePopViewController {
             detailLb.attributedText = amountAtt
         }
     }
-    public var payLogId : String!
+    public var payLogId : String! {
+        didSet{
+            guard payLogId != nil else { return }
+            receiveRechargeBonusRequest()
+        }
+    }
     public var delegate : ActivityRechargeResultVCDelegate!
     
     private var icon : UIImageView!
@@ -37,7 +42,7 @@ class ActivityRechargeResultVC: BasePopViewController {
         super.viewDidLoad()
         self.popStyle = .fromCenter
         initSubview()
-       
+        
     }
 
     // MARK: - 点击事件
@@ -52,7 +57,6 @@ class ActivityRechargeResultVC: BasePopViewController {
     // MARK: - 网络请求
     private func receiveRechargeBonusRequest() {
         guard self.payLogId != nil else { return }
-        
         
         _ = activityProvider.rx.request(.receiveRechargeBonus(payLogId: self.payLogId))
             .asObservable()
