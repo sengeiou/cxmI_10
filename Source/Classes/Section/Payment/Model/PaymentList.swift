@@ -40,6 +40,6 @@ struct RechargeUserInfo: HandyJSON {
 }
 
 struct RechargeDonationPrice: HandyJSON {
-    var donationAmount: String!
-    var minRechargeAmount: String!
+    var donationAmount: Double!
+    var minRechargeAmount: Double!
 }

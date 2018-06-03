@@ -19,18 +19,26 @@ fileprivate let textfieldHeight : CGFloat = 36
 fileprivate let cardHeight : CGFloat = 36
 fileprivate let topSpacing : CGFloat = 17
 
+protocol RechargeCardCellDelegate {
+    func didSelectedCard(cell : RechargeCardCell, amount: String) -> Void
+}
+
 class RechargeCardCell: UITableViewCell {
 
-    //MARK: 点击事件
-    @objc private func cartButClicked(_ sender: UIButton) {
-        self.textfield.text = "\(sender.tag)"
-        TongJi.log(.充值固定金额, label: "充值固定金额")
-    }
+   
     
     //MARK: - 属性
+    public var giveAmount : String! {
+        didSet{
+            guard giveAmount != nil else { return }
+            activityMoney.text = "最高可送\(giveAmount!)元优惠券"
+        }
+    }
+    public var delegate :RechargeCardCellDelegate!
+    
     private var title : UILabel! //
     public var textfield : CustomTextField!
-    private var activityImageView : UIImageView!
+    public var activityImageView : UIImageView!
     private var activityMoney : UILabel!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -38,6 +46,14 @@ class RechargeCardCell: UITableViewCell {
         
         initSubview()
     }
+    //MARK: 点击事件
+    @objc private func cartButClicked(_ sender: UIButton) {
+        guard delegate != nil else { return }
+        delegate.didSelectedCard(cell: self, amount: "\(sender.tag)")
+        TongJi.log(.充值固定金额, label: "充值固定金额")
+    }
+    
+    
     
     private func initSubview() {
         self.selectionStyle = .none
@@ -50,12 +66,13 @@ class RechargeCardCell: UITableViewCell {
         
         activityImageView = UIImageView()
         activityImageView.image = UIImage(named: "Label")
+        activityImageView.isHidden = true
         
         activityMoney = UILabel()
         activityMoney.font = Font12
         activityMoney.textColor = ColorFFFFFF
         activityMoney.textAlignment = .center
-        activityMoney.text = "送10元优惠券"
+//        activityMoney.text = "送10元优惠券"
         
         
         textfield = CustomTextField()
@@ -118,7 +135,7 @@ class RechargeCardCell: UITableViewCell {
             make.bottom.equalTo(textfield.snp.top).offset(-4)
             make.height.equalTo(30)
             make.right.equalTo(textfield)
-            make.width.equalTo(100)
+            make.width.equalTo(130)
         }
         activityMoney.snp.makeConstraints { (make) in
             make.top.left.right.equalTo(0)

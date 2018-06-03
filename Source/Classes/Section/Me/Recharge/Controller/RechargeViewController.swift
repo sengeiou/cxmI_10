@@ -14,7 +14,7 @@ fileprivate let RechargeCardCellIdentifier = "RechargeCardCellIdentifier"
 fileprivate let RechargeTitleCellIdentifier = "RechargeTitleCellIdentifier"
 fileprivate let RechargePaymentTitleCellId = "RechargePaymentTitleCellId"
 
-class RechargeViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, RechargeFooterViewDelegate, UITextFieldDelegate, ValidatePro, ActivityRechargeResultVCDelegate, ActivityRechargeCouponVCDelegate {
+class RechargeViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, RechargeFooterViewDelegate, UITextFieldDelegate, ValidatePro, ActivityRechargeResultVCDelegate, ActivityRechargeCouponVCDelegate, RechargeCardCellDelegate {
     
     public var userInfo  : UserInfoDataModel!
     
@@ -59,7 +59,10 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
         activity.rechargeAmount = amount
         self.present(activity)
     }
-    
+    func didSelectedCard(cell: RechargeCardCell, amount: String) {
+        self.textfield.text = amount
+        changeActivityAmount(amount: amount)
+    }
     @objc private func startPollingTimer() {
         
         if canPayment == false {
@@ -106,7 +109,43 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
         if let tex = textField as? CustomTextField {
             tex.changeBorderColor(string)
         }
+        
+        guard self.paymentMethodModel.isHaveRechargeAct else { return true }
+        guard var text = self.textfield.text else { return true }
+        if range.location <= text.count && string == "" {
+            text.removeLast()
+            self.changeActivityAmount(amount: text + string)
+        }else {
+            self.changeActivityAmount(amount: text + string)
+        }
+        
         return true
+    }
+
+    private func changeActivityAmount (amount : String) {
+        guard let rechargeUser = self.paymentMethodModel.rechargeUserDTO else { return }
+        guard let list = rechargeUser.donationPriceList else { return }
+        var i = 0
+        for price in list {
+            
+            if i != 0 {
+                if let amount = Double(amount) {
+                    if amount < price.minRechargeAmount! && amount >= list[i - 1].minRechargeAmount {
+                        self.cardCell.activityImageView.isHidden = false
+                        self.cardCell.giveAmount = "\(price.donationAmount!)"
+                    }
+                }
+            }else {
+                if let amount = Double(amount) {
+                    if amount < price.minRechargeAmount {
+                        self.cardCell.activityImageView.isHidden = true
+                        self.cardCell.giveAmount = nil
+                        break
+                    }
+                }
+            }
+            i += 1
+        }
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -422,6 +461,7 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
             return cell
         case 1:
             let cell = tableview.dequeueReusableCell(withIdentifier: RechargeCardCellIdentifier, for: indexPath) as! RechargeCardCell
+            cell.delegate = self
             self.cardCell = cell
             cell.textfield.delegate = self
             self.textfield = cell.textfield
