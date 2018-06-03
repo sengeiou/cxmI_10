@@ -9,11 +9,12 @@
 import UIKit
 
 protocol ActivityRechargeCouponVCDelegate {
-    func didTipReceive(vc: ActivityRechargeCouponVC) -> Void
+    func didTipReceive(vc: ActivityRechargeCouponVC, amount : String) -> Void
 }
 
 class ActivityRechargeCouponVC: BasePopViewController {
 
+    public var rechargeAmount : String!
     public var payLogId : String!
     public var delegate : ActivityRechargeCouponVCDelegate!
     
@@ -28,7 +29,8 @@ class ActivityRechargeCouponVC: BasePopViewController {
     // MARK: - 点击事件
     @objc private func receive(_ sender : UIButton) {
         guard delegate != nil else { return }
-        delegate.didTipReceive(vc: self)
+        guard self.rechargeAmount != nil else { return }
+        delegate.didTipReceive(vc: self, amount: self.rechargeAmount)
     }
     
     private func initSubview() {

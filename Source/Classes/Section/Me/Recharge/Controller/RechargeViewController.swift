@@ -16,8 +16,6 @@ fileprivate let RechargePaymentTitleCellId = "RechargePaymentTitleCellId"
 
 class RechargeViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, RechargeFooterViewDelegate, UITextFieldDelegate, ValidatePro, ActivityRechargeResultVCDelegate, ActivityRechargeCouponVCDelegate {
     
-    
-    
     public var userInfo  : UserInfoDataModel!
     
     private var maxTimes = QueryMaxTimes
@@ -53,12 +51,12 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
         
         pushPagerView(pagerType: .coupon)
     }
-    func didTipReceive(vc: ActivityRechargeCouponVC) {
+    func didTipReceive(vc: ActivityRechargeCouponVC, amount: String) {
         vc.backPopVC()
         
         let activity = ActivityRechargeResultVC()
         activity.delegate = self
-        activity.payLogId = self.paymentResult.payLogId
+        activity.rechargeAmount = amount
         self.present(activity)
     }
     
@@ -194,30 +192,17 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
                     self.canPayment = true
                     self.timer.invalidate()
                     
-                    self.dismissProgressHud()
-                    
                     guard self.paymentMethodModel != nil else { return }
                     
                     /// 是否有充值活动
                     guard self.paymentMethodModel.isHaveRechargeAct else {
+                        self.dismissProgressHud()
                         self.showHUD(message: data.msg)
                         self.popViewController()
                         return
                     }
                     
-                    guard self.paymentMethodModel.rechargeUserDTO != nil else { return }
-                    if self.paymentMethodModel.rechargeUserDTO.oldUserBz == "0" { // 新用户
-                        let activity = ActivityRechargeResultVC()
-                        activity.delegate = self
-                        activity.payLogId = self.paymentResult.payLogId
-                        self.present(activity)
-                    }else if self.paymentMethodModel.rechargeUserDTO.oldUserBz == "1" { // 老用户
-                        let activity = ActivityRechargeCouponVC()
-                        activity.delegate = self
-                        activity.payLogId = self.paymentResult.payLogId
-                        self.present(activity)
-                    }
-                    
+                    self.receiveRechargeBonusRequest()
                 case "304035":
                     self.canPayment = true
                     //self.showHUD(message: data.msg)
@@ -235,6 +220,7 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
                 }
                 
             }, onError: { (error) in
+                self.dismissProgressHud()
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):
@@ -308,6 +294,51 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
                         self.showHUD(message: msg!)
                     }
                     print("\(code)   \(msg!)")
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil )
+    }
+    
+    private func receiveRechargeBonusRequest() {
+        guard self.paymentResult.payLogId != nil else { return }
+        
+        _ = activityProvider.rx.request(.receiveRechargeBonus(payLogId: self.paymentResult.payLogId))
+            .asObservable()
+            .mapObject(type: ReceiveRechargeBonusModel.self)
+            .subscribe(onNext: { (data) in
+                self.dismissProgressHud()
+                guard self.paymentMethodModel.rechargeUserDTO != nil else { return }
+                if self.paymentMethodModel.rechargeUserDTO.oldUserBz == "0" { // 新用户
+                    let activity = ActivityRechargeResultVC()
+                    activity.delegate = self
+                    activity.rechargeAmount = data.donationPrice
+                    self.present(activity)
+                }else if self.paymentMethodModel.rechargeUserDTO.oldUserBz == "1" { // 老用户
+                    let activity = ActivityRechargeCouponVC()
+                    activity.delegate = self
+                    activity.rechargeAmount = data.donationPrice
+                    self.present(activity)
+                }
+                
+                self.rechargeAmount = data.donationPrice
+            }, onError: { (error) in
+                self.dismissProgressHud()
+                print(error)
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        break
+                        
+                    default : break
+                    }
+                    
+                    if 300000...310000 ~= code {
+                        print(code)
+                        self.showHUD(message: msg!)
+                    }
+                    
                 default: break
                 }
             }, onCompleted: nil , onDisposed: nil )

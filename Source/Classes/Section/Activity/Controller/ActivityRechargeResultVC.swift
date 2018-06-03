@@ -25,10 +25,11 @@ class ActivityRechargeResultVC: BasePopViewController {
             detailLb.attributedText = amountAtt
         }
     }
+    
     public var payLogId : String! {
         didSet{
             guard payLogId != nil else { return }
-            receiveRechargeBonusRequest()
+            
         }
     }
     public var delegate : ActivityRechargeResultVCDelegate!
