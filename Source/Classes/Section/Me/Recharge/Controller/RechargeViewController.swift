@@ -110,6 +110,7 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
             tex.changeBorderColor(string)
         }
         
+        guard self.paymentMethodModel != nil else { return true }
         guard self.paymentMethodModel.isHaveRechargeAct else { return true }
         guard var text = self.textfield.text else { return true }
         if range.location <= text.count && string == "" {
@@ -124,6 +125,8 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
 
     // 充值送  提示框 逻辑
     private func changeActivityAmount (amount : String) {
+        guard self.paymentMethodModel != nil else { return }
+        guard self.paymentMethodModel.isHaveRechargeAct else { return }
         guard let rechargeUser = self.paymentMethodModel.rechargeUserDTO else { return }
         guard let list = rechargeUser.donationPriceList else { return }
         var i = 0
