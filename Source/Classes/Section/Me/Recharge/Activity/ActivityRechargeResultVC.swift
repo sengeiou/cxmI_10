@@ -8,21 +8,29 @@
 
 import UIKit
 
+protocol ActivityRechargeResultVCDelegate {
+    func didTipShowDetail(vc: ActivityRechargeResultVC) -> Void
+}
+
 class ActivityRechargeResultVC: BasePopViewController {
 
     public var rechargeAmount : String! {
         didSet{
             let amountAtt = NSMutableAttributedString(string: "恭喜!\n", attributes: [NSAttributedStringKey.font: Font36, NSAttributedStringKey.foregroundColor : ColorF6AD41])
             let title = NSAttributedString(string: "彩小秘恭喜您通过充值活动\n", attributes: [NSAttributedStringKey.font: Font16, NSAttributedStringKey.foregroundColor : ColorFFFFFF])
-            let amount = NSMutableAttributedString(string: "获得\(rechargeAmount!)元彩金", attributes: [NSAttributedStringKey.font: Font36, NSAttributedStringKey.foregroundColor : ColorF6AD41])
+            let amount = NSMutableAttributedString(string: "获得\(rechargeAmount!)元彩金", attributes: [NSAttributedStringKey.font: Font25, NSAttributedStringKey.foregroundColor : ColorF6AD41])
             amountAtt.append(title)
             amountAtt.append(amount)
             detailLb.attributedText = amountAtt
         }
     }
     
+    public var delegate : ActivityRechargeResultVCDelegate!
+    
     private var icon : UIImageView!
     private var detailLb : UILabel!
+    private var closeBut: UIButton!
+    private var detailBut: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +39,15 @@ class ActivityRechargeResultVC: BasePopViewController {
        
     }
 
+    // MARK: - 点击事件
+    @objc private func closeClicked(_ sender : UIButton) {
+        self.backPopVC()
+    }
+    @objc private func detailButClicked(_ sender : UIButton) {
+        guard delegate != nil else { return }
+        delegate.didTipShowDetail(vc: self)
+    }
+    
     private func initSubview() {
         
         let bagView = UIView()
@@ -44,9 +61,24 @@ class ActivityRechargeResultVC: BasePopViewController {
         detailLb.textAlignment = .center
         detailLb.font = Font14
         
+        closeBut = UIButton(type: .custom)
+        closeBut.setTitle("关闭", for: .normal)
+        closeBut.setTitleColor(ColorEA5504, for: .normal)
+        closeBut.backgroundColor = ColorF6AD41
+        closeBut.addTarget(self, action: #selector(closeClicked(_:)), for: .touchUpInside)
+        
+        detailBut = UIButton(type: .custom)
+        detailBut.setTitle("去查看", for: .normal)
+        detailBut.setTitleColor(ColorFFFFFF, for: .normal)
+        detailBut.backgroundColor = ColorEA5504
+        detailBut.addTarget(self, action: #selector(detailButClicked(_:)), for: .touchUpInside)
+        
+        
         self.view.addSubview(bagView)
         bagView.addSubview(icon)
         bagView.addSubview(detailLb)
+        bagView.addSubview(closeBut)
+        bagView.addSubview(detailBut)
         
         bagView.snp.makeConstraints { (make) in
             make.top.left.right.bottom.equalTo(0)
@@ -59,7 +91,17 @@ class ActivityRechargeResultVC: BasePopViewController {
         detailLb.snp.makeConstraints { (make) in
             make.top.equalTo(icon.snp.bottom).offset(10)
             make.left.right.equalTo(0)
-            
+            make.height.equalTo(100)
+        }
+        closeBut.snp.makeConstraints { (make) in
+            make.top.equalTo(detailLb.snp.bottom).offset(10)
+            make.width.equalTo(100)
+            make.height.equalTo(30)
+            make.right.equalTo(self.view.snp.centerX).offset(-10)
+        }
+        detailBut.snp.makeConstraints { (make) in
+            make.top.width.height.equalTo(closeBut)
+            make.left.equalTo(self.view.snp.centerX).offset(10)
         }
         
     }
