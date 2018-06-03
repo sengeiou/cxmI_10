@@ -129,26 +129,61 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
         guard self.paymentMethodModel.isHaveRechargeAct else { return }
         guard let rechargeUser = self.paymentMethodModel.rechargeUserDTO else { return }
         guard let list = rechargeUser.donationPriceList else { return }
-        var i = 0
-        for price in list {
-            
-            if i != 0 {
-                if let amount = Double(amount) {
-                    if amount < price.minRechargeAmount! && amount >= list[i - 1].minRechargeAmount {
-                        self.cardCell.activityImageView.isHidden = false
-                        self.cardCell.giveAmount = "\(price.donationAmount!)"
+        
+        if rechargeUser.oldUserBz == "0" { // 新用户
+            var i = 0
+            for price in list {
+                
+                if i == list.count - 1 {
+                    if let amount = Double(amount) {
+                        if amount >= price.minRechargeAmount! {
+                            self.cardCell.activityImageView.isHidden = false
+                            self.cardCell.giveAmount = "\(price.donationAmount!)"
+                        }else if amount < price.minRechargeAmount && amount >= list[i - 1].minRechargeAmount  {
+                            self.cardCell.activityImageView.isHidden = false
+                            self.cardCell.giveAmount = "\(amount)"
+                        }
+                    }
+                }else if i != 0 {
+                    if let amount = Double(amount) {
+                        if amount < price.minRechargeAmount! && amount >= list[i - 1].minRechargeAmount {
+                            self.cardCell.activityImageView.isHidden = false
+                            self.cardCell.giveAmount = "\(price.donationAmount!)"
+                        }
+                    }
+                }else {
+                    if let amount = Double(amount) {
+                        if amount < price.minRechargeAmount {
+                            self.cardCell.activityImageView.isHidden = true
+                            self.cardCell.giveAmount = nil
+                            break
+                        }
                     }
                 }
-            }else {
-                if let amount = Double(amount) {
-                    if amount < price.minRechargeAmount {
-                        self.cardCell.activityImageView.isHidden = true
-                        self.cardCell.giveAmount = nil
-                        break
-                    }
-                }
+                i += 1
             }
-            i += 1
+        }else if rechargeUser.oldUserBz == "1" {
+            var i = 0
+            for price in list {
+                
+                if i != 0 {
+                    if let amount = Double(amount) {
+                        if amount < price.minRechargeAmount! && amount >= list[i - 1].minRechargeAmount {
+                            self.cardCell.activityImageView.isHidden = false
+                            self.cardCell.giveAmount = "\(price.donationAmount!)"
+                        }
+                    }
+                }else {
+                    if let amount = Double(amount) {
+                        if amount < price.minRechargeAmount {
+                            self.cardCell.activityImageView.isHidden = true
+                            self.cardCell.giveAmount = nil
+                            break
+                        }
+                    }
+                }
+                i += 1
+            }
         }
     }
     
