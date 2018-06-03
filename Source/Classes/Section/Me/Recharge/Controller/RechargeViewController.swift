@@ -52,7 +52,7 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
         pushPagerView(pagerType: .coupon)
     }
     func didTipReceive(vc: ActivityRechargeCouponVC, amount: String) {
-        vc.backPopVC()
+        vc.dismiss(animated: true , completion: nil)
         
         let activity = ActivityRechargeResultVC()
         activity.delegate = self
@@ -299,6 +299,7 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
             }, onCompleted: nil , onDisposed: nil )
     }
     
+    // 充值送红包活动
     private func receiveRechargeBonusRequest() {
         guard self.paymentResult.payLogId != nil else { return }
         
@@ -319,8 +320,6 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
                     activity.rechargeAmount = data.donationPrice
                     self.present(activity)
                 }
-                
-                self.rechargeAmount = data.donationPrice
             }, onError: { (error) in
                 self.dismissProgressHud()
                 print(error)

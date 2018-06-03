@@ -50,6 +50,11 @@ class ActivityRechargeCouponVC: BasePopViewController {
         }
         
     }
+    
+    override func backPopVC() {
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
