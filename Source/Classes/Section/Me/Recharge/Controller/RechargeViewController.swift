@@ -14,7 +14,7 @@ fileprivate let RechargeCardCellIdentifier = "RechargeCardCellIdentifier"
 fileprivate let RechargeTitleCellIdentifier = "RechargeTitleCellIdentifier"
 fileprivate let RechargePaymentTitleCellId = "RechargePaymentTitleCellId"
 
-class RechargeViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, RechargeFooterViewDelegate, UITextFieldDelegate, ValidatePro {
+class RechargeViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, RechargeFooterViewDelegate, UITextFieldDelegate, ValidatePro, ActivityRechargeResultVCDelegate, ActivityRechargeCouponVCDelegate {
     
     
     
@@ -30,6 +30,7 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
     private var textfield : UITextField!
     private var paymentAllList : [PaymentList]!
     private var paymentModel : PaymentList!
+    private var paymentMethodModel : AllPaymentModel!
     private var paymentResult : PaymentResultModel!
     private var canPayment : Bool = true
     private var timer : Timer!
@@ -47,6 +48,21 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     //MARK: - 点击事件
+    func didTipShowDetail(vc: ActivityRechargeResultVC) {
+        vc.backPopVC()
+        
+        let card = CouponViewController()
+        pushViewController(vc: card)
+    }
+    func didTipReceive(vc: ActivityRechargeCouponVC) {
+        vc.backPopVC()
+        
+        let activity = ActivityRechargeResultVC()
+        activity.delegate = self
+        activity.payLogId = self.paymentResult.payLogId
+        self.present(activity)
+    }
+    
     @objc private func startPollingTimer() {
         
         if canPayment == false {
@@ -180,8 +196,25 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
                     self.timer.invalidate()
                     self.showHUD(message: data.msg)
                     self.dismissProgressHud()
-                    //self.userInfoRequest()
-                    self.popViewController()
+                    
+                    guard self.paymentMethodModel != nil else { return }
+                    
+                    if self.paymentMethodModel.rechargeUserDTO != nil {
+                        if self.paymentMethodModel.rechargeUserDTO.oldUserBz == "0" { // 新用户
+                            let activity = ActivityRechargeResultVC()
+                            activity.delegate = self
+                            activity.payLogId = self.paymentResult.payLogId
+                            self.present(activity)
+                        }else if self.paymentMethodModel.rechargeUserDTO.oldUserBz == "1" { // 老用户
+                            let activity = ActivityRechargeCouponVC()
+                            activity.delegate = self
+                            activity.payLogId = self.paymentResult.payLogId
+                            self.present(activity)
+                        }
+                    }else {
+                        self.popViewController()
+                    }
+                    
                 case "304035":
                     self.canPayment = true
                     //self.showHUD(message: data.msg)
@@ -247,12 +280,13 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
     private func allPaymentRequest() {
         self.dismissProgressHud()
         weak var weakSelf = self
-        _ = paymentProvider.rx.request(.paymentAll)
+        _ = paymentProvider.rx.request(.allPayment)
             .asObservable()
-            .mapArray(type: PaymentList.self)
+            .mapObject(type: AllPaymentModel.self)
             .subscribe(onNext: { (data) in
                 self.dismissProgressHud()
-                weakSelf?.paymentAllList = data
+                weakSelf?.paymentMethodModel = data
+                weakSelf?.paymentAllList = data.paymentDTOList
                 weakSelf?.tableview.reloadData()
             }, onError: { (error) in
                 self.dismissProgressHud()

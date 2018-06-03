@@ -24,7 +24,7 @@ class ActivityRechargeResultVC: BasePopViewController {
             detailLb.attributedText = amountAtt
         }
     }
-    
+    public var payLogId : String!
     public var delegate : ActivityRechargeResultVCDelegate!
     
     private var icon : UIImageView!
@@ -46,6 +46,38 @@ class ActivityRechargeResultVC: BasePopViewController {
     @objc private func detailButClicked(_ sender : UIButton) {
         guard delegate != nil else { return }
         delegate.didTipShowDetail(vc: self)
+    }
+    
+    // MARK: - 网络请求
+    private func receiveRechargeBonusRequest() {
+        guard self.payLogId != nil else { return }
+        weak var weakSelf = self
+        
+        _ = activityProvider.rx.request(.receiveRechargeBonus(payLogId: self.payLogId))
+            .asObservable()
+            .mapObject(type: ReceiveRechargeBonusModel.self)
+            .subscribe(onNext: { (data) in
+                
+            }, onError: { (error) in
+                print(error)
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        break
+                        
+                    default : break
+                    }
+                    
+                    if 300000...310000 ~= code {
+                        print(code)
+                        self.showHUD(message: msg!)
+                    }
+                    
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil )
     }
     
     private func initSubview() {

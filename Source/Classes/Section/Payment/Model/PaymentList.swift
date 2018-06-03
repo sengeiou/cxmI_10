@@ -10,6 +10,15 @@ import Foundation
 
 import HandyJSON
 
+struct AllPaymentModel: HandyJSON {
+    /// 0-没有充值活动 1-有充值活动
+    var isHaveRechargeAct : Bool!
+    /// 支付方式
+    var paymentDTOList: [PaymentList]!
+    /// 充值用户具体信息
+    var rechargeUserDTO: RechargeUserInfo!
+}
+
 struct PaymentList : HandyJSON {
     var isEnable: Bool!
     var payCode: String!
@@ -22,4 +31,15 @@ struct PaymentList : HandyJSON {
     var paySort: String!
     var payTitle: String!
     var payType: String!
+}
+
+struct RechargeUserInfo: HandyJSON {
+    var donationPriceList : [RechargeDonationPrice]!
+    /// 0-未充过值，即新用户 1- 充过值，即老用户
+    var oldUserBz: String!
+}
+
+struct RechargeDonationPrice: HandyJSON {
+    var donationAmount: String!
+    var minRechargeAmount: String!
 }

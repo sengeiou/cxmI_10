@@ -8,8 +8,15 @@
 
 import UIKit
 
+protocol ActivityRechargeCouponVCDelegate {
+    func didTipReceive(vc: ActivityRechargeCouponVC) -> Void
+}
+
 class ActivityRechargeCouponVC: BasePopViewController {
 
+    public var payLogId : String!
+    public var delegate : ActivityRechargeCouponVCDelegate!
+    
     private var couponView : UIButton!
     
     override func viewDidLoad() {
@@ -18,11 +25,19 @@ class ActivityRechargeCouponVC: BasePopViewController {
         initSubview()
     }
 
+    // MARK: - 点击事件
+    @objc private func receive(_ sender : UIButton) {
+        guard delegate != nil else { return }
+        delegate.didTipReceive(vc: self)
+    }
+    
     private func initSubview() {
         self.viewHeight = 280
         
         couponView = UIButton(type: .custom)
         couponView.setBackgroundImage(UIImage(named: "activityBonus"), for: .normal)
+        couponView.addTarget(self, action: #selector(receive(_:)), for: .touchUpInside)
+        
         
         self.pushBgView.backgroundColor = UIColor.clear
         self.pushBgView.addSubview(couponView)
