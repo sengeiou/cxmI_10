@@ -31,9 +31,17 @@ class RechargeCardCell: UITableViewCell {
     public var giveAmount : String! {
         didSet{
             guard giveAmount != nil else { return }
-            activityMoney.text = "最高可送\(giveAmount!)元优惠券"
+            guard isNewUser != nil else { return }
+            
+            if isNewUser == "0" {
+                activityMoney.text = "送\(giveAmount!)元优惠券"
+            }else if isNewUser == "1" {
+                activityMoney.text = "最高可送\(giveAmount!)元优惠券"
+            }
         }
     }
+    public var isNewUser : String!
+    
     public var delegate :RechargeCardCellDelegate!
     
     private var title : UILabel! //

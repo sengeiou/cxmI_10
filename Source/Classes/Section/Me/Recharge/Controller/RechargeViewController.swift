@@ -500,6 +500,11 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
             return cell
         case 1:
             let cell = tableview.dequeueReusableCell(withIdentifier: RechargeCardCellIdentifier, for: indexPath) as! RechargeCardCell
+            
+            if self.paymentMethodModel != nil, self.paymentMethodModel.rechargeUserDTO != nil {
+                cell.isNewUser = self.paymentMethodModel.rechargeUserDTO.oldUserBz
+            }
+            
             cell.delegate = self
             self.cardCell = cell
             cell.textfield.delegate = self
