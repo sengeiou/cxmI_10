@@ -122,6 +122,7 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
         return true
     }
 
+    // 充值送  提示框 逻辑
     private func changeActivityAmount (amount : String) {
         guard let rechargeUser = self.paymentMethodModel.rechargeUserDTO else { return }
         guard let list = rechargeUser.donationPriceList else { return }
