@@ -118,10 +118,14 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     // header delegate
     func rechargeClicked() {
         print("充值")
-        let recharge = RechargeViewController()
-        recharge.userInfo = userInfo
-        pushViewController(vc: recharge)
-        TongJi.log(.充值, label: "充值")
+//        let recharge = RechargeViewController()
+//        recharge.userInfo = userInfo
+//        pushViewController(vc: recharge)
+//        TongJi.log(.充值, label: "充值")
+        
+        let activity = ActivityRechargeResultVC()
+        activity.rechargeAmount = "20"
+        present(activity)
     }
     
     func withdrawalClicked() {
