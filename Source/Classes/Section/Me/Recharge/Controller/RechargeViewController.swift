@@ -100,6 +100,7 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
         TongJi.log(.充值支付, label: "ios", att: .终端)
     }
     
+    // MARK: - textField delegate
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         if let tex = textField as? CustomTextField {
