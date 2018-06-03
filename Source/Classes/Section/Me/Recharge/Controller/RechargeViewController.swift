@@ -17,13 +17,19 @@ fileprivate let RechargePaymentTitleCellId = "RechargePaymentTitleCellId"
 class RechargeViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, RechargeFooterViewDelegate, UITextFieldDelegate, ValidatePro, ActivityRechargeResultVCDelegate, ActivityRechargeCouponVCDelegate, RechargeCardCellDelegate {
     
     public var userInfo  : UserInfoDataModel!
+    public var rechargeAmounts : String? {
+        didSet{
+            guard rechargeAmounts != nil else { return }
+            changeActivityAmount(amount: rechargeAmounts!)
+        }
+    }
     
     private var maxTimes = QueryMaxTimes
     private var timeInterval : Double = 3
     //MARK: - 属性
     private var headerView : RechargeHeaderView!
     private var footerView : RechargeFooterView!
-    private var rechargeAmount : String?
+    
     private var cardCell : RechargeCardCell!
     private var textfield : UITextField!
     private var paymentAllList : [PaymentList]!
