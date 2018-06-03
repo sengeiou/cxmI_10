@@ -30,7 +30,8 @@ class RechargeCardCell: UITableViewCell {
     //MARK: - 属性
     private var title : UILabel! //
     public var textfield : CustomTextField!
-    
+    private var activityImageView : UIImageView!
+    private var activityMoney : UILabel!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -46,6 +47,16 @@ class RechargeCardCell: UITableViewCell {
         title.text = "充值金额"
         title.textColor = UIColor.black
         title.textAlignment = .left
+        
+        activityImageView = UIImageView()
+        activityImageView.image = UIImage(named: "Label")
+        
+        activityMoney = UILabel()
+        activityMoney.font = Font12
+        activityMoney.textColor = ColorFFFFFF
+        activityMoney.textAlignment = .center
+        activityMoney.text = "送10元优惠券"
+        
         
         textfield = CustomTextField()
         textfield.font = Font14
@@ -69,6 +80,8 @@ class RechargeCardCell: UITableViewCell {
         self.contentView.addSubview(card50)
         self.contentView.addSubview(card100)
         self.contentView.addSubview(card200)
+        self.contentView.addSubview(activityImageView)
+        activityImageView.addSubview(activityMoney)
         
         title.snp.makeConstraints { (make) in
             make.height.equalTo(titleHeight)
@@ -100,6 +113,16 @@ class RechargeCardCell: UITableViewCell {
             make.height.width.top.equalTo(card20)
             make.left.equalTo(card100.snp.right).offset(13.5)
             make.right.equalTo(self.contentView).offset(-19)
+        }
+        activityImageView.snp.makeConstraints { (make) in
+            make.bottom.equalTo(textfield.snp.top).offset(-4)
+            make.height.equalTo(30)
+            make.right.equalTo(textfield)
+            make.width.equalTo(100)
+        }
+        activityMoney.snp.makeConstraints { (make) in
+            make.top.left.right.equalTo(0)
+            make.bottom.equalTo(-6)
         }
     }
     
