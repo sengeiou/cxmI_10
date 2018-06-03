@@ -22,4 +22,6 @@ struct PurchaseRecordInfoModel: HandyJSON {
     var ticketAmount: String!
     var winningMoner: String!
     var moneyPaid: String!
+    /// 投注类型，0 - 竞彩 ， 1 - 世界杯
+    var orderType : String!
 }
