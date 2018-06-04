@@ -25,27 +25,12 @@ extension RouterPro {
         case .注册:
             break
         case .网页:
-            let web = ActivityViewController()
-            if urlStr.contains("?") {
-                web.urlStr = urlStr + "&cfrom=app"
-            }else {
-                web.urlStr = urlStr + "?cfrom=app"
-            }
-            
-            //web.urlStr = "http://192.168.31.205:8080/activity/discount?cxmxc=scm&usinfo=1&cmshare=1&from=app&showtitle=1"
-            //web.urlStr = "http://192.168.31.232:8080/activity/tuiguang?cxmxc=scm&type=1&usinfo=1&showtitle=1"
-            pushViewController(web, from: vc)
-            break
+            pushWebview(urlStr: urlStr, from: vc)
         case .浏览器:
             if let url = URL(string: urlStr) {
                 UIApplication.shared.openURL(url)
             }
         case .足球胜平负:
-//            let web = ActivityViewController()
-//            //web.urlStr = urlStr
-//            //web.urlStr = "http://192.168.31.205:8080/activity/discount?cxmxc=scm&usinfo=1&cmshare=1&from=app&showtitle=1"
-//            web.urlStr = "http://192.168.31.205:8080/user/activity/one?cxmxc=scm&usinfo=2&showtitle=1&cmshare=1"  + "&cfrom=app"
-//            pushViewController(web, from: vc)
             pushFootballVC(type.0.rawValue, from: vc)
         case .足球让球胜平负:
             pushFootballVC(type.0.rawValue, from: vc)
@@ -59,6 +44,8 @@ extension RouterPro {
             pushFootballVC(type.0.rawValue, from: vc)
         case .足球二选一:
             pushFootballVC(type.0.rawValue, from: vc)
+        case .世界杯:
+            pushWebview(urlStr: urlStr, from: vc)
         case .咨询详情:
             guard let id = type.1?.id else { return }
             pushNewsDetail( articleId: id, from: vc )
@@ -106,6 +93,19 @@ extension RouterPro {
     
         TongJi.log(.足彩彩种, label: football.matchType.rawValue, att: .彩种)
         pushViewController(football, from: vc)
+    }
+    
+    private func pushWebview(urlStr : String, from vc: UIViewController) {
+        let web = ActivityViewController()
+        if urlStr.contains("?") {
+            web.urlStr = urlStr + "&cfrom=app"
+        }else {
+            web.urlStr = urlStr + "?cfrom=app"
+        }
+        
+        //web.urlStr = "http://192.168.31.205:8080/activity/discount?cxmxc=scm&usinfo=1&cmshare=1&from=app&showtitle=1"
+        //web.urlStr = "http://192.168.31.232:8080/activity/tuiguang?cxmxc=scm&type=1&usinfo=1&showtitle=1"
+        pushViewController(web, from: vc)
     }
     
     private func pushViewController(_ vc: UIViewController, from formvc: UIViewController) {
