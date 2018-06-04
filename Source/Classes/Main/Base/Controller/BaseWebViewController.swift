@@ -39,14 +39,22 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+//        progressView.snp.makeConstraints { (make) in
+//            make.top.equalTo(SafeAreaTopHeight)
+//            make.left.right.equalTo(0)
+//            make.height.equalTo(2)
+//        }
+        
         progressView.snp.makeConstraints { (make) in
-            make.top.equalTo(SafeAreaTopHeight)
+            //make.top.equalTo(SafeAreaTopHeight)
+            make.bottom.equalTo(0)
             make.left.right.equalTo(0)
             make.height.equalTo(2)
         }
         
         webView.snp.makeConstraints { (make) in
-            make.top.equalTo(progressView.snp.bottom)
+            make.top.equalTo(SafeAreaTopHeight)
+            //make.top.equalTo(progressView.snp.bottom)
             make.left.right.bottom.equalTo(0)
         }
     }
@@ -85,10 +93,15 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
     private func initProgressView() {
         progressView = UIProgressView()
         progressView.progressTintColor = ColorEA5504
-        self.view.addSubview(progressView)
+        if self.navigationController != nil {
+            self.navigationController?.navigationBar.addSubview(progressView)
+        }else {
+            self.view.addSubview(progressView)
+        }
     }
     
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+    
 //        let urlStr = "\(webView.url!)"
 //
 //        let type = matcherHttp(urlStr: urlStr)
@@ -102,6 +115,7 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+       
         webView.evaluateJavaScript("getCxmTitle()") { (data, error) in
             if let title = data as? String {
                 self.navigationItem.title = title

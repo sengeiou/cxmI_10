@@ -76,10 +76,12 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
         case .登录:
             pushLoginVC(from: self)
             decisionHandler(.cancel)
+            return
         case .注册:
             let register = RegisterViewController()
             pushViewController(vc: register)
             decisionHandler(.cancel)
+            return
         default: break
         }
    
@@ -128,15 +130,8 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
         }else {
             decisionHandler(.allow)
         }
-        
-        webView.evaluateJavaScript("getCxmMoney()") { (data, error) in
-            
-        }
-        
     }
 
-    
-    
     override func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         super.webView(webView, didFinish: navigation)
     
@@ -148,9 +143,6 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
             self.shareContent.title = dic["title"]
             self.shareContent.description = dic["description"]
             self.shareContent.urlStr = dic["url"]
-        }
-        webView.evaluateJavaScript("getCxmMoney()") { (data, error) in
-            
         }
     }
     
