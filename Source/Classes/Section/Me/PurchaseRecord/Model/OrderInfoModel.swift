@@ -41,6 +41,8 @@ struct OrderInfoModel: HandyJSON {
     var payName : String = ""
     
     var detailType : String!
+    /// web url
+    var redirectUrl : String!
     
 }
 

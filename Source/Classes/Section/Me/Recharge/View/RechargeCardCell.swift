@@ -143,7 +143,7 @@ class RechargeCardCell: UITableViewCell {
             make.bottom.equalTo(textfield.snp.top).offset(-4)
             make.height.equalTo(30)
             make.right.equalTo(textfield)
-            make.width.equalTo(130)
+            make.width.equalTo(160)
         }
         activityMoney.snp.makeConstraints { (make) in
             make.top.left.right.equalTo(0)

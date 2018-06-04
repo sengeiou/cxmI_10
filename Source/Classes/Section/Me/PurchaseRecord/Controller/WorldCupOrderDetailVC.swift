@@ -21,36 +21,10 @@ class WorldCupOrderDetailVC: BaseViewController, UITableViewDelegate, UITableVie
     func goBuy() {
         guard orderInfo != nil else { return }
         
-        let football = FootballMatchVC()
+        let worldCup = ActivityViewController()
+        worldCup.urlStr = orderInfo.redirectUrl
         
-        switch orderInfo.lotteryPlayClassifyId {
-        case "2":
-            football.matchType = .胜平负
-        case "1":
-            football.matchType = .让球胜平负
-        case "4":
-            football.matchType = .总进球
-        case "5":
-            football.matchType = .半全场
-        case "3":
-            football.matchType = .比分
-        case "6":
-            football.matchType = .混合过关
-        case "7":
-            football.matchType = .二选一
-        default: break
-            
-        }
-        
-        var homeData = HomePlayModel()
-        homeData.lotteryId = orderInfo.lotteryClassifyId
-        homeData.playClassifyId = orderInfo.lotteryPlayClassifyId
-        homeData.playClassifyImg = orderInfo.lotteryClassifyImg
-        homeData.playClassifyName = orderInfo.lotteryClassifyName
-        homeData.playType = orderInfo.lotteryPlayClassifyId
-        
-        
-        pushViewController(vc: football)
+        pushViewController(vc: worldCup)
         
     }
     

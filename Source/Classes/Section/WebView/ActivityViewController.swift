@@ -85,9 +85,22 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
             break
         }
         
+        if type.0 == .登录 {
+            
+        }else if type.0 == .注册 {
+            
+        }else {
+            
+        }
         
-        guard let model = parseUrl(urlStr: urlStr) else { return }
-        guard urlStr.contains("cxmxc=scm") else { return }
+        
+        
+        guard let model = parseUrl(urlStr: urlStr) else {
+            decisionHandler(.allow)
+            return }
+        guard urlStr.contains("cxmxc=scm") else {
+            decisionHandler(.allow)
+            return }
         
         // 分享
         if  model.cmshare == "1" {
