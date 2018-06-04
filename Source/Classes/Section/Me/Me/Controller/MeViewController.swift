@@ -556,7 +556,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         
         var service = MeListDataModel()
         service.title = "在线客服"
-        service.iconStr = "serive"
+        service.iconStr = "zaixiankefu"
         service.pushType = .在线客服
         section2.list.append(service)
         
