@@ -22,6 +22,7 @@ class CouponCell: UITableViewCell {
             useBut.isHidden = true
             switch couponInfo.bonusStatus {
             case "0":
+                stateIcon.image = nil
                 // 快过期标志：1-显示 0-隐藏 2- 未生效优惠券
                 if couponInfo.soonExprireBz == "1" {
                     titleLB.textColor = Color505050
