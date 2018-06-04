@@ -15,7 +15,7 @@ let WeixinAppID = "wx6c3f43ecb1ff2be2"
 let BaiduAppKey = "8b4996b71f"
 
 /// 智齿客服
-let ZhiChiAppKey = "37ecff6d518143ecac351b6c93410ee8"
+let ZhiChiAppKey = "7b732ef68c044f97a50bafff726f18c7"
 
 let phoneNum = "400-012-6600"
 
