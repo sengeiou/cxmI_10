@@ -102,11 +102,11 @@ class ActivityRechargeResultVC: BasePopViewController {
         closeBut = UIButton(type: .custom)
         closeBut.setTitle("关闭", for: .normal)
         closeBut.setTitleColor(ColorEA5504, for: .normal)
-        closeBut.backgroundColor = ColorF6AD41
+        closeBut.backgroundColor = ColorFDC801
         closeBut.addTarget(self, action: #selector(closeClicked(_:)), for: .touchUpInside)
         
         detailBut = UIButton(type: .custom)
-        detailBut.setTitle("去查看", for: .normal)
+        detailBut.setTitle("去看看", for: .normal)
         detailBut.setTitleColor(ColorFFFFFF, for: .normal)
         detailBut.backgroundColor = ColorEA5504
         detailBut.addTarget(self, action: #selector(detailButClicked(_:)), for: .touchUpInside)

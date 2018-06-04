@@ -80,20 +80,9 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
             let register = RegisterViewController()
             pushViewController(vc: register)
             decisionHandler(.cancel)
-        default:
-//            decisionHandler(.allow)
-            break
+        default: break
         }
-        
-        if type.0 == .登录 {
-            
-        }else if type.0 == .注册 {
-            
-        }else {
-            
-        }
-        
-        
+   
         
         guard let model = parseUrl(urlStr: urlStr) else {
             decisionHandler(.allow)
