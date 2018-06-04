@@ -112,6 +112,19 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
             self.shareContent.description = dic["description"]
             self.shareContent.urlStr = dic["url"]
         }
+        webView.evaluateJavaScript("getCxmMoney()") { (data, error) in
+            
+        }
+        
+        guard let url = webView.url else { return}
+        let urlStr = "\(url)"
+        guard let model = parseUrl(urlStr: urlStr) else { return }
+        guard urlStr.contains("cxmxc=scm") && model.extparam != nil else {
+            
+            return }
+        webView.evaluateJavaScript("\(model.extparam!)") { (data, error) in
+            
+        }
     }
     
     override func back(_ sender: UIButton) {
