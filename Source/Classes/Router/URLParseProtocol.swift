@@ -38,6 +38,8 @@ extension URLParseProtocol {
                 urlModel.cmshare = value
             }else if key == "usinfo" {
                 urlModel.usInfo = value
+            }else if key == "extparam" {
+                urlModel.extparam = value
             }
             
             i += 1
