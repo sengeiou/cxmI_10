@@ -345,17 +345,23 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
         guard self.saveBetInfo != nil else { return }
         guard self.saveBetInfo.thirdPartyPaid != nil else { return }
         guard self.saveBetInfo.thirdPartyPaid != 0 else {
-//            if self.matchType != nil {
-//                TongJi.log(.余额抵扣, label: self.matchType.rawValue, att: .彩种)
-//            }
             
             showHUD(message: self.paymentResult.showMsg)
             SVProgressHUD.dismiss()
             self.canPayment = true
-            let order = OrderDetailVC()
-            order.backType = .root
-            order.orderId = paymentResult.orderId
-            pushViewController(vc: order)
+            
+            if self.worldCupDic != nil {// 世界杯活动
+                let order = WorldCupOrderDetailVC()
+                order.backType = .root
+                order.orderId = self.paymentResult.orderId
+                
+                self.pushViewController(vc: order)
+            }else { // 正常订单
+                let order = OrderDetailVC()
+                order.backType = .root
+                order.orderId = self.paymentResult.orderId
+                self.pushViewController(vc: order)
+            }
             return
         }
         
