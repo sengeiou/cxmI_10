@@ -140,19 +140,23 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
             var i = 0
             for price in list {
                 
-                if i == list.count - 1 {
-                    if let amount = Double(amount) {
-                        if amount >= price.minRechargeAmount! {
-                            self.cardCell.activityImageView.isHidden = false
-                            self.cardCell.giveAmount = "\(price.donationAmount!)"
-                        }else if amount < price.minRechargeAmount && amount >= list[i - 1].minRechargeAmount  {
-                            self.cardCell.activityImageView.isHidden = false
-                            self.cardCell.giveAmount = "\(price.donationAmount!)"
-                        }
-                    }
-                }else if i != 0 {
+//                if i == list.count - 1 {
+//                    if let amount = Double(amount) {
+//                        if amount >= price.minRechargeAmount! {
+//                            self.cardCell.activityImageView.isHidden = false
+//                            self.cardCell.giveAmount = "\(price.donationAmount!)"
+//                        }else if amount < price.minRechargeAmount && amount >= list[i - 1].minRechargeAmount  {
+//                            self.cardCell.activityImageView.isHidden = false
+//                            self.cardCell.giveAmount = "\(price.donationAmount!)"
+//                        }
+//                    }
+//                }else
+                if i != 0 {
                     if let amount = Double(amount) {
                         if amount < price.minRechargeAmount! && amount >= list[i - 1].minRechargeAmount {
+                            self.cardCell.activityImageView.isHidden = false
+                            self.cardCell.giveAmount = "\(list[i - 1].donationAmount!)"
+                        }else if amount >= price.minRechargeAmount {
                             self.cardCell.activityImageView.isHidden = false
                             self.cardCell.giveAmount = "\(price.donationAmount!)"
                         }
@@ -175,6 +179,9 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
                 if i != 0 {
                     if let amount = Double(amount) {
                         if amount < price.minRechargeAmount! && amount >= list[i - 1].minRechargeAmount {
+                            self.cardCell.activityImageView.isHidden = false
+                            self.cardCell.giveAmount = "\(list[i - 1].donationAmount!)"
+                        }else if amount >= price.minRechargeAmount {
                             self.cardCell.activityImageView.isHidden = false
                             self.cardCell.giveAmount = "\(price.donationAmount!)"
                         }
