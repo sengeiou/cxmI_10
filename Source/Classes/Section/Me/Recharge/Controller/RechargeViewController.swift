@@ -20,7 +20,7 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
     public var rechargeAmounts : String? {
         didSet{
             guard rechargeAmounts != nil else { return }
-            changeActivityAmount(amount: rechargeAmounts!)
+            
         }
     }
     
@@ -31,7 +31,14 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
     private var footerView : RechargeFooterView!
     
     private var cardCell : RechargeCardCell!
-    private var textfield : UITextField!
+    private var textfield : UITextField! {
+        didSet{
+            guard textfield != nil else { return }
+            guard rechargeAmounts != nil else { return }
+            self.textfield.text = rechargeAmounts
+            changeActivityAmount(amount: rechargeAmounts!)
+        }
+    }
     private var paymentAllList : [PaymentList]!
     private var paymentModel : PaymentList!
     private var paymentMethodModel : AllPaymentModel!
@@ -46,7 +53,8 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
         super.viewDidLoad()
         self.title = "彩小秘 · 充值"
         initSubview()
-        allPaymentRequest()
+        
+        userInfoRequest()
         
         NotificationCenter.default.addObserver(self, selector: #selector(startPollingTimer), name: NSNotification.Name(rawValue: NotificationWillEnterForeground), object: nil)
     }
@@ -444,7 +452,7 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
             .subscribe(onNext: { (data) in
                 guard weakSelf != nil else { return }
                 weakSelf!.userInfo = data
-                weakSelf?.tableview.reloadData()
+                weakSelf?.allPaymentRequest()
             }, onError: { (error) in
                 print(error)
                 guard let err = error as? HXError else { return }

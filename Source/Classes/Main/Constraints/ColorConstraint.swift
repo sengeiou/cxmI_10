@@ -30,6 +30,8 @@ let ColorEA5504 = UIColor(hexColor: "EA5504")
 let ColorE85504 = UIColor(hexColor: "E85504")
 /// 黄橙色
 let ColorF7931E = UIColor(hexColor: "F7931E")
+/// 橙色
+let ColorFDC801 = UIColor(hexColor: "FDC801")
 /// 未认证条，字体颜色
 let ColorE95504 = UIColor(hexColor: "E95504")
 let ColorE95504a2 = UIColor(hexColor: "E95504", alpha: 0.2)

@@ -17,9 +17,9 @@ class ActivityRechargeResultVC: BasePopViewController {
     public var rechargeAmount : String! {
         didSet{
             guard rechargeAmount != nil else { return }
-            let amountAtt = NSMutableAttributedString(string: "恭喜!\n", attributes: [NSAttributedStringKey.font: Font36, NSAttributedStringKey.foregroundColor : ColorF6AD41])
+            let amountAtt = NSMutableAttributedString(string: "恭喜!\n", attributes: [NSAttributedStringKey.font: Font36, NSAttributedStringKey.foregroundColor : ColorFDC801])
             let title = NSAttributedString(string: "彩小秘恭喜您通过充值活动\n", attributes: [NSAttributedStringKey.font: Font16, NSAttributedStringKey.foregroundColor : ColorFFFFFF])
-            let amount = NSMutableAttributedString(string: "获得\(rechargeAmount!)元彩金", attributes: [NSAttributedStringKey.font: Font25, NSAttributedStringKey.foregroundColor : ColorF6AD41])
+            let amount = NSMutableAttributedString(string: "获得\(rechargeAmount!)元彩金", attributes: [NSAttributedStringKey.font: Font25, NSAttributedStringKey.foregroundColor : ColorFDC801])
             amountAtt.append(title)
             amountAtt.append(amount)
             detailLb.attributedText = amountAtt

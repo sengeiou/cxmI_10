@@ -112,19 +112,33 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
         // 世界杯
         if model.extparam != nil {
             webView.evaluateJavaScript("\(model.extparam!)()") { (data, error) in
-                if let dic = data as? [String: String] {
-                    let payment = PaymentViewController()
-                    payment.worldCupDic = dic
-                    self.pushViewController(vc: payment)
-                    decisionHandler(.cancel)
-                }else {
-                    decisionHandler(.allow)
+                if model.type == "10" {
+                    if let dic = data as? [String: String] {
+                        let payment = PaymentViewController()
+                        payment.worldCupDic = dic
+                        self.pushViewController(vc: payment)
+                        decisionHandler(.cancel)
+                    }else {
+                        decisionHandler(.allow)
+                    }
+                }else if model.type == "11" {
+                    if let money = data as? String {
+                        let recharge = RechargeViewController()
+                        recharge.rechargeAmounts = money
+                        self.pushViewController(vc: recharge)
+                        decisionHandler(.cancel)
+                    }else {
+                        decisionHandler(.allow)
+                    }
                 }
             }
         }else {
             decisionHandler(.allow)
         }
         
+        webView.evaluateJavaScript("getCxmMoney()") { (data, error) in
+            
+        }
         
     }
 
