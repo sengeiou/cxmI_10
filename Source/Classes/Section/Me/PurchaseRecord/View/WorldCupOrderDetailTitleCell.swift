@@ -10,6 +10,17 @@ import UIKit
 
 class WorldCupOrderDetailTitleCell: UITableViewCell {
 
+    public var detailType : String! {
+        didSet{
+            guard detailType != nil else { return }
+            if detailType == "1" {
+                nameTitle.text = "猜冠军球队"
+            }else if detailType == "2" {
+                nameTitle.text = "猜冠亚军球队"
+            }
+        }
+    }
+    
     private var nameTitle: UILabel!
     private var oddTitle: UILabel!      // 玩法
     private var resultTitle: UILabel!    // 赛果

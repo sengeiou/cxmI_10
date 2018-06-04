@@ -85,6 +85,16 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
         }
         
         guard let model = parseUrl(urlStr: urlStr) else { return }
+        
+        guard urlStr.contains("cxmxc=scm") && model.extparam != nil else {
+            
+            return }
+        let xxx = "\(model.extparam!)()"
+        webView.evaluateJavaScript("\(model.extparam!)()") { (data, error) in
+            
+        }
+        
+        
         guard urlStr.contains("cxmxc=scm") && model.cmshare == "1" else {
             shareBut.isHidden = true
             return }
@@ -122,8 +132,11 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
         guard urlStr.contains("cxmxc=scm") && model.extparam != nil else {
             
             return }
-        webView.evaluateJavaScript("\(model.extparam!)") { (data, error) in
-            
+        let xxx = "\(model.extparam!)()"
+        webView.evaluateJavaScript("\(model.extparam!)()") { (data, error) in
+            guard let jsData = data as? String else { return }
+//            let payment = PaymentViewController()
+//            self.pushViewController(vc: payment)
         }
     }
     

@@ -9,17 +9,22 @@
 import UIKit
 
 class WorldCupOrderDetailCell: UITableViewCell {
-
+    public var detailType : String!
+    
     public var matchInfo: MatchInfo! {
         didSet{
             guard matchInfo != nil else { return }
-            guard let range = matchInfo.match.range(of: "VS") else { return }
-            
-            let homeMatch = matchInfo.match.prefix(upTo: (range.lowerBound))
-            let viMatch = matchInfo.match.suffix(from: range.upperBound)
-            
-            
-            nameLB.text = "\(homeMatch)\nVS\n\(viMatch)"
+            guard detailType != nil else { return }
+            if detailType == "1" { // 冠军
+                nameLB.text = matchInfo.match
+            }else if detailType == "2" {// 冠亚军
+                guard let range = matchInfo.match.range(of: "VS") else { return }
+                
+                let homeMatch = matchInfo.match.prefix(upTo: (range.lowerBound))
+                let viMatch = matchInfo.match.suffix(from: range.upperBound)
+                
+                nameLB.text = "\(homeMatch)\nVS\n\(viMatch)"
+            }
             
             matchInfo.changci.insert("\n", at: matchInfo.changci.index(matchInfo.changci.startIndex, offsetBy: 2))
             
@@ -44,9 +49,9 @@ class WorldCupOrderDetailCell: UITableViewCell {
                     }
                     let cathectic = cath.cathectic.replacingOccurrences(of: "null", with: "")
                     
-                    let rec = NSAttributedString(string: cathectic + "\n", attributes: [NSAttributedStringKey.foregroundColor: color])
+                    let rec = NSAttributedString(string: cathectic, attributes: [NSAttributedStringKey.foregroundColor: color])
                     
-                    let res = NSAttributedString(string: result.matchResult + "\n", attributes: [NSAttributedStringKey.foregroundColor: color])
+                    let res = NSAttributedString(string: result.matchResult, attributes: [NSAttributedStringKey.foregroundColor: color])
                     record.append(rec)
                     resultAtt.append(res)
                 }
@@ -59,7 +64,7 @@ class WorldCupOrderDetailCell: UITableViewCell {
             
             if ruleStr != "" {
                 ruleStr.removeLast()
-                oddLB.text = ruleStr
+                oddLB.attributedText = record
             }
         }
     }

@@ -10,7 +10,7 @@ import UIKit
 
 fileprivate let WorldCupOrderDetailTitleCellId = "WorldCupOrderDetailTitleCellId"
 fileprivate let WorldCupOrderDetailCellId = "WorldCupOrderDetailCellId"
-fileprivate let OrderRuleCellId = "OrderRuleCellId"
+fileprivate let WorldCupOrderRuleCellId = "WorldCupOrderRuleCellId"
 fileprivate let OrderPaymentCellId = "OrderPaymentCellId"
 fileprivate let OrderProgrammeCellId = "OrderProgrammeCellId"
 
@@ -164,7 +164,7 @@ class WorldCupOrderDetailVC: BaseViewController, UITableViewDelegate, UITableVie
         
         table.register(WorldCupOrderDetailTitleCell.self, forCellReuseIdentifier: WorldCupOrderDetailTitleCellId)
         table.register(WorldCupOrderDetailCell.self, forCellReuseIdentifier: WorldCupOrderDetailCellId)
-        table.register(OrderRuleCell.self, forCellReuseIdentifier: OrderRuleCellId)
+        table.register(WorldCupOrderRuleCell.self, forCellReuseIdentifier: WorldCupOrderRuleCellId)
         table.register(OrderPaymentCell.self, forCellReuseIdentifier: OrderPaymentCellId)
         table.register(OrderProgrammeCell.self, forCellReuseIdentifier: OrderProgrammeCellId)
         
@@ -191,16 +191,18 @@ class WorldCupOrderDetailVC: BaseViewController, UITableViewDelegate, UITableVie
             switch indexPath.row {
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: WorldCupOrderDetailTitleCellId, for: indexPath) as! WorldCupOrderDetailTitleCell
+                cell.detailType = self.orderInfo.detailType
                 return cell
             case 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: WorldCupOrderDetailCellId, for: indexPath) as! WorldCupOrderDetailCell
+                cell.detailType = self.orderInfo.detailType
                 if self.orderInfo.matchInfos.count >= 1 {
                     cell.matchInfo = self.orderInfo.matchInfos[indexPath.row - 1]
                 }
                 cell.line.isHidden = true
                 return cell
             case orderInfo.matchInfos.count + 1 :
-                let cell = tableView.dequeueReusableCell(withIdentifier: OrderRuleCellId, for: indexPath) as! OrderRuleCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: WorldCupOrderRuleCellId, for: indexPath) as! WorldCupOrderRuleCell
                 cell.orderInfo = self.orderInfo
                 return cell
             case orderInfo.matchInfos.count + 2:
@@ -209,6 +211,7 @@ class WorldCupOrderDetailVC: BaseViewController, UITableViewDelegate, UITableVie
                 return cell
             default :
                 let cell = tableView.dequeueReusableCell(withIdentifier: WorldCupOrderDetailCellId, for: indexPath) as! WorldCupOrderDetailCell
+                cell.detailType = self.orderInfo.detailType
                 if self.orderInfo.matchInfos.count >= 1 {
                     cell.matchInfo = self.orderInfo.matchInfos[indexPath.row - 1]
                 }

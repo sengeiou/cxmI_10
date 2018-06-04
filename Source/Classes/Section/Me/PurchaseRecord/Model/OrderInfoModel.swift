@@ -40,6 +40,8 @@ struct OrderInfoModel: HandyJSON {
     /// 支付方式
     var payName : String = ""
     
+    var detailType : String!
+    
 }
 
 struct MatchInfo: HandyJSON {
