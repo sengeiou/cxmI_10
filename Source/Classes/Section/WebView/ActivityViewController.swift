@@ -111,11 +111,15 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
                         decisionHandler(.allow)
                     }
                 }else if model.type == "11" {
-                    if let money = data as? String {
-                        let recharge = RechargeViewController()
-                        recharge.rechargeAmounts = money
-                        self.pushViewController(vc: recharge)
-                        decisionHandler(.cancel)
+                    if let money = data as? [String: String] {
+                        if money.keys.contains("price") {
+                            let recharge = RechargeViewController()
+                            recharge.rechargeAmounts = money["price"]
+                            self.pushViewController(vc: recharge)
+                            decisionHandler(.cancel)
+                        }else {
+                            decisionHandler(.allow)
+                        }
                     }else {
                         decisionHandler(.allow)
                     }
