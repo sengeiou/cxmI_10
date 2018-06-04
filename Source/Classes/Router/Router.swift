@@ -44,8 +44,6 @@ extension RouterPro {
             pushFootballVC(type.0.rawValue, from: vc)
         case .足球二选一:
             pushFootballVC(type.0.rawValue, from: vc)
-        case .世界杯:
-            pushWebview(urlStr: urlStr, from: vc)
         case .咨询详情:
             guard let id = type.1?.id else { return }
             pushNewsDetail( articleId: id, from: vc )

@@ -21,7 +21,6 @@ enum PushControllerType : String{
     case 足球比分 = "3"
     case 足球混合过关 = "6"
     case 足球二选一 = "7"
-    case 世界杯 = "8"
     case 球队详情
     case 咨询详情
     case 登录
@@ -94,8 +93,6 @@ extension RouterMatcher {
             return (.足球混合过关, nil )
         case "7":
             return (.足球二选一, nil )
-        case "8":
-            return (.世界杯, nil )
         default:
             return (.none, nil )
         }
