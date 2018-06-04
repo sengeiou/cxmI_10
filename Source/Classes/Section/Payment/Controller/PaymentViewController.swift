@@ -24,11 +24,18 @@ fileprivate let PaymentMethodCellId = "PaymentMethodCellId"
 
 class PaymentViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, CouponFilterViewControllerDelegate, WeixinPayDelegate {
     
+    public var requestModel: FootballRequestMode!
+    public var matchType: FootballMatchType!
+    public var worldCupDic : [String: String]! {
+        didSet{
+            guard worldCupDic != nil else { return }
+            worldCupOrderRequest()
+        }
+    }
     
     private var maxTimes = QueryMaxTimes
     private var timeInterval : Double = 3
-    public var requestModel: FootballRequestMode!
-    public var matchType: FootballMatchType!
+    
     private var saveBetInfo : FootballSaveBetInfoModel!
     
     private var confirmBut : UIButton!
@@ -100,8 +107,59 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
     }
 
     // MARK: - 网络请求
+    
+    // 世界杯，订单请求
+    private func worldCupOrderRequest() {
+        guard self.worldCupDic != nil else { return }
+        weak var weakSelf = self
+        self.showProgressHUD()
+        _ = activityProvider.rx.request(.saveWCBetInfo(dic: self.worldCupDic))
+            .asObservable()
+            .mapObject(type: FootballSaveBetInfoModel.self)
+            .subscribe(onNext: { (data) in
+                weakSelf?.saveBetInfo = data
+                weakSelf?.dismissProgressHud()
+                if weakSelf?.saveBetInfo.bonusList.count != 0 {
+                    
+                    let bonus = BonusInfoModel()
+                    bonus.bonusId = ""
+                    bonus.userBonusId = "-1"
+                    bonus.bonusPrice = "不使用优惠券"
+                    bonus.bonusName = "暂不使用"
+                    bonus.bonusStatus = "暂不使用"
+                    bonus.useRange = ""
+                    bonus.minGoodsAmount = ""
+                    bonus.leaveTime = ""
+                    weakSelf?.saveBetInfo.bonusList.append(bonus)
+                }
+                
+                data.setBonus() // 设置默认选中的优惠券
+                //weakSelf?.tableView.reloadData()
+                weakSelf?.allPaymentRequest()
+            }, onError: { (error) in
+                weakSelf?.dismissProgressHud()
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        weakSelf?.removeUserData()
+                        weakSelf?.pushLoginVC(from: self)
+                    default : break
+                    }
+                    
+                    if 300000...310000 ~= code {
+                        print(code)
+                        self.showHUD(message: msg!)
+                    }
+                default: break
+                }
+            }, onCompleted: nil, onDisposed: nil )
+    }
+    
     // 订单
     private func orderRequest() {
+        guard self.requestModel != nil else { return }
         weak var weakSelf = self
         self.showProgressHUD()
         _ = homeProvider.rx.request(.saveBetInfo(requestModel: self.requestModel))
@@ -233,10 +291,20 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
                     self.timer.invalidate()
                     self.showHUD(message: data.msg)
                     SVProgressHUD.dismiss()
-                    let order = OrderDetailVC()
-                    order.backType = .root
-                    order.orderId = self.paymentResult.orderId
-                    self.pushViewController(vc: order)
+                    
+                    if self.worldCupDic != nil {// 世界杯活动
+                        let order = WorldCupOrderDetailVC()
+                        order.backType = .root
+                        order.orderId = self.paymentResult.orderId
+                        
+                        self.pushViewController(vc: order)
+                    }else { // 正常订单
+                        let order = OrderDetailVC()
+                        order.backType = .root
+                        order.orderId = self.paymentResult.orderId
+                        self.pushViewController(vc: order)
+                    }
+                    
                 case "304035":
                     self.canPayment = true
                     //self.showHUD(message: data.msg)

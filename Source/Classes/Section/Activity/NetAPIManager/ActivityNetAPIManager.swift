@@ -14,6 +14,8 @@ let activityProvider = MoyaProvider<ActivityNetAPIManager>(plugins:[RequestLoadi
 enum ActivityNetAPIManager {
     /// 用户信息
     case receiveRechargeBonus(payLogId : String)
+    /// 保存世界杯投注信息
+    case saveWCBetInfo(dic: [String: String])
 }
 
 extension ActivityNetAPIManager : TargetType {
@@ -31,6 +33,8 @@ extension ActivityNetAPIManager : TargetType {
         switch self {
         case .receiveRechargeBonus:
             return "/member/user/bonus/rechargeSucReiceiveBonus"
+        case .saveWCBetInfo:
+            return "/lottery/dl/wc/saveBetInfo"
         }
     }
     
@@ -44,7 +48,8 @@ extension ActivityNetAPIManager : TargetType {
         switch self {
         case .receiveRechargeBonus(let payLogId):
             dic["payLogId"] = payLogId
-            
+        case .saveWCBetInfo(let dict):
+            dic = dict
         default:
             return .requestPlain
         }

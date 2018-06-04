@@ -81,24 +81,37 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
             pushViewController(vc: register)
             decisionHandler(.cancel)
         default:
+//            decisionHandler(.allow)
+            break
+        }
+        
+        
+        guard let model = parseUrl(urlStr: urlStr) else { return }
+        guard urlStr.contains("cxmxc=scm") else { return }
+        
+        // 分享
+        if  model.cmshare == "1" {
+            shareBut.isHidden = false
+        }else {
+            shareBut.isHidden = true
+        }
+        
+        // 世界杯
+        if model.extparam != nil {
+            webView.evaluateJavaScript("\(model.extparam!)()") { (data, error) in
+                if let dic = data as? [String: String] {
+                    let payment = PaymentViewController()
+                    payment.worldCupDic = dic
+                    self.pushViewController(vc: payment)
+                    decisionHandler(.cancel)
+                }else {
+                    decisionHandler(.allow)
+                }
+            }
+        }else {
             decisionHandler(.allow)
         }
         
-        guard let model = parseUrl(urlStr: urlStr) else { return }
-        
-        guard urlStr.contains("cxmxc=scm") && model.extparam != nil else {
-            
-            return }
-        let xxx = "\(model.extparam!)()"
-        webView.evaluateJavaScript("\(model.extparam!)()") { (data, error) in
-            
-        }
-        
-        
-        guard urlStr.contains("cxmxc=scm") && model.cmshare == "1" else {
-            shareBut.isHidden = true
-            return }
-        shareBut.isHidden = false
         
     }
 
@@ -106,13 +119,7 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
     
     override func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         super.webView(webView, didFinish: navigation)
-        
-//        if webView.canGoBack {
-//            self.deleteBut.isHidden = false
-//        }else {
-//            self.deleteBut.isHidden = true
-//        }
-        
+    
         webView.evaluateJavaScript("getCxmShare()") { (data, error) in
             guard error == nil else { return }
             guard let dic = data as? [String: String] else { return }
@@ -124,19 +131,6 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
         }
         webView.evaluateJavaScript("getCxmMoney()") { (data, error) in
             
-        }
-        
-        guard let url = webView.url else { return}
-        let urlStr = "\(url)"
-        guard let model = parseUrl(urlStr: urlStr) else { return }
-        guard urlStr.contains("cxmxc=scm") && model.extparam != nil else {
-            
-            return }
-        let xxx = "\(model.extparam!)()"
-        webView.evaluateJavaScript("\(model.extparam!)()") { (data, error) in
-            guard let jsData = data as? String else { return }
-//            let payment = PaymentViewController()
-//            self.pushViewController(vc: payment)
         }
     }
     
