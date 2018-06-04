@@ -47,7 +47,7 @@ class SettingPasswordVC: BaseViewController, UITableViewDelegate, UITableViewDat
                 showHUD(message: "两次输入的密码不一致")
                 return }
             
-            setLoginPassRequest("1", oldPass: nil, newPass: self.newTF.text!)
+            setLoginPassRequest("0", oldPass: nil, newPass: self.newTF.text!)
         }else {
             guard validate(.password, str: self.oldTF.text) else {
                 showHUD(message: "请输入6-20位数字和字母组合的密码")
@@ -59,7 +59,7 @@ class SettingPasswordVC: BaseViewController, UITableViewDelegate, UITableViewDat
                 showHUD(message: "两次输入的密码不一致")
                 return }
             
-            setLoginPassRequest("0", oldPass: self.oldTF.text!, newPass: self.newTF.text!)
+            setLoginPassRequest("1", oldPass: self.oldTF.text!, newPass: self.newTF.text!)
             
         }
     }
