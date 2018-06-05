@@ -14,10 +14,10 @@ class OrderDetailHeaderView: UIView {
     public var orderInfo: OrderInfoModel! {
         didSet{
             guard orderInfo != nil else { return }
-//            if let url = URL(string: orderInfo.lotteryClassifyImg){
-//                icon.kf.setImage(with: url)
-//            }
-            icon.image = UIImage(named: "Racecolorfootball")
+            if let url = URL(string: orderInfo.lotteryClassifyImg!){
+                icon.kf.setImage(with: url)
+            }
+            //icon.image = UIImage(named: "Racecolorfootball")
             
             
             let moneyAtt = NSMutableAttributedString(string: "¥", attributes: [NSAttributedStringKey.font: Font10])

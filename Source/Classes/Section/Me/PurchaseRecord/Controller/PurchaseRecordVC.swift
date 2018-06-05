@@ -64,6 +64,7 @@ class PurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
         self.tableView.footerRefresh {
             self.loadNextData()
         }
+        self.tableView.beginRefreshing()
         self.recordList = []
         recordRequest(1)
         
