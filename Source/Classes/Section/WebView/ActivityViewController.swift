@@ -104,26 +104,37 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
         if model.extparam != nil {
             webView.evaluateJavaScript("\(model.extparam!)()") { (data, error) in
                 if model.type == "10" {
-                    if let dic = data as? [String: String] {
-                        let payment = PaymentViewController()
-                        payment.worldCupDic = dic
-                        self.pushViewController(vc: payment)
+                    if self.getUserData() == nil {
+                        self.pushLoginVC(from: self)
                         decisionHandler(.cancel)
                     }else {
-                        decisionHandler(.allow)
-                    }
-                }else if model.type == "11" {
-                    if let money = data as? [String: String] {
-                        if money.keys.contains("price") {
-                            let recharge = RechargeViewController()
-                            recharge.rechargeAmounts = money["price"]
-                            self.pushViewController(vc: recharge)
+                        if let dic = data as? [String: String] {
+                            let payment = PaymentViewController()
+                            payment.worldCupDic = dic
+                            self.pushViewController(vc: payment)
                             decisionHandler(.cancel)
                         }else {
                             decisionHandler(.allow)
                         }
+                    }
+                    
+                }else if model.type == "11" {
+                    if self.getUserData() == nil {
+                        self.pushLoginVC(from: self)
+                        decisionHandler(.cancel)
                     }else {
-                        decisionHandler(.allow)
+                        if let money = data as? [String: String] {
+                            if money.keys.contains("price") {
+                                let recharge = RechargeViewController()
+                                recharge.rechargeAmounts = money["price"]
+                                self.pushViewController(vc: recharge)
+                                decisionHandler(.cancel)
+                            }else {
+                                decisionHandler(.allow)
+                            }
+                        }else {
+                            decisionHandler(.allow)
+                        }
                     }
                 }
             }
