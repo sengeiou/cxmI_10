@@ -39,6 +39,7 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
             changeActivityAmount(amount: rechargeAmounts!)
         }
     }
+    private var rechargeMoney: Double!
     private var paymentAllList : [PaymentList]!
     private var paymentModel : PaymentList!
     private var paymentMethodModel : AllPaymentModel!
@@ -113,6 +114,10 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
         }
         maxTimes = QueryMaxTimes
         self.canPayment = false
+        if let money = Double(self.cardCell.textfield.text!) {
+            self.rechargeMoney = money
+        }
+        
         rechargeRequest(amount: self.cardCell.textfield.text!)
         TongJi.log(.充值支付, label: "ios", att: .终端)
     }
@@ -302,7 +307,25 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
                         return
                     }
                     
-                    self.receiveRechargeBonusRequest()
+                    guard self.paymentMethodModel != nil else { return }
+                    guard self.paymentMethodModel.isHaveRechargeAct else { return }
+                    guard let rechargeUser = self.paymentMethodModel.rechargeUserDTO else { return }
+                    guard let list = rechargeUser.donationPriceList else { return }
+                    
+                    if rechargeUser.oldUserBz == "0" {
+                        
+                    }
+                    
+                    guard list.count >= 0 else { return }
+                    guard self.rechargeMoney != nil else { return }
+                    if self.rechargeMoney < list[0].minRechargeAmount {
+                        self.dismissProgressHud()
+                        self.showHUD(message: data.msg)
+                        self.popViewController()
+                    }else {
+                        self.receiveRechargeBonusRequest()
+                    }
+            
                 case "304035":
                     self.canPayment = true
                     //self.showHUD(message: data.msg)
