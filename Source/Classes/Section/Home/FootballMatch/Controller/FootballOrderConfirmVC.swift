@@ -790,7 +790,7 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         
         //rightBut.setBackgroundImage(UIImage(named:"Details"), for: .normal)
         
-        rightBut.setTitle("dan?", for: .normal)
+        rightBut.setTitle("胆", for: .normal)
         rightBut.setTitleColor(Color787878, for: .normal)
         
         rightBut.addTarget(self, action: #selector(showMenu(_:)), for: .touchUpInside)
