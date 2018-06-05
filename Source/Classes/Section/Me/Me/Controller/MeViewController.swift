@@ -64,7 +64,9 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+    
         userInfoRequest()
+    
         self.isHidenBar = false
         
         let turnOn = UserDefaults.standard.bool(forKey: TurnOn)
@@ -75,7 +77,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         }else if turnOn == false && self.showType != .onlyNews {
             showType = .onlyNews
         }
-        
+        // 隐藏消息 红点的显示
         hidenNotic()
     }
     
@@ -122,10 +124,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         recharge.userInfo = userInfo
         pushViewController(vc: recharge)
         TongJi.log(.充值, label: "充值")
-        
-//        let activity = ActivityRechargeResultVC()
-//        activity.rechargeAmount = "20"
-//        present(activity)
+
     }
     
     func withdrawalClicked() {
@@ -148,11 +147,9 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         print("退出登录")
         weak var weakSelf = self
         self.showCXMAlert(title: nil, message: "您正在退出登录", action: "继续退出", cancel: "返回") { (action) in
-            weakSelf?.logoutRequest()
             weakSelf?.removeUserData()
-            DispatchQueue.main.async {
-                weakSelf?.pushRootViewController(3)
-            }
+            weakSelf?.pushRootViewController(0)
+            weakSelf?.logoutRequest()
             TongJi.log(.退出登录, label: "退出登录")
         }
     }
@@ -328,8 +325,8 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     private func logoutRequest() {
         //weak var weakSelf = self
         _ = loginProvider.rx.request(.logout)
-        .asObservable()
-        .mapBaseObject(type: DataModel.self)
+            .asObservable()
+            .mapBaseObject(type: DataModel.self)
             .subscribe(onNext: { (data) in
                 
             }, onError: { (error) in
