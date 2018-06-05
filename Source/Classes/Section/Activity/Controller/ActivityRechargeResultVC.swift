@@ -17,9 +17,9 @@ class ActivityRechargeResultVC: BasePopViewController {
     public var rechargeAmount : String! {
         didSet{
             guard rechargeAmount != nil else { return }
-            let amountAtt = NSMutableAttributedString(string: "恭喜!\n", attributes: [NSAttributedStringKey.font: Font36, NSAttributedStringKey.foregroundColor : ColorFDC801])
+            let amountAtt = NSMutableAttributedString(string: "恭喜!\n", attributes: [NSAttributedStringKey.font: Font40, NSAttributedStringKey.foregroundColor : ColorFDC801])
             let title = NSAttributedString(string: "彩小秘恭喜您通过充值活动\n", attributes: [NSAttributedStringKey.font: Font16, NSAttributedStringKey.foregroundColor : ColorFFFFFF])
-            let amount = NSMutableAttributedString(string: "获得\(rechargeAmount!)元彩金", attributes: [NSAttributedStringKey.font: Font25, NSAttributedStringKey.foregroundColor : ColorFDC801])
+            let amount = NSMutableAttributedString(string: "获得\(rechargeAmount!)元彩金", attributes: [NSAttributedStringKey.font: Font21, NSAttributedStringKey.foregroundColor : ColorFDC801])
             amountAtt.append(title)
             amountAtt.append(amount)
             detailLb.attributedText = amountAtt
@@ -103,12 +103,14 @@ class ActivityRechargeResultVC: BasePopViewController {
         closeBut.setTitle("关闭", for: .normal)
         closeBut.setTitleColor(ColorEA5504, for: .normal)
         closeBut.backgroundColor = ColorFDC801
+        closeBut.layer.cornerRadius = 2
         closeBut.addTarget(self, action: #selector(closeClicked(_:)), for: .touchUpInside)
         
         detailBut = UIButton(type: .custom)
         detailBut.setTitle("去看看", for: .normal)
         detailBut.setTitleColor(ColorFFFFFF, for: .normal)
         detailBut.backgroundColor = ColorEA5504
+        detailBut.layer.cornerRadius = 2
         detailBut.addTarget(self, action: #selector(detailButClicked(_:)), for: .touchUpInside)
         
         
