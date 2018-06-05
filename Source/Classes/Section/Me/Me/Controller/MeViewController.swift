@@ -548,11 +548,11 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         item6.pushType = .帮助中心
         section2.list.append(item6)
         
-        var item7 = MeListDataModel()
-        item7.title = "联系客服"
-        item7.iconStr = "serive"
-        item7.pushType = .联系客服
-        section2.list.append(item7)
+//        var item7 = MeListDataModel()
+//        item7.title = "联系客服"
+//        item7.iconStr = "serive"
+//        item7.pushType = .联系客服
+//        section2.list.append(item7)
         
         var service = MeListDataModel()
         service.title = "在线客服"
