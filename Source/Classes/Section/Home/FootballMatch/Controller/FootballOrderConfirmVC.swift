@@ -788,8 +788,6 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         let rightBut = UIButton(type: .custom)
         rightBut.frame = CGRect(x: 0, y: 0, width: 16, height: 16)
         
-        //rightBut.setBackgroundImage(UIImage(named:"Details"), for: .normal)
-        
         rightBut.setTitle("胆", for: .normal)
         rightBut.setTitleColor(Color787878, for: .normal)
         
