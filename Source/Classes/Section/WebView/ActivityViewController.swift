@@ -134,7 +134,7 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
                             }
                         }else {
                             decisionHandler(.allow)
-                        }
+                        }     
                     }
                 }
             }
