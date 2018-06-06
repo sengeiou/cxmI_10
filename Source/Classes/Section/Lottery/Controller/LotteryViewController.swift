@@ -37,7 +37,7 @@ class LotteryViewController: BaseViewController, UITableViewDelegate, UITableVie
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "彩小秘 · 比赛结果"
+        self.navigationItem.title = "彩小秘 · 比分"
         
         hideBackBut()
         initSubview()
