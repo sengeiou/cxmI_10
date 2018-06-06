@@ -29,19 +29,7 @@ class FootballMatchPagerView: UIView {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        vLine.snp.makeConstraints { (make) in
-            make.top.bottom.equalTo(0)
-            make.centerX.equalTo(self.snp.centerX)
-            make.width.equalTo(1)
-        }
-        analysisBut.snp.makeConstraints { (make) in
-            make.top.left.bottom.equalTo(0)
-            make.right.equalTo(vLine.snp.left)
-        }
-        oddsBut.snp.makeConstraints { (make) in
-            make.top.bottom.right.equalTo(0)
-            make.left.equalTo(vLine.snp.right)
-        }
+        
     }
     private func initSubview() {
         vLine = UIView()
@@ -56,6 +44,33 @@ class FootballMatchPagerView: UIView {
         self.addSubview(vLine)
         self.addSubview(analysisBut)
         self.addSubview(oddsBut)
+        
+        
+        
+        
+        
+        let turnOn = UserDefaults.standard.bool(forKey: TurnOn)
+        
+        if turnOn {
+            vLine.snp.makeConstraints { (make) in
+                make.top.bottom.equalTo(0)
+                make.centerX.equalTo(self.snp.centerX)
+                make.width.equalTo(1)
+            }
+            analysisBut.snp.makeConstraints { (make) in
+                make.top.left.bottom.equalTo(0)
+                make.right.equalTo(vLine.snp.left)
+            }
+            oddsBut.snp.makeConstraints { (make) in
+                make.top.bottom.right.equalTo(0)
+                make.left.equalTo(vLine.snp.right)
+            }
+        }else {
+            analysisBut.snp.makeConstraints { (make) in
+                make.top.left.bottom.equalTo(0)
+                make.right.equalTo(0)
+            }
+        }
     }
     
     private func getButton(_ title : String) -> UIButton {
