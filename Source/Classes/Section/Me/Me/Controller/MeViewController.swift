@@ -238,7 +238,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
             
         }
     }
-    
+    // MARK: - 在线客服配置
     private func initZhiChiService() {
         let initInfo = ZCLibInitInfo()
         
@@ -255,6 +255,15 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         
         uiInfo.titleFont = Font15
         
+        uiInfo.satisfactionSelectedBgColor = ColorEA5504
+        
+        uiInfo.commentOtherButtonBgColor = ColorEA5504
+        
+        uiInfo.commentCommitButtonColor = ColorEA5504
+        
+        uiInfo.commentCommitButtonBgColor = ColorEA5504
+        
+        uiInfo.commentCommitButtonBgHighColor = ColorFFFFFF
         //uiInfo.serviceNameTextColor = Color0099D9
         
         
