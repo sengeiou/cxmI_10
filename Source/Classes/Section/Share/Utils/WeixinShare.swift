@@ -53,7 +53,8 @@ extension WeixinSharePro {
     }
     
     private func share(title: String, description: String, image: UIImage, url: String, scene: WXScene) {
-        guard let data = UIImagePNGRepresentation(image) else { return }
+
+        guard let data = image.compressImage(image: image, maxLength: 32) else { return }
         share(title: title, description: description, imageDate: data, url: url, scene: scene)
         
     }

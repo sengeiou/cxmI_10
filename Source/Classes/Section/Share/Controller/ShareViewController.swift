@@ -17,7 +17,7 @@ fileprivate let minimumInteritemSpacing : CGFloat = 20 * defaultScale
 fileprivate let cellWidth : CGFloat = (screenWidth - leftInset * 2 - minimumInteritemSpacing * 4) / 4
 fileprivate let cellHeight : CGFloat = 70 * defaultScale
 
-class ShareViewController: BasePopViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, WeixinSharePro {
+class ShareViewController: BasePopViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, WeixinSharePro, ZipImagePro {
     
     public var shareContent: ShareContentModel!
 
@@ -65,6 +65,7 @@ class ShareViewController: BasePopViewController, UICollectionViewDelegate, UICo
     private func shareWeixin() {
         
         guard shareContent != nil else { return }
+        //self.shareContent.sharePic = zipImage(image: self.shareContent.sharePic)
         shareImage(content: self.shareContent, scene: WXSceneSession)
     }
     private func shareWeixinCircle() {

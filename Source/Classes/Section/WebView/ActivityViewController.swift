@@ -134,7 +134,7 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
                             }
                         }else {
                             decisionHandler(.allow)
-                        }     
+                        }
                     }
                 }
             }
@@ -154,6 +154,7 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
             self.shareContent.title = dic["title"]
             self.shareContent.description = dic["description"]
             self.shareContent.urlStr = dic["url"]
+            self.shareContent.sharePicUrl = dic["thumbUrl"]
         }
     }
     

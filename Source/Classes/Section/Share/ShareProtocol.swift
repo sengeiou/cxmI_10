@@ -26,12 +26,27 @@ extension ShareProtocol {
         
         contentModel.urlStr = content.urlStr + "&frz=\(turn)"
         
-        if contentModel.sharePic == nil {
-            contentModel.sharePic = UIImage(named: "fenxiangtubiao")
+        if contentModel.sharePicUrl == nil {
+            if contentModel.sharePic == nil {
+                contentModel.sharePic = UIImage(named: "fenxiangtubiao")
+            }
+            
+            let share = ShareViewController()
+            share.shareContent = contentModel
+            vc.present(share)
+        }else {
+            if let url = URL(string: contentModel.sharePicUrl) {
+                UIImageView().kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil , completionHandler: { (image, error, type , url) in
+                    guard image != nil else { return }
+                    DispatchQueue.main.async {
+                        contentModel.sharePic = image
+                        let share = ShareViewController()
+                        share.shareContent = contentModel
+                        vc.present(share)
+                    }
+                })
+            }
         }
-        
-        let share = ShareViewController()
-        share.shareContent = contentModel
-        vc.present(share)
     }
+    
 }

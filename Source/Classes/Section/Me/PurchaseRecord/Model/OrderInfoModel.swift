@@ -44,6 +44,8 @@ struct OrderInfoModel: HandyJSON {
     /// web url
     var redirectUrl : String!
     
+    var betNum : String!
+    
 }
 
 struct MatchInfo: HandyJSON {

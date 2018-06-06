@@ -312,9 +312,11 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
                     guard let rechargeUser = self.paymentMethodModel.rechargeUserDTO else { return }
                     guard let list = rechargeUser.donationPriceList else { return }
                     
-                    if rechargeUser.oldUserBz == "0" {
-                        
-                    }
+//                    if rechargeUser.oldUserBz == "0" {
+//
+//                    }else {
+//
+//                    }
                     
                     guard list.count >= 0 else { return }
                     guard self.rechargeMoney != nil else { return }

@@ -22,7 +22,7 @@ class WorldCupOrderRuleCell: UITableViewCell {
 //            title.attributedText = titleAtt
             
             let detailAtt = NSMutableAttributedString(string: "投注倍数: ")
-            let details = NSAttributedString(string: orderInfo.cathectic, attributes: [NSAttributedStringKey.foregroundColor: Color505050])
+            let details = NSAttributedString(string: "\(orderInfo.betNum)注 \(orderInfo.cathectic)倍", attributes: [NSAttributedStringKey.foregroundColor: Color505050])
             detailAtt.append(details)
             detail.attributedText = detailAtt
         }
