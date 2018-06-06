@@ -34,9 +34,9 @@ class RechargeCardCell: UITableViewCell {
             guard isNewUser != nil else { return }
             
             if isNewUser == "0" {
-                activityMoney.text = "送\(giveAmount!)元优惠券"
+                activityMoney.text = "送\(giveAmount!)元"
             }else if isNewUser == "1" {
-                activityMoney.text = "最高可送\(giveAmount!)元优惠券"
+                activityMoney.text = "最高可送\(giveAmount!)元"
             }
         }
     }
