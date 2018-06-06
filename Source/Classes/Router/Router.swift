@@ -14,7 +14,7 @@ protocol RouterPro : RouterMatcher { }
 extension RouterPro {
     /// 路由跳转
     func pushRouterVC(urlStr: String, from vc : UIViewController) {
-        //let urlStr = "http://192.168.31.205:8080/activity/world_matchList?cxmxc=scm&type=1&showtitle=1"
+//        let urlStr = "http://192.168.31.205:8080/activity/red_packet?cxmxc=scm&cmshare=1&showtitle=1&type=1&usinfo=1"
         let type = matcherHttp(urlStr: urlStr)
         
         switch type.0 {
