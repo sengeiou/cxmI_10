@@ -11,6 +11,7 @@ import UIKit
 enum UserInfoSettingPushType {
     case 设置密码
     case 修改密码
+    case none
 }
 
 fileprivate let UserInfoSettingCellId = "UserInfoSettingCellId"
@@ -57,6 +58,7 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
             let pass = SettingPasswordVC()
             pass.settingType = .修改
             pushViewController(vc: pass)
+        default: break
         }
     }
     
@@ -127,6 +129,7 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
         var phone = SettingRowDataModel()
         phone.title = "手机认证"
         phone.detail = userInfo?.mobile
+        phone.pushType = .none
         section1.list.append(phone)
         
         var pass = SettingRowDataModel()

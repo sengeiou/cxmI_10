@@ -10,6 +10,7 @@ import Foundation
 import SystemConfiguration.CaptiveNetwork
 import HandyJSON
 import Reachability
+import AdSupport
 
 class DeviceManager: AlertPro  {
     static let share = DeviceManager()
@@ -63,7 +64,7 @@ class DeviceManager: AlertPro  {
         device.build = UIDevice.current.systemVersion
         device.net = net
         device.channel = "c16010"
-        
+        device.IDFA = ASIdentifierManager.shared().advertisingIdentifier.uuidString
         self.device = device
         
         //return device
@@ -115,6 +116,6 @@ struct DeviceInfoModel: HandyJSON {
     var channel:String!
     /// 当前网络连接类型
     var net  : String!
-    
+    var IDFA : String!
     var token: String!
 }
