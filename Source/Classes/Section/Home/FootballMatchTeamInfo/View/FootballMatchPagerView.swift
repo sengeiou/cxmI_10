@@ -44,11 +44,7 @@ class FootballMatchPagerView: UIView {
         self.addSubview(vLine)
         self.addSubview(analysisBut)
         self.addSubview(oddsBut)
-        
-        
-        
-        
-        
+
         let turnOn = UserDefaults.standard.bool(forKey: TurnOn)
         
         if turnOn {
