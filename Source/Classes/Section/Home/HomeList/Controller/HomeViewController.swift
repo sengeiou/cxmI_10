@@ -189,25 +189,29 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                     weakSelf?.newsList.removeAll()
                 }
                 weakSelf?.newsList.append(contentsOf: self.newsListModel.list)
-                weakSelf?.tableView.reloadData()
-                
-                let xxx = data.toJSONString()
-                let dataStr = xxx?.data(using: .utf8)
-                
-                guard let realm = try? Realm() else { return }
-                let dataRealm = HomeRealmData()
-                dataRealm.data = dataStr!
-                
-                let turnOn = UserDefaults.standard.bool(forKey: TurnOn)
-            
-                if turnOn {
-                    dataRealm.homeStyle = 1
-                }else {
-                    dataRealm.homeStyle = 0
+                DispatchQueue.main.async {
+                    weakSelf?.tableView.reloadData()
                 }
                 
-                try! realm.write {
-                    realm.add(dataRealm, update: true)
+                DispatchQueue.global().async {
+                    let xxx = data.toJSONString()
+                    let dataStr = xxx?.data(using: .utf8)
+                    
+                    guard let realm = try? Realm() else { return }
+                    let dataRealm = HomeRealmData()
+                    dataRealm.data = dataStr!
+                    
+                    let turnOn = UserDefaults.standard.bool(forKey: TurnOn)
+                    
+                    if turnOn {
+                        dataRealm.homeStyle = 1
+                    }else {
+                        dataRealm.homeStyle = 0
+                    }
+                    
+                    try! realm.write {
+                        realm.add(dataRealm, update: true)
+                    }
                 }
                 
             }, onError: { (error) in
