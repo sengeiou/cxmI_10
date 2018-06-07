@@ -64,6 +64,8 @@ class NewsDetailCell: UITableViewCell, WKUIDelegate, WKNavigationDelegate, DateP
     }
     
     private func initSubview() {
+        self.selectionStyle = .none
+        
         title = getLabel()
         title.numberOfLines = 2
         

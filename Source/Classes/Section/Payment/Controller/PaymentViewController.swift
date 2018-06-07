@@ -592,9 +592,13 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
         
         self.saveBetInfo.bonusId = bonusId
         self.saveBetInfo.setBonus()
-        
-        self.requestModel.bonusId = bonusId
-        orderRequest()
+        if self.requestModel != nil {
+            self.requestModel.bonusId = bonusId
+            orderRequest()
+        }else if self.worldCupDic != nil {
+            self.worldCupDic["bonusId"] = bonusId
+            worldCupOrderRequest()
+        }
         
         if self.matchType != nil {
             TongJi.log(.优惠券抵扣, label: self.matchType.rawValue, att: .彩种)
