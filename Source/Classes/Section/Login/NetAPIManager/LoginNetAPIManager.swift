@@ -101,6 +101,8 @@ extension LoginNetAPIManager: TargetType {
         case .sendSms(let mobile, let smsType):
             dic["mobile"] = mobile
             dic["smsType"] = smsType
+        case .logout:
+            dic["str"] = "ssss"
         default:
             return .requestPlain
         }
