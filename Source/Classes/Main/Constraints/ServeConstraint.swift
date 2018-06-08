@@ -24,16 +24,16 @@ let baseWeb = "http://m.caixiaomi.net"
 
 
 /// 安全保障
-let webInsurance = "\(baseWeb)/user/insurance?showtitle=1&display=\(display)"
+let webInsurance = "\(baseWeb)/user/insurance?showtitle=1"
 /// 帮助中心
-let webHelp = "\(baseWeb)/user/help?showtitle=1&display=\(display)"
+let webHelp = "\(baseWeb)/user/help?showtitle=1"
 /// 玩法帮助
-let webPlayHelp = "\(baseWeb)/freebuy/inToplay?showtitle=1&display=\(display)"
+let webPlayHelp = "\(baseWeb)/freebuy/inToplay?showtitle=1"
 /// 购彩协议
-let webBuyAgreement = "\(baseWeb)/freebuy/protocol?showtitle=1&display=\(display)"
+let webBuyAgreement = "\(baseWeb)/freebuy/protocol?showtitle=1"
 /// 注册协议
-let webRegisterAgreement = "\(baseWeb)/user/service?showtitle=1&display=\(display)"
+let webRegisterAgreement = "\(baseWeb)/user/service?showtitle=1"
 /// 发现
-let SurpriseUrl = "\(baseWeb)/find?showBar=1&showtitle=1&from=app_find&display=\(display)"
+let SurpriseUrl = "\(baseWeb)/find?showBar=1&showtitle=1&from=app_find"
 /// 胆说明
-let danExplainUrl = "\(baseWeb)/freebuy/explain?showBar=1&showtitle=1&display=\(display)"
+let danExplainUrl = "\(baseWeb)/freebuy/explain?showBar=1&showtitle=1"
