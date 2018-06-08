@@ -19,6 +19,9 @@ let ZhiChiAppKey = "7b732ef68c044f97a50bafff726f18c7"
 
 let phoneNum = "400-012-6600"
 
+/// 更换马甲包显示内容 - title 、 协议内容等
+let display = "tiantianmai"
+
 #if DEBUG
     let GetuiAppID  = "BWgBz2PhAq5ZxmZ7e4yINA"
     let GetuiAppKey = "o74Y1SjdzI73MhkkAwuXp4"
