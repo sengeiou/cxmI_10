@@ -380,7 +380,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
             case 0:
                 return 35
             case 1:
-                if self.homeData.activity == nil {
+                if self.homeData != nil, self.homeData.activity == nil {
                     return 0
                 }else {
                     return 80
@@ -415,6 +415,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
             return 5
         }else {
             if section == 1 {
+                guard self.homeData != nil else { return 0}
                 if self.homeData.activity == nil {
                     return 0
                 }else {
