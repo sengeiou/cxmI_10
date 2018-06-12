@@ -104,6 +104,7 @@ class ForgetPswPhoneVC: BaseViewController, UITextFieldDelegate, ValidatePro, UI
                     let vcode = ForgetPswVCodeVC()
                     vcode.phoneNum = self.phoneTF.text
                     self.pushViewController(vc: vcode)
+                    TongJi.log(.忘记密码获取验证码, label: "ios", att: .终端)
                 default : break
                 }
                 

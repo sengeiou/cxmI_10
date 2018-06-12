@@ -135,11 +135,12 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-         TongJi.start("大厅")
+        TongJi.start("大厅")
+        TongJi.log(.show, label: "大厅")
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-         TongJi.end("大厅")
+        TongJi.end("大厅")
     }
     
     //MARK: - 加载数据
