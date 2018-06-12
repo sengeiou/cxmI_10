@@ -21,7 +21,7 @@ class OrderDetailHeaderView: UIView {
             
             
             let moneyAtt = NSMutableAttributedString(string: "¥", attributes: [NSAttributedStringKey.font: Font10])
-            let money = NSAttributedString(string: orderInfo.moneyPaid)
+            let money = NSAttributedString(string: orderInfo.ticketAmount)
             moneyAtt.append(money)
             
             titleLB.text = orderInfo.lotteryClassifyName
