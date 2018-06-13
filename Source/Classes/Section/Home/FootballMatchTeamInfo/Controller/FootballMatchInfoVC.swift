@@ -50,7 +50,6 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
     // MARK: - 属性 private
     private var teamInfoStyle : TeamInfoStyle! = .analysis {
         didSet{
-            
             self.tableView.reloadData()
         }
     }
@@ -74,6 +73,14 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
         initSubview()
         
         matchInfoRequest(matchId: matchId)
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        TongJi.start("赛事分析页/赔率页")
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        TongJi.end("赛事分析页/赔率页")
     }
     // MARK: - 去投注
     @objc private func buyButtonClicked(_ sender: UIButton) {

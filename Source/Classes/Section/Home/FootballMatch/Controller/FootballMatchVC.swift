@@ -111,11 +111,11 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        //TongJi.start(self.matchType.rawValue)
+        TongJi.start(self.matchType.rawValue)
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        //TongJi.end(self.matchType.rawValue)
+        TongJi.end(self.matchType.rawValue)
     }
     // MARK: - 查看详情
     func didTipPopConfirm(matchId : String) {

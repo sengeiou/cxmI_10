@@ -55,6 +55,14 @@ class NewsDetailViewController: BaseViewController, UITableViewDelegate, UITable
         super.viewWillAppear(animated)
         //newsDetailRequest()
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        TongJi.start("资讯页")
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        TongJi.end("资讯页")
+    }
     
     // MARK: - 点击事件
     // 收藏

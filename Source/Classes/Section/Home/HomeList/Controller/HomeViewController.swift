@@ -29,11 +29,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     
     // MARK: - banner 点击
     func didTipBanner(banner: BannerModel) {
-        
-        //
-        //dsafdsafasdfsafasd
-        
-        pushRouterVC(urlStr: banner.bannerLink, from: self)
+        pushRouterVC(banner.bannerName, urlStr: banner.bannerLink, from: self)
     }
     
     //MARK: - 点击事件
@@ -51,7 +47,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
             switch indexPath.section {
             case 1:
                 guard homeData != nil, let activity = self.homeData.activity else { return }
-                pushRouterVC(urlStr: activity.actUrl, from: self)
+                pushRouterVC(activity.actTitle, urlStr: activity.actUrl, from: self)
             case 3:
                 let web = NewsDetailViewController()
                 web.articleId = self.newsList[indexPath.row].articleId

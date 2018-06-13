@@ -68,6 +68,14 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
 //        accountListRequest(1)
 //        statisticsRequest()
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        TongJi.start("账户明细页")
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        TongJi.end("账户明细页")
+    }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.snp.makeConstraints { (make) in

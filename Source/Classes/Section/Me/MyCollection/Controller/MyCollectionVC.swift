@@ -17,6 +17,7 @@ class MyCollectionVC: BaseViewController, UITableViewDelegate, UITableViewDataSo
     private var collectModel: NewsListModel!
     private var collectList : [NewsInfoModel]!
     
+    // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "彩小秘 · 我的收藏"
@@ -33,7 +34,14 @@ class MyCollectionVC: BaseViewController, UITableViewDelegate, UITableViewDataSo
             self.loadNextData()
         }
     }
-
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        TongJi.start("我的收藏页")
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        TongJi.end("我的收藏页")
+    }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.tableView.snp.makeConstraints { (make) in

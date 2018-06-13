@@ -17,6 +17,7 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
     
     public var shouldReload = true
     //public var titleStr : String! = ""
+    public var webName: String = ""
     
     private var progressView : UIProgressView!
     
@@ -35,6 +36,11 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
         if shouldReload {
             //self.webView.reload()
         }
+        TongJi.start(webName)
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        TongJi.end(webName)
     }
     
     override func viewDidLayoutSubviews() {

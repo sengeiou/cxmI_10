@@ -55,6 +55,7 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
     
     private var backed  = false
     
+    // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "彩小秘 · 支付订单"
@@ -68,7 +69,14 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
-    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        TongJi.start("支付页: \(self.matchType.rawValue)")
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        TongJi.end("支付页: \(self.matchType.rawValue)")
+    }
     override func didLogin(isLogin: Bool) {
         if isLogin == false {
             self.popViewController()

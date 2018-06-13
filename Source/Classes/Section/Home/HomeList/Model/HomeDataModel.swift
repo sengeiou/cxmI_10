@@ -47,6 +47,6 @@ struct HomePlayModel:  HandyJSON {
 /// 活动栏
 struct HomeActivityModel:  HandyJSON {
     var actImg: String!
-    var actTitle: String!
+    var actTitle: String! = ""
     var actUrl: String!
 }

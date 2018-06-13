@@ -69,6 +69,14 @@ class PurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
         recordRequest(1)
         
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        TongJi.start("投注记录页")
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        TongJi.end("投注记录页")
+    }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.snp.makeConstraints { (make) in

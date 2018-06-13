@@ -11,6 +11,8 @@ import WebKit
 
 class ActivityViewController: BaseWebViewController, ShareProtocol {
 
+    
+    
     override func didLogin(isLogin: Bool) {
         if isLogin {
             self.webView.reload()

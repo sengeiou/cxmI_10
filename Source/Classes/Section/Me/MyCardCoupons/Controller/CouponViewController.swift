@@ -37,6 +37,7 @@ class CouponViewController: BaseViewController, IndicatorInfoProvider, UITableVi
     private var couponListModel : CouponListModel!
     private var couponList : [CouponInfoModel]!
     
+    // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(tableView)
@@ -52,7 +53,14 @@ class CouponViewController: BaseViewController, IndicatorInfoProvider, UITableVi
             self.loadNextData()
         }
     }
-    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        TongJi.start("我的卡券页")
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        TongJi.end("我的卡券页")
+    }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.snp.makeConstraints { (make) in

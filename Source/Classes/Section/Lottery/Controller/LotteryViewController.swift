@@ -59,6 +59,16 @@ class LotteryViewController: BaseViewController, UITableViewDelegate, UITableVie
         self.headerView.dateModel = self.dateList.last
         self.selectedDateModel = self.dateList.last
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        TongJi.start("开奖页")
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        TongJi.end("开奖页")
+    }
+    
+    
     override func viewDidLayoutSubviews() {
         tableView.snp.makeConstraints { (make) in
             make.top.equalTo(headerView.snp.bottom)

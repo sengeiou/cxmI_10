@@ -97,6 +97,14 @@ class RegisterViewController: BaseViewController, UITableViewDelegate, UITableVi
         self.title = "彩小秘 · 注册"
         self.view.addSubview(tableView)
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        TongJi.start("注册页")
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        TongJi.end("注册页")
+    }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         

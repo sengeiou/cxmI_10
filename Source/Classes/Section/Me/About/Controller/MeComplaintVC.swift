@@ -36,7 +36,14 @@ class MeComplaintVC: BaseViewController {
         self.title = "彩小秘 · 投诉建议"
         initSubview()
     }
-
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        TongJi.start("投诉建议页")
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        TongJi.end("投诉建议页")
+    }
     // MARK: = 网络请求
     private func complainRequest() {
         self.showProgressHUD()

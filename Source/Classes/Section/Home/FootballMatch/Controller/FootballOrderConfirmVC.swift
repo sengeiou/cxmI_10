@@ -130,6 +130,14 @@ class FootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITableVi
         selectPlays = Set(playList)
         orderRequest()
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        TongJi.start("投注确认页: \(self.matchType.rawValue)")
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        TongJi.end("投注确认页: \(self.matchType.rawValue)")
+    }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.snp.makeConstraints { (make) in

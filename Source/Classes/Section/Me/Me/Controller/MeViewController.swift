@@ -80,6 +80,14 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         // 隐藏消息 红点的显示
         hidenNotic()
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        TongJi.start("我的页")
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        TongJi.end("我的页")
+    }
     
     private func hidenNotic() {
         guard let bonusNo = UserDefaults.standard.value(forKey: BonusNotice) as? String else { return }
@@ -199,6 +207,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
             TongJi.log(.我的收藏, label: "我的收藏")
         case .帮助中心:
             let web = WebViewController()
+            web.webName = "帮助中心"
             web.urlStr = webHelp
             pushViewController(vc: web)
             TongJi.log(.帮助中心, label: "帮助中心")

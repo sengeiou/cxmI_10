@@ -13,8 +13,8 @@ protocol RouterPro : RouterMatcher { }
 
 extension RouterPro {
     /// 路由跳转
-    func pushRouterVC(urlStr: String, from vc : UIViewController) {
-        let urlStr = "http://192.168.31.205:8080/activity/tuiguang?cxmxc=scm&type=1&usinfo=1&showtitle=1&cfrom=app"
+    func pushRouterVC(_ name: String = "", urlStr: String, from vc : UIViewController) {
+        //let urlStr = "http://192.168.31.205:8080/activity/tuiguang?cxmxc=scm&type=1&usinfo=1&showtitle=1&cfrom=app"
         //"http://39.106.18.39:9805/activity/tuiguang?cxmxc=scm&type=1&usinfo=1&showtitle=1&cfrom=app"
         let type = matcherHttp(urlStr: urlStr)
         
@@ -26,7 +26,7 @@ extension RouterPro {
         case .注册:
             break
         case .网页:
-            pushWebview(urlStr: urlStr, from: vc)
+            pushWebview(name, urlStr: urlStr, from: vc)
         case .浏览器:
             if let url = URL(string: urlStr) {
                 UIApplication.shared.openURL(url)
@@ -94,8 +94,9 @@ extension RouterPro {
         pushViewController(football, from: vc)
     }
     
-    private func pushWebview(urlStr : String, from vc: UIViewController) {
+    private func pushWebview(_ name : String = "", urlStr : String, from vc: UIViewController) {
         let web = ActivityViewController()
+        web.webName = name
         if urlStr.contains("?") {
             web.urlStr = urlStr + "&cfrom=app"
         }else {

@@ -39,6 +39,7 @@ class MessageCenterVC: BaseViewController, IndicatorInfoProvider, UITableViewDel
     private var messageModel : BasePageModel<MessageCenterModel>!
     private var messageList: [MessageCenterModel]!
     
+    // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
         setEmpty(title: "暂无数据", tableView)
@@ -55,7 +56,14 @@ class MessageCenterVC: BaseViewController, IndicatorInfoProvider, UITableViewDel
             self.loadNextData()
         }
     }
-
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        TongJi.start("消息中心页")
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        TongJi.end("消息中心页")
+    }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.snp.makeConstraints { (make) in
