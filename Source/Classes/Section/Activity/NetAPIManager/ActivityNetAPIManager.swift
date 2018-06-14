@@ -23,8 +23,6 @@ extension ActivityNetAPIManager : TargetType {
         return URL(string : baseURLStr + xpath)!
     }
     
-    
-    
     var path : String {
         return ""
     }

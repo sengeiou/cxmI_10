@@ -14,5 +14,5 @@ import HandyJSON
 struct BannerModel: HandyJSON {
    var bannerImage: String!
    var bannerLink: String!
-   var bannerName: String! = ""
+   var bannerName: String = ""
 }

@@ -34,7 +34,7 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if shouldReload {
-            //self.webView.reload()
+            self.webView.reload()
         }
         TongJi.start(webName)
     }

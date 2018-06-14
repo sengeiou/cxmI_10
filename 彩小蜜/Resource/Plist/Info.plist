@@ -57,6 +57,8 @@
 	<string>需要您的同意才能使用相机</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>需要您的同意才能使用麦克风</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>需要您的同意才能访问您的相册</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>需要您的同意才能访问您的相册</string>
 	<key>UIBackgroundModes</key>
