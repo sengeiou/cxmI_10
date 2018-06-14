@@ -116,6 +116,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro,
             
             if self.currentVC != nil {
                 self.popToCurrentVC()
+                NotificationCenter.default.post(name: NSNotification.Name(LoginSuccess), object: nil)
                 guard self.loginDelegate != nil else { return }
                 self.loginDelegate.didLogin(isLogin: true)
             }else {

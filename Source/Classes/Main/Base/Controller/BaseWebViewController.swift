@@ -21,25 +21,23 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
     
     private var progressView : UIProgressView!
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         initProgressView()
         initWebView()
         loadWebView()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(didLoginSuccess), name: NSNotification.Name(rawValue: LoginSuccess), object: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if shouldReload {
-            self.webView.reload()
-        }
         TongJi.start(webName)
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        
         TongJi.end(webName)
     }
     
@@ -54,6 +52,12 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
         webView.snp.makeConstraints { (make) in
             make.top.equalTo(progressView.snp.bottom)
             make.left.right.bottom.equalTo(0)
+        }
+    }
+    
+    @objc private func didLoginSuccess() {
+        DispatchQueue.main.async {
+            self.webView.reload()
         }
     }
     
@@ -96,16 +100,7 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
     
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
     
-//        let urlStr = "\(webView.url!)"
-//
-//        let type = matcherHttp(urlStr: urlStr)
-//
-//        switch type.0 {
-//        case .登录:
-//            pushLoginVC(from: self)
-//
-//        default: break
-//        }
+
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
@@ -128,7 +123,7 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
         // usInfo == "1" 进入此页面发现无token时 弹出登录页
         if urlStr.contains("cxmxc=scm") && urlModel.usInfo == "1" {
             guard model.token != "" else {
-                pushLoginVC(from: self)
+                self.pushLoginVC(from: self)
                 return
             }
             webView.evaluateJavaScript("actionMessage('\(jsData!)')") { (data, error) in
@@ -189,6 +184,7 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
         if self.webView != nil {
             self.webView.removeObserver(self, forKeyPath: "estimatedProgress")
         }
+        NotificationCenter.default.removeObserver(self)
     }
     
     override func didReceiveMemoryWarning() {

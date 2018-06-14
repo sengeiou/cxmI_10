@@ -40,6 +40,7 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
         self.countdownBut.stop = true
         let vcode = LoginViewController()
         vcode.currentVC = self.currentVC
+        vcode.loginDelegate = self.loginDelegate
         pushViewController(vc: vcode)
     }
     
@@ -107,6 +108,7 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
                 
                 if self.currentVC != nil {
                     self.popToCurrentVC()
+                    NotificationCenter.default.post(name: NSNotification.Name(LoginSuccess), object: nil)
                     guard self.loginDelegate != nil else { return }
                     self.loginDelegate.didLogin(isLogin: true)
                 }else {

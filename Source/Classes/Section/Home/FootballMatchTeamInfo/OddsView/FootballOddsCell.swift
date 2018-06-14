@@ -216,7 +216,7 @@ class FootballOddsCell: UITableViewCell {
         topLine.image = UIImage(named: "line")
         
         company = getLabel("公司")
-        oddslb = getLabel("初赔\n即赔")
+        oddslb = getLabel("初始\n即时")
         
         homelb = getLabel("胜")
         
