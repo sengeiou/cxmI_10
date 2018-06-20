@@ -18,7 +18,7 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
     public var shouldReload = true
     //public var titleStr : String! = ""
     public var webName: String = ""
-    
+    public var showTitle : String!
     private var progressView : UIProgressView!
     
     override func viewDidLoad() {
@@ -105,12 +105,16 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
        
-        webView.evaluateJavaScript("getCxmTitle()") { (data, error) in
-            if let title = data as? String {
-                self.navigationItem.title = title
-            }else {
-                self.navigationItem.title = webView.title
+        if showTitle == nil {
+            webView.evaluateJavaScript("getCxmTitle()") { (data, error) in
+                if let title = data as? String {
+                    self.navigationItem.title = title
+                }else {
+                    self.navigationItem.title = webView.title
+                }
             }
+        }else {
+            self.navigationItem.title = self.showTitle
         }
         
         let model = JSDataModel()
