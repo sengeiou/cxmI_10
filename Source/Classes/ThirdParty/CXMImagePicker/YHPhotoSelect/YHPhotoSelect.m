@@ -9,6 +9,8 @@
 #import "YHPhotoSelect.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "YHImageEditVC.h"
+#import<AVFoundation/AVCaptureDevice.h>
+#import <AVFoundation/AVMediaFormat.h>
 
 @interface YHPhotoSelect ()
 <
@@ -63,34 +65,72 @@ YHDPhotoEditVCDelegate
 #pragma mark - Private Methods
 
 - (void)showTakePhotoView {
-    self.previousStatusBarStyle = [[UIApplication sharedApplication] statusBarStyle];
+    //相机权限
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    if (authStatus ==ALAuthorizationStatusRestricted ||
+        authStatus ==ALAuthorizationStatusDenied)
+    {
+        [self showAlert:@"请打开访问相机权限" detail:@""];
+    }else {
+        self.previousStatusBarStyle = [[UIApplication sharedApplication] statusBarStyle];
+        
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        self.pickerController = picker;
+        picker.delegate = self;
+        //picker.allowsEditing = YES;
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        [self.viewController presentViewController:picker animated:YES completion:^{
+            [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+        }];
+    }
     
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    self.pickerController = picker;
-    picker.delegate = self;
-    picker.allowsEditing = YES;
-    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    [self.viewController presentViewController:picker animated:YES completion:^{
-        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
-    }];
 }
 
 - (void)showPhotoSelectView {
     
-    self.previousStatusBarStyle = [[UIApplication sharedApplication] statusBarStyle];
-    
-    if (!self.isMultiPickImage) {
-        // 如果不是多选, 则使用系统的控件来进行选择
-        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-        self.pickerController = picker;
-        picker.delegate = self;
-        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        [self.viewController presentViewController:picker animated:YES completion:^{
-            [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
-        }];
-    }else{
-        // 多选(暂未实现)
+    //相册权限
+    ALAuthorizationStatus author = [ALAssetsLibrary authorizationStatus];
+    if (author ==ALAuthorizationStatusRestricted || author ==ALAuthorizationStatusDenied){
+        [self showAlert:@"请打开访问相机权限" detail:@""];
+    }else {
+        self.previousStatusBarStyle = [[UIApplication sharedApplication] statusBarStyle];
+        
+        if (!self.isMultiPickImage) {
+            // 如果不是多选, 则使用系统的控件来进行选择
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            self.pickerController = picker;
+            picker.delegate = self;
+            picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            [self.viewController presentViewController:picker animated:YES completion:^{
+                [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+            }];
+        }else{
+            // 多选(暂未实现)
+        }
     }
+    
+    
+}
+
+- (void)showAlert : (NSString*)title detail: (NSString*)detail {
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle:title message:detail preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        // 无权限 引导去开启
+        NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+        if ([[UIApplication sharedApplication]canOpenURL:url]) {
+            [[UIApplication sharedApplication]openURL:url];
+        }
+    }];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    
+    [alert addAction:action];
+    [alert addAction:cancel];
+    
+    [self.viewController presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)selectedFinished:(NSArray *)imageArray {
@@ -101,7 +141,8 @@ YHDPhotoEditVCDelegate
     if ([self.delegate respondsToSelector:@selector(yhdOptionalPhotoSelect:didFinishedWithImageArray:)]) {
         [self.delegate yhdOptionalPhotoSelect:self didFinishedWithImageArray:self.imageArray];
     }
-    [self.pickerController dismissViewControllerAnimated:YES completion:nil];
+    //[self.pickerController dismissViewControllerAnimated:YES completion:nil];
+    [self.viewController.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)selectedCancelled {
