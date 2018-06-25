@@ -60,7 +60,8 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
     private func pushSettingVC(_ model : UserInfoSettingPushType) {
         switch model {
         case .设置头像:
-            self.photoSelect.start(YHEPhotoSelectFromLibrary)
+            self.showPhotoSelect()
+            
         case .设置密码:
             let pass = SettingPasswordVC()
             pass.settingType = .设置
@@ -71,6 +72,30 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
             pushViewController(vc: pass)
         default: break
         }
+    }
+    
+    private func showPhotoSelect() {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let libraryAct = UIAlertAction(title: "从手机相册选择", style: .default) { (action) in
+            self.photoSelect.start(YHEPhotoSelectFromLibrary)
+        }
+        libraryAct.setValue(ColorA0A0A0, forKey: "titleTextColor")
+        
+        let cameraAct = UIAlertAction(title: "拍照", style: .default) { (action) in
+            self.photoSelect.start(YHEPhotoSelectTakePhoto)
+        }
+        cameraAct.setValue(ColorA0A0A0, forKey: "titleTextColor")
+        let cancel = UIAlertAction(title: "取消", style: .cancel) { (action) in
+            
+        }
+        cancel.setValue(ColorEA5504, forKey: "titleTextColor")
+        
+        alertController.addAction(cameraAct)
+        alertController.addAction(libraryAct)
+        alertController.addAction(cancel)
+        
+        self.present(alertController)
     }
     
     //MARK: - 懒加载
