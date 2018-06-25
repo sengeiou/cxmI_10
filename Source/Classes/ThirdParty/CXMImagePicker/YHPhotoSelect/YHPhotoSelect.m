@@ -68,7 +68,7 @@ YHDPhotoEditVCDelegate
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     self.pickerController = picker;
     picker.delegate = self;
-    //picker.allowsEditing = YES;
+    picker.allowsEditing = YES;
     picker.sourceType = UIImagePickerControllerSourceTypeCamera;
     [self.viewController presentViewController:picker animated:YES completion:^{
         [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
@@ -128,10 +128,16 @@ YHDPhotoEditVCDelegate
     if (self.isAllowEdit) {
         YHImageEditVC *vc = [[YHImageEditVC alloc] initWithImage:selectedImage delegate:self];
         picker.view.backgroundColor = [UIColor whiteColor];
-        [picker pushViewController:vc animated:YES];
+        //[picker pushViewController:vc animated:YES];
+        [picker dismissViewControllerAnimated:NO completion:^{
+            [self.viewController.navigationController pushViewController:vc animated:YES];
+        }];
+        
     } else {
         [self selectedFinished:@[selectedImage]];
     }
+    
+    
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{

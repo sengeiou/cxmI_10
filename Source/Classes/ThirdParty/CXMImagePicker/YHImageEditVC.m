@@ -43,7 +43,7 @@
     self.cropView = [[YHCropView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     self.cropView.delegate = self;
     [self.view addSubview:self.cropView];
-    
+    [self setNav];
     self.cropView.image = self.image;
 }
 
@@ -61,6 +61,17 @@
     // 开启返回手势
     self.fd_interactivePopDisabled = NO;
 }
+
+- (void)setNav {
+    UIButton * but = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    [but addTarget:self action:@selector(leftBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    UIImage *image = [UIImage imageNamed:@"ret"];
+    but.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 24);
+    [but setImage:image  forState:UIControlStateNormal];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:but];
+}
+
 
 #pragma mark - Click Events
 - (void)leftBtnClick:(id)sender {
