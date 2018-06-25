@@ -11,6 +11,9 @@ import SnapKit
 import DZNEmptyDataSet
 import SVProgressHUD
 import Reachability
+import JPImageresizerView
+
+
 class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, DateProtocol, UserInfoPro , LoginProtocol, RouterPro{
     func didLogin(isLogin: Bool) {
         

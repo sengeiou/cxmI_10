@@ -5,6 +5,7 @@ PODS:
   - FSPagerView (0.7.1)
   - GTSDK (2.2.0.0-noidfa)
   - HandyJSON (4.1.1)
+  - JPImageresizerView (0.3.9)
   - Kingfisher (4.7.0)
   - MJRefresh (3.1.15.3)
   - Moya/Core (11.0.2):
@@ -35,6 +36,7 @@ DEPENDENCIES:
   - FSPagerView
   - GTSDK (= 2.2.0.0-noidfa)
   - HandyJSON (~> 4.1.1)
+  - JPImageresizerView
   - Kingfisher
   - MJRefresh
   - Moya/RxSwift
@@ -58,6 +60,7 @@ SPEC REPOS:
     - FSPagerView
     - GTSDK
     - HandyJSON
+    - JPImageresizerView
     - Kingfisher
     - MJRefresh
     - Moya
@@ -81,6 +84,7 @@ SPEC CHECKSUMS:
   FSPagerView: 958aba39684e1573755ddcfcc29f7eebb8413cee
   GTSDK: 2cb8f5df1fbb250f596698443edd0191f77024f1
   HandyJSON: 3a3de917c4118767ffe41c29b5acba23409649f4
+  JPImageresizerView: 32677208d6f617dabd7ea8897a027126d7f12509
   Kingfisher: da6b005aa96d37698e3e4f1ccfe96a5b9bbf27d6
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
   Moya: a725035953bc1c0eb1be505ab903984501d82440
@@ -97,6 +101,6 @@ SPEC CHECKSUMS:
   WechatOpenSDK: 676feec516a11173eafd1fe64b10d27babf28701
   XLPagerTabStrip: c908b17cbf42fcd2598ee1adfc49bae25444d88a
 
-PODFILE CHECKSUM: a61ff0e9bdde649a471f22f85b6118f155518844
+PODFILE CHECKSUM: ec75af7b82b014f86db410564049baecd83bac75
 
 COCOAPODS: 1.5.0

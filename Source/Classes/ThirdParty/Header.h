@@ -18,3 +18,4 @@
 #import <GTSDK/GeTuiSdk.h>
 #import "BaiduMobStat.h"
 #import <SobotKit/SobotKit.h>
+#import "YHPhotoSelect.h"

@@ -11,11 +11,14 @@ import UIKit
 enum UserInfoSettingPushType {
     case 设置密码
     case 修改密码
+    case 设置头像
+    case 设置昵称
     case none
 }
 
 fileprivate let UserInfoSettingCellId = "UserInfoSettingCellId"
 fileprivate let UserInfoSettingHeaderViewId = "UserInfoSettingHeaderViewId"
+fileprivate let UserInfoIconCellId = "UserInfoIconCellId"
 
 class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -23,12 +26,18 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
     
     private var dataList: [SettingSectionModel]!
     
+    private var photoSelect: YHPhotoSelect!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "彩小秘 · 个人信息"
         self.view.addSubview(tableView)
         
         self.dataList = getDataList()
+        
+        self.photoSelect = YHPhotoSelect(controller: self, delegate: self)
+        
+        self.photoSelect.isAllowEdit = true
         
         self.tableView.reloadData()
     }
@@ -50,6 +59,8 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
     
     private func pushSettingVC(_ model : UserInfoSettingPushType) {
         switch model {
+        case .设置头像:
+            self.photoSelect.start(YHEPhotoSelectFromLibrary)
         case .设置密码:
             let pass = SettingPasswordVC()
             pass.settingType = .设置
@@ -70,6 +81,7 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
         table.dataSource = self
         table.backgroundColor = ColorF4F4F4
         table.register(UserInfoSettingCell.self, forCellReuseIdentifier: UserInfoSettingCellId)
+        table.register(UserInfoIconCell.self, forCellReuseIdentifier: UserInfoIconCellId)
         table.register(UserInfoSettingHeaderView.self, forHeaderFooterViewReuseIdentifier: UserInfoSettingHeaderViewId)
         return table
     }()
@@ -85,14 +97,23 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: UserInfoSettingCellId, for: indexPath) as! UserInfoSettingCell
         
         let section = dataList[indexPath.section]
         let row = section.list[indexPath.row]
         
-        cell.model = row
+        if row.pushType == .设置头像 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: UserInfoIconCellId, for: indexPath) as! UserInfoIconCell
 
-        return cell
+            cell.model = row
+            
+            return cell
+        }else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: UserInfoSettingCellId, for: indexPath) as! UserInfoSettingCell
+
+            cell.model = row
+            
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -100,9 +121,9 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
-            return 44
+            return 0
         }
-        return 4
+        return 44
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.01
@@ -123,16 +144,28 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
         var dataList = [SettingSectionModel]()
         
         guard userInfo != nil else { return nil }
-        var section1 = SettingSectionModel()
+        let section0 = SettingSectionModel()
+        
+        let userIcon = SettingRowDataModel()
+        userIcon.title = "头像"
+        userIcon.pushType = .设置头像
+        section0.list.append(userIcon)
+        
+        let userName = SettingRowDataModel()
+        userName.title = "昵称"
+        userName.pushType = .设置昵称
+        section0.list.append(userName)
+        
+        let section1 = SettingSectionModel()
         section1.sectionTitle = "账户安全"
         
-        var phone = SettingRowDataModel()
+        let phone = SettingRowDataModel()
         phone.title = "手机认证"
         phone.detail = userInfo?.mobile
         phone.pushType = .none
         section1.list.append(phone)
         
-        var pass = SettingRowDataModel()
+        let pass = SettingRowDataModel()
         pass.title = "登录密码"
         userInfo.hasPass = false
         if userInfo.hasPass {
@@ -144,15 +177,49 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
         }
         section1.list.append(pass)
         
+        dataList.append(section0)
         dataList.append(section1)
         
         return dataList
     }
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
 }
+
+// MARK: - PhotoSelect Deleate
+extension UserInfoSettingVC: YHDPhotoSelectDelegate {
+    func imageFrom(image : UIImage, in rect: CGRect) -> UIImage {
+        let sourceImageRef : CGImage = image.cgImage!
+        
+        let newImageRef = sourceImageRef.cropping(to: rect)
+        
+        return UIImage(cgImage: newImageRef!)
+    }
+    
+    func yhdOptionalPhotoSelect(_ photoSelect: YHPhotoSelect!, didFinishedWithImageArray imageArray: [Any]!) {
+        let img : UIImage = imageArray.last as! UIImage
+        
+        var resultImg = img
+        
+        if img.size.width != img.size.height {
+            if img.size.width > img.size.height {
+                let left : CGFloat = (img.size.width - img.size.height) / 2
+                resultImg = self.imageFrom(image: img, in: CGRect(x: left, y: 0, width: img.size.height, height: img.size.height))
+            }else if img.size.width < img.size.width {
+                let top : CGFloat = (img.size.height - img.size.width) / 2
+                resultImg = self.imageFrom(image: img, in: CGRect(x: 0, y: top, width: img.size.width, height: img.size.width))
+            }
+        }
+        
+        let section = dataList[0]
+        let row = section.list[0]
+        row.image = resultImg
+        
+        self.tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
+    }
+    
+    func yhdOptionalPhotoSelectDidCancelled(_ photoSelect: YHPhotoSelect!) {
+        
+    }
+}
+
+

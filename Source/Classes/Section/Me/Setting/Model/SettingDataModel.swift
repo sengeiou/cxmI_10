@@ -10,12 +10,16 @@ import Foundation
 
 import HandyJSON
 
-struct SettingSectionModel: HandyJSON {
+class SettingSectionModel: HandyJSON {
+    required init() { }
+    
     var sectionTitle : String! = ""
     var list : [SettingRowDataModel] = [SettingRowDataModel]()
 }
 
-struct SettingRowDataModel: HandyJSON {
+class SettingRowDataModel: HandyJSON {
+    required init() { }
+    
     var title : String!
     var detail : String!
     var icon: String!
@@ -23,4 +27,6 @@ struct SettingRowDataModel: HandyJSON {
     var iconStr: String!
     var pushType: UserInfoSettingPushType = .设置密码
     var pwIsSeted : Bool = false
+    var image : UIImage = UIImage(named: "head")!
+    var imageStr : String!
 }
