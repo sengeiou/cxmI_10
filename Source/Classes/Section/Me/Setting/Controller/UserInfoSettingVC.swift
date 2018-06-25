@@ -63,7 +63,13 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
         switch model {
         case .设置头像:
             self.showPhotoSelect()
-            
+        case .待认证:
+            let authentication = AuthenticationVC()
+            pushViewController(vc: authentication)
+        case .已认证:
+            break
+        case .设置昵称:
+            break
         case .设置密码:
             let pass = SettingPasswordVC()
             pass.settingType = .设置
