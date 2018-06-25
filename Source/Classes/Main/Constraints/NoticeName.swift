@@ -12,3 +12,9 @@ let MessageNotice = "MessageNotice"
 let BonusNotice = "BonusNotice"
 let ClientId = "ClientId"
 let LoginSuccess = "loginSuccessNotice"
+let UserIconSetting = "UserIconSetting"
+
+
+
+// 数据持久化
+let UserIconData = "UserIconData"

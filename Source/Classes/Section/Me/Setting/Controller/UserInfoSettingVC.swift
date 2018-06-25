@@ -184,6 +184,13 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
         let userIcon = SettingRowDataModel()
         userIcon.title = "头像"
         userIcon.pushType = .设置头像
+        
+        if let imageData = UserDefaults.standard.data(forKey: UserIconData) {
+            if let image = UIImage(data: imageData) {
+                userIcon.image = image
+            }
+        }
+        
         section0.list.append(userIcon)
         
         let userName = SettingRowDataModel()
@@ -262,6 +269,12 @@ extension UserInfoSettingVC: YHDPhotoSelectDelegate {
         row.image = resultImg
         
         self.tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
+        
+        let data = UIImagePNGRepresentation(resultImg)
+        
+        UserDefaults.standard.set(data, forKey: UserIconData)
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: UserIconSetting), object: nil, userInfo: ["image" : resultImg] )
     }
     
     func yhdOptionalPhotoSelectDidCancelled(_ photoSelect: YHPhotoSelect!) {

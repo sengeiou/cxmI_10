@@ -48,6 +48,13 @@ class MeHeaderView: UIView , UserInfoPro{
         }
     }
     
+    public var userIcon : UIImage! {
+        didSet{
+            guard userIcon != nil else { return }
+            self.icon.image = userIcon
+        }
+    }
+    
     private func getBalanceText(str : String?) -> NSAttributedString {
     
         var attStr : NSMutableAttributedString!
@@ -238,7 +245,14 @@ class MeHeaderView: UIView , UserInfoPro{
     private func initSubview() {
         // 头像
         icon = UIImageView()
-        icon.image = UIImage(named: "head")
+        
+        if let imageData = UserDefaults.standard.data(forKey: UserIconData) {
+            if let image = UIImage(data: imageData) {
+                icon.image = image
+            }
+        }else {
+            icon.image = UIImage(named: "head")
+        }
         
         // 手机号
         phoneLB = UILabel()

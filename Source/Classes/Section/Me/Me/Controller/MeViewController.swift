@@ -60,6 +60,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         self.view.addSubview(tableView)
         
         NotificationCenter.default.addObserver(self, selector: #selector(configNotification(_:)), name: NSNotification.Name(rawValue: NotificationConfig), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(userIconSetting(_:)), name: NSNotification.Name(rawValue: UserIconSetting), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -123,6 +124,13 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         }else if turnOn == false && self.showType != .onlyNews {
             showType = .onlyNews
         }
+    }
+    
+    @objc private func userIconSetting(_ notification : Notification) {
+        guard let userInfo = notification.userInfo else { return }
+        guard let image = userInfo["image"] as? UIImage else { return }
+        
+        self.headerView.userIcon = image
     }
     
     // header delegate
