@@ -66,6 +66,16 @@ class FootballScoreCell: UITableViewCell, DateProtocol {
         initSubview()
     }
     
+    private func changSellingState(isStop: Bool) {
+        if isStop {
+            scoreView.alpha = 0.2
+            stopSellingView.isHidden = false
+        }else {
+            scoreView.alpha = 1
+            stopSellingView.isHidden = true
+        }
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         

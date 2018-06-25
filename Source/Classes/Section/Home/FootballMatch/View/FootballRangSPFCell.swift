@@ -50,6 +50,16 @@ class FootballRangSPFCell: UITableViewCell, DateProtocol {
         initSubview()
     }
     
+    private func changSellingState(isStop: Bool) {
+        if isStop {
+            teamView.alpha = 0.2
+            stopSellingView.isHidden = false
+        }else {
+            teamView.alpha = 1
+            stopSellingView.isHidden = true
+        }
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
