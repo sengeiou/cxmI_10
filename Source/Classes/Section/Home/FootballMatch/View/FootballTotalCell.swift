@@ -58,6 +58,8 @@ class FootballTotalCell: UITableViewCell, DateProtocol {
     
     private var line : UIImageView!
     
+    private var stopSellingView: FootballStopSellingView!
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initSubview()
@@ -123,6 +125,12 @@ class FootballTotalCell: UITableViewCell, DateProtocol {
             make.left.equalTo(endTime.snp.right).offset(10 * defaultScale)
             make.right.equalTo(-rightSpacing)
         }
+        stopSellingView.snp.makeConstraints { (make) in
+            make.top.equalTo(totalView)
+            make.bottom.equalTo(totalView)
+            make.left.equalTo(totalView)
+            make.right.equalTo(totalView)
+        }
     }
     private func initSubview() {
         self.selectionStyle = .none
@@ -159,6 +167,7 @@ class FootballTotalCell: UITableViewCell, DateProtocol {
         visitingMatch.font = Font14
         visitingMatch.textColor = Color505050
         
+        stopSellingView = FootballStopSellingView()
         
         self.contentView.addSubview(line)
         self.contentView.addSubview(typeIcon)
@@ -170,6 +179,7 @@ class FootballTotalCell: UITableViewCell, DateProtocol {
         self.contentView.addSubview(homeMatch)
         self.contentView.addSubview(vsLb)
         self.contentView.addSubview(visitingMatch)
+        self.contentView.addSubview(stopSellingView)
     }
     private func initLabel() -> UILabel {
         let lab = UILabel()

@@ -43,6 +43,8 @@ class FootballSPFCell: UITableViewCell, DateProtocol {
     
     private var line : UIImageView!
     
+    private var stopSellingView: FootballStopSellingView!
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initSubview()
@@ -90,6 +92,12 @@ class FootballSPFCell: UITableViewCell, DateProtocol {
             make.right.equalTo(-rightSpacing)
             make.left.equalTo(endTime.snp.right).offset(10 * defaultScale)
         }
+        stopSellingView.snp.makeConstraints { (make) in
+            make.top.equalTo(teamView)
+            make.bottom.equalTo(teamView)
+            make.left.equalTo(teamView)
+            make.right.equalTo(teamView)
+        }
     }
     private func initSubview() {
         self.selectionStyle = .none
@@ -115,6 +123,8 @@ class FootballSPFCell: UITableViewCell, DateProtocol {
         detailBut.contentEdgeInsets = UIEdgeInsets(top: 2, left: 0, bottom: 5, right: 0)
         detailBut.addTarget(self, action: #selector(detailButClicked(_:)), for: .touchUpInside)
         
+        stopSellingView = FootballStopSellingView()
+        
         self.contentView.addSubview(line)
         self.contentView.addSubview(teamView)
         self.contentView.addSubview(typeIcon)
@@ -122,6 +132,7 @@ class FootballSPFCell: UITableViewCell, DateProtocol {
         self.contentView.addSubview(matchTime)
         self.contentView.addSubview(endTime)
         self.contentView.addSubview(detailBut)
+        self.contentView.addSubview(stopSellingView)
     }
     private func initLabel() -> UILabel {
         let lab = UILabel()

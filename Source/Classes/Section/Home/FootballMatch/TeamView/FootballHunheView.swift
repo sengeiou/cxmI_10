@@ -133,6 +133,7 @@ class FootballHunheView: UIView {
         }
     }
     
+    
     private func changeButState(but: UIButton, isSelected: Bool) {
         if isSelected {
             but.setTitleColor(ColorFFFFFF, for: .normal)

@@ -19,6 +19,9 @@ class FootballHunheCell: UITableViewCell, DateProtocol {
     public var playInfoModel: FootballPlayListModel! {
         didSet{
             guard playInfoModel != nil else { return }
+            
+            changSellingState(isStop: true )
+            
             matchTitle.text = playInfoModel.leagueAddr
             matchTime.text = playInfoModel.changci
             teamView.teamInfo = playInfoModel
@@ -93,6 +96,8 @@ class FootballHunheCell: UITableViewCell, DateProtocol {
     public var rangTeamView: FootballHunheView!
     private var topTitleView : TopTitleView!
     
+    private var stopSellingView: FootballStopSellingView!
+    
     private var moreBut: UIButton!
     private var teamlb : UILabel! // 胜平负
     private var rangTeamlb : UILabel! // 让球胜平负
@@ -104,6 +109,18 @@ class FootballHunheCell: UITableViewCell, DateProtocol {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initSubview()
+    }
+    
+    private func changSellingState(isStop: Bool) {
+        if isStop {
+            teamView.alpha = 0.2
+            rangTeamView.alpha = 0.2
+            stopSellingView.isHidden = false
+        }else {
+            teamView.alpha = 1
+            rangTeamView.alpha = 1
+            stopSellingView.isHidden = true
+        }
     }
     
     override func layoutSubviews() {
@@ -173,6 +190,14 @@ class FootballHunheCell: UITableViewCell, DateProtocol {
             make.top.equalTo(teamView)
             make.bottom.equalTo(rangTeamView)
         }
+        
+        stopSellingView.snp.makeConstraints { (make) in
+            make.top.equalTo(teamlb)
+            make.bottom.equalTo(rangTeamlb)
+            make.left.equalTo(teamlb)
+            make.right.equalTo(moreBut)
+        }
+        
     }
     private func initSubview() {
         self.selectionStyle = .none
@@ -221,6 +246,7 @@ class FootballHunheCell: UITableViewCell, DateProtocol {
         moreBut.layer.borderColor = ColorC8C8C8.cgColor
         moreBut.addTarget(self, action: #selector(moreButClicked(_:)), for: .touchUpInside)
         
+        stopSellingView = FootballStopSellingView()
         
         self.contentView.addSubview(line)
         self.contentView.addSubview(teamView)
@@ -234,6 +260,8 @@ class FootballHunheCell: UITableViewCell, DateProtocol {
         self.contentView.addSubview(rangTeamlb)
         self.contentView.addSubview(moreBut)
         self.contentView.addSubview(topTitleView)
+        self.contentView.addSubview(stopSellingView)
+        
     }
     private func initLabel() -> UILabel {
         let lab = UILabel()
