@@ -144,6 +144,14 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard dataList != nil else { return 0 }
+        let section = dataList[indexPath.section]
+        let row = section.list[indexPath.row]
+        
+        if row.pushType == .设置头像 {
+            return 60
+        }
+        
         return 44
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -180,6 +188,7 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
         
         let userName = SettingRowDataModel()
         userName.title = "昵称"
+        userName.detail = userInfo.userName
         userName.pushType = .设置昵称
         section0.list.append(userName)
         
