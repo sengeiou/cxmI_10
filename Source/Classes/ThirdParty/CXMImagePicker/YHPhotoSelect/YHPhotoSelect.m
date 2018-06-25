@@ -68,7 +68,7 @@ YHDPhotoEditVCDelegate
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     self.pickerController = picker;
     picker.delegate = self;
-    picker.allowsEditing = YES;
+    //picker.allowsEditing = YES;
     picker.sourceType = UIImagePickerControllerSourceTypeCamera;
     [self.viewController presentViewController:picker animated:YES completion:^{
         [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
