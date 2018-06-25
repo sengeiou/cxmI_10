@@ -113,6 +113,10 @@ class WithdrawalViewController: BaseViewController, ValidatePro, UITextFieldDele
                         print(code)
                         self.showHUD(message:  data.msg)
                     }
+                    
+                    if code == 304056 {
+                        self.popViewController()
+                    }
                 }
                 
             }, onError: { (error) in

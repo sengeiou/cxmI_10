@@ -13,6 +13,8 @@ enum UserInfoSettingPushType {
     case 修改密码
     case 设置头像
     case 设置昵称
+    case 待认证
+    case 已认证
     case none
 }
 
@@ -189,6 +191,17 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
         phone.detail = userInfo?.mobile
         phone.pushType = .none
         section1.list.append(phone)
+        
+        let authentication = SettingRowDataModel()
+        authentication.title = "身份认证"
+        if userInfo.isReal {
+            authentication.detail = userInfo.rankPoint
+            authentication.pushType = .已认证
+        }else {
+            authentication.detail = "待认证"
+            authentication.pushType = .待认证
+        }
+        section1.list.append(authentication)
         
         let pass = SettingRowDataModel()
         pass.title = "登录密码"

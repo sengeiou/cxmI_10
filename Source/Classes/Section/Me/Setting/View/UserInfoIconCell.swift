@@ -27,6 +27,8 @@ class UserInfoIconCell: UITableViewCell {
     }
     
     private func initSubview() {
+        self.selectionStyle = .none
+        
         titleLabel = UILabel()
         
         titleLabel.textColor = Color787878

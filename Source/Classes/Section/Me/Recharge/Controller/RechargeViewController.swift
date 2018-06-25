@@ -278,9 +278,6 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
                 default: break
                 }
             }, onCompleted: nil, onDisposed: nil)
-        
-        
-        
     }
     
     // 查询支付结果
@@ -311,12 +308,7 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
                     guard self.paymentMethodModel.isHaveRechargeAct else { return }
                     guard let rechargeUser = self.paymentMethodModel.rechargeUserDTO else { return }
                     guard let list = rechargeUser.donationPriceList else { return }
-                    
-//                    if rechargeUser.oldUserBz == "0" {
-//
-//                    }else {
-//
-//                    }
+
                     
                     guard list.count >= 0 else { return }
                     guard self.rechargeMoney != nil else { return }
