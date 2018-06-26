@@ -39,9 +39,9 @@ enum MeNetAPIManager {
     /// 出票方案
     case orderScheme (programmeSn: String, orderSn: String)
     /// 账户明细列表
-    case accountDetailsList (amountType: String, pageNum: Int)
+    case accountDetailsList (amountType: String, pageNum: Int, timeType: String)
     /// 统计账户信息
-    case accountStatistics
+    case accountStatistics(timeType: String)
     /// 消息列表 0通知，1消息 
     case messageList (msgType: String, pageNum: Int)
     /// 提现进度
@@ -179,12 +179,13 @@ extension MeNetAPIManager : TargetType {
         case .orderScheme(let programmeSn, let orderSn):
             dic["orderSn"] = orderSn
             dic["programmeSn"] = programmeSn
-        case .accountDetailsList(let amountType, let pageNum):
+        case .accountDetailsList(let amountType, let pageNum, let timeType):
             dic["amountType"] = amountType
+            dic["timeType"] = timeType
             dic["pageNum"] = pageNum
             dic["pageSize"] = "20"
-        case .accountStatistics:
-            dic["str"] = "ss"
+        case .accountStatistics (let timeType):
+            dic["timeType"] = timeType
         case .messageList(let msgType, let pageNum):
             dic["msgType"] = msgType
             dic["pageNum"] = pageNum

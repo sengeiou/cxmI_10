@@ -9,11 +9,11 @@
 import UIKit
 
 enum FilterTime: String {
-    case 当天    = "0"
-    case 最近一周 = "1"
-    case 最近一月 = "2"
-    case 最近三月 = "3"
-    case 全部    = "4"
+    case 当天    = "1"
+    case 最近一周 = "2"
+    case 最近一月 = "3"
+    case 最近三月 = "4"
+    case 全部    = "0"
 }
 
 fileprivate let cellHeight: CGFloat = 50

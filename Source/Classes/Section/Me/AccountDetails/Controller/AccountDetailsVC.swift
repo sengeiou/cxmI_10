@@ -131,7 +131,7 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
         }
         //self.showProgressHUD()
         weak var weakSelf = self
-        _ = userProvider.rx.request(.accountDetailsList(amountType: type, pageNum: pageNum))
+        _ = userProvider.rx.request(.accountDetailsList(amountType: type, pageNum: pageNum, timeType: self.filterTime.rawValue))
             .asObservable()
             .mapObject(type: BasePageModel<AccountDetailModel>.self)
             .subscribe(onNext: { (data) in
@@ -182,7 +182,7 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
     private func statisticsRequest() {
         //self.showProgressHUD()
         weak var weakSelf = self
-        _ = userProvider.rx.request(.accountStatistics)
+        _ = userProvider.rx.request(.accountStatistics(timeType: self.filterTime.rawValue))
             .asObservable()
             .mapObject(type: AccountStatisticsModel.self)
             .subscribe(onNext: { (data) in
