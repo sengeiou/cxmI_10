@@ -83,17 +83,22 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
     }
     
     private func showUserNameSetting() {
-        let alertController = UIAlertController(title: "给自己去一个喜欢的昵称", message: "昵称取好后不能再修改", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "给自己取一个喜欢的昵称", message: "昵称取好后不能再修改", preferredStyle: .alert)
         alertController.addTextField { (textField) in
             textField.placeholder = "请勿以手机号/真实姓名为昵称(2-15字符)"
             textField.font = Font12
         }
+       
         let action = UIAlertAction(title: "确定", style: .default) { (action) in
+            let text = alertController.textFields![0]
+            
             
         }
         let cancel = UIAlertAction(title: "取消", style: .cancel) { (action) in
             
         }
+        action.setValue(ColorEA5504, forKey: "titleTextColor")
+        cancel.setValue(ColorEA5504, forKey: "titleTextColor")
         alertController.addAction(action)
         alertController.addAction(cancel)
         
