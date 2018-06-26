@@ -39,8 +39,12 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
             case .coupon:
                 TongJi.log(.账户明细红包, label: "账户明细红包")
             }
+            
+            
         }
     }
+    
+    public var filterTime: FilterTime!
     
     private var pageDataModel: BasePageModel<AccountDetailModel>!
     private var accountList: [AccountDetailModel]!
@@ -52,7 +56,7 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
         super.viewDidLoad()
         self.isHidenBar = true
         accountList = []
-        
+    
         self.view.addSubview(tableView)
         footer = AccountDetailFooterView()
         self.view.addSubview(footer)
@@ -65,8 +69,8 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
             self.loadNextData()
         }
         self.tableView.beginRefreshing()
-//        accountListRequest(1)
-//        statisticsRequest()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(accountDetailsFilter(notification:)), name: NSNotification.Name(rawValue: AccountDetailsFilterName), object: nil)
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -87,6 +91,13 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
             make.left.right.equalTo(0)
             make.height.equalTo(50 * defaultScale)
         }
+    }
+    
+    @objc private func accountDetailsFilter(notification: Notification) {
+        guard let userInfo = notification.userInfo else { return }
+        let time = userInfo["filterTime"]
+        
+        loadNewData()
     }
     
     private func loadNewData() {
@@ -303,6 +314,7 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
         TongJi.log(.账户明细返回, label: "账户明细返回")
     }
     
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

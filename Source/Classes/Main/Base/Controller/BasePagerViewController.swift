@@ -18,7 +18,28 @@ enum PagerViewType: String {
 
 class BasePagerViewController: ButtonBarPagerTabStripViewController {
     
+    public var showAccountDetailsFilter : Bool = false {
+        didSet{
+            if showAccountDetailsFilter {
+                setRightButtonItem()
+                self.accountFilterList = AccountDetailFilterModel.getDate()
+            }
+        }
+    }
+    
+    private var rightButton: UIButton!
+    
+    private var filterTime : FilterTime!
+    
     var pagerType: PagerViewType!
+    var accountFilterList : [AccountDetailFilterModel]!
+    
+    private var accountAll : AccountDetailsVC!
+    private var accountBonus: AccountDetailsVC!
+    private var accountRecharge: AccountDetailsVC!
+    private var accountBuy : AccountDetailsVC!
+    private var accountWithdrawal : AccountDetailsVC!
+    private var accountCoupon : AccountDetailsVC!
     
     override func viewDidLoad() {
         settings.style.buttonBarBackgroundColor = ColorFFFFFF
@@ -44,7 +65,6 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
         super.viewDidLoad()
         self.title = self.pagerType.rawValue
         setLiftButtonItem()
-        
     }
 
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
@@ -99,28 +119,27 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
         return [notice, message]
     }
     private func getAccountDetailsVC() -> [UIViewController] {
+        self.showAccountDetailsFilter = true
         let all = AccountDetailsVC()
+        self.accountAll = all
         all.accountType = .all
         let bonus = AccountDetailsVC()
+        self.accountBonus = bonus
         bonus.accountType = .bonus
         let recharge = AccountDetailsVC()
+        self.accountRecharge = recharge
         recharge.accountType = .recharge
         let buy = AccountDetailsVC()
+        self.accountBuy = buy
         buy.accountType = .buy
         let withdrawal = AccountDetailsVC()
+        self.accountWithdrawal = withdrawal
         withdrawal.accountType = .withdrawal
         let coupon = AccountDetailsVC()
+        self.accountCoupon = coupon
         coupon.accountType = .coupon
         return [all, bonus, recharge, buy, withdrawal, coupon]
     }
-    
-    
-    
-    
-    
-    
-    
-    
     
     private func setLiftButtonItem() {
         let leftBut = UIButton(type: .custom)
@@ -135,16 +154,49 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftBut)
     }
     
+    
+    
     @objc private func back(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+
+}
+
+extension BasePagerViewController : AccountDetailsFilterDelegate {
+    func didSelect(time: FilterTime, title:String) {
+        self.rightButton.setTitle(title, for: .normal)
+        
+        self.accountAll.filterTime = time
+        self.accountBonus.filterTime = time
+        self.accountRecharge.filterTime = time
+        self.accountBuy.filterTime = time
+        self.accountWithdrawal.filterTime = time
+        self.accountCoupon.filterTime = time
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: AccountDetailsFilterName), object: nil, userInfo: ["filterTime": time])
     }
     
-
+    @objc private func rightButtonClick(_ sender: UIButton) {
+        let filter = AccountDetailsFilter()
+        filter.filterList = self.accountFilterList
+        filter.delegate = self
+        present(filter, animated: true, completion: nil )
+    }
     
-
+    private func setRightButtonItem() {
+        
+        rightButton = UIButton(type: .custom)
+        rightButton.frame = CGRect(x: 0, y: 0, width: 90, height: 40)
+        rightButton.setTitle("最近一周", for: .normal)
+        rightButton.titleLabel?.font = Font14
+        rightButton.setTitleColor(Color787878, for: .normal)
+        rightButton.setImage(UIImage(named: "Collapse"), for: .normal)
+        rightButton.contentHorizontalAlignment = .right
+        rightButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 15)
+        rightButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 80, bottom: 0, right: -10)
+        rightButton.addTarget(self, action: #selector(rightButtonClick(_:)), for: .touchUpInside)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButton)
+    }
+    
+    
 }

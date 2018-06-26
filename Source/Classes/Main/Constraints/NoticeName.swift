@@ -13,7 +13,7 @@ let BonusNotice = "BonusNotice"
 let ClientId = "ClientId"
 let LoginSuccess = "loginSuccessNotice"
 let UserIconSetting = "UserIconSetting"
-
+let AccountDetailsFilterName = "AccountDetailsFilter"
 
 
 // 数据持久化
