@@ -147,7 +147,7 @@ class NewsMeViewController: BaseViewController, UITableViewDelegate, UITableView
         table.register(MeCell.self, forCellReuseIdentifier: meCellIdentifier)
         
         headerView = NewsHeaderView()
-        headerView.delegate = self
+        //headerView.delegate = self
         
         footerView = MeFooterView()
         footerView.delegate = self

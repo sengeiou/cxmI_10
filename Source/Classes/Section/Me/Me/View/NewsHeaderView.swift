@@ -8,7 +8,15 @@
 
 import UIKit
 
+fileprivate let iconHeight : CGFloat = 56
+
+protocol NewsHeaderViewDelegate {
+    func didTipNewsUserIcon() -> Void
+}
+
 class NewsHeaderView: UIView, UserInfoPro {
+    
+    
     
     //MARK: - 设置界面显示信息
     public var userInfo : UserInfoDataModel! {
@@ -27,6 +35,11 @@ class NewsHeaderView: UIView, UserInfoPro {
     
     public func setIcon(image: UIImage) {
         icon.image = image
+    }
+    
+    @objc private func userIconClick() {
+        guard delegate != nil else { return }
+        delegate.didTipNewsUserIcon()
     }
     
     private func getBalanceText(str : String?) -> NSAttributedString {
@@ -68,7 +81,7 @@ class NewsHeaderView: UIView, UserInfoPro {
     
     
     // MARK: - 属性
-    public var delegate : MeHeaderViewDelegate!
+    public var delegate : NewsHeaderViewDelegate!
     
     private var icon : UIImageView! // 用户头像
     private var phoneLB : UILabel! // 手机号
@@ -217,7 +230,21 @@ class NewsHeaderView: UIView, UserInfoPro {
     private func initSubview() {
         // 头像
         icon = UIImageView()
-        icon.image = UIImage(named: "head")
+        icon.layer.cornerRadius = iconHeight / 2
+        icon.layer.masksToBounds = true
+        
+        if let imageData = UserDefaults.standard.data(forKey: UserIconData) {
+            if let image = UIImage(data: imageData) {
+                icon.image = image
+            }
+        }else {
+            icon.image = UIImage(named: "head")
+        }
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(userIconClick))
+        
+        icon.addGestureRecognizer(tap)
+        icon.isUserInteractionEnabled = true
         
         // 手机号
         phoneLB = UILabel()

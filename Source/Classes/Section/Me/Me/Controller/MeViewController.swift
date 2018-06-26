@@ -77,8 +77,8 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         let turnOn = UserDefaults.standard.bool(forKey: TurnOn)
         //turnOn = false
         if turnOn && self.showType != .allShow{
-            showType = .allShow
-            //showType = .onlyNews
+            //showType = .allShow
+            showType = .onlyNews
         }else if turnOn == false && self.showType != .onlyNews {
             showType = .onlyNews
         }
@@ -137,7 +137,13 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         guard let userInfo = notification.userInfo else { return }
         guard let image = userInfo["image"] as? UIImage else { return }
         
-        self.headerView.userIcon = image
+        if self.headerView != nil {
+            self.headerView.setIcon(image: image)
+        }
+        
+        if self.newsheaderView != nil {
+            self.newsheaderView.setIcon(image: image)
+        }
     }
     
     // header delegate
@@ -645,7 +651,11 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     
 }
 
-
+extension MeViewController : NewsHeaderViewDelegate {
+    func didTipNewsUserIcon() {
+        showPhotoSelect()
+    }
+}
 
 // MARK: - PhotoSelect Deleate
 extension MeViewController: YHDPhotoSelectDelegate {
@@ -671,14 +681,18 @@ extension MeViewController: YHDPhotoSelectDelegate {
                 resultImg = self.imageFrom(image: img, in: CGRect(x: 0, y: top, width: img.size.width, height: img.size.width))
             }
         }
-        
-        self.headerView.setIcon(image: resultImg)
+        if self.headerView != nil {
+            self.headerView.setIcon(image: resultImg)
+        }
+        if self.newsheaderView != nil {
+            self.newsheaderView.setIcon(image: resultImg)
+        }
         
         let data = UIImagePNGRepresentation(resultImg)
         
         UserDefaults.standard.set(data, forKey: UserIconData)
         
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: UserIconSetting), object: nil, userInfo: ["image" : resultImg] )
+//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: UserIconSetting), object: nil, userInfo: ["image" : resultImg] )
     }
     
     func yhdOptionalPhotoSelectDidCancelled(_ photoSelect: YHPhotoSelect!) {

@@ -58,13 +58,6 @@ class MeHeaderView: UIView , UserInfoPro{
         }
     }
     
-    public var userIcon : UIImage! {
-        didSet{
-            guard userIcon != nil else { return }
-            self.icon.image = userIcon
-        }
-    }
-    
     private func getBalanceText(str : String?) -> NSAttributedString {
     
         var attStr : NSMutableAttributedString!
