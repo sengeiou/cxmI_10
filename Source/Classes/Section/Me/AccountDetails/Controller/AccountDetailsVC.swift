@@ -44,7 +44,7 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
         }
     }
     
-    public var filterTime: FilterTime!
+    public var filterTime: FilterTime! = .最近一周
     
     private var pageDataModel: BasePageModel<AccountDetailModel>!
     private var accountList: [AccountDetailModel]!
