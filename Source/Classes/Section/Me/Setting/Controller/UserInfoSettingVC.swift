@@ -69,7 +69,7 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
         case .已认证:
             break
         case .设置昵称:
-            break
+            showUserNameSetting()
         case .设置密码:
             let pass = SettingPasswordVC()
             pass.settingType = .设置
@@ -80,6 +80,24 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
             pushViewController(vc: pass)
         default: break
         }
+    }
+    
+    private func showUserNameSetting() {
+        let alertController = UIAlertController(title: "给自己去一个喜欢的昵称", message: "昵称取好后不能再修改", preferredStyle: .alert)
+        alertController.addTextField { (textField) in
+            textField.placeholder = "请勿以手机号/真实姓名为昵称(2-15字符)"
+            textField.font = Font12
+        }
+        let action = UIAlertAction(title: "确定", style: .default) { (action) in
+            
+        }
+        let cancel = UIAlertAction(title: "取消", style: .cancel) { (action) in
+            
+        }
+        alertController.addAction(action)
+        alertController.addAction(cancel)
+        
+        self.present(alertController)
     }
     
     private func showPhotoSelect() {
