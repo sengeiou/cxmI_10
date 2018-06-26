@@ -77,8 +77,8 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
         let turnOn = UserDefaults.standard.bool(forKey: TurnOn)
         //turnOn = false
         if turnOn && self.showType != .allShow{
-            //showType = .allShow
-            showType = .onlyNews
+            showType = .allShow
+            //showType = .onlyNews
         }else if turnOn == false && self.showType != .onlyNews {
             showType = .onlyNews
         }
