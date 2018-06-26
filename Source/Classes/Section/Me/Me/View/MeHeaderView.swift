@@ -9,15 +9,21 @@
 import UIKit
 import Kingfisher
 
+fileprivate let iconHeight : CGFloat = 56
 
 protocol MeHeaderViewDelegate {
     func rechargeClicked() -> Void
     func withdrawalClicked() -> Void
     func alertClicked() -> Void
+    func didTipUserIcon() -> Void
 }
 
 class MeHeaderView: UIView , UserInfoPro{
 
+    public func setIcon(image: UIImage) {
+        icon.image = image
+    }
+    
     // MARK: - 点击事件
     @objc private func rechargeClicked(_ sender: UIButton) {
         guard delegate != nil else { return }
@@ -31,6 +37,10 @@ class MeHeaderView: UIView , UserInfoPro{
     @objc private func alertClicked(_ sender: UIButton) {
         guard delegate != nil else { return }
         delegate.alertClicked()
+    }
+    @objc private func userIconClick() {
+        guard delegate != nil else { return }
+        delegate.didTipUserIcon()
     }
     
     //MARK: - 设置界面显示信息
@@ -179,8 +189,8 @@ class MeHeaderView: UIView , UserInfoPro{
         super.layoutSubviews()
         
         icon.snp.makeConstraints { (make) in
-            make.width.equalTo(56)
-            make.height.equalTo(56)
+            make.width.equalTo(iconHeight)
+            make.height.equalTo(iconHeight)
             make.top.equalTo(self).offset(15)
             make.left.equalTo(self).offset(23.5)
         }
@@ -245,6 +255,8 @@ class MeHeaderView: UIView , UserInfoPro{
     private func initSubview() {
         // 头像
         icon = UIImageView()
+        icon.layer.cornerRadius = iconHeight / 2
+        icon.layer.masksToBounds = true
         
         if let imageData = UserDefaults.standard.data(forKey: UserIconData) {
             if let image = UIImage(data: imageData) {
@@ -253,6 +265,11 @@ class MeHeaderView: UIView , UserInfoPro{
         }else {
             icon.image = UIImage(named: "head")
         }
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(userIconClick))
+        
+        icon.addGestureRecognizer(tap)
+        icon.isUserInteractionEnabled = true
         
         // 手机号
         phoneLB = UILabel()

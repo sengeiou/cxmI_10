@@ -184,7 +184,7 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
         let row = section.list[indexPath.row]
         
         if row.pushType == .设置头像 {
-            return 60
+            return UserInfoIconCell.cellHeight
         }
         
         return 44

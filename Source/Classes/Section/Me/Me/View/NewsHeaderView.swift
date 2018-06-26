@@ -25,6 +25,10 @@ class NewsHeaderView: UIView, UserInfoPro {
         }
     }
     
+    public func setIcon(image: UIImage) {
+        icon.image = image
+    }
+    
     private func getBalanceText(str : String?) -> NSAttributedString {
         
         var attStr : NSMutableAttributedString!

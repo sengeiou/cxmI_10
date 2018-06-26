@@ -11,6 +11,10 @@ import UIKit
 fileprivate let meCellIdentifier = "meCellIdentifier"
 
 class NewsMeViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, MeHeaderViewDelegate, MeFooterViewDelegate {
+    func didTipUserIcon() {
+        showPhotoSelect()
+    }
+    
     func rechargeClicked() {
         
     }
@@ -31,6 +35,9 @@ class NewsMeViewController: BaseViewController, UITableViewDelegate, UITableView
     private var headerView: NewsHeaderView!
     private var footerView: MeFooterView!
     private var userInfo  : UserInfoDataModel!
+    
+    private var photoSelect: YHPhotoSelect!
+    
     //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +45,9 @@ class NewsMeViewController: BaseViewController, UITableViewDelegate, UITableView
         self.navigationItem.title = "彩小秘 · 我的"
         self.view.addSubview(tableView)
         
+        self.photoSelect = YHPhotoSelect(controller: self, delegate: self)
+        
+        self.photoSelect.isAllowEdit = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -195,15 +205,72 @@ class NewsMeViewController: BaseViewController, UITableViewDelegate, UITableView
         return nil
     }
     
-    
-    
+    private func showPhotoSelect() {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let libraryAct = UIAlertAction(title: "从手机相册选择", style: .default) { (action) in
+            self.photoSelect.start(YHEPhotoSelectFromLibrary)
+        }
+        libraryAct.setValue(ColorA0A0A0, forKey: "titleTextColor")
+        
+        let cameraAct = UIAlertAction(title: "拍照", style: .default) { (action) in
+            self.photoSelect.start(YHEPhotoSelectTakePhoto)
+        }
+        cameraAct.setValue(ColorA0A0A0, forKey: "titleTextColor")
+        let cancel = UIAlertAction(title: "取消", style: .cancel) { (action) in
+            
+        }
+        cancel.setValue(ColorEA5504, forKey: "titleTextColor")
+        
+        alertController.addAction(cameraAct)
+        alertController.addAction(libraryAct)
+        alertController.addAction(cancel)
+        
+        self.present(alertController)
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+}
+
+// MARK: - PhotoSelect Deleate
+extension NewsMeViewController: YHDPhotoSelectDelegate {
+    func imageFrom(image : UIImage, in rect: CGRect) -> UIImage {
+        let sourceImageRef : CGImage = image.cgImage!
+        
+        let newImageRef = sourceImageRef.cropping(to: rect)
+        
+        return UIImage(cgImage: newImageRef!)
+    }
     
+    func yhdOptionalPhotoSelect(_ photoSelect: YHPhotoSelect!, didFinishedWithImageArray imageArray: [Any]!) {
+        let img : UIImage = imageArray.last as! UIImage
+        
+        var resultImg = img
+        
+        if img.size.width != img.size.height {
+            if img.size.width > img.size.height {
+                let left : CGFloat = (img.size.width - img.size.height) / 2
+                resultImg = self.imageFrom(image: img, in: CGRect(x: left, y: 0, width: img.size.height, height: img.size.height))
+            }else if img.size.width < img.size.width {
+                let top : CGFloat = (img.size.height - img.size.width) / 2
+                resultImg = self.imageFrom(image: img, in: CGRect(x: 0, y: top, width: img.size.width, height: img.size.width))
+            }
+        }
+        
+        self.headerView.setIcon(image: resultImg)
+        
+        let data = UIImagePNGRepresentation(resultImg)
+        
+        UserDefaults.standard.set(data, forKey: UserIconData)
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: UserIconSetting), object: nil, userInfo: ["image" : resultImg] )
+    }
     
-    
+    func yhdOptionalPhotoSelectDidCancelled(_ photoSelect: YHPhotoSelect!) {
+        
+    }
 }

@@ -8,8 +8,12 @@
 
 import UIKit
 
+fileprivate let iconTopSpacing : CGFloat = 5
+
 class UserInfoIconCell: UITableViewCell {
 
+    static let cellHeight : CGFloat = 60
+    
     public var model : SettingRowDataModel! {
         didSet{
             titleLabel.text = model.title
@@ -37,6 +41,8 @@ class UserInfoIconCell: UITableViewCell {
         titleLabel.sizeToFit()
         
         icon = UIImageView()
+        icon.layer.cornerRadius = (UserInfoIconCell.cellHeight - iconTopSpacing * 2) / 2
+        icon.layer.masksToBounds = true
         
         self.contentView.addSubview(titleLabel)
         self.contentView.addSubview(icon)
@@ -48,8 +54,8 @@ class UserInfoIconCell: UITableViewCell {
         
         icon.snp.makeConstraints { (make ) in
             make.right.equalTo(-10)
-            make.top.equalTo(5)
-            make.bottom.equalTo(-5)
+            make.top.equalTo(iconTopSpacing)
+            make.bottom.equalTo(-iconTopSpacing)
             make.width.equalTo(icon.snp.height)
         }
         
