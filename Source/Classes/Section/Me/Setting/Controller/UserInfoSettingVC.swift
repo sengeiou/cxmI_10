@@ -98,7 +98,7 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
             
         }
         action.setValue(ColorEA5504, forKey: "titleTextColor")
-        cancel.setValue(ColorEA5504, forKey: "titleTextColor")
+        cancel.setValue(Color505050, forKey: "titleTextColor")
         alertController.addAction(action)
         alertController.addAction(cancel)
         
