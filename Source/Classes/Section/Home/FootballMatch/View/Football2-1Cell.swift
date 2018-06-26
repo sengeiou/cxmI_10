@@ -182,6 +182,7 @@ class Football2_1Cell: UITableViewCell , DateProtocol{
         visitingMatch.textColor = Color505050
         
         stopSellingView = FootballStopSellingView()
+        stopSellingView.vertical = false
         
         self.contentView.addSubview(line)
         self.contentView.addSubview(typeIcon)

@@ -247,6 +247,7 @@ class FootballHunheCell: UITableViewCell, DateProtocol {
         moreBut.addTarget(self, action: #selector(moreButClicked(_:)), for: .touchUpInside)
         
         stopSellingView = FootballStopSellingView()
+        stopSellingView.vertical = true
         
         self.contentView.addSubview(line)
         self.contentView.addSubview(teamView)

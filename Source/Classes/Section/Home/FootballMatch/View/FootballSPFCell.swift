@@ -136,6 +136,7 @@ class FootballSPFCell: UITableViewCell, DateProtocol {
         detailBut.addTarget(self, action: #selector(detailButClicked(_:)), for: .touchUpInside)
         
         stopSellingView = FootballStopSellingView()
+        stopSellingView.vertical = true 
         
         self.contentView.addSubview(line)
         self.contentView.addSubview(teamView)
