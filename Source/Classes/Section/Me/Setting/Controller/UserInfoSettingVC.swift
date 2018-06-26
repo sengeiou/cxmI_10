@@ -23,7 +23,7 @@ fileprivate let UserInfoSettingHeaderViewId = "UserInfoSettingHeaderViewId"
 fileprivate let UserInfoIconCellId = "UserInfoIconCellId"
 
 class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDataSource {
-
+    
     public var userInfo : UserInfoDataModel!
     
     private var dataList: [SettingSectionModel]!
@@ -35,11 +35,17 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
         self.title = "彩小秘 · 个人信息"
         self.view.addSubview(tableView)
         
-        self.dataList = getDataList()
-        
         self.photoSelect = YHPhotoSelect(controller: self, delegate: self)
         
         self.photoSelect.isAllowEdit = true
+        
+        let turnOn = UserDefaults.standard.bool(forKey: TurnOn)
+        
+        if turnOn {
+            self.dataList = getDataList()
+        }else {
+            self.dataList = getNewsDataList()
+        }
         
         self.tableView.reloadData()
     }
@@ -203,6 +209,67 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
         return nil
     }
     
+    private func getNewsDataList() -> [SettingSectionModel]? {
+        var dataList = [SettingSectionModel]()
+        
+        guard userInfo != nil else { return nil }
+        let section0 = SettingSectionModel()
+        
+        let userIcon = SettingRowDataModel()
+        userIcon.title = "头像"
+        userIcon.pushType = .设置头像
+        
+        if let imageData = UserDefaults.standard.data(forKey: UserIconData) {
+            if let image = UIImage(data: imageData) {
+                userIcon.image = image
+            }
+        }
+        
+        section0.list.append(userIcon)
+        
+        let userName = SettingRowDataModel()
+        userName.title = "昵称"
+        userName.detail = userInfo.userName
+        userName.pushType = .设置昵称
+        section0.list.append(userName)
+        
+        let section1 = SettingSectionModel()
+        section1.sectionTitle = "账户安全"
+        
+        let phone = SettingRowDataModel()
+        phone.title = "手机认证"
+        phone.detail = userInfo?.mobile
+        phone.pushType = .none
+        section1.list.append(phone)
+        
+//        let authentication = SettingRowDataModel()
+//        authentication.title = "身份认证"
+//        if userInfo.isReal {
+//            authentication.detail = userInfo.rankPoint
+//            authentication.pushType = .已认证
+//        }else {
+//            authentication.detail = "待认证"
+//            authentication.pushType = .待认证
+//        }
+//        section1.list.append(authentication)
+        
+        let pass = SettingRowDataModel()
+        pass.title = "登录密码"
+        userInfo.hasPass = false
+        if userInfo.hasPass {
+            pass.detail = "更改密码"
+            pass.pushType = .修改密码
+        }else {
+            pass.detail = "请设置密码"
+            pass.pushType = .设置密码
+        }
+        section1.list.append(pass)
+        
+        dataList.append(section0)
+        dataList.append(section1)
+        
+        return dataList
+    }
     
     private func getDataList() -> [SettingSectionModel]? {
         var dataList = [SettingSectionModel]()
