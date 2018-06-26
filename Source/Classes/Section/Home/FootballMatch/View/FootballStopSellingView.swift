@@ -81,6 +81,7 @@ class FootballStopSellingView: UIView {
         
         button = UIButton(type: .custom)
         button.setTitle("详情>>", for: .normal)
+        button.titleLabel?.font = Font14
         button.setTitleColor(Color505050, for: .normal)
         button.addTarget(self, action: #selector(buttonClick(_:)), for: .touchUpInside)
         

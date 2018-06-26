@@ -12,9 +12,12 @@ let typeIconSize : CGFloat = 24
 
 protocol FootballSPFCellDelegate {
     func didTipSPFCellDetail(teamInfo : FootballPlayListModel) -> Void
+    func didTipStopSelling(cell: FootballSPFCell, teamInfo : FootballPlayListModel) -> Void
 }
 
-class FootballSPFCell: UITableViewCell, DateProtocol {
+class FootballSPFCell: UITableViewCell, DateProtocol, FootballStopSellingViewDelegate {
+    
+    
 
     public var playInfoModel: FootballPlayListModel! {
         didSet{
@@ -60,6 +63,11 @@ class FootballSPFCell: UITableViewCell, DateProtocol {
             teamView.alpha = 1
             stopSellingView.isHidden = true
         }
+    }
+    
+    func didTipDetails(view: UIView) {
+        guard delegate != nil else { return }
+        delegate.didTipStopSelling(cell: self, teamInfo: self.playInfoModel)
     }
     
     override func layoutSubviews() {
@@ -136,6 +144,7 @@ class FootballSPFCell: UITableViewCell, DateProtocol {
         detailBut.addTarget(self, action: #selector(detailButClicked(_:)), for: .touchUpInside)
         
         stopSellingView = FootballStopSellingView()
+        stopSellingView.delegate = self 
         stopSellingView.vertical = true 
         
         self.contentView.addSubview(line)

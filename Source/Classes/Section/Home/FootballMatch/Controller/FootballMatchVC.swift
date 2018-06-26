@@ -61,14 +61,6 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     
     
     
-    
-    
-    
-    
-    
-    
-
-    
     // MARK: - 属性
     public var matchType: FootballMatchType = .胜平负
     
@@ -146,6 +138,49 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     func didTipRangSPFCellDetail(teamInfo: FootballPlayListModel) {
         presentMatchInfoPopVC(teamInfo)
     }
+    
+    func didTipStopSelling(cell: FootballHunheCell, teamInfo: FootballPlayListModel) {
+        showCXMAlert(title: "停售原因", message: "因出票限制，暂停销售！", action: "我知道了", cancel: nil) { (action) in
+            
+        }
+    }
+    
+    func didTipStopSelling(cell: FootballSPFCell, teamInfo: FootballPlayListModel) {
+        showCXMAlert(title: "停售原因", message: "因出票限制，暂停销售！", action: "我知道了", cancel: nil) { (action) in
+            
+        }
+    }
+    
+    func didTipStopSelling(cell: FootballTotalCell, teamInfo: FootballPlayListModel) {
+        showCXMAlert(title: "停售原因", message: "因出票限制，暂停销售！", action: "我知道了", cancel: nil) { (action) in
+            
+        }
+    }
+    
+    func didTipStopSelling(cell: FootballScoreCell, teamInfo: FootballPlayListModel) {
+        showCXMAlert(title: "停售原因", message: "因出票限制，暂停销售！", action: "我知道了", cancel: nil) { (action) in
+            
+        }
+    }
+    
+    func didTipStopSelling(cell: FootballBanQuanCCell, teamInfo: FootballPlayListModel) {
+        showCXMAlert(title: "停售原因", message: "因出票限制，暂停销售！", action: "我知道了", cancel: nil) { (action) in
+            
+        }
+    }
+    
+    func didTipStopSelling(cell: Football2_1Cell, teamInfo: FootballPlayListModel) {
+        showCXMAlert(title: "停售原因", message: "因出票限制，暂停销售！", action: "我知道了", cancel: nil) { (action) in
+            
+        }
+    }
+    
+    func didTipStopSelling(cell: FootballRangSPFCell, teamInfo: FootballPlayListModel) {
+        showCXMAlert(title: "停售原因", message: "因出票限制，暂停销售！", action: "我知道了", cancel: nil) { (action) in
+            
+        }
+    }
+    
     private func presentMatchInfoPopVC(_ teamInfo: FootballPlayListModel) {
         let matchInfo = FootballMatchInfoPopVC()
         matchInfo.matchId = teamInfo.matchId

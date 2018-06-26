@@ -10,9 +10,10 @@ import UIKit
 
 protocol FootballTotalCellDelegate {
     func didTipTotalCellDetail(teamInfo : FootballPlayListModel) -> Void
+    func didTipStopSelling(cell: FootballTotalCell, teamInfo : FootballPlayListModel) -> Void
 }
 
-class FootballTotalCell: UITableViewCell, DateProtocol {
+class FootballTotalCell: UITableViewCell, DateProtocol, FootballStopSellingViewDelegate {
 
     public var playInfoModel: FootballPlayListModel! {
         didSet{
@@ -76,6 +77,11 @@ class FootballTotalCell: UITableViewCell, DateProtocol {
             totalView.alpha = 1
             stopSellingView.isHidden = true
         }
+    }
+    
+    func didTipDetails(view: UIView) {
+        guard delegate != nil else { return }
+        delegate.didTipStopSelling(cell: self, teamInfo: self.playInfoModel)
     }
     
     override func layoutSubviews() {
@@ -181,7 +187,8 @@ class FootballTotalCell: UITableViewCell, DateProtocol {
         visitingMatch.textColor = Color505050
         
         stopSellingView = FootballStopSellingView()
-        stopSellingView.vertical = true 
+        stopSellingView.vertical = true
+        stopSellingView.delegate = self 
         
         self.contentView.addSubview(line)
         self.contentView.addSubview(typeIcon)
