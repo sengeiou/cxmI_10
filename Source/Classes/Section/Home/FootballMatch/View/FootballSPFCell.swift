@@ -22,7 +22,7 @@ class FootballSPFCell: UITableViewCell, DateProtocol, FootballStopSellingViewDel
     public var playInfoModel: FootballPlayListModel! {
         didSet{
             guard playInfoModel != nil else { return }
-            changSellingState(isStop: true )
+            changSellingState(isStop: false )
             
             matchTitle.text = playInfoModel.leagueAddr
             matchTime.text = playInfoModel.changci

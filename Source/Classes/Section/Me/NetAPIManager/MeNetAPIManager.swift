@@ -62,6 +62,9 @@ enum MeNetAPIManager {
     case updateUnReadNotic(type: String)
     /// 设置用户登录密码、修改用户登录密码
     case setLoginPass(oldPass: String?, newPass: String, type : String)
+    
+    /// 账户明细列表，带统计信息
+    case accountDetailsListAndTotal(amountType: String, pageNum: Int, timeType: String)
 }
 
 extension MeNetAPIManager : TargetType {
@@ -134,6 +137,10 @@ extension MeNetAPIManager : TargetType {
             return "/member/user/updateUnReadNotice"
         case .setLoginPass:
             return "/member/user/setLoginPass"
+        case .accountDetailsListAndTotal:
+            return "/user/account/getUserAccountListAndCountTotal"
+            
+            
         }
     }
     
@@ -186,6 +193,11 @@ extension MeNetAPIManager : TargetType {
             dic["pageSize"] = "20"
         case .accountStatistics (let timeType):
             dic["timeType"] = timeType
+        case .accountDetailsListAndTotal(let amountType, let pageNum, let timeType):
+            dic["amountType"] = amountType
+            dic["timeType"] = timeType
+            dic["pageNum"] = pageNum
+            dic["pageSize"] = "20"
         case .messageList(let msgType, let pageNum):
             dic["msgType"] = msgType
             dic["pageNum"] = pageNum

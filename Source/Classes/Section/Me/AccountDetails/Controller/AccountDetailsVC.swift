@@ -131,12 +131,11 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
         }
         //self.showProgressHUD()
         weak var weakSelf = self
-        _ = userProvider.rx.request(.accountDetailsList(amountType: type, pageNum: pageNum, timeType: self.filterTime.rawValue))
-            .asObservable()
-            .mapObject(type: BasePageModel<AccountDetailModel>.self)
+        
+        _ = userProvider.rx.request(.accountDetailsListAndTotal(amountType: type, pageNum: pageNum, timeType: self.filterTime.rawValue))
+        .asObservable()
+        .mapObject(type: BasePageModel<AccountDetailModel>.self)
             .subscribe(onNext: { (data) in
-               
-                //weakSelf?.tableView.endrefresh()
                 weakSelf?.pageDataModel = data
                 if pageNum == 1 {
                     weakSelf?.accountList.removeAll()
@@ -148,11 +147,9 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
                 }else {
                     weakSelf?.footer.isHidden = false
                 }
-                self.statisticsRequest()
-                //self.dismissProgressHud()
-
+                
+                weakSelf?.tableView.reloadData()
             }, onError: { (error) in
-                //self.dismissProgressHud()
                 if weakSelf?.accountList.count == 0 {
                     weakSelf?.footer.isHidden = true
                 }else {
@@ -175,7 +172,54 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
                     }
                 default: break
                 }
-            }, onCompleted: nil , onDisposed: nil )
+            }, onCompleted: nil, onDisposed: nil)
+        
+        
+//        _ = userProvider.rx.request(.accountDetailsList(amountType: type, pageNum: pageNum, timeType: self.filterTime.rawValue))
+//            .asObservable()
+//            .mapObject(type: BasePageModel<AccountDetailModel>.self)
+//            .subscribe(onNext: { (data) in
+//
+//                //weakSelf?.tableView.endrefresh()
+//                weakSelf?.pageDataModel = data
+//                if pageNum == 1 {
+//                    weakSelf?.accountList.removeAll()
+//                }
+//                weakSelf?.accountList.append(contentsOf: data.list)
+//
+//                if weakSelf?.accountList.count == 0 {
+//                    weakSelf?.footer.isHidden = true
+//                }else {
+//                    weakSelf?.footer.isHidden = false
+//                }
+//                self.statisticsRequest()
+//                //self.dismissProgressHud()
+//
+//            }, onError: { (error) in
+//                //self.dismissProgressHud()
+//                if weakSelf?.accountList.count == 0 {
+//                    weakSelf?.footer.isHidden = true
+//                }else {
+//                    weakSelf?.footer.isHidden = false
+//                }
+//                weakSelf?.tableView.endrefresh()
+//                guard let err = error as? HXError else { return }
+//                switch err {
+//                case .UnexpectedResult(let code, let msg):
+//                    switch code {
+//                    case 600:
+//                        weakSelf?.removeUserData()
+//                        weakSelf?.pushLoginVC(from: self)
+//                    default : break
+//                    }
+//
+//                    if 300000...310000 ~= code {
+//                        print(code)
+//                        self.showHUD(message: msg!)
+//                    }
+//                default: break
+//                }
+//            }, onCompleted: nil , onDisposed: nil )
     }
     
     // 统计账户信息
