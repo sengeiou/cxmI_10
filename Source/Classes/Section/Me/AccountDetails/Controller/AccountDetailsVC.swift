@@ -136,6 +136,7 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
         .asObservable()
         .mapObject(type: AccountDetailData.self)
             .subscribe(onNext: { (data) in
+                self.tableView.endrefresh()
                 weakSelf?.pageDataModel = data.pageInfo
                 if pageNum == 1 {
                     weakSelf?.accountList.removeAll()
@@ -148,8 +149,10 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
                     weakSelf?.footer.isHidden = false
                 }
                 
+                weakSelf?.footer.dataModel = data.userAccountByTimeDTO
                 weakSelf?.tableView.reloadData()
             }, onError: { (error) in
+                self.tableView.endrefresh()
                 if weakSelf?.accountList.count == 0 {
                     weakSelf?.footer.isHidden = true
                 }else {
@@ -225,29 +228,29 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
     // 统计账户信息
     private func statisticsRequest() {
         //self.showProgressHUD()
-        weak var weakSelf = self
-        _ = userProvider.rx.request(.accountStatistics(timeType: self.filterTime.rawValue))
-            .asObservable()
-            .mapObject(type: AccountStatisticsModel.self)
-            .subscribe(onNext: { (data) in
-                //self.dismissProgressHud()
-                self.tableView.endrefresh()
-                //weakSelf?.statisticsModel = data
-                weakSelf?.footer.dataModel = data
-                weakSelf?.tableView.reloadData()
-            }, onError: { (error) in
-                //self.dismissProgressHud()
-                self.tableView.endrefresh()
-                guard let err = error as? HXError else { return }
-                switch err {
-                case .UnexpectedResult(let code, let msg):
-                    if 300000...310000 ~= code {
-                        print(code)
-                        self.showHUD(message: msg!)
-                    }
-                default: break
-                }
-            }, onCompleted: nil , onDisposed: nil )
+//        weak var weakSelf = self
+//        _ = userProvider.rx.request(.accountStatistics(timeType: self.filterTime.rawValue))
+//            .asObservable()
+//            .mapObject(type: AccountStatisticsModel.self)
+//            .subscribe(onNext: { (data) in
+//                //self.dismissProgressHud()
+//                self.tableView.endrefresh()
+//                //weakSelf?.statisticsModel = data
+//                weakSelf?.footer.dataModel = data
+//                weakSelf?.tableView.reloadData()
+//            }, onError: { (error) in
+//                //self.dismissProgressHud()
+//                self.tableView.endrefresh()
+//                guard let err = error as? HXError else { return }
+//                switch err {
+//                case .UnexpectedResult(let code, let msg):
+//                    if 300000...310000 ~= code {
+//                        print(code)
+//                        self.showHUD(message: msg!)
+//                    }
+//                default: break
+//                }
+//            }, onCompleted: nil , onDisposed: nil )
     }
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
