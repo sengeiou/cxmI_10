@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+/// app 主色
+let ColorEA5504 = UIColor(hexColor: "EA5504")
 
 /// 浅灰色字体
 let ColorA0A0A0 = UIColor(hexColor: "A0A0A0")
@@ -24,10 +26,7 @@ let ColorC7C7C7 = UIColor(hexColor: "C7C7C7")
 /// 主白
 let ColorFFFFFF = UIColor(hexColor: "FFFFFF")
 let ColorFFFFFFa8 = UIColor(hexColor: "FFFFFF", alpha: 0.8)
-/// app 主色
-let ColorEA5504 = UIColor(hexColor: "EA5504")
-/// app 主色2
-let ColorE85504 = UIColor(hexColor: "E85504")
+
 /// 黄橙色
 let ColorF7931E = UIColor(hexColor: "F7931E")
 /// 橙色

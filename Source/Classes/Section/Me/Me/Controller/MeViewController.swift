@@ -113,7 +113,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
     }
     //MARK: - 点击事件
     func didTipUserIcon() {
-        showPhotoSelect()
+        //showPhotoSelect()
     }
     @objc private func setting() {
         guard self.userInfo != nil else { return }
@@ -653,7 +653,7 @@ class MeViewController: BaseViewController, UITableViewDelegate, UITableViewData
 
 extension MeViewController : NewsHeaderViewDelegate {
     func didTipNewsUserIcon() {
-        showPhotoSelect()
+        //showPhotoSelect()
     }
 }
 

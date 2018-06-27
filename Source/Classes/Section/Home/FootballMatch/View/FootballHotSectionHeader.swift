@@ -90,7 +90,7 @@ class FootballHotSectionHeader: UITableViewHeaderFooterView, DateProtocol {
         title = UILabel()
         title.font = Font15
         title.textAlignment = .left
-        title.textColor = ColorE85504
+        title.textColor = ColorEA5504
         title.text = "热门比赛"
         
         spreadBut = UIButton(type: .custom)

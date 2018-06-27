@@ -191,7 +191,7 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
-            return 0
+            return 44
         }
         return 44
     }
@@ -265,7 +265,7 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
         }
         section1.list.append(pass)
         
-        dataList.append(section0)
+        //dataList.append(section0)
         dataList.append(section1)
         
         return dataList
@@ -327,7 +327,7 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
         }
         section1.list.append(pass)
         
-        dataList.append(section0)
+        //dataList.append(section0)
         dataList.append(section1)
         
         return dataList
