@@ -134,13 +134,13 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
         
         _ = userProvider.rx.request(.accountDetailsListAndTotal(amountType: type, pageNum: pageNum, timeType: self.filterTime.rawValue))
         .asObservable()
-        .mapObject(type: BasePageModel<AccountDetailModel>.self)
+        .mapObject(type: AccountDetailData.self)
             .subscribe(onNext: { (data) in
-                weakSelf?.pageDataModel = data
+                weakSelf?.pageDataModel = data.pageInfo
                 if pageNum == 1 {
                     weakSelf?.accountList.removeAll()
                 }
-                weakSelf?.accountList.append(contentsOf: data.list)
+                weakSelf?.accountList.append(contentsOf: data.pageInfo.list)
                 
                 if weakSelf?.accountList.count == 0 {
                     weakSelf?.footer.isHidden = true
