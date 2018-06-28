@@ -21,7 +21,7 @@ class FootballHunheCell: UITableViewCell, DateProtocol, FootballStopSellingViewD
         didSet{
             guard playInfoModel != nil else { return }
             
-            changSellingState(isStop: false )
+            changSellingState(isStop: playInfoModel.isShutDown )
             
             matchTitle.text = playInfoModel.leagueAddr
             matchTime.text = playInfoModel.changci

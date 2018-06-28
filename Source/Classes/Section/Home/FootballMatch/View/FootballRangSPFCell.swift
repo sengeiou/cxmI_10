@@ -18,7 +18,7 @@ class FootballRangSPFCell: UITableViewCell, DateProtocol, FootballStopSellingVie
     public var playInfoModel: FootballPlayListModel! {
         didSet{
             guard playInfoModel != nil else { return }
-            changSellingState(isStop: true )
+            changSellingState(isStop: playInfoModel.isShutDown )
             
             matchTitle.text = playInfoModel.leagueAddr
             matchTime.text = playInfoModel.changci

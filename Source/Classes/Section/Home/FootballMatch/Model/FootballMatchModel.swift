@@ -34,7 +34,8 @@ class FootballMatchModel:NSObject, HandyJSON {
 class FootballPlayListModel:NSObject, HandyJSON {
     required override init() { }
     
- 
+    /// 是否停售
+    var isShutDown : Bool! = false
     var changci: String!
     var changciId: String!
     var isDan : Bool! = false

@@ -19,7 +19,7 @@ class FootballBanQuanCCell: UITableViewCell, DateProtocol, FootballStopSellingVi
         didSet{
             guard playInfoModel != nil else { return }
             
-            changSellingState(isStop: true )
+            changSellingState(isStop: playInfoModel.isShutDown )
             
             if playInfoModel.homeTeamRank != nil && playInfoModel.homeTeamRank != "" {
                 homeMatch.text = "[\(playInfoModel.homeTeamRank!)]" + playInfoModel.homeTeamAbbr

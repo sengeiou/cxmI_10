@@ -19,7 +19,7 @@ class Football2_1Cell: UITableViewCell , DateProtocol, FootballStopSellingViewDe
         didSet{
             guard playInfoModel != nil else { return }
             
-            changSellingState(isStop: true )
+            changSellingState(isStop: playInfoModel.isShutDown )
             
             if playInfoModel.homeTeamRank != nil && playInfoModel.homeTeamRank != "" {
                 homeMatch.text = "[\(playInfoModel.homeTeamRank!)]" + playInfoModel.homeTeamAbbr

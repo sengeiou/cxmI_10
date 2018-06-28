@@ -307,7 +307,7 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
         let authentication = SettingRowDataModel()
         authentication.title = "身份认证"
         if userInfo.isReal {
-            authentication.detail = userInfo.rankPoint
+            authentication.detail = userInfo.realInfo
             authentication.pushType = .已认证
         }else {
             authentication.detail = "待认证"

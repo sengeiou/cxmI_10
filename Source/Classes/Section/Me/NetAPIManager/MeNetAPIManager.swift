@@ -138,7 +138,7 @@ extension MeNetAPIManager : TargetType {
         case .setLoginPass:
             return "/member/user/setLoginPass"
         case .accountDetailsListAndTotal:
-            return "/user/account/getUserAccountListAndCountTotal"
+            return "/member/user/account/getUserAccountListAndCountTotal"
             
             
         }
