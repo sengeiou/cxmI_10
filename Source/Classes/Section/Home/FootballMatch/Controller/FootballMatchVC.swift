@@ -140,43 +140,43 @@ class FootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     }
     
     func didTipStopSelling(cell: FootballHunheCell, teamInfo: FootballPlayListModel) {
-        showCXMAlert(title: "停售原因", message: "因出票限制，暂停销售！", action: "我知道了", cancel: nil) { (action) in
+        showCXMAlert(title: "停售原因", message: "\n因出票限制，暂停销售！", action: "我知道了", cancel: nil) { (action) in
             
         }
     }
     
     func didTipStopSelling(cell: FootballSPFCell, teamInfo: FootballPlayListModel) {
-        showCXMAlert(title: "停售原因", message: "因出票限制，暂停销售！", action: "我知道了", cancel: nil) { (action) in
+        showCXMAlert(title: "停售原因", message: "\n因出票限制，暂停销售！", action: "我知道了", cancel: nil) { (action) in
             
         }
     }
     
     func didTipStopSelling(cell: FootballTotalCell, teamInfo: FootballPlayListModel) {
-        showCXMAlert(title: "停售原因", message: "因出票限制，暂停销售！", action: "我知道了", cancel: nil) { (action) in
+        showCXMAlert(title: "停售原因", message: "\n因出票限制，暂停销售！", action: "我知道了", cancel: nil) { (action) in
             
         }
     }
     
     func didTipStopSelling(cell: FootballScoreCell, teamInfo: FootballPlayListModel) {
-        showCXMAlert(title: "停售原因", message: "因出票限制，暂停销售！", action: "我知道了", cancel: nil) { (action) in
+        showCXMAlert(title: "停售原因", message: "\n因出票限制，暂停销售！", action: "我知道了", cancel: nil) { (action) in
             
         }
     }
     
     func didTipStopSelling(cell: FootballBanQuanCCell, teamInfo: FootballPlayListModel) {
-        showCXMAlert(title: "停售原因", message: "因出票限制，暂停销售！", action: "我知道了", cancel: nil) { (action) in
+        showCXMAlert(title: "停售原因", message: "\n因出票限制，暂停销售！", action: "我知道了", cancel: nil) { (action) in
             
         }
     }
     
     func didTipStopSelling(cell: Football2_1Cell, teamInfo: FootballPlayListModel) {
-        showCXMAlert(title: "停售原因", message: "因出票限制，暂停销售！", action: "我知道了", cancel: nil) { (action) in
+        showCXMAlert(title: "停售原因", message: "\n因出票限制，暂停销售！", action: "我知道了", cancel: nil) { (action) in
             
         }
     }
     
     func didTipStopSelling(cell: FootballRangSPFCell, teamInfo: FootballPlayListModel) {
-        showCXMAlert(title: "停售原因", message: "因出票限制，暂停销售！", action: "我知道了", cancel: nil) { (action) in
+        showCXMAlert(title: "停售原因", message: "\n因出票限制，暂停销售！", action: "我知道了", cancel: nil) { (action) in
             
         }
     }
