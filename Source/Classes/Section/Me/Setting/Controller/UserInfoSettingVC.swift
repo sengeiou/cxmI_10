@@ -259,13 +259,13 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
         let pass = SettingRowDataModel()
         pass.title = "登录密码"
         userInfo.hasPass = false
+        pass.detailTextColor = ColorEA5504
         if userInfo.hasPass {
             pass.detail = "更改密码"
             pass.pushType = .修改密码
         }else {
             pass.detail = "请设置密码"
             pass.pushType = .设置密码
-            pass.detailTextColor = ColorEA5504
         }
         section1.list.append(pass)
         
@@ -322,14 +322,13 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
         
         let pass = SettingRowDataModel()
         pass.title = "登录密码"
-        
+        pass.detailTextColor = ColorEA5504
         if userInfo.hasPass {
             pass.detail = "更改密码"
             pass.pushType = .修改密码
         }else {
             pass.detail = "请设置密码"
             pass.pushType = .设置密码
-            pass.detailTextColor = ColorEA5504
         }
         section1.list.append(pass)
         
