@@ -71,10 +71,12 @@ class PaymentViewController: BaseViewController, UITableViewDelegate, UITableVie
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        guard self.matchType != nil else { return }
         TongJi.start("支付页: \(self.matchType.rawValue)")
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        guard self.matchType != nil else { return }
         TongJi.end("支付页: \(self.matchType.rawValue)")
     }
     override func didLogin(isLogin: Bool) {
