@@ -29,4 +29,5 @@ class SettingRowDataModel: HandyJSON {
     var pwIsSeted : Bool = false
     var image : UIImage = UIImage(named: "head")!
     var imageStr : String!
+    var detailTextColor : UIColor = Color787878
 }

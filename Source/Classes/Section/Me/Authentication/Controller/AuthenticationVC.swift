@@ -8,9 +8,41 @@
 
 import UIKit
 
+protocol AuthenticationVCDelegate {
+    func didAuthentication(vc : AuthenticationVC) -> Void
+}
+
 class AuthenticationVC: BaseViewController, UITextFieldDelegate, ValidatePro {
 
     
+    
+    
+    
+    //MARK: - 属性
+    public var delegate : AuthenticationVCDelegate!
+    
+    private var nameTF : UITextField! //姓名输入框
+    private var IDNumberTF : UITextField! // 身份证号输入
+    private var authenticationBut : UIButton! // 认证按钮
+    private var alertTitleLB : UILabel! //顶部警告
+    private var alertLB : UILabel! // 警告语
+    
+    private var bgView : UIView!
+    private var line : UIView!
+    
+    private var nameIcon : UIImageView!
+    private var nameTitle : UILabel!
+    
+    private var idIcon : UIImageView!
+    private var idTitle : UILabel!
+    
+    
+    //MARK: - 生命周期
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.title = "彩小秘 · 实名认证"
+        initSubView()
+    }
     //MARK: - 点击事件
     @objc private func authenticationClicked(_ sender: UIButton) {
         
@@ -44,48 +76,23 @@ class AuthenticationVC: BaseViewController, UITextFieldDelegate, ValidatePro {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        if textField == nameTF {
-//            guard validate(.chinese, str: textField.text) == true else {
-//                showHUD(message: "请输入正确的姓名")
-//                return false
-//            }
-//            IDNumberTF.becomeFirstResponder()
-//        }
-//        if textField == IDNumberTF {
-//            guard validate(.IDNumber, str: textField.text) == true else {
-//                showHUD(message: "请输入正确的身份证号码")
-//                return false
-//            }
-//            textField.resignFirstResponder()
-//        }
+        //        if textField == nameTF {
+        //            guard validate(.chinese, str: textField.text) == true else {
+        //                showHUD(message: "请输入正确的姓名")
+        //                return false
+        //            }
+        //            IDNumberTF.becomeFirstResponder()
+        //        }
+        //        if textField == IDNumberTF {
+        //            guard validate(.IDNumber, str: textField.text) == true else {
+        //                showHUD(message: "请输入正确的身份证号码")
+        //                return false
+        //            }
+        //            textField.resignFirstResponder()
+        //        }
         
         return true
     }
-    
-    //MARK: - 属性
-    private var nameTF : UITextField! //姓名输入框
-    private var IDNumberTF : UITextField! // 身份证号输入
-    private var authenticationBut : UIButton! // 认证按钮
-    private var alertTitleLB : UILabel! //顶部警告
-    private var alertLB : UILabel! // 警告语
-    
-    private var bgView : UIView!
-    private var line : UIView!
-    
-    private var nameIcon : UIImageView!
-    private var nameTitle : UILabel!
-    
-    private var idIcon : UIImageView!
-    private var idTitle : UILabel!
-    
-    
-    //MARK: - 生命周期
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.title = "彩小秘 · 实名认证"
-        initSubView()
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         alertTitleLB.snp.makeConstraints { (make) in
@@ -165,7 +172,13 @@ class AuthenticationVC: BaseViewController, UITextFieldDelegate, ValidatePro {
                 self.dismissProgressHud()
                 self.showHUD(message: "身份认证成功")
                 print(data)
+                
+                if self.delegate != nil {
+                    self.delegate.didAuthentication(vc: self)
+                }
+                
                 self.popViewController()
+                
             }, onError: { (error) in
                 self.dismissProgressHud()
                 guard let err = error as? HXError else { return }
@@ -182,6 +195,9 @@ class AuthenticationVC: BaseViewController, UITextFieldDelegate, ValidatePro {
                         print(code)
                         self.showHUD(message: msg!)
                         if code == 0 {
+                            if self.delegate != nil {
+                                self.delegate.didAuthentication(vc: self)
+                            }
                             self.popViewController()
                         }
                     }

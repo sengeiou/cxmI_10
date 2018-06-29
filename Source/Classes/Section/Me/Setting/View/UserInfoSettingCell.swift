@@ -14,6 +14,8 @@ class UserInfoSettingCell: UITableViewCell {
         didSet{
             title.text = model.title
             detail.text = model.detail
+            
+            detail.textColor = model.detailTextColor
         }
     }
     

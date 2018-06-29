@@ -30,6 +30,8 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
     
     private var photoSelect: YHPhotoSelect!
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "彩小秘 · 个人信息"
@@ -71,6 +73,7 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
             self.showPhotoSelect()
         case .待认证:
             let authentication = AuthenticationVC()
+            authentication.delegate = self
             pushViewController(vc: authentication)
         case .已认证:
             break
@@ -262,6 +265,7 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
         }else {
             pass.detail = "请设置密码"
             pass.pushType = .设置密码
+            pass.detailTextColor = ColorEA5504
         }
         section1.list.append(pass)
         
@@ -312,6 +316,7 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
         }else {
             authentication.detail = "待认证"
             authentication.pushType = .待认证
+            authentication.detailTextColor = ColorEA5504
         }
         section1.list.append(authentication)
         
@@ -324,6 +329,7 @@ class UserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
         }else {
             pass.detail = "请设置密码"
             pass.pushType = .设置密码
+            pass.detailTextColor = ColorEA5504
         }
         section1.list.append(pass)
         
@@ -378,4 +384,38 @@ extension UserInfoSettingVC: YHDPhotoSelectDelegate {
     }
 }
 
+extension UserInfoSettingVC : AuthenticationVCDelegate {
+    func didAuthentication(vc: AuthenticationVC) {
+        userInfoRequest()
+    }
+    
+    private func userInfoRequest() {
+        weak var weakSelf = self
+        _ = userProvider.rx.request(.userInfo)
+            .asObservable()
+            .mapObject(type: UserInfoDataModel.self)
+            .subscribe(onNext: { (data) in
+                guard weakSelf != nil else { return }
+                weakSelf!.userInfo = data
+                
+                let turnOn = UserDefaults.standard.bool(forKey: TurnOn)
+                
+                if turnOn {
+                    self.dataList = self.getDataList()
+                }else {
+                    self.dataList = self.getNewsDataList()
+                }
+                
+                weakSelf!.tableView.reloadData()
+                
+            }, onError: { (error) in
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(_, _):
+                    break
+                default: break
+                }
+            }, onCompleted: nil, onDisposed: nil)
+    }
+}
 
