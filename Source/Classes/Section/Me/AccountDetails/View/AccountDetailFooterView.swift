@@ -86,7 +86,7 @@ class AccountDetailFooterView: UIView {
     }
     private func initSubview() {
         titleLB = getLB()
-        titleLB.text = "当月合计: "
+        titleLB.text = "合计: "
         rechargeLB = getLB()
         rechargeLB.numberOfLines = 0
 //        buyLB = getLB()
