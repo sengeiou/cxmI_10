@@ -503,7 +503,12 @@ class RechargeViewController: BaseViewController, UITableViewDelegate, UITableVi
         tableview.register(RechargeCardCell.self, forCellReuseIdentifier: RechargeCardCellIdentifier)
         tableview.register(RechargePaymentCell.self, forCellReuseIdentifier: RechargeCellIdentifier)
         tableview.register(RechargePaymentTitleCell.self, forCellReuseIdentifier: RechargePaymentTitleCellId)
-        
+        if #available(iOS 11.0, *) {
+            
+        }else {
+            tableview.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 49, right: 0)
+            tableview.scrollIndicatorInsets = tableview.contentInset
+        }
         tableview.separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         
         headerView = RechargeHeaderView()
