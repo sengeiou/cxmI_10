@@ -143,11 +143,11 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
                 }
                 weakSelf?.accountList.append(contentsOf: data.pageInfo.list)
                 
-                if weakSelf?.accountList.count == 0 {
-                    weakSelf?.footer.isHidden = true
-                }else {
-                    weakSelf?.footer.isHidden = false
-                }
+//                if weakSelf?.accountList.count == 0 {
+//                    weakSelf?.footer.isHidden = true
+//                }else {
+//                    weakSelf?.footer.isHidden = false
+//                }
                 
                 weakSelf?.footer.dataModel = data.userAccountByTimeDTO
                 weakSelf?.tableView.reloadData()
