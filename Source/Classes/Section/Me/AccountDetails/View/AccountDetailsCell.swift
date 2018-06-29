@@ -24,6 +24,13 @@ class AccountDetailsCell: UITableViewCell {
             stateIcon.isHidden = true
             // 0-全部 1-奖金 2-充值 3-购彩 4-提现 5-红包 6- 退款
             moneyLB.textColor = Color505050
+            moneyLB.snp.remakeConstraints { (make) in
+                make.height.top.equalTo(titleLB)
+                make.right.equalTo(self.contentView).offset(-rightSpacing)
+                make.left.equalTo(titleLB.snp.right).offset(10)
+                make.width.equalTo(titleLB)
+            }
+            
             switch accountDetail.processType {
             case "1":
                 icon.image = UIImage(named: "Thewinning")
@@ -36,6 +43,14 @@ class AccountDetailsCell: UITableViewCell {
                 stateLB.isHidden = false
                 stateIcon.isHidden = false
                 icon.image = UIImage(named: "withdrawal")
+               
+                moneyLB.snp.remakeConstraints { (make) in
+                    make.height.top.equalTo(titleLB)
+                    make.right.equalTo(stateIcon.snp.left).offset(-1)
+                    make.left.equalTo(titleLB.snp.right).offset(10)
+                    make.width.equalTo(titleLB)
+                }
+                
             case "5":
                 icon.image = UIImage(named: "")
             case "6":
@@ -63,6 +78,7 @@ class AccountDetailsCell: UITableViewCell {
     
     private func initSubview() {
         self.selectionStyle = .none
+        
         line = UIImageView()
         line.image = UIImage(named: "line")
         
@@ -150,6 +166,7 @@ class AccountDetailsCell: UITableViewCell {
             make.left.equalTo(titleLB.snp.right).offset(10)
             make.width.equalTo(titleLB)
         }
+        
         stateLB.snp.makeConstraints { (make) in
             make.top.equalTo(detailLB)
             make.right.equalTo(stateIcon.snp.left).offset(-1)
@@ -157,9 +174,9 @@ class AccountDetailsCell: UITableViewCell {
             make.height.equalTo(15)
         }
         stateIcon.snp.makeConstraints { (make) in
-            make.centerY.equalTo(stateLB.snp.centerY)
+            make.centerY.equalTo(moneyLB.snp.centerY)
             make.height.width.equalTo(11)
-            make.right.equalTo(-rightSpacing)
+            make.right.equalTo(-(rightSpacing - 2))
         }
         
     }
