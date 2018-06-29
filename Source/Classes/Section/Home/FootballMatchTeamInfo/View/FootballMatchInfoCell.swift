@@ -31,7 +31,7 @@ class FootballMatchInfoCell: UITableViewCell {
             guard teamInfo.matchRs != "" else { return }
             matchResult.text = teamInfo.matchRs
             if teamInfo.matchRs == "胜" {
-                matchResult.textColor = ColorEA5504
+                matchResult.textColor = ColorE85504
                 wholeColor = ColorEA5504
             }else if teamInfo.matchRs == "平" {
                 matchResult.textColor = Color65AADD

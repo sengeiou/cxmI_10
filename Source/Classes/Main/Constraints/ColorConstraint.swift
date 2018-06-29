@@ -9,8 +9,10 @@
 import Foundation
 import UIKit
 
-/// app 主色
+/// app 主色 主风格
 let ColorEA5504 = UIColor(hexColor: "EA5504")
+/// app 主色2
+let ColorE85504 = UIColor(hexColor: "E85504")
 
 /// 浅灰色字体
 let ColorA0A0A0 = UIColor(hexColor: "A0A0A0")
