@@ -30,7 +30,7 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
         self.tabBar.shadowImage = UIImage(named : "line1")
         self.tabBar.backgroundImage = UIImage()
         self.delegate = self
-        creatSubViewControllers(false)
+        creatSubViewControllers()
         
         guard getUserData() != nil else {
             configRequest()
@@ -120,7 +120,7 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
     }
     
     
-    public func creatSubViewControllers(_ turnOn: Bool)
+    public func creatSubViewControllers()
     {
         // 主页
         home = HomeViewController()
