@@ -283,6 +283,8 @@ class WithdrawalViewController: BaseViewController, ValidatePro, UITextFieldDele
         2.提现金额最低3元，每天提现不超过3次；
         3.提现暂不收取手续费；
         4.为防止恶意提款、洗钱等不法行为，充值金额及活动赠送金额只能用于消费，不可提现；
+        5.处理提现的时间为工作日的早10:00-晚19:00，非工作日发起的提现申请会在工作日的工作时间内顺序处理。
+        6.如提现中遇到任何问题，可联系在线客服咨询处理。
         """
         
         bgView.addSubview(moneyLB)
