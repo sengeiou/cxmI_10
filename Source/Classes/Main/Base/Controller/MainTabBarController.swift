@@ -140,7 +140,8 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
         
         
         // 开奖
-        let lottery = LotteryViewController()
+        
+        let lottery = ScoreViewController()
         
         let lotteryNav = UINavigationController(rootViewController: lottery)
         lotteryNav.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)

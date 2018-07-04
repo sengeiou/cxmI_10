@@ -47,6 +47,7 @@ target '彩小蜜' do
   pod 'JPImageresizerView'
 
 
+
   # Pods for 彩小蜜
 
   

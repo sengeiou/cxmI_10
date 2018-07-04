@@ -14,7 +14,8 @@ let ClientId = "ClientId"
 let LoginSuccess = "loginSuccessNotice"
 let UserIconSetting = "UserIconSetting"
 let AccountDetailsFilterName = "AccountDetailsFilter"
-
+let MatchFilterNotificationName = "MatchFilterNotificationName"
+let DateFilterNotificationName = "DateFilterNotificationName"
 
 // 数据持久化
 let UserIconData = "UserIconData"

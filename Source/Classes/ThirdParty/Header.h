@@ -19,3 +19,4 @@
 #import "BaiduMobStat.h"
 #import <SobotKit/SobotKit.h>
 #import "YHPhotoSelect.h"
+#import "WMPageController.h"
