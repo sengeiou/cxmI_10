@@ -14,6 +14,9 @@ fileprivate let LotterySectionHeaderId = "LotterySectionHeaderId"
 class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate {
 
     // MARK: - 属性 public
+    
+    public var changeNum : ((_ numStr: String) -> Void)!
+    
     // MARK: - 属性 private
     public var dateFilter : String!
     private var isAlready : Bool = false
@@ -21,6 +24,7 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate 
     private var finished : Bool = false
     
     private var resultList : [LotteryResultModel]!
+    
     
     // MARK: - 生命周期
     override func viewDidLoad() {
@@ -101,6 +105,8 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate 
                 //self.dismissProgressHud()
                 
                 self.resultList = data
+                
+                self.changeNum("\(self.resultList.count)")
                 
                 DispatchQueue.main.async {
                     

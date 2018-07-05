@@ -51,8 +51,6 @@ class ScoreViewController: WMPageController, AlertPro {
         self.navigationItem.title = "彩小秘 · 比分"
         setRightBarButton()
         
-        
-        
         filterRequest()
     }
     
@@ -188,6 +186,17 @@ extension ScoreViewController {
     override func pageController(_ pageController: WMPageController, viewControllerAt index: Int) -> UIViewController {
         let scoreList = ScoreListViewController()
         scoreList.dateFilter = self.selectedDateModel.date
+        scoreList.changeNum = { num in
+            switch index {
+            case 0:
+                self.notFinishedLabel.text = num
+            case 1:
+                self.finishedLabel.text = num
+            case 2:
+                self.myMatchLabel.text = num
+            default: break
+            }
+        }
         return scoreList
     }
     
