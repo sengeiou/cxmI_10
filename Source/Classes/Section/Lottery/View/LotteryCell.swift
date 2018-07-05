@@ -184,6 +184,7 @@ class LotteryCell: UITableViewCell {
         self.contentView.addSubview(homeTeamIcon)
         self.contentView.addSubview(visiTeamIcon)
         self.contentView.addSubview(collectionButton)
+        
     }
     
     private func getLabel() -> UILabel {
