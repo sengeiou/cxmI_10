@@ -20,6 +20,7 @@ class FootballMatchInfoHeader: UIView {
     public var pagerView: FootballMatchPagerView!
     private var header : FootballTeamHeader!
     private var bottonLine: UIView!
+    
     init() {
         super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 189 * defaultScale))
         initSubview()

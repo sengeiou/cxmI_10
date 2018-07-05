@@ -102,7 +102,6 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate 
             .mapArray(type: LotteryResultModel.self)
             .subscribe(onNext: { (data) in
                 self.tableView.endrefresh()
-                //self.dismissProgressHud()
                 
                 self.resultList = data
                 

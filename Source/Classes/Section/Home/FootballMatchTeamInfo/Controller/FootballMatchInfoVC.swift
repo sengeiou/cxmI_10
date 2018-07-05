@@ -22,38 +22,14 @@ enum TeamInfoStyle {
     case lineup    //阵容
 }
 
-class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballMatchPagerViewDelegate, FootballOddsPagerViewDelegate {
-    
-    // MARK: -  pagerView delegate
-    func didTipAnalysisButton() {
-        self.teamInfoStyle = .analysis
-    }
-    
-    func didTipOddsButton() {
-        self.teamInfoStyle = .odds
-    }
-    
-    // MARK: - 赔率 pagerView delegate
-    func didTipEuropeOdds() {
-        self.oddsStyle = .欧赔
-    }
-    
-    func didTipAsianOdds() {
-        self.oddsStyle = .亚盘
-    }
-    
-    func didTipBigAndSmallBall() {
-        self.oddsStyle = .大小球
-    }
-    
+class FootballMatchInfoVC: BaseViewController, UITableViewDelegate {
     
     public var matchId : String!
     
     // MARK: - 属性 private
-    private var teamInfoStyle : TeamInfoStyle! = .analysis {
+    private var teamInfoStyle : TeamInfoStyle = .matchDetail {
         didSet{
             self.tableView.reloadData()
-            
         }
     }
     private var oddsStyle : OddsPagerStyle! = .欧赔 {
@@ -164,7 +140,9 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
         table.register(FootballOddsTitleCell.self, forCellReuseIdentifier: FootballOddsTitleCellId)
         table.register(FootballOddsCell.self, forCellReuseIdentifier: FootballOddsCellId)
         table.register(FootballAnalysisSectionHeader.self, forHeaderFooterViewReuseIdentifier: FootballAnalysisSectionHeaderId)
-        
+        table.register(FootballDetailSectionHeader.self, forHeaderFooterViewReuseIdentifier: FootballDetailSectionHeader.identifier)
+        table.register(FootballDetailEventCell.self, forCellReuseIdentifier: FootballDetailEventCell.identifier)
+        table.register(FootballDetailEventExplainCell.self, forCellReuseIdentifier: FootballDetailEventExplainCell.identifier)
         headerView = FootballMatchInfoHeader()
         headerView.pagerView.delegate = self
         
@@ -172,19 +150,45 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
      
         return table
     }()
+    
+    
+}
+
+// MARK: -  pagerView delegate
+extension FootballMatchInfoVC : FootballMatchPagerViewDelegate {
+    func didSelected(_ teamInfoStyle: TeamInfoStyle) {
+        self.teamInfoStyle = teamInfoStyle
+    }
+}
+
+extension FootballMatchInfoVC : FootballOddsPagerViewDelegate {
+    // MARK: - 赔率 pagerView delegate
+    func didSelected(_ oddsStyle: OddsPagerStyle) {
+        self.oddsStyle = oddsStyle
+    }
+}
+
+extension FootballMatchInfoVC : UITableViewDataSource {
     //MARK: - tableView dataSource
     func numberOfSections(in tableView: UITableView) -> Int {
-        if self.teamInfoStyle == .odds {
+        
+        switch teamInfoStyle {
+        case .odds:
             return 1
-        }else {
+        case .analysis:
             return 5
+        case .matchDetail:
+            return 3
+        case .lineup :
+            return 6
         }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard self.matchInfoModel != nil else { return 0 }
         
-        if self.teamInfoStyle == .odds {
+        switch teamInfoStyle {
+        case .odds:
             switch oddsStyle {
             case .欧赔:
                 guard self.matchInfoModel.leagueMatchEuropes.isEmpty == false else { return 1 }
@@ -197,8 +201,7 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
                 return self.matchInfoModel.leagueMatchDaoxiaos.count + 1
             default : return 1
             }
-        }else {
-            
+        case .analysis:
             switch section {
             case 0:
                 return 1
@@ -216,19 +219,24 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
             default:
                 return 0
             }
+        case .matchDetail:
+            return 6
+        case .lineup:
+            return 2
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        if self.teamInfoStyle == .odds {
+        
+        switch teamInfoStyle {
+        case .odds:
             switch indexPath.row {
             case 0:
                 return initOddsTitleCell(indexPath: indexPath)
             default:
                 return initOddsCell(indexPath: indexPath)
             }
-        }else {
+        case .analysis:
             switch indexPath.section {
             case 0:
                 return initAnalysisScaleCell(indexPath: indexPath)
@@ -239,7 +247,179 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
             default:
                 return UITableViewCell()
             }
+        case .matchDetail:
+            if indexPath.row == 5 {
+                return initMatchDetailEventExplain(indexPath: indexPath)
+            }
+            if indexPath.row == 0 {
+                return initMatchDetailEventCell(indexPath: indexPath)
+            }else {
+                return initMatchDetailEventCell(indexPath: indexPath)
+            }
+        case .lineup:
+            return UITableViewCell()
         }
+        
+    }
+    
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        guard self.matchInfoModel != nil else { return UIView() }
+        
+        switch teamInfoStyle {
+        case .odds:
+            let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: FootballAnalysisSectionHeaderId) as! FootballAnalysisSectionHeader
+            
+            switch section {
+                //            case 0:
+                //                header.headerStyle = .标题
+            //                header.teamInfo = self.matchInfoModel.hvMatchTeamInfo
+            case 1:
+                header.headerStyle = .赛事
+                
+            case 2:
+                header.headerStyle = .主队
+                header.teamInfo = self.matchInfoModel.hMatchTeamInfo
+            case 3:
+                header.headerStyle = .客队
+                header.teamInfo = self.matchInfoModel.vMatchTeamInfo
+            case 4:
+                return UIView()
+            default:
+                return UIView()
+                
+            }
+            
+            return header
+        case .analysis:
+            let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: FootballAnalysisSectionHeaderId) as! FootballAnalysisSectionHeader
+            
+            switch section {
+            case 0:
+                header.headerStyle = .标题
+                header.teamInfo = self.matchInfoModel.hvMatchTeamInfo
+            case 1:
+                header.headerStyle = .赛事
+                
+            case 2:
+                header.headerStyle = .主队
+                header.teamInfo = self.matchInfoModel.hMatchTeamInfo
+            case 3:
+                header.headerStyle = .客队
+                header.teamInfo = self.matchInfoModel.vMatchTeamInfo
+            case 4:
+                return UIView()
+            default:
+                break
+                
+            }
+            return header
+        case .matchDetail:
+
+            let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: FootballDetailSectionHeader.identifier) as! FootballDetailSectionHeader
+            header.titleLabel.text = "事件"
+            return header
+            
+        case .lineup:
+            let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: FootballDetailSectionHeader.identifier) as! FootballDetailSectionHeader
+            header.titleLabel.text = "事件"
+            return header
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        switch teamInfoStyle {
+        case .odds:
+            switch indexPath.row {
+            case 0:
+                return 72 * defaultScale
+            default:
+                return 50 * defaultScale
+            }
+        case .analysis:
+            switch indexPath.section {
+            case 0:
+                return 96 * defaultScale
+            case 1, 2, 3:
+                return 42 * defaultScale
+            case 4:
+                return 375 * defaultScale
+            default:
+                return 0
+            }
+        case .matchDetail:
+            if indexPath.row == 5 {
+                return 70 * defaultScale
+            }
+            return 50 * defaultScale
+        case .lineup:
+            return 50 * defaultScale
+        }
+    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        switch teamInfoStyle {
+        case .odds:
+            return 0
+        case .analysis:
+            switch section {
+            case 0:
+                return 44 * defaultScale
+            case 1:
+                return 44 * defaultScale
+            case 2, 3:
+                return 80 * defaultScale
+            case 4:
+                return 0.01
+            default:
+                return 0
+            }
+        case .matchDetail:
+            return 44 * defaultScale
+        case .lineup:
+            return 44 * defaultScale
+        }
+    }
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 5
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return nil
+    }
+    
+    /// 赛况 - 事件信息
+    private func initMatchDetailEventCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: FootballDetailEventCell.identifier, for: indexPath) as! FootballDetailEventCell
+        cell.score = "2:0"
+        if indexPath.row == 0 {
+            cell.hiddenStart = false
+            cell.hiddenTop = true
+        }else{
+            cell.hiddenTop = false
+            cell.hiddenStart = true
+        }
+        
+        if indexPath.row == 4 {
+            cell.hiddenBot = true
+        }else {
+            cell.hiddenBot = false
+        }
+        
+        return cell
+    }
+    /// 赛况 - 说明
+    private func initMatchDetailEventExplain(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: FootballDetailEventExplainCell.identifier, for: indexPath) as! FootballDetailEventExplainCell
+        return cell
+    }
+    /// 赛况 - 技术统计
+    private func initMatchDetailStatisticsCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: FootballDetailEventCell.identifier, for: indexPath) as! FootballDetailEventCell
+        
+        return cell
     }
     /// 分析 统计 历史交锋 Cell
     private func initAnalysisScaleCell(indexPath: IndexPath) -> UITableViewCell {
@@ -295,7 +475,7 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
             cell.titleView.flatlb.text = "盘口"
             cell.titleView.visilb.text = "小"
         default : break
-        
+            
         }
         return cell
     }
@@ -313,118 +493,5 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
         }
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: FootballAnalysisSectionHeaderId) as! FootballAnalysisSectionHeader
-        guard self.matchInfoModel != nil else { return UIView() }
-        
-        if self.teamInfoStyle == .odds {
-            switch section {
-//            case 0:
-//                header.headerStyle = .标题
-//                header.teamInfo = self.matchInfoModel.hvMatchTeamInfo
-            case 1:
-                header.headerStyle = .赛事
-                
-            case 2:
-                header.headerStyle = .主队
-                header.teamInfo = self.matchInfoModel.hMatchTeamInfo
-            case 3:
-                header.headerStyle = .客队
-                header.teamInfo = self.matchInfoModel.vMatchTeamInfo
-            case 4:
-                return UIView()
-            default:
-                return UIView()
-                
-            }
-        }else {
-            switch section {
-            case 0:
-                header.headerStyle = .标题
-                header.teamInfo = self.matchInfoModel.hvMatchTeamInfo
-            case 1:
-                header.headerStyle = .赛事
-                
-            case 2:
-                header.headerStyle = .主队
-                header.teamInfo = self.matchInfoModel.hMatchTeamInfo
-            case 3:
-                header.headerStyle = .客队
-                header.teamInfo = self.matchInfoModel.vMatchTeamInfo
-            case 4:
-                return UIView()
-            default:
-                break
-                
-            }
-        }
-        
-        
-        return header
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        if self.teamInfoStyle == .odds {
-            switch indexPath.row {
-            case 0:
-                return 72 * defaultScale
-            default:
-                return 50 * defaultScale
-            }
-        }else {
-            switch indexPath.section {
-            case 0:
-                return 96 * defaultScale
-            case 1, 2, 3:
-                return 42 * defaultScale
-            case 4:
-                return 375 * defaultScale
-            default:
-                return 0
-            }
-        }
-    }
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        
-        if self.teamInfoStyle == .odds{
-            return 0
-        }else {
-            switch section {
-            case 0:
-                return 44 * defaultScale
-            case 1:
-                return 44 * defaultScale
-            case 2, 3:
-                return 80 * defaultScale
-            case 4:
-                return 0.01
-            default:
-                return 0
-            }
-        }
-    }
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 5
-    }
-    
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return nil
-    }
-    
-    
-    
-    
-    
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        
-    }
-    
-
-    
-
 }
+

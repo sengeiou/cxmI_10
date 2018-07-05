@@ -15,9 +15,7 @@ enum OddsPagerStyle {
 }
 
 protocol FootballOddsPagerViewDelegate {
-    func didTipEuropeOdds() -> Void
-    func didTipAsianOdds() -> Void
-    func didTipBigAndSmallBall() -> Void
+    func didSelected(_ oddsStyle : OddsPagerStyle) -> Void
 }
 
 class FootballOddsPagerView: UIView {
@@ -46,7 +44,7 @@ class FootballOddsPagerView: UIView {
         changeButState(sender: asianOddsBut, isSelected: false)
         //changeButState(sender: bigSmallBut, isSelected: false)
         guard delegate != nil else { return }
-        delegate.didTipEuropeOdds()
+        delegate.didSelected(.欧赔)
     }
     @objc private func asianOddsClicked(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
@@ -54,7 +52,7 @@ class FootballOddsPagerView: UIView {
         //changeButState(sender: bigSmallBut, isSelected: false)
         changeButState(sender: europeOddsBut, isSelected: false)
         guard delegate != nil else { return }
-        delegate.didTipAsianOdds()
+        delegate.didSelected(.亚盘)
     }
     @objc private func bigSmallClicked(_ sender : UIButton) {
         sender.isSelected = !sender.isSelected
@@ -62,7 +60,7 @@ class FootballOddsPagerView: UIView {
         changeButState(sender: asianOddsBut, isSelected: false)
         changeButState(sender: europeOddsBut, isSelected: false)
         guard delegate != nil else { return }
-        delegate.didTipBigAndSmallBall()
+        delegate.didSelected(.大小球)
     }
     
     private func changeButState(sender : UIButton, isSelected : Bool) {
