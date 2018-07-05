@@ -163,25 +163,10 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate 
         tableView.reloadSections(IndexSet(integer: section), with: .automatic)
     }
 
-//    // MARK: - 时间筛选 delegate
-//    func didSelectDateItem(filter: LotteryDateFilterVC, dateModel: LotteryDateModel) {
-//        self.dateFilter = dateModel.date
-//        self.selectedDateModel = dateModel
-//        self.isAlready = false
-//        self.leagueIds = ""
-//        self.finished = false
-//        filterRequest()
-//        lotteryResultRequest(date: dateFilter, isAlready: isAlready, leagueIds: leagueIds, finished: finished)
-//    }
-//    // MARK: - 更多筛选 delegate
-//    func filterConfirm(leagueId: String, isAlreadyBuy: Bool) {
-//        self.isAlready = isAlreadyBuy
-//        self.leagueIds = leagueId
-//        lotteryResultRequest(date: self.dateFilter, isAlready: isAlready, leagueIds: self.leagueIds, finished: finished)
-//    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+}
+
+extension ScoreListViewController : LotteryCellDelegate {
+    func didTipCollection(cell: LotteryCell, model: LotteryResultModel) {
         
     }
 }
@@ -210,6 +195,7 @@ extension ScoreListViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: LotteryCellId, for: indexPath) as! LotteryCell
         cell.resultModel = resultList[indexPath.row]
+        cell.delegate = self
         return cell
     }
     
@@ -235,3 +221,4 @@ extension ScoreListViewController : UITableViewDataSource {
         return nil
     }
 }
+

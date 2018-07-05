@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol LotteryCellDelegate {
+    func didTipCollection(cell : LotteryCell, model : LotteryResultModel) -> Void
+}
+
 class LotteryCell: UITableViewCell {
 
     public var resultModel : LotteryResultModel! {
@@ -17,9 +21,11 @@ class LotteryCell: UITableViewCell {
             homeTeamlb.text = resultModel.homeTeamAbbr
             visiTeamlb.text = resultModel.visitingTeamAbbr
             
-            if resultModel.matchFinish == "3" {
+            if resultModel.matchFinish == "0" {
                 resultlb.text = "未开始"
+                changeCollectionSelected(selected: true)
             }else {
+                changeCollectionSelected(selected: false)
                 if resultModel.firstHalf == "" {
                     resultlb.text = "半场 " + "0:0" + " 总比分" + "0:0"
                 }
@@ -35,7 +41,11 @@ class LotteryCell: UITableViewCell {
         }
     }
     
+    public var delegate : LotteryCellDelegate!
+    
     // MARK: - 属性 private
+    private var collectionButton : UIButton!
+    
     private var titlelb : UILabel!
     private var homeTeamIcon : UIImageView!
     private var visiTeamIcon : UIImageView!
@@ -49,6 +59,22 @@ class LotteryCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initSubview()
+    }
+    
+    private func changeCollectionSelected(selected : Bool) {
+        if selected {
+            self.collectionButton.setImage(UIImage(named: "se收藏"), for: .normal)
+        }else {
+            self.collectionButton.setImage(UIImage(named: "收藏"), for: .normal)
+        }
+    }
+    
+    @objc private func collectionClick(_ sender : UIButton) {
+        sender.isSelected = !sender.isSelected
+        
+        changeCollectionSelected(selected: sender.isSelected)
+        guard delegate != nil else { fatalError("delegate 值为空") }
+        delegate.didTipCollection(cell: self, model: resultModel)
     }
     
     override func layoutSubviews() {
@@ -65,14 +91,19 @@ class LotteryCell: UITableViewCell {
             make.left.equalTo(16 * defaultScale)
             make.right.equalTo(-16 * defaultScale)
         }
+        collectionButton.snp.makeConstraints { (make) in
+            make.centerY.equalTo(self.contentView.snp.centerY)
+            make.height.width.equalTo(35 * defaultScale)
+            make.left.equalTo(6 * defaultScale)
+        }
         homeTeamIcon.snp.makeConstraints { (make) in
             make.centerY.equalTo(self.contentView.snp.centerY)
             make.height.width.equalTo(40 * defaultScale)
-            make.left.equalTo(28 * defaultScale)
+            make.left.equalTo(collectionButton.snp.right).offset(2)
         }
         visiTeamIcon.snp.makeConstraints { (make) in
             make.centerY.height.width.equalTo(homeTeamIcon)
-            make.right.equalTo(-28 * defaultScale)
+            make.right.equalTo(-1)
         }
         scorelb.snp.makeConstraints { (make) in
             make.width.equalTo(60 * defaultScale)
@@ -102,6 +133,7 @@ class LotteryCell: UITableViewCell {
     
     private func initSubview() {
         self.selectionStyle = .none
+        self.accessoryType = .disclosureIndicator
         
         titlelb = getLabel()
         titlelb.text = "001 德国杯 2月7日 01： 30"
@@ -138,6 +170,11 @@ class LotteryCell: UITableViewCell {
         line = UIImageView()
         line.image = UIImage(named : "line")
         
+        collectionButton = UIButton(type: .custom)
+        collectionButton.setImage(UIImage(named: "收藏"), for: .normal)
+        collectionButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        collectionButton.addTarget(self, action: #selector(collectionClick(_:)), for: .touchUpInside)
+        
         self.contentView.addSubview(line)
         self.contentView.addSubview(titlelb)
         self.contentView.addSubview(scorelb)
@@ -146,6 +183,7 @@ class LotteryCell: UITableViewCell {
         self.contentView.addSubview(visiTeamlb)
         self.contentView.addSubview(homeTeamIcon)
         self.contentView.addSubview(visiTeamIcon)
+        self.contentView.addSubview(collectionButton)
     }
     
     private func getLabel() -> UILabel {
@@ -156,6 +194,9 @@ class LotteryCell: UITableViewCell {
         
         return lab
     }
+    
+    
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
