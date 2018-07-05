@@ -45,7 +45,7 @@ class CouponViewController: BaseViewController, IndicatorInfoProvider, UITableVi
         couponListRequest(1)
         updateUnReadNoticeRequest() // 更新未读消息提示
         setEmpty(title: "暂无数据", tableView)
-        
+        addPanGestureRecognizer = false
         self.tableView.headerRefresh {
             self.loadNewData()
         }

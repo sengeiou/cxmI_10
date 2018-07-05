@@ -30,7 +30,7 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "彩小秘 · 比分xx"
-        
+        self.addPanGestureRecognizer = false
         hideBackBut()
         initSubview()
         

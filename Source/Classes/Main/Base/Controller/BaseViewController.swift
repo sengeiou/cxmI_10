@@ -120,8 +120,19 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
         SVProgressHUD.dismiss()
     }
     
-    
     //MARK: - 属性
+    public var addPanGestureRecognizer = true {
+        didSet{
+            if addPanGestureRecognizer {
+                self.view.addGestureRecognizer(pan)
+            }else {
+                self.view.removeGestureRecognizer(pan)
+            }
+        }
+    }
+    
+    private let pan = UIPanGestureRecognizer(target: self, action: nil )
+    
     public var isHidenBar : Bool! {
         didSet{
             guard isHidenBar != nil else { return }
@@ -142,6 +153,7 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
         setNavigation()
         self.isHidenBar = true
         
+        addPanGestureRecognizer = true
         
     }
     
@@ -149,7 +161,9 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: Font17, NSAttributedStringKey.foregroundColor: UIColor.black]
     }
-    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
     private func setNavigation() {
         self.navigationController?.navigationBar.isHidden = false
         

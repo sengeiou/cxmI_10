@@ -56,7 +56,8 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
         super.viewDidLoad()
         self.isHidenBar = true
         accountList = []
-    
+        addPanGestureRecognizer = false
+        
         self.view.addSubview(tableView)
         footer = AccountDetailFooterView()
         self.view.addSubview(footer)

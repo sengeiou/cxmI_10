@@ -46,7 +46,7 @@ class MessageCenterVC: BaseViewController, IndicatorInfoProvider, UITableViewDel
         self.view.addSubview(self.tableView)
         updateUnReadNoticeRequest() // 更新未读消息提示
         messageList = []
-        
+        addPanGestureRecognizer = false
         messageListRequest(1)
         
         self.tableView.headerRefresh {

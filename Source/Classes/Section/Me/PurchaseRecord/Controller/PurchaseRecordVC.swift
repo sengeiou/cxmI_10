@@ -57,7 +57,7 @@ class PurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
         //self.title = "彩小秘 · 购彩记录"
         self.view.addSubview(self.tableView)
         setEmpty(title: "暂无投注记录", tableView)
-        
+        addPanGestureRecognizer = false
         self.tableView.headerRefresh {
             self.loadNewData()
         }
