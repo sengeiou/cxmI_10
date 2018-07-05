@@ -64,7 +64,7 @@ class ScoreViewController: WMPageController, AlertPro {
         label.textAlignment = .center
         label.font = Font12
         label.backgroundColor = Color9F9F9F
-        label.text = "12"
+        label.text = "0"
         label.layer.cornerRadius = 2
         label.layer.masksToBounds = true
         return label
