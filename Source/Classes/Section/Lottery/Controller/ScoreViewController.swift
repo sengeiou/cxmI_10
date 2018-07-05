@@ -47,6 +47,7 @@ class ScoreViewController: WMPageController, AlertPro {
         
         self.progressWidth = 60
         self.progressViewIsNaughty = true
+        
         super.viewDidLoad()
         self.navigationItem.title = "彩小秘 · 比分"
         setRightBarButton()

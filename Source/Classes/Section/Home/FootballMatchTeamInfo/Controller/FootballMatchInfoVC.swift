@@ -16,8 +16,10 @@ fileprivate let FootballOddsTitleCellId = "FootballOddsTitleCellId"
 fileprivate let FootballOddsCellId = "FootballOddsCellId"
 
 enum TeamInfoStyle {
-    case analysis
-    case odds
+    case matchDetail //赛况
+    case analysis  //分析
+    case odds      //赔率
+    case lineup    //阵容
 }
 
 class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballMatchPagerViewDelegate, FootballOddsPagerViewDelegate {
@@ -51,6 +53,7 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, UITableViewD
     private var teamInfoStyle : TeamInfoStyle! = .analysis {
         didSet{
             self.tableView.reloadData()
+            
         }
     }
     private var oddsStyle : OddsPagerStyle! = .欧赔 {
