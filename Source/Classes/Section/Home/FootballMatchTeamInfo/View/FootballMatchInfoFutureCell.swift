@@ -47,6 +47,13 @@ class FootballMatchInfoFutureCell: UITableViewCell {
         self.contentView.addSubview(homeLabel)
         self.contentView.addSubview(visiLabel)
         
+        hLine.snp.makeConstraints { (make) in
+            make.top.equalTo(0)
+            make.height.equalTo(1)
+            make.left.equalTo(10)
+            make.right.equalTo(-10)
+        }
+        
         teamLabel.snp.makeConstraints { (make) in
             make.top.equalTo(hLine.snp.bottom)
             make.bottom.equalTo(0)
