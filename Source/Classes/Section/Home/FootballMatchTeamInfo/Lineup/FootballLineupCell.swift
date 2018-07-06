@@ -13,6 +13,15 @@ class FootballLineupCell: UITableViewCell {
     static let identifier: String = "FootballLineupCell"
     
     private var backImageView : UIImageView!
+    private var lineupImageView: UIImageView!
+    
+    private var lineupView : FootballLineupView!
+    
+    private var refereeLabel: UILabel! //裁判
+    private var fieldLabel: UILabel!   //场地
+    
+    private var homeLabel : UILabel!
+    private var visiLabel : UILabel!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -22,19 +31,88 @@ class FootballLineupCell: UITableViewCell {
     }
     
     private func initSubview() {
+        lineupView = FootballLineupView()
+        
+        self.contentView.addSubview(lineupView)
+        
+        refereeLabel = getLabel()
+        refereeLabel.textAlignment = .left
+        refereeLabel.text = "主裁： 洛奇"
+        
+        fieldLabel = getLabel()
+        fieldLabel.textAlignment = .right
+        fieldLabel.text = "场地：萨马拉竞技场"
+        
+        homeLabel = getLabel()
+        homeLabel.textAlignment = .left
+        homeLabel.text = "巴西\n4-4-2"
+        homeLabel.numberOfLines = 2
+        homeLabel.sizeToFit()
+        
+        visiLabel = getLabel()
+        visiLabel.textAlignment = .left
+        visiLabel.text = "墨西哥\n4-4-2"
+        visiLabel.numberOfLines = 2
+        visiLabel.sizeToFit()
+        
+        backImageView.addSubview(refereeLabel)
+        backImageView.addSubview(fieldLabel)
+        lineupImageView.addSubview(homeLabel)
+        lineupImageView.addSubview(visiLabel)
         
         
+        refereeLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(0)
+            make.bottom.equalTo(lineupImageView.snp.top)
+            make.left.equalTo(lineupImageView)
+            make.width.equalTo(fieldLabel)
+        }
+        fieldLabel.snp.makeConstraints { (make) in
+            make.top.bottom.equalTo(refereeLabel)
+            make.right.equalTo(lineupImageView)
+            make.left.equalTo(refereeLabel.snp.right)
+        }
+        homeLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(19)
+            make.left.equalTo(10)
+            make.height.equalTo(40)
+        }
+        visiLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(lineupImageView.snp.centerY).offset(19)
+            make.left.height.equalTo(homeLabel)
+        }
+        
+        lineupView.snp.makeConstraints { (make) in
+            make.top.left.right.bottom.equalTo(0)
+        }
     }
 
     private func initBackView() {
         backImageView = UIImageView()
-        backImageView.image = UIImage(named: "球场底图")
+        backImageView.image = UIImage(named: "绿地")
+        
+        lineupImageView = UIImageView()
+        lineupImageView.image = UIImage(named: "球场")
         
         self.contentView.addSubview(backImageView)
+        backImageView.addSubview(lineupImageView)
         
         backImageView.snp.makeConstraints { (make) in
             make.top.left.right.bottom.equalTo(0)
         }
+        lineupImageView.snp.makeConstraints { (make) in
+            make.top.equalTo(44 * defaultScale)
+            make.bottom.equalTo(-44 * defaultScale)
+            make.left.equalTo(15)
+            make.right.equalTo(-15)
+        }
+    }
+    
+    private func getLabel() -> UILabel {
+        let lab = UILabel()
+        lab.font = Font12
+        lab.textColor = ColorFFFFFF
+        return lab
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

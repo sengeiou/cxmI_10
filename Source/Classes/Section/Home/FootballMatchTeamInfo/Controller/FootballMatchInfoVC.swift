@@ -410,7 +410,7 @@ extension FootballMatchInfoVC : UITableViewDataSource {
             
         case .lineup:
             if indexPath.section == 0 {
-                return 588 * defaultScale
+                return 660 * defaultScale
             }
             return 36 * defaultScale
         }
