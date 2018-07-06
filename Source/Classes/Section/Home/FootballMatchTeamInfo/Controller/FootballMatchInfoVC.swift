@@ -146,6 +146,9 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate {
         table.register(FootballDetailTeamInfoCell.self, forCellReuseIdentifier: FootballDetailTeamInfoCell.identifier)
         table.register(FootballDetailStatisticsCell.self, forCellReuseIdentifier: FootballDetailStatisticsCell.identifier)
         
+        table.register(FootballMatchInfoFutureHeader.self, forHeaderFooterViewReuseIdentifier: FootballMatchInfoFutureHeader.identifier)
+        table.register(FootballMatchInfoFutureCell.self, forCellReuseIdentifier: FootballMatchInfoFutureCell.identifier)
+        
         table.register(FootballLineupHeader.self, forHeaderFooterViewReuseIdentifier: FootballLineupHeader.identifier)
         table.register(FootballLineupMemberCell.self, forCellReuseIdentifier: FootballLineupMemberCell.identifier)
         table.register(FootballLineupCell.self, forCellReuseIdentifier: FootballLineupCell.identifier)
@@ -182,7 +185,7 @@ extension FootballMatchInfoVC : UITableViewDataSource {
         case .odds:
             return 1
         case .analysis:
-            return 5
+            return 7
         case .matchDetail:
             return 2
         case .lineup :
@@ -221,7 +224,9 @@ extension FootballMatchInfoVC : UITableViewDataSource {
                 guard self.matchInfoModel.vMatchTeamInfo.matchInfos != nil else { return 0 }
                 return self.matchInfoModel.vMatchTeamInfo.matchInfos.count
             case 4:
-                return 0 // 暂时隐藏 积分排名，如需打开  return 1
+                return 1 // 暂时隐藏 积分排名，如需打开  return 1
+            case 5,6:
+                return 3
             default:
                 return 0
             }
@@ -257,6 +262,8 @@ extension FootballMatchInfoVC : UITableViewDataSource {
                 return initAnalysisMatchInfoCell(indexPath: indexPath)
             case 4:
                 return initAnalysisIntegralCell(indexPath: indexPath)
+            case 5,6:
+                return initAnalysisFutureCell(indexPath: indexPath)
             default:
                 return UITableViewCell()
             }
@@ -325,6 +332,12 @@ extension FootballMatchInfoVC : UITableViewDataSource {
             
             return header
         case .analysis:
+            if section == 5 || section == 6 {
+                let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: FootballMatchInfoFutureHeader.identifier) as! FootballMatchInfoFutureHeader
+                
+                return header
+            }
+            
             let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: FootballAnalysisSectionHeaderId) as! FootballAnalysisSectionHeader
             
             switch section {
@@ -342,11 +355,13 @@ extension FootballMatchInfoVC : UITableViewDataSource {
                 header.teamInfo = self.matchInfoModel.vMatchTeamInfo
             case 4:
                 return UIView()
+            
             default:
                 break
                 
             }
             return header
+            
         case .matchDetail:
             let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: FootballDetailSectionHeader.identifier) as! FootballDetailSectionHeader
             
@@ -392,6 +407,8 @@ extension FootballMatchInfoVC : UITableViewDataSource {
                 return 42 * defaultScale
             case 4:
                 return 375 * defaultScale
+            case 5,6:
+                return 42 * defaultScale
             default:
                 return 0
             }
@@ -430,6 +447,8 @@ extension FootballMatchInfoVC : UITableViewDataSource {
                 return 80 * defaultScale
             case 4:
                 return 0.01
+            case 5,6:
+                return 88 * defaultScale
             default:
                 return 0
             }
@@ -533,6 +552,12 @@ extension FootballMatchInfoVC : UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballMatchIntegralCellId, for: indexPath) as! FootballMatchIntegralCell
         cell.homeScoreInfo = self.matchInfoModel.homeTeamScoreInfo
         cell.visiScoreInfo = self.matchInfoModel.visitingTeamScoreInfo
+        return cell
+    }
+    /// 分析 - 未来赛事
+    private func initAnalysisFutureCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: FootballMatchInfoFutureCell.identifier, for: indexPath) as! FootballMatchInfoFutureCell
+        
         return cell
     }
     /// 赔率 title Cell

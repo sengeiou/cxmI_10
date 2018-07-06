@@ -10,6 +10,8 @@ import UIKit
 
 class FootballMatchInfoFutureCell: UITableViewCell {
 
+    static let identifier: String = "FootballMatchInfoFutureCell"
+    
     private var teamLabel: UILabel!
     private var dateLabel: UILabel!
     private var homeLabel: UILabel!

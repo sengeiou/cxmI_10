@@ -10,6 +10,8 @@ import UIKit
 
 class FootballMatchInfoFutureHeader: UITableViewHeaderFooterView {
 
+    static let identifier: String = "FootballMatchInfoFutureHeader"
+    
     public var teamName: UILabel!
     
     private var titleLabel: UILabel!
