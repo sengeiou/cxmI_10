@@ -42,6 +42,7 @@ class FootballDetailStatisticsCell: UITableViewCell {
         
         homeScaleView = ScaleView()
         homeScaleView.scaleWidth = scaleWidth
+        homeScaleView.sequence = false 
         homeScaleView.scaleColor = ColorE85504
         
         homeScaleView.scaleNum = 0.6

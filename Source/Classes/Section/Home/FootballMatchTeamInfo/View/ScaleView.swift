@@ -26,6 +26,12 @@ class ScaleView: UIView {
         }
     }
     
+    public var sequence = true {
+        didSet{
+            
+        }
+    }
+    
     private var acaleView : UIView!
     
     init() {
@@ -45,10 +51,19 @@ class ScaleView: UIView {
     }
     
     private func layoutScale() {
-        acaleView.snp.makeConstraints { (make) in
-            make.top.bottom.left.equalTo(0)
-            make.width.equalTo((scaleWidth ) * scaleNum)
+        if sequence {
+            acaleView.snp.makeConstraints { (make) in
+                make.top.bottom.left.equalTo(0)
+                make.width.equalTo((scaleWidth ) * scaleNum)
+            }
+        }else {
+            acaleView.snp.makeConstraints { (make) in
+                make.top.bottom.equalTo(0)
+                make.right.equalTo(0)
+                make.width.equalTo((scaleWidth ) * scaleNum)
+            }
         }
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
