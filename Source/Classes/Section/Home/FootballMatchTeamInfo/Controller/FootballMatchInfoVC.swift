@@ -143,6 +143,11 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate {
         table.register(FootballDetailSectionHeader.self, forHeaderFooterViewReuseIdentifier: FootballDetailSectionHeader.identifier)
         table.register(FootballDetailEventCell.self, forCellReuseIdentifier: FootballDetailEventCell.identifier)
         table.register(FootballDetailEventExplainCell.self, forCellReuseIdentifier: FootballDetailEventExplainCell.identifier)
+        table.register(FootballDetailTeamInfoCell.self, forCellReuseIdentifier: FootballDetailTeamInfoCell.identifier)
+        table.register(FootballDetailStatisticsCell.self, forCellReuseIdentifier: FootballDetailStatisticsCell.identifier)
+        
+        
+        
         headerView = FootballMatchInfoHeader()
         headerView.pagerView.delegate = self
         
@@ -178,9 +183,9 @@ extension FootballMatchInfoVC : UITableViewDataSource {
         case .analysis:
             return 5
         case .matchDetail:
-            return 3
+            return 2
         case .lineup :
-            return 6
+            return 3
         }
     }
     
@@ -220,7 +225,11 @@ extension FootballMatchInfoVC : UITableViewDataSource {
                 return 0
             }
         case .matchDetail:
-            return 6
+            if section == 0 {
+                return 6
+            }else {
+                return 11
+            }
         case .lineup:
             return 2
         }
@@ -248,14 +257,24 @@ extension FootballMatchInfoVC : UITableViewDataSource {
                 return UITableViewCell()
             }
         case .matchDetail:
-            if indexPath.row == 5 {
-                return initMatchDetailEventExplain(indexPath: indexPath)
-            }
-            if indexPath.row == 0 {
-                return initMatchDetailEventCell(indexPath: indexPath)
+          
+            if indexPath.section == 0 {
+                if indexPath.row == 5 {
+                    return initMatchDetailEventExplain(indexPath: indexPath)
+                }
+                if indexPath.row == 0 {
+                    return initMatchDetailEventCell(indexPath: indexPath)
+                }else {
+                    return initMatchDetailEventCell(indexPath: indexPath)
+                }
             }else {
-                return initMatchDetailEventCell(indexPath: indexPath)
+                if indexPath.row == 0 {
+                    return initMatchDetailTeamInfo(indexPath: indexPath)
+                }else {
+                    return initMatchDetailStatisticsCell(indexPath: indexPath)
+                }
             }
+            
         case .lineup:
             return UITableViewCell()
         }
@@ -415,9 +434,15 @@ extension FootballMatchInfoVC : UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballDetailEventExplainCell.identifier, for: indexPath) as! FootballDetailEventExplainCell
         return cell
     }
+    /// 赛况 - 技术统计 - 球队信息
+    private func initMatchDetailTeamInfo(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: FootballDetailTeamInfoCell.identifier, for: indexPath) as! FootballDetailTeamInfoCell
+        
+        return cell
+    }
     /// 赛况 - 技术统计
     private func initMatchDetailStatisticsCell(indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: FootballDetailEventCell.identifier, for: indexPath) as! FootballDetailEventCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: FootballDetailStatisticsCell.identifier, for: indexPath) as! FootballDetailStatisticsCell
         
         return cell
     }

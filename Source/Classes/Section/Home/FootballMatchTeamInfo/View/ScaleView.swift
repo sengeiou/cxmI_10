@@ -17,6 +17,8 @@ class ScaleView: UIView {
         }
     }
     
+    public var scaleWidth: CGFloat = 306 * defaultScale
+    
     public var scaleColor: UIColor! {
         didSet{
             guard scaleColor != nil else { return }
@@ -45,7 +47,7 @@ class ScaleView: UIView {
     private func layoutScale() {
         acaleView.snp.makeConstraints { (make) in
             make.top.bottom.left.equalTo(0)
-            make.width.equalTo((306 * defaultScale ) * scaleNum)
+            make.width.equalTo((scaleWidth ) * scaleNum)
         }
     }
     
