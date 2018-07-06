@@ -80,7 +80,7 @@ class ScoreViewController: WMPageController, AlertPro {
         
         dateFilter = UIButton(type: .custom)
         dateFilter.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-        dateFilter.setImage(UIImage(named: "Popular"), for: .normal)
+        dateFilter.setImage(UIImage(named: "date"), for: .normal)
         dateFilter.addTarget(self, action: #selector(dateFilterClick(_:)), for: .touchUpInside)
         
         self.navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: matchFilter), UIBarButtonItem(customView: dateFilter)]

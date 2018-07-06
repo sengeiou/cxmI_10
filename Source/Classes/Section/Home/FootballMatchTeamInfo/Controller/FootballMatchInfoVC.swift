@@ -146,13 +146,14 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate {
         table.register(FootballDetailTeamInfoCell.self, forCellReuseIdentifier: FootballDetailTeamInfoCell.identifier)
         table.register(FootballDetailStatisticsCell.self, forCellReuseIdentifier: FootballDetailStatisticsCell.identifier)
         
-        
+        table.register(FootballLineupHeader.self, forHeaderFooterViewReuseIdentifier: FootballLineupHeader.identifier)
+        table.register(FootballLineupMemberCell.self, forCellReuseIdentifier: FootballLineupMemberCell.identifier)
+        table.register(FootballLineupCell.self, forCellReuseIdentifier: FootballLineupCell.identifier)
         
         headerView = FootballMatchInfoHeader()
         headerView.pagerView.delegate = self
         
         table.tableHeaderView = headerView
-     
         return table
     }()
     
@@ -228,9 +229,12 @@ extension FootballMatchInfoVC : UITableViewDataSource {
             if section == 0 {
                 return 6
             }else {
-                return 11
+                return 12
             }
         case .lineup:
+            if section == 0 {
+                return 1
+            }
             return 2
         }
     }
@@ -270,13 +274,22 @@ extension FootballMatchInfoVC : UITableViewDataSource {
             }else {
                 if indexPath.row == 0 {
                     return initMatchDetailTeamInfo(indexPath: indexPath)
-                }else {
+                }
+                if indexPath.row == 11 {
+                    let cell = UITableViewCell()
+                    cell.selectionStyle = .none
+                    return cell
+                }
+                else {
                     return initMatchDetailStatisticsCell(indexPath: indexPath)
                 }
             }
             
         case .lineup:
-            return UITableViewCell()
+            if indexPath.section == 0 {
+                return initLineupCell(indexPath: indexPath)
+            }
+            return initLineupMemberCell(indexPath: indexPath)
         }
         
     }
@@ -335,14 +348,28 @@ extension FootballMatchInfoVC : UITableViewDataSource {
             }
             return header
         case .matchDetail:
-
             let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: FootballDetailSectionHeader.identifier) as! FootballDetailSectionHeader
-            header.titleLabel.text = "事件"
+            
+            if section == 0{
+                header.titleLabel.text = "事件"
+            }else {
+                header.titleLabel.text = "技术统计"
+            }
             return header
             
         case .lineup:
-            let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: FootballDetailSectionHeader.identifier) as! FootballDetailSectionHeader
-            header.titleLabel.text = "事件"
+            if section == 0{
+                return nil
+            }
+            let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: FootballLineupHeader.identifier) as! FootballLineupHeader
+            
+            if section == 1{
+                header.titleLabel.text = "替补阵容"
+            }else {
+                header.titleLabel.text = "伤停"
+            }
+            header.homeLabel.text = "巴西"
+            header.visiLabel.text = "墨西哥"
             return header
         }
     }
@@ -369,12 +396,23 @@ extension FootballMatchInfoVC : UITableViewDataSource {
                 return 0
             }
         case .matchDetail:
-            if indexPath.row == 5 {
-                return 70 * defaultScale
+            if indexPath.section == 0 {
+                if indexPath.row == 5 {
+                    return 70 * defaultScale
+                }
+                return 50 * defaultScale
+            }else {
+                if indexPath.row == 0 {
+                    return 90 * defaultScale
+                }
+                return 30 * defaultScale
             }
-            return 50 * defaultScale
+            
         case .lineup:
-            return 50 * defaultScale
+            if indexPath.section == 0 {
+                return 588 * defaultScale
+            }
+            return 36 * defaultScale
         }
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -398,7 +436,10 @@ extension FootballMatchInfoVC : UITableViewDataSource {
         case .matchDetail:
             return 44 * defaultScale
         case .lineup:
-            return 44 * defaultScale
+            if section == 0 {
+                return 0.01
+            }
+            return 88 * defaultScale
         }
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -443,6 +484,18 @@ extension FootballMatchInfoVC : UITableViewDataSource {
     /// 赛况 - 技术统计
     private func initMatchDetailStatisticsCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballDetailStatisticsCell.identifier, for: indexPath) as! FootballDetailStatisticsCell
+        
+        return cell
+    }
+    /// 阵容 - 阵容图
+    private func initLineupCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: FootballLineupCell.identifier, for: indexPath) as! FootballLineupCell
+        
+        return cell
+    }
+    /// 阵容 - 替补-伤停
+    private func initLineupMemberCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: FootballLineupMemberCell.identifier, for: indexPath) as! FootballLineupMemberCell
         
         return cell
     }

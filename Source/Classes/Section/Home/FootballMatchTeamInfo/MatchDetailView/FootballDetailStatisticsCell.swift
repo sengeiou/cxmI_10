@@ -42,7 +42,7 @@ class FootballDetailStatisticsCell: UITableViewCell {
         
         homeScaleView = ScaleView()
         homeScaleView.scaleWidth = scaleWidth
-        homeScaleView.sequence = false 
+        homeScaleView.sequence = false
         homeScaleView.scaleColor = ColorE85504
         
         homeScaleView.scaleNum = 0.6
@@ -66,7 +66,7 @@ class FootballDetailStatisticsCell: UITableViewCell {
         homeScaleView.snp.makeConstraints { (make) in
             make.width.equalTo(scaleWidth)
             make.right.equalTo(titleLabel.snp.left).offset(-5)
-            make.height.equalTo(2)
+            make.height.equalTo(4)
             make.centerY.equalTo(titleLabel.snp.centerY)
         }
         homeNumLabel.snp.makeConstraints { (make) in

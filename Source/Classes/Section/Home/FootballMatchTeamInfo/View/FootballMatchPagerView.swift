@@ -153,7 +153,7 @@ class FootballMatchPagerView: UIView {
         changeButtonState(sender: sender, isSelected: true)
         changeButtonState(sender: analysisBut, isSelected: false)
         changeButtonState(sender: oddsBut, isSelected: false)
-        changeButtonState(sender: lineupBut, isSelected: false)
+        changeButtonState(sender: matchDetailBut, isSelected: false)
         guard delegate != nil else { return }
         delegate.didSelected(.lineup)
     }
