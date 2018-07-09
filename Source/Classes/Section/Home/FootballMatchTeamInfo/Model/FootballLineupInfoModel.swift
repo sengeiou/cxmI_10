@@ -32,6 +32,78 @@ struct FootballLineupInfoModel : HandyJSON {
     var hlineupPersons: [FootballLineupMemberInfo] = [FootballLineupMemberInfo]()
     /// 主队停赛队员
     var hsuspensionPersons:[FootballLineupMemberInfo] = [FootballLineupMemberInfo]()
+    
+    func getHomeLineup() -> [[FootballLineupMemberInfo]] {
+        var homeLinup : [[FootballLineupMemberInfo]] = [[FootballLineupMemberInfo]]()
+        
+        var hGK = [FootballLineupMemberInfo]()
+        var hD1 = [FootballLineupMemberInfo]()
+        var hM = [FootballLineupMemberInfo]()
+        var hA = [FootballLineupMemberInfo]()
+        
+        for member in hlineupPersons {
+            if member.positionX == "GK" {
+                hGK.append(member)
+            }else if member.positionX == "D1" {
+                hD1.append(member)
+            }else if member.positionX == "M" {
+                hM.append(member)
+            }else if member.positionX == "A" {
+                hA.append(member)
+            }
+        }
+        
+        if hGK.count > 0 {
+            homeLinup.append(hGK)
+        }
+        if hD1.count > 0 {
+            homeLinup.append(hD1)
+        }
+        if hM.count > 0 {
+            homeLinup.append(hM)
+        }
+        if hA.count > 0 {
+            homeLinup.append(hA)
+        }
+        
+        return homeLinup
+    }
+    
+    func getVisiLineup() -> [[FootballLineupMemberInfo]] {
+        var visiLinup : [[FootballLineupMemberInfo]] = [[FootballLineupMemberInfo]]()
+        
+        var GK = [FootballLineupMemberInfo]()
+        var D1 = [FootballLineupMemberInfo]()
+        var M = [FootballLineupMemberInfo]()
+        var A = [FootballLineupMemberInfo]()
+        
+        for member in hlineupPersons {
+            if member.positionX == "GK" {
+                GK.append(member)
+            }else if member.positionX == "D1" {
+                D1.append(member)
+            }else if member.positionX == "M" {
+                M.append(member)
+            }else if member.positionX == "A" {
+                A.append(member)
+            }
+        }
+        
+        if GK.count > 0 {
+            visiLinup.append(GK)
+        }
+        if D1.count > 0 {
+            visiLinup.append(D1)
+        }
+        if M.count > 0 {
+            visiLinup.append(M)
+        }
+        if A.count > 0 {
+            visiLinup.append(A)
+        }
+        
+        return visiLinup
+    }
 }
 
 struct FootballLineupMemberInfo : HandyJSON {

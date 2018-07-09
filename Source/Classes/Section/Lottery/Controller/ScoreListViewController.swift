@@ -29,7 +29,7 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate 
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "彩小秘 · 比分xx"
+        self.navigationItem.title = "彩小秘 · 比分"
         self.addPanGestureRecognizer = false
         hideBackBut()
         initSubview()

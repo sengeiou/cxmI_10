@@ -30,7 +30,7 @@ class FootballMatchPagerView: UIView {
     init() {
         super.init(frame: CGRect.zero)
         initSubview()
-        changeButtonState(sender: matchDetailBut, isSelected: true)
+        changeButtonState(sender: analysisBut, isSelected: true)
     }
     override func layoutSubviews() {
         super.layoutSubviews()

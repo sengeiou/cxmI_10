@@ -12,10 +12,22 @@ class FootballLineupCell: UITableViewCell {
 
     static let identifier: String = "FootballLineupCell"
     
+    public var homeLineup : [[FootballLineupMemberInfo]]! {
+        didSet{
+            hLineupView.lineupList = homeLineup
+        }
+    }
+    public var visiLineup : [[FootballLineupMemberInfo]]! {
+        didSet{
+            vLineupView.lineupList = visiLineup
+        }
+    }
+    
     private var backImageView : UIImageView!
     private var lineupImageView: UIImageView!
     
-    private var lineupView : FootballLineupView!
+    private var hLineupView : FootballLineupView!
+    private var vLineupView : FootballLineupView!
     
     private var refereeLabel: UILabel! //裁判
     private var fieldLabel: UILabel!   //场地
@@ -31,9 +43,11 @@ class FootballLineupCell: UITableViewCell {
     }
     
     private func initSubview() {
-        lineupView = FootballLineupView()
+        hLineupView = FootballLineupView()
+        vLineupView = FootballLineupView()
         
-        self.contentView.addSubview(lineupView)
+        self.contentView.addSubview(hLineupView)
+        self.contentView.addSubview(vLineupView)
         
         refereeLabel = getLabel()
         refereeLabel.textAlignment = .left
@@ -82,8 +96,13 @@ class FootballLineupCell: UITableViewCell {
             make.left.height.equalTo(homeLabel)
         }
         
-        lineupView.snp.makeConstraints { (make) in
-            make.top.left.right.bottom.equalTo(0)
+        hLineupView.snp.makeConstraints { (make) in
+            make.top.left.right.equalTo(0)
+            make.height.equalTo(vLineupView)
+        }
+        vLineupView.snp.makeConstraints { (make) in
+            make.top.equalTo(hLineupView.snp.bottom)
+            make.bottom.left.right.equalTo(0)
         }
     }
 

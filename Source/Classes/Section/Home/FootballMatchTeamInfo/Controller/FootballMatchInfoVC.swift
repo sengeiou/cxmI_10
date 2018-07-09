@@ -27,7 +27,7 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate {
     public var matchId : String!
     
     // MARK: - 属性 private
-    private var teamInfoStyle : TeamInfoStyle = .matchDetail {
+    private var teamInfoStyle : TeamInfoStyle = .analysis {
         didSet{
             self.tableView.reloadData()
         }
@@ -46,6 +46,9 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate {
     
     private var lineupInfoModel : FootballLineupInfoModel! //阵营信息
     private var liveInfoModel: FootballLiveInfoModel!      //赛况信息
+    
+    private var homeLineupList : [[FootballLineupMemberInfo]]! //主队阵容
+    private var visiLineupList : [[FootballLineupMemberInfo]]! //客队阵容
     
     private var headerView : FootballMatchInfoHeader!
     private var buyButton : UIButton!
@@ -132,6 +135,9 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate {
             .subscribe(onNext: { (data) in
                 weakSelf?.dismissProgressHud()
                 weakSelf?.lineupInfoModel = data
+                weakSelf?.homeLineupList = weakSelf?.lineupInfoModel.getHomeLineup()
+                weakSelf?.visiLineupList = weakSelf?.lineupInfoModel.getVisiLineup()
+                
                 weakSelf?.tableView.reloadData()
             }, onError: { (error) in
                 self.dismissProgressHud()
@@ -463,11 +469,13 @@ extension FootballMatchInfoVC : UITableViewDataSource {
             
             if section == 1{
                 header.titleLabel.text = "替补阵容"
+                
             }else {
                 header.titleLabel.text = "伤停"
             }
-            header.homeLabel.text = "巴西"
-            header.visiLabel.text = "墨西哥"
+            
+            header.homeLabel.text = self.lineupInfoModel.homeTeamAbbr
+            header.visiLabel.text = self.lineupInfoModel.visitingTeamAbbr
             return header
         }
     }
@@ -592,7 +600,8 @@ extension FootballMatchInfoVC : UITableViewDataSource {
     /// 阵容 - 阵容图
     private func initLineupCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballLineupCell.identifier, for: indexPath) as! FootballLineupCell
-        
+        cell.homeLineup = self.homeLineupList
+        cell.visiLineup = self.visiLineupList
         return cell
     }
     /// 阵容 - 替补-伤停
