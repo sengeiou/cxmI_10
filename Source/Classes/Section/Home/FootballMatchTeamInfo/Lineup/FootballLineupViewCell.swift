@@ -8,20 +8,38 @@
 
 import UIKit
 
+fileprivate let spacing : CGFloat = 50
+
 class FootballLineupViewCell: UITableViewCell {
 
     static let identifier = "FootballLineupViewCell"
     
     public var lineupList : [FootballLineupMemberInfo]! {
         didSet{
+            clIcon.memberInfo = lineupList[0]
+            clIcon.image = ""
             
+            if lineupType == .主队 {
+                setHomeData()
+            }else {
+                setVisiData()
+            }
         }
     }
     
-    private var clIcon: UIImageView! // 左中
-    private var crIcon: UIImageView! // 右中
-    private var lIcon : UIImageView! // 左
-    private var rIcon : UIImageView! // 右
+    private func setHomeData () {
+        
+    }
+    private func setVisiData () {
+        
+    }
+    
+    public var lineupType : LineupType!
+    
+    private var clIcon: FootballLineupMemView! // 左中
+    private var crIcon: FootballLineupMemView! // 右中
+    private var lIcon : FootballLineupMemView! // 左
+    private var rIcon : FootballLineupMemView! // 右
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -30,29 +48,36 @@ class FootballLineupViewCell: UITableViewCell {
     }
     
     private func initSubview() {
-        clIcon = getImageView(image: "Hometeam_1")
-        crIcon = getImageView(image: "Hometeam_1")
-        lIcon = getImageView(image: "Hometeam_1")
-        rIcon = getImageView(image: "Hometeam_1")
+        clIcon = FootballLineupMemView()
+        crIcon = FootballLineupMemView()
+        lIcon = FootballLineupMemView()
+        rIcon = FootballLineupMemView()
         
         self.contentView.addSubview(clIcon)
         self.contentView.addSubview(crIcon)
         self.contentView.addSubview(lIcon)
         self.contentView.addSubview(rIcon)
         
-        clIcon.snp.makeConstraints { (make) in
+        lIcon.snp.makeConstraints { (make) in
             make.centerY.equalTo(self.contentView.snp.centerY)
-            make.top.equalTo(10)
-            make.bottom.equalTo(-10)
-            make.width.equalTo(clIcon.snp.height)
+            make.height.equalTo(48)
+            make.left.equalTo(20)
         }
-    }
-    
-    private func getImageView(image: String) -> UIImageView {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named : image)
-        imageView.alpha = 1
-        return imageView
+        clIcon.snp.makeConstraints { (make) in
+            make.centerY.width.height.equalTo(lIcon)
+            make.left.equalTo(lIcon.snp.right)
+        }
+        crIcon.snp.makeConstraints { (make) in
+            make.centerY.height.width.equalTo(lIcon)
+            make.left.equalTo(clIcon.snp.right)
+        }
+        rIcon.snp.makeConstraints { (make) in
+            make.centerY.height.width.equalTo(crIcon)
+            make.left.equalTo(crIcon.snp.right)
+            make.right.equalTo(-20)
+        }
+        
+        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

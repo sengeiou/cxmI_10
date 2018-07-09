@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum LineupType {
+    case 主队
+    case 客队
+}
+
 class FootballLineupView: UIView {
 
     public var lineupList : [[FootballLineupMemberInfo]]! {
@@ -15,6 +20,8 @@ class FootballLineupView: UIView {
             self.tableView.reloadData()
         }
     }
+    
+    public var lineupType : LineupType! 
     
     init() {
         super.init(frame: CGRect.zero)
@@ -74,6 +81,7 @@ extension FootballLineupView : UITableViewDataSource {
         if memberList.count % 2 == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: FootballLineupViewCell.identifier, for: indexPath) as! FootballLineupViewCell
             cell.lineupList = memberList
+            cell.lineupType = self.lineupType
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: FootballLineupViewOddCell.identifier, for: indexPath) as! FootballLineupViewOddCell
@@ -83,6 +91,6 @@ extension FootballLineupView : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+        return 70
     }
 }

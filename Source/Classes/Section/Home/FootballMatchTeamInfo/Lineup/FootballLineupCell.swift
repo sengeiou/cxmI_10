@@ -44,10 +44,12 @@ class FootballLineupCell: UITableViewCell {
     
     private func initSubview() {
         hLineupView = FootballLineupView()
+        hLineupView.lineupType = .主队
         vLineupView = FootballLineupView()
+        vLineupView.lineupType = .客队
         
-        self.contentView.addSubview(hLineupView)
-        self.contentView.addSubview(vLineupView)
+        lineupImageView.addSubview(hLineupView)
+        lineupImageView.addSubview(vLineupView)
         
         refereeLabel = getLabel()
         refereeLabel.textAlignment = .left
