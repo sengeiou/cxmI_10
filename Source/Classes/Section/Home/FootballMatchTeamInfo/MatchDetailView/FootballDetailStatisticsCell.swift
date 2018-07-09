@@ -14,6 +14,8 @@ class FootballDetailStatisticsCell: UITableViewCell {
 
     static let identifier : String = "FootballDetailStatisticsCell"
     
+    
+    
     private var homeNumLabel: UILabel!
     private var visiNumLabel: UILabel!
     
@@ -26,6 +28,32 @@ class FootballDetailStatisticsCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
         initSubview()
+    }
+    
+    public func changeData(data : FootballStatisticsInfo, indexPath : IndexPath) {
+        switch indexPath.row {
+        case 1:
+            titleLabel.text = "控球率"
+        case 2:
+            titleLabel.text = "射正"
+        case 3:
+            titleLabel.text = "射偏"
+        case 4:
+            titleLabel.text = "被封堵"
+        case 5:
+            titleLabel.text = "角球"
+        case 6:
+            titleLabel.text = "任意球"
+        case 7:
+            titleLabel.text = "越位"
+        case 8:
+            titleLabel.text = "黄牌"
+        case 9:
+            titleLabel.text = "犯规"
+        case 10:
+            titleLabel.text = "有威胁攻势"
+            
+        default: break }
     }
     
     private func initSubview() {

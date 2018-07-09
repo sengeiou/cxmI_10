@@ -13,46 +13,27 @@ let lotteryProvider = MoyaProvider<LotteryNetAPIManager>(plugins:[RequestLoading
 
 enum LotteryNetAPIManager {
     case lotteryResult (date: String, isAlready: Bool, leagueIds: String, finished: Bool)
+    /// 阵容信息
+    case lineupInfo(matchId: String)
+    /// 赛况信息
+    case liveInfo(matchId: String)
+    
 }
 
 extension LotteryNetAPIManager : TargetType {
     var baseURL : URL {
         return URL(string : baseURLStr + "/lottery" + xpath )!
     }
+    var path : String { return ""}
     
     var xpath : String {
         switch self {
         case .lotteryResult:
             return "/lottery/match/queryMatchResult"
-        }
-    }
-    
-    var path : String {
-        
-        switch self {
-        
-        case .lotteryResult:
-            return ""
-        }
-    }
-    
-    var method : Moya.Method {
-        switch self {
-        
-        default:
-            return .post
-        }
-    }
-    var headers: [String : String]? {
-        return ["Content-Type" : "application/json",
-                "token" : UserInfoManager().getToken()
-        ]
-    }
-    var parameters: [String: Any]? {
-        switch self {
-        
-        default:
-            return nil
+        case .lineupInfo:
+            return "/match/lineup/info"
+        case .liveInfo:
+            return "/match/live/info"
         }
     }
     
@@ -75,6 +56,11 @@ extension LotteryNetAPIManager : TargetType {
             
             dic["leagueIds"] = leagueIds
             
+        case .lineupInfo(let matchId):
+            dic["matchId"] = matchId
+            
+        case .liveInfo(let matchId):
+            dic["matchId"] = matchId
         default:
             return .requestPlain
         }
@@ -84,6 +70,28 @@ extension LotteryNetAPIManager : TargetType {
         let jsonStr = try? JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted)
         return .requestData(jsonStr!)
     }
+    
+    var method : Moya.Method {
+        switch self {
+        
+        default:
+            return .post
+        }
+    }
+    var headers: [String : String]? {
+        return ["Content-Type" : "application/json",
+                "token" : UserInfoManager().getToken()
+        ]
+    }
+    var parameters: [String: Any]? {
+        switch self {
+        
+        default:
+            return nil
+        }
+    }
+    
+    
     
     var parameterEncoding: ParameterEncoding {
         switch self {

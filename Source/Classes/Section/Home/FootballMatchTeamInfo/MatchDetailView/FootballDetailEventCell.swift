@@ -14,6 +14,12 @@ class FootballDetailEventCell: UITableViewCell {
 
     static let identifier : String = "FootballDetailEventCellId"
     
+    public var eventInfo : FootballLiveEventInfo! {
+        didSet{
+            
+        }
+    }
+    
     public var hiddenStart = true {
         didSet{
             self.startIcon.isHidden = hiddenStart

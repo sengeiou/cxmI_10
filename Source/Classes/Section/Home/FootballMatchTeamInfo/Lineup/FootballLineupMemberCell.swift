@@ -12,6 +12,20 @@ class FootballLineupMemberCell: UITableViewCell {
 
     static let identifier: String = "FootballLineupMemberCell"
     
+    public var homeMemberInfo : FootballLineupMemberInfo! {
+        didSet{
+            homeLabel.text = homeMemberInfo.personName
+            homeNum.text = homeMemberInfo.position
+        }
+    }
+    public var visiMemberInfo : FootballLineupMemberInfo! {
+        didSet{
+            visiLabel.text = visiMemberInfo.personName
+            visiNum.text = visiMemberInfo.position
+        }
+    }
+    
+    
     private var homeIcon : UIImageView!
     private var visiIcon : UIImageView!
     

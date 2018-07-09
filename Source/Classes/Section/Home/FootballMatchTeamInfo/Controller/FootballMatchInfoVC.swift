@@ -43,12 +43,17 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate {
             headerView.matchInfo = self.matchInfoModel.matchInfo
         }
     }
+    
+    private var lineupInfoModel : FootballLineupInfoModel! //阵营信息
+    private var liveInfoModel: FootballLiveInfoModel!      //赛况信息
+    
     private var headerView : FootballMatchInfoHeader!
     private var buyButton : UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "彩小秘 · 查看详情"
+        setEmpty(title: "暂无信息", self.tableView)
         initSubview()
         
         matchInfoRequest(matchId: matchId)
@@ -90,9 +95,13 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate {
             .asObservable()
             .mapObject(type: FootballMatchInfoModel.self)
             .subscribe(onNext: { (data) in
-                self.dismissProgressHud()
+                //self.dismissProgressHud()
                 weakSelf?.matchInfoModel = data
-                weakSelf?.tableView.reloadData()
+                
+                //weakSelf?.tableView.reloadData()
+                
+                weakSelf?.lineupInfoRequest(matchId: matchId)
+                weakSelf?.liveInfoRequest()
             }, onError: { (error) in
                 self.dismissProgressHud()
                 guard let err = error as? HXError else { return }
@@ -113,7 +122,72 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate {
                 }
             }, onCompleted: nil , onDisposed: nil )
     }
+    // 阵容
+    private func lineupInfoRequest(matchId: String) {
+        
+        weak var weakSelf = self
+        
+        lotteryProvider.rx.request(.lineupInfo(matchId: matchId)).asObservable()
+        .mapObject(type: FootballLineupInfoModel.self)
+            .subscribe(onNext: { (data) in
+                weakSelf?.dismissProgressHud()
+                weakSelf?.lineupInfoModel = data
+                weakSelf?.tableView.reloadData()
+            }, onError: { (error) in
+                self.dismissProgressHud()
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        weakSelf?.removeUserData()
+                        weakSelf?.pushLoginVC(from: self)
+                    default : break
+                    }
+                    
+                    if 300000...310000 ~= code {
+                        print(code)
+                        self.showHUD(message: msg!)
+                    }
+                default: break
+                }
+            }, onCompleted: nil, onDisposed: nil )
+        
+    }
     
+    // 赛况
+    private func liveInfoRequest() {
+        guard self.matchId != nil else { fatalError("matchId 为空")}
+        weak var weakSelf = self
+        
+        _ = lotteryProvider.rx.request(.liveInfo(matchId: matchId)).asObservable()
+            .mapObject(type: FootballLiveInfoModel.self)
+            .subscribe(onNext: { (data) in
+                weakSelf?.liveInfoModel = data
+                if weakSelf?.teamInfoStyle == .matchDetail {
+                    weakSelf?.tableView.reloadData()
+                }
+            }, onError: { (error) in
+                self.dismissProgressHud()
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        weakSelf?.removeUserData()
+                        weakSelf?.pushLoginVC(from: self)
+                    default : break
+                    }
+                    
+                    if 300000...310000 ~= code {
+                        print(code)
+                        self.showHUD(message: msg!)
+                    }
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil )
+        
+    }
     
     private func initSubview() {
         buyButton = UIButton(type: .custom)
@@ -180,13 +254,13 @@ extension FootballMatchInfoVC : FootballOddsPagerViewDelegate {
 extension FootballMatchInfoVC : UITableViewDataSource {
     //MARK: - tableView dataSource
     func numberOfSections(in tableView: UITableView) -> Int {
-        
         switch teamInfoStyle {
         case .odds:
             return 1
         case .analysis:
             return 7
         case .matchDetail:
+            //guard self.liveInfoModel != nil else { return 0 }
             return 2
         case .lineup :
             return 3
@@ -231,16 +305,25 @@ extension FootballMatchInfoVC : UITableViewDataSource {
                 return 0
             }
         case .matchDetail:
+            //guard self.liveInfoModel != nil else { return 0 }
             if section == 0 {
-                return 6
+                //return self.liveInfoModel.eventList.count
+                return 4
             }else {
                 return 12
             }
         case .lineup:
-            if section == 0 {
+            switch section {
+            case 0:
                 return 1
+            case 1:
+                guard self.lineupInfoModel != nil else { return 0 }
+                return self.lineupInfoModel.hbenchPersons.count > lineupInfoModel.abenchPersons.count ? lineupInfoModel.hbenchPersons.count : lineupInfoModel.abenchPersons.count
+            case 2:
+                guard self.lineupInfoModel != nil else { return 0 }
+                return self.lineupInfoModel.hinjureiesPersons.count > lineupInfoModel.ainjureiesPersons.count ? lineupInfoModel.hinjureiesPersons.count : lineupInfoModel.ainjureiesPersons.count
+            default : return 0
             }
-            return 2
         }
     }
     
@@ -481,12 +564,18 @@ extension FootballMatchInfoVC : UITableViewDataSource {
             cell.hiddenStart = true
         }
         
-        if indexPath.row == 4 {
-            cell.hiddenBot = true
-        }else {
-            cell.hiddenBot = false
-        }
-        
+//        if indexPath.row == liveInfoModel.eventList.count - 1 {
+//            cell.hiddenBot = true
+//        }else {
+//            cell.hiddenBot = false
+//        }
+        //cell.eventInfo = self.liveInfoModel.eventList[indexPath.row]
+        return cell
+    }
+    /// 赛况 - 技术统计 - 球队信息
+    private func initMatchDetailTeamInfo(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: FootballDetailTeamInfoCell.identifier, for: indexPath) as! FootballDetailTeamInfoCell
+        cell.matchInfo = self.matchInfoModel.matchInfo
         return cell
     }
     /// 赛况 - 说明
@@ -494,16 +583,10 @@ extension FootballMatchInfoVC : UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballDetailEventExplainCell.identifier, for: indexPath) as! FootballDetailEventExplainCell
         return cell
     }
-    /// 赛况 - 技术统计 - 球队信息
-    private func initMatchDetailTeamInfo(indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: FootballDetailTeamInfoCell.identifier, for: indexPath) as! FootballDetailTeamInfoCell
-        
-        return cell
-    }
     /// 赛况 - 技术统计
     private func initMatchDetailStatisticsCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballDetailStatisticsCell.identifier, for: indexPath) as! FootballDetailStatisticsCell
-        
+        cell.changeData(data: FootballStatisticsInfo(), indexPath: indexPath)
         return cell
     }
     /// 阵容 - 阵容图
@@ -515,7 +598,15 @@ extension FootballMatchInfoVC : UITableViewDataSource {
     /// 阵容 - 替补-伤停
     private func initLineupMemberCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballLineupMemberCell.identifier, for: indexPath) as! FootballLineupMemberCell
-        
+        switch indexPath.section {
+        case 1:
+            cell.homeMemberInfo = self.lineupInfoModel.hbenchPersons[indexPath.row]
+            cell.visiMemberInfo = self.lineupInfoModel.abenchPersons[indexPath.row]
+        case 2:
+            cell.homeMemberInfo = self.lineupInfoModel.hinjureiesPersons[indexPath.row]
+            cell.visiMemberInfo = self.lineupInfoModel.ainjureiesPersons[indexPath.row]
+        default: break }
+    
         return cell
     }
     /// 分析 统计 历史交锋 Cell

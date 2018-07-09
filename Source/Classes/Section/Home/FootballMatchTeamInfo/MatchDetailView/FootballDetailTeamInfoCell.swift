@@ -12,6 +12,19 @@ class FootballDetailTeamInfoCell: UITableViewCell {
 
     static let identifier : String = "FootballDetailTeamInfoCell"
     
+    public var matchInfo : MatchInfoModel! {
+        didSet{
+            homeLabel.text = matchInfo.homeTeamAbbr
+            visiLabel.text = matchInfo.visitingTeamAbbr
+            if let url = URL(string: matchInfo.homeTeamPic) {
+                homeIcon.kf.setImage(with: url)
+            }
+            if let url = URL(string: matchInfo.visitingTeamPic) {
+                visiIcon.kf.setImage(with: url)
+            }
+         }
+    }
+    
     private var vsLabel: UILabel!
     private var homeLabel: UILabel!
     private var visiLabel: UILabel!
