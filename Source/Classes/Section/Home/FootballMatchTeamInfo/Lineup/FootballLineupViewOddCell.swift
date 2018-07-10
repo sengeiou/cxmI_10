@@ -24,10 +24,12 @@ class FootballLineupViewOddCell: UITableViewCell {
     }
     
     private func setHomeData () {
-        
+        clIcon.memberInfo = lineupList[0]
+        clIcon.image = "Hometeam_1"
     }
     private func setVisiData () {
-        
+        clIcon.memberInfo = lineupList[0]
+        clIcon.image = "Visitingteam_1"
     }
     
     public var lineupType : LineupType!

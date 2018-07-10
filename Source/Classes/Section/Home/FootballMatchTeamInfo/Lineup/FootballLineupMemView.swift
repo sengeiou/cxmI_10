@@ -15,7 +15,6 @@ class FootballLineupMemView: UIView {
     public var memberInfo : FootballLineupMemberInfo! {
         didSet{
             titleLabel.text = memberInfo.personName
-            
         }
     }
     
@@ -32,8 +31,6 @@ class FootballLineupMemView: UIView {
         super.init(frame: CGRect.zero)
         initSubview()
     }
-    
-   
     
     private func initSubview() {
         icon = UIImageView()
