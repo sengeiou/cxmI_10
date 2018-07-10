@@ -49,7 +49,7 @@ class ScoreViewController: WMPageController, AlertPro {
         self.progressViewIsNaughty = true
         
         super.viewDidLoad()
-        self.navigationItem.title = "彩小秘 · 比分"
+        self.navigationItem.title = "彩小秘 · 比赛"
         setRightBarButton()
         
         filterRequest()
