@@ -33,7 +33,7 @@ class ScoreViewController: WMPageController, AlertPro {
         myMatchLabel = initLabel()
         
         self.dateList = LotteryDateModel().getDates()
-        self.selectedDateModel = self.dateList.last
+        self.selectedDateModel = self.dateList[16]
         
         self.menuViewStyle = .line
         self.titleColorNormal = Color505050
