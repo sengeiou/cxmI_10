@@ -13,6 +13,22 @@ enum LineupType {
     case 客队
 }
 
+enum MemberType : String{
+    case GK = "GK"
+    case D1 = "D1"
+    case M  = "M"
+    case A  = "A"
+}
+enum MemberYType: String {
+    case C  = "C"
+    case CR  = "CR"
+    case CL  = "CL"
+    case R  = "R"
+    case L  = "L"
+    
+}
+
+
 class FootballLineupView: UIView {
 
     public var lineupList : [[FootballLineupMemberInfo]]! {
@@ -80,11 +96,12 @@ extension FootballLineupView : UITableViewDataSource {
         
         if memberList.count % 2 == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: FootballLineupViewCell.identifier, for: indexPath) as! FootballLineupViewCell
-            cell.lineupList = memberList
             cell.lineupType = self.lineupType
+            cell.lineupList = memberList
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: FootballLineupViewOddCell.identifier, for: indexPath) as! FootballLineupViewOddCell
+            cell.lineupType = self.lineupType
             cell.lineupList = memberList
             return cell
         }

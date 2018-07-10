@@ -77,7 +77,7 @@ struct FootballLineupInfoModel : HandyJSON {
         var M = [FootballLineupMemberInfo]()
         var A = [FootballLineupMemberInfo]()
         
-        for member in hlineupPersons {
+        for member in alineupPersons {
             if member.positionX == "GK" {
                 GK.append(member)
             }else if member.positionX == "D1" {
@@ -89,19 +89,18 @@ struct FootballLineupInfoModel : HandyJSON {
             }
         }
         
-        if GK.count > 0 {
-            visiLinup.append(GK)
-        }
-        if D1.count > 0 {
-            visiLinup.append(D1)
+        if A.count > 0 {
+            visiLinup.append(A)
         }
         if M.count > 0 {
             visiLinup.append(M)
         }
-        if A.count > 0 {
-            visiLinup.append(A)
+        if D1.count > 0 {
+            visiLinup.append(D1)
         }
-        
+        if GK.count > 0 {
+            visiLinup.append(GK)
+        }
         return visiLinup
     }
 }

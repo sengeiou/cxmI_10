@@ -25,12 +25,42 @@ class FootballLineupViewCell: UITableViewCell {
     }
     
     private func setHomeData () {
-        clIcon.memberInfo = lineupList[0]
-        clIcon.image = "Hometeam_1"
+        for lineup in lineupList {
+            switch lineup.positionY {
+            case MemberYType.CL.rawValue :
+                crIcon.memberInfo = lineup
+                crIcon.image = "Hometeam_1"
+            case MemberYType.CR.rawValue :
+                clIcon.memberInfo = lineup
+                clIcon.image = "Hometeam_1"
+            case MemberYType.R.rawValue :
+                lIcon.memberInfo = lineup
+                lIcon.image = "Hometeam_1"
+            case MemberYType.L.rawValue :
+                rIcon.memberInfo = lineup
+                rIcon.image = "Hometeam_1"
+            default : break
+            }
+        }
     }
     private func setVisiData () {
-        clIcon.memberInfo = lineupList[0]
-        clIcon.image = "Visitingteam_1"
+        for lineup in lineupList {
+            switch lineup.positionY {
+            case MemberYType.CL.rawValue :
+                clIcon.memberInfo = lineup
+                clIcon.image = "Visitingteam_1"
+            case MemberYType.CR.rawValue :
+                crIcon.memberInfo = lineup
+                crIcon.image = "Visitingteam_1"
+            case MemberYType.R.rawValue :
+                rIcon.memberInfo = lineup
+                rIcon.image = "Visitingteam_1"
+            case MemberYType.L.rawValue :
+                lIcon.memberInfo = lineup
+                lIcon.image = "Visitingteam_1"
+            default : break
+            }
+        }
     }
     
     public var lineupType : LineupType!
