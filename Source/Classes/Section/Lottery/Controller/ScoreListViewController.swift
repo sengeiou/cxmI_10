@@ -25,8 +25,11 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate 
 
     
     
-    private var resultList : [LotteryResultModel]!
-    
+    private var resultList : [LotteryResultModel]! {
+        didSet{
+            self.changeNum("\(self.resultList.count)")
+        }
+    }
     
     // MARK: - 生命周期
     override func viewDidLoad() {
@@ -110,8 +113,6 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate 
                 
                 self.resultList = data
                 
-                self.changeNum("\(self.resultList.count)")
-                
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
@@ -145,7 +146,7 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate 
             .asObservable()
             .mapBaseObject(type: DataModel.self)
             .subscribe(onNext: { (data) in
-                self.showHUD(message: data.msg)
+                //self.showHUD(message: data.msg)
             }, onError: { (error) in
                 cell.changeCollectionSelected(selected: false)
                 guard let err = error as? HXError else { return }
@@ -175,7 +176,8 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate 
             .asObservable()
             .mapBaseObject(type: DataModel.self)
             .subscribe(onNext: { (data) in
-                self.showHUD(message: data.msg)
+                //self.showHUD(message: data.msg)
+                
             }, onError: { (error) in
                 cell.changeCollectionSelected(selected: true)
                 guard let err = error as? HXError else { return }
@@ -230,6 +232,11 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate 
 //MARK: - 收藏
 extension ScoreListViewController : LotteryCellDelegate {
     func didTipCollection(cell: LotteryCell, model: LotteryResultModel, selected: Bool) {
+        if matchType == "2" {
+            collectCancelRequest(matchId: model.matchId, cell : cell)
+            self.resultList.remove(model)
+            self.tableView.reloadData()
+        }
         if model.isCollect {
             collectRequest(matchId: model.matchId, cell : cell)
         }else {
@@ -262,6 +269,7 @@ extension ScoreListViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: LotteryCellId, for: indexPath) as! LotteryCell
         cell.resultModel = resultList[indexPath.row]
+        cell.indexPath = indexPath
         cell.delegate = self
         return cell
     }

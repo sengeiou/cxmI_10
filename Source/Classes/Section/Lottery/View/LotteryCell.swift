@@ -38,7 +38,7 @@ class LotteryCell: UITableViewCell {
             }
         }
     }
-    
+    public var indexPath : IndexPath!
     public var delegate : LotteryCellDelegate!
     
     // MARK: - 属性 private
