@@ -16,8 +16,6 @@ class LotteryDateModel : NSObject, HandyJSON {
     var isSelected : Bool = false
     var date : String!
     
-    
-    
     func getDates() ->[LotteryDateModel] {
         var dates = [LotteryDateModel]()
         

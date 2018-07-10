@@ -133,6 +133,7 @@ extension ScoreViewController : LotteryDateFilterVCDelegate {
     func didSelectDateItem(filter: LotteryDateFilterVC, dateModel: LotteryDateModel) {
         self.selectedDateModel = dateModel
         self.isAlready = false
+        
         filterRequest()
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: DateFilterNotificationName), object: nil, userInfo: ["date" : dateModel])
     }

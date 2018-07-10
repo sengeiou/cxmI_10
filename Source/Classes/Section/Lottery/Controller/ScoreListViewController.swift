@@ -82,6 +82,7 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate 
         guard let model = userInfo["date"] as?  LotteryDateModel else { return }
         self.dateFilter = model.date
         self.isAlready = false
+        self.leagueIds = ""
         self.loadNewData()
     }
     
