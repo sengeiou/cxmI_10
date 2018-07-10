@@ -65,7 +65,8 @@ class LotteryCell: UITableViewCell {
         }else {
             self.collectionButton.setImage(UIImage(named: "收藏"), for: .normal)
         }
-        self.collectionButton.isSelected = false
+        self.collectionButton.isSelected = selected
+        self.resultModel.isCollect = selected
     }
     
     @objc private func collectionClick(_ sender : UIButton) {

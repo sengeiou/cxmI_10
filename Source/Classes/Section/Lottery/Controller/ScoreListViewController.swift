@@ -230,7 +230,7 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate 
 //MARK: - 收藏
 extension ScoreListViewController : LotteryCellDelegate {
     func didTipCollection(cell: LotteryCell, model: LotteryResultModel, selected: Bool) {
-        if selected {
+        if model.isCollect {
             collectRequest(matchId: model.matchId, cell : cell)
         }else {
             collectCancelRequest(matchId: model.matchId, cell : cell)

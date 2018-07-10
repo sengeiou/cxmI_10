@@ -10,7 +10,9 @@ import Foundation
 
 import HandyJSON
 
-struct LotteryResultModel : HandyJSON {
+class LotteryResultModel : NSObject, HandyJSON {
+    required override init() {}
+    
     var changci: String!
     var changciId: String!
     var firstHalf: String!
