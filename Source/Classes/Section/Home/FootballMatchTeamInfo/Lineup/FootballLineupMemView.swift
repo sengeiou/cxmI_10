@@ -39,7 +39,7 @@ class FootballLineupMemView: UIView {
         //icon.image = UIImage(named: "Hometeam_1")
         
         titleLabel = UILabel()
-        titleLabel.font = Font11
+        titleLabel.font = Font10
         titleLabel.textColor = ColorFFFFFF
         titleLabel.textAlignment = .center
         

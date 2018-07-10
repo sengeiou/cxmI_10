@@ -90,7 +90,7 @@ class FootballLineupViewCell: UITableViewCell {
         lIcon.snp.makeConstraints { (make) in
             make.centerY.equalTo(self.contentView.snp.centerY)
             make.height.equalTo(48)
-            make.left.equalTo(20)
+            make.left.equalTo(0)
         }
         clIcon.snp.makeConstraints { (make) in
             make.centerY.width.height.equalTo(lIcon)
@@ -103,7 +103,7 @@ class FootballLineupViewCell: UITableViewCell {
         rIcon.snp.makeConstraints { (make) in
             make.centerY.height.width.equalTo(crIcon)
             make.left.equalTo(crIcon.snp.right)
-            make.right.equalTo(-20)
+            make.right.equalTo(-0)
         }
         
         
