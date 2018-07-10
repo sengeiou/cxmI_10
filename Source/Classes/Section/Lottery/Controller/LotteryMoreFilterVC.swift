@@ -34,7 +34,7 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
     public var delegate : LotteryMoreFilterVCDelegate!
     public var isAlreadyBuy: Bool = false {
         didSet{
-            changButState(isSelected: isAlreadyBuy)
+            //changButState(isSelected: isAlreadyBuy)
         }
     }
     private var bottomView: FootballFilterBottomView!
@@ -45,7 +45,7 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
     private var titleTwolb : UILabel!
     private var titleThreelb : UILabel!
     
-    private var onlyButBut: UIButton!
+    //private var onlyButBut: UIButton!
     private var currentFilterList : [FilterModel]!
     private var currentIsAlreadyBuy : Bool!
     private var fiveMatchs = ["英超","西甲","法甲","意甲","德甲"]
@@ -73,7 +73,7 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
         
         if turnOn == false {
             self.titleTwolb.isHidden = true
-            self.onlyButBut.isHidden = true
+            //self.onlyButBut.isHidden = true
         }
     }
     
@@ -90,21 +90,23 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
             make.height.equalTo(0.5)
         }
         
-        titleTwolb.snp.makeConstraints { (make) in
-            make.top.equalTo(topLine.snp.bottom).offset(17 * defaultScale)
-            make.height.equalTo(12 * defaultScale)
-            make.left.equalTo(leftSpacing)
-            make.width.equalTo(100)
-        }
+//        titleTwolb.snp.makeConstraints { (make) in
+//            make.top.equalTo(topLine.snp.bottom).offset(17 * defaultScale)
+//            make.height.equalTo(12 * defaultScale)
+//            make.left.equalTo(leftSpacing)
+//            make.width.equalTo(100)
+//        }
         
-        onlyButBut.snp.makeConstraints { (make) in
-            make.top.equalTo(titleTwolb.snp.bottom).offset(12 * defaultScale)
-            make.left.equalTo(titleTwolb)
-            //make.width.equalTo(100)
-        }
+//        onlyButBut.snp.makeConstraints { (make) in
+//            make.top.equalTo(titleTwolb.snp.bottom).offset(12 * defaultScale)
+//            make.left.equalTo(titleTwolb)
+//            //make.width.equalTo(100)
+//        }
         titleThreelb.snp.makeConstraints { (make) in
-            make.top.equalTo(onlyButBut.snp.bottom).offset(16 * defaultScale)
-            make.bottom.equalTo(topView.snp.top).offset(-12 * defaultScale)
+            make.top.equalTo(topLine.snp.bottom).offset(17 * defaultScale)
+            //make.top.equalTo(onlyButBut.snp.bottom).offset(16 * defaultScale)
+           // make.bottom.equalTo(topView.snp.top).offset(-12 * defaultScale)
+            
             make.height.equalTo(12 * defaultScale)
             make.left.equalTo(titleTwolb)
             make.width.equalTo(100)
@@ -112,7 +114,7 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
         
         
         topView.snp.makeConstraints { (make) in
-            make.top.equalTo(topLine.snp.bottom).offset(110 * defaultScale)
+            make.top.equalTo(titleThreelb.snp.bottom).offset(17 * defaultScale)
             make.left.equalTo(10 * defaultScale)
             make.right.equalTo(-10 * defaultScale)
             make.height.equalTo(30 * defaultScale)
@@ -159,15 +161,15 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
         titleThreelb.textAlignment = .left
         titleThreelb.text = "选择赛事"
         
-        onlyButBut = UIButton(type: .custom)
-        onlyButBut.titleLabel?.sizeToFit()
-        onlyButBut.titleLabel?.font = Font14
-        onlyButBut.setTitle("  只看已购对阵  ", for: .normal)
-        onlyButBut.setTitleColor(Color787878, for: .normal)
-        
-        onlyButBut.layer.borderWidth = 0.3
-        onlyButBut.layer.borderColor = ColorC8C8C8.cgColor
-        onlyButBut.addTarget(self, action: #selector(onlyBuyButClicked(_:) ), for: .touchUpInside)
+//        onlyButBut = UIButton(type: .custom)
+//        onlyButBut.titleLabel?.sizeToFit()
+//        onlyButBut.titleLabel?.font = Font14
+//        onlyButBut.setTitle("  只看已购对阵  ", for: .normal)
+//        onlyButBut.setTitleColor(Color787878, for: .normal)
+//
+//        onlyButBut.layer.borderWidth = 0.3
+//        onlyButBut.layer.borderColor = ColorC8C8C8.cgColor
+//        onlyButBut.addTarget(self, action: #selector(onlyBuyButClicked(_:) ), for: .touchUpInside)
         
         
         self.pushBgView.addSubview(topLine)
@@ -177,7 +179,7 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
         self.pushBgView.addSubview(collectionView)
         self.pushBgView.addSubview(titleTwolb)
         self.pushBgView.addSubview(titleThreelb)
-        self.pushBgView.addSubview(onlyButBut)
+        //self.pushBgView.addSubview(onlyButBut)
     }
     
     // MARK: - 懒加载
@@ -230,7 +232,7 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
         filter.isSelected = !filter.isSelected
         collectionView.reloadItems(at: [indexPath])
         self.isAlreadyBuy = false
-        changButState(isSelected: false)
+        //changButState(isSelected: false)
         
     }
     
@@ -251,7 +253,7 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
             filter.isSelected = true
             self.collectionView.reloadItems(at: [indexPath])
         }
-        changButState(isSelected: false)
+        //changButState(isSelected: false)
     }
     // 反选
     func reverseSelected() {
@@ -263,12 +265,12 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
             filter.isSelected = !filter.isSelected
             self.collectionView.reloadItems(at: [indexPath])
         }
-        changButState(isSelected: false)
+        //changButState(isSelected: false)
     }
     // 仅五大联赛
     func fiveSelected() {
         self.isAlreadyBuy = false
-        changButState(isSelected: false)
+        //changButState(isSelected: false)
         
         guard self.filterList != nil else { return }
         for  index in 0..<filterList.count {
@@ -296,7 +298,7 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
         
         sender.isSelected = !sender.isSelected
         self.isAlreadyBuy = sender.isSelected
-        changButState(isSelected: sender.isSelected)
+        //changButState(isSelected: sender.isSelected)
         guard filterList != nil else { return }
         for index in 0..<filterList.count {
             let indexPath = IndexPath(item: index, section: 0)
@@ -306,16 +308,16 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
         }
     }
     
-    private func changButState(isSelected: Bool) {
-        if isSelected {
-            onlyButBut.setTitleColor(ColorFFFFFF, for: .normal)
-            onlyButBut.backgroundColor = ColorEA5504
-        }else {
-            onlyButBut.setTitleColor(Color787878, for: .normal)
-            onlyButBut.backgroundColor = ColorFFFFFF
-        }
-        onlyButBut.isSelected = isSelected
-    }
+//    private func changButState(isSelected: Bool) {
+//        if isSelected {
+//            onlyButBut.setTitleColor(ColorFFFFFF, for: .normal)
+//            onlyButBut.backgroundColor = ColorEA5504
+//        }else {
+//            onlyButBut.setTitleColor(Color787878, for: .normal)
+//            onlyButBut.backgroundColor = ColorFFFFFF
+//        }
+//        onlyButBut.isSelected = isSelected
+//    }
     
     func filterConfirm() {
         guard self.filterList != nil else { return }
@@ -339,7 +341,7 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
     }
     
     func filterCancel() {
-        changButState(isSelected: self.currentIsAlreadyBuy)
+        //changButState(isSelected: self.currentIsAlreadyBuy)
         
         DispatchQueue.global().async {
             if self.filterList != nil {
