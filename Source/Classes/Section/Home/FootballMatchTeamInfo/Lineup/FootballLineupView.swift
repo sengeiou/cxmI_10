@@ -108,6 +108,6 @@ extension FootballLineupView : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
+        return self.bounds.size.height / CGFloat(self.lineupList.count)
     }
 }

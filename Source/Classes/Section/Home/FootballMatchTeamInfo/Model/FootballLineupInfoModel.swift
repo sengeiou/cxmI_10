@@ -38,7 +38,9 @@ struct FootballLineupInfoModel : HandyJSON {
         
         var hGK = [FootballLineupMemberInfo]()
         var hD1 = [FootballLineupMemberInfo]()
+        var DM = [FootballLineupMemberInfo]()
         var hM = [FootballLineupMemberInfo]()
+        var AM = [FootballLineupMemberInfo]()
         var hA = [FootballLineupMemberInfo]()
         
         for member in hlineupPersons {
@@ -50,6 +52,10 @@ struct FootballLineupInfoModel : HandyJSON {
                 hM.append(member)
             }else if member.positionX == "A" {
                 hA.append(member)
+            }else if member.positionX == "DM" {
+                DM.append(member)
+            }else if member.positionX == "AM" {
+                AM.append(member)
             }
         }
         
@@ -59,8 +65,14 @@ struct FootballLineupInfoModel : HandyJSON {
         if hD1.count > 0 {
             homeLinup.append(hD1)
         }
+        if DM.count > 0 {
+            homeLinup.append(DM)
+        }
         if hM.count > 0 {
             homeLinup.append(hM)
+        }
+        if AM.count > 0 {
+            homeLinup.append(AM)
         }
         if hA.count > 0 {
             homeLinup.append(hA)
@@ -74,7 +86,9 @@ struct FootballLineupInfoModel : HandyJSON {
         
         var GK = [FootballLineupMemberInfo]()
         var D1 = [FootballLineupMemberInfo]()
+        var DM = [FootballLineupMemberInfo]()
         var M = [FootballLineupMemberInfo]()
+        var AM = [FootballLineupMemberInfo]()
         var A = [FootballLineupMemberInfo]()
         
         for member in alineupPersons {
@@ -86,14 +100,24 @@ struct FootballLineupInfoModel : HandyJSON {
                 M.append(member)
             }else if member.positionX == "A" {
                 A.append(member)
+            }else if member.positionX == "DM" {
+                DM.append(member)
+            }else if member.positionX == "AM" {
+                AM.append(member)
             }
         }
         
         if A.count > 0 {
             visiLinup.append(A)
         }
+        if AM.count > 0 {
+            visiLinup.append(AM)
+        }
         if M.count > 0 {
             visiLinup.append(M)
+        }
+        if DM.count > 0 {
+            visiLinup.append(DM)
         }
         if D1.count > 0 {
             visiLinup.append(D1)

@@ -15,6 +15,7 @@ class FootballLineupMemView: UIView {
     public var memberInfo : FootballLineupMemberInfo! {
         didSet{
             titleLabel.text = memberInfo.personName
+            numLabel.text = "20"
         }
     }
     
@@ -26,6 +27,7 @@ class FootballLineupMemView: UIView {
     
     private var icon : UIImageView!
     private var titleLabel : UILabel!
+    private var numLabel : UILabel!
     
     init() {
         super.init(frame: CGRect.zero)
@@ -41,8 +43,14 @@ class FootballLineupMemView: UIView {
         titleLabel.textColor = ColorFFFFFF
         titleLabel.textAlignment = .center
         
+        numLabel = UILabel()
+        numLabel.font = Font11
+        numLabel.textColor = ColorFFFFFF
+        numLabel.textAlignment = .center
+        
         self.addSubview(icon)
         self.addSubview(titleLabel)
+        icon.addSubview(numLabel)
         
         icon.snp.makeConstraints { (make) in
             make.top.equalTo(0)
@@ -53,6 +61,9 @@ class FootballLineupMemView: UIView {
             make.top.equalTo(icon.snp.bottom).offset(10)
             make.left.right.bottom.equalTo(0)
             make.height.equalTo(12)
+        }
+        numLabel.snp.makeConstraints { (make) in
+            make.top.left.right.bottom.equalTo(0)
         }
     }
     

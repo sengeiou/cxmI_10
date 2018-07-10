@@ -27,8 +27,12 @@ class FootballLineupViewOddCell: UITableViewCell {
         for lineup in lineupList {
             switch lineup.positionY {
             case MemberYType.C.rawValue :
+                if lineup.positionX == "GK" {
+                    cIcon.image = "goalkeeper"
+                }else {
+                    cIcon.image = "Hometeam_1"
+                }
                 cIcon.memberInfo = lineup
-                cIcon.image = "Hometeam_1"
             case MemberYType.CL.rawValue :
                 crIcon.memberInfo = lineup
                 crIcon.image = "Hometeam_1"
@@ -49,8 +53,13 @@ class FootballLineupViewOddCell: UITableViewCell {
         for lineup in lineupList {
             switch lineup.positionY {
             case MemberYType.C.rawValue :
+                if lineup.positionX == "GK" {
+                    cIcon.image = "goalkeeper"
+                }else {
+                    cIcon.image = "Visitingteam_1"
+                }
                 cIcon.memberInfo = lineup
-                cIcon.image = "Visitingteam_1"
+                
             case MemberYType.CL.rawValue :
                 clIcon.memberInfo = lineup
                 clIcon.image = "Visitingteam_1"
