@@ -31,4 +31,5 @@ struct LotteryResultModel : HandyJSON {
     var visitingTeamName: String!
     var visitingTeamLogo: String!
     var whole : String!
+    var isCollect : Bool = false
 }

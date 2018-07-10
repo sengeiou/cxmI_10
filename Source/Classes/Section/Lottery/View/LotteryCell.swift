@@ -9,7 +9,7 @@
 import UIKit
 
 protocol LotteryCellDelegate {
-    func didTipCollection(cell : LotteryCell, model : LotteryResultModel) -> Void
+    func didTipCollection(cell : LotteryCell, model : LotteryResultModel, selected: Bool) -> Void
 }
 
 class LotteryCell: UITableViewCell {
@@ -20,12 +20,10 @@ class LotteryCell: UITableViewCell {
             titlelb.text = resultModel.changci + resultModel.leagueAddr + resultModel.matchTime
             homeTeamlb.text = resultModel.homeTeamAbbr
             visiTeamlb.text = resultModel.visitingTeamAbbr
-            
+            changeCollectionSelected(selected: resultModel.isCollect)
             if resultModel.matchFinish == "0" {
                 resultlb.text = "未开始"
-                changeCollectionSelected(selected: true)
             }else {
-                changeCollectionSelected(selected: false)
                 if resultModel.firstHalf == "" {
                     resultlb.text = "半场 " + "0:0" + " 总比分" + "0:0"
                 }
@@ -61,12 +59,13 @@ class LotteryCell: UITableViewCell {
         initSubview()
     }
     
-    private func changeCollectionSelected(selected : Bool) {
+    public func changeCollectionSelected(selected : Bool) {
         if selected {
             self.collectionButton.setImage(UIImage(named: "se收藏"), for: .normal)
         }else {
             self.collectionButton.setImage(UIImage(named: "收藏"), for: .normal)
         }
+        self.collectionButton.isSelected = false
     }
     
     @objc private func collectionClick(_ sender : UIButton) {
@@ -74,7 +73,7 @@ class LotteryCell: UITableViewCell {
         
         changeCollectionSelected(selected: sender.isSelected)
         guard delegate != nil else { fatalError("delegate 值为空") }
-        delegate.didTipCollection(cell: self, model: resultModel)
+        delegate.didTipCollection(cell: self, model: resultModel, selected : sender.isSelected)
     }
     
     override func layoutSubviews() {

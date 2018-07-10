@@ -135,10 +135,68 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate 
                 default: break
                 }
             }, onCompleted: nil , onDisposed: nil )
-        
-    
     }
     
+    //MARK: - 收藏赛事
+    private func collectRequest(matchId: String, cell: LotteryCell) {
+        weak var weakSelf = self
+        
+        _ = userProvider.rx.request(.collectMatch(matchId: matchId))
+            .asObservable()
+            .mapBaseObject(type: DataModel.self)
+            .subscribe(onNext: { (data) in
+                self.showHUD(message: data.msg)
+            }, onError: { (error) in
+                cell.changeCollectionSelected(selected: false)
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        weakSelf?.removeUserData()
+                        weakSelf?.isAlready = false
+                        weakSelf?.pushLoginVC(from: self)
+                    default : break
+                    }
+                    
+                    if 300000...310000 ~= code {
+                        print(code)
+                        self.showHUD(message: msg!)
+                    }
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil )
+    }
+    
+    //MARK: - 取消收藏赛事
+    private func collectCancelRequest(matchId: String, cell: LotteryCell) {
+        weak var weakSelf = self
+        _ = userProvider.rx.request(.collectMatchCancle(matchId: matchId))
+            .asObservable()
+            .mapBaseObject(type: DataModel.self)
+            .subscribe(onNext: { (data) in
+                self.showHUD(message: data.msg)
+            }, onError: { (error) in
+                cell.changeCollectionSelected(selected: true)
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        weakSelf?.removeUserData()
+                        weakSelf?.isAlready = false
+                        weakSelf?.pushLoginVC(from: self)
+                    default : break
+                    }
+                    
+                    if 300000...310000 ~= code {
+                        print(code)
+                        self.showHUD(message: msg!)
+                    }
+                default: break
+                }
+            }, onCompleted: nil, onDisposed: nil)
+    }
     
     //MARK: - 懒加载
     lazy var tableView : UITableView = {
@@ -169,9 +227,14 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate 
 
 }
 
+//MARK: - 收藏
 extension ScoreListViewController : LotteryCellDelegate {
-    func didTipCollection(cell: LotteryCell, model: LotteryResultModel) {
-        
+    func didTipCollection(cell: LotteryCell, model: LotteryResultModel, selected: Bool) {
+        if selected {
+            collectRequest(matchId: model.matchId, cell : cell)
+        }else {
+            collectCancelRequest(matchId: model.matchId, cell : cell)
+        }
     }
 }
 
