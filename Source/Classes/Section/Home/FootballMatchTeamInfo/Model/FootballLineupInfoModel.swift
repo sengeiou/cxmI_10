@@ -11,11 +11,23 @@ import HandyJSON
 
 struct FootballLineupInfoModel : HandyJSON {
     var changci: String!
-    var homeTeamAbbr: String!
+    /// 主裁名字
+    var refereeName: String = ""
+    /// 主队教练
+    var coachTeamH : String = ""
+    /// 客队教练
+    var coachTeamA : String = ""
+    /// 主队阵型
+    var formationTeamH: String = ""
+    /// 客队阵型
+    var formationTeamA: String = ""
+    
+    var homeTeamAbbr: String = ""
+    var visitingTeamAbbr: String = ""
     /// 联赛
     var leagueAddr: String!
     var matchTime: String!
-    var visitingTeamAbbr: String!
+    
     /// 客队替补队员
     var abenchPersons: [FootballLineupMemberInfo] = [FootballLineupMemberInfo]()
     /// 客队受伤队员
@@ -130,12 +142,14 @@ struct FootballLineupInfoModel : HandyJSON {
 }
 
 struct FootballLineupMemberInfo : HandyJSON {
-    var personId: String!
-    var personName: String!
+    var personId: String = ""
+    /// 球衣号
+    var shirtNumber : String = ""
+    var personName: String = ""
     ///队员位置
-    var position: String!
+    var position: String = ""
     ///队员位置X
-    var positionX: String!
+    var positionX: String = ""
     ///队员位置Y
-    var positionY: String!
+    var positionY: String = ""
 }

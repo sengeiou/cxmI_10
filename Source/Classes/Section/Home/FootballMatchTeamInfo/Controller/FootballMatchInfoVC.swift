@@ -602,18 +602,35 @@ extension FootballMatchInfoVC : UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballLineupCell.identifier, for: indexPath) as! FootballLineupCell
         cell.homeLineup = self.homeLineupList
         cell.visiLineup = self.visiLineupList
+        cell.lineupInfo = self.lineupInfoModel
         return cell
     }
-    /// 阵容 - 替补-伤停
+    /// 阵容 - 替补/伤停
     private func initLineupMemberCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballLineupMemberCell.identifier, for: indexPath) as! FootballLineupMemberCell
         switch indexPath.section {
         case 1:
-            cell.homeMemberInfo = self.lineupInfoModel.hbenchPersons[indexPath.row]
-            cell.visiMemberInfo = self.lineupInfoModel.abenchPersons[indexPath.row]
+            if indexPath.row < self.lineupInfoModel.hbenchPersons.count {
+                cell.homeMemberInfo = self.lineupInfoModel.hbenchPersons[indexPath.row]
+            }else {
+                cell.homeMemberInfo = FootballLineupMemberInfo()
+            }
+            if indexPath.row < self.lineupInfoModel.abenchPersons.count {
+                cell.visiMemberInfo = self.lineupInfoModel.abenchPersons[indexPath.row]
+            }else {
+                cell.visiMemberInfo = FootballLineupMemberInfo()
+            }
         case 2:
-            cell.homeMemberInfo = self.lineupInfoModel.hinjureiesPersons[indexPath.row]
-            cell.visiMemberInfo = self.lineupInfoModel.ainjureiesPersons[indexPath.row]
+            if indexPath.row < self.lineupInfoModel.hinjureiesPersons.count {
+                cell.homeMemberInfo = self.lineupInfoModel.hinjureiesPersons[indexPath.row]
+            }else {
+                cell.homeMemberInfo = FootballLineupMemberInfo()
+            }
+            if indexPath.row < self.lineupInfoModel.ainjureiesPersons.count {
+                cell.visiMemberInfo = self.lineupInfoModel.ainjureiesPersons[indexPath.row]
+            }else {
+                cell.visiMemberInfo = FootballLineupMemberInfo()
+            }
         default: break }
     
         return cell

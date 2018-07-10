@@ -15,7 +15,7 @@ class FootballLineupMemView: UIView {
     public var memberInfo : FootballLineupMemberInfo! {
         didSet{
             titleLabel.text = memberInfo.personName
-            numLabel.text = "20"
+            numLabel.text = memberInfo.shirtNumber
         }
     }
     

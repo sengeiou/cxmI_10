@@ -16,12 +16,22 @@ class FootballLineupMemberCell: UITableViewCell {
         didSet{
             homeLabel.text = homeMemberInfo.personName
             homeNum.text = homeMemberInfo.position
+            if homeMemberInfo.personName == "" {
+                homeIcon.isHidden = true
+            }else {
+                homeIcon.isHidden = false
+            }
         }
     }
     public var visiMemberInfo : FootballLineupMemberInfo! {
         didSet{
             visiLabel.text = visiMemberInfo.personName
             visiNum.text = visiMemberInfo.position
+            if visiMemberInfo.personName == "" {
+                visiIcon.isHidden = true
+            }else {
+                visiIcon.isHidden = false
+            }
         }
     }
     

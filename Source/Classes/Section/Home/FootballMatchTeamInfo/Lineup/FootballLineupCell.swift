@@ -23,6 +23,15 @@ class FootballLineupCell: UITableViewCell {
         }
     }
     
+    public var lineupInfo : FootballLineupInfoModel! {
+        didSet{
+            self.refereeLabel.text = "主裁：" + lineupInfo.refereeName
+            
+            self.homeLabel.text = "\(lineupInfo.homeTeamAbbr)\n\(lineupInfo.formationTeamH)"
+            self.visiLabel.text = "\(lineupInfo.visitingTeamAbbr)\n\(lineupInfo.formationTeamA)"
+        }
+    }
+    
     private var backImageView : UIImageView!
     private var lineupImageView: UIImageView!
     
