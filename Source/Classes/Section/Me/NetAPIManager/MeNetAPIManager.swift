@@ -65,6 +65,10 @@ enum MeNetAPIManager {
     
     /// 账户明细列表，带统计信息
     case accountDetailsListAndTotal(amountType: String, pageNum: Int, timeType: String)
+    /// 收藏赛事
+    case collectMatch(matchId: String)
+    /// 取消收藏赛事
+    case collectMatchCancle(matchId: String)
 }
 
 extension MeNetAPIManager : TargetType {
@@ -139,8 +143,10 @@ extension MeNetAPIManager : TargetType {
             return "/member/user/setLoginPass"
         case .accountDetailsListAndTotal:
             return "/member/user/account/getUserAccountListAndCountTotal"
-            
-            
+        case .collectMatch:
+            return "/member/user/matchCollect/collectMatchId"
+        case .collectMatchCancle:
+            return "/member/user/matchCollect/cancle"
         }
     }
     
@@ -225,7 +231,10 @@ extension MeNetAPIManager : TargetType {
             dic["oldLoginPass"] = oldPass
             dic["userLoginPass"] = newPass
             dic["type"] = type
-            
+        case .collectMatch(let matchId) :
+            dic["matchId"] = matchId
+        case .collectMatchCancle(let matchId) :
+            dic["id"] = matchId
         default:
             return .requestPlain
         }
