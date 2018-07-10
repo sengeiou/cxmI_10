@@ -187,6 +187,15 @@ extension ScoreViewController {
     override func pageController(_ pageController: WMPageController, viewControllerAt index: Int) -> UIViewController {
         let scoreList = ScoreListViewController()
         scoreList.dateFilter = self.selectedDateModel.date
+        switch index {
+        case 0:
+            scoreList.matchType = "0"
+        case 1:
+            scoreList.matchType = "1"
+        case 2:
+            scoreList.matchType = "2"
+        default: break
+        }
         scoreList.changeNum = { num in
             switch index {
             case 0:
@@ -202,7 +211,7 @@ extension ScoreViewController {
     }
     
     override func menuView(_ menu: WMMenuView!, didSelectedIndex index: Int, currentIndex: Int) {
-        
+        super.menuView(menu, didSelectedIndex: index, currentIndex: currentIndex)
         changeLabelBGColor(index: index)
     }
     

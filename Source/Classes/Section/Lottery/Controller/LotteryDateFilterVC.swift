@@ -38,6 +38,24 @@ class LotteryDateFilterVC: BasePopViewController, UITableViewDelegate, UITableVi
         self.popStyle = .fromCenter
         initSubview()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        guard dateList != nil else { return }
+        for i in 0..<dateList.count {
+            let dateModel = dateList[i]
+            if dateModel.isSelected {
+                if i == 0 {
+                    self.tableView.scrollsToTop = true
+                }
+                else if i < 15 {
+                    self.tableView.scrollToRow(at: IndexPath(row: i - 1, section: 0), at: .none, animated: false)
+                }else {
+                    self.tableView.scrollToRow(at: IndexPath(row: i, section: 0), at: .none, animated: false)
+                }
+            }
+        }
+    }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -119,6 +137,7 @@ class LotteryDateFilterVC: BasePopViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: LotteryDateFilterCellId, for: indexPath) as! LotteryDateFilterCell
         cell.dateModel = dateList[indexPath.row]
+        let dateModel = dateList[indexPath.row]
         return cell
     }
     

@@ -64,6 +64,7 @@ class FootballLineupView: UIView {
         //table.alpha = 0
         table.backgroundColor = UIColor.clear
         table.separatorStyle = .none
+        table.isScrollEnabled = false
         
         table.register(FootballLineupViewCell.self, forCellReuseIdentifier: FootballLineupViewCell.identifier)
         table.register(FootballLineupViewOddCell.self, forCellReuseIdentifier: FootballLineupViewOddCell.identifier)

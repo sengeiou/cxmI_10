@@ -13,6 +13,8 @@ let lotteryProvider = MoyaProvider<LotteryNetAPIManager>(plugins:[RequestLoading
 
 enum LotteryNetAPIManager {
     case lotteryResult (date: String, isAlready: Bool, leagueIds: String, finished: Bool)
+    /// 比赛结果
+    case lotteryResultNew (date: String, isAlready: Bool, leagueIds: String, type: String)
     /// 阵容信息
     case lineupInfo(matchId: String)
     /// 赛况信息
@@ -30,6 +32,8 @@ extension LotteryNetAPIManager : TargetType {
         switch self {
         case .lotteryResult:
             return "/lottery/match/queryMatchResult"
+        case .lotteryResultNew:
+            return "/lottery/match/queryMatchResultNew"
         case .lineupInfo:
             return "/match/lineup/info"
         case .liveInfo:
@@ -55,6 +59,15 @@ extension LotteryNetAPIManager : TargetType {
             }
             
             dic["leagueIds"] = leagueIds
+        case .lotteryResultNew(let date, let isAlready, let leagueIds, let type) :
+            dic["dateStr"] = date
+            dic["leagueIds"] = leagueIds
+            dic["type"] = type
+            if isAlready == false {
+                dic["isAlreadyBuyMatch"] = ""
+            }else {
+                dic["isAlreadyBuyMatch"] = "1"
+            }
             
         case .lineupInfo(let matchId):
             dic["matchId"] = matchId

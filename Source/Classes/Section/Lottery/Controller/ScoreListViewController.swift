@@ -16,12 +16,14 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate 
     // MARK: - 属性 public
     
     public var changeNum : ((_ numStr: String) -> Void)!
+    public var matchType : String = "0"
     
     // MARK: - 属性 private
     public var dateFilter : String!
     private var isAlready : Bool = false
     private var leagueIds : String = ""
-    private var finished : Bool = false
+
+    
     
     private var resultList : [LotteryResultModel]!
     
@@ -30,6 +32,7 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "彩小秘 · 比分"
+        //setEmpty(title: "暂无比赛", self.tableView)
         self.addPanGestureRecognizer = false
         hideBackBut()
         initSubview()
@@ -90,14 +93,15 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate 
         guard self.dateFilter != nil else {
             self.tableView.endrefresh()
             return }
-        self.lotteryResultRequest(date: self.dateFilter, isAlready: self.isAlready, leagueIds: self.leagueIds, finished: self.finished)
+        self.lotteryResultRequest(date: self.dateFilter, isAlready: self.isAlready, leagueIds: self.leagueIds, type: self.matchType)
     }
     
     //MARK: - 网络请求
-    private func lotteryResultRequest(date : String, isAlready: Bool, leagueIds: String, finished : Bool) {
+    private func lotteryResultRequest(date : String, isAlready: Bool, leagueIds: String, type : String) {
         //self.showProgressHUD()
         weak var weakSelf = self
-        _ = lotteryProvider.rx.request(.lotteryResult(date: date, isAlready: isAlready, leagueIds: leagueIds, finished: finished))
+        
+        _ = lotteryProvider.rx.request(.lotteryResultNew(date: date, isAlready: isAlready, leagueIds: leagueIds, type: type))
             .asObservable()
             .mapArray(type: LotteryResultModel.self)
             .subscribe(onNext: { (data) in
@@ -108,11 +112,9 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate 
                 self.changeNum("\(self.resultList.count)")
                 
                 DispatchQueue.main.async {
-                    
                     self.tableView.reloadData()
                 }
             }, onError: { (error) in
-                //self.dismissProgressHud()
                 self.tableView.endrefresh()
                 guard let err = error as? HXError else { return }
                 switch err {
@@ -132,6 +134,8 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate 
                 default: break
                 }
             }, onCompleted: nil , onDisposed: nil )
+        
+    
     }
     
     

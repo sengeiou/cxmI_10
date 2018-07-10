@@ -15,7 +15,7 @@ class FootballLineupMemberCell: UITableViewCell {
     public var homeMemberInfo : FootballLineupMemberInfo! {
         didSet{
             homeLabel.text = homeMemberInfo.personName
-            homeNum.text = homeMemberInfo.position
+            homeNum.text = homeMemberInfo.shirtNumber
             if homeMemberInfo.personName == "" {
                 homeIcon.isHidden = true
             }else {
@@ -26,7 +26,7 @@ class FootballLineupMemberCell: UITableViewCell {
     public var visiMemberInfo : FootballLineupMemberInfo! {
         didSet{
             visiLabel.text = visiMemberInfo.personName
-            visiNum.text = visiMemberInfo.position
+            visiNum.text = visiMemberInfo.shirtNumber
             if visiMemberInfo.personName == "" {
                 visiIcon.isHidden = true
             }else {
@@ -50,6 +50,7 @@ class FootballLineupMemberCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.selectionStyle = .none
         initSubview()
     }
     
@@ -59,19 +60,17 @@ class FootballLineupMemberCell: UITableViewCell {
         
         homeLabel = getLabel()
         homeLabel.textAlignment = .left
-        homeLabel.text = "费尔南蒂尼奥"
         
         visiLabel = getLabel()
         visiLabel.textAlignment = .left
-        visiLabel.text = "拉云"
         
         homeNum = getLabel()
+        homeNum.font = Font11
         homeNum.textColor = ColorFFFFFF
-        homeNum.text = "3"
         
         visiNum = getLabel()
+        visiNum.font = Font11
         visiNum.textColor = ColorFFFFFF
-        visiNum.text = "12"
         
         hLine = getImageView("line")
         vLine = getImageView("vline")
