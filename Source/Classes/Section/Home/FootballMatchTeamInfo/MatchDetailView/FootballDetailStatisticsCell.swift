@@ -34,23 +34,26 @@ class FootballDetailStatisticsCell: UITableViewCell {
         self.titleLabel.text = data.dataName
         
         if data.dataType == "1" {
-            homeScaleView.setProgress( 1 - (Float(data.teamHData) / 100), animated: true)
+            homeScaleView.setProgress( 1 - (Float(data.teamHData) / 100), animated: false)
             homeNumLabel.text = "\(data.teamHData)%"
             
-            visiScaleView.setProgress(Float(data.teamAData) / 100, animated: true)
+            visiScaleView.setProgress(Float(data.teamAData) / 100, animated: false)
             visiNumLabel.text = "\(data.teamAData)%"
         }else {
 
-            homeScaleView.setProgress( 1 - (Float(CGFloat(data.teamHData) / CGFloat(data.teamHData + data.teamAData))), animated: true)
+            homeScaleView.setProgress( 1 - (Float(CGFloat(data.teamHData) / CGFloat(data.teamHData + data.teamAData))), animated: false)
             homeNumLabel.text = "\(data.teamHData)"
 
-            visiScaleView.setProgress(Float(data.teamAData) / Float(data.teamHData + data.teamAData), animated: true)
+            visiScaleView.setProgress(Float(data.teamAData) / Float(data.teamHData + data.teamAData), animated: false)
             visiNumLabel.text = "\(data.teamAData)"
         }
         
         if data.teamHData > data.teamAData {
             homeScaleView.trackTintColor = ColorE85504
             visiScaleView.progressTintColor = ColorA5A5A5
+        }else if data.teamHData == data.teamAData {
+            homeScaleView.trackTintColor = ColorE85504
+            visiScaleView.progressTintColor = ColorE85504
         }else {
             homeScaleView.trackTintColor = ColorA5A5A5
             visiScaleView.progressTintColor = ColorE85504
