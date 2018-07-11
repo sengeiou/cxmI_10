@@ -30,7 +30,7 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
             self.changeNum("\(self.resultList.count)")
             //startTimer()
             if matchType == "0" {
-                resultList[0].matchTimeStart = 1531291178
+                //resultList[0].matchTimeStart = 1531291178
                 shouldStartTimer()
             }
         }
@@ -55,7 +55,7 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
     }
     
     private func startTimer() {
-        CXMGCDTimer.shared.scheduledDispatchTimer(WithTimerName: "cxmTimer", timeInterval: 10, queue: .main, repeats: true) {
+        CXMGCDTimer.shared.scheduledDispatchTimer(WithTimerName: "cxmTimer", timeInterval: 60, queue: .main, repeats: true) {
             print(1)
             
             self.loadNewData()

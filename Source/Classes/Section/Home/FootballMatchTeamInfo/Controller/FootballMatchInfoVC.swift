@@ -130,8 +130,8 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate {
         
         weak var weakSelf = self
         
-        lotteryProvider.rx.request(.lineupInfo(matchId: matchId)).asObservable()
-        .mapObject(type: FootballLineupInfoModel.self)
+        _ = lotteryProvider.rx.request(.lineupInfo(matchId: matchId)).asObservable()
+            .mapObject(type: FootballLineupInfoModel.self)
             .subscribe(onNext: { (data) in
                 weakSelf?.dismissProgressHud()
                 weakSelf?.lineupInfoModel = data
@@ -266,7 +266,7 @@ extension FootballMatchInfoVC : UITableViewDataSource {
         case .analysis:
             return 7
         case .matchDetail:
-            //guard self.liveInfoModel != nil else { return 0 }
+            guard self.liveInfoModel != nil else { return 0 }
             return 2
         case .lineup :
             return 3
@@ -311,10 +311,9 @@ extension FootballMatchInfoVC : UITableViewDataSource {
                 return 0
             }
         case .matchDetail:
-            //guard self.liveInfoModel != nil else { return 0 }
+            guard self.liveInfoModel != nil else { return 0 }
             if section == 0 {
-                //return self.liveInfoModel.eventList.count
-                return 4
+                return self.liveInfoModel.eventList.count + 2
             }else {
                 return 12
             }
@@ -359,14 +358,13 @@ extension FootballMatchInfoVC : UITableViewDataSource {
         case .matchDetail:
           
             if indexPath.section == 0 {
-                if indexPath.row == 5 {
+        
+                if indexPath.row == self.liveInfoModel.eventList.count + 1 {
                     return initMatchDetailEventExplain(indexPath: indexPath)
-                }
-                if indexPath.row == 0 {
-                    return initMatchDetailEventCell(indexPath: indexPath)
                 }else {
                     return initMatchDetailEventCell(indexPath: indexPath)
                 }
+                
             }else {
                 if indexPath.row == 0 {
                     return initMatchDetailTeamInfo(indexPath: indexPath)
@@ -563,21 +561,23 @@ extension FootballMatchInfoVC : UITableViewDataSource {
     /// 赛况 - 事件信息
     private func initMatchDetailEventCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballDetailEventCell.identifier, for: indexPath) as! FootballDetailEventCell
-        cell.score = "2:0"
+        
+        //cell.score = "2:0"
         if indexPath.row == 0 {
             cell.hiddenStart = false
             cell.hiddenTop = true
-        }else{
+            cell.eventInfo = FootballLiveEventInfo()
+        }else {
             cell.hiddenTop = false
             cell.hiddenStart = true
+            cell.eventInfo = self.liveInfoModel.eventList[indexPath.row - 1]
+        }
+        if indexPath.row == liveInfoModel.eventList.count {
+            cell.hiddenBot = true
+        }else {
+            cell.hiddenBot = false
         }
         
-//        if indexPath.row == liveInfoModel.eventList.count - 1 {
-//            cell.hiddenBot = true
-//        }else {
-//            cell.hiddenBot = false
-//        }
-        //cell.eventInfo = self.liveInfoModel.eventList[indexPath.row]
         return cell
     }
     /// 赛况 - 技术统计 - 球队信息
