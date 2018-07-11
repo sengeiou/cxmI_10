@@ -51,6 +51,27 @@ extension DateProtocol {
         }
     }
     
+    func timeStampToYMDHms(_ timeStamp : Int?) -> String {
+        if timeStamp != nil {
+            let timeInterval : TimeInterval = TimeInterval(timeStamp!)
+            
+            let date = Date(timeIntervalSince1970: timeInterval)
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            
+            return dateFormatter.string(from: date)
+        }else {
+            return ""
+        }
+    }
+    
+    func timeStampToDate(_ timeStamp : Int?) -> Date {
+        let timeInterval : TimeInterval = TimeInterval(timeStamp!)
+        let date = Date(timeIntervalSince1970: timeInterval)
+        return date
+    }
+    
     func getWeek() -> String {
         
         let weaks = ["星期日", "星期一","星期二","星期三","星期四","星期五","星期六"]

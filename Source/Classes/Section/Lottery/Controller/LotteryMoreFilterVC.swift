@@ -114,7 +114,7 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
         
         
         topView.snp.makeConstraints { (make) in
-            make.top.equalTo(titleThreelb.snp.bottom).offset(17 * defaultScale)
+            make.top.equalTo(titleThreelb.snp.bottom).offset(17  * defaultScale)
             make.left.equalTo(10 * defaultScale)
             make.right.equalTo(-10 * defaultScale)
             make.height.equalTo(30 * defaultScale)

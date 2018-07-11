@@ -11,7 +11,7 @@ import UIKit
 fileprivate let LotteryCellId = "LotteryCellId"
 fileprivate let LotterySectionHeaderId = "LotterySectionHeaderId"
 
-class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate {
+class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate, LotteryProtocol {
 
     // MARK: - 属性 public
     
@@ -28,6 +28,37 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate 
     private var resultList : [LotteryResultModel]! {
         didSet{
             self.changeNum("\(self.resultList.count)")
+            //startTimer()
+            if matchType == "0" {
+                resultList[0].matchTimeStart = 1531291178
+                shouldStartTimer()
+            }
+        }
+    }
+    
+    private func shouldStartTimer() {
+        var start = false
+        for match in resultList {
+            if matchStart(with: match.matchTimeStart) {
+                start = true
+                break
+            }
+        }
+        
+        if start {
+            if !CXMGCDTimer.shared.isExistTimer(WithTimerName: "cxmTimer") {
+                startTimer()
+            }
+        }else {
+            CXMGCDTimer.shared.cancleTimer(WithTimerName: "cxmTimer")
+        }
+    }
+    
+    private func startTimer() {
+        CXMGCDTimer.shared.scheduledDispatchTimer(WithTimerName: "cxmTimer", timeInterval: 10, queue: .main, repeats: true) {
+            print(1)
+            
+            self.loadNewData()
         }
     }
     
@@ -39,7 +70,6 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate 
         self.addPanGestureRecognizer = false
         hideBackBut()
         initSubview()
-        
         self.tableView.headerRefresh {
             self.loadNewData()
         }
@@ -268,6 +298,7 @@ extension ScoreListViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: LotteryCellId, for: indexPath) as! LotteryCell
+        cell.matchType = self.matchType
         cell.resultModel = resultList[indexPath.row]
         cell.indexPath = indexPath
         cell.delegate = self

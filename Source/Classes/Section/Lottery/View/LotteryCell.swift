@@ -8,8 +8,14 @@
 
 import UIKit
 
+fileprivate let MaxTime = 150
+
 protocol LotteryCellDelegate {
     func didTipCollection(cell : LotteryCell, model : LotteryResultModel, selected: Bool) -> Void
+}
+
+extension LotteryCell: LotteryProtocol {
+    
 }
 
 class LotteryCell: UITableViewCell {
@@ -21,14 +27,7 @@ class LotteryCell: UITableViewCell {
             homeTeamlb.text = resultModel.homeTeamAbbr
             visiTeamlb.text = resultModel.visitingTeamAbbr
             changeCollectionSelected(selected: resultModel.isCollect)
-            if resultModel.matchFinish == "0" {
-                resultlb.text = "未开始"
-            }else {
-                if resultModel.firstHalf == "" {
-                    resultlb.text = "半场 " + "0:0" + " 总比分" + "0:0"
-                }
-                resultlb.text = "半场 " + resultModel.firstHalf + " 总比分" + resultModel.whole
-            }
+
             guard resultModel.homeTeamLogo != nil, resultModel.visitingTeamLogo != nil else { return }
             if let url = URL(string: resultModel.homeTeamLogo) {
                 homeTeamIcon.kf.setImage(with: url)
@@ -36,8 +35,49 @@ class LotteryCell: UITableViewCell {
             if let url = URL(string: resultModel.visitingTeamLogo) {
                 visiTeamIcon.kf.setImage(with: url)
             }
+            
+            switch matchType {
+            case "0":
+                setStartMatch()
+            case "1","2":
+                setOverMatch()
+            default: break
+            }
+            
         }
     }
+    
+    private func setStartMatch() {
+        // xiao 1531291178
+        // 1531305578
+        let time = matchIntervalue(with: resultModel.matchTimeStart)
+        if time > 0 {
+            resultLeftLabel.text = "\(time)′"
+            if resultModel.firstHalf == "" {
+                resultlb.text = "0:0"
+            }else {
+                resultlb.text = resultModel.firstHalf
+            }
+        
+            resultlb.textColor = ColorE85504
+            resultLeftLabel.textColor = ColorE85504
+        }else {
+            resultLeftLabel.text = "未开赛"
+            resultlb.text = timeStampToHHmm(resultModel.matchTimeStart)
+            resultlb.textColor = Color787878
+            resultLeftLabel.textColor = Color787878
+        }
+    }
+    private func setOverMatch() {
+        resultLeftLabel.text = "比分" + resultModel.whole
+        resultlb.text = "半场" + resultModel.firstHalf
+        resultlb.textColor = ColorE85504
+        resultLeftLabel.textColor = ColorE85504
+    }
+    
+    
+    public var matchType: String!
+    
     public var indexPath : IndexPath!
     public var delegate : LotteryCellDelegate!
     
@@ -51,6 +91,7 @@ class LotteryCell: UITableViewCell {
     private var visiTeamlb : UILabel!
     private var scorelb : UILabel!
     private var resultlb : UILabel!
+    private var resultLeftLabel: UILabel!
     
     private var line : UIImageView!
     
@@ -122,11 +163,17 @@ class LotteryCell: UITableViewCell {
             make.left.equalTo(scorelb.snp.right)
             make.right.equalTo(visiTeamIcon.snp.left)
         }
-        resultlb.snp.makeConstraints { (make) in
+        resultLeftLabel.snp.makeConstraints { (make) in
             make.left.equalTo(homeTeamlb)
-            make.right.equalTo(visiTeamlb)
+            make.right.equalTo(scorelb.snp.centerX).offset(-15 * defaultScale)
             make.height.equalTo(12 * defaultScale)
             make.top.equalTo(homeTeamlb.snp.bottom).offset(11.5 * defaultScale)
+        }
+        
+        resultlb.snp.makeConstraints { (make) in
+            make.top.height.equalTo(resultLeftLabel)
+            make.left.equalTo(scorelb.snp.centerX).offset(15 * defaultScale)
+            make.right.equalTo(visiTeamlb)
         }
         
     }
@@ -158,8 +205,14 @@ class LotteryCell: UITableViewCell {
         resultlb = getLabel()
         resultlb.font = Font12
         resultlb.textColor = Color787878
-        resultlb.textAlignment = .center
+        resultlb.textAlignment = .left
         resultlb.text = "半场 1：0  总比分1：2"
+        
+        resultLeftLabel = getLabel()
+        resultLeftLabel.font = Font12
+        resultLeftLabel.textColor = ColorEA5504
+        resultLeftLabel.textAlignment = .right
+        
         
         homeTeamIcon = UIImageView()
         homeTeamIcon.image = UIImage(named : "Racecolorfootball")
@@ -184,6 +237,7 @@ class LotteryCell: UITableViewCell {
         self.contentView.addSubview(homeTeamIcon)
         self.contentView.addSubview(visiTeamIcon)
         self.contentView.addSubview(collectionButton)
+        self.contentView.addSubview(resultLeftLabel)
         
     }
     
