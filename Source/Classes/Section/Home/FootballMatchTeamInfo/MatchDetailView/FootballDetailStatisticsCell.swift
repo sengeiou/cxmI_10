@@ -21,8 +21,8 @@ class FootballDetailStatisticsCell: UITableViewCell {
     
     private var titleLabel: UILabel!
     
-    private var homeScaleView: ScaleView!
-    private var visiScaleView: ScaleView!
+    private var homeScaleView: UIProgressView!
+    private var visiScaleView: UIProgressView!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -30,30 +30,31 @@ class FootballDetailStatisticsCell: UITableViewCell {
         initSubview()
     }
     
-    public func changeData(data : FootballStatisticsInfo, indexPath : IndexPath) {
-        switch indexPath.row {
-        case 1:
-            titleLabel.text = "控球率"
-        case 2:
-            titleLabel.text = "射正"
-        case 3:
-            titleLabel.text = "射偏"
-        case 4:
-            titleLabel.text = "被封堵"
-        case 5:
-            titleLabel.text = "角球"
-        case 6:
-            titleLabel.text = "任意球"
-        case 7:
-            titleLabel.text = "越位"
-        case 8:
-            titleLabel.text = "黄牌"
-        case 9:
-            titleLabel.text = "犯规"
-        case 10:
-            titleLabel.text = "有威胁攻势"
+    public func changeData(data : FootballLiveTeamData, indexPath : IndexPath) {
+        self.titleLabel.text = data.dataName
+        
+        if data.dataType == "1" {
+            homeScaleView.setProgress( 1 - (Float(data.teamHData) / 100), animated: true)
+            homeNumLabel.text = "\(data.teamHData)%"
             
-        default: break }
+            visiScaleView.setProgress(Float(data.teamAData) / 100, animated: true)
+            visiNumLabel.text = "\(data.teamAData)%"
+        }else {
+
+            homeScaleView.setProgress( 1 - (Float(CGFloat(data.teamHData) / CGFloat(data.teamHData + data.teamAData))), animated: true)
+            homeNumLabel.text = "\(data.teamHData)"
+
+            visiScaleView.setProgress(Float(data.teamAData) / Float(data.teamHData + data.teamAData), animated: true)
+            visiNumLabel.text = "\(data.teamAData)"
+        }
+        
+        if data.teamHData > data.teamAData {
+            homeScaleView.trackTintColor = ColorE85504
+            visiScaleView.progressTintColor = ColorA5A5A5
+        }else {
+            homeScaleView.trackTintColor = ColorA5A5A5
+            visiScaleView.progressTintColor = ColorE85504
+        }
     }
     
     private func initSubview() {
@@ -68,17 +69,13 @@ class FootballDetailStatisticsCell: UITableViewCell {
         titleLabel = getLabel()
         titleLabel.text = "有威胁助攻"
         
-        homeScaleView = ScaleView()
-        homeScaleView.scaleWidth = scaleWidth
-        homeScaleView.sequence = false
-        homeScaleView.scaleColor = ColorE85504
+        homeScaleView = UIProgressView()
+        homeScaleView.progressTintColor = ColorF4F4F4
+        homeScaleView.trackTintColor = ColorEA5504
         
-        homeScaleView.scaleNum = 0.6
-        
-        visiScaleView = ScaleView()
-        visiScaleView.scaleWidth = scaleWidth
-        visiScaleView.scaleColor = ColorE85504
-        visiScaleView.scaleNum = 0.9
+        visiScaleView = UIProgressView()
+        visiScaleView.progressTintColor = ColorEA5504
+        visiScaleView.trackTintColor = ColorF4F4F4
         
         self.contentView.addSubview(homeNumLabel)
         self.contentView.addSubview(visiNumLabel)

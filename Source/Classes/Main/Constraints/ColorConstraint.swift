@@ -42,6 +42,8 @@ let Color505050 = UIColor(hexColor: "505050")
 let ColorCC4050 = UIColor(hexColor: "CC4050")
 /// 按钮 borderColor 次灰
 let ColorC8C8C8 = UIColor(hexColor: "C8C8C8")
+/// 进度条灰 - progressTintColor
+let ColorA5A5A5 = UIColor(hexColor: "A5A5A5")
 /// 灰线
 let ColorE9E9E9 = UIColor(hexColor: "E9E9E9")
 /// 绿色

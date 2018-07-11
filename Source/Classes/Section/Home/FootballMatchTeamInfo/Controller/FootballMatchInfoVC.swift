@@ -315,7 +315,7 @@ extension FootballMatchInfoVC : UITableViewDataSource {
             if section == 0 {
                 return self.liveInfoModel.eventList.count + 2
             }else {
-                return 12
+                return self.liveInfoModel.matchLiveStatisticsDTO.count + 2
             }
         case .lineup:
             switch section {
@@ -368,8 +368,7 @@ extension FootballMatchInfoVC : UITableViewDataSource {
             }else {
                 if indexPath.row == 0 {
                     return initMatchDetailTeamInfo(indexPath: indexPath)
-                }
-                if indexPath.row == 11 {
+                }else if indexPath.row == self.liveInfoModel.matchLiveStatisticsDTO.count + 1 {
                     let cell = UITableViewCell()
                     cell.selectionStyle = .none
                     return cell
@@ -594,9 +593,10 @@ extension FootballMatchInfoVC : UITableViewDataSource {
     /// 赛况 - 技术统计
     private func initMatchDetailStatisticsCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballDetailStatisticsCell.identifier, for: indexPath) as! FootballDetailStatisticsCell
-        
-        
-        cell.changeData(data: FootballStatisticsInfo(), indexPath: indexPath)
+        if indexPath.row != 0 {
+            cell.changeData(data: self.liveInfoModel.matchLiveStatisticsDTO[indexPath.row - 1], indexPath: indexPath)
+        }
+    
         return cell
     }
     /// 阵容 - 阵容图

@@ -13,6 +13,7 @@ class ScaleView: UIView {
     public var scaleNum : CGFloat! {
         didSet{
             guard scaleNum != nil, scaleNum.isNaN == false else { return }
+            print(self.bounds.size.width)
             layoutScale()
         }
     }
@@ -54,16 +55,15 @@ class ScaleView: UIView {
         if sequence {
             acaleView.snp.makeConstraints { (make) in
                 make.top.bottom.left.equalTo(0)
-                make.width.equalTo((scaleWidth ) * scaleNum)
+                make.width.equalTo(scaleWidth * scaleNum)
             }
         }else {
             acaleView.snp.makeConstraints { (make) in
                 make.top.bottom.equalTo(0)
                 make.right.equalTo(0)
-                make.width.equalTo((scaleWidth ) * scaleNum)
+                make.width.equalTo(scaleWidth * scaleNum)
             }
         }
-        
     }
     
     required init?(coder aDecoder: NSCoder) {

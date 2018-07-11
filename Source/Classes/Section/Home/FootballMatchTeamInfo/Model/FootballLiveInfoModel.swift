@@ -17,7 +17,7 @@ struct FootballLiveInfoModel: HandyJSON {
     var visitingTeamAbbr: String!
     var leagueAddr: String!
     /// 统计数据
-    var matchLiveStatisticsDTO: FootballStatisticsInfo!
+    var matchLiveStatisticsDTO: [FootballLiveTeamData]!
     var matchTime: String!
 }
 
@@ -38,27 +38,12 @@ struct FootballLiveEventInfo: HandyJSON {
     var personId: String!
 }
 
-struct FootballStatisticsInfo : HandyJSON {
-    var attacks: FootballLiveTeamData!
-    var corners: FootballLiveTeamData!
-    var dangerousAttacks: FootballLiveTeamData!
-    var fouls: FootballLiveTeamData!
-    var freeKicks: FootballLiveTeamData!
-    var goalKicks: FootballLiveTeamData!
-    var goals: FootballLiveTeamData!
-    var offsides: FootballLiveTeamData!
-    var posession: FootballLiveTeamData!
-    var possession: FootballLiveTeamData!
-    var shotsBlocked: FootballLiveTeamData!
-    var shotsOffTarget: FootballLiveTeamData!
-    var shotsOnTarget: FootballLiveTeamData!
-    var substitutions: FootballLiveTeamData!
-    var throwIns: FootballLiveTeamData!
-    var yellowCards: FootballLiveTeamData!
-    
-}
-
 struct FootballLiveTeamData: HandyJSON {
-    var teamAData: String!
-    var teamHData: String!
+    var dataCode: String!
+    var dataName: String!
+    /// 数据类型:0数字1百分比
+    var dataType: String!
+    
+    var teamAData: Int = 0
+    var teamHData: Int = 0
 }
