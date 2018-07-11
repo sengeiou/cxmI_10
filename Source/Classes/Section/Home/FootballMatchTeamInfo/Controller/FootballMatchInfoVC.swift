@@ -594,6 +594,8 @@ extension FootballMatchInfoVC : UITableViewDataSource {
     /// 赛况 - 技术统计
     private func initMatchDetailStatisticsCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballDetailStatisticsCell.identifier, for: indexPath) as! FootballDetailStatisticsCell
+        
+        
         cell.changeData(data: FootballStatisticsInfo(), indexPath: indexPath)
         return cell
     }

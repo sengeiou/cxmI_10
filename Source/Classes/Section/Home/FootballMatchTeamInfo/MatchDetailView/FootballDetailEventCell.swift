@@ -43,11 +43,9 @@ class FootballDetailEventCell: UITableViewCell {
         switch eventInfo.eventCode {
         case "G": //进球
             self.homeEventIcon.image = UIImage(named: "Goals_1")
-            if eventInfo.eventType == "goals" {
-                self.homeGoalIcon.isHidden = true
-            }else {
-                self.homeGoalIcon.isHidden = false
-            }
+        case "PG":
+            self.homeEventIcon.image = UIImage(named: "Goals_1")
+            self.homeGoalIcon.isHidden = true
         case "AS"://助攻
             break
         case "SI"://换上
@@ -56,10 +54,14 @@ class FootballDetailEventCell: UITableViewCell {
             self.homeEventIcon.image = UIImage(named: "final_1")
         case "YC"://黄牌
             self.homeEventIcon.image = UIImage(named: "Yellowcard_1")
-        case "hc"://红牌
+        case "RC"://红牌
             self.homeEventIcon.image = UIImage(named: "redcard_1")
-        case "wl"://乌龙
+        case "OG"://乌龙
             self.homeEventIcon.image = UIImage(named: "Owngoals_1")
+        case "PSG"://射入的点球
+            break
+        case "PSM"://射失的点球
+            break
         default:
             self.homeEventIcon.image = nil
             self.homeTeamMember.text = ""
@@ -70,11 +72,9 @@ class FootballDetailEventCell: UITableViewCell {
         switch eventInfo.eventCode {
         case "G": //进球
             self.visiEventIcon.image = UIImage(named: "Goals_1")
-            if eventInfo.eventType == "goals" {
-                self.visiGoalIcon.isHidden = true
-            }else {
-                self.visiGoalIcon.isHidden = false
-            }
+        case "PG":
+            self.visiEventIcon.image = UIImage(named: "Goals_1")
+            self.visiGoalIcon.isHidden = true
         case "AS"://助攻
             break
         case "SI"://换上
@@ -83,10 +83,14 @@ class FootballDetailEventCell: UITableViewCell {
             self.visiEventIcon.image = UIImage(named: "final_1")
         case "YC"://黄牌
             self.visiEventIcon.image = UIImage(named: "Yellowcard_1")
-        case "hc"://红牌
+        case "RC"://红牌
             self.visiEventIcon.image = UIImage(named: "redcard_1")
-        case "wl"://乌龙
+        case "OG"://乌龙
             self.visiEventIcon.image = UIImage(named: "Owngoals_1")
+        case "PSG"://射入的点球
+            break
+        case "PSM"://射失的点球
+            break
         default:
             self.visiEventIcon.image = nil
             self.visiTeamMember.text = ""
