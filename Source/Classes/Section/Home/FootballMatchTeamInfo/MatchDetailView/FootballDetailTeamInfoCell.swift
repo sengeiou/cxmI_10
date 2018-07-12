@@ -52,7 +52,16 @@ class FootballDetailTeamInfoCell: UITableViewCell {
         visiLabel.text = "俄罗斯"
         
         homeIcon = getImageView("足球")
+//        homeIcon.layer.cornerRadius = 20
+//        homeIcon.layer.masksToBounds = true
+//        homeIcon.layer.borderWidth = 1
+//        homeIcon.layer.borderColor = Color9F9F9F.cgColor
+        
         visiIcon = getImageView("足球")
+//        visiIcon.layer.cornerRadius = 20
+//        visiIcon.layer.masksToBounds = true
+//        visiIcon.layer.borderWidth = 1
+//        visiIcon.layer.borderColor = ColorC7C7C7.cgColor
         
         self.contentView.addSubview(vsLabel)
         self.contentView.addSubview(homeLabel)
