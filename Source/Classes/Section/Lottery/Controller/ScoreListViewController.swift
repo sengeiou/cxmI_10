@@ -40,11 +40,14 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
         var start = false
         for match in resultList {
             if matchStart(with: match.matchTimeStart) {
-                start = true
-                break
+                if matchIntervalue(with: match.matchTimeStart) < 150 {
+                    start = true
+                }else {
+                    start = false
+                }
             }
         }
-        
+    
         if start {
             if !CXMGCDTimer.shared.isExistTimer(WithTimerName: "cxmTimer") {
                 startTimer()

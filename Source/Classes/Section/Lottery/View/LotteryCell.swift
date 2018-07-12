@@ -51,7 +51,35 @@ class LotteryCell: UITableViewCell {
         // xiao 1531291178
         // 1531305578
         let time = matchIntervalue(with: resultModel.matchTimeStart)
+        
+        guard time > 0 else {
+            resultLeftLabel.text = "未开赛"
+            resultlb.text = timeStampToHHmm(resultModel.matchTimeStart)
+            resultlb.textColor = Color787878
+            resultLeftLabel.textColor = Color787878
+            return
+        }
+        
+        if time >= 90 {
+            resultLeftLabel.text = "90+′"
+        }else {
+            resultLeftLabel.text = "\(time)′"
+        }
+        
+        if resultModel.firstHalf == "" {
+            resultlb.text = "0:0"
+        }else {
+            resultlb.text = resultModel.firstHalf
+        }
+        
+        resultlb.textColor = ColorE85504
+        resultLeftLabel.textColor = ColorE85504
+        
+        
         if time > 0 {
+            
+            
+            
             resultLeftLabel.text = "\(time)′"
             if resultModel.firstHalf == "" {
                 resultlb.text = "0:0"
