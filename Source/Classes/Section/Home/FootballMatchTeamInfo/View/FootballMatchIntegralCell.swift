@@ -52,7 +52,7 @@ class FootballMatchIntegralCell: UITableViewCell {
         }
         homeIntegralView.snp.makeConstraints { (make) in
             make.top.equalTo(69 * defaultScale)
-            make.height.equalTo(111 * defaultScale)
+            make.height.equalTo(117 * defaultScale)
             make.left.right.equalTo(0)
         }
         visiTeamName.snp.makeConstraints { (make) in

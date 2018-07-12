@@ -9,7 +9,7 @@
 import UIKit
 fileprivate let FootballIntegralCollectionCellId = "FootballIntegralCollectionCellId"
 
-fileprivate let TitleWidth : CGFloat = 36 * defaultScale
+fileprivate let TitleWidth : CGFloat = 36 
 
 fileprivate let IntegralCellWidth : CGFloat = (screenWidth - 36 - 80 - 12) / 6
 fileprivate let IntegralCellHeight: CGFloat = 27
