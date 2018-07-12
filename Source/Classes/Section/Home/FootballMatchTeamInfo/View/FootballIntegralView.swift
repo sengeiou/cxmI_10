@@ -9,7 +9,7 @@
 import UIKit
 fileprivate let FootballIntegralCollectionCellId = "FootballIntegralCollectionCellId"
 
-fileprivate let TitleWidth : CGFloat = 36
+fileprivate let TitleWidth : CGFloat = 36 * defaultScale
 
 fileprivate let IntegralCellWidth : CGFloat = (screenWidth - 36 - 80 - 12) / 6
 fileprivate let IntegralCellHeight: CGFloat = 27
@@ -48,6 +48,8 @@ class FootballIntegralView: UIView, UICollectionViewDelegate, UICollectionViewDa
             scoreList.append("\(lteam.ballIn)/\(lteam.ballLose)/\(lteam.ballClean)")
             scoreList.append(lteam.score)
             scoreList.append(lteam.ranking)
+            
+            scoreList.append("")
         }
     }
     
@@ -58,9 +60,9 @@ class FootballIntegralView: UIView, UICollectionViewDelegate, UICollectionViewDa
         initSubview()
         scoreList = [String]()
         
-        for _ in 0...20 {
-            scoreList.append("88")
-        }
+//        for _ in 0...20 {
+//            scoreList.append("")
+//        }
     }
     
     override func layoutSubviews() {
@@ -207,8 +209,9 @@ class FootballIntegralView: UIView, UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FootballIntegralCollectionCellId, for: indexPath) as! FootballIntegralCollectionCell
+      
         cell.title.text = scoreList[indexPath.row]
-        
+     
         if indexPath.row == 5 || indexPath.row == 12 || indexPath.row == 19 {
             cell.title.textColor = ColorEA5504
         }else {
@@ -226,10 +229,8 @@ class FootballIntegralView: UIView, UICollectionViewDelegate, UICollectionViewDa
         }else if indexPath.row == 18 {
             return CGSize(width: 80, height: IntegralCellHeight)
         }else {
-            return CGSize(width: 40, height: IntegralCellHeight)
+            return CGSize(width: IntegralCellWidth, height: IntegralCellHeight)
         }
-        
-        return CGSize(width: 40, height: IntegralCellHeight)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 1
