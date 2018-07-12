@@ -48,8 +48,7 @@ class LotteryCell: UITableViewCell {
     }
     
     private func setStartMatch() {
-        // xiao 1531291178
-        // 1531305578
+
         let time = matchIntervalue(with: resultModel.matchTimeStart)
         
         guard time > 0 else {
