@@ -70,9 +70,10 @@ class FootballMatchInfoFutureHeader: UITableViewHeaderFooterView {
             make.top.equalTo(0)
             make.bottom.equalTo(hLine.snp.top)
             make.left.equalTo(16 * defaultScale)
+            make.width.equalTo(60)
         }
         teamName.snp.makeConstraints { (make) in
-            make.left.equalTo(16 * defaultScale)
+            make.left.equalTo(titleLabel.snp.right).offset(10 * defaultScale)
             make.right.equalTo(0)
             make.top.bottom.equalTo(titleLabel)
         }
