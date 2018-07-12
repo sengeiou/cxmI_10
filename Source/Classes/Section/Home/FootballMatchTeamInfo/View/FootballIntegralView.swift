@@ -9,10 +9,10 @@
 import UIKit
 fileprivate let FootballIntegralCollectionCellId = "FootballIntegralCollectionCellId"
 
-fileprivate let TitleWidth : CGFloat = 36 * defaultScale
+fileprivate let TitleWidth : CGFloat = 36
 
-fileprivate let IntegralCellWidth : CGFloat = (screenWidth - 36 * defaultScale) / 7
-fileprivate let IntegralCellHeight: CGFloat = 27 * defaultScale
+fileprivate let IntegralCellWidth : CGFloat = (screenWidth - 36 - 80 - 12) / 6
+fileprivate let IntegralCellHeight: CGFloat = 27
 
 class FootballIntegralView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
@@ -29,7 +29,7 @@ class FootballIntegralView: UIView, UICollectionViewDelegate, UICollectionViewDa
             scoreList.append(tteam.matchH)
             scoreList.append(tteam.matchD)
             scoreList.append(tteam.matchL)
-            scoreList.append("\(tteam.ballIn!)/\(tteam.ballLose)")
+            scoreList.append("\(tteam.ballIn)/\(tteam.ballLose)/\(tteam.ballClean)")
             scoreList.append(tteam.score)
             scoreList.append(tteam.ranking)
             
@@ -37,7 +37,7 @@ class FootballIntegralView: UIView, UICollectionViewDelegate, UICollectionViewDa
             scoreList.append(hteam.matchH)
             scoreList.append(hteam.matchD)
             scoreList.append(hteam.matchL)
-            scoreList.append("\(hteam.ballIn!)/\(hteam.ballLose)")
+            scoreList.append("\(hteam.ballIn)/\(hteam.ballLose)/\(hteam.ballClean)")
             scoreList.append(hteam.score)
             scoreList.append(hteam.ranking)
             
@@ -45,7 +45,7 @@ class FootballIntegralView: UIView, UICollectionViewDelegate, UICollectionViewDa
             scoreList.append(lteam.matchH)
             scoreList.append(lteam.matchD)
             scoreList.append(lteam.matchL)
-            scoreList.append("\(lteam.ballIn!)/\(lteam.ballLose)")
+            scoreList.append("\(lteam.ballIn)/\(lteam.ballLose)/\(lteam.ballClean)")
             scoreList.append(lteam.score)
             scoreList.append(lteam.ranking)
         }
@@ -79,7 +79,7 @@ class FootballIntegralView: UIView, UICollectionViewDelegate, UICollectionViewDa
         let sheng = getLabel("胜")
         let ping  = getLabel("平")
         let fu    = getLabel("负")
-        let jin   = getLabel("进/失")
+        let jin   = getLabel("进/失/净")
         let jifen = getLabel("积分")
         let mingci = getLabel("名次")
         
@@ -102,7 +102,7 @@ class FootballIntegralView: UIView, UICollectionViewDelegate, UICollectionViewDa
             make.height.equalTo(0.5)
         }
         centerLine.snp.makeConstraints { (make) in
-            make.top.equalTo(topLine.snp.bottom).offset(36 * defaultScale)
+            make.top.equalTo(topLine.snp.bottom).offset(36 )
             make.left.right.height.equalTo(topLine)
         }
         bottomLine.snp.makeConstraints { (make) in
@@ -132,7 +132,8 @@ class FootballIntegralView: UIView, UICollectionViewDelegate, UICollectionViewDa
             make.right.equalTo(mingci.snp.left)
         }
         jin.snp.makeConstraints { (make) in
-            make.top.bottom.width.equalTo(mingci)
+            make.top.bottom.equalTo(mingci)
+            make.width.equalTo(80)
             make.right.equalTo(jifen.snp.left)
         }
         fu.snp.makeConstraints { (make) in
@@ -186,7 +187,8 @@ class FootballIntegralView: UIView, UICollectionViewDelegate, UICollectionViewDa
         collection.backgroundColor = ColorFFFFFF
         collection.dataSource = self
         collection.delegate = self
-        collection.isScrollEnabled = true
+        collection.isScrollEnabled = false
+        
         collection.register(FootballIntegralCollectionCell.self, forCellWithReuseIdentifier: FootballIntegralCollectionCellId)
         return collection
     }()
@@ -200,12 +202,11 @@ class FootballIntegralView: UIView, UICollectionViewDelegate, UICollectionViewDa
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard scoreList.isEmpty == false else { return 0 }
-        return 21
+        return 22
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FootballIntegralCollectionCellId, for: indexPath) as! FootballIntegralCollectionCell
-        
         cell.title.text = scoreList[indexPath.row]
         
         if indexPath.row == 5 || indexPath.row == 12 || indexPath.row == 19 {
@@ -217,13 +218,24 @@ class FootballIntegralView: UIView, UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: IntegralCellWidth - 2, height: IntegralCellHeight)
+
+        if indexPath.row == 4 {
+            return CGSize(width: 80, height: IntegralCellHeight)
+        }else if indexPath.row ==  11 {
+            return CGSize(width: 80, height: IntegralCellHeight)
+        }else if indexPath.row == 18 {
+            return CGSize(width: 80, height: IntegralCellHeight)
+        }else {
+            return CGSize(width: 40, height: IntegralCellHeight)
+        }
+        
+        return CGSize(width: 40, height: IntegralCellHeight)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0.01
+        return 1
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0.01
+        return 0
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)

@@ -235,26 +235,26 @@ struct TeamInfo : HandyJSON {
 
 struct TeamScoreInfo: HandyJSON {
     /// 净球数
-    var ballClean : String!
+    var ballClean : String = ""
     /// 进球数
-    var ballIn : String!
+    var ballIn : String = ""
     /// 失球数
-    var ballLose: String!
+    var ballLose: String = ""
     /// 平场次数
-    var matchD: String!
+    var matchD: String = ""
     /// 胜场次数
-    var matchH: String!
+    var matchH: String = ""
     /// 负场次数
-    var matchL: String!
+    var matchL: String = ""
     /// 比赛场次数
-    var matchNum: String!
+    var matchNum: String = ""
     
     /// 积分
-    var score: String!
+    var score: String = ""
     ///
-    var teamId: String!
+    var teamId: String = ""
     /// 球队名称
-    var teamName: String!
+    var teamName: String = ""
     /// 名次
-    var ranking : String!
+    var ranking : String = ""
 }
