@@ -36,8 +36,26 @@ struct FootballMatchInfoModel: HandyJSON {
     var leagueMatchDaoxiaos: [MatchDaxiaoqModel]!
     /// 赛事信息
     var matchInfo : MatchInfoModel!
+    /// 未来赛事，主队
+    var hfutureMatchInfos : [MatchFutureInfo]! = [MatchFutureInfo]()
+    var vfutureMatchInfos : [MatchFutureInfo]! = [MatchFutureInfo]()
     
-    
+}
+
+struct MatchFutureInfo: HandyJSON {
+    /// 主队简称
+    var homeTeamAbbr: String!
+    var homeTeamId: String!
+    var homeTeamName: String!
+    var leagueAbbr: String!
+    var leagueId: String!
+    var leagueName: String!
+    var matchDate: String!
+    var matchId: String!
+    var matchTime: String!
+    var visitorTeamAbbr: String!
+    var visitorTeamId: String!
+    var visitorTeamName: String!
 }
 
 struct MatchTeamInfoModel : HandyJSON{
@@ -211,8 +229,6 @@ struct TeamInfo : HandyJSON {
     var visitingTeamAbbr: String!
     ///  比赛比分
     var whole: String!
-    
-    
     /// 1- 交锋 2- 主队 3- 客队
     var teamType : String!
 }
@@ -224,8 +240,6 @@ struct TeamScoreInfo: HandyJSON {
     var ballIn : String!
     /// 失球数
     var ballLose: String!
-    /// 0总1主2客 ,
-    var flag : String!
     /// 平场次数
     var matchD: String!
     /// 胜场次数
@@ -234,16 +248,7 @@ struct TeamScoreInfo: HandyJSON {
     var matchL: String!
     /// 比赛场次数
     var matchNum: String!
-    /// 均得
-    var preH: String!
-    /// 均失
-    var preL: String!
-    /// 平率
-    var ratioD: String!
-    /// 胜率
-    var ratioH: String!
-    /// 负率 ,
-    var ratioL: String!
+    
     /// 积分
     var score: String!
     ///

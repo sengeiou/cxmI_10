@@ -37,6 +37,7 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
     }
     
     private func shouldStartTimer() {
+        // 开赛时间>0且<150时启动计时器
         var start = false
         for match in resultList {
             if matchStart(with: match.matchTimeStart) {

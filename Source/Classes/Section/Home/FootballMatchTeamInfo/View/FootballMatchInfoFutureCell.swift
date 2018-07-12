@@ -12,6 +12,15 @@ class FootballMatchInfoFutureCell: UITableViewCell {
 
     static let identifier: String = "FootballMatchInfoFutureCell"
     
+    public var futureInfo : MatchFutureInfo! {
+        didSet{
+            teamLabel.text = futureInfo.leagueAbbr
+            dateLabel.text = futureInfo.matchDate
+            homeLabel.text = futureInfo.homeTeamAbbr
+            visiLabel.text = futureInfo.visitorTeamAbbr
+        }
+    }
+   
     private var teamLabel: UILabel!
     private var dateLabel: UILabel!
     private var homeLabel: UILabel!

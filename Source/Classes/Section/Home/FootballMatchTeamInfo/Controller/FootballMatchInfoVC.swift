@@ -351,8 +351,10 @@ extension FootballMatchInfoVC : UITableViewDataSource {
                 return self.matchInfoModel.vMatchTeamInfo.matchInfos.count
             case 4:
                 return 1 // 暂时隐藏 积分排名，如需打开  return 1
-            case 5,6:
-                return 3
+            case 5:
+                return self.matchInfoModel.hfutureMatchInfos.count
+            case 6:
+                return self.matchInfoModel.vfutureMatchInfos.count
             default:
                 return 0
             }
@@ -464,9 +466,13 @@ extension FootballMatchInfoVC : UITableViewDataSource {
             
             return header
         case .analysis:
-            if section == 5 || section == 6 {
+            if section == 5 {
                 let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: FootballMatchInfoFutureHeader.identifier) as! FootballMatchInfoFutureHeader
-                
+                header.teamName.text = self.matchInfoModel.matchInfo.homeTeamAbbr
+                return header
+            }else if section == 6 {
+                let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: FootballMatchInfoFutureHeader.identifier) as! FootballMatchInfoFutureHeader
+                header.teamName.text = self.matchInfoModel.matchInfo.visitingTeamAbbr
                 return header
             }
             
@@ -722,7 +728,12 @@ extension FootballMatchInfoVC : UITableViewDataSource {
     /// 分析 - 未来赛事
     private func initAnalysisFutureCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballMatchInfoFutureCell.identifier, for: indexPath) as! FootballMatchInfoFutureCell
-        
+        if indexPath.section == 5 {
+            cell.futureInfo = self.matchInfoModel.hfutureMatchInfos[indexPath.row]
+        }else {
+           cell.futureInfo = self.matchInfoModel.vfutureMatchInfos[indexPath.row]
+        }
+    
         return cell
     }
     /// 赔率 title Cell
