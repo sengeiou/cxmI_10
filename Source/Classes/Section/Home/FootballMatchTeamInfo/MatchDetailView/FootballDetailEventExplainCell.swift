@@ -36,6 +36,18 @@ class FootballDetailEventExplainCell: UITableViewCell {
         let downIcon = getImageView("final_1")
         let downLab = getLabel("换下")
         
+        let goalsWuIcon = getImageView("Invalidgoal")
+        let goalsWuLab = getLabel("入球无效")
+        
+        let psmIcon = getImageView("IostPenalty")
+        let psmLab = getLabel("点球未进")
+        
+        let y2cIcon = getImageView("Redden")
+        let y2cLab = getLabel("两黄变红")
+        
+        let asIcon = getImageView("Assist")
+        let asLab = getLabel("助攻")
+        
         self.contentView.addSubview(goalIcon)
         self.contentView.addSubview(goalLab)
         self.contentView.addSubview(wulongIcon)
@@ -49,10 +61,19 @@ class FootballDetailEventExplainCell: UITableViewCell {
         self.contentView.addSubview(downIcon)
         self.contentView.addSubview(downLab)
         
+        self.contentView.addSubview(goalsWuIcon)
+        self.contentView.addSubview(goalsWuLab)
+        self.contentView.addSubview(psmIcon)
+        self.contentView.addSubview(psmLab)
+        self.contentView.addSubview(y2cIcon)
+        self.contentView.addSubview(y2cLab)
+        self.contentView.addSubview(asIcon)
+        self.contentView.addSubview(asLab)
+        
         goalIcon.snp.makeConstraints { (make) in
             make.height.width.equalTo(16)
             make.left.equalTo(16 * defaultScale)
-            make.centerY.equalTo(self.contentView)
+            make.top.equalTo(30)
         }
         goalLab.snp.makeConstraints { (make) in
             make.centerY.height.equalTo(goalIcon)
@@ -104,7 +125,42 @@ class FootballDetailEventExplainCell: UITableViewCell {
             make.left.equalTo(downIcon.snp.right).offset(4)
             make.right.equalTo(-5)
         }
-        
+        goalsWuIcon.snp.makeConstraints { (make) in
+            make.left.height.width.equalTo(goalIcon)
+            make.bottom.equalTo(-30)
+        }
+        goalsWuLab.snp.makeConstraints { (make) in
+            make.centerY.height.equalTo(goalsWuIcon)
+            make.left.equalTo(goalsWuIcon.snp.right).offset(4)
+            make.width.equalTo(asLab)
+        }
+        psmIcon.snp.makeConstraints { (make) in
+            make.height.width.bottom.equalTo(goalsWuIcon)
+            make.left.equalTo(goalsWuLab.snp.right).offset(4)
+        }
+        psmLab.snp.makeConstraints { (make) in
+            make.centerY.height.equalTo(goalsWuIcon)
+            make.left.equalTo(psmIcon.snp.right).offset(4)
+            make.width.equalTo(asLab)
+        }
+        y2cIcon.snp.makeConstraints { (make) in
+            make.height.width.bottom.equalTo(goalsWuIcon)
+            make.left.equalTo(psmLab.snp.right).offset(4)
+        }
+        y2cLab.snp.makeConstraints { (make) in
+            make.centerY.height.equalTo(goalsWuIcon)
+            make.left.equalTo(y2cIcon.snp.right).offset(4)
+            make.width.equalTo(asLab)
+        }
+        asIcon.snp.makeConstraints { (make) in
+            make.height.width.bottom.equalTo(goalsWuIcon)
+            make.left.equalTo(y2cLab.snp.right).offset(4)
+        }
+        asLab.snp.makeConstraints { (make) in
+            make.centerY.height.equalTo(goalsWuIcon)
+            make.left.equalTo(asIcon.snp.right).offset(4)
+            make.right.equalTo(downLab)
+        }
     }
 
     private func getImageView(_ image: String) -> UIImageView {

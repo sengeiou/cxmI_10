@@ -47,7 +47,7 @@ class FootballDetailEventCell: UITableViewCell {
             self.homeEventIcon.image = UIImage(named: "Goals_1")
             self.homeGoalIcon.isHidden = true
         case "AS"://助攻
-            break
+            self.homeEventIcon.image = UIImage(named: "Assist")
         case "SI"://换上
             self.homeEventIcon.image = UIImage(named: "Play_1")
         case "SO"://换下
@@ -59,9 +59,14 @@ class FootballDetailEventCell: UITableViewCell {
         case "OG"://乌龙
             self.homeEventIcon.image = UIImage(named: "Owngoals_1")
         case "PSG"://射入的点球
-            break
+            self.homeEventIcon.image = UIImage(named: "Goals_1")
+            self.homeGoalIcon.isHidden = true
         case "PSM"://射失的点球
-            break
+            self.homeEventIcon.image = UIImage(named: "lostPenalty")
+        case "": //进球无效
+            self.homeEventIcon.image = UIImage(named: "Invalidgoal")
+        case "Y2C"://二黄变红
+            self.homeEventIcon.image = UIImage(named: "Redden")
         default:
             self.homeEventIcon.image = nil
             self.homeTeamMember.text = ""
@@ -88,9 +93,14 @@ class FootballDetailEventCell: UITableViewCell {
         case "OG"://乌龙
             self.visiEventIcon.image = UIImage(named: "Owngoals_1")
         case "PSG"://射入的点球
-            break
+            self.visiEventIcon.image = UIImage(named: "Goals_1")
+            self.visiGoalIcon.isHidden = true
         case "PSM"://射失的点球
-            break
+            self.visiEventIcon.image = UIImage(named: "lostPenalty")
+        case "": //进球无效
+            self.visiEventIcon.image = UIImage(named: "Invalidgoal")
+        case "Y2C"://二黄变红
+            self.visiEventIcon.image = UIImage(named: "Redden")
         default:
             self.visiEventIcon.image = nil
             self.visiTeamMember.text = ""

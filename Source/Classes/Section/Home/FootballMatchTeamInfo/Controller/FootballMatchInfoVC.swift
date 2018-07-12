@@ -22,7 +22,7 @@ enum TeamInfoStyle {
     case lineup    //阵容
 }
 
-class FootballMatchInfoVC: BaseViewController, UITableViewDelegate {
+class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, LotteryProtocol {
     
     public var matchId : String!
     
@@ -43,9 +43,36 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate {
             headerView.matchInfo = self.matchInfoModel.matchInfo
         }
     }
+     //阵营信息
+    private var lineupInfoModel : FootballLineupInfoModel!{
+        didSet{
+            
+        }
+    }
+    //赛况信息
+    private var liveInfoModel: FootballLiveInfoModel! {
+        didSet{
+            
+        }
+    }
     
-    private var lineupInfoModel : FootballLineupInfoModel! //阵营信息
-    private var liveInfoModel: FootballLiveInfoModel!      //赛况信息
+    private func shouldStartTimer() {
+        if matchStart(with: Int(liveInfoModel.matchTime)!) {
+            if !CXMGCDTimer.shared.isExistTimer(WithTimerName: "cxmLiveInfoTimer") {
+                startTimer()
+            }
+        }else {
+            CXMGCDTimer.shared.cancleTimer(WithTimerName: "cxmLiveInfoTimer")
+        }
+    }
+    
+    private func startTimer() {
+        CXMGCDTimer.shared.scheduledDispatchTimer(WithTimerName: "cxmLiveInfoTimer", timeInterval: 60, queue: .main, repeats: true) {
+            print(1)
+            
+            self.liveInfoRequest()
+        }
+    }
     
     private var homeLineupList : [[FootballLineupMemberInfo]]! //主队阵容
     private var visiLineupList : [[FootballLineupMemberInfo]]! //客队阵容
@@ -68,6 +95,9 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         TongJi.end("赛事分析页/赔率页")
+    }
+    override func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
+        return -10
     }
     // MARK: - 去投注
     @objc private func buyButtonClicked(_ sender: UIButton) {
@@ -267,8 +297,15 @@ extension FootballMatchInfoVC : UITableViewDataSource {
             return 7
         case .matchDetail:
             guard self.liveInfoModel != nil else { return 0 }
+            guard self.liveInfoModel.eventList.count != 0 ||
+                self.liveInfoModel.matchLiveStatisticsDTO.count != 0
+                else { return 0 }
             return 2
         case .lineup :
+            guard self.lineupInfoModel != nil else { return 0 }
+            guard self.lineupInfoModel.alineupPersons.count != 0 ||
+                self.lineupInfoModel.hlineupPersons.count != 0
+                else { return 0 }
             return 3
         }
     }
@@ -502,8 +539,8 @@ extension FootballMatchInfoVC : UITableViewDataSource {
             }
         case .matchDetail:
             if indexPath.section == 0 {
-                if indexPath.row == 5 {
-                    return 70 * defaultScale
+                if indexPath.row == self.liveInfoModel.eventList.count + 1 {
+                    return 100
                 }
                 return 50 * defaultScale
             }else {
