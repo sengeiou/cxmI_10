@@ -728,10 +728,13 @@ extension FootballMatchInfoVC : UITableViewDataSource {
     /// 分析 - 未来赛事
     private func initAnalysisFutureCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballMatchInfoFutureCell.identifier, for: indexPath) as! FootballMatchInfoFutureCell
+        
         if indexPath.section == 5 {
-            cell.futureInfo = self.matchInfoModel.hfutureMatchInfos[indexPath.row]
+            cell.setFutureInfo(with: self.matchInfoModel.hfutureMatchInfos[indexPath.row],
+                               highlightTeam: self.matchInfoModel.matchInfo.homeTeamAbbr)
         }else {
-           cell.futureInfo = self.matchInfoModel.vfutureMatchInfos[indexPath.row]
+           cell.setFutureInfo(with: self.matchInfoModel.vfutureMatchInfos[indexPath.row],
+                              highlightTeam: self.matchInfoModel.matchInfo.visitingTeamAbbr)
         }
     
         return cell

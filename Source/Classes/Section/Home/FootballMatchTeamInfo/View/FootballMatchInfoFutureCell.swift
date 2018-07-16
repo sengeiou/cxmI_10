@@ -12,6 +12,25 @@ class FootballMatchInfoFutureCell: UITableViewCell {
 
     static let identifier: String = "FootballMatchInfoFutureCell"
     
+    public func setFutureInfo(with futureInfo : MatchFutureInfo, highlightTeam: String) {
+        teamLabel.text = futureInfo.leagueAbbr
+        dateLabel.text = futureInfo.matchDate
+        homeLabel.text = futureInfo.homeTeamAbbr
+        visiLabel.text = futureInfo.visitorTeamAbbr
+        
+        if futureInfo.homeTeamAbbr == highlightTeam {
+            homeLabel.textColor = Color505050
+        }else {
+            homeLabel.textColor = Color9F9F9F
+        }
+        
+        if futureInfo.visitorTeamAbbr == highlightTeam {
+            visiLabel.textColor = Color505050
+        }else {
+            visiLabel.textColor = Color9F9F9F
+        }
+    }
+    
     public var futureInfo : MatchFutureInfo! {
         didSet{
             teamLabel.text = futureInfo.leagueAbbr
