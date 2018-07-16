@@ -71,11 +71,12 @@ class CXMGCDTimer {
         
         
         let currentMin = currentMinute()
-        let dely = 60 - currentMin
+        let dely : Double = Double( 60 - currentMin)
         
+       
         
         //精度0.1秒
-        timer?.schedule(deadline: .init(uptimeNanoseconds: UInt64(dely)), repeating: timeInterval, leeway: DispatchTimeInterval.milliseconds(100))
+        timer?.schedule(deadline: .now() + dely , repeating: timeInterval, leeway: DispatchTimeInterval.milliseconds(10))
         timer?.setEventHandler(handler: { [weak self] in
             action()
             if repeats == false {
@@ -111,8 +112,8 @@ class CXMGCDTimer {
     func currentMinute () -> Int {
         let calendar = Calendar.current
         
-        let dateCom = calendar.dateComponents([.minute], from: Date())
-        return dateCom.minute!
+        let dateCom = calendar.dateComponents([.second], from: Date())
+        return dateCom.second!
     }
     
 }
