@@ -352,9 +352,9 @@ extension FootballMatchInfoVC : UITableViewDataSource {
             case 4:
                 return 1 // 暂时隐藏 积分排名，如需打开  return 1
             case 5:
-                return self.matchInfoModel.hfutureMatchInfos.count
+                return self.matchInfoModel.hFutureMatchInfos.count
             case 6:
-                return self.matchInfoModel.vfutureMatchInfos.count
+                return self.matchInfoModel.vFutureMatchInfos.count
             default:
                 return 0
             }
@@ -730,10 +730,10 @@ extension FootballMatchInfoVC : UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballMatchInfoFutureCell.identifier, for: indexPath) as! FootballMatchInfoFutureCell
         
         if indexPath.section == 5 {
-            cell.setFutureInfo(with: self.matchInfoModel.hfutureMatchInfos[indexPath.row],
+            cell.setFutureInfo(with: self.matchInfoModel.hFutureMatchInfos[indexPath.row],
                                highlightTeam: self.matchInfoModel.matchInfo.homeTeamAbbr)
         }else {
-           cell.setFutureInfo(with: self.matchInfoModel.vfutureMatchInfos[indexPath.row],
+           cell.setFutureInfo(with: self.matchInfoModel.vFutureMatchInfos[indexPath.row],
                               highlightTeam: self.matchInfoModel.matchInfo.visitingTeamAbbr)
         }
     
@@ -749,13 +749,13 @@ extension FootballMatchInfoVC : UITableViewDataSource {
             cell.titleView.flatlb.text = "平"
             cell.titleView.visilb.text = "负"
         case .亚盘:
-            cell.titleView.homelb.text = "主"
+            cell.titleView.homelb.text = "主水"
             cell.titleView.flatlb.text = "盘口"
-            cell.titleView.visilb.text = "负"
+            cell.titleView.visilb.text = "客水"
         case .大小球:
-            cell.titleView.homelb.text = "大"
+            cell.titleView.homelb.text = "大球"
             cell.titleView.flatlb.text = "盘口"
-            cell.titleView.visilb.text = "小"
+            cell.titleView.visilb.text = "小球"
         default : break
             
         }

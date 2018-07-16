@@ -37,9 +37,8 @@ struct FootballMatchInfoModel: HandyJSON {
     /// 赛事信息
     var matchInfo : MatchInfoModel!
     /// 未来赛事，主队
-    var hfutureMatchInfos : [MatchFutureInfo]! = [MatchFutureInfo]()
-    var vfutureMatchInfos : [MatchFutureInfo]! = [MatchFutureInfo]()
-    
+    var hFutureMatchInfos : [MatchFutureInfo]! = [MatchFutureInfo]()
+    var vFutureMatchInfos : [MatchFutureInfo]! = [MatchFutureInfo]()
 }
 
 struct MatchFutureInfo: HandyJSON {
