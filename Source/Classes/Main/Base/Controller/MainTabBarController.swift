@@ -64,13 +64,15 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
             .asObservable()
             .mapObject(type: ConfigInfoModel.self)
             .subscribe(onNext: { (data) in
-                if data.turnOn {
-                    weakSelf?.home.homeStyle = .allShow
-                }else {
-                    weakSelf?.home.homeStyle = .onlyNews
-                }
+//                if data.turnOn {
+//                    weakSelf?.home.homeStyle = .allShow
+//                }else {
+//                    weakSelf?.home.homeStyle = .onlyNews
+//                }
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationConfig), object: nil, userInfo: ["showStyle": data.turnOn])
                 UserDefaults.standard.set(data.turnOn, forKey: TurnOn)
+                
+                print("开关\(data.turnOn)")
                 
                 self.queryUserNotice(data.turnOn)
             }, onError: { (error) in

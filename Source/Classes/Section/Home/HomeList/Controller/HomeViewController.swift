@@ -67,6 +67,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     public var homeStyle : ShowType! = .onlyNews {
         didSet{
             loadNewData()
+            self.tableView.reloadData()
         }
     }
     
@@ -90,6 +91,9 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         self.tableView.footerRefresh {
             self.loadNextData()
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(configNotification(_:)), name: NSNotification.Name(rawValue: NotificationConfig), object: nil)
+        
         getRealmData()
         
     }
@@ -109,14 +113,8 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         
         newsList.append(contentsOf: self.newsListModel.list)
         
-        let turnOn = UserDefaults.standard.bool(forKey: TurnOn)
         
-        if turnOn == false {
-            self.homeStyle = .onlyNews
-        }else {
-            self.homeStyle = .allShow
-        }
-        tableView.reloadData()
+        
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -128,6 +126,16 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.isHidenBar = false
+        
+        let turnOn = UserDefaults.standard.bool(forKey: TurnOn)
+        
+        if turnOn == false {
+            self.homeStyle = .onlyNews
+        }else {
+            self.homeStyle = .allShow
+        }
+        
+        tableView.reloadData()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -139,6 +147,20 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         TongJi.end("大厅")
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc private func configNotification(_ notification : Notification) {
+        guard let userinf = notification.userInfo else { return }
+        guard let turnOn = userinf["showStyle"] as? Bool else { return }
+        if turnOn && self.homeStyle != .allShow{
+            self.homeStyle = .allShow
+            //showType = .onlyNews
+        }else if turnOn == false && self.homeStyle != .onlyNews {
+            self.homeStyle = .onlyNews
+        }
+    }
     //MARK: - 加载数据
     private func loadNewData() {
         //configRequest()
@@ -198,13 +220,13 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                     let dataRealm = HomeRealmData()
                     dataRealm.data = dataStr!
                     
-                    let turnOn = UserDefaults.standard.bool(forKey: TurnOn)
-                    
-                    if turnOn {
-                        dataRealm.homeStyle = 1
-                    }else {
-                        dataRealm.homeStyle = 0
-                    }
+//                    let turnOn = UserDefaults.standard.bool(forKey: TurnOn)
+//
+//                    if turnOn {
+//                        dataRealm.homeStyle = 1
+//                    }else {
+//                        dataRealm.homeStyle = 0
+//                    }
                     
                     try! realm.write {
                         realm.add(dataRealm, update: true)
@@ -380,7 +402,7 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                 if self.homeData != nil, self.homeData.activity == nil {
                     return 0
                 }else {
-                    return 80
+                    return 90 * defaultScale
                 }
             case 2:
                 guard self.homeData != nil else { return 0 }

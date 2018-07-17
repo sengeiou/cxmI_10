@@ -37,7 +37,7 @@ class LotteryCell: UITableViewCell {
             }
             
             switch matchType {
-            case "0":
+            case "0":// 未开始
                 setStartMatch()
             case "1","2":
                 setOverMatch()
@@ -49,9 +49,23 @@ class LotteryCell: UITableViewCell {
     
     private func setStartMatch() {
         
-        let time = matchIntervalue(with: resultModel.matchTimeStart)
+//        let time = matchIntervalue(with: resultModel.matchTimeStart)
+//
+//        guard time > 0 else {
+//            resultLeftLabel.text = "未开赛"
+//            resultlb.text = timeStampToHHmm(resultModel.matchTimeStart)
+//            resultlb.textColor = Color787878
+//            resultLeftLabel.textColor = Color787878
+//            return
+//        }
         
-        guard time > 0 else {
+//        if time >= 90 {
+//            resultLeftLabel.text = "90+′"
+//        }else {
+//            resultLeftLabel.text = "\(time)′"
+//        }
+        
+        guard resultModel.minute > 0 else {
             resultLeftLabel.text = "未开赛"
             resultlb.text = timeStampToHHmm(resultModel.matchTimeStart)
             resultlb.textColor = Color787878
@@ -59,11 +73,7 @@ class LotteryCell: UITableViewCell {
             return
         }
         
-        if time >= 90 {
-            resultLeftLabel.text = "90+′"
-        }else {
-            resultLeftLabel.text = "\(time)′"
-        }
+        resultLeftLabel.text = "\(resultModel.minute)"
         
         if resultModel.firstHalf == "" {
             resultlb.text = "0:0"
