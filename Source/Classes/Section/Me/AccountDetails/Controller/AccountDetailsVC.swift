@@ -59,8 +59,8 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
         addPanGestureRecognizer = false
         
         self.view.addSubview(tableView)
-        footer = AccountDetailFooterView()
-        self.view.addSubview(footer)
+//        footer = AccountDetailFooterView()
+//        self.view.addSubview(footer)
         
         setEmpty(title: "暂无明细数据", tableView)
         self.tableView.headerRefresh {
@@ -85,13 +85,13 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
         super.viewDidLayoutSubviews()
         tableView.snp.makeConstraints { (make) in
             make.top.left.right.equalTo(self.view)
-            make.bottom.equalTo(footer.snp.top)
+            make.bottom.equalTo(0)
         }
-        footer.snp.makeConstraints { (make) in
-            make.bottom.equalTo(-0)
-            make.left.right.equalTo(0)
-            make.height.equalTo(50 * defaultScale)
-        }
+//        footer.snp.makeConstraints { (make) in
+//            make.bottom.equalTo(-0)
+//            make.left.right.equalTo(0)
+//            make.height.equalTo(50 * defaultScale)
+//        }
     }
     
     @objc private func accountDetailsFilter(notification: Notification) {
@@ -150,7 +150,7 @@ class AccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableViewDe
 //                    weakSelf?.footer.isHidden = false
 //                }
                 
-                weakSelf?.footer.dataModel = data.userAccountByTimeDTO
+                //weakSelf?.footer.dataModel = data.userAccountByTimeDTO
                 weakSelf?.tableView.reloadData()
             }, onError: { (error) in
                 self.tableView.endrefresh()
