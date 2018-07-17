@@ -80,6 +80,7 @@ class ScoreViewController: WMPageController, AlertPro {
         
         dateFilter = UIButton(type: .custom)
         dateFilter.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        dateFilter.imageEdgeInsets = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: -5)
         dateFilter.setImage(UIImage(named: "date"), for: .normal)
         dateFilter.addTarget(self, action: #selector(dateFilterClick(_:)), for: .touchUpInside)
         
