@@ -113,8 +113,6 @@ class HomeViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         
         newsList.append(contentsOf: self.newsListModel.list)
         
-        
-        
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
