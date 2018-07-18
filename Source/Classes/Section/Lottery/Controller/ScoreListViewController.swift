@@ -82,6 +82,7 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         TongJi.start("开奖页")
+        self.loadNewData()
         if matchType == "0" {
             self.shouldStartTimer(true)
         }
@@ -90,9 +91,9 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         TongJi.end("开奖页")
-        if matchType == "0" {
-            self.shouldStartTimer(false)
-        }
+        
+        self.shouldStartTimer(false)
+    
     }
     deinit {
         NotificationCenter.default.removeObserver(self)
