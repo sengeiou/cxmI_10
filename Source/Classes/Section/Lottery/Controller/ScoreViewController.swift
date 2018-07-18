@@ -57,6 +57,8 @@ class ScoreViewController: WMPageController, AlertPro {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.selectIndex = 0
     }
     
     private func initLabel() -> UILabel {

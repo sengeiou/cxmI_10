@@ -30,33 +30,34 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
     
     private var resultList : [LotteryResultModel]! {
         didSet{
-           
-            //startTimer()
+
             if matchType == "0" {
                 //resultList[0].matchTimeStart = 1531291178
-                shouldStartTimer()
+                shouldStartTimer(true)
             }
         }
     }
     
-    private func shouldStartTimer() {
+    private func shouldStartTimer(_ start : Bool) {
         // 开赛时间>0且<150时启动计时器
-        var start = false
-        for match in resultList {
-            if matchStart(with: match.matchTimeStart) {
-                if matchIntervalue(with: match.matchTimeStart) < 150 {
-                    start = true
-                }else {
-                    start = false
-                }
-            }
-        }
+//        var start = false
+//        for match in resultList {
+//            if matchStart(with: match.matchTimeStart) {
+//                if matchIntervalue(with: match.matchTimeStart) < 150 {
+//                    start = true
+//                }else {
+//                    start = false
+//                }
+//            }
+//        }
     
         if start {
+            print("计时开始")
             if !CXMGCDTimer.shared.isExistTimer(WithTimerName: "cxmTimer") {
                 startTimer()
             }
         }else {
+            print("计时结束")
             CXMGCDTimer.shared.cancleTimer(WithTimerName: "cxmTimer")
         }
     }
@@ -93,10 +94,16 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         TongJi.start("开奖页")
+        if matchType == "0" {
+            self.shouldStartTimer(true)
+        }
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         TongJi.end("开奖页")
+        if matchType == "0" {
+            self.shouldStartTimer(false)
+        }
     }
     deinit {
         NotificationCenter.default.removeObserver(self)
