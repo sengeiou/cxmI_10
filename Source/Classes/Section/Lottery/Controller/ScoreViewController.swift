@@ -13,6 +13,18 @@ fileprivate let numLabelRightSpacing: CGFloat = 10
 
 class ScoreViewController: WMPageController, AlertPro {
 
+    public var backDefault : Bool = false {
+        didSet{
+            if backDefault {
+                if self.dateList == nil {
+                    self.dateList = LotteryDateModel().getDates()
+                    self.selectedDateModel = self.dateList[16]
+                }
+                self.selectIndex = 0
+            }
+        }
+    }
+    
     private var titleDatas : [String] = ["未结束","已结束","我的比赛"]
     private var finishedLabel: UILabel!
     private var notFinishedLabel: UILabel!
@@ -31,9 +43,6 @@ class ScoreViewController: WMPageController, AlertPro {
         finishedLabel = initLabel()
         notFinishedLabel = initLabel()
         myMatchLabel = initLabel()
-        
-        self.dateList = LotteryDateModel().getDates()
-        self.selectedDateModel = self.dateList[16]
         
         self.menuViewStyle = .line
         self.titleColorNormal = Color505050
@@ -57,8 +66,6 @@ class ScoreViewController: WMPageController, AlertPro {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        self.selectIndex = 0
     }
     
     private func initLabel() -> UILabel {
@@ -190,7 +197,10 @@ extension ScoreViewController {
     
     override func pageController(_ pageController: WMPageController, viewControllerAt index: Int) -> UIViewController {
         let scoreList = ScoreListViewController()
-        scoreList.dateFilter = self.selectedDateModel.date
+        if self.selectedDateModel != nil {
+            scoreList.dateFilter = self.selectedDateModel.date
+        }
+        
         switch index {
         case 0:
             scoreList.matchType = "0"

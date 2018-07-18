@@ -19,6 +19,7 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
     
     private var home : HomeViewController!
     public var me : BaseViewController!
+    private var lottery : ScoreViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -143,7 +144,7 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
         
         // 开奖
         
-        let lottery = ScoreViewController()
+        lottery = ScoreViewController()
         
         let lotteryNav = UINavigationController(rootViewController: lottery)
         lotteryNav.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
@@ -217,6 +218,9 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
             }
         }
         
+        if viewController == self.viewControllers![1] {
+            lottery.backDefault = true
+        }
         
         return true
     }

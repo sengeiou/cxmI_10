@@ -19,7 +19,7 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
     public var matchType : String = "0"
     
     // MARK: - 属性 private
-    public var dateFilter : String!
+    public var dateFilter : String! = ""
     private var isAlready : Bool = false
     private var leagueIds : String = ""
     private var lotteryModel : LotteryModel! {
@@ -39,22 +39,10 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
     }
     
     private func shouldStartTimer(_ start : Bool) {
-        // 开赛时间>0且<150时启动计时器
-//        var start = false
-//        for match in resultList {
-//            if matchStart(with: match.matchTimeStart) {
-//                if matchIntervalue(with: match.matchTimeStart) < 150 {
-//                    start = true
-//                }else {
-//                    start = false
-//                }
-//            }
-//        }
-    
         if start {
-            print("计时开始")
             if !CXMGCDTimer.shared.isExistTimer(WithTimerName: "cxmTimer") {
                 startTimer()
+                print("计时开始")
             }
         }else {
             print("计时结束")
@@ -97,6 +85,7 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
         if matchType == "0" {
             self.shouldStartTimer(true)
         }
+        self.tableView.setContentOffset(CGPoint.zero, animated: true)
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
