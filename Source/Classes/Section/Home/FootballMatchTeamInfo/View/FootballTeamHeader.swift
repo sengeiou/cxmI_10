@@ -34,13 +34,60 @@ class FootballTeamHeader: UIView, DateProtocol {
                 visiName.text = matchInfo.visitingTeamAbbr
             }
             
-            homeOdds.text = "主胜" + matchInfo.hOdds
-            flatOdds.text = "平" + matchInfo.dOdds
-            visiOdds.text = "客胜" + matchInfo.aOdds
+            //homeOdds.text = "主胜" + matchInfo.hOdds
+            //flatOdds.text = "平" + matchInfo.dOdds
+            //visiOdds.text = "客胜" + matchInfo.aOdds
+            
             guard let homeurl = URL(string: matchInfo.homeTeamPic) else { return }
             guard let visiUrl = URL(string: matchInfo.visitingTeamPic) else { return }
             homeTeamIcon.kf.setImage(with: homeurl)
             visiTeamIcon.kf.setImage(with: visiUrl)
+        }
+    }
+    
+    public var liveInfoModel: FootballLiveInfoModel! {
+        didSet{
+            guard liveInfoModel != nil else { return }
+            //guard let matchStatus = liveInfoModel.matchStatus else { return }
+            
+            switch "1" {
+            case "0": // 未开赛
+                flatName.text = "未开赛"
+                flatName.text = timeStampToMDHHmm(liveInfoModel.matchTime)
+            case "1": // 已完成
+                
+                let muName = NSMutableAttributedString(string: "3   ",
+                                                       attributes: [NSAttributedStringKey.font : Font30,
+                                                                    NSAttributedStringKey.foregroundColor: ColorE85504])
+                let name = NSAttributedString(string: "已结束",
+                                              attributes: [NSAttributedStringKey.font : Font15])
+                
+                let oddName = NSAttributedString(string: "   1",
+                                                 attributes: [NSAttributedStringKey.font : Font30,
+                                                              NSAttributedStringKey.foregroundColor: ColorE85504])
+                
+                muName.append(name)
+                muName.append(oddName)
+                flatName.attributedText = muName
+                
+                //flatName.text = "已结束"
+                flatOdds.text = "半场 0:0"
+            
+            case "2": // 取消
+                flatName.text = "取消"
+            case "4": // 推迟
+                flatName.text = "推迟"
+                flatOdds.text = timeStampToMDHHmm(liveInfoModel.matchTime)
+            case "5": // 暂停
+                flatName.text = "暂停"
+                
+            case "6": // 进行中
+                flatName.text = "正在比赛"
+                flatOdds.text = liveInfoModel.minute + "′"
+                flatOdds.textColor = ColorE85504
+                
+            default: break
+            }
         }
     }
     
@@ -75,6 +122,7 @@ class FootballTeamHeader: UIView, DateProtocol {
     private var visiOdds : UILabel!
     private var flatOdds : UILabel!
     private var flatName : UILabel!
+    private var resultLabel: UILabel!
     
     public var bottomLine : UIView!
     
@@ -92,12 +140,12 @@ class FootballTeamHeader: UIView, DateProtocol {
         }
         homeTeamIcon.snp.makeConstraints { (make) in
             make.top.equalTo(titlelb.snp.bottom).offset(14 * defaultScale)
-            make.left.equalTo(71 * defaultScale)
+            make.left.equalTo(40 * defaultScale)
             make.height.width.equalTo(40 * defaultScale)
         }
         visiTeamIcon.snp.makeConstraints { (make) in
             make.top.width.height.equalTo(homeTeamIcon)
-            make.right.equalTo(-71 * defaultScale)
+            make.right.equalTo(-40 * defaultScale)
         }
         homeName.snp.makeConstraints { (make) in
             make.top.equalTo(homeTeamIcon.snp.bottom).offset(9 * defaultScale)
@@ -112,7 +160,7 @@ class FootballTeamHeader: UIView, DateProtocol {
         flatName.snp.makeConstraints { (make) in
             make.left.equalTo(homeName.snp.right)
             make.right.equalTo(visiName.snp.left)
-            make.top.height.equalTo(homeName)
+            make.top.height.equalTo(homeTeamIcon)
         }
         homeOdds.snp.makeConstraints { (make) in
             make.top.equalTo(homeName.snp.bottom).offset(8 * defaultScale)
@@ -125,11 +173,17 @@ class FootballTeamHeader: UIView, DateProtocol {
             make.centerX.equalTo(visiName.snp.centerX)
         }
         flatOdds.snp.makeConstraints { (make) in
-            make.top.equalTo(homeOdds)
-            make.width.equalTo(flatName)
+            make.top.equalTo(homeName)
             make.height.equalTo(homeOdds)
-            make.left.equalTo(flatName)
+            make.left.equalTo(homeName.snp.right)
+            make.right.equalTo(visiName.snp.left)
         }
+//        resultLabel.snp.makeConstraints { (make) in
+//            make.top.equalTo(flatOdds.snp.bottom).offset(8 * defaultScale)
+//            make.width.equalTo(flatName)
+//            make.height.equalTo(homeOdds)
+//            make.left.equalTo(flatName)
+//        }
     }
 
     private func initSubview() {
@@ -156,6 +210,9 @@ class FootballTeamHeader: UIView, DateProtocol {
         
         flatOdds = getLabel()
         
+        resultLabel = getLabel()
+        //resultLabel.textColor = ColorE85504
+        
         homeTeamIcon = UIImageView()
         homeTeamIcon.image = UIImage(named : "Racecolorfootball")
         
@@ -172,6 +229,7 @@ class FootballTeamHeader: UIView, DateProtocol {
         self.addSubview(visiOdds)
         self.addSubview(flatName)
         self.addSubview(flatOdds)
+        self.addSubview(resultLabel)
         self.addSubview(homeTeamIcon)
         self.addSubview(visiTeamIcon)
         self.addSubview(bottomLine)

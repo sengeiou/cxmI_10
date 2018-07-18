@@ -18,7 +18,15 @@ struct FootballLiveInfoModel: HandyJSON {
     var leagueAddr: String!
     /// 统计数据
     var matchLiveStatisticsDTO: [FootballLiveTeamData]!
-    var matchTime: String!
+    var matchTime: Int! = 0
+    /// 比赛状态 0-未开赛，1-已完成，2-取消，4-推迟， 5-暂停，6-进行中
+    var matchStatus: String!
+    /// 比赛时长
+    var minute: String!
+    /// 全场比分
+    var whole : String = "0:0"
+    /// 半场比分
+    var firstHalf: String = "0:0"
 }
 
 struct FootballLiveEventInfo: HandyJSON {

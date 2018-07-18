@@ -52,18 +52,12 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, LotteryProto
     //赛况信息
     private var liveInfoModel: FootballLiveInfoModel! {
         didSet{
-            
+            guard liveInfoModel != nil else { return }
+            headerView.liveInfoModel = liveInfoModel
         }
     }
     
     private func shouldStartTimer() {
-        guard matchStart(with: Int(liveInfoModel.matchTime)!) else {
-            CXMGCDTimer.shared.cancleTimer(WithTimerName: "cxmLiveInfoTimer")
-            return }
-        guard matchIntervalue(with: Int(liveInfoModel.matchTime)!) < 150 else {
-            CXMGCDTimer.shared.cancleTimer(WithTimerName: "cxmLiveInfoTimer")
-            return }
-        
         if !CXMGCDTimer.shared.isExistTimer(WithTimerName: "cxmLiveInfoTimer") {
             startTimer()
         }
@@ -282,6 +276,7 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, LotteryProto
 // MARK: -  pagerView delegate
 extension FootballMatchInfoVC : FootballMatchPagerViewDelegate {
     func didSelected(_ teamInfoStyle: TeamInfoStyle) {
+        CXMGCDTimer.shared.cancleTimer(WithTimerName: "cxmLiveInfoTimer")
         self.teamInfoStyle = teamInfoStyle
         if teamInfoStyle == .matchDetail {
             shouldStartTimer()

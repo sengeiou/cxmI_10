@@ -48,42 +48,26 @@ class LotteryCell: UITableViewCell {
     }
     
     private func setStartMatch() {
+
+        guard let status = resultModel.matchFinish else { return }
         
-//        let time = matchIntervalue(with: resultModel.matchTimeStart)
-//
-//        guard time > 0 else {
-//            resultLeftLabel.text = "未开赛"
-//            resultlb.text = timeStampToHHmm(resultModel.matchTimeStart)
-//            resultlb.textColor = Color787878
-//            resultLeftLabel.textColor = Color787878
-//            return
-//        }
-        
-//        if time >= 90 {
-//            resultLeftLabel.text = "90+′"
-//        }else {
-//            resultLeftLabel.text = "\(time)′"
-//        }
-        
-        guard resultModel.minute > 0 else {
+        if status == "6", resultModel.minute > 0 {
+            resultLeftLabel.text = "\(resultModel.minute)"
+            
+            if resultModel.firstHalf == "" {
+                resultlb.text = "0:0"
+            }else {
+                resultlb.text = resultModel.firstHalf
+            }
+            
+            resultlb.textColor = ColorE85504
+            resultLeftLabel.textColor = ColorE85504
+        }else {
             resultLeftLabel.text = "未开赛"
             resultlb.text = timeStampToHHmm(resultModel.matchTimeStart)
             resultlb.textColor = Color787878
             resultLeftLabel.textColor = Color787878
-            return
         }
-        
-        resultLeftLabel.text = "\(resultModel.minute)"
-        
-        if resultModel.firstHalf == "" {
-            resultlb.text = "0:0"
-        }else {
-            resultlb.text = resultModel.firstHalf
-        }
-        
-        resultlb.textColor = ColorE85504
-        resultLeftLabel.textColor = ColorE85504
-    
     }
     private func setOverMatch() {
         resultLeftLabel.text = "比分" + resultModel.whole
