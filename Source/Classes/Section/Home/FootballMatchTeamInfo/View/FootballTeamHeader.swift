@@ -56,14 +56,14 @@ class FootballTeamHeader: UIView, DateProtocol {
                 flatName.text = timeStampToMDHHmm(liveInfoModel.matchTime)
             case "1": // 已完成
                 
-                let muName = NSMutableAttributedString(string: "3   ",
+                let muName = NSMutableAttributedString(string: "\(liveInfoModel.fsH)   ",
                                                        attributes: [NSAttributedStringKey.font : Font30,
                                                                     NSAttributedStringKey.foregroundColor: ColorE85504])
                 let name = NSAttributedString(string: "\(liveInfoModel.minute!)′",
                                               attributes: [NSAttributedStringKey.font : Font15,
                                                            NSAttributedStringKey.foregroundColor: ColorE85504])
                 
-                let oddName = NSAttributedString(string: "   1",
+                let oddName = NSAttributedString(string: "   \(liveInfoModel.fsA)",
                                                  attributes: [NSAttributedStringKey.font : Font30,
                                                               NSAttributedStringKey.foregroundColor: ColorE85504])
                 
@@ -71,7 +71,7 @@ class FootballTeamHeader: UIView, DateProtocol {
                 muName.append(oddName)
                 flatName.attributedText = muName
             
-                flatOdds.text = "半场 0:0"
+                flatOdds.text = "半场 \(liveInfoModel.htsH):\(liveInfoModel.htsA)"
             
             case "2": // 取消
                 flatName.text = "取消"
@@ -82,13 +82,13 @@ class FootballTeamHeader: UIView, DateProtocol {
                 flatName.text = "暂停"
                 
             case "6": // 进行中
-                let muName = NSMutableAttributedString(string: "6   ",
+                let muName = NSMutableAttributedString(string: "\(liveInfoModel.fsH)   ",
                                                        attributes: [NSAttributedStringKey.font : Font30,
                                                                     NSAttributedStringKey.foregroundColor: ColorE85504])
-                let name = NSAttributedString(string: "已结束",
+                let name = NSAttributedString(string: "\(liveInfoModel.minute!)′",
                                               attributes: [NSAttributedStringKey.font : Font15])
                 
-                let oddName = NSAttributedString(string: "   1",
+                let oddName = NSAttributedString(string: "   \(liveInfoModel.fsA)",
                                                  attributes: [NSAttributedStringKey.font : Font30,
                                                               NSAttributedStringKey.foregroundColor: ColorE85504])
                 

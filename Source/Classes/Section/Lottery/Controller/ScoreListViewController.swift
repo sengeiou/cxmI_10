@@ -94,9 +94,10 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
             self.tableView.setContentOffset(CGPoint.zero, animated: true)
         }
         
-        self.loadNewData()
         if matchType == "0" {
             self.shouldStartTimer(true)
+        }else {
+            self.loadNewData()
         }
     }
     override func viewDidDisappear(_ animated: Bool) {

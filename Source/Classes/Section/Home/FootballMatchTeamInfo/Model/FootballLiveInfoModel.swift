@@ -22,11 +22,19 @@ struct FootballLiveInfoModel: HandyJSON {
     /// 比赛状态 0-未开赛，1-已完成，2-取消，4-推迟， 5-暂停，6-进行中
     var matchStatus: String!
     /// 比赛时长
-    var minute: String!
+    var minute: String! = ""
     /// 全场比分
     var whole : String = "0:0"
     /// 半场比分
     var firstHalf: String = "0:0"
+    /// 主队全场比分
+    var fsH : String = "0"
+    /// 客队全场比分
+    var fsA : String = "0"
+    /// 主队半场比分
+    var htsH: String = "0"
+    /// 客队半场比分
+    var htsA: String = "0"
 }
 
 struct FootballLiveEventInfo: HandyJSON {
