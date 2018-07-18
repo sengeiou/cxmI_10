@@ -95,6 +95,7 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, LotteryProto
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         TongJi.end("赛事分析页/赔率页")
+        CXMGCDTimer.shared.cancleTimer(WithTimerName: "cxmLiveInfoTimer")
     }
     override func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
         return -10
