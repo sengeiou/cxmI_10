@@ -15,19 +15,22 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
 
     // MARK: - 属性 public
     
-    public var changeNum : ((_ numStr: String) -> Void)!
+    public var changeNum : ((_ notFinishNum: String, _ finishNum: String, _ collectNum: String) -> Void)!
     public var matchType : String = "0"
     
     // MARK: - 属性 private
     public var dateFilter : String!
     private var isAlready : Bool = false
     private var leagueIds : String = ""
-
-    
+    private var lotteryModel : LotteryModel! {
+        didSet{
+            self.changeNum(lotteryModel.notfinishCount, lotteryModel.finishCount, lotteryModel.matchCollectCount)
+        }
+    }
     
     private var resultList : [LotteryResultModel]! {
         didSet{
-            self.changeNum("\(self.resultList.count)")
+           
             //startTimer()
             if matchType == "0" {
                 //resultList[0].matchTimeStart = 1531291178
@@ -141,11 +144,11 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
         
         _ = lotteryProvider.rx.request(.lotteryResultNew(date: date, isAlready: isAlready, leagueIds: leagueIds, type: type))
             .asObservable()
-            .mapArray(type: LotteryResultModel.self)
+            .mapObject(type: LotteryModel.self)
             .subscribe(onNext: { (data) in
                 self.tableView.endrefresh()
-                
-                self.resultList = data
+                self.lotteryModel = data
+                self.resultList = data.lotteryMatchDTOList
                 
                 DispatchQueue.main.async {
                     self.tableView.reloadData()

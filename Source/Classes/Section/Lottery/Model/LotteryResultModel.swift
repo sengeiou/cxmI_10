@@ -10,6 +10,16 @@ import Foundation
 
 import HandyJSON
 
+class LotteryModel : NSObject, HandyJSON {
+    required override init() {}
+    
+    var notfinishCount : String!
+    var finishCount : String!
+    var matchCollectCount : String!
+    
+    var lotteryMatchDTOList : [LotteryResultModel] = [LotteryResultModel]()
+}
+
 class LotteryResultModel : NSObject, HandyJSON {
     required override init() {}
     

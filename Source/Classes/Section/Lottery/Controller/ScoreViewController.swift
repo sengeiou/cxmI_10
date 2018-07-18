@@ -198,16 +198,10 @@ extension ScoreViewController {
             scoreList.matchType = "2"
         default: break
         }
-        scoreList.changeNum = { num in
-            switch index {
-            case 0:
-                self.notFinishedLabel.text = num
-            case 1:
-                self.finishedLabel.text = num
-            case 2:
-                self.myMatchLabel.text = num
-            default: break
-            }
+        scoreList.changeNum = { notFinishNum, finishNum, collectNum   in
+            self.notFinishedLabel.text = notFinishNum
+            self.finishedLabel.text = finishNum
+            self.myMatchLabel.text = collectNum
         }
         return scoreList
     }
