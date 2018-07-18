@@ -59,8 +59,9 @@ class FootballTeamHeader: UIView, DateProtocol {
                 let muName = NSMutableAttributedString(string: "3   ",
                                                        attributes: [NSAttributedStringKey.font : Font30,
                                                                     NSAttributedStringKey.foregroundColor: ColorE85504])
-                let name = NSAttributedString(string: "已结束",
-                                              attributes: [NSAttributedStringKey.font : Font15])
+                let name = NSAttributedString(string: "\(liveInfoModel.minute!)′",
+                                              attributes: [NSAttributedStringKey.font : Font15,
+                                                           NSAttributedStringKey.foregroundColor: ColorE85504])
                 
                 let oddName = NSAttributedString(string: "   1",
                                                  attributes: [NSAttributedStringKey.font : Font30,
@@ -69,8 +70,7 @@ class FootballTeamHeader: UIView, DateProtocol {
                 muName.append(name)
                 muName.append(oddName)
                 flatName.attributedText = muName
-                
-                //flatName.text = "已结束"
+            
                 flatOdds.text = "半场 0:0"
             
             case "2": // 取消
@@ -82,9 +82,19 @@ class FootballTeamHeader: UIView, DateProtocol {
                 flatName.text = "暂停"
                 
             case "6": // 进行中
-                flatName.text = "正在比赛"
-                flatOdds.text = liveInfoModel.minute + "′"
-                flatOdds.textColor = ColorE85504
+                let muName = NSMutableAttributedString(string: "6   ",
+                                                       attributes: [NSAttributedStringKey.font : Font30,
+                                                                    NSAttributedStringKey.foregroundColor: ColorE85504])
+                let name = NSAttributedString(string: "已结束",
+                                              attributes: [NSAttributedStringKey.font : Font15])
+                
+                let oddName = NSAttributedString(string: "   1",
+                                                 attributes: [NSAttributedStringKey.font : Font30,
+                                                              NSAttributedStringKey.foregroundColor: ColorE85504])
+                
+                muName.append(name)
+                muName.append(oddName)
+                flatName.attributedText = muName
                 
             default: break
             }

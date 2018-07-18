@@ -18,6 +18,14 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
     public var changeNum : ((_ notFinishNum: String, _ finishNum: String, _ collectNum: String) -> Void)!
     public var matchType : String = "0"
     
+    public var shouldReloadData : Bool = false {
+        didSet{
+            if shouldReloadData {
+                
+            }
+        }
+    }
+    
     // MARK: - 属性 private
     public var dateFilter : String! = ""
     private var isAlready : Bool = false
@@ -82,11 +90,14 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         TongJi.start("开奖页")
+        if self.shouldReloadData {
+            self.tableView.setContentOffset(CGPoint.zero, animated: true)
+        }
+        
         self.loadNewData()
         if matchType == "0" {
             self.shouldStartTimer(true)
         }
-        self.tableView.setContentOffset(CGPoint.zero, animated: true)
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
@@ -285,6 +296,7 @@ extension ScoreListViewController : UITableViewDelegate {
         guard let matchId = resultList[indexPath.row].matchId else { return }
         let matchInfo = FootballMatchInfoVC()
         matchInfo.matchId = matchId
+        self.shouldReloadData = false
         pushViewController(vc: matchInfo)
     }
 }

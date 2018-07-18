@@ -20,6 +20,7 @@ class ScoreViewController: WMPageController, AlertPro {
                     self.dateList = LotteryDateModel().getDates()
                     self.selectedDateModel = self.dateList[16]
                 }
+                notScore.shouldReloadData = true
                 self.selectIndex = 0
             }
         }
@@ -38,6 +39,10 @@ class ScoreViewController: WMPageController, AlertPro {
     
     private var dateList : [LotteryDateModel]!
     private var isAlready : Bool = false
+    
+    private var notScore = ScoreListViewController()
+    private var finishScore = ScoreListViewController()
+    private var collectScore = ScoreListViewController()
     
     override func viewDidLoad() {
         finishedLabel = initLabel()
@@ -187,6 +192,8 @@ extension ScoreViewController {
 
 extension ScoreViewController {
     
+    
+    
     override func numbersOfChildControllers(in pageController: WMPageController) -> Int {
         
         return self.titleDatas.count
@@ -196,37 +203,65 @@ extension ScoreViewController {
     }
     
     override func pageController(_ pageController: WMPageController, viewControllerAt index: Int) -> UIViewController {
-        let scoreList = ScoreListViewController()
-        if self.selectedDateModel != nil {
-            scoreList.dateFilter = self.selectedDateModel.date
-        }
-        
+    
         switch index {
         case 0:
-            scoreList.matchType = "0"
+            notScore.dateFilter = self.selectedDateModel.date
+            notScore.changeNum = { notFinishNum, finishNum, collectNum   in
+                self.notFinishedLabel.text = notFinishNum
+                self.finishedLabel.text = finishNum
+                self.myMatchLabel.text = collectNum
+            }
+            return notScore
         case 1:
-            scoreList.matchType = "1"
+            finishScore.dateFilter = self.selectedDateModel.date
+            finishScore.changeNum = { notFinishNum, finishNum, collectNum   in
+                self.notFinishedLabel.text = notFinishNum
+                self.finishedLabel.text = finishNum
+                self.myMatchLabel.text = collectNum
+            }
+            return finishScore
         case 2:
-            scoreList.matchType = "2"
-        default: break
+            collectScore.dateFilter = self.selectedDateModel.date
+            collectScore.changeNum = { notFinishNum, finishNum, collectNum   in
+                self.notFinishedLabel.text = notFinishNum
+                self.finishedLabel.text = finishNum
+                self.myMatchLabel.text = collectNum
+            }
+            return collectScore
+            
+        default:
+            return UIViewController()
         }
-        scoreList.changeNum = { notFinishNum, finishNum, collectNum   in
-            self.notFinishedLabel.text = notFinishNum
-            self.finishedLabel.text = finishNum
-            self.myMatchLabel.text = collectNum
-        }
-        return scoreList
     }
     
     override func menuView(_ menu: WMMenuView!, didSelectedIndex index: Int, currentIndex: Int) {
         super.menuView(menu, didSelectedIndex: index, currentIndex: currentIndex)
         changeLabelBGColor(index: index)
+        
+        switch index {
+        case 0:
+            notScore.shouldReloadData = true
+        case 1:
+            finishScore.shouldReloadData = true
+        case 2:
+            collectScore.shouldReloadData = true
+        default: break }
     }
     
     override func pageController(_ pageController: WMPageController, didEnter viewController: UIViewController, withInfo info: [AnyHashable : Any]) {
         guard let index = info["index"] as? Int else { return }
         
         changeLabelBGColor(index: index)
+        
+        switch index {
+        case 0:
+            notScore.shouldReloadData = true
+        case 1:
+            finishScore.shouldReloadData = true
+        case 2:
+            collectScore.shouldReloadData = true
+        default: break }
     }
     
     override func menuView(_ menu: WMMenuView!, initialMenuItem: WMMenuItem!, at index: Int) -> WMMenuItem! {

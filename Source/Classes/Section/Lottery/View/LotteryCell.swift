@@ -52,7 +52,7 @@ class LotteryCell: UITableViewCell {
         guard let status = resultModel.matchFinish else { return }
         
         if status == "6", resultModel.minute > 0 {
-            resultLeftLabel.text = "\(resultModel.minute)"
+            resultLeftLabel.text = "\(resultModel.minute)′"
             
             if resultModel.firstHalf == "" {
                 resultlb.text = "0:0"
