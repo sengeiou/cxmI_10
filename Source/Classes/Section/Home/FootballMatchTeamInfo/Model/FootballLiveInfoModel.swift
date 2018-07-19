@@ -35,6 +35,74 @@ struct FootballLiveInfoModel: HandyJSON {
     var htsH: String = "0"
     /// 客队半场比分
     var htsA: String = "0"
+    
+    static func getDefaultData() -> [FootballLiveTeamData] {
+        var list = [FootballLiveTeamData]()
+    
+        var item1 = FootballLiveTeamData()
+        item1.dataName = "控球率"
+        item1.teamHData = 0
+        item1.teamHData = 0
+        item1.dataType = "1"
+        list.append(item1)
+        
+        var item2 = FootballLiveTeamData()
+        item2.dataName = "控球率"
+        item2.teamHData = 0
+        item2.teamHData = 0
+        list.append(item2)
+        
+        var item3 = FootballLiveTeamData()
+        item3.dataName = "控球率"
+        item3.teamHData = 0
+        item3.teamHData = 0
+        list.append(item3)
+        
+        var item4 = FootballLiveTeamData()
+        item4.dataName = "控球率"
+        item4.teamHData = 0
+        item4.teamHData = 0
+        list.append(item4)
+        
+        var item5 = FootballLiveTeamData()
+        item5.dataName = "控球率"
+        item5.teamHData = 0
+        item5.teamHData = 0
+        list.append(item5)
+        
+        var item6 = FootballLiveTeamData()
+        item6.dataName = "控球率"
+        item6.teamHData = 0
+        item6.teamHData = 0
+        list.append(item6)
+        
+        var item7 = FootballLiveTeamData()
+        item7.dataName = "控球率"
+        item7.teamHData = 0
+        item7.teamHData = 0
+        list.append(item7)
+        
+        var item8 = FootballLiveTeamData()
+        item8.dataName = "控球率"
+        item8.teamHData = 0
+        item8.teamHData = 0
+        list.append(item8)
+        
+        var item9 = FootballLiveTeamData()
+        item9.dataName = "控球率"
+        item9.teamHData = 0
+        item9.teamHData = 0
+        list.append(item9)
+        
+        var item10 = FootballLiveTeamData()
+        item10.dataName = "控球率"
+        item10.teamHData = 0
+        item10.teamHData = 0
+        list.append(item10)
+        
+        return list
+    }
+    
 }
 
 struct FootballLiveEventInfo: HandyJSON {
