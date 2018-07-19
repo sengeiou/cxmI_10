@@ -44,7 +44,13 @@ class FootballDetailStatisticsCell: UITableViewCell {
             homeScaleView.setProgress( 1 - (Float(CGFloat(data.teamHData) / CGFloat(data.teamHData + data.teamAData))), animated: false)
             homeNumLabel.text = "\(data.teamHData)"
 
-            visiScaleView.setProgress(Float(data.teamAData) / Float(data.teamHData + data.teamAData), animated: false)
+            if data.teamAData + data.teamHData == 0{
+                visiScaleView.setProgress(0, animated: false)
+            }
+            else {
+                visiScaleView.setProgress(Float(data.teamAData) / Float(data.teamHData + data.teamAData), animated: false)
+            }
+            
             visiNumLabel.text = "\(data.teamAData)"
         }
         
