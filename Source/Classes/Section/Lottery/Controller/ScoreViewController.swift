@@ -192,8 +192,6 @@ extension ScoreViewController {
 
 extension ScoreViewController {
     
-    
-    
     override func numbersOfChildControllers(in pageController: WMPageController) -> Int {
         
         return self.titleDatas.count
@@ -206,7 +204,7 @@ extension ScoreViewController {
     
         switch index {
         case 0:
-            notScore.dateFilter = self.selectedDateModel.date
+            //notScore.dateFilter = self.selectedDateModel.date
             notScore.matchType = "0"
             notScore.changeNum = { notFinishNum, finishNum, collectNum   in
                 self.notFinishedLabel.text = notFinishNum
@@ -215,7 +213,7 @@ extension ScoreViewController {
             }
             return notScore
         case 1:
-            finishScore.dateFilter = self.selectedDateModel.date
+            //finishScore.dateFilter = self.selectedDateModel.date
             finishScore.matchType = "1"
             finishScore.changeNum = { notFinishNum, finishNum, collectNum   in
                 self.notFinishedLabel.text = notFinishNum
@@ -224,7 +222,7 @@ extension ScoreViewController {
             }
             return finishScore
         case 2:
-            collectScore.dateFilter = self.selectedDateModel.date
+            //collectScore.dateFilter = self.selectedDateModel.date
             collectScore.matchType = "2"
             collectScore.changeNum = { notFinishNum, finishNum, collectNum   in
                 self.notFinishedLabel.text = notFinishNum

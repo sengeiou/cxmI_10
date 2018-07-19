@@ -18,13 +18,7 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
     public var changeNum : ((_ notFinishNum: String, _ finishNum: String, _ collectNum: String) -> Void)!
     public var matchType : String = "0"
     
-    public var shouldReloadData : Bool = false {
-        didSet{
-            if shouldReloadData {
-                
-            }
-        }
-    }
+    public var shouldReloadData : Bool = false
     
     // MARK: - 属性 private
     public var dateFilter : String! = ""
@@ -188,11 +182,16 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
     private func collectRequest(matchId: String, cell: LotteryCell) {
         weak var weakSelf = self
         
-        _ = userProvider.rx.request(.collectMatch(matchId: matchId))
+        _ = userProvider.rx.request(.collectMatch(matchId: matchId, dateStr: self.dateFilter))
             .asObservable()
-            .mapBaseObject(type: DataModel.self)
+            .mapObject(type: LotteryCollectModel.self)
             .subscribe(onNext: { (data) in
-                //self.showHUD(message: data.msg)
+                guard let notCount = weakSelf?.lotteryModel.notfinishCount else { return }
+                guard let finishCount = weakSelf?.lotteryModel.finishCount else { return }
+                
+                weakSelf?.changeNum(notCount,
+                                    finishCount,
+                                    (weakSelf?.lotteryModel.matchCollectCount)!)
             }, onError: { (error) in
                 cell.changeCollectionSelected(selected: false)
                 guard let err = error as? HXError else { return }
@@ -218,11 +217,16 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
     //MARK: - 取消收藏赛事
     private func collectCancelRequest(matchId: String, cell: LotteryCell) {
         weak var weakSelf = self
-        _ = userProvider.rx.request(.collectMatchCancle(matchId: matchId))
+        _ = userProvider.rx.request(.collectMatchCancle(matchId: matchId, dateStr: self.dateFilter))
             .asObservable()
-            .mapBaseObject(type: DataModel.self)
+            .mapObject(type: LotteryCollectModel.self)
             .subscribe(onNext: { (data) in
-                //self.showHUD(message: data.msg)
+                guard let notCount = weakSelf?.lotteryModel.notfinishCount else { return }
+                guard let finishCount = weakSelf?.lotteryModel.finishCount else { return }
+                
+                weakSelf?.changeNum(notCount,
+                                    finishCount,
+                                    (weakSelf?.lotteryModel.matchCollectCount)!)
                 
             }, onError: { (error) in
                 cell.changeCollectionSelected(selected: true)

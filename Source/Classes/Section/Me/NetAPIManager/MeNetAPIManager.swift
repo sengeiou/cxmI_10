@@ -66,9 +66,9 @@ enum MeNetAPIManager {
     /// 账户明细列表，带统计信息
     case accountDetailsListAndTotal(amountType: String, pageNum: Int, timeType: String)
     /// 收藏赛事
-    case collectMatch(matchId: String)
+    case collectMatch(matchId: String, dateStr: String)
     /// 取消收藏赛事
-    case collectMatchCancle(matchId: String)
+    case collectMatchCancle(matchId: String, dateStr: String)
 }
 
 extension MeNetAPIManager : TargetType {
@@ -231,10 +231,12 @@ extension MeNetAPIManager : TargetType {
             dic["oldLoginPass"] = oldPass
             dic["userLoginPass"] = newPass
             dic["type"] = type
-        case .collectMatch(let matchId) :
+        case .collectMatch(let matchId, let dateStr ) :
             dic["matchId"] = matchId
-        case .collectMatchCancle(let matchId) :
-            dic["id"] = matchId
+            dic["dateStr"] = dateStr
+        case .collectMatchCancle(let matchId, let dateStr ) :
+            dic["matchId"] = matchId
+            dic["dateStr"] = dateStr
         default:
             return .requestPlain
         }
