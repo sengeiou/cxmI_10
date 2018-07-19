@@ -37,7 +37,17 @@ class ScoreViewController: WMPageController, AlertPro {
     private var selectedDateModel : LotteryDateModel!
     private var filterList: [FilterModel]!
     
-    private var dateList : [LotteryDateModel]!
+    private var dateList : [LotteryDateModel]!{
+        didSet{
+            guard dateList != nil else { return }
+            for date in dateList {
+                if date.isSelected {
+                    self.selectedDateModel = date
+                    break
+                }
+            }
+        }
+    }
     private var isAlready : Bool = false
     
     private var notScore = ScoreListViewController()
@@ -66,7 +76,10 @@ class ScoreViewController: WMPageController, AlertPro {
         self.navigationItem.title = "彩小秘 · 比赛"
         setRightBarButton()
         
+        dateFilterRequest()
+        
         filterRequest()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -173,9 +186,7 @@ extension ScoreViewController {
                 case .UnexpectedResult(let code, let msg):
                     switch code {
                     case 600:
-//                        weakSelf?.removeUserData()
-//                        weakSelf?.pushLoginVC(from: self)
-                        
+
                         break
                     default : break
                     }
@@ -187,6 +198,30 @@ extension ScoreViewController {
                 default: break
                 }
             }, onCompleted: nil, onDisposed: nil )
+    }
+    
+    private func dateFilterRequest() {
+        _ = lotteryProvider.rx.request(.dateFilter)
+            .asObservable()
+            .mapArray(type: LotteryDateModel.self)
+            .subscribe(onNext: { (data) in
+                self.dateList = data
+            }, onError: { (error) in
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        break
+                    default : break
+                    }
+                    
+                    if 300000...310000 ~= code {
+                        print(code)
+                        self.showHUD(message: msg!)
+                    }
+                default: break }
+            }, onCompleted: nil , onDisposed: nil )
     }
 }
 

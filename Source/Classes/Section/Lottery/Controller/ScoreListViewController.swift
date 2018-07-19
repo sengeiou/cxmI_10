@@ -191,7 +191,7 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
                 
                 weakSelf?.changeNum(notCount,
                                     finishCount,
-                                    (weakSelf?.lotteryModel.matchCollectCount)!)
+                                    data.matchCollectCount)
             }, onError: { (error) in
                 cell.changeCollectionSelected(selected: false)
                 guard let err = error as? HXError else { return }
@@ -226,7 +226,7 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
                 
                 weakSelf?.changeNum(notCount,
                                     finishCount,
-                                    (weakSelf?.lotteryModel.matchCollectCount)!)
+                                    data.matchCollectCount)
                 
             }, onError: { (error) in
                 cell.changeCollectionSelected(selected: true)

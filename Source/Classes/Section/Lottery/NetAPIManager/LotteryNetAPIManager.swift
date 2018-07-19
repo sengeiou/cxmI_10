@@ -19,7 +19,8 @@ enum LotteryNetAPIManager {
     case lineupInfo(matchId: String)
     /// 赛况信息
     case liveInfo(matchId: String)
-    
+    /// 筛选时间
+    case dateFilter
 }
 
 extension LotteryNetAPIManager : TargetType {
@@ -38,6 +39,8 @@ extension LotteryNetAPIManager : TargetType {
             return "/match/lineup/info"
         case .liveInfo:
             return "/match/live/info"
+        case .dateFilter:
+            return "/lottery/match/giveMatchChooseDate"
         }
     }
     
@@ -74,6 +77,9 @@ extension LotteryNetAPIManager : TargetType {
             
         case .liveInfo(let matchId):
             dic["matchId"] = matchId
+        case .dateFilter:
+            dic["emptyStr"] = ""
+            
         default:
             return .requestPlain
         }

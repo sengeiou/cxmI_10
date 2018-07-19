@@ -10,5 +10,5 @@ import Foundation
 import HandyJSON
 
 struct LotteryCollectModel : HandyJSON {
-    
+    var matchCollectCount: String = ""
 }
