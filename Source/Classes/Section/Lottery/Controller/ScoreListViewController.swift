@@ -32,25 +32,6 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
     
     private var resultList : [LotteryResultModel]!
     
-    private func shouldStartTimer(_ start : Bool) {
-        if start {
-            if !CXMGCDTimer.shared.isExistTimer(WithTimerName: "cxmTimer") {
-                startTimer()
-                print("计时开始")
-            }
-        }else {
-            print("计时结束")
-            CXMGCDTimer.shared.cancleTimer(WithTimerName: "cxmTimer")
-        }
-    }
-    
-    private func startTimer() {
-        CXMGCDTimer.shared.scheduledDispatchTimer(WithTimerName: "cxmTimer", timeInterval: 60, queue: .main, repeats: true) {
-            print(1)
-            
-            self.loadNewData()
-        }
-    }
     
     // MARK: - 生命周期
     override func viewDidLoad() {
@@ -270,6 +251,28 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
         tableView.reloadSections(IndexSet(integer: section), with: .automatic)
     }
 
+}
+
+extension ScoreListViewController {
+    private func shouldStartTimer(_ start : Bool) {
+        if start {
+            if !CXMGCDTimer.shared.isExistTimer(WithTimerName: "cxmTimer") {
+                startTimer()
+                print("计时开始")
+            }
+        }else {
+            print("计时结束")
+            CXMGCDTimer.shared.cancleTimer(WithTimerName: "cxmTimer")
+        }
+    }
+    
+    private func startTimer() {
+        CXMGCDTimer.shared.scheduledDispatchTimer(WithTimerName: "cxmTimer", timeInterval: 60, queue: .main, repeats: true) {
+            print(1)
+            
+            self.loadNewData()
+        }
+    }
 }
 
 //MARK: - 收藏
