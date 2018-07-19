@@ -207,6 +207,7 @@ extension ScoreViewController {
         switch index {
         case 0:
             notScore.dateFilter = self.selectedDateModel.date
+            notScore.matchType = "0"
             notScore.changeNum = { notFinishNum, finishNum, collectNum   in
                 self.notFinishedLabel.text = notFinishNum
                 self.finishedLabel.text = finishNum
@@ -215,6 +216,7 @@ extension ScoreViewController {
             return notScore
         case 1:
             finishScore.dateFilter = self.selectedDateModel.date
+            finishScore.matchType = "1"
             finishScore.changeNum = { notFinishNum, finishNum, collectNum   in
                 self.notFinishedLabel.text = notFinishNum
                 self.finishedLabel.text = finishNum
@@ -223,6 +225,7 @@ extension ScoreViewController {
             return finishScore
         case 2:
             collectScore.dateFilter = self.selectedDateModel.date
+            collectScore.matchType = "2"
             collectScore.changeNum = { notFinishNum, finishNum, collectNum   in
                 self.notFinishedLabel.text = notFinishNum
                 self.finishedLabel.text = finishNum

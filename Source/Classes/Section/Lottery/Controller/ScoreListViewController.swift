@@ -90,8 +90,8 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         TongJi.start("开奖页")
-        if self.shouldReloadData {
-            self.tableView.setContentOffset(CGPoint.zero, animated: true)
+        if self.shouldReloadData, self.resultList != nil , self.resultList.count > 0 {
+            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .none, animated: true)
         }
         
         if matchType == "0" {

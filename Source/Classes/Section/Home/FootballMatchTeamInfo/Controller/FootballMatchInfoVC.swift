@@ -359,6 +359,9 @@ extension FootballMatchInfoVC : UITableViewDataSource {
             if section == 0 {
                 return self.liveInfoModel.eventList.count + 2
             }else {
+                if self.liveInfoModel.matchLiveStatisticsDTO.count == 0 {
+                    return 12
+                }
                 return self.liveInfoModel.matchLiveStatisticsDTO.count + 2
             }
         case .lineup:

@@ -48,9 +48,9 @@ class FootballTeamHeader: UIView, DateProtocol {
     public var liveInfoModel: FootballLiveInfoModel! {
         didSet{
             guard liveInfoModel != nil else { return }
-            //guard let matchStatus = liveInfoModel.matchStatus else { return }
+            guard let matchStatus = liveInfoModel.matchStatus else { return }
             
-            switch "1" {
+            switch matchStatus {
             case "0": // 未开赛
                 flatName.text = "未开赛"
                 flatName.text = timeStampToMDHHmm(liveInfoModel.matchTime)
@@ -59,9 +59,8 @@ class FootballTeamHeader: UIView, DateProtocol {
                 let muName = NSMutableAttributedString(string: "\(liveInfoModel.fsH)   ",
                                                        attributes: [NSAttributedStringKey.font : Font30,
                                                                     NSAttributedStringKey.foregroundColor: ColorE85504])
-                let name = NSAttributedString(string: "\(liveInfoModel.minute!)′",
-                                              attributes: [NSAttributedStringKey.font : Font15,
-                                                           NSAttributedStringKey.foregroundColor: ColorE85504])
+                let name = NSAttributedString(string: "已结束",
+                                              attributes: [NSAttributedStringKey.font : Font15])
                 
                 let oddName = NSAttributedString(string: "   \(liveInfoModel.fsA)",
                                                  attributes: [NSAttributedStringKey.font : Font30,
@@ -85,16 +84,22 @@ class FootballTeamHeader: UIView, DateProtocol {
                 let muName = NSMutableAttributedString(string: "\(liveInfoModel.fsH)   ",
                                                        attributes: [NSAttributedStringKey.font : Font30,
                                                                     NSAttributedStringKey.foregroundColor: ColorE85504])
-                let name = NSAttributedString(string: "\(liveInfoModel.minute!)′",
-                                              attributes: [NSAttributedStringKey.font : Font15])
+                let name = NSAttributedString(string: "\(liveInfoModel.minute)",
+                                              attributes: [NSAttributedStringKey.font : Font15,
+                                                           NSAttributedStringKey.foregroundColor: Color505050])
+                
+                let min = NSAttributedString(string: "′", attributes: [NSAttributedStringKey.font : Font15,
+                                                                         NSAttributedStringKey.foregroundColor: ColorE85504])
                 
                 let oddName = NSAttributedString(string: "   \(liveInfoModel.fsA)",
                                                  attributes: [NSAttributedStringKey.font : Font30,
                                                               NSAttributedStringKey.foregroundColor: ColorE85504])
-                
+            
                 muName.append(name)
+                muName.append(min)
                 muName.append(oddName)
                 flatName.attributedText = muName
+                flatOdds.text = "半场 \(liveInfoModel.htsH):\(liveInfoModel.htsA)"
                 
             default: break
             }
@@ -168,9 +173,12 @@ class FootballTeamHeader: UIView, DateProtocol {
             make.centerX.equalTo(visiTeamIcon.snp.centerX)
         }
         flatName.snp.makeConstraints { (make) in
-            make.left.equalTo(homeName.snp.right)
-            make.right.equalTo(visiName.snp.left)
+//            make.left.equalTo(homeName.snp.right)
+//            make.right.equalTo(visiName.snp.left)
             make.top.height.equalTo(homeTeamIcon)
+            
+            make.centerX.equalTo(self.snp.centerX)
+            
         }
         homeOdds.snp.makeConstraints { (make) in
             make.top.equalTo(homeName.snp.bottom).offset(8 * defaultScale)
@@ -217,6 +225,7 @@ class FootballTeamHeader: UIView, DateProtocol {
         flatName = getLabel()
         flatName.font = Font15
         flatName.text = "VS"
+        flatName.sizeToFit()
         
         flatOdds = getLabel()
         

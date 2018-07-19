@@ -76,7 +76,7 @@ class CXMGCDTimer {
        
         
         //精度0.1秒
-        timer?.schedule(deadline: .now() + dely , repeating: timeInterval, leeway: DispatchTimeInterval.milliseconds(10))
+        timer?.schedule(deadline: .now() + dely , repeating: timeInterval, leeway: DispatchTimeInterval.milliseconds(100))
         timer?.setEventHandler(handler: { [weak self] in
             action()
             if repeats == false {
