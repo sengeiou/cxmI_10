@@ -413,9 +413,11 @@ extension FootballMatchInfoVC : UITableViewDataSource {
                 }
                 
             }else {
+                
+                
                 if indexPath.row == 0 {
                     return initMatchDetailTeamInfo(indexPath: indexPath)
-                }else if indexPath.row == self.liveInfoModel.matchLiveStatisticsDTO.count + 1 {
+                }else if indexPath.row == 10 + 1 {
                     let cell = UITableViewCell()
                     cell.selectionStyle = .none
                     return cell
@@ -645,7 +647,43 @@ extension FootballMatchInfoVC : UITableViewDataSource {
     private func initMatchDetailStatisticsCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballDetailStatisticsCell.identifier, for: indexPath) as! FootballDetailStatisticsCell
         if indexPath.row != 0 {
-            cell.changeData(data: self.liveInfoModel.matchLiveStatisticsDTO[indexPath.row - 1], indexPath: indexPath)
+        
+            if liveInfoModel.matchLiveStatisticsDTO.count > 0 {
+                cell.changeData(data: self.liveInfoModel.matchLiveStatisticsDTO[indexPath.row - 1], indexPath: indexPath)
+            }
+            else {
+                cell.homeNumLabel.text = "0"
+                cell.visiNumLabel.text = "0"
+                switch indexPath.row {
+                case 1:
+                    cell.titleLabel.text = "控球率"
+                    cell.homeNumLabel.text = "0%"
+                    cell.visiNumLabel.text = "0%"
+                case 2:
+                    cell.titleLabel.text = "射正"
+                case 3:
+                    cell.titleLabel.text = "射偏"
+                case 4:
+                    cell.titleLabel.text = "被封堵"
+                case 5:
+                    cell.titleLabel.text = "角球"
+                case 6:
+                    cell.titleLabel.text = "任意球"
+                case 7:
+                    cell.titleLabel.text = "越位"
+                case 8:
+                    cell.titleLabel.text = "黄牌"
+                case 9:
+                    cell.titleLabel.text = "犯规"
+                case 10:
+                    cell.titleLabel.text = "有威胁助攻"
+                default : break }
+            }
+            
+        }
+        else {
+            
+
         }
     
         return cell

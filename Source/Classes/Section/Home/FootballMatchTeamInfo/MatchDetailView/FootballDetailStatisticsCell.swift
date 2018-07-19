@@ -16,10 +16,10 @@ class FootballDetailStatisticsCell: UITableViewCell {
     
     
     
-    private var homeNumLabel: UILabel!
-    private var visiNumLabel: UILabel!
+    public var homeNumLabel: UILabel!
+    public var visiNumLabel: UILabel!
     
-    private var titleLabel: UILabel!
+    public var titleLabel: UILabel!
     
     private var homeScaleView: UIProgressView!
     private var visiScaleView: UIProgressView!
@@ -63,11 +63,11 @@ class FootballDetailStatisticsCell: UITableViewCell {
     private func initSubview() {
         homeNumLabel = getLabel()
         homeNumLabel.textAlignment = .right
-        homeNumLabel.text = "25"
+        homeNumLabel.text = "0"
         
         visiNumLabel = getLabel()
         visiNumLabel.textAlignment = .left
-        visiNumLabel.text = "20%"
+        visiNumLabel.text = "0%"
         
         titleLabel = getLabel()
         titleLabel.text = "有威胁助攻"
@@ -75,6 +75,7 @@ class FootballDetailStatisticsCell: UITableViewCell {
         homeScaleView = UIProgressView()
         homeScaleView.progressTintColor = ColorF4F4F4
         homeScaleView.trackTintColor = ColorEA5504
+        homeScaleView.setProgress(1, animated: false)
         
         visiScaleView = UIProgressView()
         visiScaleView.progressTintColor = ColorEA5504
