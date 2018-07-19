@@ -20,7 +20,7 @@ class LotteryHeaderView: UIView {
     public var dateModel : LotteryDateModel! {
         didSet{
             guard dateModel != nil else { return }
-            timeFilterBut.setTitle(dateModel.date, for: .normal)
+            timeFilterBut.setTitle(dateModel.strDate, for: .normal)
         }
     }
     

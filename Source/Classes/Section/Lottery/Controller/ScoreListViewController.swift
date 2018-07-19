@@ -64,7 +64,7 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         //self.navigationItem.title = "彩小秘 · 比赛"
-        //setEmpty(title: "暂无比赛", self.tableView)
+        setEmpty(title: "暂无比赛", self.tableView)
         self.addPanGestureRecognizer = false
         hideBackBut()
         initSubview()
@@ -123,7 +123,7 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
     @objc private func dateFilter(_ notification : Notification) {
         guard let userInfo = notification.userInfo else { return }
         guard let model = userInfo["date"] as?  LotteryDateModel else { return }
-        self.dateFilter = model.date
+        self.dateFilter = model.strDate
         self.isAlready = false
         self.leagueIds = ""
         self.loadNewData()

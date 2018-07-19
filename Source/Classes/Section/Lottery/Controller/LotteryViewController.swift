@@ -54,8 +54,8 @@ class LotteryViewController: BaseViewController, UITableViewDelegate, UITableVie
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.isHidenBar = false
-        self.dateList = LotteryDateModel().getDates()
-        self.dateFilter = self.dateList.last?.date
+        //self.dateList = LotteryDateModel().getDates()
+        self.dateFilter = self.dateList.last?.strDate
         self.headerView.dateModel = self.dateList.last
         self.selectedDateModel = self.dateList.last
     }
@@ -136,9 +136,9 @@ class LotteryViewController: BaseViewController, UITableViewDelegate, UITableVie
     }
     
     private func filterRequest() {
-        guard self.selectedDateModel != nil, self.selectedDateModel.date != nil else { return }
+        guard self.selectedDateModel != nil, self.selectedDateModel.strDate != nil else { return }
         weak var weakSelf = self
-        _ = homeProvider.rx.request(.filterList(dateStr: self.selectedDateModel.date))
+        _ = homeProvider.rx.request(.filterList(dateStr: self.selectedDateModel.strDate))
             .asObservable()
             .mapArray(type: FilterModel.self)
             .subscribe(onNext: { (data) in
@@ -251,7 +251,7 @@ class LotteryViewController: BaseViewController, UITableViewDelegate, UITableVie
     
     // MARK: - 时间筛选 delegate
     func didSelectDateItem(filter: LotteryDateFilterVC, dateModel: LotteryDateModel) {
-        self.dateFilter = dateModel.date
+        self.dateFilter = dateModel.strDate
         self.headerView.dateModel = dateModel
         self.selectedDateModel = dateModel
         self.isAlready = false

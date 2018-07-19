@@ -25,12 +25,12 @@ class LotterySectionHeader: UITableViewHeaderFooterView {
                     }
                 }
                 
-                let att = NSMutableAttributedString(string: "共有\(resultList.count)场比赛 已经结束")
+                let att = NSMutableAttributedString(string: "共有\(resultList.count)场比赛")
                 
-                let attCount = NSAttributedString(string: "\(count)", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
-                let chang = NSAttributedString(string: "场")
-                att.append(attCount)
-                att.append(chang)
+//                let attCount = NSAttributedString(string: "\(count)", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+//                let chang = NSAttributedString(string: "场")
+//                att.append(attCount)
+//                att.append(chang)
                 title.attributedText = att
             }
         }

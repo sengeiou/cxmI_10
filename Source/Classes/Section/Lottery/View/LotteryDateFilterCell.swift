@@ -13,7 +13,7 @@ class LotteryDateFilterCell: UITableViewCell {
     public var dateModel : LotteryDateModel! {
         didSet{
             guard dateModel != nil else { return }
-            datelb.text = dateModel.date
+            datelb.text = dateModel.strDate
             if dateModel.isSelected {
                 datelb.textColor = ColorEA5504
             }else {

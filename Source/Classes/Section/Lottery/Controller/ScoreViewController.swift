@@ -16,10 +16,10 @@ class ScoreViewController: WMPageController, AlertPro {
     public var backDefault : Bool = false {
         didSet{
             if backDefault {
-                if self.dateList == nil {
-                    self.dateList = LotteryDateModel().getDates()
-                    self.selectedDateModel = self.dateList[16]
-                }
+//                if self.dateList == nil {
+//                    //self.dateList = LotteryDateModel().getDates()
+//                    self.selectedDateModel = self.dateList[16]
+//                }
                 notScore.shouldReloadData = true
                 self.selectIndex = 0
             }
@@ -34,20 +34,19 @@ class ScoreViewController: WMPageController, AlertPro {
     private var matchFilter : UIButton! //比赛筛选
     private var dateFilter : UIButton!  //日期筛选
     
-    private var selectedDateModel : LotteryDateModel!
+    //private var selectedDateModel : LotteryDateModel!
+    private var filterDate : String = ""
     private var filterList: [FilterModel]!
     
     private var dateList : [LotteryDateModel]!{
         didSet{
-            guard dateList != nil else { return }
-            for date in dateList {
-                if date.isSelected {
-                    self.selectedDateModel = date
-                    break
-                }
-            }
+//            guard dateList != nil else { return }
+//            for date in dateList where date.isSelected {
+//                self.selectedDateModel = date
+//            }
         }
     }
+    
     private var isAlready : Bool = false
     
     private var notScore = ScoreListViewController()
@@ -78,7 +77,7 @@ class ScoreViewController: WMPageController, AlertPro {
         
         dateFilterRequest()
         
-        filterRequest()
+        
         
     }
     
@@ -159,7 +158,7 @@ extension ScoreViewController : LotteryMoreFilterVCDelegate {
 }
 extension ScoreViewController : LotteryDateFilterVCDelegate {
     func didSelectDateItem(filter: LotteryDateFilterVC, dateModel: LotteryDateModel) {
-        self.selectedDateModel = dateModel
+        self.filterDate = dateModel.strDate
         self.isAlready = false
         
         filterRequest()
@@ -170,9 +169,8 @@ extension ScoreViewController : LotteryDateFilterVCDelegate {
 extension ScoreViewController {
     
     private func filterRequest() {
-        guard self.selectedDateModel != nil, self.selectedDateModel.date != nil else { return }
         weak var weakSelf = self
-        _ = homeProvider.rx.request(.filterList(dateStr: self.selectedDateModel.date))
+        _ = homeProvider.rx.request(.filterList(dateStr: filterDate))
             .asObservable()
             .mapArray(type: FilterModel.self)
             .subscribe(onNext: { (data) in
@@ -201,11 +199,14 @@ extension ScoreViewController {
     }
     
     private func dateFilterRequest() {
+        weak var weakSelf = self
         _ = lotteryProvider.rx.request(.dateFilter)
             .asObservable()
             .mapArray(type: LotteryDateModel.self)
             .subscribe(onNext: { (data) in
                 self.dateList = data
+                
+                weakSelf?.filterRequest()
             }, onError: { (error) in
                 guard let err = error as? HXError else { return }
                 switch err {
@@ -277,10 +278,13 @@ extension ScoreViewController {
         
         switch index {
         case 0:
+            notScore.dateFilter = filterDate
             notScore.shouldReloadData = true
         case 1:
+            finishScore.dateFilter = filterDate
             finishScore.shouldReloadData = true
         case 2:
+            collectScore.dateFilter = filterDate
             collectScore.shouldReloadData = true
         default: break }
     }
