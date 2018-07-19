@@ -275,7 +275,7 @@ extension ScoreViewController {
     override func menuView(_ menu: WMMenuView!, didSelectedIndex index: Int, currentIndex: Int) {
         super.menuView(menu, didSelectedIndex: index, currentIndex: currentIndex)
         changeLabelBGColor(index: index)
-        
+        //CXMGCDTimer.shared.cancleTimer(WithTimerName: "cxmTimer")
         switch index {
         case 0:
             notScore.dateFilter = filterDate
@@ -290,6 +290,7 @@ extension ScoreViewController {
     }
     
     override func pageController(_ pageController: WMPageController, didEnter viewController: UIViewController, withInfo info: [AnyHashable : Any]) {
+        //CXMGCDTimer.shared.cancleTimer(WithTimerName: "cxmTimer")
         guard let index = info["index"] as? Int else { return }
         
         changeLabelBGColor(index: index)

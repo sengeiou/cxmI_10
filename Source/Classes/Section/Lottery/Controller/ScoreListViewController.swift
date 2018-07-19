@@ -30,15 +30,7 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
         }
     }
     
-    private var resultList : [LotteryResultModel]! {
-        didSet{
-
-            if matchType == "0" {
-                //resultList[0].matchTimeStart = 1531291178
-                shouldStartTimer(true)
-            }
-        }
-    }
+    private var resultList : [LotteryResultModel]!
     
     private func shouldStartTimer(_ start : Bool) {
         if start {
@@ -94,12 +86,13 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
             self.loadNewData()
         }
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.shouldStartTimer(false)
+    }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         TongJi.end("开奖页")
-        
-        self.shouldStartTimer(false)
-    
     }
     deinit {
         NotificationCenter.default.removeObserver(self)
