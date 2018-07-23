@@ -99,7 +99,10 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
         guard let isAlreadyBuy = userInfo["isAlreadyBuy"] as? Bool else { return }
         self.isAlready = isAlreadyBuy
         self.leagueIds = leagueId
-        self.loadNewData()
+       
+        if let type = userInfo["type"] as? String, type == self.matchType {
+            self.loadNewData()
+        }
     }
     @objc private func dateFilter(_ notification : Notification) {
         guard let userInfo = notification.userInfo else { return }
@@ -107,7 +110,10 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
         self.dateFilter = model.strDate
         self.isAlready = false
         self.leagueIds = ""
-        self.loadNewData()
+        
+        if let type = userInfo["type"] as? String, type == self.matchType {
+            self.loadNewData()
+        }
     }
     
     private func initSubview() {

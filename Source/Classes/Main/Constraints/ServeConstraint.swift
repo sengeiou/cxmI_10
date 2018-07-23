@@ -15,7 +15,7 @@ let baseWeb = "http://39.106.18.39:9805"
 //let baseWeb = "http://192.168.31.205:8080"
 
 
-//let baseURLStr = "http://api.caixiaomi.net/api"
+//let baseURLStr = "https://api.caixiaomi.net/api"
 //let baseWeb = "https://m.caixiaomi.net"
 #else
 let baseURLStr = "https://api.caixiaomi.net/api"

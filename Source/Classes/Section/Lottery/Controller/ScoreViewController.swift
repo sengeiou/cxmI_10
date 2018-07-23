@@ -49,6 +49,8 @@ class ScoreViewController: WMPageController, AlertPro {
     
     private var isAlready : Bool = false
     
+    private var selectedMatchType : String = "0"
+    
     private var notScore = ScoreListViewController()
     private var finishScore = ScoreListViewController()
     private var collectScore = ScoreListViewController()
@@ -175,7 +177,7 @@ extension ScoreViewController : LoginProtocol {
 extension ScoreViewController : LotteryMoreFilterVCDelegate {
     func filterConfirm(leagueId: String, isAlreadyBuy: Bool) {
         self.isAlready = isAlreadyBuy
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: MatchFilterNotificationName), object: nil, userInfo: ["leagueId" : leagueId, "isAlreadyBuy": isAlreadyBuy])
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: MatchFilterNotificationName), object: nil, userInfo: ["leagueId" : leagueId, "isAlreadyBuy": isAlreadyBuy, "type" : self.selectedMatchType])
     }
 }
 extension ScoreViewController : LotteryDateFilterVCDelegate {
@@ -184,7 +186,7 @@ extension ScoreViewController : LotteryDateFilterVCDelegate {
         self.isAlready = false
         
         filterRequest()
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: DateFilterNotificationName), object: nil, userInfo: ["date" : dateModel])
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: DateFilterNotificationName), object: nil, userInfo: ["date" : dateModel, "type" : self.selectedMatchType])
     }
 }
 
@@ -302,12 +304,15 @@ extension ScoreViewController {
         case 0:
             notScore.dateFilter = filterDate
             notScore.shouldReloadData = true
+            self.selectedMatchType = "0"
         case 1:
             finishScore.dateFilter = filterDate
             finishScore.shouldReloadData = true
+            self.selectedMatchType = "1"
         case 2:
             collectScore.dateFilter = filterDate
             collectScore.shouldReloadData = true
+            self.selectedMatchType = "2"
         default: break }
     }
     
@@ -320,10 +325,13 @@ extension ScoreViewController {
         switch index {
         case 0:
             notScore.shouldReloadData = true
+            self.selectedMatchType = "0"
         case 1:
             finishScore.shouldReloadData = true
+            self.selectedMatchType = "1"
         case 2:
             collectScore.shouldReloadData = true
+            self.selectedMatchType = "2"
         default: break }
     }
     
