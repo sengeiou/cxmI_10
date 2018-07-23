@@ -66,7 +66,7 @@ class FootballLineupCell: UITableViewCell {
         
         fieldLabel = getLabel()
         fieldLabel.textAlignment = .right
-        fieldLabel.text = "场地：萨马拉竞技场"
+        //fieldLabel.text = "场地："
         
         homeLabel = getLabel()
         homeLabel.textAlignment = .left
