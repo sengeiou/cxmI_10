@@ -36,13 +36,23 @@ class LotteryCell: UITableViewCell {
                 visiTeamIcon.kf.setImage(with: url)
             }
             
-            switch matchType {
-            case "0":// 未开始
+            //2- 已取消  , 1- 已结束 , 3- 未开始 0-未开赛 6-进行中
+            switch resultModel.matchFinish {
+            case "3", "0", "6":
                 setStartMatch()
-            case "1","2":
+            case "1":
                 setOverMatch()
             default: break
+                
             }
+            
+//            switch matchType {
+//            case "0":// 未开始
+//                setStartMatch()
+//            case "1","2":
+//                setOverMatch()
+//            default: break
+//            }
             
         }
     }
@@ -108,13 +118,13 @@ class LotteryCell: UITableViewCell {
             self.collectionButton.setImage(UIImage(named: "收藏"), for: .normal)
         }
         self.collectionButton.isSelected = selected
-        self.resultModel.isCollect = selected
+        
     }
     
     @objc private func collectionClick(_ sender : UIButton) {
         sender.isSelected = !sender.isSelected
-        
-        changeCollectionSelected(selected: sender.isSelected)
+       
+        //changeCollectionSelected(selected: sender.isSelected)
         guard delegate != nil else { fatalError("delegate 值为空") }
         delegate.didTipCollection(cell: self, model: resultModel, selected : sender.isSelected)
     }

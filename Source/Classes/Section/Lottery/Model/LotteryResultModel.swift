@@ -46,4 +46,6 @@ class LotteryResultModel : NSObject, HandyJSON {
     var whole : String!
     var isCollect : Bool = false
     var minute : Int = 0
+    
+    var canTip = true
 }

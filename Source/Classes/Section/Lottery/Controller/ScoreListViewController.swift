@@ -55,6 +55,7 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.isHidenBar = false
+        self.tableView.isUserInteractionEnabled = true
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -81,6 +82,7 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
         super.viewDidDisappear(animated)
         TongJi.end("开奖页")
         self.shouldReload = true
+        self.tableView.endrefresh()
     }
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -137,7 +139,7 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
             .mapObject(type: LotteryModel.self)
             .subscribe(onNext: { (data) in
                 self.tableView.endrefresh()
-                //self.dismissProgressHud()
+                self.dismissProgressHud()
                 self.lotteryModel = data
                 self.resultList = data.lotteryMatchDTOList
                 
@@ -171,19 +173,23 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
     //MARK: - 收藏赛事
     private func collectRequest(matchId: String, cell: LotteryCell) {
         weak var weakSelf = self
-        
+        self.showProgressHUD()
         _ = userProvider.rx.request(.collectMatch(matchId: matchId, dateStr: self.dateFilter))
             .asObservable()
             .mapObject(type: LotteryCollectModel.self)
             .subscribe(onNext: { (data) in
+                //self.dismissProgressHud()
+                weakSelf?.loadNewData()
                 guard let notCount = weakSelf?.lotteryModel.notfinishCount else { return }
                 guard let finishCount = weakSelf?.lotteryModel.finishCount else { return }
                 
                 weakSelf?.changeNum(notCount,
                                     finishCount,
                                     data.matchCollectCount)
+                
             }, onError: { (error) in
-                cell.changeCollectionSelected(selected: false)
+                weakSelf?.loadNewData()
+                
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):
@@ -208,10 +214,13 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
     //MARK: - 取消收藏赛事
     private func collectCancelRequest(matchId: String, cell: LotteryCell) {
         weak var weakSelf = self
+        self.showProgressHUD()
         _ = userProvider.rx.request(.collectMatchCancle(matchId: matchId, dateStr: self.dateFilter))
             .asObservable()
             .mapObject(type: LotteryCollectModel.self)
             .subscribe(onNext: { (data) in
+                
+                weakSelf?.loadNewData()
                 guard let notCount = weakSelf?.lotteryModel.notfinishCount else { return }
                 guard let finishCount = weakSelf?.lotteryModel.finishCount else { return }
                 
@@ -220,10 +229,11 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
                                     data.matchCollectCount)
                 
             }, onError: { (error) in
-                cell.changeCollectionSelected(selected: true)
+                
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):
+                    weakSelf?.loadNewData()
                     switch code {
                     case 600:
                         weakSelf?.removeUserData()
@@ -296,12 +306,13 @@ extension ScoreListViewController {
 //MARK: - 收藏
 extension ScoreListViewController : LotteryCellDelegate {
     func didTipCollection(cell: LotteryCell, model: LotteryResultModel, selected: Bool) {
+        
         if matchType == "2" {
             collectCancelRequest(matchId: model.matchId, cell : cell)
             self.resultList.remove(model)
             self.tableView.reloadData()
         }
-        if model.isCollect {
+        if model.isCollect == false {
             collectRequest(matchId: model.matchId, cell : cell)
         }else {
             collectCancelRequest(matchId: model.matchId, cell : cell)
@@ -352,7 +363,7 @@ extension ScoreListViewController : UITableViewDataSource {
         return 91 * defaultScale
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 36 * defaultScale
+        return 0.5
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.01

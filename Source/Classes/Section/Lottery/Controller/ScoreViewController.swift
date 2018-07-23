@@ -77,8 +77,6 @@ class ScoreViewController: WMPageController, AlertPro {
         self.navigationItem.title = "彩小秘 · 比赛"
         setRightBarButton()
         
-        dateFilterRequest()
-        
         
         notScore.shouldLogin = { [weak self] in
             self?.login()
@@ -101,6 +99,9 @@ class ScoreViewController: WMPageController, AlertPro {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if dateList == nil || dateList.count == 0 {
+            dateFilterRequest()
+        }
     }
     
     private func initLabel() -> UILabel {
@@ -190,6 +191,7 @@ extension ScoreViewController : LotteryDateFilterVCDelegate {
     }
 }
 
+// MARK: - 网络请求
 extension ScoreViewController {
     
     private func filterRequest() {
