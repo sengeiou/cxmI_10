@@ -149,9 +149,6 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
                         weakSelf?.removeUserData()
                         weakSelf?.isAlready = false
                         //weakSelf?.pushLoginVC(from: self)
-                        if self.shouldLogin == nil {
-                            
-                        }
                         weakSelf?.shouldLogin()
                     default : break
                     }
@@ -188,7 +185,8 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
                     case 600:
                         weakSelf?.removeUserData()
                         weakSelf?.isAlready = false
-                        weakSelf?.pushLoginVC(from: self)
+                        //weakSelf?.pushLoginVC(from: self)
+                        weakSelf?.shouldLogin()
                     default : break
                     }
                     
@@ -224,7 +222,8 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
                     case 600:
                         weakSelf?.removeUserData()
                         weakSelf?.isAlready = false
-                        weakSelf?.pushLoginVC(from: self)
+                        //weakSelf?.pushLoginVC(from: self)
+                        weakSelf?.shouldLogin()
                     default : break
                     }
                     

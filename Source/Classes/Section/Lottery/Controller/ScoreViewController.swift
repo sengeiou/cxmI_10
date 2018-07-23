@@ -77,13 +77,24 @@ class ScoreViewController: WMPageController, AlertPro {
         
         dateFilterRequest()
         
+        
+        notScore.shouldLogin = { [weak self] in
+            self?.login()
+        }
+        finishScore.shouldLogin = { [weak self] in
+            self?.login()
+        }
         collectScore.shouldLogin = { [weak self] in
-            let login = VCodeLoginViewController()
-            login.currentVC = self
-            login.loginDelegate = self 
-            self?.navigationController?.pushViewController(login, animated: true)
+            self?.login()
         }
         
+    }
+    
+    private func login() {
+        let login = VCodeLoginViewController()
+        login.currentVC = self
+        login.loginDelegate = self
+        self.navigationController?.pushViewController(login, animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
