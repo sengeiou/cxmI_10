@@ -8,7 +8,7 @@
 
 import UIKit
 
-fileprivate let numLabelWidth : CGFloat = 15
+fileprivate let numLabelWidth : CGFloat = 20
 fileprivate let numLabelRightSpacing: CGFloat = 10
 
 class ScoreViewController: WMPageController, AlertPro {
@@ -103,13 +103,14 @@ class ScoreViewController: WMPageController, AlertPro {
     
     private func initLabel() -> UILabel {
         let label = UILabel()
-        label.textColor = ColorFFFFFF
+        label.textColor = Color9F9F9F
         label.textAlignment = .center
         label.font = Font12
-        label.backgroundColor = Color9F9F9F
+        //label.backgroundColor = Color9F9F9F
         label.text = "0"
         label.layer.cornerRadius = 2
         label.layer.masksToBounds = true
+        //label.sizeToFit()
         return label
     }
 
@@ -145,25 +146,24 @@ class ScoreViewController: WMPageController, AlertPro {
         date.dateList = self.dateList
         self.present(date, animated: true, completion: nil)
     }
-    
+    //MARK: - 修改角标显示样式
     private func changeLabelBGColor(index : Int) {
         switch index {
         case 0:
-            notFinishedLabel.backgroundColor = ColorF6AD41
-            finishedLabel.backgroundColor = Color9F9F9F
-            myMatchLabel.backgroundColor = Color9F9F9F
+            notFinishedLabel.textColor = ColorF6AD41
+            finishedLabel.textColor = Color9F9F9F
+            myMatchLabel.textColor = Color9F9F9F
         case 1:
-            finishedLabel.backgroundColor = ColorF6AD41
-            notFinishedLabel.backgroundColor = Color9F9F9F
-            myMatchLabel.backgroundColor = Color9F9F9F
+            finishedLabel.textColor = ColorF6AD41
+            notFinishedLabel.textColor = Color9F9F9F
+            myMatchLabel.textColor = Color9F9F9F
         case 2:
-            myMatchLabel.backgroundColor = ColorF6AD41
-            finishedLabel.backgroundColor = Color9F9F9F
-            notFinishedLabel.backgroundColor = Color9F9F9F
+            myMatchLabel.textColor = ColorF6AD41
+            finishedLabel.textColor = Color9F9F9F
+            notFinishedLabel.textColor = Color9F9F9F
         default: break
         }
     }
-    
 }
 
 extension ScoreViewController : LoginProtocol {
@@ -351,6 +351,7 @@ extension ScoreViewController {
                 make.centerY.equalTo(initialMenuItem.snp.centerY)
                 make.right.equalTo(-numLabelRightSpacing)
                 make.width.height.equalTo(numLabelWidth)
+                
             }
         case 2:
             initialMenuItem.addSubview(myMatchLabel)
