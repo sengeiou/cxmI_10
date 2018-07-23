@@ -20,8 +20,8 @@ class FootballIntegralView: UIView, UICollectionViewDelegate, UICollectionViewDa
         didSet{
             guard scoreInfo != nil else { return }
             guard let hteam = scoreInfo.hteamScore else { return }
-            guard let lteam = scoreInfo.lteamScore else { return }
-            guard let tteam = scoreInfo.tteamScore else { return }
+            guard let lteam = scoreInfo.tteamScore else { return }
+            guard let tteam = scoreInfo.lteamScore else { return }
             
             scoreList.removeAll()
             
@@ -60,9 +60,9 @@ class FootballIntegralView: UIView, UICollectionViewDelegate, UICollectionViewDa
         initSubview()
         scoreList = [String]()
         
-//        for _ in 0...20 {
-//            scoreList.append("")
-//        }
+        for _ in 0...20 {
+            scoreList.append("-")
+        }
     }
     
     override func layoutSubviews() {
