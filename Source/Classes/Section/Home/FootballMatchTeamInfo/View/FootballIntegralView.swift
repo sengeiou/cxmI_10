@@ -135,7 +135,7 @@ class FootballIntegralView: UIView, UICollectionViewDelegate, UICollectionViewDa
         }
         jin.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(mingci)
-            make.width.equalTo(80)
+            make.width.equalTo(88)
             make.right.equalTo(jifen.snp.left)
         }
         fu.snp.makeConstraints { (make) in
