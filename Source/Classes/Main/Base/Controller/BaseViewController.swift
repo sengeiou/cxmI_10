@@ -38,7 +38,14 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
         login.loginDelegate = vc as! LoginProtocol
         self.navigationController?.pushViewController(login, animated: true)
     }
-    
+    public func pushLoginVC(from vc : UIViewController, fromWeb : Bool) {
+        let login = VCodeLoginViewController()
+        login.fromWeb = fromWeb
+        login.currentVC = vc
+        login.loginDelegate = vc as! LoginProtocol
+        
+        self.navigationController?.pushViewController(login, animated: true)
+    }
     
     public func pushPagerView(pagerType: PagerViewType) {
         let storyboard = UIStoryboard(name: "Storyboard", bundle: Bundle.main)

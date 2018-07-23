@@ -73,6 +73,7 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
     
     public var loginDelegate : LoginProtocol!
     public var popToDefault = false
+    public var fromWeb = false
     //MARK: - 属性
     private var userNameTF : UITextField!
     private var vcodeTF    : UITextField!
@@ -114,7 +115,9 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
                 
                 if self.currentVC != nil {
                     self.popToCurrentVC()
-                    NotificationCenter.default.post(name: NSNotification.Name(LoginSuccess), object: nil)
+                    if self.fromWeb {
+                        NotificationCenter.default.post(name: NSNotification.Name(LoginSuccess), object: nil)
+                    }
                     guard self.loginDelegate != nil else { return }
                     self.loginDelegate.didLogin(isLogin: true)
                 }else {

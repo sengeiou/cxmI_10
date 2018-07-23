@@ -76,7 +76,8 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
         
         switch type.0 {
         case .登录:
-            pushLoginVC(from: self)
+            //pushLoginVC(from: self)
+            pushLoginVC(from: self, fromWeb: true)
             decisionHandler(.cancel)
             return
         case .注册:
@@ -107,13 +108,15 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
             webView.evaluateJavaScript("\(model.extparam!)()") { (data, error) in
                 if model.type == "10" {
                     if self.getUserData() == nil {
-                        self.pushLoginVC(from: self)
+                        //self.pushLoginVC(from: self)
+                        self.pushLoginVC(from: self, fromWeb: true)
                         decisionHandler(.cancel)
                     }else {
                         if let dic = data as? [String: String] {
                             let payment = PaymentViewController()
                             payment.worldCupDic = dic
                             self.pushViewController(vc: payment)
+                
                             decisionHandler(.cancel)
                         }else {
                             decisionHandler(.allow)
@@ -122,7 +125,8 @@ class ActivityViewController: BaseWebViewController, ShareProtocol {
                     
                 }else if model.type == "11" {
                     if self.getUserData() == nil {
-                        self.pushLoginVC(from: self)
+                        //self.pushLoginVC(from: self)
+                        self.pushLoginVC(from: self, fromWeb: true)
                         decisionHandler(.cancel)
                     }else {
                         if let money = data as? [String: String] {
