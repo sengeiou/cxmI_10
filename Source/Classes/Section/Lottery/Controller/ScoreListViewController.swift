@@ -16,9 +16,11 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
     // MARK: - 属性 public
     
     public var changeNum : ((_ notFinishNum: String, _ finishNum: String, _ collectNum: String) -> Void)!
+    public var shouldLogin : ( () -> Void )!
     public var matchType : String = "0"
     
-    public var shouldReloadData : Bool = false
+    public var shouldReloadData : Bool = false // 置顶
+    public var shouldReload  = false // 刷新数据
     
     // MARK: - 属性 private
     public var dateFilter : String! = ""
@@ -44,8 +46,8 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
         self.tableView.headerRefresh {
             self.loadNewData()
         }
-        self.tableView.beginRefreshing()
         
+        self.tableView.beginRefreshing()
         NotificationCenter.default.addObserver(self, selector: #selector(matchFilter(_:)), name: NSNotification.Name(rawValue: MatchFilterNotificationName), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(dateFilter(_:)), name: NSNotification.Name(rawValue: DateFilterNotificationName), object: nil)
         
@@ -62,10 +64,14 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
         }
         
         if matchType == "0" {
+            self.loadNewData()
             self.shouldStartTimer(true)
         }else {
-            self.loadNewData()
+            if self.shouldReload {
+                self.loadNewData()
+            }
         }
+        self.shouldReload = true
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -74,6 +80,7 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         TongJi.end("开奖页")
+        self.shouldReload = true
     }
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -124,6 +131,7 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
             .mapObject(type: LotteryModel.self)
             .subscribe(onNext: { (data) in
                 self.tableView.endrefresh()
+                //self.dismissProgressHud()
                 self.lotteryModel = data
                 self.resultList = data.lotteryMatchDTOList
                 
@@ -132,6 +140,7 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
                 }
             }, onError: { (error) in
                 self.tableView.endrefresh()
+                //self.dismissProgressHud()
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):
@@ -139,7 +148,11 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
                     case 600:
                         weakSelf?.removeUserData()
                         weakSelf?.isAlready = false
-                        weakSelf?.pushLoginVC(from: self)
+                        //weakSelf?.pushLoginVC(from: self)
+                        if self.shouldLogin == nil {
+                            
+                        }
+                        weakSelf?.shouldLogin()
                     default : break
                     }
                     

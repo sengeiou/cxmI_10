@@ -77,7 +77,12 @@ class ScoreViewController: WMPageController, AlertPro {
         
         dateFilterRequest()
         
-        
+        collectScore.shouldLogin = { [weak self] in
+            let login = VCodeLoginViewController()
+            login.currentVC = self
+            login.loginDelegate = self 
+            self?.navigationController?.pushViewController(login, animated: true)
+        }
         
     }
     
@@ -148,6 +153,12 @@ class ScoreViewController: WMPageController, AlertPro {
         }
     }
     
+}
+
+extension ScoreViewController : LoginProtocol {
+    func didLogin(isLogin: Bool) {
+        collectScore.shouldReload = isLogin
+    }
 }
 
 extension ScoreViewController : LotteryMoreFilterVCDelegate {

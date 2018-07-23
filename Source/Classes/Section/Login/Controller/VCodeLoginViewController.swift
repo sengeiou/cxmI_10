@@ -72,6 +72,7 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
     }
     
     public var loginDelegate : LoginProtocol!
+    public var popToDefault = false
     //MARK: - 属性
     private var userNameTF : UITextField!
     private var vcodeTF    : UITextField!
@@ -105,6 +106,11 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
                 self.save(userInfo: data)
                 
                 self.countdownBut.stop = true
+                
+                guard self.popToDefault == false else {
+                    self.popViewController()
+                    return
+                }
                 
                 if self.currentVC != nil {
                     self.popToCurrentVC()
@@ -235,6 +241,11 @@ class VCodeLoginViewController: BaseViewController, UITextFieldDelegate, Validat
     @objc override func back(_ sender: UIButton) {
         self.vcodeTF.resignFirstResponder()
         self.userNameTF.resignFirstResponder()
+        
+        guard self.popToDefault == false else {
+            self.popViewController()
+            return
+        }
         
         if currentVC != nil {
             popToCurrentVC()
