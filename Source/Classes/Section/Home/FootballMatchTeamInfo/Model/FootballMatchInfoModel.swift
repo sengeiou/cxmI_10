@@ -256,4 +256,7 @@ struct TeamScoreInfo: HandyJSON {
     var teamName: String = ""
     /// 名次
     var ranking : String = ""
+    
+    /// 排名
+    var teamOrder: String = ""
 }

@@ -31,7 +31,7 @@ class FootballIntegralView: UIView, UICollectionViewDelegate, UICollectionViewDa
             scoreList.append(tteam.matchL)
             scoreList.append("\(tteam.ballIn)/\(tteam.ballLose)/\(tteam.ballClean)")
             scoreList.append(tteam.score)
-            scoreList.append(tteam.ranking)
+            scoreList.append(tteam.teamOrder)
             
             scoreList.append(hteam.matchNum)
             scoreList.append(hteam.matchH)
@@ -39,7 +39,7 @@ class FootballIntegralView: UIView, UICollectionViewDelegate, UICollectionViewDa
             scoreList.append(hteam.matchL)
             scoreList.append("\(hteam.ballIn)/\(hteam.ballLose)/\(hteam.ballClean)")
             scoreList.append(hteam.score)
-            scoreList.append(hteam.ranking)
+            scoreList.append(hteam.teamOrder)
             
             scoreList.append(lteam.matchNum)
             scoreList.append(lteam.matchH)
@@ -47,7 +47,7 @@ class FootballIntegralView: UIView, UICollectionViewDelegate, UICollectionViewDa
             scoreList.append(lteam.matchL)
             scoreList.append("\(lteam.ballIn)/\(lteam.ballLose)/\(lteam.ballClean)")
             scoreList.append(lteam.score)
-            scoreList.append(lteam.ranking)
+            scoreList.append(lteam.teamOrder)
             
             scoreList.append("")
         }
