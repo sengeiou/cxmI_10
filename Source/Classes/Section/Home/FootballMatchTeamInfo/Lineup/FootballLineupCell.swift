@@ -103,8 +103,10 @@ class FootballLineupCell: UITableViewCell {
             make.height.equalTo(40)
         }
         visiLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(lineupImageView.snp.centerY).offset(19)
+            //make.top.equalTo(lineupImageView.snp.centerY).offset(19)
             make.left.height.equalTo(homeLabel)
+            
+            make.bottom.equalTo(-19)
         }
         
         hLineupView.snp.makeConstraints { (make) in
