@@ -114,7 +114,7 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
         
         
         topView.snp.makeConstraints { (make) in
-            make.top.equalTo(titleThreelb.snp.bottom).offset(17  * defaultScale)
+            make.top.equalTo(titleThreelb)
             make.left.equalTo(10 * defaultScale)
             make.right.equalTo(-10 * defaultScale)
             make.height.equalTo(30 * defaultScale)
@@ -159,7 +159,7 @@ class LotteryMoreFilterVC: BasePopViewController, UICollectionViewDelegate, UICo
         titleThreelb.font = Font12
         titleThreelb.textColor = Color787878
         titleThreelb.textAlignment = .left
-        titleThreelb.text = "选择赛事"
+        //titleThreelb.text = "选择赛事"
         
 //        onlyButBut = UIButton(type: .custom)
 //        onlyButBut.titleLabel?.sizeToFit()

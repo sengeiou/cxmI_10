@@ -209,9 +209,10 @@ class FootballIntegralView: UIView, UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FootballIntegralCollectionCellId, for: indexPath) as! FootballIntegralCollectionCell
-      
-        cell.title.text = scoreList[indexPath.row]
-     
+        if indexPath.row != 21 {
+            cell.title.text = scoreList[indexPath.row]
+        }
+        
         if indexPath.row == 5 || indexPath.row == 12 || indexPath.row == 19 {
             cell.title.textColor = ColorEA5504
         }else {

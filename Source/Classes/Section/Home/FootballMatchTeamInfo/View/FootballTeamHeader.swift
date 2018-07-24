@@ -53,7 +53,7 @@ class FootballTeamHeader: UIView, DateProtocol {
             switch matchStatus {
             case "0": // 未开赛
                 flatName.text = "未开赛"
-                flatName.text = timeStampToMDHHmm(liveInfoModel.matchTime)
+                flatOdds.text = timeStampToMDHHmm(liveInfoModel.matchTime)
             case "1": // 已完成
                 
                 let muName = NSMutableAttributedString(string: "\(liveInfoModel.fsH)   ",
@@ -65,6 +65,7 @@ class FootballTeamHeader: UIView, DateProtocol {
                 let oddName = NSAttributedString(string: "   \(liveInfoModel.fsA)",
                                                  attributes: [NSAttributedStringKey.font : Font30,
                                                               NSAttributedStringKey.foregroundColor: ColorE85504])
+                
                 
                 muName.append(name)
                 muName.append(oddName)
