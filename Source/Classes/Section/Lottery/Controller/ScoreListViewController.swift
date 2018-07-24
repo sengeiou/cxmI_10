@@ -311,11 +311,13 @@ extension ScoreListViewController : LotteryCellDelegate {
             collectCancelRequest(matchId: model.matchId, cell : cell)
             self.resultList.remove(model)
             self.tableView.reloadData()
-        }
-        if model.isCollect == false {
-            collectRequest(matchId: model.matchId, cell : cell)
+            return
         }else {
-            collectCancelRequest(matchId: model.matchId, cell : cell)
+            if model.isCollect == false {
+                collectRequest(matchId: model.matchId, cell : cell)
+            }else {
+                collectCancelRequest(matchId: model.matchId, cell : cell)
+            }
         }
     }
 }
