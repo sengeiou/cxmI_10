@@ -36,49 +36,61 @@ class LotteryCell: UITableViewCell {
                 visiTeamIcon.kf.setImage(with: url)
             }
             
-            //2- 已取消  , 1- 已结束 , 3- 未开始 0-未开赛 6-进行中
-            switch resultModel.matchFinish {
-            case "3", "0", "6":
-                setStartMatch()
-            case "1":
-                setOverMatch()
-            default: break
-                
-            }
-            
-//            switch matchType {
-//            case "0":// 未开始
-//                setStartMatch()
-//            case "1","2":
-//                setOverMatch()
-//            default: break
-//            }
+            self.showData()
             
         }
     }
     
-    private func setStartMatch() {
-
+    private func showData() {
+        statusLabel.text = ""
         guard let status = resultModel.matchFinish else { return }
         
-        if status == "6", resultModel.minute > 0 {
-            resultLeftLabel.text = "\(resultModel.minute)′"
-            
-            if resultModel.firstHalf == "" {
-                resultlb.text = "0:0"
-            }else {
-                resultlb.text = resultModel.firstHalf
-            }
-            
-            resultlb.textColor = ColorE85504
-            resultLeftLabel.textColor = ColorE85504
-        }else {
-            resultLeftLabel.text = "未开赛"
-            resultlb.text = timeStampToHHmm(resultModel.matchTimeStart)
-            resultlb.textColor = Color787878
-            resultLeftLabel.textColor = Color787878
+        switch status {
+        case "0": // 未开赛
+            setNotStartMatch("未开赛")
+        case "2":  // 取消
+            setCancelMatch("取消")
+        case "4":  // 推迟
+            setCancelMatch("推迟")
+        case "5":  // 暂停
+            setCancelMatch("暂停")
+        case "6":  // 进行中
+            setStartMatch()
+        case "1":  // 已结束
+            setOverMatch()
+        default:
+            setOverMatch()
         }
     }
+    
+    private func setStartMatch() {
+        resultLeftLabel.text = "\(resultModel.minute)′"
+        
+        if resultModel.firstHalf == "" {
+            resultlb.text = "0:0"
+        }else {
+            resultlb.text = resultModel.firstHalf
+        }
+        
+        resultlb.textColor = ColorE85504
+        resultLeftLabel.textColor = ColorE85504
+    }
+    
+    private func setNotStartMatch(_ title: String) {
+        resultLeftLabel.text = title
+        resultlb.text = timeStampToHHmm(resultModel.matchTimeStart)
+        resultlb.textColor = Color787878
+        resultLeftLabel.textColor = Color787878
+    }
+    
+    private func setCancelMatch (_ title: String) {
+        resultlb.text = ""
+        resultLeftLabel.text = ""
+        statusLabel.text = title
+        resultlb.textColor = Color787878
+        resultLeftLabel.textColor = Color787878
+    }
+    
     private func setOverMatch() {
         resultLeftLabel.text = "比分" + resultModel.whole
         resultlb.text = "半场" + resultModel.firstHalf
@@ -92,6 +104,7 @@ class LotteryCell: UITableViewCell {
     public var indexPath : IndexPath!
     public var delegate : LotteryCellDelegate!
     
+    
     // MARK: - 属性 private
     private var collectionButton : UIButton!
     
@@ -103,6 +116,8 @@ class LotteryCell: UITableViewCell {
     private var scorelb : UILabel!
     private var resultlb : UILabel!
     private var resultLeftLabel: UILabel!
+    
+    private var statusLabel : UILabel!
     
     private var line : UIImageView!
     
@@ -187,6 +202,15 @@ class LotteryCell: UITableViewCell {
             make.right.equalTo(visiTeamlb)
         }
         
+        statusLabel.snp.makeConstraints { (make) in
+            make.centerX.equalTo(scorelb.snp.centerX)
+            make.top.equalTo(resultlb)
+            make.width.equalTo(100)
+            make.height.equalTo(resultlb)
+        }
+        
+        
+        
     }
     
     private func initSubview() {
@@ -224,6 +248,10 @@ class LotteryCell: UITableViewCell {
         resultLeftLabel.textColor = ColorEA5504
         resultLeftLabel.textAlignment = .right
         
+        statusLabel = getLabel()
+        statusLabel.font = Font12
+        statusLabel.textAlignment = .center
+        statusLabel.textColor = Color787878
         
         homeTeamIcon = UIImageView()
         homeTeamIcon.image = UIImage(named : "Racecolorfootball")
@@ -249,7 +277,7 @@ class LotteryCell: UITableViewCell {
         self.contentView.addSubview(visiTeamIcon)
         self.contentView.addSubview(collectionButton)
         self.contentView.addSubview(resultLeftLabel)
-        
+        self.contentView.addSubview(statusLabel)
     }
     
     private func getLabel() -> UILabel {

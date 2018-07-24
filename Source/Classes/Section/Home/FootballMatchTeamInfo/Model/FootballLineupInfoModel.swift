@@ -152,4 +152,6 @@ struct FootballLineupMemberInfo : HandyJSON {
     var positionX: String = ""
     ///队员位置Y
     var positionY: String = ""
+    
+    var isEmpty = false
 }

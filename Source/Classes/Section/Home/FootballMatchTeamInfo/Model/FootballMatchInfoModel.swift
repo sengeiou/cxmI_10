@@ -55,6 +55,8 @@ struct MatchFutureInfo: HandyJSON {
     var visitorTeamAbbr: String!
     var visitorTeamId: String!
     var visitorTeamName: String!
+    
+    var isEmpty = false
 }
 
 struct MatchTeamInfoModel : HandyJSON{

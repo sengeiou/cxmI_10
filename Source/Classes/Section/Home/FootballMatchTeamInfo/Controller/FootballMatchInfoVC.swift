@@ -134,6 +134,18 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, LotteryProto
                 
                 //weakSelf?.tableView.reloadData()
                 
+                if data.hFutureMatchInfos.count == 0 {
+                    var futureInfo = MatchFutureInfo()
+                    futureInfo.isEmpty = true
+                    weakSelf?.matchInfoModel.hFutureMatchInfos.append(futureInfo)
+                }
+                if data.vFutureMatchInfos.count == 0 {
+                    var futureInfo = MatchFutureInfo()
+                    futureInfo.isEmpty = true
+                    weakSelf?.matchInfoModel.vFutureMatchInfos.append(futureInfo)
+                }
+                weakSelf?.tableView.reloadData()
+                
                 weakSelf?.lineupInfoRequest(matchId: matchId)
                 weakSelf?.liveInfoRequest()
             }, onError: { (error) in
@@ -248,6 +260,8 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, LotteryProto
         table.dataSource = self
         table.backgroundColor = ColorF4F4F4
         table.separatorStyle = .none
+        
+        table.register(EmptyDataCell.self, forCellReuseIdentifier: EmptyDataCell.identifier)
         table.register(FootballMatchInfoCell.self, forCellReuseIdentifier: FootballMatchInfoCellId)
         table.register(FootballMatchInfoScaleCell.self, forCellReuseIdentifier: FootballMatchInfoScaleCellId)
         table.register(FootballMatchIntegralCell.self, forCellReuseIdentifier: FootballMatchIntegralCellId)
@@ -311,9 +325,9 @@ extension FootballMatchInfoVC : UITableViewDataSource {
             return 2
         case .lineup :
             guard self.lineupInfoModel != nil else { return 0 }
-            guard self.lineupInfoModel.alineupPersons.count != 0 ||
-                self.lineupInfoModel.hlineupPersons.count != 0
-                else { return 0 }
+//            guard self.lineupInfoModel.alineupPersons.count != 0 ||
+//                self.lineupInfoModel.hlineupPersons.count != 0
+//                else { return 0 }
             return 3
         }
     }
@@ -370,9 +384,22 @@ extension FootballMatchInfoVC : UITableViewDataSource {
                 return 1
             case 1:
                 guard self.lineupInfoModel != nil else { return 0 }
+                
+                if self.lineupInfoModel.hbenchPersons.count == 0 &&
+                    self.lineupInfoModel.abenchPersons.count == 0 {
+                    return 1
+                }
+                
                 return self.lineupInfoModel.hbenchPersons.count > lineupInfoModel.abenchPersons.count ? lineupInfoModel.hbenchPersons.count : lineupInfoModel.abenchPersons.count
             case 2:
+                
                 guard self.lineupInfoModel != nil else { return 0 }
+                
+                if self.lineupInfoModel.hinjureiesPersons.count == 0 &&
+                    self.lineupInfoModel.ainjureiesPersons.count == 0 {
+                    return 1
+                }
+                
                 return self.lineupInfoModel.hinjureiesPersons.count > lineupInfoModel.ainjureiesPersons.count ? lineupInfoModel.hinjureiesPersons.count : lineupInfoModel.ainjureiesPersons.count
             default : return 0
             }
@@ -397,8 +424,20 @@ extension FootballMatchInfoVC : UITableViewDataSource {
                 return initAnalysisMatchInfoCell(indexPath: indexPath)
             case 4:
                 return initAnalysisIntegralCell(indexPath: indexPath)
-            case 5,6:
-                return initAnalysisFutureCell(indexPath: indexPath)
+            case 5:
+                let info = self.matchInfoModel.hFutureMatchInfos[indexPath.row]
+                if info.isEmpty {
+                    return emptyCell(indexPath: indexPath)
+                }else {
+                    return initAnalysisFutureCell(indexPath: indexPath)
+                }
+            case 6:
+                let info = self.matchInfoModel.vFutureMatchInfos[indexPath.row]
+                if info.isEmpty {
+                    return emptyCell(indexPath: indexPath)
+                }else {
+                    return initAnalysisFutureCell(indexPath: indexPath)
+                }
             default:
                 return UITableViewCell()
             }
@@ -426,10 +465,28 @@ extension FootballMatchInfoVC : UITableViewDataSource {
             }
             
         case .lineup:
-            if indexPath.section == 0 {
+            
+            switch indexPath.section {
+            case 0:
                 return initLineupCell(indexPath: indexPath)
+            case 1:
+                if self.lineupInfoModel.hbenchPersons.count != 0 ||
+                    self.lineupInfoModel.abenchPersons.count != 0 {
+                    return initLineupMemberCell(indexPath: indexPath)
+                }else {
+                    return emptyCell(indexPath: indexPath)
+                }
+            case 2:
+                if self.lineupInfoModel.hinjureiesPersons.count != 0 ||
+                    self.lineupInfoModel.ainjureiesPersons.count != 0 {
+                    return initLineupMemberCell(indexPath: indexPath)
+                }
+                else {
+                    return emptyCell(indexPath: indexPath)
+                }
+            default:
+                return emptyCell(indexPath: indexPath)
             }
-            return initLineupMemberCell(indexPath: indexPath)
         }
         
     }
@@ -608,6 +665,12 @@ extension FootballMatchInfoVC : UITableViewDataSource {
         return nil
     }
     
+    /// 空数据cell
+    private func emptyCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: EmptyDataCell.identifier, for: indexPath) as! EmptyDataCell
+        return cell
+    }
+    
     /// 赛况 - 事件信息
     private func initMatchDetailEventCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballDetailEventCell.identifier, for: indexPath) as! FootballDetailEventCell
@@ -660,6 +723,7 @@ extension FootballMatchInfoVC : UITableViewDataSource {
     }
     /// 阵容 - 替补/伤停
     private func initLineupMemberCell(indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballLineupMemberCell.identifier, for: indexPath) as! FootballLineupMemberCell
         switch indexPath.section {
         case 1:
@@ -726,6 +790,7 @@ extension FootballMatchInfoVC : UITableViewDataSource {
     }
     /// 分析 - 未来赛事
     private func initAnalysisFutureCell(indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: FootballMatchInfoFutureCell.identifier, for: indexPath) as! FootballMatchInfoFutureCell
         
         if indexPath.section == 5 {
