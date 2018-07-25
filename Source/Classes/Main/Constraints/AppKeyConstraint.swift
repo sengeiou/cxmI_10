@@ -16,6 +16,8 @@ let BaiduAppKey = "8b4996b71f"
 
 /// 智齿客服
 let ZhiChiAppKey = "7b732ef68c044f97a50bafff726f18c7"
+/// 渠道
+let Channel = "c16010"
 
 let phoneNum = "400-012-6600"
 /// 个推

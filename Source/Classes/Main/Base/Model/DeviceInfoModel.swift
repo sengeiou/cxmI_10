@@ -63,7 +63,7 @@ class DeviceManager: AlertPro  {
         device.mid = identifier
         device.build = UIDevice.current.systemVersion
         device.net = net
-        device.channel = "c16010"
+        device.channel = Channel 
         device.IDFA = ASIdentifierManager.shared().advertisingIdentifier.uuidString
         self.device = device
         
