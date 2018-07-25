@@ -9,13 +9,13 @@
 import Foundation
 
 /// 微信分享
-let WeixinAppID = "wx6c3f43ecb1ff2be2"
+let WeixinAppID = "wxf63a7421996362f5"
 
 /// 百度统计
 let BaiduAppKey = "8b4996b71f"
 
 /// 智齿客服
-let ZhiChiAppKey = "7b732ef68c044f97a50bafff726f18c7"
+let ZhiChiAppKey = "92afce39268e4926ab9f681b04bf44db"
 /// 渠道
 let Channel = "c16010"
 
@@ -27,9 +27,9 @@ let phoneNum = "400-012-6600"
     let GetuiSecrct = "vaBGD6ddiO7LrnarEJO5hA"
 
 #else
-    let GetuiAppID  = "zH0e8aiYaa73oVVsElXX"
-    let GetuiAppKey = "R4iI9PslDe5LSXjpd7XSy"
-    let GetuiSecrct = "24e2HwXbm064CiewPXklE6"
+    let GetuiAppID  = "dqYmwUERnLAVGciYVdLoy4"
+    let GetuiAppKey = "9GStgrZXEMAbF9noB8bnS4"
+    let GetuiSecrct = "JHnOaUxRAa5X8k99u7yXQ2"
 #endif
 
 // test
