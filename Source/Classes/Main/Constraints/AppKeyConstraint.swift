@@ -22,9 +22,9 @@ let Channel = "c16010"
 let phoneNum = "400-012-6600"
 /// 个推
 #if DEBUG
-    let GetuiAppID  = "BWgBz2PhAq5ZxmZ7e4yINA"
-    let GetuiAppKey = "o74Y1SjdzI73MhkkAwuXp4"
-    let GetuiSecrct = "vaBGD6ddiO7LrnarEJO5hA"
+    let GetuiAppID  = "SQ3WV0duEo5YipEvzlaXS2"
+    let GetuiAppKey = "Y1seeH4pyr7TCBEZDNwaF"
+    let GetuiSecrct = "svMsjRq4LR6gT6RZk8rfO9"
 
 #else
     let GetuiAppID  = "dqYmwUERnLAVGciYVdLoy4"
