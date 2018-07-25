@@ -34,6 +34,7 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
     
     private var resultList : [LotteryResultModel]!
     
+    private let semaphore = DispatchSemaphore(value: 1)
     
     // MARK: - 生命周期
     override func viewDidLoad() {
@@ -122,52 +123,69 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
         self.view.addSubview(tableView)
     }
     
-    private func loadNewData() {
+    private func loadNewData(_ cell : LotteryCell? = nil) {
         guard self.dateFilter != nil else {
             self.tableView.endrefresh()
             return }
-        self.lotteryResultRequest(date: self.dateFilter, isAlready: self.isAlready, leagueIds: self.leagueIds, type: self.matchType)
+        self.lotteryResultRequest(date: self.dateFilter, isAlready: self.isAlready, leagueIds: self.leagueIds, type: self.matchType, cell : cell)
     }
     
     //MARK: - 网络请求
-    private func lotteryResultRequest(date : String, isAlready: Bool, leagueIds: String, type : String) {
+    private func lotteryResultRequest(date : String, isAlready: Bool, leagueIds: String, type : String, cell: LotteryCell? ) {
         //self.showProgressHUD()
         weak var weakSelf = self
         
-        _ = lotteryProvider.rx.request(.lotteryResultNew(date: date, isAlready: isAlready, leagueIds: leagueIds, type: type))
-            .asObservable()
-            .mapObject(type: LotteryModel.self)
-            .subscribe(onNext: { (data) in
-                self.tableView.endrefresh()
-                self.dismissProgressHud()
-                self.lotteryModel = data
-                self.resultList = data.lotteryMatchDTOList
-                
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            }, onError: { (error) in
-                self.tableView.endrefresh()
-                //self.dismissProgressHud()
-                guard let err = error as? HXError else { return }
-                switch err {
-                case .UnexpectedResult(let code, let msg):
-                    switch code {
-                    case 600:
-                        weakSelf?.removeUserData()
-                        weakSelf?.isAlready = false
-                        //weakSelf?.pushLoginVC(from: self)
-                        weakSelf?.shouldLogin()
-                    default : break
+        DispatchQueue.global().async {
+            weakSelf?.semaphore.wait()
+            _ = lotteryProvider.rx.request(.lotteryResultNew(date: date, isAlready: isAlready, leagueIds: leagueIds, type: type))
+                .asObservable()
+                .mapObject(type: LotteryModel.self)
+                .subscribe(onNext: { (data) in
+                    
+                    self.tableView.endrefresh()
+                    self.dismissProgressHud()
+                    self.lotteryModel = data
+                    self.resultList = data.lotteryMatchDTOList
+                    
+                    DispatchQueue.main.async {
+                        if cell != nil {
+                            cell?.collectionButton.isUserInteractionEnabled = true
+                        }
+                        self.tableView.reloadData()
                     }
                     
-                    if 300000...310000 ~= code {
-                        print(code)
-                        self.showHUD(message: msg!)
+                    weakSelf?.semaphore.signal()
+                }, onError: { (error) in
+                    self.tableView.endrefresh()
+                    DispatchQueue.main.async {
+                        if cell != nil {
+                            cell?.collectionButton.isUserInteractionEnabled = true
+                        }
                     }
-                default: break
-                }
-            }, onCompleted: nil , onDisposed: nil )
+                    //self.dismissProgressHud()
+                    weakSelf?.semaphore.signal()
+                    guard let err = error as? HXError else { return }
+                    switch err {
+                    case .UnexpectedResult(let code, let msg):
+                        switch code {
+                        case 600:
+                            weakSelf?.removeUserData()
+                            weakSelf?.isAlready = false
+                            //weakSelf?.pushLoginVC(from: self)
+                            weakSelf?.shouldLogin()
+                        default : break
+                        }
+                        
+                        if 300000...310000 ~= code {
+                            print(code)
+                            self.showHUD(message: msg!)
+                        }
+                    default: break
+                    }
+                }, onCompleted: nil , onDisposed: nil )
+        }
+        
+        
     }
     
     //MARK: - 收藏赛事
@@ -179,7 +197,8 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
             .mapObject(type: LotteryCollectModel.self)
             .subscribe(onNext: { (data) in
                 //self.dismissProgressHud()
-                weakSelf?.loadNewData()
+                
+                weakSelf?.loadNewData(cell)
                 guard let notCount = weakSelf?.lotteryModel.notfinishCount else { return }
                 guard let finishCount = weakSelf?.lotteryModel.finishCount else { return }
                 
@@ -188,8 +207,7 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
                                     data.matchCollectCount)
                 
             }, onError: { (error) in
-                weakSelf?.loadNewData()
-                
+                weakSelf?.loadNewData(cell)
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):
@@ -214,13 +232,15 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
     //MARK: - 取消收藏赛事
     private func collectCancelRequest(matchId: String, cell: LotteryCell) {
         weak var weakSelf = self
+        
         self.showProgressHUD()
+        
         _ = userProvider.rx.request(.collectMatchCancle(matchId: matchId, dateStr: self.dateFilter))
             .asObservable()
             .mapObject(type: LotteryCollectModel.self)
             .subscribe(onNext: { (data) in
                 
-                weakSelf?.loadNewData()
+                weakSelf?.loadNewData(cell)
                 guard let notCount = weakSelf?.lotteryModel.notfinishCount else { return }
                 guard let finishCount = weakSelf?.lotteryModel.finishCount else { return }
                 
@@ -229,11 +249,12 @@ class ScoreListViewController: BaseViewController, LotterySectionHeaderDelegate,
                                     data.matchCollectCount)
                 
             }, onError: { (error) in
+                weakSelf?.loadNewData(cell)
                 
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):
-                    weakSelf?.loadNewData()
+                    
                     switch code {
                     case 600:
                         weakSelf?.removeUserData()
@@ -329,6 +350,7 @@ extension ScoreListViewController : UITableViewDelegate {
         let matchInfo = FootballMatchInfoVC()
         matchInfo.matchId = matchId
         self.shouldReloadData = false
+        self.shouldReload = false
         pushViewController(vc: matchInfo)
     }
 }

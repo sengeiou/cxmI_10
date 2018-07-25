@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import PKHUD
+
 
 fileprivate let FootballAnalysisSectionHeaderId = "FootballAnalysisSectionHeaderId"
 fileprivate let FootballMatchInfoCellId = "FootballMatchInfoCellId"
@@ -57,9 +59,15 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, LotteryProto
         }
     }
     
-    private func shouldStartTimer() {
-        if !CXMGCDTimer.shared.isExistTimer(WithTimerName: "cxmLiveInfoTimer") {
-            startTimer()
+    private func shouldStartTimer(_ start : Bool) {
+        if start {
+            if !CXMGCDTimer.shared.isExistTimer(WithTimerName: "cxmLiveInfoTimer") {
+                startTimer()
+                print("计时开始")
+            }
+        }else {
+            print("计时结束")
+            CXMGCDTimer.shared.cancleTimer(WithTimerName: "cxmLiveInfoTimer")
         }
     }
     
@@ -91,6 +99,7 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, LotteryProto
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         TongJi.start("赛事分析页/赔率页")
+        shouldStartTimer(true)
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
@@ -125,64 +134,91 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, LotteryProto
         self.showProgressHUD()
         weak var weakSelf = self
         
-        _ = homeProvider.rx.request(.matchTeamInfo(matchId: matchId))
-            .asObservable()
-            .mapObject(type: FootballMatchInfoModel.self)
-            .subscribe(onNext: { (data) in
-                //self.dismissProgressHud()
-                weakSelf?.matchInfoModel = data
-                
-                //weakSelf?.tableView.reloadData()
-                
-                if data.hFutureMatchInfos.count == 0 {
-                    var futureInfo = MatchFutureInfo()
-                    futureInfo.isEmpty = true
-                    weakSelf?.matchInfoModel.hFutureMatchInfos.append(futureInfo)
-                }
-                if data.vFutureMatchInfos.count == 0 {
-                    var futureInfo = MatchFutureInfo()
-                    futureInfo.isEmpty = true
-                    weakSelf?.matchInfoModel.vFutureMatchInfos.append(futureInfo)
-                }
-                weakSelf?.tableView.reloadData()
-                
-                weakSelf?.lineupInfoRequest(matchId: matchId)
-                weakSelf?.liveInfoRequest()
-            }, onError: { (error) in
-                self.dismissProgressHud()
-                guard let err = error as? HXError else { return }
-                switch err {
-                case .UnexpectedResult(let code, let msg):
-                    switch code {
-                    case 600:
-                        weakSelf?.removeUserData()
-                        weakSelf?.pushLoginVC(from: self)
-                    default : break
+        DispatchQueue.global().async {
+            let semaphore = DispatchSemaphore(value: 0)
+            _ = homeProvider.rx.request(.matchTeamInfo(matchId: matchId))
+                .asObservable()
+                .mapObject(type: FootballMatchInfoModel.self)
+                .subscribe(onNext: { (data) in
+                    
+                    weakSelf?.matchInfoModel = data
+                    
+                    //weakSelf?.tableView.reloadData()
+                    
+                    if data.hFutureMatchInfos.count == 0 {
+                        var futureInfo = MatchFutureInfo()
+                        futureInfo.isEmpty = true
+                        weakSelf?.matchInfoModel.hFutureMatchInfos.append(futureInfo)
+                    }
+                    if data.vFutureMatchInfos.count == 0 {
+                        var futureInfo = MatchFutureInfo()
+                        futureInfo.isEmpty = true
+                        weakSelf?.matchInfoModel.vFutureMatchInfos.append(futureInfo)
+                    }
+                    DispatchQueue.main.async {
+                        weakSelf?.tableView.reloadData()
                     }
                     
-                    if 300000...310000 ~= code {
-                        print(code)
-                        self.showHUD(message: msg!)
+                    semaphore.signal()
+                }, onError: { (error) in
+                    semaphore.signal()
+                    self.dismissProgressHud()
+                    guard let err = error as? HXError else { return }
+                    switch err {
+                    case .UnexpectedResult(let code, let msg):
+                        switch code {
+                        case 600:
+                            weakSelf?.removeUserData()
+                            weakSelf?.pushLoginVC(from: self)
+                        default : break
+                        }
+                        
+                        if 300000...310000 ~= code {
+                            print(code)
+                            self.showHUD(message: msg!)
+                        }
+                    default: break
                     }
-                default: break
-                }
-            }, onCompleted: nil , onDisposed: nil )
+                }, onCompleted: nil , onDisposed: nil )
+            
+            
+            semaphore.wait()
+            weakSelf?.liveInfoRequest(semaphore)
+            
+            semaphore.wait()
+            weakSelf?.lineupInfoRequest(matchId: matchId, semaphore)
+        }
+        
+        
+        
     }
     // 阵容
-    private func lineupInfoRequest(matchId: String) {
+    private func lineupInfoRequest(matchId: String, _ semaphore : DispatchSemaphore? = nil) {
         
         weak var weakSelf = self
         
         _ = lotteryProvider.rx.request(.lineupInfo(matchId: matchId)).asObservable()
             .mapObject(type: FootballLineupInfoModel.self)
             .subscribe(onNext: { (data) in
-                weakSelf?.dismissProgressHud()
+                
+                
                 weakSelf?.lineupInfoModel = data
                 weakSelf?.homeLineupList = weakSelf?.lineupInfoModel.getHomeLineup()
                 weakSelf?.visiLineupList = weakSelf?.lineupInfoModel.getVisiLineup()
                 
-                weakSelf?.tableView.reloadData()
+                DispatchQueue.main.async {
+                    weakSelf?.tableView.reloadData()
+                    weakSelf?.dismissProgressHud()
+                }
+                
+                if semaphore != nil {
+                    semaphore!.signal()
+                }
+                
             }, onError: { (error) in
+                if semaphore != nil {
+                    semaphore!.signal()
+                }
                 self.dismissProgressHud()
                 guard let err = error as? HXError else { return }
                 switch err {
@@ -205,22 +241,30 @@ class FootballMatchInfoVC: BaseViewController, UITableViewDelegate, LotteryProto
     }
     
     // 赛况
-    private func liveInfoRequest() {
+    private func liveInfoRequest(_ semaphore : DispatchSemaphore? = nil) {
         guard self.matchId != nil else { fatalError("matchId 为空")}
         weak var weakSelf = self
         
         _ = lotteryProvider.rx.request(.liveInfo(matchId: matchId)).asObservable()
             .mapObject(type: FootballLiveInfoModel.self)
             .subscribe(onNext: { (data) in
+                if semaphore != nil {
+                    semaphore!.signal()
+                }
                 weakSelf?.liveInfoModel = data
                 if data.matchLiveStatisticsDTO.count == 0 {
                     weakSelf?.liveInfoModel.matchLiveStatisticsDTO = FootballLiveInfoModel.getDefaultData()
                 }
                 if weakSelf?.teamInfoStyle == .matchDetail {
                     weakSelf?.tableView.reloadData()
+                }else {
+                    weakSelf?.headerView.liveInfoModel = weakSelf?.liveInfoModel
                 }
             }, onError: { (error) in
-                self.dismissProgressHud()
+                if semaphore != nil {
+                    semaphore!.signal()
+                }
+                
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):
@@ -296,9 +340,9 @@ extension FootballMatchInfoVC : FootballMatchPagerViewDelegate {
     func didSelected(_ teamInfoStyle: TeamInfoStyle) {
         CXMGCDTimer.shared.cancleTimer(WithTimerName: "cxmLiveInfoTimer")
         self.teamInfoStyle = teamInfoStyle
-        if teamInfoStyle == .matchDetail {
-            shouldStartTimer()
-        }
+//        if teamInfoStyle == .matchDetail {
+//            shouldStartTimer()
+//        }
     }
 }
 

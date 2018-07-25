@@ -24,6 +24,7 @@ extension AlertPro {
     /// 无按钮提示
     public func showHUD(message: String) {
         HUD.flash(.label(message), delay: 1.0)
+        
     }
     
     public func showCXMAlert(title: String?, message: NSAttributedString, action: String, cancel: String?,confirm: ((UIAlertAction)->Void)?) {

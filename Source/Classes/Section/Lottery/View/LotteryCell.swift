@@ -35,7 +35,7 @@ class LotteryCell: UITableViewCell {
             if let url = URL(string: resultModel.visitingTeamLogo) {
                 visiTeamIcon.kf.setImage(with: url)
             }
-            
+            //self.collectionButton.isUserInteractionEnabled = true
             self.showData()
             
         }
@@ -103,10 +103,10 @@ class LotteryCell: UITableViewCell {
     
     public var indexPath : IndexPath!
     public var delegate : LotteryCellDelegate!
-    
+    public var collectionButton : UIButton!
     
     // MARK: - 属性 private
-    private var collectionButton : UIButton!
+    
     
     private var titlelb : UILabel!
     private var homeTeamIcon : UIImageView!
@@ -138,7 +138,7 @@ class LotteryCell: UITableViewCell {
     
     @objc private func collectionClick(_ sender : UIButton) {
         sender.isSelected = !sender.isSelected
-       
+        sender.isUserInteractionEnabled = false
         //changeCollectionSelected(selected: sender.isSelected)
         guard delegate != nil else { fatalError("delegate 值为空") }
         delegate.didTipCollection(cell: self, model: resultModel, selected : sender.isSelected)
@@ -160,7 +160,7 @@ class LotteryCell: UITableViewCell {
         }
         collectionButton.snp.makeConstraints { (make) in
             make.centerY.equalTo(self.contentView.snp.centerY)
-            make.height.width.equalTo(35 * defaultScale)
+            make.height.width.equalTo(40 * defaultScale)
             make.left.equalTo(6 * defaultScale)
         }
         homeTeamIcon.snp.makeConstraints { (make) in
