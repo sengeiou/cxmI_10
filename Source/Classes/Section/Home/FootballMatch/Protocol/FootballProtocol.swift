@@ -17,7 +17,7 @@ protocol FootballRequestPro {
     
 }
 
-extension FootballRequestPro where Self: FootballMatchVC {
+extension FootballRequestPro where Self: CXMFootballMatchVC {
     func footballRequest(leagueId: String) {
         
         switch matchType {

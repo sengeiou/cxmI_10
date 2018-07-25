@@ -57,19 +57,19 @@ extension RouterPro {
     }
     
     private func pushNewsDetail(articleId: String, from vc : UIViewController) {
-        let detail = NewsDetailViewController()
+        let detail = CXMNewsDetailViewController()
         detail.articleId = articleId
         pushViewController(detail, from: vc)
     }
     
     private func pushMatchInfo(matchId: String, from vc : UIViewController) {
-        let match = FootballMatchInfoVC()
+        let match = CXMFootballMatchInfoVC()
         match.matchId = matchId
         pushViewController(match, from: vc)
     }
     
     private func pushFootballVC(_ playType: String, from vc : UIViewController) {
-        let football = FootballMatchVC()
+        let football = CXMFootballMatchVC()
         
         switch playType {
         case "1":
@@ -95,7 +95,7 @@ extension RouterPro {
     }
     
     private func pushWebview(_ name : String = "", urlStr : String, from vc: UIViewController) {
-        let web = ActivityViewController()
+        let web = CXMActivityViewController()
         web.webName = name
         if urlStr.contains("?") {
             web.urlStr = urlStr + "&cfrom=app"
@@ -201,7 +201,7 @@ struct Router : RouterMatcher {
     }
     
     private func pushFootballVC(_ playType: String) {
-        let football = FootballMatchVC()
+        let football = CXMFootballMatchVC()
         
         switch playType {
         case "1":

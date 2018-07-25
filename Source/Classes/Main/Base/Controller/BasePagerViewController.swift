@@ -34,12 +34,12 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
     var pagerType: PagerViewType!
     var accountFilterList : [AccountDetailFilterModel]!
     
-    private var accountAll : AccountDetailsVC!
-    private var accountBonus: AccountDetailsVC!
-    private var accountRecharge: AccountDetailsVC!
-    private var accountBuy : AccountDetailsVC!
-    private var accountWithdrawal : AccountDetailsVC!
-    private var accountCoupon : AccountDetailsVC!
+    private var accountAll : CXMAccountDetailsVC!
+    private var accountBonus: CXMAccountDetailsVC!
+    private var accountRecharge: CXMAccountDetailsVC!
+    private var accountBuy : CXMAccountDetailsVC!
+    private var accountWithdrawal : CXMAccountDetailsVC!
+    private var accountCoupon : CXMAccountDetailsVC!
     
     override func viewDidLoad() {
         settings.style.buttonBarBackgroundColor = ColorFFFFFF
@@ -91,51 +91,51 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
     
     //MARK: - 初始化控制器
     private func getCouponViewController() -> [UIViewController]{
-        let notUsed = CouponViewController()
+        let notUsed = CXMCouponViewController()
         notUsed.couponType = .unUsed
-        let used = CouponViewController()
+        let used = CXMCouponViewController()
         used.couponType = .used
-        let overdue = CouponViewController()
+        let overdue = CXMCouponViewController()
         overdue.couponType = .overdue
         
         return [notUsed, used, overdue]
     }
     
     private func getPurchaseRecordVC() -> [UIViewController] {
-        let all = PurchaseRecordVC()
+        let all = CXMPurchaseRecordVC()
         all.recordType = .all
-        let winning = PurchaseRecordVC()
+        let winning = CXMPurchaseRecordVC()
         winning.recordType = .winning
-        let prize = PurchaseRecordVC()
+        let prize = CXMPurchaseRecordVC()
         prize.recordType = .prize
         return [all, winning, prize]
     }
     
     private func getMessageCenterVC() -> [UIViewController] {
-        let notice = MessageCenterVC()
+        let notice = CXMMessageCenterVC()
         notice.messageType = .notice
-        let message = MessageCenterVC()
+        let message = CXMMessageCenterVC()
         message.messageType = .message
         return [notice, message]
     }
     private func getAccountDetailsVC() -> [UIViewController] {
         self.showAccountDetailsFilter = true
-        let all = AccountDetailsVC()
+        let all = CXMAccountDetailsVC()
         self.accountAll = all
         all.accountType = .all
-        let bonus = AccountDetailsVC()
+        let bonus = CXMAccountDetailsVC()
         self.accountBonus = bonus
         bonus.accountType = .bonus
-        let recharge = AccountDetailsVC()
+        let recharge = CXMAccountDetailsVC()
         self.accountRecharge = recharge
         recharge.accountType = .recharge
-        let buy = AccountDetailsVC()
+        let buy = CXMAccountDetailsVC()
         self.accountBuy = buy
         buy.accountType = .buy
-        let withdrawal = AccountDetailsVC()
+        let withdrawal = CXMAccountDetailsVC()
         self.accountWithdrawal = withdrawal
         withdrawal.accountType = .withdrawal
-        let coupon = AccountDetailsVC()
+        let coupon = CXMAccountDetailsVC()
         self.accountCoupon = coupon
         coupon.accountType = .coupon
         return [all, bonus, recharge, buy, withdrawal, coupon]
@@ -177,7 +177,7 @@ extension BasePagerViewController : AccountDetailsFilterDelegate {
     }
     
     @objc private func rightButtonClick(_ sender: UIButton) {
-        let filter = AccountDetailsFilter()
+        let filter = CXMAccountDetailsFilter()
         filter.filterList = self.accountFilterList
         filter.delegate = self
         present(filter, animated: true, completion: nil )

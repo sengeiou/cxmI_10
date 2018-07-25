@@ -13,7 +13,7 @@ protocol FootballMatchInfoProtocol {
     
 }
 
-extension FootballMatchInfoProtocol where Self : FootballMatchInfoVC {
+extension FootballMatchInfoProtocol where Self : CXMFootballMatchInfoVC {
     func matchInfoRequest(matchId: String) {
         
         weak var weakSelf = self

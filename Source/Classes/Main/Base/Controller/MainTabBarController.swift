@@ -17,9 +17,9 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
 
     //private var configInfo : ConfigInfoModel!
     
-    private var home : HomeViewController!
+    private var home : CXMHomeViewController!
     public var me : BaseViewController!
-    private var lottery : ScoreViewController!
+    private var lottery : CXMScoreViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -126,7 +126,7 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
     public func creatSubViewControllers()
     {
         // 主页
-        home = HomeViewController()
+        home = CXMHomeViewController()
     
         let homeNav = UINavigationController(rootViewController: home)
         homeNav.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
@@ -144,7 +144,7 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
         
         // 开奖
         
-        lottery = ScoreViewController()
+        lottery = CXMScoreViewController()
         
         let lotteryNav = UINavigationController(rootViewController: lottery)
         lotteryNav.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
@@ -158,7 +158,7 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
         lotteryNav.tabBarItem.selectedImage = loSelImg
         
         // 发现
-        let surprise = SurpriseViewController()
+        let surprise = CXMSurpriseViewController()
         surprise.urlStr = SurpriseUrl
         let surpriseNav = UINavigationController(rootViewController: surprise)
         surpriseNav.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
@@ -183,7 +183,7 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
     
     public func creatMeVC () -> UINavigationController{
 
-        me = MeViewController()
+        me = CXMMeViewController()
         
         let meNav = UINavigationController(rootViewController: me)
         meNav.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
@@ -201,7 +201,7 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         if viewController == self.viewControllers![3] {
             if getUserData() == nil {
-                me = VCodeLoginViewController()
+                me = CXMVCodeLoginViewController()
                 //me.popRoot = true
                 let meNav = UINavigationController(rootViewController: me)
                 meNav.tabBarItem.imageInsets = UIEdgeInsets(top: 10, left: 0, bottom: -10, right: 0)

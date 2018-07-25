@@ -11,7 +11,7 @@ import Foundation
 
 protocol FootballOrderProtocol { }
 
-extension FootballOrderProtocol where Self: FootballOrderConfirmVC {
+extension FootballOrderProtocol where Self: CXMFootballOrderConfirmVC {
     
     
     

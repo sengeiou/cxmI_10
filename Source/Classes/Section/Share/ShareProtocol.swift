@@ -31,7 +31,7 @@ extension ShareProtocol {
                 contentModel.sharePic = UIImage(named: "fenxiangtubiao")
             }
             
-            let share = ShareViewController()
+            let share = CXMShareViewController()
             share.shareContent = contentModel
             vc.present(share)
         }else {
@@ -40,7 +40,7 @@ extension ShareProtocol {
                     guard image != nil else { return }
                     DispatchQueue.main.async {
                         contentModel.sharePic = image
-                        let share = ShareViewController()
+                        let share = CXMShareViewController()
                         share.shareContent = contentModel
                         vc.present(share)
                     }

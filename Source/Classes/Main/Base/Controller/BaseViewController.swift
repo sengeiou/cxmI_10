@@ -33,13 +33,13 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
 //        login.loginDelegate = vc as! LoginProtocol
 //        self.navigationController?.pushViewController(login, animated: true)
         
-        let login = VCodeLoginViewController()
+        let login = CXMVCodeLoginViewController()
         login.currentVC = vc
         login.loginDelegate = vc as! LoginProtocol
         self.navigationController?.pushViewController(login, animated: true)
     }
     public func pushLoginVC(from vc : UIViewController, fromWeb : Bool) {
-        let login = VCodeLoginViewController()
+        let login = CXMVCodeLoginViewController()
         login.fromWeb = fromWeb
         login.currentVC = vc
         login.loginDelegate = vc as! LoginProtocol
@@ -91,7 +91,7 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
     public func popToVCodeLoginViewController() {
         guard self.navigationController?.viewControllers != nil else { return }
         for vc in (self.navigationController?.viewControllers)! {
-            if vc .isKind(of: VCodeLoginViewController.self) {
+            if vc .isKind(of: CXMVCodeLoginViewController.self) {
                 self.navigationController?.popToViewController(vc, animated: true)
             }
         }
@@ -99,7 +99,7 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
     public func popToLoginViewController() {
         guard self.navigationController?.viewControllers != nil else { return }
         for vc in (self.navigationController?.viewControllers)! {
-            if vc .isKind(of: LoginViewController.self) {
+            if vc .isKind(of: CXMLoginViewController.self) {
                 self.navigationController?.popToViewController(vc, animated: true)
             }
         }
