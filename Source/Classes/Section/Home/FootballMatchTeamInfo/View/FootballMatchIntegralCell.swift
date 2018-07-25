@@ -69,7 +69,8 @@ class FootballMatchIntegralCell: UITableViewCell {
         self.selectionStyle = .none
         
         title = getLabel()
-        title.textColor = Color9F9F9F
+        title.textColor = Color505050
+        title.font = Font14
         title.textAlignment = .left
         
         homeTeamName = getLabel()

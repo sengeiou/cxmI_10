@@ -35,11 +35,15 @@ class FootballMatchInfoFutureHeader: UITableViewHeaderFooterView {
         
         titleLabel = getLabel()
         titleLabel.textAlignment = .left
+        titleLabel.textColor = Color505050
+        titleLabel.font = Font14
         titleLabel.text = "未来赛事"
         titleLabel.sizeToFit()
         
         teamName = getLabel()
-        teamName.textAlignment = .left
+        teamName.textColor = Color505050
+        teamName.font = Font12
+        teamName.textAlignment = .center
         
         teamLabel = getLabel()
         teamLabel.text = "赛事"
@@ -73,7 +77,7 @@ class FootballMatchInfoFutureHeader: UITableViewHeaderFooterView {
             make.width.equalTo(60)
         }
         teamName.snp.makeConstraints { (make) in
-            make.left.equalTo(titleLabel.snp.right).offset(10 * defaultScale)
+            make.left.equalTo(0)
             make.right.equalTo(0)
             make.top.bottom.equalTo(titleLabel)
         }
