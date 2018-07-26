@@ -17,7 +17,7 @@ class LotterySectionHeader: UITableViewHeaderFooterView, DateProtocol {
             guard lotteryModel != nil else { return }
             let srtData = lotteryModel.matchDateStr.data(using: String.Encoding.unicode, allowLossyConversion: true)!
             let strOptions = [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html] //
-            let attrStr = try! NSAttributedString(data: srtData, options: strOptions, documentAttributes: nil)
+            let attrStr = try? NSAttributedString(data: srtData, options: strOptions, documentAttributes: nil)
             
             title.attributedText = attrStr
         }
