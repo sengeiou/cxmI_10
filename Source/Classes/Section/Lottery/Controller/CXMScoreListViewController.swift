@@ -28,7 +28,7 @@ class CXMScoreListViewController: BaseViewController, LotterySectionHeaderDelega
     private var leagueIds : String = ""
     private var lotteryModel : LotteryModel! {
         didSet{
-            self.changeNum(lotteryModel.notfinishCount, lotteryModel.finishCount, lotteryModel.matchCollectCount)
+            //self.changeNum(lotteryModel.notfinishCount, lotteryModel.finishCount, lotteryModel.matchCollectCount)
         }
     }
     
@@ -184,8 +184,6 @@ class CXMScoreListViewController: BaseViewController, LotterySectionHeaderDelega
                     }
                 }, onCompleted: nil , onDisposed: nil )
         }
-        
-        
     }
     
     //MARK: - 收藏赛事
@@ -380,6 +378,7 @@ extension CXMScoreListViewController : UITableViewDataSource {
         header.tag = section
         //header.delegate = self
         header.resultList = self.resultList
+        header.lotteryModel = self.lotteryModel
         return header
     }
     
@@ -387,7 +386,7 @@ extension CXMScoreListViewController : UITableViewDataSource {
         return 91 * defaultScale
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 0.5
+        return 36 * defaultScale
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.01

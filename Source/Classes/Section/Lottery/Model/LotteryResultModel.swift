@@ -17,6 +17,8 @@ class LotteryModel : NSObject, HandyJSON {
     var finishCount : String!
     var matchCollectCount : String!
     
+    var matchDateStr : String = ""
+    
     var lotteryMatchDTOList : [LotteryResultModel] = [LotteryResultModel]()
 }
 

@@ -72,13 +72,30 @@ extension DateProtocol {
         return date
     }
     
-    func getWeek() -> String {
+    func timeStampToYMD(_ timeStamp : Int?) -> String {
+        if timeStamp != nil {
+            let timeInterval : TimeInterval = TimeInterval(timeStamp!)
+            
+            let date = Date(timeIntervalSince1970: timeInterval)
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            
+            return dateFormatter.string(from: date)
+        }else {
+            return ""
+        }
+    }
+    
+    func getWeek(_ timeStamp : Int, _ format : String = "星期") -> String {
         
-        let weaks = ["星期日", "星期一","星期二","星期三","星期四","星期五","星期六"]
+        let date = Date(timeIntervalSince1970: TimeInterval(timeStamp))
+        
+        let weaks = ["\(format)日", "\(format)一","\(format)二","\(format)三","\(format)四","\(format)五","\(format)六"]
         
         let calendar: Calendar = Calendar(identifier: .gregorian)
         var comps: DateComponents = DateComponents()
-        comps = calendar.dateComponents([.year,.month,.day, .weekday, .hour, .minute,.second], from: Date())
+        comps = calendar.dateComponents([.year,.month,.day, .weekday, .hour, .minute,.second], from: date)
         guard let index = comps.weekday else { return "" }
         
         return weaks[index - 1]

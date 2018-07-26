@@ -10,29 +10,51 @@ import UIKit
 protocol LotterySectionHeaderDelegate {
     func spread(sender: UIButton, section : Int) -> Void
 }
-class LotterySectionHeader: UITableViewHeaderFooterView {
+class LotterySectionHeader: UITableViewHeaderFooterView, DateProtocol {
 
+    public var lotteryModel : LotteryModel! {
+        didSet{
+            guard lotteryModel != nil else { return }
+            let srtData = lotteryModel.matchDateStr.data(using: String.Encoding.unicode, allowLossyConversion: true)!
+            let strOptions = [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html] //
+            let attrStr = try! NSAttributedString(data: srtData, options: strOptions, documentAttributes: nil)
+            
+            title.attributedText = attrStr
+        }
+    }
+    
     public var resultList : [LotteryResultModel]! {
         didSet{
-            guard resultList != nil else { return }
-            if resultList.count == 0 {
-                title.text = "共有\(resultList.count)场比赛"
-            }else {
-                var count = 0
-                for result in resultList {
-                    if result.matchFinish == "1" {
-                        count += 1
-                    }
-                }
-                
-                let att = NSMutableAttributedString(string: "共有\(resultList.count)场比赛")
-                
-//                let attCount = NSAttributedString(string: "\(count)", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
-//                let chang = NSAttributedString(string: "场")
-//                att.append(attCount)
-//                att.append(chang)
-                title.attributedText = att
-            }
+//            guard resultList != nil else { return }
+//
+//            if resultList.count == 0 {
+//                title.text = "共有\(resultList.count)场比赛"
+//            }else {
+//                let model = resultList[0]
+//
+//                let time  = timeStampToYMD(model.matchTimeStart)
+//
+//                let week = getWeek(model.matchTimeStart, "周")
+//
+//                let att = NSMutableAttributedString(string: "")
+//
+//                let timeAtt = NSAttributedString(string: time)
+//                let weekAtt = NSAttributedString(string: " " + week)
+//                let totalAtt = NSAttributedString(string: "共有")
+//
+//                let countAtt = NSAttributedString(string: "\(resultList.count)", attributes: [NSAttributedStringKey.foregroundColor : ColorE85504])
+//
+//                let lAtt = NSAttributedString(string: "场比赛")
+//
+//                att.append(timeAtt)
+//                att.append(weekAtt)
+//                att.append(totalAtt)
+//
+//                att.append(countAtt)
+//                att.append(lAtt)
+//
+//                title.attributedText = att
+          //  }
         }
     }
     
