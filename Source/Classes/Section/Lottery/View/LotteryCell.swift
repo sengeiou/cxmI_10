@@ -65,13 +65,7 @@ class LotteryCell: UITableViewCell {
     
     private func setStartMatch() {
         resultLeftLabel.text = "\(resultModel.minute)′"
-        
-        if resultModel.firstHalf == "" {
-            resultlb.text = "0:0"
-        }else {
-            resultlb.text = resultModel.firstHalf
-        }
-        
+        resultlb.text = resultModel.whole
         resultlb.textColor = ColorE85504
         resultLeftLabel.textColor = ColorE85504
     }
