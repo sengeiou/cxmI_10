@@ -112,7 +112,7 @@ class BasePopViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, 
     private func initTopLayout() {
         pushBgView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
-            make.top.equalTo(0)
+            make.top.equalTo(SafeAreaTopHeight)
             make.height.equalTo(300)
         }
     }

@@ -60,7 +60,6 @@ fileprivate let FootballHunheCellId = "FootballHunheCellId"
 class CXMFootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, FootballBottomViewDelegate, FootballSectionHeaderDelegate, FootballRequestPro, FootballTeamViewDelegate , FootballMatchFilterVCDelegate, FootballTotalViewDelegate, FootballScoreViewDelegate, FootballTwoOneViewDelegate , FootballHunheViewDelegate , FootballSPFCellDelegate, FootballMatchInfoPopVCDelegate, FootballCellProtocol, FootballFilterPro, FootballOrderConfirmVCDelegate, FootballHotSectionHeaderDelegate{
     
     
-    
     // MARK: - 属性
     public var matchType: FootballMatchType = .胜平负
     
@@ -99,6 +98,8 @@ class CXMFootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDa
         footballRequest(leagueId: "")
         filterRequest()
         setRightButtonItem()
+        
+        setNavigationTitleView()
         limitNum = 1
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -435,6 +436,28 @@ class CXMFootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDa
         let helpItem = UIBarButtonItem(customView: helpBut)
         self.navigationItem.rightBarButtonItems = [helpItem, rightItem]
     }
+    
+    private func setNavigationTitleView() {
+        let titleView = UIButton(type: .custom)
+        
+        titleView.frame = CGRect(x: 0, y: 0, width: 150, height: 30)
+        
+        titleView.setTitle(matchType.rawValue, for: .normal)
+        titleView.setTitleColor(Color505050, for: .normal)
+        titleView.addTarget(self, action: #selector(titleViewClicked(_:)), for: .touchUpInside)
+        
+        self.navigationItem.titleView = titleView
+    }
+    
+    @objc private func titleViewClicked(_ sender: UIButton) {
+        print("11111")
+        showMatchMenu()
+    }
+    
+    private func showMatchMenu() {
+        self.present(CXMMFootballMatchMenu())
+    }
+    
     // MARK: - 帮助
     @objc private func helpClicked(_ sender: UIButton) {
         TongJi.log(.帮助, label: self.matchType.rawValue, att: .彩种)
