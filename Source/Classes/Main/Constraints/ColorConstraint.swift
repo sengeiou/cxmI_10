@@ -65,3 +65,5 @@ let Color0099D9 = UIColor(hexColor: "6CD6C4")
 let Color85C36B = UIColor(hexColor: "85C36B")
 /// 浅紫
 let ColorEB6D8E = UIColor(hexColor: "EB6D8E")
+/// 红色 - 大乐透
+let ColorEB1C24 = UIColor(hexColor: "EB1C24")

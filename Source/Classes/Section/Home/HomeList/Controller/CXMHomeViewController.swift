@@ -39,6 +39,15 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
         pushRouterVC(urlStr: playModel.redirectUrl, from: self)
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let stor = UIStoryboard(name: "Daletou", bundle: nil)
+        
+        let vc = stor.instantiateViewController(withIdentifier: "DaletouViewController") as! CXMMDaletouViewController
+        
+        self.pushViewController(vc: vc)
+        
+        return
+        
         if homeStyle == .onlyNews {
             let web = CXMNewsDetailViewController()
             web.articleId = self.newsList[indexPath.row].articleId
