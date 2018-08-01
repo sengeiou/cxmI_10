@@ -8,24 +8,71 @@
 
 import UIKit
 
+enum DaletouType : String {
+    case 标准选号 = "彩小秘 · 标准选号"
+    case 胆拖选号 = "彩小秘 · 胆拖选号"
+}
+
 class CXMMDaletouViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var bottomView: DaletouBottomView!
+
+    private var type : DaletouType = .标准选号 {
+        didSet{
+            titleView.setTitle(type.rawValue, for: .normal)
+        }
+    }
+    private var menu : CXMMDaletouMenu = CXMMDaletouMenu()
+    private var titleView : UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        menu.delegate = self
+        setNavigationTitleView()
         setTableview()
+        setSubview()
     }
 
+    private func setSubview() {
+        self.view.addSubview(menu)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+}
 
+// MARK: - MENU
+extension CXMMDaletouViewController : CXMMDaletouMenuDelegate {
+    
+    private func setNavigationTitleView() {
+        titleView = UIButton(type: .custom)
+        
+        titleView.frame = CGRect(x: 0, y: 0, width: 150, height: 30)
+        
+        titleView.setTitle(type.rawValue, for: .normal)
+        titleView.setTitleColor(Color505050, for: .normal)
+        titleView.addTarget(self, action: #selector(titleViewClicked(_:)), for: .touchUpInside)
+        
+        self.navigationItem.titleView = titleView
+    }
+    
+    @objc private func titleViewClicked(_ sender: UIButton) {
+        showMatchMenu()
+    }
+    
+    private func showMatchMenu() {
+        menu.configure(with: type)
+        menu.show()
+    }
+    
+    func didTipMenu(view: CXMMDaletouMenu, type: DaletouType) {
+        
+        self.type = type
+    }
 }
 
 extension CXMMDaletouViewController {
