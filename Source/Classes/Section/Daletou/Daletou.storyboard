@@ -210,7 +210,7 @@
                                             <outlet property="redView" destination="4nG-k6-IwV" id="sDp-sO-gx4"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DaletouStandardBlueCell" rowHeight="189" id="XqD-yh-1Id" customClass="DaletouStandardBlueCell" customModule="彩小蜜" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DaletouStandardBlueCell" rowHeight="189" id="XqD-yh-1Id" customClass="DaletouStandardBlueCell" customModule="彩小蜜" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="259" width="375" height="189"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XqD-yh-1Id" id="Usy-HG-3XX">
@@ -315,7 +315,7 @@
                                             <outlet property="blueView" destination="wZa-sh-viM" id="aOg-Is-KgR"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DaletouDanRedCell" rowHeight="289" id="A3N-SS-als" customClass="DaletouDanRedCell" customModule="彩小蜜" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DaletouDanRedCell" rowHeight="289" id="A3N-SS-als" customClass="DaletouDanRedCell" customModule="彩小蜜" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="448" width="375" height="289"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="A3N-SS-als" id="uPz-TM-nbb">
@@ -442,7 +442,7 @@
                                             <outlet property="redView" destination="e4A-La-5hz" id="Sml-rL-Ie7"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DaletouDragRedCell" rowHeight="198" id="Sbh-1h-0hD" customClass="DaletouDragRedCell" customModule="彩小蜜" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DaletouDragRedCell" rowHeight="198" id="Sbh-1h-0hD" customClass="DaletouDragRedCell" customModule="彩小蜜" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="737" width="375" height="198"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Sbh-1h-0hD" id="MpH-de-awV">
@@ -544,7 +544,7 @@
                                             <outlet property="redView" destination="Ytm-vE-bem" id="tY4-3N-BjN"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DaletouDanBlueCell" rowHeight="255" id="MNQ-KA-NvE" customClass="DaletouDanBlueCell" customModule="彩小蜜" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DaletouDanBlueCell" rowHeight="255" id="MNQ-KA-NvE" customClass="DaletouDanBlueCell" customModule="彩小蜜" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="935" width="375" height="255"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MNQ-KA-NvE" id="BnP-rJ-eeS">
@@ -647,7 +647,7 @@
                                             <outlet property="blueView" destination="OLN-RJ-0Fw" id="GAy-zZ-bJK"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DaletouDragBlueCell" rowHeight="198" id="DeY-ut-Ai5" customClass="DaletouDragBlueCell" customModule="彩小蜜" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DaletouDragBlueCell" rowHeight="198" id="DeY-ut-Ai5" customClass="DaletouDragBlueCell" customModule="彩小蜜" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="1190" width="375" height="198"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DeY-ut-Ai5" id="7YH-8F-8KQ">

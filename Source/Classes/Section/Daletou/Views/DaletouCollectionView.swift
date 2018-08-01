@@ -43,7 +43,9 @@ extension DaletouCollectionView {
 
 extension DaletouCollectionView : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        let model = self.dataList[indexPath.row]
+        model.selected = !model.selected
+        collectionView.reloadData()
     }
 }
 
