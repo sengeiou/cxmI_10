@@ -22,6 +22,7 @@ class CXMMDaletouViewController: BaseViewController {
     private var type : DaletouType = .标准选号 {
         didSet{
             titleView.setTitle(type.rawValue, for: .normal)
+            self.tableView.reloadData()
         }
     }
     private var menu : CXMMDaletouMenu = CXMMDaletouMenu()
@@ -48,11 +49,16 @@ class CXMMDaletouViewController: BaseViewController {
 // MARK: - MENU
 extension CXMMDaletouViewController : CXMMDaletouMenuDelegate {
     
+    func didTipMenu(view: CXMMDaletouMenu, type: DaletouType) {
+        
+        self.type = type
+    }
+    
     private func setNavigationTitleView() {
         titleView = UIButton(type: .custom)
         
-        titleView.frame = CGRect(x: 0, y: 0, width: 150, height: 30)
-        
+        titleView.frame = CGRect(x: 0, y: 0, width: 160, height: 30)
+        titleView.titleLabel?.font = Font17
         titleView.setTitle(type.rawValue, for: .normal)
         titleView.setTitleColor(Color505050, for: .normal)
         titleView.addTarget(self, action: #selector(titleViewClicked(_:)), for: .touchUpInside)
@@ -68,11 +74,6 @@ extension CXMMDaletouViewController : CXMMDaletouMenuDelegate {
         menu.configure(with: type)
         menu.show()
     }
-    
-    func didTipMenu(view: CXMMDaletouMenu, type: DaletouType) {
-        
-        self.type = type
-    }
 }
 
 extension CXMMDaletouViewController {
@@ -87,7 +88,19 @@ extension CXMMDaletouViewController {
 }
 
 extension CXMMDaletouViewController : UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch type {
+        case .标准选号:
+            switch indexPath.row {
+            case 0:
+                let history = CXMMDaletouHistoryAward()
+                present(history)
+            default: break
+            }
+        case .胆拖选号:
+            break
+        }
+    }
 }
 
 extension CXMMDaletouViewController : UITableViewDataSource {
@@ -95,50 +108,71 @@ extension CXMMDaletouViewController : UITableViewDataSource {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        switch type {
+        case .标准选号:
+            return 3
+        case .胆拖选号:
+            return 4
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        
-        switch indexPath.row {
-        case 0:
-            return initTitleCell(tableView, indexPath)
-        case 1:
-            return initStandardRedCell(tableView, indexPath)
-        case 2:
-            return initStandardBlueCell(tableView, indexPath)
-        case 3:
-            return initDanRedCell(tableView, indexPath)
-        case 4:
-            return initDragRedCell(tableView, indexPath)
-        case 5:
-            return initDanBlueCell(tableView, indexPath)
-        case 6:
-            return initDragBlueCell(tableView, indexPath)
-        default:
-            return UITableViewCell()
+        switch type {
+        case .标准选号:
+            switch indexPath.row {
+            case 0:
+                return initTitleCell(tableView, indexPath)
+            case 1:
+                return initStandardRedCell(tableView, indexPath)
+            case 2:
+                return initStandardBlueCell(tableView, indexPath)
+            default:
+                return UITableViewCell()
+            }
+        case .胆拖选号:
+            switch indexPath.row {
+            case 0:
+                return initDanRedCell(tableView, indexPath)
+            case 1:
+                return initDragRedCell(tableView, indexPath)
+            case 2:
+                return initDanBlueCell(tableView, indexPath)
+            case 3:
+                return initDragBlueCell(tableView, indexPath)
+            default:
+                return UITableViewCell()
+            }
         }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch indexPath.row {
-        case 0:
-            return 40
-        case 1:
-            return 240 + 54 + 15
-        case 2:
-            return 117
-        case 3:
-            return 350
-        case 4:
-            return 300
-        case 5:
-            return 200
-        case 6:
-            return 200
-        default:
-            return 40
+        
+        switch type {
+        case .标准选号:
+            switch indexPath.row {
+            case 0:
+                return 40
+            case 1:
+                return 240 + 54 + 15
+            case 2:
+                return 117
+            default:
+                return 0
+            }
+        case .胆拖选号:
+            switch indexPath.row {
+            case 0:
+                return 350
+            case 1:
+                return 240 + 54 + 15
+            case 2:
+                return 150
+            case 3:
+                return 150
+            default:
+                return 0
+            }
         }
     }
     
