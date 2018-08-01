@@ -18,7 +18,7 @@ let HorizontalItemCount = 4
 let FootballCellLineSpacing: CGFloat = 10 * defaultScale
 let FootballCellInteritemSpacing: CGFloat = 10 * defaultScale
 let FootballCellWidth : CGFloat = (screenWidth - (FootballCellInteritemSpacing * CGFloat(HorizontalItemCount - 1)) - sectionLeftSpacing * 2) / CGFloat(HorizontalItemCount)
-let FootballCellHeight : CGFloat = 90 * defaultScale
+let FootballCellHeight : CGFloat = 100 * defaultScale
 
 protocol HomeSportLotteryCellDelegate {
     func didSelectItem(playModel: HomePlayModel, index: Int) -> Void

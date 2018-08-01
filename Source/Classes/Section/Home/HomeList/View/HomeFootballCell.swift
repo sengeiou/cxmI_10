@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeFootballCell: UICollectionViewCell {
+class HomeFootballCell: UICollectionViewCell, RouterMatcher {
     
     public var playModel: HomePlayModel! {
         didSet{
@@ -18,25 +18,25 @@ class HomeFootballCell: UICollectionViewCell {
             }
             
             title.text = playModel.playClassifyName
+            subTitle.text = playModel.subTitle
             
+            let type = matcherHttp(urlStr: playModel.redirectUrl)
             
-//            switch playModel.playClassifyLabelId {
-//            case "1":
-//                activityIcon.image = UIImage(named: "Singlepass")
-//            case "2":
-//                activityIcon.image = UIImage(named: "Lottery")
-//            case "3":
-//                activityIcon.image = UIImage(named: "Awards")
-//            case "4":
-//                activityIcon.image = UIImage(named: "Popular-1")
-//            default:
-//                activityIcon.image = UIImage(named: "")
-//            }
+            switch type.0 {
+            case .竞彩足球:
+                subTitle.textColor = ColorE85504
+            case .大乐透:
+                subTitle.textColor = ColorE85504
+            default:
+                subTitle.textColor = Color787878
+            }
+    
         }
     }
     
     private var icon : UIImageView!
     private var title : UILabel!
+    private var subTitle: UILabel!
     private var activityIcon : UIImageView!
     
     override init(frame: CGRect) {
@@ -55,6 +55,11 @@ class HomeFootballCell: UICollectionViewCell {
         title.snp.makeConstraints { (make) in
             make.top.equalTo(icon.snp.bottom).offset(5)
             make.left.right.equalTo(self.contentView)
+            make.height.equalTo(subTitle)
+        }
+        subTitle.snp.makeConstraints { (make) in
+            make.top.equalTo(title.snp.bottom).offset(5)
+            make.left.right.equalTo(title)
             make.bottom.equalTo(self.contentView).offset(-5)
         }
         activityIcon.snp.makeConstraints { (make) in
@@ -74,11 +79,17 @@ class HomeFootballCell: UICollectionViewCell {
         title.text = "单关固定"
         title.textAlignment = .center
         
+        subTitle = UILabel()
+        subTitle.font = Font12
+        subTitle.textColor = Color787878
+        subTitle.text = "单关固定"
+        subTitle.textAlignment = .center
+        
         activityIcon = UIImageView()
-        //activityIcon.image = UIImage(named: "足球")
         
         self.contentView.addSubview(icon)
         self.contentView.addSubview(title)
+        self.contentView.addSubview(subTitle)
         self.contentView.addSubview(activityIcon)
     }
     
