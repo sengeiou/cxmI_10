@@ -41,6 +41,8 @@ enum HomeNetAPIManager {
     case newsRecommend(articleId: String, page: Int)
     /// 彩票大厅数据，和 咨询列表数据
     case hallMixData(page: Int, isTransaction: String)
+    /// 彩票大厅数据，彩种新接口
+    case hallMix(page: Int, isTransaction: String)
 }
 
 extension HomeNetAPIManager : TargetType {
@@ -79,7 +81,8 @@ extension HomeNetAPIManager : TargetType {
             return "/dl/article/relatedArticles"
         case .hallMixData:
             return "/lottery/hall/getHallMixData"
-            
+        case .hallMix:
+            return "/lottery/hall/getAllLotteryInHallMixData"
             
         }
     }
@@ -116,6 +119,10 @@ extension HomeNetAPIManager : TargetType {
             dic["currentArticleId"] = articleId
             dic["page"] = page
         case .hallMixData(let page, let isTransaction ):
+            dic["page"] = page
+            dic["size"] = "20"
+            dic["isTransaction"] = isTransaction
+        case .hallMix(let page, let isTransaction ):
             dic["page"] = page
             dic["size"] = "20"
             dic["isTransaction"] = isTransaction

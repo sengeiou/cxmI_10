@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-protocol RouterPro : RouterMatcher { }
+protocol RouterPro : RouterMatcher, AlertPro { }
 
 extension RouterPro {
     /// 路由跳转
@@ -32,20 +32,22 @@ extension RouterPro {
             if let url = URL(string: urlStr) {
                 UIApplication.shared.openURL(url)
             }
-        case .足球胜平负:
-            pushFootballVC(type.0.rawValue, from: vc)
-        case .足球让球胜平负:
-            pushFootballVC(type.0.rawValue, from: vc)
-        case .足球比分:
-            pushFootballVC(type.0.rawValue, from: vc)
-        case .足球半全场:
-            pushFootballVC(type.0.rawValue, from: vc)
-        case .足球总进球:
-            pushFootballVC(type.0.rawValue, from: vc)
-        case .足球混合过关:
-            pushFootballVC(type.0.rawValue, from: vc)
-        case .足球二选一:
-            pushFootballVC(type.0.rawValue, from: vc)
+        case .竞彩足球:
+            pushFootballVC(from: vc)
+        case .大乐透:
+            pushDaletou(from: vc)
+        case .竞彩篮球:
+            pushBasketball(from: vc)
+        case .快3:
+            pushKuai3(from: vc)
+        case .双色球:
+            pushShuangSeQiu(from: vc)
+        case .北京单场:
+            pushBeijing(from: vc)
+        case .广东11选5:
+            pushGuangdong(from: vc)
+        case .更多彩种:
+            pushMore(from: vc)
         case .咨询详情:
             guard let id = type.1?.id else { return }
             pushNewsDetail( articleId: id, from: vc )
@@ -69,32 +71,51 @@ extension RouterPro {
         pushViewController(match, from: vc)
     }
     
-    private func pushFootballVC(_ playType: String, from vc : UIViewController) {
+    private func pushFootballVC(from vc : UIViewController) {
         let football = CXMFootballMatchVC()
         
-        switch playType {
-        case "1":
-            football.matchType = .让球胜平负
-        case "2":
-            football.matchType = .胜平负
-        case "3":
-            football.matchType = .比分
-        case "4":
-            football.matchType = .总进球
-        case "5":
-            football.matchType = .半全场
-        case "6":
-            football.matchType = .混合过关
-        case "7":
-            football.matchType = .二选一
-        default:
-            break
-        }
-    
-        TongJi.log(.足彩彩种, label: football.matchType.rawValue, att: .彩种)
+//        switch playType {
+//        case "1":
+//            football.matchType = .让球胜平负
+//        case "2":
+//            football.matchType = .胜平负
+//        case "3":
+//            football.matchType = .比分
+//        case "4":
+//            football.matchType = .总进球
+//        case "5":
+//            football.matchType = .半全场
+//        case "6":
+//            football.matchType = .混合过关
+//        case "7":
+//            football.matchType = .二选一
+//        default:
+//            break
+//        }
+
         pushViewController(football, from: vc)
     }
-    
+    private func pushDaletou(from vc : UIViewController) {
+        
+    }
+    private func pushBasketball(from vc : UIViewController) {
+        showHUD(message: "敬请期待")
+    }
+    private func pushKuai3(from vc : UIViewController) {
+        showHUD(message: "敬请期待")
+    }
+    private func pushShuangSeQiu(from vc : UIViewController) {
+        showHUD(message: "敬请期待")
+    }
+    private func pushBeijing(from vc : UIViewController){
+        showHUD(message: "敬请期待")
+    }
+    private func pushGuangdong(from vc : UIViewController) {
+        showHUD(message: "敬请期待")
+    }
+    private func pushMore(from vc : UIViewController) {
+        showHUD(message: "敬请期待")
+    }
     private func pushWebview(_ name : String = "", urlStr : String, from vc: UIViewController) {
         let web = CXMActivityViewController()
         web.webName = name

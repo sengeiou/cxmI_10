@@ -20,18 +20,18 @@ class HomeFootballCell: UICollectionViewCell {
             title.text = playModel.playClassifyName
             
             
-            switch playModel.playClassifyLabelId {
-            case "1":
-                activityIcon.image = UIImage(named: "Singlepass")
-            case "2":
-                activityIcon.image = UIImage(named: "Lottery")
-            case "3":
-                activityIcon.image = UIImage(named: "Awards")
-            case "4":
-                activityIcon.image = UIImage(named: "Popular-1")
-            default:
-                activityIcon.image = UIImage(named: "")
-            }
+//            switch playModel.playClassifyLabelId {
+//            case "1":
+//                activityIcon.image = UIImage(named: "Singlepass")
+//            case "2":
+//                activityIcon.image = UIImage(named: "Lottery")
+//            case "3":
+//                activityIcon.image = UIImage(named: "Awards")
+//            case "4":
+//                activityIcon.image = UIImage(named: "Popular-1")
+//            default:
+//                activityIcon.image = UIImage(named: "")
+//            }
         }
     }
     

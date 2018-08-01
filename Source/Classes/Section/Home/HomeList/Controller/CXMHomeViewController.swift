@@ -199,7 +199,7 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
             isTransaction = "1"
         }
         
-        _ = homeProvider.rx.request(.hallMixData(page: pageNum, isTransaction: isTransaction))
+        _ = homeProvider.rx.request(.hallMix(page: pageNum, isTransaction: isTransaction))
             .asObservable()
             .mapObject(type: HomeListModel.self)
             .subscribe(onNext: { (data) in

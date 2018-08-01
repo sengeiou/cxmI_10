@@ -61,7 +61,11 @@ class CXMFootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDa
     
     
     // MARK: - 属性
-    public var matchType: FootballMatchType = .胜平负
+    public var matchType: FootballMatchType = .胜平负 {
+        didSet{
+            TongJi.log(.足彩彩种, label: matchType.rawValue, att: .彩种)
+        }
+    }
     
     //public var homeData : HomePlayModel!
     
