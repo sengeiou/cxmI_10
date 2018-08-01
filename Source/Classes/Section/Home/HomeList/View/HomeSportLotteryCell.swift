@@ -12,7 +12,7 @@ fileprivate let homeFootballCellIdentifier = "homeFootballCellIdentifier"
 
 fileprivate let sectionLeftSpacing: CGFloat = 20 * defaultScale
 let HomesectionTopSpacing : CGFloat = 10
-let HomeSectionViewHeight : CGFloat = 44 * defaultScale
+let HomeSectionViewHeight : CGFloat = 1 * defaultScale
 let HorizontalItemCount = 4
 
 let FootballCellLineSpacing: CGFloat = 10 * defaultScale
@@ -47,22 +47,22 @@ class HomeSportLotteryCell: UITableViewCell, UICollectionViewDataSource, UIColle
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        line.snp.makeConstraints { (make) in
-            make.top.equalTo(HomeSectionViewHeight)
-            make.left.equalTo(10 * defaultScale)
-            make.right.equalTo(-10 * defaultScale)
-            make.height.equalTo(0.5)
-        }
-        
-        title.snp.makeConstraints { (make) in
-            make.top.equalTo(0)
-            make.bottom.equalTo(line.snp.top).offset(0)
-            make.left.equalTo(leftSpacing)
-            make.right.equalTo(-rightSpacing)
-        }
+//        line.snp.makeConstraints { (make) in
+//            make.top.equalTo(HomeSectionViewHeight)
+//            make.left.equalTo(10 * defaultScale)
+//            make.right.equalTo(-10 * defaultScale)
+//            make.height.equalTo(0.5)
+//        }
+//
+//        title.snp.makeConstraints { (make) in
+//            make.top.equalTo(0)
+//            make.bottom.equalTo(line.snp.top).offset(0)
+//            make.left.equalTo(leftSpacing)
+//            make.right.equalTo(-rightSpacing)
+//        }
         
         collectionView.snp.makeConstraints { (make) in
-            make.top.equalTo(line.snp.bottom)
+            make.top.equalTo(1)
             make.bottom.equalTo(self.contentView)
             make.left.equalTo(self.contentView).offset(0)
             make.right.equalTo(self.contentView).offset(-0)
