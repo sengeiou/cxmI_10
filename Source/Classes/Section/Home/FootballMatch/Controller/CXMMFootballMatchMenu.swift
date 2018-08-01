@@ -24,6 +24,13 @@ class CXMMFootballMatchMenu: PopMenu {
     private var scoreBut: UIButton!
     private var twoBut: UIButton!
     
+    private var hunheIcon : UIImageView!
+    private var spfIcon: UIImageView!
+    private var rangSpfIcon: UIImageView!
+    private var totalIcon: UIImageView!
+    private var banIcon: UIImageView!
+    private var scoreIcon : UIImageView!
+    private var twoIcon: UIImageView!
     
     override init() {
         super.init()
@@ -55,6 +62,23 @@ class CXMMFootballMatchMenu: PopMenu {
         self.popView.addSubview(banBut)
         self.popView.addSubview(scoreBut)
         self.popView.addSubview(twoBut)
+        
+        hunheIcon = getImageView()
+        spfIcon = getImageView()
+        rangSpfIcon = getImageView()
+        totalIcon = getImageView()
+        banIcon = getImageView()
+        scoreIcon = getImageView()
+        twoIcon = getImageView()
+        
+        hunheBut.addSubview(hunheIcon)
+        spfBut.addSubview(spfIcon)
+        rangSpfBut.addSubview(rangSpfIcon)
+        tatalBut.addSubview(totalIcon)
+        banBut.addSubview(banIcon)
+        scoreBut.addSubview(scoreIcon)
+        twoBut.addSubview(twoIcon)
+        
         
         hunheBut.snp.makeConstraints { (make) in
             make.top.equalTo(SafeAreaTopHeight + 10)
@@ -89,25 +113,64 @@ class CXMMFootballMatchMenu: PopMenu {
             make.left.width.height.equalTo(hunheBut)
         }
         
+        hunheIcon.snp.makeConstraints { (make) in
+            make.bottom.right.equalTo(0)
+            make.height.width.equalTo(18)
+        }
+        spfIcon.snp.makeConstraints { (make) in
+            make.bottom.right.equalTo(0)
+            make.height.width.equalTo(hunheIcon)
+        }
+        rangSpfIcon.snp.makeConstraints { (make) in
+            make.bottom.right.equalTo(0)
+            make.height.width.equalTo(hunheIcon)
+        }
+        totalIcon.snp.makeConstraints { (make) in
+            make.bottom.right.equalTo(0)
+            make.height.width.equalTo(hunheIcon)
+        }
+        banIcon.snp.makeConstraints { (make) in
+            make.bottom.right.equalTo(0)
+            make.height.width.equalTo(hunheIcon)
+        }
+        scoreIcon.snp.makeConstraints { (make) in
+            make.bottom.right.equalTo(0)
+            make.height.width.equalTo(hunheIcon)
+        }
+        twoIcon.snp.makeConstraints { (make) in
+            make.bottom.right.equalTo(0)
+            make.height.width.equalTo(hunheIcon)
+        }
     }
     
     private func getBut(_ title : String) -> UIButton {
         let but = UIButton(type: .custom)
         but.setTitle(title, for: .normal)
-        setBut(but: but)
+        but.setTitleColor(Color505050, for: .normal)
+        but.layer.borderColor = ColorC7C7C7.cgColor
         but.layer.cornerRadius = 1
         but.layer.borderWidth = 1
+        but.titleLabel?.font = Font14
         but.addTarget(self, action: #selector(didClick(_:)), for: .touchUpInside)
         return but
     }
     
-    private func setBut(but: UIButton) {
+    private func getImageView() -> UIImageView {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "Check")
+        return imageView
+    }
+    
+    private func setDefault(but: UIButton, imageView: UIImageView) {
         but.setTitleColor(Color505050, for: .normal)
         but.layer.borderColor = ColorC7C7C7.cgColor
+        imageView.isHidden = true
     }
-    private func setSelectBut(but: UIButton) {
+   
+    private func setSelectBut(but: UIButton, imageView: UIImageView) {
         but.setTitleColor(ColorE85504, for: .normal)
         but.layer.borderColor = ColorE85504.cgColor
+        imageView.isHidden = false
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -118,30 +181,36 @@ class CXMMFootballMatchMenu: PopMenu {
 extension CXMMFootballMatchMenu {
     @objc private func didClick(_ sender: UIButton) {
         resetState()
-        setSelectBut(but: sender)
         
-        hide()
         guard delegate != nil else { fatalError("delegate 为空") }
         
         switch sender.tag {
         case 1000:
+            setSelectBut(but: sender, imageView: hunheIcon)
             delegate.didTipMenu(view: self, type: .混合过关)
         case 2000:
+            setSelectBut(but: sender, imageView: spfIcon)
             delegate.didTipMenu(view: self, type: .胜平负)
         case 3000:
+            setSelectBut(but: sender, imageView: rangSpfIcon)
             delegate.didTipMenu(view: self, type: .让球胜平负)
         case 4000:
+            setSelectBut(but: sender, imageView: totalIcon)
             delegate.didTipMenu(view: self, type: .总进球)
         case 5000:
+            setSelectBut(but: sender, imageView: banIcon)
             delegate.didTipMenu(view: self, type: .半全场)
         case 6000:
+            setSelectBut(but: sender, imageView: scoreIcon)
             delegate.didTipMenu(view: self, type: .比分)
         case 7000:
+            setSelectBut(but: sender, imageView: twoIcon)
             delegate.didTipMenu(view: self, type: .二选一)
         default: break
             
         }
         
+        hide()
     }
 }
 
@@ -151,30 +220,31 @@ extension CXMMFootballMatchMenu {
         
         switch type {
         case .混合过关:
-            setSelectBut(but: hunheBut)
+            setSelectBut(but: hunheBut, imageView: hunheIcon)
         case .胜平负:
-            setSelectBut(but: spfBut)
+            setSelectBut(but: spfBut, imageView: spfIcon)
         case .让球胜平负:
-            setSelectBut(but: rangSpfBut)
+            setSelectBut(but: rangSpfBut, imageView: rangSpfIcon)
         case .总进球:
-            setSelectBut(but: tatalBut)
+            setSelectBut(but: tatalBut, imageView: totalIcon)
         case .半全场:
-            setSelectBut(but: banBut)
+            setSelectBut(but: banBut, imageView: banIcon)
         case .比分:
-            setSelectBut(but: scoreBut)
+            setSelectBut(but: scoreBut, imageView: scoreIcon)
         case .二选一:
-            setSelectBut(but: twoBut)
+            setSelectBut(but: twoBut, imageView: twoIcon)
        
         }
     }
     private func resetState() {
-        setBut(but: hunheBut)
-        setBut(but: spfBut)
-        setBut(but: rangSpfBut)
-        setBut(but: tatalBut)
-        setBut(but: banBut)
-        setBut(but: scoreBut)
-        setBut(but: twoBut)
+        setDefault(but: hunheBut, imageView: hunheIcon)
+        setDefault(but: spfBut, imageView: spfIcon)
+        setDefault(but: rangSpfBut, imageView: rangSpfIcon)
+        setDefault(but: tatalBut, imageView: totalIcon)
+        setDefault(but: banBut, imageView: banIcon)
+        setDefault(but: scoreBut, imageView: scoreIcon)
+        setDefault(but: twoBut, imageView: twoIcon)
+        
     }
 }
 
