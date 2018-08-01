@@ -813,10 +813,11 @@ extension CXMFootballMatchVC : CXMMFootballMatchMenuDelegate{
     private func setNavigationTitleView() {
         titleView = UIButton(type: .custom)
         
-        titleView.frame = CGRect(x: 0, y: 0, width: 150, height: 30)
+        titleView.frame = CGRect(x: 0, y: 0, width: 160, height: 30)
         
         titleView.setTitle(matchType.rawValue, for: .normal)
         titleView.setTitleColor(Color505050, for: .normal)
+        titleView.titleLabel?.font = Font17
         titleView.addTarget(self, action: #selector(titleViewClicked(_:)), for: .touchUpInside)
         
         self.navigationItem.titleView = titleView
