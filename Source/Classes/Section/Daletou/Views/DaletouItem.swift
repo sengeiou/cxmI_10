@@ -43,18 +43,22 @@ extension DaletouItem {
             case true :
                 numLabel.textColor = ColorFFFFFF
                 numLabel.backgroundColor = ColorEB1C24
+                numLabel.layer.borderColor = ColorEB1C24.cgColor
             case false :
                 numLabel.textColor = ColorEB1C24
                 numLabel.backgroundColor = ColorFFFFFF
+                numLabel.layer.borderColor = ColorC7C7C7.cgColor
             }
         case .blue:
             switch state {
             case true :
                 numLabel.textColor = ColorFFFFFF
                 numLabel.backgroundColor = Color0081CC
+                numLabel.layer.borderColor = Color0081CC.cgColor
             case false :
                 numLabel.textColor = Color0081CC
                 numLabel.backgroundColor = ColorFFFFFF
+                numLabel.layer.borderColor = ColorC7C7C7.cgColor
             }
         }
     }

@@ -842,12 +842,25 @@
                             <constraint firstItem="aOr-kh-5Vq" firstAttribute="leading" secondItem="XkH-lm-hbi" secondAttribute="leading" id="wta-sX-lCG"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="rNK-Ky-kzb"/>
+                    <navigationItem key="navigationItem" id="rNK-Ky-kzb">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="j7t-1y-O6M">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2yu-KU-2iH">
+                                <rect key="frame" x="289" y="11" width="70" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="imageEdgeInsets" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" image="More"/>
+                                <connections>
+                                    <action selector="topMenuClick:" destination="eWG-cl-Ba1" eventType="touchUpInside" id="9UU-aM-0Me"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="2000"/>
                     <connections>
                         <outlet property="bottomView" destination="xAs-ej-kZv" id="YMZ-8W-acv"/>
                         <outlet property="tableView" destination="aOr-kh-5Vq" id="YrL-cQ-EKC"/>
+                        <outlet property="topMenu" destination="2yu-KU-2iH" id="dMK-5u-Zn7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P3a-39-fsK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -876,6 +889,7 @@
     </scenes>
     <resources>
         <image name="IntelligentChoice" width="18" height="18"/>
+        <image name="More" width="16" height="16"/>
         <image name="jump" width="14" height="14"/>
         <image name="trashbin" width="20" height="20"/>
     </resources>

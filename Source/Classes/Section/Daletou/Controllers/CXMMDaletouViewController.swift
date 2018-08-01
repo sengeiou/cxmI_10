@@ -19,6 +19,9 @@ class CXMMDaletouViewController: BaseViewController {
     
     @IBOutlet weak var bottomView: DaletouBottomView!
 
+    @IBOutlet weak var topMenu: UIButton!
+    
+    
     private var type : DaletouType = .标准选号 {
         didSet{
             titleView.setTitle(type.rawValue, for: .normal)
@@ -75,15 +78,10 @@ extension CXMMDaletouViewController : CXMMDaletouMenuDelegate {
         menu.show()
     }
 }
-
+// MARK: - TOP Menu
 extension CXMMDaletouViewController {
-    private func setTableview() {
-        if #available(iOS 11.0, *) {
-            
-        }else {
-            tableView.contentInset = UIEdgeInsets(top: -64, left: 0, bottom: 49, right: 0)
-            tableView.scrollIndicatorInsets = tableView.contentInset
-        }
+    @IBAction func topMenuClick(_ sender: UIButton) {
+        
     }
 }
 
@@ -102,7 +100,16 @@ extension CXMMDaletouViewController : UITableViewDelegate {
         }
     }
 }
-
+extension CXMMDaletouViewController {
+    private func setTableview() {
+        if #available(iOS 11.0, *) {
+            
+        }else {
+            tableView.contentInset = UIEdgeInsets(top: -64, left: 0, bottom: 49, right: 0)
+            tableView.scrollIndicatorInsets = tableView.contentInset
+        }
+    }
+}
 extension CXMMDaletouViewController : UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
