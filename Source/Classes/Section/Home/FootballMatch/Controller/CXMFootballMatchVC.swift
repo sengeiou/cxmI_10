@@ -61,7 +61,7 @@ class CXMFootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDa
     
     
     // MARK: - 属性
-    public var matchType: FootballMatchType = .胜平负 {
+    public var matchType: FootballMatchType = .混合过关 {
         didSet{
             TongJi.log(.足彩彩种, label: matchType.rawValue, att: .彩种)
         }
@@ -89,7 +89,7 @@ class CXMFootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDa
             
         }
     }
-
+    private var menu : CXMMFootballMatchMenu = CXMMFootballMatchMenu()
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,7 +98,7 @@ class CXMFootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDa
         selectPlays = Set<FootballPlayListModel>()
         initSubview()
         setEmpty(title: "暂无可选赛事", tableView)
-        
+        menu.delegate = self
         footballRequest(leagueId: "")
         filterRequest()
         setRightButtonItem()
@@ -221,6 +221,7 @@ class CXMFootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDa
         self.view.addSubview(tableView)
         self.view.addSubview(topView)
         self.view.addSubview(bottomView)
+        self.view.addSubview(menu)
     }
     // MARK: - 网络请求
     
@@ -256,22 +257,13 @@ class CXMFootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDa
         return table
     }()
     private func registerCell(_ table: UITableView) {
-        switch matchType {
-        case .胜平负:
-            table.register(FootballSPFCell.self, forCellReuseIdentifier: FootballSPFCellId)
-        case .让球胜平负:
-            table.register(FootballRangSPFCell.self, forCellReuseIdentifier: FootballRangSPFCellId)
-        case .总进球:
-            table.register(FootballTotalCell.self, forCellReuseIdentifier: FootballTotalCellId)
-        case .比分:
-            table.register(FootballScoreCell.self, forCellReuseIdentifier: FootballScoreCellId)
-        case .半全场:
-            table.register(FootballBanQuanCCell.self, forCellReuseIdentifier: FootballBanQuanCCellId)
-        case .二选一:
-            table.register(Football2_1Cell.self, forCellReuseIdentifier: Football2_1CellId)
-        case .混合过关:
-            table.register(FootballHunheCell.self, forCellReuseIdentifier: FootballHunheCellId)
-        }
+        table.register(FootballSPFCell.self, forCellReuseIdentifier: FootballSPFCellId)
+        table.register(FootballRangSPFCell.self, forCellReuseIdentifier: FootballRangSPFCellId)
+        table.register(FootballTotalCell.self, forCellReuseIdentifier: FootballTotalCellId)
+        table.register(FootballScoreCell.self, forCellReuseIdentifier: FootballScoreCellId)
+        table.register(FootballBanQuanCCell.self, forCellReuseIdentifier: FootballBanQuanCCellId)
+        table.register(Football2_1Cell.self, forCellReuseIdentifier: Football2_1CellId)
+        table.register(FootballHunheCell.self, forCellReuseIdentifier: FootballHunheCellId)
     }
     
     //MARK: - tableView dataSource
@@ -439,27 +431,6 @@ class CXMFootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDa
         let rightItem = UIBarButtonItem(customView: rightBut)
         let helpItem = UIBarButtonItem(customView: helpBut)
         self.navigationItem.rightBarButtonItems = [helpItem, rightItem]
-    }
-    
-    private func setNavigationTitleView() {
-        let titleView = UIButton(type: .custom)
-        
-        titleView.frame = CGRect(x: 0, y: 0, width: 150, height: 30)
-        
-        titleView.setTitle(matchType.rawValue, for: .normal)
-        titleView.setTitleColor(Color505050, for: .normal)
-        titleView.addTarget(self, action: #selector(titleViewClicked(_:)), for: .touchUpInside)
-        
-        self.navigationItem.titleView = titleView
-    }
-    
-    @objc private func titleViewClicked(_ sender: UIButton) {
-        print("11111")
-        showMatchMenu()
-    }
-    
-    private func showMatchMenu() {
-        self.present(CXMMFootballMatchMenu())
     }
     
     // MARK: - 帮助
@@ -833,5 +804,35 @@ class CXMFootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDa
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
+    }
+}
+
+extension CXMFootballMatchVC : CXMMFootballMatchMenuDelegate{
+    private func setNavigationTitleView() {
+        let titleView = UIButton(type: .custom)
+        
+        titleView.frame = CGRect(x: 0, y: 0, width: 150, height: 30)
+        
+        titleView.setTitle(matchType.rawValue, for: .normal)
+        titleView.setTitleColor(Color505050, for: .normal)
+        titleView.addTarget(self, action: #selector(titleViewClicked(_:)), for: .touchUpInside)
+        
+        self.navigationItem.titleView = titleView
+    }
+    
+    @objc private func titleViewClicked(_ sender: UIButton) {
+        showMatchMenu()
+    }
+    
+    private func showMatchMenu() {
+        menu.configure(with: matchType)
+        menu.show()
+    }
+    func didTipMenu(view: CXMMFootballMatchMenu, type: FootballMatchType) {
+        self.matchType = type
+        
+        footballRequest(leagueId: "")
+        filterRequest()
+        //self.tableView.reloadData()
     }
 }
