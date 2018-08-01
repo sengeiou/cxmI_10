@@ -137,10 +137,7 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
         }
         // usInfo == "2" 进入此页面发现无token时 不弹出登录页
         else if urlStr.contains("cxmxc=scm") && urlModel.usInfo == "2" {
-            guard model.token != "" else {
-                
-                return
-            }
+            guard model.token != "" else { return }
             webView.evaluateJavaScript("actionMessage('\(jsData!)')") { (data, error) in
                 
             }
