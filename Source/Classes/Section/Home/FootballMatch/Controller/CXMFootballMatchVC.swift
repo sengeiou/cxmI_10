@@ -64,6 +64,7 @@ class CXMFootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDa
     public var matchType: FootballMatchType = .混合过关 {
         didSet{
             TongJi.log(.足彩彩种, label: matchType.rawValue, att: .彩种)
+            titleView.setTitle(matchType.rawValue, for: .normal)
         }
     }
     
@@ -90,6 +91,7 @@ class CXMFootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDa
         }
     }
     private var menu : CXMMFootballMatchMenu = CXMMFootballMatchMenu()
+    private var titleView : UIButton!
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -809,7 +811,7 @@ class CXMFootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDa
 
 extension CXMFootballMatchVC : CXMMFootballMatchMenuDelegate{
     private func setNavigationTitleView() {
-        let titleView = UIButton(type: .custom)
+        titleView = UIButton(type: .custom)
         
         titleView.frame = CGRect(x: 0, y: 0, width: 150, height: 30)
         
