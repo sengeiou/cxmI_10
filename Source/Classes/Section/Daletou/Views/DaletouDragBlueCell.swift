@@ -1,5 +1,5 @@
 //
-//  DaletouDanRedCell.swift
+//  DaletouDragBlueCell.swift
 //  彩小蜜
 //
 //  Created by 笑 on 2018/8/1.
@@ -8,16 +8,16 @@
 
 import UIKit
 
-class DaletouDanRedCell: UITableViewCell {
+class DaletouDragBlueCell: UITableViewCell {
 
-    @IBOutlet weak var redView: DaletouCollectionView!
+    @IBOutlet weak var blueView: DaletouCollectionView!
     override func awakeFromNib() {
         super.awakeFromNib()
         setSubview()
     }
 
     private func setSubview() {
-        redView.configure(with: DaletouDataModel.getData(isRed: true))
+        blueView.configure(with: DaletouDataModel.getData(isRed: false))
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

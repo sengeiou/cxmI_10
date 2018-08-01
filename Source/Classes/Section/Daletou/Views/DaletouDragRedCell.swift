@@ -10,11 +10,16 @@ import UIKit
 
 class DaletouDragRedCell: UITableViewCell {
 
+    @IBOutlet weak var redView: DaletouCollectionView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        setSubview()
     }
 
+    private func setSubview() {
+        redView.configure(with: DaletouDataModel.getData(isRed: true))
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

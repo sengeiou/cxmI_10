@@ -61,6 +61,14 @@ extension CXMMDaletouViewController : UITableViewDataSource {
             return initStandardRedCell(tableView, indexPath)
         case 2:
             return initStandardBlueCell(tableView, indexPath)
+        case 3:
+            return initDanRedCell(tableView, indexPath)
+        case 4:
+            return initDragRedCell(tableView, indexPath)
+        case 5:
+            return initDanBlueCell(tableView, indexPath)
+        case 6:
+            return initDragBlueCell(tableView, indexPath)
         default:
             return UITableViewCell()
         }
@@ -74,6 +82,14 @@ extension CXMMDaletouViewController : UITableViewDataSource {
             return 240 + 54 + 15
         case 2:
             return 117
+        case 3:
+            return 350
+        case 4:
+            return 300
+        case 5:
+            return 200
+        case 6:
+            return 200
         default:
             return 40
         }
@@ -95,5 +111,26 @@ extension CXMMDaletouViewController : UITableViewDataSource {
         
         return cell
     }
+    private func initDanRedCell(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DaletouDanRedCell", for: indexPath) as! DaletouDanRedCell
+        
+        return cell
+    }
+    private func initDragRedCell(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DaletouDragRedCell", for: indexPath) as! DaletouDragRedCell
+        
+        return cell
+    }
+    private func initDanBlueCell(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DaletouDanBlueCell", for: indexPath) as! DaletouDanBlueCell
+        
+        return cell
+    }
+    private func initDragBlueCell(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DaletouDragBlueCell", for: indexPath) as! DaletouDragBlueCell
+        
+        return cell
+    }
+    
     
 }
