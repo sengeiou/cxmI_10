@@ -29,3 +29,9 @@ class DaletouStandardRedCell: UITableViewCell {
     }
 
 }
+
+extension DaletouStandardRedCell {
+    public func configure(model : DaletouOmissionModel) {
+        
+    }
+}
