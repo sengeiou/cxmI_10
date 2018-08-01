@@ -17,7 +17,7 @@ class DaletouDragRedCell: UITableViewCell {
     }
 
     private func setSubview() {
-        redView.configure(with: DaletouDataModel.getData(isRed: true))
+        redView.configure(with: DaletouDataModel.getData(ballStyle: .red))
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

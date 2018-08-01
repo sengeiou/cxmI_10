@@ -8,8 +8,15 @@
 
 import UIKit
 
+enum BallStyle {
+    case red
+    case blue
+}
+
 class DaletouCollectionView: UIView {
 
+    private var ballStyle : BallStyle = .red
+    
     private var dataList : [DaletouDataModel]!
     
     @IBOutlet weak var collectionView : UICollectionView!
@@ -28,13 +35,11 @@ extension DaletouCollectionView {
         self.dataList = dataList
         self.collectionView.reloadData()
     }
-    
+    // 隐藏数据
     public func configure(with omissionList : [Any]) {
         
     }
 }
-
-
 
 extension DaletouCollectionView : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

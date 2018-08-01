@@ -17,7 +17,7 @@ class DaletouDragBlueCell: UITableViewCell {
     }
 
     private func setSubview() {
-        blueView.configure(with: DaletouDataModel.getData(isRed: false))
+        blueView.configure(with: DaletouDataModel.getData(ballStyle: .blue))
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

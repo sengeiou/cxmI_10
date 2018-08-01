@@ -40,15 +40,6 @@
                                                     <color key="textColor" red="0.62352941179999999" green="0.62352941179999999" blue="0.62352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fUv-RI-Brv">
-                                                    <rect key="frame" x="287" y="12" width="62" height="16"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="62" id="H8b-cc-84B"/>
-                                                    </constraints>
-                                                    <state key="normal" title="历史开奖">
-                                                        <color key="titleColor" red="0.62352941176470589" green="0.62352941176470589" blue="0.62352941176470589" alpha="1" colorSpace="calibratedRGB"/>
-                                                    </state>
-                                                </button>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jump" translatesAutoresizingMaskIntoConstraints="NO" id="qhq-J1-cdH">
                                                     <rect key="frame" x="350" y="15" width="11" height="11"/>
                                                     <constraints>
@@ -63,6 +54,15 @@
                                                         <constraint firstAttribute="height" constant="1" id="RAy-s8-Gdt"/>
                                                     </constraints>
                                                 </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="历史开奖" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2B0-7W-OD1">
+                                                    <rect key="frame" x="269" y="1" width="80" height="37"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="80" id="3kS-rY-drS"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" red="0.62352941176470589" green="0.62352941176470589" blue="0.62352941176470589" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="PSE-WQ-DB9" firstAttribute="top" secondItem="Fxe-rR-GGI" secondAttribute="topMargin" id="5gr-VM-bPX"/>
@@ -70,11 +70,11 @@
                                                 <constraint firstAttribute="bottom" secondItem="AxY-RV-NHz" secondAttribute="bottom" id="DB3-Vt-bDW"/>
                                                 <constraint firstItem="qhq-J1-cdH" firstAttribute="centerY" secondItem="Fxe-rR-GGI" secondAttribute="centerY" id="E1A-jc-U0t"/>
                                                 <constraint firstItem="PSE-WQ-DB9" firstAttribute="leading" secondItem="Fxe-rR-GGI" secondAttribute="leading" constant="16" id="TZv-Bk-I5F"/>
-                                                <constraint firstItem="fUv-RI-Brv" firstAttribute="top" secondItem="Fxe-rR-GGI" secondAttribute="topMargin" constant="1" id="Xqq-dD-lxO"/>
+                                                <constraint firstItem="2B0-7W-OD1" firstAttribute="top" secondItem="Fxe-rR-GGI" secondAttribute="top" constant="1" id="UDd-DM-FxU"/>
                                                 <constraint firstItem="AxY-RV-NHz" firstAttribute="leading" secondItem="Fxe-rR-GGI" secondAttribute="leading" constant="10" id="bQo-ye-wkx"/>
-                                                <constraint firstItem="qhq-J1-cdH" firstAttribute="leading" secondItem="fUv-RI-Brv" secondAttribute="trailing" constant="1" id="f6z-lV-gEM"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="fUv-RI-Brv" secondAttribute="bottom" constant="1" id="gwJ-z7-1Kj"/>
+                                                <constraint firstItem="AxY-RV-NHz" firstAttribute="top" secondItem="2B0-7W-OD1" secondAttribute="bottom" constant="1" id="cvY-WN-Xbz"/>
                                                 <constraint firstAttribute="trailing" secondItem="AxY-RV-NHz" secondAttribute="trailing" constant="10" id="h0J-rr-5Zx"/>
+                                                <constraint firstItem="qhq-J1-cdH" firstAttribute="leading" secondItem="2B0-7W-OD1" secondAttribute="trailing" constant="1" id="itK-NB-bBt"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="PSE-WQ-DB9" secondAttribute="bottom" constant="1" id="mKJ-aE-QpI"/>
                                             </constraints>
                                         </tableViewCellContentView>

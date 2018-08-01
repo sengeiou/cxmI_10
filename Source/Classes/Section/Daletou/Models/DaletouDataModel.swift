@@ -12,26 +12,27 @@ class DaletouDataModel: NSObject {
     required override init() {}
     
     var num : String!
+    var style : BallStyle = .red
     var selected : Bool = false
     
-    static func getData(isRed : Bool) -> [DaletouDataModel] {
+    static func getData(ballStyle : BallStyle) -> [DaletouDataModel] {
         var list = [DaletouDataModel]()
         
-        if isRed {
+        switch ballStyle {
+        case .red:
             for i in 1...35 {
                 let model = DaletouDataModel()
                 model.num = "\(i)"
                 list.append(model)
             }
-        }
-        else {
+        case .blue:
             for i in 1...12 {
                 let model = DaletouDataModel()
+                model.style = .blue
                 model.num = "\(i)"
                 list.append(model)
             }
         }
-        
         return list
     }
     
