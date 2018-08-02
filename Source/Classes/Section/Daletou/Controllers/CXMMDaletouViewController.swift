@@ -28,7 +28,8 @@ class CXMMDaletouViewController: BaseViewController {
             self.tableView.reloadData()
         }
     }
-    private var selectedSet : Set<DaletouDataModel> = Set<DaletouDataModel>()
+    private var selectedRedSet : Set<DaletouDataModel> = Set<DaletouDataModel>()
+    private var selectedBlueSet : Set<DaletouDataModel> = Set<DaletouDataModel>()
     private var selectedList : [DaletouDataModel] = [DaletouDataModel]()
     
     private var displayStyle : DLTDisplayStyle = .defStyle
@@ -107,7 +108,9 @@ extension CXMMDaletouViewController {
         case "pushConfirm":
             let vc = segue.destination as! CXMMDaletouConfirmVC
             
-            vc.dataList.insert(selectedSet.sorted{$0.number < $1.number}, at: 0)
+            var arr = selectedRedSet.sorted{$0.number < $1.number}
+            arr.append(contentsOf: selectedBlueSet.sorted{$0.number < $1.number})
+            vc.dataList.insert(arr, at: 0)
             
         default: break
             
@@ -115,6 +118,7 @@ extension CXMMDaletouViewController {
     }
 }
 
+// MARK: - CELL DELEGATE
 extension CXMMDaletouViewController : DaletouStandardRedCellDelegate,
                                         DaletouStandardBlueCellDelegate,
                                         DaletouDanRedCellDelegate,
@@ -123,34 +127,40 @@ extension CXMMDaletouViewController : DaletouStandardRedCellDelegate,
                                         DaletouDragBlueCellDelegate{
     
     func didSelect(cell: DaletouStandardRedCell, model: DaletouDataModel) {
-        
-        insertData(model: model)
-        print(selectedSet)
+        insertRedData(model: model)
     }
     
     func didSelect(cell: DaletouStandardBlueCell, model: DaletouDataModel) {
-        
+        insertBlueData(model: model)
     }
     func didSelect(cell: DaletouDanRedCell, model: DaletouDataModel) {
-        
+        insertRedData(model: model)
     }
     func didSelect(cell: DaletouDragRedCell, model: DaletouDataModel) {
-        
+        insertRedData(model: model)
     }
     func didSelect(cell: DaletouDanBlueCell, model: DaletouDataModel) {
-        
+        insertBlueData(model: model)
     }
     func didSelect(cell: DaletouDragBlueCell, model: DaletouDataModel) {
-        
+        insertBlueData(model: model)
     }
     
     
-    private func insertData(model: DaletouDataModel) {
+    private func insertRedData(model: DaletouDataModel) {
         switch model.selected {
         case true:
-            selectedSet.insert(model)
+            selectedRedSet.insert(model)
         case false:
-            selectedSet.remove(model)
+            selectedRedSet.remove(model)
+        }
+    }
+    private func insertBlueData(model: DaletouDataModel) {
+        switch model.selected {
+        case true:
+            selectedBlueSet.insert(model)
+        case false:
+            selectedBlueSet.remove(model)
         }
     }
 }

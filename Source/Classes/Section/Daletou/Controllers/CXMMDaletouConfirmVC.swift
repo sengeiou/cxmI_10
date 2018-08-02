@@ -17,7 +17,7 @@ class CXMMDaletouConfirmVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        self.tableView.reloadData()
     }
 
    

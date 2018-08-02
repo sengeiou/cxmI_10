@@ -26,6 +26,7 @@ class DaletouDragBlueCell: UITableViewCell {
     }
 
     private func setSubview() {
+        blueView.delegate = self
         blueView.configure(with: DaletouDataModel.getData(ballStyle: .blue))
     }
     
@@ -36,7 +37,12 @@ class DaletouDragBlueCell: UITableViewCell {
     }
 
 }
-
+extension DaletouDragBlueCell : DaletouCollectionViewDelegate {
+    func didSelected(view: DaletouCollectionView, model: DaletouDataModel) {
+        guard delegate != nil else { fatalError("delegate为空")}
+        delegate.didSelect(cell: self, model: model)
+    }
+}
 extension DaletouDragBlueCell{
     public func configure(with display : DLTDisplayStyle) {
         blueView.configure(with: display)

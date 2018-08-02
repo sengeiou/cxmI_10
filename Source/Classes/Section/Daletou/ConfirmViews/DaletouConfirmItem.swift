@@ -12,3 +12,15 @@ class DaletouConfirmItem: UICollectionViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
 }
+
+extension DaletouConfirmItem {
+    public func configure(with data : DaletouDataModel) {
+        titleLabel.text = data.num
+        switch data.style {
+        case .red:
+            titleLabel.textColor = ColorEB1C24
+        case .blue:
+            titleLabel.textColor = Color0081CC
+        }
+    }
+}

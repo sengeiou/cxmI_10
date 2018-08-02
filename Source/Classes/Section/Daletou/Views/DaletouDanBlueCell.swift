@@ -26,6 +26,7 @@ class DaletouDanBlueCell: UITableViewCell {
     }
 
     private func setSubview() {
+        blueView.delegate = self
         blueView.configure(with: DaletouDataModel.getData(ballStyle: .blue))
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -35,7 +36,12 @@ class DaletouDanBlueCell: UITableViewCell {
     }
 
 }
-
+extension DaletouDanBlueCell : DaletouCollectionViewDelegate {
+    func didSelected(view: DaletouCollectionView, model: DaletouDataModel) {
+        guard delegate != nil else { fatalError("delegate为空")}
+        delegate.didSelect(cell: self, model: model)
+    }
+}
 extension DaletouDanBlueCell {
     public func configure(with display : DLTDisplayStyle) {
         blueView.configure(with: display)

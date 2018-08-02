@@ -49,7 +49,7 @@ extension DaletouConfirmCell : UICollectionViewDataSource {
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DaletouConfirmItem", for: indexPath) as! DaletouConfirmItem
-        
+        cell.configure(with: self.dataList[indexPath.row])
         return cell
     }
 }
