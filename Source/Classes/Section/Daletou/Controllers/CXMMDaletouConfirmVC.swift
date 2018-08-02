@@ -42,7 +42,21 @@ extension CXMMDaletouConfirmVC : UITableViewDataSource {
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
+    
+        let list = dataList[indexPath.row]
+        
+        let count : Int = list.count / 8
+        
+        if count == 0 {
+            return 90
+        }else {
+            let num : Int = dataList.count % 8
+            if num == 0 {
+                return CGFloat(70 + 30 * count)
+            }else {
+                return CGFloat(70 + 30 * (count + 1))
+            }
+        }
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {

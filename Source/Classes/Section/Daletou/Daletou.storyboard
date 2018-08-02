@@ -892,6 +892,9 @@
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="2ol-Co-SCT">
                                                     <rect key="frame" x="70" y="18" width="256" height="87"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="256" id="5a2-bw-CnZ"/>
+                                                    </constraints>
                                                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="xJd-dj-6ko">
                                                         <size key="itemSize" width="65" height="88"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -960,7 +963,6 @@
                                                 <constraint firstItem="54v-bd-VbS" firstAttribute="leading" secondItem="Rjr-qf-bTt" secondAttribute="leading" constant="16" id="VQb-ZS-Hwg"/>
                                                 <constraint firstItem="IsU-qt-GdX" firstAttribute="top" secondItem="2ol-Co-SCT" secondAttribute="bottom" constant="11" id="enW-Zf-nyx"/>
                                                 <constraint firstItem="IsU-qt-GdX" firstAttribute="trailing" secondItem="2ol-Co-SCT" secondAttribute="trailing" id="fYe-BW-EyC"/>
-                                                <constraint firstAttribute="trailing" secondItem="2ol-Co-SCT" secondAttribute="trailing" constant="16" id="lsz-BT-iDQ"/>
                                                 <constraint firstItem="IsU-qt-GdX" firstAttribute="leading" secondItem="2ol-Co-SCT" secondAttribute="leading" id="nS0-4O-Sn2"/>
                                                 <constraint firstItem="2ol-Co-SCT" firstAttribute="leading" secondItem="Rjr-qf-bTt" secondAttribute="leading" constant="70" id="wTK-ZF-dHA"/>
                                             </constraints>
