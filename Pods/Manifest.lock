@@ -29,6 +29,7 @@ PODS:
   - TTTAttributedLabel (2.0.0)
   - WechatOpenSDK (1.8.2)
   - XLPagerTabStrip (8.0.1)
+  - YBPopupMenu (1.1.2)
 
 DEPENDENCIES:
   - BaiduMobStat
@@ -51,6 +52,7 @@ DEPENDENCIES:
   - TTTAttributedLabel
   - WechatOpenSDK
   - XLPagerTabStrip (~> 8.0)
+  - YBPopupMenu (~> 1.1.2)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -76,6 +78,7 @@ SPEC REPOS:
     - TTTAttributedLabel
     - WechatOpenSDK
     - XLPagerTabStrip
+    - YBPopupMenu
 
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
@@ -100,7 +103,8 @@ SPEC CHECKSUMS:
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
   WechatOpenSDK: 676feec516a11173eafd1fe64b10d27babf28701
   XLPagerTabStrip: c908b17cbf42fcd2598ee1adfc49bae25444d88a
+  YBPopupMenu: 6efb286385d95ba5f97c58b8464ec873645e8764
 
-PODFILE CHECKSUM: 59a8ee8524877479e2e37977a5d9c1ee34df8a5e
+PODFILE CHECKSUM: 063d507c69a0e2eae729a657ec20a80b4df34978
 
 COCOAPODS: 1.5.0

@@ -79,9 +79,12 @@ extension CXMMDaletouViewController : CXMMDaletouMenuDelegate {
     }
 }
 // MARK: - TOP Menu
-extension CXMMDaletouViewController {
+extension CXMMDaletouViewController : YBPopupMenuDelegate{
     @IBAction func topMenuClick(_ sender: UIButton) {
-        
+        YBPopupMenu.showRely(on: sender, titles: ["1","2"], icons: ["",""], menuWidth: 100, delegate: self)
+    }
+    func ybPopupMenu(_ ybPopupMenu: YBPopupMenu!, didSelectedAt index: Int) {
+        print(11111)
     }
 }
 

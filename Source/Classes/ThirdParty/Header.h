@@ -20,3 +20,4 @@
 #import <SobotKit/SobotKit.h>
 #import "YHPhotoSelect.h"
 #import "WMPageController.h"
+#import "YBPopupMenu.h"

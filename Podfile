@@ -46,6 +46,7 @@ target '彩小蜜' do
 
   pod 'JPImageresizerView'
 
+  pod 'YBPopupMenu', '~> 1.1.2'
 
 
   # Pods for 彩小蜜
