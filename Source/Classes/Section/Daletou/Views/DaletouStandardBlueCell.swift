@@ -7,11 +7,16 @@
 //
 
 import UIKit
+protocol DaletouStandardBlueCellDelegate {
+    func didSelect(cell: DaletouStandardBlueCell, model : DaletouDataModel) -> Void
+}
 
 class DaletouStandardBlueCell: UITableViewCell {
 
     static var cellHeight : CGFloat =  DaletouItem.width * 2 + 15 * 2 + 11
     static var omCellHeight : CGFloat = (DaletouItem.width * 2) + (21 * 2) + 11
+    
+    public var delegate : DaletouStandardBlueCellDelegate!
     
     @IBOutlet weak var blueView: DaletouCollectionView!
     override func awakeFromNib() {

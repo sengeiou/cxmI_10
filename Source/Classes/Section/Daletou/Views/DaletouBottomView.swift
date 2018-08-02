@@ -8,8 +8,15 @@
 
 import UIKit
 
+protocol DaletouBottomViewDelegate {
+    func didTipDelete() -> Void
+    func didTipConfirm() -> Void
+}
+
 class DaletouBottomView: UIView {
 
+    public var delegate: DaletouBottomViewDelegate!
+    
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var deleteBut : UIButton!
@@ -17,10 +24,12 @@ class DaletouBottomView: UIView {
     @IBOutlet weak var confirmBut : UIButton!
     
     @IBAction func confirmClick(_ sender: UIButton) {
+        guard delegate != nil else { fatalError("delegate为空")}
+        delegate.didTipConfirm()
     }
     @IBAction func deleteClick(_ sender: UIButton) {
-        
-        
+        guard delegate != nil else { fatalError("delegate为空")}
+        delegate.didTipDelete()
     }
     
 

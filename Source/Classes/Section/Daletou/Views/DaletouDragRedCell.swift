@@ -8,10 +8,16 @@
 
 import UIKit
 
+protocol DaletouDragRedCellDelegate {
+    func didSelect(cell: DaletouDragRedCell, model : DaletouDataModel) -> Void
+}
+
 class DaletouDragRedCell: UITableViewCell {
 
     static var cellHeight : CGFloat =  DaletouItem.width * 5 + 15 * 5 + 50
     static var omCellHeight : CGFloat = (DaletouItem.width * 5) + (21 * 6) + 50
+    
+    public var delegate : DaletouDragRedCellDelegate!
     
     @IBOutlet weak var redView: DaletouCollectionView!
     override func awakeFromNib() {

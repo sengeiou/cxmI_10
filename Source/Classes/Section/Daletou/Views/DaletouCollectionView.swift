@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+
 
 enum BallStyle {
     case red
@@ -20,9 +22,14 @@ enum DLTDisplayStyle {
     case omission
 }
 
+protocol DaletouCollectionViewDelegate {
+    func didSelected(view : DaletouCollectionView, model: DaletouDataModel) -> Void
+}
 
 class DaletouCollectionView: UIView {
 
+    public var delegate : DaletouCollectionViewDelegate!
+    
     private var ballStyle : BallStyle = .red
     
     private var displayStyle : DLTDisplayStyle = .defStyle
@@ -37,6 +44,10 @@ class DaletouCollectionView: UIView {
         self.collectionView.isScrollEnabled = false
         
     }
+}
+// MARK: - Event
+extension DaletouCollectionView {
+    
 }
 
 // MARK: - 数据
@@ -61,7 +72,10 @@ extension DaletouCollectionView : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let model = self.dataList[indexPath.row]
         model.selected = !model.selected
+        
         collectionView.reloadData()
+        guard delegate != nil else { fatalError("delegate为空")}
+        delegate.didSelected(view: self, model: model)
     }
 }
 

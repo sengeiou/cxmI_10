@@ -12,6 +12,7 @@ class DaletouDataModel: NSObject {
     required override init() {}
     
     var num : String!
+    var number: Int!
     var style : BallStyle = .red
     var selected : Bool = false
     
@@ -23,6 +24,7 @@ class DaletouDataModel: NSObject {
             for i in 1...35 {
                 let model = DaletouDataModel()
                 model.num = "\(i)"
+                model.number = i
                 list.append(model)
             }
         case .blue:
@@ -30,6 +32,7 @@ class DaletouDataModel: NSObject {
                 let model = DaletouDataModel()
                 model.style = .blue
                 model.num = "\(i)"
+                model.number = i
                 list.append(model)
             }
         }

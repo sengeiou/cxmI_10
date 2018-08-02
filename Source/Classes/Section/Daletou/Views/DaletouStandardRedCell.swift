@@ -8,10 +8,17 @@
 
 import UIKit
 
+protocol DaletouStandardRedCellDelegate {
+    func didSelect(cell: DaletouStandardRedCell, model : DaletouDataModel) -> Void
+}
+
 class DaletouStandardRedCell: UITableViewCell {
 
     static var cellHeight : CGFloat =  DaletouItem.width * 5 + 15 * 5 + 54
     static var omCellHeight : CGFloat = (DaletouItem.width * 5) + (21 * 5) + 65
+    
+    public var delegate : DaletouStandardRedCellDelegate!
+    
     @IBOutlet weak var redView: DaletouCollectionView!
     
     public var displayType : DLTDisplayStyle!
@@ -22,6 +29,7 @@ class DaletouStandardRedCell: UITableViewCell {
     }
 
     private func setSubview() {
+        redView.delegate = self
         redView.configure(with: DaletouDataModel.getData(ballStyle: .red))
     }
     
@@ -30,7 +38,13 @@ class DaletouStandardRedCell: UITableViewCell {
 
         
     }
+}
 
+extension DaletouStandardRedCell : DaletouCollectionViewDelegate {
+    func didSelected(view: DaletouCollectionView, model: DaletouDataModel) {
+        guard delegate != nil else { fatalError("delegate为空")}
+        delegate.didSelect(cell: self, model: model)
+    }
 }
 
 extension DaletouStandardRedCell {

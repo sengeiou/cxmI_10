@@ -28,6 +28,9 @@ class CXMMDaletouViewController: BaseViewController {
             self.tableView.reloadData()
         }
     }
+    private var selectedSet : Set<DaletouDataModel> = Set<DaletouDataModel>()
+    private var selectedList : [DaletouDataModel] = [DaletouDataModel]()
+    
     private var displayStyle : DLTDisplayStyle = .defStyle
     private var menu : CXMMDaletouMenu = CXMMDaletouMenu()
     private var titleView : UIButton!
@@ -35,6 +38,7 @@ class CXMMDaletouViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         menu.delegate = self
+        bottomView.delegate = self
         setNavigationTitleView()
         setTableview()
         setSubview()
@@ -50,7 +54,123 @@ class CXMMDaletouViewController: BaseViewController {
     }
 }
 
-// MARK: - MENU
+
+// MARK: - TOP Menu
+extension CXMMDaletouViewController : YBPopupMenuDelegate{
+    @IBAction func topMenuClick(_ sender: UIButton) {
+        YBPopupMenu.showRely(on: sender, titles: ["走势图","玩法帮助","开奖结果","隐藏遗漏"],
+                             icons: ["Trend","GameDescription","LotteryResult","Missing"],
+                             menuWidth: 125, delegate: self)
+    }
+    func ybPopupMenu(_ ybPopupMenu: YBPopupMenu!, didSelectedAt index: Int) {
+        switch index {
+        case 0:
+            break
+        case 1:
+            break
+        case 2:
+            break
+        case 3:
+            if self.displayStyle == .defStyle {
+                self.displayStyle = .omission
+            }else if self.displayStyle == .omission {
+                self.displayStyle = .defStyle
+            }
+            self.tableView.reloadData()
+        default: break
+        }
+    }
+}
+
+// MARK: - 底部视图 代理
+extension CXMMDaletouViewController : DaletouBottomViewDelegate {
+    func didTipDelete() {
+        showAlert()
+    }
+    
+    func didTipConfirm() {
+        
+    }
+
+    private func showAlert() {
+        showCXMAlert(title: "温馨提示", message: "\n确定清空所选号码吗？",
+                     action: "确定", cancel: "取消") { (action) in
+            
+        }
+    }
+}
+
+// MARK: - PUSH
+extension CXMMDaletouViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "pushConfirm":
+            let vc = segue.destination as! CXMMDaletouConfirmVC
+            
+            vc.dataList.insert(selectedSet.sorted{$0.number < $1.number}, at: 0)
+            
+        default: break
+            
+        }
+    }
+}
+
+extension CXMMDaletouViewController : DaletouStandardRedCellDelegate,
+                                        DaletouStandardBlueCellDelegate,
+                                        DaletouDanRedCellDelegate,
+                                        DaletouDanBlueCellDelegate,
+                                        DaletouDragRedCellDelegate,
+                                        DaletouDragBlueCellDelegate{
+    
+    func didSelect(cell: DaletouStandardRedCell, model: DaletouDataModel) {
+        
+        insertData(model: model)
+        print(selectedSet)
+    }
+    
+    func didSelect(cell: DaletouStandardBlueCell, model: DaletouDataModel) {
+        
+    }
+    func didSelect(cell: DaletouDanRedCell, model: DaletouDataModel) {
+        
+    }
+    func didSelect(cell: DaletouDragRedCell, model: DaletouDataModel) {
+        
+    }
+    func didSelect(cell: DaletouDanBlueCell, model: DaletouDataModel) {
+        
+    }
+    func didSelect(cell: DaletouDragBlueCell, model: DaletouDataModel) {
+        
+    }
+    
+    
+    private func insertData(model: DaletouDataModel) {
+        switch model.selected {
+        case true:
+            selectedSet.insert(model)
+        case false:
+            selectedSet.remove(model)
+        }
+    }
+}
+
+extension CXMMDaletouViewController : UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch type {
+        case .标准选号:
+            switch indexPath.row {
+            case 0:
+                let history = CXMMDaletouHistoryAward()
+                present(history)
+            default: break
+            }
+        case .胆拖选号:
+            break
+        }
+    }
+}
+// MARK: - 导航栏 title MENU
 extension CXMMDaletouViewController : CXMMDaletouMenuDelegate {
     
     func didTipMenu(view: CXMMDaletouMenu, type: DaletouType) {
@@ -79,48 +199,7 @@ extension CXMMDaletouViewController : CXMMDaletouMenuDelegate {
         menu.show()
     }
 }
-// MARK: - TOP Menu
-extension CXMMDaletouViewController : YBPopupMenuDelegate{
-    @IBAction func topMenuClick(_ sender: UIButton) {
-        YBPopupMenu.showRely(on: sender, titles: ["走势图","玩法帮助","开奖结果","隐藏遗漏"],
-                             icons: ["Trend","GameDescription","LotteryResult","Missing"],
-                             menuWidth: 100, delegate: self)
-    }
-    func ybPopupMenu(_ ybPopupMenu: YBPopupMenu!, didSelectedAt index: Int) {
-        switch index {
-        case 0:
-            break
-        case 1:
-            break
-        case 2:
-            break
-        case 3:
-            if self.displayStyle == .defStyle {
-                self.displayStyle = .omission
-            }else if self.displayStyle == .omission {
-                self.displayStyle = .defStyle
-            }
-            self.tableView.reloadData()
-        default: break
-        }
-    }
-}
 
-extension CXMMDaletouViewController : UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch type {
-        case .标准选号:
-            switch indexPath.row {
-            case 0:
-                let history = CXMMDaletouHistoryAward()
-                present(history)
-            default: break
-            }
-        case .胆拖选号:
-            break
-        }
-    }
-}
 extension CXMMDaletouViewController {
     private func setTableview() {
         if #available(iOS 11.0, *) {
@@ -242,32 +321,37 @@ extension CXMMDaletouViewController : UITableViewDataSource {
     
     private func initStandardRedCell(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DaletouStandardRedCell", for: indexPath) as! DaletouStandardRedCell
-        
+        cell.delegate = self
         cell.configure(with: self.displayStyle)
         return cell
     }
     private func initStandardBlueCell(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DaletouStandardBlueCell", for: indexPath) as! DaletouStandardBlueCell
+        cell.delegate = self
         cell.configure(with: self.displayStyle)
         return cell
     }
     private func initDanRedCell(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DaletouDanRedCell", for: indexPath) as! DaletouDanRedCell
+        cell.delegate = self
         cell.configure(with: self.displayStyle)
         return cell
     }
     private func initDragRedCell(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DaletouDragRedCell", for: indexPath) as! DaletouDragRedCell
+        cell.delegate = self
         cell.configure(with: self.displayStyle)
         return cell
     }
     private func initDanBlueCell(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DaletouDanBlueCell", for: indexPath) as! DaletouDanBlueCell
+        cell.delegate = self
         cell.configure(with: self.displayStyle)
         return cell
     }
     private func initDragBlueCell(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DaletouDragBlueCell", for: indexPath) as! DaletouDragBlueCell
+        cell.delegate = self
         cell.configure(with: self.displayStyle)
         return cell
     }
