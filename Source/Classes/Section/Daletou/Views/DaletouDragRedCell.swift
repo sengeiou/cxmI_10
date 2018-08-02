@@ -10,6 +10,9 @@ import UIKit
 
 class DaletouDragRedCell: UITableViewCell {
 
+    static var cellHeight : CGFloat =  DaletouItem.width * 5 + 15 * 5 + 50
+    static var omCellHeight : CGFloat = (DaletouItem.width * 5) + (21 * 6) + 50
+    
     @IBOutlet weak var redView: DaletouCollectionView!
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,4 +29,10 @@ class DaletouDragRedCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+}
+
+extension DaletouDragRedCell {
+    public func configure(with display : DLTDisplayStyle) {
+        redView.configure(with: display)
+    }
 }

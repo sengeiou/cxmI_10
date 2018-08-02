@@ -28,6 +28,7 @@ class CXMMDaletouViewController: BaseViewController {
             self.tableView.reloadData()
         }
     }
+    private var displayStyle : DLTDisplayStyle = .defStyle
     private var menu : CXMMDaletouMenu = CXMMDaletouMenu()
     private var titleView : UIButton!
     
@@ -81,10 +82,27 @@ extension CXMMDaletouViewController : CXMMDaletouMenuDelegate {
 // MARK: - TOP Menu
 extension CXMMDaletouViewController : YBPopupMenuDelegate{
     @IBAction func topMenuClick(_ sender: UIButton) {
-        YBPopupMenu.showRely(on: sender, titles: ["1","2"], icons: ["",""], menuWidth: 100, delegate: self)
+        YBPopupMenu.showRely(on: sender, titles: ["走势图","玩法帮助","开奖结果","隐藏遗漏"],
+                             icons: ["Trend","GameDescription","LotteryResult","Missing"],
+                             menuWidth: 100, delegate: self)
     }
     func ybPopupMenu(_ ybPopupMenu: YBPopupMenu!, didSelectedAt index: Int) {
-        print(11111)
+        switch index {
+        case 0:
+            break
+        case 1:
+            break
+        case 2:
+            break
+        case 3:
+            if self.displayStyle == .defStyle {
+                self.displayStyle = .omission
+            }else if self.displayStyle == .omission {
+                self.displayStyle = .defStyle
+            }
+            self.tableView.reloadData()
+        default: break
+        }
     }
 }
 
@@ -164,22 +182,52 @@ extension CXMMDaletouViewController : UITableViewDataSource {
             case 0:
                 return 40
             case 1:
-                return 240 + 54 + 15
+                switch displayStyle {
+                case .defStyle:
+                    return DaletouStandardRedCell.cellHeight
+                case .omission:
+                    return DaletouStandardRedCell.omCellHeight
+                }
             case 2:
-                return 117
+                switch displayStyle {
+                case .defStyle:
+                    return DaletouStandardBlueCell.cellHeight
+                case .omission:
+                    return DaletouStandardBlueCell.omCellHeight
+                }
             default:
                 return 0
             }
         case .胆拖选号:
             switch indexPath.row {
             case 0:
-                return 350
+                switch displayStyle {
+                case .defStyle:
+                    return DaletouDanRedCell.cellHeight
+                case .omission:
+                    return DaletouDanRedCell.omCellHeight
+                }
             case 1:
-                return 240 + 54 + 15
+                switch displayStyle {
+                case .defStyle:
+                    return DaletouDragRedCell.cellHeight
+                case .omission:
+                    return DaletouDragRedCell.omCellHeight
+                }
             case 2:
-                return 150
+                switch displayStyle {
+                case .defStyle:
+                    return DaletouDanBlueCell.cellHeight
+                case .omission:
+                    return DaletouDanBlueCell.omCellHeight
+                }
             case 3:
-                return 150
+                switch displayStyle {
+                case .defStyle:
+                    return DaletouDragBlueCell.cellHeight
+                case .omission:
+                    return DaletouDragBlueCell.omCellHeight
+                }
             default:
                 return 0
             }
@@ -195,31 +243,32 @@ extension CXMMDaletouViewController : UITableViewDataSource {
     private func initStandardRedCell(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DaletouStandardRedCell", for: indexPath) as! DaletouStandardRedCell
         
+        cell.configure(with: self.displayStyle)
         return cell
     }
     private func initStandardBlueCell(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DaletouStandardBlueCell", for: indexPath) as! DaletouStandardBlueCell
-        
+        cell.configure(with: self.displayStyle)
         return cell
     }
     private func initDanRedCell(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DaletouDanRedCell", for: indexPath) as! DaletouDanRedCell
-        
+        cell.configure(with: self.displayStyle)
         return cell
     }
     private func initDragRedCell(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DaletouDragRedCell", for: indexPath) as! DaletouDragRedCell
-        
+        cell.configure(with: self.displayStyle)
         return cell
     }
     private func initDanBlueCell(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DaletouDanBlueCell", for: indexPath) as! DaletouDanBlueCell
-        
+        cell.configure(with: self.displayStyle)
         return cell
     }
     private func initDragBlueCell(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DaletouDragBlueCell", for: indexPath) as! DaletouDragBlueCell
-        
+        cell.configure(with: self.displayStyle)
         return cell
     }
     

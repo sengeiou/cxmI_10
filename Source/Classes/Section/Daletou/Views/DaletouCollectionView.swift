@@ -13,20 +13,30 @@ enum BallStyle {
     case blue
 }
 
+enum DLTDisplayStyle {
+    /// 默认样式
+    case defStyle
+    /// 显示遗漏
+    case omission
+}
+
+
 class DaletouCollectionView: UIView {
 
     private var ballStyle : BallStyle = .red
     
+    private var displayStyle : DLTDisplayStyle = .defStyle
+    
     private var dataList : [DaletouDataModel]!
+    private var omissionList: [DaletouOmissionModel]!
     
     @IBOutlet weak var collectionView : UICollectionView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        self.collectionView.isScrollEnabled = false
         
     }
-
 }
 
 // MARK: - 数据
@@ -35,9 +45,15 @@ extension DaletouCollectionView {
         self.dataList = dataList
         self.collectionView.reloadData()
     }
-    // 隐藏数据
-    public func configure(with omissionList : [Any]) {
-        
+    // 显示隐藏数据
+    public func configure(with omissionList : [DaletouOmissionModel]) {
+        self.omissionList = omissionList
+        self.collectionView.reloadData()
+    }
+    /// 配置显示样式，，默认-显示遗漏
+    public func configure(with displayStyle : DLTDisplayStyle) {
+        self.displayStyle = displayStyle
+        self.collectionView.reloadData()
     }
 }
 
@@ -60,20 +76,28 @@ extension DaletouCollectionView : UICollectionViewDataSource {
         cell.configure(with: self.dataList[indexPath.row])
         return cell
     }
-    
-    
 }
 
 extension DaletouCollectionView : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: DaletouItem.width, height: DaletouItem.heiht)
+        switch displayStyle {
+        case .defStyle:
+            return CGSize(width: DaletouItem.width, height: DaletouItem.heiht)
+        case .omission:
+            return CGSize(width: DaletouItem.width, height: DaletouItem.heiht + 16)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 16, bottom: 15, right: 16)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 15
+        switch displayStyle {
+        case .defStyle:
+            return 15
+        case .omission:
+            return 5
+        }
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         

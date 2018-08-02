@@ -10,6 +10,9 @@ import UIKit
 
 class DaletouDanBlueCell: UITableViewCell {
 
+    static var cellHeight : CGFloat =  DaletouItem.width * 2 + 15 * 2 + 50
+    static var omCellHeight : CGFloat = (DaletouItem.width * 2) + (21 * 3) + 50
+    
     @IBOutlet weak var blueView: DaletouCollectionView!
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,4 +28,10 @@ class DaletouDanBlueCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+}
+
+extension DaletouDanBlueCell {
+    public func configure(with display : DLTDisplayStyle) {
+        blueView.configure(with: display)
+    }
 }

@@ -10,9 +10,12 @@ import UIKit
 
 class DaletouStandardRedCell: UITableViewCell {
 
-    static let height : CGFloat = 240 + 15
-    
+    static var cellHeight : CGFloat =  DaletouItem.width * 5 + 15 * 5 + 54
+    static var omCellHeight : CGFloat = (DaletouItem.width * 5) + (21 * 5) + 65
     @IBOutlet weak var redView: DaletouCollectionView!
+    
+    public var displayType : DLTDisplayStyle!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setSubview()
@@ -31,7 +34,11 @@ class DaletouStandardRedCell: UITableViewCell {
 }
 
 extension DaletouStandardRedCell {
-    public func configure(model : DaletouOmissionModel) {
+    public func configure(model : DaletouOmissionModel, display : DLTDisplayStyle) {
         
+    }
+    
+    public func configure(with display : DLTDisplayStyle) {
+        redView.configure(with: display)
     }
 }

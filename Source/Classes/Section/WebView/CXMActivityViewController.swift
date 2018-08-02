@@ -85,6 +85,8 @@ class CXMActivityViewController: BaseWebViewController, ShareProtocol {
             pushViewController(vc: register)
             decisionHandler(.cancel)
             return
+        case .竞彩足球:
+            break
         default: break
         }
    
