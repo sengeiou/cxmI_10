@@ -23,7 +23,7 @@ enum DLTDisplayStyle {
 }
 
 protocol DaletouCollectionViewDelegate {
-    func didSelected(view : DaletouCollectionView, model: DaletouDataModel) -> Void
+    func didSelected(view : DaletouCollectionView, model: DaletouDataModel, indexPath : IndexPath) -> Void
 }
 
 class DaletouCollectionView: UIView {
@@ -47,7 +47,9 @@ class DaletouCollectionView: UIView {
 }
 // MARK: - Event
 extension DaletouCollectionView {
-    
+    public func reloadData() {
+        
+    }
 }
 
 // MARK: - 数据
@@ -72,10 +74,10 @@ extension DaletouCollectionView : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let model = self.dataList[indexPath.row]
         model.selected = !model.selected
-        
-        collectionView.reloadData()
+        model.isselected.value = model.selected
+        //collectionView.reloadData()
         guard delegate != nil else { fatalError("delegate为空")}
-        delegate.didSelected(view: self, model: model)
+        delegate.didSelected(view: self, model: model, indexPath: indexPath)
     }
 }
 

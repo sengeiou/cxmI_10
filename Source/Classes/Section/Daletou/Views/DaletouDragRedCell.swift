@@ -9,7 +9,7 @@
 import UIKit
 
 protocol DaletouDragRedCellDelegate {
-    func didSelect(cell: DaletouDragRedCell, model : DaletouDataModel) -> Void
+    func didSelect(cell: DaletouDragRedCell, model : DaletouDataModel, indexPath : IndexPath) -> Void
 }
 
 class DaletouDragRedCell: UITableViewCell {
@@ -27,7 +27,7 @@ class DaletouDragRedCell: UITableViewCell {
 
     private func setSubview() {
         redView.delegate = self
-        redView.configure(with: DaletouDataModel.getData(ballStyle: .red))
+        //redView.configure(with: DaletouDataModel.getData(ballStyle: .red))
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -38,12 +38,15 @@ class DaletouDragRedCell: UITableViewCell {
 
 }
 extension DaletouDragRedCell : DaletouCollectionViewDelegate {
-    func didSelected(view: DaletouCollectionView, model: DaletouDataModel) {
+    func didSelected(view: DaletouCollectionView, model: DaletouDataModel, indexPath : IndexPath) {
         guard delegate != nil else { fatalError("delegate为空")}
-        delegate.didSelect(cell: self, model: model)
+        delegate.didSelect(cell: self, model: model, indexPath: indexPath)
     }
 }
 extension DaletouDragRedCell {
+    public func configure(with list : [DaletouDataModel]) {
+        redView.configure(with: list)
+    }
     public func configure(with display : DLTDisplayStyle) {
         redView.configure(with: display)
     }

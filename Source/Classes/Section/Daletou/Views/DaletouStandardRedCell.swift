@@ -9,7 +9,7 @@
 import UIKit
 
 protocol DaletouStandardRedCellDelegate {
-    func didSelect(cell: DaletouStandardRedCell, model : DaletouDataModel) -> Void
+    func didSelect(cell: DaletouStandardRedCell, model : DaletouDataModel, indexPath : IndexPath) -> Void
 }
 
 class DaletouStandardRedCell: UITableViewCell {
@@ -41,9 +41,9 @@ class DaletouStandardRedCell: UITableViewCell {
 }
 
 extension DaletouStandardRedCell : DaletouCollectionViewDelegate {
-    func didSelected(view: DaletouCollectionView, model: DaletouDataModel) {
+    func didSelected(view: DaletouCollectionView, model: DaletouDataModel, indexPath : IndexPath) {
         guard delegate != nil else { fatalError("delegate为空")}
-        delegate.didSelect(cell: self, model: model)
+        delegate.didSelect(cell: self, model: model, indexPath: indexPath)
     }
 }
 
@@ -51,7 +51,9 @@ extension DaletouStandardRedCell {
     public func configure(model : DaletouOmissionModel, display : DLTDisplayStyle) {
         
     }
-    
+    public func configure(with list : [DaletouDataModel]) {
+        redView.configure(with: list)
+    }
     public func configure(with display : DLTDisplayStyle) {
         redView.configure(with: display)
     }

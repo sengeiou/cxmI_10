@@ -36,6 +36,20 @@ class CXMMDaletouViewController: BaseViewController {
     private var menu : CXMMDaletouMenu = CXMMDaletouMenu()
     private var titleView : UIButton!
     
+   
+    lazy private var danRedList : [DaletouDataModel] = {
+        return DaletouDataModel.getData(ballStyle: .red)
+    }()
+    lazy private var dragRedList: [DaletouDataModel] = {
+        return DaletouDataModel.getData(ballStyle: .red)
+    }()
+    lazy private var danBlueList: [DaletouDataModel] = {
+        return DaletouDataModel.getData(ballStyle: .blue)
+    }()
+    lazy private var dragBlueList: [DaletouDataModel] = {
+        return DaletouDataModel.getData(ballStyle: .blue)
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         menu.delegate = self
@@ -126,24 +140,34 @@ extension CXMMDaletouViewController : DaletouStandardRedCellDelegate,
                                         DaletouDragRedCellDelegate,
                                         DaletouDragBlueCellDelegate{
     
-    func didSelect(cell: DaletouStandardRedCell, model: DaletouDataModel) {
+    func didSelect(cell: DaletouStandardRedCell, model: DaletouDataModel, indexPath : IndexPath) {
         insertRedData(model: model)
     }
     
-    func didSelect(cell: DaletouStandardBlueCell, model: DaletouDataModel) {
+    func didSelect(cell: DaletouStandardBlueCell, model: DaletouDataModel, indexPath : IndexPath) {
         insertBlueData(model: model)
     }
-    func didSelect(cell: DaletouDanRedCell, model: DaletouDataModel) {
+    func didSelect(cell: DaletouDanRedCell, model: DaletouDataModel, indexPath : IndexPath) {
         insertRedData(model: model)
+        dragRedList[indexPath.row].selected = false
+        dragRedList[indexPath.row].isselected.value = false
+        
+        
     }
-    func didSelect(cell: DaletouDragRedCell, model: DaletouDataModel) {
+    func didSelect(cell: DaletouDragRedCell, model: DaletouDataModel, indexPath : IndexPath) {
         insertRedData(model: model)
+        danRedList[indexPath.row].selected = false
+        danRedList[indexPath.row].isselected.value = false
     }
-    func didSelect(cell: DaletouDanBlueCell, model: DaletouDataModel) {
+    func didSelect(cell: DaletouDanBlueCell, model: DaletouDataModel, indexPath : IndexPath) {
         insertBlueData(model: model)
+        dragBlueList[indexPath.row].selected = false
+        self.tableView.reloadData()
     }
-    func didSelect(cell: DaletouDragBlueCell, model: DaletouDataModel) {
+    func didSelect(cell: DaletouDragBlueCell, model: DaletouDataModel, indexPath : IndexPath) {
         insertBlueData(model: model)
+        danBlueList[indexPath.row].selected = false
+        self.tableView.reloadData()
     }
     
     
@@ -333,6 +357,7 @@ extension CXMMDaletouViewController : UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DaletouStandardRedCell", for: indexPath) as! DaletouStandardRedCell
         cell.delegate = self
         cell.configure(with: self.displayStyle)
+        
         return cell
     }
     private func initStandardBlueCell(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
@@ -345,24 +370,28 @@ extension CXMMDaletouViewController : UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DaletouDanRedCell", for: indexPath) as! DaletouDanRedCell
         cell.delegate = self
         cell.configure(with: self.displayStyle)
+        cell.configure(with: danRedList)
         return cell
     }
     private func initDragRedCell(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DaletouDragRedCell", for: indexPath) as! DaletouDragRedCell
         cell.delegate = self
         cell.configure(with: self.displayStyle)
+        cell.configure(with: dragRedList)
         return cell
     }
     private func initDanBlueCell(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DaletouDanBlueCell", for: indexPath) as! DaletouDanBlueCell
         cell.delegate = self
         cell.configure(with: self.displayStyle)
+        cell.configure(with: danBlueList)
         return cell
     }
     private func initDragBlueCell(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DaletouDragBlueCell", for: indexPath) as! DaletouDragBlueCell
         cell.delegate = self
         cell.configure(with: self.displayStyle)
+        cell.configure(with: dragBlueList)
         return cell
     }
     

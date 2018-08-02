@@ -8,7 +8,7 @@
 
 import UIKit
 protocol DaletouStandardBlueCellDelegate {
-    func didSelect(cell: DaletouStandardBlueCell, model : DaletouDataModel) -> Void
+    func didSelect(cell: DaletouStandardBlueCell, model : DaletouDataModel, indexPath : IndexPath) -> Void
 }
 
 class DaletouStandardBlueCell: UITableViewCell {
@@ -37,12 +37,15 @@ class DaletouStandardBlueCell: UITableViewCell {
 
 }
 extension DaletouStandardBlueCell : DaletouCollectionViewDelegate {
-    func didSelected(view: DaletouCollectionView, model: DaletouDataModel) {
+    func didSelected(view: DaletouCollectionView, model: DaletouDataModel, indexPath : IndexPath) {
         guard delegate != nil else { fatalError("delegate为空")}
-        delegate.didSelect(cell: self, model: model)
+        delegate.didSelect(cell: self, model: model, indexPath: indexPath)
     }
 }
 extension DaletouStandardBlueCell {
+    public func configure(with list : [DaletouDataModel]) {
+        blueView.configure(with: list)
+    }
     public func configure(with display : DLTDisplayStyle) {
         blueView.configure(with: display)
     }

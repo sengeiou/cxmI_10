@@ -9,7 +9,7 @@
 import UIKit
 
 protocol DaletouDanBlueCellDelegate {
-    func didSelect(cell: DaletouDanBlueCell, model : DaletouDataModel) -> Void
+    func didSelect(cell: DaletouDanBlueCell, model : DaletouDataModel, indexPath : IndexPath) -> Void
 }
 
 class DaletouDanBlueCell: UITableViewCell {
@@ -27,7 +27,7 @@ class DaletouDanBlueCell: UITableViewCell {
 
     private func setSubview() {
         blueView.delegate = self
-        blueView.configure(with: DaletouDataModel.getData(ballStyle: .blue))
+        //blueView.configure(with: DaletouDataModel.getData(ballStyle: .blue))
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -37,12 +37,15 @@ class DaletouDanBlueCell: UITableViewCell {
 
 }
 extension DaletouDanBlueCell : DaletouCollectionViewDelegate {
-    func didSelected(view: DaletouCollectionView, model: DaletouDataModel) {
+    func didSelected(view: DaletouCollectionView, model: DaletouDataModel, indexPath : IndexPath) {
         guard delegate != nil else { fatalError("delegate为空")}
-        delegate.didSelect(cell: self, model: model)
+        delegate.didSelect(cell: self, model: model, indexPath: indexPath)
     }
 }
 extension DaletouDanBlueCell {
+    public func configure(with list : [DaletouDataModel]) {
+        blueView.configure(with: list)
+    }
     public func configure(with display : DLTDisplayStyle) {
         blueView.configure(with: display)
     }

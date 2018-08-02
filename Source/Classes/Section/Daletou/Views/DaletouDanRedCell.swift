@@ -10,7 +10,7 @@ import UIKit
 
 
 protocol DaletouDanRedCellDelegate {
-    func didSelect(cell: DaletouDanRedCell, model : DaletouDataModel) -> Void
+    func didSelect(cell: DaletouDanRedCell, model : DaletouDataModel, indexPath : IndexPath) -> Void
 }
 
 class DaletouDanRedCell: UITableViewCell {
@@ -26,9 +26,16 @@ class DaletouDanRedCell: UITableViewCell {
         setSubview()
     }
 
+    public func reloadData() {
+        DispatchQueue.main.async {
+            self.redView.collectionView.reloadData()
+            self.setNeedsLayout()
+        }
+    }
+    
     private func setSubview() {
         redView.delegate = self
-        redView.configure(with: DaletouDataModel.getData(ballStyle: .red))
+        //redView.configure(with: DaletouDataModel.getData(ballStyle: .red))
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -39,12 +46,15 @@ class DaletouDanRedCell: UITableViewCell {
 
 }
 extension DaletouDanRedCell : DaletouCollectionViewDelegate {
-    func didSelected(view: DaletouCollectionView, model: DaletouDataModel) {
+    func didSelected(view: DaletouCollectionView, model: DaletouDataModel, indexPath : IndexPath) {
         guard delegate != nil else { fatalError("delegate为空")}
-        delegate.didSelect(cell: self, model: model)
+        delegate.didSelect(cell: self, model: model, indexPath: indexPath)
     }
 }
 extension DaletouDanRedCell {
+    public func configure(with list : [DaletouDataModel]) {
+        redView.configure(with: list)
+    }
     public func configure(with display : DLTDisplayStyle) {
         redView.configure(with: display)
     }

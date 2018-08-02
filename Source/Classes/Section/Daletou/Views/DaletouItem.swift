@@ -67,14 +67,12 @@ extension DaletouItem {
 // MARK: - 数据设置
 extension DaletouItem {
     public func configure(with data: DaletouDataModel) {
-//        switch data.style {
-//        case .red:
-//            numLabel.textColor = ColorEB1C24
-//        case .blue:
-//            numLabel.textColor = Color0081CC
-//        default: break
-//        }
-        changeSelect(data.selected, style: data.style)
+        
+        data.isselected.asObservable().subscribe(onNext: { (selected) in
+            self.changeSelect(selected, style: data.style)
+        }, onError: nil, onCompleted: nil, onDisposed: nil )
+        
+        //changeSelect(data.selected, style: data.style)
         if let num = Int(data.num) {
             if num < 10 {
                 numLabel.text = "0" + data.num
