@@ -295,20 +295,16 @@ extension CXMMDaletouViewController : DaletouBottomViewDelegate {
             let model = DaletouDataList()
             model.redList = getStandardReds()
             model.blueList = getStandardBlues()
-            
+            model.type = type
             vc.list.append(model)
-            
-            vc.bettingNumber = getStandardBetNum()
         case .胆拖选号:
             let model = DaletouDataList()
             model.danRedList = getDanReds()
             model.dragRedList = getDragReds()
             model.danBlueList = getDanBlues()
             model.dragBlueList = getDragBlues()
-            
+            model.type = type
             vc.list.append(model)
-            
-            vc.bettingNumber = getBettingNum()
         }
         
         pushViewController(vc: vc)
