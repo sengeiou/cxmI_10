@@ -13,6 +13,10 @@ import RxSwift
 enum BallStyle {
     case red
     case blue
+    case danRed
+    case dragRed
+    case danBlue
+    case dragBlue
 }
 
 enum DLTDisplayStyle {

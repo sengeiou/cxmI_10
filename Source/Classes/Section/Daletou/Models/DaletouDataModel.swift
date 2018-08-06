@@ -26,6 +26,7 @@ class DaletouDataModel: NSObject {
                 let model = DaletouDataModel()
                 model.num = "\(i)"
                 model.number = i
+                model.style = ballStyle
                 list.append(model)
             }
         case .blue:
@@ -34,6 +35,41 @@ class DaletouDataModel: NSObject {
                 model.style = .blue
                 model.num = "\(i)"
                 model.number = i
+                model.style = ballStyle
+                list.append(model)
+            }
+        case .danRed:
+            for i in 1...35 {
+                let model = DaletouDataModel()
+                model.num = "\(i)"
+                model.number = i
+                model.style = ballStyle
+                list.append(model)
+            }
+        case .dragRed:
+            for i in 1...35 {
+                let model = DaletouDataModel()
+                model.num = "\(i)"
+                model.number = i
+                model.style = ballStyle
+                list.append(model)
+            }
+        case .danBlue:
+            for i in 1...12 {
+                let model = DaletouDataModel()
+                model.style = .blue
+                model.num = "\(i)"
+                model.number = i
+                model.style = ballStyle
+                list.append(model)
+            }
+        case .dragBlue:
+            for i in 1...12 {
+                let model = DaletouDataModel()
+                model.style = .blue
+                model.num = "\(i)"
+                model.number = i
+                model.style = ballStyle
                 list.append(model)
             }
         }
@@ -41,3 +77,6 @@ class DaletouDataModel: NSObject {
     }
     
 }
+
+
+

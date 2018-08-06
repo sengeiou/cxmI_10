@@ -40,7 +40,7 @@ class DaletouItem: UICollectionViewCell {
 extension DaletouItem {
     public func changeSelect(_ state : Bool, style : BallStyle) {
         switch style {
-        case .red:
+        case .red, .danRed, .dragRed:
             switch state {
             case true :
                 numLabel.textColor = ColorFFFFFF
@@ -51,7 +51,7 @@ extension DaletouItem {
                 numLabel.backgroundColor = ColorFFFFFF
                 numLabel.layer.borderColor = ColorC7C7C7.cgColor
             }
-        case .blue:
+        case .blue, .danBlue, .dragBlue:
             switch state {
             case true :
                 numLabel.textColor = ColorFFFFFF

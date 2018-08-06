@@ -38,6 +38,8 @@ class CXMMDaletouConfirmVC: BaseViewController {
             .asObservable()
             .subscribe(onNext: { (num, multiple) in
                 print("\(num)     \(multiple)")
+                
+                
             }, onError: nil , onCompleted: nil , onDisposed: nil )
     }
 

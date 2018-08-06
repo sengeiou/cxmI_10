@@ -17,9 +17,9 @@ extension DaletouConfirmItem {
     public func configure(with data : DaletouDataModel) {
         titleLabel.text = data.num
         switch data.style {
-        case .red:
+        case .red, .danRed, .dragRed:
             titleLabel.textColor = ColorEB1C24
-        case .blue:
+        case .blue, .danBlue, .dragBlue:
             titleLabel.textColor = Color0081CC
         }
         if data.num == "-" {

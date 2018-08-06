@@ -93,16 +93,16 @@ class CXMMDaletouViewController: BaseViewController {
     }()
     
     lazy private var danRedList : [DaletouDataModel] = {
-        return DaletouDataModel.getData(ballStyle: .red)
+        return DaletouDataModel.getData(ballStyle: .danRed)
     }()
     lazy private var dragRedList: [DaletouDataModel] = {
-        return DaletouDataModel.getData(ballStyle: .red)
+        return DaletouDataModel.getData(ballStyle: .dragRed)
     }()
     lazy private var danBlueList: [DaletouDataModel] = {
-        return DaletouDataModel.getData(ballStyle: .blue)
+        return DaletouDataModel.getData(ballStyle: .danBlue)
     }()
     lazy private var dragBlueList: [DaletouDataModel] = {
-        return DaletouDataModel.getData(ballStyle: .blue)
+        return DaletouDataModel.getData(ballStyle: .dragBlue)
     }()
     
     override func viewDidLoad() {
@@ -309,10 +309,10 @@ extension CXMMDaletouViewController : DaletouBottomViewDelegate {
                 self.selectedBlueSet.removeAll()
                 self.tableView.reloadData()
             case .胆拖选号:
-                self.danRedList = DaletouDataModel.getData(ballStyle: .red)
-                self.dragRedList = DaletouDataModel.getData(ballStyle: .red)
-                self.danBlueList = DaletouDataModel.getData(ballStyle: .blue)
-                self.dragBlueList = DaletouDataModel.getData(ballStyle: .blue)
+                self.danRedList = DaletouDataModel.getData(ballStyle: .danRed)
+                self.dragRedList = DaletouDataModel.getData(ballStyle: .dragRed)
+                self.danBlueList = DaletouDataModel.getData(ballStyle: .danBlue)
+                self.dragBlueList = DaletouDataModel.getData(ballStyle: .dragBlue)
                 self.selectedDanRedSet.removeAll()
                 self.selectedDragRedSet.removeAll()
                 self.selectedDanBlueSet.removeAll()
