@@ -23,6 +23,7 @@ extension DaletouConfirmItem {
             titleLabel.textColor = Color0081CC
         }
         if data.num == "-" {
+            titleLabel.font = Font30
             titleLabel.textColor = ColorC7C7C7
         }
         

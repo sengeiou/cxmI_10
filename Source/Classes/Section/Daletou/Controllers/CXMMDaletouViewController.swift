@@ -240,8 +240,10 @@ extension CXMMDaletouViewController : DaletouBottomViewDelegate {
         switch type {
         case .标准选号:
             vc.dataList = getStandardBalls()
+            vc.bettingNumber = getStandardBetNum()
         case .胆拖选号:
             vc.dataList = getDanBalls()
+            vc.bettingNumber = getBettingNum()
         }
         
         pushViewController(vc: vc)

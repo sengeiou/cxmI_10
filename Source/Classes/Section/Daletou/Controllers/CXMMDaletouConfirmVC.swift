@@ -7,20 +7,39 @@
 //
 
 import UIKit
+import RxSwift
 
 class CXMMDaletouConfirmVC: BaseViewController {
 
     public var dataList : [[DaletouDataModel]] = [[DaletouDataModel]]()
     
+    public var bettingNumber = 0 {
+        didSet{
+            let num = try! bettingNum.value()
+            bettingNum.onNext( num + bettingNumber)
+        }
+    }
+    
     @IBOutlet weak var tableView: UITableView!
+    
+    public var bettingNum = BehaviorSubject(value: 0)
+    private var multiple = BehaviorSubject(value: 0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.title = "彩小秘 · 投注确认"
         self.tableView.reloadData()
+        
+        settingData()
     }
 
-   
+    private func settingData() {
+        _ = Observable.combineLatest(bettingNum, multiple)
+            .asObservable()
+            .subscribe(onNext: { (num, multiple) in
+                print("\(num)     \(multiple)")
+            }, onError: nil , onCompleted: nil , onDisposed: nil )
+    }
 
 }
 
@@ -45,16 +64,16 @@ extension CXMMDaletouConfirmVC : UITableViewDataSource {
     
         let list = dataList[indexPath.row]
         
-        let count : Int = list.count / 8
+        let count : Int = list.count / 12
         
         if count == 0 {
             return 90
         }else {
-            let num : Int = dataList.count % 8
+            let num : Int = list.count % 12
             if num == 0 {
-                return CGFloat(70 + 30 * count)
+                return CGFloat(70 + 21 * count)
             }else {
-                return CGFloat(70 + 30 * (count + 1))
+                return CGFloat(70 + 21 * (count + 1))
             }
         }
     }
