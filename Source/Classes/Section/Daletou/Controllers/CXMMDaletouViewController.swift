@@ -150,24 +150,25 @@ extension CXMMDaletouViewController : DaletouStandardRedCellDelegate,
     func didSelect(cell: DaletouDanRedCell, model: DaletouDataModel, indexPath : IndexPath) {
         insertRedData(model: model)
         dragRedList[indexPath.row].selected = false
-        dragRedList[indexPath.row].isselected.value = false
-        
-        
+        UIView.performWithoutAnimation {
+            self.tableView.reloadSections([indexPath.section], with: .none)
+        }
     }
     func didSelect(cell: DaletouDragRedCell, model: DaletouDataModel, indexPath : IndexPath) {
         insertRedData(model: model)
         danRedList[indexPath.row].selected = false
-        danRedList[indexPath.row].isselected.value = false
+        UIView.performWithoutAnimation {
+            self.tableView.reloadSections([indexPath.section], with: .none)
+        }
     }
     func didSelect(cell: DaletouDanBlueCell, model: DaletouDataModel, indexPath : IndexPath) {
         insertBlueData(model: model)
         dragBlueList[indexPath.row].selected = false
-        self.tableView.reloadData()
+       
     }
     func didSelect(cell: DaletouDragBlueCell, model: DaletouDataModel, indexPath : IndexPath) {
         insertBlueData(model: model)
         danBlueList[indexPath.row].selected = false
-        self.tableView.reloadData()
     }
     
     

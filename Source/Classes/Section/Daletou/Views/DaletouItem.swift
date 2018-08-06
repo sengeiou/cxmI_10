@@ -21,6 +21,8 @@ class DaletouItem: UICollectionViewCell {
         super.awakeFromNib()
         
         setSubView()
+        
+        
     }
     
     private func setSubView() {
@@ -67,12 +69,7 @@ extension DaletouItem {
 // MARK: - 数据设置
 extension DaletouItem {
     public func configure(with data: DaletouDataModel) {
-        
-        data.isselected.asObservable().subscribe(onNext: { (selected) in
-            self.changeSelect(selected, style: data.style)
-        }, onError: nil, onCompleted: nil, onDisposed: nil )
-        
-        //changeSelect(data.selected, style: data.style)
+        changeSelect(data.selected, style: data.style)
         if let num = Int(data.num) {
             if num < 10 {
                 numLabel.text = "0" + data.num

@@ -42,7 +42,6 @@ class DaletouCollectionView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.collectionView.isScrollEnabled = false
-        
     }
 }
 // MARK: - Event
@@ -74,8 +73,7 @@ extension DaletouCollectionView : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let model = self.dataList[indexPath.row]
         model.selected = !model.selected
-        model.isselected.value = model.selected
-        //collectionView.reloadData()
+        self.collectionView.reloadData()
         guard delegate != nil else { fatalError("delegate为空")}
         delegate.didSelected(view: self, model: model, indexPath: indexPath)
     }
