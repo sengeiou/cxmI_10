@@ -29,48 +29,43 @@ class CXMMDaletouViewController: BaseViewController {
             self.tableView.reloadData()
         }
     }
+    
+    
+
+    private var settingNum = Variable(0)
+    
     private var selectedRedSet = Set<DaletouDataModel>() {
         didSet{
-            guard selectedRedSet.count != 0, selectedBlueSet.count != 0 else { return }
-            print(standardBettingNum(m: self.selectedRedSet.count, n: self.selectedBlueSet.count))
-            
+            settingNum.value = getStandardBetNum()
         }
     }
     private var selectedBlueSet = Set<DaletouDataModel>() {
         didSet{
-            guard selectedRedSet.count != 0, selectedBlueSet.count != 0 else { return }
-            print(standardBettingNum(m: self.selectedRedSet.count, n: self.selectedBlueSet.count))
+            settingNum.value = getStandardBetNum()
         }
     }
     
-    private var danRed = Variable(Set<DaletouDataModel>())
-    private var dragRed = Variable(Set<DaletouDataModel>())
-    private var danBlue = Variable(Set<DaletouDataModel>())
-    private var dragBlue = Variable(Set<DaletouDataModel>())
-    
-    private var settingNum = Variable(0)
-    
     private var selectedDanRedSet = Set<DaletouDataModel>() {
         didSet{
-            settingNum.value = getSettingNum()
+            settingNum.value = getBettingNum()
         }
     }
     private var selectedDragRedSet = Set<DaletouDataModel>()
     {
         didSet{
-            settingNum.value = getSettingNum()
+            settingNum.value = getBettingNum()
         }
     }
     private var selectedDanBlueSet = Set<DaletouDataModel>()
     {
         didSet{
-            settingNum.value = getSettingNum()
+            settingNum.value = getBettingNum()
         }
     }
     private var selectedDragBlueSet = Set<DaletouDataModel>()
     {
         didSet{
-            settingNum.value = getSettingNum()
+            settingNum.value = getBettingNum()
         }
     }
     
@@ -81,6 +76,13 @@ class CXMMDaletouViewController: BaseViewController {
     private var titleView : UIButton!
     
    
+    lazy private var redList : [DaletouDataModel] = {
+        return DaletouDataModel.getData(ballStyle: .red)
+    }()
+    lazy private var blueList : [DaletouDataModel] = {
+        return DaletouDataModel.getData(ballStyle: .blue)
+    }()
+    
     lazy private var danRedList : [DaletouDataModel] = {
         return DaletouDataModel.getData(ballStyle: .red)
     }()
@@ -144,7 +146,11 @@ class CXMMDaletouViewController: BaseViewController {
 
 
 extension CXMMDaletouViewController : Algorithm {
-    private func getSettingNum() -> Int {
+    private func getStandardBetNum() -> Int {
+        guard selectedRedSet.count >= 5, selectedBlueSet.count >= 2 else { return 0 }
+        return standardBettingNum(m: selectedRedSet.count, n: selectedBlueSet.count)
+    }
+    private func getBettingNum() -> Int {
         
         guard match(danRedNum: selectedDanRedSet.count) else {
             return 0
@@ -164,6 +170,9 @@ extension CXMMDaletouViewController : Algorithm {
                              c: selectedDanBlueSet.count,
                              d: selectedDragBlueSet.count)
     }
+    
+    
+    
     
     private func match(danRedNum : Int) -> Bool {
         if danRedNum >= 1, danRedNum <= 4 {
@@ -257,11 +266,19 @@ extension CXMMDaletouViewController : DaletouStandardRedCellDelegate,
                                         DaletouDragBlueCellDelegate{
     
     func didSelect(cell: DaletouStandardRedCell, model: DaletouDataModel, indexPath : IndexPath) {
+        model.selected = !model.selected
         insertRedData(model: model)
+        UIView.performWithoutAnimation {
+            self.tableView.reloadSections([indexPath.section], with: .none)
+        }
     }
     
     func didSelect(cell: DaletouStandardBlueCell, model: DaletouDataModel, indexPath : IndexPath) {
+        model.selected = !model.selected
         insertBlueData(model: model)
+        UIView.performWithoutAnimation {
+            self.tableView.reloadSections([indexPath.section], with: .none)
+        }
     }
     func didSelect(cell: DaletouDanRedCell, model: DaletouDataModel, indexPath : IndexPath) {
         selectedDragRedSet.remove(dragRedList[indexPath.row])
@@ -332,40 +349,40 @@ extension CXMMDaletouViewController : DaletouStandardRedCellDelegate,
         switch model.selected {
         case true:
             selectedDanRedSet.insert(model)
-            danRed.value.insert(model)
+           
         case false:
             selectedDanRedSet.remove(model)
-            danRed.value.remove(model)
+            
         }
     }
     private func insertDragRed (model: DaletouDataModel) {
         switch model.selected {
         case true:
             selectedDragRedSet.insert(model)
-            dragRed.value.insert(model)
+           
         case false:
             selectedDragRedSet.remove(model)
-            dragRed.value.remove(model)
+            
         }
     }
     private func insertDanBlue(model: DaletouDataModel) {
         switch model.selected {
         case true:
             selectedDanBlueSet.insert(model)
-            danBlue.value.insert(model)
+            
         case false:
             selectedDanBlueSet.remove(model)
-            danBlue.value.remove(model)
+           
         }
     }
     private func insertDragBlue(model: DaletouDataModel) {
         switch model.selected {
         case true:
             selectedDragBlueSet.insert(model)
-            dragBlue.value.insert(model)
+            
         case false:
             selectedDragBlueSet.remove(model)
-            dragBlue.value.remove(model)
+            
         }
     }
 }
@@ -538,13 +555,14 @@ extension CXMMDaletouViewController : UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DaletouStandardRedCell", for: indexPath) as! DaletouStandardRedCell
         cell.delegate = self
         cell.configure(with: self.displayStyle)
-        
+        cell.configure(with: redList)
         return cell
     }
     private func initStandardBlueCell(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DaletouStandardBlueCell", for: indexPath) as! DaletouStandardBlueCell
         cell.delegate = self
         cell.configure(with: self.displayStyle)
+        cell.configure(with: blueList)
         return cell
     }
     private func initDanRedCell(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {

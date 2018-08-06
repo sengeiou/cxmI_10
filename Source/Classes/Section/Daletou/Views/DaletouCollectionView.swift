@@ -72,8 +72,6 @@ extension DaletouCollectionView {
 extension DaletouCollectionView : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let model = self.dataList[indexPath.row]
-//        model.selected = !model.selected
-//        self.collectionView.reloadData()
         guard delegate != nil else { fatalError("delegate为空")}
         delegate.didSelected(view: self, model: model, indexPath: indexPath)
     }

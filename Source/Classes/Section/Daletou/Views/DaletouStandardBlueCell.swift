@@ -26,7 +26,7 @@ class DaletouStandardBlueCell: UITableViewCell {
 
     private func setSubview() {
         blueView.delegate = self
-        blueView.configure(with: DaletouDataModel.getData(ballStyle: .blue))
+        //blueView.configure(with: DaletouDataModel.getData(ballStyle: .blue))
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

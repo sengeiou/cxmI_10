@@ -30,14 +30,9 @@ class DaletouStandardRedCell: UITableViewCell {
 
     private func setSubview() {
         redView.delegate = self
-        redView.configure(with: DaletouDataModel.getData(ballStyle: .red))
+        //redView.configure(with: DaletouDataModel.getData(ballStyle: .red))
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        
-    }
 }
 
 extension DaletouStandardRedCell : DaletouCollectionViewDelegate {
