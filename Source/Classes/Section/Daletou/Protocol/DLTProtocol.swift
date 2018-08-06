@@ -38,14 +38,5 @@ extension Calculation {
             result = result * (m - n + i)/i
         }
         return result
-        
-        
-//        let n = n > m ? n : m
-//        let m = n > m ? m : n
-//        var result:Int = 1;
-//        for i in 1...m {
-//            result = result * (n - m + i)/i
-//        }
-//        return result
     }
 }

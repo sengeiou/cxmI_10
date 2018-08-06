@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 enum DaletouType : String {
     case 标准选号 = "彩小秘 · 标准选号"
@@ -28,20 +29,51 @@ class CXMMDaletouViewController: BaseViewController {
             self.tableView.reloadData()
         }
     }
-    private var selectedRedSet : Set<DaletouDataModel> = Set<DaletouDataModel>() {
+    private var selectedRedSet = Set<DaletouDataModel>() {
         didSet{
             guard selectedRedSet.count != 0, selectedBlueSet.count != 0 else { return }
             print(standardBettingNum(m: self.selectedRedSet.count, n: self.selectedBlueSet.count))
             
         }
     }
-    private var selectedBlueSet : Set<DaletouDataModel> = Set<DaletouDataModel>() {
+    private var selectedBlueSet = Set<DaletouDataModel>() {
         didSet{
             guard selectedRedSet.count != 0, selectedBlueSet.count != 0 else { return }
             print(standardBettingNum(m: self.selectedRedSet.count, n: self.selectedBlueSet.count))
-            //print(danBettingNum(a: self.selectedRedSet.count, b: self.selectedRedSet.count, c: self.selectedBlueSet.count, d: self.selectedBlueSet.count))
         }
     }
+    
+    private var danRed = Variable(Set<DaletouDataModel>())
+    private var dragRed = Variable(Set<DaletouDataModel>())
+    private var danBlue = Variable(Set<DaletouDataModel>())
+    private var dragBlue = Variable(Set<DaletouDataModel>())
+    
+    private var settingNum = Variable(0)
+    
+    private var selectedDanRedSet = Set<DaletouDataModel>() {
+        didSet{
+            settingNum.value = getSettingNum()
+        }
+    }
+    private var selectedDragRedSet = Set<DaletouDataModel>()
+    {
+        didSet{
+            settingNum.value = getSettingNum()
+        }
+    }
+    private var selectedDanBlueSet = Set<DaletouDataModel>()
+    {
+        didSet{
+            settingNum.value = getSettingNum()
+        }
+    }
+    private var selectedDragBlueSet = Set<DaletouDataModel>()
+    {
+        didSet{
+            settingNum.value = getSettingNum()
+        }
+    }
+    
     private var selectedList : [DaletouDataModel] = [DaletouDataModel]()
     
     private var displayStyle : DLTDisplayStyle = .defStyle
@@ -70,21 +102,87 @@ class CXMMDaletouViewController: BaseViewController {
         setTableview()
         setSubview()
         
+        setData()
         print(danBettingNum(a: 2, b: 4, c: 1, d: 2))
+        
     }
 
+    private func setData() {
+        
+        _ = settingNum.asObservable().subscribe(onNext: { (num) in
+            if num > 0 {
+                let att = NSMutableAttributedString(string: "共")
+                let numAtt = NSAttributedString(string: "\(num)", attributes: [NSAttributedStringKey.foregroundColor: ColorE85504])
+                let defa = NSAttributedString(string: "注 合计")
+                let money = NSAttributedString(string: "\(num * 2)", attributes: [NSAttributedStringKey.foregroundColor: ColorE85504])
+                att.append(numAtt)
+                att.append(defa)
+                att.append(money)
+                self.bottomView.titleLabel.attributedText = att
+            }else {
+                let att = NSMutableAttributedString(string: "请至少选择")
+                let numAtt = NSAttributedString(string: "5", attributes: [NSAttributedStringKey.foregroundColor: ColorE85504])
+                let defa = NSAttributedString(string: "个红球")
+                let money = NSAttributedString(string: "2", attributes: [NSAttributedStringKey.foregroundColor: Color0081CC])
+                let defa1 = NSAttributedString(string: "个篮球")
+                att.append(numAtt)
+                att.append(defa)
+                att.append(money)
+                att.append(defa1)
+                self.bottomView.titleLabel.attributedText = att
+            }
+        }, onError: nil , onCompleted: nil , onDisposed: nil)
+    }
+    
     private func setSubview() {
         self.view.addSubview(menu)
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    
+  
 }
 
 
 extension CXMMDaletouViewController : Algorithm {
+    private func getSettingNum() -> Int {
+        
+        guard match(danRedNum: selectedDanRedSet.count) else {
+            return 0
+        }
+        guard match(dragRedNum: selectedDragRedSet.count) else {
+            return 0
+        }
+        guard match(danBlueNum: selectedDanBlueSet.count) else {
+            return 0
+        }
+        guard match(dragBlueNum: selectedDragBlueSet.count) else {
+            return 0
+        }
+        
+        return danBettingNum(a: selectedDanRedSet.count,
+                             b: selectedDragRedSet.count,
+                             c: selectedDanBlueSet.count,
+                             d: selectedDragBlueSet.count)
+    }
+    
+    private func match(danRedNum : Int) -> Bool {
+        if danRedNum >= 1, danRedNum <= 4 {
+            return true
+        }else {
+            return false
+        }
+    }
+    
+    private func match(dragRedNum : Int) -> Bool {
+        return dragRedNum >= 2 ? true : false
+    }
+    
+    private func match(danBlueNum: Int) -> Bool {
+        return danBlueNum <= 1 ? true : false
+    }
+    private func match(dragBlueNum: Int) -> Bool {
+        return dragBlueNum >= 2 ? true : false
+    }
     
 }
 
@@ -166,28 +264,28 @@ extension CXMMDaletouViewController : DaletouStandardRedCellDelegate,
         insertBlueData(model: model)
     }
     func didSelect(cell: DaletouDanRedCell, model: DaletouDataModel, indexPath : IndexPath) {
-        insertRedData(model: model)
+        insertDanRed(model: model)
         dragRedList[indexPath.row].selected = false
         UIView.performWithoutAnimation {
             self.tableView.reloadSections([indexPath.section], with: .none)
         }
     }
     func didSelect(cell: DaletouDragRedCell, model: DaletouDataModel, indexPath : IndexPath) {
-        insertRedData(model: model)
+        insertDragRed(model: model)
         danRedList[indexPath.row].selected = false
         UIView.performWithoutAnimation {
             self.tableView.reloadSections([indexPath.section], with: .none)
         }
     }
     func didSelect(cell: DaletouDanBlueCell, model: DaletouDataModel, indexPath : IndexPath) {
-        insertBlueData(model: model)
+        insertDanBlue(model: model)
         dragBlueList[indexPath.row].selected = false
         UIView.performWithoutAnimation {
             self.tableView.reloadSections([indexPath.section], with: .none)
         }
     }
     func didSelect(cell: DaletouDragBlueCell, model: DaletouDataModel, indexPath : IndexPath) {
-        insertBlueData(model: model)
+        insertDragBlue(model: model)
         danBlueList[indexPath.row].selected = false
         UIView.performWithoutAnimation {
             self.tableView.reloadSections([indexPath.section], with: .none)
@@ -209,6 +307,46 @@ extension CXMMDaletouViewController : DaletouStandardRedCellDelegate,
             selectedBlueSet.insert(model)
         case false:
             selectedBlueSet.remove(model)
+        }
+    }
+    private func insertDanRed(model: DaletouDataModel) {
+        switch model.selected {
+        case true:
+            selectedDanRedSet.insert(model)
+            danRed.value.insert(model)
+        case false:
+            selectedDanRedSet.remove(model)
+            danRed.value.remove(model)
+        }
+    }
+    private func insertDragRed (model: DaletouDataModel) {
+        switch model.selected {
+        case true:
+            selectedDragRedSet.insert(model)
+            dragRed.value.insert(model)
+        case false:
+            selectedDragRedSet.remove(model)
+            dragRed.value.remove(model)
+        }
+    }
+    private func insertDanBlue(model: DaletouDataModel) {
+        switch model.selected {
+        case true:
+            selectedDanBlueSet.insert(model)
+            danBlue.value.insert(model)
+        case false:
+            selectedDanBlueSet.remove(model)
+            danBlue.value.remove(model)
+        }
+    }
+    private func insertDragBlue(model: DaletouDataModel) {
+        switch model.selected {
+        case true:
+            selectedDragBlueSet.insert(model)
+            dragBlue.value.insert(model)
+        case false:
+            selectedDragBlueSet.remove(model)
+            dragBlue.value.remove(model)
         }
     }
 }
