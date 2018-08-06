@@ -28,8 +28,20 @@ class CXMMDaletouViewController: BaseViewController {
             self.tableView.reloadData()
         }
     }
-    private var selectedRedSet : Set<DaletouDataModel> = Set<DaletouDataModel>()
-    private var selectedBlueSet : Set<DaletouDataModel> = Set<DaletouDataModel>()
+    private var selectedRedSet : Set<DaletouDataModel> = Set<DaletouDataModel>() {
+        didSet{
+            guard selectedRedSet.count != 0, selectedBlueSet.count != 0 else { return }
+            print(standardBettingNum(m: self.selectedRedSet.count, n: self.selectedBlueSet.count))
+            
+        }
+    }
+    private var selectedBlueSet : Set<DaletouDataModel> = Set<DaletouDataModel>() {
+        didSet{
+            guard selectedRedSet.count != 0, selectedBlueSet.count != 0 else { return }
+            print(standardBettingNum(m: self.selectedRedSet.count, n: self.selectedBlueSet.count))
+            //print(danBettingNum(a: self.selectedRedSet.count, b: self.selectedRedSet.count, c: self.selectedBlueSet.count, d: self.selectedBlueSet.count))
+        }
+    }
     private var selectedList : [DaletouDataModel] = [DaletouDataModel]()
     
     private var displayStyle : DLTDisplayStyle = .defStyle
@@ -57,6 +69,8 @@ class CXMMDaletouViewController: BaseViewController {
         setNavigationTitleView()
         setTableview()
         setSubview()
+        
+        print(danBettingNum(a: 2, b: 4, c: 1, d: 2))
     }
 
     private func setSubview() {
@@ -69,6 +83,10 @@ class CXMMDaletouViewController: BaseViewController {
     }
 }
 
+
+extension CXMMDaletouViewController : Algorithm {
+    
+}
 
 // MARK: - TOP Menu
 extension CXMMDaletouViewController : YBPopupMenuDelegate{
@@ -164,11 +182,16 @@ extension CXMMDaletouViewController : DaletouStandardRedCellDelegate,
     func didSelect(cell: DaletouDanBlueCell, model: DaletouDataModel, indexPath : IndexPath) {
         insertBlueData(model: model)
         dragBlueList[indexPath.row].selected = false
-       
+        UIView.performWithoutAnimation {
+            self.tableView.reloadSections([indexPath.section], with: .none)
+        }
     }
     func didSelect(cell: DaletouDragBlueCell, model: DaletouDataModel, indexPath : IndexPath) {
         insertBlueData(model: model)
         danBlueList[indexPath.row].selected = false
+        UIView.performWithoutAnimation {
+            self.tableView.reloadSections([indexPath.section], with: .none)
+        }
     }
     
     
