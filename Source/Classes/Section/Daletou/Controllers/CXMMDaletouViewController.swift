@@ -14,8 +14,14 @@ enum DaletouType : String {
     case 胆拖选号 = "彩小秘 · 胆拖选号"
 }
 
+protocol CXMMDaletouViewControllerDelegate {
+    func didSelected(list : DaletouDataList) -> Void
+}
+
 class CXMMDaletouViewController: BaseViewController {
 
+    public var delegate : CXMMDaletouViewControllerDelegate!
+    
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var bottomView: DaletouBottomView!
@@ -118,6 +124,7 @@ class CXMMDaletouViewController: BaseViewController {
         
     }
 
+    
     private func setData() {
         
         _ = settingNum.asObservable().subscribe(onNext: { (num) in
@@ -163,6 +170,12 @@ class CXMMDaletouViewController: BaseViewController {
   
 }
 
+// MARK: - public
+extension CXMMDaletouViewController {
+    public func configure(with data : [DaletouDataModel], type : DaletouType) {
+        
+    }
+}
 
 extension CXMMDaletouViewController : Algorithm {
     private func getStandardBetNum() -> Int {
@@ -249,6 +262,26 @@ extension CXMMDaletouViewController : DaletouBottomViewDelegate {
     
     func didTipConfirm() {
         guard isPush == false else {
+            
+            
+            guard delegate != nil else { return }
+            
+            switch type {
+            case .标准选号:
+                let model = DaletouDataList()
+                model.redList = getStandardReds()
+                model.blueList = getStandardBlues()
+                model.type = type
+                delegate.didSelected(list: model)
+            case .胆拖选号:
+                let model = DaletouDataList()
+                model.danRedList = getDanReds()
+                model.dragRedList = getDragReds()
+                model.danBlueList = getDanBlues()
+                model.dragBlueList = getDragBlues()
+                model.type = type
+                delegate.didSelected(list: model)
+            }
             self.popViewController()
             return
         }
@@ -259,44 +292,74 @@ extension CXMMDaletouViewController : DaletouBottomViewDelegate {
         
         switch type {
         case .标准选号:
-            vc.dataList = getStandardBalls()
+            let model = DaletouDataList()
+            model.redList = getStandardReds()
+            model.blueList = getStandardBlues()
+            
+            vc.list.append(model)
+            
             vc.bettingNumber = getStandardBetNum()
         case .胆拖选号:
-            vc.dataList = getDanBalls()
+            let model = DaletouDataList()
+            model.danRedList = getDanReds()
+            model.dragRedList = getDragReds()
+            model.danBlueList = getDanBlues()
+            model.dragBlueList = getDragBlues()
+            
+            vc.list.append(model)
+            
             vc.bettingNumber = getBettingNum()
         }
         
         pushViewController(vc: vc)
     }
 
-    private func getStandardBalls () -> [[DaletouDataModel]] {
-        var list = [[DaletouDataModel]]()
-        var arr = selectedRedSet.sorted{$0.number < $1.number}
-        arr.append(contentsOf: selectedBlueSet.sorted{$0.number < $1.number})
-        list.append(arr)
-        return list
+    private func getStandardReds () -> [DaletouDataModel] {
+        let arr = selectedRedSet.sorted{$0.number < $1.number}
+        return arr
+    }
+    private func getStandardBlues()-> [DaletouDataModel] {
+        let arr = selectedBlueSet.sorted{$0.number < $1.number}
+        return arr
     }
     
-    private func getDanBalls() -> [[DaletouDataModel]] {
-        var list = [[DaletouDataModel]]()
-        
-        var arr = selectedDanRedSet.sorted{ $0.number < $1.number}
-        let model1 = DaletouDataModel()
-        model1.num = "-"
-        model1.style = .red
-        arr.append(model1)
-        
-        arr.append(contentsOf: selectedDragRedSet.sorted{$0.number < $1.number})
-        if selectedDanBlueSet.count > 0 {
-            arr.append(model1)
-        }
-        arr.append(contentsOf: selectedDanBlueSet.sorted{$0.number < $1.number})
-        arr.append(model1)
-        arr.append(contentsOf: selectedDragBlueSet.sorted{$0.number < $1.number})
-        
-        list.append(arr)
-        return list
+    private func getDanReds() -> [DaletouDataModel] {
+        let arr = selectedDanRedSet.sorted{ $0.number < $1.number}
+        return arr
     }
+    private func getDragReds() -> [DaletouDataModel] {
+        let arr = selectedDragRedSet.sorted{$0.number < $1.number}
+        return arr
+    }
+    private func getDanBlues() -> [DaletouDataModel] {
+        let arr = selectedDanBlueSet.sorted{$0.number < $1.number}
+        return arr
+    }
+    private func getDragBlues() -> [DaletouDataModel] {
+        let arr = selectedDragBlueSet.sorted{$0.number < $1.number}
+        return arr
+    }
+    
+//    private func getDanBalls() -> [DaletouDataModel] {
+//
+//
+//        var arr = selectedDanRedSet.sorted{ $0.number < $1.number}
+//        let model1 = DaletouDataModel()
+//        model1.num = "-"
+//        model1.style = .red
+//        arr.append(model1)
+//
+//        arr.append(contentsOf: selectedDragRedSet.sorted{$0.number < $1.number})
+//        if selectedDanBlueSet.count > 0 {
+//            arr.append(model1)
+//        }
+//        arr.append(contentsOf: selectedDanBlueSet.sorted{$0.number < $1.number})
+//        arr.append(model1)
+//        arr.append(contentsOf: selectedDragBlueSet.sorted{$0.number < $1.number})
+//
+//
+//        return arr
+//    }
     
     private func showAlert() {
         showCXMAlert(title: "温馨提示", message: "\n确定清空所选号码吗？",

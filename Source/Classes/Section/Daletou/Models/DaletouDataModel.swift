@@ -78,5 +78,17 @@ class DaletouDataModel: NSObject {
     
 }
 
+class DaletouDataList: NSObject {
+    required override init() {}
 
+    var type : DaletouType = .标准选号
+    
+    var redList = [DaletouDataModel]()
+    var blueList = [DaletouDataModel]()
+    var danRedList = [DaletouDataModel]()
+    var dragRedList = [DaletouDataModel]()
+    var danBlueList = [DaletouDataModel]()
+    var dragBlueList = [DaletouDataModel]()
+    
+}
 

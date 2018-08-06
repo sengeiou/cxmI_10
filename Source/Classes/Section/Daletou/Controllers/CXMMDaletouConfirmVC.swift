@@ -11,7 +11,40 @@ import RxSwift
 
 class CXMMDaletouConfirmVC: BaseViewController {
 
-    public var dataList : [[DaletouDataModel]] = [[DaletouDataModel]]()
+    public var list = [DaletouDataList]() {
+        didSet{
+            for model in list {
+                switch model.type {
+                case .标准选号:
+                    var arr = model.redList
+                    arr.append(contentsOf: model.blueList)
+                    
+                    dataList.append(arr)
+                case .胆拖选号:
+                    var arr = model.danRedList
+                    
+                    let model1 = DaletouDataModel()
+                    model1.num = "-"
+                    model1.style = .red
+                    arr.append(model1)
+                    
+                    arr.append(contentsOf: model.dragRedList)
+                    if model.danBlueList.count > 0 {
+                        arr.append(model1)
+                    }
+                    arr.append(contentsOf: model.danBlueList)
+                    arr.append(model1)
+                    arr.append(contentsOf: model.dragBlueList)
+                }
+            }
+        }
+    }
+    
+    public var dataList : [[DaletouDataModel]] = [[DaletouDataModel]]() {
+        didSet{
+            self.tableView.reloadData()
+        }
+    }
     
     public var bettingNumber = 0 {
         didSet{
@@ -43,6 +76,25 @@ class CXMMDaletouConfirmVC: BaseViewController {
             }, onError: nil , onCompleted: nil , onDisposed: nil )
     }
 
+}
+
+extension CXMMDaletouConfirmVC : CXMMDaletouViewControllerDelegate {
+    func didSelected(list: DaletouDataList) {
+        self.list.append(list)
+        //self.tableView.reloadData()
+    }
+
+    private func pushDaletouBetting(indexPath: IndexPath?) {
+        
+        let story = UIStoryboard(name: "Daletou", bundle: nil)
+        let vc = story.instantiateViewController(withIdentifier: "DaletouViewController") as! CXMMDaletouViewController
+        vc.delegate = self
+        vc.isPush = true
+        if indexPath != nil {
+            
+        }
+        pushViewController(vc: vc)
+    }
 }
 
 extension CXMMDaletouConfirmVC : UITableViewDelegate {
