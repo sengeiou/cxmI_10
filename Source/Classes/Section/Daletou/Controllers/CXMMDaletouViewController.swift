@@ -22,6 +22,7 @@ class CXMMDaletouViewController: BaseViewController {
 
     @IBOutlet weak var topMenu: UIButton!
     
+    public var isPush = false
     
     private var type : DaletouType = .标准选号 {
         didSet{
@@ -171,9 +172,7 @@ extension CXMMDaletouViewController : Algorithm {
                              d: selectedDragBlueSet.count)
     }
     
-    
-    
-    
+
     private func match(danRedNum : Int) -> Bool {
         if danRedNum >= 1, danRedNum <= 4 {
             return true
@@ -229,9 +228,54 @@ extension CXMMDaletouViewController : DaletouBottomViewDelegate {
     }
     
     func didTipConfirm() {
+        guard isPush == false else {
+            self.popViewController()
+            return
+        }
         
+        let story = UIStoryboard(name: "Daletou", bundle: nil)
+        
+        let vc = story.instantiateViewController(withIdentifier: "CXMMDaletouConfirmVC") as! CXMMDaletouConfirmVC
+        
+        switch type {
+        case .标准选号:
+            vc.dataList = getStandardBalls()
+        case .胆拖选号:
+            vc.dataList = getDanBalls()
+        }
+        
+        pushViewController(vc: vc)
     }
 
+    private func getStandardBalls () -> [[DaletouDataModel]] {
+        var list = [[DaletouDataModel]]()
+        var arr = selectedRedSet.sorted{$0.number < $1.number}
+        arr.append(contentsOf: selectedBlueSet.sorted{$0.number < $1.number})
+        list.append(arr)
+        return list
+    }
+    
+    private func getDanBalls() -> [[DaletouDataModel]] {
+        var list = [[DaletouDataModel]]()
+        
+        var arr = selectedDanRedSet.sorted{ $0.number < $1.number}
+        let model1 = DaletouDataModel()
+        model1.num = "-"
+        model1.style = .red
+        arr.append(model1)
+        
+        arr.append(contentsOf: selectedDragRedSet.sorted{$0.number < $1.number})
+        if selectedDanBlueSet.count > 0 {
+            arr.append(model1)
+        }
+        arr.append(contentsOf: selectedDanBlueSet.sorted{$0.number < $1.number})
+        arr.append(model1)
+        arr.append(contentsOf: selectedDragBlueSet.sorted{$0.number < $1.number})
+        
+        list.append(arr)
+        return list
+    }
+    
     private func showAlert() {
         showCXMAlert(title: "温馨提示", message: "\n确定清空所选号码吗？",
                      action: "确定", cancel: "取消") { (action) in
@@ -243,17 +287,17 @@ extension CXMMDaletouViewController : DaletouBottomViewDelegate {
 // MARK: - PUSH
 extension CXMMDaletouViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier {
-        case "pushConfirm":
-            let vc = segue.destination as! CXMMDaletouConfirmVC
-            
-            var arr = selectedRedSet.sorted{$0.number < $1.number}
-            arr.append(contentsOf: selectedBlueSet.sorted{$0.number < $1.number})
-            vc.dataList.insert(arr, at: 0)
-            
-        default: break
-            
-        }
+//        switch segue.identifier {
+//        case "pushConfirm":
+//            let vc = segue.destination as! CXMMDaletouConfirmVC
+//            
+//            var arr = selectedRedSet.sorted{$0.number < $1.number}
+//            arr.append(contentsOf: selectedBlueSet.sorted{$0.number < $1.number})
+//            vc.dataList.insert(arr, at: 0)
+//            
+//        default: break
+//            
+//        }
     }
 }
 

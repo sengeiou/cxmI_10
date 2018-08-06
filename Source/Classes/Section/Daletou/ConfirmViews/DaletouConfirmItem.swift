@@ -22,5 +22,9 @@ extension DaletouConfirmItem {
         case .blue:
             titleLabel.textColor = Color0081CC
         }
+        if data.num == "-" {
+            titleLabel.textColor = ColorC7C7C7
+        }
+        
     }
 }

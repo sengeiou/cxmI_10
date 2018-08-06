@@ -724,7 +724,7 @@
                                                         <outlet property="collectionView" destination="RVL-sj-jh4" id="Vuk-h1-DlA"/>
                                                     </connections>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="拖码-篮球，至多选2个" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="20X-bY-sex">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="拖码-篮球，至少选2个" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="20X-bY-sex">
                                                     <rect key="frame" x="16" y="20" width="343" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="Yzr-Xo-chv"/>
@@ -790,8 +790,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="confirmClick:" destination="gBT-TZ-3k0" eventType="touchUpInside" id="t82-IL-9P4"/>
-                                            <segue destination="b1E-jf-tqY" kind="push" identifier="pushConfirm" id="OLo-AC-bYz"/>
+                                            <action selector="confirmClick:" destination="xAs-ej-kZv" eventType="touchUpInside" id="0X7-Ty-hLx"/>
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KDw-yA-E7X">
@@ -862,14 +861,13 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P3a-39-fsK" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="gBT-TZ-3k0" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="709.60000000000002" y="139.43028485757122"/>
         </scene>
         <!--Daletou ConfirmVC-->
         <scene sceneID="tIm-wp-DmK">
             <objects>
-                <viewController id="b1E-jf-tqY" customClass="CXMMDaletouConfirmVC" customModule="彩小蜜" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CXMMDaletouConfirmVC" id="b1E-jf-tqY" customClass="CXMMDaletouConfirmVC" customModule="彩小蜜" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Vcs-J4-VCa"/>
                         <viewControllerLayoutGuide type="bottom" id="dWU-i9-4vC"/>
@@ -879,7 +877,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="FRi-sY-bcc">
-                                <rect key="frame" x="0.0" y="124" width="375" height="776"/>
+                                <rect key="frame" x="0.0" y="80" width="375" height="820"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DaletouConfirmCell" rowHeight="158" id="LNa-JU-J7f" customClass="DaletouConfirmCell" customModule="彩小蜜" customModuleProvider="target">
@@ -1109,7 +1107,7 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VhR-fr-UeH">
-                                <rect key="frame" x="0.0" y="64" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d3L-AB-Xdf">
                                         <rect key="frame" x="18.5" y="15" width="93" height="30"/>
