@@ -262,8 +262,7 @@ extension CXMMDaletouViewController : DaletouBottomViewDelegate {
     
     func didTipConfirm() {
         guard isPush == false else {
-            
-            
+        
             guard delegate != nil else { return }
             
             switch type {

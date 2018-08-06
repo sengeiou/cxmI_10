@@ -37,12 +37,13 @@ class CXMMDaletouConfirmVC: BaseViewController {
                     arr.append(contentsOf: model.dragBlueList)
                 }
             }
+            
         }
     }
     
     public var dataList : [[DaletouDataModel]] = [[DaletouDataModel]]() {
         didSet{
-            self.tableView.reloadData()
+            
         }
     }
     
@@ -64,6 +65,7 @@ class CXMMDaletouConfirmVC: BaseViewController {
         self.tableView.reloadData()
         
         settingData()
+        self.tableView.reloadData()
     }
 
     private func settingData() {
