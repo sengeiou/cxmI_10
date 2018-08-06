@@ -301,7 +301,24 @@ extension CXMMDaletouViewController : DaletouBottomViewDelegate {
     private func showAlert() {
         showCXMAlert(title: "温馨提示", message: "\n确定清空所选号码吗？",
                      action: "确定", cancel: "取消") { (action) in
-            
+            switch self.type {
+            case .标准选号:
+                self.redList = DaletouDataModel.getData(ballStyle: .red)
+                self.blueList = DaletouDataModel.getData(ballStyle: .blue)
+                self.selectedRedSet.removeAll()
+                self.selectedBlueSet.removeAll()
+                self.tableView.reloadData()
+            case .胆拖选号:
+                self.danRedList = DaletouDataModel.getData(ballStyle: .red)
+                self.dragRedList = DaletouDataModel.getData(ballStyle: .red)
+                self.danBlueList = DaletouDataModel.getData(ballStyle: .blue)
+                self.dragBlueList = DaletouDataModel.getData(ballStyle: .blue)
+                self.selectedDanRedSet.removeAll()
+                self.selectedDragRedSet.removeAll()
+                self.selectedDanBlueSet.removeAll()
+                self.selectedDragBlueSet.removeAll()
+                self.tableView.reloadData()
+            }
         }
     }
 }
