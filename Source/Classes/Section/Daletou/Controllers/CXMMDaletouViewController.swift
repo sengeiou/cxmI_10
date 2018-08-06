@@ -264,6 +264,13 @@ extension CXMMDaletouViewController : DaletouStandardRedCellDelegate,
         insertBlueData(model: model)
     }
     func didSelect(cell: DaletouDanRedCell, model: DaletouDataModel, indexPath : IndexPath) {
+        selectedDragRedSet.remove(dragRedList[indexPath.row])
+        
+        if selectedDanRedSet.count >= 0, selectedDanRedSet.count <= 3, model.selected == false {
+            model.selected = !model.selected
+        }else {
+            model.selected = false
+        }
         insertDanRed(model: model)
         dragRedList[indexPath.row].selected = false
         UIView.performWithoutAnimation {
@@ -271,13 +278,23 @@ extension CXMMDaletouViewController : DaletouStandardRedCellDelegate,
         }
     }
     func didSelect(cell: DaletouDragRedCell, model: DaletouDataModel, indexPath : IndexPath) {
+        model.selected = !model.selected
         insertDragRed(model: model)
         danRedList[indexPath.row].selected = false
+        selectedDanRedSet.remove(danRedList[indexPath.row])
         UIView.performWithoutAnimation {
             self.tableView.reloadSections([indexPath.section], with: .none)
         }
     }
     func didSelect(cell: DaletouDanBlueCell, model: DaletouDataModel, indexPath : IndexPath) {
+        selectedDragBlueSet.remove(dragBlueList[indexPath.row])
+
+        if selectedDanBlueSet.count <= 0, model.selected == false {
+            model.selected = !model.selected
+        }else {
+            model.selected = false
+        }
+        
         insertDanBlue(model: model)
         dragBlueList[indexPath.row].selected = false
         UIView.performWithoutAnimation {
@@ -285,6 +302,8 @@ extension CXMMDaletouViewController : DaletouStandardRedCellDelegate,
         }
     }
     func didSelect(cell: DaletouDragBlueCell, model: DaletouDataModel, indexPath : IndexPath) {
+        selectedDanBlueSet.remove(danBlueList[indexPath.row])
+        model.selected = !model.selected
         insertDragBlue(model: model)
         danBlueList[indexPath.row].selected = false
         UIView.performWithoutAnimation {
