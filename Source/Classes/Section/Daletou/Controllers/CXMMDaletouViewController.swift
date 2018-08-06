@@ -27,6 +27,14 @@ class CXMMDaletouViewController: BaseViewController {
     private var type : DaletouType = .标准选号 {
         didSet{
             titleView.setTitle(type.rawValue, for: .normal)
+            
+            switch type {
+            case .标准选号:
+                settingNum.value = getStandardBetNum()
+            case .胆拖选号:
+                settingNum.value = getBettingNum()
+            }
+            
             self.tableView.reloadData()
         }
     }
@@ -122,6 +130,8 @@ class CXMMDaletouViewController: BaseViewController {
                 att.append(defa)
                 att.append(money)
                 self.bottomView.titleLabel.attributedText = att
+                self.bottomView.confirmBut.backgroundColor = ColorE85504
+                self.bottomView.confirmBut.isUserInteractionEnabled = true
             }else {
                 let att = NSMutableAttributedString(string: "请至少选择")
                 let numAtt = NSAttributedString(string: "5", attributes: [NSAttributedStringKey.foregroundColor: ColorE85504])
@@ -133,6 +143,8 @@ class CXMMDaletouViewController: BaseViewController {
                 att.append(money)
                 att.append(defa1)
                 self.bottomView.titleLabel.attributedText = att
+                self.bottomView.confirmBut.backgroundColor = ColorC7C7C7
+                self.bottomView.confirmBut.isUserInteractionEnabled = false
             }
         }, onError: nil , onCompleted: nil , onDisposed: nil)
     }
