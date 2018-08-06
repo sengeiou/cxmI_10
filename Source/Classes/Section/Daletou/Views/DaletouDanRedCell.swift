@@ -11,6 +11,7 @@ import UIKit
 
 protocol DaletouDanRedCellDelegate {
     func didSelect(cell: DaletouDanRedCell, model : DaletouDataModel, indexPath : IndexPath) -> Void
+    func didTipHelp() -> Void
 }
 
 class DaletouDanRedCell: UITableViewCell {
@@ -21,6 +22,7 @@ class DaletouDanRedCell: UITableViewCell {
     public var delegate : DaletouDanRedCellDelegate!
     
     @IBOutlet weak var redView: DaletouCollectionView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setSubview()
@@ -33,9 +35,12 @@ class DaletouDanRedCell: UITableViewCell {
         }
     }
     
+    @IBAction func helpClick(_ sender: UIButton) {
+        guard delegate != nil else { return }
+        delegate.didTipHelp()
+    }
     private func setSubview() {
         redView.delegate = self
-        //redView.configure(with: DaletouDataModel.getData(ballStyle: .red))
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

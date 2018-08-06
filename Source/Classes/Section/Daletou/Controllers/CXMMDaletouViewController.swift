@@ -134,7 +134,13 @@ class CXMMDaletouViewController: BaseViewController {
                 self.bottomView.confirmBut.isUserInteractionEnabled = true
             }else {
                 let att = NSMutableAttributedString(string: "请至少选择")
-                let numAtt = NSAttributedString(string: "5", attributes: [NSAttributedStringKey.foregroundColor: ColorE85504])
+                
+                var red = 5
+                if self.type == .胆拖选号 {
+                    red = 6
+                }
+                
+                let numAtt = NSAttributedString(string: "\(red)", attributes: [NSAttributedStringKey.foregroundColor: ColorE85504])
                 let defa = NSAttributedString(string: "个红球")
                 let money = NSAttributedString(string: "2", attributes: [NSAttributedStringKey.foregroundColor: Color0081CC])
                 let defa1 = NSAttributedString(string: "个篮球")
@@ -177,7 +183,9 @@ extension CXMMDaletouViewController : Algorithm {
         guard match(dragBlueNum: selectedDragBlueSet.count) else {
             return 0
         }
-        
+        guard selectedDanRedSet.count + selectedDragRedSet.count >= 6 else {
+            return 0
+        }
         return danBettingNum(a: selectedDanRedSet.count,
                              b: selectedDragRedSet.count,
                              c: selectedDanBlueSet.count,
@@ -322,6 +330,11 @@ extension CXMMDaletouViewController : DaletouStandardRedCellDelegate,
                                         DaletouDanBlueCellDelegate,
                                         DaletouDragRedCellDelegate,
                                         DaletouDragBlueCellDelegate{
+    // 什么是胆拖？
+    func didTipHelp() {
+        
+    }
+    
     
     func didSelect(cell: DaletouStandardRedCell, model: DaletouDataModel, indexPath : IndexPath) {
         model.selected = !model.selected
