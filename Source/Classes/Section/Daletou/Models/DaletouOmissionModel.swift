@@ -7,7 +7,22 @@
 //  大乐透 遗漏数据
 
 import Foundation
+import HandyJSON
+struct DaletouOmissionModel : HandyJSON {
+    
+    var endDate : String!
+    /// 后去遗漏
+    var postList : [String]!
+    /// 前区遗漏
+    var preList : [String]!
+    /// 历史中奖纪录
+    var prizeList : [DLTHistoricalData]!
+    var prizes : String!
+    var term_num : String!
+    
+}
 
-struct DaletouOmissionModel {
-    var num : String = "88"
+struct DLTHistoricalData : HandyJSON {
+    var numList : [String]!
+    var termNum : String!
 }

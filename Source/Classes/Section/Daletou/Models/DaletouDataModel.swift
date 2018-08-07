@@ -16,7 +16,8 @@ class DaletouDataModel: NSObject {
     var number: Int!
     var style : BallStyle = .red
     var selected : Bool = false
-
+    var omissionNum : String = ""
+    
     static func getData(ballStyle : BallStyle) -> [DaletouDataModel] {
         var list = [DaletouDataModel]()
         

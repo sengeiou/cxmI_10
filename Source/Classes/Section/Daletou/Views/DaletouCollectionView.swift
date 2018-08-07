@@ -39,7 +39,7 @@ class DaletouCollectionView: UIView {
     private var displayStyle : DLTDisplayStyle = .defStyle
     
     private var dataList : [DaletouDataModel]!
-    private var omissionList: [DaletouOmissionModel]!
+    private var omissionList: [String]!
     
     @IBOutlet weak var collectionView : UICollectionView!
     
@@ -62,7 +62,7 @@ extension DaletouCollectionView {
         self.collectionView.reloadData()
     }
     // 显示隐藏数据
-    public func configure(with omissionList : [DaletouOmissionModel]) {
+    public func configure(with omissionList : [String]) {
         self.omissionList = omissionList
         self.collectionView.reloadData()
     }

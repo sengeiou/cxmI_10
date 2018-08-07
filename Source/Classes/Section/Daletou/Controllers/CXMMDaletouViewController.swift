@@ -116,8 +116,10 @@ class CXMMDaletouViewController: BaseViewController {
             switch type {
             case .标准选号:
                 settingNum.value = getStandardBetNum()
+                motion(edit: true)
             case .胆拖选号:
                 settingNum.value = getBettingNum()
+                motion(edit: false)
             }
             
             self.tableView.reloadData()
@@ -169,6 +171,7 @@ class CXMMDaletouViewController: BaseViewController {
     private var menu : CXMMDaletouMenu = CXMMDaletouMenu()
     private var titleView : UIButton!
     
+    private var omissionModel : DaletouOmissionModel!
    
     lazy private var redList : [DaletouDataModel] = {
         return DaletouDataModel.getData(ballStyle: .red)
@@ -190,6 +193,7 @@ class CXMMDaletouViewController: BaseViewController {
         return DaletouDataModel.getData(ballStyle: .dragBlue)
     }()
     
+    // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
         menu.delegate = self
@@ -201,6 +205,7 @@ class CXMMDaletouViewController: BaseViewController {
         setData()
         print(danBettingNum(a: 2, b: 4, c: 1, d: 2))
         setDefaultData()
+        loadNewData()
     }
 
     
@@ -648,6 +653,80 @@ extension CXMMDaletouViewController : CXMMDaletouMenuDelegate {
     private func showMatchMenu() {
         menu.configure(with: type)
         menu.show()
+    }
+}
+
+// MARK: - 摇一摇
+extension CXMMDaletouViewController {
+    private func motion(edit: Bool) {
+        UIApplication.shared.applicationSupportsShakeToEdit = edit
+        self.becomeFirstResponder()
+    }
+    
+    override func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) {
+        let model = getOneRandom()
+        self.model = model
+        self.tableView.reloadData()
+    }
+    override func motionCancelled(_ motion: UIEventSubtype, with event: UIEvent?) {
+        
+    }
+    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
+        
+    }
+    
+}
+
+// MARK: - 网络请求
+extension CXMMDaletouViewController {
+    private func loadNewData() {
+        ticketInfoRequest()
+    }
+    
+    private func ticketInfoRequest() {
+        weak var weakSelf = self
+        _ = dltProvider.rx.request(.tickenInfo)
+            .asObservable()
+            .mapObject(type: DaletouOmissionModel.self)
+            .subscribe(onNext: { (data) in
+                self.omissionModel = data
+                
+                for i in 0..<self.redList.count {
+                    self.redList[i].omissionNum = self.omissionModel.preList[i]
+                }
+                for i in 0..<self.blueList.count {
+                    self.blueList[i].omissionNum = self.omissionModel.postList[i]
+                }
+                for i in 0..<self.danRedList.count {
+                    self.danRedList[i].omissionNum = self.omissionModel.preList[i]
+                }
+                for i in 0..<self.dragRedList.count {
+                    self.dragRedList[i].omissionNum = self.omissionModel.preList[i]
+                }
+                for i in 0..<self.danBlueList.count {
+                    self.danBlueList[i].omissionNum = self.omissionModel.postList[i]
+                }
+                for i in 0..<self.dragBlueList.count {
+                    self.dragBlueList[i].omissionNum = self.omissionModel.postList[i]
+                }
+                
+                self.tableView.reloadData()
+            }, onError: { (error) in
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        weakSelf?.pushLoginVC(from: self)
+                    default : break
+                    }
+                    if 300000...310000 ~= code {
+                        self.showHUD(message: msg!)
+                    }
+                    print(code)
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil)
     }
 }
 

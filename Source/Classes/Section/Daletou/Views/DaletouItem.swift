@@ -72,6 +72,6 @@ extension DaletouItem {
         changeSelect(data.selected, style: data.style)
         numLabel.text = data.num
         
-        
+        detailLabel.text = data.omissionNum
     }
 }
