@@ -971,6 +971,7 @@
                                         <connections>
                                             <outlet property="collectionView" destination="2ol-Co-SCT" id="2cT-jQ-OKj"/>
                                             <outlet property="deleteBut" destination="54v-bd-VbS" id="BxB-u8-4Fa"/>
+                                            <outlet property="detailLabel" destination="IsU-qt-GdX" id="GXv-D0-pB8"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1123,6 +1124,9 @@
                                                 <integer key="value" value="8"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="addDaletou:" destination="b1E-jf-tqY" eventType="touchUpInside" id="e01-MH-ZqG"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tSr-ZI-jCj">
                                         <rect key="frame" x="141.5" y="15" width="93" height="30"/>
@@ -1139,6 +1143,9 @@
                                                 <integer key="value" value="8"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="machineOne:" destination="b1E-jf-tqY" eventType="touchUpInside" id="KR4-Mb-h6x"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cc1-dS-Pyh">
                                         <rect key="frame" x="264.5" y="15" width="93" height="30"/>
@@ -1151,6 +1158,10 @@
                                                 <integer key="value" value="8"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="addDaletou:" destination="b1E-jf-tqY" eventType="touchUpInside" id="j7W-SD-Jbo"/>
+                                            <action selector="machineFive:" destination="b1E-jf-tqY" eventType="touchUpInside" id="G4N-1T-gGu"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1187,6 +1198,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="1000"/>
                     <connections>
+                        <outlet property="bottomView" destination="7rE-ho-pfn" id="tMM-KJ-7Oz"/>
                         <outlet property="tableView" destination="FRi-sY-bcc" id="J9p-IH-PzJ"/>
                     </connections>
                 </viewController>

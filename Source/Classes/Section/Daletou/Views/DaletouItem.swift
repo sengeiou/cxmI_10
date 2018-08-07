@@ -70,14 +70,8 @@ extension DaletouItem {
 extension DaletouItem {
     public func configure(with data: DaletouDataModel) {
         changeSelect(data.selected, style: data.style)
-        if let num = Int(data.num) {
-            if num < 10 {
-                numLabel.text = "0" + data.num
-            }
-            else{
-                numLabel.text = data.num
-            }
-        }
+        numLabel.text = data.num
+        
         
     }
 }

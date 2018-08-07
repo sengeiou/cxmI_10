@@ -24,7 +24,12 @@ class DaletouDataModel: NSObject {
         case .red:
             for i in 1...35 {
                 let model = DaletouDataModel()
-                model.num = "\(i)"
+                if i < 10 {
+                    model.num = "0\(i)"
+                }else {
+                    model.num = "\(i)"
+                }
+                
                 model.number = i
                 model.style = ballStyle
                 list.append(model)
@@ -33,7 +38,11 @@ class DaletouDataModel: NSObject {
             for i in 1...12 {
                 let model = DaletouDataModel()
                 model.style = .blue
-                model.num = "\(i)"
+                if i < 10 {
+                    model.num = "0\(i)"
+                }else {
+                    model.num = "\(i)"
+                }
                 model.number = i
                 model.style = ballStyle
                 list.append(model)
@@ -41,7 +50,11 @@ class DaletouDataModel: NSObject {
         case .danRed:
             for i in 1...35 {
                 let model = DaletouDataModel()
-                model.num = "\(i)"
+                if i < 10 {
+                    model.num = "0\(i)"
+                }else {
+                    model.num = "\(i)"
+                }
                 model.number = i
                 model.style = ballStyle
                 list.append(model)
@@ -49,7 +62,11 @@ class DaletouDataModel: NSObject {
         case .dragRed:
             for i in 1...35 {
                 let model = DaletouDataModel()
-                model.num = "\(i)"
+                if i < 10 {
+                    model.num = "0\(i)"
+                }else {
+                    model.num = "\(i)"
+                }
                 model.number = i
                 model.style = ballStyle
                 list.append(model)
@@ -58,7 +75,11 @@ class DaletouDataModel: NSObject {
             for i in 1...12 {
                 let model = DaletouDataModel()
                 model.style = .blue
-                model.num = "\(i)"
+                if i < 10 {
+                    model.num = "0\(i)"
+                }else {
+                    model.num = "\(i)"
+                }
                 model.number = i
                 model.style = ballStyle
                 list.append(model)
@@ -67,7 +88,11 @@ class DaletouDataModel: NSObject {
             for i in 1...12 {
                 let model = DaletouDataModel()
                 model.style = .blue
-                model.num = "\(i)"
+                if i < 10 {
+                    model.num = "0\(i)"
+                }else {
+                    model.num = "\(i)"
+                }
                 model.number = i
                 model.style = ballStyle
                 list.append(model)
@@ -78,7 +103,7 @@ class DaletouDataModel: NSObject {
     
 }
 
-class DaletouDataList: NSObject {
+class DaletouDataList: NSObject, Algorithm {
     required override init() {}
 
     var type : DaletouType = .标准选号
@@ -90,5 +115,30 @@ class DaletouDataList: NSObject {
     var danBlueList = [DaletouDataModel]()
     var dragBlueList = [DaletouDataModel]()
     
+    /// 注数
+    var bettingNum = 0
+    /// 倍数
+    var multiple = 1
+    /// 钱数
+    var money = 2
+    
+    func getBettingNum () {
+        switch type {
+        case .标准选号:
+            bettingNum = getStandardBettingNum()
+        case .胆拖选号:
+            bettingNum = getDanBettingNum()
+        }
+    }
+    
+    private func getStandardBettingNum() -> Int {
+        return standardBettingNum(m: redList.count, n: blueList.count)
+    }
+    private func getDanBettingNum() -> Int {
+        return danBettingNum(a: danRedList.count,
+                             b: dragRedList.count,
+                             c: danBlueList.count,
+                             d: dragBlueList.count)
+    }
 }
 

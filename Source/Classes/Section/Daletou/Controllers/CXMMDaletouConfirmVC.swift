@@ -13,6 +13,9 @@ class CXMMDaletouConfirmVC: BaseViewController {
 
     public var list = [DaletouDataList]() {
         didSet{
+            self.dataList.removeAll()
+            bettingNum.onNext(0)
+            var num = 0
             for model in list {
                 switch model.type {
                 case .标准选号:
@@ -36,28 +39,25 @@ class CXMMDaletouConfirmVC: BaseViewController {
                     arr.append(model1)
                     arr.append(contentsOf: model.dragBlueList)
                 }
+                
+                num += model.bettingNum
             }
-            
+            let value = try! bettingNum.value()
+            bettingNum.onNext( value + num)
         }
+        
     }
     
-    public var dataList : [[DaletouDataModel]] = [[DaletouDataModel]]() {
-        didSet{
-            
-        }
-    }
-    
-    public var bettingNumber = 0 {
-        didSet{
-            let num = try! bettingNum.value()
-            bettingNum.onNext( num + bettingNumber)
-        }
-    }
+    public var dataList : [[DaletouDataModel]] = [[DaletouDataModel]]()
     
     @IBOutlet weak var tableView: UITableView!
     
-    public var bettingNum = BehaviorSubject(value: 0)
-    private var multiple = BehaviorSubject(value: 0)
+    @IBOutlet weak var bottomView: DaletouConfirmBottom!
+    
+    private var money = 2
+    
+    private var bettingNum = BehaviorSubject(value: 0)
+    private var multiple = BehaviorSubject(value: 1)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,16 +65,30 @@ class CXMMDaletouConfirmVC: BaseViewController {
         self.tableView.reloadData()
         
         settingData()
-        self.tableView.reloadData()
+        
     }
 
+    @IBAction func addDaletou(_ sender: UIButton) {
+        pushDaletouBetting(indexPath: nil)
+    }
+    @IBAction func machineOne(_ sender: UIButton) {
+    }
+    @IBAction func machineFive(_ sender: UIButton) {
+    }
+    
     private func settingData() {
         _ = Observable.combineLatest(bettingNum, multiple)
             .asObservable()
             .subscribe(onNext: { (num, multiple) in
                 print("\(num)     \(multiple)")
                 
+                let att = NSMutableAttributedString(string: "\(num)注\(multiple)倍 共需: ")
                 
+                let money = NSAttributedString(string: "¥\(num * self.money * multiple)",
+                    attributes: [NSAttributedStringKey.foregroundColor: ColorE85504])
+                att.append(money)
+                self.bottomView.moneyLabel.attributedText = att
+            
             }, onError: nil , onCompleted: nil , onDisposed: nil )
     }
 
@@ -83,17 +97,18 @@ class CXMMDaletouConfirmVC: BaseViewController {
 extension CXMMDaletouConfirmVC : CXMMDaletouViewControllerDelegate {
     func didSelected(list: DaletouDataList) {
         self.list.append(list)
-        //self.tableView.reloadData()
+        self.tableView.reloadData()
     }
-
+    
     private func pushDaletouBetting(indexPath: IndexPath?) {
-        
         let story = UIStoryboard(name: "Daletou", bundle: nil)
         let vc = story.instantiateViewController(withIdentifier: "DaletouViewController") as! CXMMDaletouViewController
         vc.delegate = self
         vc.isPush = true
-        if indexPath != nil {
-            
+        if let index = indexPath {
+            vc.model = self.list[index.row]
+            self.list.remove(at: index.row)
+            self.dataList.remove(at: index.row)
         }
         pushViewController(vc: vc)
     }
@@ -101,7 +116,7 @@ extension CXMMDaletouConfirmVC : CXMMDaletouViewControllerDelegate {
 
 extension CXMMDaletouConfirmVC : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        pushDaletouBetting(indexPath: indexPath)
     }
 }
 extension CXMMDaletouConfirmVC : UITableViewDataSource {
@@ -109,23 +124,37 @@ extension CXMMDaletouConfirmVC : UITableViewDataSource {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataList.count
+        return list.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DaletouConfirmCell", for: indexPath) as! DaletouConfirmCell
-        cell.configure(with: dataList[indexPath.row])
+        cell.configure(with: list[indexPath.row])
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     
-        let list = dataList[indexPath.row]
+        let model = self.list[indexPath.row]
         
-        let count : Int = list.count / 12
+        var listCount = 0
+        
+        switch model.type {
+        case .标准选号:
+            listCount = model.redList.count + model.blueList.count
+        case .胆拖选号:
+            listCount = model.danRedList.count + 1 + model.dragRedList.count
+            if model.danBlueList.count != 0 {
+                listCount += 1
+            }
+            listCount += model.danBlueList.count
+            listCount += model.dragBlueList.count
+        }
+        
+        let count : Int = listCount / 12
         
         if count == 0 {
             return 90
         }else {
-            let num : Int = list.count % 12
+            let num : Int = listCount % 12
             if num == 0 {
                 return CGFloat(70 + 21 * count)
             }else {

@@ -13,6 +13,8 @@ class DaletouConfirmCell: UITableViewCell {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    @IBOutlet weak var detailLabel: UILabel!
+    
     @IBAction func deleteClick(_ sender: UIButton) {
     }
     
@@ -32,8 +34,45 @@ class DaletouConfirmCell: UITableViewCell {
 }
 
 extension DaletouConfirmCell {
-    public func configure(with data : [DaletouDataModel]) {
-        self.dataList = data
+    public func configure(with data : DaletouDataList) {
+        let detail = "\(data.bettingNum)注 \(data.multiple)倍 \(data.bettingNum * data.money * data.multiple).00元"
+        
+        switch data.type {
+        case .标准选号:
+            var arr = data.redList
+            arr.append(contentsOf: data.blueList)
+            self.dataList = arr
+            
+            
+            
+            if self.dataList.count > 7 {
+                self.detailLabel.text = "复试 \(detail)"
+            }
+            else {
+                self.detailLabel.text = "单式 \(detail)"
+            }
+            
+        case .胆拖选号:
+            var arr = data.danRedList
+            
+            let model1 = DaletouDataModel()
+            model1.num = "-"
+            model1.style = .red
+            arr.append(model1)
+            
+            arr.append(contentsOf: data.dragRedList)
+            if data.danBlueList.count > 0 {
+                arr.append(model1)
+            }
+            arr.append(contentsOf: data.danBlueList)
+            arr.append(model1)
+            arr.append(contentsOf: data.dragBlueList)
+            
+            self.dataList = arr
+            self.detailLabel.text = "胆拖 \(detail)"
+        }
+        
+        
         self.collectionView.reloadData()
     }
 }

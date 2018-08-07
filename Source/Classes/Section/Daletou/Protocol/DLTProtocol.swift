@@ -20,7 +20,7 @@ extension Algorithm {
     /// a : 胆红球
     /// b : 拖红球
     /// c : 胆篮球
-    /// d : 拖红球
+    /// d : 拖蓝球
     func danBettingNum(a : Int, b : Int, c : Int, d : Int) -> Int {
         return calculation(n: 5 - a, m: b) * calculation(n: 2 - c, m: d)
     }

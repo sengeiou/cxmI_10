@@ -22,6 +22,71 @@ class CXMMDaletouViewController: BaseViewController {
 
     public var delegate : CXMMDaletouViewControllerDelegate!
     
+    public var model : DaletouDataList? {
+        didSet{
+            guard let mod = model else { return }
+            switch mod.type {
+            case .标准选号:
+                for data in mod.redList {
+                    for data1 in self.redList {
+                        if data.num == data1.num {
+                            data1.selected = data.selected
+                            break
+                        }
+                    }
+                }
+                for data in mod.blueList {
+                    for data1 in self.blueList {
+                        if data.num == data1.num {
+                            data1.selected = data.selected
+                            break
+                        }
+                    }
+                }
+                self.selectedRedSet = Set(mod.redList)
+                self.selectedBlueSet = Set(mod.blueList)
+            case .胆拖选号:
+                for data in mod.danRedList {
+                    for data1 in self.danRedList {
+                        if data.num == data1.num {
+                            data1.selected = data.selected
+                            break
+                        }
+                    }
+                }
+                for data in mod.dragRedList {
+                    for data1 in self.dragRedList {
+                        if data.num == data1.num {
+                            data1.selected = data.selected
+                            break
+                        }
+                    }
+                }
+                for data in mod.danBlueList {
+                    for data1 in self.danBlueList {
+                        if data.num == data1.num {
+                            data1.selected = data.selected
+                            break
+                        }
+                    }
+                }
+                for data in mod.dragBlueList {
+                    for data1 in self.dragBlueList {
+                        if data.num == data1.num {
+                            data1.selected = data.selected
+                            break
+                        }
+                    }
+                }
+                self.selectedDanRedSet = Set(mod.danRedList)
+                self.selectedDragRedSet = Set(mod.dragRedList)
+                self.selectedDanBlueSet = Set(mod.danBlueList)
+                self.selectedDragBlueSet = Set(mod.dragBlueList)
+            }
+        }
+    }
+    
+    
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var bottomView: DaletouBottomView!
@@ -121,10 +186,13 @@ class CXMMDaletouViewController: BaseViewController {
         
         setData()
         print(danBettingNum(a: 2, b: 4, c: 1, d: 2))
-        
+        setDefaultData()
     }
 
-    
+    private func setDefaultData() {
+        guard let mod = self.model else { return }
+        self.type = mod.type
+    }
     private func setData() {
         
         _ = settingNum.asObservable().subscribe(onNext: { (num) in
@@ -271,6 +339,7 @@ extension CXMMDaletouViewController : DaletouBottomViewDelegate {
                 model.redList = getStandardReds()
                 model.blueList = getStandardBlues()
                 model.type = type
+                model.getBettingNum()
                 delegate.didSelected(list: model)
             case .胆拖选号:
                 let model = DaletouDataList()
@@ -279,6 +348,7 @@ extension CXMMDaletouViewController : DaletouBottomViewDelegate {
                 model.danBlueList = getDanBlues()
                 model.dragBlueList = getDragBlues()
                 model.type = type
+                model.getBettingNum()
                 delegate.didSelected(list: model)
             }
             self.popViewController()
@@ -295,6 +365,7 @@ extension CXMMDaletouViewController : DaletouBottomViewDelegate {
             model.redList = getStandardReds()
             model.blueList = getStandardBlues()
             model.type = type
+            model.getBettingNum()
             vc.list.append(model)
         case .胆拖选号:
             let model = DaletouDataList()
@@ -303,6 +374,7 @@ extension CXMMDaletouViewController : DaletouBottomViewDelegate {
             model.danBlueList = getDanBlues()
             model.dragBlueList = getDragBlues()
             model.type = type
+            model.getBettingNum()
             vc.list.append(model)
         }
         

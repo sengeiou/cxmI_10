@@ -25,6 +25,10 @@ extension DaletouConfirmItem {
         if data.num == "-" {
             titleLabel.font = Font28
             titleLabel.textColor = ColorC7C7C7
+            titleLabel.textAlignment = .center
+        }else {
+            titleLabel.font = Font16
+            titleLabel.textAlignment = .left
         }
         
     }
