@@ -9,7 +9,8 @@
 import UIKit
 
 class DaletouTitleCell: UITableViewCell {
-
+    @IBOutlet weak var titleLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -21,4 +22,10 @@ class DaletouTitleCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+}
+
+extension DaletouTitleCell {
+    public func configure(model : DaletouOmissionModel) {
+        self.titleLabel.text = "\(model.term_num)期 截止时间\(model.endDate)"
+    }
 }

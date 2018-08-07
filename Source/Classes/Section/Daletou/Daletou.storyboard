@@ -79,6 +79,9 @@
                                                 <constraint firstAttribute="bottomMargin" secondItem="PSE-WQ-DB9" secondAttribute="bottom" constant="1" id="mKJ-aE-QpI"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="titleLabel" destination="PSE-WQ-DB9" id="84O-5x-Abv"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DaletouStandardRedCell" rowHeight="191" id="322-eN-2t5" customClass="DaletouStandardRedCell" customModule="彩小蜜" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="68" width="375" height="191"/>
@@ -210,6 +213,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="detailLabel" destination="2te-SP-AfN" id="jxG-Pu-gIK"/>
                                             <outlet property="redView" destination="4nG-k6-IwV" id="sDp-sO-gx4"/>
                                         </connections>
                                     </tableViewCell>

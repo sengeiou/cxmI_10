@@ -845,7 +845,9 @@ extension CXMMDaletouViewController : UITableViewDataSource {
     
     private func initTitleCell(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DaletouTitleCell", for: indexPath) as! DaletouTitleCell
-        
+        if self.omissionModel != nil {
+            cell.configure(model: self.omissionModel)
+        }
         return cell
     }
     
@@ -854,6 +856,9 @@ extension CXMMDaletouViewController : UITableViewDataSource {
         cell.delegate = self
         cell.configure(with: self.displayStyle)
         cell.configure(with: redList)
+        if self.omissionModel != nil {
+            cell.configure(model: self.omissionModel, display: self.displayStyle)
+        }
         return cell
     }
     private func initStandardBlueCell(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {

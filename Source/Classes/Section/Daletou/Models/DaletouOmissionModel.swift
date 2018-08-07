@@ -10,15 +10,15 @@ import Foundation
 import HandyJSON
 struct DaletouOmissionModel : HandyJSON {
     
-    var endDate : String!
+    var endDate : String = ""
     /// 后去遗漏
     var postList : [String]!
     /// 前区遗漏
     var preList : [String]!
     /// 历史中奖纪录
     var prizeList : [DLTHistoricalData]!
-    var prizes : String!
-    var term_num : String!
+    var prizes : String = ""
+    var term_num : String = ""
     
 }
 
