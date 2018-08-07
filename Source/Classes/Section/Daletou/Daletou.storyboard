@@ -1165,7 +1165,6 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="addDaletou:" destination="b1E-jf-tqY" eventType="touchUpInside" id="j7W-SD-Jbo"/>
                                             <action selector="machineFive:" destination="b1E-jf-tqY" eventType="touchUpInside" id="G4N-1T-gGu"/>
                                         </connections>
                                     </button>

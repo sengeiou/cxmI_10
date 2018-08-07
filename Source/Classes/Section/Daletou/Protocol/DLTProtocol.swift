@@ -45,6 +45,19 @@ protocol DLTRandom { }
 
 extension DLTRandom {
     
+    func getFiveRandom() -> [DaletouDataList] {
+        var list = [DaletouDataList]()
+        
+        let num = 5
+        
+        for _ in 1...num {
+            list.append(getOneRandom())
+        }
+        
+        return list
+    }
+    
+    
     func getOneRandom() -> DaletouDataList {
         let model = DaletouDataList()
         model.bettingNum = 1

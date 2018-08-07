@@ -131,7 +131,9 @@ extension CXMMDaletouConfirmVC : DLTRandom {
         self.tableView.reloadData()
     }
     @IBAction func machineFive(_ sender: UIButton) {
-        
+        let models = getFiveRandom()
+        self.list.append(contentsOf: models)
+        self.tableView.reloadData()
     }
 }
 
