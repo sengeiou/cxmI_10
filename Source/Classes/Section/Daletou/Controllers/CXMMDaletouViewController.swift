@@ -210,9 +210,11 @@ class CXMMDaletouViewController: BaseViewController {
                 let numAtt = NSAttributedString(string: "\(num)", attributes: [NSAttributedStringKey.foregroundColor: ColorE85504])
                 let defa = NSAttributedString(string: "注 合计")
                 let money = NSAttributedString(string: "\(num * 2)", attributes: [NSAttributedStringKey.foregroundColor: ColorE85504])
+                let yuan = NSAttributedString(string: "元")
                 att.append(numAtt)
                 att.append(defa)
                 att.append(money)
+                att.append(yuan)
                 self.bottomView.titleLabel.attributedText = att
                 self.bottomView.confirmBut.backgroundColor = ColorE85504
                 self.bottomView.confirmBut.isUserInteractionEnabled = true
