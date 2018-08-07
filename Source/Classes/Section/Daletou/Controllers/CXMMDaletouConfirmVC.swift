@@ -13,7 +13,7 @@ class CXMMDaletouConfirmVC: BaseViewController {
 
     public var list = [DaletouDataList]() {
         didSet{
-            self.dataList.removeAll()
+            //self.dataList.removeAll()
             bettingNum.onNext(0)
             var num = 0
             for model in list {
@@ -21,8 +21,6 @@ class CXMMDaletouConfirmVC: BaseViewController {
                 case .标准选号:
                     var arr = model.redList
                     arr.append(contentsOf: model.blueList)
-                    
-                    dataList.append(arr)
                 case .胆拖选号:
                     var arr = model.danRedList
                     
@@ -54,8 +52,6 @@ class CXMMDaletouConfirmVC: BaseViewController {
         }
     }
     
-    public var dataList : [[DaletouDataModel]] = [[DaletouDataModel]]()
-    
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var bottomView: DaletouConfirmBottom!
@@ -66,6 +62,8 @@ class CXMMDaletouConfirmVC: BaseViewController {
     private var multiple = BehaviorSubject(value: 1)
     private var money = BehaviorSubject(value: 2)
     private var agreement = BehaviorSubject(value: true)
+    
+    private var pushIndex : Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -186,7 +184,8 @@ extension CXMMDaletouConfirmVC : FootballOrderFooterDelegate {
 // MARK: - 选择大乐透
 extension CXMMDaletouConfirmVC : CXMMDaletouViewControllerDelegate {
     func didSelected(list: DaletouDataList) {
-        self.list.append(list)
+        //self.list.append(list)
+        self.list.insert(list, at: self.pushIndex)
         self.tableView.reloadData()
     }
     
@@ -198,7 +197,7 @@ extension CXMMDaletouConfirmVC : CXMMDaletouViewControllerDelegate {
         if let index = indexPath {
             vc.model = self.list[index.row]
             self.list.remove(at: index.row)
-            self.dataList.remove(at: index.row)
+            self.pushIndex = index.row
         }
         pushViewController(vc: vc)
     }

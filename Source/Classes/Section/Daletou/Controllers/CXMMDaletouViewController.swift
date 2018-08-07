@@ -21,13 +21,14 @@ protocol CXMMDaletouViewControllerDelegate {
 class CXMMDaletouViewController: BaseViewController {
 
     public var delegate : CXMMDaletouViewControllerDelegate!
-    
+   
     public var model : DaletouDataList? {
         didSet{
             guard let mod = model else { return }
             switch mod.type {
             case .标准选号:
-                
+                self.selectedRedSet.removeAll()
+                self.selectedBlueSet.removeAll()
                 for data in self.redList {
                     data.selected = false
                 }
@@ -39,6 +40,7 @@ class CXMMDaletouViewController: BaseViewController {
                     for data1 in self.redList {
                         if data.num == data1.num {
                             data1.selected = data.selected
+                            self.selectedRedSet.insert(data1)
                             break
                         }
                     }
@@ -47,17 +49,22 @@ class CXMMDaletouViewController: BaseViewController {
                     for data1 in self.blueList {
                         if data.num == data1.num {
                             data1.selected = data.selected
+                            self.selectedBlueSet.insert(data1)
                             break
                         }
                     }
                 }
-                self.selectedRedSet = Set(mod.redList)
-                self.selectedBlueSet = Set(mod.blueList)
+                
             case .胆拖选号:
+                self.selectedDanRedSet.removeAll()
+                self.selectedDragRedSet.removeAll()
+                self.selectedDanBlueSet.removeAll()
+                self.selectedDragBlueSet.removeAll()
                 for data in mod.danRedList {
                     for data1 in self.danRedList {
                         if data.num == data1.num {
                             data1.selected = data.selected
+                            self.selectedDanRedSet.insert(data1)
                             break
                         }
                     }
@@ -66,6 +73,7 @@ class CXMMDaletouViewController: BaseViewController {
                     for data1 in self.dragRedList {
                         if data.num == data1.num {
                             data1.selected = data.selected
+                            self.selectedDragRedSet.insert(data1)
                             break
                         }
                     }
@@ -74,6 +82,7 @@ class CXMMDaletouViewController: BaseViewController {
                     for data1 in self.danBlueList {
                         if data.num == data1.num {
                             data1.selected = data.selected
+                            self.selectedDanBlueSet.insert(data1)
                             break
                         }
                     }
@@ -82,14 +91,11 @@ class CXMMDaletouViewController: BaseViewController {
                     for data1 in self.dragBlueList {
                         if data.num == data1.num {
                             data1.selected = data.selected
+                            self.selectedDragBlueSet.insert(data1)
                             break
                         }
                     }
                 }
-                self.selectedDanRedSet = Set(mod.danRedList)
-                self.selectedDragRedSet = Set(mod.dragRedList)
-                self.selectedDanBlueSet = Set(mod.danBlueList)
-                self.selectedDragBlueSet = Set(mod.dragBlueList)
             }
         }
     }
@@ -422,28 +428,7 @@ extension CXMMDaletouViewController : DaletouBottomViewDelegate {
         let arr = selectedDragBlueSet.sorted{$0.number < $1.number}
         return arr
     }
-    
-//    private func getDanBalls() -> [DaletouDataModel] {
-//
-//
-//        var arr = selectedDanRedSet.sorted{ $0.number < $1.number}
-//        let model1 = DaletouDataModel()
-//        model1.num = "-"
-//        model1.style = .red
-//        arr.append(model1)
-//
-//        arr.append(contentsOf: selectedDragRedSet.sorted{$0.number < $1.number})
-//        if selectedDanBlueSet.count > 0 {
-//            arr.append(model1)
-//        }
-//        arr.append(contentsOf: selectedDanBlueSet.sorted{$0.number < $1.number})
-//        arr.append(model1)
-//        arr.append(contentsOf: selectedDragBlueSet.sorted{$0.number < $1.number})
-//
-//
-//        return arr
-//    }
-    
+
     private func showAlert() {
         showCXMAlert(title: "温馨提示", message: "\n确定清空所选号码吗？",
                      action: "确定", cancel: "取消") { (action) in
