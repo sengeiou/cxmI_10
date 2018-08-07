@@ -9,7 +9,14 @@
 import UIKit
 import RxSwift
 
+protocol DaletouConfirmCellDelegate {
+    func didTipDelete(model : DaletouDataList) -> Void
+}
+
 class DaletouConfirmCell: UITableViewCell {
+    
+    public var delegate : DaletouConfirmCellDelegate!
+    
     @IBOutlet weak var deleteBut: UIButton!
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -17,12 +24,12 @@ class DaletouConfirmCell: UITableViewCell {
     @IBOutlet weak var detailLabel: UILabel!
     
     @IBAction func deleteClick(_ sender: UIButton) {
+        guard delegate != nil else { return }
+        delegate.didTipDelete(model: self.data)
     }
     
-    
-    
     private var dataList : [DaletouDataModel]!
-    
+    private var data : DaletouDataList!
     override func awakeFromNib() {
         super.awakeFromNib()
         self.collectionView.isScrollEnabled = false
@@ -38,6 +45,7 @@ class DaletouConfirmCell: UITableViewCell {
 
 extension DaletouConfirmCell {
     public func configure(with data : DaletouDataList) {
+        self.data = data
         let detail = "\(data.bettingNum)注 \(data.multiple)倍 \(data.bettingNum * data.money * data.multiple).00元"
         
         switch data.type {

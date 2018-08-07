@@ -176,8 +176,6 @@ extension CXMMDaletouConfirmVC : FootballOrderFooterDelegate {
         agreement.urlStr = webBuyAgreement
         pushViewController(vc: agreement)
     }
-    
-    
 }
 // MARK: - 选择大乐透
 extension CXMMDaletouConfirmVC : CXMMDaletouViewControllerDelegate {
@@ -200,6 +198,15 @@ extension CXMMDaletouConfirmVC : CXMMDaletouViewControllerDelegate {
     }
 }
 
+extension CXMMDaletouConfirmVC : DaletouConfirmCellDelegate{
+    func didTipDelete(model: DaletouDataList) {
+        self.list.remove(model)
+        self.tableView.reloadData()
+        if self.list.count == 0 {
+            self.popViewController()
+        }
+    }
+}
 extension CXMMDaletouConfirmVC : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         pushDaletouBetting(indexPath: indexPath)
@@ -215,6 +222,7 @@ extension CXMMDaletouConfirmVC : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DaletouConfirmCell", for: indexPath) as! DaletouConfirmCell
         cell.configure(with: list[indexPath.row])
+        cell.delegate = self
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
