@@ -41,4 +41,76 @@ extension Calculation {
     }
 }
 
+protocol DLTRandom { }
+
+extension DLTRandom {
+    
+    func getOneRandom() -> DaletouDataList {
+        let model = DaletouDataList()
+        model.bettingNum = 1
+        for num in getRedRandom() {
+            let mo = DaletouDataModel()
+            if num < 10 {
+                mo.num = "0\(num)"
+            }
+            else {
+                mo.num = "\(num)"
+            }
+            
+            mo.number = num
+            mo.selected = true
+            mo.style = .red
+            model.redList.append(mo)
+        }
+        for num in getBlueRandom() {
+            let mo = DaletouDataModel()
+            if num < 10 {
+                mo.num = "0\(num)"
+            }
+            else {
+                mo.num = "\(num)"
+            }
+            mo.number = num
+            mo.selected = true
+            mo.style = .blue
+            model.redList.append(mo)
+        }
+        return model
+    }
+    
+    func getRedRandom() -> [Int] {
+        let arr = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35]
+        return random(arr: arr, scope: 5)
+    }
+    
+    func getBlueRandom() -> [Int] {
+        let arr = [1,2,3,4,5,6,7,8,9,10,11,12]
+        return random(arr: arr, scope: 2)
+    }
+    
+    private func random(arr : [Int], scope: Int) -> [Int] {
+       
+        var startArr = Array(arr)
+        var resultArr = Array(repeating: 0, count: scope)
+        for i in 0..<scope {
+            let currentCount = UInt32(startArr.count - i )
+            let index = Int(arc4random_uniform(currentCount))
+            resultArr[i] = startArr[index]
+            startArr.remove(at: index)
+        }
+        return resultArr.sorted()
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
 

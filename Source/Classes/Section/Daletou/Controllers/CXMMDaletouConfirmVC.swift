@@ -78,14 +78,6 @@ class CXMMDaletouConfirmVC: BaseViewController {
         
     }
 
-    @IBAction func addDaletou(_ sender: UIButton) {
-        pushDaletouBetting(indexPath: nil)
-    }
-    @IBAction func machineOne(_ sender: UIButton) {
-    }
-    @IBAction func machineFive(_ sender: UIButton) {
-    }
-    
     private func settingData() {
         _ = Observable.combineLatest(bettingNum, multiple, money, agreement)
             .asObservable()
@@ -129,10 +121,22 @@ class CXMMDaletouConfirmVC: BaseViewController {
     
 }
 
+extension CXMMDaletouConfirmVC : DLTRandom {
+    @IBAction func addDaletou(_ sender: UIButton) {
+        pushDaletouBetting(indexPath: nil)
+    }
+    @IBAction func machineOne(_ sender: UIButton) {
+        let model = getOneRandom()
+        self.list.append(model)
+        self.tableView.reloadData()
+    }
+    @IBAction func machineFive(_ sender: UIButton) {
+        
+    }
+}
+
 // MARK: - 底部 视图  代理
 extension CXMMDaletouConfirmVC : DaletouConfirmBottomDelegate, FootballTimesFilterVCDelegate {
-    
-    
     func didTipAppend(isAppend : Bool) {
         switch isAppend {
         case true:
@@ -154,7 +158,7 @@ extension CXMMDaletouConfirmVC : DaletouConfirmBottomDelegate, FootballTimesFilt
         filter.times = "\(try! self.multiple.value())"
         self.present(filter)
     }
-    
+    // MARK: - 投注确认按钮
     func didTipConfirm() {
         
     }
@@ -202,6 +206,7 @@ extension CXMMDaletouConfirmVC : DaletouConfirmCellDelegate{
     func didTipDelete(model: DaletouDataList) {
         self.list.remove(model)
         self.tableView.reloadData()
+        // 无数据返回上一页
         if self.list.count == 0 {
             self.popViewController()
         }
