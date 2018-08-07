@@ -27,6 +27,14 @@ class CXMMDaletouViewController: BaseViewController {
             guard let mod = model else { return }
             switch mod.type {
             case .标准选号:
+                
+                for data in self.redList {
+                    data.selected = false
+                }
+                for data in self.blueList {
+                    data.selected = false
+                }
+                
                 for data in mod.redList {
                     for data1 in self.redList {
                         if data.num == data1.num {
@@ -189,6 +197,7 @@ class CXMMDaletouViewController: BaseViewController {
         setDefaultData()
     }
 
+    
     private func setDefaultData() {
         guard let mod = self.model else { return }
         self.type = mod.type
@@ -239,7 +248,12 @@ class CXMMDaletouViewController: BaseViewController {
 }
 
 // MARK: - public
-extension CXMMDaletouViewController {
+extension CXMMDaletouViewController : DLTRandom {
+    @IBAction func randomOne(_ sender: UIButton) {
+        let model = getOneRandom()
+        self.model = model
+        self.tableView.reloadData()
+    }
     public func configure(with data : [DaletouDataModel], type : DaletouType) {
         
     }

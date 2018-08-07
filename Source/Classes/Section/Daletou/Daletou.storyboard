@@ -102,6 +102,9 @@
                                                             <integer key="value" value="8"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="randomOne:" destination="eWG-cl-Ba1" eventType="touchUpInside" id="Kvu-5K-0Nf"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="奖池：59亿" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2te-SP-AfN">
                                                     <rect key="frame" x="120" y="15" width="239" height="20"/>

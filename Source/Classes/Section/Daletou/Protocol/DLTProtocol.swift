@@ -73,7 +73,7 @@ extension DLTRandom {
             mo.number = num
             mo.selected = true
             mo.style = .blue
-            model.redList.append(mo)
+            model.blueList.append(mo)
         }
         return model
     }
