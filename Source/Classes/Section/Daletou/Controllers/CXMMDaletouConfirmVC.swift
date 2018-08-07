@@ -41,6 +41,12 @@ class CXMMDaletouConfirmVC: BaseViewController {
                 }
                 
                 num += model.bettingNum
+                if let money = try? self.money.value() {
+                    model.money = money
+                }
+                if let muti = try? self.multiple.value() {
+                    model.multiple = muti
+                }
             }
             let value = try! bettingNum.value()
             bettingNum.onNext( value + num)
