@@ -54,14 +54,16 @@ class CXMMDaletouConfirmVC: BaseViewController {
     
     @IBOutlet weak var bottomView: DaletouConfirmBottom!
     
-    private var money = 2
+    //private var money = 2
     
     private var bettingNum = BehaviorSubject(value: 0)
     private var multiple = BehaviorSubject(value: 1)
+    private var money = BehaviorSubject(value: 2)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "彩小秘 · 投注确认"
+        self.bottomView.delegate = self
         self.tableView.reloadData()
         
         settingData()
@@ -77,23 +79,60 @@ class CXMMDaletouConfirmVC: BaseViewController {
     }
     
     private func settingData() {
-        _ = Observable.combineLatest(bettingNum, multiple)
+        _ = Observable.combineLatest(bettingNum, multiple, money)
             .asObservable()
-            .subscribe(onNext: { (num, multiple) in
-                print("\(num)     \(multiple)")
+            .subscribe(onNext: { (num, multiple, money) in
+                
                 
                 let att = NSMutableAttributedString(string: "\(num)注\(multiple)倍 共需: ")
                 
-                let money = NSAttributedString(string: "¥\(num * self.money * multiple)",
+                let money = NSAttributedString(string: "¥\(num * money * multiple)",
                     attributes: [NSAttributedStringKey.foregroundColor: ColorE85504])
                 att.append(money)
                 self.bottomView.moneyLabel.attributedText = att
-            
+                self.bottomView.multipleBut.setTitle("\(multiple)", for: .normal)
             }, onError: nil , onCompleted: nil , onDisposed: nil )
     }
 
 }
 
+// MARK: - 底部 视图  代理
+extension CXMMDaletouConfirmVC : DaletouConfirmBottomDelegate, FootballTimesFilterVCDelegate {
+    
+    
+    func didTipAppend(isAppend : Bool) {
+        switch isAppend {
+        case true:
+            for model in list {
+                model.money = 3
+            }
+            self.money.onNext(3)
+        case false :
+            for model in list {
+                model.money = 2
+            }
+            self.money.onNext(2)
+        }
+    }
+    // MARK: - 选取倍数
+    func didTipMultiple() {
+        let filter = CXMFootballTimesFilterVC()
+        filter.delegate = self
+        filter.times = "\(try! self.multiple.value())"
+        self.present(filter)
+    }
+    
+    func didTipConfirm() {
+        
+    }
+    
+    func timesConfirm(times: String) {
+        self.multiple.onNext(Int(times)!)
+    }
+    
+}
+
+// MARK: - 选择大乐透
 extension CXMMDaletouConfirmVC : CXMMDaletouViewControllerDelegate {
     func didSelected(list: DaletouDataList) {
         self.list.append(list)

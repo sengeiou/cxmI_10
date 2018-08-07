@@ -996,7 +996,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="confirmClick:" destination="e4L-be-9cP" eventType="touchUpInside" id="h5e-Bp-HFA"/>
+                                            <action selector="confirmClick:" destination="7rE-ho-pfn" eventType="touchUpInside" id="smg-On-RkD"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3cu-Bh-utz">
@@ -1008,7 +1008,7 @@
                                             <color key="titleColor" red="0.31372549019607843" green="0.31372549019607843" blue="0.31372549019607843" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="MultipleClick:" destination="e4L-be-9cP" eventType="touchUpInside" id="Mwx-6A-pGO"/>
+                                            <action selector="MultipleClick:" destination="7rE-ho-pfn" eventType="touchUpInside" id="b6b-Cj-5za"/>
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Clickable" translatesAutoresizingMaskIntoConstraints="NO" id="CBi-1Z-r3t">
@@ -1066,10 +1066,11 @@
                                             <constraint firstAttribute="width" constant="17" id="lR7-8j-DVD"/>
                                             <constraint firstAttribute="height" constant="17" id="zjg-Ec-rpq"/>
                                         </constraints>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" backgroundImage="SelectionBox1"/>
                                         <state key="selected" backgroundImage="Selected1"/>
                                         <connections>
-                                            <action selector="appendClick:" destination="e4L-be-9cP" eventType="touchUpInside" id="0sK-fg-2FA"/>
+                                            <action selector="appendClick:" destination="7rE-ho-pfn" eventType="touchUpInside" id="V01-kt-4Wu"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1107,7 +1108,9 @@
                                     <constraint firstAttribute="bottom" secondItem="jZh-u7-2No" secondAttribute="bottom" constant="5" id="zDI-2H-dkT"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="confirmBut" destination="9Ws-WA-hd7" id="ak1-52-xst"/>
                                     <outlet property="moneyLabel" destination="jZh-u7-2No" id="zTi-1f-6Tb"/>
+                                    <outlet property="multipleBut" destination="3cu-Bh-utz" id="LTA-Tn-zpl"/>
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VhR-fr-UeH">
@@ -1203,7 +1206,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r1d-Bf-ugI" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="e4L-be-9cP" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1564" y="141.22938530734635"/>
         </scene>
