@@ -193,6 +193,7 @@ class CXMMDaletouViewController: BaseViewController {
         return DaletouDataModel.getData(ballStyle: .dragBlue)
     }()
     
+    private var menuTitle : String = "显示遗漏"
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -324,8 +325,9 @@ extension CXMMDaletouViewController : Algorithm {
 
 // MARK: - TOP Menu
 extension CXMMDaletouViewController : YBPopupMenuDelegate{
+    
     @IBAction func topMenuClick(_ sender: UIButton) {
-        YBPopupMenu.showRely(on: sender, titles: ["走势图","玩法帮助","开奖结果","隐藏遗漏"],
+        YBPopupMenu.showRely(on: sender, titles: ["走势图","玩法帮助","开奖结果","\(menuTitle)"],
                              icons: ["Trend","GameDescription","LotteryResult","Missing"],
                              menuWidth: 125, delegate: self)
     }
@@ -340,8 +342,10 @@ extension CXMMDaletouViewController : YBPopupMenuDelegate{
         case 3:
             if self.displayStyle == .defStyle {
                 self.displayStyle = .omission
+                menuTitle = "隐藏遗漏"
             }else if self.displayStyle == .omission {
                 self.displayStyle = .defStyle
+                menuTitle = "显示遗漏"
             }
             self.tableView.reloadData()
         default: break
