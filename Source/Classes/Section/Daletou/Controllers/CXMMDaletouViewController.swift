@@ -636,28 +636,35 @@ extension CXMMDaletouViewController : CXMMDaletouMenuDelegate {
     func didTipMenu(view: CXMMDaletouMenu, type: DaletouType) {
         
         self.type = type
+        titleView.setImage(UIImage(named: "Down"), for: .normal)
     }
-    
+    func didCancel() {
+        titleView.setImage(UIImage(named: "Down"), for: .normal)
+    }
     private func setNavigationTitleView() {
         titleView = UIButton(type: .custom)
         
-        titleView.frame = CGRect(x: 0, y: 0, width: 160, height: 30)
+        titleView.frame = CGRect(x: 0, y: 0, width: 175, height: 30)
         titleView.titleLabel?.font = Font17
         titleView.setTitle(type.rawValue, for: .normal)
         titleView.setTitleColor(Color505050, for: .normal)
+        titleView.setImage(UIImage(named: "Down"), for: .normal)
         titleView.addTarget(self, action: #selector(titleViewClicked(_:)), for: .touchUpInside)
-        
+        titleView.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 12)
+        titleView.imageEdgeInsets = UIEdgeInsets(top: 0, left: 163, bottom: 0, right: 0)
         self.navigationItem.titleView = titleView
     }
     
     @objc private func titleViewClicked(_ sender: UIButton) {
         showMatchMenu()
+        titleView.setImage(UIImage(named: "Upon"), for: .normal)
     }
     
     private func showMatchMenu() {
         menu.configure(with: type)
         menu.show()
     }
+   
 }
 
 // MARK: - 摇一摇

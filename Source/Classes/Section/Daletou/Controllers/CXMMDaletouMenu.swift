@@ -10,6 +10,7 @@ import UIKit
 
 protocol CXMMDaletouMenuDelegate {
     func didTipMenu(view : CXMMDaletouMenu, type : DaletouType) -> Void
+    func didCancel() -> Void
 }
 
 class CXMMDaletouMenu: PopMenu {
@@ -120,6 +121,11 @@ extension CXMMDaletouMenu {
         }
         
         hide()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        self.delegate.didCancel()
     }
 }
 
