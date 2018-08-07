@@ -48,10 +48,10 @@ class CXMMDaletouConfirmVC: BaseViewController {
                     model.multiple = muti
                 }
             }
-            let value = try! bettingNum.value()
-            bettingNum.onNext( value + num)
+            if let value = try? bettingNum.value() {
+                bettingNum.onNext( value + num)
+            }
         }
-        
     }
     
     public var dataList : [[DaletouDataModel]] = [[DaletouDataModel]]()
@@ -65,6 +65,7 @@ class CXMMDaletouConfirmVC: BaseViewController {
     private var bettingNum = BehaviorSubject(value: 0)
     private var multiple = BehaviorSubject(value: 1)
     private var money = BehaviorSubject(value: 2)
+    private var agreement = BehaviorSubject(value: true)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,6 +74,7 @@ class CXMMDaletouConfirmVC: BaseViewController {
         self.tableView.reloadData()
         
         settingData()
+        initSubview()
         
     }
 
@@ -85,10 +87,16 @@ class CXMMDaletouConfirmVC: BaseViewController {
     }
     
     private func settingData() {
-        _ = Observable.combineLatest(bettingNum, multiple, money)
+        _ = Observable.combineLatest(bettingNum, multiple, money, agreement)
             .asObservable()
-            .subscribe(onNext: { (num, multiple, money) in
-                
+            .subscribe(onNext: { (num, multiple, money, agreement) in
+                guard agreement else { // 需要同意协议，方可购买
+                    self.bottomView.confirmBut.backgroundColor = ColorC7C7C7
+                    self.bottomView.confirmBut.isUserInteractionEnabled = false
+                    return
+                }
+                self.bottomView.confirmBut.backgroundColor = ColorE85504
+                self.bottomView.confirmBut.isUserInteractionEnabled = true
                 
                 let att = NSMutableAttributedString(string: "\(num)注\(multiple)倍 共需: ")
                 
@@ -113,6 +121,12 @@ class CXMMDaletouConfirmVC: BaseViewController {
         }, onError: nil , onCompleted: nil , onDisposed: nil )
     }
 
+    private func initSubview() {
+        let foot = FootballOrderFooter()
+        foot.delegate = self
+        self.tableView.tableFooterView = foot
+    }
+    
 }
 
 // MARK: - 底部 视图  代理
@@ -151,7 +165,20 @@ extension CXMMDaletouConfirmVC : DaletouConfirmBottomDelegate, FootballTimesFilt
     }
     
 }
-
+// MARK: - FooterView 代理
+extension CXMMDaletouConfirmVC : FootballOrderFooterDelegate {
+    func didTipSelectedAgreement(isAgerr: Bool) {
+        self.agreement.onNext(isAgerr)
+    }
+    
+    func didTipAgreement() {
+        let agreement = CXMWebViewController()
+        agreement.urlStr = webBuyAgreement
+        pushViewController(vc: agreement)
+    }
+    
+    
+}
 // MARK: - 选择大乐透
 extension CXMMDaletouConfirmVC : CXMMDaletouViewControllerDelegate {
     func didSelected(list: DaletouDataList) {
