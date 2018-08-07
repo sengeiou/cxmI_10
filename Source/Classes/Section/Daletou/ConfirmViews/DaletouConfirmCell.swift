@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class DaletouConfirmCell: UITableViewCell {
     @IBOutlet weak var deleteBut: UIButton!
@@ -17,6 +18,8 @@ class DaletouConfirmCell: UITableViewCell {
     
     @IBAction func deleteClick(_ sender: UIButton) {
     }
+    
+    
     
     private var dataList : [DaletouDataModel]!
     

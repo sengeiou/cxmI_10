@@ -90,8 +90,21 @@ class CXMMDaletouConfirmVC: BaseViewController {
                     attributes: [NSAttributedStringKey.foregroundColor: ColorE85504])
                 att.append(money)
                 self.bottomView.moneyLabel.attributedText = att
-                self.bottomView.multipleBut.setTitle("\(multiple)", for: .normal)
+                self.bottomView.multipleBut.setTitle("倍数 \(multiple)倍", for: .normal)
             }, onError: nil , onCompleted: nil , onDisposed: nil )
+        
+        _ = multiple.asObserver().subscribe(onNext: { (multiple) in
+            for model in self.list {
+                model.multiple = multiple
+            }
+            self.tableView.reloadData()
+        }, onError: nil , onCompleted: nil , onDisposed: nil )
+        _ = money.asObserver().subscribe(onNext: { (money) in
+            for model in self.list {
+                model.money = money
+            }
+            self.tableView.reloadData()
+        }, onError: nil , onCompleted: nil , onDisposed: nil )
     }
 
 }
@@ -128,6 +141,7 @@ extension CXMMDaletouConfirmVC : DaletouConfirmBottomDelegate, FootballTimesFilt
     
     func timesConfirm(times: String) {
         self.multiple.onNext(Int(times)!)
+        self.tableView.reloadData()
     }
     
 }
