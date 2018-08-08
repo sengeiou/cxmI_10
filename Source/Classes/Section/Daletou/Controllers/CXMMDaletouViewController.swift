@@ -339,7 +339,8 @@ extension CXMMDaletouViewController : YBPopupMenuDelegate{
     func ybPopupMenu(_ ybPopupMenu: YBPopupMenu!, didSelectedAt index: Int) {
         switch index {
         case 0:
-            break
+            let vc = CXMMDaletouTrendVC()
+            pushViewController(vc: vc)
         case 1:
             break
         case 2:
