@@ -2105,11 +2105,21 @@
                                                 <constraint firstItem="kyp-cS-TBI" firstAttribute="top" secondItem="6R2-Bo-hqk" secondAttribute="top" constant="1" id="rFO-kO-cBw"/>
                                             </constraints>
                                         </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TJG-JQ-K3p">
+                                            <rect key="frame" x="10" y="49" width="355" height="1"/>
+                                            <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="1" id="AgJ-A9-QNd"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="6R2-Bo-hqk" secondAttribute="trailing" id="9pK-zP-7zL"/>
+                                        <constraint firstAttribute="bottom" secondItem="TJG-JQ-K3p" secondAttribute="bottom" id="H8G-q1-f2z"/>
+                                        <constraint firstItem="TJG-JQ-K3p" firstAttribute="leading" secondItem="Vsc-zM-pOO" secondAttribute="leading" constant="10" id="NQy-sr-xbR"/>
                                         <constraint firstItem="6R2-Bo-hqk" firstAttribute="top" secondItem="Vsc-zM-pOO" secondAttribute="top" constant="5" id="UzB-Ya-vOm"/>
+                                        <constraint firstAttribute="trailing" secondItem="TJG-JQ-K3p" secondAttribute="trailing" constant="10" id="WjL-5g-huy"/>
                                         <constraint firstAttribute="bottom" secondItem="6R2-Bo-hqk" secondAttribute="bottom" id="Wuy-36-Kux"/>
                                         <constraint firstItem="6R2-Bo-hqk" firstAttribute="leading" secondItem="Vsc-zM-pOO" secondAttribute="leading" id="elZ-Eb-qkA"/>
                                     </constraints>
