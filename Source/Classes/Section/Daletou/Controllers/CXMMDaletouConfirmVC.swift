@@ -118,10 +118,10 @@ class CXMMDaletouConfirmVC: BaseViewController {
     }
     
     override func back(_ sender: UIButton) {
-        showCXMAlert(title: "温馨提示", message: "是否保存已选号码", action: "保存", cancel: "不保存", confirm: { (action) in
-            
-        }) { (action) in
+        showCXMAlert(title: "温馨提示", message: "返回将清空所选号码，确定返回？", action: "确定", cancel: "取消", confirm: { (action) in
             self.popViewController()
+        }) { (action) in
+            
         }
     }
     
