@@ -126,7 +126,7 @@ class CXMMDaletouViewController: BaseViewController {
         }
     }
     
-    
+    private var prizeList : [DLTHistoricalData]!
 
     private var settingNum = Variable(0)
     
@@ -264,9 +264,14 @@ class CXMMDaletouViewController: BaseViewController {
 // MARK: - public
 extension CXMMDaletouViewController : DLTRandom {
     @IBAction func randomOne(_ sender: UIButton) {
-        let model = getOneRandom()
-        self.model = model
-        self.tableView.reloadData()
+//        let model = getOneRandom()
+//        self.model = model
+//        self.tableView.reloadData()
+        
+        let story = UIStoryboard(name: "Daletou", bundle: nil)
+        let vc = story.instantiateViewController(withIdentifier: "DaletouOrderVC") as! CXMMDaletouOrderVC
+        
+        pushViewController(vc: vc)
     }
     public func configure(with data : [DaletouDataModel], type : DaletouType) {
         
@@ -622,6 +627,7 @@ extension CXMMDaletouViewController : UITableViewDelegate {
             switch indexPath.row {
             case 0:
                 let history = CXMMDaletouHistoryAward()
+                history.prizeList = self.prizeList
                 present(history)
             default: break
             }
@@ -701,7 +707,7 @@ extension CXMMDaletouViewController {
             .mapObject(type: DaletouOmissionModel.self)
             .subscribe(onNext: { (data) in
                 self.omissionModel = data
-                
+                self.prizeList = data.prizeList
                 for i in 0..<self.redList.count {
                     self.redList[i].omissionNum = self.omissionModel.preList[i]
                 }

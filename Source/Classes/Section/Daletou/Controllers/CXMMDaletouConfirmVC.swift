@@ -117,6 +117,15 @@ class CXMMDaletouConfirmVC: BaseViewController {
         self.tableView.tableFooterView = foot
     }
     
+    override func back(_ sender: UIButton) {
+        showCXMAlert(title: "温馨提示", message: "是否保存已选号码", action: "保存", cancel: "不保存", confirm: { (action) in
+            
+        }) { (action) in
+            self.popViewController()
+        }
+    }
+    
+    
 }
 
 extension CXMMDaletouConfirmVC : DLTRandom {
@@ -133,6 +142,7 @@ extension CXMMDaletouConfirmVC : DLTRandom {
         self.list.append(contentsOf: models)
         self.tableView.reloadData()
     }
+    
 }
 
 // MARK: - 底部 视图  代理
@@ -249,12 +259,12 @@ extension CXMMDaletouConfirmVC : UITableViewDataSource {
             listCount += model.dragBlueList.count
         }
         
-        let count : Int = listCount / 12
+        let count : Int = listCount / 10
         
         if count == 0 {
             return 90
         }else {
-            let num : Int = listCount % 12
+            let num : Int = listCount % 10
             if num == 0 {
                 return CGFloat(70 + 21 * count)
             }else {

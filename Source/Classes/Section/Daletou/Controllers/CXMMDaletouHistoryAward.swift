@@ -10,6 +10,12 @@ import UIKit
 
 class CXMMDaletouHistoryAward: BasePopViewController {
 
+    public var prizeList : [DLTHistoricalData]! {
+        didSet{
+            self.tableView.reloadData()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.popStyle = .fromBottom
@@ -54,12 +60,12 @@ extension CXMMDaletouHistoryAward : UITableViewDataSource {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return self.prizeList != nil ? self.prizeList.count : 0
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DaletouHistoryAwardCell.identifier, for: indexPath) as! DaletouHistoryAwardCell
         
-        
+        cell.configure(with: prizeList[indexPath.row])
         return cell
     }
     

@@ -115,7 +115,17 @@ class DaletouHistoryAwardCell: UITableViewCell {
 }
 
 extension DaletouHistoryAwardCell {
-    public func configure() {
+    public func configure(with data : DLTHistoricalData) {
+        title.text = data.termNum
+        guard data.numList.count == 7 else { return }
         
+        red1.text = data.numList[0]
+        red2.text = data.numList[1]
+        red3.text = data.numList[2]
+        red4.text = data.numList[3]
+        red5.text = data.numList[4]
+        
+        blue1.text = data.numList[5]
+        blue2.text = data.numList[6]
     }
 }
