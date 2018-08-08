@@ -78,12 +78,29 @@ extension CXMMDaletouTrendVC {
     
     override func pageController(_ pageController: WMPageController, viewControllerAt index: Int) -> UIViewController {
         
-        let story = UIStoryboard(name: "Daletou", bundle: nil)
-        let vc = story.instantiateViewController(withIdentifier: "DLTHistoryTrendVC") as! CXMMDLTHistoryTrendVC
+        switch index {
+        case 0:
+            let story = UIStoryboard(name: "Daletou", bundle: nil)
+            let vc = story.instantiateViewController(withIdentifier: "DLTHistoryTrendVC") as! CXMMDLTHistoryTrendVC
+            
+            
+            return vc
+        case 1:
+            let story = UIStoryboard(name: "Daletou", bundle: nil)
+            let vc = story.instantiateViewController(withIdentifier: "DLTRedTrendVC") as! CXMMDLTRedTrendVC
+            
+            
+            return vc
+        default:
+            let story = UIStoryboard(name: "Daletou", bundle: nil)
+            let vc = story.instantiateViewController(withIdentifier: "CXMMDaletouConfirmVC") as! CXMMDaletouConfirmVC
+            
+            
+            return vc
+        }
         
         
-        return vc
-        return UIViewController()
+       
         
     }
     

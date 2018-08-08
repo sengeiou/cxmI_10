@@ -14,6 +14,7 @@ enum PagerViewType: String {
     case purchaseRecord = "彩小秘 · 投注记录"
     case message = "彩小秘 · 消息中心"
     case accountDetails = "彩小秘 · 账户明细"
+    case trend = "彩小秘 · 走势图"
 }
 
 class BasePagerViewController: ButtonBarPagerTabStripViewController {
@@ -82,6 +83,8 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
             return getMessageCenterVC()
         case .accountDetails:
             return getAccountDetailsVC()
+        case .trend:
+            return getTrendVC()
         default:
             return[]
         }
@@ -139,6 +142,19 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
         self.accountCoupon = coupon
         coupon.accountType = .coupon
         return [all, bonus, recharge, buy, withdrawal, coupon]
+    }
+    
+    private func getTrendVC() -> [UIViewController] {
+        let story = UIStoryboard(name: "Daletou", bundle: nil)
+        let vc = story.instantiateViewController(withIdentifier: "DLTHistoryTrendVC") as! CXMMDLTHistoryTrendVC
+        
+        
+        let vc1 = story.instantiateViewController(withIdentifier: "DLTRedTrendVC") as! CXMMDLTRedTrendVC
+        
+        let vc2 = story.instantiateViewController(withIdentifier: "DLTRedTrendVC") as! CXMMDLTRedTrendVC
+        let vc3 = story.instantiateViewController(withIdentifier: "DLTHistoryTrendVC") as! CXMMDLTHistoryTrendVC
+        let vc4 = story.instantiateViewController(withIdentifier: "DLTRedTrendVC") as! CXMMDLTRedTrendVC
+        return [vc2,vc3,vc4,vc]
     }
     
     private func setLiftButtonItem() {
