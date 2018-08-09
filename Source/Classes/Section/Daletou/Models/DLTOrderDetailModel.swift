@@ -65,6 +65,40 @@ class DLTOrderItemInfo : NSObject, HandyJSON {
     /// 投注号码
     var cathectic : String!
     ///是否猜中 0-没猜中 1-猜中
-    var isGuess : String!
+    var isGuess : Bool = false
     var style : BallStyle = .red
+}
+
+struct DLTTicketSchemeModel: HandyJSON {
+    var programmeSn = ""
+    var ticketSchemeDetailDTOs : [DLTTicketSchemeInfo]!
+}
+
+struct DLTTicketSchemeInfo : HandyJSON {
+    /// 彩票购买金额
+    var amount : String = ""
+    /// 投注注数
+    var betNum: String = ""
+    var blueCathectics: [DLTOrderItemInfo]!
+    var blueDanCathectics : [DLTOrderItemInfo]!
+    /// 投注倍数
+    var cathectic: String = ""
+    /// 倍数
+    var multiple : String = ""
+    /// 序号
+    var number : String = ""
+    /// 出票状态， 0-待出票 1-已出票 2-出票失败 3-出票中
+    var status : String!
+    /// 投注内容
+    var tickeContent: String!
+    /// 出票编号
+    var ticketSn: String!
+    /// 是否追加，0否1是 ,
+    var isAppend: String!
+    /// 玩法:0单式，1复式，2胆拖 ,
+    var playType: String!
+    var redCathectics : [DLTOrderItemInfo]!
+    var redDanCathectics : [DLTOrderItemInfo]!
+    var redTuoCathectics : [DLTOrderItemInfo]!
+    var blueTuoCathectics: [DLTOrderItemInfo]!
 }
