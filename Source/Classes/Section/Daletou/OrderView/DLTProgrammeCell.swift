@@ -28,3 +28,12 @@ class DLTProgrammeCell: UITableViewCell {
     }
 
 }
+
+extension DLTProgrammeCell {
+    public func configure(with data : DLTOrderDetailModel) {
+        programmeNo.text = data.programmeSn
+        creatTime.text = data.createTime
+        orderTime.text = data.acceptTime
+        ticketTime.text = data.ticketTime
+    }
+}

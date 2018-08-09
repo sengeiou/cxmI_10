@@ -323,7 +323,7 @@ extension CXMMDaletouOrderVC : UITableViewDataSource {
     }
     private func initProgrammeCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "DLTProgrammeCell", for: indexPath) as! DLTProgrammeCell
-        
+        cell.configure(with: orderModel)
         return cell
     }
     private func initOrderTitleCell(indexPath: IndexPath) -> UITableViewCell {
