@@ -17,21 +17,27 @@ let dltProvider = MoyaProvider<DLTAPIManager>(requestClosure: requestClosure,plu
 enum DLTAPIManager {
     /// 大乐透列表
     case tickenInfo
-    
+    /// 订单详情
+    case orderDetail(orderId: String)
+    /// 出票方案
+    case ticketScheme(orderSn: String, programmeSn: String)
 }
 
 extension DLTAPIManager : TargetType {
     
     var baseURL : URL {
-        return URL(string : baseURLStr + "/lotto" + xpath )!
+        return URL(string : baseURLStr + xpath )!
     }
     var path : String { return ""}
     
     var xpath : String {
         switch self {
         case .tickenInfo:
-            return "/lotto/getTicketInfo"
-            
+            return "/lotto/lotto/getTicketInfo"
+        case .orderDetail:
+            return "/order/order/getLottoOrderDetail"
+        case .ticketScheme:
+            return "/order/order/getLottoTicketScheme"
         }
     }
     
@@ -42,6 +48,11 @@ extension DLTAPIManager : TargetType {
         case .tickenInfo:
             //dic["s"] = ""
             break
+        case .orderDetail(let orderId):
+            dic["orderId"] = orderId
+        case .ticketScheme(let orderSn, let programmeSn):
+            dic["orderSn"] = orderSn
+            dic["programmeSn"] = programmeSn
         default:
             return .requestPlain
         }

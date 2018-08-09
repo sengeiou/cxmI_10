@@ -98,6 +98,8 @@ class DaletouDataModel: NSObject {
                 model.style = ballStyle
                 list.append(model)
             }
+        case .line:
+            break
         }
         return list
     }

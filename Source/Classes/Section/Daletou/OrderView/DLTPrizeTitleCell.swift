@@ -18,12 +18,6 @@ class DLTPrizeTitleCell: UITableViewCell {
     @IBOutlet weak var numSix: UILabel!
     @IBOutlet weak var numSeven: UILabel!
     
-    
-    
-    
-    
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         setSubview()
@@ -55,4 +49,17 @@ class DLTPrizeTitleCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+}
+
+extension DLTPrizeTitleCell {
+    public func configure(with list : [String]) {
+        guard list.count == 7 else { fatalError("中奖号码有误") }
+        numOne.text = list[0]
+        numTwo.text = list[1]
+        numThree.text = list[2]
+        numFour.text = list[3]
+        numFive.text = list[4]
+        numSix.text = list[5]
+        numSeven.text = list[6]
+    }
 }

@@ -17,6 +17,8 @@ enum BallStyle {
     case dragRed
     case danBlue
     case dragBlue
+    /// 横线
+    case line
 }
 
 enum DLTDisplayStyle {

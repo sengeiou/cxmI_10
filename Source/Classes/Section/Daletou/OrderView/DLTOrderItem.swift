@@ -30,3 +30,18 @@ class DLTOrderItem: UICollectionViewCell {
         self.numLabel.layer.borderColor = ColorC7C7C7.cgColor
     }
 }
+
+extension DLTOrderItem {
+    public func configure(with data : DLTOrderItemInfo) {
+        numLabel.text = data.cathectic
+        switch data.style {
+        case .line:
+            numLabel.isHidden = true
+            line.isHidden = false
+        case .red, .danRed, .dragRed:
+            numLabel.textColor = ColorEB1C24
+        case .blue, .danBlue, .dragBlue:
+            numLabel.textColor = Color0081CC
+        }
+    }
+}

@@ -14,6 +14,8 @@ class DLTPrizeOrderCell: UITableViewCell {
     
     @IBOutlet weak var detailLabel: UILabel!
     
+    private var itemList : [DLTOrderItemInfo]!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.collectionView.isScrollEnabled = false
@@ -28,22 +30,94 @@ class DLTPrizeOrderCell: UITableViewCell {
     
 }
 
+extension DLTPrizeOrderCell {
+    public func configure(with orderInfo : DLTOrderResult) {
+        switch orderInfo.playType {
+        case "0", "1":
+            self.itemList = getStandardData(orderInfo)
+        case "2":
+            self.itemList = getDanData(orderInfo)
+        default:
+            break
+        }
+        self.collectionView.reloadData()
+    }
+    private func getStandardData(_ orderInfo : DLTOrderResult) -> [DLTOrderItemInfo] {
+        guard let reds  = orderInfo.redCathectics else { fatalError("红球为空") }
+        guard let blues = orderInfo.blueCathectics else { fatalError("篮球为空") }
+        
+        var list = [DLTOrderItemInfo]()
+        
+        for model in reds {
+            model.style = .red
+        }
+        for model in blues {
+            model.style = .blue
+        }
+        
+        list.append(contentsOf: reds)
+        list.append(contentsOf: blues)
+        
+        return list
+    }
+    private func getDanData(_ orderInfo : DLTOrderResult) -> [DLTOrderItemInfo] {
+        var list = [DLTOrderItemInfo]()
+        
+        guard let danReds = orderInfo.redDanCathectics else { fatalError("红胆为空") }
+        guard let dragReds = orderInfo.redTuoCathectics else { fatalError("红拖为空") }
+        guard let dragBlues = orderInfo.blueTuoCathectics else { fatalError("蓝拖为空") }
+        
+        
+        for model in danReds {
+            model.style = .danRed
+        }
+        for model in dragReds {
+            model.style = .dragRed
+        }
+        
+        if let danBlues = orderInfo.blueDanCathectics {
+            for model in danBlues {
+                model.style = .danBlue
+            }
+        }
+        
+        for model in dragBlues {
+            model.style = .dragBlue
+        }
+        
+        list.append(contentsOf: danReds)
+        let line = DLTOrderItemInfo()
+        line.style = .line
+        
+        list.append(line)
+        
+        list.append(contentsOf: dragReds)
+        
+        list.append(line)
+        if let danBlues = orderInfo.blueDanCathectics {
+            list.append(contentsOf: danBlues)
+            if danBlues.isEmpty == false {
+                list.append(line)
+            }
+        }
+
+        list.append(contentsOf: dragBlues)
+        
+        return list
+    }
+}
+
 extension DLTPrizeOrderCell : UICollectionViewDelegate {
     
 }
 extension DLTPrizeOrderCell : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return itemList != nil ? itemList.count : 0
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DLTOrderItem", for: indexPath) as! DLTOrderItem
-        switch indexPath.row {
-        case 4:
-            cell.numLabel.isHidden = true
-            cell.line.isHidden = false
-        default:
-            break
-        }
+        cell.configure(with: itemList[indexPath.row])
+        
         return cell
     }
     

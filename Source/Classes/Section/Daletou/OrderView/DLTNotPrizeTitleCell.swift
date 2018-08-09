@@ -23,3 +23,9 @@ class DLTNotPrizeTitleCell: UITableViewCell {
     }
 
 }
+
+extension DLTNotPrizeTitleCell {
+    public func configure(with date : String) {
+        
+    }
+}

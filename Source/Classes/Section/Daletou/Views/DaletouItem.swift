@@ -62,6 +62,8 @@ extension DaletouItem {
                 numLabel.backgroundColor = ColorFFFFFF
                 numLabel.layer.borderColor = ColorC7C7C7.cgColor
             }
+        case .line:
+            break
         }
     }
 }

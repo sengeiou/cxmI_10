@@ -21,6 +21,8 @@ extension DaletouConfirmItem {
             titleLabel.textColor = ColorEB1C24
         case .blue, .danBlue, .dragBlue:
             titleLabel.textColor = Color0081CC
+        case .line:
+            break
         }
         if data.num == "-" {
             titleLabel.font = Font28
