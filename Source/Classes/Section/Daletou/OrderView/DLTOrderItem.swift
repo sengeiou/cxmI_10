@@ -39,8 +39,12 @@ extension DLTOrderItem {
             numLabel.isHidden = true
             line.isHidden = false
         case .red, .danRed, .dragRed:
+            line.isHidden = true
+            numLabel.isHidden = false
             numLabel.textColor = ColorEB1C24
         case .blue, .danBlue, .dragBlue:
+            line.isHidden = true
+            numLabel.isHidden = false
             numLabel.textColor = Color0081CC
         }
     }
