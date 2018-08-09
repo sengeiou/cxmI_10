@@ -1758,6 +1758,12 @@
                                                 <constraint firstItem="IJW-Lz-QyE" firstAttribute="leading" secondItem="neU-vC-8bA" secondAttribute="leading" id="yBB-rT-Mdb"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="creatTime" destination="i2J-mx-wEd" id="GTY-E9-KvH"/>
+                                            <outlet property="orderTime" destination="Ysm-ug-Sl8" id="VBQ-bA-9Qf"/>
+                                            <outlet property="programmeNo" destination="jlu-lk-cpJ" id="wD8-8z-Cml"/>
+                                            <outlet property="ticketTime" destination="ma6-bf-dHg" id="5vo-zJ-iZ2"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="9Uk-JG-FTF">
                                         <rect key="frame" x="0.0" y="717" width="375" height="44"/>

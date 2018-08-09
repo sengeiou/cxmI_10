@@ -192,6 +192,7 @@ extension CXMMDaletouOrderVC : UITableViewDelegate {
             let story = UIStoryboard(name: "Daletou", bundle: nil)
             let vc = story.instantiateViewController(withIdentifier: "DaletouProVC") as! CXMMDaletouProVC
             pushViewController(vc: vc)
+            
         default:
             break
         }
@@ -285,13 +286,8 @@ extension CXMMDaletouOrderVC : UITableViewDataSource {
                         return CGFloat(40 + 40 * (count + 1))
                     }
                 }
-                
-                return 50
             }
             
-            
-            
-         
         case 2:
             return 180
         default:

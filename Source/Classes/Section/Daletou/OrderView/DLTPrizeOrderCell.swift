@@ -32,14 +32,32 @@ class DLTPrizeOrderCell: UITableViewCell {
 
 extension DLTPrizeOrderCell {
     public func configure(with orderInfo : DLTOrderResult) {
+        var type = ""
+        var append = ""
         switch orderInfo.playType {
-        case "0", "1":
+        case "0":
+            type = "单式"
+            self.itemList = getStandardData(orderInfo)
+        case "1":
+            type = "复式"
             self.itemList = getStandardData(orderInfo)
         case "2":
+            type = "胆拖"
             self.itemList = getDanData(orderInfo)
-        default:
-            break
+        default: break
         }
+        
+        switch orderInfo.isAppend {
+        case "0":
+            append = ""
+        case "1":
+            append = "已追加"
+        default: break
+        }
+        
+        detailLabel.text = type + " \(orderInfo.betNum)注" + " \(orderInfo.cathectic)倍" + " \(orderInfo.amount).00元" + append
+         
+        
         self.collectionView.reloadData()
     }
     private func getStandardData(_ orderInfo : DLTOrderResult) -> [DLTOrderItemInfo] {

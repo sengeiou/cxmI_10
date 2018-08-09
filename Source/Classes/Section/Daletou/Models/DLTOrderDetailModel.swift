@@ -11,14 +11,14 @@ import HandyJSON
 
 struct DLTOrderDetailModel: HandyJSON  {
    
-    var acceptTime : String!
+    var acceptTime : String = ""
     var bonus : String!
     var lotteryClassifyId: String!
     var lotteryClassifyImg: String!
     var lotteryClassifyName: String!
     /// 订单投注详情
     var cathecticResults : [DLTOrderResult]!
-    var createTime: String!
+    var createTime: String = ""
     var moneyPaid: String!
     var orderSn: String!
     var orderStatus: String!
@@ -28,25 +28,25 @@ struct DLTOrderDetailModel: HandyJSON  {
     var prePrizeInfo : String!
     /// 开奖号码
     var prizeNum: [String]!
-    var programmeSn: String!
-    var surplus: String!
-    var termNum: String!
-    var thirdPartyPaid: String!
-    var ticketAmount: String!
-    var ticketTime: String!
+    var programmeSn: String = ""
+    var surplus: String = ""
+    var termNum: String = ""
+    var thirdPartyPaid: String = ""
+    var ticketAmount: String = ""
+    var ticketTime: String = ""
     var userSurplus: String!
     var userSurplusLimit: String!
 }
 
 struct DLTOrderResult : HandyJSON {
     /// 彩票购买金额
-    var amount : String!
+    var amount : String = ""
     /// 投注注数
-    var betNum: String!
+    var betNum: String = ""
     var blueCathectics: [DLTOrderItemInfo]!
     var blueDanCathectics : [DLTOrderItemInfo]!
     /// 投注倍数
-    var cathectic: String!
+    var cathectic: String = ""
     /// 是否追加，0否1是 ,
     var isAppend: String!
     /// 玩法:0单式，1复式，2胆拖 ,
