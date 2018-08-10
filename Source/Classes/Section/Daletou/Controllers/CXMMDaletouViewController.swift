@@ -217,6 +217,9 @@ class CXMMDaletouViewController: BaseViewController {
     private func setData() {
         
         _ = settingNum.asObservable().subscribe(onNext: { (num) in
+            guard num * 2 <= 20000 else {
+                
+                return }
             if num > 0 {
                 let att = NSMutableAttributedString(string: "共")
                 let numAtt = NSAttributedString(string: "\(num)", attributes: [NSAttributedStringKey.foregroundColor: ColorE85504])
@@ -341,7 +344,8 @@ extension CXMMDaletouViewController : YBPopupMenuDelegate{
         case 0:
 //            let vc = CXMMDaletouTrendVC()
 //            pushViewController(vc: vc)
-            pushPagerView(pagerType: .trend)
+              pushPagerView(pagerType: .trend)
+            
         case 1:
             break
         case 2:

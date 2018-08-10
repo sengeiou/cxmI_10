@@ -146,15 +146,20 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
     
     private func getTrendVC() -> [UIViewController] {
         let story = UIStoryboard(name: "Daletou", bundle: nil)
-        let vc = story.instantiateViewController(withIdentifier: "DLTHistoryTrendVC") as! CXMMDLTHistoryTrendVC
         
+        let history = story.instantiateViewController(withIdentifier: "DLTHistoryTrendVC") as! CXMMDLTHistoryTrendVC
+    
+        let redTrend = story.instantiateViewController(withIdentifier: "DLTRedTrendVC") as! CXMMDLTRedTrendVC
         
-        let vc1 = story.instantiateViewController(withIdentifier: "DLTRedTrendVC") as! CXMMDLTRedTrendVC
+        let blueTrend = story.instantiateViewController(withIdentifier: "DLTBlueTrendVC") as! CXMMDLTBlueTrendVC
         
-        let vc2 = story.instantiateViewController(withIdentifier: "DLTRedTrendVC") as! CXMMDLTRedTrendVC
-        let vc3 = story.instantiateViewController(withIdentifier: "DLTHistoryTrendVC") as! CXMMDLTHistoryTrendVC
-        let vc4 = story.instantiateViewController(withIdentifier: "DLTRedTrendVC") as! CXMMDLTRedTrendVC
-        return [vc2,vc3,vc4,vc]
+        let redHot = story.instantiateViewController(withIdentifier: "DLTHotColdVC") as! CXMMDLTHotColdVC
+        redHot.style = .red
+        
+        let blueHot = story.instantiateViewController(withIdentifier: "DLTHotColdVC") as! CXMMDLTHotColdVC
+        blueHot.style = .blue
+        
+        return [history, redTrend, blueTrend, redHot, blueHot]
     }
     
     private func setLiftButtonItem() {

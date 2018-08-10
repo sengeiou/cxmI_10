@@ -37,3 +37,18 @@ class DLTHistoryTrendCell: UITableViewCell {
     }
 
 }
+
+extension DLTHistoryTrendCell {
+    public func configure(with data : DLTLottoNumInfo) {
+        phaseNum.text = data.termNum
+        guard data.numList.count == 7 else { return }
+        redOne.text = data.numList[0]
+        redTwo.text = data.numList[1]
+        redThree.text = data.numList[2]
+        redFour.text = data.numList[3]
+        redFive.text = data.numList[4]
+        blueOne.text = data.numList[5]
+        blueTwo.text = data.numList[6]
+    }
+}
+

@@ -21,6 +21,12 @@ enum DLTAPIManager {
     case orderDetail(orderId: String)
     /// 出票方案
     case ticketScheme(orderSn: String, programmeSn: String)
+    /// 走势图
+    /// compute : 是否计算统计，0不统计，1统计，默认1
+    /// count : 期数，30，50，100，默认100
+    /// drop : 是否显示遗漏0不显示，1显示，默认1
+    /// sort : 排序, 0正序1倒序，默认为0
+    case chartData(compute : Bool, count: String, drop : Bool, sort : Bool, tab : String)
 }
 
 extension DLTAPIManager : TargetType {
@@ -38,6 +44,8 @@ extension DLTAPIManager : TargetType {
             return "/order/order/getLottoOrderDetail"
         case .ticketScheme:
             return "/order/order/getLottoTicketScheme"
+        case .chartData:
+            return "/lotto/lotto/getChartData"
         }
     }
     
@@ -53,6 +61,12 @@ extension DLTAPIManager : TargetType {
         case .ticketScheme(let orderSn, let programmeSn):
             dic["orderSn"] = orderSn
             dic["programmeSn"] = programmeSn
+        case .chartData(let compute, let count, let drop, let sort, let tab):
+            dic["compute"] = compute
+            dic["count"] = count
+            dic["drop"] = drop
+            dic["sort"] = sort
+            dic["tab"] = tab
         default:
             return .requestPlain
         }

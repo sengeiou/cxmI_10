@@ -65,6 +65,5 @@ extension DLTOrderItem {
                 numLabel.backgroundColor = ColorFFFFFF
             }
         }
-        
     }
 }

@@ -14,6 +14,8 @@ class DLTProTableViewCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var detailLabel: UILabel!
     
+    private var itemList : [DLTOrderItemInfo]!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -27,17 +29,112 @@ class DLTProTableViewCell: UITableViewCell {
 
 }
 
+extension DLTProTableViewCell {
+    public func configure(with orderInfo : DLTTicketSchemeInfo) {
+        var type = ""
+        var append = ""
+        switch orderInfo.playType {
+        case "0":
+            type = "单式"
+            self.itemList = getStandardData(orderInfo)
+        case "1":
+            type = "复式"
+            self.itemList = getStandardData(orderInfo)
+        case "2":
+            type = "胆拖"
+            self.itemList = getDanData(orderInfo)
+        default: break
+        }
+        
+        switch orderInfo.isAppend {
+        case "0":
+            append = ""
+        case "1":
+            append = "已追加"
+        default: break
+        }
+        
+        detailLabel.text = type + " \(orderInfo.betNum)注" + " \(orderInfo.cathectic)倍" + " \(orderInfo.amount).00元" + append
+        
+        self.collectionView.reloadData()
+    }
+    
+    private func getStandardData(_ orderInfo : DLTTicketSchemeInfo) -> [DLTOrderItemInfo] {
+        guard let reds  = orderInfo.redCathectics else { fatalError("红球为空") }
+        guard let blues = orderInfo.blueCathectics else { fatalError("篮球为空") }
+        
+        var list = [DLTOrderItemInfo]()
+        
+        for model in reds {
+            model.style = .red
+        }
+        for model in blues {
+            model.style = .blue
+        }
+        
+        list.append(contentsOf: reds)
+        list.append(contentsOf: blues)
+        
+        return list
+    }
+    private func getDanData(_ orderInfo : DLTTicketSchemeInfo) -> [DLTOrderItemInfo] {
+        var list = [DLTOrderItemInfo]()
+        
+        guard let danReds = orderInfo.redDanCathectics else { fatalError("红胆为空") }
+        guard let dragReds = orderInfo.redTuoCathectics else { fatalError("红拖为空") }
+        guard let dragBlues = orderInfo.blueTuoCathectics else { fatalError("蓝拖为空") }
+        
+        
+        for model in danReds {
+            model.style = .danRed
+        }
+        for model in dragReds {
+            model.style = .dragRed
+        }
+        
+        if let danBlues = orderInfo.blueDanCathectics {
+            for model in danBlues {
+                model.style = .danBlue
+            }
+        }
+        
+        for model in dragBlues {
+            model.style = .dragBlue
+        }
+        
+        list.append(contentsOf: danReds)
+        let line = DLTOrderItemInfo()
+        line.style = .line
+        
+        list.append(line)
+        
+        list.append(contentsOf: dragReds)
+        
+        list.append(line)
+        if let danBlues = orderInfo.blueDanCathectics {
+            list.append(contentsOf: danBlues)
+            if danBlues.isEmpty == false {
+                list.append(line)
+            }
+        }
+        
+        list.append(contentsOf: dragBlues)
+        
+        return list
+    }
+}
+
 extension DLTProTableViewCell : UICollectionViewDelegate {
     
 }
 
 extension DLTProTableViewCell : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return itemList != nil ? itemList.count : 0
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DLTProItem", for: indexPath) as! DLTProItem
-        
+        cell.configure(with: itemList[indexPath.row])
         return cell
     }
 }
