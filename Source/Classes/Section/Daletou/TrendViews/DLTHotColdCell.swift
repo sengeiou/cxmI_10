@@ -34,11 +34,19 @@ class DLTHotColdCell: UITableViewCell {
 }
 
 extension DLTHotColdCell {
-    public func configure(with data : DLTHotOrCold) {
+    public func configure(with data : DLTHotOrCold, style : HotColdStyle) {
         numLabel.text = data.num
         label30.text = data.countA
         label50.text = data.countB
         label100.text = data.countC
         dropLabel.text = data.drop
+        
+        switch style {
+        case .red:
+            numLabel.textColor = ColorEB1C24
+        case .blue:
+            numLabel.textColor = Color0081CC
+        }
+        
     }
 }

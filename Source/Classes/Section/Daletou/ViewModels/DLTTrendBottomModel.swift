@@ -1,0 +1,14 @@
+//
+//  DLTTrendBottomModel.swift
+//  彩小蜜
+//
+//  Created by 笑 on 2018/8/10.
+//  Copyright © 2018年 韩笑. All rights reserved.
+//
+
+import Foundation
+
+struct DLTTrendBottomModel {
+    public var seRedSet = Set<DaletouDataModel>()
+    public var seBluSet = Set<DaletouDataModel>()
+}

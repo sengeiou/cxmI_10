@@ -122,7 +122,7 @@ extension CXMMDLTHotColdVC : UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DLTHotColdCell", for: indexPath) as! DLTHotColdCell
-        cell.configure(with: list[indexPath.row])
+        cell.configure(with: list[indexPath.row], style : self.style)
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

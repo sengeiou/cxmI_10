@@ -15,6 +15,10 @@ class DLTTrendBottom: UIView {
     private var redList : [DaletouDataModel]!
     private var blueList : [DaletouDataModel]!
     
+    private var seRedSet = Set<DaletouDataModel>()
+    private var seBluSet = Set<DaletouDataModel>()
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
 //        self.redCollectionView.delegate = self
