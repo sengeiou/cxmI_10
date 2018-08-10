@@ -21,6 +21,8 @@ class CXMMDLTHotColdVC: BaseViewController, IndicatorInfoProvider {
     public var redList : [DaletouDataModel]!
     public var blueList : [DaletouDataModel]!
     
+    public var viewModel : DLTTrendBottomModel!
+    
     public var compute: Bool! = false // 是否计算统计
     public var count: String! = "100" // 期数
     public var drop: Bool! = true     // 是否显示遗漏
@@ -37,11 +39,14 @@ class CXMMDLTHotColdVC: BaseViewController, IndicatorInfoProvider {
         setSubview()
         loadNewData()
         setData()
+        
+        self.bottomView.viewModel = self.viewModel
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.bottomView.configure(red: self.redList, blue: self.blueList)
+        
     }
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {

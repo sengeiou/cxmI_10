@@ -2731,6 +2731,9 @@
                                 </constraints>
                                 <connections>
                                     <outlet property="blueCollectionView" destination="h2V-ma-h1d" id="OZG-8f-3bL"/>
+                                    <outlet property="confirmBut" destination="1rC-Ys-mtt" id="CG8-MJ-ACl"/>
+                                    <outlet property="deleteBut" destination="Hf1-vb-L3J" id="yM5-Jj-GZD"/>
+                                    <outlet property="detailLabel" destination="NxM-nA-fBw" id="c0E-Oe-K1c"/>
                                     <outlet property="redCollectionView" destination="3oN-iz-438" id="FVH-eF-ztC"/>
                                 </connections>
                             </view>

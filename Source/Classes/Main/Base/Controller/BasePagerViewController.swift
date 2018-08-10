@@ -48,7 +48,9 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
     lazy private var bludList: [DaletouDataModel] = {
         return DaletouDataModel.getData(ballStyle: .blue)
     }()
-    
+    lazy private var viewModel : DLTTrendBottomModel = {
+        return DLTTrendBottomModel()
+    }()
     
     
     override func viewDidLoad() {
@@ -166,10 +168,12 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
         redHot.style = .red
         redHot.redList = self.redList
         redHot.blueList = self.bludList
+        redHot.viewModel = self.viewModel
         let blueHot = story.instantiateViewController(withIdentifier: "DLTHotColdVC") as! CXMMDLTHotColdVC
         blueHot.style = .blue
         blueHot.redList = self.redList
         blueHot.blueList = self.bludList
+        blueHot.viewModel = self.viewModel
         
         return [history, redTrend, blueTrend, redHot, blueHot]
     }
