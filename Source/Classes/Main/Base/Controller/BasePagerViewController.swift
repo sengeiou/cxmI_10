@@ -42,6 +42,15 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
     private var accountWithdrawal : CXMAccountDetailsVC!
     private var accountCoupon : CXMAccountDetailsVC!
     
+    lazy private var redList : [DaletouDataModel] = {
+        return DaletouDataModel.getData(ballStyle: .red)
+    }()
+    lazy private var bludList: [DaletouDataModel] = {
+        return DaletouDataModel.getData(ballStyle: .blue)
+    }()
+    
+    
+    
     override func viewDidLoad() {
         settings.style.buttonBarBackgroundColor = ColorFFFFFF
         settings.style.buttonBarItemBackgroundColor = ColorFFFFFF
@@ -155,9 +164,12 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
         
         let redHot = story.instantiateViewController(withIdentifier: "DLTHotColdVC") as! CXMMDLTHotColdVC
         redHot.style = .red
-        
+        redHot.redList = self.redList
+        redHot.blueList = self.bludList
         let blueHot = story.instantiateViewController(withIdentifier: "DLTHotColdVC") as! CXMMDLTHotColdVC
         blueHot.style = .blue
+        blueHot.redList = self.redList
+        blueHot.blueList = self.bludList
         
         return [history, redTrend, blueTrend, redHot, blueHot]
     }

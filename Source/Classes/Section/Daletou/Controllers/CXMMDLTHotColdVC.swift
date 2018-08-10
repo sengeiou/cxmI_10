@@ -18,22 +18,32 @@ class CXMMDLTHotColdVC: BaseViewController, IndicatorInfoProvider {
 
     public var style : HotColdStyle = .red
     
+    public var redList : [DaletouDataModel]!
+    public var blueList : [DaletouDataModel]!
+    
     public var compute: Bool! = false // 是否计算统计
     public var count: String! = "100" // 期数
     public var drop: Bool! = true     // 是否显示遗漏
     public var sort: Bool! = false    // 排序
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var bottomView: DLTTrendBottom!
     
     private var list : [DLTHotOrCold]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addPanGestureRecognizer = false
+        //addPanGestureRecognizer = false
         setSubview()
         loadNewData()
+        setData()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.bottomView.configure(red: self.redList, blue: self.blueList)
+    }
+    
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: style.rawValue)
     }
@@ -42,6 +52,10 @@ class CXMMDLTHotColdVC: BaseViewController, IndicatorInfoProvider {
 extension CXMMDLTHotColdVC {
     private func setSubview() {
         self.tableView.separatorStyle = .none
+        
+    }
+    private func setData() {
+        
     }
 }
 
