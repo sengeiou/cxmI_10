@@ -27,10 +27,10 @@ class CXMMDLTRedTrendVC: BaseViewController, IndicatorInfoProvider{
     
     public var viewModel : DLTTrendBottomModel!
     
-    public var compute: Bool! = false // 是否计算统计
-    public var count: String! = "100" // 期数
-    public var drop: Bool! = false     // 是否显示遗漏
-    public var sort: Bool! = false    // 排序
+    public var compute: Bool = true // 是否计算统计
+    public var count: String = "100" // 期数
+    public var drop: Bool = false     // 是否显示遗漏
+    public var sort: Bool = false    // 排序
     
     private var list : [DLTHotOrCold]!
     
@@ -121,10 +121,20 @@ extension CXMMDLTRedTrendVC {
                 switch self.style {
                 case .red:
                     weakSelf?.dropData = data.preLottoDrop
-                    weakSelf?.scrollView.contentSize = CGSize(width: 35 * DLTRedBlueTrendItem.width + 1, height: DLTRedBlueTrendItem.height * CGFloat(data.preLottoDrop.drop.count))
+                    if self.compute {
+                        weakSelf?.dropData.drop.append(contentsOf: self.getCompueList(with: data.preLottoDrop))
+                    }
+                    weakSelf?.scrollView.contentSize = CGSize(width: 35 * DLTRedBlueTrendItem.width + 1,
+                                                              height: DLTRedBlueTrendItem.height * CGFloat((weakSelf?.dropData.drop.count)!))
+                
                 case .blue:
                     weakSelf?.dropData = data.postLottoDrop
-                    weakSelf?.scrollView.contentSize = CGSize(width: 12 * DLTRedBlueTrendItem.width + 1, height: DLTRedBlueTrendItem.height * CGFloat(data.postLottoDrop.drop.count))
+                    if self.compute {
+                        weakSelf?.dropData.drop.append(contentsOf: self.getCompueList(with: data.postLottoDrop))
+                    }
+                    weakSelf?.scrollView.contentSize = CGSize(width: 12 * DLTRedBlueTrendItem.width + 1,
+                                                              height: DLTRedBlueTrendItem.height * CGFloat((weakSelf?.dropData.drop.count)!))
+                    
                 }
                 
                 weakSelf?.tableView.reloadData()
@@ -150,12 +160,39 @@ extension CXMMDLTRedTrendVC {
                 }
             }, onCompleted: nil , onDisposed: nil )
     }
+    
+    
+    private func getCompueList(with model : DLTTrendInfo) -> [DLTLottoNumInfo] {
+        var list = [DLTLottoNumInfo]()
+        var mo1 = DLTLottoNumInfo()
+        mo1.termNum = "出现次数"
+        mo1.termStyle = .出现次数
+        mo1.numList = model.countNum
+        var mo2 = DLTLottoNumInfo()
+        mo2.termNum = "平均遗漏"
+        mo2.termStyle = .平均遗漏
+        mo2.numList = model.averageData
+        var mo3 = DLTLottoNumInfo()
+        mo3.termNum = "最大遗漏"
+        mo3.termStyle = .最大遗漏
+        mo3.numList = model.maxData
+        var mo4 = DLTLottoNumInfo()
+        mo4.termNum = "最大连出"
+        mo4.termStyle = .最大连出
+        mo4.numList = model.maxContinue
+        
+        list.append(mo1)
+        list.append(mo2)
+        list.append(mo3)
+        list.append(mo4)
+        return list
+    }
+    
+    
 }
 
 extension CXMMDLTRedTrendVC : UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
-       
         if scrollView == self.scrollView {
             
             if scrollView.contentOffset.x > 0 {
@@ -170,12 +207,7 @@ extension CXMMDLTRedTrendVC : UIScrollViewDelegate {
             }
             
             self.collectionView.contentOffset = scrollView.contentOffset
-            
-            print(scrollView.contentOffset)
         }
-        
-        
-        
     }
 }
 
@@ -193,7 +225,28 @@ extension CXMMDLTRedTrendVC : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "DLTRedBlueTrendCell", for: indexPath) as! DLTRedBlueTrendCell
-        cell.configure(with: self.dropData.drop[indexPath.row])
+        
+        let model = dropData.drop[indexPath.row]
+        var color : UIColor
+        
+        switch model.termStyle {
+        case .默认:
+            if indexPath.row % 2 == 0 {
+                color = ColorFFFFFF
+            }else {
+                color = ColorF5911Ea1
+            }
+        case .出现次数:
+            color = Color00A79Ba1
+        case .平均遗漏:
+            color = ColorBF272Da1
+        case .最大遗漏:
+            color = Color009045a1
+        case .最大连出:
+            color = Color65AADDa1
+        }
+        
+        cell.configure(with: self.dropData.drop[indexPath.row], color : color)
         return cell
         
     }
@@ -242,14 +295,26 @@ extension CXMMDLTRedTrendVC : UICollectionViewDataSource {
         }else if collectionView == self.collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DLTRedBlueTrendItem", for: indexPath) as! DLTRedBlueTrendItem
             
-            
-            
+    
             var color : UIColor
             
-            if indexPath.section % 2 == 0 {
-                color = ColorFFFFFF
-            }else {
-                color = ColorF5911Ea1
+            let model = dropData.drop[indexPath.section]
+            
+            switch model.termStyle {
+            case .默认:
+                if indexPath.section % 2 == 0 {
+                    color = ColorFFFFFF
+                }else {
+                    color = ColorF5911Ea1
+                }
+            case .出现次数:
+                color = Color00A79Ba1
+            case .平均遗漏:
+                color = ColorBF272Da1
+            case .最大遗漏:
+                color = Color009045a1
+            case .最大连出:
+                color = Color65AADDa1
             }
             
             cell.configure(with: dropData.drop[indexPath.section].numList[indexPath.row],

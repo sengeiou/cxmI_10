@@ -23,11 +23,18 @@ struct DLTTrendModel: HandyJSON {
     var stopTime: String!
     
 }
-
+enum TermStyle {
+    case 出现次数
+    case 平均遗漏
+    case 最大遗漏
+    case 最大连出
+    case 默认
+}
 struct DLTLottoNumInfo: HandyJSON {
     var numList : [String]!
     /// 期号
     var termNum: String!
+    var termStyle : TermStyle = .默认
 }
 
 struct DLTHotOrCold : HandyJSON {
@@ -38,9 +45,13 @@ struct DLTHotOrCold : HandyJSON {
     var num: String!
 }
 struct DLTTrendInfo : HandyJSON {
+    /// 平均遗漏
     var averageData : [String]!
+    /// 出现次数
     var countNum: [String]!
     var drop : [DLTLottoNumInfo]!
+    /// 最大连出
     var maxContinue : [String]!
+    /// 最大遗漏
     var maxData : [String]!
 }

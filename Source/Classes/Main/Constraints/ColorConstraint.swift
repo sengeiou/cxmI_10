@@ -29,6 +29,12 @@ let ColorC7C7C7 = UIColor(hexColor: "C7C7C7")
 let ColorFFFFFF = UIColor(hexColor: "FFFFFF")
 let ColorFFFFFFa8 = UIColor(hexColor: "FFFFFF", alpha: 0.8)
 let ColorF5911Ea1 = UIColor(hexColor: "F5911E", alpha: 0.1)
+
+let Color00A79Ba1 = UIColor(hexColor: "00A79B", alpha: 0.1)
+let ColorBF272Da1 = UIColor(hexColor: "BF272D", alpha: 0.1)
+let Color009045a1 = UIColor(hexColor: "009045", alpha: 0.1)
+let Color65AADDa1 = UIColor(hexColor: "65AADD", alpha: 0.1)
+
 /// 黄橙色
 let ColorF7931E = UIColor(hexColor: "F7931E")
 /// 橙色

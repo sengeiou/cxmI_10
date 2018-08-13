@@ -14,7 +14,7 @@ class DLTRedBlueTrendCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        self.numLabel.backgroundColor = UIColor(hexColor: "ffffff", alpha: 0)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -26,7 +26,8 @@ class DLTRedBlueTrendCell: UITableViewCell {
 }
 
 extension DLTRedBlueTrendCell {
-    public func configure(with data : DLTLottoNumInfo) {
+    public func configure(with data : DLTLottoNumInfo, color : UIColor) {
         numLabel.text = data.termNum
+        self.backgroundColor = color
     }
 }
