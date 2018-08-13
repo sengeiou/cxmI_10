@@ -199,7 +199,7 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
         
         leftBut.setImage(UIImage(named:"TrendSetting"), for: .normal)
         
-        leftBut.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 24)
+        leftBut.contentEdgeInsets = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 0)
         
         leftBut.addTarget(self, action: #selector(showTrendSetting(_:)), for: .touchUpInside)
         
