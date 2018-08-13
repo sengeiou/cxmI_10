@@ -100,6 +100,7 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
         case .accountDetails:
             return getAccountDetailsVC()
         case .trend:
+            setTrendRightItem()
             self.containerView.isScrollEnabled = false
             return getTrendVC()
         default:
@@ -190,6 +191,25 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
         blueHot.viewModel = self.viewModel
         
         return [history, redTrend, blueTrend, redHot, blueHot]
+    }
+    
+    private func setTrendRightItem() {
+        let leftBut = UIButton(type: .custom)
+        leftBut.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        
+        leftBut.setImage(UIImage(named:"TrendSetting"), for: .normal)
+        
+        leftBut.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 24)
+        
+        leftBut.addTarget(self, action: #selector(showTrendSetting(_:)), for: .touchUpInside)
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: leftBut)
+    }
+    
+    @objc private func showTrendSetting(_ sender: UIButton) {
+        let vc = CXMMDLTTrendSettingVC()
+        
+        self.present(vc, animated: true, completion: nil)
     }
     
     private func setLiftButtonItem() {

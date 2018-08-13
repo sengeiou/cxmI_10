@@ -29,7 +29,7 @@ class CXMMDLTRedTrendVC: BaseViewController, IndicatorInfoProvider{
     
     public var compute: Bool = true // 是否计算统计
     public var count: String = "100" // 期数
-    public var drop: Bool = false     // 是否显示遗漏
+    public var drop: Bool = true     // 是否显示遗漏
     public var sort: Bool = false    // 排序
     
     private var list : [DLTHotOrCold]!
