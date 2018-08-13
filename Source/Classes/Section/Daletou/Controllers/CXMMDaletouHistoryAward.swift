@@ -16,6 +16,9 @@ class CXMMDaletouHistoryAward: BasePopViewController {
         }
     }
     
+    private var titleLabel : UILabel!
+    private var line : UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.popStyle = .fromBottom
@@ -25,10 +28,34 @@ class CXMMDaletouHistoryAward: BasePopViewController {
     private func initSubview() {
         self.viewHeight = 400 * defaultScale
         
+        titleLabel = UILabel()
+        titleLabel.font = Font14
+        titleLabel.textColor = Color505050
+        titleLabel.textAlignment = .center
+        titleLabel.text = "历史开奖"
+        
+        line = UIView()
+        line.backgroundColor = ColorE9E9E9
+        
+        
+        self.pushBgView.addSubview(titleLabel)
+        self.pushBgView.addSubview(line)
         self.pushBgView.addSubview(tableView)
         
+        line.snp.makeConstraints { (make) in
+            make.left.right.equalTo(0)
+            make.height.equalTo(1)
+            make.top.equalTo(40)
+        }
+        
+        titleLabel.snp.makeConstraints { (make) in
+            make.top.left.right.equalTo(0)
+            make.bottom.equalTo(line.snp.top)
+        }
+        
         tableView.snp.makeConstraints { (make) in
-            make.top.left.right.bottom.equalTo(0)
+            make.left.right.bottom.equalTo(0)
+            make.top.equalTo(line.snp.bottom)
         }
     }
     
@@ -41,7 +68,7 @@ class CXMMDaletouHistoryAward: BasePopViewController {
         table.backgroundColor = ColorF4F4F4
         table.register(DaletouHistoryAwardCell.self,
                        forCellReuseIdentifier: DaletouHistoryAwardCell.identifier)
-        
+        table.separatorColor = ColorE9E9E9
         return table
     }()
     

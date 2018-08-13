@@ -38,7 +38,7 @@ extension DLTTrendBottom {
         guard viewModel != nil else { return }
         _ = viewModel.betNum.asObserver().subscribe(onNext: { (num) in
             guard num * 2 <= 20000 else {
-                self.showHUD(message: "已超20000")
+                self.showHUD(message: "单次投注最多2万元")
                 return 
             }
             if num > 0 {
@@ -100,11 +100,9 @@ extension DLTTrendBottom : UICollectionViewDelegate {
         if collectionView == self.redCollectionView {
             redList[indexPath.row].selected = !redList[indexPath.row].selected
             viewModel.selected(model: redList[indexPath.row])
-            //collectionView.reloadData()
         }else if collectionView == self.blueCollectionView {
             blueList[indexPath.row].selected = !blueList[indexPath.row].selected
             viewModel.selected(model: blueList[indexPath.row])
-            //collectionView.reloadData()
         }
     }
 }

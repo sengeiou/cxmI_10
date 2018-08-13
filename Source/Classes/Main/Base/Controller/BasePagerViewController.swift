@@ -32,7 +32,11 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
     
     private var filterTime : FilterTime!
     
-    var pagerType: PagerViewType!
+    var pagerType: PagerViewType! {
+        didSet{
+            
+        }
+    }
     var accountFilterList : [AccountDetailFilterModel]!
     
     private var accountAll : CXMAccountDetailsVC!
@@ -69,6 +73,7 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
         settings.style.buttonBarRightContentInset = 0
         
         
+        
         changeCurrentIndexProgressive = { [weak self] (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
             guard changeCurrentIndex == true else { return }
             oldCell?.label.textColor = Color505050
@@ -84,7 +89,7 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
     }
     
     func getViewController() -> [UIViewController] {
-        
+        self.containerView.isScrollEnabled = true
         switch pagerType {
         case .coupon:
             return getCouponViewController()
@@ -95,6 +100,7 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
         case .accountDetails:
             return getAccountDetailsVC()
         case .trend:
+            self.containerView.isScrollEnabled = false
             return getTrendVC()
         default:
             return[]
@@ -161,8 +167,16 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
         let history = story.instantiateViewController(withIdentifier: "DLTHistoryTrendVC") as! CXMMDLTHistoryTrendVC
     
         let redTrend = story.instantiateViewController(withIdentifier: "DLTRedTrendVC") as! CXMMDLTRedTrendVC
+        redTrend.style = .red
+        redTrend.redList = self.redList
+        redTrend.blueList = self.bludList
+        redTrend.viewModel = self.viewModel
         
-        let blueTrend = story.instantiateViewController(withIdentifier: "DLTBlueTrendVC") as! CXMMDLTBlueTrendVC
+        let blueTrend = story.instantiateViewController(withIdentifier: "DLTRedTrendVC") as! CXMMDLTRedTrendVC
+        blueTrend.style = .blue
+        blueTrend.redList = self.redList
+        blueTrend.blueList = self.bludList
+        blueTrend.viewModel = self.viewModel
         
         let redHot = story.instantiateViewController(withIdentifier: "DLTHotColdVC") as! CXMMDLTHotColdVC
         redHot.style = .red
