@@ -53,10 +53,10 @@ class FootballFilterBottomView: UIView {
         self.backgroundColor = ColorFFFFFF
         
         line = UIView()
-        line.backgroundColor = ColorC8C8C8
+        line.backgroundColor = ColorE9E9E9
         
         vLine = UIView()
-        vLine.backgroundColor = ColorC8C8C8
+        vLine.backgroundColor = ColorE9E9E9
         
         confirmBut = UIButton(type: .custom)
         confirmBut.setTitle("确定", for: .normal)
