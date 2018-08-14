@@ -119,9 +119,12 @@ class CXMScoreViewController: WMPageController, AlertPro {
 
     private func setRightBarButton() {
         matchFilter = UIButton(type: .custom)
-        matchFilter.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-        matchFilter.setTitle("筛选", for: .normal)
-        matchFilter.setTitleColor(Color787878, for: .normal)
+        matchFilter.frame = CGRect(x: 0, y: 0, width: 35, height: 40)
+        //matchFilter.setTitle("筛选", for: .normal)
+        //matchFilter.setTitleColor(Color787878, for: .normal)
+        matchFilter.setImage(UIImage(named:"filter"), for: .normal)
+        matchFilter.imageEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        
         matchFilter.addTarget(self, action: #selector(matchFilterClick(_:)), for: .touchUpInside)
         
         dateFilter = UIButton(type: .custom)
