@@ -119,11 +119,13 @@ class DaletouDataList: NSObject, Algorithm {
     var dragBlueList = [DaletouDataModel]()
     
     /// 注数
-    var bettingNum = 0
+    var bettingNum : Int = 0
     /// 倍数
-    var multiple = 1
+    var multiple : Int = 1
     /// 钱数
-    var money = 2
+    var money : Int = 2
+    /// 追加
+    var isAppend = false
     
     func getBettingNum () {
         switch type {

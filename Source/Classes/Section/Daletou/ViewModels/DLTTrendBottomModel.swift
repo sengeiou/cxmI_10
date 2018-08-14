@@ -13,8 +13,10 @@ class DLTTrendBottomModel: Algorithm {
     private var seRedSet = Set<DaletouDataModel>()
     private var seBluSet = Set<DaletouDataModel>()
     
+    public var seCount = 0
     public var betNum = BehaviorSubject(value: 0)
     public var reloadData = BehaviorSubject(value: false)
+    public var confirm = PublishSubject<[DaletouDataList]>()
 }
 
 extension DLTTrendBottomModel {
@@ -25,9 +27,10 @@ extension DLTTrendBottomModel {
             switch model.selected {
             case true:
                 seRedSet.insert(model)
-                
+                seCount += 1
             case false:
                 seRedSet.remove(model)
+                seCount -= 1
             }
             
             setBettingNum(model: model, isRed: true)
@@ -36,16 +39,30 @@ extension DLTTrendBottomModel {
             switch model.selected {
             case true:
                 seBluSet.insert(model)
+                seCount += 1
             case false:
                 seBluSet.remove(model)
+                seCount -= 1
             }
             setBettingNum(model: model, isRed: false)
         default : break
         }
+    }
+    
+    public func removeAll () {
+        self.seRedSet.removeAll()
+        self.seBluSet.removeAll()
+        self.betNum.onNext(0)
+        seCount = 0
+    }
+    public func confirmClick() {
+        
+        let list = [DaletouDataList]()
         
         
         
         
+        self.confirm.onNext(list)
     }
     
     private func setBettingNum (model : DaletouDataModel, isRed: Bool) {

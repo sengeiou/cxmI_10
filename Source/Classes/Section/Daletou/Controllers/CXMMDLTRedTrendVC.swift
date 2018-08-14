@@ -34,6 +34,9 @@ class CXMMDLTRedTrendVC: BaseViewController, IndicatorInfoProvider{
     
     private var dropData : DLTTrendInfo!
     
+   
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //addPanGestureRecognizer = false

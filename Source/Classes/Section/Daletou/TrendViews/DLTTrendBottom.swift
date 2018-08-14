@@ -23,14 +23,36 @@ class DLTTrendBottom: UIView , AlertPro{
     private var redList : [DaletouDataModel]!
     private var blueList : [DaletouDataModel]!
     
-    private var seRedSet = Set<DaletouDataModel>()
-    private var seBluSet = Set<DaletouDataModel>()
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         
     }
+    
+    @IBAction func deleteClick(_ sender: UIButton) {
+        guard viewModel.seCount > 0 else { return }
+        
+        showCXMAlert(title: "温馨提示", message: "\n确定清空所选号码吗？",
+                     action: "确定", cancel: "取消") { (action) in
+            for model in self.redList {
+                model.selected = false
+            }
+            for model in self.blueList {
+                model.selected = false
+            }
+                        
+            self.viewModel.removeAll()
+                        
+            self.redCollectionView.reloadData()
+            self.blueCollectionView.reloadData()
+        }
+        
+        
+    }
+    
+    @IBAction func confirmClick(_ sender: UIButton) {
+        
+    }
+    
 }
 
 extension DLTTrendBottom {

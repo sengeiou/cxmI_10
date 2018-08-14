@@ -103,6 +103,7 @@ class CXMMDaletouConfirmVC: BaseViewController {
             }
             self.tableView.reloadData()
         }, onError: nil , onCompleted: nil , onDisposed: nil )
+        
         _ = money.asObserver().subscribe(onNext: { (money) in
             for model in self.list {
                 model.money = money
@@ -169,7 +170,9 @@ extension CXMMDaletouConfirmVC : DaletouConfirmBottomDelegate, FootballTimesFilt
     }
     // MARK: - 投注确认按钮
     func didTipConfirm() {
+        let model = DLTBetInfoRequestModel.getRequestModel(list: list, isAppend: true)
         
+        print( model)
     }
     
     func timesConfirm(times: String) {
@@ -193,8 +196,13 @@ extension CXMMDaletouConfirmVC : FootballOrderFooterDelegate {
 // MARK: - 选择大乐透
 extension CXMMDaletouConfirmVC : CXMMDaletouViewControllerDelegate {
     func didSelected(list: DaletouDataList) {
-        //self.list.append(list)
-        self.list.insert(list, at: self.pushIndex)
+        
+        if self.pushIndex != nil {
+            self.list.insert(list, at: self.pushIndex)
+        }else {
+            self.list.append(list)
+        }
+        
         self.tableView.reloadData()
     }
     
