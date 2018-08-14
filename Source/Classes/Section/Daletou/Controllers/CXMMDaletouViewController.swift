@@ -214,6 +214,8 @@ class CXMMDaletouViewController: BaseViewController {
         guard let mod = self.model else { return }
         self.type = mod.type
     }
+
+    
     private func setData() {
         
         _ = settingNum.asObservable().subscribe(onNext: { (num) in
@@ -260,7 +262,34 @@ class CXMMDaletouViewController: BaseViewController {
         self.view.addSubview(menu)
     }
     
-    
+    override func back(_ sender: UIButton) {
+        guard isPush else {
+            self.popViewController()
+            return
+        }
+        
+        guard delegate != nil else { return }
+        
+        switch type {
+        case .标准选号:
+            let model = DaletouDataList()
+            model.redList = getStandardReds()
+            model.blueList = getStandardBlues()
+            model.type = type
+            model.getBettingNum()
+            delegate.didSelected(list: model)
+        case .胆拖选号:
+            let model = DaletouDataList()
+            model.danRedList = getDanReds()
+            model.dragRedList = getDragReds()
+            model.danBlueList = getDanBlues()
+            model.dragBlueList = getDragBlues()
+            model.type = type
+            model.getBettingNum()
+            delegate.didSelected(list: model)
+        }
+        self.popViewController()
+    }
   
 }
 
@@ -423,6 +452,8 @@ extension CXMMDaletouViewController : DaletouBottomViewDelegate {
         pushViewController(vc: vc)
     }
 
+    
+    
     private func getStandardReds () -> [DaletouDataModel] {
         let arr = selectedRedSet.sorted{$0.number < $1.number}
         return arr

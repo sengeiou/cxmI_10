@@ -10,12 +10,27 @@ import UIKit
 
 class CXMMDLTTrendSettingVC: BasePopViewController {
 
+    public var settingViewModel : DLTTrendSettingModel! {
+        didSet{
+            setPeriods(per: settingViewModel.count)
+            setOmission(omis: settingViewModel.drop)
+            setStatis(sta: settingViewModel.compute)
+            setSort(sort: settingViewModel.sort)
+        }
+    }
+    
+    private var compute: Bool! = false // 是否计算统计
+    private var count: String! = "100" // 期数
+    private var drop: Bool! = true     // 是否显示遗漏
+    private var sort: Bool! = false    // 排序
+    
     private var periods30 : UIButton!    // 30期
     private var periods50 : UIButton!    // 50期
     private var periods100: UIButton!    // 100期
     
     private var omissionShow: UIButton!  // 显示遗漏
     private var omissionHide: UIButton!  // 隐藏遗漏
+    
     
     private var statisticsShow : UIButton! // 显示统计
     private var statisticsHide : UIButton! // 隐藏统计
@@ -32,6 +47,61 @@ class CXMMDLTTrendSettingVC: BasePopViewController {
         initSubview()
     }
 
+    private func setPeriods(per : String) {
+        self.count = per
+        switch per {
+        case "30":
+            self.periods30.isSelected = true
+            self.periods50.isSelected = false
+            self.periods100.isSelected = false
+        case "50":
+            self.periods30.isSelected = false
+            self.periods50.isSelected = true
+            self.periods100.isSelected = false
+        case "100":
+            self.periods30.isSelected = false
+            self.periods50.isSelected = false
+            self.periods100.isSelected = true
+        default: break
+            
+        }
+        
+    }
+    private func setOmission(omis : Bool) {
+        self.drop = omis
+        switch omis {
+        case true:
+            omissionShow.isSelected = true
+            omissionHide.isSelected = false
+        case false:
+            omissionHide.isSelected = true
+            omissionShow.isSelected = false
+        }
+    }
+    private func setStatis(sta : Bool) {
+        self.compute = sta
+        switch sta {
+        case true :
+            statisticsShow.isSelected = true
+            statisticsHide.isSelected = false
+        case false:
+            statisticsHide.isSelected = true
+            statisticsShow.isSelected = false
+        }
+    }
+    private func setSort(sort : Bool) {
+        self.sort = sort
+        switch sort {
+        case true:
+            sortShow.isSelected = true
+            sortHide.isSelected = false
+        case false:
+            sortHide.isSelected = true
+            sortShow.isSelected = false
+        }
+    }
+    
+    
     private func initSubview() {
         self.viewHeight = 310
         
@@ -71,6 +141,9 @@ class CXMMDLTTrendSettingVC: BasePopViewController {
         self.periods30 = getButton()
         self.periods50 = getButton()
         self.periods100 = getButton()
+        self.periods30.tag = 100
+        self.periods50.tag = 200
+        self.periods100.tag = 300
         
         let title30 = getLabel()
         let title50 = getLabel()
@@ -83,6 +156,8 @@ class CXMMDLTTrendSettingVC: BasePopViewController {
         
         self.omissionShow = getButton()
         self.omissionHide = getButton()
+        self.omissionShow.tag = 400
+        self.omissionHide.tag = 500
         
         let omissionShowTitle = getLabel()
         let omissionHideTitle = getLabel()
@@ -92,6 +167,8 @@ class CXMMDLTTrendSettingVC: BasePopViewController {
         
         self.statisticsShow = getButton()
         self.statisticsHide = getButton()
+        self.statisticsShow.tag = 600
+        self.statisticsHide.tag = 700
         
         let statisShowTitle = getLabel()
         let statisHideTitle = getLabel()
@@ -101,6 +178,8 @@ class CXMMDLTTrendSettingVC: BasePopViewController {
         
         self.sortShow = getButton()
         self.sortHide = getButton()
+        self.sortShow.tag = 800
+        self.sortHide.tag = 900
         
         let sortShowTitle = getLabel()
         let sortHideTitle = getLabel()
@@ -289,10 +368,18 @@ class CXMMDLTTrendSettingVC: BasePopViewController {
         view.backgroundColor = ColorE9E9E9
         return view
     }
+    
+    
+    
+    
 }
 
 extension CXMMDLTTrendSettingVC : FootballFilterBottomViewDelegate {
     func filterConfirm() {
+        settingViewModel.setting(with: self.compute,
+                                 drop: self.drop,
+                                 sort: self.sort,
+                                 count: self.count)
         
         dismiss(animated: true, completion: nil)
     }
@@ -306,7 +393,29 @@ extension CXMMDLTTrendSettingVC : FootballFilterBottomViewDelegate {
 
 extension CXMMDLTTrendSettingVC {
     @objc private func didButtonClick(_ sender : UIButton) {
-        sender.isSelected = !sender.isSelected
+        //sender.isSelected = !sender.isSelected
+        
+        switch sender.tag {
+        case 100:
+            setPeriods(per: "30")
+        case 200:
+            setPeriods(per: "50")
+        case 300:
+            setPeriods(per: "100")
+        case 400:
+            setOmission(omis: true)
+        case 500:
+            setOmission(omis: false)
+        case 600:
+            setStatis(sta: true)
+        case 700:
+            setStatis(sta: false)
+        case 800:
+            setSort(sort: true)
+        case 900:
+            setSort(sort: false)
+        default: break
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

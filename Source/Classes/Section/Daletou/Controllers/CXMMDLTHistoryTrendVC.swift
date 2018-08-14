@@ -11,10 +11,7 @@ import XLPagerTabStrip
 
 class CXMMDLTHistoryTrendVC: BaseViewController, IndicatorInfoProvider {
 
-    public var compute: Bool! = false
-    public var count: String! = "100"
-    public var drop: Bool! = true
-    public var sort: Bool! = true
+    public var settingViewModel : DLTTrendSettingModel!
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -27,7 +24,22 @@ class CXMMDLTHistoryTrendVC: BaseViewController, IndicatorInfoProvider {
         addPanGestureRecognizer = false
         setSubview()
         loadNewData()
+        settingData()
     }
+    
+    private func settingData() {
+        _ = settingViewModel.change.asObserver()
+            .subscribe(onNext: { (change)  in
+                if change {
+                    
+                    self.chartDataRequest(compute: self.settingViewModel.compute,
+                                          count: self.settingViewModel.count,
+                                          drop: self.settingViewModel.drop,
+                                          sort: self.settingViewModel.sort)
+                }
+            }, onError: nil , onCompleted: nil , onDisposed: nil )
+    }
+    
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return "开奖号码"
     }
@@ -36,16 +48,17 @@ class CXMMDLTHistoryTrendVC: BaseViewController, IndicatorInfoProvider {
 // MARK: - 网络请求
 extension CXMMDLTHistoryTrendVC {
     private func loadNewData() {
-        chartDataRequest()
+        chartDataRequest(compute: true, count: "100", drop: true, sort: true)
     }
-    private func chartDataRequest() {
+    private func chartDataRequest(compute: Bool, count: String, drop: Bool, sort: Bool) {
         
         weak var weakSelf = self
-        
+        self.showProgressHUD()
         _ = dltProvider.rx.request(.chartData(compute: compute, count: count, drop: drop, sort: sort, tab : "1"))
             .asObservable()
             .mapObject(type: DLTTrendModel.self)
             .subscribe(onNext: { (data) in
+                weakSelf?.dismissProgressHud()
                 weakSelf?.numList = data.lottoNums
                 
                 if var time = data.stopTime {
@@ -57,6 +70,7 @@ extension CXMMDLTHistoryTrendVC {
                 
                 weakSelf?.tableView.reloadData()
             }, onError: { (error) in
+                weakSelf?.dismissProgressHud()
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):

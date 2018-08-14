@@ -23,11 +23,8 @@ class CXMMDLTHotColdVC: BaseViewController, IndicatorInfoProvider {
     
     public var viewModel : DLTTrendBottomModel!
     
-    public var compute: Bool! = false // 是否计算统计
-    public var count: String! = "100" // 期数
-    public var drop: Bool! = true     // 是否显示遗漏
-    public var sort: Bool! = false    // 排序
-    
+    public var settingViewModel : DLTTrendSettingModel!
+        
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bottomView: DLTTrendBottom!
     
@@ -41,12 +38,25 @@ class CXMMDLTHotColdVC: BaseViewController, IndicatorInfoProvider {
         setData()
         
         self.bottomView.viewModel = self.viewModel
+        settingData()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.bottomView.configure(red: self.redList, blue: self.blueList)
         
+    }
+    
+    private func settingData() {
+        _ = settingViewModel.change.asObserver()
+            .subscribe(onNext: { (change)  in
+                if change {
+                    self.chartDataRequest(compute: self.settingViewModel.compute,
+                                          count: self.settingViewModel.count,
+                                          drop: self.settingViewModel.drop,
+                                          sort: self.settingViewModel.sort)
+                }
+            }, onError: nil , onCompleted: nil , onDisposed: nil )
     }
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
@@ -67,9 +77,9 @@ extension CXMMDLTHotColdVC {
 // MARK: - 网络请求
 extension CXMMDLTHotColdVC {
     private func loadNewData() {
-        chartDataRequest()
+        chartDataRequest(compute: true, count: "100", drop: true, sort: true)
     }
-    private func chartDataRequest() {
+    private func chartDataRequest(compute: Bool, count: String, drop: Bool, sort: Bool) {
         
         weak var weakSelf = self
         
@@ -81,11 +91,12 @@ extension CXMMDLTHotColdVC {
         case .blue:
             tab = "5"
         }
-        
+        self.showProgressHUD()
         _ = dltProvider.rx.request(.chartData(compute: compute, count: count, drop: drop, sort: sort, tab : tab))
             .asObservable()
             .mapObject(type: DLTTrendModel.self)
             .subscribe(onNext: { (data) in
+                weakSelf?.dismissProgressHud()
                 switch self.style {
                 case .red:
                     weakSelf?.list = data.preHeatColds
@@ -95,6 +106,7 @@ extension CXMMDLTHotColdVC {
                 
                 weakSelf?.tableView.reloadData()
             }, onError: { (error) in
+                weakSelf?.dismissProgressHud()
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):

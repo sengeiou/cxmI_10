@@ -55,7 +55,9 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
     lazy private var viewModel : DLTTrendBottomModel = {
         return DLTTrendBottomModel()
     }()
-    
+    lazy private var trendSettingModel : DLTTrendSettingModel = {
+        return DLTTrendSettingModel()
+    }()
     
     override func viewDidLoad() {
         settings.style.buttonBarBackgroundColor = ColorFFFFFF
@@ -166,29 +168,34 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
         let story = UIStoryboard(name: "Daletou", bundle: nil)
         
         let history = story.instantiateViewController(withIdentifier: "DLTHistoryTrendVC") as! CXMMDLTHistoryTrendVC
-    
+        history.settingViewModel = self.trendSettingModel
+        
         let redTrend = story.instantiateViewController(withIdentifier: "DLTRedTrendVC") as! CXMMDLTRedTrendVC
         redTrend.style = .red
         redTrend.redList = self.redList
         redTrend.blueList = self.bludList
         redTrend.viewModel = self.viewModel
+        redTrend.settingViewModel = self.trendSettingModel
         
         let blueTrend = story.instantiateViewController(withIdentifier: "DLTRedTrendVC") as! CXMMDLTRedTrendVC
         blueTrend.style = .blue
         blueTrend.redList = self.redList
         blueTrend.blueList = self.bludList
         blueTrend.viewModel = self.viewModel
+        blueTrend.settingViewModel = self.trendSettingModel
         
         let redHot = story.instantiateViewController(withIdentifier: "DLTHotColdVC") as! CXMMDLTHotColdVC
         redHot.style = .red
         redHot.redList = self.redList
         redHot.blueList = self.bludList
         redHot.viewModel = self.viewModel
+        redHot.settingViewModel = self.trendSettingModel
         let blueHot = story.instantiateViewController(withIdentifier: "DLTHotColdVC") as! CXMMDLTHotColdVC
         blueHot.style = .blue
         blueHot.redList = self.redList
         blueHot.blueList = self.bludList
         blueHot.viewModel = self.viewModel
+        blueHot.settingViewModel = self.trendSettingModel
         
         return [history, redTrend, blueTrend, redHot, blueHot]
     }
@@ -208,6 +215,7 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
     
     @objc private func showTrendSetting(_ sender: UIButton) {
         let vc = CXMMDLTTrendSettingVC()
+        vc.settingViewModel = self.trendSettingModel
         
         self.present(vc, animated: true, completion: nil)
     }

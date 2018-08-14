@@ -8,6 +8,7 @@
 
 import UIKit
 import XLPagerTabStrip
+import RxSwift
 
 class CXMMDLTRedTrendVC: BaseViewController, IndicatorInfoProvider{
 
@@ -27,10 +28,7 @@ class CXMMDLTRedTrendVC: BaseViewController, IndicatorInfoProvider{
     
     public var viewModel : DLTTrendBottomModel!
     
-    public var compute: Bool = true // 是否计算统计
-    public var count: String = "100" // 期数
-    public var drop: Bool = true     // 是否显示遗漏
-    public var sort: Bool = false    // 排序
+    public var settingViewModel : DLTTrendSettingModel!
     
     private var list : [DLTHotOrCold]!
     
@@ -42,6 +40,7 @@ class CXMMDLTRedTrendVC: BaseViewController, IndicatorInfoProvider{
         self.bottomView.viewModel = self.viewModel
         initSubview()
         loadNewData()
+        settingData()
         self.topCollectionView.reloadData()
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -49,6 +48,20 @@ class CXMMDLTRedTrendVC: BaseViewController, IndicatorInfoProvider{
         self.bottomView.configure(red: self.redList, blue: self.blueList)
         
     }
+    
+    private func settingData() {
+        _ = settingViewModel.change.asObserver()
+            .subscribe(onNext: { (change)  in
+                if change {
+                    self.chartDataRequest(compute: self.settingViewModel.compute,
+                                     count: self.settingViewModel.count,
+                                     drop: self.settingViewModel.drop,
+                                     sort: self.settingViewModel.sort)
+                }
+            }, onError: nil , onCompleted: nil , onDisposed: nil )
+        
+    }
+    
     private func initSubview() {
     
         
@@ -97,9 +110,9 @@ class CXMMDLTRedTrendVC: BaseViewController, IndicatorInfoProvider{
 // MARK: - 网络请求
 extension CXMMDLTRedTrendVC {
     private func loadNewData() {
-        chartDataRequest()
+        chartDataRequest(compute: true, count: "100", drop: true, sort: true)
     }
-    private func chartDataRequest() {
+    private func chartDataRequest(compute: Bool, count: String, drop: Bool, sort: Bool) {
         
         weak var weakSelf = self
         
@@ -111,7 +124,7 @@ extension CXMMDLTRedTrendVC {
         case .blue:
             tab = "3"
         }
-        
+        self.showProgressHUD()
         _ = dltProvider.rx.request(.chartData(compute: compute, count: count, drop: drop, sort: sort, tab : tab))
             .asObservable()
             .mapObject(type: DLTTrendModel.self)
@@ -121,7 +134,7 @@ extension CXMMDLTRedTrendVC {
                 switch self.style {
                 case .red:
                     weakSelf?.dropData = data.preLottoDrop
-                    if self.compute {
+                    if compute {
                         weakSelf?.dropData.drop.append(contentsOf: self.getCompueList(with: data.preLottoDrop))
                     }
                     weakSelf?.scrollView.contentSize = CGSize(width: 35 * DLTRedBlueTrendItem.width + 1,
@@ -129,7 +142,7 @@ extension CXMMDLTRedTrendVC {
                 
                 case .blue:
                     weakSelf?.dropData = data.postLottoDrop
-                    if self.compute {
+                    if compute {
                         weakSelf?.dropData.drop.append(contentsOf: self.getCompueList(with: data.postLottoDrop))
                     }
                     weakSelf?.scrollView.contentSize = CGSize(width: 12 * DLTRedBlueTrendItem.width + 1,
@@ -137,13 +150,15 @@ extension CXMMDLTRedTrendVC {
                     
                 }
                 
-                weakSelf?.tableView.reloadData()
-                
+                weakSelf?.scrollView.contentOffset = CGPoint(x: 0, y: 0)
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2, execute: {
                     weakSelf?.collectionView.reloadData()
+                    weakSelf?.tableView.reloadData()
+                    weakSelf?.dismissProgressHud()
                 })
                 
             }, onError: { (error) in
+                weakSelf?.dismissProgressHud()
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):
