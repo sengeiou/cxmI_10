@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import AudioToolbox
 
 enum DaletouType : String {
     case 标准选号 = "彩小秘 · 标准选号"
@@ -715,6 +716,9 @@ extension CXMMDaletouViewController {
         let model = getOneRandom()
         self.model = model
         self.tableView.reloadData()
+        let soundID = SystemSoundID(kSystemSoundID_Vibrate)
+        //振动
+        AudioServicesPlaySystemSound(soundID)
     }
     override func motionCancelled(_ motion: UIEventSubtype, with event: UIEvent?) {
         
