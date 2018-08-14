@@ -204,11 +204,27 @@ class CXMMDaletouViewController: BaseViewController {
         setSubview()
         
         setData()
-        print(danBettingNum(a: 2, b: 4, c: 1, d: 2))
+        
         setDefaultData()
         loadNewData()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        redList = DaletouDataModel.getData(ballStyle: .red)
+        
+        blueList = DaletouDataModel.getData(ballStyle: .blue)
+        
+        danRedList = DaletouDataModel.getData(ballStyle: .danRed)
+       
+        dragRedList = DaletouDataModel.getData(ballStyle: .dragRed)
+        
+        danBlueList = DaletouDataModel.getData(ballStyle: .danBlue)
+        
+        dragBlueList = DaletouDataModel.getData(ballStyle: .dragBlue)
+    
+        self.tableView.reloadData()
+    }
     
     private func setDefaultData() {
         guard let mod = self.model else { return }
@@ -263,47 +279,25 @@ class CXMMDaletouViewController: BaseViewController {
     }
     
     override func back(_ sender: UIButton) {
-        guard isPush else {
+       
+        if isPush && self.model != nil {
+            guard delegate != nil else { return }
+            guard let mod = self.model else { return }
+            
+            delegate.didSelected(list: mod)
             self.popViewController()
-            return
+        }else{
+            self.popViewController()
         }
-        
-        guard delegate != nil else { return }
-        
-        switch type {
-        case .标准选号:
-            let model = DaletouDataList()
-            model.redList = getStandardReds()
-            model.blueList = getStandardBlues()
-            model.type = type
-            model.getBettingNum()
-            delegate.didSelected(list: model)
-        case .胆拖选号:
-            let model = DaletouDataList()
-            model.danRedList = getDanReds()
-            model.dragRedList = getDragReds()
-            model.danBlueList = getDanBlues()
-            model.dragBlueList = getDragBlues()
-            model.type = type
-            model.getBettingNum()
-            delegate.didSelected(list: model)
-        }
-        self.popViewController()
     }
-  
 }
 
-// MARK: - public
+// MARK: - public 机选
 extension CXMMDaletouViewController : DLTRandom {
     @IBAction func randomOne(_ sender: UIButton) {
-//        let model = getOneRandom()
-//        self.model = model
-//        self.tableView.reloadData()
-        
-        let story = UIStoryboard(name: "Daletou", bundle: nil)
-        let vc = story.instantiateViewController(withIdentifier: "DaletouOrderVC") as! CXMMDaletouOrderVC
-        
-        pushViewController(vc: vc)
+        let model = getOneRandom()
+        self.model = model
+        self.tableView.reloadData()
     }
     public func configure(with data : [DaletouDataModel], type : DaletouType) {
         

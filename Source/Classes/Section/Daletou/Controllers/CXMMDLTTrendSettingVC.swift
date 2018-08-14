@@ -370,7 +370,9 @@ class CXMMDLTTrendSettingVC: BasePopViewController {
     }
     
     
-    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+    }
     
 }
 
@@ -418,8 +420,6 @@ extension CXMMDLTTrendSettingVC {
         }
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-    }
+    
     
 }

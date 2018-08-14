@@ -23,14 +23,21 @@ class CXMPurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableVie
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let recordInfo = recordList[indexPath.section]
         
-        if recordInfo.orderType == "0" {
+        switch recordInfo.orderType {
+        case "0":
             let order = CXMOrderDetailVC()
             order.orderId = recordInfo.orderId
             pushViewController(vc: order)
-        }else if recordInfo.orderType == "1" {
+        case "1":
             let order = CXMWorldCupOrderDetailVC()
             order.orderId = recordInfo.orderId
             pushViewController(vc: order)
+        case "2":
+            let story = UIStoryboard(name: "Daletou", bundle: nil)
+            let vc = story.instantiateViewController(withIdentifier: "DaletouOrderVC") as! CXMMDaletouOrderVC
+            
+            pushViewController(vc: vc)
+        default : break
         }
     }
     

@@ -126,9 +126,10 @@ class CXMMDaletouConfirmVC: BaseViewController {
     }
 }
 
+// MARK: - 手动添加，，机选，，
 extension CXMMDaletouConfirmVC : DLTRandom {
     @IBAction func addDaletou(_ sender: UIButton) {
-        pushDaletouBetting(indexPath: nil)
+        pushDaletouBetting(indexPath: nil, ispush: true)
     }
     @IBAction func machineOne(_ sender: UIButton) {
         let model = getOneRandom()
@@ -197,11 +198,11 @@ extension CXMMDaletouConfirmVC : CXMMDaletouViewControllerDelegate {
         self.tableView.reloadData()
     }
     
-    private func pushDaletouBetting(indexPath: IndexPath?) {
+    private func pushDaletouBetting(indexPath: IndexPath?, ispush : Bool) {
         let story = UIStoryboard(name: "Daletou", bundle: nil)
         let vc = story.instantiateViewController(withIdentifier: "DaletouViewController") as! CXMMDaletouViewController
         vc.delegate = self
-        vc.isPush = true
+        vc.isPush = ispush
         if let index = indexPath {
             vc.model = self.list[index.row]
             self.list.remove(at: index.row)
@@ -223,7 +224,7 @@ extension CXMMDaletouConfirmVC : DaletouConfirmCellDelegate{
 }
 extension CXMMDaletouConfirmVC : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        pushDaletouBetting(indexPath: indexPath)
+        pushDaletouBetting(indexPath: indexPath, ispush: true)
     }
 }
 extension CXMMDaletouConfirmVC : UITableViewDataSource {
