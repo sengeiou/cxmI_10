@@ -18,7 +18,7 @@ class CXMMDLTHistoryTrendVC: BaseViewController, IndicatorInfoProvider {
     
     @IBOutlet weak var tableView: UITableView!
     
-    @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var bottomView: DLTHistoryTrendBottom!
     
     private var numList : [DLTLottoNumInfo]!
     
@@ -47,6 +47,14 @@ extension CXMMDLTHistoryTrendVC {
             .mapObject(type: DLTTrendModel.self)
             .subscribe(onNext: { (data) in
                 weakSelf?.numList = data.lottoNums
+                
+                if var time = data.stopTime {
+                    if time.contains("|") {
+                        time = time.replacingOccurrences(of: "|", with: "期 截止时间 ")
+                        weakSelf?.bottomView.titleLabel.text = time
+                    }
+                }
+                
                 weakSelf?.tableView.reloadData()
             }, onError: { (error) in
                 guard let err = error as? HXError else { return }
