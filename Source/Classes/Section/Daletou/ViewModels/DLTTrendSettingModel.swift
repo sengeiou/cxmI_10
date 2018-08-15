@@ -16,7 +16,7 @@ class DLTTrendSettingModel  {
     public var compute = true // 是否计算统计
     public var count = "100"  // 期数
     public var drop = true    // 是否显示遗漏
-    public var sort = true    // 排序
+    public var sort = true    // 排序 true 倒序，，false 正序
     
     public func setting(with compute : Bool, drop : Bool, sort : Bool, count : String) {
         self.compute = compute

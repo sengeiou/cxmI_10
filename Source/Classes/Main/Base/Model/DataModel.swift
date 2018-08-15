@@ -12,4 +12,5 @@ import HandyJSON
 struct DataModel: HandyJSON {
     var code: String!
     var msg : String!
+    var data : String!
 }

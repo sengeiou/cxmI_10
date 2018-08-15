@@ -68,7 +68,7 @@ extension HomeNetAPIManager : TargetType {
         case .getBetInfo:
             return "/lottery/match/getBetInfo"
         case .saveBetInfo:
-            return "/lottery/match/saveBetInfo"
+            return "/lottery/match/nSaveBetInfo"
         case .matchTeamInfo:
             return "/lottery/match/matchTeamInfos"
         case .matchTeamInfoSum:

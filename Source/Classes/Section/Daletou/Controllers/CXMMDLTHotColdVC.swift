@@ -57,6 +57,14 @@ class CXMMDLTHotColdVC: BaseViewController, IndicatorInfoProvider {
                                           sort: self.settingViewModel.sort)
                 }
             }, onError: nil , onCompleted: nil , onDisposed: nil )
+        
+        _ = viewModel.confirm.asObserver()
+            .subscribe(onNext: { (list) in
+                
+                let model = DLTBetInfoRequestModel.getRequestModel(list: [list], isAppend: false)
+                
+                self.saveBetInfoRequest(model: model)
+            }, onError: nil , onCompleted: nil , onDisposed: nil )
     }
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
@@ -113,6 +121,35 @@ extension CXMMDLTHotColdVC {
                     switch code {
                     case 600:
                         break
+                    default : break
+                    }
+                    if 300000...310000 ~= code {
+                        self.showHUD(message: msg!)
+                    }
+                    print(code)
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil )
+    }
+    private func saveBetInfoRequest(model : DLTBetInfoRequestModel) {
+        weak var weakSelf = self
+        
+        _ = dltProvider.rx.request(.setInfo(model: model))
+            .asObservable()
+            .mapBaseObject(type: DataModel.self)
+            .subscribe(onNext: { (data) in
+                print(data)
+                let vc = CXMPaymentViewController()
+                vc.lottoToken = data.data
+                
+                self.pushViewController(vc: vc)
+            }, onError: { (error) in
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        weakSelf?.pushLoginVC(from: self)
                     default : break
                     }
                     if 300000...310000 ~= code {

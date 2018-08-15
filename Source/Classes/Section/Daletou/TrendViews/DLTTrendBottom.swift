@@ -50,7 +50,7 @@ class DLTTrendBottom: UIView , AlertPro{
     }
     
     @IBAction func confirmClick(_ sender: UIButton) {
-        
+        viewModel.confirmClick()
     }
     
 }

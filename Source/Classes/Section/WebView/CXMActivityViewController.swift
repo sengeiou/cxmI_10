@@ -116,7 +116,7 @@ class CXMActivityViewController: BaseWebViewController, ShareProtocol {
                     }else {
                         if let dic = data as? [String: String] {
                             let payment = CXMPaymentViewController()
-                            payment.worldCupDic = dic
+                            
                             self.pushViewController(vc: payment)
                 
                             decisionHandler(.cancel)

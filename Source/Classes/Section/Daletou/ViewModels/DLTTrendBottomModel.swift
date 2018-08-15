@@ -16,7 +16,7 @@ class DLTTrendBottomModel: Algorithm {
     public var seCount = 0
     public var betNum = BehaviorSubject(value: 0)
     public var reloadData = BehaviorSubject(value: false)
-    public var confirm = PublishSubject<[DaletouDataList]>()
+    public var confirm = PublishSubject<DaletouDataList>()
     public var showMsg = PublishSubject<String>()
 }
 
@@ -58,8 +58,12 @@ extension DLTTrendBottomModel {
     }
     public func confirmClick() {
         
-        let list = [DaletouDataList]()
+        let list = DaletouDataList()
         
+        list.redList = seRedSet.sorted{$0.number < $1.number}
+        list.blueList = seBluSet.sorted{$0.number < $1.number}
+        list.type = .标准选号
+        list.bettingNum = standardBettingNum(m: seRedSet.count, n: seBluSet.count)
         self.confirm.onNext(list)
     }
     

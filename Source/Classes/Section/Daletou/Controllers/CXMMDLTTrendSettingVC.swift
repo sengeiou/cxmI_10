@@ -93,11 +93,11 @@ class CXMMDLTTrendSettingVC: BasePopViewController {
         self.sort = sort
         switch sort {
         case true:
-            sortShow.isSelected = true
-            sortHide.isSelected = false
-        case false:
             sortHide.isSelected = true
             sortShow.isSelected = false
+        case false:
+            sortShow.isSelected = true
+            sortHide.isSelected = false
         }
     }
     
@@ -413,9 +413,9 @@ extension CXMMDLTTrendSettingVC {
         case 700:
             setStatis(sta: false)
         case 800:
-            setSort(sort: true)
-        case 900:
             setSort(sort: false)
+        case 900:
+            setSort(sort: true)
         default: break
         }
     }

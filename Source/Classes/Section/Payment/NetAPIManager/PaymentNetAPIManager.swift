@@ -25,6 +25,11 @@ enum PaymentNetAPIManager {
     /// 可用第三方支付方式 list
     case allPayment
     
+    /// 新支付
+    case paymentNew(payCode: String, payToken: String)
+    /// 支付订单金额计算
+    case payBefore(bonusId: String, payToken: String)
+    
 }
 
 extension PaymentNetAPIManager : TargetType {
@@ -37,6 +42,8 @@ extension PaymentNetAPIManager : TargetType {
         switch self {
         case .payment:
             return "/payment/app"
+        case .paymentNew:
+            return "/payment/nUnifiedOrder"
         case .paymentQuery:
             return "/payment/query"
         case .paymentRecharge:
@@ -47,7 +54,8 @@ extension PaymentNetAPIManager : TargetType {
             return "/payment/allPayment"
         case .allPayment:
             return "/payment/allPaymentWithRecharge"
-            
+        case .payBefore:
+            return "/payment/unifiedPayBefore"
         }
     }
     
@@ -58,6 +66,10 @@ extension PaymentNetAPIManager : TargetType {
         case .payment(let payCode, let payToken):
             dic["payCode"] = payCode
             dic["payToken"] = payToken
+        case .paymentNew(let payCode, let payToken):
+            dic["payCode"] = payCode
+            dic["payToken"] = payToken
+            
         case .paymentRecharge(let payCode, let totalAmount):
             dic["payCode"] = payCode
             dic["totalAmount"] = totalAmount
@@ -68,7 +80,9 @@ extension PaymentNetAPIManager : TargetType {
             dic["payLogId"] = payLogId
         case .paymentAll:
             break
-            
+        case .payBefore(let bonusId, let payToken):
+            dic["bonusId"] = bonusId
+            dic["payToken"] = payToken
         default:
             break
         }

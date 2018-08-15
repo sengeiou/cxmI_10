@@ -423,16 +423,43 @@ class CXMFootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITabl
             return }
         let requestModel = getRequestModel(betType: self.betType, times: self.times, bonusId: "")
         
-        if getUserData() != nil {
-            let payment = CXMPaymentViewController()
-            payment.matchType = self.matchType
-            payment.requestModel = requestModel
-            pushViewController(vc: payment)
-            TongJi.log(.投注确认, label: self.matchType.rawValue, att: .彩种)
-        }else {
-            pushLoginVC(from: self)
-        }
+        saveBetInfo(requestModel: requestModel)
+
     }
+    
+    private func saveBetInfo(requestModel: FootballRequestMode) {
+        weak var weakSelf = self
+        
+        _ = homeProvider.rx.request(.saveBetInfo(requestModel: requestModel))
+            .asObservable()
+            .mapBaseObject(type: DataModel.self)
+            .subscribe(onNext: { (data) in
+                let payment = CXMPaymentViewController()
+                payment.lottoToken = data.data
+                weakSelf?.pushViewController(vc: payment)
+                TongJi.log(.投注确认, label: self.matchType.rawValue, att: .彩种)
+            }, onError: { (error) in
+                weakSelf?.dismissProgressHud()
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        weakSelf?.removeUserData()
+                        weakSelf?.pushLoginVC(from: self)
+                    default : break
+                    }
+                    
+                    if 300000...310000 ~= code {
+                        print(code)
+                        self.showHUD(message: msg!)
+                    }
+                default: break
+                }
+            }, onCompleted: nil, onDisposed: nil )
+
+    }
+    
     // 串关 弹窗
     func orderPlay(filterList: [FootballPlayFilterModel]) {
         TongJi.log(.串关, label: self.matchType.rawValue, att: .彩种)

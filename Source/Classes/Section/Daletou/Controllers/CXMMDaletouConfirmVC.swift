@@ -153,9 +153,14 @@ extension CXMMDaletouConfirmVC {
         
         _ = dltProvider.rx.request(.setInfo(model: model))
             .asObservable()
-            .mapObject(type: FootballSaveBetInfoModel.self)
+            .mapBaseObject(type: DataModel.self)
             .subscribe(onNext: { (data) in
                 print(data)
+                
+                let vc = CXMPaymentViewController()
+                vc.lottoToken = data.data
+                
+                self.pushViewController(vc: vc)
                 
             }, onError: { (error) in
                 guard let err = error as? HXError else { return }
@@ -244,6 +249,7 @@ extension CXMMDaletouConfirmVC : CXMMDaletouViewControllerDelegate {
     private func pushDaletouBetting(indexPath: IndexPath?, ispush : Bool) {
         let story = UIStoryboard(name: "Daletou", bundle: nil)
         let vc = story.instantiateViewController(withIdentifier: "DaletouViewController") as! CXMMDaletouViewController
+        
         vc.delegate = self
         vc.isPush = ispush
         if let index = indexPath {
