@@ -17,6 +17,7 @@ class DLTTrendBottomModel: Algorithm {
     public var betNum = BehaviorSubject(value: 0)
     public var reloadData = BehaviorSubject(value: false)
     public var confirm = PublishSubject<[DaletouDataList]>()
+    public var showMsg = PublishSubject<String>()
 }
 
 extension DLTTrendBottomModel {
@@ -59,9 +60,6 @@ extension DLTTrendBottomModel {
         
         let list = [DaletouDataList]()
         
-        
-        
-        
         self.confirm.onNext(list)
     }
     
@@ -70,31 +68,50 @@ extension DLTTrendBottomModel {
         case true:
             let bettingNum = standardBettingNum(m: seRedSet.count, n: seBluSet.count)
             
-            if seRedSet.count >= 5 && seBluSet.count >= 2{
-                betNum.onNext(bettingNum)
-            }
-            
-            if bettingNum * 2 > 20000 {
+            guard seRedSet.count <= 18 else {
                 seRedSet.remove(model)
                 model.selected = false
+                self.showMsg.onNext("最多只能选择18个红球")
                 reloadData.onNext(false)
-            }else {
-                reloadData.onNext(true)
+                return
             }
+            
+            guard bettingNum * 2 <= 20000 else {
+                
+                seRedSet.remove(model)
+                model.selected = false
+                self.showMsg.onNext("单次投注最多2万元")
+                reloadData.onNext(false)
+                return
+            }
+            
+            if seRedSet.count >= 5 && seBluSet.count >= 2{
+                betNum.onNext(bettingNum)
+            }else{
+                betNum.onNext(0)
+            }
+            
+            reloadData.onNext(true)
         case false:
             let bettingNum = standardBettingNum(m: seRedSet.count, n: seBluSet.count)
             
-            if seRedSet.count >= 5 && seBluSet.count >= 2{
-                betNum.onNext(bettingNum)
-            }
-            
-            if bettingNum * 2 > 20000 {
+            guard bettingNum * 2 <= 20000 else {
+                
                 seBluSet.remove(model)
                 model.selected = false
+                self.showMsg.onNext("单次投注最多2万元")
                 reloadData.onNext(false)
-            }else {
-                reloadData.onNext(true)
+                return
             }
+            
+            
+            if seRedSet.count >= 5 && seBluSet.count >= 2{
+                betNum.onNext(bettingNum)
+            }else {
+                betNum.onNext(0)
+            }
+
+            reloadData.onNext(true)
        
         }
     }

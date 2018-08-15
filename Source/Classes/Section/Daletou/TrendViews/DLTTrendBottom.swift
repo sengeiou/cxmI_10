@@ -59,10 +59,7 @@ extension DLTTrendBottom {
     private func setData() {
         guard viewModel != nil else { return }
         _ = viewModel.betNum.asObserver().subscribe(onNext: { (num) in
-            guard num * 2 <= 20000 else {
-                self.showHUD(message: "单次投注最多2万元")
-                return 
-            }
+            
             if num > 0 {
                 let att = NSMutableAttributedString(string: "共")
                 let numAtt = NSAttributedString(string: "\(num)", attributes: [NSAttributedStringKey.foregroundColor: ColorE85504])
@@ -102,7 +99,10 @@ extension DLTTrendBottom {
                 }
             }, onError: nil , onCompleted: nil , onDisposed: nil )
         
-        
+        _ = viewModel.showMsg.asObserver()
+            .subscribe(onNext: { (msg) in
+                self.showHUD(message: msg)
+            }, onError: nil , onCompleted: nil , onDisposed: nil )
     }
 }
 

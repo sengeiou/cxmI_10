@@ -55,7 +55,7 @@ class CXMMDaletouViewController: BaseViewController {
                         }
                     }
                 }
-                
+                settingNum.value = getStandardBetNum()
             case .胆拖选号:
                 self.selectedDanRedSet.removeAll()
                 self.selectedDragRedSet.removeAll()
@@ -97,6 +97,7 @@ class CXMMDaletouViewController: BaseViewController {
                         }
                     }
                 }
+                settingNum.value = getBettingNum()
             }
         }
     }
@@ -133,36 +134,36 @@ class CXMMDaletouViewController: BaseViewController {
     
     private var selectedRedSet = Set<DaletouDataModel>() {
         didSet{
-            settingNum.value = getStandardBetNum()
+            
         }
     }
     private var selectedBlueSet = Set<DaletouDataModel>() {
         didSet{
-            settingNum.value = getStandardBetNum()
+            
         }
     }
     
     private var selectedDanRedSet = Set<DaletouDataModel>() {
         didSet{
-            settingNum.value = getBettingNum()
+            
         }
     }
     private var selectedDragRedSet = Set<DaletouDataModel>()
     {
         didSet{
-            settingNum.value = getBettingNum()
+            
         }
     }
     private var selectedDanBlueSet = Set<DaletouDataModel>()
     {
         didSet{
-            settingNum.value = getBettingNum()
+           
         }
     }
     private var selectedDragBlueSet = Set<DaletouDataModel>()
     {
         didSet{
-            settingNum.value = getBettingNum()
+            
         }
     }
     
@@ -212,6 +213,9 @@ class CXMMDaletouViewController: BaseViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        guard isPush == false else { return }
+      //  guard model == nil else { return }
         redList = DaletouDataModel.getData(ballStyle: .red)
         
         blueList = DaletouDataModel.getData(ballStyle: .blue)
@@ -236,9 +240,6 @@ class CXMMDaletouViewController: BaseViewController {
     private func setData() {
         
         _ = settingNum.asObservable().subscribe(onNext: { (num) in
-            guard num * 2 <= 20000 else {
-                
-                return }
             if num > 0 {
                 let att = NSMutableAttributedString(string: "共")
                 let numAtt = NSAttributedString(string: "\(num)", attributes: [NSAttributedStringKey.foregroundColor: ColorE85504])
@@ -395,6 +396,7 @@ extension CXMMDaletouViewController : DaletouBottomViewDelegate {
     }
     
     func didTipConfirm() {
+        
         guard isPush == false else {
         
             guard delegate != nil else { return }
@@ -408,6 +410,12 @@ extension CXMMDaletouViewController : DaletouBottomViewDelegate {
                 model.getBettingNum()
                 delegate.didSelected(list: model)
             case .胆拖选号:
+                
+                guard getBettingNum() * 2 <= 20000 else {
+                    showHUD(message: "单次投注最多2万元")
+                    return
+                }
+                
                 let model = DaletouDataList()
                 model.danRedList = getDanReds()
                 model.dragRedList = getDragReds()
@@ -434,6 +442,12 @@ extension CXMMDaletouViewController : DaletouBottomViewDelegate {
             model.getBettingNum()
             vc.list.append(model)
         case .胆拖选号:
+            
+            guard getBettingNum() * 2 <= 20000 else {
+                showHUD(message: "单次投注最多2万元")
+                return
+            }
+            
             let model = DaletouDataList()
             model.danRedList = getDanReds()
             model.dragRedList = getDragReds()
@@ -442,6 +456,7 @@ extension CXMMDaletouViewController : DaletouBottomViewDelegate {
             model.type = type
             model.getBettingNum()
             vc.list.append(model)
+            
         }
         
         pushViewController(vc: vc)
@@ -531,8 +546,19 @@ extension CXMMDaletouViewController : DaletouStandardRedCellDelegate,
     
     
     func didSelect(cell: DaletouStandardRedCell, model: DaletouDataModel, indexPath : IndexPath) {
+        
         model.selected = !model.selected
         insertRedData(model: model)
+        
+        
+        guard validate(bettingNum: getStandardBetNum(), ballNum: selectedRedSet.count, selected: model.selected) else {
+            model.selected = false
+            insertRedData(model: model)
+            return
+        }
+        
+        settingNum.value = getStandardBetNum()
+        
         UIView.performWithoutAnimation {
             self.tableView.reloadSections([indexPath.section], with: .none)
         }
@@ -541,6 +567,18 @@ extension CXMMDaletouViewController : DaletouStandardRedCellDelegate,
     func didSelect(cell: DaletouStandardBlueCell, model: DaletouDataModel, indexPath : IndexPath) {
         model.selected = !model.selected
         insertBlueData(model: model)
+        
+        guard validate(bettingNum: getStandardBetNum(),
+                       ballNum: selectedBlueSet.count,
+                       selected: model.selected) else {
+                        
+            model.selected = false
+            insertRedData(model: model)
+            return
+        }
+        
+        settingNum.value = getStandardBetNum()
+        
         UIView.performWithoutAnimation {
             self.tableView.reloadSections([indexPath.section], with: .none)
         }
@@ -555,6 +593,9 @@ extension CXMMDaletouViewController : DaletouStandardRedCellDelegate,
         }
         insertDanRed(model: model)
         dragRedList[indexPath.row].selected = false
+        
+        settingNum.value = getBettingNum()
+        
         UIView.performWithoutAnimation {
             self.tableView.reloadSections([indexPath.section], with: .none)
         }
@@ -564,6 +605,9 @@ extension CXMMDaletouViewController : DaletouStandardRedCellDelegate,
         insertDragRed(model: model)
         danRedList[indexPath.row].selected = false
         selectedDanRedSet.remove(danRedList[indexPath.row])
+        
+        settingNum.value = getBettingNum()
+        
         UIView.performWithoutAnimation {
             self.tableView.reloadSections([indexPath.section], with: .none)
         }
@@ -579,6 +623,9 @@ extension CXMMDaletouViewController : DaletouStandardRedCellDelegate,
         
         insertDanBlue(model: model)
         dragBlueList[indexPath.row].selected = false
+        
+        settingNum.value = getBettingNum()
+        
         UIView.performWithoutAnimation {
             self.tableView.reloadSections([indexPath.section], with: .none)
         }
@@ -588,6 +635,9 @@ extension CXMMDaletouViewController : DaletouStandardRedCellDelegate,
         model.selected = !model.selected
         insertDragBlue(model: model)
         danBlueList[indexPath.row].selected = false
+        
+        settingNum.value = getBettingNum()
+        
         UIView.performWithoutAnimation {
             self.tableView.reloadSections([indexPath.section], with: .none)
         }
@@ -650,6 +700,27 @@ extension CXMMDaletouViewController : DaletouStandardRedCellDelegate,
             
         }
     }
+    
+    private func validate (bettingNum : Int, ballNum: Int, selected : Bool, isdan : Bool = false) -> Bool {
+        switch selected {
+        case false:
+            return true
+        case true:
+            if isdan == false {
+                guard selectedRedSet.count <= 18 else {
+                    showHUD(message: "最多只能选择18个红球")
+                    return false
+                }
+            }
+            
+            guard bettingNum * 2 <= 20000 else {
+                showHUD(message: "单次投注最多2万元")
+                return false
+            }
+            return true
+        }
+    }
+    
 }
 
 extension CXMMDaletouViewController : UITableViewDelegate {

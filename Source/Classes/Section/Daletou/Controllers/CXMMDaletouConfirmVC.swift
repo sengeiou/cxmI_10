@@ -57,6 +57,7 @@ class CXMMDaletouConfirmVC: BaseViewController {
     @IBOutlet weak var bottomView: DaletouConfirmBottom!
     
     //private var money = 2
+    private var isAppend = false // 是否追加
     
     private var bettingNum = BehaviorSubject(value: 0)
     private var multiple = BehaviorSubject(value: 1)
@@ -145,9 +146,40 @@ extension CXMMDaletouConfirmVC : DLTRandom {
     
 }
 
+// MARK: - 网络请求
+extension CXMMDaletouConfirmVC {
+    private func saveBetInfoRequest(model : DLTBetInfoRequestModel) {
+        weak var weakSelf = self
+        
+        _ = dltProvider.rx.request(.setInfo(model: model))
+            .asObservable()
+            .mapObject(type: FootballSaveBetInfoModel.self)
+            .subscribe(onNext: { (data) in
+                print(data)
+                
+            }, onError: { (error) in
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        weakSelf?.pushLoginVC(from: self)
+                    default : break
+                    }
+                    if 300000...310000 ~= code {
+                        self.showHUD(message: msg!)
+                    }
+                    print(code)
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil )
+    }
+}
+
 // MARK: - 底部 视图  代理
 extension CXMMDaletouConfirmVC : DaletouConfirmBottomDelegate, FootballTimesFilterVCDelegate {
     func didTipAppend(isAppend : Bool) {
+        self.isAppend = isAppend
         switch isAppend {
         case true:
             for model in list {
@@ -170,7 +202,10 @@ extension CXMMDaletouConfirmVC : DaletouConfirmBottomDelegate, FootballTimesFilt
     }
     // MARK: - 投注确认按钮
     func didTipConfirm() {
-        let model = DLTBetInfoRequestModel.getRequestModel(list: list, isAppend: true)
+        
+        let model = DLTBetInfoRequestModel.getRequestModel(list: list, isAppend: self.isAppend)
+        
+        self.saveBetInfoRequest(model: model)
         
         print( model)
     }

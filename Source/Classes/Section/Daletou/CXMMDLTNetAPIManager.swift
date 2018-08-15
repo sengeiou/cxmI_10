@@ -27,6 +27,8 @@ enum DLTAPIManager {
     /// drop : 是否显示遗漏0不显示，1显示，默认1
     /// sort : 排序, 0正序1倒序，默认为0
     case chartData(compute : Bool, count: String, drop : Bool, sort : Bool, tab : String)
+    /// 投注确认
+    case setInfo(model : DLTBetInfoRequestModel)
 }
 
 extension DLTAPIManager : TargetType {
@@ -46,6 +48,8 @@ extension DLTAPIManager : TargetType {
             return "/order/order/getLottoTicketScheme"
         case .chartData:
             return "/lotto/lotto/getChartData"
+        case .setInfo:
+            return "/lotto/lotto/saveBetInfo"
         }
     }
     
@@ -67,6 +71,9 @@ extension DLTAPIManager : TargetType {
             dic["drop"] = drop
             dic["sort"] = sort
             dic["tab"] = tab
+        case .setInfo(let model):
+            dic = model.toJSON()!
+            
         default:
             return .requestPlain
         }
