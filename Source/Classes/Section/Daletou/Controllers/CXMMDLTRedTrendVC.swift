@@ -13,8 +13,8 @@ import RxSwift
 class CXMMDLTRedTrendVC: BaseViewController, IndicatorInfoProvider{
 
     @IBOutlet weak var topCollectionView: UICollectionView!
-    @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var leftCollectionView: UICollectionView!
     @IBOutlet weak var bottomView: DLTTrendBottom!
     var scrollView: UIScrollView!
     
@@ -46,8 +46,6 @@ class CXMMDLTRedTrendVC: BaseViewController, IndicatorInfoProvider{
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        tableView.scrollsToTop = true
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -86,7 +84,7 @@ class CXMMDLTRedTrendVC: BaseViewController, IndicatorInfoProvider{
         
         self.collectionView.isScrollEnabled = false
         self.topCollectionView.isScrollEnabled = false
-        self.tableView.isScrollEnabled = false
+        self.leftCollectionView.isScrollEnabled = false
         self.view.addSubview(scrollView)
         
         
@@ -95,7 +93,7 @@ class CXMMDLTRedTrendVC: BaseViewController, IndicatorInfoProvider{
             self.collectionView.snp.makeConstraints { (make) in
                 make.top.equalTo(topCollectionView.snp.bottom)
                 make.bottom.equalTo(self.bottomView.snp.top)
-                make.left.equalTo(self.tableView.snp.right)
+                make.left.equalTo(self.leftCollectionView.snp.right)
                 make.width.equalTo(DLTRedBlueTrendItem.width * 35)
             }
         case .blue:
@@ -103,7 +101,7 @@ class CXMMDLTRedTrendVC: BaseViewController, IndicatorInfoProvider{
             self.collectionView.snp.makeConstraints { (make) in
                 make.top.equalTo(topCollectionView.snp.bottom)
                 make.bottom.equalTo(self.bottomView.snp.top)
-                make.left.equalTo(self.tableView.snp.right)
+                make.left.equalTo(self.leftCollectionView.snp.right)
                 make.width.equalTo(DLTRedBlueTrendItem.width * 12 )
             }
         
@@ -165,9 +163,8 @@ extension CXMMDLTRedTrendVC {
                 }
                 
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2, execute: {
-                    
                     weakSelf?.collectionView.reloadData()
-                    weakSelf?.tableView.reloadData()
+                    weakSelf?.leftCollectionView.reloadData()
                     weakSelf?.scrollView.contentOffset = CGPoint(x: 0, y: 0)
                     weakSelf?.dismissProgressHud()
                 })
@@ -275,9 +272,9 @@ extension CXMMDLTRedTrendVC : UIScrollViewDelegate {
                 self.topCollectionView.contentOffset.x = 0
             }
             if scrollView.contentOffset.y > 0 {
-                self.tableView.contentOffset.y = scrollView.contentOffset.y
+                self.leftCollectionView.contentOffset.y = scrollView.contentOffset.y
             }else{
-                self.tableView.contentOffset.y = 0
+                self.leftCollectionView.contentOffset.y = 0
             }
             
             self.collectionView.contentOffset = scrollView.contentOffset
@@ -289,53 +286,16 @@ extension CXMMDLTRedTrendVC : UITableViewDelegate {
     
 }
 
-extension CXMMDLTRedTrendVC : UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dropData != nil ? dropData.drop.count : 0
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DLTRedBlueTrendCell", for: indexPath) as! DLTRedBlueTrendCell
-        
-        let model = dropData.drop[indexPath.row]
-        var color : UIColor
-        
-        switch model.termStyle {
-        case .默认:
-            if indexPath.row % 2 == 0 {
-                color = ColorFFFFFF
-            }else {
-                color = ColorF5911Ea1
-            }
-        case .出现次数:
-            color = Color00A79Ba1
-        case .平均遗漏:
-            color = ColorBF272Da1
-        case .最大遗漏:
-            color = Color009045a1
-        case .最大连出:
-            color = Color65AADDa1
-        }
-        
-        cell.configure(with: self.dropData.drop[indexPath.row], color : color)
-        return cell
-        
-    }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 30
-    }
-}
-
 extension CXMMDLTRedTrendVC : UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         if collectionView == self.collectionView {
             return dropData != nil ? dropData.drop.count : 0
         }else if collectionView == self.topCollectionView {
             return 1
-        }else {
+        }else if collectionView == self.leftCollectionView{
+            return 1
+        }
+        else {
             return 0
         }
         
@@ -349,7 +309,10 @@ extension CXMMDLTRedTrendVC : UICollectionViewDataSource {
             case .blue:
                 return 12
             }
-        }else {
+        }else if collectionView == leftCollectionView {
+            return dropData != nil ? dropData.drop.count : 0
+        }
+        else {
             guard dropData != nil else { return 0 }
             switch style {
             case .red:
@@ -366,7 +329,34 @@ extension CXMMDLTRedTrendVC : UICollectionViewDataSource {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DLTRedBlueTopItem", for: indexPath) as! DLTRedBlueTopItem
             cell.configure(with: "\(indexPath.row + 1)")
             return cell
-        }else if collectionView == self.collectionView {
+        }
+        else if collectionView == self.leftCollectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DLTRedBlueTrendStageItem", for: indexPath) as! DLTRedBlueTrendStageItem
+            
+            let model = dropData.drop[indexPath.row]
+            var color : UIColor
+            
+            switch model.termStyle {
+            case .默认:
+                if indexPath.row % 2 == 0 {
+                    color = ColorFFFFFF
+                }else {
+                    color = ColorF5911Ea1
+                }
+            case .出现次数:
+                color = Color00A79Ba1
+            case .平均遗漏:
+                color = ColorBF272Da1
+            case .最大遗漏:
+                color = Color009045a1
+            case .最大连出:
+                color = Color65AADDa1
+            }
+            
+            cell.configure(with: self.dropData.drop[indexPath.row], color : color)
+            return cell
+        }
+        else if collectionView == self.collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DLTRedBlueTrendItem", for: indexPath) as! DLTRedBlueTrendItem
             
     
@@ -405,6 +395,9 @@ extension CXMMDLTRedTrendVC : UICollectionViewDataSource {
 }
 extension CXMMDLTRedTrendVC : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == self.leftCollectionView {
+            return CGSize(width: 60, height: 30)
+        }
         return CGSize(width: 35, height: 30)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
