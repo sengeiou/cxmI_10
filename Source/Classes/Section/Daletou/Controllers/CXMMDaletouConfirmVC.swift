@@ -156,13 +156,14 @@ extension CXMMDaletouConfirmVC {
             .mapBaseObject(type: DataModel.self)
             .subscribe(onNext: { (data) in
                 print(data)
-                
+                weakSelf?.changeConfirmButton(canTip: true)
                 let vc = CXMPaymentViewController()
                 vc.lottoToken = data.data
                 
                 self.pushViewController(vc: vc)
                 
             }, onError: { (error) in
+                weakSelf?.changeConfirmButton(canTip: true)
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):
@@ -208,6 +209,8 @@ extension CXMMDaletouConfirmVC : DaletouConfirmBottomDelegate, FootballTimesFilt
     // MARK: - 投注确认按钮
     func didTipConfirm() {
         
+        changeConfirmButton(canTip: false)
+        
         let model = DLTBetInfoRequestModel.getRequestModel(list: list, isAppend: self.isAppend)
         
         self.saveBetInfoRequest(model: model)
@@ -218,6 +221,17 @@ extension CXMMDaletouConfirmVC : DaletouConfirmBottomDelegate, FootballTimesFilt
     func timesConfirm(times: String) {
         self.multiple.onNext(Int(times)!)
         self.tableView.reloadData()
+    }
+    
+    private func changeConfirmButton( canTip : Bool) {
+        switch canTip {
+        case true:
+            self.bottomView.confirmBut.isUserInteractionEnabled = true
+            self.bottomView.confirmBut.backgroundColor = ColorE85504
+        case false:
+            self.bottomView.confirmBut.isUserInteractionEnabled = false
+            self.bottomView.confirmBut.backgroundColor = ColorC7C7C7
+        }
     }
     
 }

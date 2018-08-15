@@ -130,6 +130,7 @@ class CXMPaymentViewController: BaseViewController, UITableViewDelegate, UITable
             .asObservable()
             .mapObject(type: FootballSaveBetInfoModel.self)
             .subscribe(onNext: { (data) in
+                weakSelf?.lottoToken = data.payToken
                 weakSelf?.saveBetInfo = data
                 weakSelf?.dismissProgressHud()
                 if weakSelf?.saveBetInfo.bonusList.count != 0 {

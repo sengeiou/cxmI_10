@@ -69,6 +69,7 @@ class CXMMDLTRedTrendVC: BaseViewController, IndicatorInfoProvider{
         _ = viewModel.confirm.asObserver()
             .subscribe(onNext: { (list) in
                
+                self.changeConfirmButton(canTip: false)
                 let model = DLTBetInfoRequestModel.getRequestModel(list: [list], isAppend: false)
                 
                 self.saveBetInfoRequest(model: model)
@@ -164,9 +165,10 @@ extension CXMMDLTRedTrendVC {
                 }
                 
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2, execute: {
-                    weakSelf?.scrollView.contentOffset = CGPoint(x: 0, y: 0)
+                    
                     weakSelf?.collectionView.reloadData()
                     weakSelf?.tableView.reloadData()
+                    weakSelf?.scrollView.contentOffset = CGPoint(x: 0, y: 0)
                     weakSelf?.dismissProgressHud()
                 })
                 
@@ -196,12 +198,14 @@ extension CXMMDLTRedTrendVC {
             .asObservable()
             .mapBaseObject(type: DataModel.self)
             .subscribe(onNext: { (data) in
-                print(data)
+                weakSelf?.changeConfirmButton(canTip: true)
+                
                 let vc = CXMPaymentViewController()
                 vc.lottoToken = data.data
                 
                 self.pushViewController(vc: vc)
             }, onError: { (error) in
+                weakSelf?.changeConfirmButton(canTip: true)
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):
@@ -245,7 +249,20 @@ extension CXMMDLTRedTrendVC {
         return list
     }
     
-    
+    private func changeConfirmButton( canTip : Bool) {
+        switch canTip {
+        case true:
+            self.bottomView.confirmBut.isUserInteractionEnabled = true
+            self.bottomView.confirmBut.backgroundColor = ColorE85504
+            self.bottomView.redCollectionView.isUserInteractionEnabled = true
+            self.bottomView.blueCollectionView.isUserInteractionEnabled = true
+        case false:
+            self.bottomView.confirmBut.isUserInteractionEnabled = false
+            self.bottomView.confirmBut.backgroundColor = ColorC7C7C7
+            self.bottomView.redCollectionView.isUserInteractionEnabled = false
+            self.bottomView.blueCollectionView.isUserInteractionEnabled = false
+        }
+    }
 }
 
 extension CXMMDLTRedTrendVC : UIScrollViewDelegate {
