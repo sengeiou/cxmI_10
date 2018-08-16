@@ -171,8 +171,9 @@ extension CXMMDLTRedTrendVC {
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2, execute: {
                     weakSelf?.collectionView.reloadData()
                     weakSelf?.leftCollectionView.reloadData()
-                    weakSelf?.scrollView.contentOffset = CGPoint(x: 0, y: 0)
+                    weakSelf?.scrollView.contentOffset = CGPoint(x: 0, y: DLTRedBlueTrendItem.height * CGFloat((weakSelf?.dropData.drop.count)!))
                     weakSelf?.dismissProgressHud()
+                    
                 })
                 
             }, onError: { (error) in

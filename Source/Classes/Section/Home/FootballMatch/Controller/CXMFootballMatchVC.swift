@@ -813,18 +813,20 @@ extension CXMFootballMatchVC : CXMMFootballMatchMenuDelegate{
     private func setNavigationTitleView() {
         titleView = UIButton(type: .custom)
         
-        titleView.frame = CGRect(x: 0, y: 0, width: 160, height: 30)
-        
+        titleView.frame = CGRect(x: 0, y: 0, width: 175, height: 30)
+        titleView.titleLabel?.font = Font17
         titleView.setTitle(matchType.rawValue, for: .normal)
         titleView.setTitleColor(Color505050, for: .normal)
-        titleView.titleLabel?.font = Font17
+        titleView.setImage(UIImage(named: "Down"), for: .normal)
         titleView.addTarget(self, action: #selector(titleViewClicked(_:)), for: .touchUpInside)
-        
+        titleView.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 12)
+        titleView.imageEdgeInsets = UIEdgeInsets(top: 0, left: 163, bottom: 0, right: 0)
         self.navigationItem.titleView = titleView
     }
     
     @objc private func titleViewClicked(_ sender: UIButton) {
         showMatchMenu()
+        titleView.setImage(UIImage(named: "Upon"), for: .normal)
     }
     
     private func showMatchMenu() {
@@ -833,9 +835,12 @@ extension CXMFootballMatchVC : CXMMFootballMatchMenuDelegate{
     }
     func didTipMenu(view: CXMMFootballMatchMenu, type: FootballMatchType) {
         self.matchType = type
-        
+        titleView.setImage(UIImage(named: "Down"), for: .normal)
         footballRequest(leagueId: "")
         filterRequest()
-        //self.tableView.reloadData()
     }
+    func didCancel() {
+        titleView.setImage(UIImage(named: "Down"), for: .normal)
+    }
+    
 }

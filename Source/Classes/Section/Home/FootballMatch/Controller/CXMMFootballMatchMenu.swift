@@ -10,6 +10,7 @@ import UIKit
 
 protocol CXMMFootballMatchMenuDelegate {
     func didTipMenu(view : CXMMFootballMatchMenu, type : FootballMatchType) -> Void
+    func didCancel() -> Void
 }
 
 class CXMMFootballMatchMenu: PopMenu {
@@ -35,6 +36,11 @@ class CXMMFootballMatchMenu: PopMenu {
     override init() {
         super.init()
         initSubview()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        self.delegate.didCancel()
     }
     
     private func initSubview() {

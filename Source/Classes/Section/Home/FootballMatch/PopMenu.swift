@@ -23,7 +23,7 @@ class PopMenu: UIView {
     private func initSubview() {
         popView = UIView()
         popView.backgroundColor = ColorFFFFFF
-        self.backgroundColor = UIColor(hexColor: "EA5504", alpha: 0.5)
+        self.backgroundColor = UIColor(white: 0.5, alpha: 0.5)
         self.addSubview(popView)
         layoutPopView()
     }
