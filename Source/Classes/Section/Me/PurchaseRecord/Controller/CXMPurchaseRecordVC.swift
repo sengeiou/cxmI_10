@@ -127,7 +127,7 @@ class CXMPurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableVie
         }
         //self.showProgressHUD()
         weak var weakSelf = self
-        _ = userProvider.rx.request(.orderInfoList(fyId: "", orderStatus: orderStatus, pageNum: pageNum))
+        _ = userProvider.rx.request(.orderInfoList(orderStatus: orderStatus, pageNum: pageNum))
             .asObservable()
             .mapObject(type: PurchaseRecordListModel.self)
             .subscribe(onNext: { (data) in

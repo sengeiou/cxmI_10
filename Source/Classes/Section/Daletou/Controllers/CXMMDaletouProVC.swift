@@ -23,8 +23,6 @@ class CXMMDaletouProVC: BaseViewController {
         loadNewData()
         setSubview()
         
-        
-        
     }
 
     private func setSubview() {
@@ -44,7 +42,7 @@ extension CXMMDaletouProVC {
         guard orderSn != nil, proSn != nil else { return }
         weak var weakSelf = self
         
-        _ = dltProvider.rx.request(.ticketScheme(orderSn: "2018080110000000010440", programmeSn: "2018080110000000010440"))
+        _ = dltProvider.rx.request(.ticketScheme(orderSn: self.orderSn, programmeSn: self.proSn))
             .asObservable()
             .mapObject(type: DLTTicketSchemeModel.self)
             .subscribe(onNext: { (data) in
