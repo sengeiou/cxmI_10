@@ -46,10 +46,11 @@ class CXMAuthenticationVC: BaseViewController, UITextFieldDelegate, ValidatePro 
     //MARK: - 点击事件
     @objc private func authenticationClicked(_ sender: UIButton) {
         
-        guard validate(.chinese, str: nameTF.text) == true else {
+        guard self.nameTF.text != nil , self.nameTF.text != "" else {
             showHUD(message: "请输入正确的姓名")
             return
         }
+        
         guard validate(.IDNumber, str: IDNumberTF.text) == true else {
             showHUD(message: "请输入正确的身份证号码")
             return

@@ -26,14 +26,7 @@ class CXMPaymentViewController: BaseViewController, UITableViewDelegate, UITable
     
     public var lottoToken : String!
     
-    //public var requestModel: FootballRequestMode!
-    //public var matchType: FootballMatchType!
-//    public var worldCupDic : [String: String]! {
-//        didSet{
-//            guard worldCupDic != nil else { return }
-//            worldCupOrderRequest()
-//        }
-//    }
+    private var palyId : String!
     
     private var maxTimes = QueryMaxTimes
     private var timeInterval : Double = 3
@@ -118,7 +111,173 @@ class CXMPaymentViewController: BaseViewController, UITableViewDelegate, UITable
         
     }
 
-    // MARK: - 网络请求
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableView.snp.makeConstraints { (make) in
+            make.top.equalTo(SafeAreaTopHeight)
+            make.left.right.equalTo(0)
+            make.bottom.equalTo(confirmBut.snp.top)
+        }
+        confirmBut.snp.makeConstraints { (make) in
+            make.left.right.equalTo(0)
+            make.height.equalTo(44 * defaultScale)
+            make.bottom.equalTo(-SafeAreaBottomHeight)
+        }
+    }
+    private func initSubview() {
+        self.view.addSubview(tableView)
+        initBottowView()
+    }
+    private func initBottowView() {
+        confirmBut = UIButton(type: .custom)
+        confirmBut.setTitle("确认支付", for: .normal)
+        confirmBut.setTitleColor(ColorFFFFFF, for: .normal)
+        confirmBut.backgroundColor = ColorEA5504
+        confirmBut.titleLabel?.font = Font15
+        confirmBut.addTarget(self, action: #selector(confirmClicked(_:)), for: .touchUpInside)
+        
+        self.view.addSubview(confirmBut)
+    }
+    // MARK: 懒加载
+    lazy var tableView : UITableView = {
+        let table = UITableView(frame: CGRect.zero, style: .grouped)
+        
+        table.delegate = self
+        table.dataSource = self
+        table.backgroundColor = ColorF4F4F4
+        table.separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        table.register(PaymentCell.self, forCellReuseIdentifier: PaymentCellId)
+        table.register(PaymentMethodCell.self, forCellReuseIdentifier: PaymentMethodCellId)
+        if #available(iOS 11.0, *) {
+            
+        }else {
+            table.contentInset = UIEdgeInsets(top: -64, left: 0, bottom: 49, right: 0)
+            table.scrollIndicatorInsets = table.contentInset
+        }
+        return table
+    }()
+    
+    // MARK : - 点击事件
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            
+            if self.selectedIndex != nil {
+                tableView.selectRow(at: self.selectedIndex, animated: true, scrollPosition: .none)
+            }
+            
+            if indexPath.row == 2 {
+                guard self.saveBetInfo != nil, self.saveBetInfo.bonusList.isEmpty == false else { return }
+                
+                let coupon = CXMCouponFilterViewController()
+                coupon.delegate = self
+                coupon.bonusList = self.saveBetInfo.bonusList
+                present(coupon)
+            }
+            
+        }else if indexPath.section == 1 {
+            
+            if indexPath.row != 0 {
+                self.paymentModel = paymentAllList[indexPath.row - 1 ]
+                self.selectedIndex = indexPath
+                if indexPath.row == 1 {
+//                    if self.matchType != nil {
+//                        TongJi.log(.微信支付, label: self.matchType.rawValue, att: .彩种)
+//                    }
+                }
+                
+            }else {
+                guard self.selectedIndex != nil else { return }
+                tableView.selectRow(at: self.selectedIndex, animated: true, scrollPosition: .none)
+            }
+        }
+    }
+    
+    // 支付
+    @objc private func confirmClicked(_ sender: UIButton) {
+        guard canPayment else { return }
+        self.canPayment = false
+        maxTimes = QueryMaxTimes
+        paymentRequest()
+    }
+    // 选取的  优惠券
+    func didSelected(bonus bonusId: String) {
+        
+        self.saveBetInfo.bonusId = bonusId
+        self.saveBetInfo.setBonus()
+        
+        orderRequest(bonusId: bonusId)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+        if timer != nil {
+            timer.invalidate()
+            timer = nil
+        }
+    }
+    
+    override func back(_ sender: UIButton) {
+        NotificationCenter.default.removeObserver(self)
+        if timer != nil {
+            timer.invalidate()
+            timer = nil
+        }
+        
+        self.backed = true
+        self.dismissProgressHud()
+        self.popViewController()
+        
+//        if self.matchType != nil {
+//            TongJi.log(.支付返回, label: self.matchType.rawValue, att: .彩种)
+//        }
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        
+    }
+}
+
+// MARK: - PUSH
+extension CXMPaymentViewController {
+    private func pushOrderDetailVC() {
+        guard self.palyId != nil else { return }
+        guard self.paymentResult != nil else { return }
+        switch self.palyId {
+        case "0":
+            let order = CXMOrderDetailVC()
+            order.backType = .root
+            order.orderId = self.paymentResult.orderId
+            self.pushViewController(vc: order)
+        case "1":
+            break
+        case "2":
+            let story = UIStoryboard(name: "Daletou", bundle: nil)
+            let order = story.instantiateViewController(withIdentifier: "DaletouOrderVC") as! CXMMDaletouOrderVC
+            order.backType = .root
+            order.orderId = self.paymentResult.orderId
+            pushViewController(vc: order)
+        case "3": // 竞彩篮球
+            break
+        case "4": // 快3
+            break
+        case "5": // 双色球
+            break
+        case "6": // 北京单场
+            break
+        case "7": // 广东11选5
+            break
+        case "8": // 更多彩种
+            break
+        default : break
+        }
+    }
+}
+
+// MARK: - 网络请求
+extension CXMPaymentViewController {
 
     // 订单
     private func orderRequest(bonusId: String) {
@@ -126,11 +285,12 @@ class CXMPaymentViewController: BaseViewController, UITableViewDelegate, UITable
         weak var weakSelf = self
         self.showProgressHUD()
         
-         _ = paymentProvider.rx.request(.payBefore(bonusId: bonusId, payToken: self.lottoToken))
+        _ = paymentProvider.rx.request(.payBefore(bonusId: bonusId, payToken: self.lottoToken))
             .asObservable()
             .mapObject(type: FootballSaveBetInfoModel.self)
             .subscribe(onNext: { (data) in
                 weakSelf?.lottoToken = data.payToken
+                weakSelf?.palyId = data.lotteryClassifyId
                 weakSelf?.saveBetInfo = data
                 weakSelf?.dismissProgressHud()
                 if weakSelf?.saveBetInfo.bonusList.count != 0 {
@@ -212,7 +372,7 @@ class CXMPaymentViewController: BaseViewController, UITableViewDelegate, UITable
         self.showProgressHUD()
         
         
-        _ = paymentProvider.rx.request(.paymentNew(payCode: paymentModel.payCode, payToken: self.saveBetInfo.payToken))
+        _ = paymentProvider.rx.request(.paymentNew(payCode: paymentModel.payCode, payToken: self.lottoToken))
             .asObservable()
             .mapObject(type: PaymentResultModel.self)
             .subscribe(onNext: { (data) in
@@ -244,39 +404,6 @@ class CXMPaymentViewController: BaseViewController, UITableViewDelegate, UITable
                 default: break
                 }
             }, onCompleted: nil, onDisposed: nil)
-        
-//        _ = paymentProvider.rx.request(.payment(payCode: paymentModel.payCode, payToken: self.saveBetInfo.payToken))
-//            .asObservable()
-//            .mapObject(type: PaymentResultModel.self)
-//            .subscribe(onNext: { (data) in
-//                self.dismissProgressHud()
-//                if !self.backed {
-//                    self.paymentResult = data
-//                    self.handlePaymentResult()
-//                }else {
-//                    self.popViewController()
-//                }
-//
-//            }, onError: { (error) in
-//                self.dismissProgressHud()
-//                weakSelf?.canPayment = true
-//                guard let err = error as? HXError else { return }
-//                switch err {
-//                case .UnexpectedResult(let code, let msg):
-//                    switch code {
-//                    case 600:
-//                        weakSelf?.removeUserData()
-//                        weakSelf?.pushLoginVC(from: self)
-//                    default : break
-//                    }
-//
-//                    if 300000...310000 ~= code {
-//                        print(code)
-//                        self.showHUD(message: msg!)
-//                    }
-//                default: break
-//                }
-//            }, onCompleted: nil, onDisposed: nil)
     }
     // 查询支付结果
     private func queryPaymentResultRequest() {
@@ -294,21 +421,12 @@ class CXMPaymentViewController: BaseViewController, UITableViewDelegate, UITable
                     self.showHUD(message: data.msg)
                     SVProgressHUD.dismiss()
                     
-//                    if self.worldCupDic != nil {// 世界杯活动
-//                        let order = CXMWorldCupOrderDetailVC()
-//                        order.backType = .root
-//                        order.orderId = self.paymentResult.orderId
-//
-//                        self.pushViewController(vc: order)
-//                    }else { // 正常订单
-//                        let order = CXMOrderDetailVC()
-//                        order.backType = .root
-//                        order.orderId = self.paymentResult.orderId
-//                        self.pushViewController(vc: order)
-//                    }
+                    self.pushOrderDetailVC()
+                    
                     
                 case "304035":
                     self.canPayment = true
+                    self.timer.invalidate()
                     //self.showHUD(message: data.msg)
                     self.showCXMAlert(title: "查询失败", message: "暂未查询到您的支付结果，如果您已经确认支付并成功扣款，可能存在延迟到账的情况，请到账户明细中查看或联系客服查询", action: "知道了", cancel: nil) { (action) in
                         self.canPayment = true
@@ -351,19 +469,7 @@ class CXMPaymentViewController: BaseViewController, UITableViewDelegate, UITable
             showHUD(message: self.paymentResult.showMsg)
             SVProgressHUD.dismiss()
             self.canPayment = true
-            
-//            if self.worldCupDic != nil {// 世界杯活动
-//                let order = CXMWorldCupOrderDetailVC()
-//                order.backType = .root
-//                order.orderId = self.paymentResult.orderId
-//
-//                self.pushViewController(vc: order)
-//            }else { // 正常订单
-//                let order = CXMOrderDetailVC()
-//                order.backType = .root
-//                order.orderId = self.paymentResult.orderId
-//                self.pushViewController(vc: order)
-//            }
+            self.pushOrderDetailVC()
             return
         }
         
@@ -387,52 +493,9 @@ class CXMPaymentViewController: BaseViewController, UITableViewDelegate, UITable
             //self.queryPaymentResultRequest()
         }
     }
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        tableView.snp.makeConstraints { (make) in
-            make.top.equalTo(SafeAreaTopHeight)
-            make.left.right.equalTo(0)
-            make.bottom.equalTo(confirmBut.snp.top)
-        }
-        confirmBut.snp.makeConstraints { (make) in
-            make.left.right.equalTo(0)
-            make.height.equalTo(44 * defaultScale)
-            make.bottom.equalTo(-SafeAreaBottomHeight)
-        }
-    }
-    private func initSubview() {
-        self.view.addSubview(tableView)
-        initBottowView()
-    }
-    private func initBottowView() {
-        confirmBut = UIButton(type: .custom)
-        confirmBut.setTitle("确认支付", for: .normal)
-        confirmBut.setTitleColor(ColorFFFFFF, for: .normal)
-        confirmBut.backgroundColor = ColorEA5504
-        confirmBut.titleLabel?.font = Font15
-        confirmBut.addTarget(self, action: #selector(confirmClicked(_:)), for: .touchUpInside)
-        
-        self.view.addSubview(confirmBut)
-    }
-    // MARK: 懒加载
-    lazy var tableView : UITableView = {
-        let table = UITableView(frame: CGRect.zero, style: .grouped)
-        
-        table.delegate = self
-        table.dataSource = self
-        table.backgroundColor = ColorF4F4F4
-        table.separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-        table.register(PaymentCell.self, forCellReuseIdentifier: PaymentCellId)
-        table.register(PaymentMethodCell.self, forCellReuseIdentifier: PaymentMethodCellId)
-        if #available(iOS 11.0, *) {
-            
-        }else {
-            table.contentInset = UIEdgeInsets(top: -64, left: 0, bottom: 49, right: 0)
-            table.scrollIndicatorInsets = table.contentInset
-        }
-        return table
-    }()
-    
+}
+
+extension CXMPaymentViewController {
     func numberOfSections(in tableView: UITableView) -> Int {
         guard self.saveBetInfo != nil else { return 0 }
         return 2
@@ -539,103 +602,4 @@ class CXMPaymentViewController: BaseViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return nil
     }
-    
-    // MARK : - 点击事件
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
-            
-            if self.selectedIndex != nil {
-                tableView.selectRow(at: self.selectedIndex, animated: true, scrollPosition: .none)
-            }
-            
-            if indexPath.row == 2 {
-                guard self.saveBetInfo != nil, self.saveBetInfo.bonusList.isEmpty == false else { return }
-                
-                let coupon = CXMCouponFilterViewController()
-                coupon.delegate = self
-                coupon.bonusList = self.saveBetInfo.bonusList
-                present(coupon)
-            }
-            
-        }else if indexPath.section == 1 {
-            
-            if indexPath.row != 0 {
-                self.paymentModel = paymentAllList[indexPath.row - 1 ]
-                self.selectedIndex = indexPath
-                if indexPath.row == 1 {
-//                    if self.matchType != nil {
-//                        TongJi.log(.微信支付, label: self.matchType.rawValue, att: .彩种)
-//                    }
-                }
-                
-            }else {
-                guard self.selectedIndex != nil else { return }
-                tableView.selectRow(at: self.selectedIndex, animated: true, scrollPosition: .none)
-            }
-        }
-        
-        //tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-    // 支付
-    @objc private func confirmClicked(_ sender: UIButton) {
-        guard canPayment else { return }
-        self.canPayment = false
-        maxTimes = QueryMaxTimes
-        paymentRequest()
-        
-//        if self.matchType != nil {
-//            TongJi.log(.确认支付, label: self.matchType.rawValue, att: .彩种)
-//        }
-    }
-    // 选取的  优惠券
-    func didSelected(bonus bonusId: String) {
-        
-        self.saveBetInfo.bonusId = bonusId
-        self.saveBetInfo.setBonus()
-        
-        orderRequest(bonusId: bonusId)
-//        }else if self.worldCupDic != nil {
-//            self.worldCupDic["bonusId"] = bonusId
-//            worldCupOrderRequest()
-//        }
-        
-//        if self.matchType != nil {
-//            TongJi.log(.优惠券抵扣, label: self.matchType.rawValue, att: .彩种)
-//        }
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-        if timer != nil {
-            timer.invalidate()
-            timer = nil
-        }
-    }
-    
-    override func back(_ sender: UIButton) {
-        NotificationCenter.default.removeObserver(self)
-        if timer != nil {
-            timer.invalidate()
-            timer = nil
-        }
-        
-        self.backed = true
-        self.dismissProgressHud()
-        self.popViewController()
-        
-//        if self.matchType != nil {
-//            TongJi.log(.支付返回, label: self.matchType.rawValue, att: .彩种)
-//        }
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        
-    }
-    
-
-    
-
 }

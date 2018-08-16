@@ -35,9 +35,14 @@ class CXMPurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableVie
         case "2":
             let story = UIStoryboard(name: "Daletou", bundle: nil)
             let vc = story.instantiateViewController(withIdentifier: "DaletouOrderVC") as! CXMMDaletouOrderVC
-            
+            vc.orderId = recordInfo.orderId
             pushViewController(vc: vc)
-        default : break
+        default :
+            let story = UIStoryboard(name: "Daletou", bundle: nil)
+            let vc = story.instantiateViewController(withIdentifier: "DaletouOrderVC") as! CXMMDaletouOrderVC
+            vc.orderId = recordInfo.orderId
+            pushViewController(vc: vc)
+            break
         }
     }
     
@@ -122,7 +127,7 @@ class CXMPurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableVie
         }
         //self.showProgressHUD()
         weak var weakSelf = self
-        _ = userProvider.rx.request(.orderInfoList(fyId: "1", orderStatus: orderStatus, pageNum: pageNum))
+        _ = userProvider.rx.request(.orderInfoList(fyId: "2", orderStatus: orderStatus, pageNum: pageNum))
             .asObservable()
             .mapObject(type: PurchaseRecordListModel.self)
             .subscribe(onNext: { (data) in

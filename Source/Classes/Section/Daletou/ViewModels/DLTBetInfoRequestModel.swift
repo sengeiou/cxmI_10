@@ -15,9 +15,9 @@ struct DLTBetInfoRequestModel : HandyJSON {
     var bonusId : String!
     /// 是否追加
     var isAppend : Bool!
-    var lotteryClassifyId : String!
-    var lotteryPlayClassifyId : String!
-    var matchTime : String!
+    //var lotteryClassifyId : String!
+    //var lotteryPlayClassifyId : String!
+   //var matchTime : String!
     /// 订单金额
     var orderMoney : String!
     
@@ -31,20 +31,12 @@ struct DLTBetInfoRequestModel : HandyJSON {
         var amount : Int!
         var betInfo : String!
         var betNum : Int!
-        var palyType : String!
+        var playType : String!
     }
     
     static func getRequestModel (list : [DaletouDataList], isAppend : Bool) -> DLTBetInfoRequestModel {
         
         var requestModel = DLTBetInfoRequestModel()
-        requestModel.lotteryClassifyId = "2"
-        
-        switch isAppend {
-        case true:
-            requestModel.lotteryPlayClassifyId = "10"
-        case false:
-            requestModel.lotteryPlayClassifyId = "9"
-        }
         
         var money : Int = 0
         
@@ -53,23 +45,17 @@ struct DLTBetInfoRequestModel : HandyJSON {
             requestModel.times = data.multiple
             money += data.money * data.multiple * data.bettingNum
             requestModel.isAppend = isAppend
-            
+            requestModel.bonusId = ""
             var model = BetInfo()
             model.amount = data.money * data.multiple * data.bettingNum
             model.betNum = data.bettingNum
             
-//            if data.money == 3{
-//                requestModel.isAppend = true
-//            }else{
-//                requestModel.isAppend = false
-//            }
-            
             switch data.type {
             case .标准选号:
                 if data.redList.count + data.blueList.count > 7 {
-                    model.palyType = "1"
+                    model.playType = "1"
                 }else {
-                    model.palyType = "0"
+                    model.playType = "0"
                 }
                 
                 var betInfo = ""
@@ -98,7 +84,7 @@ struct DLTBetInfoRequestModel : HandyJSON {
                 
                 model.betInfo = betInfo
             case .胆拖选号:
-                model.palyType = "2"
+                model.playType = "2"
                 var betInfo = ""
                 
                 var i = 1

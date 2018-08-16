@@ -52,6 +52,9 @@ class CXMMDaletouConfirmVC: BaseViewController {
         }
     }
     
+    public var isAppendSubject = PublishSubject<Bool>()
+    
+    
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var bottomView: DaletouConfirmBottom!
@@ -60,7 +63,7 @@ class CXMMDaletouConfirmVC: BaseViewController {
     private var isAppend = false // 是否追加
     
     private var bettingNum = BehaviorSubject(value: 0)
-    private var multiple = BehaviorSubject(value: 1)
+    public var multiple = BehaviorSubject(value: 1)
     private var money = BehaviorSubject(value: 2)
     private var agreement = BehaviorSubject(value: true)
     
@@ -110,6 +113,11 @@ class CXMMDaletouConfirmVC: BaseViewController {
                 model.money = money
             }
             self.tableView.reloadData()
+        }, onError: nil , onCompleted: nil , onDisposed: nil )
+        
+        _ = isAppendSubject.asObserver().subscribe(onNext: { (isAppend) in
+            self.bottomView.appendBut.isSelected = isAppend
+            self.isAppend = isAppend
         }, onError: nil , onCompleted: nil , onDisposed: nil )
     }
 

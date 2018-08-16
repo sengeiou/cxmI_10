@@ -12,6 +12,8 @@ class CXMMDaletouOrderVC: BaseViewController {
 
     public var orderId: String!
     
+    public var backType : BackType = .notRoot
+    
     @IBOutlet weak var tableView: UITableView!
     
     
@@ -32,85 +34,129 @@ class CXMMDaletouOrderVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setTableview()
-        //loadNewData()
+        loadNewData()
         setDefaultData()
         
-        self.orderModel = DLTOrderDetailModel()
+
+    }
+
+    override func back(_ sender: UIButton) {
+        switch backType {
+        case .notRoot:
+            self.popViewController()
+        case .root:
+            self.popToRootViewController()
+        }
+    }
+    
+  
+}
+
+extension CXMMDaletouOrderVC {
+    @IBAction func buyDaletou(_ sender: UIButton) {
+        let stor = UIStoryboard(name: "Daletou", bundle: nil)
         
-        var list = [DLTOrderResult]()
+        let dlt = stor.instantiateViewController(withIdentifier: "DaletouViewController") as! CXMMDaletouViewController
         
-        for _ in 0...2{
-            var model = DLTOrderResult()
-            model.playType = "2"
-            var reds = [DLTOrderItemInfo]()
-            var blues = [DLTOrderItemInfo]()
-            
-            var danReds = [DLTOrderItemInfo]()
-            var dragReds  = [DLTOrderItemInfo]()
-            var danBlues  = [DLTOrderItemInfo]()
-            var dragBlues  = [DLTOrderItemInfo]()
-            
-            for i in 0...5 {
-                let red = DLTOrderItemInfo()
-                red.cathectic = "\(i)"
-                reds.append(red)
+        pushViewController(vc: dlt)
+    }
+    
+    @IBAction func buyThisNumber(_ sender: UIButton) {
+        
+        let stor = UIStoryboard(name: "Daletou", bundle: nil)
+        
+        let dlt = stor.instantiateViewController(withIdentifier: "DaletouConfirmVC") as! CXMMDaletouConfirmVC
+        
+        dlt.list = parse().0
+        dlt.isAppendSubject.onNext(parse().1)
+        dlt.multiple.onNext(parse().2)
+        pushViewController(vc: dlt)
+    }
+    
+    private func parse() -> ([DaletouDataList], Bool, Int){
+        var list = [DaletouDataList]()
+        var isAppend : Bool = false
+        var times : Int = 1
+        for data in self.orderModel.cathecticResults {
+            let model = DaletouDataList()
+            model.bettingNum = Int(data.betNum)!
+            model.multiple = Int(data.cathectic)!
+            times = model.multiple
+            if data.isAppend == "0" {
+                model.money = 2
+                model.isAppend = false
+                isAppend = false
+            }else {
+                model.money = 3
+                model.isAppend = true
+                isAppend = true
             }
-            
-            for i in 5...7 {
-                let blue = DLTOrderItemInfo()
-                blue.cathectic = "\(i)"
-                blues.append(blue)
+         
+            switch data.playType {
+            case "0", "1":
+                model.type = .标准选号
+                for mo in data.redCathectics {
+                    let redModel = DaletouDataModel()
+                    redModel.num = mo.cathectic
+                    redModel.number = Int(mo.cathectic)
+                    redModel.selected = true
+                    redModel.style = .red
+                    model.redList.append(redModel)
+                }
+                for mo in data.blueCathectics {
+                    let redModel = DaletouDataModel()
+                    redModel.num = mo.cathectic
+                    redModel.number = Int(mo.cathectic)
+                    redModel.selected = true
+                    redModel.style = .blue
+                    model.blueList.append(redModel)
+                }
+            case "2":
+                model.type = .胆拖选号
+                for redDan in data.redDanCathectics {
+                    let redModel = DaletouDataModel()
+                    redModel.num = redDan.cathectic
+                    redModel.number = Int(redDan.cathectic)
+                    redModel.selected = true
+                    redModel.style = .danRed
+                    model.danRedList.append(redModel)
+                }
+                for redDrag in data.redTuoCathectics {
+                    let redModel = DaletouDataModel()
+                    redModel.num = redDrag.cathectic
+                    redModel.number = Int(redDrag.cathectic)
+                    redModel.selected = true
+                    redModel.style = .dragRed
+                    model.dragRedList.append(redModel)
+                }
+                for mo in data.blueDanCathectics {
+                    let redModel = DaletouDataModel()
+                    redModel.num = mo.cathectic
+                    redModel.number = Int(mo.cathectic)
+                    redModel.selected = true
+                    redModel.style = .danBlue
+                    model.danBlueList.append(redModel)
+                }
+                for mo in data.blueTuoCathectics {
+                    let redModel = DaletouDataModel()
+                    redModel.num = mo.cathectic
+                    redModel.number = Int(mo.cathectic)
+                    redModel.selected = true
+                    redModel.style = .dragBlue
+                    model.dragBlueList.append(redModel)
+                }
+            default : break
             }
-            
-            
-            for i in 5...15 {
-                let blue = DLTOrderItemInfo()
-                blue.cathectic = "\(i)"
-                danReds.append(blue)
-            }
-            for i in 5...7 {
-                let blue = DLTOrderItemInfo()
-                blue.cathectic = "\(i)"
-                dragReds.append(blue)
-            }
-            for i in 8...10 {
-                let blue = DLTOrderItemInfo()
-                blue.cathectic = "\(i)"
-                danBlues.append(blue)
-            }
-            for i in 5...7 {
-                let blue = DLTOrderItemInfo()
-                blue.cathectic = "\(i)"
-                dragBlues.append(blue)
-            }
-            
-            
-            //model.redCathectics = reds
-            //model.blueCathectics = blues
-            
-            model.redDanCathectics = danReds
-            model.redTuoCathectics = dragReds
-            
-            model.blueDanCathectics = danBlues
-            model.blueTuoCathectics = dragBlues
             
             list.append(model)
         }
         
-        
-        
-        self.orderModel.prePrizeInfo = "xxxxxxxx"
-        self.orderModel.cathecticResults = list
-        self.tableView.reloadData()
-        
-        
+        return (list, isAppend, times)
     }
-
-  
-
     
-
+    
 }
+
 extension CXMMDaletouOrderVC {
     private func setTableview() {
         self.tableView.separatorStyle = .none
@@ -154,20 +200,23 @@ extension CXMMDaletouOrderVC {
 // MARK: - 请求
 extension CXMMDaletouOrderVC {
     private func loadNewData() {
-        
+        orderDetailRequest()
     }
     private func orderDetailRequest() {
         guard orderId != nil else { fatalError("orderId 为空") }
         weak var weakSelf = self
-        
+        self.showProgressHUD()
         _ = dltProvider.rx.request(.orderDetail(orderId: orderId))
             .asObservable()
             .mapObject(type: DLTOrderDetailModel.self)
             .subscribe(onNext: { (data) in
+                
                 weakSelf?.orderModel = data
                 weakSelf?.setData()
                 weakSelf?.tableView.reloadData()
+                weakSelf?.dismissProgressHud()
             }, onError: { (error) in
+                weakSelf?.dismissProgressHud()
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):
@@ -188,9 +237,17 @@ extension CXMMDaletouOrderVC {
 extension CXMMDaletouOrderVC : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
+        case 1:
+            if indexPath.row == self.orderModel.cathecticResults.count + 1 { // 最后一个 -》 奖金如何计算
+                let web = CXMWebViewController()
+                web.urlStr = DLTPlayHelpUrl
+                pushViewController(vc: web)
+            }
         case 2:
             let story = UIStoryboard(name: "Daletou", bundle: nil)
             let vc = story.instantiateViewController(withIdentifier: "DaletouProVC") as! CXMMDaletouProVC
+            vc.orderSn = self.orderModel.orderSn
+            vc.proSn = self.orderModel.programmeSn
             pushViewController(vc: vc)
             
         default:
@@ -219,7 +276,7 @@ extension CXMMDaletouOrderVC : UITableViewDataSource {
         
         switch indexPath.section {
         case 0:
-            if orderModel.prizeNum == nil {
+            if orderModel.prizeNum == nil || orderModel.prizeNum.isEmpty {
                 return initNotPrizeTitleCell(indexPath: indexPath)
             }
             else {

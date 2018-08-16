@@ -23,73 +23,7 @@ class CXMMDaletouProVC: BaseViewController {
         loadNewData()
         setSubview()
         
-        self.schemeModel = DLTTicketSchemeModel()
         
-        var list = [DLTTicketSchemeInfo]()
-        
-        for _ in 0...2{
-            var model = DLTTicketSchemeInfo()
-            model.playType = "2"
-            var reds = [DLTOrderItemInfo]()
-            var blues = [DLTOrderItemInfo]()
-            
-            var danReds = [DLTOrderItemInfo]()
-            var dragReds  = [DLTOrderItemInfo]()
-            var danBlues  = [DLTOrderItemInfo]()
-            var dragBlues  = [DLTOrderItemInfo]()
-            
-            for i in 0...5 {
-                let red = DLTOrderItemInfo()
-                red.cathectic = "\(i)"
-                reds.append(red)
-            }
-            
-            for i in 5...7 {
-                let blue = DLTOrderItemInfo()
-                blue.cathectic = "\(i)"
-                blues.append(blue)
-            }
-            
-            
-            for i in 5...15 {
-                let blue = DLTOrderItemInfo()
-                blue.cathectic = "\(i)"
-                danReds.append(blue)
-            }
-            for i in 5...7 {
-                let blue = DLTOrderItemInfo()
-                blue.cathectic = "\(i)"
-                dragReds.append(blue)
-            }
-            for i in 8...10 {
-                let blue = DLTOrderItemInfo()
-                blue.cathectic = "\(i)"
-                danBlues.append(blue)
-            }
-            for i in 5...7 {
-                let blue = DLTOrderItemInfo()
-                blue.cathectic = "\(i)"
-                dragBlues.append(blue)
-            }
-            
-            
-            //model.redCathectics = reds
-            //model.blueCathectics = blues
-            
-            model.redDanCathectics = danReds
-            model.redTuoCathectics = dragReds
-            
-            model.blueDanCathectics = danBlues
-            model.blueTuoCathectics = dragBlues
-            
-            list.append(model)
-        }
-        
-        
-        
-        //self.schemeModel.prePrizeInfo = "xxxxxxxx"
-        self.schemeModel.ticketSchemeDetailDTOs = list
-        self.tableView.reloadData()
         
     }
 
@@ -144,7 +78,9 @@ extension CXMMDaletouProVC : UITableViewDataSource {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return schemeModel != nil ? schemeModel.ticketSchemeDetailDTOs.count : 0
+        guard schemeModel != nil else { return 0 }
+        
+        return schemeModel.ticketSchemeDetailDTOs != nil ? schemeModel.ticketSchemeDetailDTOs.count : 0
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DLTProTableViewCell", for: indexPath) as! DLTProTableViewCell

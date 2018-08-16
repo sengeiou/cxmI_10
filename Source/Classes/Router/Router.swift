@@ -96,7 +96,11 @@ extension RouterPro {
         pushViewController(football, from: vc)
     }
     private func pushDaletou(from vc : UIViewController) {
+        let stor = UIStoryboard(name: "Daletou", bundle: nil)
         
+        let dlt = stor.instantiateViewController(withIdentifier: "DaletouViewController") as! CXMMDaletouViewController
+        
+        pushViewController(dlt, from: vc)
     }
     private func pushBasketball(from vc : UIViewController) {
         showHUD(message: "敬请期待")

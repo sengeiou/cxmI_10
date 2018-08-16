@@ -26,82 +26,16 @@ class CXMMDaletouViewController: BaseViewController {
     public var model : DaletouDataList? {
         didSet{
             guard let mod = model else { return }
-            switch mod.type {
-            case .标准选号:
-                self.selectedRedSet.removeAll()
-                self.selectedBlueSet.removeAll()
-                for data in self.redList {
-                    data.selected = false
-                }
-                for data in self.blueList {
-                    data.selected = false
-                }
-                
-                for data in mod.redList {
-                    for data1 in self.redList {
-                        if data.num == data1.num {
-                            data1.selected = data.selected
-                            self.selectedRedSet.insert(data1)
-                            break
-                        }
-                    }
-                }
-                for data in mod.blueList {
-                    for data1 in self.blueList {
-                        if data.num == data1.num {
-                            data1.selected = data.selected
-                            self.selectedBlueSet.insert(data1)
-                            break
-                        }
-                    }
-                }
-                settingNum.value = getStandardBetNum()
-            case .胆拖选号:
-                self.selectedDanRedSet.removeAll()
-                self.selectedDragRedSet.removeAll()
-                self.selectedDanBlueSet.removeAll()
-                self.selectedDragBlueSet.removeAll()
-                for data in mod.danRedList {
-                    for data1 in self.danRedList {
-                        if data.num == data1.num {
-                            data1.selected = data.selected
-                            self.selectedDanRedSet.insert(data1)
-                            break
-                        }
-                    }
-                }
-                for data in mod.dragRedList {
-                    for data1 in self.dragRedList {
-                        if data.num == data1.num {
-                            data1.selected = data.selected
-                            self.selectedDragRedSet.insert(data1)
-                            break
-                        }
-                    }
-                }
-                for data in mod.danBlueList {
-                    for data1 in self.danBlueList {
-                        if data.num == data1.num {
-                            data1.selected = data.selected
-                            self.selectedDanBlueSet.insert(data1)
-                            break
-                        }
-                    }
-                }
-                for data in mod.dragBlueList {
-                    for data1 in self.dragBlueList {
-                        if data.num == data1.num {
-                            data1.selected = data.selected
-                            self.selectedDragBlueSet.insert(data1)
-                            break
-                        }
-                    }
-                }
-                settingNum.value = getBettingNum()
-            }
+            setDefaultData(dataModel: mod)
         }
     }
     
+    private var randomModel : DaletouDataList! {
+        didSet{
+            guard let mod = randomModel else { return }
+            setDefaultData(dataModel: mod)
+        }
+    }
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -132,40 +66,13 @@ class CXMMDaletouViewController: BaseViewController {
 
     private var settingNum = Variable(0)
     
-    private var selectedRedSet = Set<DaletouDataModel>() {
-        didSet{
-            
-        }
-    }
-    private var selectedBlueSet = Set<DaletouDataModel>() {
-        didSet{
-            
-        }
-    }
-    
-    private var selectedDanRedSet = Set<DaletouDataModel>() {
-        didSet{
-            
-        }
-    }
+    private var selectedRedSet = Set<DaletouDataModel>()
+    private var selectedBlueSet = Set<DaletouDataModel>()
+    private var selectedDanRedSet = Set<DaletouDataModel>()
     private var selectedDragRedSet = Set<DaletouDataModel>()
-    {
-        didSet{
-            
-        }
-    }
     private var selectedDanBlueSet = Set<DaletouDataModel>()
-    {
-        didSet{
-           
-        }
-    }
     private var selectedDragBlueSet = Set<DaletouDataModel>()
-    {
-        didSet{
-            
-        }
-    }
+    
     
     private var selectedList : [DaletouDataModel] = [DaletouDataModel]()
     
@@ -214,21 +121,7 @@ class CXMMDaletouViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        guard isPush == false else { return }
-      //  guard model == nil else { return }
-        redList = DaletouDataModel.getData(ballStyle: .red)
         
-        blueList = DaletouDataModel.getData(ballStyle: .blue)
-        
-        danRedList = DaletouDataModel.getData(ballStyle: .danRed)
-       
-        dragRedList = DaletouDataModel.getData(ballStyle: .dragRed)
-        
-        danBlueList = DaletouDataModel.getData(ballStyle: .danBlue)
-        
-        dragBlueList = DaletouDataModel.getData(ballStyle: .dragBlue)
-    
-        self.tableView.reloadData()
     }
     
     private func setDefaultData() {
@@ -298,7 +191,7 @@ class CXMMDaletouViewController: BaseViewController {
 extension CXMMDaletouViewController : DLTRandom {
     @IBAction func randomOne(_ sender: UIButton) {
         let model = getOneRandom()
-        self.model = model
+        self.randomModel = model
         self.tableView.reloadData()
     }
     public func configure(with data : [DaletouDataModel], type : DaletouType) {
@@ -372,6 +265,10 @@ extension CXMMDaletouViewController : YBPopupMenuDelegate{
               pushPagerView(pagerType: .trend)
             
         case 1:
+            let web = CXMWebViewController()
+            web.urlStr = DLTPlayHelpUrl
+            pushViewController(vc: web)
+            //TongJi.log(.关于我们安全保障, label: "大乐透玩法")
             break
         case 2:
             break
@@ -426,12 +323,13 @@ extension CXMMDaletouViewController : DaletouBottomViewDelegate {
                 delegate.didSelected(list: model)
             }
             self.popViewController()
+            //backDefaultData()
             return
         }
         
         let story = UIStoryboard(name: "Daletou", bundle: nil)
         
-        let vc = story.instantiateViewController(withIdentifier: "CXMMDaletouConfirmVC") as! CXMMDaletouConfirmVC
+        let vc = story.instantiateViewController(withIdentifier: "DaletouConfirmVC") as! CXMMDaletouConfirmVC
         
         switch type {
         case .标准选号:
@@ -460,6 +358,7 @@ extension CXMMDaletouViewController : DaletouBottomViewDelegate {
         }
         
         pushViewController(vc: vc)
+        backDefaultData()
     }
 
     
@@ -512,6 +411,24 @@ extension CXMMDaletouViewController : DaletouBottomViewDelegate {
                 self.tableView.reloadData()
             }
         }
+    }
+    
+    private func backDefaultData () {
+        guard isPush == false else { return }
+        //  guard model == nil else { return }
+        redList = DaletouDataModel.getData(ballStyle: .red)
+        
+        blueList = DaletouDataModel.getData(ballStyle: .blue)
+        
+        danRedList = DaletouDataModel.getData(ballStyle: .danRed)
+        
+        dragRedList = DaletouDataModel.getData(ballStyle: .dragRed)
+        
+        danBlueList = DaletouDataModel.getData(ballStyle: .danBlue)
+        
+        dragBlueList = DaletouDataModel.getData(ballStyle: .dragBlue)
+        
+        self.tableView.reloadData()
     }
 }
 
@@ -735,6 +652,17 @@ extension CXMMDaletouViewController : UITableViewDelegate {
             default: break
             }
         case .胆拖选号:
+            switch indexPath.row {
+            case 0:
+                let history = CXMMDaletouHistoryAward()
+                history.prizeList = self.prizeList
+                present(history)
+            case 1:
+                let web = CXMWebViewController()
+                web.urlStr = DLTDanHelpUrl
+                pushViewController(vc: web)
+            default : break
+            }
             break
         }
     }
@@ -872,7 +800,7 @@ extension CXMMDaletouViewController : UITableViewDataSource {
         case .标准选号:
             return 3
         case .胆拖选号:
-            return 4
+            return 5
         }
     }
     
@@ -893,12 +821,14 @@ extension CXMMDaletouViewController : UITableViewDataSource {
         case .胆拖选号:
             switch indexPath.row {
             case 0:
-                return initDanRedCell(tableView, indexPath)
+                return initTitleCell(tableView, indexPath)
             case 1:
-                return initDragRedCell(tableView, indexPath)
+                return initDanRedCell(tableView, indexPath)
             case 2:
-                return initDanBlueCell(tableView, indexPath)
+                return initDragRedCell(tableView, indexPath)
             case 3:
+                return initDanBlueCell(tableView, indexPath)
+            case 4:
                 return initDragBlueCell(tableView, indexPath)
             default:
                 return UITableViewCell()
@@ -933,27 +863,29 @@ extension CXMMDaletouViewController : UITableViewDataSource {
         case .胆拖选号:
             switch indexPath.row {
             case 0:
+                return 40
+            case 1:
                 switch displayStyle {
                 case .defStyle:
                     return DaletouDanRedCell.cellHeight
                 case .omission:
                     return DaletouDanRedCell.omCellHeight
                 }
-            case 1:
+            case 2:
                 switch displayStyle {
                 case .defStyle:
                     return DaletouDragRedCell.cellHeight
                 case .omission:
                     return DaletouDragRedCell.omCellHeight
                 }
-            case 2:
+            case 3:
                 switch displayStyle {
                 case .defStyle:
                     return DaletouDanBlueCell.cellHeight
                 case .omission:
                     return DaletouDanBlueCell.omCellHeight
                 }
-            case 3:
+            case 4:
                 switch displayStyle {
                 case .defStyle:
                     return DaletouDragBlueCell.cellHeight
@@ -1019,6 +951,84 @@ extension CXMMDaletouViewController : UITableViewDataSource {
         cell.configure(with: dragBlueList)
         return cell
     }
-    
-    
 }
+
+extension CXMMDaletouViewController {
+    private func setDefaultData( dataModel : DaletouDataList) {
+        
+        switch dataModel.type {
+        case .标准选号:
+            self.selectedRedSet.removeAll()
+            self.selectedBlueSet.removeAll()
+            for data in self.redList {
+                data.selected = false
+            }
+            for data in self.blueList {
+                data.selected = false
+            }
+            
+            for data in dataModel.redList {
+                for data1 in self.redList {
+                    if data.num == data1.num {
+                        data1.selected = data.selected
+                        self.selectedRedSet.insert(data1)
+                        break
+                    }
+                }
+            }
+            for data in dataModel.blueList {
+                for data1 in self.blueList {
+                    if data.num == data1.num {
+                        data1.selected = data.selected
+                        self.selectedBlueSet.insert(data1)
+                        break
+                    }
+                }
+            }
+            settingNum.value = getStandardBetNum()
+        case .胆拖选号:
+            self.selectedDanRedSet.removeAll()
+            self.selectedDragRedSet.removeAll()
+            self.selectedDanBlueSet.removeAll()
+            self.selectedDragBlueSet.removeAll()
+            for data in dataModel.danRedList {
+                for data1 in self.danRedList {
+                    if data.num == data1.num {
+                        data1.selected = data.selected
+                        self.selectedDanRedSet.insert(data1)
+                        break
+                    }
+                }
+            }
+            for data in dataModel.dragRedList {
+                for data1 in self.dragRedList {
+                    if data.num == data1.num {
+                        data1.selected = data.selected
+                        self.selectedDragRedSet.insert(data1)
+                        break
+                    }
+                }
+            }
+            for data in dataModel.danBlueList {
+                for data1 in self.danBlueList {
+                    if data.num == data1.num {
+                        data1.selected = data.selected
+                        self.selectedDanBlueSet.insert(data1)
+                        break
+                    }
+                }
+            }
+            for data in dataModel.dragBlueList {
+                for data1 in self.dragBlueList {
+                    if data.num == data1.num {
+                        data1.selected = data.selected
+                        self.selectedDragBlueSet.insert(data1)
+                        break
+                    }
+                }
+            }
+            settingNum.value = getBettingNum()
+        }
+    }
+}
+

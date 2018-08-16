@@ -21,6 +21,8 @@ class DaletouConfirmBottom: UIView {
     @IBOutlet weak var moneyLabel: UILabel!
     @IBOutlet weak var multipleBut : UIButton!
     @IBOutlet weak var confirmBut : UIButton!
+    @IBOutlet weak var appendBut : UIButton!
+    
     @IBAction func MultipleClick(_ sender: UIButton) {
         guard delegate != nil else { return }
         delegate.didTipMultiple()
