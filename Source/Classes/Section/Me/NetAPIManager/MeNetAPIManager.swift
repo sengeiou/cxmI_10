@@ -33,7 +33,7 @@ enum MeNetAPIManager {
     /// 单个优惠券
     case coupon (userBonusId: String)
     /// 订单列表 - 投注记录 -1 -所有订单 2-待开奖 4-已中奖  fyId :
-    case orderInfoList (orderStatus: String, pageNum: Int)
+    case orderInfoList (fyd : String, orderStatus: String, pageNum: Int)
     /// 订单详情
     case orderInfo (orderId: String)
     /// 出票方案
@@ -183,7 +183,8 @@ extension MeNetAPIManager : TargetType {
             dic["pageSize"] = "20"
         case .coupon(let userBonusId):
             dic["userBonusId"] = userBonusId
-        case .orderInfoList(let orderStatus, let pageNum):
+        case .orderInfoList(let fyd, let orderStatus, let pageNum):
+            dic["lotteryClassifyId"] = fyd
             dic["orderStatus"] = orderStatus
             dic["pageNum"] = pageNum
         case .orderInfo(let orderId):

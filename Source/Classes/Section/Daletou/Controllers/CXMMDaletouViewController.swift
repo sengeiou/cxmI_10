@@ -428,6 +428,13 @@ extension CXMMDaletouViewController : DaletouBottomViewDelegate {
         
         dragBlueList = DaletouDataModel.getData(ballStyle: .dragBlue)
         
+        selectedRedSet.removeAll()
+        selectedBlueSet.removeAll()
+        selectedDanRedSet.removeAll()
+        selectedDragRedSet.removeAll()
+        selectedDanBlueSet.removeAll()
+        selectedDragBlueSet.removeAll()
+        
         self.tableView.reloadData()
     }
 }
