@@ -54,6 +54,19 @@ extension DLTProTableViewCell {
         default: break
         }
         
+        switch orderInfo.status {
+        case "0":
+            stateLabel.text = "待出票"
+        case "1":
+            stateLabel.text = "已出票"
+        case "2":
+            stateLabel.text = "出票失败"
+        case "3":
+            stateLabel.text = "出票中"
+        default:
+            stateLabel.text = ""
+        }
+        
         detailLabel.text = type + " \(orderInfo.betNum)注" + " \(orderInfo.cathectic)倍" + " \(orderInfo.amount).00元" + append
         
         self.collectionView.reloadData()

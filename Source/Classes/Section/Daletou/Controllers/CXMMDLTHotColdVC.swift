@@ -11,7 +11,7 @@ import XLPagerTabStrip
 
 enum HotColdStyle : String {
     case red = "红球冷热"
-    case blue = "篮球冷热"
+    case blue = "蓝球冷热"
 }
 
 class CXMMDLTHotColdVC: BaseViewController, IndicatorInfoProvider {
@@ -85,7 +85,10 @@ extension CXMMDLTHotColdVC {
 // MARK: - 网络请求
 extension CXMMDLTHotColdVC {
     private func loadNewData() {
-        chartDataRequest(compute: true, count: "100", drop: true, sort: true)
+        chartDataRequest(compute: settingViewModel.compute,
+                         count: settingViewModel.count,
+                         drop: settingViewModel.drop,
+                         sort: settingViewModel.sort)
     }
     private func chartDataRequest(compute: Bool, count: String, drop: Bool, sort: Bool) {
         

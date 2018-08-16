@@ -48,7 +48,10 @@ class CXMMDLTHistoryTrendVC: BaseViewController, IndicatorInfoProvider {
 // MARK: - 网络请求
 extension CXMMDLTHistoryTrendVC {
     private func loadNewData() {
-        chartDataRequest(compute: true, count: "100", drop: true, sort: true)
+        chartDataRequest(compute: settingViewModel.compute,
+                         count: settingViewModel.count,
+                         drop: settingViewModel.drop,
+                         sort: settingViewModel.sort)
     }
     private func chartDataRequest(compute: Bool, count: String, drop: Bool, sort: Bool) {
         
@@ -68,7 +71,12 @@ extension CXMMDLTHistoryTrendVC {
                     }
                 }
                 
+                
                 weakSelf?.tableView.reloadData()
+                if data.lottoNums.count > 0 {
+                    weakSelf?.tableView.scrollToRow(at: IndexPath(row: data.lottoNums.count - 1, section: 0), at: .none, animated: true)
+                }
+                    
             }, onError: { (error) in
                 weakSelf?.dismissProgressHud()
                 guard let err = error as? HXError else { return }

@@ -113,16 +113,22 @@ class CXMMDLTRedTrendVC: BaseViewController, IndicatorInfoProvider{
     }
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return "红球走势"
+        switch style {
+        case .red:
+            return "红球走势"
+        case .blue:
+            return "蓝球走势"
+        }
     }
-  
-
 }
 
 // MARK: - 网络请求
 extension CXMMDLTRedTrendVC {
     private func loadNewData() {
-        chartDataRequest(compute: true, count: "100", drop: true, sort: true)
+        chartDataRequest(compute: settingViewModel.compute,
+                         count: settingViewModel.count,
+                         drop: settingViewModel.drop,
+                         sort: settingViewModel.sort)
     }
     private func chartDataRequest(compute: Bool, count: String, drop: Bool, sort: Bool) {
         

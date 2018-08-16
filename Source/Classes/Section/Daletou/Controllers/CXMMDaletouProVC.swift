@@ -44,7 +44,7 @@ extension CXMMDaletouProVC {
         guard orderSn != nil, proSn != nil else { return }
         weak var weakSelf = self
         
-        _ = dltProvider.rx.request(.ticketScheme(orderSn: orderSn, programmeSn: proSn))
+        _ = dltProvider.rx.request(.ticketScheme(orderSn: "2018080110000000010440", programmeSn: "2018080110000000010440"))
             .asObservable()
             .mapObject(type: DLTTicketSchemeModel.self)
             .subscribe(onNext: { (data) in
@@ -80,15 +80,15 @@ extension CXMMDaletouProVC : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard schemeModel != nil else { return 0 }
         
-        return schemeModel.ticketSchemeDetailDTOs != nil ? schemeModel.ticketSchemeDetailDTOs.count : 0
+        return schemeModel.lottoTicketSchemeDetailDTOs != nil ? schemeModel.lottoTicketSchemeDetailDTOs.count : 0
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DLTProTableViewCell", for: indexPath) as! DLTProTableViewCell
-        cell.configure(with: self.schemeModel.ticketSchemeDetailDTOs[indexPath.row])
+        cell.configure(with: self.schemeModel.lottoTicketSchemeDetailDTOs[indexPath.row])
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let model = schemeModel.ticketSchemeDetailDTOs[indexPath.row]
+        let model = schemeModel.lottoTicketSchemeDetailDTOs[indexPath.row]
         
         var listCount = 0
         

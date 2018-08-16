@@ -71,7 +71,7 @@ class DLTOrderItemInfo : NSObject, HandyJSON {
 
 struct DLTTicketSchemeModel: HandyJSON {
     var programmeSn = ""
-    var ticketSchemeDetailDTOs : [DLTTicketSchemeInfo]!
+    var lottoTicketSchemeDetailDTOs : [DLTTicketSchemeInfo]!
 }
 
 struct DLTTicketSchemeInfo : HandyJSON {
