@@ -38,6 +38,6 @@ let SurpriseUrl = "\(baseWeb)/find?showBar=1&showtitle=1&from=app_find"
 /// 胆说明
 let danExplainUrl = "\(baseWeb)/freebuy/explain?cxmxc=scm&showBar=1&showtitle=1"
 /// 大乐透玩法帮助
-let DLTPlayHelpUrl = "\(baseWeb)/daletou/playHelp"
+let DLTPlayHelpUrl = "\(baseWeb)/daletou/playHelp?showtitle=1"
 /// 胆拖 说明
-let DLTDanHelpUrl = "\(baseWeb)/daletou/whatDantuo"
+let DLTDanHelpUrl = "\(baseWeb)/daletou/whatDantuo?showtitle=1"

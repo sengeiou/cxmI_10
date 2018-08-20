@@ -416,13 +416,13 @@ extension CXMPaymentViewController {
             .subscribe(onNext: { (data) in
                 switch data.code {
                 case "0":
-                    self.canPayment = true
+                    
                     self.timer.invalidate()
                     self.showHUD(message: data.msg)
                     SVProgressHUD.dismiss()
                     
                     self.pushOrderDetailVC()
-                    
+                    //self.canPayment = true
                     
                 case "304035":
                     self.canPayment = true
@@ -468,8 +468,8 @@ extension CXMPaymentViewController {
             
             showHUD(message: self.paymentResult.showMsg)
             SVProgressHUD.dismiss()
-            self.canPayment = true
             self.pushOrderDetailVC()
+            //self.canPayment = true
             return
         }
         
