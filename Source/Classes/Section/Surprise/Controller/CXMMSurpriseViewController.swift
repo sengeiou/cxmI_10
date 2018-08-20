@@ -33,10 +33,9 @@ class CXMMSurpriseViewController: BaseViewController , UITableViewDelegate, UITa
     
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        //self.navigationItem.title = "天空体育 · 我的收藏"
-        //setRightButton()
-       
+        hideBackBut()
         setEmpty(title: "暂无内容", tableView)
         collectList = [NewsInfoModel]()
         collectionRequest(1)
@@ -52,7 +51,7 @@ class CXMMSurpriseViewController: BaseViewController , UITableViewDelegate, UITa
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        hideBackBut()
+        
         isHidenBar = false
     }
     

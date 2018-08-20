@@ -84,6 +84,13 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
         
         self.navigationItem.title = self.pagerType.rawValue
         setLiftButtonItem()
+        switch pagerType {
+        case .surprise:
+            hideLeftButtonItem()
+        default:
+            break
+        }
+        
     }
 
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
@@ -166,8 +173,10 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
         return [all, bonus, recharge, buy, withdrawal, coupon]
     }
     private func getSurpriseVC() -> [UIViewController] {
+    
         let one = CXMMSurpriseViewController()
         one.type = .今日关注
+        
         let two = CXMMSurpriseViewController()
         two.type = .重心推荐
         let three = CXMMSurpriseViewController()
@@ -246,7 +255,9 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftBut)
     }
     
-    
+    public func hideLeftButtonItem() {
+        self.navigationItem.leftBarButtonItem = nil
+    }
     
     @objc private func back(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)

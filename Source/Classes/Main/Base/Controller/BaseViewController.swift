@@ -199,9 +199,12 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
         self.tabBarController?.tabBar.isHidden = true
     }
     
+    var backBut : UIButton!
+    
     private func setLiftButtonItem() {
         
         let leftBut = UIButton(type: .custom)
+        self.backBut = leftBut
         leftBut.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         
         leftBut.setImage(UIImage(named:"ret"), for: .normal)

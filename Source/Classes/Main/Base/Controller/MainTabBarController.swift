@@ -161,6 +161,7 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
         let storyboard = UIStoryboard(name: "Storyboard", bundle: Bundle.main)
         let surprise = storyboard.instantiateViewController(withIdentifier: "BasePagerViewController") as! BasePagerViewController
         surprise.pagerType = .surprise
+     
 //        let surprise = CXMSurpriseViewController()
 //        surprise.urlStr = SurpriseUrl
         let surpriseNav = UINavigationController(rootViewController: surprise)
@@ -174,6 +175,7 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
         surpriseNav.tabBarItem.image = surpriseImg
         surpriseNav.tabBarItem.selectedImage = surpriseSelImg
         
+    
         // me
         //me : BaseViewController!
         
