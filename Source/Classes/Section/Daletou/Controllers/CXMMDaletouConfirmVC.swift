@@ -163,7 +163,7 @@ extension CXMMDaletouConfirmVC {
             .asObservable()
             .mapBaseObject(type: DataModel.self)
             .subscribe(onNext: { (data) in
-                print(data)
+                
                 weakSelf?.changeConfirmButton(canTip: true)
                 let vc = CXMPaymentViewController()
                 vc.lottoToken = data.data

@@ -43,7 +43,7 @@ class CXMMDLTTrendSettingVC: BasePopViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.popStyle = .fromCenter
-        
+        //self.tap.removeTarget(self, action: #selector(backPopVC))
         initSubview()
     }
 
@@ -374,7 +374,17 @@ class CXMMDLTTrendSettingVC: BasePopViewController {
         
     }
     
+    override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if touch.view == self.pushBgView {
+            return false
+        }else {
+            return true
+        }
+    }
+    
 }
+
+
 
 extension CXMMDLTTrendSettingVC : FootballFilterBottomViewDelegate {
     func filterConfirm() {

@@ -632,7 +632,7 @@
                                                         <outlet property="collectionView" destination="DEz-ER-pja" id="eFq-9c-RNR"/>
                                                     </connections>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="胆码-篮球，至多选1个" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4N4-Wu-fJG">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="胆码-蓝球，至多选1个" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4N4-Wu-fJG">
                                                     <rect key="frame" x="16" y="20" width="343" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="u6w-zH-OzJ"/>
@@ -734,7 +734,7 @@
                                                         <outlet property="collectionView" destination="RVL-sj-jh4" id="Vuk-h1-DlA"/>
                                                     </connections>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="拖码-篮球，至少选2个" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="20X-bY-sex">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="拖码-蓝球，至少选2个" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="20X-bY-sex">
                                                     <rect key="frame" x="16" y="20" width="343" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="Yzr-Xo-chv"/>

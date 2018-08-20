@@ -289,7 +289,19 @@ extension CXMMDaletouViewController : YBPopupMenuDelegate{
 // MARK: - 底部视图 代理
 extension CXMMDaletouViewController : DaletouBottomViewDelegate {
     func didTipDelete() {
-        showAlert()
+        switch type {
+        case .标准选号:
+            if selectedRedSet.isEmpty == false || selectedBlueSet.isEmpty == false {
+                showAlert()
+            }
+        case .胆拖选号:
+            if selectedDanRedSet.isEmpty == false ||
+            selectedDragRedSet.isEmpty == false ||
+            selectedDanBlueSet.isEmpty == false ||
+                selectedDragBlueSet.isEmpty == false {
+                showAlert()
+            }
+        }
     }
     
     func didTipConfirm() {
@@ -415,6 +427,9 @@ extension CXMMDaletouViewController : DaletouBottomViewDelegate {
     
     private func backDefaultData () {
         guard isPush == false else { return }
+        
+        settingNum.value = 0
+        
         //  guard model == nil else { return }
         redList = DaletouDataModel.getData(ballStyle: .red)
         
@@ -434,6 +449,9 @@ extension CXMMDaletouViewController : DaletouBottomViewDelegate {
         selectedDragRedSet.removeAll()
         selectedDanBlueSet.removeAll()
         selectedDragBlueSet.removeAll()
+        
+        
+        
         
         self.tableView.reloadData()
     }
@@ -507,6 +525,7 @@ extension CXMMDaletouViewController : DaletouStandardRedCellDelegate,
             self.tableView.reloadSections([indexPath.section], with: .none)
         }
     }
+    // 红胆
     func didSelect(cell: DaletouDanRedCell, model: DaletouDataModel, indexPath : IndexPath) {
         selectedDragRedSet.remove(dragRedList[indexPath.row])
         
@@ -516,7 +535,9 @@ extension CXMMDaletouViewController : DaletouStandardRedCellDelegate,
             model.selected = false
         }
         insertDanRed(model: model)
-        dragRedList[indexPath.row].selected = false
+        if model.selected {
+            dragRedList[indexPath.row].selected = false
+        }
         
         settingNum.value = getBettingNum()
         
@@ -527,7 +548,11 @@ extension CXMMDaletouViewController : DaletouStandardRedCellDelegate,
     func didSelect(cell: DaletouDragRedCell, model: DaletouDataModel, indexPath : IndexPath) {
         model.selected = !model.selected
         insertDragRed(model: model)
-        danRedList[indexPath.row].selected = false
+        
+        if model.selected {
+            danRedList[indexPath.row].selected = false
+        }
+        
         selectedDanRedSet.remove(danRedList[indexPath.row])
         
         settingNum.value = getBettingNum()
@@ -536,17 +561,26 @@ extension CXMMDaletouViewController : DaletouStandardRedCellDelegate,
             self.tableView.reloadSections([indexPath.section], with: .none)
         }
     }
+    // 蓝胆
     func didSelect(cell: DaletouDanBlueCell, model: DaletouDataModel, indexPath : IndexPath) {
         selectedDragBlueSet.remove(dragBlueList[indexPath.row])
 
-        if selectedDanBlueSet.count <= 0, model.selected == false {
-            model.selected = !model.selected
-        }else {
-            model.selected = false
+//        if selectedDanBlueSet.count <= 0, model.selected == false {
+//            model.selected = !model.selected
+//        }else {
+//            model.selected = false
+//        }
+        model.selected = !model.selected
+        // 点击的为选中，，其他已选中的要改成未选中状态
+        for blue in selectedDanBlueSet {
+            blue.selected = false
         }
+        selectedDanBlueSet.removeAll()
         
         insertDanBlue(model: model)
-        dragBlueList[indexPath.row].selected = false
+        if model.selected {
+            dragBlueList[indexPath.row].selected = false
+        }
         
         settingNum.value = getBettingNum()
         
@@ -558,7 +592,9 @@ extension CXMMDaletouViewController : DaletouStandardRedCellDelegate,
         selectedDanBlueSet.remove(danBlueList[indexPath.row])
         model.selected = !model.selected
         insertDragBlue(model: model)
-        danBlueList[indexPath.row].selected = false
+        if model.selected {
+            danBlueList[indexPath.row].selected = false
+        }
         
         settingNum.value = getBettingNum()
         
@@ -719,12 +755,17 @@ extension CXMMDaletouViewController {
     }
     
     override func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) {
-        let model = getOneRandom()
-        self.model = model
-        self.tableView.reloadData()
-        let soundID = SystemSoundID(kSystemSoundID_Vibrate)
-        //振动
-        AudioServicesPlaySystemSound(soundID)
+        switch type {
+        case .标准选号:
+            let model = getOneRandom()
+            self.model = model
+            self.tableView.reloadData()
+            let soundID = SystemSoundID(kSystemSoundID_Vibrate)
+            //振动
+            AudioServicesPlaySystemSound(soundID)
+        case .胆拖选号:
+            break
+        }
     }
     override func motionCancelled(_ motion: UIEventSubtype, with event: UIEvent?) {
         

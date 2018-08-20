@@ -35,6 +35,15 @@ extension Observable where E == Response {
                 throw HXError.NoResponse
             }
             
+            guard json["code"] as! String == "0" else {
+                
+                guard let codeStr = json["code"] as? String else { throw HXError.ParseCodeError }
+                guard let code = Int(codeStr) else { throw HXError.ParseCodeError }
+                
+                throw HXError.UnexpectedResult(resultCode: code , resultMsg: json["msg"] as? String )
+            }
+            
+            
             print(json["msg"] as! String)
             let jsonString = String.init(data: response.data, encoding: .utf8)
             return JSONDeserializer<T>.deserializeFrom(json: jsonString)!

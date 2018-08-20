@@ -35,6 +35,7 @@ class CXMWithdrawalViewController: BaseViewController, ValidatePro, UITextFieldD
         }
         
         self.canWithDraw = false
+        self.amountOfMoney.resignFirstResponder()
         drawRequest()
         TongJi.log(.提现提交, label: "ios", att: .终端)
     }
