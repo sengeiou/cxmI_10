@@ -69,6 +69,8 @@ enum MeNetAPIManager {
     case collectMatch(matchId: String, dateStr: String)
     /// 取消收藏赛事
     case collectMatchCancle(matchId: String, dateStr: String)
+    /// 发现
+    case surprise(page: Int, extendCat: String)
 }
 
 extension MeNetAPIManager : TargetType {
@@ -147,6 +149,8 @@ extension MeNetAPIManager : TargetType {
             return "/member/user/matchCollect/collectMatchId"
         case .collectMatchCancle:
             return "/member/user/matchCollect/cancle"
+        case.surprise:
+            return "/lottery/dl/article/findList"
         }
     }
     
@@ -237,6 +241,10 @@ extension MeNetAPIManager : TargetType {
         case .collectMatchCancle(let matchId, let dateStr ) :
             dic["matchId"] = matchId
             dic["dateStr"] = dateStr
+        case.surprise(let page, let extendCat):
+            dic["page"] = page
+            dic["size"] = "20"
+            dic["extendCat"] = extendCat
         default:
             return .requestPlain
         }

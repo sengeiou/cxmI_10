@@ -15,6 +15,7 @@ enum PagerViewType: String {
     case message = "彩小秘 · 消息中心"
     case accountDetails = "彩小秘 · 账户明细"
     case trend = "彩小秘 · 走势图"
+    case surprise = "彩小秘 · 发现"
 }
 
 class BasePagerViewController: ButtonBarPagerTabStripViewController {
@@ -74,15 +75,14 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
         settings.style.buttonBarLeftContentInset = 0
         settings.style.buttonBarRightContentInset = 0
         
-        
-        
         changeCurrentIndexProgressive = { [weak self] (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
             guard changeCurrentIndex == true else { return }
             oldCell?.label.textColor = Color505050
             newCell?.label.textColor = ColorE95504
         }
         super.viewDidLoad()
-        self.title = self.pagerType.rawValue
+        
+        self.navigationItem.title = self.pagerType.rawValue
         setLiftButtonItem()
     }
 
@@ -105,6 +105,8 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
             setTrendRightItem()
             self.containerView.isScrollEnabled = false
             return getTrendVC()
+        case .surprise:
+            return getSurpriseVC()
         default:
             return[]
         }
@@ -163,7 +165,18 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
         coupon.accountType = .coupon
         return [all, bonus, recharge, buy, withdrawal, coupon]
     }
-    
+    private func getSurpriseVC() -> [UIViewController] {
+        let one = CXMMSurpriseViewController()
+        one.type = .今日关注
+        let two = CXMMSurpriseViewController()
+        two.type = .重心推荐
+        let three = CXMMSurpriseViewController()
+        three.type = .牛人分析
+        let four = CXMMSurpriseViewController()
+        four.type = .其它
+        
+        return [one, two, three, four]
+    }
     private func getTrendVC() -> [UIViewController] {
         let story = UIStoryboard(name: "Daletou", bundle: nil)
         
