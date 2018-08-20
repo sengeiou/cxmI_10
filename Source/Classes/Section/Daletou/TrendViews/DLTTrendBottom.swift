@@ -79,7 +79,7 @@ extension DLTTrendBottom {
                 let numAtt = NSAttributedString(string: "\(5)", attributes: [NSAttributedStringKey.foregroundColor: ColorE85504])
                 let defa = NSAttributedString(string: "个红球")
                 let money = NSAttributedString(string: "2", attributes: [NSAttributedStringKey.foregroundColor: Color0081CC])
-                let defa1 = NSAttributedString(string: "个篮球")
+                let defa1 = NSAttributedString(string: "个蓝球")
                 att.append(numAtt)
                 att.append(defa)
                 att.append(money)
