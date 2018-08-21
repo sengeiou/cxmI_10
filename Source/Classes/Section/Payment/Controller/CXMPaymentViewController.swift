@@ -465,7 +465,7 @@ extension CXMPaymentViewController {
         guard self.saveBetInfo != nil else { return }
         guard self.saveBetInfo.thirdPartyPaid != nil else { return }
         guard self.saveBetInfo.thirdPartyPaid != 0 else {
-            self.timer.invalidate()
+            
             showHUD(message: self.paymentResult.showMsg)
             SVProgressHUD.dismiss()
             self.pushOrderDetailVC()
