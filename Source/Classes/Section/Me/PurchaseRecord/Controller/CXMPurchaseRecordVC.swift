@@ -23,30 +23,27 @@ class CXMPurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableVie
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let recordInfo = recordList[indexPath.section]
         
-        switch recordInfo.lotteryClassifyId {
-        case "1":
+        switch recordInfo.orderType {
+        case "0":
             let order = CXMOrderDetailVC()
             order.orderId = recordInfo.orderId
             pushViewController(vc: order)
-//            switch recordInfo.orderType {
-//            case "0":
-//
-//            case "1":
-//                let order = CXMWorldCupOrderDetailVC()
-//                order.orderId = recordInfo.orderId
-//                pushViewController(vc: order)
-//            default :
-//                break
-//            }
+        case "1":
+            let order = CXMWorldCupOrderDetailVC()
+            order.orderId = recordInfo.orderId
+            pushViewController(vc: order)
         case "2":
             let story = UIStoryboard(name: "Daletou", bundle: nil)
             let vc = story.instantiateViewController(withIdentifier: "DaletouOrderVC") as! CXMMDaletouOrderVC
             vc.orderId = recordInfo.orderId
             pushViewController(vc: vc)
-        default:
+        default :
+            let story = UIStoryboard(name: "Daletou", bundle: nil)
+            let vc = story.instantiateViewController(withIdentifier: "DaletouOrderVC") as! CXMMDaletouOrderVC
+            vc.orderId = recordInfo.orderId
+            pushViewController(vc: vc)
             break
         }
-       
     }
     
     public var recordType : PurchaseRecordType = .all {
