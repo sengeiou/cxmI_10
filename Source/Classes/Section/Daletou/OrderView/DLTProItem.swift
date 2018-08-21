@@ -10,8 +10,8 @@ import UIKit
 
 class DLTProItem: UICollectionViewCell {
     
-    static let width : CGFloat = 28
-    static let heiht : CGFloat = 28
+    static let width : CGFloat = 32
+    static let heiht : CGFloat = 32
     
     @IBOutlet weak var numLabel: UILabel!
     @IBOutlet weak var line: UIView!
@@ -23,7 +23,7 @@ class DLTProItem: UICollectionViewCell {
     
     private func setSubview() {
         self.line.isHidden = true
-        self.numLabel.layer.cornerRadius = DLTOrderItem.width / 2
+        self.numLabel.layer.cornerRadius = (DLTOrderItem.width - 4) / 2
         self.numLabel.layer.masksToBounds = true
         self.numLabel.layer.borderWidth = 1
         self.numLabel.layer.borderColor = ColorC7C7C7.cgColor

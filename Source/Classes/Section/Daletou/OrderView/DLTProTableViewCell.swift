@@ -163,7 +163,7 @@ extension DLTProTableViewCell : UICollectionViewDelegateFlowLayout {
         return 12
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 6
+        return 0
     }
 }
 

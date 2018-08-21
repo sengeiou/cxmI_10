@@ -111,9 +111,9 @@ extension CXMMDaletouProVC : UITableViewDataSource {
         }else {
             let num : Int = listCount % 7
             if num == 0 {
-                return CGFloat(30 + 40 * count)
+                return CGFloat(30 + 44 * count)
             }else {
-                return CGFloat(30 + 40 * (count + 1))
+                return CGFloat(30 + 44 * (count + 1))
             }
         }
     }
