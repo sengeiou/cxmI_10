@@ -143,9 +143,15 @@ class CXMMSurpriseViewController: BaseViewController , UITableViewDelegate, UITa
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard self.collectList != nil else { return }
-        let web = CXMNewsDetailViewController()
-        web.articleId = self.collectList[indexPath.section].articleId
-        pushViewController(vc: web)
+        
+        let vc = LAJIViewController()
+        
+        pushViewController(vc: vc)
+        
+        
+//        let web = CXMNewsDetailViewController()
+//        web.articleId = self.collectList[indexPath.section].articleId
+//        pushViewController(vc: web)
     }
     
     //MARK: - 懒加载
