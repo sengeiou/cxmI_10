@@ -1308,6 +1308,12 @@
                                             <color key="textColor" red="0.62352941179999999" green="0.62352941179999999" blue="0.62352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q9U-Ka-0mf">
+                                            <rect key="frame" x="121" y="70.5" width="238" height="54.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" red="0.62352941176470589" green="0.62352941176470589" blue="0.62352941176470589" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
@@ -1321,6 +1327,7 @@
                                         <constraint firstItem="R9r-xi-cvP" firstAttribute="centerY" secondItem="m37-yF-grW" secondAttribute="centerY" id="BIf-vd-x5M"/>
                                         <constraint firstItem="R9r-xi-cvP" firstAttribute="top" secondItem="WEo-Dh-evD" secondAttribute="bottom" constant="12" id="CQz-2e-Uvb"/>
                                         <constraint firstItem="R9r-xi-cvP" firstAttribute="leading" secondItem="m37-yF-grW" secondAttribute="leading" constant="10" id="HyS-tf-0dN"/>
+                                        <constraint firstItem="q9U-Ka-0mf" firstAttribute="leading" secondItem="rNe-WD-CYI" secondAttribute="leading" id="R0F-R1-kHg"/>
                                         <constraint firstItem="R9r-xi-cvP" firstAttribute="top" secondItem="7VE-t2-Lmx" secondAttribute="bottom" constant="10" id="TmL-GE-DuS"/>
                                         <constraint firstItem="Dcg-vH-HTZ" firstAttribute="top" secondItem="m37-yF-grW" secondAttribute="top" constant="12" id="VkU-or-WZ4"/>
                                         <constraint firstItem="WEo-Dh-evD" firstAttribute="leading" secondItem="Dcg-vH-HTZ" secondAttribute="leading" id="XO8-0d-fAq"/>
@@ -1330,10 +1337,13 @@
                                         <constraint firstItem="U8y-sP-EA3" firstAttribute="leading" secondItem="Dcg-vH-HTZ" secondAttribute="trailing" constant="10" id="f0B-fx-psj"/>
                                         <constraint firstAttribute="trailing" secondItem="x5y-O1-Wpt" secondAttribute="trailing" constant="16" id="fOa-gT-5ex"/>
                                         <constraint firstAttribute="bottom" secondItem="rNe-WD-CYI" secondAttribute="bottom" constant="10" id="hha-rj-BBU"/>
+                                        <constraint firstItem="x5y-O1-Wpt" firstAttribute="trailing" secondItem="q9U-Ka-0mf" secondAttribute="trailing" id="lQJ-Ev-DJd"/>
                                         <constraint firstItem="rNe-WD-CYI" firstAttribute="trailing" secondItem="x5y-O1-Wpt" secondAttribute="trailing" id="m0e-d3-uHI"/>
                                         <constraint firstItem="WEo-Dh-evD" firstAttribute="trailing" secondItem="Dcg-vH-HTZ" secondAttribute="trailing" id="mGV-23-ePQ"/>
+                                        <constraint firstItem="q9U-Ka-0mf" firstAttribute="top" secondItem="R9r-xi-cvP" secondAttribute="bottom" constant="5" id="oiN-pv-8R0"/>
                                         <constraint firstAttribute="trailing" secondItem="R9r-xi-cvP" secondAttribute="trailing" constant="10" id="pdc-y2-mHb"/>
                                         <constraint firstItem="rNe-WD-CYI" firstAttribute="leading" secondItem="U4q-JY-PiG" secondAttribute="trailing" constant="5" id="pvs-K8-zE0"/>
+                                        <constraint firstAttribute="bottom" secondItem="q9U-Ka-0mf" secondAttribute="bottom" constant="5" id="qS5-v3-EWn"/>
                                         <constraint firstItem="x5y-O1-Wpt" firstAttribute="top" secondItem="R9r-xi-cvP" secondAttribute="bottom" constant="10" id="rh7-cl-Hrt"/>
                                         <constraint firstItem="WEo-Dh-evD" firstAttribute="top" secondItem="Dcg-vH-HTZ" secondAttribute="bottom" constant="5" id="zR0-nt-nim"/>
                                     </constraints>
@@ -1866,6 +1876,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="1500"/>
                     <connections>
+                        <outlet property="oneMsgOrderStatus" destination="q9U-Ka-0mf" id="4bL-EQ-7b5"/>
                         <outlet property="orderIcon" destination="7VE-t2-Lmx" id="r7T-i2-oLo"/>
                         <outlet property="orderStatus" destination="U4q-JY-PiG" id="gN6-bw-huw"/>
                         <outlet property="orderStatusIcon" destination="U8y-sP-EA3" id="YvN-ga-VSu"/>
@@ -1878,7 +1889,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="13x-iH-Cb0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2260" y="366"/>
+            <point key="canvasLocation" x="2260" y="365.21739130434787"/>
         </scene>
         <!--Daletou ProVC-->
         <scene sceneID="ja0-ax-k6l">

@@ -37,6 +37,8 @@ struct DLTOrderDetailModel: HandyJSON  {
     var userSurplus: String!
     var userSurplusLimit: String!
     var winningMoney : String = ""
+    /// 状态描述
+    var processStatusDesc : String = ""
 }
 
 struct DLTOrderResult : HandyJSON {

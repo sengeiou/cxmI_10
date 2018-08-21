@@ -26,6 +26,8 @@ class CXMMDaletouOrderVC: BaseViewController {
     @IBOutlet weak var orderStatus: UILabel!
     @IBOutlet weak var orderStatusIcon: UIImageView!
     
+    @IBOutlet weak var oneMsgOrderStatus: UILabel!
+    
     @IBOutlet weak var winningTitle: UILabel!
     @IBOutlet weak var winningAmount: UILabel!
     
@@ -181,18 +183,27 @@ extension CXMMDaletouOrderVC {
         payMoney.attributedText = moneyAtt
         
         switch orderModel.orderStatus {
+        case "2":
+            winningTitle.text = ""
+            winningAmount.text = ""
+            orderStatusIcon.image = nil
+            oneMsgOrderStatus.text = orderModel.processStatusDesc
         case "4": // 未中奖
             winningTitle.text = ""
             winningAmount.text = ""
+            oneMsgOrderStatus.text = orderModel.processStatusDesc
             orderStatusIcon.image = UIImage(named: "NoPrize")
-        case "5": // 已中奖
+        case "5", "6" , "7": // 已中奖
+            oneMsgOrderStatus.text = ""
             winningTitle.text = "中奖金额"
             winningAmount.text = "¥ " + orderModel.winningMoney
             orderStatusIcon.image = UIImage(named: "Prize")
+        
         default:
             winningTitle.text = ""
             winningAmount.text = ""
             orderStatusIcon.image = nil
+            oneMsgOrderStatus.text = ""
             break
         }
         
