@@ -24,11 +24,11 @@ class CXMPurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableVie
         let recordInfo = recordList[indexPath.section]
         
         switch recordInfo.lotteryClassifyId {
-        case "1":
+        case "1": // 竟足
             let order = CXMOrderDetailVC()
             order.orderId = recordInfo.orderId
             pushViewController(vc: order)
-        case "2":
+        case "2": // 大乐透
             let story = UIStoryboard(name: "Daletou", bundle: nil)
             let vc = story.instantiateViewController(withIdentifier: "DaletouOrderVC") as! CXMMDaletouOrderVC
             vc.orderId = recordInfo.orderId
