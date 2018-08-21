@@ -78,15 +78,27 @@ extension CXMMDaletouProVC : UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard schemeModel != nil else { return 0 }
-        
-        return schemeModel.lottoTicketSchemeDetailDTOs != nil ? schemeModel.lottoTicketSchemeDetailDTOs.count : 0
+        guard schemeModel.lottoTicketSchemeDetailDTOs != nil else { return 0 }
+        guard schemeModel.lottoTicketSchemeDetailDTOs.isEmpty == false else { return 1 }
+        return schemeModel.lottoTicketSchemeDetailDTOs.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if schemeModel.lottoTicketSchemeDetailDTOs.count == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "DLTProDefaultCell", for: indexPath) as! DLTProDefaultCell
+            return cell
+        }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "DLTProTableViewCell", for: indexPath) as! DLTProTableViewCell
         cell.configure(with: self.schemeModel.lottoTicketSchemeDetailDTOs[indexPath.row])
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if schemeModel.lottoTicketSchemeDetailDTOs.count == 0 {
+            return 60
+        }
+        
         let model = schemeModel.lottoTicketSchemeDetailDTOs[indexPath.row]
         
         var listCount = 0

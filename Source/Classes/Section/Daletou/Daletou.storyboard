@@ -2061,6 +2061,43 @@
                                             <outlet property="stateLabel" destination="Pyw-aa-jMa" id="eih-kq-fTU"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DLTProDefaultCell" rowHeight="60" id="5nf-rK-8k2" customClass="DLTProDefaultCell" customModule="彩小蜜" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="314" width="375" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5nf-rK-8k2" id="4Xi-sh-2H9">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="出票中" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fvM-hB-Szi">
+                                                    <rect key="frame" x="279" y="14.5" width="80" height="30.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="80" id="OmD-5C-XGV"/>
+                                                        <constraint firstAttribute="height" constant="30" id="bN7-8m-HHN"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" red="0.91764705879999997" green="0.33333333329999998" blue="0.015686274510000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WaQ-Xv-lfy">
+                                                    <rect key="frame" x="36" y="29" width="15" height="1"/>
+                                                    <color key="backgroundColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="15" id="Vn6-6Y-px9"/>
+                                                        <constraint firstAttribute="height" constant="1" id="aWP-Kq-sbx"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="WaQ-Xv-lfy" firstAttribute="leading" secondItem="4Xi-sh-2H9" secondAttribute="leading" constant="36" id="SEQ-9g-Xs9"/>
+                                                <constraint firstItem="WaQ-Xv-lfy" firstAttribute="centerY" secondItem="4Xi-sh-2H9" secondAttribute="centerY" id="XQg-Pz-y1e"/>
+                                                <constraint firstAttribute="trailing" secondItem="fvM-hB-Szi" secondAttribute="trailing" constant="16" id="dB0-8n-9Ug"/>
+                                                <constraint firstItem="fvM-hB-Szi" firstAttribute="centerY" secondItem="4Xi-sh-2H9" secondAttribute="centerY" id="otL-9i-EqH"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="stateLabel" destination="fvM-hB-Szi" id="H54-kt-BgC"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="9n2-5M-Inf" id="OH0-ZC-Svt"/>

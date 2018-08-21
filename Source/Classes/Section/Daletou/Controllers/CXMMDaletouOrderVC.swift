@@ -187,7 +187,7 @@ extension CXMMDaletouOrderVC {
             orderStatusIcon.image = UIImage(named: "NoPrize")
         case "5": // 已中奖
             winningTitle.text = "中奖金额"
-            winningAmount.text = orderModel.orderStatusDesc
+            winningAmount.text = "¥ " + orderModel.winningMoney
             orderStatusIcon.image = UIImage(named: "Prize")
         default:
             winningTitle.text = ""

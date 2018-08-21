@@ -58,7 +58,7 @@ extension DLTProTableViewCell {
         case "0":
             stateLabel.text = "待出票"
         case "1":
-            stateLabel.text = "已出票"
+            stateLabel.text = "出票成功"
         case "2":
             stateLabel.text = "出票失败"
         case "3":

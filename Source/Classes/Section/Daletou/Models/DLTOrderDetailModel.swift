@@ -36,6 +36,7 @@ struct DLTOrderDetailModel: HandyJSON  {
     var ticketTime: String = ""
     var userSurplus: String!
     var userSurplusLimit: String!
+    var winningMoney : String = ""
 }
 
 struct DLTOrderResult : HandyJSON {
