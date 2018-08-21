@@ -245,6 +245,9 @@ extension CXMPaymentViewController {
     private func pushOrderDetailVC() {
         guard self.palyId != nil else { return }
         guard self.paymentResult != nil else { return }
+        
+        NotificationCenter.default.removeObserver(self)
+        
         switch self.palyId {
         case "0":
             let order = CXMOrderDetailVC()
@@ -252,7 +255,10 @@ extension CXMPaymentViewController {
             order.orderId = self.paymentResult.orderId
             self.pushViewController(vc: order)
         case "1":
-            break
+            let order = CXMOrderDetailVC()
+            order.backType = .root
+            order.orderId = self.paymentResult.orderId
+            self.pushViewController(vc: order)
         case "2":
             let story = UIStoryboard(name: "Daletou", bundle: nil)
             let order = story.instantiateViewController(withIdentifier: "DaletouOrderVC") as! CXMMDaletouOrderVC
