@@ -515,7 +515,8 @@ extension CXMMDaletouViewController : DaletouStandardRedCellDelegate,
                        selected: model.selected) else {
                         
             model.selected = false
-            insertRedData(model: model)
+            insertBlueData(model: model)
+                        
             return
         }
         

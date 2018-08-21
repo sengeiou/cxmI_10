@@ -33,6 +33,7 @@ class CXMMDaletouOrderVC: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "彩小秘 · 方案详情"
         setTableview()
         loadNewData()
         setDefaultData()
@@ -327,6 +328,7 @@ extension CXMMDaletouOrderVC : UITableViewDataSource {
                         listCount += 1
                     }
                     listCount += model.blueDanCathectics.count
+                    listCount += 1
                     listCount += model.blueTuoCathectics.count
                 default : break
                 }
@@ -338,9 +340,9 @@ extension CXMMDaletouOrderVC : UITableViewDataSource {
                 }else {
                     let num : Int = listCount % 10
                     if num == 0 {
-                        return CGFloat(40 + 40 * count)
+                        return CGFloat(40 + 44 * count)
                     }else {
-                        return CGFloat(40 + 40 * (count + 1))
+                        return CGFloat(40 + 44 * (count + 1))
                     }
                 }
             }
