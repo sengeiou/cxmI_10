@@ -326,6 +326,7 @@ extension CXMMDaletouConfirmVC : UITableViewDataSource {
                 listCount += 1
             }
             listCount += model.danBlueList.count
+            listCount += 1
             listCount += model.dragBlueList.count
         }
         
