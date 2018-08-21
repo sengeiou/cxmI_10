@@ -61,15 +61,15 @@ class CXMMSurpriseViewController: BaseViewController , UITableViewDelegate, UITa
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.tableView.snp.makeConstraints { (make) in
-            make.top.left.right.equalTo(0)
-            make.bottom.equalTo(-SafeAreaBottomHeight)
-        }
+        
     }
     
     private func initSubview() {
         self.view.addSubview(tableView)
-        
+        self.tableView.snp.makeConstraints { (make) in
+            make.top.left.right.equalTo(0)
+            make.bottom.equalTo(-SafeAreaBottomHeight)
+        }
     }
     
     //MARK: - 加载数据
@@ -144,6 +144,12 @@ class CXMMSurpriseViewController: BaseViewController , UITableViewDelegate, UITa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard self.collectList != nil else { return }
         
+        let articleId = self.collectList[indexPath.section].articleId
+        
+        if articleId == "" {
+            
+        }
+        
         let vc = LAJIViewController()
         
         pushViewController(vc: vc)
@@ -162,6 +168,7 @@ class CXMMSurpriseViewController: BaseViewController , UITableViewDelegate, UITa
         table.dataSource = self
         table.backgroundColor = ColorF4F4F4
         table.isEditing = false
+        table.tableFooterView = UIView()
         table.register(NewsNoPicCell.self, forCellReuseIdentifier: NewsNoPicCellId)
         table.register(NewsOnePicCell.self, forCellReuseIdentifier: NewsOnePicCellId)
         table.register(NewsThreePicCell.self, forCellReuseIdentifier: NewsThreePicCellId)
@@ -170,6 +177,7 @@ class CXMMSurpriseViewController: BaseViewController , UITableViewDelegate, UITa
     }()
     //MARK: - tableView dataSource
     func numberOfSections(in tableView: UITableView) -> Int {
+        guard collectList != nil else { return 0 }
         guard collectList.isEmpty == false else { return 0 }
         return collectList.count
     }
