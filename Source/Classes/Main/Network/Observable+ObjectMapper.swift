@@ -25,6 +25,7 @@ extension Observable where E == Response {
                     ************statusCode****************
                     
                     statusCode   :    \(response.statusCode)
+                    URL          :    \(response.request?.url)
                     
                     ************************************
                     """)
@@ -60,6 +61,7 @@ extension Observable where E == Response {
                     ************statusCode****************
                     
                     statusCode   :    \(response.statusCode)
+                    URL          :    \(response.request?.url)
                     
                     ************************************
                     """)

@@ -94,7 +94,7 @@ class CXMRegisterViewController: BaseViewController, UITableViewDelegate, UITabl
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "彩小秘 · 注册"
+        self.title = "注册"
         self.view.addSubview(tableView)
     }
     override func viewDidAppear(_ animated: Bool) {

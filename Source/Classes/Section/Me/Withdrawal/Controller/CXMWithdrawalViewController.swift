@@ -76,7 +76,7 @@ class CXMWithdrawalViewController: BaseViewController, ValidatePro, UITextFieldD
     //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "彩小秘 · 提现"
+        self.title = "提现"
         initSubview()
     }
     override func viewWillAppear(_ animated: Bool) {

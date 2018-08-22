@@ -13,11 +13,11 @@ class HomeFootballCell: UICollectionViewCell, RouterMatcher {
     public var playModel: HomePlayModel! {
         didSet{
             guard playModel != nil else { return }
-            if let url = URL(string: playModel.playClassifyImg) {
+            if let url = URL(string: playModel.lotteryImg) {
                 icon.kf.setImage(with: url)
             }
             
-            title.text = playModel.playClassifyName
+            title.text = playModel.lotteryName
             subTitle.text = playModel.subTitle
             
             let type = matcherHttp(urlStr: playModel.redirectUrl)

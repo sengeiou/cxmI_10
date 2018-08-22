@@ -37,7 +37,7 @@ class CXMLotteryViewController: BaseViewController, UITableViewDelegate, UITable
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "彩小秘 · 比分"
+        self.navigationItem.title = "比分"
         
         hideBackBut()
         initSubview()

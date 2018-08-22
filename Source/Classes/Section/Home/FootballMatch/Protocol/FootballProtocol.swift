@@ -38,49 +38,61 @@ extension FootballRequestPro where Self: CXMFootballMatchVC {
         }
     }
     
+    
+    
     private func request(type: String, leagueId: String) {
         self.showProgressHUD()
         weak var weakSelf = self
-        _ = homeProvider.rx.request(.matchList(playType: type, leagueId: leagueId))
-            .asObservable()
-            .mapObject(type: FootballMatchData.self)
-            .subscribe(onNext: { (data) in
-                
-                print(data)
-                weakSelf?.matchData = data
-                weakSelf?.matchList = data.playList
-            
-                NSLog("-----------解析结束-----------\(Date())")
-                if data.hotPlayList.count > 0 {
-                    let footb = FootballMatchModel()
-                    footb.playList = data.hotPlayList
-                    footb.title = "热门赛事"
-                    weakSelf?.matchList.insert(footb, at: 0)
-                }
-                self.topView.number = data.allMatchCount
-                self.dismissProgressHud()
-                DispatchQueue.main.async {
-                    weakSelf?.tableView.reloadData()
-                }
-            }, onError: { (error) in
-                self.dismissProgressHud()
-                guard let err = error as? HXError else { return }
-                switch err {
-                case .UnexpectedResult(let code, let msg):
-                    switch code {
-                    case 600:
-                        weakSelf?.removeUserData()
-                        weakSelf?.pushLoginVC(from: self)
-                    default : break
-                    }
+        if self.titleView != nil {
+            self.titleView.isUserInteractionEnabled = false
+        }
+        
+        DispatchQueue.global().async {
+            self.semaphoreSignal.wait()
+            _ = homeProvider.rx.request(.matchList(playType: type, leagueId: leagueId))
+                .asObservable()
+                .mapObject(type: FootballMatchData.self)
+                .subscribe(onNext: { (data) in
+                    self.titleView.isUserInteractionEnabled = true
+                    self.semaphoreSignal.signal()
+                    print(data)
+                    weakSelf?.matchData = data
+                    weakSelf?.matchList = data.playList
                     
-                    if 300000...310000 ~= code {
-                        print(code)
-                        self.showHUD(message: msg!)
+                    NSLog("-----------解析结束-----------\(Date())")
+                    if data.hotPlayList.count > 0 {
+                        let footb = FootballMatchModel()
+                        footb.playList = data.hotPlayList
+                        footb.title = "热门赛事"
+                        weakSelf?.matchList.insert(footb, at: 0)
                     }
-                default: break
-                }
-            }, onCompleted: nil , onDisposed: nil )
+                    self.topView.number = data.allMatchCount
+                    self.dismissProgressHud()
+                    DispatchQueue.main.async {
+                        weakSelf?.tableView.reloadData()
+                    }
+                }, onError: { (error) in
+                    self.dismissProgressHud()
+                    self.titleView.isUserInteractionEnabled = true
+                    self.semaphoreSignal.signal()
+                    guard let err = error as? HXError else { return }
+                    switch err {
+                    case .UnexpectedResult(let code, let msg):
+                        switch code {
+                        case 600:
+                            weakSelf?.removeUserData()
+                            weakSelf?.pushLoginVC(from: self)
+                        default : break
+                        }
+                        
+                        if 300000...310000 ~= code {
+                            print(code)
+                            self.showHUD(message: msg!)
+                        }
+                    default: break
+                    }
+                }, onCompleted: nil , onDisposed: nil )
+        }
     }
     
     func filterRequest() {

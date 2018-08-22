@@ -90,7 +90,7 @@ class CXMFootballMatchInfoVC: BaseViewController, UITableViewDelegate, LotteryPr
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "彩小秘 · 查看详情"
+        self.title = "查看详情"
         setEmpty(title: "暂无信息", self.tableView)
         initSubview()
         

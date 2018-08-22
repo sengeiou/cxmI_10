@@ -39,7 +39,7 @@ class CXMScoreListViewController: BaseViewController, LotterySectionHeaderDelega
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.navigationItem.title = "彩小秘 · 比赛"
+        //self.navigationItem.title = "比赛"
         setEmpty(title: "暂无比赛", self.tableView)
         self.addPanGestureRecognizer = false
         hideBackBut()

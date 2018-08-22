@@ -12,13 +12,13 @@ import SVProgressHUD
 let MaxSelectedNum = 15
 
 enum FootballMatchType: String {
-    case 胜平负 = "彩小秘 · 胜平负"
-    case 让球胜平负 = "彩小秘 · 让球胜平负"
-    case 总进球 = "彩小秘 · 总进球"
-    case 比分 = "彩小秘 · 比分"
-    case 半全场 = "彩小秘 · 半全场"
-    case 二选一 = "彩小秘 · 2选1"
-    case 混合过关 = "彩小秘 · 混合投注"
+    case 胜平负 = "胜平负"
+    case 让球胜平负 = "让球胜平负"
+    case 总进球 = "总进球"
+    case 比分 = "比分"
+    case 半全场 = "半全场"
+    case 二选一 = "2选1"
+    case 混合过关 = "混合投注"
     
     func getMatchType(type: String) -> FootballMatchType {
         var matchType : FootballMatchType = .胜平负
@@ -64,6 +64,7 @@ class CXMFootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDa
     public var matchType: FootballMatchType = .混合过关 {
         didSet{
             TongJi.log(.足彩彩种, label: matchType.rawValue, att: .彩种)
+            guard titleView != nil else { return }
             titleView.setTitle(matchType.rawValue, for: .normal)
         }
     }
@@ -82,6 +83,7 @@ class CXMFootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDa
             self.bottomView.number = selectPlayList.count
         }
     }
+    public let semaphoreSignal = DispatchSemaphore(value: 1)
     
     private var selectPlays : Set<FootballPlayListModel>! {
         didSet{
@@ -91,10 +93,13 @@ class CXMFootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDa
         }
     }
     private var menu : CXMMFootballMatchMenu = CXMMFootballMatchMenu()
-    private var titleView : UIButton!
+    public var titleView : UIButton!
+    public var titleIcon : UIImageView!
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
+        setNavigationTitleView()
+        setRightButtonItem()
         self.title = matchType.rawValue
         selectPlayList = [FootballPlayListModel]()
         selectPlays = Set<FootballPlayListModel>()
@@ -103,9 +108,9 @@ class CXMFootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDa
         menu.delegate = self
         footballRequest(leagueId: "")
         filterRequest()
-        setRightButtonItem()
         
-        setNavigationTitleView()
+        
+        
         limitNum = 1
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -720,7 +725,7 @@ class CXMFootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDa
     
     // MARK: - 混合 按钮 点击   delegate
     func didSelectedHunHeView(view: FootballHunheView, teamInfo: FootballPlayListModel, index: IndexPath) {
-        
+        guard self.matchList.isEmpty == false else { return }
         let cell = self.tableView.cellForRow(at: index) as! FootballHunheCell
         let matchModel = matchList[index.section]
         cell.playInfoModel = matchModel.playList[index.row]
@@ -813,20 +818,28 @@ extension CXMFootballMatchVC : CXMMFootballMatchMenuDelegate{
     private func setNavigationTitleView() {
         titleView = UIButton(type: .custom)
         
-        titleView.frame = CGRect(x: 0, y: 0, width: 175, height: 30)
+        titleView.frame = CGRect(x: 0, y: 0, width: 150, height: 30)
         titleView.titleLabel?.font = Font17
         titleView.setTitle(matchType.rawValue, for: .normal)
         titleView.setTitleColor(Color505050, for: .normal)
-        titleView.setImage(UIImage(named: "Down"), for: .normal)
+
         titleView.addTarget(self, action: #selector(titleViewClicked(_:)), for: .touchUpInside)
-        titleView.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 12)
-        titleView.imageEdgeInsets = UIEdgeInsets(top: 0, left: 163, bottom: 0, right: 0)
+
         self.navigationItem.titleView = titleView
+        titleIcon = UIImageView(image: UIImage(named: "Down"))
+        
+        titleView.addSubview(titleIcon)
+        
+        titleIcon.snp.makeConstraints { (make) in
+            make.width.height.equalTo(12)
+            make.right.equalTo(14)
+            make.centerY.equalTo(titleView.snp.centerY)
+        }
     }
     
     @objc private func titleViewClicked(_ sender: UIButton) {
         showMatchMenu()
-        titleView.setImage(UIImage(named: "Upon"), for: .normal)
+        titleIcon.image = UIImage(named: "Upon")
     }
     
     private func showMatchMenu() {
@@ -834,13 +847,29 @@ extension CXMFootballMatchVC : CXMMFootballMatchMenuDelegate{
         menu.show()
     }
     func didTipMenu(view: CXMMFootballMatchMenu, type: FootballMatchType) {
+        
+        titleIcon.image = UIImage(named: "Down")
+//        if matchData != nil {
+//            matchData = nil
+//        }
+//        if matchList != nil {
+//            matchList.removeAll()
+//        }
+        matchData = nil
+        matchList = nil
+        self.tableView.reloadData()
+        
         self.matchType = type
-        titleView.setImage(UIImage(named: "Down"), for: .normal)
+        
+        if selectPlays != nil {
+            selectPlays.removeAll()
+        }
+        
         footballRequest(leagueId: "")
         filterRequest()
     }
     func didCancel() {
-        titleView.setImage(UIImage(named: "Down"), for: .normal)
+        titleIcon.image = UIImage(named: "Down")
     }
     
 }

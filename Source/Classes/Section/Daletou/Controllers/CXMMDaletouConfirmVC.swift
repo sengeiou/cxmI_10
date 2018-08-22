@@ -71,7 +71,7 @@ class CXMMDaletouConfirmVC: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "彩小秘 · 投注确认"
+        self.title = "投注确认"
         self.bottomView.delegate = self
         self.tableView.reloadData()
         

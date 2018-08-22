@@ -27,7 +27,9 @@ class PurchaseRecordCell: UITableViewCell {
             detailLB.textColor = ColorA0A0A0
             
             switch recordInfo.orderStatus {
-            case "0": break
+            case "0":
+                stateBut.textColor = Color505050
+                stateIcon.image = UIImage(named: "jump")
             case "1":
                 stateBut.textColor = Color505050
                 stateIcon.image = UIImage(named: "jump")

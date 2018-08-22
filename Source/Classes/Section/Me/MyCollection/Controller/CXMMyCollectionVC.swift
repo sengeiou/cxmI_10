@@ -20,7 +20,7 @@ class CXMMyCollectionVC: BaseViewController, UITableViewDelegate, UITableViewDat
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "彩小秘 · 我的收藏"
+        self.title = "我的收藏"
         setRightButton()
         setEmpty(title: "暂无收藏内容", tableView)
         collectList = [NewsInfoModel]()

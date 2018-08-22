@@ -33,7 +33,7 @@ class CXMMeComplaintVC: BaseViewController {
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "彩小秘 · 投诉建议"
+        self.title = "投诉建议"
         initSubview()
     }
     override func viewDidAppear(_ animated: Bool) {

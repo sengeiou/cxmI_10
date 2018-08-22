@@ -85,7 +85,7 @@ class CXMVCodeLoginViewController: BaseViewController, UITextFieldDelegate, Vali
     //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "彩小秘 · 短信登录"
+        self.title = "短信登录"
         self.view.addSubview(tableView)
     }
     override func viewDidLayoutSubviews() {

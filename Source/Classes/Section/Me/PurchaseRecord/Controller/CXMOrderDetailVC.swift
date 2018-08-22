@@ -49,8 +49,8 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
         var homeData = HomePlayModel()
         homeData.lotteryId = orderInfo.lotteryClassifyId
         homeData.playClassifyId = orderInfo.lotteryPlayClassifyId
-        homeData.playClassifyImg = orderInfo.lotteryClassifyImg
-        homeData.playClassifyName = orderInfo.lotteryClassifyName
+        homeData.lotteryImg = orderInfo.lotteryClassifyImg
+        homeData.lotteryName = orderInfo.lotteryClassifyName
         homeData.playType = orderInfo.lotteryPlayClassifyId
         
         
@@ -78,7 +78,7 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "彩小秘 · 订单详情"
+        self.title = "订单详情"
         initSubview()
         
         //orderInfoRequest()

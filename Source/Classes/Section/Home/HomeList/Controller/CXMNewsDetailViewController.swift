@@ -45,7 +45,7 @@ class CXMNewsDetailViewController: BaseViewController, UITableViewDelegate, UITa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "彩小秘 · 资讯详情"
+        self.title = "资讯详情"
         newsDetailRequest()
         setRightItem()
         initSubview()

@@ -111,6 +111,7 @@ class FootballTotalView: UIView {
     }
     
     private func setSelected(but : UIButton, isSelected: Bool) {
+        guard teamInfo.matchPlays[0].matchCells.isEmpty == false else { return }
         if isSelected == true {
             but.backgroundColor = ColorEA5504
             setButTitle(but: but, isSelected: true)
@@ -119,10 +120,12 @@ class FootballTotalView: UIView {
             setButTitle(but: but, isSelected: false)
         }
          but.isSelected = isSelected
+        
         teamInfo.matchPlays[0].matchCells[but.tag].isSelected = isSelected
     }
     
     @objc private func buttonClicked(_ sender : UIButton) {
+        //guard teamInfo.matchPlays[0].matchCells.isEmpty == false else { return }
         sender.isSelected = !sender.isSelected
         
         setSelected(but: sender, isSelected: sender.isSelected)
@@ -143,6 +146,8 @@ class FootballTotalView: UIView {
     private func setButTitle(but : UIButton, isSelected: Bool) {
         if isSelected == true {
 
+            guard teamInfo.matchPlays[0].matchCells.isEmpty == false else { return }
+            
             let titleAtt = NSMutableAttributedString(string: teamInfo.matchPlays[0].matchCells[but.tag].cellName, attributes: [NSAttributedStringKey.foregroundColor: ColorFFFFFF])
 
             let att = NSAttributedString(string: teamInfo.matchPlays[0].matchCells[but.tag].cellOdds, attributes: [NSAttributedStringKey.foregroundColor: ColorFFFFFF])

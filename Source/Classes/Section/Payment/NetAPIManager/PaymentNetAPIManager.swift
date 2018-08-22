@@ -26,7 +26,7 @@ enum PaymentNetAPIManager {
     case allPayment
     
     /// 新支付
-    case paymentNew(payCode: String, payToken: String)
+    case paymentNew(payCode: String, payToken: String, weChat : Bool)
     /// 支付订单金额计算
     case payBefore(bonusId: String, payToken: String)
     
@@ -66,10 +66,10 @@ extension PaymentNetAPIManager : TargetType {
         case .payment(let payCode, let payToken):
             dic["payCode"] = payCode
             dic["payToken"] = payToken
-        case .paymentNew(let payCode, let payToken):
+        case .paymentNew(let payCode, let payToken, let weChart):
             dic["payCode"] = payCode
             dic["payToken"] = payToken
-            
+            dic["innerWechat"] = weChart
         case .paymentRecharge(let payCode, let totalAmount):
             dic["payCode"] = payCode
             dic["totalAmount"] = totalAmount

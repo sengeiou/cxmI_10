@@ -28,7 +28,7 @@ class CXMMeAboutViewController: BaseViewController, UITableViewDelegate, UITable
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "彩小秘 · 关于我们"
+        self.title = "关于我们"
         self.view.addSubview(tableView)
         
     }

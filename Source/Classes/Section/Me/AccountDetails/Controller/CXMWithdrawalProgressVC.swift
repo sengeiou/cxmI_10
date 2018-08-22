@@ -23,7 +23,7 @@ class CXMWithdrawalProgressVC: BaseViewController, UITableViewDelegate, UITableV
     //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "彩小秘 · 提现详情"
+        self.title = "提现详情"
         self.view.addSubview(tableView)
         progressRequest()
     }

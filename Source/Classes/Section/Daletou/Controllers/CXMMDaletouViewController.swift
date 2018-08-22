@@ -11,8 +11,8 @@ import RxSwift
 import AudioToolbox
 
 enum DaletouType : String {
-    case 标准选号 = "彩小秘 · 标准选号"
-    case 胆拖选号 = "彩小秘 · 胆拖选号"
+    case 标准选号 = "标准选号"
+    case 胆拖选号 = "胆拖选号"
 }
 
 protocol CXMMDaletouViewControllerDelegate {
@@ -79,6 +79,7 @@ class CXMMDaletouViewController: BaseViewController {
     private var displayStyle : DLTDisplayStyle = .defStyle
     private var menu : CXMMDaletouMenu = CXMMDaletouMenu()
     private var titleView : UIButton!
+    public var titleIcon : UIImageView!
     
     private var omissionModel : DaletouOmissionModel!
    
@@ -717,28 +718,37 @@ extension CXMMDaletouViewController : CXMMDaletouMenuDelegate {
     func didTipMenu(view: CXMMDaletouMenu, type: DaletouType) {
         
         self.type = type
-        titleView.setImage(UIImage(named: "Down"), for: .normal)
+        titleIcon.image = UIImage(named: "Down")
     }
     func didCancel() {
-        titleView.setImage(UIImage(named: "Down"), for: .normal)
+        titleIcon.image = UIImage(named: "Down")
     }
     private func setNavigationTitleView() {
         titleView = UIButton(type: .custom)
         
-        titleView.frame = CGRect(x: 0, y: 0, width: 175, height: 30)
+        titleView.frame = CGRect(x: 0, y: 0, width: 150, height: 30)
         titleView.titleLabel?.font = Font17
         titleView.setTitle(type.rawValue, for: .normal)
         titleView.setTitleColor(Color505050, for: .normal)
-        titleView.setImage(UIImage(named: "Down"), for: .normal)
+       
         titleView.addTarget(self, action: #selector(titleViewClicked(_:)), for: .touchUpInside)
-        titleView.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 12)
-        titleView.imageEdgeInsets = UIEdgeInsets(top: 0, left: 163, bottom: 0, right: 0)
+
         self.navigationItem.titleView = titleView
+        
+        titleIcon = UIImageView(image: UIImage(named: "Down"))
+        
+        titleView.addSubview(titleIcon)
+        
+        titleIcon.snp.makeConstraints { (make) in
+            make.width.height.equalTo(12)
+            make.right.equalTo(14)
+            make.centerY.equalTo(titleView.snp.centerY)
+        }
     }
     
     @objc private func titleViewClicked(_ sender: UIButton) {
         showMatchMenu()
-        titleView.setImage(UIImage(named: "Upon"), for: .normal)
+        titleIcon.image = UIImage(named: "Upon")
     }
     
     private func showMatchMenu() {
@@ -977,6 +987,9 @@ extension CXMMDaletouViewController : UITableViewDataSource {
         cell.delegate = self
         cell.configure(with: self.displayStyle)
         cell.configure(with: danRedList)
+        if self.omissionModel != nil {
+            cell.configure(model: self.omissionModel, display: self.displayStyle)
+        }
         return cell
     }
     private func initDragRedCell(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {

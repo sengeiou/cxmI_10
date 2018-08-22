@@ -117,7 +117,7 @@ class CXMFootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITabl
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "彩小秘 · 投注确认"
+        self.title = "投注确认"
         initSubview()
         setRightButtonItem()
         setEmpty(title: "暂无可选赛事", tableView)

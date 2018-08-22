@@ -58,7 +58,7 @@ class CXMPurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.title = "彩小秘 · 购彩记录"
+        //self.title = "购彩记录"
         self.view.addSubview(self.tableView)
         setEmpty(title: "暂无投注记录", tableView)
         addPanGestureRecognizer = false

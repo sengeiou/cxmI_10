@@ -10,11 +10,11 @@ import UIKit
 import XLPagerTabStrip
 
 enum PagerViewType: String {
-    case coupon = "彩小秘 · 我的卡券"
-    case purchaseRecord = "彩小秘 · 投注记录"
-    case message = "彩小秘 · 消息中心"
-    case accountDetails = "彩小秘 · 账户明细"
-    case trend = "彩小秘 · 走势图"
+    case coupon = "我的卡券"
+    case purchaseRecord = "投注记录"
+    case message = "消息中心"
+    case accountDetails = "账户明细"
+    case trend = "走势图"
 }
 
 class BasePagerViewController: ButtonBarPagerTabStripViewController {

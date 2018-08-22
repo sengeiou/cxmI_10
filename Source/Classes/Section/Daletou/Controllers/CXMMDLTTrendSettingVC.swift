@@ -107,7 +107,7 @@ class CXMMDLTTrendSettingVC: BasePopViewController {
         
         let titleLabel = getLabel()
         titleLabel.font = Font16
-        titleLabel.text = "彩小秘 · 走势图设置"
+        titleLabel.text = "走势图设置"
         titleLabel.textAlignment = .center
         
         let line = UIImageView()

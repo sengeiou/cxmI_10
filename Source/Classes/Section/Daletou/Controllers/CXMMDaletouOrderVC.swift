@@ -35,7 +35,7 @@ class CXMMDaletouOrderVC: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "彩小秘 · 方案详情"
+        self.navigationItem.title = "方案详情"
         setTableview()
         loadNewData()
         setDefaultData()

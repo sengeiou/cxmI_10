@@ -213,6 +213,7 @@ extension FootballOrderProtocol where Self: CXMFootballOrderConfirmVC {
         let requestModel = getRequestModel(betType: betType, times: times, bonusId: "")
         self.showProgressHUD()
         self.view.isUserInteractionEnabled = false
+        
         weak var weakSelf = self
         _ = homeProvider.rx.request(.getBetInfo(requestModel: requestModel))
             .asObservable()

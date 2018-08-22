@@ -34,7 +34,7 @@ class CXMUserInfoSettingVC: BaseViewController, UITableViewDelegate, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "彩小秘 · 个人信息"
+        self.title = "个人信息"
         self.view.addSubview(tableView)
         
         self.photoSelect = YHPhotoSelect(controller: self, delegate: self)

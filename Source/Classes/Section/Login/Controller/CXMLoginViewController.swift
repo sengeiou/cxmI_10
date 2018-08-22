@@ -90,7 +90,7 @@ class CXMLoginViewController: BaseViewController, UITextFieldDelegate, ValidateP
     //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "彩小秘 · 密码登录"
+        self.navigationItem.title = "密码登录"
         self.view.addSubview(tableView)
         
         //if getUserData() == nil {

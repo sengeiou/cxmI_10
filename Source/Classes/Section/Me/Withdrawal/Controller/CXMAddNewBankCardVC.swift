@@ -45,7 +45,7 @@ class CXMAddNewBankCardVC: BaseViewController, UITextFieldDelegate, ValidatePro 
     //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "彩小秘 · 添加银行卡"
+        self.title = "添加银行卡"
         realInfoRequest()
         initSubview()
     }

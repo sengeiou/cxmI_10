@@ -42,7 +42,7 @@ class CXMNewsMeViewController: BaseViewController, UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         hideBackBut()
-        self.navigationItem.title = "彩小秘 · 我的"
+        self.navigationItem.title = "我的"
         self.view.addSubview(tableView)
         
         self.photoSelect = YHPhotoSelect(controller: self, delegate: self)

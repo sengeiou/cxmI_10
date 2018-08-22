@@ -53,7 +53,7 @@ class CXMPaymentViewController: BaseViewController, UITableViewDelegate, UITable
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "彩小秘 · 支付订单"
+        self.title = "支付订单"
         WeixinCenter.share.payDelegate = self
         initSubview()
         orderRequest(bonusId: "")
@@ -378,7 +378,7 @@ extension CXMPaymentViewController {
         self.showProgressHUD()
         
         
-        _ = paymentProvider.rx.request(.paymentNew(payCode: paymentModel.payCode, payToken: self.lottoToken))
+        _ = paymentProvider.rx.request(.paymentNew(payCode: paymentModel.payCode, payToken: self.lottoToken, weChat : true))
             .asObservable()
             .mapObject(type: PaymentResultModel.self)
             .subscribe(onNext: { (data) in
@@ -483,12 +483,18 @@ extension CXMPaymentViewController {
         
         if let payUrl = self.paymentResult.payUrl {
             guard let url = URL(string: payUrl) else { return }
-            //根据iOS系统版本，分别处理
+            
+            
+//            let vc = CXMMPaymentWebView()
+//            vc.urlStr = payUrl
+//            pushViewController(vc: vc)
+//            return
+//            //根据iOS系统版本，分别处理
             if #available(iOS 10, *) {
                 UIApplication.shared.open(url, options: [:],
                                           completionHandler: {
                                             (success) in
-                                            
+
                 })
             } else {
                 UIApplication.shared.openURL(url)

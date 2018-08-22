@@ -449,6 +449,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="detailLabel" destination="7oG-9z-3RO" id="M71-TK-otK"/>
                                             <outlet property="redView" destination="e4A-La-5hz" id="Sml-rL-Ie7"/>
                                         </connections>
                                     </tableViewCell>

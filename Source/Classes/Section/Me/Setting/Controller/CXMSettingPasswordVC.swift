@@ -9,8 +9,8 @@
 import UIKit
 
 enum SettingType : String {
-    case 设置 = "彩小秘 · 设置登录密码"
-    case 修改 = "彩小秘 · 修改登录密码"
+    case 设置 = "设置登录密码"
+    case 修改 = "修改登录密码"
 }
 
 fileprivate let SettingPasswordCellId = "SettingPasswordCellId"

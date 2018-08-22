@@ -56,7 +56,7 @@ class CXMBankCardViewController: BaseViewController, UITableViewDelegate, UITabl
     //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "彩小秘 · 管理银行卡"
+        self.title = "管理银行卡"
         initSubview()
        
     }

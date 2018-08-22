@@ -27,7 +27,7 @@ struct HomeListModel : HandyJSON {
 
 struct HomeDataModel :  HandyJSON {
     var activity: HomeActivityModel!
-    var dlPlayClassifyDetailDTOs: [HomePlayModel]!
+    var lotteryClassifys: [HomePlayModel]! = [HomePlayModel]()
     var navBanners: [BannerModel]!
     var winningMsgs: [WinningMsgModel]!
 }
@@ -36,13 +36,15 @@ struct HomeDataModel :  HandyJSON {
 struct HomePlayModel:  HandyJSON {
     var lotteryId: String!
     var playClassifyId: String!
-    var playClassifyImg: String!
+    var lotteryImg: String = ""
     var playClassifyLabelId: String!
     var playClassifyLabelName: String!
-    var playClassifyName: String!
+    var lotteryName: String!
     var playType: String!
     var redirectUrl: String!
-    var subTitle : String!
+    var subTitle : String = ""
+    var status : String = ""
+    var statusReason : String = ""
 }
 
 /// 活动栏

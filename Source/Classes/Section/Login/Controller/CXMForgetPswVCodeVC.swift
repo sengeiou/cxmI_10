@@ -64,7 +64,7 @@ class CXMForgetPswVCodeVC: BaseViewController, UITextFieldDelegate, ValidatePro,
     //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "彩小秘 · 找回密码"
+        self.title = "找回密码"
         self.view.addSubview(tableView)
         guard countdownBut != nil else { return }
         countdownBut.isCounting = true

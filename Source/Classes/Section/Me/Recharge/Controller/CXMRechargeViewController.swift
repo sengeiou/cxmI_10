@@ -52,7 +52,7 @@ class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITabl
     //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "彩小秘 · 充值"
+        self.title = "充值"
         initSubview()
         
         userInfoRequest()
@@ -363,11 +363,16 @@ class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITabl
         
         if let payUrl = self.paymentResult.payUrl {
             guard let url = URL(string: payUrl) else { return }
-            //根据iOS系统版本，分别处理
+            
+//            let vc = CXMMPaymentWebView()
+//            vc.urlStr = payUrl
+//            pushViewController(vc: vc)
+            
+//            //根据iOS系统版本，分别处理
             if #available(iOS 10, *) {
                 UIApplication.shared.open(url, options: [:],
                                           completionHandler: { (success) in
-                  
+
                     if success {
                         self.showProgressHUD()
                     }

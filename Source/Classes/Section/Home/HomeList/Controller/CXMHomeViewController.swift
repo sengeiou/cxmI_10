@@ -36,7 +36,16 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
     func didSelectItem(playModel: HomePlayModel, index: Int) {
         
         guard playModel.redirectUrl != nil , playModel.redirectUrl != "" else { return }
-        pushRouterVC(urlStr: playModel.redirectUrl, from: self)
+        guard playModel.status != "" else { return }
+        switch playModel.status {
+        case "0":
+            pushRouterVC(urlStr: playModel.redirectUrl, from: self)
+        case "1":
+            showHUD(message: playModel.statusReason)
+        default:
+            break
+        }
+        
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -338,7 +347,7 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
     private func initSportLotteryCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: homeSportsCellIdentifier, for: indexPath) as! HomeSportLotteryCell
         if self.homeData != nil {
-            cell.playList = self.homeData.dlPlayClassifyDetailDTOs
+            cell.playList = self.homeData.lotteryClassifys
         }
         
         cell.delegate = self
@@ -405,7 +414,7 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
                 }
             case 2:
                 guard self.homeData != nil else { return 0 }
-                let count = self.homeData.dlPlayClassifyDetailDTOs.count
+                let count = self.homeData.lotteryClassifys.count
                 var verticalCount = count / HorizontalItemCount
                 
                 if count % HorizontalItemCount != 0 {

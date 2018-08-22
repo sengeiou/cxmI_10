@@ -40,7 +40,7 @@ class CXMAuthenticationVC: BaseViewController, UITextFieldDelegate, ValidatePro 
     //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "彩小秘 · 实名认证"
+        self.title = "实名认证"
         initSubView()
     }
     //MARK: - 点击事件
