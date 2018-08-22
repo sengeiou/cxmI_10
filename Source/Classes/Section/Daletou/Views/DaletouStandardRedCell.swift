@@ -31,6 +31,7 @@ class DaletouStandardRedCell: UITableViewCell {
 
     private func setSubview() {
         redView.delegate = self
+        self.detailLabel.text = ""
         //redView.configure(with: DaletouDataModel.getData(ballStyle: .red))
     }
     

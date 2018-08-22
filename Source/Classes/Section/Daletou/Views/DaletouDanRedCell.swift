@@ -41,6 +41,7 @@ class DaletouDanRedCell: UITableViewCell {
     }
     private func setSubview() {
         redView.delegate = self
+        self.detailLabel.text = ""
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
