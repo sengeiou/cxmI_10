@@ -23,7 +23,7 @@ class RechargeHeaderView: UIView {
     
     private func initSubview() {
         alertTitle = UILabel()
-        alertTitle.text = "小秘提示: 充值金额可购彩但不能提现，中奖奖金可提现"
+        alertTitle.text = "提示: 充值金额可购彩但不能提现，中奖奖金可提现"
         alertTitle.font = Font13
         alertTitle.textColor = ColorF7931E
         alertTitle.numberOfLines = 2
