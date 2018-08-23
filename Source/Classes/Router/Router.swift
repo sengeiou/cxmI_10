@@ -37,17 +37,23 @@ extension RouterPro {
         case .大乐透:
             pushDaletou(from: vc)
         case .竞彩篮球:
-            pushBasketball(from: vc)
+            pushLotto(urlStr: urlStr, from: vc)
+//            pushBasketball(from: vc)
         case .快3:
-            pushKuai3(from: vc)
+            pushLotto(urlStr: urlStr, from: vc)
+//            pushKuai3(from: vc)
         case .双色球:
-            pushShuangSeQiu(from: vc)
+            pushLotto(urlStr: urlStr, from: vc)
+//            pushShuangSeQiu(from: vc)
         case .北京单场:
-            pushBeijing(from: vc)
+            pushLotto(urlStr: urlStr, from: vc)
+//            pushBeijing(from: vc)
         case .广东11选5:
-            pushGuangdong(from: vc)
+            pushLotto(urlStr: urlStr, from: vc)
+//            pushGuangdong(from: vc)
         case .更多彩种:
-            pushMore(from: vc)
+            pushLotto(urlStr: urlStr, from: vc)
+//            pushMore(from: vc)
         case .咨询详情:
             guard let id = type.1?.id else { return }
             pushNewsDetail( articleId: id, from: vc )
@@ -57,6 +63,12 @@ extension RouterPro {
         default:
             break
         }
+    }
+    
+    private func pushLotto(urlStr: String, from vc : UIViewController ) {
+        let web = CXMActivityViewController()
+        web.urlStr = urlStr
+        pushViewController(web, from: vc)
     }
     
     private func pushNewsDetail(articleId: String, from vc : UIViewController) {
