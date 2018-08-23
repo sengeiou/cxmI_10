@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler {
+class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler, ShareProtocol {
 
     public var urlStr : String!
     
@@ -68,6 +68,13 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
         webConfiguration.allowsInlineMediaPlayback = true;//是否允许内联(YES)或使用本机全屏控制器(NO)，默认是NO。
         webConfiguration.mediaPlaybackAllowsAirPlay = true;
         
+        let userContent = WKUserContentController()
+        
+        userContent.add(self, name: "appNative")
+        
+        
+        
+        webConfiguration.userContentController = userContent
         
         webView = WKWebView(frame: CGRect.zero, configuration: webConfiguration)
         webView.navigationDelegate = self
@@ -88,9 +95,7 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
         webView.load(request)
     }
     
-    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        
-    }
+    
     
     private func initProgressView() {
         progressView = UIProgressView()
@@ -159,10 +164,7 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
         self.present(alert, animated: true, completion: nil)
     }
     
-//    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-//        
-//        decisionHandler(.allow)
-//    }
+
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
         if navigationAction.targetFrame == nil {
             let url = navigationAction.request.url
@@ -184,7 +186,9 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
     deinit {
         if self.webView != nil {
             self.webView.removeObserver(self, forKeyPath: "estimatedProgress")
+            self.webView.configuration.userContentController.removeAllUserScripts()
         }
+        
         NotificationCenter.default.removeObserver(self)
     }
     
@@ -192,7 +196,86 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+}
+
+extension BaseWebViewController {
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        guard message.name == "appNative" else { return }
+       
+        guard let dic = message.body as? [String : String] else { return }
+        
+        let methodName = dic["methodName"]
+        
+        switch methodName {
+        case "getToken":
+            evaluateToken()
+        case "pushPayment":
+            pushPaymentVC(dic: dic)
+        case "pushRechange":
+            pushRechange(dic: dic)
+        case "showTitle":
+            showJSTitle(dic: dic)
+        case "goShare":
+            share(dic: dic)
+        case "pushUrl":
+            pushRouter(dic: dic)
+        case "closeWeb":
+            goBack()
+        default:
+            break
+        }
+    }
     
-
-
+    private func evaluateToken() {
+        guard webView != nil else { return }
+        let model = JSDataModel()
+        let jsData = model.toJSONString()
+        webView.evaluateJavaScript("actionMessage('\(jsData!)')") { (data, error) in
+            
+        }
+    }
+    private func pushPaymentVC(dic : [String: String]) {
+        guard let payToken = dic["payToken"] else { return }
+        let vc = CXMPaymentViewController()
+        vc.lottoToken = payToken
+        pushViewController(vc: vc)
+    }
+    private func pushRechange(dic : [String: String]) {
+        let vc = CXMRechargeViewController()
+        
+        if let price = dic["price"] {
+            vc.rechargeAmounts = price
+        }
+        
+        if let disStr = dic["isDisabled"] {
+            if let disableInput = Bool(disStr) {
+                vc.disableInput = disableInput
+            }
+        }
+        
+        pushViewController(vc: vc)
+    }
+    private func showJSTitle(dic : [String: String]) {
+        guard let title = dic["title"] else { return }
+        self.navigationItem.title = title
+    }
+    private func share(dic : [String: String]) {
+        guard let urlStr = dic["url"] else { return }
+        
+        var shareContent = ShareContentModel()
+        shareContent.title = dic["title"]
+        shareContent.description = dic["description"]
+        shareContent.urlStr = urlStr
+        shareContent.sharePicUrl = dic["thumbUrl"]
+        
+        share(shareContent, from: self)
+        
+    }
+    private func pushRouter(dic : [String: String]) {
+        guard let urlStr = dic["url"] else { return }
+        pushRouterVC(urlStr: urlStr, from: self)
+    }
+    private func goBack() {
+        self.popViewController()
+    }
 }

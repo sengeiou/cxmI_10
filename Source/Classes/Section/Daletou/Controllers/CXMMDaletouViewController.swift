@@ -774,6 +774,7 @@ extension CXMMDaletouViewController {
             let soundID = SystemSoundID(kSystemSoundID_Vibrate)
             //振动
             AudioServicesPlaySystemSound(soundID)
+            
         case .胆拖选号:
             break
         }

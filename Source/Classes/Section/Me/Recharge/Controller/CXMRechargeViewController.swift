@@ -23,7 +23,16 @@ class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITabl
             
         }
     }
-    
+    public var disableInput : Bool! {
+        didSet{
+            guard disableInput != nil else { return }
+            if disableInput {
+                self.textfield.isUserInteractionEnabled = false
+            }else {
+                self.textfield.isUserInteractionEnabled = true
+            }
+        }
+    }
     private var maxTimes = QueryMaxTimes
     private var timeInterval : Double = 3
     //MARK: - 属性

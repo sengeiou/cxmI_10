@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class CXMActivityViewController: BaseWebViewController, ShareProtocol {
+class CXMActivityViewController: BaseWebViewController {
 
     
     
@@ -181,3 +181,4 @@ class CXMActivityViewController: BaseWebViewController, ShareProtocol {
     }
 
 }
+
