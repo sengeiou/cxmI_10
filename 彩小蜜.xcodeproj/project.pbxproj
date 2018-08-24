@@ -169,7 +169,7 @@
 		11AB2C1B21300BC40044FB1C /* SurpriseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AB2C1821300BC40044FB1C /* SurpriseModel.swift */; };
 		11AB2C1C21300BC40044FB1C /* SurpriseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AB2C1A21300BC40044FB1C /* SurpriseTableViewCell.swift */; };
 		11AB2C1F21300BD80044FB1C /* CXMMSurpriseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AB2C1D21300BD70044FB1C /* CXMMSurpriseViewController.swift */; };
-		11AB2C2021300BD80044FB1C /* LAJIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AB2C1E21300BD80044FB1C /* LAJIViewController.swift */; };
+		11AB2C222130119C0044FB1C /* Surprise.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11AB2C212130119C0044FB1C /* Surprise.storyboard */; };
 		11B179242090AFC50061226C /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11B179222090AFC40061226C /* Storyboard.storyboard */; };
 		11B1B96A20F3005800387430 /* FootballLineupInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B1B96920F3005800387430 /* FootballLineupInfoModel.swift */; };
 		11B1B96C20F30EA200387430 /* FootballLiveInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B1B96B20F30EA200387430 /* FootballLiveInfoModel.swift */; };
@@ -566,7 +566,7 @@
 		11AB2C1821300BC40044FB1C /* SurpriseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurpriseModel.swift; sourceTree = "<group>"; };
 		11AB2C1A21300BC40044FB1C /* SurpriseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurpriseTableViewCell.swift; sourceTree = "<group>"; };
 		11AB2C1D21300BD70044FB1C /* CXMMSurpriseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXMMSurpriseViewController.swift; sourceTree = "<group>"; };
-		11AB2C1E21300BD80044FB1C /* LAJIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LAJIViewController.swift; sourceTree = "<group>"; };
+		11AB2C212130119C0044FB1C /* Surprise.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Surprise.storyboard; sourceTree = "<group>"; };
 		11B179232090AFC40061226C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Storyboard.storyboard; sourceTree = "<group>"; };
 		11B1B96920F3005800387430 /* FootballLineupInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballLineupInfoModel.swift; sourceTree = "<group>"; };
 		11B1B96B20F30EA200387430 /* FootballLiveInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballLiveInfoModel.swift; sourceTree = "<group>"; };
@@ -1248,6 +1248,7 @@
 		11BD5CEA20B3BA3A00A3AE6A /* Surprise */ = {
 			isa = PBXGroup;
 			children = (
+				11AB2C212130119C0044FB1C /* Surprise.storyboard */,
 				11AB2C1721300BC40044FB1C /* Model */,
 				11AB2C1921300BC40044FB1C /* View */,
 				11BD5CEB20B3BA5200A3AE6A /* Controller */,
@@ -1260,7 +1261,6 @@
 			children = (
 				11BD5CEE20B3BA8000A3AE6A /* CXMSurpriseViewController.swift */,
 				11AB2C1D21300BD70044FB1C /* CXMMSurpriseViewController.swift */,
-				11AB2C1E21300BD80044FB1C /* LAJIViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2554,6 +2554,7 @@
 				E57375AD20468B8900148622 /* LaunchScreen.storyboard in Resources */,
 				E57375AA20468B8900148622 /* Assets.xcassets in Resources */,
 				11B179242090AFC50061226C /* Storyboard.storyboard in Resources */,
+				11AB2C222130119C0044FB1C /* Surprise.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2831,7 +2832,6 @@
 				116E458B2111B47E00418661 /* CXMMDaletouHistoryAward.swift in Sources */,
 				113DE73F211AE96900DE8026 /* DLTHistoryTrendCell.swift in Sources */,
 				113DE72A211A8E1300DE8026 /* DLTPrizeOrderCell.swift in Sources */,
-				11AB2C2021300BD80044FB1C /* LAJIViewController.swift in Sources */,
 				11551CF420E22D18002FE691 /* AccountDetailFilterModel.swift in Sources */,
 				E533BF012060DE600037D2D8 /* RechargeTitleCell.swift in Sources */,
 				E5D5A377206D034100FC865D /* CXMFootballMatchVC.swift in Sources */,

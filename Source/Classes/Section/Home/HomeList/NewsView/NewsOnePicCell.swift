@@ -40,7 +40,7 @@ class NewsOnePicCell: UITableViewCell {
     public var icon : UIImageView!
     private var bottomView: NewsBottomView!
     private var videoIcon : UIImageView!
-    private var bottomLine : UIView!
+    public var bottomLine : UIView!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

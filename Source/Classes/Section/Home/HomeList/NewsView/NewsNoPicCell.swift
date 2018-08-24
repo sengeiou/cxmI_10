@@ -25,7 +25,7 @@ class NewsNoPicCell: UITableViewCell {
     private var titleLb : UILabel!
     private var detailLb: UILabel!
     private var bottomView: NewsBottomView!
-    private var bottomLine : UIView!
+    public var bottomLine : UIView!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

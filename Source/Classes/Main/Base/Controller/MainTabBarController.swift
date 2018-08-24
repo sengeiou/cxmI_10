@@ -158,8 +158,8 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
         lotteryNav.tabBarItem.selectedImage = loSelImg
         
         // 发现
-        let surprise = CXMSurpriseViewController()
-        surprise.urlStr = SurpriseUrl
+        let surprise = CXMMSurpriseViewController()
+        
         let surpriseNav = UINavigationController(rootViewController: surprise)
         surpriseNav.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
         

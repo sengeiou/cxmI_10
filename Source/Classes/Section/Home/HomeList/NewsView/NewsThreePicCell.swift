@@ -35,7 +35,7 @@ class NewsThreePicCell: UITableViewCell {
     private var picOne : UIImageView!
     private var picTwo : UIImageView!
     private var picThree: UIImageView!
-    private var bottomLine : UIView!
+    public var bottomLine : UIView!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
