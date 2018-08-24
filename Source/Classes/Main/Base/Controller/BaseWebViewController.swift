@@ -221,6 +221,11 @@ extension BaseWebViewController {
             pushRouter(dic: dic)
         case "closeWeb":
             goBack()
+        case "login":
+            //pushLoginVC(from: self)
+            pushLoginVC(from: self, fromWeb: true)
+        case "register":
+            pushRegister()
         default:
             break
         }
@@ -275,6 +280,12 @@ extension BaseWebViewController {
         guard let urlStr = dic["url"] else { return }
         pushRouterVC(urlStr: urlStr, from: self)
     }
+    
+    private func pushRegister() {
+        let register = CXMRegisterViewController()
+        pushViewController(vc: register)
+    }
+    
     private func goBack() {
         self.popViewController()
     }
