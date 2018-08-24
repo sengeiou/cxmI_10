@@ -166,7 +166,6 @@
 		11A25C522080BF2000085C58 /* FootballHunheView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A25C512080BF2000085C58 /* FootballHunheView.swift */; };
 		11A25C542080C4B500085C58 /* TopTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A25C532080C4B500085C58 /* TopTitleView.swift */; };
 		11A555EC20805D96004641AA /* FootballTwoOneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A555EB20805D96004641AA /* FootballTwoOneView.swift */; };
-		11AB2C10212FF5DC0044FB1C /* csViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AB2C0F212FF5DC0044FB1C /* csViewController.swift */; };
 		11B179242090AFC50061226C /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11B179222090AFC40061226C /* Storyboard.storyboard */; };
 		11B1B96A20F3005800387430 /* FootballLineupInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B1B96920F3005800387430 /* FootballLineupInfoModel.swift */; };
 		11B1B96C20F30EA200387430 /* FootballLiveInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B1B96B20F30EA200387430 /* FootballLiveInfoModel.swift */; };
@@ -560,7 +559,6 @@
 		11A25C512080BF2000085C58 /* FootballHunheView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballHunheView.swift; sourceTree = "<group>"; };
 		11A25C532080C4B500085C58 /* TopTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTitleView.swift; sourceTree = "<group>"; };
 		11A555EB20805D96004641AA /* FootballTwoOneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballTwoOneView.swift; sourceTree = "<group>"; };
-		11AB2C0F212FF5DC0044FB1C /* csViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = csViewController.swift; sourceTree = "<group>"; };
 		11B179232090AFC40061226C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Storyboard.storyboard; sourceTree = "<group>"; };
 		11B1B96920F3005800387430 /* FootballLineupInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballLineupInfoModel.swift; sourceTree = "<group>"; };
 		11B1B96B20F30EA200387430 /* FootballLiveInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballLiveInfoModel.swift; sourceTree = "<group>"; };
@@ -1156,7 +1154,6 @@
 			isa = PBXGroup;
 			children = (
 				1158FC3E21104FD20004229D /* CXMMDaletouViewController.swift */,
-				11AB2C0F212FF5DC0044FB1C /* csViewController.swift */,
 				113BC9FE2112F4C100FCACBF /* CXMMDaletouConfirmVC.swift */,
 				113CD0B52119B4CD00F76DE0 /* CXMMDaletouOrderVC.swift */,
 				113DE733211AC64D00DE8026 /* CXMMDaletouProVC.swift */,
@@ -2782,7 +2779,6 @@
 				11647F0320EE00AB00B55897 /* FootballDetailEventCell.swift in Sources */,
 				E5B68AFD205A81A70038A5A2 /* Extension+Color.swift in Sources */,
 				11FEB964208DDC2100926951 /* AppKeyConstraint.swift in Sources */,
-				11AB2C10212FF5DC0044FB1C /* csViewController.swift in Sources */,
 				11227C162084D7C900680CCC /* FootballMatchInfoHeader.swift in Sources */,
 				E56CE80C206A21670090A1B5 /* CXMWithdrawalProgressVC.swift in Sources */,
 				E512A96D20480917003F14F4 /* HomeDataModel.swift in Sources */,
