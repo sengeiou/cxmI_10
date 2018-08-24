@@ -59,6 +59,7 @@ class CXMMDaletouViewController: BaseViewController {
             }
             
             self.tableView.reloadData()
+            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .none, animated: true)
         }
     }
     
@@ -121,8 +122,9 @@ class CXMMDaletouViewController: BaseViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.tableView.scrollsToTop = true
-        
+        //self.tableView.scrollsToTop = true
+       // self.tableView.reloadData()
+       // self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .none, animated: true)
     }
     
     private func setDefaultData() {
