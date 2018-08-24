@@ -1,6 +1,0 @@
-framework module Pods____Tests {
-  umbrella header "Pods-彩小蜜Tests-umbrella.h"
-
-  export *
-  module * { export * }
-}
