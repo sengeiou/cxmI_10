@@ -23,14 +23,9 @@ class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITabl
             
         }
     }
-    public var disableInput : Bool! {
+    public var disableInput : String! {
         didSet{
-            guard disableInput != nil else { return }
-            if disableInput {
-                self.textfield.isUserInteractionEnabled = false
-            }else {
-                self.textfield.isUserInteractionEnabled = true
-            }
+            
         }
     }
     private var maxTimes = QueryMaxTimes
@@ -222,6 +217,17 @@ class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITabl
         }
     }
     
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        guard disableInput != nil else { return true }
+        if disableInput == "1" {
+            //self.textfield.isUserInteractionEnabled = false
+            return false
+        }else {
+            //self.textfield.isUserInteractionEnabled = true
+            return true
+        }
+        
+    }
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == self.textfield {
             TongJi.log(.充值输入金额, label: "充值输入金额")

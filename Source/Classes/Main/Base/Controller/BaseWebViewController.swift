@@ -248,9 +248,9 @@ extension BaseWebViewController {
         }
         
         if let disStr = dic["isDisabled"] {
-            if let disableInput = Bool(disStr) {
-                vc.disableInput = disableInput
-            }
+            
+            vc.disableInput = disStr
+          
         }
         
         pushViewController(vc: vc)

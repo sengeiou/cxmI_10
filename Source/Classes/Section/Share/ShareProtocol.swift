@@ -26,7 +26,8 @@ extension ShareProtocol {
         
         contentModel.urlStr = content.urlStr + "&frz=\(turn)"
         
-        if contentModel.sharePicUrl == nil {
+        if contentModel.sharePicUrl == nil ||
+            contentModel.sharePicUrl == "" {
             if contentModel.sharePic == nil {
                 contentModel.sharePic = UIImage(named: "fenxiangtubiao")
             }
