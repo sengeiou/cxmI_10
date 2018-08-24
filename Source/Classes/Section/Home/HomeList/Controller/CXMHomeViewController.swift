@@ -39,7 +39,8 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
         guard playModel.status != "" else { return }
         switch playModel.status {
         case "0":
-            pushRouterVC(urlStr: playModel.redirectUrl, from: self)
+            let url =  "http://192.168.31.205:8080?cxmxc=scm&type=1"
+            pushRouterVC(urlStr: url, from: self)
         case "1":
             showHUD(message: playModel.statusReason)
         default:
