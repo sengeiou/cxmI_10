@@ -213,7 +213,7 @@ class CXMMeViewController: BaseViewController, UITableViewDelegate, UITableViewD
         case .投注记录:
             let  vc = CXMActivityViewController()
             
-            vc.urlStr = "https://www.baidu.com"
+            vc.urlStr = OrderRecord
             
             pushViewController(vc: vc)
             
