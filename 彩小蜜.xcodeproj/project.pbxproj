@@ -167,6 +167,7 @@
 		11A25C542080C4B500085C58 /* TopTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A25C532080C4B500085C58 /* TopTitleView.swift */; };
 		11A555EC20805D96004641AA /* FootballTwoOneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A555EB20805D96004641AA /* FootballTwoOneView.swift */; };
 		11AB2C14212FF80B0044FB1C /* fdsaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AB2C13212FF80B0044FB1C /* fdsaViewController.swift */; };
+		11AB2C16212FFDDE0044FB1C /* CXMMSurpriseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AB2C15212FFDDE0044FB1C /* CXMMSurpriseVC.swift */; };
 		11B179242090AFC50061226C /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11B179222090AFC40061226C /* Storyboard.storyboard */; };
 		11B1B96A20F3005800387430 /* FootballLineupInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B1B96920F3005800387430 /* FootballLineupInfoModel.swift */; };
 		11B1B96C20F30EA200387430 /* FootballLiveInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B1B96B20F30EA200387430 /* FootballLiveInfoModel.swift */; };
@@ -561,6 +562,7 @@
 		11A25C532080C4B500085C58 /* TopTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTitleView.swift; sourceTree = "<group>"; };
 		11A555EB20805D96004641AA /* FootballTwoOneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballTwoOneView.swift; sourceTree = "<group>"; };
 		11AB2C13212FF80B0044FB1C /* fdsaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fdsaViewController.swift; sourceTree = "<group>"; };
+		11AB2C15212FFDDE0044FB1C /* CXMMSurpriseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMMSurpriseVC.swift; sourceTree = "<group>"; };
 		11B179232090AFC40061226C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Storyboard.storyboard; sourceTree = "<group>"; };
 		11B1B96920F3005800387430 /* FootballLineupInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballLineupInfoModel.swift; sourceTree = "<group>"; };
 		11B1B96B20F30EA200387430 /* FootballLiveInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballLiveInfoModel.swift; sourceTree = "<group>"; };
@@ -1238,6 +1240,7 @@
 			isa = PBXGroup;
 			children = (
 				11BD5CEE20B3BA8000A3AE6A /* CXMSurpriseViewController.swift */,
+				11AB2C15212FFDDE0044FB1C /* CXMMSurpriseVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2898,6 +2901,7 @@
 				11E969EA20C7E01700EAB733 /* Extension+UIImage.swift in Sources */,
 				E5973E33204FC1D9006461CE /* MeFooterView.swift in Sources */,
 				11436EF420B6BF9600127247 /* ShareProtocol.swift in Sources */,
+				11AB2C16212FFDDE0044FB1C /* CXMMSurpriseVC.swift in Sources */,
 				112E9D4A21227575008466B4 /* CXMMDLTTrendSettingVC.swift in Sources */,
 				116EB32020C50FC500EE80E5 /* WorldCupOrderRuleCell.swift in Sources */,
 				11B1B96A20F3005800387430 /* FootballLineupInfoModel.swift in Sources */,
