@@ -222,7 +222,7 @@ extension BaseWebViewController {
         case "closeWeb":
             goBack()
         case "login":
-            //pushLoginVC(from: self)//
+            //pushLoginVC(from: self)////
             pushLoginVC(from: self, fromWeb: true)
         case "register":
             pushRegister()
