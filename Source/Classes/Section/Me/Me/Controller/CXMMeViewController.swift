@@ -211,8 +211,15 @@ class CXMMeViewController: BaseViewController, UITableViewDelegate, UITableViewD
     private func pushMeViewController (_ model: MeListDataModel) {
         switch model.pushType {
         case .投注记录:
-            pushPagerView(pagerType: .purchaseRecord)
-            TongJi.log(.投注记录, label: "投注记录")
+            let  vc = CXMActivityViewController()
+            
+            vc.urlStr = "https://www.baidu.com"
+            
+            pushViewController(vc: vc)
+            
+            
+//            pushPagerView(pagerType: .purchaseRecord)
+//            TongJi.log(.投注记录, label: "投注记录")
         case .账户明细:
             pushPagerView(pagerType: .accountDetails)
             TongJi.log(.账户明细, label: "账户明细")
