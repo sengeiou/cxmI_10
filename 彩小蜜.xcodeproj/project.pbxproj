@@ -166,7 +166,10 @@
 		11A25C522080BF2000085C58 /* FootballHunheView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A25C512080BF2000085C58 /* FootballHunheView.swift */; };
 		11A25C542080C4B500085C58 /* TopTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A25C532080C4B500085C58 /* TopTitleView.swift */; };
 		11A555EC20805D96004641AA /* FootballTwoOneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A555EB20805D96004641AA /* FootballTwoOneView.swift */; };
-		11AB2C16212FFDDE0044FB1C /* CXMMSurpriseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AB2C15212FFDDE0044FB1C /* CXMMSurpriseVC.swift */; };
+		11AB2C1B21300BC40044FB1C /* SurpriseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AB2C1821300BC40044FB1C /* SurpriseModel.swift */; };
+		11AB2C1C21300BC40044FB1C /* SurpriseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AB2C1A21300BC40044FB1C /* SurpriseTableViewCell.swift */; };
+		11AB2C1F21300BD80044FB1C /* CXMMSurpriseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AB2C1D21300BD70044FB1C /* CXMMSurpriseViewController.swift */; };
+		11AB2C2021300BD80044FB1C /* LAJIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AB2C1E21300BD80044FB1C /* LAJIViewController.swift */; };
 		11B179242090AFC50061226C /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11B179222090AFC40061226C /* Storyboard.storyboard */; };
 		11B1B96A20F3005800387430 /* FootballLineupInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B1B96920F3005800387430 /* FootballLineupInfoModel.swift */; };
 		11B1B96C20F30EA200387430 /* FootballLiveInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B1B96B20F30EA200387430 /* FootballLiveInfoModel.swift */; };
@@ -560,7 +563,10 @@
 		11A25C512080BF2000085C58 /* FootballHunheView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballHunheView.swift; sourceTree = "<group>"; };
 		11A25C532080C4B500085C58 /* TopTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTitleView.swift; sourceTree = "<group>"; };
 		11A555EB20805D96004641AA /* FootballTwoOneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballTwoOneView.swift; sourceTree = "<group>"; };
-		11AB2C15212FFDDE0044FB1C /* CXMMSurpriseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMMSurpriseVC.swift; sourceTree = "<group>"; };
+		11AB2C1821300BC40044FB1C /* SurpriseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurpriseModel.swift; sourceTree = "<group>"; };
+		11AB2C1A21300BC40044FB1C /* SurpriseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurpriseTableViewCell.swift; sourceTree = "<group>"; };
+		11AB2C1D21300BD70044FB1C /* CXMMSurpriseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXMMSurpriseViewController.swift; sourceTree = "<group>"; };
+		11AB2C1E21300BD80044FB1C /* LAJIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LAJIViewController.swift; sourceTree = "<group>"; };
 		11B179232090AFC40061226C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Storyboard.storyboard; sourceTree = "<group>"; };
 		11B1B96920F3005800387430 /* FootballLineupInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballLineupInfoModel.swift; sourceTree = "<group>"; };
 		11B1B96B20F30EA200387430 /* FootballLiveInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballLiveInfoModel.swift; sourceTree = "<group>"; };
@@ -1223,11 +1229,27 @@
 			path = TeamView;
 			sourceTree = "<group>";
 		};
+		11AB2C1721300BC40044FB1C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				11AB2C1821300BC40044FB1C /* SurpriseModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		11AB2C1921300BC40044FB1C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				11AB2C1A21300BC40044FB1C /* SurpriseTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		11BD5CEA20B3BA3A00A3AE6A /* Surprise */ = {
 			isa = PBXGroup;
 			children = (
-				11BD5CED20B3BA5800A3AE6A /* Model */,
-				11BD5CEC20B3BA5500A3AE6A /* View */,
+				11AB2C1721300BC40044FB1C /* Model */,
+				11AB2C1921300BC40044FB1C /* View */,
 				11BD5CEB20B3BA5200A3AE6A /* Controller */,
 			);
 			path = Surprise;
@@ -1237,23 +1259,10 @@
 			isa = PBXGroup;
 			children = (
 				11BD5CEE20B3BA8000A3AE6A /* CXMSurpriseViewController.swift */,
-				11AB2C15212FFDDE0044FB1C /* CXMMSurpriseVC.swift */,
+				11AB2C1D21300BD70044FB1C /* CXMMSurpriseViewController.swift */,
+				11AB2C1E21300BD80044FB1C /* LAJIViewController.swift */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		11BD5CEC20B3BA5500A3AE6A /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		11BD5CED20B3BA5800A3AE6A /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		11BDF4DB20F59FBE00AA94B2 /* Protocol */ = {
@@ -2822,6 +2831,7 @@
 				116E458B2111B47E00418661 /* CXMMDaletouHistoryAward.swift in Sources */,
 				113DE73F211AE96900DE8026 /* DLTHistoryTrendCell.swift in Sources */,
 				113DE72A211A8E1300DE8026 /* DLTPrizeOrderCell.swift in Sources */,
+				11AB2C2021300BD80044FB1C /* LAJIViewController.swift in Sources */,
 				11551CF420E22D18002FE691 /* AccountDetailFilterModel.swift in Sources */,
 				E533BF012060DE600037D2D8 /* RechargeTitleCell.swift in Sources */,
 				E5D5A377206D034100FC865D /* CXMFootballMatchVC.swift in Sources */,
@@ -2880,6 +2890,7 @@
 				11D9D9E62089D6A200F78FCF /* NewsDetailCell.swift in Sources */,
 				112E9D4D21228FE0008466B4 /* DLTHistoryTrendBottom.swift in Sources */,
 				1169180A207DBA8B00C8A287 /* PaymentResultModel.swift in Sources */,
+				11AB2C1F21300BD80044FB1C /* CXMMSurpriseViewController.swift in Sources */,
 				11E8FA6720BFEE5C0090BC6A /* SettingDataModel.swift in Sources */,
 				E56CE80E206A22240090A1B5 /* WithdrawalProgressCell.swift in Sources */,
 				E5973E20204E34A3006461CE /* FontConstraint.swift in Sources */,
@@ -2897,7 +2908,6 @@
 				11E969EA20C7E01700EAB733 /* Extension+UIImage.swift in Sources */,
 				E5973E33204FC1D9006461CE /* MeFooterView.swift in Sources */,
 				11436EF420B6BF9600127247 /* ShareProtocol.swift in Sources */,
-				11AB2C16212FFDDE0044FB1C /* CXMMSurpriseVC.swift in Sources */,
 				112E9D4A21227575008466B4 /* CXMMDLTTrendSettingVC.swift in Sources */,
 				116EB32020C50FC500EE80E5 /* WorldCupOrderRuleCell.swift in Sources */,
 				11B1B96A20F3005800387430 /* FootballLineupInfoModel.swift in Sources */,
@@ -2911,6 +2921,7 @@
 				116E0F2B209973BD009FE44E /* RouterMatcher.swift in Sources */,
 				E581F38C2063B446002AB9F7 /* CouponCell.swift in Sources */,
 				E536386B2068A99200457EB5 /* OrderInfoModel.swift in Sources */,
+				11AB2C1C21300BC40044FB1C /* SurpriseTableViewCell.swift in Sources */,
 				E51032482064A99700A0156C /* CouponListModel.swift in Sources */,
 				E512A96B2047EF67003F14F4 /* RequestPlugin.swift in Sources */,
 				113CD0B42119947F00F76DE0 /* CXMMDLTNetAPIManager.swift in Sources */,
@@ -3041,6 +3052,7 @@
 				E5A2644E205B742B00EE6491 /* CXMHomeViewController.swift in Sources */,
 				E58B57C7205676EC0025E2F1 /* LotteryNetAPIManager.swift in Sources */,
 				E56CE80A2069F4080090A1B5 /* AccountListModel.swift in Sources */,
+				11AB2C1B21300BC40044FB1C /* SurpriseModel.swift in Sources */,
 				11062B2320832B99001C1D14 /* LotterySectionHeader.swift in Sources */,
 				114491122085E1C8009F1D09 /* FootballIntegralCollectionCell.swift in Sources */,
 				E51F9A5A205A122000AB8A21 /* VcodeTextFieldCell.swift in Sources */,
