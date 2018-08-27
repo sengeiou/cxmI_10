@@ -10,6 +10,8 @@ import UIKit
 
 class NewsThreePicCell: UITableViewCell {
 
+    static let identifier = "NewsThreePicCellId"
+    
     // MARK: - 属性 public
     public var newsInfo : NewsInfoModel!{
         didSet{

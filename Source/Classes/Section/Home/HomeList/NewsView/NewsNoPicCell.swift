@@ -10,6 +10,8 @@ import UIKit
 
 class NewsNoPicCell: UITableViewCell {
 
+    static let identifier = "NewsNoPicCellId"
+    
     // MARK: - 属性 public
     public var newsInfo : NewsInfoModel!{
         didSet{

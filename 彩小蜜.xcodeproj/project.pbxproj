@@ -96,6 +96,7 @@
 		114D06C520B54E7A00443BCC /* CXMActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D06C420B54E7A00443BCC /* CXMActivityViewController.swift */; };
 		114D06C720B54F4600443BCC /* CXMWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D06C620B54F4500443BCC /* CXMWebViewController.swift */; };
 		114D06CD20B55BA600443BCC /* ClearCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D06CC20B55BA600443BCC /* ClearCache.swift */; };
+		114F0A332133995300E391E8 /* SurpriseCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114F0A322133995300E391E8 /* SurpriseCollectionCell.swift */; };
 		11528AA1208F3F67004CC8B4 /* MeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11528AA0208F3F67004CC8B4 /* MeView.swift */; };
 		11528AA3208F3F76004CC8B4 /* NewsMeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11528AA2208F3F76004CC8B4 /* NewsMeView.swift */; };
 		11551CF220E225C5002FE691 /* CXMAccountDetailsFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11551CF120E225C5002FE691 /* CXMAccountDetailsFilter.swift */; };
@@ -492,6 +493,7 @@
 		114D06C420B54E7A00443BCC /* CXMActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMActivityViewController.swift; sourceTree = "<group>"; };
 		114D06C620B54F4500443BCC /* CXMWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXMWebViewController.swift; sourceTree = "<group>"; };
 		114D06CC20B55BA600443BCC /* ClearCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearCache.swift; sourceTree = "<group>"; };
+		114F0A322133995300E391E8 /* SurpriseCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurpriseCollectionCell.swift; sourceTree = "<group>"; };
 		11528AA0208F3F67004CC8B4 /* MeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeView.swift; sourceTree = "<group>"; };
 		11528AA2208F3F76004CC8B4 /* NewsMeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsMeView.swift; sourceTree = "<group>"; };
 		11551CF120E225C5002FE691 /* CXMAccountDetailsFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMAccountDetailsFilter.swift; sourceTree = "<group>"; };
@@ -1241,6 +1243,7 @@
 			isa = PBXGroup;
 			children = (
 				11AB2C1A21300BC40044FB1C /* SurpriseTableViewCell.swift */,
+				114F0A322133995300E391E8 /* SurpriseCollectionCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2990,6 +2993,7 @@
 				E581F378206348EB002AB9F7 /* UserInfoManager.swift in Sources */,
 				E5D5A379206D191C00FC865D /* FootballTopView.swift in Sources */,
 				11754E09211D4B130061C5AB /* DLTHotColdCell.swift in Sources */,
+				114F0A332133995300E391E8 /* SurpriseCollectionCell.swift in Sources */,
 				114D06C520B54E7A00443BCC /* CXMActivityViewController.swift in Sources */,
 				114D06C720B54F4600443BCC /* CXMWebViewController.swift in Sources */,
 				116EB212207F332900B32ABD /* BottomView.swift in Sources */,

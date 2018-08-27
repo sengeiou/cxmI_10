@@ -13,6 +13,8 @@ fileprivate let PicWidth : CGFloat = (screenWidth - 12 * 2 - 5 * 2) / 3
 
 class NewsOnePicCell: UITableViewCell {
 
+    static let identifier = "NewsOnePicCellId"
+    
     // MARK: - 属性 public
     public var newsInfo : NewsInfoModel!{
         didSet{

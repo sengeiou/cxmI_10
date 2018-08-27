@@ -13,3 +13,7 @@ struct SurpriseModel: HandyJSON {
     var dlArticlePage: NewsListModel!
     var bigNewsList : [NewsInfoModel] = [NewsInfoModel]()
 }
+
+//struct  {
+//    <#fields#>
+//}
