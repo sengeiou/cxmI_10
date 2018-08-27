@@ -207,25 +207,29 @@ extension BaseWebViewController {
         let methodName = dic["methodName"]
         
         switch methodName {
-        case "getToken":
+        case "getToken":    // 获取用户Token
             evaluateToken()
-        case "pushPayment":
+        case "pushPayment": // 结算
             pushPaymentVC(dic: dic)
-        case "pushRechange":
+        case "pushRechange": //充值
             pushRechange(dic: dic)
-        case "showTitle":
+        case "showTitle": // 显示标题
             showJSTitle(dic: dic)
-        case "goShare":
+        case "goShare":  // 分享
             share(dic: dic)
-        case "pushUrl":
+        case "pushUrl":  // 跳转路由
             pushRouter(dic: dic)
-        case "closeWeb":
+        case "closeWeb": // 关闭H5 -返回上一页
             goBack()
-        case "login":
+        case "login":    // 登录
             //pushLoginVC(from: self)////
             pushLoginVC(from: self, fromWeb: true)
-        case "register":
+        case "register": // 注册
             pushRegister()
+        case "channel": // 渠道号
+            getChannel()
+        case "hideTitle": // 隐藏导航栏
+            hideNavigationTitle()
         default:
             break
         }
@@ -288,5 +292,13 @@ extension BaseWebViewController {
     
     private func goBack() {
         self.popViewController()
+    }
+    private func getChannel() {
+        webView.evaluateJavaScript("getChannel('\(Channel)')") { (data, error) in
+            
+        }
+    }
+    private func hideNavigationTitle() {
+        hideNavigationBar()
     }
 }

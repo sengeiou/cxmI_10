@@ -11,4 +11,5 @@ import HandyJSON
 
 struct JSDataModel : HandyJSON {
     var token : String = UserInfoManager().getToken()
+    var channel : String = Channel
 }
