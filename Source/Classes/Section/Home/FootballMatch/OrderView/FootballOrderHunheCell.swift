@@ -187,7 +187,7 @@ class FootballOrderHunheCell: UITableViewCell, DateProtocol {
         lab.font = Font14
         lab.textColor = Color787878
         lab.textAlignment = .center
-        lab.text = "截止23： 50"
+        //lab.text = "截止23： 50"
         return lab
     }
     // 删除

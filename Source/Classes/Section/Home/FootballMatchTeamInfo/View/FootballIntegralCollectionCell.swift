@@ -31,7 +31,7 @@ class FootballIntegralCollectionCell: UICollectionViewCell {
         title.font = Font12
         title.textColor = Color505050
         title.textAlignment = .center
-        title.text = "88"
+        //title.text = "88"
         
         self.contentView.addSubview(title)
     }

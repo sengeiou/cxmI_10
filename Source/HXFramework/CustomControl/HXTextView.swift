@@ -62,7 +62,7 @@ class HXTextView: UIView, UITextViewDelegate {
         numLB.font = Font12
         numLB.textColor = ColorC8C8C8
         numLB.textAlignment = .right
-        numLB.text = "SSS"
+        //numLB.text = "SSS"
         
         self.addSubview(textView)
         self.addSubview(numLB)

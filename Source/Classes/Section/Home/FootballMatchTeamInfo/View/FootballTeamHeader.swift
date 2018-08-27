@@ -209,7 +209,7 @@ class FootballTeamHeader: UIView, DateProtocol {
         titlelb = getLabel()
         titlelb.textAlignment = .left
         titlelb.font = Font11
-        titlelb.text = "001 德国杯 2月7日 01： 30"
+        //titlelb.text = "001 德国杯 2月7日 01： 30"
         
         homeName = getLabel()
         homeName.font = Font15

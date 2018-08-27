@@ -194,11 +194,11 @@ class FootballTeamView: UIView , AlertPro{
         
         homeName = initLabel()
         homeName.textColor = Color505050
-        homeName.text = "[5]沙尔克"
+        //homeName.text = "[5]沙尔克"
         
         homeOdds = initLabel()
         homeOdds.font = Font12
-        homeOdds.text = "主胜1.57"
+        //homeOdds.text = "主胜1.57"
         
         VSLB = initLabel()
         VSLB.textColor = Color787878
@@ -206,15 +206,15 @@ class FootballTeamView: UIView , AlertPro{
         
         drawOdds = initLabel()
         drawOdds.font = Font12
-        drawOdds.text = "平3.6"
+        //drawOdds.text = "平3.6"
         
         awayName = initLabel()
         awayName.textColor = Color505050
-        awayName.text = "[5]沙尔克"
+        //awayName.text = "[5]沙尔克"
         
         awayOdds = initLabel()
         awayOdds.font = Font12
-        awayOdds.text = "客胜1.88"
+        //awayOdds.text = "客胜1.88"
         
         self.addSubview(homeBut)
         self.addSubview(drawBut)
