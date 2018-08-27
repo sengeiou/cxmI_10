@@ -43,12 +43,12 @@ class RechargeTitleCell: UITableViewCell {
         self.selectionStyle = .none
         
         account = UILabel()
-        account.text = "当前账号: 114548655425365"
+        //account.text = "当前账号: 114548655425365"
         account.font = Font15
         account.textColor = Color505050
         
         balance = UILabel()
-        balance.text = "当前余额: 8888888元"
+        //balance.text = "当前余额: 8888888元"
         balance.font = Font15
         balance.textColor = Color505050
         

@@ -170,7 +170,7 @@ class FootballDetailEventCell: UITableViewCell {
         timeLabel.layer.masksToBounds = true
         timeLabel.layer.borderWidth = 2
         timeLabel.layer.borderColor = ColorF6AD41.cgColor
-        timeLabel.text = "40′"
+        //timeLabel.text = "40′"
         
         homeTeamMember = initLabel()
         homeTeamMember.font = Font13

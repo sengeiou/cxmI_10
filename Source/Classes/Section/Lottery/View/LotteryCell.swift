@@ -235,7 +235,7 @@ class LotteryCell: UITableViewCell {
         resultlb.font = Font12
         resultlb.textColor = Color787878
         resultlb.textAlignment = .left
-        resultlb.text = "半场 1：0  总比分1：2"
+        //resultlb.text = "半场 1：0  总比分1：2"
         
         resultLeftLabel = getLabel()
         resultLeftLabel.font = Font12
