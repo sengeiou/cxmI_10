@@ -10,25 +10,135 @@ import UIKit
 
 
 class CXMMSurpriseViewController: BaseViewController{
-    
-    
-    @IBOutlet weak var collectionView: UICollectionView!
+
+    public var showType: ShowType! = .onlyNews{
+        didSet{
+            guard showType != nil else { return }
+            if showType == .onlyNews {
+                
+            }else {
+                
+                
+            }
+            //self.tableView.reloadData()
+        }
+    }
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var headerView: UIView!
+   
+    private var surpriseModel : SurpriseModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "彩小秘 · 发现"
+        hideBackBut()
+        self.isHidenBar = false
+        initSubview()
+        //loadNewData()
         
+        tableView.headerRefresh {
+            self.loadNewData()
+        }
+        tableView.footerRefresh {
+            self.loadNextData()
+        }
+        tableView.beginRefreshing()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(configNotification(_:)), name: NSNotification.Name(rawValue: NotificationConfig), object: nil)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let turnOn = UserDefaults.standard.bool(forKey: TurnOn)
+        //turnOn = false
+        if turnOn && self.showType != .allShow{
+            showType = .allShow
+            //showType = .onlyNews
+        }else if turnOn == false && self.showType != .onlyNews {
+            showType = .onlyNews
+        }
+    }
     
+    private func initSubview() {
+        tableView.register(NewsNoPicCell.self, forCellReuseIdentifier: NewsNoPicCell.identifier)
+        tableView.register(NewsOnePicCell.self, forCellReuseIdentifier: NewsOnePicCell.identifier)
+        tableView.register(NewsThreePicCell.self, forCellReuseIdentifier: NewsThreePicCell.identifier)
+        
+        tableView.register(SurpriseHeaderView.self, forHeaderFooterViewReuseIdentifier: SurpriseHeaderView.identifier)
+    }
     
+    @objc private func configNotification(_ notification : Notification) {
+        guard let userinf = notification.userInfo else { return }
+        guard let turnOn = userinf["showStyle"] as? Bool else { return }
+        if turnOn && self.showType != .allShow{
+            showType = .allShow
+            //showType = .onlyNews
+        }else if turnOn == false && self.showType != .onlyNews {
+            showType = .onlyNews
+        }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 }
 
-extension CXMMSurpriseViewController : UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+// 网络请求
+extension CXMMSurpriseViewController {
+    private func loadNewData() {
+        prizeListRequest(pageNum: 1)
+    }
+    private func loadNextData() {
+        guard self.surpriseModel != nil else { return }
+        guard self.surpriseModel.dlArticlePage != nil else { return }
+        guard self.surpriseModel.dlArticlePage.isLastPage == false else {
+            self.tableView.noMoreData()
+            return
+        }
         
+        prizeListRequest(pageNum: self.surpriseModel.dlArticlePage.nextPage)
+    }
+    private func prizeListRequest(pageNum : Int) {
+        
+        weak var weakSelf = self
+        
+        _ = surpriseProvider.rx.request(.surpriseList(pageNum: pageNum))
+            .asObservable()
+            .mapObject(type: SurpriseModel.self)
+            .subscribe(onNext: { (data) in
+                weakSelf?.tableView.endrefresh()
+                
+                weakSelf?.surpriseModel = data
+                
+                weakSelf?.tableView.reloadData()
+                
+            }, onError: { (error) in
+                weakSelf?.tableView.endrefresh()
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        weakSelf?.pushLoginVC(from: self)
+                    default : break
+                    }
+                    if 300000...310000 ~= code {
+                        weakSelf?.showHUD(message: msg!)
+                    }
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil )
+    }
+}
+
+// MARK: - SurpriseCategoryCell  Delegate
+extension CXMMSurpriseViewController : SurpriseCategoryCellDelegate {
+    func didSelectItem(info: SurpriseItemInfo, indexPath: IndexPath) {
+        let story = UIStoryboard(name: "Surprise", bundle: nil)
+        let vc = story.instantiateViewController(withIdentifier: "PrizeListVC") as! CXMMPrizeListVC
+        
+        pushViewController(vc: vc   )
     }
 }
 
@@ -37,23 +147,23 @@ extension CXMMSurpriseViewController : UITableViewDelegate {
         
     }
 }
-extension CXMMSurpriseViewController : UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 8
-    }
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SurpriseCollectionCell", for: indexPath) as! SurpriseCollectionCell
-        
-        return cell
-    }
-}
+
 
 extension CXMMSurpriseViewController : UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        switch section {
+        case 0:
+            guard self.surpriseModel != nil else { return 0 }
+            return 1
+        default:
+            guard self.surpriseModel != nil else { return 0 }
+            guard self.surpriseModel.dlArticlePage != nil else { return 0 }
+            guard let list = self.surpriseModel.dlArticlePage.list else { return 0 }
+            return list.count
+        }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -67,7 +177,34 @@ extension CXMMSurpriseViewController : UITableViewDataSource {
 //            return initNewsNoPicCell(indexPath: indexPath)
 //        }
         
-        return initNewsOnePicCell(indexPath: indexPath)
+        switch indexPath.section {
+        case 0:
+            return initCategoryCell(indexPath: indexPath)
+            
+        default:
+            return initNewsOnePicCell(indexPath: indexPath)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        switch section {
+        case 0:
+            return nil
+        default:
+            let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: SurpriseHeaderView.identifier) as! SurpriseHeaderView
+            return header
+        }
+    }
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return nil
+    }
+    
+    private func initCategoryCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SurpriseCategoryCell", for: indexPath) as! SurpriseCategoryCell
+        cell.delegate = self
+        cell.configure(with: self.surpriseModel.discoveryHallClassifyList)
+        return cell
     }
     
     private func initNewsNoPicCell(indexPath: IndexPath) -> UITableViewCell {
@@ -99,21 +236,24 @@ extension CXMMSurpriseViewController : UITableViewDataSource {
 //        else {
 //            return 150 * defaultScale
 //        }
-        
-        return 110 * defaultScale
-        
-        
+        switch indexPath.section {
+        case 0:
+            return 300
+            
+        default:
+            return 110 * defaultScale
+        }
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 5
+        switch section {
+        case 0:
+            return 0.01
+        default:
+            return 34
+        }
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.01
     }
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return nil
-    }
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return nil
-    }
+    
 }

@@ -9,20 +9,28 @@
 import UIKit
 
 class SurpriseCollectionCell: UICollectionViewCell {
+    
+    static let width : CGFloat = 80
+    static let height : CGFloat = 100
+    
     @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var suTitle: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        icon.image = UIImage(named: "SuperLtto")
     }
     
     
 }
 
 extension SurpriseCollectionCell {
-    public func configure(with info : String) {
-        
+    public func configure(with info : SurpriseItemInfo) {
+        if let url = URL(string: info.classImg) {
+            icon.kf.setImage(with: url)
+        }
+        title.text = info.className
+        suTitle.text = info.subTitle
     }
 }
