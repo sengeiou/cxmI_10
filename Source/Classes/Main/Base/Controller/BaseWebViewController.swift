@@ -300,5 +300,9 @@ extension BaseWebViewController {
     }
     private func hideNavigationTitle() {
         hideNavigationBar()
+        self.webView.snp.remakeConstraints { (make) in
+            make.top.equalTo(SafeTopHeight)
+            make.left.right.bottom.equalTo(0)
+        }
     }
 }
