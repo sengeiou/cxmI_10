@@ -38,6 +38,8 @@
 		11353E9D2134EB2300C1D645 /* SurpriseMatchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11353E9C2134EB2300C1D645 /* SurpriseMatchItem.swift */; };
 		11353E9F2134EF3300C1D645 /* SurpriseShooterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11353E9E2134EF3300C1D645 /* SurpriseShooterCell.swift */; };
 		11353EA12134F06700C1D645 /* SurpriseShooterHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11353EA02134F06700C1D645 /* SurpriseShooterHeader.swift */; };
+		11353EA32134F65A00C1D645 /* SurpriseShooterHeaderItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11353EA22134F65A00C1D645 /* SurpriseShooterHeaderItem.swift */; };
+		11353EA62134FFCC00C1D645 /* SurpriseShooterHeaderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11353EA52134FFCC00C1D645 /* SurpriseShooterHeaderModel.swift */; };
 		1135CCF82117F3CA000ACD4B /* DLTProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1135CCF72117F3CA000ACD4B /* DLTProtocol.swift */; };
 		1138981C21103EF900E48B72 /* Daletou.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1138981B21103EF900E48B72 /* Daletou.storyboard */; };
 		113AAD7A2121330700FB86B8 /* DLTRedBlueTrendItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113AAD792121330700FB86B8 /* DLTRedBlueTrendItem.swift */; };
@@ -445,6 +447,8 @@
 		11353E9C2134EB2300C1D645 /* SurpriseMatchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurpriseMatchItem.swift; sourceTree = "<group>"; };
 		11353E9E2134EF3300C1D645 /* SurpriseShooterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurpriseShooterCell.swift; sourceTree = "<group>"; };
 		11353EA02134F06700C1D645 /* SurpriseShooterHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurpriseShooterHeader.swift; sourceTree = "<group>"; };
+		11353EA22134F65A00C1D645 /* SurpriseShooterHeaderItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurpriseShooterHeaderItem.swift; sourceTree = "<group>"; };
+		11353EA52134FFCC00C1D645 /* SurpriseShooterHeaderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurpriseShooterHeaderModel.swift; sourceTree = "<group>"; };
 		1135CCF72117F3CA000ACD4B /* DLTProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DLTProtocol.swift; sourceTree = "<group>"; };
 		1138981B21103EF900E48B72 /* Daletou.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Daletou.storyboard; sourceTree = "<group>"; };
 		113AAD792121330700FB86B8 /* DLTRedBlueTrendItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DLTRedBlueTrendItem.swift; sourceTree = "<group>"; };
@@ -943,6 +947,14 @@
 			path = WMMenuView;
 			sourceTree = "<group>";
 		};
+		11353EA42134FFA400C1D645 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				11353EA52134FFCC00C1D645 /* SurpriseShooterHeaderModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		113B9CC920871F5C006AE3F8 /* NewsView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1270,6 +1282,7 @@
 				11B0813A2133B49B004FCAE9 /* SurpriseCategoryCell.swift */,
 				11B081382133AEF6004FCAE9 /* SurpriseHeaderView.swift */,
 				11353EA02134F06700C1D645 /* SurpriseShooterHeader.swift */,
+				11353EA22134F65A00C1D645 /* SurpriseShooterHeaderItem.swift */,
 				11B081402133E26E004FCAE9 /* SurprisePrizeDigitalCell.swift */,
 				11B081442133E31F004FCAE9 /* SurprisePrizeDigitalItem.swift */,
 				11B081422133E2BA004FCAE9 /* SurprisePrizeMatchCell.swift */,
@@ -1283,6 +1296,7 @@
 				11AB2C212130119C0044FB1C /* Surprise.storyboard */,
 				11B081462133EE59004FCAE9 /* SurpriseNetAPIManager.swift */,
 				11AB2C1721300BC40044FB1C /* Model */,
+				11353EA42134FFA400C1D645 /* ViewModels */,
 				11AB2C1921300BC40044FB1C /* View */,
 				11BD5CEB20B3BA5200A3AE6A /* Controller */,
 			);
@@ -2851,6 +2865,7 @@
 				E51F9A64205A2A2D00AB8A21 /* ForgetPswVCodeFooterView.swift in Sources */,
 				116E0F292099739E009FE44E /* Router.swift in Sources */,
 				E55016F7207228220056AB1F /* FootballFilterCell.swift in Sources */,
+				11353EA62134FFCC00C1D645 /* SurpriseShooterHeaderModel.swift in Sources */,
 				E56CE814206A33310090A1B5 /* MessageCenterModel.swift in Sources */,
 				114491012085970A009F1D09 /* FootballOddsPagerView.swift in Sources */,
 				E56CE818206A47720090A1B5 /* AboutCell.swift in Sources */,
@@ -2988,6 +3003,7 @@
 				E567636E206B9D6D00E2D9A8 /* ProgressModel.swift in Sources */,
 				E5D8ABB4206737FF002D688B /* CXMOrderDetailVC.swift in Sources */,
 				1179BD8320C39A28000D4875 /* CXMActivityRechargeCouponVC.swift in Sources */,
+				11353EA32134F65A00C1D645 /* SurpriseShooterHeaderItem.swift in Sources */,
 				113AAD7C212140E700FB86B8 /* DLTRedBlueTopItem.swift in Sources */,
 				115B0CED20EF06A400848EC7 /* FootballDetailTeamInfoCell.swift in Sources */,
 				E56CE81C206A47930090A1B5 /* AboutFooter.swift in Sources */,

@@ -27,6 +27,7 @@ class CXMMSurpriseViewController: BaseViewController{
     @IBOutlet weak var tableView: UITableView!
    
     private var surpriseModel : SurpriseModel!
+    private var viewModel : ShooterHeaderViewModel = ShooterHeaderViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,11 +62,14 @@ class CXMMSurpriseViewController: BaseViewController{
     }
     
     private func initSubview() {
-        tableView.register(NewsNoPicCell.self, forCellReuseIdentifier: NewsNoPicCell.identifier)
-        tableView.register(NewsOnePicCell.self, forCellReuseIdentifier: NewsOnePicCell.identifier)
-        tableView.register(NewsThreePicCell.self, forCellReuseIdentifier: NewsThreePicCell.identifier)
+//        tableView.register(NewsNoPicCell.self, forCellReuseIdentifier: NewsNoPicCell.identifier)
+//        tableView.register(NewsOnePicCell.self, forCellReuseIdentifier: NewsOnePicCell.identifier)
+//        tableView.register(NewsThreePicCell.self, forCellReuseIdentifier: NewsThreePicCell.identifier)
         
-        tableView.register(SurpriseHeaderView.self, forHeaderFooterViewReuseIdentifier: SurpriseHeaderView.identifier)
+        tableView.register(SurpriseHeaderView.self,
+                           forHeaderFooterViewReuseIdentifier: SurpriseHeaderView.identifier)
+        tableView.register(SurpriseShooterHeader.self,
+                           forHeaderFooterViewReuseIdentifier: SurpriseShooterHeader.identifier)
     }
     
     @objc private func configNotification(_ notification : Notification) {
@@ -151,13 +155,17 @@ extension CXMMSurpriseViewController : UITableViewDelegate {
 
 extension CXMMSurpriseViewController : UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
             guard self.surpriseModel != nil else { return 0 }
             return 1
+        case 1:
+            return 1
+        case 2:
+            return 6
         default:
             guard self.surpriseModel != nil else { return 0 }
             guard self.surpriseModel.dlArticlePage != nil else { return 0 }
@@ -180,7 +188,10 @@ extension CXMMSurpriseViewController : UITableViewDataSource {
         switch indexPath.section {
         case 0:
             return initCategoryCell(indexPath: indexPath)
-            
+        case 1:
+            return initCategoryCell(indexPath: indexPath)
+        case 2:
+            return initShooterCell(indexPath: indexPath)
         default:
             return initNewsOnePicCell(indexPath: indexPath)
         }
@@ -191,9 +202,15 @@ extension CXMMSurpriseViewController : UITableViewDataSource {
         switch section {
         case 0:
             return nil
-        default:
+        case 1:
             let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: SurpriseHeaderView.identifier) as! SurpriseHeaderView
             return header
+        case 2:
+            let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: SurpriseShooterHeader.identifier) as! SurpriseShooterHeader
+            header.viewModel = self.viewModel
+            return header
+        default:
+            return nil
         }
     }
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -203,10 +220,13 @@ extension CXMMSurpriseViewController : UITableViewDataSource {
     private func initCategoryCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SurpriseCategoryCell", for: indexPath) as! SurpriseCategoryCell
         cell.delegate = self
-        cell.configure(with: self.surpriseModel.discoveryHallClassifyList)
+        //cell.configure(with: self.surpriseModel.discoveryHallClassifyList)
         return cell
     }
-    
+    private func initShooterCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SurpriseShooterCell", for: indexPath) as! SurpriseShooterCell
+        return cell
+    }
     private func initNewsNoPicCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NewsNoPicCell.identifier, for: indexPath) as! NewsNoPicCell
         
