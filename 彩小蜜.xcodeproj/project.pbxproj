@@ -34,6 +34,10 @@
 		112F77BD20EC7C8C005CA9E4 /* WMMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 112F77B520EC7C8C005CA9E4 /* WMMenuView.m */; };
 		112F77BE20EC7C8C005CA9E4 /* WMProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 112F77B620EC7C8C005CA9E4 /* WMProgressView.m */; };
 		112F77C020EC7D62005CA9E4 /* CXMScoreListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112F77BF20EC7D62005CA9E4 /* CXMScoreListViewController.swift */; };
+		11353E9B2134EA6300C1D645 /* SurpriseMatchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11353E9A2134EA6300C1D645 /* SurpriseMatchCell.swift */; };
+		11353E9D2134EB2300C1D645 /* SurpriseMatchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11353E9C2134EB2300C1D645 /* SurpriseMatchItem.swift */; };
+		11353E9F2134EF3300C1D645 /* SurpriseShooterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11353E9E2134EF3300C1D645 /* SurpriseShooterCell.swift */; };
+		11353EA12134F06700C1D645 /* SurpriseShooterHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11353EA02134F06700C1D645 /* SurpriseShooterHeader.swift */; };
 		1135CCF82117F3CA000ACD4B /* DLTProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1135CCF72117F3CA000ACD4B /* DLTProtocol.swift */; };
 		1138981C21103EF900E48B72 /* Daletou.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1138981B21103EF900E48B72 /* Daletou.storyboard */; };
 		113AAD7A2121330700FB86B8 /* DLTRedBlueTrendItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113AAD792121330700FB86B8 /* DLTRedBlueTrendItem.swift */; };
@@ -437,6 +441,10 @@
 		112F77B720EC7C8C005CA9E4 /* WMPageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMPageController.h; sourceTree = "<group>"; };
 		112F77B820EC7C8C005CA9E4 /* UIViewController+WMPageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+WMPageController.h"; sourceTree = "<group>"; };
 		112F77BF20EC7D62005CA9E4 /* CXMScoreListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMScoreListViewController.swift; sourceTree = "<group>"; };
+		11353E9A2134EA6300C1D645 /* SurpriseMatchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurpriseMatchCell.swift; sourceTree = "<group>"; };
+		11353E9C2134EB2300C1D645 /* SurpriseMatchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurpriseMatchItem.swift; sourceTree = "<group>"; };
+		11353E9E2134EF3300C1D645 /* SurpriseShooterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurpriseShooterCell.swift; sourceTree = "<group>"; };
+		11353EA02134F06700C1D645 /* SurpriseShooterHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurpriseShooterHeader.swift; sourceTree = "<group>"; };
 		1135CCF72117F3CA000ACD4B /* DLTProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DLTProtocol.swift; sourceTree = "<group>"; };
 		1138981B21103EF900E48B72 /* Daletou.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Daletou.storyboard; sourceTree = "<group>"; };
 		113AAD792121330700FB86B8 /* DLTRedBlueTrendItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DLTRedBlueTrendItem.swift; sourceTree = "<group>"; };
@@ -1255,9 +1263,13 @@
 			isa = PBXGroup;
 			children = (
 				11AB2C1A21300BC40044FB1C /* SurpriseTableViewCell.swift */,
+				11353E9A2134EA6300C1D645 /* SurpriseMatchCell.swift */,
+				11353E9C2134EB2300C1D645 /* SurpriseMatchItem.swift */,
+				11353E9E2134EF3300C1D645 /* SurpriseShooterCell.swift */,
 				114F0A322133995300E391E8 /* SurpriseCollectionCell.swift */,
 				11B0813A2133B49B004FCAE9 /* SurpriseCategoryCell.swift */,
 				11B081382133AEF6004FCAE9 /* SurpriseHeaderView.swift */,
+				11353EA02134F06700C1D645 /* SurpriseShooterHeader.swift */,
 				11B081402133E26E004FCAE9 /* SurprisePrizeDigitalCell.swift */,
 				11B081442133E31F004FCAE9 /* SurprisePrizeDigitalItem.swift */,
 				11B081422133E2BA004FCAE9 /* SurprisePrizeMatchCell.swift */,
@@ -2802,6 +2814,7 @@
 				112F77BB20EC7C8C005CA9E4 /* WMMenuItem.m in Sources */,
 				113B9CCD2087201E006AE3F8 /* NewsOnePicCell.swift in Sources */,
 				E50B9073205231B500417BFE /* RechargeHeaderView.swift in Sources */,
+				11353E9F2134EF3300C1D645 /* SurpriseShooterCell.swift in Sources */,
 				11BDF4DD20F59FDC00AA94B2 /* Protocol.swift in Sources */,
 				11062B21208322D0001C1D14 /* LotteryCell.swift in Sources */,
 				11A555EC20805D96004641AA /* FootballTwoOneView.swift in Sources */,
@@ -2981,6 +2994,7 @@
 				113DE738211AC79E00DE8026 /* DLTProItem.swift in Sources */,
 				113DE72E211A8E5000DE8026 /* DLTPrizeExplainCell.swift in Sources */,
 				11C4F45F20E095D800CCDFC6 /* YHCropRectView.m in Sources */,
+				11353E9B2134EA6300C1D645 /* SurpriseMatchCell.swift in Sources */,
 				E51F9A5E205A29D500AB8A21 /* LoginFooterView.swift in Sources */,
 				113D8EA9212433C00020EAC4 /* DLTRedBlueTrendStageItem.swift in Sources */,
 				1169180C207E3EC500C8A287 /* FootballScoreView.swift in Sources */,
@@ -3065,6 +3079,7 @@
 				E5973E1E204D50BC006461CE /* CustomTextField.swift in Sources */,
 				11FEB95D208D8DA100926951 /* NewsDetailFooter.swift in Sources */,
 				E5786FBC206DE98A0045F7F5 /* FootballScoreCell.swift in Sources */,
+				11353EA12134F06700C1D645 /* SurpriseShooterHeader.swift in Sources */,
 				E5D5A37B206D193100FC865D /* FootballBottomView.swift in Sources */,
 				116E458321119DFD00418661 /* DaletouDanRedCell.swift in Sources */,
 				E562989F2050E04C006397EA /* ValidateProtocol.swift in Sources */,
@@ -3095,6 +3110,7 @@
 				E567636C206B375A00E2D9A8 /* HXTextView.swift in Sources */,
 				E50B907D20526BB200417BFE /* RechargePaymentCell.swift in Sources */,
 				E562989C2050D1DD006397EA /* CXMRegisterViewController.swift in Sources */,
+				11353E9D2134EB2300C1D645 /* SurpriseMatchItem.swift in Sources */,
 				1144910C2085C7F9009F1D09 /* ScaleView.swift in Sources */,
 				E550D89D207339DF002DDE23 /* FootballOrderScoreCell.swift in Sources */,
 				113DE736211AC67F00DE8026 /* DLTProTableViewCell.swift in Sources */,
