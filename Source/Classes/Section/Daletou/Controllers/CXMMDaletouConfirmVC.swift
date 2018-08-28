@@ -52,7 +52,7 @@ class CXMMDaletouConfirmVC: BaseViewController {
         }
     }
     
-    public var isAppendSubject = PublishSubject<Bool>()
+    public var isAppendSubject = BehaviorSubject(value: false)
     
     
     @IBOutlet weak var tableView: UITableView!
@@ -118,6 +118,18 @@ class CXMMDaletouConfirmVC: BaseViewController {
         _ = isAppendSubject.asObserver().subscribe(onNext: { (isAppend) in
             self.bottomView.appendBut.isSelected = isAppend
             self.isAppend = isAppend
+            switch isAppend {
+            case true:
+                for model in self.list {
+                    model.money = 3
+                }
+                self.money.onNext(3)
+            case false :
+                for model in self.list {
+                    model.money = 2
+                }
+                self.money.onNext(2)
+            }
         }, onError: nil , onCompleted: nil , onDisposed: nil )
     }
 
