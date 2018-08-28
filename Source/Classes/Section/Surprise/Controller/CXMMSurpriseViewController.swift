@@ -45,6 +45,9 @@ class CXMMSurpriseViewController: BaseViewController{
         }
         tableView.beginRefreshing()
         
+        initData()
+        
+        
         NotificationCenter.default.addObserver(self, selector: #selector(configNotification(_:)), name: NSNotification.Name(rawValue: NotificationConfig), object: nil)
     }
     
@@ -59,6 +62,10 @@ class CXMMSurpriseViewController: BaseViewController{
         }else if turnOn == false && self.showType != .onlyNews {
             showType = .onlyNews
         }
+    }
+    
+    private func initData() {
+        
     }
     
     private func initSubview() {
