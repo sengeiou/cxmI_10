@@ -47,10 +47,19 @@ class SurpriseShooterHeader: UITableViewHeaderFooterView {
         
         collectionView.register(SurpriseShooterHeaderItem.self, forCellWithReuseIdentifier: SurpriseShooterHeaderItem.identifier)
         
+        let view = UIView()
+        view.backgroundColor = ColorFFFFFF
+        
+        self.contentView.addSubview(view)
         self.contentView.addSubview(collectionView)
         
         collectionView.snp.makeConstraints { (make) in
-            make.top.left.right.bottom.equalTo(0)
+            make.top.left.right.equalTo(0)
+            make.bottom.equalTo(view.snp.top)
+        }
+        view.snp.makeConstraints { (make) in
+            make.bottom.left.right.equalTo(0)
+            make.height.equalTo(10)
         }
         
     }
@@ -81,21 +90,6 @@ extension SurpriseShooterHeader : UICollectionViewDataSource {
         }
         
         cell.title.text = viewModel.headerList[indexPath.row].title
-        
-//        switch indexPath.row {
-//        case 0:
-//            cell.title.text = "英超-射手榜"
-//        case 1:
-//            cell.title.text = "德甲-射手榜"
-//        case 2:
-//            cell.title.text = "意甲-射手榜"
-//        case 3:
-//            cell.title.text = "西甲-射手榜"
-//        case 4:
-//            cell.title.text = "法甲-射手榜"
-//        default:
-//            cell.title.text = ""
-//        }
         return cell
     }
 }
@@ -105,7 +99,7 @@ extension SurpriseShooterHeader : UICollectionViewDelegateFlowLayout {
         return CGSize(width: SurpriseShooterHeaderItem.width, height: SurpriseShooterHeaderItem.height)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        return UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0

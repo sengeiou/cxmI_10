@@ -16,7 +16,7 @@ let surpriseProvider = MoyaProvider<SurpriseAPIManager>(requestClosure: requestC
 
 enum SurpriseAPIManager {
     /// 发现首页列表
-    case surpriseList(pageNum : Int)
+    case surpriseList()
     
 }
 
@@ -30,7 +30,7 @@ extension SurpriseAPIManager : TargetType {
     var xpath : String {
         switch self {
         case .surpriseList:
-            return "/lottery/dl/article/discoveryPage"
+            return "/lottery/discoveryPage/homePage"
             
         }
     }
@@ -39,9 +39,8 @@ extension SurpriseAPIManager : TargetType {
         var dic : [String: Any] = [:]
         
         switch self {
-        case .surpriseList(let pageNum):
-            dic["page"] = pageNum
-            dic["size"] = "20"
+        case .surpriseList():
+            dic["emptyStr"] = "20"
             
         default:
             return .requestPlain

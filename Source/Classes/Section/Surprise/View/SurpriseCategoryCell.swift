@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum SurpriseCategoryType {
+    case category
+    case hotLeague
+}
+
 protocol SurpriseCategoryCellDelegate {
     func didSelectItem(info : SurpriseItemInfo ,indexPath: IndexPath) -> Void
 }
@@ -16,9 +21,12 @@ class SurpriseCategoryCell: UITableViewCell {
 
     public var delegate : SurpriseCategoryCellDelegate!
     
+    public var style : SurpriseCategoryType = .category
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     private var itemList : [SurpriseItemInfo]!
+    private var hotItemList : [SurpriseLeagueInfo]!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,7 +42,10 @@ class SurpriseCategoryCell: UITableViewCell {
 extension SurpriseCategoryCell {
     public func configure(with list : [SurpriseItemInfo]) {
         self.itemList = list
-        
+        self.collectionView.reloadData()
+    }
+    public func configure(with list : [SurpriseLeagueInfo]) {
+        self.hotItemList = list
         self.collectionView.reloadData()
     }
 }
@@ -48,12 +59,25 @@ extension SurpriseCategoryCell : UICollectionViewDelegate {
 
 extension SurpriseCategoryCell : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return itemList != nil ? itemList.count : 0
+        switch style {
+        case .category:
+            return itemList != nil ? itemList.count : 0
+        case .hotLeague:
+            return hotItemList != nil ? hotItemList.count : 0
+        }
+        
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SurpriseCollectionCell", for: indexPath) as! SurpriseCollectionCell
-        cell.configure(with: itemList[indexPath.row])
+        
+        switch style {
+        case .category:
+            cell.configure(with: itemList[indexPath.row])
+        case .hotLeague:
+            cell.configure(with: hotItemList[indexPath.row])
+        }
+        
         return cell
     }
 }

@@ -22,9 +22,9 @@ class SurpriseHeaderView: UITableViewHeaderFooterView {
     private func initSubview() {
         title = UILabel()
         title.font = Font15
-        title.textColor = Color505050
+        title.textColor = ColorE85504
         title.textAlignment = .left
-        title.text = "牛人分析"
+        title.text = "热门联赛"
         
         self.contentView.addSubview(title)
         

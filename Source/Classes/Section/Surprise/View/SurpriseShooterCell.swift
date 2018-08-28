@@ -9,16 +9,41 @@
 import UIKit
 
 class SurpriseShooterCell: UITableViewCell {
-
+    
+    @IBOutlet weak var topLine: UIView!
+    
+    @IBOutlet weak var bottomLine: UIView!
+    
+    @IBOutlet weak var numLabel: UILabel!
+    
+    @IBOutlet weak var memberLabel: UILabel!
+    @IBOutlet weak var teamLabel: UILabel!
+    @IBOutlet weak var totalLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        initSubview()
     }
 
+    private func initSubview() {
+        self.numLabel.text = "排名"
+        self.memberLabel.text = "球员"
+        self.teamLabel.text = "球队"
+        self.totalLabel.text = "总进球数"
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
+}
+
+extension SurpriseShooterCell {
+    public func configure(with info : SurpriseMemberInfo) {
+        self.numLabel.text = info.ranking
+        self.memberLabel.text = info.memberName
+        self.teamLabel.text = info.topScorerTeam
+        self.totalLabel.text = info.totalGoal
+    }
 }

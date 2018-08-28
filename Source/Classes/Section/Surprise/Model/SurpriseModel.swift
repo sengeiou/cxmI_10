@@ -12,7 +12,18 @@ import HandyJSON
 struct SurpriseModel: HandyJSON {
     var discoveryHallClassifyList : [SurpriseItemInfo] = [SurpriseItemInfo]()
     
-    var dlArticlePage : BasePageModel<ArticleInfo>!
+    /// 联赛 list
+    var hotLeagueList : [SurpriseLeagueInfo] = [SurpriseLeagueInfo]()
+    /// 射手榜List
+    var topScorerDTOList : [SurpriseScorerInfo] = [SurpriseScorerInfo]()
+    
+}
+
+struct SurpriseLeagueInfo : HandyJSON {
+    var actUrl: String = ""
+    var detail : String = ""
+    var iconImg: String = ""
+    var title : String = ""
 }
 
 struct SurpriseItemInfo : HandyJSON {
@@ -22,19 +33,13 @@ struct SurpriseItemInfo : HandyJSON {
     var subTitle : String = ""
 }
 
-struct ArticleInfo : HandyJSON {
-    var addTime : String = ""
-    var articleId : String = ""
-    var articleThumb: String = ""
-    var author : String = ""
-    var clickNumber : String = ""
-    var extendCat : String = ""
-    var isStick : String = ""
-    var keywords : String = ""
-    var link : String = ""
-    var listStyle : String = ""
-    var matchId : String = ""
-    var relatedTeam : String = ""
-    var summary : String = ""
-    var title : String = ""
+struct SurpriseScorerInfo : HandyJSON {
+    var leagueName: String = ""
+    var topScorerMemberList : [SurpriseMemberInfo]!
+}
+struct SurpriseMemberInfo : HandyJSON {
+    var memberName: String = ""
+    var ranking : String = ""
+    var topScorerTeam: String = ""
+    var totalGoal: String = ""
 }

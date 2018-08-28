@@ -8,6 +8,13 @@
 
 import UIKit
 
+enum SurpriseLeagueStyle {
+    case 英超
+    case 德甲
+    case 意甲
+    case 西甲
+    case 法甲
+}
 
 class CXMMSurpriseViewController: BaseViewController{
 
@@ -24,8 +31,11 @@ class CXMMSurpriseViewController: BaseViewController{
         }
     }
     
+    private var leagueStyle : SurpriseLeagueStyle = .英超
+    
     @IBOutlet weak var tableView: UITableView!
    
+    
     private var surpriseModel : SurpriseModel!
     private var viewModel : ShooterHeaderViewModel = ShooterHeaderViewModel()
     
@@ -35,18 +45,9 @@ class CXMMSurpriseViewController: BaseViewController{
         hideBackBut()
         self.isHidenBar = false
         initSubview()
-        //loadNewData()
-        
-        tableView.headerRefresh {
-            self.loadNewData()
-        }
-        tableView.footerRefresh {
-            self.loadNextData()
-        }
-        tableView.beginRefreshing()
+        loadNewData()
         
         initData()
-        
         
         NotificationCenter.default.addObserver(self, selector: #selector(configNotification(_:)), name: NSNotification.Name(rawValue: NotificationConfig), object: nil)
     }
@@ -65,14 +66,28 @@ class CXMMSurpriseViewController: BaseViewController{
     }
     
     private func initData() {
-        
+        _ = viewModel.selectedItem.asObserver()
+            .subscribe(onNext: { (index) in
+                switch index {
+                case 0:
+                    self.leagueStyle = .英超
+                case 1:
+                    self.leagueStyle = .德甲
+                case 2:
+                    self.leagueStyle = .意甲
+                case 3:
+                    self.leagueStyle = .西甲
+                case 4:
+                    self.leagueStyle = .法甲
+                default : break
+                }
+               
+                self.tableView.reloadSections(IndexSet(integer: 2), with: .none)
+            }, onError: nil , onCompleted: nil , onDisposed: nil )
     }
     
     private func initSubview() {
-//        tableView.register(NewsNoPicCell.self, forCellReuseIdentifier: NewsNoPicCell.identifier)
-//        tableView.register(NewsOnePicCell.self, forCellReuseIdentifier: NewsOnePicCell.identifier)
-//        tableView.register(NewsThreePicCell.self, forCellReuseIdentifier: NewsThreePicCell.identifier)
-        
+
         tableView.register(SurpriseHeaderView.self,
                            forHeaderFooterViewReuseIdentifier: SurpriseHeaderView.identifier)
         tableView.register(SurpriseShooterHeader.self,
@@ -98,23 +113,19 @@ class CXMMSurpriseViewController: BaseViewController{
 // 网络请求
 extension CXMMSurpriseViewController {
     private func loadNewData() {
-        prizeListRequest(pageNum: 1)
+        prizeListRequest()
     }
     private func loadNextData() {
         guard self.surpriseModel != nil else { return }
-        guard self.surpriseModel.dlArticlePage != nil else { return }
-        guard self.surpriseModel.dlArticlePage.isLastPage == false else {
-            self.tableView.noMoreData()
-            return
-        }
+       
         
-        prizeListRequest(pageNum: self.surpriseModel.dlArticlePage.nextPage)
+        prizeListRequest()
     }
-    private func prizeListRequest(pageNum : Int) {
+    private func prizeListRequest() {
         
         weak var weakSelf = self
         
-        _ = surpriseProvider.rx.request(.surpriseList(pageNum: pageNum))
+        _ = surpriseProvider.rx.request(.surpriseList())
             .asObservable()
             .mapObject(type: SurpriseModel.self)
             .subscribe(onNext: { (data) in
@@ -165,38 +176,39 @@ extension CXMMSurpriseViewController : UITableViewDataSource {
         return 3
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard self.surpriseModel != nil else { return 0 }
+        
         switch section {
         case 0:
-            guard self.surpriseModel != nil else { return 0 }
             return 1
         case 1:
             return 1
         case 2:
-            return 6
+            guard surpriseModel != nil else { return 0 }
+            guard surpriseModel.topScorerDTOList.count == 5 else { return 0 }
+            switch leagueStyle {
+            case .英超:
+                return surpriseModel.topScorerDTOList[0].topScorerMemberList.count + 1
+            case .德甲:
+                return surpriseModel.topScorerDTOList[0].topScorerMemberList.count + 1
+            case .意甲:
+                return surpriseModel.topScorerDTOList[0].topScorerMemberList.count + 1
+            case .西甲:
+                return surpriseModel.topScorerDTOList[0].topScorerMemberList.count + 1
+            case .法甲:
+                return surpriseModel.topScorerDTOList[0].topScorerMemberList.count + 1
+            }
         default:
-            guard self.surpriseModel != nil else { return 0 }
-            guard self.surpriseModel.dlArticlePage != nil else { return 0 }
-            guard let list = self.surpriseModel.dlArticlePage.list else { return 0 }
-            return list.count
+            return  0
         }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-//        let newsInfo = newsList[indexPath.row]
-//
-//        if newsInfo.listStyle == "1" || newsInfo.listStyle == "4" {
-//            return initNewsOnePicCell(indexPath: indexPath)
-//        }else if newsInfo.listStyle == "3" {
-//            return initNewsThreePicCell(indexPath: indexPath)
-//        }else {
-//            return initNewsNoPicCell(indexPath: indexPath)
-//        }
         
         switch indexPath.section {
         case 0:
             return initCategoryCell(indexPath: indexPath)
         case 1:
-            return initCategoryCell(indexPath: indexPath)
+            return initLeagueCell(indexPath: indexPath)
         case 2:
             return initShooterCell(indexPath: indexPath)
         default:
@@ -227,11 +239,46 @@ extension CXMMSurpriseViewController : UITableViewDataSource {
     private func initCategoryCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SurpriseCategoryCell", for: indexPath) as! SurpriseCategoryCell
         cell.delegate = self
-        //cell.configure(with: self.surpriseModel.discoveryHallClassifyList)
+        cell.style = .category
+        cell.configure(with: self.surpriseModel.discoveryHallClassifyList)
+        return cell
+    }
+    private func initLeagueCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SurpriseCategoryCell", for: indexPath) as! SurpriseCategoryCell
+        cell.delegate = self
+        cell.style = .hotLeague
+        cell.configure(with: self.surpriseModel.hotLeagueList)
         return cell
     }
     private func initShooterCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SurpriseShooterCell", for: indexPath) as! SurpriseShooterCell
+        
+        if indexPath.row != 0 {
+            cell.topLine.isHidden = true
+            
+            switch leagueStyle {
+            case .英超:
+                cell.configure(with: surpriseModel.topScorerDTOList[0].topScorerMemberList[indexPath.row - 1])
+            case .德甲:
+                cell.configure(with: surpriseModel.topScorerDTOList[1].topScorerMemberList[indexPath.row - 1])
+            case .意甲:
+                cell.configure(with: surpriseModel.topScorerDTOList[2].topScorerMemberList[indexPath.row - 1])
+            case .西甲:
+                cell.configure(with: surpriseModel.topScorerDTOList[3].topScorerMemberList[indexPath.row - 1])
+            case .法甲:
+                cell.configure(with: surpriseModel.topScorerDTOList[4].topScorerMemberList[indexPath.row - 1])
+            }
+        }else {
+            cell.topLine.isHidden = false
+            
+            var model = SurpriseMemberInfo()
+            model.ranking = "排名"
+            model.memberName = "球员"
+            model.topScorerTeam = "球队"
+            model.totalGoal = "总进球数"
+            cell.configure(with: model)
+        }
+        
         return cell
     }
     private func initNewsNoPicCell(indexPath: IndexPath) -> UITableViewCell {
@@ -255,26 +302,21 @@ extension CXMMSurpriseViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-       
-//        let newsInfo = newsList[indexPath.row]
-//        if newsInfo.listStyle == "1" || newsInfo.listStyle == "4" || newsInfo.listStyle == "0" {
-//            return 110 * defaultScale
-//        }
-//        else {
-//            return 150 * defaultScale
-//        }
         switch indexPath.section {
         case 0:
             return 300
-            
+        case 1:
+            return 300
         default:
-            return 110 * defaultScale
+            return 35 * defaultScale
         }
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
         case 0:
             return 0.01
+        case 2:
+            return 44
         default:
             return 34
         }
