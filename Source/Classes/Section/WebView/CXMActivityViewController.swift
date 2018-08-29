@@ -61,7 +61,8 @@ class CXMActivityViewController: BaseWebViewController {
     }
     
     @objc private func deleteClicked(_ sender: UIButton) {
-        self.popToRootViewController()
+        //self.popToRootViewController()
+        self.popViewController()
     }
     // MARK: - webView delegate
     
@@ -181,4 +182,25 @@ class CXMActivityViewController: BaseWebViewController {
     }
 
 }
-
+extension CXMActivityViewController {
+    override func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        super.userContentController(userContentController, didReceive: message)
+        
+        guard message.name == "appNative" else { return }
+        
+        guard let dic = message.body as? [String : String] else { return }
+        
+        let methodName = dic["methodName"]
+        
+        switch methodName {
+        case "hideDelete":
+            hideDeleteButton()
+        default : break
+        }
+    }
+    
+    private func hideDeleteButton() {
+        self.deleteBut.isHidden = true
+    }
+    
+}
