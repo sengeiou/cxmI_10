@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+
 class SurprisePrizeMatchCell: UITableViewCell {
 
     @IBOutlet weak var icon: UIImageView!
@@ -22,19 +24,36 @@ class SurprisePrizeMatchCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        matchLabel.layer.cornerRadius = 15
+        matchLabel.layer.masksToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
+       
     }
 
 }
 
 extension SurprisePrizeMatchCell {
-    public func configure() {
+    public func configure(with data : PrizeListModel) {
+        if let url = URL(string: data.lotteryIcon) {
+            icon.kf.setImage(with: url)
+        }
+        title.text = data.lotteryName
+        stageLabel.text = data.period
+        dateLabel.text = data.date
         
+        matchLabel.text = "\(data.homeTeam)  \(data.score)  \(data.visitingTeam)"
+        
+        switch data.ballColor {
+        case "0":
+            matchLabel.backgroundColor = ColorFC6F1C
+        case "1":
+            matchLabel.backgroundColor = Color439E0B
+        default:
+            break
+        }
     }
 }

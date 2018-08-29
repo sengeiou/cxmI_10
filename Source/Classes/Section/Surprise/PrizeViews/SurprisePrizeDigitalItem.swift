@@ -17,6 +17,34 @@ class SurprisePrizeDigitalItem: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        numLabel.layer.cornerRadius = SurprisePrizeDigitalItem.width / 2
+        numLabel.layer.masksToBounds = true
+        numLabel.layer.borderWidth = 1
+        numLabel.layer.borderColor = ColorFFFFFF.cgColor
+    }
+}
+
+extension SurprisePrizeDigitalItem {
+    public func configure(with data : PrizeDigitalData) {
+        numLabel.text = data.title
+        switch data.style {
+        case .seRed:
+            numLabel.textColor = ColorFFFFFF
+            numLabel.backgroundColor = ColorEB1C24
+            numLabel.layer.borderColor = ColorEB1C24.cgColor
+        case .seBlue:
+            numLabel.textColor = ColorFFFFFF
+            numLabel.backgroundColor = Color0081CC
+            numLabel.layer.borderColor = Color0081CC.cgColor
+        case .red:
+            numLabel.textColor = ColorEB1C24
+            numLabel.backgroundColor = ColorFFFFFF
+            numLabel.layer.borderColor = ColorFFFFFF.cgColor
+        case .blue:
+            numLabel.textColor = Color0081CC
+            numLabel.backgroundColor = ColorFFFFFF
+            numLabel.layer.borderColor = ColorFFFFFF.cgColor
         
+        }
     }
 }

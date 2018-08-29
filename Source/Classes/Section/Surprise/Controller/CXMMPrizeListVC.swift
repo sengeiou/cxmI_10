@@ -12,11 +12,14 @@ class CXMMPrizeListVC: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    private var prizeList : [PrizeListModel]!
+    
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "开奖"
         initSubview()
+        loadNewData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -29,6 +32,39 @@ class CXMMPrizeListVC: BaseViewController {
         
     }
     
+}
+
+extension CXMMPrizeListVC {
+    private func loadNewData() {
+        prizeListRequest()
+    }
+    private func prizeListRequest() {
+        
+        weak var weakSelf = self
+        
+        _ = surpriseProvider.rx.request(.prizeList())
+            .asObservable()
+            .mapArray(type: PrizeListModel.self)
+            .subscribe(onNext: { (data) in
+                weakSelf?.prizeList = data
+                weakSelf?.tableView.reloadData()
+            }, onError: { (error) in
+                weakSelf?.tableView.endrefresh()
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        weakSelf?.pushLoginVC(from: self)
+                    default : break
+                    }
+                    if 300000...310000 ~= code {
+                        weakSelf?.showHUD(message: msg!)
+                    }
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil )
+    }
 }
 
 // MARK: - table Delegate
@@ -46,25 +82,46 @@ extension CXMMPrizeListVC : UITableViewDataSource {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return prizeList != nil ? prizeList.count : 0
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return initDigitalCell(indexPath: indexPath)
+        
+        
+        let model = prizeList[indexPath.row]
+        
+        switch model.classifyStatus {
+        case "0":
+            return initDigitalCell(indexPath: indexPath)
+        case "1":
+            return initMatchCell(indexPath: indexPath)
+        default:
+            return UITableViewCell()
+        }
+        
     }
     
     private func initDigitalCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SurprisePrizeDigitalCell", for: indexPath) as! SurprisePrizeDigitalCell
-        
+        cell.configure(with: prizeList[indexPath.row], style : .prizeList)
         return cell
     }
     private func initMatchCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SurprisePrizeMatchCell", for: indexPath) as! SurprisePrizeMatchCell
-        
+        cell.configure(with: prizeList[indexPath.row])
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+        
+        let model = prizeList[indexPath.row]
+        switch model.classifyStatus {
+        case "0":
+            return 108
+        case "1":
+            return 100
+        default:
+            return 0
+        }
     }
 }
 

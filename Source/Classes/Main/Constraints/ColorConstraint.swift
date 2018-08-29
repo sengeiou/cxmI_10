@@ -76,3 +76,7 @@ let Color85C36B = UIColor(hexColor: "85C36B")
 let ColorEB6D8E = UIColor(hexColor: "EB6D8E")
 /// 红色 - 大乐透
 let ColorEB1C24 = UIColor(hexColor: "EB1C24")
+/// 足球开奖背景色 绿色
+let Color439E0B = UIColor(hexColor: "439E0B")
+/// 蓝球开奖背景色 橙色
+let ColorFC6F1C = UIColor(hexColor: "FC6F1C")

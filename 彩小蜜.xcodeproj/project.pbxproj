@@ -226,6 +226,7 @@
 		11F305D72136479500FCA3F7 /* CXMMPrizeDigitalHistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F305D62136479500FCA3F7 /* CXMMPrizeDigitalHistoryVC.swift */; };
 		11F305D92136481100FCA3F7 /* PrizeDigitalHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F305D82136481100FCA3F7 /* PrizeDigitalHistoryCell.swift */; };
 		11F305DE21364F7A00FCA3F7 /* PrizeDigitalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F305DD21364F7A00FCA3F7 /* PrizeDigitalViewModel.swift */; };
+		11F305E021368B3600FCA3F7 /* PrizeListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F305DF21368B3600FCA3F7 /* PrizeListModel.swift */; };
 		11FEB943208D781400926951 /* DeviceInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FEB942208D781400926951 /* DeviceInfoModel.swift */; };
 		11FEB945208D78B900926951 /* ConfigInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FEB944208D78B900926951 /* ConfigInfoModel.swift */; };
 		11FEB947208D79A400926951 /* AppDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FEB946208D79A400926951 /* AppDelegateProtocol.swift */; };
@@ -648,6 +649,7 @@
 		11F305D62136479500FCA3F7 /* CXMMPrizeDigitalHistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMMPrizeDigitalHistoryVC.swift; sourceTree = "<group>"; };
 		11F305D82136481100FCA3F7 /* PrizeDigitalHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrizeDigitalHistoryCell.swift; sourceTree = "<group>"; };
 		11F305DD21364F7A00FCA3F7 /* PrizeDigitalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrizeDigitalViewModel.swift; sourceTree = "<group>"; };
+		11F305DF21368B3600FCA3F7 /* PrizeListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrizeListModel.swift; sourceTree = "<group>"; };
 		11FEB942208D781400926951 /* DeviceInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoModel.swift; sourceTree = "<group>"; };
 		11FEB944208D78B900926951 /* ConfigInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigInfoModel.swift; sourceTree = "<group>"; };
 		11FEB946208D79A400926951 /* AppDelegateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateProtocol.swift; sourceTree = "<group>"; };
@@ -1276,6 +1278,7 @@
 			isa = PBXGroup;
 			children = (
 				11AB2C1821300BC40044FB1C /* SurpriseModel.swift */,
+				11F305DF21368B3600FCA3F7 /* PrizeListModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2859,6 +2862,7 @@
 				114491102085D93F009F1D09 /* FootballMatchIntegralCell.swift in Sources */,
 				E59CB3DF205BA17F0086DD0E /* HomeHeaderView.swift in Sources */,
 				E514DDE22052B3E000274854 /* CXMWithdrawalViewController.swift in Sources */,
+				11F305E021368B3600FCA3F7 /* PrizeListModel.swift in Sources */,
 				11647F0320EE00AB00B55897 /* FootballDetailEventCell.swift in Sources */,
 				E5B68AFD205A81A70038A5A2 /* Extension+Color.swift in Sources */,
 				11FEB964208DDC2100926951 /* AppKeyConstraint.swift in Sources */,

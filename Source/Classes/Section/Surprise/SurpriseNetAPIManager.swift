@@ -17,6 +17,8 @@ let surpriseProvider = MoyaProvider<SurpriseAPIManager>(requestClosure: requestC
 enum SurpriseAPIManager {
     /// 发现首页列表
     case surpriseList()
+    /// 开奖结果
+    case prizeList()
     
 }
 
@@ -31,7 +33,8 @@ extension SurpriseAPIManager : TargetType {
         switch self {
         case .surpriseList:
             return "/lottery/discoveryPage/homePage"
-            
+        case .prizeList:
+            return "/lottery/discoveryPage/openPrize"
         }
     }
     
@@ -39,9 +42,10 @@ extension SurpriseAPIManager : TargetType {
         var dic : [String: Any] = [:]
         
         switch self {
-        case .surpriseList():
+        case .surpriseList:
             dic["emptyStr"] = "20"
-            
+        case .prizeList:
+            dic["emptyStr"] = "20"
         default:
             return .requestPlain
         }

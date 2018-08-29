@@ -22,16 +22,40 @@ class SurprisePrizeDigitalCell: UITableViewCell {
     
     @IBOutlet weak var dateLabel: UILabel!
     
-    public var viewModel : PrizeDigitalViewModel!
+    public var style : PrizeStyle!
+    
+    public var viewModel : PrizeDigitalViewModel = PrizeDigitalViewModel()
+    
+    private var list : [PrizeDigitalData]!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        
+        _ = viewModel.list.asObserver()
+            .subscribe(onNext: { (list) in
+                self.list = list
+                self.collectionView.reloadData()
+            }, onError: nil , onCompleted: nil , onDisposed: nil )
     }
-
-    
-
 }
+
+extension SurprisePrizeDigitalCell {
+    public func configure(with data : PrizeListModel, style : PrizeStyle) {
+        if let url = URL(string: data.lotteryIcon) {
+            icon.kf.setImage(with: url)
+        }
+        title.text = data.lotteryName
+        stageLabel.text = data.period
+        dateLabel.text = data.date
+        viewModel.style = style
+        viewModel.setData(red: data.redBall, blue: data.blueBall)
+        
+    }
+    
+    
+}
+
 
 extension SurprisePrizeDigitalCell : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -40,11 +64,11 @@ extension SurprisePrizeDigitalCell : UICollectionViewDelegate {
 }
 extension SurprisePrizeDigitalCell : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return list != nil ? list.count : 0
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SurprisePrizeDigitalItem", for: indexPath) as! SurprisePrizeDigitalItem
-        
+        cell.configure(with: list[indexPath.row])
         return cell
     }
 }
