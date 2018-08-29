@@ -16,6 +16,8 @@ class PrizeDigitalHistoryCell: UITableViewCell {
     
     @IBOutlet weak var dateLabel: UILabel!
     
+    @IBOutlet weak var stateIcon: UIImageView!
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func awakeFromNib() {

@@ -663,21 +663,26 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="06-04(周三)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kuF-7A-z6w">
-                                                    <rect key="frame" x="121" y="11" width="80" height="20"/>
+                                                    <rect key="frame" x="121" y="11" width="90" height="20"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="80" id="JvR-rD-hl2"/>
+                                                        <constraint firstAttribute="width" constant="90" id="JvR-rD-hl2"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.62352941179999999" green="0.62352941179999999" blue="0.62352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XWH-iR-jU9">
-                                                    <rect key="frame" x="251" y="10" width="35" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Assist" translatesAutoresizingMaskIntoConstraints="NO" id="XWH-iR-jU9">
+                                                    <rect key="frame" x="216" y="15.5" width="30" height="10"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="30" id="7Ku-kh-cW7"/>
+                                                        <constraint firstAttribute="height" constant="10" id="Faq-JV-dZv"/>
+                                                    </constraints>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="kuF-7A-z6w" firstAttribute="top" secondItem="4gp-4L-LY6" secondAttribute="top" id="3dB-vM-qkK"/>
+                                                <constraint firstItem="XWH-iR-jU9" firstAttribute="centerY" secondItem="kuF-7A-z6w" secondAttribute="centerY" id="8Yh-87-Gkj"/>
+                                                <constraint firstItem="XWH-iR-jU9" firstAttribute="leading" secondItem="kuF-7A-z6w" secondAttribute="trailing" constant="5" id="9ag-Vk-1ip"/>
                                                 <constraint firstItem="4gp-4L-LY6" firstAttribute="top" secondItem="JTs-to-Lsn" secondAttribute="topMargin" id="A2y-AW-dXK"/>
                                                 <constraint firstAttribute="trailing" secondItem="kG4-8b-7J5" secondAttribute="trailing" constant="16" id="GHc-Fj-N3d"/>
                                                 <constraint firstItem="4gp-4L-LY6" firstAttribute="leading" secondItem="JTs-to-Lsn" secondAttribute="leadingMargin" constant="16" id="Naq-wH-FQK"/>
@@ -694,6 +699,7 @@
                                             <outlet property="collectionView" destination="HbC-11-R9C" id="CUV-5g-hib"/>
                                             <outlet property="dateLabel" destination="kuF-7A-z6w" id="adB-dG-LTF"/>
                                             <outlet property="stageLabel" destination="4gp-4L-LY6" id="bM9-pX-o2Y"/>
+                                            <outlet property="stateIcon" destination="XWH-iR-jU9" id="5O0-RJ-VpK"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -740,6 +746,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Assist" width="18" height="18"/>
         <image name="SuperLtto" width="43" height="43"/>
         <image name="jump" width="14" height="14"/>
     </resources>
