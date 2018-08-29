@@ -225,6 +225,7 @@
 		11F2585A211B0668002D0A44 /* DLTOrderDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F25859211B0668002D0A44 /* DLTOrderDetailModel.swift */; };
 		11F305D72136479500FCA3F7 /* CXMMPrizeDigitalHistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F305D62136479500FCA3F7 /* CXMMPrizeDigitalHistoryVC.swift */; };
 		11F305D92136481100FCA3F7 /* PrizeDigitalHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F305D82136481100FCA3F7 /* PrizeDigitalHistoryCell.swift */; };
+		11F305DE21364F7A00FCA3F7 /* PrizeDigitalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F305DD21364F7A00FCA3F7 /* PrizeDigitalViewModel.swift */; };
 		11FEB943208D781400926951 /* DeviceInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FEB942208D781400926951 /* DeviceInfoModel.swift */; };
 		11FEB945208D78B900926951 /* ConfigInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FEB944208D78B900926951 /* ConfigInfoModel.swift */; };
 		11FEB947208D79A400926951 /* AppDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FEB946208D79A400926951 /* AppDelegateProtocol.swift */; };
@@ -646,6 +647,7 @@
 		11F25859211B0668002D0A44 /* DLTOrderDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DLTOrderDetailModel.swift; sourceTree = "<group>"; };
 		11F305D62136479500FCA3F7 /* CXMMPrizeDigitalHistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMMPrizeDigitalHistoryVC.swift; sourceTree = "<group>"; };
 		11F305D82136481100FCA3F7 /* PrizeDigitalHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrizeDigitalHistoryCell.swift; sourceTree = "<group>"; };
+		11F305DD21364F7A00FCA3F7 /* PrizeDigitalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrizeDigitalViewModel.swift; sourceTree = "<group>"; };
 		11FEB942208D781400926951 /* DeviceInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoModel.swift; sourceTree = "<group>"; };
 		11FEB944208D78B900926951 /* ConfigInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigInfoModel.swift; sourceTree = "<group>"; };
 		11FEB946208D79A400926951 /* AppDelegateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateProtocol.swift; sourceTree = "<group>"; };
@@ -957,6 +959,7 @@
 			isa = PBXGroup;
 			children = (
 				11353EA52134FFCC00C1D645 /* SurpriseShooterHeaderModel.swift */,
+				11F305DD21364F7A00FCA3F7 /* PrizeDigitalViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1289,10 +1292,6 @@
 				11B081382133AEF6004FCAE9 /* SurpriseHeaderView.swift */,
 				11353EA02134F06700C1D645 /* SurpriseShooterHeader.swift */,
 				11353EA22134F65A00C1D645 /* SurpriseShooterHeaderItem.swift */,
-				11B081402133E26E004FCAE9 /* SurprisePrizeDigitalCell.swift */,
-				11F305D82136481100FCA3F7 /* PrizeDigitalHistoryCell.swift */,
-				11B081442133E31F004FCAE9 /* SurprisePrizeDigitalItem.swift */,
-				11B081422133E2BA004FCAE9 /* SurprisePrizeMatchCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1305,6 +1304,7 @@
 				11AB2C1721300BC40044FB1C /* Model */,
 				11353EA42134FFA400C1D645 /* ViewModels */,
 				11AB2C1921300BC40044FB1C /* View */,
+				11F305DC21364D8100FCA3F7 /* PrizeViews */,
 				11BD5CEB20B3BA5200A3AE6A /* Controller */,
 			);
 			path = Surprise;
@@ -1408,6 +1408,17 @@
 				11E8FA6620BFEE5C0090BC6A /* SettingDataModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		11F305DC21364D8100FCA3F7 /* PrizeViews */ = {
+			isa = PBXGroup;
+			children = (
+				11F305D82136481100FCA3F7 /* PrizeDigitalHistoryCell.swift */,
+				11B081442133E31F004FCAE9 /* SurprisePrizeDigitalItem.swift */,
+				11B081422133E2BA004FCAE9 /* SurprisePrizeMatchCell.swift */,
+				11B081402133E26E004FCAE9 /* SurprisePrizeDigitalCell.swift */,
+			);
+			path = PrizeViews;
 			sourceTree = "<group>";
 		};
 		11FEB948208D7E9500926951 /* ThirdParty */ = {
@@ -3026,6 +3037,7 @@
 				113D8EA9212433C00020EAC4 /* DLTRedBlueTrendStageItem.swift in Sources */,
 				1137A4EA21363519000CED33 /* LineNumberProtocol.swift in Sources */,
 				1169180C207E3EC500C8A287 /* FootballScoreView.swift in Sources */,
+				11F305DE21364F7A00FCA3F7 /* PrizeDigitalViewModel.swift in Sources */,
 				E537397F2057F8F40087E4E6 /* BankCardInfo.swift in Sources */,
 				114800D4208C2DD700621AFA /* ShareDataModel.swift in Sources */,
 				11B1B96C20F30EA200387430 /* FootballLiveInfoModel.swift in Sources */,

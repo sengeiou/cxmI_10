@@ -43,7 +43,7 @@ class CXMMSurpriseViewController: BaseViewController{
         super.viewDidLoad()
         self.navigationItem.title = "彩小秘 · 发现"
         hideBackBut()
-        self.isHidenBar = false
+        
         initSubview()
         //loadNewData()
         
@@ -58,7 +58,7 @@ class CXMMSurpriseViewController: BaseViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        self.isHidenBar = false
         let turnOn = UserDefaults.standard.bool(forKey: TurnOn)
         //turnOn = false
         if turnOn && self.showType != .allShow{

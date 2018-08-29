@@ -1,41 +1,42 @@
 //
-//  SurprisePrizeDigitalCell.swift
+//  PrizeDigitalHistoryCell.swift
 //  彩小蜜
 //
-//  Created by 笑 on 2018/8/27.
+//  Created by 笑 on 2018/8/29.
 //  Copyright © 2018年 韩笑. All rights reserved.
 //
 
 import UIKit
 
-class SurprisePrizeDigitalCell: UITableViewCell {
+class PrizeDigitalHistoryCell: UITableViewCell {
 
-    @IBOutlet weak var icon: UIImageView!
     
-    @IBOutlet weak var collectionView: UICollectionView!
-    
-    
-    @IBOutlet weak var title: UILabel!
     
     @IBOutlet weak var stageLabel: UILabel!
     
     @IBOutlet weak var dateLabel: UILabel!
+    
+    @IBOutlet weak var collectionView: UICollectionView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
-    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
 
 }
 
-extension SurprisePrizeDigitalCell : UICollectionViewDelegate {
+extension PrizeDigitalHistoryCell : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
     }
 }
-extension SurprisePrizeDigitalCell : UICollectionViewDataSource {
+extension PrizeDigitalHistoryCell : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10
     }
@@ -46,7 +47,7 @@ extension SurprisePrizeDigitalCell : UICollectionViewDataSource {
     }
 }
 
-extension SurprisePrizeDigitalCell : UICollectionViewDelegateFlowLayout {
+extension PrizeDigitalHistoryCell : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize (width: SurprisePrizeDigitalItem.width, height: SurprisePrizeDigitalItem.height)
     }

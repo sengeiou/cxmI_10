@@ -34,7 +34,10 @@ class CXMMPrizeListVC: BaseViewController {
 // MARK: - table Delegate
 extension CXMMPrizeListVC : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let story = UIStoryboard(name: "Surprise", bundle: nil )
+        let prizeHistory = story.instantiateViewController(withIdentifier: "PrizeDigitalHistoryVC") as! CXMMPrizeDigitalHistoryVC
         
+        pushViewController(vc: prizeHistory)
     }
 }
 // MARK: - table DataSource
