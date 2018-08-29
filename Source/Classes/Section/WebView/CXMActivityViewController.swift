@@ -49,6 +49,8 @@ class CXMActivityViewController: BaseWebViewController {
         let dele = UIBarButtonItem(customView: deleteBut)
         self.navigationItem.leftBarButtonItems?.append(dele)
         
+        deleteBut.isHidden = true
+        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: shareBut)
         
         shareBut.isHidden = true
@@ -205,6 +207,8 @@ extension CXMActivityViewController {
         switch methodName {
         case "hideDelete":
             hideDeleteButton()
+        case "showDelete":
+            showDelete()
         default : break
         }
     }
@@ -212,5 +216,7 @@ extension CXMActivityViewController {
     private func hideDeleteButton() {
         self.deleteBut.isHidden = true
     }
-    
+    private func showDelete() {
+        self.deleteBut.isHidden = false
+    }
 }
