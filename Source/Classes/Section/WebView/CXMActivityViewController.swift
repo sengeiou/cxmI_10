@@ -11,7 +11,7 @@ import WebKit
 
 class CXMActivityViewController: BaseWebViewController {
 
-    
+    public var backType : BackType! = .notRoot
     
     override func didLogin(isLogin: Bool) {
         if isLogin {
@@ -62,6 +62,10 @@ class CXMActivityViewController: BaseWebViewController {
     
     @objc private func deleteClicked(_ sender: UIButton) {
         //self.popToRootViewController()
+        guard self.backType == .notRoot else {
+            self.popToRootViewController()
+            return
+        }
         self.popViewController()
     }
     // MARK: - webView delegate
@@ -168,6 +172,12 @@ class CXMActivityViewController: BaseWebViewController {
     }
     
     override func back(_ sender: UIButton) {
+        
+        guard self.backType == .notRoot else {
+            self.popToRootViewController()
+            return
+        }
+        
         
         if webView.canGoBack {
             webView.goBack()

@@ -253,8 +253,9 @@ extension CXMPaymentViewController {
         guard self.pushWebUrl == nil else {
             
             let web = CXMActivityViewController()
-            web.urlStr = self.pushWebUrl + "&\(self.paymentResult.orderId!)"
-            
+            web.urlStr = self.pushWebUrl + "?id=\(self.paymentResult.orderId!)&from=app"
+            web.backType = .root
+            pushViewController(vc: web)
             return
         }
         
