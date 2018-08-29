@@ -14,7 +14,7 @@ import Reachability
 import JPImageresizerView
 
 
-class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, DateProtocol, UserInfoPro , LoginProtocol, RouterPro{
+class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, DateProtocol, UserInfoPro , LoginProtocol, RouterPro, LineNumberProtocol{
     func didLogin(isLogin: Bool) {
         
     }

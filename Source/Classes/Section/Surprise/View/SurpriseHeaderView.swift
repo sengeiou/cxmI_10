@@ -16,6 +16,7 @@ class SurpriseHeaderView: UITableViewHeaderFooterView {
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
+        self.contentView.backgroundColor = ColorF4F4F4
         initSubview()
     }
     
