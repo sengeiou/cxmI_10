@@ -10,9 +10,9 @@
 
 #if DEBUG
 let baseURLStr = "http://39.106.18.39:8765/api"
-//let baseWeb = "http://t1.caixiaomi.net:9805"
+let baseWeb = "http://t1.caixiaomi.net:9805"
 //
-let baseWeb = "http://192.168.31.205:8080"
+//let baseWeb = "http://192.168.31.205:8080"
 
 
 //let baseURLStr = "https://api.caixiaomi.net/api"
