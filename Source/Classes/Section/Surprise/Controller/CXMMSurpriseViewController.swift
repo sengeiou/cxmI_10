@@ -91,9 +91,6 @@ class CXMMSurpriseViewController: BaseViewController{
     }
     
     private func initSubview() {
-
-        
-        
         tableView.register(SurpriseHeaderView.self,
                            forHeaderFooterViewReuseIdentifier: SurpriseHeaderView.identifier)
         tableView.register(SurpriseShooterHeader.self,
@@ -319,7 +316,13 @@ extension CXMMSurpriseViewController : UITableViewDataSource {
                 return CGFloat(count * 115)
             }
         case 1:
-            return 300
+            let count = lineNumber(totalNum: surpriseModel.hotLeagueList.count, horizonNum: 4)
+            
+            if count == 0 {
+                return 115
+            }else {
+                return CGFloat(count * 115)
+            }
         default:
             return 35 * defaultScale
         }

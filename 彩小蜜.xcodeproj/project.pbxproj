@@ -223,6 +223,8 @@
 		11EB8EE8207B8A5500AFC9C1 /* FootballSaveBetInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EB8EE7207B8A5500AFC9C1 /* FootballSaveBetInfoModel.swift */; };
 		11EB8EEA207B8B1500AFC9C1 /* BonusInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EB8EE9207B8B1500AFC9C1 /* BonusInfoModel.swift */; };
 		11F2585A211B0668002D0A44 /* DLTOrderDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F25859211B0668002D0A44 /* DLTOrderDetailModel.swift */; };
+		11F305D72136479500FCA3F7 /* CXMMPrizeDigitalHistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F305D62136479500FCA3F7 /* CXMMPrizeDigitalHistoryVC.swift */; };
+		11F305D92136481100FCA3F7 /* PrizeDigitalHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F305D82136481100FCA3F7 /* PrizeDigitalHistoryCell.swift */; };
 		11FEB943208D781400926951 /* DeviceInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FEB942208D781400926951 /* DeviceInfoModel.swift */; };
 		11FEB945208D78B900926951 /* ConfigInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FEB944208D78B900926951 /* ConfigInfoModel.swift */; };
 		11FEB947208D79A400926951 /* AppDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FEB946208D79A400926951 /* AppDelegateProtocol.swift */; };
@@ -642,6 +644,8 @@
 		11EB8EE7207B8A5500AFC9C1 /* FootballSaveBetInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballSaveBetInfoModel.swift; sourceTree = "<group>"; };
 		11EB8EE9207B8B1500AFC9C1 /* BonusInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusInfoModel.swift; sourceTree = "<group>"; };
 		11F25859211B0668002D0A44 /* DLTOrderDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DLTOrderDetailModel.swift; sourceTree = "<group>"; };
+		11F305D62136479500FCA3F7 /* CXMMPrizeDigitalHistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMMPrizeDigitalHistoryVC.swift; sourceTree = "<group>"; };
+		11F305D82136481100FCA3F7 /* PrizeDigitalHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrizeDigitalHistoryCell.swift; sourceTree = "<group>"; };
 		11FEB942208D781400926951 /* DeviceInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoModel.swift; sourceTree = "<group>"; };
 		11FEB944208D78B900926951 /* ConfigInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigInfoModel.swift; sourceTree = "<group>"; };
 		11FEB946208D79A400926951 /* AppDelegateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateProtocol.swift; sourceTree = "<group>"; };
@@ -1286,6 +1290,7 @@
 				11353EA02134F06700C1D645 /* SurpriseShooterHeader.swift */,
 				11353EA22134F65A00C1D645 /* SurpriseShooterHeaderItem.swift */,
 				11B081402133E26E004FCAE9 /* SurprisePrizeDigitalCell.swift */,
+				11F305D82136481100FCA3F7 /* PrizeDigitalHistoryCell.swift */,
 				11B081442133E31F004FCAE9 /* SurprisePrizeDigitalItem.swift */,
 				11B081422133E2BA004FCAE9 /* SurprisePrizeMatchCell.swift */,
 			);
@@ -1310,6 +1315,7 @@
 			children = (
 				11AB2C1D21300BD70044FB1C /* CXMMSurpriseViewController.swift */,
 				11B0813C2133DAFF004FCAE9 /* CXMMPrizeListVC.swift */,
+				11F305D62136479500FCA3F7 /* CXMMPrizeDigitalHistoryVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2785,11 +2791,13 @@
 				113BCA012112F82900FCACBF /* DaletouConfirmCell.swift in Sources */,
 				11D9D9E02089CD2500F78FCF /* CXMNewsDetailViewController.swift in Sources */,
 				11528AA3208F3F76004CC8B4 /* NewsMeView.swift in Sources */,
+				11F305D92136481100FCA3F7 /* PrizeDigitalHistoryCell.swift in Sources */,
 				113DE724211A8DC800DE8026 /* DLTPrizeTitleCell.swift in Sources */,
 				E5973DDE204D152F006461CE /* BaseViewController.swift in Sources */,
 				E59CB3DD205BA1650086DD0E /* HomeSportLotteryCell.swift in Sources */,
 				E50B9075205231C800417BFE /* RechargeFooterView.swift in Sources */,
 				11EB8EE4207B6E8800AFC9C1 /* PaymentCell.swift in Sources */,
+				11F305D72136479500FCA3F7 /* CXMMPrizeDigitalHistoryVC.swift in Sources */,
 				11062B27208344CB001C1D14 /* CXMLotteryDateFilterVC.swift in Sources */,
 				E533BF032060EB3A0037D2D8 /* RechargePaymentTitleCell.swift in Sources */,
 				E5D8ABC020674A07002D688B /* OrderDetailFooterView.swift in Sources */,
