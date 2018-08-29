@@ -110,17 +110,17 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
        
-        if showTitle == nil {
-            webView.evaluateJavaScript("getCxmTitle()") { (data, error) in
-                if let title = data as? String {
-                    self.navigationItem.title = title
-                }else {
-                    self.navigationItem.title = webView.title
-                }
-            }
-        }else {
-            self.navigationItem.title = self.showTitle
-        }
+//        if showTitle == nil {
+//            webView.evaluateJavaScript("getCxmTitle()") { (data, error) in
+//                if let title = data as? String {
+//                    self.navigationItem.title = title
+//                }else {
+//                    self.navigationItem.title = webView.title
+//                }
+//            }
+//        }else {
+//            self.navigationItem.title = self.showTitle
+//        }
         
         let model = JSDataModel()
         let jsData = model.toJSONString()
