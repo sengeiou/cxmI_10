@@ -511,16 +511,20 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jump" translatesAutoresizingMaskIntoConstraints="NO" id="3hb-6i-a0c">
-                                                    <rect key="frame" x="344" y="84.5" width="15" height="15"/>
+                                                    <rect key="frame" x="344" y="111" width="15" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="15" id="6Em-uh-4oM"/>
                                                         <constraint firstAttribute="height" constant="15" id="8Hd-NT-xUw"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9iT-7A-Shs">
-                                                    <rect key="frame" x="72" y="51" width="262" height="82"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9iT-7A-Shs">
+                                                    <rect key="frame" x="72" y="103" width="262" height="30"/>
+                                                    <color key="backgroundColor" red="0.9882352941176471" green="0.43529411764705883" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="8yv-2P-KrO"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -540,7 +544,6 @@
                                                 <constraint firstItem="9iT-7A-Shs" firstAttribute="leading" secondItem="deO-6Z-0wr" secondAttribute="leading" id="XZO-Jh-87s"/>
                                                 <constraint firstItem="deO-6Z-0wr" firstAttribute="height" secondItem="jgl-Se-PFB" secondAttribute="height" id="gti-r7-Krn"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="9iT-7A-Shs" secondAttribute="bottom" constant="20" id="kcN-FJ-ff6"/>
-                                                <constraint firstItem="9iT-7A-Shs" firstAttribute="top" secondItem="deO-6Z-0wr" secondAttribute="bottom" constant="20" id="qQb-so-XWd"/>
                                                 <constraint firstItem="Izb-Da-a2F" firstAttribute="top" secondItem="deO-6Z-0wr" secondAttribute="top" id="qTk-g1-YB6"/>
                                                 <constraint firstItem="deO-6Z-0wr" firstAttribute="height" secondItem="Izb-Da-a2F" secondAttribute="height" id="thE-6h-e1P"/>
                                                 <constraint firstItem="3hb-6i-a0c" firstAttribute="centerY" secondItem="9iT-7A-Shs" secondAttribute="centerY" id="typ-UM-hdR"/>

@@ -32,3 +32,9 @@ class SurprisePrizeMatchCell: UITableViewCell {
     }
 
 }
+
+extension SurprisePrizeMatchCell {
+    public func configure() {
+        
+    }
+}
