@@ -10,10 +10,11 @@ import UIKit
 
 class SurprisePrizeDigitalCell: UITableViewCell {
 
-    @IBOutlet weak var icon: UIImageView!
+    
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    @IBOutlet weak var icon: UIImageView!
     
     @IBOutlet weak var title: UILabel!
     

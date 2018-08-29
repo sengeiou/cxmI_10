@@ -10,6 +10,16 @@ import UIKit
 
 class SurprisePrizeMatchCell: UITableViewCell {
 
+    @IBOutlet weak var icon: UIImageView!
+    
+    @IBOutlet weak var title: UILabel!
+    
+    @IBOutlet weak var stageLabel: UILabel!
+    
+    @IBOutlet weak var dateLabel: UILabel!
+    
+    @IBOutlet weak var matchLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -549,6 +549,7 @@
                                         <connections>
                                             <outlet property="dateLabel" destination="Izb-Da-a2F" id="d74-to-3VJ"/>
                                             <outlet property="icon" destination="lIH-Bp-TEZ" id="tFN-sw-bx9"/>
+                                            <outlet property="matchLabel" destination="9iT-7A-Shs" id="eEe-5J-eAc"/>
                                             <outlet property="stageLabel" destination="jgl-Se-PFB" id="bRo-O5-wEd"/>
                                             <outlet property="title" destination="deO-6Z-0wr" id="fej-2F-UIl"/>
                                         </connections>
