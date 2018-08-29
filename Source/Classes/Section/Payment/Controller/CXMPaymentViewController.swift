@@ -26,6 +26,8 @@ class CXMPaymentViewController: BaseViewController, UITableViewDelegate, UITable
     
     public var lottoToken : String!
     
+    public var pushWebUrl : String!
+    
     private var palyId : String!
     
     private var maxTimes = QueryMaxTimes
@@ -247,6 +249,15 @@ extension CXMPaymentViewController {
         guard self.paymentResult != nil else { return }
         
         NotificationCenter.default.removeObserver(self)
+        
+        guard self.pushWebUrl == nil else {
+            
+            let web = CXMActivityViewController()
+            web.urlStr = self.pushWebUrl + "&\(self.paymentResult.orderId!)"
+            
+            return
+        }
+        
         
         switch self.palyId {
         case "0":

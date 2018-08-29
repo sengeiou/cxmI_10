@@ -207,29 +207,30 @@ extension BaseWebViewController {
         let methodName = dic["methodName"]
         
         switch methodName {
-        case "getToken":    // 获取用户Token
+        case "getToken":         // 获取用户Token
             evaluateToken()
-        case "pushPayment": // 结算
+        case "pushPayment":      // 结算
             pushPaymentVC(dic: dic)
-        case "pushRechange": //充值
+        case "pushRechange":     //充值
             pushRechange(dic: dic)
-        case "showTitle": // 显示标题
+        case "showTitle":        // 显示标题
             showJSTitle(dic: dic)
-        case "goShare":  // 分享
+        case "goShare":          // 分享
             share(dic: dic)
-        case "pushUrl":  // 跳转路由
+        case "pushUrl":          // 跳转路由
             pushRouter(dic: dic)
-        case "closeWeb": // 关闭H5 -返回上一页
+        case "closeWeb":         // 关闭H5 -返回上一页
             goBack()
-        case "login":    // 登录
+        case "login":            // 登录
             //pushLoginVC(from: self)////
             pushLoginVC(from: self, fromWeb: true)
-        case "register": // 注册
+        case "register":         // 注册
             pushRegister()
-        case "channel": // 渠道号
+        case "channel":          // 渠道号
             getChannel()
-        case "hideTitle": // 隐藏导航栏
+        case "hideTitle":        // 隐藏导航栏
             hideNavigationTitle()
+            
         default:
             break
         }
@@ -247,6 +248,11 @@ extension BaseWebViewController {
         guard let payToken = dic["payToken"] else { return }
         let vc = CXMPaymentViewController()
         vc.lottoToken = payToken
+        
+        if let url = dic["pushUrl"] {
+            vc.pushWebUrl = url
+        }
+        
         pushViewController(vc: vc)
     }
     private func pushRechange(dic : [String: String]) {
