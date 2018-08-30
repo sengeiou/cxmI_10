@@ -16,6 +16,7 @@ enum PagerViewType: String {
     case accountDetails = "账户明细"
     case trend = "走势图"
     case activityCenter = "活动中心"
+    case leagueMatch = "联赛资料"
 }
 
 class BasePagerViewController: ButtonBarPagerTabStripViewController {
@@ -108,6 +109,8 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
             return getTrendVC()
         case .activityCenter:
             return getActivityCenterVC()
+        case .leagueMatch:
+            return getLeagueMatchVC()
         default:
             return[]
         }
@@ -213,6 +216,16 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
         
         return [propress, over]
     }
+    
+    private func getLeagueMatchVC() -> [UIViewController] {
+        let story = UIStoryboard(name: "Surprise", bundle: nil )
+        let hot = story.instantiateViewController(withIdentifier: "ActivityCenterVC") as! CXMMActivityCenterVC
+        
+        
+        
+        return [hot]
+    }
+    
     
     
     private func setTrendRightItem() {
