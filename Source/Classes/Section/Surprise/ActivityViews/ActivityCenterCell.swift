@@ -52,7 +52,8 @@ extension ActivityCenterCell {
             maskBageView.isHidden = false
             self.isUserInteractionEnabled = false
         }
-        
+    }
+    public func configure() {
         
     }
 }

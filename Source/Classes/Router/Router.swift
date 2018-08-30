@@ -154,7 +154,6 @@ extension RouterPro {
     private func pushPrize(from vc : UIViewController) {
         let story = UIStoryboard(name: "Surprise", bundle: nil)
         let prize = story.instantiateViewController(withIdentifier: "PrizeListVC") as! CXMMPrizeListVC
-        
         pushViewController(prize, from: vc)
     }
     /// 专家广场
@@ -163,7 +162,9 @@ extension RouterPro {
     }
     /// 彩票学堂
     private func pushLottoSchool(from vc : UIViewController) {
-        
+        let story = UIStoryboard(name: "Surprise", bundle: nil)
+        let school = story.instantiateViewController(withIdentifier: "LotterySchoolVC") as! CXMMLotterySchoolVC
+        pushViewController(school, from: vc)
     }
     /// 活动中心
     private func pushActivityCenter(from vc : UIViewController) {

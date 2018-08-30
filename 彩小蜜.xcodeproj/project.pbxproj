@@ -109,6 +109,7 @@
 		11547F8D21378DC80068596C /* CXMMActivityCenterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11547F8C21378DC80068596C /* CXMMActivityCenterVC.swift */; };
 		11547F90213791D70068596C /* ActivityCenterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11547F8F213791D70068596C /* ActivityCenterCell.swift */; };
 		11547F922137C6260068596C /* ActivityCenterListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11547F912137C6260068596C /* ActivityCenterListModel.swift */; };
+		11547F942137CD320068596C /* CXMMLotterySchoolVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11547F932137CD320068596C /* CXMMLotterySchoolVC.swift */; };
 		11551CF220E225C5002FE691 /* CXMAccountDetailsFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11551CF120E225C5002FE691 /* CXMAccountDetailsFilter.swift */; };
 		11551CF420E22D18002FE691 /* AccountDetailFilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11551CF320E22D18002FE691 /* AccountDetailFilterModel.swift */; };
 		11551CF620E23179002FE691 /* AccountDetailFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11551CF520E23179002FE691 /* AccountDetailFilterCell.swift */; };
@@ -526,6 +527,7 @@
 		11547F8C21378DC80068596C /* CXMMActivityCenterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMMActivityCenterVC.swift; sourceTree = "<group>"; };
 		11547F8F213791D70068596C /* ActivityCenterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCenterCell.swift; sourceTree = "<group>"; };
 		11547F912137C6260068596C /* ActivityCenterListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCenterListModel.swift; sourceTree = "<group>"; };
+		11547F932137CD320068596C /* CXMMLotterySchoolVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMMLotterySchoolVC.swift; sourceTree = "<group>"; };
 		11551CF120E225C5002FE691 /* CXMAccountDetailsFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMAccountDetailsFilter.swift; sourceTree = "<group>"; };
 		11551CF320E22D18002FE691 /* AccountDetailFilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailFilterModel.swift; sourceTree = "<group>"; };
 		11551CF520E23179002FE691 /* AccountDetailFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailFilterCell.swift; sourceTree = "<group>"; };
@@ -1336,6 +1338,7 @@
 				11B0813C2133DAFF004FCAE9 /* CXMMPrizeListVC.swift */,
 				11F305D62136479500FCA3F7 /* CXMMPrizeDigitalHistoryVC.swift */,
 				11547F8C21378DC80068596C /* CXMMActivityCenterVC.swift */,
+				11547F932137CD320068596C /* CXMMLotterySchoolVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2982,6 +2985,7 @@
 				E5103254206500A800A0156C /* CXMPurchaseRecordVC.swift in Sources */,
 				E53739772057B9340087E4E6 /* extension+UserDefaults.swift in Sources */,
 				112F77AA20EC79AE005CA9E4 /* CXMScoreViewController.swift in Sources */,
+				11547F942137CD320068596C /* CXMMLotterySchoolVC.swift in Sources */,
 				11D9D9E62089D6A200F78FCF /* NewsDetailCell.swift in Sources */,
 				112E9D4D21228FE0008466B4 /* DLTHistoryTrendBottom.swift in Sources */,
 				1169180A207DBA8B00C8A287 /* PaymentResultModel.swift in Sources */,
