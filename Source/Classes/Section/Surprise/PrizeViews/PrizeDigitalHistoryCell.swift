@@ -20,9 +20,19 @@ class PrizeDigitalHistoryCell: UITableViewCell {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    public var style : PrizeStyle!
+    
+    public var viewModel : PrizeDigitalViewModel = PrizeDigitalViewModel()
+    
+    private var list : [PrizeDigitalData]!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        _ = viewModel.list.asObserver()
+            .subscribe(onNext: { (list) in
+                self.list = list
+                self.collectionView.reloadData()
+            }, onError: nil , onCompleted: nil , onDisposed: nil )
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -33,6 +43,16 @@ class PrizeDigitalHistoryCell: UITableViewCell {
 
 }
 
+extension PrizeDigitalHistoryCell {
+    public func configure(with data : PrizeListModel, style : PrizeStyle) {
+        stageLabel.text = data.period
+        dateLabel.text = data.date
+        viewModel.style = style
+        viewModel.setData(red: data.redBall, blue: data.blueBall)
+    }
+}
+
+
 extension PrizeDigitalHistoryCell : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
@@ -40,11 +60,11 @@ extension PrizeDigitalHistoryCell : UICollectionViewDelegate {
 }
 extension PrizeDigitalHistoryCell : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return list != nil ? list.count : 0
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SurprisePrizeDigitalItem", for: indexPath) as! SurprisePrizeDigitalItem
-        
+        cell.configure(with: list[indexPath.row])
         return cell
     }
 }

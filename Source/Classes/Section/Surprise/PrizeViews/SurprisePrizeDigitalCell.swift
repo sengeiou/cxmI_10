@@ -52,8 +52,6 @@ extension SurprisePrizeDigitalCell {
         viewModel.setData(red: data.redBall, blue: data.blueBall)
         
     }
-    
-    
 }
 
 
