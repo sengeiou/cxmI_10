@@ -149,19 +149,7 @@ extension RouterPro {
     private func pushMore(from vc : UIViewController) {
         showHUD(message: "敬请期待")
     }
-    private func pushWebview(_ name : String = "", urlStr : String, from vc: UIViewController) {
-        let web = CXMActivityViewController()
-        web.webName = name
-        if urlStr.contains("?") {
-            web.urlStr = urlStr + "&cfrom=app"
-        }else {
-            web.urlStr = urlStr + "?cfrom=app"
-        }
-        
-        //web.urlStr = "http://192.168.31.205:8080/activity/discount?cxmxc=scm&usinfo=1&cmshare=1&from=app&showtitle=1"
-        //web.urlStr = "http://192.168.31.232:8080/activity/tuiguang?cxmxc=scm&type=1&usinfo=1&showtitle=1"
-        pushViewController(web, from: vc)
-    }
+    
     /// 开奖结果
     private func pushPrize(from vc : UIViewController) {
         let story = UIStoryboard(name: "Surprise", bundle: nil)
@@ -183,7 +171,7 @@ extension RouterPro {
     }
     /// 资讯信息
     private func pushInformation(from vc : UIViewController) {
-        
+        pushWebview(urlStr: SurpriseUrl, from: vc)
     }
     /// 晒单公园
     private func pushShaidan(from vc : UIViewController) {
@@ -211,7 +199,19 @@ extension RouterPro {
         
         formvc.navigationController?.pushViewController(vc, animated: true)
     }
-    
+    private func pushWebview(_ name : String = "", urlStr : String, from vc: UIViewController) {
+        let web = CXMActivityViewController()
+        web.webName = name
+        if urlStr.contains("?") {
+            web.urlStr = urlStr + "&cfrom=app"
+        }else {
+            web.urlStr = urlStr + "?cfrom=app"
+        }
+        
+        //web.urlStr = "http://192.168.31.205:8080/activity/discount?cxmxc=scm&usinfo=1&cmshare=1&from=app&showtitle=1"
+        //web.urlStr = "http://192.168.31.232:8080/activity/tuiguang?cxmxc=scm&type=1&usinfo=1&showtitle=1"
+        pushViewController(web, from: vc)
+    }
     func getCurrentVC()->UIViewController{
         
         var window = UIApplication.shared.keyWindow
