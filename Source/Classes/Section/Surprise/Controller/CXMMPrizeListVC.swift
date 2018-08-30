@@ -70,10 +70,30 @@ extension CXMMPrizeListVC {
 // MARK: - table Delegate
 extension CXMMPrizeListVC : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let story = UIStoryboard(name: "Surprise", bundle: nil )
-        let prizeHistory = story.instantiateViewController(withIdentifier: "PrizeDigitalHistoryVC") as! CXMMPrizeDigitalHistoryVC
         
-        pushViewController(vc: prizeHistory)
+        let story = UIStoryboard(name: "Surprise", bundle: nil )
+        
+        let model = prizeList[indexPath.row]
+        
+        switch model.classifyStatus {
+        case "0":
+            let prizeHistory = story.instantiateViewController(withIdentifier: "PrizeDigitalHistoryVC") as! CXMMPrizeDigitalHistoryVC
+            pushViewController(vc: prizeHistory)
+        case "1":
+            let history = story.instantiateViewController(withIdentifier: "PrizeMatchHistoryVC") as! CXMMPrizeMatchHistoryVC
+            
+            switch model.ballColor {
+            case "1":
+                history.style = .football
+            case "0":
+                history.style = .basketBall
+            default: break
+            }
+            
+            pushViewController(vc: history)
+        default : break
+        }
+        
     }
 }
 // MARK: - table DataSource
