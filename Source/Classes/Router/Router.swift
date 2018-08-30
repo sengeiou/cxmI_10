@@ -180,7 +180,7 @@ extension RouterPro {
     }
     /// 实时统计
     private func pushStatistics(from vc : UIViewController) {
-        
+        pushPagerView(pagerType: .leagueMatch, from: vc)
     }
     /// 发现更多
     private func pushSurpriseMore(from vc : UIViewController) {

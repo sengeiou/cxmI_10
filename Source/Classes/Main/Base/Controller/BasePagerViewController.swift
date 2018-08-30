@@ -219,11 +219,20 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
     
     private func getLeagueMatchVC() -> [UIViewController] {
         let story = UIStoryboard(name: "Surprise", bundle: nil )
-        let hot = story.instantiateViewController(withIdentifier: "ActivityCenterVC") as! CXMMActivityCenterVC
+        let hot = story.instantiateViewController(withIdentifier: "LeagueHotVC") as! CXMMLeagueHotVC
         
+        let international = story.instantiateViewController(withIdentifier: "LeagueMatchVC") as! CXMMLeagueMatchVC
+        international.style = .国际
+        let europe = story.instantiateViewController(withIdentifier: "LeagueMatchVC") as! CXMMLeagueMatchVC
+        europe.style = .欧洲
+        let asia = story.instantiateViewController(withIdentifier: "LeagueMatchVC") as! CXMMLeagueMatchVC
+        asia.style = .亚洲
+        let america = story.instantiateViewController(withIdentifier: "LeagueMatchVC") as! CXMMLeagueMatchVC
+        america.style = .美洲
+        let africa = story.instantiateViewController(withIdentifier: "LeagueMatchVC") as! CXMMLeagueMatchVC
+        africa.style = .非洲
         
-        
-        return [hot]
+        return [hot, international, europe, asia, america, africa]
     }
     
     
