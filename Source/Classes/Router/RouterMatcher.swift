@@ -26,6 +26,14 @@ enum PushControllerType : String{
     case 北京单场
     case 广东11选5
     case 更多彩种
+    case 开奖结果
+    case 专家广场
+    case 彩票学堂
+    case 活动中心
+    case 资讯信息
+    case 晒单公园
+    case 实时统计
+    case 发现更多
     case none
 }
 
@@ -97,6 +105,27 @@ extension RouterMatcher {
             return (.注册, urlModel)
         case "8":
             return (.咨询详情, urlModel)
+        case "9":
+            switch urlModel.id {
+            case "1":
+                return (.开奖结果, urlModel)
+            case "2":
+                return (.专家广场, urlModel)
+            case "3":
+                return (.彩票学堂, urlModel)
+            case "4":
+                return (.活动中心, urlModel)
+            case "5":
+                return (.资讯信息, urlModel)
+            case "6":
+                return (.晒单公园, urlModel)
+            case "7":
+                return (.实时统计, urlModel)
+            case "8":
+                return (.发现更多, urlModel)
+            default :
+                return (.none, urlModel)
+            }
         default:
             return (.none, urlModel)
         }

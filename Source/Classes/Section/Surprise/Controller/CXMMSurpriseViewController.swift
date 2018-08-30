@@ -160,10 +160,17 @@ extension CXMMSurpriseViewController {
 // MARK: - SurpriseCategoryCell  Delegate
 extension CXMMSurpriseViewController : SurpriseCategoryCellDelegate {
     func didSelectItem(info: SurpriseItemInfo, indexPath: IndexPath) {
-        let story = UIStoryboard(name: "Surprise", bundle: nil)
-        let vc = story.instantiateViewController(withIdentifier: "PrizeListVC") as! CXMMPrizeListVC
-        
-        pushViewController(vc: vc   )
+        guard info.redirectUrl != "" else { return }
+        guard info.status != "" else { return }
+        switch info.status {
+        case "0":
+            //let url =  "http://192.168.31.205:8080?cxmxc=scm&type=1"
+            pushRouterVC(urlStr: info.redirectUrl, from: self)
+        case "1":
+            showHUD(message: info.statusReason)
+        default:
+            break
+        }
     }
 }
 
@@ -307,7 +314,7 @@ extension CXMMSurpriseViewController : UITableViewDataSource {
         
         switch indexPath.section {
         case 0:
-            
+            guard surpriseModel.discoveryHallClassifyList.count != 0 else { return 0 }
             let count = lineNumber(totalNum: surpriseModel.discoveryHallClassifyList.count, horizonNum: 4)
             
             if count == 0 {
@@ -316,6 +323,8 @@ extension CXMMSurpriseViewController : UITableViewDataSource {
                 return CGFloat(count * 115)
             }
         case 1:
+            
+            guard surpriseModel.hotLeagueList.count != 0 else { return 0 }
             let count = lineNumber(totalNum: surpriseModel.hotLeagueList.count, horizonNum: 4)
             
             if count == 0 {

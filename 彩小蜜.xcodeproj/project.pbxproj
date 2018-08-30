@@ -108,6 +108,7 @@
 		11528AA3208F3F76004CC8B4 /* NewsMeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11528AA2208F3F76004CC8B4 /* NewsMeView.swift */; };
 		11547F8D21378DC80068596C /* CXMMActivityCenterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11547F8C21378DC80068596C /* CXMMActivityCenterVC.swift */; };
 		11547F90213791D70068596C /* ActivityCenterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11547F8F213791D70068596C /* ActivityCenterCell.swift */; };
+		11547F922137C6260068596C /* ActivityCenterListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11547F912137C6260068596C /* ActivityCenterListModel.swift */; };
 		11551CF220E225C5002FE691 /* CXMAccountDetailsFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11551CF120E225C5002FE691 /* CXMAccountDetailsFilter.swift */; };
 		11551CF420E22D18002FE691 /* AccountDetailFilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11551CF320E22D18002FE691 /* AccountDetailFilterModel.swift */; };
 		11551CF620E23179002FE691 /* AccountDetailFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11551CF520E23179002FE691 /* AccountDetailFilterCell.swift */; };
@@ -524,6 +525,7 @@
 		11528AA2208F3F76004CC8B4 /* NewsMeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsMeView.swift; sourceTree = "<group>"; };
 		11547F8C21378DC80068596C /* CXMMActivityCenterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMMActivityCenterVC.swift; sourceTree = "<group>"; };
 		11547F8F213791D70068596C /* ActivityCenterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCenterCell.swift; sourceTree = "<group>"; };
+		11547F912137C6260068596C /* ActivityCenterListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCenterListModel.swift; sourceTree = "<group>"; };
 		11551CF120E225C5002FE691 /* CXMAccountDetailsFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMAccountDetailsFilter.swift; sourceTree = "<group>"; };
 		11551CF320E22D18002FE691 /* AccountDetailFilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailFilterModel.swift; sourceTree = "<group>"; };
 		11551CF520E23179002FE691 /* AccountDetailFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailFilterCell.swift; sourceTree = "<group>"; };
@@ -1291,6 +1293,7 @@
 			children = (
 				11AB2C1821300BC40044FB1C /* SurpriseModel.swift */,
 				11F305DF21368B3600FCA3F7 /* PrizeListModel.swift */,
+				11547F912137C6260068596C /* ActivityCenterListModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3053,6 +3056,7 @@
 				11C4F45F20E095D800CCDFC6 /* YHCropRectView.m in Sources */,
 				11353E9B2134EA6300C1D645 /* SurpriseMatchCell.swift in Sources */,
 				E51F9A5E205A29D500AB8A21 /* LoginFooterView.swift in Sources */,
+				11547F922137C6260068596C /* ActivityCenterListModel.swift in Sources */,
 				113D8EA9212433C00020EAC4 /* DLTRedBlueTrendStageItem.swift in Sources */,
 				1137A4EA21363519000CED33 /* LineNumberProtocol.swift in Sources */,
 				1169180C207E3EC500C8A287 /* FootballScoreView.swift in Sources */,

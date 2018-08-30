@@ -15,6 +15,7 @@ enum PagerViewType: String {
     case message = "消息中心"
     case accountDetails = "账户明细"
     case trend = "走势图"
+    case activityCenter = "活动中心"
 }
 
 class BasePagerViewController: ButtonBarPagerTabStripViewController {
@@ -105,6 +106,8 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
             setTrendRightItem()
             self.containerView.isScrollEnabled = false
             return getTrendVC()
+        case .activityCenter:
+            return getActivityCenterVC()
         default:
             return[]
         }
@@ -199,6 +202,18 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
         
         return [history, redTrend, blueTrend, redHot, blueHot]
     }
+    
+    private func getActivityCenterVC() -> [UIViewController] {
+        let story = UIStoryboard(name: "Surprise", bundle: nil )
+        let propress = story.instantiateViewController(withIdentifier: "ActivityCenterVC") as! CXMMActivityCenterVC
+        propress.style = .progress
+        
+        let over = story.instantiateViewController(withIdentifier: "ActivityCenterVC") as! CXMMActivityCenterVC
+        over.style = .over
+        
+        return [propress, over]
+    }
+    
     
     private func setTrendRightItem() {
         let leftBut = UIButton(type: .custom)

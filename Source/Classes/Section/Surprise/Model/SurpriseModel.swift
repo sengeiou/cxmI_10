@@ -31,6 +31,8 @@ struct SurpriseItemInfo : HandyJSON {
     var className : String = ""
     var redirectUrl : String = ""
     var subTitle : String = ""
+    var status : String = ""
+    var statusReason : String = ""
 }
 
 struct SurpriseScorerInfo : HandyJSON {

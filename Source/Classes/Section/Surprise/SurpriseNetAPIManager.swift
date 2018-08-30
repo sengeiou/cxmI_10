@@ -19,7 +19,8 @@ enum SurpriseAPIManager {
     case surpriseList()
     /// 开奖结果
     case prizeList()
-    
+    /// 活动中心
+    case activityCenter()
 }
 
 extension SurpriseAPIManager : TargetType {
@@ -35,6 +36,8 @@ extension SurpriseAPIManager : TargetType {
             return "/lottery/discoveryPage/homePage"
         case .prizeList:
             return "/lottery/discoveryPage/openPrize"
+        case .activityCenter:
+            return "/lottery/discoveryPage/activeCenter"
         }
     }
     
@@ -45,6 +48,8 @@ extension SurpriseAPIManager : TargetType {
         case .surpriseList:
             dic["emptyStr"] = "20"
         case .prizeList:
+            dic["emptyStr"] = "20"
+        case .activityCenter:
             dic["emptyStr"] = "20"
         default:
             return .requestPlain

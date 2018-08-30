@@ -60,6 +60,23 @@ extension RouterPro {
         case .球队详情:
             guard let id = type.1?.id else { return }
             pushMatchInfo(matchId: id, from: vc)
+        case .开奖结果:
+            pushPrize(from: vc )
+        case .专家广场:
+            pushExpert(from: vc)
+        case .彩票学堂:
+            pushLottoSchool(from: vc )
+        case .活动中心:
+            pushActivityCenter(from: vc )
+        case .资讯信息:
+            pushInformation(from: vc )
+        case .晒单公园:
+            pushShaidan(from: vc)
+        case .实时统计:
+            pushStatistics(from: vc )
+        case .发现更多:
+            pushSurpriseMore(from: vc)
+            
         default:
             break
         }
@@ -145,8 +162,53 @@ extension RouterPro {
         //web.urlStr = "http://192.168.31.232:8080/activity/tuiguang?cxmxc=scm&type=1&usinfo=1&showtitle=1"
         pushViewController(web, from: vc)
     }
+    /// 开奖结果
+    private func pushPrize(from vc : UIViewController) {
+        let story = UIStoryboard(name: "Surprise", bundle: nil)
+        let prize = story.instantiateViewController(withIdentifier: "PrizeListVC") as! CXMMPrizeListVC
+        
+        pushViewController(prize, from: vc)
+    }
+    /// 专家广场
+    private func pushExpert(from vc : UIViewController) {
+        
+    }
+    /// 彩票学堂
+    private func pushLottoSchool(from vc : UIViewController) {
+        
+    }
+    /// 活动中心
+    private func pushActivityCenter(from vc : UIViewController) {
+        pushPagerView(pagerType: .activityCenter, from: vc)
+    }
+    /// 资讯信息
+    private func pushInformation(from vc : UIViewController) {
+        
+    }
+    /// 晒单公园
+    private func pushShaidan(from vc : UIViewController) {
+        
+    }
+    /// 实时统计
+    private func pushStatistics(from vc : UIViewController) {
+        
+    }
+    /// 发现更多
+    private func pushSurpriseMore(from vc : UIViewController) {
+        
+    }
+    
     
     private func pushViewController(_ vc: UIViewController, from formvc: UIViewController) {
+        formvc.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    public func pushPagerView(pagerType: PagerViewType, from formvc: UIViewController) {
+        let storyboard = UIStoryboard(name: "Storyboard", bundle: Bundle.main)
+        
+        let vc = storyboard.instantiateViewController(withIdentifier: "BasePagerViewController") as! BasePagerViewController
+        vc.pagerType = pagerType
+        
         formvc.navigationController?.pushViewController(vc, animated: true)
     }
     
