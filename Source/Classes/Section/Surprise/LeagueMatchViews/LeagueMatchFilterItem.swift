@@ -10,7 +10,7 @@ import UIKit
 
 class LeagueMatchFilterItem: UICollectionViewCell {
     
-    static let width : CGFloat = 60
+    static let width : CGFloat = (screenWidth - 40 - 40) / 3 - 1
     static let height: CGFloat = 30
     
     static let identifier = "LeagueMatchFilterItem"
