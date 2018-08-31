@@ -82,6 +82,15 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
         
         webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
         
+        webView.evaluateJavaScript("navigator.userAgent") { (result, error) in
+            if let resu = result as? String {
+                if #available(iOS 9.0, *) {
+                    self.webView.customUserAgent = "app/ios&" + resu
+                } else {
+                }
+            }
+        }
+        
         self.view.addSubview(webView)
         
     }
