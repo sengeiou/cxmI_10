@@ -76,7 +76,7 @@ class CXMMLeagueMatchFilterVC: BasePopViewController {
             make.left.right.equalTo(0)
         }
         topline.snp.makeConstraints { (make) in
-            make.top.equalTo(titleLabel.snp.bottom)
+            make.top.equalTo(titleLabel.snp.bottom).offset(10)
             make.left.right.equalTo(0)
             make.height.equalTo(1)
         }
