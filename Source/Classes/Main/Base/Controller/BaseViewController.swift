@@ -120,6 +120,11 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
         tableView.emptyDataSetSource = self
         self.emptyTitle = title
     }
+    public func setEmpty(title: String, _ collectionView: UICollectionView) {
+        collectionView.emptyDataSetDelegate = self
+        collectionView.emptyDataSetSource = self
+        self.emptyTitle = title
+    }
     public func showProgressHUD() {
         SVProgressHUD.show()
     }

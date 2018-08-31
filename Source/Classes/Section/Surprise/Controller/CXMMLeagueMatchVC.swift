@@ -29,6 +29,8 @@ class CXMMLeagueMatchVC: BaseViewController, IndicatorInfoProvider {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       
+        setEmpty(title: "暂无数据", collectionView)
         collectionView.headerRefresh {
             self.loadNewData()
         }
