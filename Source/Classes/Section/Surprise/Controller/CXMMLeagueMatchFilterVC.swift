@@ -12,7 +12,7 @@ class CXMMLeagueMatchFilterVC: BasePopViewController {
 
     private var collectionView : UICollectionView!
     
-    private var bottomView: BottomView!
+//    private var bottomView: BottomView!
     
     private var titleLabel : UILabel!
     
@@ -34,32 +34,32 @@ class CXMMLeagueMatchFilterVC: BasePopViewController {
         titleLabel.textAlignment = .center
         titleLabel.text = "西班牙"
         
-        bottomView = BottomView()
-        bottomView.delegate = self
+//        bottomView = BottomView()
+//        bottomView.delegate = self
         
         
         self.pushBgView.addSubview(titleLabel)
-        self.pushBgView.addSubview(bottomView)
+        //self.pushBgView.addSubview(bottomView)
         self.pushBgView.addSubview(collectionView)
         
         
         collectionView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
             make.top.equalTo(titleLabel.snp.bottom).offset(20)
-            make.bottom.equalTo(bottomView.snp.top).offset(-20)
+            make.bottom.equalTo(-10)
         }
     }
 }
 
-extension CXMMLeagueMatchFilterVC : BottomViewDelegate {
-    func didTipConfitm() {
-        
-    }
-    
-    func didTipCancel() {
-        
-    }
-}
+//extension CXMMLeagueMatchFilterVC : BottomViewDelegate {
+//    func didTipConfitm() {
+//
+//    }
+//
+//    func didTipCancel() {
+//
+//    }
+//}
 
 extension CXMMLeagueMatchFilterVC : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

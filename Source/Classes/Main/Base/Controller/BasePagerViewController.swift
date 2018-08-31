@@ -109,8 +109,8 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
             return getTrendVC()
         case .activityCenter:
             return getActivityCenterVC()
-//        case .leagueMatch:
-//            return getLeagueMatchVC()
+        case .leagueMatch:
+            return getLeagueMatchVC()
         default:
             return[]
         }

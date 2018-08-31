@@ -10,17 +10,11 @@ import Foundation
 import HandyJSON
 
 struct LeagueMatchModel : HandyJSON {
-    var groupName: String = ""
-    var groupStatus : String = ""
-    var leagueContryList : [LeagueContryModel] = [LeagueContryModel]()
-    var leagueInfoList : [LeagueInfoModel] = [LeagueInfoModel]()
-}
-
-struct LeagueContryModel : HandyJSON {
-    var contryName : String = ""
+    
+    var contryName: String = ""
     var contryPic : String = ""
     var groupId : String = ""
-    var id : String = ""
+    var leagueInfoList : [LeagueInfoModel] = [LeagueInfoModel]()
 }
 
 struct LeagueInfoModel : HandyJSON {

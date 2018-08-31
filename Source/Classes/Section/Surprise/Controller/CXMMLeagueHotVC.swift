@@ -24,10 +24,10 @@ class CXMMLeagueHotVC:  BaseViewController, IndicatorInfoProvider {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        collectionView.headerRefresh {
-//            self.loadNewData()
-//        }
-//        collectionView.beginRefreshing()
+        collectionView.headerRefresh {
+            self.loadNewData()
+        }
+        collectionView.beginRefreshing()
     }
 
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
@@ -44,30 +44,33 @@ extension CXMMLeagueHotVC {
         
          weak var weakSelf = self
         
-//        _ = surpriseProvider.rx.request(.leagueList(contryId: contryId))
-//            .asObservable()
-//            .mapArray(type: LeagueListModel.self)
-//            .subscribe(onNext: { (data) in
-//                weakSelf?.collectionView.endrefresh()
-//                weakSelf?.leagueList = data
-//                weakSelf?.collectionView.reloadData()
-//
-//            }, onError: { (error) in
-//                weakSelf?.collectionView.endrefresh()
-//                guard let err = error as? HXError else { return }
-//                switch err {
-//                case .UnexpectedResult(let code, let msg):
-//                    switch code {
-//                    case 600:
-//                        weakSelf?.pushLoginVC(from: self)
-//                    default : break
-//                    }
-//                    if 300000...310000 ~= code {
-//                        weakSelf?.showHUD(message: msg!)
-//                    }
-//                default: break
-//                }
-//            }, onCompleted: nil , onDisposed: nil )
+        _ = surpriseProvider.rx.request(.leagueList(groupId: "0"))
+            .asObservable()
+            .mapArray(type: LeagueMatchModel.self)
+            .subscribe(onNext: { (data) in
+                weakSelf?.collectionView.endrefresh()
+                
+                guard data.count > 0 else { return }
+                
+                weakSelf?.leagueList = data[0].leagueInfoList
+                weakSelf?.collectionView.reloadData()
+
+            }, onError: { (error) in
+                weakSelf?.collectionView.endrefresh()
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        weakSelf?.pushLoginVC(from: self)
+                    default : break
+                    }
+                    if 300000...310000 ~= code {
+                        weakSelf?.showHUD(message: msg!)
+                    }
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil )
     }
 }
 

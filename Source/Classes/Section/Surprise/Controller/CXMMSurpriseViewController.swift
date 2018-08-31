@@ -165,11 +165,11 @@ extension CXMMSurpriseViewController : SurpriseCategoryCellDelegate {
         switch info.status {
         case "0":
             //let url =  "http://192.168.31.205:8080?cxmxc=scm&type=1"
-            //pushRouterVC(urlStr: info.redirectUrl, from: self)
+            pushRouterVC(urlStr: info.redirectUrl, from: self)
             
-            let vc = CXMMLeaguePagerVC()
-            
-            pushViewController(vc: vc)
+//            let vc = CXMMLeaguePagerVC()
+//
+//            pushViewController(vc: vc)
             
         case "1":
             showHUD(message: info.statusReason)

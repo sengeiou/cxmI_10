@@ -21,10 +21,11 @@ enum SurpriseAPIManager {
     case prizeList()
     /// 活动中心
     case activityCenter()
-    /// 联赛信息
-    case leagueList(contryId: String)
-    /// 联赛pager
-    case leaguePager()
+    /// 联赛信息 首页
+    case leagueList(groupId: String)
+    /// 联赛详情
+    case leagueDetail()
+    
 }
 
 extension SurpriseAPIManager : TargetType {
@@ -43,8 +44,8 @@ extension SurpriseAPIManager : TargetType {
         case .activityCenter:
             return "/lottery/discoveryPage/activeCenter"
         case .leagueList:
-            return "/lottery/discoveryPage/leagueList"
-        case .leaguePager:
+            return "/lottery/discoveryPage/leagueListByGroupId"
+        case .leagueDetail:
             return "/lottery/discoveryPage/leaguePage"
         }
     }
@@ -59,9 +60,9 @@ extension SurpriseAPIManager : TargetType {
             dic["emptyStr"] = "20"
         case .activityCenter:
             dic["emptyStr"] = "20"
-        case .leagueList (let contryId):
-            dic["contryId"] = contryId
-        case .leaguePager:
+        case .leagueList (let groupId):
+            dic["groupId"] = groupId
+        case .leagueDetail():
             dic["emptyStr"] = "20"
         default:
             return .requestPlain
