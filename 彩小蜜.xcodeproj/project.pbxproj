@@ -111,6 +111,7 @@
 		115076AA213916860029A63E /* LeagueMatchDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115076A9213916860029A63E /* LeagueMatchDetailCell.swift */; };
 		115076AC213918EE0029A63E /* LeagueDetailShooterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115076AB213918EE0029A63E /* LeagueDetailShooterCell.swift */; };
 		115076AE213919260029A63E /* LeagueDetailCourseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115076AD213919260029A63E /* LeagueDetailCourseCell.swift */; };
+		115076B2213954F30029A63E /* LeagueDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115076B1213954F30029A63E /* LeagueDetailModel.swift */; };
 		11528AA1208F3F67004CC8B4 /* MeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11528AA0208F3F67004CC8B4 /* MeView.swift */; };
 		11528AA3208F3F76004CC8B4 /* NewsMeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11528AA2208F3F76004CC8B4 /* NewsMeView.swift */; };
 		11547F8D21378DC80068596C /* CXMMActivityCenterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11547F8C21378DC80068596C /* CXMMActivityCenterVC.swift */; };
@@ -542,6 +543,7 @@
 		115076A9213916860029A63E /* LeagueMatchDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueMatchDetailCell.swift; sourceTree = "<group>"; };
 		115076AB213918EE0029A63E /* LeagueDetailShooterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueDetailShooterCell.swift; sourceTree = "<group>"; };
 		115076AD213919260029A63E /* LeagueDetailCourseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueDetailCourseCell.swift; sourceTree = "<group>"; };
+		115076B1213954F30029A63E /* LeagueDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueDetailModel.swift; sourceTree = "<group>"; };
 		11528AA0208F3F67004CC8B4 /* MeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeView.swift; sourceTree = "<group>"; };
 		11528AA2208F3F76004CC8B4 /* NewsMeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsMeView.swift; sourceTree = "<group>"; };
 		11547F8C21378DC80068596C /* CXMMActivityCenterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMMActivityCenterVC.swift; sourceTree = "<group>"; };
@@ -1323,6 +1325,7 @@
 				11F305DF21368B3600FCA3F7 /* PrizeListModel.swift */,
 				11547F912137C6260068596C /* ActivityCenterListModel.swift */,
 				115076A52138E7640029A63E /* LeagueListModel.swift */,
+				115076B1213954F30029A63E /* LeagueDetailModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2890,6 +2893,7 @@
 				E512CE402071D0A30095B6DD /* CXMFootballMatchFilterVC.swift in Sources */,
 				114D06CD20B55BA600443BCC /* ClearCache.swift in Sources */,
 				11691806207DB73800C8A287 /* CXMCouponFilterViewController.swift in Sources */,
+				115076B2213954F30029A63E /* LeagueDetailModel.swift in Sources */,
 				11EA897220E36CD2000AB4BA /* AccountDetailData.swift in Sources */,
 				E5786FB4206DE19F0045F7F5 /* FootballMatchModel.swift in Sources */,
 				E5973DDC204CEFDB006461CE /* CXMLoginViewController.swift in Sources */,

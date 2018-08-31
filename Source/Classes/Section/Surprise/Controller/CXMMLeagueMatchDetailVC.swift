@@ -20,6 +20,8 @@ class CXMMLeagueMatchDetailVC: BaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    private var leagueDetailModel : LeagueDetailModel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -40,6 +42,32 @@ extension CXMMLeagueMatchDetailVC {
     }
     private func leagueDetailRequest() {
         
+        weak var weakSelf = self
+        
+        surpriseProvider.rx.request(.leagueDetail(leagueId: leagueInfo.leagueId))
+        .asObservable()
+        .mapObject(type: LeagueDetailModel.self)
+            .subscribe(onNext: { (data) in
+                weakSelf?.tableView.endrefresh()
+                weakSelf?.leagueDetailModel = data
+                weakSelf?.tableView.reloadData()
+                
+            }, onError: { (error) in
+                weakSelf?.tableView.endrefresh()
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        weakSelf?.pushLoginVC(from: self)
+                    default : break
+                    }
+                    if 300000...310000 ~= code {
+                        weakSelf?.showHUD(message: msg!)
+                    }
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil )
     }
 }
 

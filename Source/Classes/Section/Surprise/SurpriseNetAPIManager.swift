@@ -24,7 +24,8 @@ enum SurpriseAPIManager {
     /// 联赛信息 首页
     case leagueList(groupId: String)
     /// 联赛详情
-    case leagueDetail()
+    case leagueDetail(leagueId : String)
+    
     
 }
 
@@ -46,7 +47,7 @@ extension SurpriseAPIManager : TargetType {
         case .leagueList:
             return "/lottery/discoveryPage/leagueListByGroupId"
         case .leagueDetail:
-            return "/lottery/discoveryPage/leaguePage"
+            return "/lottery/discoveryPage/leagueDetail"
         }
     }
     
@@ -62,8 +63,8 @@ extension SurpriseAPIManager : TargetType {
             dic["emptyStr"] = "20"
         case .leagueList (let groupId):
             dic["groupId"] = groupId
-        case .leagueDetail():
-            dic["emptyStr"] = "20"
+        case .leagueDetail(let leagueId):
+            dic["leagueId"] = leagueId
         default:
             return .requestPlain
         }
