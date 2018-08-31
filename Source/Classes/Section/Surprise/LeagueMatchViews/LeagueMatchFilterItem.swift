@@ -23,15 +23,16 @@ class LeagueMatchFilterItem: UICollectionViewCell {
         initSubview()
     }
     
-    
-    
     private func initSubview() {
         title = UILabel()
         title.font = Font13
         title.textColor = Color505050
         title.textAlignment = .center
         title.text = "西班牙杯"
-        
+        title.layer.cornerRadius = 2
+        title.layer.masksToBounds = true
+        title.layer.borderWidth = 1
+        title.layer.borderColor = ColorE9E9E9.cgColor
         self.contentView.addSubview(title)
         
         title.snp.makeConstraints { (make) in
@@ -44,8 +45,8 @@ class LeagueMatchFilterItem: UICollectionViewCell {
     }
 }
 extension LeagueMatchFilterItem {
-    public func configure() {
-        
+    public func configure(with data : LeagueInfoModel) {
+        title.text = data.leagueAddr
     }
 }
 

@@ -93,10 +93,17 @@ extension CXMMLeagueMatchVC {
     }
 }
 
-
+extension CXMMLeagueMatchVC : LeagueMatchFilterDelegate {
+    func didSelectItem(leagueInfo: LeagueInfoModel) {
+        
+    }
+}
 extension CXMMLeagueMatchVC : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        let match = CXMMLeagueMatchFilterVC()
+        match.delegate = self
+        match.leagueList = leagueMatchList[indexPath.row].leagueInfoList
+        present(match)
     }
 }
 extension CXMMLeagueMatchVC : UICollectionViewDataSource {
@@ -106,28 +113,18 @@ extension CXMMLeagueMatchVC : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LeagueMatchItem", for: indexPath) as! LeagueMatchItem
         cell.configure(with: leagueMatchList[indexPath.row])
+
+        cell.topLine.isHidden = true
         
-        //if indexPath.row == 2 || indexPath
-        
-        
-        cell.bottomLine.isHidden = true
-        
-//        if (indexPath.row + 1) % 3 == 0 || leagueMatchList.count == indexPath.row + 1 {
-//            cell.rightLine.isHidden = false
-//        }else {
-//            cell.rightLine.isHidden = true
-//        }
-        
-        if indexPath.row == 0 || (indexPath.row + 1) % 4 == 0 || (indexPath.row + 1) % 4 == 3 {
+        if indexPath.row == 0 || (indexPath.row + 1) % 3 == 1 {
             cell.leftLine.isHidden = false
         }else {
             cell.leftLine.isHidden = true
         }
         
-        if leagueMatchList.count - indexPath.row < 4 {
-            cell.bottomLine.isHidden = false
+        if indexPath.row < 3 {
+            cell.topLine.isHidden = false
         }
-        
         
         return cell
     }

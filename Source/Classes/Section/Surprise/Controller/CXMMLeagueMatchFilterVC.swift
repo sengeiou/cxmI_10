@@ -8,13 +8,23 @@
 
 import UIKit
 
+protocol LeagueMatchFilterDelegate {
+    func didSelectItem(leagueInfo : LeagueInfoModel) -> Void
+}
+
 class CXMMLeagueMatchFilterVC: BasePopViewController {
 
+    public var leagueList : [LeagueInfoModel]!
+    
+    public var delegate : LeagueMatchFilterDelegate!
+    
     private var collectionView : UICollectionView!
     
 //    private var bottomView: BottomView!
     
     private var titleLabel : UILabel!
+    
+    private var topline : UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +34,19 @@ class CXMMLeagueMatchFilterVC: BasePopViewController {
     }
 
     private func initSubview() {
-        collectionView = UICollectionView()
+        
+        self.viewHeight = 380
+        
+        topline = UIView()
+        topline.backgroundColor = ColorE9E9E9
+        
+        
+        let layout = UICollectionViewFlowLayout()
+        
+        collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.backgroundColor = ColorFFFFFF
         collectionView.register(LeagueMatchFilterItem.self,
                                 forCellWithReuseIdentifier: LeagueMatchFilterItem.identifier)
         
@@ -37,11 +59,21 @@ class CXMMLeagueMatchFilterVC: BasePopViewController {
 //        bottomView = BottomView()
 //        bottomView.delegate = self
         
-        
+        self.pushBgView.addSubview(topline)
         self.pushBgView.addSubview(titleLabel)
         //self.pushBgView.addSubview(bottomView)
         self.pushBgView.addSubview(collectionView)
         
+        titleLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(10)
+            make.height.equalTo(20)
+            make.left.right.equalTo(0)
+        }
+        topline.snp.makeConstraints { (make) in
+            make.top.equalTo(titleLabel.snp.bottom)
+            make.left.right.equalTo(0)
+            make.height.equalTo(1)
+        }
         
         collectionView.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
@@ -63,12 +95,14 @@ class CXMMLeagueMatchFilterVC: BasePopViewController {
 
 extension CXMMLeagueMatchFilterVC : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        guard delegate != nil else { return }
+        delegate.didSelectItem(leagueInfo: leagueList[indexPath.row])
+        self.dismiss(animated: false, completion: nil )
     }
 }
 extension CXMMLeagueMatchFilterVC : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return leagueList != nil ? leagueList.count : 0
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LeagueMatchFilterItem.identifier, for: indexPath) as! LeagueMatchFilterItem
@@ -82,7 +116,7 @@ extension CXMMLeagueMatchFilterVC : UICollectionViewDelegateFlowLayout {
         return CGSize(width: LeagueMatchFilterItem.width, height: LeagueMatchFilterItem.height)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 5
