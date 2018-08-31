@@ -10,8 +10,8 @@ import UIKit
 
 class SurpriseMatchItem: UICollectionViewCell {
     
-    static let width : CGFloat = 60
-    static let height: CGFloat = 80
+    static let width : CGFloat = 80
+    static let height: CGFloat = 100
     
     @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var title: UILabel!
@@ -22,6 +22,6 @@ extension SurpriseMatchItem {
         if let url = URL(string: data.leaguePic) {
             icon.kf.setImage(with: url)
         }
-        title.text = data.leagueName
+        title.text = data.leagueAddr
     }
 }

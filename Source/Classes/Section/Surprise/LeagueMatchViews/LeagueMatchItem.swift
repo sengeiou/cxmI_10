@@ -10,8 +10,8 @@ import UIKit
 
 class LeagueMatchItem: UICollectionViewCell {
     
-    static let width : CGFloat = 60
-    static let height: CGFloat = 30
+    static let width : CGFloat = (screenWidth - 20) / 3 - 0.01
+    static let height: CGFloat = 40
     
     @IBOutlet weak var topLine: UIView!
     @IBOutlet weak var bottomLine: UIView!
@@ -20,7 +20,18 @@ class LeagueMatchItem: UICollectionViewCell {
     
     @IBOutlet weak var rightLine: UIView!
     
+    @IBOutlet weak var icon: UIImageView!
     
-    @IBOutlet weak var titleButton: UIButton!
+    @IBOutlet weak var title: UILabel!
     
+    
+}
+
+extension LeagueMatchItem {
+    public func configure(with data : LeagueMatchModel) {
+        if let url = URL(string: data.contryPic) {
+            icon.kf.setImage(with: url)
+        }
+        title.text = data.contryName
+    }
 }
