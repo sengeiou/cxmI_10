@@ -10,6 +10,13 @@ import UIKit
 
 class CXMMLeagueMatchDetailVC: BaseViewController {
     
+    public var leagueInfo : LeagueInfoModel! {
+        didSet{
+            guard leagueInfo != nil else { return }
+            
+            self.navigationItem.title = leagueInfo.leagueAddr
+        }
+    }
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -17,12 +24,23 @@ class CXMMLeagueMatchDetailVC: BaseViewController {
         super.viewDidLoad()
 
         initSubview()
+        
+        loadNewData()
     }
 
     private func initSubview() {
     
     }
 
+}
+
+extension CXMMLeagueMatchDetailVC {
+    private func loadNewData() {
+        leagueDetailRequest()
+    }
+    private func leagueDetailRequest() {
+        
+    }
 }
 
 extension CXMMLeagueMatchDetailVC : UITableViewDelegate {

@@ -76,7 +76,13 @@ extension CXMMLeagueHotVC {
 
 extension CXMMLeagueHotVC : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let story = UIStoryboard(name: "Surprise", bundle: nil)
         
+        let detail = story.instantiateViewController(withIdentifier: "LeagueMatchDetailVC") as! CXMMLeagueMatchDetailVC
+        
+        detail.leagueInfo = leagueList[indexPath.row]
+        
+        pushViewController(vc: detail)
     }
 }
 extension CXMMLeagueHotVC : UICollectionViewDataSource {

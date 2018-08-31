@@ -97,7 +97,13 @@ extension CXMMLeagueMatchVC {
 
 extension CXMMLeagueMatchVC : LeagueMatchFilterDelegate {
     func didSelectItem(leagueInfo: LeagueInfoModel) {
+        let story = UIStoryboard(name: "Surprise", bundle: nil)
         
+        let detail = story.instantiateViewController(withIdentifier: "LeagueMatchDetailVC") as! CXMMLeagueMatchDetailVC
+        
+        detail.leagueInfo = leagueInfo
+        
+        pushViewController(vc: detail)
     }
 }
 extension CXMMLeagueMatchVC : UICollectionViewDelegate {
