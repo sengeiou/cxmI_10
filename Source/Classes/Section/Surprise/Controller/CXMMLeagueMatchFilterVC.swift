@@ -14,7 +14,13 @@ protocol LeagueMatchFilterDelegate {
 
 class CXMMLeagueMatchFilterVC: BasePopViewController {
 
-    public var leagueList : [LeagueInfoModel]!
+    public var leagueMatch : LeagueMatchModel! {
+        didSet{
+            guard leagueMatch != nil else { return }
+            self.collectionView.reloadData()
+            titleLabel.text = leagueMatch.contryName
+        }
+    }
     
     public var delegate : LeagueMatchFilterDelegate!
     
@@ -96,17 +102,18 @@ class CXMMLeagueMatchFilterVC: BasePopViewController {
 extension CXMMLeagueMatchFilterVC : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard delegate != nil else { return }
-        delegate.didSelectItem(leagueInfo: leagueList[indexPath.row])
+        delegate.didSelectItem(leagueInfo: leagueMatch.leagueInfoList[indexPath.row])
         self.dismiss(animated: false, completion: nil )
     }
 }
 extension CXMMLeagueMatchFilterVC : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return leagueList != nil ? leagueList.count : 0
+        guard leagueMatch != nil else { return 0 }
+        return leagueMatch.leagueInfoList.isEmpty == false ? leagueMatch.leagueInfoList.count : 0
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LeagueMatchFilterItem.identifier, for: indexPath) as! LeagueMatchFilterItem
-        
+        cell.configure(with: leagueMatch.leagueInfoList[indexPath.row])
         return cell
     }
 }

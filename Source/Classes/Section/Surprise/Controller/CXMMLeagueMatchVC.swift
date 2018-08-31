@@ -102,7 +102,7 @@ extension CXMMLeagueMatchVC : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let match = CXMMLeagueMatchFilterVC()
         match.delegate = self
-        match.leagueList = leagueMatchList[indexPath.row].leagueInfoList
+        match.leagueMatch = leagueMatchList[indexPath.row]
         present(match)
     }
 }
