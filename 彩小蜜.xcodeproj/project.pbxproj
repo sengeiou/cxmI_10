@@ -104,6 +104,11 @@
 		114D06C720B54F4600443BCC /* CXMWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D06C620B54F4500443BCC /* CXMWebViewController.swift */; };
 		114D06CD20B55BA600443BCC /* ClearCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D06CC20B55BA600443BCC /* ClearCache.swift */; };
 		114F0A332133995300E391E8 /* SurpriseCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114F0A322133995300E391E8 /* SurpriseCollectionCell.swift */; };
+		115076A02138DD6E0029A63E /* CXMMLeagueMatchFilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1150769F2138DD6E0029A63E /* CXMMLeagueMatchFilterVC.swift */; };
+		115076A22138DF500029A63E /* LeagueMatchFilterItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115076A12138DF500029A63E /* LeagueMatchFilterItem.swift */; };
+		115076A42138E1920029A63E /* CXMMLeagueMatchDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115076A32138E1920029A63E /* CXMMLeagueMatchDetailVC.swift */; };
+		115076A62138E7640029A63E /* LeagueListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115076A52138E7640029A63E /* LeagueListModel.swift */; };
+		115076A82138EABF0029A63E /* CXMMLeaguePagerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115076A72138EABF0029A63E /* CXMMLeaguePagerVC.swift */; };
 		11528AA1208F3F67004CC8B4 /* MeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11528AA0208F3F67004CC8B4 /* MeView.swift */; };
 		11528AA3208F3F76004CC8B4 /* NewsMeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11528AA2208F3F76004CC8B4 /* NewsMeView.swift */; };
 		11547F8D21378DC80068596C /* CXMMActivityCenterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11547F8C21378DC80068596C /* CXMMActivityCenterVC.swift */; };
@@ -528,6 +533,11 @@
 		114D06C620B54F4500443BCC /* CXMWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXMWebViewController.swift; sourceTree = "<group>"; };
 		114D06CC20B55BA600443BCC /* ClearCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearCache.swift; sourceTree = "<group>"; };
 		114F0A322133995300E391E8 /* SurpriseCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurpriseCollectionCell.swift; sourceTree = "<group>"; };
+		1150769F2138DD6E0029A63E /* CXMMLeagueMatchFilterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMMLeagueMatchFilterVC.swift; sourceTree = "<group>"; };
+		115076A12138DF500029A63E /* LeagueMatchFilterItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueMatchFilterItem.swift; sourceTree = "<group>"; };
+		115076A32138E1920029A63E /* CXMMLeagueMatchDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMMLeagueMatchDetailVC.swift; sourceTree = "<group>"; };
+		115076A52138E7640029A63E /* LeagueListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueListModel.swift; sourceTree = "<group>"; };
+		115076A72138EABF0029A63E /* CXMMLeaguePagerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMMLeaguePagerVC.swift; sourceTree = "<group>"; };
 		11528AA0208F3F67004CC8B4 /* MeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeView.swift; sourceTree = "<group>"; };
 		11528AA2208F3F76004CC8B4 /* NewsMeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsMeView.swift; sourceTree = "<group>"; };
 		11547F8C21378DC80068596C /* CXMMActivityCenterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMMActivityCenterVC.swift; sourceTree = "<group>"; };
@@ -1308,6 +1318,7 @@
 				11AB2C1821300BC40044FB1C /* SurpriseModel.swift */,
 				11F305DF21368B3600FCA3F7 /* PrizeListModel.swift */,
 				11547F912137C6260068596C /* ActivityCenterListModel.swift */,
+				115076A52138E7640029A63E /* LeagueListModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1317,7 +1328,6 @@
 			children = (
 				11AB2C1A21300BC40044FB1C /* SurpriseTableViewCell.swift */,
 				11353E9A2134EA6300C1D645 /* SurpriseMatchCell.swift */,
-				11353E9C2134EB2300C1D645 /* SurpriseMatchItem.swift */,
 				11353E9E2134EF3300C1D645 /* SurpriseShooterCell.swift */,
 				114F0A322133995300E391E8 /* SurpriseCollectionCell.swift */,
 				11B0813A2133B49B004FCAE9 /* SurpriseCategoryCell.swift */,
@@ -1353,8 +1363,11 @@
 				11547F952137D1470068596C /* CXMMPrizeMatchHistoryVC.swift */,
 				11547F8C21378DC80068596C /* CXMMActivityCenterVC.swift */,
 				11547F932137CD320068596C /* CXMMLotterySchoolVC.swift */,
+				115076A72138EABF0029A63E /* CXMMLeaguePagerVC.swift */,
 				11547F9D2137FFD90068596C /* CXMMLeagueHotVC.swift */,
 				11547F9B2137FB990068596C /* CXMMLeagueMatchVC.swift */,
+				1150769F2138DD6E0029A63E /* CXMMLeagueMatchFilterVC.swift */,
+				115076A32138E1920029A63E /* CXMMLeagueMatchDetailVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1413,7 +1426,9 @@
 		11CBF028213805D700CB20AC /* LeagueMatchViews */ = {
 			isa = PBXGroup;
 			children = (
+				11353E9C2134EB2300C1D645 /* SurpriseMatchItem.swift */,
 				11CBF0292138060600CB20AC /* LeagueMatchItem.swift */,
+				115076A12138DF500029A63E /* LeagueMatchFilterItem.swift */,
 			);
 			path = LeagueMatchViews;
 			sourceTree = "<group>";
@@ -2961,6 +2976,7 @@
 				E550D897207339A4002DDE23 /* FootballOrderSPFCell.swift in Sources */,
 				115B0CF020EF41BA00848EC7 /* FootballLineupMemberCell.swift in Sources */,
 				E5883F4C2068DA0800CB3A46 /* CXMOrderSchemeVC.swift in Sources */,
+				115076A22138DF500029A63E /* LeagueMatchFilterItem.swift in Sources */,
 				E50B9077205235BF00417BFE /* RechargeCardCell.swift in Sources */,
 				112E9D512122D8D7008466B4 /* DLTBetInfoRequestModel.swift in Sources */,
 				113DE741211AF50500DE8026 /* CXMMDLTRedTrendVC.swift in Sources */,
@@ -3134,6 +3150,7 @@
 				11227C122084BFF900680CCC /* FootballBuyRatioView.swift in Sources */,
 				E51F9A60205A29EE00AB8A21 /* VCodeLoginFooterView.swift in Sources */,
 				11547F9C2137FB990068596C /* CXMMLeagueMatchVC.swift in Sources */,
+				115076A42138E1920029A63E /* CXMMLeagueMatchDetailVC.swift in Sources */,
 				11551CF220E225C5002FE691 /* CXMAccountDetailsFilter.swift in Sources */,
 				115B0CEB20EF068A00848EC7 /* FootballDetailStatisticsCell.swift in Sources */,
 				112F77B920EC7C8C005CA9E4 /* WMPageController.m in Sources */,
@@ -3190,6 +3207,7 @@
 				E550D8AD20737C69002DDE23 /* CXMKeyboardView.swift in Sources */,
 				E5D8ABB820674283002D688B /* OrderDetailCell.swift in Sources */,
 				113DE734211AC64D00DE8026 /* CXMMDaletouProVC.swift in Sources */,
+				115076A02138DD6E0029A63E /* CXMMLeagueMatchFilterVC.swift in Sources */,
 				E5883F502068DC2100CB3A46 /* OrderSchemeInfoModel.swift in Sources */,
 				E5A2644E205B742B00EE6491 /* CXMHomeViewController.swift in Sources */,
 				E58B57C7205676EC0025E2F1 /* LotteryNetAPIManager.swift in Sources */,
@@ -3205,6 +3223,7 @@
 				11411D05209171FE0009E6CE /* NoticeCell.swift in Sources */,
 				116EB20E207F064300B32ABD /* FootballScoreCollectionCell.swift in Sources */,
 				E550D89F207339F9002DDE23 /* FootballOrderBanQuanCCell.swift in Sources */,
+				115076A62138E7640029A63E /* LeagueListModel.swift in Sources */,
 				11E8FA5620BFD5B60090BC6A /* WorldCupOrderDetailCell.swift in Sources */,
 				E567636C206B375A00E2D9A8 /* HXTextView.swift in Sources */,
 				E50B907D20526BB200417BFE /* RechargePaymentCell.swift in Sources */,
@@ -3214,6 +3233,7 @@
 				E550D89D207339DF002DDE23 /* FootballOrderScoreCell.swift in Sources */,
 				11547F8D21378DC80068596C /* CXMMActivityCenterVC.swift in Sources */,
 				113DE736211AC67F00DE8026 /* DLTProTableViewCell.swift in Sources */,
+				115076A82138EABF0029A63E /* CXMMLeaguePagerVC.swift in Sources */,
 				1158FC4D211074150004229D /* DaletouStandardBlueCell.swift in Sources */,
 				1144910A2085AEE0009F1D09 /* FootballMatchInfoScaleCell.swift in Sources */,
 				E59CB3D9205BA11A0086DD0E /* HomeScrollBarCell.swift in Sources */,

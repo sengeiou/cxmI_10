@@ -22,6 +22,9 @@ class CXMMLeagueMatchVC: BaseViewController, IndicatorInfoProvider {
     
     public var style : LeagueMatchStyle = .国际
 
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,6 +35,7 @@ class CXMMLeagueMatchVC: BaseViewController, IndicatorInfoProvider {
     }
 
 }
+
 
 extension CXMMLeagueMatchVC : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -48,4 +52,17 @@ extension CXMMLeagueMatchVC : UICollectionViewDataSource {
         return cell
     }
 }
-
+extension CXMMLeagueMatchVC : UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: LeagueMatchItem.width, height: LeagueMatchItem.height)
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 5
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+}

@@ -1,0 +1,27 @@
+//
+//  SurpriseMatchItem.swift
+//  彩小蜜
+//
+//  Created by 笑 on 2018/8/28.
+//  Copyright © 2018年 韩笑. All rights reserved.
+//
+
+import UIKit
+
+class SurpriseMatchItem: UICollectionViewCell {
+    
+    static let width : CGFloat = 60
+    static let height: CGFloat = 80
+    
+    @IBOutlet weak var icon: UIImageView!
+    @IBOutlet weak var title: UILabel!
+}
+
+extension SurpriseMatchItem {
+    public func configure(with data : LeagueInfoModel) {
+        if let url = URL(string: data.leaguePic) {
+            icon.kf.setImage(with: url)
+        }
+        title.text = data.leagueName
+    }
+}
