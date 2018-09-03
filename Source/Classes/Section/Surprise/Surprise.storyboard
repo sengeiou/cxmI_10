@@ -1705,6 +1705,11 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="rME-Br-sgD">
                                 <rect key="frame" x="0.0" y="64" width="375" height="1436"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="73M-JH-ErI" userLabel="footer">
+                                    <rect key="frame" x="0.0" y="554.5" width="375" height="145"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="LeagueMatchDetailCell" rowHeight="263" id="KI1-7x-w2f" customClass="LeagueMatchDetailCell" customModule="彩小蜜" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="375" height="263"/>
@@ -1946,7 +1951,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3rz-Zq-Nre" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3343" y="2321"/>
+            <point key="canvasLocation" x="3341.5999999999999" y="2320.8395802098953"/>
         </scene>
         <!--League MatchVC-->
         <scene sceneID="Iwv-5H-caU">
