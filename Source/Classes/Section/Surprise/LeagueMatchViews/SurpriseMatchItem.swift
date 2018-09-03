@@ -24,4 +24,11 @@ extension SurpriseMatchItem {
         }
         title.text = data.leagueAddr
     }
+    
+    public func configure(with info : LeagueTeamInfo) {
+        if let url = URL(string: info.teamPic) {
+            icon.kf.setImage(with: url)
+        }
+        title.text = info.teamAddr
+    }
 }

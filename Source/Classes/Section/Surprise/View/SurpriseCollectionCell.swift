@@ -40,4 +40,5 @@ extension SurpriseCollectionCell {
         title.text = info.title
         suTitle.text = info.detail
     }
+    
 }

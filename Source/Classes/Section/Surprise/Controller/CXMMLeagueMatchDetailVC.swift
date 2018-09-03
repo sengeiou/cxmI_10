@@ -118,8 +118,7 @@ extension CXMMLeagueMatchDetailVC : UITableViewDataSource {
                 leagueDetailModel.leagueMatch.futureMatchDTOList.count : 0
                 
             case .球队资料:
-                return leagueDetailModel.leagueTeam != nil ?
-                leagueDetailModel.leagueTeam.leagueTeamInfoDTOList.count : 0
+                return leagueDetailModel.leagueTeam != nil ? 1 : 0
             }
             return 0
         }
@@ -192,8 +191,8 @@ extension CXMMLeagueMatchDetailVC : UITableViewDataSource {
         return cell
     }
     private func initLeagueTeamCell(indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "LeagueMatchDetailCell", for: indexPath) as! LeagueMatchDetailCell
-        cell.configure(with: self.leagueDetailModel)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "LeagueDetailTeamCell", for: indexPath) as! LeagueDetailTeamCell
+        cell.configure(with: self.leagueDetailModel.leagueTeam)
         return cell
     }
     
@@ -212,7 +211,15 @@ extension CXMMLeagueMatchDetailVC : UITableViewDataSource {
             case .赛程安排:
                 return 40 * defaultScale
             case .球队资料:
-                return 40 * defaultScale
+                guard leagueDetailModel.leagueTeam.leagueTeamInfoDTOList.count != 0 else { return 0 }
+                let count = lineNumber(totalNum: leagueDetailModel.leagueTeam.leagueTeamInfoDTOList.count,
+                                       horizonNum: 4)
+                
+                if count == 0 {
+                    return 135
+                }else {
+                    return CGFloat(count * 135)
+                }
             }
         }
     }
