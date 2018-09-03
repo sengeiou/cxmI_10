@@ -1706,7 +1706,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="1436"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="73M-JH-ErI" userLabel="footer">
-                                    <rect key="frame" x="0.0" y="620.5" width="375" height="145"/>
+                                    <rect key="frame" x="0.0" y="837.5" width="375" height="145"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
@@ -2032,6 +2032,78 @@
                                             <outlet property="topLine" destination="b95-uU-UOX" id="9Df-bp-NTp"/>
                                             <outlet property="visiLabel" destination="adc-Eu-SbD" id="zYZ-ea-g4i"/>
                                             <outlet property="vsLabel" destination="IZy-y8-fJD" id="hSS-PX-V9s"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="LeagueDetailTeamCell" rowHeight="217" id="xK5-9e-04I" customClass="LeagueDetailTeamCell" customModule="彩小蜜" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="602.5" width="375" height="217"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xK5-9e-04I" id="xrt-Mf-mAi">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="216.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uKW-32-gvm">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="216.5"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="HMp-hB-zq9">
+                                                        <size key="itemSize" width="100" height="167"/>
+                                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                    </collectionViewFlowLayout>
+                                                    <cells>
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SurpriseMatchItem" id="FUS-7Y-WrD" customClass="SurpriseMatchItem" customModule="彩小蜜" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="0.0" width="100" height="167"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                                <rect key="frame" x="0.0" y="0.0" width="100" height="167"/>
+                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                <subviews>
+                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aNA-mu-sfA">
+                                                                        <rect key="frame" x="10" y="0.0" width="80" height="80"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" secondItem="aNA-mu-sfA" secondAttribute="height" multiplier="1:1" id="HmW-G2-VBS"/>
+                                                                        </constraints>
+                                                                    </imageView>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="开奖结果" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nSg-N7-Jtt">
+                                                                        <rect key="frame" x="0.0" y="95" width="100" height="15"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="15" id="MnM-SU-bV1"/>
+                                                                        </constraints>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                        <color key="textColor" red="0.08235294118" green="0.08235294118" blue="0.08235294118" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </view>
+                                                            <constraints>
+                                                                <constraint firstItem="aNA-mu-sfA" firstAttribute="leading" secondItem="FUS-7Y-WrD" secondAttribute="leading" constant="10" id="F9r-GW-VDf"/>
+                                                                <constraint firstItem="aNA-mu-sfA" firstAttribute="top" secondItem="FUS-7Y-WrD" secondAttribute="top" id="Lr4-5q-SZc"/>
+                                                                <constraint firstItem="nSg-N7-Jtt" firstAttribute="leading" secondItem="FUS-7Y-WrD" secondAttribute="leading" id="Xjy-Dm-80b"/>
+                                                                <constraint firstItem="nSg-N7-Jtt" firstAttribute="top" secondItem="aNA-mu-sfA" secondAttribute="bottom" constant="15" id="mCB-8W-gUh"/>
+                                                                <constraint firstAttribute="trailing" secondItem="aNA-mu-sfA" secondAttribute="trailing" constant="10" id="nWB-QS-D0I"/>
+                                                                <constraint firstAttribute="trailing" secondItem="nSg-N7-Jtt" secondAttribute="trailing" id="xEX-v9-hga"/>
+                                                            </constraints>
+                                                            <connections>
+                                                                <outlet property="icon" destination="aNA-mu-sfA" id="Dpz-vi-RzT"/>
+                                                                <outlet property="title" destination="nSg-N7-Jtt" id="bFI-lf-uPH"/>
+                                                            </connections>
+                                                        </collectionViewCell>
+                                                    </cells>
+                                                    <connections>
+                                                        <outlet property="dataSource" destination="xK5-9e-04I" id="yUL-hZ-lhV"/>
+                                                        <outlet property="delegate" destination="xK5-9e-04I" id="XqM-5K-JQZ"/>
+                                                    </connections>
+                                                </collectionView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="uKW-32-gvm" secondAttribute="trailing" id="5RJ-bW-2CB"/>
+                                                <constraint firstItem="uKW-32-gvm" firstAttribute="leading" secondItem="xrt-Mf-mAi" secondAttribute="leading" id="B3o-JB-34Q"/>
+                                                <constraint firstItem="uKW-32-gvm" firstAttribute="top" secondItem="xrt-Mf-mAi" secondAttribute="top" id="KOz-Uz-MKh"/>
+                                                <constraint firstAttribute="bottom" secondItem="uKW-32-gvm" secondAttribute="bottom" id="qav-NT-C0w"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="collectionView" destination="uKW-32-gvm" id="aMf-vD-JyS"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
