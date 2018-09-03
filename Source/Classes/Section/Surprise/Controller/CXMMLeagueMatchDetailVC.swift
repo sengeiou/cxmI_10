@@ -111,8 +111,9 @@ extension CXMMLeagueMatchDetailVC : UITableViewDataSource {
             case .积分榜:
                 break
             case .射手榜:
-                return leagueDetailModel.leagueShooter != nil ?
-                    leagueDetailModel.leagueShooter.leagueShooterInfoList.count + 1 : 0
+                guard leagueDetailModel.leagueShooter != nil else { return 0}
+                guard leagueDetailModel.leagueShooter.leagueShooterInfoList.count > 0 else { return 0 }
+                return leagueDetailModel.leagueShooter.leagueShooterInfoList.count + 1 
             case .赛程安排:
                 return leagueDetailModel.leagueMatch != nil ?
                 leagueDetailModel.leagueMatch.futureMatchDTOList.count : 0
