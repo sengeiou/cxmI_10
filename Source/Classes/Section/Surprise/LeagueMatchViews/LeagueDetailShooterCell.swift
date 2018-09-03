@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum LeagueShooterStyle {
+    case title
+    case defau
+}
+
 class LeagueDetailShooterCell: UITableViewCell {
 
     @IBOutlet weak var topLine : UIView!
@@ -27,8 +32,38 @@ class LeagueDetailShooterCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
+}
+
+extension LeagueDetailShooterCell {
+    public func configure(with data : LeagueShooterInfo, style : LeagueShooterStyle) {
+        
+        switch style {
+        case .title:
+            rankLable.text = "排名"
+            memberLabel.text = "球员"
+            matchLabel.text = "球队"
+            goalLabel.text = "进球（点)"
+            
+            rankLable.backgroundColor = ColorF4F4F4
+            memberLabel.backgroundColor = ColorF4F4F4
+            matchLabel.backgroundColor = ColorF4F4F4
+            goalLabel.backgroundColor = ColorF4F4F4
+            
+        case .defau:
+            
+            rankLable.text = data.sort
+            memberLabel.text = data.playerName
+            matchLabel.text = data.playerTeam
+            goalLabel.text = data.inNum
+            
+            rankLable.backgroundColor = ColorFFFFFF
+            memberLabel.backgroundColor = ColorFFFFFF
+            matchLabel.backgroundColor = ColorFFFFFF
+            goalLabel.backgroundColor = ColorFFFFFF
+        }
+        
+        
+    }
 }

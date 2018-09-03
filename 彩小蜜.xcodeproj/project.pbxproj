@@ -126,6 +126,7 @@
 		11551CF220E225C5002FE691 /* CXMAccountDetailsFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11551CF120E225C5002FE691 /* CXMAccountDetailsFilter.swift */; };
 		11551CF420E22D18002FE691 /* AccountDetailFilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11551CF320E22D18002FE691 /* AccountDetailFilterModel.swift */; };
 		11551CF620E23179002FE691 /* AccountDetailFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11551CF520E23179002FE691 /* AccountDetailFilterCell.swift */; };
+		1155A3FE213CD8290048F69A /* LeagueDetailPagerHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1155A3FD213CD8290048F69A /* LeagueDetailPagerHeader.swift */; };
 		1158FC3F21104FD20004229D /* CXMMDaletouViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1158FC3E21104FD20004229D /* CXMMDaletouViewController.swift */; };
 		1158FC41211050FC0004229D /* DaletouTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1158FC40211050FC0004229D /* DaletouTitleCell.swift */; };
 		1158FC43211052A70004229D /* DaletouBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1158FC42211052A70004229D /* DaletouBottomView.swift */; };
@@ -558,6 +559,7 @@
 		11551CF120E225C5002FE691 /* CXMAccountDetailsFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMAccountDetailsFilter.swift; sourceTree = "<group>"; };
 		11551CF320E22D18002FE691 /* AccountDetailFilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailFilterModel.swift; sourceTree = "<group>"; };
 		11551CF520E23179002FE691 /* AccountDetailFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailFilterCell.swift; sourceTree = "<group>"; };
+		1155A3FD213CD8290048F69A /* LeagueDetailPagerHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueDetailPagerHeader.swift; sourceTree = "<group>"; };
 		1158FC3E21104FD20004229D /* CXMMDaletouViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMMDaletouViewController.swift; sourceTree = "<group>"; };
 		1158FC40211050FC0004229D /* DaletouTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaletouTitleCell.swift; sourceTree = "<group>"; };
 		1158FC42211052A70004229D /* DaletouBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaletouBottomView.swift; sourceTree = "<group>"; };
@@ -1435,6 +1437,7 @@
 				11353E9C2134EB2300C1D645 /* SurpriseMatchItem.swift */,
 				11CBF0292138060600CB20AC /* LeagueMatchItem.swift */,
 				115076A12138DF500029A63E /* LeagueMatchFilterItem.swift */,
+				1155A3FD213CD8290048F69A /* LeagueDetailPagerHeader.swift */,
 				115076A9213916860029A63E /* LeagueMatchDetailCell.swift */,
 				115076AB213918EE0029A63E /* LeagueDetailShooterCell.swift */,
 				115076AD213919260029A63E /* LeagueDetailCourseCell.swift */,
@@ -3016,6 +3019,7 @@
 				11B081392133AEF6004FCAE9 /* SurpriseHeaderView.swift in Sources */,
 				E5973E24204E3687006461CE /* CXMVCodeLoginViewController.swift in Sources */,
 				E5B68AFB205A81940038A5A2 /* Extension+String.swift in Sources */,
+				1155A3FE213CD8290048F69A /* LeagueDetailPagerHeader.swift in Sources */,
 				11551CF620E23179002FE691 /* AccountDetailFilterCell.swift in Sources */,
 				E512A96620479FD7003F14F4 /* HomeNetAPIManager.swift in Sources */,
 				E50643AE206CBE3C0046A2D4 /* WinningMsgModel.swift in Sources */,

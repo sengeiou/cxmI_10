@@ -1714,14 +1714,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qbv-oo-YEM">
-                                                    <rect key="frame" x="16" y="16" width="90" height="90"/>
+                                                    <rect key="frame" x="16" y="16" width="37.5" height="37.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="90" id="bO8-If-tHe"/>
                                                         <constraint firstAttribute="width" secondItem="qbv-oo-YEM" secondAttribute="height" multiplier="1:1" id="xUr-X7-YXq"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kgh-qC-jYS">
-                                                    <rect key="frame" x="16" y="116" width="90" height="20"/>
+                                                    <rect key="frame" x="16" y="63.5" width="37.5" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="Lcf-7C-6Zu"/>
                                                     </constraints>
@@ -1730,7 +1730,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="联赛规则" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tAf-xg-HLH">
-                                                    <rect key="frame" x="116" y="16" width="234" height="20"/>
+                                                    <rect key="frame" x="83.5" y="16" width="266.5" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="wGx-Gb-lzm"/>
                                                     </constraints>
@@ -1739,13 +1739,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X0z-ti-CPv">
-                                                    <rect key="frame" x="116" y="52" width="243" height="155"/>
+                                                    <rect key="frame" x="83.5" y="52" width="275.5" height="72.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.43529411764705883" green="0.43529411764705883" blue="0.43529411764705883" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Esn-N0-Dj9">
-                                                    <rect key="frame" x="16" y="152" width="90" height="30"/>
+                                                    <rect key="frame" x="16" y="99.5" width="37.5" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="6oV-jM-xDd"/>
                                                     </constraints>
@@ -1766,9 +1766,10 @@
                                                 <constraint firstItem="qbv-oo-YEM" firstAttribute="leading" secondItem="kRj-GJ-Ota" secondAttribute="leading" constant="16" id="QUv-tc-PSo"/>
                                                 <constraint firstItem="Esn-N0-Dj9" firstAttribute="top" secondItem="kgh-qC-jYS" secondAttribute="bottom" constant="16" id="Tp6-W4-9C5"/>
                                                 <constraint firstItem="X0z-ti-CPv" firstAttribute="top" secondItem="tAf-xg-HLH" secondAttribute="bottom" constant="16" id="WeI-Mg-zTr"/>
-                                                <constraint firstItem="tAf-xg-HLH" firstAttribute="leading" secondItem="qbv-oo-YEM" secondAttribute="trailing" constant="10" id="WrI-pi-NYr"/>
+                                                <constraint firstItem="tAf-xg-HLH" firstAttribute="leading" secondItem="qbv-oo-YEM" secondAttribute="trailing" constant="30" id="WrI-pi-NYr"/>
                                                 <constraint firstItem="qbv-oo-YEM" firstAttribute="top" secondItem="kRj-GJ-Ota" secondAttribute="top" constant="16" id="hjh-AU-ezF"/>
                                                 <constraint firstItem="kgh-qC-jYS" firstAttribute="trailing" secondItem="qbv-oo-YEM" secondAttribute="trailing" id="kge-jb-phl"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Esn-N0-Dj9" secondAttribute="bottom" constant="40" id="n3m-qA-ulK"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="X0z-ti-CPv" secondAttribute="bottom" constant="45" id="qiL-Ti-2g5"/>
                                             </constraints>
                                         </tableViewCellContentView>

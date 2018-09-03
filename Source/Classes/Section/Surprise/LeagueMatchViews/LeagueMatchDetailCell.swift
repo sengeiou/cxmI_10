@@ -26,3 +26,15 @@ class LeagueMatchDetailCell: UITableViewCell {
     }
 
 }
+
+extension LeagueMatchDetailCell {
+    public func configure(with data : LeagueDetailModel) {
+        if let url = URL(string: data.leaguePic) {
+            icon.kf.setImage(with: url)
+        }
+        leaderTitle.text = "联赛规则"
+        leaderName.text = data.leagueAddr
+        leaderDetail.text = data.leagueRule
+    }
+}
+
