@@ -57,9 +57,9 @@ extension CXMMLeagueMatchDetailVC {
         
         weak var weakSelf = self
         
-        surpriseProvider.rx.request(.leagueDetail(leagueId: leagueInfo.leagueId))
-        .asObservable()
-        .mapObject(type: LeagueDetailModel.self)
+        _ = surpriseProvider.rx.request(.leagueDetail(leagueId: leagueInfo.leagueId))
+            .asObservable()
+            .mapObject(type: LeagueDetailModel.self)
             .subscribe(onNext: { (data) in
                 weakSelf?.tableView.endrefresh()
                 weakSelf?.leagueDetailModel = data
@@ -176,8 +176,19 @@ extension CXMMLeagueMatchDetailVC : UITableViewDataSource {
         return cell
     }
     private func initLeagueMatchCell(indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "LeagueMatchDetailCell", for: indexPath) as! LeagueMatchDetailCell
-        cell.configure(with: self.leagueDetailModel)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "LeagueDetailCourseCell", for: indexPath) as! LeagueDetailCourseCell
+        
+        switch indexPath.row {
+        case 0:
+            cell.topLine.isHidden = false
+            cell.configure(with: self.leagueDetailModel.leagueMatch.futureMatchDTOList[indexPath.row],
+                           style: .title)
+        default:
+            cell.topLine.isHidden = true
+            cell.configure(with: self.leagueDetailModel.leagueMatch.futureMatchDTOList[indexPath.row],
+                           style: .defau)
+        }
+        
         return cell
     }
     private func initLeagueTeamCell(indexPath: IndexPath) -> UITableViewCell {

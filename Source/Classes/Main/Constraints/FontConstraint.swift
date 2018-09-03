@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+let Font9 = UIFont.systemFont(ofSize: 9)
 let Font10 = UIFont.systemFont(ofSize: 10)
 let Font11 = UIFont.systemFont(ofSize: 11)
 let Font12 = UIFont.systemFont(ofSize: 12)
