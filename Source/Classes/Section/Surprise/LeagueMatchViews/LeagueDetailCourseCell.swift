@@ -45,14 +45,22 @@ extension LeagueDetailCourseCell {
             visiLabel.text = "客队"
             vsLabel.text = ""
             dateLabel.font = Font12
-            self.contentView.backgroundColor = ColorF4F4F4
+            dateLabel.backgroundColor = ColorF4F4F4
+            homeLabel.backgroundColor = ColorF4F4F4
+            visiLabel.backgroundColor = ColorF4F4F4
+            vsLabel.backgroundColor = ColorF4F4F4
         case .defau:
             dateLabel.text = data.matchTime
             homeLabel.text = data.homeTeamAbbr
             visiLabel.text = data.visitorTeamAbbr
             vsLabel.text = "vs"
             dateLabel.font = Font9
-            self.contentView.backgroundColor = ColorFFFFFF
+            
+            dateLabel.backgroundColor = ColorFFFFFF
+            homeLabel.backgroundColor = ColorFFFFFF
+            visiLabel.backgroundColor = ColorFFFFFF
+            vsLabel.backgroundColor = ColorFFFFFF
+            
         }
     }
 }

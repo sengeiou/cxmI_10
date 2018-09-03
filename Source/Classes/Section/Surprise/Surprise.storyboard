@@ -1969,21 +1969,21 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wWL-Ie-0NP">
-                                                    <rect key="frame" x="128" y="2" width="102.5" height="170"/>
+                                                    <rect key="frame" x="128" y="1" width="105" height="172"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.43529411759999997" green="0.43529411759999997" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="adc-Eu-SbD">
-                                                    <rect key="frame" x="255.5" y="2" width="102.5" height="170"/>
+                                                    <rect key="frame" x="253" y="1" width="105" height="172"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.43529411759999997" green="0.43529411759999997" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="vs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IZy-y8-fJD">
-                                                    <rect key="frame" x="235.5" y="2" width="15" height="170"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="vs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IZy-y8-fJD">
+                                                    <rect key="frame" x="233" y="1" width="20" height="172"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="15" id="GPX-y1-9cQ"/>
+                                                        <constraint firstAttribute="width" constant="20" id="GPX-y1-9cQ"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.43529411759999997" green="0.43529411759999997" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -1999,7 +1999,7 @@
                                                 <constraint firstItem="bvl-ge-SkJ" firstAttribute="leading" secondItem="adc-Eu-SbD" secondAttribute="trailing" id="IqT-FZ-WqN"/>
                                                 <constraint firstItem="adc-Eu-SbD" firstAttribute="bottom" secondItem="wWL-Ie-0NP" secondAttribute="bottom" id="Jia-Dk-48a"/>
                                                 <constraint firstItem="K6z-Wx-P85" firstAttribute="top" secondItem="b95-uU-UOX" secondAttribute="bottom" id="LR4-QG-Rof"/>
-                                                <constraint firstItem="IZy-y8-fJD" firstAttribute="leading" secondItem="wWL-Ie-0NP" secondAttribute="trailing" constant="5" id="LZq-Ug-Opc"/>
+                                                <constraint firstItem="IZy-y8-fJD" firstAttribute="leading" secondItem="wWL-Ie-0NP" secondAttribute="trailing" id="LZq-Ug-Opc"/>
                                                 <constraint firstItem="3zP-DD-ijS" firstAttribute="leading" secondItem="8NJ-js-xqF" secondAttribute="trailing" constant="110" id="O8I-ie-u04"/>
                                                 <constraint firstItem="wWL-Ie-0NP" firstAttribute="leading" secondItem="3zP-DD-ijS" secondAttribute="trailing" id="Q5T-1q-PhO"/>
                                                 <constraint firstItem="adc-Eu-SbD" firstAttribute="width" secondItem="wWL-Ie-0NP" secondAttribute="width" id="T1e-JY-Vhn"/>
@@ -2007,7 +2007,7 @@
                                                 <constraint firstItem="3zP-DD-ijS" firstAttribute="leading" secondItem="K6z-Wx-P85" secondAttribute="trailing" id="an5-Zu-3Au"/>
                                                 <constraint firstItem="8NJ-js-xqF" firstAttribute="top" secondItem="eZU-Hf-jgd" secondAttribute="top" id="bO1-A0-0YV"/>
                                                 <constraint firstItem="IZy-y8-fJD" firstAttribute="top" secondItem="wWL-Ie-0NP" secondAttribute="top" id="blZ-fy-gPJ"/>
-                                                <constraint firstItem="adc-Eu-SbD" firstAttribute="leading" secondItem="IZy-y8-fJD" secondAttribute="trailing" constant="5" id="bsk-xV-1vg"/>
+                                                <constraint firstItem="adc-Eu-SbD" firstAttribute="leading" secondItem="IZy-y8-fJD" secondAttribute="trailing" id="bsk-xV-1vg"/>
                                                 <constraint firstItem="K6z-Wx-P85" firstAttribute="leading" secondItem="8NJ-js-xqF" secondAttribute="trailing" id="dCT-pe-Uw0"/>
                                                 <constraint firstItem="0Kh-FH-gfK" firstAttribute="top" secondItem="K6z-Wx-P85" secondAttribute="bottom" id="dyM-fb-xMe"/>
                                                 <constraint firstItem="bvl-ge-SkJ" firstAttribute="leading" secondItem="b95-uU-UOX" secondAttribute="trailing" id="hPo-c8-9vx"/>
@@ -2016,9 +2016,9 @@
                                                 <constraint firstItem="0Kh-FH-gfK" firstAttribute="top" secondItem="3zP-DD-ijS" secondAttribute="bottom" id="o7j-eL-7bu"/>
                                                 <constraint firstAttribute="bottom" secondItem="bvl-ge-SkJ" secondAttribute="bottom" id="oXM-bN-c2g"/>
                                                 <constraint firstAttribute="bottom" secondItem="8NJ-js-xqF" secondAttribute="bottom" id="rIW-o0-4OO"/>
-                                                <constraint firstItem="0Kh-FH-gfK" firstAttribute="top" secondItem="wWL-Ie-0NP" secondAttribute="bottom" constant="1" id="uCB-na-Ess"/>
+                                                <constraint firstItem="0Kh-FH-gfK" firstAttribute="top" secondItem="wWL-Ie-0NP" secondAttribute="bottom" id="uCB-na-Ess"/>
                                                 <constraint firstItem="b95-uU-UOX" firstAttribute="leading" secondItem="8NJ-js-xqF" secondAttribute="trailing" id="y1J-IM-Pc5"/>
-                                                <constraint firstItem="wWL-Ie-0NP" firstAttribute="top" secondItem="b95-uU-UOX" secondAttribute="bottom" constant="1" id="z8H-vm-cqe"/>
+                                                <constraint firstItem="wWL-Ie-0NP" firstAttribute="top" secondItem="b95-uU-UOX" secondAttribute="bottom" id="z8H-vm-cqe"/>
                                                 <constraint firstAttribute="bottom" secondItem="0Kh-FH-gfK" secondAttribute="bottom" id="zft-rw-H5j"/>
                                                 <constraint firstItem="bvl-ge-SkJ" firstAttribute="top" secondItem="eZU-Hf-jgd" secondAttribute="top" id="zhL-Mx-7lv"/>
                                             </constraints>
