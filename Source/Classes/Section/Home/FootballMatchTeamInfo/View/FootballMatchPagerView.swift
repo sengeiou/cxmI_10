@@ -104,9 +104,30 @@ class FootballMatchPagerView: UIView {
                 make.width.equalTo(matchDetailBut)
             }
         }else {
+            vLine.snp.makeConstraints { (make) in
+                make.top.bottom.equalTo(0)
+                make.left.equalTo(matchDetailBut.snp.right).offset(0)
+                make.width.equalTo(1)
+            }
+            vlineTwo.snp.makeConstraints { (make) in
+                make.top.bottom.width.equalTo(vLine)
+                make.left.equalTo(analysisBut.snp.right)
+            }
             analysisBut.snp.makeConstraints { (make) in
-                make.top.left.bottom.equalTo(0)
+                make.top.bottom.equalTo(0)
+                make.left.equalTo(vLine.snp.right).offset(0)
+                make.right.equalTo(lineupBut.snp.left).offset(-1)
+                make.width.equalTo(matchDetailBut)
+            }
+            matchDetailBut.snp.makeConstraints { (make) in
+                make.top.bottom.equalTo(analysisBut)
+                make.left.equalTo(0)
+                
+            }
+            lineupBut.snp.makeConstraints { (make) in
+                make.top.bottom.equalTo(analysisBut)
                 make.right.equalTo(0)
+                make.width.equalTo(matchDetailBut)
             }
         }
     }
