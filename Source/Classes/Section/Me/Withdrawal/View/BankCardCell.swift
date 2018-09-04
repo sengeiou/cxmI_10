@@ -80,16 +80,16 @@ class BankCardCell: UITableViewCell {
             make.centerX.equalTo(self.contentView.snp.centerX)
         }
         
-//        bankIcon.snp.makeConstraints { (make) in
-//            make.height.width.equalTo(BankCardIconWidth)
-//            make.left.equalTo(bgView).offset(12)
-//            make.top.equalTo(bgView).offset(12)
-//        }
+        bankIcon.snp.makeConstraints { (make) in
+            make.height.width.equalTo(BankCardIconWidth)
+            make.left.equalTo(bgView).offset(12)
+            make.top.equalTo(bgView).offset(12)
+        }
         
         bankName.snp.makeConstraints { (make) in
             make.height.equalTo(labelHeight)
-            make.left.equalTo(bgView).offset(12)
-           // make.left.equalTo(bankIcon.snp.right).offset(6)
+            //make.left.equalTo(bgView).offset(12)
+            make.left.equalTo(bankIcon.snp.right).offset(6)
             make.right.equalTo(deleteBut.snp.left).offset(-10)
             make.top.equalTo(bgView).offset(10.5)
         }
