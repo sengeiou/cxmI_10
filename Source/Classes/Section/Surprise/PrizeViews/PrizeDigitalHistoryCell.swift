@@ -48,6 +48,12 @@ extension PrizeDigitalHistoryCell {
         stageLabel.text = data.period
         dateLabel.text = data.date
         viewModel.style = style
+        switch data.lotteryId {
+        case "8":
+            viewModel.ballStyle = .square
+        default:
+            viewModel.ballStyle = .circular
+        }
         viewModel.setData(red: data.redBall, blue: data.blueBall)
     }
 }
@@ -64,14 +70,19 @@ extension PrizeDigitalHistoryCell : UICollectionViewDataSource {
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SurprisePrizeDigitalItem", for: indexPath) as! SurprisePrizeDigitalItem
-        cell.configure(with: list[indexPath.row])
+        cell.configure(with: list[indexPath.row], style: viewModel.ballStyle)
         return cell
     }
 }
 
 extension PrizeDigitalHistoryCell : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize (width: SurprisePrizeDigitalItem.width, height: SurprisePrizeDigitalItem.height)
+        switch viewModel.ballStyle {
+        case .square:
+            return CGSize (width: SurprisePrizeDigitalItem.width / 2, height: SurprisePrizeDigitalItem.height)
+        default:
+            return CGSize (width: SurprisePrizeDigitalItem.width, height: SurprisePrizeDigitalItem.height)
+        }
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -80,6 +91,11 @@ extension PrizeDigitalHistoryCell : UICollectionViewDelegateFlowLayout {
         return 5
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        switch viewModel.ballStyle {
+        case .square:
+            return 1
+        default :
+            return 0
+        }
     }
 }

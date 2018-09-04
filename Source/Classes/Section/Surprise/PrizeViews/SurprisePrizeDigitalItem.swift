@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum PrizeDigitalStyle {
+    case circular
+    case square
+}
+
 class SurprisePrizeDigitalItem: UICollectionViewCell {
     
     static let width : CGFloat = 30
@@ -25,8 +30,17 @@ class SurprisePrizeDigitalItem: UICollectionViewCell {
 }
 
 extension SurprisePrizeDigitalItem {
-    public func configure(with data : PrizeDigitalData) {
+    public func configure(with data : PrizeDigitalData, style : PrizeDigitalStyle ) {
         numLabel.text = data.title
+        
+        switch style {
+        case .square:
+            numLabel.layer.cornerRadius = 2
+        numLabel.layer.masksToBounds = true
+        default:
+            break
+        }
+        
         switch data.style {
         case .seRed:
             numLabel.textColor = ColorFFFFFF

@@ -22,14 +22,15 @@ enum PrizeStyle {
 }
 struct PrizeDigitalData {
     var title : String = ""
+    var lotteryId : String = ""
     var style : DigitalStyle = .red
 }
 
 struct PrizeDigitalViewModel {
     public var list = BehaviorSubject(value: [PrizeDigitalData]())
     public var style : PrizeStyle!
-   
-    
+    public var ballStyle : PrizeDigitalStyle = .circular
+    public var lotteryId : String = ""
 }
 
 extension PrizeDigitalViewModel {
@@ -40,7 +41,7 @@ extension PrizeDigitalViewModel {
         for redDa in red {
             var redData = PrizeDigitalData()
             redData.title = redDa
-            
+            redData.lotteryId = self.lotteryId
             switch style {
             case .prizeList:
                 redData.style = .seRed
@@ -53,6 +54,7 @@ extension PrizeDigitalViewModel {
         for blueStr in blue {
             var blueData = PrizeDigitalData()
             blueData.title = blueStr
+            blueData.lotteryId = self.lotteryId
             switch style {
             case .prizeList:
                 blueData.style = .seBlue
