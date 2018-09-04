@@ -53,11 +53,11 @@ extension SurprisePrizeDigitalItem {
         case .red:
             numLabel.textColor = ColorEB1C24
             numLabel.backgroundColor = ColorFFFFFF
-            numLabel.layer.borderColor = ColorFFFFFF.cgColor
+            numLabel.layer.borderColor = ColorC7C7C7.cgColor
         case .blue:
             numLabel.textColor = Color0081CC
             numLabel.backgroundColor = ColorFFFFFF
-            numLabel.layer.borderColor = ColorFFFFFF.cgColor
+            numLabel.layer.borderColor = ColorC7C7C7.cgColor
         
         }
     }

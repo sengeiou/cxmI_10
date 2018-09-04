@@ -9,6 +9,15 @@
 import Foundation
 import HandyJSON
 
+enum LottoPlayType : String {
+    case 竞彩足球
+    case 大乐透
+    case 竞彩篮球
+    case 快3
+    case 双色球
+    case 北京单场
+    case 广东11选5
+}
 
 enum PushControllerType : String{
     case 首页

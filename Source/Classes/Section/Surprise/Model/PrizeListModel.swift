@@ -46,4 +46,6 @@ struct PrizeLottoInfo : HandyJSON {
     var termNum : String = ""
     /// 开奖日期
     var prizeDate : String = ""
+    /// 玩法ID
+    var lotteryId : String = ""
 }

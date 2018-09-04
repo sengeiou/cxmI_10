@@ -56,6 +56,18 @@ extension PrizeDigitalHistoryCell {
         }
         viewModel.setData(red: data.redBall, blue: data.blueBall)
     }
+    public func configure(with data : PrizeLottoInfo, style : PrizeStyle) {
+        stageLabel.text = data.period
+        dateLabel.text = data.prizeDate
+        viewModel.style = style
+        switch data.lotteryId {
+        case "1":
+            viewModel.ballStyle = .square
+        default:
+            viewModel.ballStyle = .circular
+        }
+        viewModel.setData(red: data.redPrizeNumList, blue: data.bluePrizeNumList)
+    }
 }
 
 
@@ -95,7 +107,7 @@ extension PrizeDigitalHistoryCell : UICollectionViewDelegateFlowLayout {
         case .square:
             return 1
         default :
-            return 0
+            return 1
         }
     }
 }

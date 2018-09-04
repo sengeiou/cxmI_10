@@ -1534,21 +1534,21 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2018708期" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4gp-4L-LY6">
-                                                    <rect key="frame" x="31" y="11" width="80" height="20"/>
+                                                    <rect key="frame" x="31" y="11" width="90" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="mRZ-J8-G9F"/>
-                                                        <constraint firstAttribute="width" constant="80" id="yCQ-v5-rT5"/>
+                                                        <constraint firstAttribute="width" constant="90" id="yCQ-v5-rT5"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.31372549019607843" green="0.31372549019607843" blue="0.31372549019607843" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="06-04(周三)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kuF-7A-z6w">
-                                                    <rect key="frame" x="121" y="11" width="90" height="20"/>
+                                                    <rect key="frame" x="131" y="11" width="80" height="20"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="90" id="JvR-rD-hl2"/>
+                                                        <constraint firstAttribute="width" constant="80" id="JvR-rD-hl2"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" red="0.62352941179999999" green="0.62352941179999999" blue="0.62352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>

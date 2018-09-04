@@ -8,17 +8,24 @@
 
 import UIKit
 
+
+
 class CXMMPrizeDigitalHistoryVC: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
     private var pageModel : BasePageModel<PrizeLottoInfo>!
     
+    private var style : LottoPlayType = .大乐透
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.navigationItem.title = "大乐透历史开奖"
         tableView.headerRefresh {
             self.loadNewData()
+        }
+        tableView.footerRefresh {
+            self.loadNextData()
         }
         tableView.beginRefreshing()
     }
@@ -44,6 +51,7 @@ extension CXMMPrizeDigitalHistoryVC {
             .asObservable()
             .mapObject(type: BasePageModel<PrizeLottoInfo>.self)
             .subscribe(onNext: { (data) in
+                weakSelf?.tableView.endrefresh()
                 weakSelf?.pageModel = data
                 
                 weakSelf?.tableView.reloadData()
@@ -81,7 +89,9 @@ extension CXMMPrizeDigitalHistoryVC : UITableViewDataSource {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        guard self.pageModel != nil else { return 0 }
+        guard let list = self.pageModel.list else { return 0 }
+        return list.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return initDigitalCell(indexPath: indexPath)
@@ -89,6 +99,16 @@ extension CXMMPrizeDigitalHistoryVC : UITableViewDataSource {
     
     private func initDigitalCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PrizeDigitalHistoryCell", for: indexPath) as! PrizeDigitalHistoryCell
+        
+        
+        switch indexPath.row {
+        case 0:
+            cell.stateIcon.isHidden = false
+            cell.configure(with: pageModel.list[indexPath.row], style: .prizeList)
+        default:
+            cell.stateIcon.isHidden = true
+            cell.configure(with: pageModel.list[indexPath.row], style: .prizeDetail)
+        }
         
         return cell
     }
