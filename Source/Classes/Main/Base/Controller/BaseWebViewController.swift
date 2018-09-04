@@ -309,7 +309,9 @@ extension BaseWebViewController {
         self.popViewController()
     }
     private func getChannel() {
-        webView.evaluateJavaScript("getChannel('\(Channel)')") { (data, error) in
+        let model = JSDataModel()
+        let jsData = model.toJSONString()
+        webView.evaluateJavaScript("actionMessage('\(jsData!)')") { (data, error) in
             
         }
     }
