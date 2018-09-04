@@ -47,7 +47,7 @@ let SeparatorLeftSpacing : CGFloat = 10
 let WithdrawalViewHeight : CGFloat = 166 * defaultScale
 let BankCardHeight : CGFloat = 120 * defaultScale
 let BankCardWidth : CGFloat = 340 * defaultScale
-let BankCardIconWidth : CGFloat = 26 * defaultScale
+let BankCardIconWidth : CGFloat = 26 + 6
 let BankCardDeleteWidth: CGFloat = 14 * defaultScale
 
 //MARK: - 优惠券

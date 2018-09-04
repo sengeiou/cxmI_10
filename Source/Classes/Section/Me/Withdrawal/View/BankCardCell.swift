@@ -58,6 +58,8 @@ class BankCardCell: UITableViewCell {
     private var deleteBut : UIButton!   // 删除按钮
     private var bankType: UILabel!     // 银行卡类型
     
+    private var bankIconBg : UIView!
+    
     private var bgView : UIView!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -80,16 +82,20 @@ class BankCardCell: UITableViewCell {
             make.centerX.equalTo(self.contentView.snp.centerX)
         }
         
-        bankIcon.snp.makeConstraints { (make) in
+        bankIconBg.snp.makeConstraints { (make) in
             make.height.width.equalTo(BankCardIconWidth)
             make.left.equalTo(bgView).offset(12)
             make.top.equalTo(bgView).offset(12)
+        }
+        bankIcon.snp.makeConstraints { (make) in
+            make.top.left.equalTo(2)
+            make.right.bottom.equalTo(-2)
         }
         
         bankName.snp.makeConstraints { (make) in
             make.height.equalTo(labelHeight)
             //make.left.equalTo(bgView).offset(12)
-            make.left.equalTo(bankIcon.snp.right).offset(6)
+            make.left.equalTo(bankIconBg.snp.right).offset(6)
             make.right.equalTo(deleteBut.snp.left).offset(-10)
             make.top.equalTo(bgView).offset(10.5)
         }
@@ -124,6 +130,13 @@ class BankCardCell: UITableViewCell {
         bgView.backgroundColor = ColorCC4050
         
         bankIcon = UIImageView()
+        bankIcon.backgroundColor = ColorFFFFFF
+        
+        
+        bankIconBg = UIView()
+        bankIconBg.backgroundColor = ColorFFFFFF
+        bankIconBg.layer.cornerRadius = BankCardIconWidth / 2
+        bankIconBg.layer.masksToBounds = true
         
         bankName = UILabel()
         bankName.font = Font14
@@ -160,13 +173,14 @@ class BankCardCell: UITableViewCell {
         deleteBut.addTarget(self, action: #selector(deleteCard(_:)), for: .touchUpInside)
         
         self.contentView.addSubview(bgView)
-        bgView.addSubview(bankIcon)
+        //bgView.addSubview(bankIcon)
         bgView.addSubview(bankName)
         bgView.addSubview(bankType)
         bgView.addSubview(bankCardNum)
         bgView.addSubview(deleteBut)
         bgView.addSubview(bankCardState)
-    
+        bgView.addSubview(bankIconBg)
+        bankIconBg.addSubview(bankIcon)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
