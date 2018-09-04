@@ -47,10 +47,10 @@ extension SurprisePrizeMatchCell {
         
         matchLabel.text = "\(data.homeTeam)  \(data.score)  \(data.visitingTeam)"
         
-        switch data.ballColor {
-        case "0":
+        switch data.lotteryId {
+        case "3":  // 篮球
             matchLabel.backgroundColor = ColorFC6F1C
-        case "1":
+        case "1":  // 足球
             matchLabel.backgroundColor = Color439E0B
         default:
             break
