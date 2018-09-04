@@ -30,7 +30,18 @@ class LeagueMatchDetailCell: UITableViewCell {
 extension LeagueMatchDetailCell {
     public func configure(with data : LeagueDetailModel) {
         if let url = URL(string: data.leaguePic) {
-            icon.kf.setImage(with: url)
+            icon.kf.setImage(with: url, placeholder: nil , options: nil , progressBlock: nil) { (image, error, type , url) in
+                
+                if let ima = image {
+                    let scor = ima.size.height / ima.size.width
+                    self.icon.snp.remakeConstraints { (make) in
+                        make.top.equalTo(16)
+                        make.left.equalTo(16)
+                        make.width.equalTo(90)
+                        make.height.equalTo(90 * scor)
+                    }
+                }
+            }
         }
         leaderTitle.text = "联赛规则"
         leaderName.text = data.leagueAddr
