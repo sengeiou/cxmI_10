@@ -12,13 +12,58 @@ class CXMMPrizeDigitalHistoryVC: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    private var pageModel : BasePageModel<PrizeLottoInfo>!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        tableView.headerRefresh {
+            self.loadNewData()
+        }
+        tableView.beginRefreshing()
     }
 
 
+}
+
+// MARK: - 网络请求
+extension CXMMPrizeDigitalHistoryVC {
+    private func loadNewData() {
+        digitalHistoryRequest(pageNum: 1)
+    }
+    private func loadNextData() {
+        guard self.pageModel.isLastPage == false else {
+            self.tableView.noMoreData()
+            return }
+        digitalHistoryRequest(pageNum: pageModel.nextPage)
+    }
+    private func digitalHistoryRequest(pageNum : Int) {
+        weak var weakSelf = self
+        
+        _ = surpriseProvider.rx.request(.lottoPrizeList(page: pageNum))
+            .asObservable()
+            .mapObject(type: BasePageModel<PrizeLottoInfo>.self)
+            .subscribe(onNext: { (data) in
+                weakSelf?.pageModel = data
+                
+                weakSelf?.tableView.reloadData()
+            }, onError: { (error) in
+                weakSelf?.tableView.endrefresh()
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        weakSelf?.pushLoginVC(from: self)
+                    default : break
+                    }
+                    if 300000...310000 ~= code {
+                        weakSelf?.showHUD(message: msg!)
+                    }
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil )
+    }
 }
 
 // MARK: - table Delegate

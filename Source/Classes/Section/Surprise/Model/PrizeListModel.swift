@@ -36,3 +36,14 @@ struct PrizeListModel : HandyJSON {
     /// 比分
     var score : String = ""
 }
+
+struct PrizeLottoInfo : HandyJSON {
+    var bluePrizeNumList : [String] = [String]()
+    var redPrizeNumList : [String] = [String]()
+    /// 其次
+    var period : String = ""
+    /// 期号
+    var termNum : String = ""
+    /// 开奖日期
+    var prizeDate : String = ""
+}
