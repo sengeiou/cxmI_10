@@ -14,7 +14,7 @@ class CXMMLotterySchoolVC: BaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    private var activityModel : ActivityListModel!
+    private var schoolListModel : SchoolListModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,12 +44,12 @@ extension CXMMLotterySchoolVC {
         
         weak var weakSelf = self
         
-        _ = surpriseProvider.rx.request(.activityCenter())
+        _ = surpriseProvider.rx.request(.schoolList())
             .asObservable()
-            .mapObject(type: ActivityListModel.self)
+            .mapObject(type: SchoolListModel.self)
             .subscribe(onNext: { (data) in
                 weakSelf?.tableView.endrefresh()
-                weakSelf?.activityModel = data
+                weakSelf?.schoolListModel = data
                 weakSelf?.tableView.reloadData()
             }, onError: { (error) in
                 weakSelf?.tableView.endrefresh()
@@ -72,22 +72,20 @@ extension CXMMLotterySchoolVC {
 
 extension CXMMLotterySchoolVC : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        pushWebViewController(url: schoolListModel.noviceClassroomList[indexPath.row].bannerLink)
     }
 }
 
 extension CXMMLotterySchoolVC : UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return activityModel != nil ? activityModel.offlineList.count : 0
+        return schoolListModel != nil ? schoolListModel.noviceClassroomList.count : 0
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ActivityCenterCell", for: indexPath) as! ActivityCenterCell
-        
-        cell.configure(with: activityModel.offlineList[indexPath.section], style: .over)
-        
+        cell.configure(with: schoolListModel.noviceClassroomList[indexPath.section])
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

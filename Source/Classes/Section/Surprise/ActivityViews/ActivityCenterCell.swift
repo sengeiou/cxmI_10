@@ -53,7 +53,11 @@ extension ActivityCenterCell {
             self.isUserInteractionEnabled = false
         }
     }
-    public func configure() {
-        
+    public func configure(with data : SchoolInfo) {
+        if let url = URL(string: data.bannerImage) {
+            icon.kf.setImage(with: url)
+        }
+        title.text = data.bannerName
+        maskBageView.isHidden = true
     }
 }

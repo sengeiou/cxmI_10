@@ -85,7 +85,7 @@ extension CXMMActivityCenterVC {
 
 extension CXMMActivityCenterVC : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        pushWebViewController(url: activityModel.onlineList[indexPath.row].bannerLink)
     }
 }
 

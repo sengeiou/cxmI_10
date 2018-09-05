@@ -60,7 +60,11 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
-    
+    public func pushWebViewController(url: String) {
+        let web = CXMActivityViewController()
+        web.urlStr = url
+        self.navigationController?.pushViewController(web, animated: true)
+    }
     public func pushRootViewController() {
         pushRootViewController(0)
     }

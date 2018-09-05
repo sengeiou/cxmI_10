@@ -1631,7 +1631,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nTI-fA-go0">
-                                                    <rect key="frame" x="16" y="41" width="318" height="147.5"/>
+                                                    <rect key="frame" x="16" y="41" width="343" height="147.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="GuL-TR-yXG">
                                                         <size key="itemSize" width="72" height="83"/>
@@ -1671,13 +1671,6 @@
                                                         <outlet property="delegate" destination="tgS-gc-8NV" id="liK-ea-ev2"/>
                                                     </connections>
                                                 </collectionView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jump" translatesAutoresizingMaskIntoConstraints="NO" id="gfT-qf-Mgg">
-                                                    <rect key="frame" x="344" y="107.5" width="15" height="15"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="15" id="gPb-0s-DQf"/>
-                                                        <constraint firstAttribute="width" constant="15" id="lUd-Le-PJ2"/>
-                                                    </constraints>
-                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2018708期" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bqt-gL-WHY">
                                                     <rect key="frame" x="16" y="11" width="100" height="20"/>
                                                     <constraints>
@@ -1709,13 +1702,11 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Bqt-gL-WHY" firstAttribute="top" secondItem="e2B-bB-hhX" secondAttribute="topMargin" id="0jR-t1-rIk"/>
-                                                <constraint firstAttribute="trailing" secondItem="gfT-qf-Mgg" secondAttribute="trailing" constant="16" id="2C8-4g-9mh"/>
+                                                <constraint firstAttribute="trailing" secondItem="nTI-fA-go0" secondAttribute="trailing" constant="16" id="3WO-Ht-QHP"/>
                                                 <constraint firstItem="Bqt-gL-WHY" firstAttribute="leading" secondItem="e2B-bB-hhX" secondAttribute="leading" constant="16" id="5nS-gk-C0o"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="aeK-1m-H0Z" secondAttribute="trailing" constant="16" id="7K4-9u-ZNO"/>
-                                                <constraint firstItem="gfT-qf-Mgg" firstAttribute="centerY" secondItem="nTI-fA-go0" secondAttribute="centerY" id="8I1-nQ-Hp6"/>
                                                 <constraint firstItem="nTI-fA-go0" firstAttribute="top" secondItem="Bqt-gL-WHY" secondAttribute="bottom" constant="10" id="HaI-te-NIY"/>
                                                 <constraint firstAttribute="bottom" secondItem="nTI-fA-go0" secondAttribute="bottom" constant="10" id="Mqe-mE-Pym"/>
-                                                <constraint firstItem="gfT-qf-Mgg" firstAttribute="leading" secondItem="nTI-fA-go0" secondAttribute="trailing" constant="10" id="UdX-N3-SBX"/>
                                                 <constraint firstItem="aeK-1m-H0Z" firstAttribute="bottom" secondItem="Omb-rH-E5D" secondAttribute="bottom" id="YR5-eR-rV2"/>
                                                 <constraint firstItem="nTI-fA-go0" firstAttribute="leading" secondItem="Bqt-gL-WHY" secondAttribute="leading" id="b7m-gy-PvH"/>
                                                 <constraint firstItem="Omb-rH-E5D" firstAttribute="leading" secondItem="Bqt-gL-WHY" secondAttribute="trailing" constant="10" id="oP4-XC-A07"/>

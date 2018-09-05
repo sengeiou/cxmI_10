@@ -77,6 +77,7 @@ extension CXMMPrizeDigitalHistoryVC {
 // MARK: - table Delegate
 extension CXMMPrizeDigitalHistoryVC : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         let story = UIStoryboard(name: "Surprise", bundle: nil )
         let prizeHistory = story.instantiateViewController(withIdentifier: "DigitalHistoryDetailVC") as! CXMMDigitalHistoryDetailVC
         prizeHistory.termNum = self.pageModel.list[indexPath.row].termNum
