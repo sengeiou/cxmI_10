@@ -11,7 +11,7 @@ import HandyJSON
 
 enum LottoPlayType : String {
     case 竞彩足球
-    case 大乐透
+    case 大乐透 = "超级大乐透"
     case 竞彩篮球
     case 快3
     case 双色球

@@ -28,7 +28,7 @@ class SurprisePrizeDigitalCell: UITableViewCell {
     
     public var viewModel : PrizeDigitalViewModel = PrizeDigitalViewModel()
     
-    private var list : [PrizeDigitalData]!
+    private var list : [DigitalBallData]!
     
     private var lotteryId : String!
     

@@ -30,7 +30,7 @@ class SurprisePrizeDigitalItem: UICollectionViewCell {
 }
 
 extension SurprisePrizeDigitalItem {
-    public func configure(with data : PrizeDigitalData, style : PrizeDigitalStyle ) {
+    public func configure(with data : DigitalBallData, style : PrizeDigitalStyle ) {
         numLabel.text = data.title
         
         switch style {
@@ -59,6 +59,39 @@ extension SurprisePrizeDigitalItem {
             numLabel.backgroundColor = ColorFFFFFF
             numLabel.layer.borderColor = ColorC7C7C7.cgColor
         
+        }
+    }
+    
+    
+    public func configure(with data : DigitalBallData, style : LottoPlayType ) {
+        numLabel.text = data.title
+        
+//        switch style {
+//        case .square:
+//            numLabel.layer.cornerRadius = 2
+//            numLabel.layer.masksToBounds = true
+//        default:
+//            break
+//        }
+//
+        switch data.style {
+        case .seRed:
+            numLabel.textColor = ColorFFFFFF
+            numLabel.backgroundColor = ColorEB1C24
+            numLabel.layer.borderColor = ColorEB1C24.cgColor
+        case .seBlue:
+            numLabel.textColor = ColorFFFFFF
+            numLabel.backgroundColor = Color0081CC
+            numLabel.layer.borderColor = Color0081CC.cgColor
+        case .red:
+            numLabel.textColor = ColorEB1C24
+            numLabel.backgroundColor = ColorFFFFFF
+            numLabel.layer.borderColor = ColorC7C7C7.cgColor
+        case .blue:
+            numLabel.textColor = Color0081CC
+            numLabel.backgroundColor = ColorFFFFFF
+            numLabel.layer.borderColor = ColorC7C7C7.cgColor
+
         }
     }
 }

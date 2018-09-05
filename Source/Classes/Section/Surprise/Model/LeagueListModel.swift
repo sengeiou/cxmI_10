@@ -23,3 +23,5 @@ struct LeagueInfoModel : HandyJSON {
     var leagueName: String = ""
     var leaguePic: String = ""
 }
+
+

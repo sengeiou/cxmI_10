@@ -49,3 +49,35 @@ struct PrizeLottoInfo : HandyJSON {
     /// 玩法ID
     var lotteryId : String = ""
 }
+
+struct PrizeLottoDetailModel : HandyJSON {
+    var bluePrizeNumList : [String] = [String]()
+    var redPrizeNumList : [String] = [String]()
+    /// 其次
+    var period : String = ""
+    /// 期号
+    var termNum : String = ""
+    /// 开奖日期
+    var prizeDate : String = ""
+    /// 玩法ID
+    var lotteryId : String = ""
+    /// 奖池金额
+    var prizes : String = ""
+    /// 销售金额
+    var sellAmount : String = ""
+    /// 获奖详情
+    var superLottoRewardDetailsList : [PrizeRewardDetailModel] = [PrizeRewardDetailModel]()
+}
+
+struct PrizeRewardDetailModel : HandyJSON {
+    /// 获奖级别1，2，3，4，5，6
+    var rewardLevel : String = ""
+    //// 基本中奖注数
+    var rewardNum1 : String = ""
+    /// 追加中奖注数
+    var rewardNum2 : String = ""
+    /// 基本单注奖金
+    var rewardPrice1 : String = ""
+    /// 追加单注奖金
+    var rewardPrice2 : String = ""
+}

@@ -24,7 +24,7 @@ class PrizeDigitalHistoryCell: UITableViewCell {
     
     public var viewModel : PrizeDigitalViewModel = PrizeDigitalViewModel()
     
-    private var list : [PrizeDigitalData]!
+    private var list : [DigitalBallData]!
     
     override func awakeFromNib() {
         super.awakeFromNib()

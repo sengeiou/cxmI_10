@@ -20,14 +20,14 @@ enum PrizeStyle {
     case prizeList
     case prizeDetail
 }
-struct PrizeDigitalData {
+struct DigitalBallData {
     var title : String = ""
     var lotteryId : String = ""
     var style : DigitalStyle = .red
 }
 
 struct PrizeDigitalViewModel {
-    public var list = BehaviorSubject(value: [PrizeDigitalData]())
+    public var list = BehaviorSubject(value: [DigitalBallData]())
     public var style : PrizeStyle!
     public var ballStyle : PrizeDigitalStyle = .circular
     public var lotteryId : String = ""
@@ -36,10 +36,10 @@ struct PrizeDigitalViewModel {
 extension PrizeDigitalViewModel {
     public func setData(red : [String], blue : [String]) {
         guard let style = self.style else { return }
-        var ballList = [PrizeDigitalData]()
+        var ballList = [DigitalBallData]()
         
         for redDa in red {
-            var redData = PrizeDigitalData()
+            var redData = DigitalBallData()
             redData.title = redDa
             redData.lotteryId = self.lotteryId
             switch style {
@@ -52,7 +52,7 @@ extension PrizeDigitalViewModel {
             ballList.append(redData)
         }
         for blueStr in blue {
-            var blueData = PrizeDigitalData()
+            var blueData = DigitalBallData()
             blueData.title = blueStr
             blueData.lotteryId = self.lotteryId
             switch style {
