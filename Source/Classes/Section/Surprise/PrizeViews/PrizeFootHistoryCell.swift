@@ -27,17 +27,21 @@ class PrizeFootHistoryCell: UITableViewCell {
         super.awakeFromNib()
         
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
 }
-
 extension PrizeFootHistoryCell {
-    public func configure() {
+    public func configure(with data : MatchHisInfo) {
+        leagueLabel.text = data.cupName
+        dateLabel.text = data.changciId + " "  + data.matchTime
+        homeLabel.text = data.homeTeamAbbr
+        visiLabel.text = data.visitTeamAbbr
+        halfScore.text = "半场\(data.half)"
+        totalLabel.text = data.whole
         
+        spfLabel.text = data.had
+        rangLabel.text = data.hhad
+        scoreLabel.text = data.crs
+        totalLabel.text = data.ttg
+        banLabel.text = data.hafu
     }
 }
 

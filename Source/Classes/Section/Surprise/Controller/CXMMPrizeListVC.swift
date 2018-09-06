@@ -82,7 +82,7 @@ extension CXMMPrizeListVC : UITableViewDelegate {
             pushViewController(vc: prizeHistory)
         case "1":
             let history = story.instantiateViewController(withIdentifier: "PrizeMatchHistoryVC") as! CXMMPrizeMatchHistoryVC
-            
+            history.lotteryId = model.lotteryId
             switch model.ballColor {
             case "1":
                 history.style = .football

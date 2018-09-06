@@ -39,6 +39,8 @@ class CXMMLeagueMatchDetailVC: BaseViewController {
         loadNewData()
     }
 
+   
+    
     private func initSubview() {
         self.tableView.estimatedRowHeight = 100
         tableView.separatorStyle = .none
@@ -81,6 +83,16 @@ extension CXMMLeagueMatchDetailVC {
                 default: break
                 }
             }, onCompleted: nil , onDisposed: nil )
+    }
+}
+// MARK: - 球队信息 - 点击
+extension CXMMLeagueMatchDetailVC : LeagueDetailTeamCellDelegate {
+    func didSelectTeamItem(teamInfo: LeagueTeamInfo, index: IndexPath) {
+        let story = UIStoryboard(name: "Surprise", bundle: nil )
+        
+        let teamDetail = story.instantiateViewController(withIdentifier: "TeamDetailVC") as! CXMMTeamDetailVC
+        
+        pushViewController(vc: teamDetail)
     }
 }
 
@@ -193,6 +205,7 @@ extension CXMMLeagueMatchDetailVC : UITableViewDataSource {
     }
     private func initLeagueTeamCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LeagueDetailTeamCell", for: indexPath) as! LeagueDetailTeamCell
+        cell.delegate = self
         cell.configure(with: self.leagueDetailModel.leagueTeam)
         return cell
     }

@@ -8,8 +8,14 @@
 
 import UIKit
 
+protocol LeagueDetailTeamCellDelegate {
+    func didSelectTeamItem(teamInfo : LeagueTeamInfo, index : IndexPath ) -> Void
+}
+
 class LeagueDetailTeamCell: UITableViewCell {
 
+    public var delegate : LeagueDetailTeamCellDelegate!
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     private var teamList : [LeagueTeamInfo]!
@@ -39,8 +45,9 @@ extension LeagueDetailTeamCell {
 
 extension LeagueDetailTeamCell : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //guard delegate != nil else { return }
-        //delegate.didSelectItem(info: itemList[indexPath.row], indexPath: indexPath)
+        guard delegate != nil else { return }
+       
+        delegate.didSelectTeamItem(teamInfo: teamList[indexPath.row], index: indexPath)
     }
 }
 
