@@ -27,7 +27,8 @@ class CXMMPrizeDigitalHistoryVC: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "大乐透历史开奖"
+        self.navigationItem.title = style.rawValue
+        setEmpty(title: "暂无数据", tableView)
         tableView.headerRefresh {
             self.loadNewData()
         }
@@ -85,9 +86,12 @@ extension CXMMPrizeDigitalHistoryVC {
 extension CXMMPrizeDigitalHistoryVC : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        let model = self.pageModel.list[indexPath.row]
+        
         let story = UIStoryboard(name: "Surprise", bundle: nil )
         let prizeHistory = story.instantiateViewController(withIdentifier: "DigitalHistoryDetailVC") as! CXMMDigitalHistoryDetailVC
-        prizeHistory.termNum = self.pageModel.list[indexPath.row].termNum
+        prizeHistory.lotteryId = lotteryId
+        prizeHistory.termNum = model.termNum
         pushViewController(vc: prizeHistory)
     }
 }

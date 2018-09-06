@@ -34,4 +34,12 @@ extension LeagueMatchItem {
         }
         title.text = data.contryName
     }
+    
+    public func configure(with data : LeagueInfoModel) {
+        if let url = URL(string: data.leaguePic) {
+            icon.kf.setImage(with: url)
+        }
+        title.text = data.leagueAddr
+    }
+    
 }

@@ -49,9 +49,9 @@ extension DigitalHisDetailLottoCell {
             amountLabel.text = "每注金额(元)"
             amountLabel.textColor = Color505050
         case false:
-            prizeLabel.text = data.rewardLevel
-            winningBetNum.text = data.rewardNum1
-            amountLabel.text = data.rewardPrice1
+            prizeLabel.text = data.rewardLevelName
+            winningBetNum.text = data.rewardNum
+            amountLabel.text = data.rewardPrice
             amountLabel.textColor = ColorE95504
         }
     }

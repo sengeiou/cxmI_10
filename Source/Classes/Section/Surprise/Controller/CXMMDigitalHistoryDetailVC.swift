@@ -11,7 +11,12 @@ import UIKit
 class CXMMDigitalHistoryDetailVC: BaseViewController {
 
     public var termNum : String = ""
-    
+    public var lotteryId : String! {
+        didSet{
+            guard lotteryId != nil else { return }
+            self.style = LottoPlayType.getType(lotteryId: lotteryId)
+        }
+    }
     public var style : LottoPlayType = .大乐透
     
     @IBOutlet weak var tableView : UITableView!
@@ -20,7 +25,7 @@ class CXMMDigitalHistoryDetailVC: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.navigationItem.title = style.rawValue + "详情"
         initSubview()
         
         tableView.headerRefresh {
@@ -42,7 +47,7 @@ extension CXMMDigitalHistoryDetailVC {
     }
     private func lottoDetailRequest() {
         weak var weakSelf = self
-        _ = surpriseProvider.rx.request(.lottoPrizeDetail(termNum: termNum))
+        _ = surpriseProvider.rx.request(.lottoPrizeDetail(termNum: termNum, lotteryId: lotteryId))
             .asObservable()
             .mapObject(type: PrizeLottoDetailModel.self)
             .subscribe(onNext: { (data) in

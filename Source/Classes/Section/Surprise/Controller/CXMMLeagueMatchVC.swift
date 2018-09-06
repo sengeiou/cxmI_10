@@ -116,11 +116,25 @@ extension CXMMLeagueMatchVC : UICollectionViewDelegate {
 }
 extension CXMMLeagueMatchVC : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return leagueMatchList != nil ? leagueMatchList.count : 0
+        
+        switch style {
+        case .国际:
+            return leagueMatchList != nil ? leagueMatchList[0].leagueInfoList.count : 0
+        default:
+            return leagueMatchList != nil ? leagueMatchList.count : 0
+        }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LeagueMatchItem", for: indexPath) as! LeagueMatchItem
-        cell.configure(with: leagueMatchList[indexPath.row])
+        
+        switch style {
+        case .国际:
+            cell.configure(with: leagueMatchList[0].leagueInfoList[indexPath.row])
+        default:
+            cell.configure(with: leagueMatchList[indexPath.row])
+        }
+        
+        
 
         cell.topLine.isHidden = true
         

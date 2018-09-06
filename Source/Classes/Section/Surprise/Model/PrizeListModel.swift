@@ -48,6 +48,7 @@ struct PrizeLottoInfo : HandyJSON {
     var prizeDate : String = ""
     /// 玩法ID
     var lotteryId : String = ""
+    var lotteryClassify : String = ""
 }
 
 struct PrizeLottoDetailModel : HandyJSON {
@@ -72,12 +73,10 @@ struct PrizeLottoDetailModel : HandyJSON {
 struct PrizeRewardDetailModel : HandyJSON {
     /// 获奖级别1，2，3，4，5，6
     var rewardLevel : String = ""
-    //// 基本中奖注数
-    var rewardNum1 : String = ""
-    /// 追加中奖注数
-    var rewardNum2 : String = ""
-    /// 基本单注奖金
-    var rewardPrice1 : String = ""
-    /// 追加单注奖金
-    var rewardPrice2 : String = ""
+    /// 获奖级别名称
+    var rewardLevelName : String = ""
+    /// 中奖注数
+    var rewardNum : String = ""
+    /// 单注奖金
+    var rewardPrice : String = ""
 }
