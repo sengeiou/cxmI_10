@@ -12,6 +12,13 @@ import UIKit
 
 class CXMMPrizeDigitalHistoryVC: BaseViewController {
 
+    public var lotteryId : String! {
+        didSet{
+            guard lotteryId != nil else { return }
+            self.style = LottoPlayType.getType(lotteryId: lotteryId)
+        }
+    }
+    
     @IBOutlet weak var tableView: UITableView!
     
     private var pageModel : BasePageModel<PrizeLottoInfo>!
@@ -47,7 +54,7 @@ extension CXMMPrizeDigitalHistoryVC {
     private func digitalHistoryRequest(pageNum : Int) {
         weak var weakSelf = self
         
-        _ = surpriseProvider.rx.request(.lottoPrizeList(page: pageNum))
+        _ = surpriseProvider.rx.request(.lottoPrizeList(page: pageNum, lotteryId: lotteryId))
             .asObservable()
             .mapObject(type: BasePageModel<PrizeLottoInfo>.self)
             .subscribe(onNext: { (data) in

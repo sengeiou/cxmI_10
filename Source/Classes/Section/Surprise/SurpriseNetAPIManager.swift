@@ -26,7 +26,7 @@ enum SurpriseAPIManager {
     /// 联赛详情
     case leagueDetail(leagueId : String)
     /// 历史开奖
-    case lottoPrizeList(page : Int)
+    case lottoPrizeList(page : Int, lotteryId : String)
     /// 竞彩历史开奖
     case matchPrizeList(date : String, lotteryId : String)
     /// 开奖详情  （期号）
@@ -56,7 +56,7 @@ extension SurpriseAPIManager : TargetType {
         case .leagueDetail:
             return "/lottery/discoveryPage/leagueDetail"
         case .lottoPrizeList:
-            return "/lottery/discoveryPage/lottoList"
+            return "/lottery/discoveryPage/szcDetailList"
         case .lottoPrizeDetail:
             return "/lottery/discoveryPage/lottoDetails"
         case .schoolList:
@@ -80,9 +80,10 @@ extension SurpriseAPIManager : TargetType {
             dic["groupId"] = groupId
         case .leagueDetail(let leagueId):
             dic["leagueId"] = leagueId
-        case .lottoPrizeList(let page) :
+        case .lottoPrizeList(let page, let lotteryId):
             dic["page"] = page
             dic["size"] = "20"
+            dic["lotteryClassify"] = lotteryId
         case .lottoPrizeDetail(let termNum) :
             dic["termNum"] = termNum
         case .schoolList:

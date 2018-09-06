@@ -78,7 +78,7 @@ extension CXMMPrizeListVC : UITableViewDelegate {
         switch model.classifyStatus {
         case "0":
             let prizeHistory = story.instantiateViewController(withIdentifier: "PrizeDigitalHistoryVC") as! CXMMPrizeDigitalHistoryVC
-            
+            prizeHistory.lotteryId = model.lotteryId
             pushViewController(vc: prizeHistory)
         case "1":
             let history = story.instantiateViewController(withIdentifier: "PrizeMatchHistoryVC") as! CXMMPrizeMatchHistoryVC

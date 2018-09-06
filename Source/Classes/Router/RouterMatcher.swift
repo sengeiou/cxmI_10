@@ -17,6 +17,31 @@ enum LottoPlayType : String {
     case 双色球
     case 北京单场
     case 广东11选5
+    case 更多彩种
+    case none
+    
+    static func getType(lotteryId : String) -> LottoPlayType {
+        switch lotteryId {
+        case "1": // 竟足
+            return .竞彩足球
+        case "2": // 大乐透
+            return .大乐透
+        case "3": // 竞彩篮球
+            return .竞彩篮球
+        case "4": // 快三
+            return .快3
+        case "5": // 双色球
+            return .双色球
+        case "6": // 北京单场
+            return .北京单场
+        case "7": // 广东11选5
+            return .广东11选5
+        case "8": // 更多彩种
+            return .更多彩种
+        default:
+            return .none
+        }
+    }
 }
 
 enum PushControllerType : String{

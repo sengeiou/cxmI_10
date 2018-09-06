@@ -1083,6 +1083,13 @@
 			path = TrendViews;
 			sourceTree = "<group>";
 		};
+		1142220821410A7C00CCBB3A /* TeamDetails */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TeamDetails;
+			sourceTree = "<group>";
+		};
 		1142DE7E208ED06A009E3916 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
@@ -1383,6 +1390,7 @@
 				11F305DC21364D8100FCA3F7 /* PrizeViews */,
 				11547F8E2137919B0068596C /* ActivityViews */,
 				11CBF028213805D700CB20AC /* LeagueMatchViews */,
+				1142220821410A7C00CCBB3A /* TeamDetails */,
 				11BD5CEB20B3BA5200A3AE6A /* Controller */,
 			);
 			path = Surprise;
