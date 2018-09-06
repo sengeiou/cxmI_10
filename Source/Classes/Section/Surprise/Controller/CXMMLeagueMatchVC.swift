@@ -134,8 +134,6 @@ extension CXMMLeagueMatchVC : UICollectionViewDataSource {
             cell.configure(with: leagueMatchList[indexPath.row])
         }
         
-        
-
         cell.topLine.isHidden = true
         
         if indexPath.row == 0 || (indexPath.row + 1) % 3 == 1 {

@@ -73,6 +73,11 @@
 		11411D092091B56C0009E6CE /* CXMPaymentWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11411D082091B56C0009E6CE /* CXMPaymentWebViewController.swift */; };
 		114222052140C92A00CCBB3A /* MatchHisListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114222042140C92A00CCBB3A /* MatchHisListModel.swift */; };
 		114222072140E33B00CCBB3A /* CXMMTeamDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114222062140E33B00CCBB3A /* CXMMTeamDetailVC.swift */; };
+		1142220A21412D1F00CCBB3A /* TeamDetailPagerHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1142220921412D1F00CCBB3A /* TeamDetailPagerHeader.swift */; };
+		1142220C2141331900CCBB3A /* TeamDetailMemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1142220B2141331900CCBB3A /* TeamDetailMemberCell.swift */; };
+		1142220E2141334400CCBB3A /* TeamDetailRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1142220D2141334400CCBB3A /* TeamDetailRecordCell.swift */; };
+		114222102141336400CCBB3A /* TeamDetailFutureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1142220F2141336400CCBB3A /* TeamDetailFutureCell.swift */; };
+		1142221221413A1600CCBB3A /* TeamDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1142221121413A1600CCBB3A /* TeamDetailModel.swift */; };
 		1142DE7D208ED059009E3916 /* PaymentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1142DE7C208ED059009E3916 /* PaymentProtocol.swift */; };
 		1142F70020B3D54F00C3E2E7 /* TongJiProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1142F6FF20B3D54F00C3E2E7 /* TongJiProtocol.swift */; };
 		11436EF220B65D5700127247 /* OrderPaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11436EF120B65D5700127247 /* OrderPaymentCell.swift */; };
@@ -517,6 +522,11 @@
 		11411D082091B56C0009E6CE /* CXMPaymentWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMPaymentWebViewController.swift; sourceTree = "<group>"; };
 		114222042140C92A00CCBB3A /* MatchHisListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchHisListModel.swift; sourceTree = "<group>"; };
 		114222062140E33B00CCBB3A /* CXMMTeamDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMMTeamDetailVC.swift; sourceTree = "<group>"; };
+		1142220921412D1F00CCBB3A /* TeamDetailPagerHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailPagerHeader.swift; sourceTree = "<group>"; };
+		1142220B2141331900CCBB3A /* TeamDetailMemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailMemberCell.swift; sourceTree = "<group>"; };
+		1142220D2141334400CCBB3A /* TeamDetailRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailRecordCell.swift; sourceTree = "<group>"; };
+		1142220F2141336400CCBB3A /* TeamDetailFutureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailFutureCell.swift; sourceTree = "<group>"; };
+		1142221121413A1600CCBB3A /* TeamDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailModel.swift; sourceTree = "<group>"; };
 		1142DE7C208ED059009E3916 /* PaymentProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentProtocol.swift; sourceTree = "<group>"; };
 		1142F6FF20B3D54F00C3E2E7 /* TongJiProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TongJiProtocol.swift; sourceTree = "<group>"; };
 		11436EF120B65D5700127247 /* OrderPaymentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderPaymentCell.swift; sourceTree = "<group>"; };
@@ -1086,6 +1096,10 @@
 		1142220821410A7C00CCBB3A /* TeamDetails */ = {
 			isa = PBXGroup;
 			children = (
+				1142220921412D1F00CCBB3A /* TeamDetailPagerHeader.swift */,
+				1142220B2141331900CCBB3A /* TeamDetailMemberCell.swift */,
+				1142220D2141334400CCBB3A /* TeamDetailRecordCell.swift */,
+				1142220F2141336400CCBB3A /* TeamDetailFutureCell.swift */,
 			);
 			path = TeamDetails;
 			sourceTree = "<group>";
@@ -1360,6 +1374,7 @@
 				115076A52138E7640029A63E /* LeagueListModel.swift */,
 				115076B1213954F30029A63E /* LeagueDetailModel.swift */,
 				116E99CD213FD514005F1217 /* SchoolListModel.swift */,
+				1142221121413A1600CCBB3A /* TeamDetailModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2953,6 +2968,7 @@
 				E5973E42204FDD6F006461CE /* CXMMeGuaranteeVC.swift in Sources */,
 				E56CE81A206A47860090A1B5 /* AboutHeader.swift in Sources */,
 				E50643AA206C93A70046A2D4 /* BaseWebViewController.swift in Sources */,
+				114222102141336400CCBB3A /* TeamDetailFutureCell.swift in Sources */,
 				E58B57B6205623B30025E2F1 /* BankCardCell.swift in Sources */,
 				E57376462046BC6400148622 /* CXMMeViewController.swift in Sources */,
 				E533BEFF2060BF950037D2D8 /* WithDrawDataModel.swift in Sources */,
@@ -2966,6 +2982,7 @@
 				116E99D0213FE16C005F1217 /* CXMMPrizeMatchHistoryFilterVC.swift in Sources */,
 				11B1B97020F3637D00387430 /* FootballLineupViewOddCell.swift in Sources */,
 				115B0CF220EF41D200848EC7 /* FootballLineupCell.swift in Sources */,
+				1142221221413A1600CCBB3A /* TeamDetailModel.swift in Sources */,
 				E5D8ABB6206739CF002D688B /* OrderDetailTitleCell.swift in Sources */,
 				1143928520A68A4100A64075 /* UIImage+Scale.swift in Sources */,
 				117CCDF4209055A100B38543 /* FootballOrderFooter.swift in Sources */,
@@ -3116,6 +3133,7 @@
 				112F77BD20EC7C8C005CA9E4 /* WMMenuView.m in Sources */,
 				11E969EA20C7E01700EAB733 /* Extension+UIImage.swift in Sources */,
 				11B0813D2133DAFF004FCAE9 /* CXMMPrizeListVC.swift in Sources */,
+				1142220E2141334400CCBB3A /* TeamDetailRecordCell.swift in Sources */,
 				E5973E33204FC1D9006461CE /* MeFooterView.swift in Sources */,
 				11436EF420B6BF9600127247 /* ShareProtocol.swift in Sources */,
 				112E9D4A21227575008466B4 /* CXMMDLTTrendSettingVC.swift in Sources */,
@@ -3154,6 +3172,7 @@
 				E56CE8082069E63E0090A1B5 /* BasePageModel.swift in Sources */,
 				E550D8922073363D002DDE23 /* CXMFootballOrderConfirmVC.swift in Sources */,
 				116E457F21115EB800418661 /* PopMenu.swift in Sources */,
+				1142220A21412D1F00CCBB3A /* TeamDetailPagerHeader.swift in Sources */,
 				E58B57B4205622950025E2F1 /* CXMBankCardViewController.swift in Sources */,
 				1144911D2086130D009F1D09 /* FootballMatchInfoModel.swift in Sources */,
 				11227C0A20849D9700680CCC /* CXMFootballMatchInfoPopVC.swift in Sources */,
@@ -3262,6 +3281,7 @@
 				11754E11211D6F070061C5AB /* DLTTrendBallItem.swift in Sources */,
 				E5973E1E204D50BC006461CE /* CustomTextField.swift in Sources */,
 				11FEB95D208D8DA100926951 /* NewsDetailFooter.swift in Sources */,
+				1142220C2141331900CCBB3A /* TeamDetailMemberCell.swift in Sources */,
 				E5786FBC206DE98A0045F7F5 /* FootballScoreCell.swift in Sources */,
 				11353EA12134F06700C1D645 /* SurpriseShooterHeader.swift in Sources */,
 				E5D5A37B206D193100FC865D /* FootballBottomView.swift in Sources */,

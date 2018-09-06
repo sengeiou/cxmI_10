@@ -59,7 +59,7 @@ extension CXMMLeagueMatchDetailVC {
         
         weak var weakSelf = self
         
-        _ = surpriseProvider.rx.request(.leagueDetail(leagueId: leagueInfo.leagueId))
+        _ = surpriseProvider.rx.request(.leagueDetail(leagueId: leagueInfo.leagueId, seasonId: leagueInfo.seasonId))
             .asObservable()
             .mapObject(type: LeagueDetailModel.self)
             .subscribe(onNext: { (data) in

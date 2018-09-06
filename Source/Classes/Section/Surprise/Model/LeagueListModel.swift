@@ -22,6 +22,10 @@ struct LeagueInfoModel : HandyJSON {
     var leagueId : String = ""
     var leagueName: String = ""
     var leaguePic: String = ""
+    /// 联赛首字母缩写
+    var leagueInitials : String = ""
+    /// 赛季ID
+    var seasonId : String = ""
 }
 
 

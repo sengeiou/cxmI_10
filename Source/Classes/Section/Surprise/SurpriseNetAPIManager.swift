@@ -24,7 +24,7 @@ enum SurpriseAPIManager {
     /// 联赛信息 首页
     case leagueList(groupId: String)
     /// 联赛详情
-    case leagueDetail(leagueId : String)
+    case leagueDetail(leagueId : String, seasonId : String)
     /// 历史开奖
     case lottoPrizeList(page : Int, lotteryId : String)
     /// 竞彩历史开奖
@@ -33,7 +33,8 @@ enum SurpriseAPIManager {
     case lottoPrizeDetail(termNum : String, lotteryId : String)
     /// 小白课堂
     case schoolList()
-    
+    /// 球队详情
+    case teamDetail(teamId : String)
 }
 
 extension SurpriseAPIManager : TargetType {
@@ -54,7 +55,7 @@ extension SurpriseAPIManager : TargetType {
         case .leagueList:
             return "/lottery/discoveryPage/leagueHomePageByGroupId"
         case .leagueDetail:
-            return "/lottery/discoveryPage/leagueDetail"
+            return "/lottery/discoveryPage/leagueDetailForDiscovery"
         case .lottoPrizeList:
             return "/lottery/discoveryPage/szcDetailList"
         case .lottoPrizeDetail:
@@ -63,6 +64,8 @@ extension SurpriseAPIManager : TargetType {
             return "/lottery/discoveryPage/noviceClassroom"
         case .matchPrizeList:
             return "/lottery/discoveryPage/queryJcOpenPrizesByDate"
+        case .teamDetail:
+            return "/lottery/discoveryPage/teamDetailForDiscovery"
         }
     }
     
@@ -78,8 +81,9 @@ extension SurpriseAPIManager : TargetType {
             dic["emptyStr"] = "20"
         case .leagueList (let groupId):
             dic["groupId"] = groupId
-        case .leagueDetail(let leagueId):
+        case .leagueDetail(let leagueId, let seasonId):
             dic["leagueId"] = leagueId
+            dic["seasonId"] = seasonId
         case .lottoPrizeList(let page, let lotteryId):
             dic["page"] = page
             dic["size"] = "20"
@@ -92,6 +96,8 @@ extension SurpriseAPIManager : TargetType {
         case .matchPrizeList(let date, let lotteryId):
             dic["dateStr"] = date
             dic["lotteryClassify"] = lotteryId
+        case .teamDetail(let teamId):
+            dic["teamId"] = teamId
         default:
             return .requestPlain
         }
