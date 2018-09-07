@@ -35,6 +35,7 @@ class CXMMLeagueMatchVC: BaseViewController, IndicatorInfoProvider {
             self.loadNewData()
         }
         collectionView.beginRefreshing()
+//        collectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header")
     }
 
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
@@ -186,9 +187,29 @@ extension CXMMLeagueMatchVC : UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "LeagueMatchReusableView", for: indexPath) as! LeagueMatchReusableView
         
+        switch indexPath.section {
+        case 0:
+            switch style {
+            case .欧洲:
+                header.title.text = "欧洲赛事"
+            case .亚洲:
+                header.title.text = "亚洲赛事"
+            case .美洲:
+                header.title.text = "美洲赛事"
+            case .非洲:
+                header.title.text = "非洲赛事"
+            default : break
+            }
+            
+        default:
+            header.title.text = "杯赛"
+        }
+        
         return header
+    
     }
     
 }
@@ -197,12 +218,27 @@ extension CXMMLeagueMatchVC : UICollectionViewDelegateFlowLayout {
         return CGSize(width: LeagueMatchItem.width, height: LeagueMatchItem.height)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        switch style {
+        case .国际:
+            return UIEdgeInsets(top: 10, left: 16, bottom: 0, right: 16)
+        default :
+            return UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        }
+        
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        switch style {
+        case .国际:
+            return CGSize(width: screenWidth, height: 0.01)
+        default :
+            return CGSize(width: screenWidth, height: 46)
+        }
+        
     }
 }
