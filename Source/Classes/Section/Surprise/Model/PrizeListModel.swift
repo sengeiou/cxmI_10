@@ -37,6 +37,12 @@ struct PrizeListModel : HandyJSON {
     var score : String = ""
 }
 
+struct PrizeLottoListModel : HandyJSON {
+    var lotteryClassify : String = ""
+    var lotteryName : String = ""
+    var szcPrizePageInfo : BasePageModel<PrizeLottoInfo>!
+}
+
 struct PrizeLottoInfo : HandyJSON {
     var bluePrizeNumList : [String] = [String]()
     var redPrizeNumList : [String] = [String]()

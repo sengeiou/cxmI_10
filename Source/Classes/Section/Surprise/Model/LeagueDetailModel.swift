@@ -85,4 +85,5 @@ struct LeagueTeamList : HandyJSON {
 struct LeagueTeamInfo : HandyJSON {
     var teamAddr : String = ""
     var teamPic : String = ""
+    var teamId : String = ""
 }

@@ -46,13 +46,11 @@ extension CXMMLeagueHotVC {
         
         _ = surpriseProvider.rx.request(.leagueList(groupId: "0"))
             .asObservable()
-            .mapArray(type: LeagueMatchModel.self)
+            .mapObject(type: LeagueMatchListModel.self)
             .subscribe(onNext: { (data) in
                 weakSelf?.collectionView.endrefresh()
                 
-                guard data.count > 0 else { return }
-                
-                weakSelf?.leagueList = data[0].leagueInfoList
+                weakSelf?.leagueList = data.groupLeagues
                 weakSelf?.collectionView.reloadData()
 
             }, onError: { (error) in

@@ -12,6 +12,7 @@ protocol LineNumberProtocol {}
 
 extension LineNumberProtocol {
     func lineNumber(totalNum: Int, horizonNum : Int) -> Int{
+        guard totalNum > 0 else { return 0 }
         let count : Int = totalNum / horizonNum
         
         if count == 0 {

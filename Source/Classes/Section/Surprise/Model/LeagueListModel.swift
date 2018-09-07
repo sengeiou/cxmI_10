@@ -9,6 +9,12 @@
 import Foundation
 import HandyJSON
 
+struct LeagueMatchListModel : HandyJSON {
+    var contrys : [LeagueMatchModel] = [LeagueMatchModel]()
+    var groutId : String = ""
+    var groupLeagues : [LeagueInfoModel] = [LeagueInfoModel]()
+}
+
 struct LeagueMatchModel : HandyJSON {
     
     var contryName: String = ""

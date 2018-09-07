@@ -13,6 +13,7 @@ class TeamDetailFutureCell: UITableViewCell {
     @IBOutlet weak var bottomLine : UIView!
     @IBOutlet weak var leftLine : UIView!
     @IBOutlet weak var rightLine : UIView!
+    
     @IBOutlet weak var dateLabel : UILabel!
     @IBOutlet weak var leagueName : UILabel!
     @IBOutlet weak var homeLabel: UILabel!
@@ -30,4 +31,37 @@ class TeamDetailFutureCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+}
+
+extension TeamDetailFutureCell {
+    public func configure(with data : TeamFutureInfo, style : TeamCellStyle) {
+        switch style {
+        case .title:
+            dateLabel.text = "比赛时间"
+            leagueName.text = "赛事"
+            homeLabel.text = "主队"
+            visiLabel.text = "客队"
+            vsLabel.text = ""
+            
+            dateLabel.backgroundColor = ColorF4F4F4
+            leagueName.backgroundColor = ColorF4F4F4
+            homeLabel.backgroundColor = ColorF4F4F4
+            visiLabel.backgroundColor = ColorF4F4F4
+            vsLabel.backgroundColor = ColorF4F4F4
+            
+        case .data:
+            dateLabel.text = data.date
+            leagueName.text = data.matchName
+            homeLabel.text = data.hTeam
+            visiLabel.text = data.vTeam
+            vsLabel.text = "vs"
+            
+            dateLabel.backgroundColor = ColorFFFFFF
+            leagueName.backgroundColor = ColorFFFFFF
+            homeLabel.backgroundColor = ColorFFFFFF
+            visiLabel.backgroundColor = ColorFFFFFF
+            vsLabel.backgroundColor = ColorFFFFFF
+        }
+        
+    }
 }

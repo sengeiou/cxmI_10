@@ -21,7 +21,7 @@ protocol TeamDetailPagerHeaderDelegate {
 
 class TeamDetailPagerHeader: UITableViewHeaderFooterView {
 
-    static let identifier : String = "LeagueDetailPagerHeader"
+    static let identifier : String = "TeamDetailPagerHeader"
     
     public var delegate : TeamDetailPagerHeaderDelegate!
     

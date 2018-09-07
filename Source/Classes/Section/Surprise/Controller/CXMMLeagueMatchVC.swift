@@ -25,7 +25,7 @@ class CXMMLeagueMatchVC: BaseViewController, IndicatorInfoProvider {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    private var leagueMatchList : [LeagueMatchModel]!
+    private var leagueMatchModel : LeagueMatchListModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,11 +69,11 @@ extension CXMMLeagueMatchVC {
         
         _ = surpriseProvider.rx.request(.leagueList(groupId: groupId))
             .asObservable()
-            .mapArray(type: LeagueMatchModel.self)
+            .mapObject(type: LeagueMatchListModel.self)
             .subscribe(onNext: { (data) in
                 weakSelf?.collectionView.endrefresh()
                 
-                weakSelf?.leagueMatchList = data
+                weakSelf?.leagueMatchModel = data
                 weakSelf?.collectionView.reloadData()
                 
             }, onError: { (error) in
@@ -108,10 +108,24 @@ extension CXMMLeagueMatchVC : LeagueMatchFilterDelegate {
 }
 extension CXMMLeagueMatchVC : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let match = CXMMLeagueMatchFilterVC()
-        match.delegate = self
-        match.leagueMatch = leagueMatchList[indexPath.row]
-        present(match)
+        
+        switch style {
+        case .国际:
+            let story = UIStoryboard(name: "Surprise", bundle: nil)
+            
+            let detail = story.instantiateViewController(withIdentifier: "LeagueMatchDetailVC") as! CXMMLeagueMatchDetailVC
+            
+            detail.leagueInfo = leagueMatchModel.groupLeagues[indexPath.row]
+            
+            pushViewController(vc: detail)
+        default:
+            let match = CXMMLeagueMatchFilterVC()
+            match.delegate = self
+            match.leagueMatch = leagueMatchModel.contrys[indexPath.row]
+            present(match)
+        }
+        
+        
     }
 }
 extension CXMMLeagueMatchVC : UICollectionViewDataSource {
@@ -119,9 +133,9 @@ extension CXMMLeagueMatchVC : UICollectionViewDataSource {
         
         switch style {
         case .国际:
-            return leagueMatchList != nil ? leagueMatchList[0].leagueInfoList.count : 0
+            return leagueMatchModel != nil ? leagueMatchModel.groupLeagues.count : 0
         default:
-            return leagueMatchList != nil ? leagueMatchList.count : 0
+            return leagueMatchModel != nil ? leagueMatchModel.contrys.count : 0
         }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -129,9 +143,9 @@ extension CXMMLeagueMatchVC : UICollectionViewDataSource {
         
         switch style {
         case .国际:
-            cell.configure(with: leagueMatchList[0].leagueInfoList[indexPath.row])
+            cell.configure(with: leagueMatchModel.groupLeagues[indexPath.row])
         default:
-            cell.configure(with: leagueMatchList[indexPath.row])
+            cell.configure(with: leagueMatchModel.contrys[indexPath.row])
         }
         
         cell.topLine.isHidden = true

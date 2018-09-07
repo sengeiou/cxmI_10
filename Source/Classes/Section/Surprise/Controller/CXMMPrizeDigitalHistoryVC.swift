@@ -21,7 +21,7 @@ class CXMMPrizeDigitalHistoryVC: BaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    private var pageModel : BasePageModel<PrizeLottoInfo>!
+    private var lottoListModel : PrizeLottoListModel!
     
     private var style : LottoPlayType = .大乐透
     
@@ -47,20 +47,20 @@ extension CXMMPrizeDigitalHistoryVC {
         digitalHistoryRequest(pageNum: 1)
     }
     private func loadNextData() {
-        guard self.pageModel.isLastPage == false else {
+        guard self.lottoListModel.szcPrizePageInfo.isLastPage == false else {
             self.tableView.noMoreData()
             return }
-        digitalHistoryRequest(pageNum: pageModel.nextPage)
+        digitalHistoryRequest(pageNum: lottoListModel.szcPrizePageInfo.nextPage)
     }
     private func digitalHistoryRequest(pageNum : Int) {
         weak var weakSelf = self
         
         _ = surpriseProvider.rx.request(.lottoPrizeList(page: pageNum, lotteryId: lotteryId))
             .asObservable()
-            .mapObject(type: BasePageModel<PrizeLottoInfo>.self)
+            .mapObject(type: PrizeLottoListModel.self)
             .subscribe(onNext: { (data) in
                 weakSelf?.tableView.endrefresh()
-                weakSelf?.pageModel = data
+                weakSelf?.lottoListModel = data
                 
                 weakSelf?.tableView.reloadData()
             }, onError: { (error) in
@@ -86,7 +86,7 @@ extension CXMMPrizeDigitalHistoryVC {
 extension CXMMPrizeDigitalHistoryVC : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let model = self.pageModel.list[indexPath.row]
+        let model = self.lottoListModel.szcPrizePageInfo.list[indexPath.row]
         
         let story = UIStoryboard(name: "Surprise", bundle: nil )
         let prizeHistory = story.instantiateViewController(withIdentifier: "DigitalHistoryDetailVC") as! CXMMDigitalHistoryDetailVC
@@ -101,8 +101,8 @@ extension CXMMPrizeDigitalHistoryVC : UITableViewDataSource {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard self.pageModel != nil else { return 0 }
-        guard let list = self.pageModel.list else { return 0 }
+        guard self.lottoListModel != nil else { return 0 }
+        guard let list = self.lottoListModel.szcPrizePageInfo.list else { return 0 }
         return list.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -116,10 +116,10 @@ extension CXMMPrizeDigitalHistoryVC : UITableViewDataSource {
         switch indexPath.row {
         case 0:
             cell.stateIcon.isHidden = false
-            cell.configure(with: pageModel.list[indexPath.row], style: .prizeList)
+            cell.configure(with: lottoListModel.szcPrizePageInfo.list[indexPath.row], style: .prizeList)
         default:
             cell.stateIcon.isHidden = true
-            cell.configure(with: pageModel.list[indexPath.row], style: .prizeDetail)
+            cell.configure(with: lottoListModel.szcPrizePageInfo.list[indexPath.row], style: .prizeDetail)
         }
         
         return cell

@@ -91,7 +91,7 @@ extension CXMMLeagueMatchDetailVC : LeagueDetailTeamCellDelegate {
         let story = UIStoryboard(name: "Surprise", bundle: nil )
         
         let teamDetail = story.instantiateViewController(withIdentifier: "TeamDetailVC") as! CXMMTeamDetailVC
-        
+        teamDetail.teamId = teamInfo.teamId
         pushViewController(vc: teamDetail)
     }
 }

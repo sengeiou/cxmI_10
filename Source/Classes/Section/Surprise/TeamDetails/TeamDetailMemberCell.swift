@@ -30,3 +30,10 @@ class TeamDetailMemberCell: UITableViewCell {
     }
 
 }
+
+extension TeamDetailMemberCell {
+    public func configure(with infoOne : TeamMemberInfo, infoTwo : TeamMemberInfo) {
+        memberOne.text = infoOne.playerName
+        memberTwo.text = infoTwo.playerName
+    }
+}

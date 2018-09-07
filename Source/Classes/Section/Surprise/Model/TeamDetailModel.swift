@@ -19,9 +19,9 @@ struct TeamDetailModel : HandyJSON {
     /// 未来赛事
     var futureMatch : TeamFutureDetail!
     /// 球员名单
-    var playerList : TeamMemberDetail!
+    var playerlist : TeamMemberDetailList!
     /// 近期战绩
-    var recentRecore : TeamRecoreDetail!
+    var recentRecord : TeamRecoreDetail!
     /// 球队简称
     var teamAddr : String = ""
     /// 球场容量
@@ -46,7 +46,9 @@ struct TeamFutureInfo : HandyJSON {
     /// 赛事名称
     var matchName : String = ""
 }
-
+struct TeamMemberDetailList : HandyJSON {
+    var playerInfosList : [TeamMemberDetail] = [TeamMemberDetail]()
+}
 struct TeamMemberDetail : HandyJSON {
     var playerList : [TeamMemberInfo] = [TeamMemberInfo]()
     var palyerType : String = ""
@@ -69,7 +71,7 @@ struct TeamRecoreDetail : HandyJSON {
     /// 比赛次数
     var matchCount : String = ""
     ///
-    var recentRecordList : TeamRecordInfo!
+    var recentRecordList : [TeamRecordInfo] = [TeamRecordInfo]()
 }
 
 struct TeamRecordInfo : HandyJSON {
