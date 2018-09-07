@@ -3248,13 +3248,13 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="zA5-5H-8o4">
                                     <size key="itemSize" width="219" height="214"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="headerReferenceSize" width="50" height="46"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LeagueMatchItem" id="Ymn-3i-KwH" customClass="LeagueMatchItem" customModule="彩小蜜" customModuleProvider="target">
-                                        <rect key="frame" x="78" y="0.0" width="219" height="214"/>
+                                        <rect key="frame" x="78" y="46" width="219" height="214"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="219" height="214"/>
@@ -3333,6 +3333,57 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="LeagueMatchReusableView" id="GVh-og-qRv" customClass="LeagueMatchReusableView" customModule="彩小蜜" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="46"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MIT-yc-2qP">
+                                            <rect key="frame" x="16" y="16" width="343" height="1"/>
+                                            <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="1" id="Qgc-LE-Cxi"/>
+                                            </constraints>
+                                        </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pfi-97-f1K">
+                                            <rect key="frame" x="16" y="17" width="1" height="29"/>
+                                            <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="1" id="6Jt-kg-2NT"/>
+                                            </constraints>
+                                        </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q2e-P1-H8v">
+                                            <rect key="frame" x="358" y="17" width="1" height="29"/>
+                                            <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="1" id="pEf-iJ-xJy"/>
+                                            </constraints>
+                                        </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="欧洲赛事" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bhv-oU-yNv">
+                                            <rect key="frame" x="33" y="16" width="315" height="30"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="MIT-yc-2qP" firstAttribute="top" secondItem="GVh-og-qRv" secondAttribute="top" constant="16" id="AgL-xJ-7zH"/>
+                                        <constraint firstAttribute="bottom" secondItem="Pfi-97-f1K" secondAttribute="bottom" id="E57-d1-1kh"/>
+                                        <constraint firstItem="Q2e-P1-H8v" firstAttribute="leading" secondItem="bhv-oU-yNv" secondAttribute="trailing" constant="10" id="JxD-pa-Qx1"/>
+                                        <constraint firstItem="Pfi-97-f1K" firstAttribute="leading" secondItem="GVh-og-qRv" secondAttribute="leading" constant="16" id="KDg-qZ-u2F"/>
+                                        <constraint firstAttribute="trailing" secondItem="MIT-yc-2qP" secondAttribute="trailing" constant="16" id="Of2-Qm-xYI"/>
+                                        <constraint firstAttribute="bottom" secondItem="Q2e-P1-H8v" secondAttribute="bottom" id="PEA-Ib-V7b"/>
+                                        <constraint firstItem="bhv-oU-yNv" firstAttribute="leading" secondItem="Pfi-97-f1K" secondAttribute="trailing" constant="16" id="bbg-Qv-eeO"/>
+                                        <constraint firstItem="MIT-yc-2qP" firstAttribute="leading" secondItem="GVh-og-qRv" secondAttribute="leading" constant="16" id="egA-cT-uny"/>
+                                        <constraint firstItem="Q2e-P1-H8v" firstAttribute="top" secondItem="MIT-yc-2qP" secondAttribute="bottom" id="fXT-if-R9B"/>
+                                        <constraint firstAttribute="trailing" secondItem="Q2e-P1-H8v" secondAttribute="trailing" constant="16" id="tYU-Xx-wEd"/>
+                                        <constraint firstItem="Pfi-97-f1K" firstAttribute="top" secondItem="MIT-yc-2qP" secondAttribute="bottom" id="uMZ-Ip-Lf8"/>
+                                        <constraint firstAttribute="bottom" secondItem="bhv-oU-yNv" secondAttribute="bottom" id="xUd-NZ-Yru"/>
+                                        <constraint firstItem="bhv-oU-yNv" firstAttribute="top" secondItem="MIT-yc-2qP" secondAttribute="top" id="yg6-bn-D8h"/>
+                                    </constraints>
+                                    <connections>
+                                        <outlet property="title" destination="bhv-oU-yNv" id="b71-Nk-M8Y"/>
+                                    </connections>
+                                </collectionReusableView>
                                 <connections>
                                     <outlet property="dataSource" destination="D6p-WL-pxK" id="x3f-IL-f6C"/>
                                     <outlet property="delegate" destination="D6p-WL-pxK" id="xru-Ah-x4D"/>

@@ -10,7 +10,7 @@ import UIKit
 
 class LeagueMatchItem: UICollectionViewCell {
     
-    static let width : CGFloat = (screenWidth - 20) / 3 - 0.01
+    static let width : CGFloat = (screenWidth - 32) / 3 - 0.01
     static let height: CGFloat = 40
     
     @IBOutlet weak var topLine: UIView!

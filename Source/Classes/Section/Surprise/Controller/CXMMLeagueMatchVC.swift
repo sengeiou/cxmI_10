@@ -129,13 +129,28 @@ extension CXMMLeagueMatchVC : UICollectionViewDelegate {
     }
 }
 extension CXMMLeagueMatchVC : UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        switch style {
+        case .国际:
+            return 1
+        default:
+            return 2
+        }
+    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         switch style {
         case .国际:
             return leagueMatchModel != nil ? leagueMatchModel.groupLeagues.count : 0
         default:
-            return leagueMatchModel != nil ? leagueMatchModel.contrys.count : 0
+            switch section {
+            case 0:
+                return leagueMatchModel != nil ? leagueMatchModel.contrys.count : 0
+            case 1:
+                return leagueMatchModel != nil ? leagueMatchModel.groupLeagues.count : 0
+            default : return 0
+            }
+            
         }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -145,7 +160,14 @@ extension CXMMLeagueMatchVC : UICollectionViewDataSource {
         case .国际:
             cell.configure(with: leagueMatchModel.groupLeagues[indexPath.row])
         default:
-            cell.configure(with: leagueMatchModel.contrys[indexPath.row])
+            switch indexPath.section {
+            case 0:
+                cell.configure(with: leagueMatchModel.contrys[indexPath.row])
+            case 1:
+                cell.configure(with: leagueMatchModel.groupLeagues[indexPath.row])
+            default : break
+            }
+            
         }
         
         cell.topLine.isHidden = true
@@ -162,13 +184,20 @@ extension CXMMLeagueMatchVC : UICollectionViewDataSource {
         
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "LeagueMatchReusableView", for: indexPath) as! LeagueMatchReusableView
+        
+        return header
+    }
+    
 }
 extension CXMMLeagueMatchVC : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: LeagueMatchItem.width, height: LeagueMatchItem.height)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
+        return UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
