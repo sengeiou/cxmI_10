@@ -51,7 +51,9 @@ struct TeamMemberDetailList : HandyJSON {
 }
 struct TeamMemberDetail : HandyJSON {
     var playerList : [TeamMemberInfo] = [TeamMemberInfo]()
+    ///  球员类型:0守门员，1后卫，2中场，3前锋
     var palyerType : String = ""
+    
     var playerTypeCode : String = ""
 }
 

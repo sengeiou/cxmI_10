@@ -142,9 +142,7 @@ extension CXMMTeamDetailVC : UITableViewDataSource {
         switch style {
         case .球员名单:
             guard teamDetail.playerlist != nil else { return 0 }
-            
-           // return lineNumber(totalNum: teamDetail.playerlist.playerList.count, horizonNum: 2)
-            return 0
+            return teamDetail.playerlist.playerInfosList.count
         case .近期战绩:
             switch section {
             case 0:
@@ -191,8 +189,7 @@ extension CXMMTeamDetailVC : UITableViewDataSource {
     
     private func initMemberCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TeamDetailMemberCell", for: indexPath) as! TeamDetailMemberCell
-//        cell.configure(with: teamDetail.playerlist.playerList[indexPath.row],
-//                       infoTwo: teamDetail.playerlist.playerList[indexPath.row + 1])
+        cell.configure(with: teamDetail.playerlist.playerInfosList[indexPath.row])
         return cell
     }
     private func initRecoreCell(indexPath: IndexPath) -> UITableViewCell {
@@ -223,7 +220,8 @@ extension CXMMTeamDetailVC : UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch style {
         case .球员名单:
-            return 80
+            let count = lineNumber(totalNum: teamDetail.playerlist.playerInfosList[indexPath.row].playerList.count, horizonNum: 2)
+            return CGFloat(40 + 40 * count)
         case .近期战绩:
             return 40
         case .未来赛事:

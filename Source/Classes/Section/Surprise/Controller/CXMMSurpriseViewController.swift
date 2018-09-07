@@ -197,6 +197,7 @@ extension CXMMSurpriseViewController : UITableViewDelegate {
 
 extension CXMMSurpriseViewController : UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
+        guard self.surpriseModel != nil else { return 0 }
         return 3
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

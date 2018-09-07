@@ -56,6 +56,7 @@ class CXMMLeagueMatchDetailVC: BaseViewController {
             tableView.scrollIndicatorInsets = tableView.contentInset
         }
         self.tableView.estimatedRowHeight = 100
+        tableView.backgroundColor = ColorFFFFFF
         tableView.separatorStyle = .none
         tableView.register(LeagueDetailPagerHeader.self,
                            forHeaderFooterViewReuseIdentifier: LeagueDetailPagerHeader.identifier)

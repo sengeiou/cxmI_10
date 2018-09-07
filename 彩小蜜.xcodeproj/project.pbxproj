@@ -136,6 +136,7 @@
 		1155A3FE213CD8290048F69A /* LeagueDetailPagerHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1155A3FD213CD8290048F69A /* LeagueDetailPagerHeader.swift */; };
 		1155A400213D10960048F69A /* LeagueDetailTeamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1155A3FF213D10960048F69A /* LeagueDetailTeamCell.swift */; };
 		11576055214228D7006D0856 /* TeamDetailRecordHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11576054214228D7006D0856 /* TeamDetailRecordHeader.swift */; };
+		1157605721427191006D0856 /* TeamDetailMemberItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1157605621427191006D0856 /* TeamDetailMemberItem.swift */; };
 		1158FC3F21104FD20004229D /* CXMMDaletouViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1158FC3E21104FD20004229D /* CXMMDaletouViewController.swift */; };
 		1158FC41211050FC0004229D /* DaletouTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1158FC40211050FC0004229D /* DaletouTitleCell.swift */; };
 		1158FC43211052A70004229D /* DaletouBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1158FC42211052A70004229D /* DaletouBottomView.swift */; };
@@ -586,6 +587,7 @@
 		1155A3FD213CD8290048F69A /* LeagueDetailPagerHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueDetailPagerHeader.swift; sourceTree = "<group>"; };
 		1155A3FF213D10960048F69A /* LeagueDetailTeamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueDetailTeamCell.swift; sourceTree = "<group>"; };
 		11576054214228D7006D0856 /* TeamDetailRecordHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailRecordHeader.swift; sourceTree = "<group>"; };
+		1157605621427191006D0856 /* TeamDetailMemberItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailMemberItem.swift; sourceTree = "<group>"; };
 		1158FC3E21104FD20004229D /* CXMMDaletouViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMMDaletouViewController.swift; sourceTree = "<group>"; };
 		1158FC40211050FC0004229D /* DaletouTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaletouTitleCell.swift; sourceTree = "<group>"; };
 		1158FC42211052A70004229D /* DaletouBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaletouBottomView.swift; sourceTree = "<group>"; };
@@ -1099,6 +1101,7 @@
 			isa = PBXGroup;
 			children = (
 				1142220921412D1F00CCBB3A /* TeamDetailPagerHeader.swift */,
+				1157605621427191006D0856 /* TeamDetailMemberItem.swift */,
 				11576054214228D7006D0856 /* TeamDetailRecordHeader.swift */,
 				1142220B2141331900CCBB3A /* TeamDetailMemberCell.swift */,
 				1142220D2141334400CCBB3A /* TeamDetailRecordCell.swift */,
@@ -3130,6 +3133,7 @@
 				114800DA208C97B400621AFA /* CXMNewsMeViewController.swift in Sources */,
 				E55016F920722E190056AB1F /* FootballFilterTopView.swift in Sources */,
 				E567636A206B2FDA00E2D9A8 /* HHTextView.swift in Sources */,
+				1157605721427191006D0856 /* TeamDetailMemberItem.swift in Sources */,
 				11B1B96E20F3609B00387430 /* FootballLineupViewCell.swift in Sources */,
 				1158FC43211052A70004229D /* DaletouBottomView.swift in Sources */,
 				116E458F2111CB5F00418661 /* DaletouOmissionModel.swift in Sources */,
