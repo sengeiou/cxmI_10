@@ -2217,10 +2217,13 @@
                                                         <constraint firstAttribute="width" constant="30" id="TeY-Pn-Hce"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal" title="详情">
                                                         <color key="titleColor" red="0.91764705879999997" green="0.33333333329999998" blue="0.015686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
-                                                    <state key="selected" title="收起"/>
+                                                    <state key="selected" title="收起">
+                                                        <color key="titleColor" red="0.91764705879999997" green="0.33333333329999998" blue="0.015686274510000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
                                                     <connections>
                                                         <action selector="detailButtonClick:" destination="KI1-7x-w2f" eventType="touchUpInside" id="CfT-aL-25L"/>
                                                     </connections>

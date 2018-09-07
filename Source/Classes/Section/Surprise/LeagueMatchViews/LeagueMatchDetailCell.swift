@@ -57,7 +57,7 @@ extension LeagueMatchDetailCell {
         }
         leaderTitle.text = "联赛规则"
         leaderName.text = data.leagueAddr
-        leaderDetail.text = data.leagueRule
+        leaderDetail.text = data.leagueRule + data.leagueRule
     }
 }
 

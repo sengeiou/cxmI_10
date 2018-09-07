@@ -98,7 +98,7 @@ extension CXMMLeagueMatchDetailVC {
             }, onCompleted: nil , onDisposed: nil )
     }
 }
-
+// MARK: - 详情 - 收起，
 extension CXMMLeagueMatchDetailVC : LeagueMatchDetailCellDelete {
     func didTipShowDetailButton(isSeletced: Bool) {
         switch isSeletced {
@@ -107,8 +107,11 @@ extension CXMMLeagueMatchDetailVC : LeagueMatchDetailCellDelete {
         case false :
             self.titleStyle = .hide
         }
-        self.tableView.reloadData()
-        self.tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
+    
+        self.tableView.reloadSections(IndexSet(integer: 0), with: .none)
+//        UIView.performWithoutAnimation {
+//            self.tableView.reloadSections(IndexSet(integer: 0), with: .none)
+//        }
     }
 }
 
@@ -194,6 +197,7 @@ extension CXMMLeagueMatchDetailVC : UITableViewDataSource {
     }
     private func initLeagueDetailCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LeagueMatchDetailCell", for: indexPath) as! LeagueMatchDetailCell
+        cell.delegate = self
         cell.configure(with: self.leagueDetailModel)
         return cell
     }
