@@ -11,7 +11,7 @@ import UIKit
 class TeamDetailMemberItem: UICollectionViewCell {
     
     static let width : CGFloat = (screenWidth - 34) / 2 - 0.01
-    static let height: CGFloat = 30
+    static let height: CGFloat = 40
     
     @IBOutlet weak var topLine : UIView!
     @IBOutlet weak var bottomLine : UIView!

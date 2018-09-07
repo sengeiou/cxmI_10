@@ -22,7 +22,11 @@ class TeamDetailMemberCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        title.backgroundColor = ColorF4F4F4
+        leftLine.isHidden = true
+        rightLine.isHidden = true
+        bottomLine.isHidden = true
+        collectionView.isScrollEnabled = false
     }
 }
 
@@ -30,15 +34,15 @@ extension TeamDetailMemberCell {
     public func configure(with info : TeamMemberDetail) {
         self.list = info.playerList
         
-        switch info.palyerType {
+        switch info.playerTypeCode {
         case "0": // 守门员
-            title.text = "守门员"
+            title.text = "  守门员"
         case "1": // 后卫
-            title.text = "后卫"
+            title.text = "  后卫"
         case "2": // 中场
-            title.text = "中场"
+            title.text = "  中场"
         case "3": // 前锋
-            title.text = "前锋"
+            title.text = "  前锋"
         default: break
         }
         
@@ -61,6 +65,7 @@ extension TeamDetailMemberCell : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TeamDetailMemberItem", for: indexPath) as! TeamDetailMemberItem
         cell.configure(with: list[indexPath.row])
+        cell.topLine.isHidden = true
         return cell
     }
 }

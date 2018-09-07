@@ -46,13 +46,13 @@ class CXMMTeamDetailVC: BaseViewController {
     private func setData() {
         guard let model = self.teamDetail else { return }
         
-        teamName.text = model.teamAddr
-        teamFoundingTime.text = model.teamTime
-        teamRegion.text = model.contry
-        teamCity.text = model.city
-        teamStadium.text = model.court
-        teamStadiumCapacity.text = model.teamCapacity
-        teamValue.text = model.teamValue
+        teamName.text = "  " + model.teamAddr
+        teamFoundingTime.text = "  " + model.teamTime
+        teamRegion.text = "  " + model.contry
+        teamCity.text = "  " + model.city
+        teamStadium.text = "  " + model.court
+        teamStadiumCapacity.text = "  " + model.teamCapacity
+        teamValue.text = "  " + model.teamValue
         
         if let url = URL(string: model.teamPic) {
             teamIcon.kf.setImage(with: url, placeholder: nil , options: nil , progressBlock: nil) { (image, error, type , url) in
@@ -142,7 +142,7 @@ extension CXMMTeamDetailVC : UITableViewDataSource {
         switch style {
         case .球员名单:
             guard teamDetail.playerlist != nil else { return 0 }
-            return teamDetail.playerlist.playerInfosList.count
+            return 4
         case .近期战绩:
             switch section {
             case 0:
@@ -189,7 +189,19 @@ extension CXMMTeamDetailVC : UITableViewDataSource {
     
     private func initMemberCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TeamDetailMemberCell", for: indexPath) as! TeamDetailMemberCell
-        cell.configure(with: teamDetail.playerlist.playerInfosList[indexPath.row])
+        
+        switch indexPath.row {
+        case 0:
+            cell.configure(with: teamDetail.playerlist.goalKeepers)
+        case 1:
+            cell.configure(with: teamDetail.playerlist.backPlayers)
+        case 2:
+            cell.configure(with: teamDetail.playerlist.midPlayers)
+        case 3:
+            cell.configure(with: teamDetail.playerlist.forwards)
+        default: break
+        }
+        
         return cell
     }
     private func initRecoreCell(indexPath: IndexPath) -> UITableViewCell {
@@ -220,8 +232,23 @@ extension CXMMTeamDetailVC : UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch style {
         case .球员名单:
-            let count = lineNumber(totalNum: teamDetail.playerlist.playerInfosList[indexPath.row].playerList.count, horizonNum: 2)
-            return CGFloat(40 + 40 * count)
+            
+            switch indexPath.row {
+            case 0:
+                let count = CGFloat(lineNumber(totalNum: teamDetail.playerlist.goalKeepers.playerList.count, horizonNum: 2))
+                return CGFloat(50 + TeamDetailMemberItem.height * count)
+            case 1:
+                let count = CGFloat(lineNumber(totalNum: teamDetail.playerlist.backPlayers.playerList.count, horizonNum: 2))
+                return CGFloat(50 + TeamDetailMemberItem.height * count)
+            case 2:
+                let count = CGFloat(lineNumber(totalNum: teamDetail.playerlist.midPlayers.playerList.count, horizonNum: 2))
+                return CGFloat(50 + TeamDetailMemberItem.height * count)
+            case 3:
+                let count = CGFloat(lineNumber(totalNum: teamDetail.playerlist.forwards.playerList.count, horizonNum: 2))
+                return CGFloat(50 + TeamDetailMemberItem.height * count)
+            default : return 0
+            }
+            
         case .近期战绩:
             return 40
         case .未来赛事:

@@ -47,7 +47,14 @@ struct TeamFutureInfo : HandyJSON {
     var matchName : String = ""
 }
 struct TeamMemberDetailList : HandyJSON {
-    var playerInfosList : [TeamMemberDetail] = [TeamMemberDetail]()
+    /// 后卫
+    var backPlayers : TeamMemberDetail!
+    /// 前锋
+    var forwards : TeamMemberDetail!
+    /// 守门员
+    var goalKeepers : TeamMemberDetail!
+    /// 中场
+    var midPlayers : TeamMemberDetail!
 }
 struct TeamMemberDetail : HandyJSON {
     var playerList : [TeamMemberInfo] = [TeamMemberInfo]()
