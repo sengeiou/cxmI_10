@@ -57,12 +57,11 @@ class CXMMTeamDetailVC: BaseViewController {
         if let url = URL(string: model.teamPic) {
             teamIcon.kf.setImage(with: url, placeholder: nil , options: nil , progressBlock: nil) { (image, error, type , url) in
                 if let ima = image {
-                    let score = ima.size.width / ima.size.height
+                    let size = ima.scaleImage(image: ima, imageLength: 80)
                     self.teamIcon.snp.remakeConstraints({ (make) in
                         make.top.equalTo(16)
                         make.centerY.equalTo(0)
-                        make.height.equalTo(80)
-                        make.width.equalTo(80 * score)
+                        make.size.equalTo(size)
                     })
                 }
             }
@@ -70,6 +69,12 @@ class CXMMTeamDetailVC: BaseViewController {
     }
     
     private func initSubview() {
+        if #available(iOS 11.0, *) {
+            
+        }else {
+            tableView.contentInset = UIEdgeInsets(top: -64, left: 0, bottom: 49, right: 0)
+            tableView.scrollIndicatorInsets = tableView.contentInset
+        }
         tableView.separatorStyle = .none
         tableView.register(TeamDetailPagerHeader.self,
                            forHeaderFooterViewReuseIdentifier: TeamDetailPagerHeader.identifier)

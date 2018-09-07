@@ -8,23 +8,36 @@
 
 import UIKit
 
+protocol LeagueMatchDetailCellDelete {
+    func didTipShowDetailButton( isSeletced : Bool) -> Void
+}
+
 class LeagueMatchDetailCell: UITableViewCell {
 
+    public var delegate : LeagueMatchDetailCellDelete!
+    
     @IBOutlet weak var icon : UIImageView!
     @IBOutlet weak var leaderTitle : UILabel!
     @IBOutlet weak var leaderName: UILabel!
     @IBOutlet weak var leaderDetail: UILabel!
     
+    @IBOutlet weak var detailButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
 
+    @IBAction func detailButtonClick(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        guard delegate != nil else { return }
+        delegate.didTipShowDetailButton(isSeletced: sender.isSelected)
+    }
+    
+    
 }
 
 extension LeagueMatchDetailCell {
@@ -33,12 +46,11 @@ extension LeagueMatchDetailCell {
             icon.kf.setImage(with: url, placeholder: nil , options: nil , progressBlock: nil) { (image, error, type , url) in
                 
                 if let ima = image {
-                    let scor = ima.size.height / ima.size.width
+                    let size = ima.scaleImage(image: ima, imageLength: 90)
                     self.icon.snp.remakeConstraints { (make) in
                         make.top.equalTo(16)
                         make.left.equalTo(16)
-                        make.width.equalTo(90)
-                        make.height.equalTo(90 * scor)
+                        make.size.equalTo(size)
                     }
                 }
             }

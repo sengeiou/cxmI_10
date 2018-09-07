@@ -36,6 +36,12 @@ class CXMMDigitalHistoryDetailVC: BaseViewController {
     }
 
     private func initSubview() {
+        if #available(iOS 11.0, *) {
+            
+        }else {
+            tableView.contentInset = UIEdgeInsets(top: -64, left: 0, bottom: 49, right: 0)
+            tableView.scrollIndicatorInsets = tableView.contentInset
+        }
         tableView.separatorStyle = .none
         
     }

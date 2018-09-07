@@ -30,7 +30,17 @@ class LeagueMatchItem: UICollectionViewCell {
 extension LeagueMatchItem {
     public func configure(with data : LeagueMatchModel) {
         if let url = URL(string: data.contryPic) {
-            icon.kf.setImage(with: url)
+            icon.kf.setImage(with: url, placeholder: nil , options: nil , progressBlock: nil) { (image, error, type , url) in
+                if let ima = image {
+                    let size = ima.scaleImage(image: ima, imageLength: 12)
+                    
+                    self.icon.snp.remakeConstraints { (make) in
+                        make.centerY.equalTo(self.contentView.snp.centerY)
+                        make.left.equalTo(10)
+                        make.size.equalTo(size)
+                    }
+                }
+            }
         }
         title.text = data.contryName
     }

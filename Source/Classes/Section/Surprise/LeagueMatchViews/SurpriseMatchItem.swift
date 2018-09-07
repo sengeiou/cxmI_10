@@ -20,7 +20,16 @@ class SurpriseMatchItem: UICollectionViewCell {
 extension SurpriseMatchItem {
     public func configure(with data : LeagueInfoModel) {
         if let url = URL(string: data.leaguePic) {
-            icon.kf.setImage(with: url)
+            icon.kf.setImage(with: url, placeholder: nil , options: nil , progressBlock: nil) { (image, error, type , url) in
+                if let ima = image {
+                    let size = ima.scaleImage(image: ima, imageLength: SurpriseMatchItem.height - 40)
+                    self.icon.snp.remakeConstraints { (make) in
+                        make.top.equalTo(0)
+                        make.centerX.equalTo(self.contentView.snp.centerX)
+                        make.size.equalTo(size)
+                    }
+                }
+            }
         }
         title.text = data.leagueAddr
     }

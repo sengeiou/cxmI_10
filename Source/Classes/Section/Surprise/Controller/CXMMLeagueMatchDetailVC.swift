@@ -15,6 +15,11 @@ enum LeagueDetailStyle  {
     case 球队资料
 }
 
+enum LeagueDetailTitleStyle {
+    case show
+    case hide
+}
+
 class CXMMLeagueMatchDetailVC: BaseViewController {
     
     public var leagueInfo : LeagueInfoModel! {
@@ -26,8 +31,10 @@ class CXMMLeagueMatchDetailVC: BaseViewController {
     }
     
     private var style : LeagueDetailStyle = .射手榜
-    
+    private var titleStyle : LeagueDetailTitleStyle = .hide
     @IBOutlet weak var tableView: UITableView!
+    
+    
     
     private var leagueDetailModel : LeagueDetailModel!
     
@@ -42,6 +49,12 @@ class CXMMLeagueMatchDetailVC: BaseViewController {
    
     
     private func initSubview() {
+        if #available(iOS 11.0, *) {
+            
+        }else {
+            tableView.contentInset = UIEdgeInsets(top: -64, left: 0, bottom: 49, right: 0)
+            tableView.scrollIndicatorInsets = tableView.contentInset
+        }
         self.tableView.estimatedRowHeight = 100
         tableView.separatorStyle = .none
         tableView.register(LeagueDetailPagerHeader.self,
@@ -85,6 +98,20 @@ extension CXMMLeagueMatchDetailVC {
             }, onCompleted: nil , onDisposed: nil )
     }
 }
+
+extension CXMMLeagueMatchDetailVC : LeagueMatchDetailCellDelete {
+    func didTipShowDetailButton(isSeletced: Bool) {
+        switch isSeletced {
+        case true:
+            self.titleStyle = .show
+        case false :
+            self.titleStyle = .hide
+        }
+        self.tableView.reloadData()
+        self.tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
+    }
+}
+
 // MARK: - 球队信息 - 点击
 extension CXMMLeagueMatchDetailVC : LeagueDetailTeamCellDelegate {
     func didSelectTeamItem(teamInfo: LeagueTeamInfo, index: IndexPath) {
@@ -210,11 +237,15 @@ extension CXMMLeagueMatchDetailVC : UITableViewDataSource {
         return cell
     }
     
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
-            return UITableViewAutomaticDimension
+            switch titleStyle {
+            case .hide:
+                return 180
+            case .show:
+                return UITableViewAutomaticDimension
+            }
         default:
             
             switch style {
