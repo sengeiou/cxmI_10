@@ -111,8 +111,6 @@ extension CXMMPrizeDigitalHistoryVC : UITableViewDataSource {
     
     private func initDigitalCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PrizeDigitalHistoryCell", for: indexPath) as! PrizeDigitalHistoryCell
-        
-        
         switch indexPath.row {
         case 0:
             cell.stateIcon.isHidden = false

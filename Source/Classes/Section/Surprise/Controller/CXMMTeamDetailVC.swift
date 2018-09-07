@@ -85,7 +85,7 @@ extension CXMMTeamDetailVC {
     private func teamDetailRequest() {
         weak var weakSelf = self
         
-        _ = surpriseProvider.rx.request(.teamDetail(teamId: "6"))
+        _ = surpriseProvider.rx.request(.teamDetail(teamId: teamId))
             .asObservable()
             .mapObject(type: TeamDetailModel.self)
             .subscribe(onNext: { (data) in
