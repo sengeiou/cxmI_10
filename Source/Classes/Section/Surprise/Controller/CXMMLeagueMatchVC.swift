@@ -110,8 +110,24 @@ extension CXMMLeagueMatchVC : LeagueMatchFilterDelegate {
 extension CXMMLeagueMatchVC : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        switch style {
-        case .国际:
+        switch indexPath.section {
+        case 0:
+            switch style {
+            case .国际:
+                let story = UIStoryboard(name: "Surprise", bundle: nil)
+                
+                let detail = story.instantiateViewController(withIdentifier: "LeagueMatchDetailVC") as! CXMMLeagueMatchDetailVC
+                
+                detail.leagueInfo = leagueMatchModel.groupLeagues[indexPath.row]
+                
+                pushViewController(vc: detail)
+            default:
+                let match = CXMMLeagueMatchFilterVC()
+                match.delegate = self
+                match.leagueMatch = leagueMatchModel.contrys[indexPath.row]
+                present(match)
+            }
+        case 1:
             let story = UIStoryboard(name: "Surprise", bundle: nil)
             
             let detail = story.instantiateViewController(withIdentifier: "LeagueMatchDetailVC") as! CXMMLeagueMatchDetailVC
@@ -120,11 +136,10 @@ extension CXMMLeagueMatchVC : UICollectionViewDelegate {
             
             pushViewController(vc: detail)
         default:
-            let match = CXMMLeagueMatchFilterVC()
-            match.delegate = self
-            match.leagueMatch = leagueMatchModel.contrys[indexPath.row]
-            present(match)
+            break
         }
+        
+        
         
         
     }

@@ -190,6 +190,10 @@
 		116EB32020C50FC500EE80E5 /* WorldCupOrderRuleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116EB31F20C50FC500EE80E5 /* WorldCupOrderRuleCell.swift */; };
 		116F542121460DF50002D002 /* LeagueDetailScorePagerHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116F542021460DF50002D002 /* LeagueDetailScorePagerHeader.swift */; };
 		116F5423214614EF0002D002 /* LeagueDetailScoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116F5422214614EF0002D002 /* LeagueDetailScoreCell.swift */; };
+		116F54252146493C0002D002 /* LeagueDetailScoreHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116F54242146493C0002D002 /* LeagueDetailScoreHeader.swift */; };
+		116F54272146503D0002D002 /* LeagueDetailCourseHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116F54262146503D0002D002 /* LeagueDetailCourseHeader.swift */; };
+		116F5429214676590002D002 /* LeagueDetailCourseTabCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116F5428214676590002D002 /* LeagueDetailCourseTabCell.swift */; };
+		116F542B214677040002D002 /* LeagueDetailCourseTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116F542A214677040002D002 /* LeagueDetailCourseTabItem.swift */; };
 		1172B63A2106DEB400E3BDD4 /* EmptyDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1172B6392106DEB400E3BDD4 /* EmptyDataCell.swift */; };
 		11752CFA212D4AA600BD1A15 /* CXMMPaymentWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11752CF9212D4AA600BD1A15 /* CXMMPaymentWebView.swift */; };
 		11754E09211D4B130061C5AB /* DLTHotColdCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11754E08211D4B130061C5AB /* DLTHotColdCell.swift */; };
@@ -644,6 +648,10 @@
 		116EB31F20C50FC500EE80E5 /* WorldCupOrderRuleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldCupOrderRuleCell.swift; sourceTree = "<group>"; };
 		116F542021460DF50002D002 /* LeagueDetailScorePagerHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueDetailScorePagerHeader.swift; sourceTree = "<group>"; };
 		116F5422214614EF0002D002 /* LeagueDetailScoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueDetailScoreCell.swift; sourceTree = "<group>"; };
+		116F54242146493C0002D002 /* LeagueDetailScoreHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueDetailScoreHeader.swift; sourceTree = "<group>"; };
+		116F54262146503D0002D002 /* LeagueDetailCourseHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueDetailCourseHeader.swift; sourceTree = "<group>"; };
+		116F5428214676590002D002 /* LeagueDetailCourseTabCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueDetailCourseTabCell.swift; sourceTree = "<group>"; };
+		116F542A214677040002D002 /* LeagueDetailCourseTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueDetailCourseTabItem.swift; sourceTree = "<group>"; };
 		1172B6392106DEB400E3BDD4 /* EmptyDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyDataCell.swift; sourceTree = "<group>"; };
 		11752CF9212D4AA600BD1A15 /* CXMMPaymentWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMMPaymentWebView.swift; sourceTree = "<group>"; };
 		11754E08211D4B130061C5AB /* DLTHotColdCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DLTHotColdCell.swift; sourceTree = "<group>"; };
@@ -1502,10 +1510,14 @@
 				115076A12138DF500029A63E /* LeagueMatchFilterItem.swift */,
 				1155A3FD213CD8290048F69A /* LeagueDetailPagerHeader.swift */,
 				116F542021460DF50002D002 /* LeagueDetailScorePagerHeader.swift */,
+				116F54242146493C0002D002 /* LeagueDetailScoreHeader.swift */,
 				115076A9213916860029A63E /* LeagueMatchDetailCell.swift */,
 				116F5422214614EF0002D002 /* LeagueDetailScoreCell.swift */,
 				115076AB213918EE0029A63E /* LeagueDetailShooterCell.swift */,
 				115076AD213919260029A63E /* LeagueDetailCourseCell.swift */,
+				116F5428214676590002D002 /* LeagueDetailCourseTabCell.swift */,
+				116F542A214677040002D002 /* LeagueDetailCourseTabItem.swift */,
+				116F54262146503D0002D002 /* LeagueDetailCourseHeader.swift */,
 				1155A3FF213D10960048F69A /* LeagueDetailTeamCell.swift */,
 				11576058214286A6006D0856 /* LeagueMatchReusableView.swift */,
 			);
@@ -2936,6 +2948,7 @@
 				114800D6208C622800621AFA /* NewsListModel.swift in Sources */,
 				E56CE8022069DFC20090A1B5 /* AccountDetailSectionHeader.swift in Sources */,
 				11227C1020849E6700680CCC /* FootballTeamHeader.swift in Sources */,
+				116F5429214676590002D002 /* LeagueDetailCourseTabCell.swift in Sources */,
 				11691808207DB82E00C8A287 /* CouponFilterCell.swift in Sources */,
 				116E99CA213F911F005F1217 /* DigitalHisDetailLottoCell.swift in Sources */,
 				112E9D4F2122AD4F008466B4 /* DLTTrendSettingModel.swift in Sources */,
@@ -3025,6 +3038,7 @@
 				E51F9A56205A11EA00AB8A21 /* MobileTextFieldCell.swift in Sources */,
 				114800D2208C2C5E00621AFA /* ShareCell.swift in Sources */,
 				11576055214228D7006D0856 /* TeamDetailRecordHeader.swift in Sources */,
+				116F54252146493C0002D002 /* LeagueDetailScoreHeader.swift in Sources */,
 				1144910E2085D3DF009F1D09 /* FootballIntegralView.swift in Sources */,
 				11A25C502080BC1200085C58 /* CXMFootballHunheFilterVC.swift in Sources */,
 				11647F0520EE23B300B55897 /* FootballDetailEventExplainCell.swift in Sources */,
@@ -3344,8 +3358,10 @@
 				1158FC4D211074150004229D /* DaletouStandardBlueCell.swift in Sources */,
 				114222072140E33B00CCBB3A /* CXMMTeamDetailVC.swift in Sources */,
 				1144910A2085AEE0009F1D09 /* FootballMatchInfoScaleCell.swift in Sources */,
+				116F542B214677040002D002 /* LeagueDetailCourseTabItem.swift in Sources */,
 				E59CB3D9205BA11A0086DD0E /* HomeScrollBarCell.swift in Sources */,
 				117C729A2100685B00D9EB83 /* LotteryCollectModel.swift in Sources */,
+				116F54272146503D0002D002 /* LeagueDetailCourseHeader.swift in Sources */,
 				1142DE7D208ED059009E3916 /* PaymentProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

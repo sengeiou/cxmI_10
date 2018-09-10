@@ -22,6 +22,10 @@ enum LeagueScoreStyle {
     case 主场积分
     case 客场积分
 }
+enum LeagueCourseStyle{
+    case showTab
+    case showData
+}
 
 enum LeagueDetailTitleStyle {
     case show
@@ -40,6 +44,7 @@ class CXMMLeagueMatchDetailVC: BaseViewController {
     
     private var style : LeagueDetailStyle = .积分榜
     private var scoreStyle : LeagueScoreStyle = .总积分
+    private var courseStyle : LeagueCourseStyle = .showData
     
     private var titleStyle : LeagueDetailTitleStyle = .hide
     @IBOutlet weak var tableView: UITableView!
@@ -57,8 +62,6 @@ class CXMMLeagueMatchDetailVC: BaseViewController {
         tableView.beginRefreshing()
     }
 
-   
-    
     private func initSubview() {
         if #available(iOS 11.0, *) {
             
@@ -73,10 +76,15 @@ class CXMMLeagueMatchDetailVC: BaseViewController {
                            forHeaderFooterViewReuseIdentifier: LeagueDetailPagerHeader.identifier)
         tableView.register(LeagueDetailScorePagerHeader.self,
                            forHeaderFooterViewReuseIdentifier: LeagueDetailScorePagerHeader.identifier)
+        tableView.register(LeagueDetailScoreHeader.self,
+                           forHeaderFooterViewReuseIdentifier: LeagueDetailScoreHeader.identifier)
+        tableView.register(LeagueDetailCourseHeader.self,
+                           forHeaderFooterViewReuseIdentifier: LeagueDetailCourseHeader.identifier)
+        
     }
 
 }
-
+// MARK: - 网络请求
 extension CXMMLeagueMatchDetailVC {
     private func loadNewData() {
         leagueDetailRequest()
@@ -138,14 +146,37 @@ extension CXMMLeagueMatchDetailVC : LeagueDetailTeamCellDelegate {
         pushViewController(vc: teamDetail)
     }
 }
-
+// MARK: - 赛程安排 选项卡
+extension CXMMLeagueMatchDetailVC : LeagueDetailCourseHeaderDelegate {
+    // 左移
+    func didTipLeftButton() {
+        
+    }
+    // 右移
+    func didTipRightButton() {
+        
+    }
+    
+    func didTipCenterButton() {
+        
+        if courseStyle == .showData {
+            self.courseStyle = .showTab
+        }else {
+            self.courseStyle = .showData
+        }
+        
+        self.tableView.reloadData()
+    }
+    
+}
+// MARK: - 积分，选项卡
 extension CXMMLeagueMatchDetailVC : LeagueDetailScorePagerHeaderDelegate {
     func didSelectScorePagerItem(style: LeagueScoreStyle) {
         self.scoreStyle = style
         self.tableView.reloadSections(IndexSet(integer: 2), with: .none)
     }
 }
-
+// MARK: - 联赛选项卡
 extension CXMMLeagueMatchDetailVC : LeagueDetailPagerHeaderDelegate {
     func didSelectHeaderPagerItem(style: LeagueDetailStyle) {
         self.style = style
@@ -170,20 +201,25 @@ extension CXMMLeagueMatchDetailVC : UITableViewDataSource {
             
             switch model.matchType {
             case "0": // 杯赛
-                return 2
+                return model.matchScoreDTOList.count + 2
             case "1":  // 联赛
                 return 3
             default : return 0
             }
+        case .赛程安排:
             
+            switch courseStyle {
+            case .showTab:
+                return 3
+            case .showData:
+                return 3
+            }
         default:
             return 2
         }
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard leagueDetailModel != nil else { return 0 }
-        
-        
         
         switch section {
         case 0:
@@ -209,9 +245,17 @@ extension CXMMLeagueMatchDetailVC : UITableViewDataSource {
                 guard leagueDetailModel.leagueShooter.leagueShooterInfoList.count > 0 else { return 0 }
                 return leagueDetailModel.leagueShooter.leagueShooterInfoList.count + 1 
             case .赛程安排:
-                return leagueDetailModel.leagueMatch != nil ?
-                leagueDetailModel.leagueMatch.futureMatchDTOList.count : 0
+                if section == 1 { return 0 }
                 
+                switch courseStyle {
+                case .showTab:
+                    return 1
+                case .showData:
+                    return 0
+                }
+                
+//                return leagueDetailModel.matchGroupData != nil ?
+//                leagueDetailModel.leagueMatch.futureMatchDTOList.count : 0
             case .球队资料:
                 return leagueDetailModel.leagueTeam != nil ? 1 : 0
             }
@@ -229,7 +273,14 @@ extension CXMMLeagueMatchDetailVC : UITableViewDataSource {
             case .射手榜:
                 return initLeagueShooterCell(indexPath: indexPath)
             case .赛程安排:
-                return initLeagueMatchCell(indexPath: indexPath)
+                
+                switch courseStyle {
+                case .showTab:
+                    return initLeagueCourseTabCell(indexPath: indexPath)
+                case .showData:
+                    return initLeagueMatchCell(indexPath: indexPath)
+                }
+                
             case .球队资料:
                 return initLeagueTeamCell(indexPath: indexPath)
             }
@@ -239,19 +290,58 @@ extension CXMMLeagueMatchDetailVC : UITableViewDataSource {
         
         switch style {
         case .积分榜:
+            
+            guard let model = leagueDetailModel.leagueScore else { return nil }
+            
+            switch model.matchType {
+            case "0": // 杯赛
+                switch section {
+                case 0:
+                    return nil
+                case 1:
+                    let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: LeagueDetailPagerHeader.identifier) as! LeagueDetailPagerHeader
+                    header.delegate = self
+                    header.configure(with: self.style)
+                    return header
+                default:
+                    let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: LeagueDetailScoreHeader.identifier) as! LeagueDetailScoreHeader
+                    header.configure(with: model.matchScoreDTOList[section - 2].groupName)
+                    return header
+                }
+            case "1": // 联赛
+                switch section {
+                case 1:
+                    let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: LeagueDetailPagerHeader.identifier) as! LeagueDetailPagerHeader
+                    header.delegate = self
+                    header.configure(with: self.style)
+                    return header
+                case 2:
+                    let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: LeagueDetailScorePagerHeader.identifier) as! LeagueDetailScorePagerHeader
+                    header.delegate = self
+                    header.configure(with: self.scoreStyle)
+                    return header
+                default:
+                    return nil
+                }
+            default : return nil
+            }
+            
+        case .赛程安排:
             switch section {
+            case 0:
+                return nil
             case 1:
                 let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: LeagueDetailPagerHeader.identifier) as! LeagueDetailPagerHeader
                 header.delegate = self
                 header.configure(with: self.style)
                 return header
             case 2:
-                let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: LeagueDetailScorePagerHeader.identifier) as! LeagueDetailScorePagerHeader
+                let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: LeagueDetailCourseHeader.identifier) as! LeagueDetailCourseHeader
                 header.delegate = self
-                header.configure(with: self.scoreStyle)
+//                header.configure(with: self.style)
                 return header
-            default:
-                return nil
+                
+            default : return nil
             }
         default :
             switch section {
@@ -311,18 +401,25 @@ extension CXMMLeagueMatchDetailVC : UITableViewDataSource {
         }
         return cell
     }
+    
+    private func initLeagueCourseTabCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "LeagueDetailCourseTabCell", for: indexPath) as! LeagueDetailCourseTabCell
+        
+        return cell
+    }
+    
     private func initLeagueMatchCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LeagueDetailCourseCell", for: indexPath) as! LeagueDetailCourseCell
         
         switch indexPath.row {
         case 0:
             cell.topLine.isHidden = false
-            cell.configure(with: self.leagueDetailModel.leagueMatch.futureMatchDTOList[indexPath.row],
-                           style: .title)
+           // cell.configure(with: self.leagueDetailModel.matchGroupData.futureMatchDTOList[indexPath.row],
+                    //       style: .title)
         default:
             cell.topLine.isHidden = true
-            cell.configure(with: self.leagueDetailModel.leagueMatch.futureMatchDTOList[indexPath.row],
-                           style: .defau)
+            //cell.configure(with: self.leagueDetailModel.leagueMatch.futureMatchDTOList[indexPath.row],
+                      //     style: .defau)
         }
         
         return cell
@@ -351,7 +448,13 @@ extension CXMMLeagueMatchDetailVC : UITableViewDataSource {
             case .射手榜:
                 return 40 * defaultScale
             case .赛程安排:
-                return 40 * defaultScale
+                switch courseStyle {
+                case .showData:
+                    return 40 * defaultScale
+                case .showTab:
+                    return 200
+                }
+                
             case .球队资料:
                 guard leagueDetailModel.leagueTeam.leagueTeamInfoDTOList.count != 0 else { return 0 }
                 let count = lineNumber(totalNum: leagueDetailModel.leagueTeam.leagueTeamInfoDTOList.count,
@@ -369,13 +472,39 @@ extension CXMMLeagueMatchDetailVC : UITableViewDataSource {
         
         switch style {
         case .积分榜:
+            
+            guard let model = leagueDetailModel.leagueScore else { return 0.01 }
+            
+            switch model.matchType {
+            case "0": // 杯赛
+                switch section {
+                case 0:
+                    return 0.01
+                case 1:
+                    return 50
+                default:
+                    return 45
+                }
+            case "1": // 联赛
+                switch section {
+                case 1:
+                    return 50
+                case 2:
+                    return 50
+                default:
+                    return 0.01
+                }
+            default : return 0.01
+            }
+            
+        case .赛程安排:
             switch section {
+            case 0:
+                return 0.01
             case 1:
                 return 50
-            case 2:
-                return 50
             default:
-                return 0.01
+                return 45
             }
         default:
             switch section {

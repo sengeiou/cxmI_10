@@ -13,7 +13,7 @@ struct LeagueDetailModel: HandyJSON {
     var leagueAddr: String = ""
     var leagueId : String = ""
     /// 联赛赛程
-    var leagueMatch : LeagueMatchList!
+    var matchGroupData : LeagueMatchList!
     var leagueName: String = ""
     /// 联赛LOGO
     var leaguePic : String = ""
@@ -60,8 +60,14 @@ struct LeagueTeamScoreInfo : HandyJSON {
     var teamOrder : String = ""
 }
 struct LeagueMatchList : HandyJSON {
+    var matchGroupData : [LeagueMatchData] = [LeagueMatchData]()
+}
+
+struct LeagueMatchData : HandyJSON {
+    var groupName : String = ""
     var futureMatchDTOList : [LeagueMatchInfo] = [LeagueMatchInfo]()
 }
+
 struct LeagueMatchInfo : HandyJSON {
     var homeTeamAbbr : String = ""
     var leagueAbbr : String = ""
