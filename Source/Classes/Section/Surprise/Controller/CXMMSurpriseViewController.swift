@@ -168,6 +168,11 @@ extension CXMMSurpriseViewController {
 
 // MARK: - SurpriseCategoryCell  Delegate
 extension CXMMSurpriseViewController : SurpriseCategoryCellDelegate {
+    // 热门赛事
+    func didSelectItem(info: SurpriseLeagueInfo, indexPath: IndexPath) {
+        
+    }
+    // 
     func didSelectItem(info: SurpriseItemInfo, indexPath: IndexPath) {
         guard info.redirectUrl != "" else { return }
         guard info.status != "" else { return }
@@ -272,7 +277,8 @@ extension CXMMSurpriseViewController : UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SurpriseCategoryCell", for: indexPath) as! SurpriseCategoryCell
         cell.delegate = self
         cell.style = .hotLeague
-        cell.configure(with: self.surpriseModel.hotLeagueList)
+        cell.configure(with: self.surpriseModel.hotLeagueList, style : .hotLeague)
+        
         return cell
     }
     private func initShooterCell(indexPath: IndexPath) -> UITableViewCell {

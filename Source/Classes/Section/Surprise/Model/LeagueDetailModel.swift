@@ -26,10 +26,14 @@ struct LeagueDetailModel: HandyJSON {
 }
 
 struct LeagueScoreList : HandyJSON {
-    var hteamScoreList : [LeagueTeamScoreInfo] = [LeagueTeamScoreInfo]()
-    var tteamScoreList : [LeagueTeamScoreInfo] = [LeagueTeamScoreInfo]()
-    var vteamScoreList : [LeagueTeamScoreInfo] = [LeagueTeamScoreInfo]()
-    
+    var matchScoreDTOList : [LeagueMatchScoreDetail] = [LeagueMatchScoreDetail]()
+    ///  比赛类型,0杯赛，1联赛
+    var matchType : String = ""
+}
+
+struct LeagueMatchScoreDetail : HandyJSON {
+    var groupName : String = ""
+    var leagueCcoreList : [LeagueTeamScoreInfo] = [LeagueTeamScoreInfo]()
 }
 
 struct LeagueTeamScoreInfo : HandyJSON {

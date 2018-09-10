@@ -34,7 +34,7 @@ extension SurpriseCollectionCell {
         suTitle.text = info.subTitle
     }
     public func configure(with info : SurpriseLeagueInfo) {
-        if let url = URL(string: info.actUrl) {
+        if let url = URL(string: info.iconImg) {
             icon.kf.setImage(with: url)
         }
         title.text = info.title

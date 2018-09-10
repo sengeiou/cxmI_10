@@ -15,6 +15,7 @@ enum SurpriseCategoryType {
 
 protocol SurpriseCategoryCellDelegate {
     func didSelectItem(info : SurpriseItemInfo ,indexPath: IndexPath) -> Void
+    func didSelectItem(info : SurpriseLeagueInfo ,indexPath: IndexPath) -> Void
 }
 
 class SurpriseCategoryCell: UITableViewCell {
@@ -44,8 +45,9 @@ extension SurpriseCategoryCell {
         self.itemList = list
         self.collectionView.reloadData()
     }
-    public func configure(with list : [SurpriseLeagueInfo]) {
+    public func configure(with list : [SurpriseLeagueInfo], style : SurpriseCategoryType) {
         self.hotItemList = list
+        self.style = style
         self.collectionView.reloadData()
     }
 }
@@ -53,7 +55,12 @@ extension SurpriseCategoryCell {
 extension SurpriseCategoryCell : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard delegate != nil else { return }
-        delegate.didSelectItem(info: itemList[indexPath.row], indexPath: indexPath)
+        switch style {
+        case .category:
+            delegate.didSelectItem(info: itemList[indexPath.row], indexPath: indexPath)
+        case .hotLeague:
+            delegate.didSelectItem(info: hotItemList[indexPath.row], indexPath: indexPath)
+        }
     }
 }
 

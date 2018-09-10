@@ -50,7 +50,7 @@ class LeagueDetailPagerHeader: UITableViewHeaderFooterView {
         bgView = UIView()
         bgView.backgroundColor = ColorFFFFFF
         
-        //self.contentView.addSubview(scoreButton)
+        self.contentView.addSubview(scoreButton)
         self.contentView.addSubview(shooterButton)
         self.contentView.addSubview(matchButton)
         self.contentView.addSubview(teamButton)
@@ -58,13 +58,16 @@ class LeagueDetailPagerHeader: UITableViewHeaderFooterView {
         self.contentView.addSubview(bgView)
         
         scoreButton.snp.makeConstraints { (make) in
-            
+            make.centerY.equalTo(self.contentView.snp.centerY).offset(-5)
+            make.height.equalTo(30)
+            make.left.equalTo(16)
+            make.width.equalTo(shooterButton)
         }
         
         shooterButton.snp.makeConstraints { (make) in
             make.centerY.equalTo(self.contentView.snp.centerY).offset(-5)
             make.height.equalTo(30)
-            make.left.equalTo(16)
+            make.left.equalTo(scoreButton.snp.right).offset(10)
         }
         matchButton.snp.makeConstraints { (make) in
             make.centerY.equalTo(shooterButton)
@@ -80,7 +83,7 @@ class LeagueDetailPagerHeader: UITableViewHeaderFooterView {
             make.bottom.equalTo(bgView.snp.top)
             make.width.equalTo(80)
             make.height.equalTo(1)
-            make.centerX.equalTo(shooterButton.snp.centerX)
+            make.centerX.equalTo(scoreButton.snp.centerX)
         }
         bgView.snp.makeConstraints { (make) in
             make.left.right.bottom.equalTo(0)
@@ -150,7 +153,8 @@ extension LeagueDetailPagerHeader {
     public func configure(with style : LeagueDetailStyle) {
         switch style {
         case .积分榜:
-            break
+            changeButtonColor(self.scoreButton)
+            changeProView(self.scoreButton)
         case .射手榜:
             changeButtonColor(self.shooterButton)
             changeProView(self.shooterButton)
