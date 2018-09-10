@@ -159,7 +159,7 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
         
         // 发现
         let surprise = CXMSurpriseViewController()
-        surprise.urlStr = SurpriseUrl
+        surprise.urlStr = getCurentBaseWebUrl() + SurpriseUrl
         let surpriseNav = UINavigationController(rootViewController: surprise)
         surpriseNav.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
         
@@ -199,6 +199,7 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
     }
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        /*
         if viewController == self.viewControllers![3] {
             if getUserData() == nil {
                 me = CXMVCodeLoginViewController()
@@ -217,6 +218,7 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
                 return false
             }
         }
+         */
         
         if viewController == self.viewControllers![1] {
             lottery.backDefault = true

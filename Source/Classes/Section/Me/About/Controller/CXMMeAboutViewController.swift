@@ -77,7 +77,7 @@ class CXMMeAboutViewController: BaseViewController, UITableViewDelegate, UITable
             TongJi.log(.关于我们投诉建议, label: "关于我们投诉建议")
         case 1:
             let web = CXMWebViewController()
-            web.urlStr = webInsurance
+            web.urlStr = getCurentBaseWebUrl() + webInsurance
             pushViewController(vc: web)
             TongJi.log(.关于我们安全保障, label: "关于我们安全保障")
         default: break

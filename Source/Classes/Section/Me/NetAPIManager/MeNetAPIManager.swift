@@ -73,7 +73,8 @@ enum MeNetAPIManager {
 
 extension MeNetAPIManager : TargetType {
     var baseURL : URL {
-        return URL(string : baseURLStr + xpath)!
+        let url = platformBaseUrl()
+        return URL(string : url! + xpath)!
     }
     
     var headers: [String : String]? {

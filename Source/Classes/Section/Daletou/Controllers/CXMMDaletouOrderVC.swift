@@ -253,7 +253,7 @@ extension CXMMDaletouOrderVC : UITableViewDelegate {
         case 1:
             if indexPath.row == self.orderModel.cathecticResults.count + 1 { // 最后一个 -》 奖金如何计算
                 let web = CXMWebViewController()
-                web.urlStr = DLTPlayHelpUrl
+                web.urlStr = getCurentBaseWebUrl() + DLTPlayHelpUrl
                 pushViewController(vc: web)
             }
         case 2:

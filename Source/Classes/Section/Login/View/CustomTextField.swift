@@ -18,7 +18,7 @@ protocol CustomTextFieldDelegate {
     func countdown(button:CountdownButton) -> Void
 }
 
-class CustomTextField: UITextField, CountdownButtonDelegate {
+class CustomTextField: UITextField, CountdownButtonDelegate, UITextFieldDelegate {
     func countdownButClicked(button: CountdownButton) {
         guard customDelegate != nil else { return }
         customDelegate.countdown(button: button)
@@ -38,6 +38,9 @@ class CustomTextField: UITextField, CountdownButtonDelegate {
             }
         }
     }
+    
+    /// 文本输入最大长度
+    public var textFieldMaxLength: Int = 0
     
     public var selectImg : String?
     public var customDelegate : CustomTextFieldDelegate!
@@ -69,6 +72,9 @@ class CustomTextField: UITextField, CountdownButtonDelegate {
             make.width.equalTo(imageView.snp.height)
             make.centerY.equalTo(cusLeftView.snp.centerY)
         }
+        
+        //UITextFieldTextDidChangeNotification
+        NotificationCenter.default.addObserver(self, selector: #selector(textFieldTextDidChanged(notice:)), name: NSNotification.Name.UITextFieldTextDidChange, object: self)
         
         
         switch style {
@@ -166,6 +172,15 @@ class CustomTextField: UITextField, CountdownButtonDelegate {
             self.isSecureTextEntry = false
         }else {
             self.isSecureTextEntry = true
+        }
+    }
+    
+    @objc func textFieldTextDidChanged(notice: Notification) {
+        if self.textFieldMaxLength > 0 && (self.text?.count)! > self.textFieldMaxLength {
+            let content = self.text
+            let str = content?.prefix(self.textFieldMaxLength)
+            self.text = String(str!)
+            
         }
     }
     

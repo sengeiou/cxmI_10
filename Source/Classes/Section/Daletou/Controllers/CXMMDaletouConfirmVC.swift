@@ -263,7 +263,7 @@ extension CXMMDaletouConfirmVC : FootballOrderFooterDelegate {
     
     func didTipAgreement() {
         let agreement = CXMWebViewController()
-        agreement.urlStr = webBuyAgreement
+        agreement.urlStr = getCurentBaseWebUrl() + webBuyAgreement
         pushViewController(vc: agreement)
     }
 }

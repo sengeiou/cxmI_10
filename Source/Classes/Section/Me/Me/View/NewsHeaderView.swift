@@ -12,6 +12,7 @@ fileprivate let iconHeight : CGFloat = 56
 
 protocol NewsHeaderViewDelegate {
     func didTipNewsUserIcon() -> Void
+    func didTipNewsLogin() -> Void
 }
 
 class NewsHeaderView: UIView, UserInfoPro {
@@ -23,6 +24,8 @@ class NewsHeaderView: UIView, UserInfoPro {
         didSet{
             guard userInfo != nil else { return }
             self.phoneLB.text = userInfo.mobile
+            
+            loginButton.isHidden = true
             //            let url = URL(string: userInfo.headimg)
             //            self.icon.kf.setImage(with: url)
             
@@ -31,6 +34,12 @@ class NewsHeaderView: UIView, UserInfoPro {
             
             //setupAuth()
         }
+    }
+    
+    public func changeHeaderStatusWithLogin() {
+        loginButton.isHidden = false
+        phoneLB.text = ""
+        self.userInfo = nil
     }
     
     public func setIcon(image: UIImage) {
@@ -85,6 +94,20 @@ class NewsHeaderView: UIView, UserInfoPro {
     
     private var icon : UIImageView! // 用户头像
     private var phoneLB : UILabel! // 手机号
+    lazy private var loginButton : UIButton = {
+        let button = UIButton(type: .custom)
+        button.titleLabel?.font = Font14
+        button.setTitle("未登录", for: .normal)
+        button.setTitleColor(Color505050, for: .normal)
+        button.contentHorizontalAlignment = .left
+        button.addTarget(self, action: #selector(loginClicked(_:)), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc private func loginClicked(_ sender: UIButton ) {
+        guard delegate != nil else { return }
+        delegate.didTipNewsLogin()
+    }
     
     //private var accountTitle : UILabel! // 账户标题
     //private var withdrawalTitle : UILabel! // 可提现标题
@@ -318,6 +341,22 @@ class NewsHeaderView: UIView, UserInfoPro {
         self.addSubview(vLine)
 //        self.addSubview(rechargeBut)
 //        self.addSubview(withdrawalBut)
+        
+        if let userInfo = getUserData() {
+            if userInfo.mobile != nil {
+                phoneLB.text = userInfo.mobile
+            }
+            loginButton.isHidden = true
+        }else {
+            self.addSubview(loginButton)
+            loginButton.isHidden = false
+            loginButton.snp.makeConstraints { (make) in
+                make.centerY.equalTo(icon.snp.centerY)
+                make.left.equalTo(icon.snp.right).offset(20)
+                make.width.equalTo(80)
+                make.height.equalTo(20)
+            }
+        }
     }
     
     

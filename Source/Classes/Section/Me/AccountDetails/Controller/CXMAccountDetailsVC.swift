@@ -96,7 +96,7 @@ class CXMAccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableVie
     
     @objc private func accountDetailsFilter(notification: Notification) {
         guard let userInfo = notification.userInfo else { return }
-        let time = userInfo["filterTime"]
+//        let time = userInfo["filterTime"]
         
         loadNewData()
     }

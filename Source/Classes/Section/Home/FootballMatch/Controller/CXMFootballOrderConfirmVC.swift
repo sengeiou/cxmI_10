@@ -331,7 +331,7 @@ class CXMFootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITabl
     
     func didTipAgreement() {
         let agreement = CXMWebViewController()
-        agreement.urlStr = webBuyAgreement
+        agreement.urlStr = getCurentBaseWebUrl() + webBuyAgreement
         pushViewController(vc: agreement)
     }
     // MARK: CELL  删除
@@ -833,7 +833,7 @@ class CXMFootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITabl
     
     @objc private func showMenu(_ sender: UIButton) {
         let web = CXMWebViewController()
-        web.urlStr = danExplainUrl
+        web.urlStr = getCurentBaseWebUrl() + danExplainUrl
         pushViewController(vc: web)
     }
     

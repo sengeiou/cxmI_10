@@ -27,6 +27,15 @@ class MeFooterView: UIView {
     init() {
         super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 100))
         initSubview()
+        changeLoginButtonStatus()
+    }
+    
+    public func changeLoginButtonStatus() {
+        if hasLogin() {
+            signOutBut.setTitle("退出登录", for: .normal)
+        }else {
+            signOutBut.setTitle("请登录", for: .normal)
+        }
     }
     
     private func initSubview() {

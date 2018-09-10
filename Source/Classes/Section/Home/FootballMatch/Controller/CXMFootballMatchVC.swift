@@ -444,7 +444,7 @@ class CXMFootballMatchVC: BaseViewController, UITableViewDelegate, UITableViewDa
     @objc private func helpClicked(_ sender: UIButton) {
         TongJi.log(.帮助, label: self.matchType.rawValue, att: .彩种)
         let homeWeb = CXMWebViewController()
-        homeWeb.urlStr = webPlayHelp
+        homeWeb.urlStr = getCurentBaseWebUrl() + webPlayHelp
         pushViewController(vc: homeWeb)
     }
     @objc private func showMenu(_ sender: UIButton) {

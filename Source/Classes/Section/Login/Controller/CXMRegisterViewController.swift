@@ -21,7 +21,7 @@ class CXMRegisterViewController: BaseViewController, UITableViewDelegate, UITabl
     // 跳转注册协议
     func didTipAgreement() {
         let regis = CXMWebViewController()
-        regis.urlStr = webRegisterAgreement
+        regis.urlStr = getCurentBaseWebUrl() + webRegisterAgreement
         pushViewController(vc: regis)
         TongJi.log(.注册用户协议, label: "注册用户协议" )
     }

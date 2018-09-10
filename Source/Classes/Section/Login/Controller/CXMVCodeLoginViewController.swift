@@ -11,7 +11,7 @@ fileprivate let mobileCellIdentifier = "mobileCellIdentifier"
 fileprivate let passwordCellIdentifier = "passwordCellIdentifier"
 fileprivate let vcodeCellIdentifier = "vcodeCellIdentifier"
 
-class CXMVCodeLoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro, CustomTextFieldDelegate , UITableViewDataSource, UITableViewDelegate{
+class CXMVCodeLoginViewController: BaseViewController, UITextFieldDelegate, ValidatePro, CustomTextFieldDelegate , UITableViewDataSource, UITableViewDelegate, ConfigureRequestProtocol{
     
     
     
@@ -105,7 +105,8 @@ class CXMVCodeLoginViewController: BaseViewController, UITextFieldDelegate, Vali
                 self.dismissProgressHud()
                 self.showHUD(message: data.showMsg)
                 self.save(userInfo: data)
-                
+                //获取开关状态
+                self.configRequest()
                 self.countdownBut.stop = true
                 
                 guard self.popToDefault == false else {

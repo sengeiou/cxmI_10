@@ -269,7 +269,7 @@ extension CXMMDaletouViewController : YBPopupMenuDelegate{
             
         case 1:
             let web = CXMWebViewController()
-            web.urlStr = DLTPlayHelpUrl
+            web.urlStr = getCurentBaseWebUrl() + DLTPlayHelpUrl
             pushViewController(vc: web)
             //TongJi.log(.关于我们安全保障, label: "大乐透玩法")
             break
@@ -706,7 +706,7 @@ extension CXMMDaletouViewController : UITableViewDelegate {
                 present(history)
             case 1:
                 let web = CXMWebViewController()
-                web.urlStr = DLTDanHelpUrl
+                web.urlStr = getCurentBaseWebUrl() + DLTDanHelpUrl
                 pushViewController(vc: web)
             default : break
             }

@@ -11,6 +11,10 @@ import UIKit
 fileprivate let meCellIdentifier = "meCellIdentifier"
 
 class CXMNewsMeViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, MeHeaderViewDelegate, MeFooterViewDelegate {
+    func didTipLogin() {
+        
+    }
+    
     func didTipUserIcon() {
         showPhotoSelect()
     }

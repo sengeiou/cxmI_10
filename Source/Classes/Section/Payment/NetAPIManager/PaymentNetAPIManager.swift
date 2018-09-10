@@ -34,7 +34,8 @@ enum PaymentNetAPIManager {
 
 extension PaymentNetAPIManager : TargetType {
     var baseURL : URL {
-        return URL(string : baseURLStr + "/payment" + xpath )!
+        let url = platformBaseUrl()
+        return URL(string : url! + "/payment" + xpath )!
     }
     var path : String { return ""}
     

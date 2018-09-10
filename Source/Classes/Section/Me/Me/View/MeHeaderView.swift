@@ -16,6 +16,7 @@ protocol MeHeaderViewDelegate {
     func withdrawalClicked() -> Void
     func alertClicked() -> Void
     func didTipUserIcon() -> Void
+    func didTipLogin() -> Void
 }
 
 class MeHeaderView: UIView , UserInfoPro{
@@ -55,6 +56,8 @@ class MeHeaderView: UIView , UserInfoPro{
             self.withdrawalBalanceLB.attributedText = getBalanceText(str: userInfo.userMoney)
 
             setupAuth()
+            
+            loginButton.isHidden = true
         }
     }
     
@@ -115,6 +118,21 @@ class MeHeaderView: UIView , UserInfoPro{
     
     private var hLine : UIView! // 水平分割线
     private var vLine : UIView! // 竖直分割线
+    
+    lazy private var loginButton : UIButton = {
+        let but = UIButton(type: .custom)
+        but.titleLabel?.font = Font14
+        but.setTitle("未登录", for: .normal)
+        but.setTitleColor(Color505050, for: .normal)
+        but.contentHorizontalAlignment = .left
+        but.addTarget(self, action: #selector(loginClicked(_:)), for: .touchUpInside)
+        return but
+    }()
+    
+    @objc private func loginClicked(_ sender: UIButton ) {
+        guard delegate != nil else { return }
+        delegate.didTipLogin()
+    }
     
     // 生命周期
     init() {
@@ -337,6 +355,22 @@ class MeHeaderView: UIView , UserInfoPro{
         self.addSubview(vLine)
         self.addSubview(rechargeBut)
         self.addSubview(withdrawalBut)
+        
+        if let userInfo = getUserData() {
+            if userInfo.mobile != nil {
+                phoneLB.text = userInfo.mobile
+            }
+            loginButton.isHidden = true
+        }else {
+            self.addSubview(loginButton)
+            loginButton.isHidden = false
+            loginButton.snp.makeConstraints { (make) in
+                make.top.equalTo(icon.snp.top).offset(5)
+                make.left.equalTo(icon.snp.right).offset(20)
+                make.width.equalTo(80)
+                make.height.equalTo(20)
+            }
+        }
     }
     
     

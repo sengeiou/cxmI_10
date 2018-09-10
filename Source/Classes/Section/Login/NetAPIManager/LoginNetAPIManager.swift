@@ -26,7 +26,8 @@ enum LoginNetAPIManager {
 
 extension LoginNetAPIManager: TargetType {
     var baseURL : URL {
-        return URL(string: baseURLStr + "/member" + xpath)!
+        let url = platformBaseUrl()
+        return URL(string: url! + "/member" + xpath)!
     }
     
     var headers: [String : String]? {

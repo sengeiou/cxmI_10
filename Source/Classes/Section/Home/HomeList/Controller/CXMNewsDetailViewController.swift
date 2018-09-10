@@ -323,7 +323,7 @@ class CXMNewsDetailViewController: BaseViewController, UITableViewDelegate, UITa
             
         }
         
-        return UITableViewCell()
+//        return UITableViewCell()
     }
     
     private func initNewsNoPicCell(indexPath: IndexPath) -> UITableViewCell {

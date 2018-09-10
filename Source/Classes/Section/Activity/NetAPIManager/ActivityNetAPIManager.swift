@@ -20,7 +20,8 @@ enum ActivityNetAPIManager {
 
 extension ActivityNetAPIManager : TargetType {
     var baseURL : URL {
-        return URL(string : baseURLStr + xpath)!
+        let url = platformBaseUrl()
+        return URL(string : url! + xpath)!
     }
     
     var path : String {

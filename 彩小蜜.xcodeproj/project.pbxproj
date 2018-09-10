@@ -213,6 +213,8 @@
 		11FEB95F208DD55200926951 /* WeixinCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FEB95E208DD55200926951 /* WeixinCenter.swift */; };
 		11FEB962208DDAAA00926951 /* WeixinShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FEB961208DDAAA00926951 /* WeixinShare.swift */; };
 		11FEB964208DDC2100926951 /* AppKeyConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FEB963208DDC2100926951 /* AppKeyConstraint.swift */; };
+		B4C375AE21461DF200390A3A /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C375AD21461DF200390A3A /* AppConfig.swift */; };
+		B4C375B021465F1900390A3A /* ConfigureRequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C375AF21465F1900390A3A /* ConfigureRequestProtocol.swift */; };
 		E503F5BE2079E8D6006D4A0B /* FootballFilterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E503F5BD2079E8D6006D4A0B /* FootballFilterProtocol.swift */; };
 		E503F5C0207A11B3006D4A0B /* FootballRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E503F5BF207A11B3006D4A0B /* FootballRequestModel.swift */; };
 		E503F5C2207A15A7006D4A0B /* FootballOrderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E503F5C1207A15A7006D4A0B /* FootballOrderProtocol.swift */; };
@@ -626,6 +628,8 @@
 		6B0C42B903C8908121D72F5C /* Pods-彩小蜜Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜Tests/Pods-彩小蜜Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		A0F39BAB4469B5128625D7A3 /* Pods-彩小蜜UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜UITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜UITests/Pods-彩小蜜UITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A7A8CDA4EA02975014D806E4 /* Pods-彩小蜜.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜.release.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜/Pods-彩小蜜.release.xcconfig"; sourceTree = "<group>"; };
+		B4C375AD21461DF200390A3A /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		B4C375AF21465F1900390A3A /* ConfigureRequestProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureRequestProtocol.swift; sourceTree = "<group>"; };
 		C46655EB1FBD7C2CB77E79A1 /* Pods-彩小蜜UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜UITests/Pods-彩小蜜UITests.release.xcconfig"; sourceTree = "<group>"; };
 		C6498BCAF23256B536C54738 /* Pods-彩小蜜.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜.debug.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜/Pods-彩小蜜.debug.xcconfig"; sourceTree = "<group>"; };
 		E503F5BD2079E8D6006D4A0B /* FootballFilterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballFilterProtocol.swift; sourceTree = "<group>"; };
@@ -1360,6 +1364,7 @@
 			isa = PBXGroup;
 			children = (
 				11FEB946208D79A400926951 /* AppDelegateProtocol.swift */,
+				B4C375AF21465F1900390A3A /* ConfigureRequestProtocol.swift */,
 				1142F6FF20B3D54F00C3E2E7 /* TongJiProtocol.swift */,
 			);
 			path = Protocol;
@@ -1911,10 +1916,10 @@
 		E57375DF2046AF4D00148622 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				11062B26208344CB001C1D14 /* CXMLotteryDateFilterVC.swift */,
-				11062B28208344DC001C1D14 /* CXMLotteryMoreFilterVC.swift */,
 				112F77A920EC79AE005CA9E4 /* CXMScoreViewController.swift */,
 				112F77BF20EC7D62005CA9E4 /* CXMScoreListViewController.swift */,
+				11062B26208344CB001C1D14 /* CXMLotteryDateFilterVC.swift */,
+				11062B28208344DC001C1D14 /* CXMLotteryMoreFilterVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2013,6 +2018,7 @@
 				E58B57BB205670670025E2F1 /* ServeConstraint.swift */,
 				11FEB963208DDC2100926951 /* AppKeyConstraint.swift */,
 				11436EF720B6E9A700127247 /* NoticeName.swift */,
+				B4C375AD21461DF200390A3A /* AppConfig.swift */,
 			);
 			path = Constraints;
 			sourceTree = "<group>";
@@ -2785,6 +2791,7 @@
 				11227C162084D7C900680CCC /* FootballMatchInfoHeader.swift in Sources */,
 				E56CE80C206A21670090A1B5 /* CXMWithdrawalProgressVC.swift in Sources */,
 				E512A96D20480917003F14F4 /* HomeDataModel.swift in Sources */,
+				B4C375AE21461DF200390A3A /* AppConfig.swift in Sources */,
 				E51F9A56205A11EA00AB8A21 /* MobileTextFieldCell.swift in Sources */,
 				114800D2208C2C5E00621AFA /* ShareCell.swift in Sources */,
 				1144910E2085D3DF009F1D09 /* FootballIntegralView.swift in Sources */,
@@ -2803,6 +2810,7 @@
 				119D8FCB20E0EFEE00576044 /* FootballStopSellingView.swift in Sources */,
 				11BD5CEF20B3BA8000A3AE6A /* CXMSurpriseViewController.swift in Sources */,
 				11FEB95F208DD55200926951 /* WeixinCenter.swift in Sources */,
+				B4C375B021465F1900390A3A /* ConfigureRequestProtocol.swift in Sources */,
 				114491082085A76A009F1D09 /* FootballMatchInfoCell.swift in Sources */,
 				E58B57BA2056364A0025E2F1 /* CXMAddNewBankCardVC.swift in Sources */,
 				E51F9A64205A2A2D00AB8A21 /* ForgetPswVCodeFooterView.swift in Sources */,
