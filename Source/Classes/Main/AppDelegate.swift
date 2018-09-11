@@ -62,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AppDelegateProtocol, GeTu
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         if UserDefaults.standard.bool(forKey: ShowGuided) {
             guard self.rootViewController != nil else { return }
-            self.rootViewController.configRequest()
+            self.rootViewController.getAppConfigRequest()
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationWillEnterForeground), object: nil)
         }
     }
