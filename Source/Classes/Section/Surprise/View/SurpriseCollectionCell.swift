@@ -36,6 +36,19 @@ extension SurpriseCollectionCell {
     public func configure(with info : LeagueInfoModel) {
         if let url = URL(string: info.leaguePic) {
             icon.kf.setImage(with: url)
+            
+            icon.kf.setImage(with: url, placeholder: nil , options: nil , progressBlock: nil) { (image, error , type, url) in
+                if let ima = image {
+                    let size = ima.scaleImage(image: ima, imageLength: SurpriseCollectionCell.width - 20)
+                    self.icon.snp.remakeConstraints { (make) in
+                        make.top.equalTo(0)
+                        make.left.equalTo(10)
+                        make.right.equalTo(-10)
+                        make.size.equalTo(size)
+                    }
+                }
+            }
+            
         }
         title.text = info.leagueAddr
         suTitle.text = ""
