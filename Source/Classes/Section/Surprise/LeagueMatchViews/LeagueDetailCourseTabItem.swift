@@ -24,7 +24,20 @@ class LeagueDetailCourseTabItem: UICollectionViewCell {
     
     private func initSubview() {
         title.backgroundColor = ColorFFFFFF
-        title.text = "ddss"
     }
     
+}
+
+extension LeagueDetailCourseTabItem {
+    public func configure(with data : CourseTabDataModel) {
+        title.text = data.title
+        
+        _ = data.select.asObserver()
+            .subscribe(onNext: { [weak self](select) in
+                self?.changeSelectItem(select: select)
+            }, onError: nil , onCompleted: nil , onDisposed: nil )
+    }
+    private func changeSelectItem(select : Bool) {
+        statusIcon.isHidden = !select
+    }
 }

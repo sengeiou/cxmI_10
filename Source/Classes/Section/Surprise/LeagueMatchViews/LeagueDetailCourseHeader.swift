@@ -10,9 +10,9 @@ import UIKit
 
 protocol LeagueDetailCourseHeaderDelegate {
     
-    func didTipLeftButton() -> Void
-    func didTipRightButton() -> Void
-    func didTipCenterButton() -> Void
+    func didTipLeftButton(leftSender : UIButton, rightSender: UIButton) -> Void
+    func didTipRightButton(leftSender : UIButton, rightSender: UIButton) -> Void
+    func didTipCenterButton(sender : UIButton) -> Void
 }
 
 class LeagueDetailCourseHeader: UITableViewHeaderFooterView {
@@ -21,7 +21,7 @@ class LeagueDetailCourseHeader: UITableViewHeaderFooterView {
     
     public var delegate : LeagueDetailCourseHeaderDelegate!
     
-    private var titleButton : UIButton!
+    public var titleButton : UIButton!
     
     private var leftButton : UIButton!
     
@@ -80,11 +80,11 @@ class LeagueDetailCourseHeader: UITableViewHeaderFooterView {
         
         switch sender.tag {
         case 100:
-            break
+            delegate.didTipLeftButton(leftSender : leftButton, rightSender: rightButton)
         case 200:
-            delegate.didTipCenterButton()
+            delegate.didTipCenterButton(sender: titleButton)
         case 300:
-            break
+            delegate.didTipRightButton(leftSender : leftButton, rightSender: rightButton)
         default: break
         }
     }

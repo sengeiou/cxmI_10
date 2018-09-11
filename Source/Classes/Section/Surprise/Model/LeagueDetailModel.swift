@@ -60,9 +60,15 @@ struct LeagueTeamScoreInfo : HandyJSON {
     var teamOrder : String = ""
 }
 struct LeagueMatchList : HandyJSON {
-    var matchGroupData : [LeagueMatchData] = [LeagueMatchData]()
+    var matchTurnGroupList : [LeagueMatchDataList] = [LeagueMatchDataList]()
 }
-
+struct LeagueMatchDataList : HandyJSON {
+    var groupDTOList : [LeagueMatchData] = [LeagueMatchData]()
+    ///  是否分组0:不分组,1分组 ,
+    var groupType : String = ""
+    /// 轮次名称
+    var turnGroupName : String = ""
+}
 struct LeagueMatchData : HandyJSON {
     var groupName : String = ""
     var futureMatchDTOList : [LeagueMatchInfo] = [LeagueMatchInfo]()

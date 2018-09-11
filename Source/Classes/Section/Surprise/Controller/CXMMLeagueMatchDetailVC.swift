@@ -47,9 +47,14 @@ class CXMMLeagueMatchDetailVC: BaseViewController {
     private var courseStyle : LeagueCourseStyle = .showData
     
     private var titleStyle : LeagueDetailTitleStyle = .hide
+    
     @IBOutlet weak var tableView: UITableView!
     
     private var leagueDetailModel : LeagueDetailModel!
+    
+    private var groupSelectIndex : Int = 0
+    
+    private var courseViewModel : CourseTabCellViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +67,23 @@ class CXMMLeagueMatchDetailVC: BaseViewController {
         tableView.beginRefreshing()
     }
 
+    private func setData() {
+        courseViewModel = CourseTabCellViewModel()
+        courseViewModel.setData(data: leagueDetailModel.matchGroupData.matchTurnGroupList)
+        
+         _ = courseViewModel.reloadData.asObserver()
+            .subscribe { (event) in
+                guard let index = event.element else { return }
+                
+                self.groupSelectIndex = index
+                
+                self.courseStyle = .showData
+                
+                self.tableView.reloadData()
+        }
+        
+    }
+    
     private func initSubview() {
         if #available(iOS 11.0, *) {
             
@@ -99,6 +121,7 @@ extension CXMMLeagueMatchDetailVC {
             .subscribe(onNext: { (data) in
                 weakSelf?.tableView.endrefresh()
                 weakSelf?.leagueDetailModel = data
+                weakSelf?.setData()
                 weakSelf?.tableView.reloadData()
                 
             }, onError: { (error) in
@@ -149,15 +172,19 @@ extension CXMMLeagueMatchDetailVC : LeagueDetailTeamCellDelegate {
 // MARK: - 赛程安排 选项卡
 extension CXMMLeagueMatchDetailVC : LeagueDetailCourseHeaderDelegate {
     // 左移
-    func didTipLeftButton() {
-        
+    func didTipLeftButton(leftSender : UIButton, rightSender: UIButton) {
+        guard courseViewModel != nil else { return }
+        leftSender.isHidden = courseViewModel.leftShift()
+        rightSender.isHidden = false
     }
     // 右移
-    func didTipRightButton() {
-        
+    func didTipRightButton(leftSender : UIButton, rightSender: UIButton) {
+        guard courseViewModel != nil else { return }
+        rightSender.isHidden = courseViewModel.rightShift()
+        leftSender.isHidden = false
     }
     
-    func didTipCenterButton() {
+    func didTipCenterButton(sender : UIButton) {
         
         if courseStyle == .showData {
             self.courseStyle = .showTab
@@ -212,7 +239,7 @@ extension CXMMLeagueMatchDetailVC : UITableViewDataSource {
             case .showTab:
                 return 3
             case .showData:
-                return 3
+                return leagueDetailModel.matchGroupData.matchTurnGroupList[groupSelectIndex].groupDTOList.count + 2
             }
         default:
             return 2
@@ -251,15 +278,12 @@ extension CXMMLeagueMatchDetailVC : UITableViewDataSource {
                 case .showTab:
                     return 1
                 case .showData:
-                    return 0
+                    return leagueDetailModel.matchGroupData.matchTurnGroupList[groupSelectIndex].groupDTOList[section - 2].futureMatchDTOList.count + 1
                 }
-                
-//                return leagueDetailModel.matchGroupData != nil ?
-//                leagueDetailModel.leagueMatch.futureMatchDTOList.count : 0
+
             case .球队资料:
                 return leagueDetailModel.leagueTeam != nil ? 1 : 0
             }
-            
         }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -338,7 +362,14 @@ extension CXMMLeagueMatchDetailVC : UITableViewDataSource {
             case 2:
                 let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: LeagueDetailCourseHeader.identifier) as! LeagueDetailCourseHeader
                 header.delegate = self
-//                header.configure(with: self.style)
+                if courseViewModel != nil {
+                     _ = courseViewModel.showTitle.asObserver()
+                        .subscribe { (event) in
+                            guard let title = event.element else { return }
+                            
+                            header.titleButton.setTitle(title, for: .normal)
+                    }
+                }
                 return header
                 
             default : return nil
@@ -404,7 +435,9 @@ extension CXMMLeagueMatchDetailVC : UITableViewDataSource {
     
     private func initLeagueCourseTabCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LeagueDetailCourseTabCell", for: indexPath) as! LeagueDetailCourseTabCell
+        //cell.viewModel = courseViewModel
         
+        cell.configure(with: courseViewModel)
         return cell
     }
     
@@ -414,13 +447,15 @@ extension CXMMLeagueMatchDetailVC : UITableViewDataSource {
         switch indexPath.row {
         case 0:
             cell.topLine.isHidden = false
-           // cell.configure(with: self.leagueDetailModel.matchGroupData.futureMatchDTOList[indexPath.row],
-                    //       style: .title)
+            cell.configure(with: leagueDetailModel.matchGroupData.matchTurnGroupList[groupSelectIndex].groupDTOList[indexPath.section - 2].futureMatchDTOList[indexPath.row],
+                           style: .title)
         default:
             cell.topLine.isHidden = true
-            //cell.configure(with: self.leagueDetailModel.leagueMatch.futureMatchDTOList[indexPath.row],
-                      //     style: .defau)
+            cell.configure(with: leagueDetailModel.matchGroupData.matchTurnGroupList[groupSelectIndex].groupDTOList[indexPath.section - 2].futureMatchDTOList[indexPath.row - 1],
+                           style: .defau)
         }
+        
+        
         
         return cell
     }
@@ -452,7 +487,9 @@ extension CXMMLeagueMatchDetailVC : UITableViewDataSource {
                 case .showData:
                     return 40 * defaultScale
                 case .showTab:
-                    return 200
+                    guard courseViewModel != nil else { return 0 }
+                    let count = CGFloat( lineNumber(totalNum: courseViewModel.list.count, horizonNum: 4))
+                    return 10 + (LeagueDetailCourseTabItem.height + 10) * count
                 }
                 
             case .球队资料:

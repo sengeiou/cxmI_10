@@ -249,6 +249,7 @@
 		11D9D9DE2089CB3000F78FCF /* CXMShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D9D9DD2089CB3000F78FCF /* CXMShareViewController.swift */; };
 		11D9D9E02089CD2500F78FCF /* CXMNewsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D9D9DF2089CD2500F78FCF /* CXMNewsDetailViewController.swift */; };
 		11D9D9E62089D6A200F78FCF /* NewsDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D9D9E52089D6A200F78FCF /* NewsDetailCell.swift */; };
+		11E8AD28214763BC00C9B762 /* CourseTabCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E8AD27214763BC00C9B762 /* CourseTabCellViewModel.swift */; };
 		11E8FA5620BFD5B60090BC6A /* WorldCupOrderDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E8FA5420BFD5B50090BC6A /* WorldCupOrderDetailCell.swift */; };
 		11E8FA5720BFD5B60090BC6A /* WorldCupOrderDetailTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E8FA5520BFD5B60090BC6A /* WorldCupOrderDetailTitleCell.swift */; };
 		11E8FA5920BFD5C20090BC6A /* CXMWorldCupOrderDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E8FA5820BFD5C20090BC6A /* CXMWorldCupOrderDetailVC.swift */; };
@@ -714,6 +715,7 @@
 		11D9D9DD2089CB3000F78FCF /* CXMShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMShareViewController.swift; sourceTree = "<group>"; };
 		11D9D9DF2089CD2500F78FCF /* CXMNewsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMNewsDetailViewController.swift; sourceTree = "<group>"; };
 		11D9D9E52089D6A200F78FCF /* NewsDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailCell.swift; sourceTree = "<group>"; };
+		11E8AD27214763BC00C9B762 /* CourseTabCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseTabCellViewModel.swift; sourceTree = "<group>"; };
 		11E8FA5420BFD5B50090BC6A /* WorldCupOrderDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldCupOrderDetailCell.swift; sourceTree = "<group>"; };
 		11E8FA5520BFD5B60090BC6A /* WorldCupOrderDetailTitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldCupOrderDetailTitleCell.swift; sourceTree = "<group>"; };
 		11E8FA5820BFD5C20090BC6A /* CXMWorldCupOrderDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXMWorldCupOrderDetailVC.swift; sourceTree = "<group>"; };
@@ -1051,6 +1053,7 @@
 				11353EA52134FFCC00C1D645 /* SurpriseShooterHeaderModel.swift */,
 				11F305DD21364F7A00FCA3F7 /* PrizeDigitalViewModel.swift */,
 				116E99C5213F8069005F1217 /* DigitalHisViewModel.swift */,
+				11E8AD27214763BC00C9B762 /* CourseTabCellViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -2839,6 +2842,7 @@
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
@@ -2861,6 +2865,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
@@ -3231,6 +3236,7 @@
 				11F305DE21364F7A00FCA3F7 /* PrizeDigitalViewModel.swift in Sources */,
 				E537397F2057F8F40087E4E6 /* BankCardInfo.swift in Sources */,
 				114800D4208C2DD700621AFA /* ShareDataModel.swift in Sources */,
+				11E8AD28214763BC00C9B762 /* CourseTabCellViewModel.swift in Sources */,
 				11B1B96C20F30EA200387430 /* FootballLiveInfoModel.swift in Sources */,
 				E5786FBE206DE9BD0045F7F5 /* FootballBanQuanCCell.swift in Sources */,
 				E50B907120522FFF00417BFE /* CXMRechargeViewController.swift in Sources */,
