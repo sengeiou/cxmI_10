@@ -2221,6 +2221,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="6oV-jM-xDd"/>
                                                     </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <state key="normal" title="赛季">
                                                         <color key="titleColor" red="0.91764705879999997" green="0.33333333329999998" blue="0.015686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>

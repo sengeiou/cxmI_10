@@ -63,7 +63,7 @@ class CXMMLeagueMatchDetailVC: BaseViewController {
         super.viewDidLoad()
 
         initSubview()
-     
+        self.footerLabel.text = ""
         tableView.headerRefresh {
             self.loadNewData()
         }

@@ -72,7 +72,7 @@ class TopTitleView: UIView {
     private func initLabel() -> UILabel {
         let lab = UILabel()
         lab.font = Font15
-        lab.textColor = Color505050
+        lab.textColor = Color787878
         lab.textAlignment = .center
         //lab.text = "截止23： 50"
         //lab.font = UIFont.boldSystemFont(ofSize: 14)
