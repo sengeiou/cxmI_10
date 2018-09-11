@@ -20,7 +20,7 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
     public var webName: String = ""
     public var showTitle : String!
     private var progressView : UIProgressView!
-    
+    private var reloadData = false
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,6 +39,13 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
         super.viewDidDisappear(animated)
         
         TongJi.end(webName)
+        
+        switch reloadData {
+        case true:
+            webView.reload()
+        default:
+            break
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -239,7 +246,10 @@ extension BaseWebViewController {
             getChannel()
         case "hideTitle":        // 隐藏导航栏
             hideNavigationTitle()
-            
+        case "reloadData":       // 刷新页面
+            shouldReloadData()
+        case "backReloadData":   // 返回刷新
+            backReloadData(dic: dic)
         default:
             break
         }
@@ -323,6 +333,23 @@ extension BaseWebViewController {
         self.webView.snp.remakeConstraints { (make) in
             make.top.equalTo(SafeTopHeight)
             make.left.right.bottom.equalTo(0)
+        }
+    }
+    private func shouldReloadData() {
+        guard webView != nil else { return }
+        webView.reload()
+    }
+    
+    private func backReloadData(dic : [String: String]) {
+        guard let back = dic["backReload"] else { return }
+        
+        switch back {
+        case "0":
+            self.reloadData = false
+        case "1":
+            self.reloadData = true
+        default:
+            break
         }
     }
 }
