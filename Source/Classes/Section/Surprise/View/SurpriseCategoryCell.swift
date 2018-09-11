@@ -15,7 +15,7 @@ enum SurpriseCategoryType {
 
 protocol SurpriseCategoryCellDelegate {
     func didSelectItem(info : SurpriseItemInfo ,indexPath: IndexPath) -> Void
-    func didSelectItem(info : SurpriseLeagueInfo ,indexPath: IndexPath) -> Void
+    func didSelectItem(info : LeagueInfoModel ,indexPath: IndexPath) -> Void
 }
 
 class SurpriseCategoryCell: UITableViewCell {
@@ -27,7 +27,7 @@ class SurpriseCategoryCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     
     private var itemList : [SurpriseItemInfo]!
-    private var hotItemList : [SurpriseLeagueInfo]!
+    private var hotItemList : [LeagueInfoModel]!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -45,7 +45,7 @@ extension SurpriseCategoryCell {
         self.itemList = list
         self.collectionView.reloadData()
     }
-    public func configure(with list : [SurpriseLeagueInfo], style : SurpriseCategoryType) {
+    public func configure(with list : [LeagueInfoModel], style : SurpriseCategoryType) {
         self.hotItemList = list
         self.style = style
         self.collectionView.reloadData()

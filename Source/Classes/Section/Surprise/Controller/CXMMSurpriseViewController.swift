@@ -169,8 +169,14 @@ extension CXMMSurpriseViewController {
 // MARK: - SurpriseCategoryCell  Delegate
 extension CXMMSurpriseViewController : SurpriseCategoryCellDelegate {
     // 热门赛事
-    func didSelectItem(info: SurpriseLeagueInfo, indexPath: IndexPath) {
+    func didSelectItem(info: LeagueInfoModel, indexPath: IndexPath) {
+        let story = UIStoryboard(name: "Surprise", bundle: nil)
         
+        let detail = story.instantiateViewController(withIdentifier: "LeagueMatchDetailVC") as! CXMMLeagueMatchDetailVC
+        
+        detail.leagueInfo = info
+        
+        pushViewController(vc: detail)
     }
     // 
     func didSelectItem(info: SurpriseItemInfo, indexPath: IndexPath) {

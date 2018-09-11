@@ -33,12 +33,13 @@ extension SurpriseCollectionCell {
         title.text = info.className
         suTitle.text = info.subTitle
     }
-    public func configure(with info : SurpriseLeagueInfo) {
-        if let url = URL(string: info.iconImg) {
+    public func configure(with info : LeagueInfoModel) {
+        if let url = URL(string: info.leaguePic) {
             icon.kf.setImage(with: url)
         }
-        title.text = info.title
-        suTitle.text = info.detail
+        title.text = info.leagueAddr
+        suTitle.text = ""
+        
     }
     
 }

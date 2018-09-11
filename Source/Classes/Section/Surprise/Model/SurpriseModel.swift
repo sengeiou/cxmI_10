@@ -13,7 +13,7 @@ struct SurpriseModel: HandyJSON {
     var discoveryHallClassifyList : [SurpriseItemInfo] = [SurpriseItemInfo]()
     
     /// 联赛 list
-    var hotLeagueList : [SurpriseLeagueInfo] = [SurpriseLeagueInfo]()
+    var hotLeagueList : [LeagueInfoModel] = [LeagueInfoModel]()
     /// 射手榜List
     var topScorerDTOList : [SurpriseScorerInfo] = [SurpriseScorerInfo]()
     
@@ -24,6 +24,8 @@ struct SurpriseLeagueInfo : HandyJSON {
     var detail : String = ""
     var iconImg: String = ""
     var title : String = ""
+    
+    
 }
 
 struct SurpriseItemInfo : HandyJSON {
