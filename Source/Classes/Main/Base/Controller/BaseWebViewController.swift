@@ -280,6 +280,11 @@ extension BaseWebViewController {
         pushViewController(vc: vc)
     }
     private func showJSTitle(dic : [String: String]) {
+        showNavigationBar()
+        self.webView.snp.remakeConstraints { (make) in
+            make.top.equalTo(SafeAreaTopHeight)
+            make.left.right.bottom.equalTo(0)
+        }
         guard let title = dic["title"] else { return }
         self.navigationItem.title = title
     }
