@@ -21,6 +21,8 @@ class LeagueMatchDetailCell: UITableViewCell {
     @IBOutlet weak var leaderName: UILabel!
     @IBOutlet weak var leaderDetail: UILabel!
     
+    @IBOutlet weak var leaderSeason : UIButton!
+    
     @IBOutlet weak var detailButton: UIButton!
     
     override func awakeFromNib() {
@@ -58,6 +60,10 @@ extension LeagueMatchDetailCell {
         leaderTitle.text = "联赛规则"
         leaderName.text = data.leagueAddr
         leaderDetail.text = data.leagueRule + data.leagueRule
+        
+        let season = data.leagueSeason.leagueSeasonInfoList[0]
+        
+        leaderSeason.setTitle(season.matchSeason, for: .normal)
     }
 }
 

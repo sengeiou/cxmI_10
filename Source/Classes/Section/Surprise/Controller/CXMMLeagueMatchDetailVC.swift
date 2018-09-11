@@ -56,6 +56,9 @@ class CXMMLeagueMatchDetailVC: BaseViewController {
     
     private var courseViewModel : CourseTabCellViewModel!
     
+    @IBOutlet weak var footerView: UIView!
+    @IBOutlet weak var footerLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -81,6 +84,34 @@ class CXMMLeagueMatchDetailVC: BaseViewController {
                 
                 self.tableView.reloadData()
         }
+        
+        switch style {
+        case .积分榜:
+            if leagueDetailModel.leagueScore.matchScoreDTOList.isEmpty {
+                footerLabel.text = "暂无数据"
+            }else {
+                footerLabel.text = ""
+            }
+        case .射手榜:
+            if leagueDetailModel.leagueShooter.leagueShooterInfoList.isEmpty {
+                footerLabel.text = "暂无数据"
+            }else {
+                footerLabel.text = ""
+            }
+        case .赛程安排:
+            if leagueDetailModel.matchGroupData.matchTurnGroupList.isEmpty {
+                footerLabel.text = "暂无数据"
+            }else {
+                footerLabel.text = ""
+            }
+        case .球队资料:
+            if leagueDetailModel.leagueTeam.leagueTeamInfoDTOList.isEmpty {
+                footerLabel.text = "暂无数据"
+            }else {
+                footerLabel.text = ""
+            }
+        }
+        
         
     }
     

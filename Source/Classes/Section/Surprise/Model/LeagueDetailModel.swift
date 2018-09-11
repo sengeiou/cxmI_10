@@ -23,8 +23,17 @@ struct LeagueDetailModel: HandyJSON {
     var leagueShooter : LeagueShooterList!
     /// 联赛球队
     var leagueTeam : LeagueTeamList!
+    /// 赛季
+    var leagueSeason : LeagueSeasonList!
 }
-
+struct LeagueSeasonList : HandyJSON {
+    var leagueSeasonInfoList : [LeagueSeasonInfo] = [LeagueSeasonInfo]()
+}
+struct LeagueSeasonInfo : HandyJSON {
+    var leagueId : String = ""
+    var matchSeason : String = ""
+    var seasonId : String = ""
+}
 struct LeagueScoreList : HandyJSON {
     var matchScoreDTOList : [LeagueMatchScoreDetail] = [LeagueMatchScoreDetail]()
     ///  比赛类型,0杯赛，1联赛
