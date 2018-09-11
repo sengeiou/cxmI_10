@@ -281,6 +281,10 @@ extension BaseWebViewController {
             vc.rechargeAmounts = price
         }
         
+        if let money = dic["toastPrice"] {
+            
+        }
+        
         if let disStr = dic["isDisabled"] {
             
             vc.disableInput = disStr
