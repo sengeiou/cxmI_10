@@ -25,6 +25,7 @@ class MobileTextFieldCell: UITableViewCell {
         textfield.borderStyle = .none
         textfield.selectImg = "pho_sel"
         textfield.placeholder = "请输入手机号码"
+        textfield.textFieldMaxLength = 11
         textfield.keyboardType = .numberPad
         self.contentView.addSubview(textfield)
         

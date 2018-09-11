@@ -51,8 +51,14 @@ class CXMScoreViewController: WMPageController, AlertPro {
     
     private var selectedMatchType : String = "0"
     
+    
+    /// 未结束
     private var notScore = CXMScoreListViewController()
+    
+    /// 已结束
     private var finishScore = CXMScoreListViewController()
+    
+    /// 我的比赛
     private var collectScore = CXMScoreListViewController()
     
     override func viewDidLoad() {
@@ -256,15 +262,18 @@ extension CXMScoreViewController {
 }
 
 extension CXMScoreViewController {
-    
+    ///返回子页面的个数
     override func numbersOfChildControllers(in pageController: WMPageController) -> Int {
         
         return self.titleDatas.count
     }
+    
+    ///返回index对应的标题
     override func pageController(_ pageController: WMPageController, titleAt index: Int) -> String {
         return self.titleDatas[index]
     }
     
+    ///返回某个index对应的页面
     override func pageController(_ pageController: WMPageController, viewControllerAt index: Int) -> UIViewController {
     
         switch index {

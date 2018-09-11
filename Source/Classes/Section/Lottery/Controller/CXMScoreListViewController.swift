@@ -19,7 +19,8 @@ class CXMScoreListViewController: BaseViewController, LotterySectionHeaderDelega
     public var shouldLogin : ( () -> Void )!
     public var matchType : String = "0"
     
-    public var shouldReloadData : Bool = false // 置顶
+    /// 置顶
+    public var shouldReloadData : Bool = false
     public var shouldReload  = false // 刷新数据
     
     // MARK: - 属性 private
