@@ -20,7 +20,7 @@ class CXMSurpriseViewController: BaseWebViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "彩小秘 · 发现"
-        self.showTitle = "发现"
+        self.showTitle = "彩小秘 · 发现"
         hideBackBut()
         self.shouldReload = false
         self.webView.scrollView.headerRefresh {

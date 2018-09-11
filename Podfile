@@ -10,6 +10,8 @@ target '彩小蜜' do
   
   pod 'RxSwift',    '~> 4.0'
 
+  pod 'RxCocoa',    '~> 4.0'
+
   pod 'SnapKit'
 
   pod 'HandyJSON’, '~> 4.1.1'

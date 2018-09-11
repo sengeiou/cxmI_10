@@ -139,7 +139,7 @@ class FootballHunheView: UIView {
             but.setTitleColor(ColorFFFFFF, for: .normal)
             but.backgroundColor = ColorEA5504
         }else {
-            but.setTitleColor(Color787878, for: .normal)
+            but.setTitleColor(Color505050, for: .normal)
             but.backgroundColor = ColorFFFFFF
         }
         but.isSelected = isSelected

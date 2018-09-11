@@ -57,6 +57,7 @@ class TopTitleView: UIView {
     private func initSubview() {
         homeMatch = initLabel()
         homeMatch.textColor = Color505050
+        
         vsLb = initLabel()
         vsLb.text = "VS"
         vsLb.textColor = Color787878
@@ -70,10 +71,14 @@ class TopTitleView: UIView {
     
     private func initLabel() -> UILabel {
         let lab = UILabel()
-        lab.font = Font14
+        lab.font = Font15
         lab.textColor = Color787878
         lab.textAlignment = .center
         //lab.text = "截止23： 50"
+<<<<<<< HEAD
+=======
+        //lab.font = UIFont.boldSystemFont(ofSize: 14)
+>>>>>>> 发现-1.1.2
         return lab
     }
     

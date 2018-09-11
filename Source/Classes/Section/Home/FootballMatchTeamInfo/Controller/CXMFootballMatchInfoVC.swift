@@ -337,9 +337,6 @@ extension CXMFootballMatchInfoVC : FootballMatchPagerViewDelegate {
     func didSelected(_ teamInfoStyle: TeamInfoStyle) {
         CXMGCDTimer.shared.cancleTimer(WithTimerName: "cxmLiveInfoTimer")
         self.teamInfoStyle = teamInfoStyle
-//        if teamInfoStyle == .matchDetail {
-//            shouldStartTimer()
-//        }
     }
 }
 

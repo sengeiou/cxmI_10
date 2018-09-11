@@ -9,6 +9,40 @@
 import Foundation
 import HandyJSON
 
+enum LottoPlayType : String {
+    case 竞彩足球
+    case 大乐透 = "超级大乐透"
+    case 竞彩篮球
+    case 快3
+    case 双色球
+    case 北京单场
+    case 广东11选5
+    case 更多彩种
+    case none
+    
+    static func getType(lotteryId : String) -> LottoPlayType {
+        switch lotteryId {
+        case "1": // 竟足
+            return .竞彩足球
+        case "2": // 大乐透
+            return .大乐透
+        case "3": // 竞彩篮球
+            return .竞彩篮球
+        case "4": // 快三
+            return .快3
+        case "5": // 双色球
+            return .双色球
+        case "6": // 北京单场
+            return .北京单场
+        case "7": // 广东11选5
+            return .广东11选5
+        case "8": // 更多彩种
+            return .更多彩种
+        default:
+            return .none
+        }
+    }
+}
 
 enum PushControllerType : String{
     case 首页
@@ -26,6 +60,14 @@ enum PushControllerType : String{
     case 北京单场
     case 广东11选5
     case 更多彩种
+    case 开奖结果
+    case 专家广场
+    case 彩票学堂
+    case 活动中心
+    case 资讯信息
+    case 晒单公园
+    case 实时统计
+    case 发现更多
     case none
 }
 
@@ -97,6 +139,27 @@ extension RouterMatcher {
             return (.注册, urlModel)
         case "8":
             return (.咨询详情, urlModel)
+        case "9":
+            switch urlModel.id {
+            case "1":
+                return (.开奖结果, urlModel)
+            case "2":
+                return (.专家广场, urlModel)
+            case "3":
+                return (.彩票学堂, urlModel)
+            case "4":
+                return (.活动中心, urlModel)
+            case "5":
+                return (.资讯信息, urlModel)
+            case "6":
+                return (.晒单公园, urlModel)
+            case "7":
+                return (.实时统计, urlModel)
+            case "8":
+                return (.发现更多, urlModel)
+            default :
+                return (.none, urlModel)
+            }
         default:
             return (.none, urlModel)
         }

@@ -10,6 +10,8 @@ import UIKit
 
 class NewsThreePicCell: UITableViewCell {
 
+    static let identifier = "NewsThreePicCellId"
+    
     // MARK: - 属性 public
     public var newsInfo : NewsInfoModel!{
         didSet{
@@ -35,7 +37,7 @@ class NewsThreePicCell: UITableViewCell {
     private var picOne : UIImageView!
     private var picTwo : UIImageView!
     private var picThree: UIImageView!
-    private var bottomLine : UIView!
+    public var bottomLine : UIView!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

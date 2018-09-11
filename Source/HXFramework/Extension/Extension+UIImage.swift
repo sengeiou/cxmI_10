@@ -27,7 +27,7 @@ extension UIImage {
     }
 
     
-    func  scaleImage(image: UIImage, imageLength: CGFloat) -> CGSize {
+    func scaleImage(image: UIImage, imageLength: CGFloat) -> CGSize {
         
         var newWidth:CGFloat = 0.0
         var newHeight:CGFloat = 0.0

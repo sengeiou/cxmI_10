@@ -202,9 +202,6 @@ class LotteryCell: UITableViewCell {
             make.width.equalTo(100)
             make.height.equalTo(resultlb)
         }
-        
-        
-        
     }
     
     private func initSubview() {

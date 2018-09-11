@@ -14,7 +14,7 @@ import Reachability
 import JPImageresizerView
 
 
-class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, DateProtocol, UserInfoPro , LoginProtocol, RouterPro{
+class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, DateProtocol, UserInfoPro , LoginProtocol, RouterPro, LineNumberProtocol{
     func didLogin(isLogin: Bool) {
         
     }
@@ -62,7 +62,11 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
-    
+    public func pushWebViewController(url: String) {
+        let web = CXMActivityViewController()
+        web.urlStr = url
+        self.navigationController?.pushViewController(web, animated: true)
+    }
     public func pushRootViewController() {
         pushRootViewController(0)
     }
@@ -123,6 +127,11 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
     public func setEmpty(title: String, _ tableView: UITableView) {
         tableView.emptyDataSetDelegate = self
         tableView.emptyDataSetSource = self
+        self.emptyTitle = title
+    }
+    public func setEmpty(title: String, _ collectionView: UICollectionView) {
+        collectionView.emptyDataSetDelegate = self
+        collectionView.emptyDataSetSource = self
         self.emptyTitle = title
     }
     public func showProgressHUD() {

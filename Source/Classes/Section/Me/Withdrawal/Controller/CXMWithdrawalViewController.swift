@@ -78,6 +78,7 @@ class CXMWithdrawalViewController: BaseViewController, ValidatePro, UITextFieldD
         super.viewDidLoad()
         self.title = "提现"
         initSubview()
+        copyWritingRequest()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -167,37 +168,22 @@ class CXMWithdrawalViewController: BaseViewController, ValidatePro, UITextFieldD
             }, onCompleted: nil, onDisposed: nil)
     }
     
-//    private func userInfoRequest() {
-//        weak var weakSelf = self
-//        _ = userProvider.rx.request(.userInfo)
-//            .asObservable()
-//            .mapObject(type: UserInfoDataModel.self)
-//            .subscribe(onNext: { (data) in
-//                guard weakSelf != nil else { return }
-//                weakSelf!.userInfo = data
-//                weakSelf?.tableview.reloadData()
-//            }, onError: { (error) in
-//                print(error)
-//                guard let err = error as? HXError else { return }
-//                switch err {
-//                case .UnexpectedResult(let code, let msg):
-//                    switch code {
-//                    case 600:
-//                        weakSelf?.removeUserData()
-//                        let login = LoginViewController()
-//                        weakSelf?.pushViewController(vc: login)
-//                    default : break
-//                    }
-//
-//                    if 300000...310000 ~= code {
-//                        print(code)
-//                        self.showHUD(message: msg!)
-//                    }
-//
-//                default: break
-//                }
-//            }, onCompleted: nil, onDisposed: nil)
-//    }
+    private func copyWritingRequest() {
+        _ = userProvider.rx.request(.copywriting(type: "1"))
+            .asObservable()
+            .mapObject(type: CopyWritingModel.self)
+            .subscribe(onNext: { (data) in
+                self.instructions.text = data.content
+            }, onError: { (error) in
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    print(code)
+                    self.showHUD(message: msg!)
+                default: break
+                }
+            }, onCompleted: nil, onDisposed: nil)
+    }
     
     private func setDrawData(data : WithDrawDataModel) {
         moneyLB.text = "可提现金额: \(data.userMoney!)元"
@@ -278,19 +264,19 @@ class CXMWithdrawalViewController: BaseViewController, ValidatePro, UITextFieldD
         instructions.textColor = ColorA0A0A0
         instructions.font = Font13
         instructions.backgroundColor = UIColor.clear
-        instructions.text = """
-        温馨提示：
-        1.为防止恶意提款、洗钱等不法行为，充值金额及活动赠送金额不能提款，中奖奖金不受限制。
-        2.同一账户每日只能申请提现3次，超过将不予受理。
-        3.提现最低金额为3元，提现暂无手续费。
-        4.工作日10:00 - 19:00为提款处理时间，非工作日发起的提款会在工作日时间内按顺序处理。
-        5.工作日申请提交后通常在30分钟内被审核，审核通过后通常在一个小时内完成汇款，节假日到账略有延迟。
-        6.如果银行账号信息有无，提款时间将会延长7个工作日。
-        注：若提款申请后三个工作日还未到账，请通过以下方式联系客服：
-        在线人工客服，
-        致电客服：400-012-6600
-        QQ在线客服：29218201
-        """
+//        instructions.text = """
+//        温馨提示：
+//        1.为防止恶意提款、洗钱等不法行为，充值金额及活动赠送金额不能提款，中奖奖金不受限制。
+//        2.同一账户每日只能申请提现3次，超过将不予受理。
+//        3.提现最低金额为3元，提现暂无手续费。
+//        4.工作日10:00 - 19:00为提款处理时间，非工作日发起的提款会在工作日时间内按顺序处理。
+//        5.工作日申请提交后通常在30分钟内被审核，审核通过后通常在一个小时内完成汇款，节假日到账略有延迟。
+//        6.如果银行账号信息有无，提款时间将会延长7个工作日。
+//        注：若提款申请后三个工作日还未到账，请通过以下方式联系客服：
+//        在线人工客服，
+//        致电客服：400-012-6600
+//        QQ在线客服：29218201
+//        """
         
         bgView.addSubview(moneyLB)
         bgView.addSubview(bankCardLB)

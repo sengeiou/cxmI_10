@@ -13,6 +13,8 @@ fileprivate let PicWidth : CGFloat = (screenWidth - 12 * 2 - 5 * 2) / 3
 
 class NewsOnePicCell: UITableViewCell {
 
+    static let identifier = "NewsOnePicCellId"
+    
     // MARK: - 属性 public
     public var newsInfo : NewsInfoModel!{
         didSet{
@@ -40,7 +42,7 @@ class NewsOnePicCell: UITableViewCell {
     public var icon : UIImageView!
     private var bottomView: NewsBottomView!
     private var videoIcon : UIImageView!
-    private var bottomLine : UIView!
+    public var bottomLine : UIView!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
