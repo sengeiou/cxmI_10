@@ -119,87 +119,6 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
             }, onCompleted: nil , onDisposed: nil )
     }
     
-    
-<<<<<<< HEAD
-=======
-    public func creatSubViewControllers()
-    {
-        // 主页
-        home = CXMHomeViewController()
-    
-        let homeNav = UINavigationController(rootViewController: home)
-        homeNav.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
-        homeNav.title = ""
-    
-        homeNav.view.backgroundColor = UIColor.white
-        
-        let homeImage = UIImage(named: "tab_home_nor")?.withRenderingMode(.alwaysOriginal)
-        let homeSelectImage = UIImage(named: "tab_home_sel")?.withRenderingMode(.alwaysOriginal)
-        
-        homeNav.tabBarItem.image = homeImage
-        homeNav.tabBarItem.selectedImage = homeSelectImage
-        homeNav.tabBarItem.title = ""
-        
-        
-        // 开奖
-        
-        lottery = CXMScoreViewController()
-        
-        let lotteryNav = UINavigationController(rootViewController: lottery)
-        lotteryNav.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
-        
-        lotteryNav.view.backgroundColor = UIColor.white
-        
-        let loImg = UIImage(named: "tab_lot_nor")?.withRenderingMode(.alwaysOriginal)
-        let loSelImg = UIImage(named: "tab_lot_sel")?.withRenderingMode(.alwaysOriginal)
-        
-        lotteryNav.tabBarItem.image = loImg
-        lotteryNav.tabBarItem.selectedImage = loSelImg
-        
-        // 发现
-        let surpriseStory = UIStoryboard(name: "Surprise", bundle: nil)
-        
-        let surprise = surpriseStory.instantiateViewController(withIdentifier: "SurpriseViewController") as! CXMMSurpriseViewController
-        
-        let surpriseNav = UINavigationController(rootViewController: surprise)
-        surpriseNav.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
-        
-        surpriseNav.view.backgroundColor = UIColor.white
-        
-        let surpriseImg = UIImage(named: "tab_dis_nor")?.withRenderingMode(.alwaysOriginal)
-        let surpriseSelImg = UIImage(named: "tab_dis_sel")?.withRenderingMode(.alwaysOriginal)
-        
-        surpriseNav.tabBarItem.image = surpriseImg
-        surpriseNav.tabBarItem.selectedImage = surpriseSelImg
-        
-        // me
-        //me : BaseViewController!
-        
-        let meNav = creatMeVC()
-        
-        
-        self.viewControllers = [homeNav, lotteryNav, surpriseNav, meNav]
-        
-    }
-    
-    public func creatMeVC () -> UINavigationController{
-
-        me = CXMMeViewController()
-        
-        let meNav = UINavigationController(rootViewController: me)
-        meNav.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
-        meNav.view.backgroundColor = UIColor.white
-        
-        let meImg = UIImage(named: "tab_min_nor")?.withRenderingMode(.alwaysOriginal)
-        let meSelImg = UIImage(named: "tab_min_sel")?.withRenderingMode(.alwaysOriginal)
-        
-        meNav.tabBarItem.image = meImg
-        meNav.tabBarItem.selectedImage = meSelImg
-        
-        return meNav
-    }
->>>>>>> 发现-1.1.2
-    
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         /*
         if viewController == self.viewControllers![3] {
@@ -238,7 +157,12 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
 
 extension MainTabBarController {
     private func setupChildControllers() {
-        let vcArray: [UIViewController] = [CXMHomeViewController(),CXMScoreViewController(),CXMSurpriseViewController(),CXMMeViewController()]
+        
+        let surpriseStory = UIStoryboard(name: "Surprise", bundle: nil)
+        
+        let surprise = surpriseStory.instantiateViewController(withIdentifier: "SurpriseViewController") as! CXMMSurpriseViewController
+        
+        let vcArray: [UIViewController] = [CXMHomeViewController(),CXMScoreViewController(),surprise,CXMMeViewController()]
         let titleArray = [("首页","tab_home"),("开奖","tab_lot"),("发现","tab_dis"),("我的","tab_min")]
         
         for (index, vc) in vcArray.enumerated() {

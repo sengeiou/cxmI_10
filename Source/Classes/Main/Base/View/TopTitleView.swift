@@ -75,10 +75,6 @@ class TopTitleView: UIView {
         lab.textColor = Color787878
         lab.textAlignment = .center
         //lab.text = "截止23： 50"
-<<<<<<< HEAD
-=======
-        //lab.font = UIFont.boldSystemFont(ofSize: 14)
->>>>>>> 发现-1.1.2
         return lab
     }
     
