@@ -52,7 +52,7 @@ class LeagueDetailCourseHeader: UITableViewHeaderFooterView {
         
         titleButton.snp.makeConstraints { (make) in
             make.top.equalTo(0)
-            make.width.equalTo(80)
+            make.width.equalTo(100)
             make.centerX.equalTo(self.contentView.snp.centerX)
             make.height.equalTo(30)
         }
@@ -71,6 +71,7 @@ class LeagueDetailCourseHeader: UITableViewHeaderFooterView {
     private func getButton() -> UIButton {
         let but = UIButton(type: .custom)
         but.setTitleColor(Color505050, for: .normal)
+        but.titleLabel?.font = Font12
         but.addTarget(self, action: #selector(buttonClick(_:)), for: .touchUpInside)
         return but
     }
