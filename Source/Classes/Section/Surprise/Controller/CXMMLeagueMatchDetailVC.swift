@@ -270,7 +270,7 @@ extension CXMMLeagueMatchDetailVC : UITableViewDataSource {
             case .showTab:
                 return 3
             case .showData:
-                return leagueDetailModel.matchGroupData.matchTurnGroupList[groupSelectIndex].groupDTOList.count + 2
+                return leagueDetailModel.matchGroupData.matchTurnGroupList[groupSelectIndex].groupDTOList.count + 3
             }
         default:
             return 2
@@ -309,7 +309,8 @@ extension CXMMLeagueMatchDetailVC : UITableViewDataSource {
                 case .showTab:
                     return 1
                 case .showData:
-                    return leagueDetailModel.matchGroupData.matchTurnGroupList[groupSelectIndex].groupDTOList[section - 2].futureMatchDTOList.count + 1
+                    if section == 2 { return 0 }
+                    return leagueDetailModel.matchGroupData.matchTurnGroupList[groupSelectIndex].groupDTOList[section - 3].futureMatchDTOList.count + 1
                 }
 
             case .球队资料:
@@ -382,6 +383,9 @@ extension CXMMLeagueMatchDetailVC : UITableViewDataSource {
             }
             
         case .赛程安排:
+            
+            guard let model = leagueDetailModel.matchGroupData else { return nil }
+            
             switch section {
             case 0:
                 return nil
@@ -403,7 +407,12 @@ extension CXMMLeagueMatchDetailVC : UITableViewDataSource {
                 }
                 return header
                 
-            default : return nil
+            default :
+                
+                let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: LeagueDetailScoreHeader.identifier) as! LeagueDetailScoreHeader
+                header.configure(with: model.matchTurnGroupList[groupSelectIndex].groupDTOList[section - 3].groupName)
+                return header
+              
             }
         default :
             switch section {
@@ -478,11 +487,11 @@ extension CXMMLeagueMatchDetailVC : UITableViewDataSource {
         switch indexPath.row {
         case 0:
             cell.topLine.isHidden = false
-            cell.configure(with: leagueDetailModel.matchGroupData.matchTurnGroupList[groupSelectIndex].groupDTOList[indexPath.section - 2].futureMatchDTOList[indexPath.row],
+            cell.configure(with: leagueDetailModel.matchGroupData.matchTurnGroupList[groupSelectIndex].groupDTOList[indexPath.section - 3].futureMatchDTOList[indexPath.row],
                            style: .title)
         default:
             cell.topLine.isHidden = true
-            cell.configure(with: leagueDetailModel.matchGroupData.matchTurnGroupList[groupSelectIndex].groupDTOList[indexPath.section - 2].futureMatchDTOList[indexPath.row - 1],
+            cell.configure(with: leagueDetailModel.matchGroupData.matchTurnGroupList[groupSelectIndex].groupDTOList[indexPath.section - 3].futureMatchDTOList[indexPath.row - 1],
                            style: .defau)
         }
         
@@ -566,13 +575,36 @@ extension CXMMLeagueMatchDetailVC : UITableViewDataSource {
             }
             
         case .赛程安排:
+            guard let model = leagueDetailModel.matchGroupData else { return 0.01 }
+            
+            let groupType = model.matchTurnGroupList[groupSelectIndex].groupType
+            
             switch section {
             case 0:
                 return 0.01
             case 1:
                 return 50
+            case 2:
+                
+                switch groupType {
+                case "0":
+                    return 35
+                case "1":
+                    return 30
+                default :
+                    return 0.01
+                }
             default:
-                return 45
+                
+                switch groupType {
+                case "0":
+                    return 0.01
+                case "1":
+                    return 45
+                default :
+                    return 45
+                }
+              
             }
         default:
             switch section {

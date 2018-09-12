@@ -240,9 +240,9 @@ class CXMMeViewController: BaseViewController, UITableViewDelegate, UITableViewD
     
     private func setupNavigationBarTitle() {
         #if DEBUG
-        self.navigationItem.title = "乐得体育 · 我的(\(getCurrentPlatformType().description))"
+        self.navigationItem.title = "彩小秘 · 我的(\(getCurrentPlatformType().description))"
         #else
-        self.navigationItem.title = "乐得体育 · 我的"
+        self.navigationItem.title = "彩小秘 · 我的"
         #endif
     }
     
