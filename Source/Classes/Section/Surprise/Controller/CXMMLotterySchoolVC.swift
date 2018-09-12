@@ -18,7 +18,8 @@ class CXMMLotterySchoolVC: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationItem.title = "彩票学堂"
+        setEmpty(title: "暂无数据", tableView)
         initSubview()
         
         tableView.headerRefresh {

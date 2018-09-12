@@ -172,7 +172,7 @@ extension RouterPro {
     }
     /// 资讯信息
     private func pushInformation(from vc : UIViewController) {
-        pushWebview(urlStr: SurpriseUrl, from: vc)
+        pushWebview(urlStr: getCurentBaseWebUrl() + SurpriseUrl, from: vc)
     }
     /// 晒单公园
     private func pushShaidan(from vc : UIViewController) {
