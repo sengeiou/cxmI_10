@@ -15,7 +15,7 @@ struct SurpriseModel: HandyJSON {
     /// 联赛 list
     var hotLeagueList : [LeagueInfoModel] = [LeagueInfoModel]()
     /// 射手榜List
-    var topScorerDTOList : [SurpriseScorerInfo] = [SurpriseScorerInfo]()
+    var topScorerDTOList : [LeagueShooterList] = [LeagueShooterList]()
     
 }
 

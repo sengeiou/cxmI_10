@@ -220,15 +220,15 @@ extension CXMMSurpriseViewController : UITableViewDataSource {
             guard surpriseModel.topScorerDTOList.count == 5 else { return 0 }
             switch leagueStyle {
             case .英超:
-                return surpriseModel.topScorerDTOList[0].topScorerMemberList.count + 1
+                return surpriseModel.topScorerDTOList[0].leagueShooterInfoList.count + 1
             case .德甲:
-                return surpriseModel.topScorerDTOList[0].topScorerMemberList.count + 1
+                return surpriseModel.topScorerDTOList[0].leagueShooterInfoList.count + 1
             case .意甲:
-                return surpriseModel.topScorerDTOList[0].topScorerMemberList.count + 1
+                return surpriseModel.topScorerDTOList[0].leagueShooterInfoList.count + 1
             case .西甲:
-                return surpriseModel.topScorerDTOList[0].topScorerMemberList.count + 1
+                return surpriseModel.topScorerDTOList[0].leagueShooterInfoList.count + 1
             case .法甲:
-                return surpriseModel.topScorerDTOList[0].topScorerMemberList.count + 1
+                return surpriseModel.topScorerDTOList[0].leagueShooterInfoList.count + 1
             }
         default:
             return  0
@@ -291,24 +291,24 @@ extension CXMMSurpriseViewController : UITableViewDataSource {
             
             switch leagueStyle {
             case .英超:
-                cell.configure(with: surpriseModel.topScorerDTOList[0].topScorerMemberList[indexPath.row - 1])
+                cell.configure(with: surpriseModel.topScorerDTOList[0].leagueShooterInfoList[indexPath.row - 1])
             case .德甲:
-                cell.configure(with: surpriseModel.topScorerDTOList[1].topScorerMemberList[indexPath.row - 1])
+                cell.configure(with: surpriseModel.topScorerDTOList[1].leagueShooterInfoList[indexPath.row - 1])
             case .意甲:
-                cell.configure(with: surpriseModel.topScorerDTOList[2].topScorerMemberList[indexPath.row - 1])
+                cell.configure(with: surpriseModel.topScorerDTOList[2].leagueShooterInfoList[indexPath.row - 1])
             case .西甲:
-                cell.configure(with: surpriseModel.topScorerDTOList[3].topScorerMemberList[indexPath.row - 1])
+                cell.configure(with: surpriseModel.topScorerDTOList[3].leagueShooterInfoList[indexPath.row - 1])
             case .法甲:
-                cell.configure(with: surpriseModel.topScorerDTOList[4].topScorerMemberList[indexPath.row - 1])
+                cell.configure(with: surpriseModel.topScorerDTOList[4].leagueShooterInfoList[indexPath.row - 1])
             }
         }else {
             cell.topLine.isHidden = false
             
-            var model = SurpriseMemberInfo()
-            model.ranking = "排名"
-            model.memberName = "球员"
-            model.topScorerTeam = "球队"
-            model.totalGoal = "总进球数"
+            var model = LeagueShooterInfo()
+            model.sort = "排名"
+            model.playerName = "球员"
+            model.playerTeam = "球队"
+            model.inNum = "总进球数"
             cell.configure(with: model)
         }
         

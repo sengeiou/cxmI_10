@@ -40,10 +40,10 @@ class SurpriseShooterCell: UITableViewCell {
 }
 
 extension SurpriseShooterCell {
-    public func configure(with info : SurpriseMemberInfo) {
-        self.numLabel.text = info.ranking
-        self.memberLabel.text = info.memberName
-        self.teamLabel.text = info.topScorerTeam
-        self.totalLabel.text = info.totalGoal
+    public func configure(with info : LeagueShooterInfo) {
+        self.numLabel.text = info.sort
+        self.memberLabel.text = info.playerName
+        self.teamLabel.text = info.playerTeam
+        self.totalLabel.text = info.inNum
     }
 }
