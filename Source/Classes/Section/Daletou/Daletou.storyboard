@@ -1877,6 +1877,8 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="1500"/>
                     <connections>
+                        <outlet property="buyDaletouButton" destination="ZXL-3R-bT4" id="71N-0m-r4s"/>
+                        <outlet property="buyThisButton" destination="YEI-Xi-geh" id="Tm2-HB-EUh"/>
                         <outlet property="oneMsgOrderStatus" destination="q9U-Ka-0mf" id="4bL-EQ-7b5"/>
                         <outlet property="orderIcon" destination="7VE-t2-Lmx" id="r7T-i2-oLo"/>
                         <outlet property="orderStatus" destination="U4q-JY-PiG" id="gN6-bw-huw"/>

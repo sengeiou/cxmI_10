@@ -361,24 +361,24 @@ class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITabl
                         weakSelf?.removeUserData()
                         weakSelf?.pushLoginVC(from: self)
                         
-//                    case 304035:
-//                        self.canPayment = true
-//                        //self.showHUD(message: data.msg)
-//                        self.showCXMAlert(title: "查询失败", message: "暂未查询到您的支付结果，如果您已经确认支付并成功扣款，可能存在延迟到账的情况，请到账户明细中查看或联系客服查询", action: "知道了", cancel: nil) { (action) in
-//                            self.canPayment = true
-//                        }
-//                        self.dismissProgressHud()
-//                    case 304037:
-//                        self.showHUD(message: data.msg)
-//                    case 304036:
-//                        break
-                    default : break
+                    case 304035:
+                        self.canPayment = true
+                        //self.showHUD(message: data.msg)
+                        self.showCXMAlert(title: "查询失败", message: "暂未查询到您的支付结果，如果您已经确认支付并成功扣款，可能存在延迟到账的情况，请到账户明细中查看或联系客服查询", action: "知道了", cancel: nil) { (action) in
+                            self.canPayment = true
+                        }
+                        self.dismissProgressHud()
+                    case 304037:
+                        self.showHUD(message: msg!)
+                    case 304036:
+                        break
+                    default :
+                        if 300000...310000 ~= code {
+                            print(code)
+                            self.showHUD(message: msg!)
+                        }
                     }
                     
-                    if 300000...310000 ~= code {
-                        print(code)
-                        self.showHUD(message: msg!)
-                    }
                 default: break
                 }
             }, onCompleted: nil , onDisposed: nil )

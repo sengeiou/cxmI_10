@@ -31,6 +31,10 @@ class CXMMDaletouOrderVC: BaseViewController {
     @IBOutlet weak var winningTitle: UILabel!
     @IBOutlet weak var winningAmount: UILabel!
     
+    @IBOutlet weak var buyThisButton : UIButton!
+    
+    @IBOutlet weak var buyDaletouButton : UIButton!
+    
     private var orderModel : DLTOrderDetailModel!
     
     override func viewDidLoad() {
@@ -40,7 +44,8 @@ class CXMMDaletouOrderVC: BaseViewController {
         loadNewData()
         setDefaultData()
         
-
+        buyThisButton.backgroundColor = ColorEA5504
+        buyDaletouButton.backgroundColor = ColorEA5504
     }
 
     override func back(_ sender: UIButton) {
