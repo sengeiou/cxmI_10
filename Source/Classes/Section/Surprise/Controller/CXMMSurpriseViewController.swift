@@ -86,7 +86,10 @@ class CXMMSurpriseViewController: BaseViewController{
                 default : break
                 }
                
-                self.tableView.reloadSections(IndexSet(integer: 2), with: .none)
+                UIView.performWithoutAnimation {
+                    self.tableView.reloadSections(IndexSet(integer: 2), with: .none)
+                }
+                
             }, onError: nil , onCompleted: nil , onDisposed: nil )
     }
     
@@ -198,8 +201,7 @@ extension CXMMSurpriseViewController : UITableViewDelegate {
         
     }
 }
-
-
+// MARK: - TABLEVIEW DataSource
 extension CXMMSurpriseViewController : UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         guard self.surpriseModel != nil else { return 0 }

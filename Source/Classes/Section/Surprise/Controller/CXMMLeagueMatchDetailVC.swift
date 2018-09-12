@@ -42,7 +42,11 @@ class CXMMLeagueMatchDetailVC: BaseViewController {
         }
     }
     
-    private var style : LeagueDetailStyle = .积分榜
+    private var style : LeagueDetailStyle = .积分榜 {
+        didSet{
+            setEmptyView()
+        }
+    }
     private var scoreStyle : LeagueScoreStyle = .总积分
     private var courseStyle : LeagueCourseStyle = .showData
     
@@ -85,6 +89,32 @@ class CXMMLeagueMatchDetailVC: BaseViewController {
                 self.tableView.reloadData()
         }
         
+        setEmptyView()
+        
+    }
+    
+    private func initSubview() {
+        if #available(iOS 11.0, *) {
+            
+        }else {
+            tableView.contentInset = UIEdgeInsets(top: -64, left: 0, bottom: 49, right: 0)
+            tableView.scrollIndicatorInsets = tableView.contentInset
+        }
+        self.tableView.estimatedRowHeight = 100
+        tableView.backgroundColor = ColorFFFFFF
+        tableView.separatorStyle = .none
+        tableView.register(LeagueDetailPagerHeader.self,
+                           forHeaderFooterViewReuseIdentifier: LeagueDetailPagerHeader.identifier)
+        tableView.register(LeagueDetailScorePagerHeader.self,
+                           forHeaderFooterViewReuseIdentifier: LeagueDetailScorePagerHeader.identifier)
+        tableView.register(LeagueDetailScoreHeader.self,
+                           forHeaderFooterViewReuseIdentifier: LeagueDetailScoreHeader.identifier)
+        tableView.register(LeagueDetailCourseHeader.self,
+                           forHeaderFooterViewReuseIdentifier: LeagueDetailCourseHeader.identifier)
+        
+    }
+
+    private func setEmptyView() {
         switch style {
         case .积分榜:
             if leagueDetailModel.leagueScore.matchScoreDTOList.isEmpty {
@@ -111,31 +141,7 @@ class CXMMLeagueMatchDetailVC: BaseViewController {
                 footerLabel.text = ""
             }
         }
-        
-        
     }
-    
-    private func initSubview() {
-        if #available(iOS 11.0, *) {
-            
-        }else {
-            tableView.contentInset = UIEdgeInsets(top: -64, left: 0, bottom: 49, right: 0)
-            tableView.scrollIndicatorInsets = tableView.contentInset
-        }
-        self.tableView.estimatedRowHeight = 100
-        tableView.backgroundColor = ColorFFFFFF
-        tableView.separatorStyle = .none
-        tableView.register(LeagueDetailPagerHeader.self,
-                           forHeaderFooterViewReuseIdentifier: LeagueDetailPagerHeader.identifier)
-        tableView.register(LeagueDetailScorePagerHeader.self,
-                           forHeaderFooterViewReuseIdentifier: LeagueDetailScorePagerHeader.identifier)
-        tableView.register(LeagueDetailScoreHeader.self,
-                           forHeaderFooterViewReuseIdentifier: LeagueDetailScoreHeader.identifier)
-        tableView.register(LeagueDetailCourseHeader.self,
-                           forHeaderFooterViewReuseIdentifier: LeagueDetailCourseHeader.identifier)
-        
-    }
-
 }
 // MARK: - 网络请求
 extension CXMMLeagueMatchDetailVC {
@@ -231,7 +237,10 @@ extension CXMMLeagueMatchDetailVC : LeagueDetailCourseHeaderDelegate {
 extension CXMMLeagueMatchDetailVC : LeagueDetailScorePagerHeaderDelegate {
     func didSelectScorePagerItem(style: LeagueScoreStyle) {
         self.scoreStyle = style
-        self.tableView.reloadSections(IndexSet(integer: 2), with: .none)
+        UIView.performWithoutAnimation {
+            self.tableView.reloadSections(IndexSet(integer: 2), with: .none)
+        }
+        
     }
 }
 // MARK: - 联赛选项卡

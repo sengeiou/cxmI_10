@@ -39,7 +39,7 @@ struct SurpriseItemInfo : HandyJSON {
 
 struct SurpriseScorerInfo : HandyJSON {
     var leagueName: String = ""
-    var topScorerMemberList : [SurpriseMemberInfo]!
+    var topScorerMemberList : [SurpriseMemberInfo] = [SurpriseMemberInfo]()
 }
 struct SurpriseMemberInfo : HandyJSON {
     var memberName: String = ""
