@@ -282,13 +282,11 @@ extension BaseWebViewController {
         }
         
         if let money = dic["toastPrice"] {
-            
+            vc.giveAmount = money
         }
         
         if let disStr = dic["isDisabled"] {
-            
             vc.disableInput = disStr
-          
         }
         
         pushViewController(vc: vc)

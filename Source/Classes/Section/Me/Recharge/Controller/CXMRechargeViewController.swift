@@ -23,11 +23,11 @@ class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITabl
             
         }
     }
-    public var disableInput : String! {
-        didSet{
-            
-        }
-    }
+    
+    public var giveAmount : String?
+    
+    public var disableInput : String = "0"
+    
     private var maxTimes = QueryMaxTimes
     private var timeInterval : Double = 3
     //MARK: - 属性
@@ -40,7 +40,7 @@ class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITabl
             guard textfield != nil else { return }
             guard rechargeAmounts != nil else { return }
             self.textfield.text = rechargeAmounts
-            changeActivityAmount(amount: rechargeAmounts!)
+            //changeActivityAmount(amount: rechargeAmounts!)
         }
     }
     private var rechargeMoney: Double!
@@ -62,8 +62,13 @@ class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITabl
         userInfoRequest()
         
         NotificationCenter.default.addObserver(self, selector: #selector(startPollingTimer), name: NSNotification.Name(rawValue: NotificationWillEnterForeground), object: nil)
+        
+        setData()
     }
     
+    private func setData() {
+        
+    }
     //MARK: - 点击事件
     func didTipShowDetail(vc: CXMActivityRechargeResultVC) {
         vc.backPopVC()
@@ -79,8 +84,9 @@ class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITabl
         self.present(activity)
     }
     func didSelectedCard(cell: RechargeCardCell, amount: String) {
+        guard disableInput != "1" else { return }
         self.textfield.text = amount
-        changeActivityAmount(amount: amount)
+        //changeActivityAmount(amount: amount)
     }
     @objc private func startPollingTimer() {
         
@@ -133,92 +139,92 @@ class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITabl
             tex.changeBorderColor(string)
         }
         
-        guard self.paymentMethodModel != nil else { return true }
-        guard self.paymentMethodModel.isHaveRechargeAct else { return true }
-        guard var text = self.textfield.text else { return true }
-        if range.location <= text.count && string == "" {
-            text.removeLast()
-            self.changeActivityAmount(amount: text + string)
-        }else {
-            self.changeActivityAmount(amount: text + string)
-        }
+        // 2.1.2版本，不支持活动 充值送，
+//        guard self.paymentMethodModel != nil else { return true }
+//        guard self.paymentMethodModel.isHaveRechargeAct else { return true }
+//        guard var text = self.textfield.text else { return true }
+//        if range.location <= text.count && string == "" {
+//            text.removeLast()
+//            self.changeActivityAmount(amount: text + string)
+//        }else {
+//            self.changeActivityAmount(amount: text + string)
+//        }
         
         return true
     }
 
     // 充值送  提示框 逻辑
-    private func changeActivityAmount (amount : String) {
-        guard self.paymentMethodModel != nil else { return }
-        guard self.paymentMethodModel.isHaveRechargeAct else { return }
-        guard let rechargeUser = self.paymentMethodModel.rechargeUserDTO else { return }
-        guard let list = rechargeUser.donationPriceList else { return }
-        
-        if rechargeUser.oldUserBz == "0" { // 新用户
-            var i = 0
-            for price in list {
-                
-//                if i == list.count - 1 {
+//    private func changeActivityAmount (amount : String) {
+//        guard self.paymentMethodModel != nil else { return }
+//        guard self.paymentMethodModel.isHaveRechargeAct else { return }
+//        guard let rechargeUser = self.paymentMethodModel.rechargeUserDTO else { return }
+//        guard let list = rechargeUser.donationPriceList else { return }
+//
+//        if rechargeUser.oldUserBz == "0" { // 新用户
+//            var i = 0
+//            for price in list {
+//
+////                if i == list.count - 1 {
+////                    if let amount = Double(amount) {
+////                        if amount >= price.minRechargeAmount! {
+////                            self.cardCell.activityImageView.isHidden = false
+////                            self.cardCell.giveAmount = "\(price.donationAmount!)"
+////                        }else if amount < price.minRechargeAmount && amount >= list[i - 1].minRechargeAmount  {
+////                            self.cardCell.activityImageView.isHidden = false
+////                            self.cardCell.giveAmount = "\(price.donationAmount!)"
+////                        }
+////                    }
+////                }else
+//                if i != 0 {
 //                    if let amount = Double(amount) {
-//                        if amount >= price.minRechargeAmount! {
+//                        if amount < price.minRechargeAmount! && amount >= list[i - 1].minRechargeAmount {
 //                            self.cardCell.activityImageView.isHidden = false
-//                            self.cardCell.giveAmount = "\(price.donationAmount!)"
-//                        }else if amount < price.minRechargeAmount && amount >= list[i - 1].minRechargeAmount  {
+//                            self.cardCell.giveAmount = "\(list[i - 1].donationAmount!)"
+//                        }else if amount >= price.minRechargeAmount {
 //                            self.cardCell.activityImageView.isHidden = false
 //                            self.cardCell.giveAmount = "\(price.donationAmount!)"
 //                        }
 //                    }
-//                }else
-                if i != 0 {
-                    if let amount = Double(amount) {
-                        if amount < price.minRechargeAmount! && amount >= list[i - 1].minRechargeAmount {
-                            self.cardCell.activityImageView.isHidden = false
-                            self.cardCell.giveAmount = "\(list[i - 1].donationAmount!)"
-                        }else if amount >= price.minRechargeAmount {
-                            self.cardCell.activityImageView.isHidden = false
-                            self.cardCell.giveAmount = "\(price.donationAmount!)"
-                        }
-                    }
-                }else {
-                    if let amount = Double(amount) {
-                        if amount < price.minRechargeAmount {
-                            self.cardCell.activityImageView.isHidden = true
-                            self.cardCell.giveAmount = nil
-                            break
-                        }
-                    }
-                }
-                i += 1
-            }
-        }else if rechargeUser.oldUserBz == "1" {
-            var i = 0
-            for price in list {
-                
-                if i != 0 {
-                    if let amount = Double(amount) {
-                        if amount < price.minRechargeAmount! && amount >= list[i - 1].minRechargeAmount {
-                            self.cardCell.activityImageView.isHidden = false
-                            self.cardCell.giveAmount = "\(list[i - 1].donationAmount!)"
-                        }else if amount >= price.minRechargeAmount {
-                            self.cardCell.activityImageView.isHidden = false
-                            self.cardCell.giveAmount = "\(price.donationAmount!)"
-                        }
-                    }
-                }else {
-                    if let amount = Double(amount) {
-                        if amount < price.minRechargeAmount {
-                            self.cardCell.activityImageView.isHidden = true
-                            self.cardCell.giveAmount = nil
-                            break
-                        }
-                    }
-                }
-                i += 1
-            }
-        }
-    }
+//                }else {
+//                    if let amount = Double(amount) {
+//                        if amount < price.minRechargeAmount {
+//                            self.cardCell.activityImageView.isHidden = true
+//                            self.cardCell.giveAmount = nil
+//                            break
+//                        }
+//                    }
+//                }
+//                i += 1
+//            }
+//        }else if rechargeUser.oldUserBz == "1" {
+//            var i = 0
+//            for price in list {
+//
+//                if i != 0 {
+//                    if let amount = Double(amount) {
+//                        if amount < price.minRechargeAmount! && amount >= list[i - 1].minRechargeAmount {
+//                            self.cardCell.activityImageView.isHidden = false
+//                            self.cardCell.giveAmount = "\(list[i - 1].donationAmount!)"
+//                        }else if amount >= price.minRechargeAmount {
+//                            self.cardCell.activityImageView.isHidden = false
+//                            self.cardCell.giveAmount = "\(price.donationAmount!)"
+//                        }
+//                    }
+//                }else {
+//                    if let amount = Double(amount) {
+//                        if amount < price.minRechargeAmount {
+//                            self.cardCell.activityImageView.isHidden = true
+//                            self.cardCell.giveAmount = nil
+//                            break
+//                        }
+//                    }
+//                }
+//                i += 1
+//            }
+//        }
+//    }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        guard disableInput != nil else { return true }
         if disableInput == "1" {
             //self.textfield.isUserInteractionEnabled = false
             return false
@@ -226,7 +232,6 @@ class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITabl
             //self.textfield.isUserInteractionEnabled = true
             return true
         }
-        
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == self.textfield {
@@ -309,31 +314,33 @@ class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITabl
                     self.canPayment = true
                     self.timer.invalidate()
                     
-                    guard self.paymentMethodModel != nil else { return }
+                    self.dismissProgressHud()
+                    self.showHUD(message: data.msg)
+                    self.popViewController()
                     
-                    /// 是否有充值活动
-                    guard self.paymentMethodModel.isHaveRechargeAct else {
-                        self.dismissProgressHud()
-                        self.showHUD(message: data.msg)
-                        self.popViewController()
-                        return
-                    }
-                    
-                    guard self.paymentMethodModel != nil else { return }
-                    guard self.paymentMethodModel.isHaveRechargeAct else { return }
-                    guard let rechargeUser = self.paymentMethodModel.rechargeUserDTO else { return }
-                    guard let list = rechargeUser.donationPriceList else { return }
-
-                    
-                    guard list.count >= 0 else { return }
-                    guard self.rechargeMoney != nil else { return }
-                    if self.rechargeMoney < list[0].minRechargeAmount {
-                        self.dismissProgressHud()
-                        self.showHUD(message: data.msg)
-                        self.popViewController()
-                    }else {
-                        self.receiveRechargeBonusRequest()
-                    }
+//                    guard self.paymentMethodModel != nil else { return }
+//
+//                    /// 是否有充值活动
+//                    guard self.paymentMethodModel.isHaveRechargeAct else {
+//
+//                        return
+//                    }
+//
+//                    guard self.paymentMethodModel != nil else { return }
+//                    guard self.paymentMethodModel.isHaveRechargeAct else { return }
+//                    guard let rechargeUser = self.paymentMethodModel.rechargeUserDTO else { return }
+//                    guard let list = rechargeUser.donationPriceList else { return }
+//
+//
+//                    guard list.count >= 0 else { return }
+//                    guard self.rechargeMoney != nil else { return }
+//                    if self.rechargeMoney < list[0].minRechargeAmount {
+//                        self.dismissProgressHud()
+//                        self.showHUD(message: data.msg)
+//                        self.popViewController()
+//                    }else {
+//                        self.receiveRechargeBonusRequest()
+//                    }
             
                 case "304035":
                     self.canPayment = true
@@ -361,22 +368,24 @@ class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITabl
                         weakSelf?.removeUserData()
                         weakSelf?.pushLoginVC(from: self)
                         
-                    case 304035:
-                        self.canPayment = true
-                        //self.showHUD(message: data.msg)
-                        self.showCXMAlert(title: "查询失败", message: "暂未查询到您的支付结果，如果您已经确认支付并成功扣款，可能存在延迟到账的情况，请到账户明细中查看或联系客服查询", action: "知道了", cancel: nil) { (action) in
-                            self.canPayment = true
-                        }
-                        self.dismissProgressHud()
-                    case 304037:
-                        self.showHUD(message: msg!)
-                    case 304036:
-                        break
+//                    case 304035:
+//                        self.canPayment = true
+//                        //self.showHUD(message: data.msg)
+//                        self.showCXMAlert(title: "查询失败", message: "暂未查询到您的支付结果，如果您已经确认支付并成功扣款，可能存在延迟到账的情况，请到账户明细中查看或联系客服查询", action: "知道了", cancel: nil) { (action) in
+//                            self.canPayment = true
+//                        }
+//                        self.dismissProgressHud()
+//                    case 304037:
+//                        self.showHUD(message: msg!)
+//                    case 304036:
+//                        break
                     default :
-                        if 300000...310000 ~= code {
-                            print(code)
-                            self.showHUD(message: msg!)
-                        }
+                        break
+                    }
+                    
+                    if 300000...310000 ~= code {
+                        print(code)
+                        self.showHUD(message: msg!)
                     }
                     
                 default: break
@@ -576,14 +585,20 @@ class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITabl
         case 1:
             let cell = tableview.dequeueReusableCell(withIdentifier: RechargeCardCellIdentifier, for: indexPath) as! RechargeCardCell
             
-            if self.paymentMethodModel != nil, self.paymentMethodModel.rechargeUserDTO != nil {
-                cell.isNewUser = self.paymentMethodModel.rechargeUserDTO.oldUserBz
-            }
+//            if self.paymentMethodModel != nil, self.paymentMethodModel.rechargeUserDTO != nil {
+//                cell.isNewUser = self.paymentMethodModel.rechargeUserDTO.oldUserBz
+//            }
             
             cell.delegate = self
             self.cardCell = cell
             cell.textfield.delegate = self
             self.textfield = cell.textfield
+            
+            if giveAmount != nil {
+                cell.activityImageView.isHidden = false
+                cell.giveAmount = giveAmount
+            }
+            
             return cell
         case 2:
             if indexPath.row == 0 {

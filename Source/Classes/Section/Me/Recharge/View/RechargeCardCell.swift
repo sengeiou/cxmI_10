@@ -31,16 +31,16 @@ class RechargeCardCell: UITableViewCell {
     public var giveAmount : String! {
         didSet{
             guard giveAmount != nil else { return }
-            guard isNewUser != nil else { return }
-            
-            if isNewUser == "0" {
-                activityMoney.text = "送\(giveAmount!)元"
-            }else if isNewUser == "1" {
-                activityMoney.text = "最高可送\(giveAmount!)元"
-            }
+            //guard isNewUser != nil else { return }
+            activityMoney.text = "送\(giveAmount!)元"
+//            if isNewUser == "0" {
+//                activityMoney.text = "送\(giveAmount!)元"
+//            }else if isNewUser == "1" {
+//                activityMoney.text = "最高可送\(giveAmount!)元"
+//            }
         }
     }
-    public var isNewUser : String!
+    //public var isNewUser : String!
     
     public var delegate :RechargeCardCellDelegate!
     
@@ -143,10 +143,13 @@ class RechargeCardCell: UITableViewCell {
             make.bottom.equalTo(textfield.snp.top).offset(-4)
             make.height.equalTo(30)
             make.right.equalTo(textfield)
-            make.width.equalTo(160)
+            //make.width.equalTo(80)
         }
         activityMoney.snp.makeConstraints { (make) in
-            make.top.left.right.equalTo(0)
+            //make.top.left.right.equalTo(0)
+            make.top.equalTo(0)
+            make.left.equalTo(10)
+            make.right.equalTo(-10)
             make.bottom.equalTo(-6)
         }
     }
