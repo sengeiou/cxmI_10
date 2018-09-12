@@ -51,6 +51,9 @@ extension CourseTabCellViewModel {
     }
     
     public func setData(data : [LeagueMatchDataList]) {
+        
+        guard data.isEmpty == false else { return }
+        
         for model in data {
             var course = CourseTabDataModel()
             
@@ -69,6 +72,7 @@ extension CourseTabCellViewModel {
     }
     
     private func changeSelected() {
+        guard list.isEmpty == false else { return  }
         for data in list {
             data.select.onNext(false)
         }

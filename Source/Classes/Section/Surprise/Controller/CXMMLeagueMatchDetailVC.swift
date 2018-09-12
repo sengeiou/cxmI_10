@@ -279,6 +279,8 @@ extension CXMMLeagueMatchDetailVC : UITableViewDataSource {
             case .showTab:
                 return 3
             case .showData:
+                guard leagueDetailModel.matchGroupData.matchTurnGroupList.isEmpty == false else { return 3 }
+                
                 return leagueDetailModel.matchGroupData.matchTurnGroupList[groupSelectIndex].groupDTOList.count + 3
             }
         default:
@@ -584,9 +586,6 @@ extension CXMMLeagueMatchDetailVC : UITableViewDataSource {
             }
             
         case .赛程安排:
-            guard let model = leagueDetailModel.matchGroupData else { return 0.01 }
-            
-            let groupType = model.matchTurnGroupList[groupSelectIndex].groupType
             
             switch section {
             case 0:
@@ -594,7 +593,10 @@ extension CXMMLeagueMatchDetailVC : UITableViewDataSource {
             case 1:
                 return 50
             case 2:
+                guard let model = leagueDetailModel.matchGroupData else { return 35 }
+                guard model.matchTurnGroupList.isEmpty == false else { return 35 }
                 
+                let groupType = model.matchTurnGroupList[groupSelectIndex].groupType
                 switch groupType {
                 case "0":
                     return 35
@@ -604,7 +606,10 @@ extension CXMMLeagueMatchDetailVC : UITableViewDataSource {
                     return 0.01
                 }
             default:
+                guard let model = leagueDetailModel.matchGroupData else { return 0.01 }
+                guard model.matchTurnGroupList.isEmpty == false else { return 0.01 }
                 
+                let groupType = model.matchTurnGroupList[groupSelectIndex].groupType
                 switch groupType {
                 case "0":
                     return 0.01

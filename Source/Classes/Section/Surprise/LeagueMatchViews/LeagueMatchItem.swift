@@ -24,7 +24,10 @@ class LeagueMatchItem: UICollectionViewCell {
     
     @IBOutlet weak var title: UILabel!
     
-    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        //title.font = Font12
+    }
 }
 
 extension LeagueMatchItem {
@@ -36,7 +39,7 @@ extension LeagueMatchItem {
                     
                     self.icon.snp.remakeConstraints { (make) in
                         make.centerY.equalTo(self.contentView.snp.centerY)
-                        make.left.equalTo(10)
+                        make.left.equalTo(self.leftLine.snp.right).offset(10)
                         make.size.equalTo(size)
                     }
                 }
