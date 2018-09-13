@@ -69,37 +69,6 @@ class CXMLoginViewController: BaseViewController, UITextFieldDelegate, ValidateP
         self.showProgressHUD()
         //登录后获取最新开关状态
         self.configRequest()
-        /*
-        userProvider.rx.request(.configQuety)
-            .asObservable()
-            .mapObject(type: ConfigInfoModel.self)
-            .subscribe(onNext: { (data) in
-
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationConfig), object: nil, userInfo: ["showStyle": data.turnOn])
-                UserDefaults.standard.set(data.turnOn, forKey: TurnOn)
-                UserDefaults.standard.synchronize()
-                
-                print("开关\(data.turnOn)")
-                
-                //更新消息提示 是否显示小红点
-//                self.queryUserNotice(data.turnOn)
-            }, onError: { (error) in
-                guard let err = error as? HXError else { return }
-                switch err {
-                case .UnexpectedResult: break
-                    
-                //self.showHUD(message: msg!)
-                default: break
-                }
-                
-                let turnOn = UserDefaults.standard.bool(forKey: TurnOn)
-                
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationConfig), object: nil, userInfo: ["showStyle": turnOn])
-                
-                
-            }, onCompleted: nil, onDisposed: nil )
-        */
-        
 //        weak var weakSelf = self
         _ = loginProvider.rx.request(.loginByPass(mobile: "18501906460", password: pwd))
             .asObservable()

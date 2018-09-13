@@ -41,7 +41,11 @@ class CXMMeViewController: BaseViewController, UITableViewDelegate, UITableViewD
                 tableView.tableHeaderView = newsheaderView
                 self.meSectionList = getNewsData()
             }else {
-                tableView.tableHeaderView = headerView
+                if hasLogin() {
+                    tableView.tableHeaderView = headerView
+                }else{
+                    tableView.tableHeaderView = newsheaderView
+                }
                 self.meSectionList = getBuyData()
             }
             self.tableView.reloadData()
@@ -753,7 +757,11 @@ class CXMMeViewController: BaseViewController, UITableViewDelegate, UITableViewD
             if showType == .onlyNews {
                 table.tableHeaderView = newsheaderView
             }else {
-                table.tableHeaderView = headerView
+                if hasLogin() {
+                    table.tableHeaderView = headerView
+                }else{
+                    table.tableHeaderView = newsheaderView
+                }
             }
         }
         
