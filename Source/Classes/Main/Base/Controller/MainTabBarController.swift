@@ -112,8 +112,6 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
                 }else {
                     self.tabBar.hideBadgeOnItemIndex(index: 3)
                 }
-                
-                self.tabBar.showBadgeOnItemIndex(index: 3)
             }, onError: { (error) in
                 
             }, onCompleted: nil , onDisposed: nil )
