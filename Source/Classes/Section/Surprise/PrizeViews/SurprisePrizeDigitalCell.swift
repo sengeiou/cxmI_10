@@ -56,7 +56,7 @@ extension SurprisePrizeDigitalCell {
         viewModel.style = style
         
         switch data.lotteryId {
-        case "8":
+        case "9":
             viewModel.ballStyle = .square
         default:
             viewModel.ballStyle = .circular

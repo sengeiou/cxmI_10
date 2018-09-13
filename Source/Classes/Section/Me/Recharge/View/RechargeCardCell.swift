@@ -32,7 +32,7 @@ class RechargeCardCell: UITableViewCell {
         didSet{
             guard giveAmount != nil else { return }
             //guard isNewUser != nil else { return }
-            activityMoney.text = "送\(giveAmount!)元"
+            activityMoney.text = giveAmount
 //            if isNewUser == "0" {
 //                activityMoney.text = "送\(giveAmount!)元"
 //            }else if isNewUser == "1" {

@@ -36,12 +36,12 @@ class LotteryCell: UITableViewCell {
                 visiTeamIcon.kf.setImage(with: url)
             }
             //self.collectionButton.isUserInteractionEnabled = true
-            self.showData()
+            self.setData()
             
         }
     }
     
-    private func showData() {
+    private func setData() {
         statusLabel.text = ""
         guard let status = resultModel.matchFinish else { return }
         
@@ -64,32 +64,42 @@ class LotteryCell: UITableViewCell {
     }
     
     private func setStartMatch() {
-        resultLeftLabel.text = "\(resultModel.minute)′"
-        resultlb.text = resultModel.whole
+        
+        scorelb.text = resultModel.whole
+        scorelb.textColor = ColorE85504
+        scorelb.font = Font16
+        
+        resultlb.text = "\(resultModel.minute)′"
         resultlb.textColor = ColorE85504
-        resultLeftLabel.textColor = ColorE85504
     }
     
     private func setNotStartMatch(_ title: String) {
-        resultLeftLabel.text = title
-        resultlb.text = timeStampToHHmm(resultModel.matchTimeStart)
+
+        scorelb.text = "VS"
+        scorelb.textColor = Color787878
+        scorelb.font = Font16
+        
+        resultlb.text = title
         resultlb.textColor = Color787878
-        resultLeftLabel.textColor = Color787878
+        
     }
     
     private func setCancelMatch (_ title: String) {
         resultlb.text = ""
-        resultLeftLabel.text = ""
         statusLabel.text = title
         resultlb.textColor = Color787878
-        resultLeftLabel.textColor = Color787878
+        
+        scorelb.text = "VS"
+        scorelb.font = Font16
     }
     
     private func setOverMatch() {
-        resultLeftLabel.text = "比分" + resultModel.whole
         resultlb.text = "半场" + resultModel.firstHalf
         resultlb.textColor = ColorE85504
-        resultLeftLabel.textColor = ColorE85504
+        
+        scorelb.text = resultModel.whole
+        scorelb.textColor = ColorE85504
+        scorelb.font = UIFont.boldSystemFont(ofSize: 16)
     }
     
     
@@ -109,7 +119,7 @@ class LotteryCell: UITableViewCell {
     private var visiTeamlb : UILabel!
     private var scorelb : UILabel!
     private var resultlb : UILabel!
-    private var resultLeftLabel: UILabel!
+    //private var resultLeftLabel: UILabel!
     
     private var statusLabel : UILabel!
     
@@ -180,19 +190,15 @@ class LotteryCell: UITableViewCell {
         }
         visiTeamlb.snp.makeConstraints { (make) in
             make.top.height.equalTo(scorelb)
+            
             make.left.equalTo(scorelb.snp.right)
             make.right.equalTo(visiTeamIcon.snp.left)
         }
-        resultLeftLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(homeTeamlb)
-            make.right.equalTo(scorelb.snp.centerX).offset(-15 * defaultScale)
-            make.height.equalTo(12 * defaultScale)
-            make.top.equalTo(homeTeamlb.snp.bottom).offset(11.5 * defaultScale)
-        }
         
         resultlb.snp.makeConstraints { (make) in
-            make.top.height.equalTo(resultLeftLabel)
-            make.left.equalTo(scorelb.snp.centerX).offset(15 * defaultScale)
+            make.top.equalTo(homeTeamlb.snp.bottom).offset(11.5 * defaultScale)
+            make.centerX.equalTo(scorelb.snp.centerX)
+            make.width.equalTo(150)
             make.right.equalTo(visiTeamlb)
         }
         
@@ -231,13 +237,13 @@ class LotteryCell: UITableViewCell {
         resultlb = getLabel()
         resultlb.font = Font12
         resultlb.textColor = Color787878
-        resultlb.textAlignment = .left
+        resultlb.textAlignment = .center
         //resultlb.text = "半场 1：0  总比分1：2"
         
-        resultLeftLabel = getLabel()
-        resultLeftLabel.font = Font12
-        resultLeftLabel.textColor = ColorEA5504
-        resultLeftLabel.textAlignment = .right
+//        resultLeftLabel = getLabel()
+//        resultLeftLabel.font = Font12
+//        resultLeftLabel.textColor = ColorEA5504
+//        resultLeftLabel.textAlignment = .right
         
         statusLabel = getLabel()
         statusLabel.font = Font12
@@ -267,7 +273,7 @@ class LotteryCell: UITableViewCell {
         self.contentView.addSubview(homeTeamIcon)
         self.contentView.addSubview(visiTeamIcon)
         self.contentView.addSubview(collectionButton)
-        self.contentView.addSubview(resultLeftLabel)
+//        self.contentView.addSubview(resultLeftLabel)
         self.contentView.addSubview(statusLabel)
     }
     
