@@ -27,11 +27,6 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="936"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <color key="separatorColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <view key="tableFooterView" contentMode="scaleToFill" id="8h1-7r-09F">
-                                    <rect key="frame" x="0.0" y="724.5" width="375" height="10"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SurpriseCategoryCell" rowHeight="217" id="4h9-ZK-fQp" customClass="SurpriseCategoryCell" customModule="彩小蜜" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="375" height="217"/>
