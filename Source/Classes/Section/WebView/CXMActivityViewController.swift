@@ -75,10 +75,6 @@ class CXMActivityViewController: BaseWebViewController {
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
 
-        
-        
-        
-        
         guard let url = navigationAction.request.url else { return}
         
         let urlStr = "\(url)"

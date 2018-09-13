@@ -107,6 +107,7 @@ extension CXMMPrizeDigitalHistoryVC : UITableViewDelegate {
 // MARK: - table DataSource
 extension CXMMPrizeDigitalHistoryVC : UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
+        guard self.lottoListModel != nil else { return 0 }
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

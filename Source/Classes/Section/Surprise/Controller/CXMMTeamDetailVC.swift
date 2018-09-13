@@ -35,6 +35,8 @@ class CXMMTeamDetailVC: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "球队资料"
+        setEmpty(title: "暂无数据", tableView)
         initSubview()
         
         tableView.headerRefresh {
@@ -46,13 +48,13 @@ class CXMMTeamDetailVC: BaseViewController {
     private func setData() {
         guard let model = self.teamDetail else { return }
         
-        teamName.text = "  " + model.teamAddr
-        teamFoundingTime.text = "  " + model.teamTime
-        teamRegion.text = "  " + model.contry
-        teamCity.text = "  " + model.city
-        teamStadium.text = "  " + model.court
-        teamStadiumCapacity.text = "  " + model.teamCapacity
-        teamValue.text = "  " + model.teamValue
+        teamName.text = model.teamAddr
+        teamFoundingTime.text = "  成立时间: " + model.teamTime
+        teamRegion.text = "  国家地区: " + model.contry
+        teamCity.text = "  所在城市: " + model.city
+        teamStadium.text = "  球场: " + model.court
+        teamStadiumCapacity.text = "  球场容量: " + model.teamCapacity
+        teamValue.text = "  球队价值: " + model.teamValue
         
         if let url = URL(string: model.teamPic) {
             teamIcon.kf.setImage(with: url, placeholder: nil , options: nil , progressBlock: nil) { (image, error, type , url) in

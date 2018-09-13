@@ -65,7 +65,7 @@ class CXMMLeagueMatchDetailVC: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setEmpty(title: "暂无数据", tableView)
         initSubview()
         self.footerLabel.text = ""
         tableView.headerRefresh {

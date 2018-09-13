@@ -24,7 +24,8 @@ class CXMMActivityCenterVC: BaseViewController, IndicatorInfoProvider {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationItem.title = "活动中心"
+        setEmpty(title: "暂无数据", tableView)
         initSubview()
         
         tableView.headerRefresh {

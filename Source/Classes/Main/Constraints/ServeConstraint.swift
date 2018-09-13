@@ -21,7 +21,7 @@ let webBuyAgreement = "/appld/protocol?showtitle=1"
 /// 注册协议
 let webRegisterAgreement = "/appld/service?showtitle=1"
 /// 发现
-let SurpriseUrl = "/find?showBar=1&showtitle=1&from=app_find"
+let SurpriseUrl = "/faxian/news?showBar=1"
 /// 胆说明
 let danExplainUrl = "/appld/explain?showBar=1&showtitle=1"
 /// 大乐透玩法帮助

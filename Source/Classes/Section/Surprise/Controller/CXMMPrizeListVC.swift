@@ -18,8 +18,15 @@ class CXMMPrizeListVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "开奖"
+        
+        setEmpty(title: "暂无数据", tableView)
         initSubview()
-        loadNewData()
+        
+        tableView.headerRefresh {
+            self.loadNewData()
+        }
+        tableView.beginRefreshing()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,6 +58,7 @@ extension CXMMPrizeListVC {
             .asObservable()
             .mapArray(type: PrizeListModel.self)
             .subscribe(onNext: { (data) in
+                weakSelf?.tableView.endrefresh()
                 weakSelf?.prizeList = data
                 weakSelf?.tableView.reloadData()
             }, onError: { (error) in
@@ -105,6 +113,7 @@ extension CXMMPrizeListVC : UITableViewDelegate {
 // MARK: - table DataSource
 extension CXMMPrizeListVC : UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
+        guard prizeList != nil else { return 0 }
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -138,7 +147,7 @@ extension CXMMPrizeListVC : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
+        guard prizeList != nil else { return 0.01 }
         let model = prizeList[indexPath.row]
         switch model.classifyStatus {
         case "0":

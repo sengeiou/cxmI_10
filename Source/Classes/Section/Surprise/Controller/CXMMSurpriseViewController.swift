@@ -334,7 +334,7 @@ extension CXMMSurpriseViewController : UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
+        guard self.surpriseModel != nil else { return 0.01 }
         switch indexPath.section {
         case 0:
             guard surpriseModel.discoveryHallClassifyList.count != 0 else { return 0 }
