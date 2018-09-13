@@ -60,18 +60,30 @@ extension TeamDetailMemberCell : UICollectionViewDataSource {
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return list.count != 0 ? list.count : 0
+        return list.count != 0 ? list.count : 1
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TeamDetailMemberItem", for: indexPath) as! TeamDetailMemberItem
-        cell.configure(with: list[indexPath.row])
+        
+        if list.isEmpty == false {
+            cell.configure(with: list[indexPath.row])
+        }else {
+            cell.title.text = "暂无数据"
+        }
+        
         cell.topLine.isHidden = true
         return cell
     }
 }
 extension TeamDetailMemberCell : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: TeamDetailMemberItem.width, height: TeamDetailMemberItem.height)
+        switch list.isEmpty {
+        case false:
+            return CGSize(width: TeamDetailMemberItem.width, height: TeamDetailMemberItem.height)
+        case true:
+            return CGSize(width: screenWidth - 32, height: TeamDetailMemberItem.height)
+        }
+        
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)

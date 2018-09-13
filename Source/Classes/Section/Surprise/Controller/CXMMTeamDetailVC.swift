@@ -36,7 +36,6 @@ class CXMMTeamDetailVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "球队资料"
-        setEmpty(title: "暂无数据", tableView)
         initSubview()
         
         tableView.headerRefresh {
@@ -82,6 +81,8 @@ class CXMMTeamDetailVC: BaseViewController {
                            forHeaderFooterViewReuseIdentifier: TeamDetailPagerHeader.identifier)
         tableView.register(TeamDetailRecordHeader.self,
                            forHeaderFooterViewReuseIdentifier: TeamDetailRecordHeader.identifier)
+        tableView.register(EmptyDataCell.self,
+                           forCellReuseIdentifier: EmptyDataCell.identifier)
     }
 }
 
@@ -150,13 +151,14 @@ extension CXMMTeamDetailVC : UITableViewDataSource {
             case 0:
                 return 0
             case 1:
-                guard teamDetail.recentRecord != nil else { return 0 }
+                guard teamDetail.recentRecord != nil else { return 1 }
                 return teamDetail.recentRecord.recentRecordList.count + 1
             default : return 0
             }
             
         case .未来赛事:
-            guard teamDetail.futureMatch != nil else { return 0 }
+            guard teamDetail.futureMatch != nil else { return 1 }
+            guard teamDetail.futureMatch.matchInfoFutureList.isEmpty == false else { return 1 }
             return teamDetail.futureMatch.matchInfoFutureList.count + 1
         }
     }
@@ -190,6 +192,7 @@ extension CXMMTeamDetailVC : UITableViewDataSource {
     }
     
     private func initMemberCell(indexPath: IndexPath) -> UITableViewCell {
+
         let cell = tableView.dequeueReusableCell(withIdentifier: "TeamDetailMemberCell", for: indexPath) as! TeamDetailMemberCell
         
         switch indexPath.row {
@@ -206,7 +209,21 @@ extension CXMMTeamDetailVC : UITableViewDataSource {
         
         return cell
     }
+    
+    private func initEmptyDataCell(indexPath: IndexPath) -> UITableViewCell {
+        let emptyCell = tableView.dequeueReusableCell(withIdentifier: EmptyDataCell.identifier, for: indexPath) as! EmptyDataCell
+        
+        return emptyCell
+    }
+    
     private func initRecoreCell(indexPath: IndexPath) -> UITableViewCell {
+        guard teamDetail.recentRecord != nil else {
+            return initEmptyDataCell(indexPath:indexPath)
+        }
+        guard teamDetail.recentRecord.recentRecordList.isEmpty == false else {
+            return initEmptyDataCell(indexPath:indexPath)
+        }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "TeamDetailRecordCell", for: indexPath) as! TeamDetailRecordCell
         switch indexPath.row {
         case 0:
@@ -220,6 +237,13 @@ extension CXMMTeamDetailVC : UITableViewDataSource {
         return cell
     }
     private func initFutureCell(indexPath: IndexPath) -> UITableViewCell {
+        guard teamDetail.futureMatch != nil else {
+            return initEmptyDataCell(indexPath:indexPath)
+        }
+        guard teamDetail.futureMatch.matchInfoFutureList.isEmpty == false  else {
+            return initEmptyDataCell(indexPath:indexPath)
+        }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "TeamDetailFutureCell", for: indexPath) as! TeamDetailFutureCell
         switch indexPath.row {
         case 0:
@@ -235,21 +259,25 @@ extension CXMMTeamDetailVC : UITableViewDataSource {
         switch style {
         case .球员名单:
             
+            var count : CGFloat = 0
+            
             switch indexPath.row {
             case 0:
-                let count = CGFloat(lineNumber(totalNum: teamDetail.playerlist.goalKeepers.playerList.count, horizonNum: 2))
-                return CGFloat(50 + TeamDetailMemberItem.height * count)
+                count = CGFloat(lineNumber(totalNum: teamDetail.playerlist.goalKeepers.playerList.count, horizonNum: 2))
             case 1:
-                let count = CGFloat(lineNumber(totalNum: teamDetail.playerlist.backPlayers.playerList.count, horizonNum: 2))
-                return CGFloat(50 + TeamDetailMemberItem.height * count)
+                count = CGFloat(lineNumber(totalNum: teamDetail.playerlist.backPlayers.playerList.count, horizonNum: 2))
             case 2:
-                let count = CGFloat(lineNumber(totalNum: teamDetail.playerlist.midPlayers.playerList.count, horizonNum: 2))
-                return CGFloat(50 + TeamDetailMemberItem.height * count)
+                count = CGFloat(lineNumber(totalNum: teamDetail.playerlist.midPlayers.playerList.count, horizonNum: 2))
             case 3:
-                let count = CGFloat(lineNumber(totalNum: teamDetail.playerlist.forwards.playerList.count, horizonNum: 2))
-                return CGFloat(50 + TeamDetailMemberItem.height * count)
-            default : return 0
+                count = CGFloat(lineNumber(totalNum: teamDetail.playerlist.forwards.playerList.count, horizonNum: 2))
+            default : break
             }
+            
+            if count == 0 {
+                return CGFloat(50 + 50)
+            }
+            
+            return CGFloat(50 + TeamDetailMemberItem.height * count)
             
         case .近期战绩:
             return 40
