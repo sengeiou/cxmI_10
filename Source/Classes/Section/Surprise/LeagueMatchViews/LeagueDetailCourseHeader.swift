@@ -41,7 +41,13 @@ class LeagueDetailCourseHeader: UITableViewHeaderFooterView {
         leftButton.tag = 100
         rightButton.tag = 300
         
-        titleButton.setTitle("xxxxx", for: .normal)
+        titleButton.setTitle("", for: .normal)
+
+        
+        let imageView = UIImageView(image: UIImage(named: "Down"))
+        
+        titleButton.titleLabel?.addSubview(imageView)
+        
         
         leftButton.setImage(UIImage(named: "←"), for: .normal)
         rightButton.setImage(UIImage(named: "→"), for: .normal)
@@ -66,6 +72,13 @@ class LeagueDetailCourseHeader: UITableViewHeaderFooterView {
             make.width.equalTo(40)
             make.top.height.equalTo(titleButton)
         }
+        
+        imageView.snp.makeConstraints { (make) in
+            make.centerY.equalTo(titleButton.snp.centerY)
+            make.right.equalTo((imageView.image?.size.width)!)
+            make.width.height.equalTo(10)
+        }
+        
     }
     
     private func getButton() -> UIButton {
