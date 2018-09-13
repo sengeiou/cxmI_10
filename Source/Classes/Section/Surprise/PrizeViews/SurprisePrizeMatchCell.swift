@@ -53,7 +53,7 @@ extension SurprisePrizeMatchCell {
         case "1":  // 足球
             matchLabel.backgroundColor = Color439E0B
         default:
-            break
+            matchLabel.backgroundColor = Color439E0B
         }
     }
 }
