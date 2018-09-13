@@ -440,7 +440,7 @@ extension CXMMLeagueMatchDetailVC : UITableViewDataSource {
     private func initLeagueDetailCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LeagueMatchDetailCell", for: indexPath) as! LeagueMatchDetailCell
         cell.delegate = self
-        cell.configure(with: self.leagueDetailModel)
+        cell.configure(with: self.leagueDetailModel, style: self.titleStyle)
         
         let strHeight = leagueDetailModel.leagueRule.heightForComment(fontSize: 12, width: screenWidth - 160)
         

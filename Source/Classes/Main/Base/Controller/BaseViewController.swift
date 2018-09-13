@@ -119,10 +119,10 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
         self.navigationItem.leftBarButtonItem = nil
     }
     public func hideNavigationBar() {
-        self.navigationController?.navigationBar.isHidden = true
+        self.navigationController?.isNavigationBarHidden = true
     }
     public func showNavigationBar() {
-        self.navigationController?.navigationBar.isHidden = false
+        self.navigationController?.isNavigationBarHidden = false
     }
     public func setEmpty(title: String, _ tableView: UITableView) {
         tableView.emptyDataSetDelegate = self

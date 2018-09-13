@@ -23,11 +23,13 @@ class CXMMPrizeDigitalHistoryVC: BaseViewController {
     
     private var lottoListModel : PrizeLottoListModel!
     
+    private var list : [PrizeLottoInfo] = [PrizeLottoInfo]()
+    
     private var style : LottoPlayType = .大乐透
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = style.rawValue
+        self.navigationItem.title = style.rawValue + "历史开奖"
         setEmpty(title: "暂无数据", tableView)
         initSubView()
         tableView.headerRefresh {
@@ -53,6 +55,7 @@ class CXMMPrizeDigitalHistoryVC: BaseViewController {
 // MARK: - 网络请求
 extension CXMMPrizeDigitalHistoryVC {
     private func loadNewData() {
+        list.removeAll()
         digitalHistoryRequest(pageNum: 1)
     }
     private func loadNextData() {
@@ -70,6 +73,8 @@ extension CXMMPrizeDigitalHistoryVC {
             .subscribe(onNext: { (data) in
                 weakSelf?.tableView.endrefresh()
                 weakSelf?.lottoListModel = data
+                
+                weakSelf?.list.append(contentsOf: data.szcPrizePageInfo.list)
                 
                 weakSelf?.tableView.reloadData()
             }, onError: { (error) in
@@ -95,7 +100,7 @@ extension CXMMPrizeDigitalHistoryVC {
 extension CXMMPrizeDigitalHistoryVC : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let model = self.lottoListModel.szcPrizePageInfo.list[indexPath.row]
+        let model = list[indexPath.row]
         
         let story = UIStoryboard(name: "Surprise", bundle: nil )
         let prizeHistory = story.instantiateViewController(withIdentifier: "DigitalHistoryDetailVC") as! CXMMDigitalHistoryDetailVC
@@ -112,7 +117,7 @@ extension CXMMPrizeDigitalHistoryVC : UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard self.lottoListModel != nil else { return 0 }
-        guard let list = self.lottoListModel.szcPrizePageInfo.list else { return 0 }
+        guard list.isEmpty == false else { return 0 }
         return list.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -124,10 +129,10 @@ extension CXMMPrizeDigitalHistoryVC : UITableViewDataSource {
         switch indexPath.row {
         case 0:
             cell.stateIcon.isHidden = false
-            cell.configure(with: lottoListModel.szcPrizePageInfo.list[indexPath.row], style: .prizeList)
+            cell.configure(with: list[indexPath.row], style: .prizeList)
         default:
             cell.stateIcon.isHidden = true
-            cell.configure(with: lottoListModel.szcPrizePageInfo.list[indexPath.row], style: .prizeDetail)
+            cell.configure(with: list[indexPath.row], style: .prizeDetail)
         }
         
         return cell

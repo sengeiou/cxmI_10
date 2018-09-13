@@ -33,7 +33,6 @@ class SurprisePrizeMatchCell: UITableViewCell {
 
        
     }
-
 }
 
 extension SurprisePrizeMatchCell {

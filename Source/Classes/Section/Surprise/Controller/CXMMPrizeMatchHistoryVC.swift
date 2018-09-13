@@ -11,6 +11,7 @@ import UIKit
 enum PrizeMatchHistoryStyle : String {
     case football = "竞彩足球开奖"
     case basketBall = "竞彩篮球开奖"
+    case beijingBall = "北京单场开奖"
 }
 
 class CXMMPrizeMatchHistoryVC: BaseViewController {
@@ -144,6 +145,8 @@ extension CXMMPrizeMatchHistoryVC : UITableViewDataSource {
             return initFootballCell(indexPath: indexPath)
         case .basketBall:
             return initBasketBallCell(indexPath: indexPath)
+        case .beijingBall:
+            return initFootballCell(indexPath: indexPath)
         }
     }
     
@@ -157,7 +160,11 @@ extension CXMMPrizeMatchHistoryVC : UITableViewDataSource {
         cell.configure(with: matchHisModel.list[indexPath.section])
         return cell
     }
-    
+    private func initBeijingCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PrizeBeijingHistoryCell", for: indexPath) as! PrizeBeijingHistoryCell
+        cell.configure(with: matchHisModel.list[indexPath.section])
+        return cell
+    }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 130
     }

@@ -21,6 +21,9 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
     public var showTitle : String!
     private var progressView : UIProgressView!
     private var reloadData = false
+    
+    private var showNavity = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,11 +37,6 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         TongJi.start(webName)
-    }
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        
-        TongJi.end(webName)
         
         switch reloadData {
         case true:
@@ -46,6 +44,19 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
         default:
             break
         }
+        
+        switch showNavity {
+        case true:
+            showNavigationBar()
+        case false:
+            hideNavigationTitle()
+        }
+        
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        TongJi.end(webName)
     }
     
     override func viewDidLayoutSubviews() {
@@ -110,8 +121,6 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
         
         webView.load(request)
     }
-    
-    
     
     private func initProgressView() {
         progressView = UIProgressView()
@@ -292,6 +301,7 @@ extension BaseWebViewController {
         pushViewController(vc: vc)
     }
     private func showJSTitle(dic : [String: String]) {
+        self.showNavity = true
         showNavigationBar()
         self.webView.snp.remakeConstraints { (make) in
             make.top.equalTo(SafeAreaTopHeight)
@@ -299,6 +309,14 @@ extension BaseWebViewController {
         }
         guard let title = dic["title"] else { return }
         self.navigationItem.title = title
+    }
+    private func hideNavigationTitle() {
+        self.showNavity = false
+        hideNavigationBar()
+        self.webView.snp.remakeConstraints { (make) in
+            make.top.equalTo(SafeTopHeight)
+            make.left.right.bottom.equalTo(0)
+        }
     }
     private func share(dic : [String: String]) {
         guard let urlStr = dic["url"] else { return }
@@ -330,13 +348,7 @@ extension BaseWebViewController {
             
         }
     }
-    private func hideNavigationTitle() {
-        hideNavigationBar()
-        self.webView.snp.remakeConstraints { (make) in
-            make.top.equalTo(SafeTopHeight)
-            make.left.right.bottom.equalTo(0)
-        }
-    }
+    
     private func shouldReloadData() {
         guard webView != nil else { return }
         webView.reload()

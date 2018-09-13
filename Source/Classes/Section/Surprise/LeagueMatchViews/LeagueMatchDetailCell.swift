@@ -43,7 +43,7 @@ class LeagueMatchDetailCell: UITableViewCell {
 }
 
 extension LeagueMatchDetailCell {
-    public func configure(with data : LeagueDetailModel) {
+    public func configure(with data : LeagueDetailModel, style : LeagueDetailTitleStyle) {
         if let url = URL(string: data.leaguePic) {
             icon.kf.setImage(with: url, placeholder: nil , options: nil , progressBlock: nil) { (image, error, type , url) in
                 
@@ -64,6 +64,14 @@ extension LeagueMatchDetailCell {
         let season = data.leagueSeason.leagueSeasonInfoList[0]
         
         leaderSeason.setTitle(season.matchSeason, for: .normal)
+        
+        switch style {
+        case .show:
+            self.detailButton.isSelected = true
+        case .hide:
+            self.detailButton.isSelected = false
+        }
+        
     }
 }
 

@@ -22,6 +22,9 @@ struct DigitalHisViewModel {
 }
 extension DigitalHisViewModel {
     public mutating func setBallData(redList : [String], blueList : [String]) {
+        
+        ballList.removeAll()
+        
         for red in redList {
             var model = DigitalBallData()
             model.title = red

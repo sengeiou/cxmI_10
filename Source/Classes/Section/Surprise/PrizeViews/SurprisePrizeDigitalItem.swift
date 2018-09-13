@@ -36,9 +36,10 @@ extension SurprisePrizeDigitalItem {
         switch style {
         case .square:
             numLabel.layer.cornerRadius = 2
-        numLabel.layer.masksToBounds = true
+            numLabel.layer.masksToBounds = true
         default:
-            break
+            numLabel.layer.cornerRadius = SurprisePrizeDigitalItem.width / 2
+            numLabel.layer.masksToBounds = true
         }
         
         switch data.style {

@@ -25,7 +25,7 @@ class CXMMDigitalHistoryDetailVC: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = style.rawValue + "详情"
+        self.navigationItem.title = style.rawValue + "期次详情"
         setEmpty(title: "暂无数据", tableView)
         initSubview()
         

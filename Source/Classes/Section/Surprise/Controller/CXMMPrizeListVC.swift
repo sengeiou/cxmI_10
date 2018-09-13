@@ -31,7 +31,6 @@ class CXMMPrizeListVC: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
     }
 
     // MARK: - 初始化 子视图
@@ -43,7 +42,6 @@ class CXMMPrizeListVC: BaseViewController {
             tableView.scrollIndicatorInsets = tableView.contentInset
         }
     }
-    
 }
 
 extension CXMMPrizeListVC {
@@ -96,11 +94,14 @@ extension CXMMPrizeListVC : UITableViewDelegate {
         case "1":
             let history = story.instantiateViewController(withIdentifier: "PrizeMatchHistoryVC") as! CXMMPrizeMatchHistoryVC
             history.lotteryId = model.lotteryId
-            switch model.ballColor {
-            case "1":
+            
+            switch model.lotteryId {
+            case "1": // 足球
                 history.style = .football
-            case "0":
+            case "3":
                 history.style = .basketBall
+            case "6":
+                history.style = .beijingBall
             default: break
             }
             
@@ -120,7 +121,6 @@ extension CXMMPrizeListVC : UITableViewDataSource {
         return prizeList != nil ? prizeList.count : 0
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         
         let model = prizeList[indexPath.row]
         

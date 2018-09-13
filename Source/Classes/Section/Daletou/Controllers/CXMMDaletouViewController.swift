@@ -274,7 +274,9 @@ extension CXMMDaletouViewController : YBPopupMenuDelegate{
             //TongJi.log(.关于我们安全保障, label: "大乐透玩法")
             break
         case 2:
-            break
+            let story = UIStoryboard(name: "Surprise", bundle: nil)
+            let prize = story.instantiateViewController(withIdentifier: "PrizeListVC") as! CXMMPrizeListVC
+            pushViewController(vc: prize)
         case 3:
             if self.displayStyle == .defStyle {
                 self.displayStyle = .omission
