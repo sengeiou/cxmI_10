@@ -602,8 +602,8 @@ extension CXMMLeagueMatchDetailVC : UITableViewDataSource {
             case 1:
                 return 50
             case 2:
-                guard let model = leagueDetailModel.matchGroupData else { return 35 }
-                guard model.matchTurnGroupList.isEmpty == false else { return 35 }
+                guard let model = leagueDetailModel.matchGroupData else { return 0.01 }
+                guard model.matchTurnGroupList.isEmpty == false else { return 0.01 }
                 
                 let groupType = model.matchTurnGroupList[groupSelectIndex].groupType
                 switch groupType {

@@ -60,7 +60,8 @@ class LeagueDetailCourseHeader: UITableViewHeaderFooterView {
             make.top.equalTo(0)
             make.width.equalTo(100)
             make.centerX.equalTo(self.contentView.snp.centerX)
-            make.height.equalTo(30)
+            //make.height.equalTo(30)
+            make.bottom.equalTo(-10)
         }
         leftButton.snp.makeConstraints { (make) in
             make.right.equalTo(titleButton.snp.left).offset(-10)
