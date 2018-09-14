@@ -62,6 +62,28 @@ extension RouterPro {
             pushMatchInfo(matchId: id, from: vc)
         case .开奖结果:
             pushPrize(from: vc )
+            
+        case .竞彩足球开奖:
+            guard let id = type.1?.subid else { return }
+            pushPrizeMatchHistory(from: vc, lotteryId: id)
+        case .大乐透开奖:
+            guard let id = type.1?.subid else { return }
+            pushPrizeDigitalHistory(from: vc, lotteryId: id)
+        case .竞彩篮球开奖:
+            guard let id = type.1?.subid else { return }
+            pushPrizeMatchHistory(from: vc, lotteryId: id)
+        case .快3开奖:
+            guard let id = type.1?.subid else { return }
+            pushPrizeDigitalHistory(from: vc, lotteryId: id)
+        case .双色球开奖:
+            guard let id = type.1?.subid else { return }
+            pushPrizeDigitalHistory(from: vc, lotteryId: id)
+        case .北京单场开奖:
+            guard let id = type.1?.subid else { return }
+            pushPrizeMatchHistory(from: vc, lotteryId: id)
+        case .广东11选5开奖:
+            guard let id = type.1?.subid else { return }
+            pushPrizeDigitalHistory(from: vc, lotteryId: id)
         case .专家广场:
             pushExpert(from: vc)
         case .彩票学堂:
@@ -102,26 +124,6 @@ extension RouterPro {
     
     private func pushFootballVC(from vc : UIViewController) {
         let football = CXMFootballMatchVC()
-        
-//        switch playType {
-//        case "1":
-//            football.matchType = .让球胜平负
-//        case "2":
-//            football.matchType = .胜平负
-//        case "3":
-//            football.matchType = .比分
-//        case "4":
-//            football.matchType = .总进球
-//        case "5":
-//            football.matchType = .半全场
-//        case "6":
-//            football.matchType = .混合过关
-//        case "7":
-//            football.matchType = .二选一
-//        default:
-//            break
-//        }
-
         pushViewController(football, from: vc)
     }
     private func pushDaletou(from vc : UIViewController) {
@@ -156,6 +158,21 @@ extension RouterPro {
         let prize = story.instantiateViewController(withIdentifier: "PrizeListVC") as! CXMMPrizeListVC
         pushViewController(prize, from: vc)
     }
+    /// 开奖结果，，- 数字彩
+    private func pushPrizeDigitalHistory(from vc : UIViewController, lotteryId : String) {
+        let story = UIStoryboard(name: "Surprise", bundle: nil )
+        let prizeHistory = story.instantiateViewController(withIdentifier: "PrizeDigitalHistoryVC") as! CXMMPrizeDigitalHistoryVC
+        prizeHistory.lotteryId = lotteryId
+        pushViewController(prizeHistory, from: vc)
+    }
+    /// 开奖结果，- 竞彩
+    private func pushPrizeMatchHistory(from vc : UIViewController, lotteryId : String) {
+        let story = UIStoryboard(name: "Surprise", bundle: nil )
+        let history = story.instantiateViewController(withIdentifier: "PrizeMatchHistoryVC") as! CXMMPrizeMatchHistoryVC
+        history.lotteryId = lotteryId
+        pushViewController(history, from: vc)
+    }
+    
     /// 专家广场
     private func pushExpert(from vc : UIViewController) {
         

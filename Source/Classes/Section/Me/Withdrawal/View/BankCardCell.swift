@@ -45,6 +45,13 @@ class BankCardCell: UITableViewCell {
             }
             bankName.text = bankInfo.bankName
             bankCardNum.text = bankInfo.cardNo
+            
+            switch bankInfo.cardType {
+            case "1":
+                bankType.text = "储蓄卡"
+            default:
+                bankType.text = ""
+            }
         }
     }
     

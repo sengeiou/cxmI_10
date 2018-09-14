@@ -252,7 +252,8 @@ class CXMVCodeLoginViewController: BaseViewController, UITextFieldDelegate, Vali
         }
         
         if currentVC != nil {
-            popToCurrentVC()
+            //popToCurrentVC()
+            popViewController()
             guard self.loginDelegate != nil else { return }
             self.loginDelegate.didLogin(isLogin: false)
         }else {

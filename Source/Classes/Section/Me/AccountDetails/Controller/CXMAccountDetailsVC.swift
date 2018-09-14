@@ -154,11 +154,11 @@ class CXMAccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableVie
                 weakSelf?.tableView.reloadData()
             }, onError: { (error) in
                 self.tableView.endrefresh()
-                if weakSelf?.accountList.count == 0 {
-                    weakSelf?.footer.isHidden = true
-                }else {
-                    weakSelf?.footer.isHidden = false
-                }
+//                if weakSelf?.accountList.count == 0 {
+//                    weakSelf?.footer.isHidden = true
+//                }else {
+//                    weakSelf?.footer.isHidden = false
+//                }
                 weakSelf?.tableView.endrefresh()
                 guard let err = error as? HXError else { return }
                 switch err {

@@ -41,6 +41,17 @@ class CXMMPrizeMatchHistoryVC: BaseViewController {
         
         setRightNavigationItem()
         
+        
+        switch lotteryId {
+        case "1": // 足球
+            style = .football
+        case "3":
+            style = .basketBall
+        case "6":
+            style = .beijingBall
+        default: break
+        }
+        
         tableView.headerRefresh {
             self.loadNewData()
         }

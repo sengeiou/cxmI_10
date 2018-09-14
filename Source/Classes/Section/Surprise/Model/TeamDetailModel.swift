@@ -66,6 +66,7 @@ struct TeamMemberDetail : HandyJSON {
 
 struct TeamMemberInfo : HandyJSON {
     var playerName : String = ""
+    var playerNo : String = ""
 }
 
 struct TeamRecoreDetail : HandyJSON {

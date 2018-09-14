@@ -19,4 +19,5 @@ struct BankCardInfo: HandyJSON {
     var userBankId: String!
     var userId   : String!
     var lastCardNo4 : String!
+    var cardType : String!
 }

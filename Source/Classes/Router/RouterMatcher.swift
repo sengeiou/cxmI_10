@@ -60,6 +60,14 @@ enum PushControllerType : String{
     case 北京单场
     case 广东11选5
     case 更多彩种
+    case 竞彩足球开奖
+    case 大乐透开奖
+    case 竞彩篮球开奖
+    case 快3开奖
+    case 双色球开奖
+    case 北京单场开奖
+    case 广东11选5开奖
+    case 更多彩种开奖
     case 开奖结果
     case 专家广场
     case 彩票学堂
@@ -110,7 +118,6 @@ extension RouterMatcher {
         case "1":
             return (.网页, urlModel)
         case "3":
-            
             switch urlModel.id {
             case "1":
                 return matcherFootballPlay(model : urlModel)
@@ -142,7 +149,31 @@ extension RouterMatcher {
         case "9":
             switch urlModel.id {
             case "1":
-                return (.开奖结果, urlModel)
+                guard urlModel.subid != nil else {
+                    return (.开奖结果, urlModel)
+                }
+                
+                switch urlModel.subid {
+                case "1": // 竟足开奖
+                    return (.竞彩足球开奖, urlModel)
+                case "2":
+                    return (.大乐透开奖, urlModel)
+                case "3":
+                    return (.竞彩篮球开奖, urlModel)
+                case "4":
+                    return (.快3开奖, urlModel)
+                case "5":
+                    return (.双色球开奖, urlModel)
+                case "6":
+                    return (.北京单场开奖, urlModel)
+                case "7":
+                    return (.广东11选5开奖, urlModel)
+                case "8":
+                    return (.更多彩种开奖, urlModel)
+                default :
+                    return (.none, urlModel)
+                }
+                
             case "2":
                 return (.专家广场, urlModel)
             case "3":

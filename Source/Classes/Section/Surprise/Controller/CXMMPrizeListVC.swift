@@ -94,17 +94,6 @@ extension CXMMPrizeListVC : UITableViewDelegate {
         case "1":
             let history = story.instantiateViewController(withIdentifier: "PrizeMatchHistoryVC") as! CXMMPrizeMatchHistoryVC
             history.lotteryId = model.lotteryId
-            
-            switch model.lotteryId {
-            case "1": // 足球
-                history.style = .football
-            case "3":
-                history.style = .basketBall
-            case "6":
-                history.style = .beijingBall
-            default: break
-            }
-            
             pushViewController(vc: history)
         default : break
         }

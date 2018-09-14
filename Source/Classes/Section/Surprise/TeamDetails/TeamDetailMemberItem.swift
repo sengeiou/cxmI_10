@@ -24,6 +24,6 @@ class TeamDetailMemberItem: UICollectionViewCell {
 
 extension TeamDetailMemberItem {
     public func configure(with data : TeamMemberInfo) {
-        title.text = data.playerName
+        title.text = data.playerNo + "号-" + data.playerName
     }
 }

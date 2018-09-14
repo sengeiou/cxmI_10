@@ -36,7 +36,8 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
         let login = CXMVCodeLoginViewController()
         login.currentVC = vc
         login.loginDelegate = vc as! LoginProtocol
-        self.navigationController?.pushViewController(login, animated: true)
+        
+        pushViewController(vc: login)
     }
     public func pushLoginVC(from vc : UIViewController, fromWeb : Bool) {
         let login = CXMVCodeLoginViewController()

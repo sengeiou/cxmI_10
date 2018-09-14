@@ -44,7 +44,7 @@ extension LeagueDetailShooterCell {
             rankLable.text = "排名"
             memberLabel.text = "球员"
             matchLabel.text = "球队"
-            goalLabel.text = "进球（点)"
+            goalLabel.text = "进球"
             
             rankLable.backgroundColor = ColorF4F4F4
             memberLabel.backgroundColor = ColorF4F4F4

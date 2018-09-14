@@ -28,6 +28,7 @@ enum MePushType {
 fileprivate let meCellIdentifier = "meCellIdentifier"
 
 class CXMMeViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, MeHeaderViewDelegate, MeFooterViewDelegate, TTTAttributedLabelDelegate, ClearCache {
+    
     func didTipLogin() {
         goLogin()
     }
@@ -137,10 +138,10 @@ class CXMMeViewController: BaseViewController, UITableViewDelegate, UITableViewD
     @objc private func configNotification(_ notification : Notification) {
         guard let userinf = notification.userInfo else { return }
         guard let turnOn = userinf["showStyle"] as? Bool else { return }
-        if turnOn && self.showType != .allShow{
+        if turnOn {
             showType = .allShow
             //showType = .onlyNews
-        }else if turnOn == false && self.showType != .onlyNews {
+        }else if turnOn == false {
             showType = .onlyNews
         }
     }

@@ -432,31 +432,38 @@ extension CXMPaymentViewController {
             .asObservable()
             .mapBaseObject(type: DataModel.self)
             .subscribe(onNext: { (data) in
-                switch data.code {
-                case "0":
-                    
-                    self.timer.invalidate()
-                    self.showHUD(message: data.msg)
-                    SVProgressHUD.dismiss()
-                    
-                    self.pushOrderDetailVC()
-                    //self.canPayment = true
-                    
-                case "304035":
-                    self.canPayment = true
-                    self.timer.invalidate()
-                    //self.showHUD(message: data.msg)
-                    self.showCXMAlert(title: "查询失败", message: "暂未查询到您的支付结果，如果您已经确认支付并成功扣款，可能存在延迟到账的情况，请到账户明细中查看或联系客服查询", action: "知道了", cancel: nil) { (action) in
-                        self.canPayment = true
-                    }
-                    SVProgressHUD.dismiss()
-                case "304037":
-                    self.showHUD(message: data.msg)
-                case "304036":
-                    break
-                    
-                default: break
-                }
+                
+                self.timer.invalidate()
+                self.showHUD(message: data.msg)
+                SVProgressHUD.dismiss()
+                
+                self.pushOrderDetailVC()
+                
+//                switch data.code {
+//                case "0":
+//                    
+//                    self.timer.invalidate()
+//                    self.showHUD(message: data.msg)
+//                    SVProgressHUD.dismiss()
+//                    
+//                    self.pushOrderDetailVC()
+//                    //self.canPayment = true
+//                    
+//                case "304035":
+//                    self.canPayment = true
+//                    self.timer.invalidate()
+//                    //self.showHUD(message: data.msg)
+//                    self.showCXMAlert(title: "查询失败", message: "暂未查询到您的支付结果，如果您已经确认支付并成功扣款，可能存在延迟到账的情况，请到账户明细中查看或联系客服查询", action: "知道了", cancel: nil) { (action) in
+//                        self.canPayment = true
+//                    }
+//                    SVProgressHUD.dismiss()
+//                case "304037":
+//                    self.showHUD(message: data.msg)
+//                case "304036":
+//                    break
+//                    
+//                default: break
+//                }
                 
             }, onError: { (error) in
                 guard let err = error as? HXError else { return }
@@ -466,12 +473,27 @@ extension CXMPaymentViewController {
                     case 600:
                         weakSelf?.removeUserData()
                         weakSelf?.pushLoginVC(from: self)
-                    default : break
-                    }
-                    
-                    if 300000...310000 ~= code {
-                        print(code)
+                        SVProgressHUD.dismiss()
+                    case 304035:
+                        self.canPayment = true
+                        self.timer.invalidate()
+                        //self.showHUD(message: data.msg)
+                        self.showCXMAlert(title: "查询失败", message: "暂未查询到您的支付结果，如果您已经确认支付并成功扣款，可能存在延迟到账的情况，请到账户明细中查看或联系客服查询", action: "知道了", cancel: nil) { (action) in
+                            self.canPayment = true
+                        }
+                        SVProgressHUD.dismiss()
+                    case 304037:
                         self.showHUD(message: msg!)
+                        SVProgressHUD.dismiss()
+                    case 304036:
+                        break
+                    default :
+                        if 300000...310000 ~= code {
+                            print(code)
+                            SVProgressHUD.dismiss()
+                            self.showHUD(message: msg!)
+                            
+                        }
                     }
                 default: break
                 }
