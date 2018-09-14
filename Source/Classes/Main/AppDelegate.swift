@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AppDelegateProtocol, GeTu
 
     var window: UIWindow?
     
-    private var rootViewController : MainTabBarController!
+    var rootViewController : MainTabBarController!
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
