@@ -554,6 +554,11 @@ class CXMMeViewController: BaseViewController, UITableViewDelegate, UITableViewD
     private func pushMeViewController (_ model: MeListDataModel) {
         switch model.pushType {
         case .投注记录:
+            guard getUserData() != nil else {
+                pushLoginVC(from: self)
+                return
+            }
+            
             let  vc = CXMActivityViewController()
             
             vc.urlStr = getCurentBaseWebUrl() + OrderRecord
@@ -564,15 +569,31 @@ class CXMMeViewController: BaseViewController, UITableViewDelegate, UITableViewD
 //            pushPagerView(pagerType: .purchaseRecord)
 //            TongJi.log(.投注记录, label: "投注记录")
         case .账户明细:
+            guard getUserData() != nil else {
+                pushLoginVC(from: self)
+                return
+            }
             pushPagerView(pagerType: .accountDetails)
             TongJi.log(.账户明细, label: "账户明细")
         case .我的卡券:
+            guard getUserData() != nil else {
+                pushLoginVC(from: self)
+                return
+            }
             pushPagerView(pagerType: .coupon)
             TongJi.log(.我的卡券, label: "我的卡券")
         case .消息中心:
+            guard getUserData() != nil else {
+                pushLoginVC(from: self)
+                return
+            }
             pushPagerView(pagerType: .message)
             TongJi.log(.消息中心, label: "消息中心")
         case .我的收藏:
+            guard getUserData() != nil else {
+                pushLoginVC(from: self)
+                return
+            }
             let collection = CXMMyCollectionVC()
             pushViewController(vc: collection)
             TongJi.log(.我的收藏, label: "我的收藏")
@@ -603,6 +624,10 @@ class CXMMeViewController: BaseViewController, UITableViewDelegate, UITableViewD
                 }
             }
         case .投诉建议:
+            guard getUserData() != nil else {
+                pushLoginVC(from: self)
+                return
+            }
             let complaint = CXMMeComplaintVC()
             pushViewController(vc: complaint)
             TongJi.log(.关于我们投诉建议, label: "关于我们投诉建议")
