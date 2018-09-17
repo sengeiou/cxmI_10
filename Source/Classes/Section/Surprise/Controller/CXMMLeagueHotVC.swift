@@ -88,14 +88,25 @@ extension CXMMLeagueHotVC : UICollectionViewDataSource {
         return leagueList != nil ? leagueList.count : 0
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SurpriseMatchItem", for: indexPath) as! SurpriseMatchItem
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LeagueMatchItem", for: indexPath) as! LeagueMatchItem
         cell.configure(with: leagueList[indexPath.row])
+        cell.topLine.isHidden = true
+        
+        if indexPath.row == 0 || (indexPath.row + 1) % 3 == 1 {
+            cell.leftLine.isHidden = false
+        }else {
+            cell.leftLine.isHidden = true
+        }
+        
+        if indexPath.row < 3 {
+            cell.topLine.isHidden = false
+        }
         return cell
     }
 }
 extension CXMMLeagueHotVC : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: SurpriseMatchItem.width, height: SurpriseMatchItem.height)
+        return CGSize(width: LeagueMatchItem.width, height: LeagueMatchItem.height)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 30, left: 16, bottom: 10, right: 16)
