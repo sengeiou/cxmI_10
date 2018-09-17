@@ -44,21 +44,21 @@ class LeagueMatchDetailCell: UITableViewCell {
 
 extension LeagueMatchDetailCell {
     public func configure(with data : LeagueDetailModel, style : LeagueDetailTitleStyle) {
-        if let url = URL(string: data.leaguePic) {
-            icon.kf.setImage(with: url, placeholder: nil , options: nil , progressBlock: nil) { (image, error, type , url) in
-                
-                if let ima = image {
-                    let size = ima.scaleImage(image: ima, imageLength: 90)
-                    self.icon.snp.remakeConstraints { (make) in
-                        make.top.equalTo(16)
-                        make.left.equalTo(16)
-                        make.size.equalTo(size)
-                    }
-                }
-            }
-        }
+//        if let url = URL(string: data.leaguePic) {
+//            icon.kf.setImage(with: url, placeholder: nil , options: nil , progressBlock: nil) { (image, error, type , url) in
+//
+//                if let ima = image {
+//                    let size = ima.scaleImage(image: ima, imageLength: 90)
+//                    self.icon.snp.remakeConstraints { (make) in
+//                        make.top.equalTo(16)
+//                        make.left.equalTo(16)
+//                        make.size.equalTo(size)
+//                    }
+//                }
+//            }
+//        }
         leaderTitle.text = "联赛规则"
-        leaderName.text = data.leagueAddr
+//        leaderName.text = data.leagueAddr
         leaderDetail.text = data.leagueRule + data.leagueRule
         
         let season = data.leagueSeason.leagueSeasonInfoList[0]

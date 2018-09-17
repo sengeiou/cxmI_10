@@ -47,7 +47,7 @@ class CXMMTeamDetailVC: BaseViewController {
     private func setData() {
         guard let model = self.teamDetail else { return }
         
-        teamName.text = model.teamAddr
+//        teamName.text = model.teamAddr
         teamFoundingTime.text = "  成立时间: " + model.teamTime
         teamRegion.text = "  国家地区: " + model.contry
         teamCity.text = "  所在城市: " + model.city
@@ -55,18 +55,18 @@ class CXMMTeamDetailVC: BaseViewController {
         teamStadiumCapacity.text = "  球场容量: " + model.teamCapacity
         teamValue.text = "  球队价值: " + model.teamValue
         
-        if let url = URL(string: model.teamPic) {
-            teamIcon.kf.setImage(with: url, placeholder: nil , options: nil , progressBlock: nil) { (image, error, type , url) in
-                if let ima = image {
-                    let size = ima.scaleImage(image: ima, imageLength: 80)
-                    self.teamIcon.snp.remakeConstraints({ (make) in
-                        make.top.equalTo(16)
-                        make.centerY.equalTo(0)
-                        make.size.equalTo(size)
-                    })
-                }
-            }
-        }
+//        if let url = URL(string: model.teamPic) {
+//            teamIcon.kf.setImage(with: url, placeholder: nil , options: nil , progressBlock: nil) { (image, error, type , url) in
+//                if let ima = image {
+//                    let size = ima.scaleImage(image: ima, imageLength: 80)
+//                    self.teamIcon.snp.remakeConstraints({ (make) in
+//                        make.top.equalTo(16)
+//                        make.centerY.equalTo(0)
+//                        make.size.equalTo(size)
+//                    })
+//                }
+//            }
+//        }
     }
     
     private func initSubview() {
