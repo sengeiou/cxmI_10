@@ -60,7 +60,11 @@ class CXMMPrizeMatchHistoryVC: BaseViewController {
 
     private func setData() {
         
-        let att = NSAttributedString(string: matchHisModel.dateStr)
+        let att = NSMutableAttributedString(string: matchHisModel.dateStr)
+        
+        let count = NSAttributedString(string: "    \(matchHisModel.prizeMatchStr)")
+        
+        att.append(count)
         
         topTitleLabel.attributedText = att
     }

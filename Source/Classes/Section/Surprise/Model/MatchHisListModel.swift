@@ -14,6 +14,8 @@ struct MatchHisListModel: HandyJSON {
     var list : [MatchHisInfo] = [MatchHisInfo]()
     var lotteryClassify : String = ""
     var lotteryName : String = ""
+    /// 已开奖
+    var prizeMatchStr : String = ""
 }
 
 struct MatchHisInfo : HandyJSON {
