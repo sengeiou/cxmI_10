@@ -1,37 +1,35 @@
 //
-//  FootballSectionHeader.swift
+//  BasketBallSectionHeader.swift
 //  彩小蜜
 //
-//  Created by HX on 2018/3/30.
+//  Created by 笑 on 2018/9/18.
 //  Copyright © 2018年 韩笑. All rights reserved.
 //
 
 import UIKit
 
-enum FootballHeaderType {
-    case hotMatch
-    case match
-}
-
-protocol FootballSectionHeaderDelegate {
+protocol BasketBallSectionHeaderDelegate {
     func spread(sender: UIButton, section : Int) -> Void
 }
 
-class FootballSectionHeader: UITableViewHeaderFooterView, DateProtocol {
-
-    public var matchModel : FootballMatchModel! {
-        didSet{
-            guard matchModel != nil else { return }
-
-            title.text = matchModel.matchDay + "共有" + "\(matchModel.playList.count)" + "场比赛可投"
+class BasketBallSectionHeader : UITableViewHeaderFooterView, DateProtocol {
     
-            if matchModel.isSpreading == true {
-                spreadBut.setImage(UIImage(named: "Unfold"), for: .normal)
-            }else {
-                spreadBut.setImage(UIImage(named: "Collapse"), for: .normal)
-            }
-        }
-    }
+    static let identifier : String = "BasketBallSectionHeader"
+    
+    
+//    public var matchModel : FootballMatchModel! {
+//        didSet{
+//            guard matchModel != nil else { return }
+//
+//            title.text = matchModel.matchDay + "共有" + "\(matchModel.playList.count)" + "场比赛可投"
+//
+//            if matchModel.isSpreading == true {
+//                spreadBut.setImage(UIImage(named: "Unfold"), for: .normal)
+//            }else {
+//                spreadBut.setImage(UIImage(named: "Collapse"), for: .normal)
+//            }
+//        }
+//    }
     
     public var delegate : FootballSectionHeaderDelegate!
     
@@ -81,7 +79,7 @@ class FootballSectionHeader: UITableViewHeaderFooterView, DateProtocol {
         
         bgView = UIView()
         bgView.backgroundColor = ColorFFFFFF
-
+        
         title = UILabel()
         title.font = Font13
         title.textAlignment = .left
@@ -112,3 +110,10 @@ class FootballSectionHeader: UITableViewHeaderFooterView, DateProtocol {
     }
     
 }
+
+extension BasketBallSectionHeader {
+    public func configure( ) {
+        
+    }
+}
+

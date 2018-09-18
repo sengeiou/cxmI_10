@@ -34,18 +34,19 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
     
     //MARK: - 点击事件
     func didSelectItem(playModel: HomePlayModel, index: Int) {
+        pushRouterVC(urlStr: playModel.redirectUrl, from: self)
         
-        guard playModel.redirectUrl != nil , playModel.redirectUrl != "" else { return }
-        guard playModel.status != "" else { return }
-        switch playModel.status {
-        case "0":
-            //let url =  "http://192.168.31.205:8080?cxmxc=scm&type=1"
-            pushRouterVC(urlStr: playModel.redirectUrl, from: self)
-        case "1":
-            showHUD(message: playModel.statusReason)
-        default:
-            break
-        }
+//        guard playModel.redirectUrl != nil , playModel.redirectUrl != "" else { return }
+//        guard playModel.status != "" else { return }
+//        switch playModel.status {
+//        case "0":
+//            //let url =  "http://192.168.31.205:8080?cxmxc=scm&type=1"
+//            pushRouterVC(urlStr: playModel.redirectUrl, from: self)
+//        case "1":
+//            showHUD(message: playModel.statusReason)
+//        default:
+//            break
+//        }
         
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
