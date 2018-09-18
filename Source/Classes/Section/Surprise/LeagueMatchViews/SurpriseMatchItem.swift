@@ -10,11 +10,24 @@ import UIKit
 
 class SurpriseMatchItem: UICollectionViewCell {
     
-    static let width : CGFloat = 80
-    static let height: CGFloat = 30
+    static let width : CGFloat = (screenWidth - 32) / 3 - 0.01
+    static let height: CGFloat = 40
     
-    @IBOutlet weak var icon: UIImageView!
+    @IBOutlet weak var topLine: UIView!
+    @IBOutlet weak var bottomLine: UIView!
+    
+    @IBOutlet weak var leftLine: UIView!
+    
+    @IBOutlet weak var rightLine: UIView!
+    
+    //@IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var title: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.title.textColor = Color505050
+    }
+    
 }
 
 extension SurpriseMatchItem {
@@ -35,9 +48,9 @@ extension SurpriseMatchItem {
     }
     
     public func configure(with info : LeagueTeamInfo) {
-        if let url = URL(string: info.teamPic) {
-            icon.kf.setImage(with: url)
-        }
+//        if let url = URL(string: info.teamPic) {
+//            icon.kf.setImage(with: url)
+//        }
         title.text = info.teamAddr
     }
 }

@@ -112,7 +112,7 @@ extension CXMMLeagueHotVC : UICollectionViewDelegateFlowLayout {
         return UIEdgeInsets(top: 30, left: 16, bottom: 10, right: 16)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 5
+        return 0
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0

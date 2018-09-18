@@ -59,19 +59,31 @@ extension LeagueDetailTeamCell : UICollectionViewDataSource {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SurpriseMatchItem", for: indexPath) as! SurpriseMatchItem
         cell.configure(with: teamList[indexPath.row])
+        
+        cell.topLine.isHidden = true
+        if indexPath.row == 0 || (indexPath.row + 1) % 3 == 1 {
+            cell.leftLine.isHidden = false
+        }else {
+            cell.leftLine.isHidden = true
+        }
+        
+        if indexPath.row < 3 {
+            cell.topLine.isHidden = false
+        }
+        
         return cell
     }
 }
 
 extension LeagueDetailTeamCell : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: SurpriseCollectionCell.width, height: SurpriseCollectionCell.height)
+        return CGSize(width: SurpriseMatchItem.width, height: SurpriseMatchItem.height)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        return UIEdgeInsets(top: 20, left: 16, bottom: 20, right: 16)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 20
+        return 0
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0

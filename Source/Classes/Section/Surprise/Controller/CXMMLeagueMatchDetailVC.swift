@@ -442,9 +442,9 @@ extension CXMMLeagueMatchDetailVC : UITableViewDataSource {
         cell.delegate = self
         cell.configure(with: self.leagueDetailModel, style: self.titleStyle)
         
-        let strHeight = leagueDetailModel.leagueRule.heightForComment(fontSize: 12, width: screenWidth - 160)
+        let strHeight = leagueDetailModel.leagueRule.heightForComment(fontSize: 12, width: screenWidth - 32)
         
-        if strHeight < 50 {
+        if strHeight < 20 || leagueDetailModel.leagueRule == "" {
             cell.detailButton.isHidden = true
         }else {
             cell.detailButton.isHidden = false
@@ -523,6 +523,8 @@ extension CXMMLeagueMatchDetailVC : UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LeagueDetailTeamCell", for: indexPath) as! LeagueDetailTeamCell
         cell.delegate = self
         cell.configure(with: self.leagueDetailModel.leagueTeam)
+        
+        
         return cell
     }
     

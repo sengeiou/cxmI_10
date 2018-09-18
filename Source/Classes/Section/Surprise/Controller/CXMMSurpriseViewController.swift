@@ -170,7 +170,7 @@ extension CXMMSurpriseViewController {
 }
 
 // MARK: - SurpriseCategoryCell  Delegate
-extension CXMMSurpriseViewController : SurpriseCategoryCellDelegate {
+extension CXMMSurpriseViewController : SurpriseCategoryCellDelegate, SurpriseMatchCellDelegate {
     // 热门赛事
     func didSelectItem(info: LeagueInfoModel, indexPath: IndexPath) {
         let story = UIStoryboard(name: "Surprise", bundle: nil)
@@ -276,10 +276,9 @@ extension CXMMSurpriseViewController : UITableViewDataSource {
         return cell
     }
     private func initLeagueCell(indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SurpriseCategoryCell", for: indexPath) as! SurpriseCategoryCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SurpriseMatchCell", for: indexPath) as! SurpriseMatchCell
         cell.delegate = self
-        cell.style = .hotLeague
-        cell.configure(with: self.surpriseModel.hotLeagueList, style : .hotLeague)
+        cell.configure(with: self.surpriseModel.hotLeagueList)
         
         return cell
     }
@@ -351,9 +350,9 @@ extension CXMMSurpriseViewController : UITableViewDataSource {
             let count = lineNumber(totalNum: surpriseModel.hotLeagueList.count, horizonNum: 4)
             
             if count == 0 {
-                return 115
+                return 80
             }else {
-                return CGFloat(count * 115)
+                return CGFloat(count * 40) + 40
             }
         default:
             return 35 * defaultScale
