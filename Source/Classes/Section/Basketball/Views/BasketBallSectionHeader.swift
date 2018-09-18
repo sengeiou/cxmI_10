@@ -31,7 +31,7 @@ class BasketBallSectionHeader : UITableViewHeaderFooterView, DateProtocol {
 //        }
 //    }
     
-    public var delegate : FootballSectionHeaderDelegate!
+    public var delegate : BasketBallSectionHeaderDelegate!
     
     private var title : UILabel!
     private var spreadBut : UIButton!

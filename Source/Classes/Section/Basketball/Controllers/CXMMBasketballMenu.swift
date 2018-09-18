@@ -9,7 +9,7 @@
 import UIKit
 
 protocol CXMMBasketballMenuDelegate {
-    func didTipMenu(view : CXMMBasketballMenu, type : FootballMatchType) -> Void
+    func didTipMenu(view : CXMMBasketballMenu, type : BasketballPlayType) -> Void
     func didCancel() -> Void
 }
 
@@ -17,21 +17,18 @@ class CXMMBasketballMenu: PopMenu {
     
     public var delegate : CXMMBasketballMenuDelegate!
     
-    private var spfBut: UIButton!
+    
     private var hunheBut: UIButton!
-    private var rangSpfBut: UIButton!
-    private var tatalBut: UIButton!
-    private var banBut: UIButton!
-    private var scoreBut: UIButton!
-    private var twoBut: UIButton!
+    private var shengfuBut: UIButton!
+    private var rangfenBut: UIButton!
+    private var daxiaofenBut: UIButton!
+    private var shengfenchaBut: UIButton!
     
     private var hunheIcon : UIImageView!
-    private var spfIcon: UIImageView!
-    private var rangSpfIcon: UIImageView!
-    private var totalIcon: UIImageView!
-    private var banIcon: UIImageView!
-    private var scoreIcon : UIImageView!
-    private var twoIcon: UIImageView!
+    private var shengfuIcon: UIImageView!
+    private var rangfenIcon: UIImageView!
+    private var daxiaofenIcon: UIImageView!
+    private var shengfenchaIcon: UIImageView!
     
     override init() {
         super.init()
@@ -48,102 +45,74 @@ class CXMMBasketballMenu: PopMenu {
         
         hunheBut = getBut("混合投注")
         hunheBut.tag = 1000
-        spfBut = getBut("胜平负")
-        spfBut.tag = 2000
-        rangSpfBut = getBut("让球胜平负")
-        rangSpfBut.tag = 3000
-        tatalBut = getBut("总进球")
-        tatalBut.tag = 4000
-        banBut = getBut("半全场")
-        banBut.tag = 5000
-        scoreBut = getBut("比分")
-        scoreBut.tag = 6000
-        twoBut = getBut("2选1")
-        twoBut.tag = 7000
+        shengfuBut = getBut("胜负")
+        shengfuBut.tag = 2000
+        rangfenBut = getBut("让分胜负")
+        rangfenBut.tag = 3000
+        daxiaofenBut = getBut("大小分")
+        daxiaofenBut.tag = 4000
+        shengfenchaBut = getBut("胜分差")
+        shengfenchaBut.tag = 5000
         
         self.popView.addSubview(hunheBut)
-        self.popView.addSubview(spfBut)
-        self.popView.addSubview(rangSpfBut)
-        self.popView.addSubview(tatalBut)
-        self.popView.addSubview(banBut)
-        self.popView.addSubview(scoreBut)
-        self.popView.addSubview(twoBut)
+        self.popView.addSubview(shengfuBut)
+        self.popView.addSubview(rangfenBut)
+        self.popView.addSubview(daxiaofenBut)
+        self.popView.addSubview(shengfenchaBut)
         
         hunheIcon = getImageView()
-        spfIcon = getImageView()
-        rangSpfIcon = getImageView()
-        totalIcon = getImageView()
-        banIcon = getImageView()
-        scoreIcon = getImageView()
-        twoIcon = getImageView()
+        shengfuIcon = getImageView()
+        rangfenIcon = getImageView()
+        daxiaofenIcon = getImageView()
+        shengfenchaIcon = getImageView()
         
         hunheBut.addSubview(hunheIcon)
-        spfBut.addSubview(spfIcon)
-        rangSpfBut.addSubview(rangSpfIcon)
-        tatalBut.addSubview(totalIcon)
-        banBut.addSubview(banIcon)
-        scoreBut.addSubview(scoreIcon)
-        twoBut.addSubview(twoIcon)
-        
+        shengfuBut.addSubview(shengfuIcon)
+        rangfenBut.addSubview(rangfenIcon)
+        daxiaofenBut.addSubview(daxiaofenIcon)
+        shengfenchaBut.addSubview(shengfenchaIcon)
         
         hunheBut.snp.makeConstraints { (make) in
             make.top.equalTo(SafeAreaTopHeight + 10)
             make.left.equalTo(20)
             make.height.equalTo(30)
         }
-        spfBut.snp.makeConstraints { (make) in
+        shengfuBut.snp.makeConstraints { (make) in
             make.top.height.width.equalTo(hunheBut)
             make.left.equalTo(hunheBut.snp.right).offset(20)
         }
-        rangSpfBut.snp.makeConstraints { (make) in
+        rangfenBut.snp.makeConstraints { (make) in
             make.top.height.width.equalTo(hunheBut)
-            make.left.equalTo(spfBut.snp.right).offset(20)
+            make.left.equalTo(shengfuBut.snp.right).offset(20)
             make.right.equalTo(-20)
         }
-        tatalBut.snp.makeConstraints { (make) in
+        daxiaofenBut.snp.makeConstraints { (make) in
             make.top.equalTo(hunheBut.snp.bottom).offset(10)
             make.left.height.width.equalTo(hunheBut)
             
         }
-        banBut.snp.makeConstraints { (make) in
-            make.top.height.width.equalTo(tatalBut)
-            make.left.equalTo(tatalBut.snp.right).offset(20)
-        }
-        scoreBut.snp.makeConstraints { (make) in
-            make.top.height.width.equalTo(tatalBut)
-            make.left.equalTo(banBut.snp.right).offset(20)
-            make.right.equalTo(-20)
-        }
-        twoBut.snp.makeConstraints { (make) in
-            make.top.equalTo(tatalBut.snp.bottom).offset(10)
-            make.left.width.height.equalTo(hunheBut)
+        shengfenchaBut.snp.makeConstraints { (make) in
+            make.top.height.width.equalTo(daxiaofenBut)
+            make.left.equalTo(daxiaofenBut.snp.right).offset(20)
         }
         
         hunheIcon.snp.makeConstraints { (make) in
             make.bottom.right.equalTo(0)
             make.height.width.equalTo(18)
         }
-        spfIcon.snp.makeConstraints { (make) in
+        shengfuIcon.snp.makeConstraints { (make) in
             make.bottom.right.equalTo(0)
             make.height.width.equalTo(hunheIcon)
         }
-        rangSpfIcon.snp.makeConstraints { (make) in
+        rangfenIcon.snp.makeConstraints { (make) in
             make.bottom.right.equalTo(0)
             make.height.width.equalTo(hunheIcon)
         }
-        totalIcon.snp.makeConstraints { (make) in
+        daxiaofenIcon.snp.makeConstraints { (make) in
             make.bottom.right.equalTo(0)
             make.height.width.equalTo(hunheIcon)
         }
-        banIcon.snp.makeConstraints { (make) in
-            make.bottom.right.equalTo(0)
-            make.height.width.equalTo(hunheIcon)
-        }
-        scoreIcon.snp.makeConstraints { (make) in
-            make.bottom.right.equalTo(0)
-            make.height.width.equalTo(hunheIcon)
-        }
-        twoIcon.snp.makeConstraints { (make) in
+        shengfenchaIcon.snp.makeConstraints { (make) in
             make.bottom.right.equalTo(0)
             make.height.width.equalTo(hunheIcon)
         }
@@ -193,25 +162,19 @@ extension CXMMBasketballMenu {
         switch sender.tag {
         case 1000:
             setSelectBut(but: sender, imageView: hunheIcon)
-            delegate.didTipMenu(view: self, type: .混合过关)
+            delegate.didTipMenu(view: self, type: .混合投注)
         case 2000:
-            setSelectBut(but: sender, imageView: spfIcon)
-            delegate.didTipMenu(view: self, type: .胜平负)
+            setSelectBut(but: sender, imageView: shengfuIcon)
+            delegate.didTipMenu(view: self, type: .胜负)
         case 3000:
-            setSelectBut(but: sender, imageView: rangSpfIcon)
-            delegate.didTipMenu(view: self, type: .让球胜平负)
+            setSelectBut(but: sender, imageView: rangfenIcon)
+            delegate.didTipMenu(view: self, type: .让分胜负)
         case 4000:
-            setSelectBut(but: sender, imageView: totalIcon)
-            delegate.didTipMenu(view: self, type: .总进球)
+            setSelectBut(but: sender, imageView: daxiaofenIcon)
+            delegate.didTipMenu(view: self, type: .大小分)
         case 5000:
-            setSelectBut(but: sender, imageView: banIcon)
-            delegate.didTipMenu(view: self, type: .半全场)
-        case 6000:
-            setSelectBut(but: sender, imageView: scoreIcon)
-            delegate.didTipMenu(view: self, type: .比分)
-        case 7000:
-            setSelectBut(but: sender, imageView: twoIcon)
-            delegate.didTipMenu(view: self, type: .二选一)
+            setSelectBut(but: sender, imageView: shengfenchaIcon)
+            delegate.didTipMenu(view: self, type: .胜分差)
         default: break
             
         }
@@ -228,25 +191,22 @@ extension CXMMBasketballMenu {
         case .混合投注:
             setSelectBut(but: hunheBut, imageView: hunheIcon)
         case .胜负:
-            setSelectBut(but: spfBut, imageView: spfIcon)
+            setSelectBut(but: shengfuBut, imageView: shengfuIcon)
         case .让分胜负:
-            setSelectBut(but: rangSpfBut, imageView: rangSpfIcon)
+            setSelectBut(but: rangfenBut, imageView: rangfenIcon)
         case .大小分:
-            setSelectBut(but: tatalBut, imageView: totalIcon)
-        case .胜负差:
-            setSelectBut(but: banBut, imageView: banIcon)
+            setSelectBut(but: daxiaofenBut, imageView: daxiaofenIcon)
+        case .胜分差:
+            setSelectBut(but: shengfenchaBut, imageView: shengfenchaIcon)
         
             
         }
     }
     private func resetState() {
         setDefault(but: hunheBut, imageView: hunheIcon)
-        setDefault(but: spfBut, imageView: spfIcon)
-        setDefault(but: rangSpfBut, imageView: rangSpfIcon)
-        setDefault(but: tatalBut, imageView: totalIcon)
-        setDefault(but: banBut, imageView: banIcon)
-        setDefault(but: scoreBut, imageView: scoreIcon)
-        setDefault(but: twoBut, imageView: twoIcon)
-        
+        setDefault(but: shengfuBut, imageView: shengfuIcon)
+        setDefault(but: rangfenBut, imageView: rangfenIcon)
+        setDefault(but: daxiaofenBut, imageView: daxiaofenIcon)
+        setDefault(but: shengfenchaBut, imageView: shengfenchaIcon)
     }
 }
