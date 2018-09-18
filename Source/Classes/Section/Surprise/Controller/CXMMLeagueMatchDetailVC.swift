@@ -444,7 +444,7 @@ extension CXMMLeagueMatchDetailVC : UITableViewDataSource {
         
         let strHeight = leagueDetailModel.leagueRule.heightForComment(fontSize: 12, width: screenWidth - 32)
         
-        if strHeight < 20 || leagueDetailModel.leagueRule == "" {
+        if strHeight < 40 || leagueDetailModel.leagueRule == "" {
             cell.detailButton.isHidden = true
         }else {
             cell.detailButton.isHidden = false
@@ -533,7 +533,7 @@ extension CXMMLeagueMatchDetailVC : UITableViewDataSource {
         case 0:
             switch titleStyle {
             case .hide:
-                return 180
+                return 150
             case .show:
                 return UITableViewAutomaticDimension
             }

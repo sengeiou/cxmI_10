@@ -3320,7 +3320,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dUX-SL-qst">
-                                                    <rect key="frame" x="16" y="80" width="343" height="142.5"/>
+                                                    <rect key="frame" x="16" y="70" width="343" height="152.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.43529411759999997" green="0.43529411759999997" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -3371,7 +3371,7 @@
                                                 <constraint firstItem="5b5-2e-K7q" firstAttribute="leading" secondItem="Jvs-4Q-ZJP" secondAttribute="leading" constant="1" id="Wrj-h7-Dm7"/>
                                                 <constraint firstItem="5b5-2e-K7q" firstAttribute="top" secondItem="Ym4-mU-C35" secondAttribute="bottom" constant="1" id="jVy-lh-fny"/>
                                                 <constraint firstAttribute="trailing" secondItem="Ym4-mU-C35" secondAttribute="trailing" constant="16" id="klr-wf-obg"/>
-                                                <constraint firstItem="dUX-SL-qst" firstAttribute="top" secondItem="Jvs-4Q-ZJP" secondAttribute="top" constant="80" id="lfE-2Y-dJN"/>
+                                                <constraint firstItem="dUX-SL-qst" firstAttribute="top" secondItem="Jvs-4Q-ZJP" secondAttribute="top" constant="70" id="lfE-2Y-dJN"/>
                                                 <constraint firstItem="NjF-1C-zgK" firstAttribute="top" secondItem="5b5-2e-K7q" secondAttribute="bottom" constant="10" id="nU4-JS-eLi"/>
                                                 <constraint firstAttribute="trailing" secondItem="dUX-SL-qst" secondAttribute="trailing" constant="16" id="nie-hD-rOX"/>
                                                 <constraint firstAttribute="bottom" secondItem="HFu-YR-gor" secondAttribute="bottom" constant="10" id="sij-2K-0t7"/>
