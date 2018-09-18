@@ -195,6 +195,7 @@
 		116F542B214677040002D002 /* LeagueDetailCourseTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116F542A214677040002D002 /* LeagueDetailCourseTabItem.swift */; };
 		116FD89F214A464D00353482 /* PrizeBeijingHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116FD89E214A464D00353482 /* PrizeBeijingHistoryCell.swift */; };
 		1172B63A2106DEB400E3BDD4 /* EmptyDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1172B6392106DEB400E3BDD4 /* EmptyDataCell.swift */; };
+		1173BEC42150AA32008BC28A /* CXMMBasketBallVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1173BEC32150AA32008BC28A /* CXMMBasketBallVC.swift */; };
 		11752CFA212D4AA600BD1A15 /* CXMMPaymentWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11752CF9212D4AA600BD1A15 /* CXMMPaymentWebView.swift */; };
 		11754E09211D4B130061C5AB /* DLTHotColdCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11754E08211D4B130061C5AB /* DLTHotColdCell.swift */; };
 		11754E0B211D4B680061C5AB /* CXMMDLTHotColdVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11754E0A211D4B680061C5AB /* CXMMDLTHotColdVC.swift */; };
@@ -659,6 +660,7 @@
 		116F542A214677040002D002 /* LeagueDetailCourseTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueDetailCourseTabItem.swift; sourceTree = "<group>"; };
 		116FD89E214A464D00353482 /* PrizeBeijingHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrizeBeijingHistoryCell.swift; sourceTree = "<group>"; };
 		1172B6392106DEB400E3BDD4 /* EmptyDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyDataCell.swift; sourceTree = "<group>"; };
+		1173BEC32150AA32008BC28A /* CXMMBasketBallVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMMBasketBallVC.swift; sourceTree = "<group>"; };
 		11752CF9212D4AA600BD1A15 /* CXMMPaymentWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMMPaymentWebView.swift; sourceTree = "<group>"; };
 		11754E08211D4B130061C5AB /* DLTHotColdCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DLTHotColdCell.swift; sourceTree = "<group>"; };
 		11754E0A211D4B680061C5AB /* CXMMDLTHotColdVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMMDLTHotColdVC.swift; sourceTree = "<group>"; };
@@ -1120,6 +1122,46 @@
 				113D8EA8212433C00020EAC4 /* DLTRedBlueTrendStageItem.swift */,
 			);
 			path = TrendViews;
+			sourceTree = "<group>";
+		};
+		113F2A402150A87A008B39AA /* Basketball */ = {
+			isa = PBXGroup;
+			children = (
+				113F2A442150A9CE008B39AA /* ViewModels */,
+				113F2A432150A9C8008B39AA /* Models */,
+				113F2A412150A9A5008B39AA /* Views */,
+				113F2A422150A9BF008B39AA /* Controllers */,
+			);
+			path = Basketball;
+			sourceTree = "<group>";
+		};
+		113F2A412150A9A5008B39AA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		113F2A422150A9BF008B39AA /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1173BEC32150AA32008BC28A /* CXMMBasketBallVC.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		113F2A432150A9C8008B39AA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		113F2A442150A9CE008B39AA /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		1142220821410A7C00CCBB3A /* TeamDetails */ = {
@@ -2036,6 +2078,7 @@
 			children = (
 				E57375DA2046AE7B00148622 /* Home */,
 				117C729F2100755700D9EB83 /* Daletou */,
+				113F2A402150A87A008B39AA /* Basketball */,
 				E57375D92046AE7700148622 /* Lottery */,
 				11BD5CEA20B3BA3A00A3AE6A /* Surprise */,
 				E57375D82046AE7000148622 /* Me */,
@@ -3354,6 +3397,7 @@
 				115076A02138DD6E0029A63E /* CXMMLeagueMatchFilterVC.swift in Sources */,
 				E5883F502068DC2100CB3A46 /* OrderSchemeInfoModel.swift in Sources */,
 				E5A2644E205B742B00EE6491 /* CXMHomeViewController.swift in Sources */,
+				1173BEC42150AA32008BC28A /* CXMMBasketBallVC.swift in Sources */,
 				E58B57C7205676EC0025E2F1 /* LotteryNetAPIManager.swift in Sources */,
 				E56CE80A2069F4080090A1B5 /* AccountListModel.swift in Sources */,
 				11AB2C1B21300BC40044FB1C /* SurpriseModel.swift in Sources */,
