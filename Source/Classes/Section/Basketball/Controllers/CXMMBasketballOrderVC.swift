@@ -1,5 +1,5 @@
 //
-//  CXMMBasketballConfirmVC.swift
+//  CXMMBasketballOrderVC.swift
 //  彩小蜜
 //
 //  Created by 笑 on 2018/9/18.
@@ -8,40 +8,41 @@
 
 import UIKit
 
-class CXMMBasketballConfirmVC: BaseViewController {
+class CXMMBasketballOrderVC: BaseViewController {
 
     @IBOutlet weak var tableView : UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "投注确认"
+
         initSubview()
     }
 
     private func initSubview() {
-        tableView.separatorStyle = .none
+        
     }
 
 }
+
 // MARK: - tableview Delegate
-extension CXMMBasketballConfirmVC : UITableViewDelegate {
+extension CXMMBasketballOrderVC : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
 }
 // MARK: - tableview DataSource
-extension CXMMBasketballConfirmVC : UITableViewDataSource {
+extension CXMMBasketballOrderVC : UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 10
+        return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 10
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return UITableViewCell()
     }
 }
-extension CXMMBasketballConfirmVC {
+extension CXMMBasketballOrderVC {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }

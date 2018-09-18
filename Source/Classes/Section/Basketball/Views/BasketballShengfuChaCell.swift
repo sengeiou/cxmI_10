@@ -10,6 +10,9 @@ import UIKit
 
 class BasketballShengfuChaCell: UITableViewCell {
 
+    // 单关标识
+    @IBOutlet weak var singleImg : UIImageView!
+    
     @IBOutlet weak var oddsLabel : UILabel!
     @IBOutlet weak var oddsButton : UIButton!
     

@@ -167,6 +167,7 @@
 		116A27F32150F0090077444E /* BasketballDaxiaofenCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116A27F22150F0090077444E /* BasketballDaxiaofenCell.swift */; };
 		116A27F52150F0210077444E /* BasketballShengfuChaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116A27F42150F0210077444E /* BasketballShengfuChaCell.swift */; };
 		116A27F7215106EC0077444E /* CXMMBasketballConfirmVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116A27F6215106EC0077444E /* CXMMBasketballConfirmVC.swift */; };
+		116A27F9215108A10077444E /* CXMMBasketballOrderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116A27F8215108A10077444E /* CXMMBasketballOrderVC.swift */; };
 		116E0F292099739E009FE44E /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116E0F282099739E009FE44E /* Router.swift */; };
 		116E0F2B209973BD009FE44E /* RouterMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116E0F2A209973BD009FE44E /* RouterMatcher.swift */; };
 		116E0F322099A601009FE44E /* PaymentList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116E0F312099A601009FE44E /* PaymentList.swift */; };
@@ -643,6 +644,7 @@
 		116A27F22150F0090077444E /* BasketballDaxiaofenCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketballDaxiaofenCell.swift; sourceTree = "<group>"; };
 		116A27F42150F0210077444E /* BasketballShengfuChaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketballShengfuChaCell.swift; sourceTree = "<group>"; };
 		116A27F6215106EC0077444E /* CXMMBasketballConfirmVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMMBasketballConfirmVC.swift; sourceTree = "<group>"; };
+		116A27F8215108A10077444E /* CXMMBasketballOrderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMMBasketballOrderVC.swift; sourceTree = "<group>"; };
 		116E0F282099739E009FE44E /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		116E0F2A209973BD009FE44E /* RouterMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterMatcher.swift; sourceTree = "<group>"; };
 		116E0F312099A601009FE44E /* PaymentList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentList.swift; sourceTree = "<group>"; };
@@ -1179,6 +1181,7 @@
 			children = (
 				1173BEC92150AD64008BC28A /* CXMMBasketballVC.swift */,
 				116A27F6215106EC0077444E /* CXMMBasketballConfirmVC.swift */,
+				116A27F8215108A10077444E /* CXMMBasketballOrderVC.swift */,
 				1173BED12150D836008BC28A /* CXMMBasketballMenu.swift */,
 			);
 			path = Controllers;
@@ -3277,6 +3280,7 @@
 				112E9D4A21227575008466B4 /* CXMMDLTTrendSettingVC.swift in Sources */,
 				116EB32020C50FC500EE80E5 /* WorldCupOrderRuleCell.swift in Sources */,
 				11B1B96A20F3005800387430 /* FootballLineupInfoModel.swift in Sources */,
+				116A27F9215108A10077444E /* CXMMBasketballOrderVC.swift in Sources */,
 				11C4F45E20E095D800CCDFC6 /* YHCropView.m in Sources */,
 				114491162085FC23009F1D09 /* FootballOddsCell.swift in Sources */,
 				11FEB943208D781400926951 /* DeviceInfoModel.swift in Sources */,

@@ -15,6 +15,8 @@ class BasketballDaxiaofenCell: UITableViewCell {
     @IBOutlet weak var rightLine: UIView!
     @IBOutlet weak var bottomLine: UIView!
     
+    // 单关标识
+    @IBOutlet weak var singleImg : UIImageView!
     // 客队
     @IBOutlet weak var visiTeam : UILabel!
     // vs
