@@ -48,3 +48,9 @@ class BasketballDaxiaofenCell: UITableViewCell {
     }
 
 }
+
+extension BasketballDaxiaofenCell {
+    public func configure(with data : BasketballListModel) {
+        
+    }
+}

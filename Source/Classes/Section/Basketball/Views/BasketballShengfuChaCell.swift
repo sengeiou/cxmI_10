@@ -28,3 +28,9 @@ class BasketballShengfuChaCell: UITableViewCell {
     }
 
 }
+
+extension BasketballShengfuChaCell {
+    public func configure(with data : BasketballListModel) {
+        
+    }
+}

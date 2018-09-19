@@ -48,3 +48,9 @@ class BasketballRangCell: UITableViewCell {
     }
 
 }
+
+extension BasketballRangCell {
+    public func configure(with data : BasketballListModel) {
+        
+    }
+}

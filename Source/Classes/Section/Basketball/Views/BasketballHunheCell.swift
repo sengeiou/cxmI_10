@@ -60,13 +60,35 @@ class BasketballHunheCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        initSubview()
     }
 
+    private func initSubview() {
+        sfTitle.text = "胜\n负"
+        rfTitle.text = "让\n分"
+        dsfTitle.text = "大\n小\n分"
+        moreButton.titleLabel?.numberOfLines = 0
+        moreButton.setTitle("更多\n玩法", for: .normal)
+        
+        sfVisiTeam.titleLabel?.numberOfLines = 2
+        sfHomeTeam.titleLabel?.numberOfLines = 2
+        
+        rfVisiTeam.titleLabel?.numberOfLines = 2
+        rfHomeTeam.titleLabel?.numberOfLines = 2
+        
+        dsfVisiTeam.titleLabel?.numberOfLines = 2
+        dsfHomeTeam.titleLabel?.numberOfLines = 2
+    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
+        
     }
 
+}
+
+extension BasketballHunheCell {
+    public func configure(with data : BasketballListModel) {
+        
+    }
 }

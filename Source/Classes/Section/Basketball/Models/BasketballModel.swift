@@ -8,9 +8,99 @@
 
 import Foundation
 import HandyJSON
+
+class BasketballDataModel : HandyJSON {
+    required init() { }
+    
+    var list : [BasketballMatchModel] = [BasketballMatchModel]()
+    var allMatchCount: String!
+    var lotteryClassifyId: String!
+    var lotteryPlayClassifyId: String!
+}
+
 class BasketballMatchModel: HandyJSON {
     required init() { }
     
     var isSpreading : Bool! = true
+    var playList: [BasketballListModel] = [BasketballListModel]()
+    var matchDay: String = ""
+    var title: String = ""
+    var allMatchCount: Int = 0
     
+}
+
+class BasketballMatchList : HandyJSON {
+    required init() { }
+    
+    var allMatchCount: String = ""
+    var playList: [BasketballMatchModel]!
+    var hotPlayList: [BasketballListModel]!
+    var leagueInfos: [FilterModel]!
+    var lotteryClassifyId: String = ""
+    var lotteryPlayClassifyId: String = ""
+
+}
+
+class BasketballListModel: HandyJSON {
+    required init() { }
+    /// 是否停售
+    var isShutDown : Bool! = false
+    var changci: String = ""
+    var changciId: String = ""
+    var isDan : Bool! = false
+    var homeTeamAbbr: String = ""
+    var homeTeamId: String = ""
+    /// 排名
+    var homeTeamRank: String = ""
+    var isHot : Bool!
+    var leagueAddr: String = ""
+    var leagueId: String = ""
+    var leagueName: String = ""
+    var matchDay: String = ""
+    var matchTime: Int!
+    var betEndTime : Int!
+    var matchId: String = ""
+    var playCode: String = ""
+    var playContent: String = ""
+    var playType: String = ""
+    var visitingTeamAbbr: String = ""
+    var visitingTeamId: String = ""
+    var visitingTeamName: String = ""
+    /// 排名
+    var visitingTeamRank: String = ""
+    var matchPlays : [BasketbalPlayInfo] = [BasketbalPlayInfo]()
+}
+
+class BasketbalPlayInfo : HandyJSON {
+    required init() { }
+    var fixedOdds: Int!
+    var flatCell: BasketballPlayCellInfo!
+    var homeCell: BasketballPlayCellInfo!
+    var visitingCell: BasketballPlayCellInfo!
+    var matchCells : [BasketballPlayCellInfo]!
+    var playContent: String = ""
+    var playType: String = ""
+    /// 单关，1-单关，0不可以
+    var single: Bool!
+    var isShow: Bool!
+}
+class BasketballPlayCellInfo : HandyJSON {
+    func copy(with zone: NSZone? = nil) -> Any {
+        let model = BasketballPlayCellInfo()
+        model.isSelected = isSelected
+        model.cellCode = cellCode
+        model.cellName = cellName
+        model.cellOdds = cellOdds
+        model.cellSons = cellSons
+        model.isRang = isRang
+        return model
+    }
+    
+    required init() { }
+    var isSelected = false
+    var cellCode: String = ""
+    var cellName: String = ""
+    var cellOdds: String = ""
+    var cellSons: [BasketballPlayCellInfo]!
+    var isRang = false
 }

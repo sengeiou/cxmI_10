@@ -14,6 +14,22 @@ enum BasketballPlayType : String {
     case 胜分差
     case 让分胜负
     case 混合投注
+    
+    static func getPlayType (type : BasketballPlayType) -> String {
+        switch type {
+        case .胜负:
+            return "1"
+        case .大小分:
+            return "4"
+        case .胜分差:
+            return "3"
+        case .让分胜负:
+            return "2"
+        case .混合投注:
+            return "5"
+        }
+    }
+    
 }
 
 class CXMMBasketballVC: BaseViewController {
@@ -23,21 +39,38 @@ class CXMMBasketballVC: BaseViewController {
     @IBOutlet weak var selectNum : UILabel!
     @IBOutlet weak var confirmBut: UIButton!
     
-    private var type : BasketballPlayType = .胜分差
+    private var type : BasketballPlayType = .混合投注
     
     private var menu : CXMMBasketballMenu = CXMMBasketballMenu()
     public var titleView : UIButton!
     public var titleIcon : UIImageView!
     
-    private var matchList : [BasketballMatchModel] = [BasketballMatchModel]()
+//    private var matchList : [BasketballMatchModel] = [BasketballMatchModel]()
+    
+    private var matchModel : BasketballDataModel!
+    
+    private var viewModel : BasketballViewModel = BasketballViewModel()
     
     // MARK : - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
         
         initSubview()
+        setData()
+        
+        tableView.headerRefresh {
+            self.loadNewData()
+        }
+        tableView.beginRefreshing()
     }
-
+    // MARK: - 设置显示数据
+    private func setData() {
+        _ = viewModel.selectNumText.asObserver()
+            .subscribe { [weak self](event) in
+                guard let text = event.element else { return }
+                self?.selectNum.text = text
+        }
+    }
     private func initSubview() {
         menu.delegate = self
         setNavigationTitleView()
@@ -54,10 +87,46 @@ class CXMMBasketballVC: BaseViewController {
 // MARK: - 网络请求
 extension CXMMBasketballVC {
     private func loadNewData() {
-        
+        basketballRequest()
     }
     private func basketballRequest() {
-        
+        weak var weakSelf = self
+        _ = basketBallProvider.rx.request(.basketballMatchList(leagueId: "",
+                                                               playType: BasketballPlayType.getPlayType(type: self.type)))
+            .asObservable()
+            .mapObject(type: BasketballMatchList.self)
+            .subscribe(onNext: { (data) in
+                weakSelf?.tableView.endrefresh()
+                weakSelf?.matchModel = BasketballDataModel()
+                weakSelf?.matchModel.allMatchCount = data.allMatchCount
+                weakSelf?.matchModel.list = data.playList
+                weakSelf?.matchModel.lotteryClassifyId = data.lotteryClassifyId
+                weakSelf?.matchModel.lotteryPlayClassifyId = data.lotteryPlayClassifyId
+                
+                if data.hotPlayList.isEmpty == false {
+                    let model = BasketballMatchModel()
+                    model.title = "热门比赛"
+                    model.playList = data.hotPlayList
+                    weakSelf?.matchModel.list.insert(model, at: 0)
+                }
+                
+                weakSelf?.tableView.reloadData()
+            }, onError: { (error) in
+                weakSelf?.tableView.endrefresh()
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        weakSelf?.pushLoginVC(from: self)
+                    default : break
+                    }
+                    if 300000...310000 ~= code {
+                        weakSelf?.showHUD(message: msg!)
+                    }
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil )
     }
 }
 
@@ -95,10 +164,11 @@ extension CXMMBasketballVC : UITableViewDelegate {
 // MARK: - tableview DataSource
 extension CXMMBasketballVC : UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return matchModel != nil ? matchModel.list.count : 0
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        guard matchModel.list[section].playList.isEmpty == false else { return 0 }
+        return matchModel.list[section].playList.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -123,27 +193,18 @@ extension CXMMBasketballVC : UITableViewDataSource {
     // MARK: - Cell
     private func initHunheCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BasketballHunheCell", for: indexPath) as! BasketballHunheCell
-        cell.sfHomeTeam.titleLabel?.numberOfLines = 2
+
+        let model = matchModel.list[indexPath.section].playList[indexPath.row]
+        cell.configure(with: model)
         
-        let att = NSMutableAttributedString(string: "客胜")
-        let sco = NSAttributedString(string: "\n1.22", attributes: [NSAttributedStringKey.foregroundColor: ColorF4F4F4])
-        
-        att.append(sco)
-        
-        cell.sfHomeTeam.setAttributedTitle(att, for: .normal)
         return cell
     }
     // 胜负
     private func initShengfuCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BasketballShengfuCell", for: indexPath) as! BasketballShengfuCell
         
-        cell.visiOdds.titleLabel?.numberOfLines = 2
-        let att = NSMutableAttributedString(string: "客胜")
-        let sco = NSAttributedString(string: "\n1.22", attributes: [NSAttributedStringKey.foregroundColor: ColorF4F4F4])
-        
-        att.append(sco)
-        
-        cell.visiOdds.setAttributedTitle(att, for: .normal)
+        let model = matchModel.list[indexPath.section].playList[indexPath.row]
+        cell.configure(with: model)
         
         return cell
     }
@@ -151,19 +212,22 @@ extension CXMMBasketballVC : UITableViewDataSource {
     private func initRangFenCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BasketballRangCell", for: indexPath) as! BasketballRangCell
     
-        
+        let model = matchModel.list[indexPath.section].playList[indexPath.row]
+        cell.configure(with: model)
         return cell
     }
     // 大小分
     private func initDaXiaoFenCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BasketballDaxiaofenCell", for: indexPath) as! BasketballDaxiaofenCell
-        
+        let model = matchModel.list[indexPath.section].playList[indexPath.row]
+        cell.configure(with: model)
         return cell
     }
     // 胜分差
     private func initShengFenChaCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BasketballShengfuChaCell", for: indexPath) as! BasketballShengfuChaCell
-        
+        let model = matchModel.list[indexPath.section].playList[indexPath.row]
+        cell.configure(with: model)
         return cell
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -248,10 +312,13 @@ extension CXMMBasketballVC : CXMMBasketballMenuDelegate{
         titleIcon.image = UIImage(named: "Down")
         
         // TODO: "处理，选择menu 项的逻辑"
+        matchModel = nil
         
         self.tableView.reloadData()
         
         self.type = type
+        
+        loadNewData()
     }
     
     func didCancel() {
