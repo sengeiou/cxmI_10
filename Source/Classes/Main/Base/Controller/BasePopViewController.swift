@@ -61,10 +61,18 @@ class BasePopViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, 
         self.view.backgroundColor = UIColor(white: 0.5, alpha: 0.5)
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.modalTransitionStyle = .crossDissolve
+        self.modalPresentationStyle = .custom
+        self.view.backgroundColor = UIColor(white: 0.5, alpha: 0.5)
+    }
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         initPushBgView()
-        
         
         tap = UITapGestureRecognizer(target: self, action: #selector(backPopVC))
         tap.delegate = self
@@ -144,8 +152,8 @@ class BasePopViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, 
 //        self.dismiss(animated: true, completion: nil)
 //    }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+//    required init?(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
 
 }

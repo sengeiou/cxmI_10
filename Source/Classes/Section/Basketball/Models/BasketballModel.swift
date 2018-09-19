@@ -13,7 +13,7 @@ class BasketballDataModel : HandyJSON {
     required init() { }
     
     var list : [BasketballMatchModel] = [BasketballMatchModel]()
-    var allMatchCount: String!
+    var allMatchCount: String = ""
     var lotteryClassifyId: String!
     var lotteryPlayClassifyId: String!
 }
@@ -21,11 +21,11 @@ class BasketballDataModel : HandyJSON {
 class BasketballMatchModel: HandyJSON {
     required init() { }
     
-    var isSpreading : Bool! = true
+    var isSpreading : Bool = true
     var playList: [BasketballListModel] = [BasketballListModel]()
     var matchDay: String = ""
     var title: String = ""
-    var allMatchCount: Int = 0
+    var allMatchCount: String = ""
     
 }
 
@@ -74,15 +74,15 @@ class BasketballListModel: HandyJSON {
 class BasketbalPlayInfo : HandyJSON {
     required init() { }
     var fixedOdds: Int!
-    var flatCell: BasketballPlayCellInfo!
+    
     var homeCell: BasketballPlayCellInfo!
     var visitingCell: BasketballPlayCellInfo!
     var matchCells : [BasketballPlayCellInfo]!
     var playContent: String = ""
     var playType: String = ""
     /// 单关，1-单关，0不可以
-    var single: Bool!
-    var isShow: Bool!
+    var single: Bool = false
+    var isShow: Bool = true
 }
 class BasketballPlayCellInfo : HandyJSON {
     func copy(with zone: NSZone? = nil) -> Any {

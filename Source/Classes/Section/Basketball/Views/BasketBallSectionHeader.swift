@@ -112,8 +112,15 @@ class BasketBallSectionHeader : UITableViewHeaderFooterView, DateProtocol {
 }
 
 extension BasketBallSectionHeader {
-    public func configure( ) {
+    public func configure(with data : BasketballMatchModel ) {
+        switch data.isSpreading {
+        case true:
+            spreadBut.setImage(UIImage(named: "Unfold"), for: .normal)
+        case false:
+            spreadBut.setImage(UIImage(named: "Collapse"), for: .normal)
+        }
         
+        title.text = data.matchDay + "共有" + "\(data.allMatchCount)" + "场比赛可投"
     }
 }
 

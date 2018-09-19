@@ -34,30 +34,36 @@ enum BasketballPlayType : String {
 
 class CXMMBasketballVC: BaseViewController {
 
+    @IBOutlet weak var totalMatch : UILabel!
     @IBOutlet weak var tableView : UITableView!
     @IBOutlet weak var deleteBut : UIButton!
     @IBOutlet weak var selectNum : UILabel!
     @IBOutlet weak var confirmBut: UIButton!
     
-    private var type : BasketballPlayType = .混合投注
+    private var type : BasketballPlayType = .混合投注 {
+        didSet{
+            guard titleView != nil else { return }
+            titleView.setTitle(type.rawValue, for: .normal)
+        }
+    }
     
     private var menu : CXMMBasketballMenu = CXMMBasketballMenu()
     public var titleView : UIButton!
     public var titleIcon : UIImageView!
     
-//    private var matchList : [BasketballMatchModel] = [BasketballMatchModel]()
-    
     private var matchModel : BasketballDataModel!
+    private var filterList : [FilterModel]!
+    private var hasHot : Bool = false
     
     private var viewModel : BasketballViewModel = BasketballViewModel()
     
     // MARK : - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setRightButtonItem()
         initSubview()
         setData()
-        
+        filterRequest()
         tableView.headerRefresh {
             self.loadNewData()
         }
@@ -83,15 +89,57 @@ class CXMMBasketballVC: BaseViewController {
                            forHeaderFooterViewReuseIdentifier: BasketBallSectionHeader.identifier)
     }
 
+    // MARK: - right bar item
+    private func setRightButtonItem() {
+        
+        let rightBut = UIButton(type: .custom)
+        rightBut.frame = CGRect(x: 0, y: 0, width: 40, height: 30)
+        
+        //rightBut.setBackgroundImage(UIImage(named:"filter"), for: .normal)
+        
+        rightBut.setImage(UIImage(named:"filter"), for: .normal)
+        rightBut.imageEdgeInsets = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 0)
+        rightBut.addTarget(self, action: #selector(showMenu(_:)), for: .touchUpInside)
+        
+        let helpBut = UIButton(type: .custom)
+        helpBut.frame = CGRect(x: 0, y: 0, width: 40, height: 30)
+        helpBut.setTitle("帮助", for: .normal)
+        helpBut.setTitleColor(Color787878, for: .normal)
+        helpBut.addTarget(self, action: #selector(helpClicked(_:)), for: .touchUpInside)
+        
+        //self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightBut)
+        let rightItem = UIBarButtonItem(customView: rightBut)
+        let helpItem = UIBarButtonItem(customView: helpBut)
+        self.navigationItem.rightBarButtonItems = [helpItem, rightItem]
+    }
+    
+    // MARK: - 帮助
+    @objc private func helpClicked(_ sender: UIButton) {
+        TongJi.log(.帮助, label: self.type.rawValue, att: .彩种)
+        let homeWeb = CXMWebViewController()
+        homeWeb.urlStr = getCurentBaseWebUrl() + webPlayHelp
+        pushViewController(vc: homeWeb)
+    }
+    @objc private func showMenu(_ sender: UIButton) {
+        TongJi.log(.赛事筛选, label: self.type.rawValue, att: .彩种)
+        
+        let story = UIStoryboard(storyboard: .Basketball)
+        
+        let filter = story.instantiateViewController(withIdentifier: "BasketballLeagueFilter") as! CXMMBasketballLeagueFilter
+        filter.delegate = self
+        filter.filterList = filterList
+        present(filter)
+    }
+    
 }
 // MARK: - 网络请求
 extension CXMMBasketballVC {
     private func loadNewData() {
-        basketballRequest()
+        basketballRequest("")
     }
-    private func basketballRequest() {
+    private func basketballRequest(_ leagueId : String) {
         weak var weakSelf = self
-        _ = basketBallProvider.rx.request(.basketballMatchList(leagueId: "",
+        _ = basketBallProvider.rx.request(.basketballMatchList(leagueId: leagueId,
                                                                playType: BasketballPlayType.getPlayType(type: self.type)))
             .asObservable()
             .mapObject(type: BasketballMatchList.self)
@@ -108,8 +156,9 @@ extension CXMMBasketballVC {
                     model.title = "热门比赛"
                     model.playList = data.hotPlayList
                     weakSelf?.matchModel.list.insert(model, at: 0)
+                    weakSelf?.hasHot = true
                 }
-                
+                weakSelf?.totalMatch.text = "共有\(data.allMatchCount)场比赛可投"
                 weakSelf?.tableView.reloadData()
             }, onError: { (error) in
                 weakSelf?.tableView.endrefresh()
@@ -128,8 +177,38 @@ extension CXMMBasketballVC {
                 }
             }, onCompleted: nil , onDisposed: nil )
     }
+    
+    private func filterRequest() {
+        weak var weakSelf = self
+        _ = basketBallProvider.rx.request(.basketballFilterList())
+            .asObservable()
+            .mapArray(type: FilterModel.self)
+            .subscribe(onNext: { (data) in
+                weakSelf?.filterList = data
+                
+            }, onError: { (error) in
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        weakSelf?.pushLoginVC(from: self)
+                    default : break
+                    }
+                    if 300000...310000 ~= code {
+                        weakSelf?.showHUD(message: msg!)
+                    }
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil )
+    }
 }
-
+// MARK: - 筛选 代理
+extension CXMMBasketballVC : CXMMBasketballLeagueFilterDelegate{
+    func filterConfirm(leagueId: String) {
+        basketballRequest(leagueId)
+    }
+}
 // MARK: - 删除、确认，点击事件
 extension CXMMBasketballVC {
     @IBAction func didTipConfirmButton(_ sender : UIButton) {
@@ -147,10 +226,18 @@ extension CXMMBasketballVC: BasketBallHotSectionHeaderDelegate,
                             BasketBallSectionHeaderDelegate {
     
     func spreadHot(sender: UIButton, section: Int) {
+        let header = matchModel.list[section]
+        
+        header.isSpreading = !header.isSpreading
+        
         tableView.reloadSections(IndexSet(integer: section), with: .automatic)
     }
     
     func spread(sender: UIButton, section: Int) {
+        let header = matchModel.list[section]
+        
+        header.isSpreading = !header.isSpreading
+        
         tableView.reloadSections(IndexSet(integer: section), with: .automatic)
     }
 }
@@ -168,7 +255,14 @@ extension CXMMBasketballVC : UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard matchModel.list[section].playList.isEmpty == false else { return 0 }
-        return matchModel.list[section].playList.count
+        let model = matchModel.list[section]
+        
+        switch model.isSpreading {
+        case true:
+            return matchModel.list[section].playList.count
+        case false:
+            return 0
+        }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -232,21 +326,19 @@ extension CXMMBasketballVC : UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        switch section {
-        case 0:
+        if section == 0, hasHot {
             let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: BasketBallHotSectionHeader.identifier) as! BasketBallHotSectionHeader
             header.tag = section
             header.delegate = self
-            
+            header.configure(with: matchModel.list[section])
             return header
-        default:
+        }else {
             let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: BasketBallSectionHeader.identifier) as! BasketBallSectionHeader
             header.tag = section
             header.delegate = self
-            
+            header.configure(with: matchModel.list[section])
             return header
         }
-
     }
 }
 
@@ -268,7 +360,7 @@ extension CXMMBasketballVC {
         }
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 38 * defaultScale
+        return 40
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.01
