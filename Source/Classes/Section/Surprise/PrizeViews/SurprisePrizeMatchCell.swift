@@ -41,7 +41,7 @@ extension SurprisePrizeMatchCell {
             icon.kf.setImage(with: url)
         }
         title.text = data.lotteryName
-        stageLabel.text = data.period
+        stageLabel.text = data.changci
         dateLabel.text = data.date
         
         matchLabel.text = "\(data.homeTeam)  \(data.score)  \(data.visitingTeam)"

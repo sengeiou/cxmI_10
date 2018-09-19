@@ -25,6 +25,8 @@ struct LeagueDetailModel: HandyJSON {
     var leagueTeam : LeagueTeamList!
     /// 赛季
     var leagueSeason : LeagueSeasonList!
+    /// 0:杯赛,1:联赛
+    var leagueType : String = ""
 }
 struct LeagueSeasonList : HandyJSON {
     var leagueSeasonInfoList : [LeagueSeasonInfo] = [LeagueSeasonInfo]()

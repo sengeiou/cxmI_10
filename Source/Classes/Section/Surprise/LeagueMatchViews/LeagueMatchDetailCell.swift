@@ -57,13 +57,20 @@ extension LeagueMatchDetailCell {
 //                }
 //            }
 //        }
-        leaderTitle.text = "联赛规则"
+        
 //        leaderName.text = data.leagueAddr
         leaderDetail.text = data.leagueRule
         
         let season = data.leagueSeason.leagueSeasonInfoList[0]
         
         leaderSeason.setTitle(season.matchSeason, for: .normal)
+        
+        switch data.leagueType {
+        case "0":
+            leaderTitle.text = "杯赛规则"
+        default:
+            leaderTitle.text = "联赛规则"
+        }
         
         switch style {
         case .show:

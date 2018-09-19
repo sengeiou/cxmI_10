@@ -35,6 +35,8 @@ struct PrizeListModel : HandyJSON {
     var visitingTeam : String = ""
     /// 比分
     var score : String = ""
+    /// 场次
+    var changci : String = ""
 }
 
 struct PrizeLottoListModel : HandyJSON {
