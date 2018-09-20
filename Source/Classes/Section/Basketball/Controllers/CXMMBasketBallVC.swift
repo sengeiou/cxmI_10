@@ -57,6 +57,8 @@ class CXMMBasketballVC: BaseViewController {
     
     private var viewModel : BasketballViewModel = BasketballViewModel()
     
+    private var playViewModel : BBPlayViewModel = BBPlayViewModel()
+    
     // MARK : - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -159,7 +161,83 @@ extension CXMMBasketballVC {
                     weakSelf?.hasHot = true
                 }
                 weakSelf?.totalMatch.text = "共有\(data.allMatchCount)场比赛可投"
+                
+                
+                
+                for model in (weakSelf?.matchModel.list)! {
+                    let sectionModel = BBPlaySectionModel()
+                    
+                    for play in model.playList {
+                        
+                        switch play.playType {
+                        case "1":
+                            let playInfo = BBPlayModel()
+                            for cell in play.matchPlays {
+                                let cellInfo = BBPlayInfoModel()
+                                let homeCell = BBCellModel()
+                                cellInfo.homeCell = homeCell
+                                let visiCell = BBCellModel()
+                                cellInfo.visiCell = visiCell
+                                playInfo.shengfu = cellInfo
+                            }
+                            sectionModel.list.append(playInfo)
+                        case "2":
+                            let playInfo = BBPlayModel()
+                            for cell in play.matchPlays {
+                                let cellInfo = BBPlayInfoModel()
+                                let homeCell = BBCellModel()
+                                cellInfo.homeCell = homeCell
+                                let visiCell = BBCellModel()
+                                cellInfo.visiCell = visiCell
+                                playInfo.rangfen = cellInfo
+                            }
+                            sectionModel.list.append(playInfo)
+                        case "3":
+                            break
+                        case "4":
+                            let playInfo = BBPlayModel()
+                            for cell in play.matchPlays {
+                                let cellInfo = BBPlayInfoModel()
+                                let homeCell = BBCellModel()
+                                cellInfo.homeCell = homeCell
+                                let visiCell = BBCellModel()
+                                cellInfo.visiCell = visiCell
+                                playInfo.daxiaofen = cellInfo
+                            }
+                            sectionModel.list.append(playInfo)
+                        case "5":
+                            let playInfo = BBPlayModel()
+                            playInfo.changci = play.changci
+                            for cell in play.matchPlays {
+                                let cellInfo = BBPlayInfoModel()
+                                let homeCell = BBCellModel()
+                                cellInfo.homeCell = homeCell
+                                let visiCell = BBCellModel()
+                                cellInfo.visiCell = visiCell
+                                
+                                switch cell.playType {
+                                case "1":
+                                    playInfo.shengfu = cellInfo
+                                case "2":
+                                    playInfo.rangfen = cellInfo
+                                case "3":
+                                    break
+                                case "4":
+                                    playInfo.daxiaofen = cellInfo
+                                default : break
+                                }
+                            }
+                            sectionModel.list.append(playInfo)
+                        default : break
+                        }
+                        
+                        
+                    }
+                    self.playViewModel.list.append(sectionModel)
+                    
+                }
                 weakSelf?.tableView.reloadData()
+                
             }, onError: { (error) in
                 weakSelf?.tableView.endrefresh()
                 guard let err = error as? HXError else { return }
@@ -244,11 +322,13 @@ extension CXMMBasketballVC: BasketBallHotSectionHeaderDelegate,
 // MARK: - 混合Cell Delegate
 extension CXMMBasketballVC : BasketballHunheCellDelegate {
     // 点击 更多玩法
-    func didTipMore(playInfo: BasketballListModel) {
+    func didTipMore(playInfo: BasketballListModel, viewModel : BBPlayModel) {
         let story = UIStoryboard(storyboard: .Basketball)
         
         let hunhePlay = story.instantiateViewController(withIdentifier: "BasketballHunhePlayPop") as! CXMMBasketballHunhePlayPop
         hunhePlay.configure(with: playInfo)
+        
+        hunhePlay.configure(with: viewModel)
         present(hunhePlay)
     }
 }
@@ -306,6 +386,8 @@ extension CXMMBasketballVC : UITableViewDataSource {
         cell.delegate = self
         let model = matchModel.list[indexPath.section].playList[indexPath.row]
         cell.configure(with: model)
+        
+        cell.configure(with: playViewModel.list[indexPath.section].list[indexPath.row])
         
         return cell
     }

@@ -93,15 +93,26 @@ extension BasketballRangCell {
             singleImg.isHidden = true
         }
         
-        // 客队赔率
-        let visiOddAtt = getAttributedString(cellName: playInfo.visitingCell.cellName,
-                                             cellOdds: playInfo.visitingCell.cellOdds, fixedOdds: nil)
-        visiOdds.setAttributedTitle(visiOddAtt, for: .normal)
+        switch playInfo.isShow {
+        case false :
+            
+            let att = NSAttributedString(string: "未开售")
+            
+            visiOdds.setAttributedTitle(att, for: .normal)
+            homeOdds.setAttributedTitle(att, for: .normal)
+        case true :
+            // 客队赔率
+            let visiOddAtt = getAttributedString(cellName: playInfo.visitingCell.cellName,
+                                                 cellOdds: playInfo.visitingCell.cellOdds, fixedOdds: nil)
+            visiOdds.setAttributedTitle(visiOddAtt, for: .normal)
+            
+            // 主队赔率
+            let homeOddAtt = getAttributedString(cellName: playInfo.homeCell.cellName,
+                                                 cellOdds: playInfo.homeCell.cellOdds, fixedOdds: playInfo.fixedOdds)
+            homeOdds.setAttributedTitle(homeOddAtt, for: .normal)
+        }
         
-        // 主队赔率
-        let homeOddAtt = getAttributedString(cellName: playInfo.homeCell.cellName,
-                                             cellOdds: playInfo.homeCell.cellOdds, fixedOdds: playInfo.fixedOdds)
-        homeOdds.setAttributedTitle(homeOddAtt, for: .normal)
+        
     }
     
     private func getAttributedString(cellName : String, cellOdds : String, fixedOdds : String?) -> NSAttributedString {

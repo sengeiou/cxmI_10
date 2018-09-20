@@ -41,7 +41,7 @@ class CXMMBasketballHunhePlayPop: BasePopViewController {
     
     private var playInfo : BasketballListModel!
     
-    
+    private var viewModel : BBPlayModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,6 +82,8 @@ class CXMMBasketballHunhePlayPop: BasePopViewController {
         }
     }
     
+    
+    
     // 左对齐等间距布局 (设置了最大间距)
     
 }
@@ -92,7 +94,99 @@ extension CXMMBasketballHunhePlayPop {
     @IBAction func cancelClick(_ sender: UIButton) {
     }
 }
+
 extension CXMMBasketballHunhePlayPop {
+    // 胜负
+    @IBAction func sfVisiClick(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        seButton(isSelected: sender.isSelected, sender: sender)
+        viewModel.seSFVisiPlay(isSelected: sender.isSelected)
+    }
+    @IBAction func sfHomeClick(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        seButton(isSelected: sender.isSelected, sender: sender)
+        viewModel.seSFHomePlay(isSelected: sender.isSelected)
+    }
+    // 让分
+    @IBAction func rfVisiClick(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        seButton(isSelected: sender.isSelected, sender: sender)
+        viewModel.seRFVisiPlay(isSelected: sender.isSelected)
+    }
+    @IBAction func rfHomeClick(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        seButton(isSelected: sender.isSelected, sender: sender)
+        viewModel.seRFHomePlay(isSelected: sender.isSelected)
+    }
+    // 大小分
+    @IBAction func dxfVisiClick(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        seButton(isSelected: sender.isSelected, sender: sender)
+        viewModel.seDXFVisiPlay(isSelected: sender.isSelected)
+    }
+    @IBAction func dxfHomeClick(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        seButton(isSelected: sender.isSelected, sender: sender)
+        viewModel.seDXFHomePlay(isSelected: sender.isSelected)
+    }
+    
+    private func seButton(isSelected : Bool, sender : UIButton) {
+        switch isSelected {
+        case true:
+            sender.backgroundColor = ColorEA5504
+        case false:
+            sender.backgroundColor = ColorFFFFFF
+        }
+    }
+}
+
+extension CXMMBasketballHunhePlayPop {
+    
+    public func configure(with data : BBPlayModel) {
+        self.viewModel = data
+        
+        _ = data.shengfu.visiCell.isSelected.asObserver()
+            .subscribe({ (event) in
+                guard let se = event.element else { return }
+                self.sfVisiOdds.isSelected = se
+                self.seButton(isSelected: se, sender: self.sfVisiOdds)
+            })
+        _ = data.shengfu.homeCell.isSelected.asObserver()
+            .subscribe({ (event) in
+                guard let se = event.element else { return }
+                self.sfHomeOdds.isSelected = se
+                self.seButton(isSelected: se, sender: self.sfHomeOdds)
+            })
+        // 让分
+        _ = data.rangfen.visiCell.isSelected.asObserver()
+            .subscribe({ (event) in
+                guard let se = event.element else { return }
+                self.rfVisiOdds.isSelected = se
+                self.seButton(isSelected: se, sender: self.rfVisiOdds)
+            })
+        
+        _ = data.rangfen.homeCell.isSelected.asObserver()
+            .subscribe({ (event) in
+                guard let se = event.element else { return }
+                self.rfHomeOdds.isSelected = se
+                self.seButton(isSelected: se, sender: self.rfHomeOdds)
+            })
+        
+        _ = data.daxiaofen.visiCell.isSelected.asObserver()
+            .subscribe({ (event) in
+                guard let se = event.element else { return }
+                self.dxfVisiOdds.isSelected = se
+                self.seButton(isSelected: se, sender: self.dxfVisiOdds)
+            })
+        
+        _ = data.daxiaofen.homeCell.isSelected.asObserver()
+            .subscribe({ (event) in
+                guard let se = event.element else { return }
+                self.dxfHomeOdds.isSelected = se
+                self.seButton(isSelected: se, sender: self.dxfHomeOdds)
+            })
+    }
+    
     public func configure(with data : BasketballListModel) {
         self.playInfo = data
         
@@ -120,7 +214,7 @@ extension CXMMBasketballHunhePlayPop {
                 switch playInfo.isShow {
                 case false :
                     
-                    let att = NSAttributedString(string: "停售")
+                    let att = NSAttributedString(string: "未开售")
                     
                     sfVisiOdds.setAttributedTitle(att, for: .normal)
                     sfHomeOdds.setAttributedTitle(att, for: .normal)
@@ -153,7 +247,7 @@ extension CXMMBasketballHunhePlayPop {
                 switch playInfo.isShow {
                 case false :
                     
-                    let att = NSAttributedString(string: "停售")
+                    let att = NSAttributedString(string: "未开售")
                     
                     rfVisiOdds.setAttributedTitle(att, for: .normal)
                     rfHomeOdds.setAttributedTitle(att, for: .normal)
@@ -180,7 +274,7 @@ extension CXMMBasketballHunhePlayPop {
                 }
                 switch playInfo.isShow {
                 case false :
-                    let att = NSAttributedString(string: "停售")
+                    let att = NSAttributedString(string: "未开售")
                     
                     dxfVisiOdds.setAttributedTitle(att, for: .normal)
                     dxfHomeOdds.setAttributedTitle(att, for: .normal)
@@ -235,13 +329,25 @@ extension CXMMBasketballHunhePlayPop : UICollectionViewDataSource {
             case "3":
                 switch indexPath.section {
                 case 0:
-                    if let visi = play.visitingCell {
-                         cell.configure(with: visi.cellSons[indexPath.row])
+                    switch play.isShow {
+                    case true :
+                        if let visi = play.visitingCell {
+                            cell.configure(with: visi.cellSons[indexPath.row], isShow: true)
+                        }
+                    case false:
+                        cell.configure(with: nil, isShow: false)
                     }
+                    
                 case 1:
-                    if let home = play.homeCell {
-                        cell.configure(with: home.cellSons[indexPath.row])
+                    switch play.isShow {
+                    case true :
+                        if let home = play.homeCell {
+                            cell.configure(with: home.cellSons[indexPath.row], isShow: true)
+                        }
+                    case false:
+                        cell.configure(with: nil, isShow: false)
                     }
+                    
                 default : break
                 }
                 

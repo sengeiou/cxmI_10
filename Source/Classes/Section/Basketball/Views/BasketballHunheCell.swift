@@ -9,7 +9,7 @@
 import UIKit
 
 protocol BasketballHunheCellDelegate {
-    func didTipMore(playInfo : BasketballListModel) -> Void
+    func didTipMore(playInfo : BasketballListModel, viewModel : BBPlayModel) -> Void
 }
 
 class BasketballHunheCell: UITableViewCell {
@@ -54,14 +54,16 @@ class BasketballHunheCell: UITableViewCell {
     @IBOutlet weak var rfVisiTeam : UIButton!
     @IBOutlet weak var rfHomeTeam : UIButton!
     // 大小分
-    @IBOutlet weak var dsfTitle : UILabel!
-    @IBOutlet weak var dsfVisiTeam : UIButton!
-    @IBOutlet weak var dsfHomeTeam : UIButton!
+    @IBOutlet weak var dxfTitle : UILabel!
+    @IBOutlet weak var dxfVisiTeam : UIButton!
+    @IBOutlet weak var dxfHomeTeam : UIButton!
     
     // 更多玩法
     @IBOutlet weak var moreButton : UIButton!
     
     private var playInfo : BasketballListModel!
+    
+    private var viewModel : BBPlayModel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -71,7 +73,7 @@ class BasketballHunheCell: UITableViewCell {
     private func initSubview() {
         sfTitle.text = "胜\n负"
         rfTitle.text = "让\n分"
-        dsfTitle.text = "大\n小\n分"
+        dxfTitle.text = "大\n小\n分"
         moreButton.titleLabel?.numberOfLines = 0
         moreButton.setTitle("更多\n玩法", for: .normal)
         
@@ -81,20 +83,20 @@ class BasketballHunheCell: UITableViewCell {
         rfVisiTeam.titleLabel?.numberOfLines = 2
         rfHomeTeam.titleLabel?.numberOfLines = 2
         
-        dsfVisiTeam.titleLabel?.numberOfLines = 2
-        dsfHomeTeam.titleLabel?.numberOfLines = 2
+        dxfVisiTeam.titleLabel?.numberOfLines = 2
+        dxfHomeTeam.titleLabel?.numberOfLines = 2
         
         sfVisiTeam.titleLabel?.textAlignment = .center
         sfHomeTeam.titleLabel?.textAlignment = .center
         rfVisiTeam.titleLabel?.textAlignment = .center
         rfHomeTeam.titleLabel?.textAlignment = .center
-        dsfVisiTeam.titleLabel?.textAlignment = .center
-        dsfHomeTeam.titleLabel?.textAlignment = .center
+        dxfVisiTeam.titleLabel?.textAlignment = .center
+        dxfHomeTeam.titleLabel?.textAlignment = .center
     }
     
     @IBAction func moreButtonClick(_ sender: UIButton) {
         guard delegate != nil else { return }
-        delegate.didTipMore(playInfo: self.playInfo)
+        delegate.didTipMore(playInfo: self.playInfo, viewModel : viewModel)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -103,9 +105,112 @@ class BasketballHunheCell: UITableViewCell {
         
     }
 
+    
+}
+
+// MARK: - 玩法 点击事件
+extension BasketballHunheCell {
+    @IBAction func sfVisiClick(_ sender : UIButton) {
+        sender.isSelected = !sender.isSelected
+        seButton(isSelected: sender.isSelected, sender: sender)
+        
+        viewModel.seSFVisiPlay(isSelected: sender.isSelected)
+    }
+    @IBAction func sfHomeClick(_ sender : UIButton) {
+        sender.isSelected = !sender.isSelected
+        seButton(isSelected: sender.isSelected, sender: sender)
+        viewModel.seSFHomePlay(isSelected: sender.isSelected)
+    }
+    @IBAction func rfVisiClick(_ sender : UIButton) {
+        sender.isSelected = !sender.isSelected
+        seButton(isSelected: sender.isSelected, sender: sender)
+        viewModel.seRFVisiPlay(isSelected: sender.isSelected)
+    }
+    @IBAction func rfHomeClick(_ sender : UIButton) {
+        sender.isSelected = !sender.isSelected
+        seButton(isSelected: sender.isSelected, sender: sender)
+        viewModel.seRFHomePlay(isSelected: sender.isSelected)
+    }
+    @IBAction func dxfVisiClick(_ sender : UIButton) {
+        sender.isSelected = !sender.isSelected
+        seButton(isSelected: sender.isSelected, sender: sender)
+        viewModel.seDXFVisiPlay(isSelected: sender.isSelected)
+    }
+    @IBAction func dxfHomeClick(_ sender : UIButton) {
+        sender.isSelected = !sender.isSelected
+        seButton(isSelected: sender.isSelected, sender: sender)
+        viewModel.seDXFHomePlay(isSelected: sender.isSelected)
+    }
+    
+    private func seButton(isSelected : Bool, sender : UIButton) {
+        switch isSelected {
+        case true:
+            sender.backgroundColor = ColorEA5504
+        case false:
+            sender.backgroundColor = ColorFFFFFF
+        }
+    }
+    
+    
 }
 
 extension BasketballHunheCell {
+    public func configure(with data : BBPlayModel) {
+        self.viewModel = data
+        _ = data.shengfu.visiCell.isSelected.asObserver()
+            .subscribe({ (event) in
+                guard let se = event.element else { return }
+                self.sfVisiTeam.isSelected = se
+                self.seButton(isSelected: se, sender: self.sfVisiTeam)
+            })
+        _ = data.shengfu.homeCell.isSelected.asObserver()
+            .subscribe({ (event) in
+                guard let se = event.element else { return }
+                self.sfHomeTeam.isSelected = se
+                self.seButton(isSelected: se, sender: self.sfHomeTeam)
+            })
+        // 让分
+        _ = data.rangfen.visiCell.isSelected.asObserver()
+            .subscribe({ (event) in
+                guard let se = event.element else { return }
+                self.rfVisiTeam.isSelected = se
+                self.seButton(isSelected: se, sender: self.rfVisiTeam)
+            })
+        
+        _ = data.rangfen.homeCell.isSelected.asObserver()
+            .subscribe({ (event) in
+                guard let se = event.element else { return }
+                self.rfHomeTeam.isSelected = se
+                self.seButton(isSelected: se, sender: self.rfHomeTeam)
+            })
+        
+        _ = data.daxiaofen.visiCell.isSelected.asObserver()
+            .subscribe({ (event) in
+                guard let se = event.element else { return }
+                self.dxfVisiTeam.isSelected = se
+                self.seButton(isSelected: se, sender: self.dxfVisiTeam)
+            })
+        
+        _ = data.daxiaofen.homeCell.isSelected.asObserver()
+            .subscribe({ (event) in
+                guard let se = event.element else { return }
+                self.dxfHomeTeam.isSelected = se
+                self.seButton(isSelected: se, sender: self.dxfHomeTeam)
+            })
+        
+        _ = data.selectedCellNum.asObserver()
+            .subscribe({ [weak self](event) in
+                guard let num = event.element else { return }
+                
+                if num <= 0 {
+                    self?.moreButton.setTitle("更多\n玩法", for: .normal)
+                }else {
+                    self?.moreButton.setTitle("已选\n\(num)项", for: .normal)
+                }
+                
+            })
+    }
+    
     public func configure(with data : BasketballListModel) {
         self.playInfo = data
         
@@ -152,7 +257,7 @@ extension BasketballHunheCell {
                 switch playInfo.isShow {
                 case false :
                     
-                    let att = NSAttributedString(string: "停售")
+                    let att = NSAttributedString(string: "未开售")
                     
                     sfVisiTeam.setAttributedTitle(att, for: .normal)
                     sfHomeTeam.setAttributedTitle(att, for: .normal)
@@ -163,10 +268,23 @@ extension BasketballHunheCell {
                     let visiOdds = getAttributedString(cellName: playInfo.visitingCell.cellName,
                                                        cellOdds: playInfo.visitingCell.cellOdds)
                     sfVisiTeam.setAttributedTitle(visiOdds, for: .normal)
-                    
+
                     let homeOdds = getAttributedString(cellName: playInfo.homeCell.cellName,
                                                        cellOdds: playInfo.homeCell.cellOdds)
                     sfHomeTeam.setAttributedTitle(homeOdds, for: .normal)
+
+                    _ = playInfo.visitingCell.isSelected.asObserver()
+                        .subscribe({ (event) in
+                            guard let se = event.element else { return }
+                            self.sfVisiTeam.isSelected = se
+                        })
+                    
+                    _ = playInfo.homeCell.isSelected.asObserver()
+                        .subscribe({ (event) in
+                            guard let se = event.element else { return }
+                            self.sfHomeTeam.isSelected = se
+                        })
+                    
                 }
                 
             case "2": // 让分胜负
@@ -180,7 +298,7 @@ extension BasketballHunheCell {
                 switch playInfo.isShow {
                 case false :
                     
-                    let att = NSAttributedString(string: "停售")
+                    let att = NSAttributedString(string: "未开售")
                     
                     sfVisiTeam.setAttributedTitle(att, for: .normal)
                     sfHomeTeam.setAttributedTitle(att, for: .normal)
@@ -196,6 +314,19 @@ extension BasketballHunheCell {
                                                        fixedOdds: playInfo.fixedOdds)
                     
                     rfHomeTeam.setAttributedTitle(homeOdds, for: .normal)
+                    
+                    _ = playInfo.visitingCell.isSelected.asObserver()
+                        .subscribe({ (event) in
+                            guard let se = event.element else { return }
+                            self.rfVisiTeam.isSelected = se
+                        })
+                    
+                    _ = playInfo.homeCell.isSelected.asObserver()
+                        .subscribe({ (event) in
+                            guard let se = event.element else { return }
+                            self.rfHomeTeam.isSelected = se
+                        })
+                    
                 }
                 
             case "4": // 大小分
@@ -209,7 +340,7 @@ extension BasketballHunheCell {
                 switch playInfo.isShow {
                 case false :
                     
-                    let att = NSAttributedString(string: "停售")
+                    let att = NSAttributedString(string: "未开售")
                     
                     sfVisiTeam.setAttributedTitle(att, for: .normal)
                     sfHomeTeam.setAttributedTitle(att, for: .normal)
@@ -219,10 +350,23 @@ extension BasketballHunheCell {
                     
                     let visiOdds = getAttributedString(cellName: playInfo.visitingCell.cellName,
                                                        cellOdds: playInfo.visitingCell.cellOdds)
-                    dsfVisiTeam.setAttributedTitle(visiOdds, for: .normal)
+                    dxfVisiTeam.setAttributedTitle(visiOdds, for: .normal)
                     let homeOdds = getAttributedString(cellName: playInfo.homeCell.cellName,
                                                        cellOdds: playInfo.homeCell.cellOdds)
-                    dsfHomeTeam.setAttributedTitle(homeOdds, for: .normal)
+                    dxfHomeTeam.setAttributedTitle(homeOdds, for: .normal)
+                    
+                    _ = playInfo.visitingCell.isSelected.asObserver()
+                        .subscribe({ (event) in
+                            guard let se = event.element else { return }
+                            self.dxfVisiTeam.isSelected = se
+                        })
+                    
+                    _ = playInfo.homeCell.isSelected.asObserver()
+                        .subscribe({ (event) in
+                            guard let se = event.element else { return }
+                            self.dxfHomeTeam.isSelected = se
+                        })
+                    
                 }
                 
                 
@@ -252,6 +396,25 @@ extension BasketballHunheCell {
         
         let cellOddsAtt = NSAttributedString(string: "\n\(cellOdds)",
             attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F,
+                         NSAttributedStringKey.font: Font12])
+        
+        cellNameAtt.append(cellOddsAtt)
+        
+        return cellNameAtt
+    }
+    
+    private func getAttributedStringSe(cellName : String, cellOdds : String, fixedOdds : String? = nil) -> NSAttributedString {
+        let cellNameAtt = NSMutableAttributedString(string: cellName,
+                                                    attributes: [NSAttributedStringKey.foregroundColor: ColorFFFFFF,
+                                                                 NSAttributedStringKey.font : Font14])
+        
+        if let fix = fixedOdds {
+            let fixAtt = NSAttributedString(string: "(\(fix))", attributes: [NSAttributedStringKey.foregroundColor : ColorFFFFFF])
+            cellNameAtt.append(fixAtt)
+        }
+        
+        let cellOddsAtt = NSAttributedString(string: "\n\(cellOdds)",
+            attributes: [NSAttributedStringKey.foregroundColor: ColorFFFFFF,
                          NSAttributedStringKey.font: Font12])
         
         cellNameAtt.append(cellOddsAtt)

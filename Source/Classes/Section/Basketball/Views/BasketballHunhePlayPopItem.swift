@@ -21,15 +21,27 @@ class BasketballHunhePlayPopItem: UICollectionViewCell {
 }
 
 extension BasketballHunhePlayPopItem {
-    public func configure(with data : BasketballPlayCellInfo) {
-        let nameAtt = NSMutableAttributedString(string: data.cellName,
-                                                attributes: [NSAttributedStringKey.foregroundColor: Color505050,
-                                                            NSAttributedStringKey.font : Font14])
-        let oddAtt = NSAttributedString(string: data.cellOdds,
-                                        attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F,
-                                                    NSAttributedStringKey.font : Font12])
-        nameAtt.append(oddAtt)
-        title.attributedText = nameAtt
+    public func configure(with data : BasketballPlayCellInfo?, isShow : Bool) {
+        
+        switch isShow {
+        case false :
+            
+            let att = NSAttributedString(string: "未开售")
+            
+            title.attributedText = att
+        case true :
+            guard let data = data else { return }
+            let nameAtt = NSMutableAttributedString(string: data.cellName,
+                                                    attributes: [NSAttributedStringKey.foregroundColor: Color505050,
+                                                                 NSAttributedStringKey.font : Font14])
+            let oddAtt = NSAttributedString(string: data.cellOdds,
+                                            attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F,
+                                                         NSAttributedStringKey.font : Font12])
+            nameAtt.append(oddAtt)
+            title.attributedText = nameAtt
+        }
+        
+        
         
     }
 }

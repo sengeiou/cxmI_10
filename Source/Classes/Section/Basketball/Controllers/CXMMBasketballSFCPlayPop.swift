@@ -103,15 +103,29 @@ extension CXMMBasketballSFCPlayPop : UICollectionViewDataSource {
         for play in self.playInfo.matchPlays {
             switch play.playType {
             case "3":
+                
                 switch indexPath.section {
                 case 0:
-                    if let visi = play.visitingCell {
-                        cell.configure(with: visi.cellSons[indexPath.row])
+                    
+                    switch play.isShow {
+                    case true :
+                        if let visi = play.visitingCell {
+                            cell.configure(with: visi.cellSons[indexPath.row], isShow: true)
+                        }
+                    case false:
+                        cell.configure(with: nil, isShow: false)
                     }
+                    
                 case 1:
-                    if let home = play.homeCell {
-                        cell.configure(with: home.cellSons[indexPath.row])
+                    switch play.isShow {
+                    case true :
+                        if let home = play.homeCell {
+                            cell.configure(with: home.cellSons[indexPath.row], isShow: true)
+                        }
+                    case false:
+                        cell.configure(with: nil, isShow: false)
                     }
+                    
                 default : break
                 }
                 

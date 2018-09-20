@@ -8,6 +8,9 @@
 
 import Foundation
 import HandyJSON
+import RxSwift
+import RxCocoa
+
 
 class BasketballDataModel : HandyJSON {
     required init() { }
@@ -97,10 +100,15 @@ class BasketballPlayCellInfo : HandyJSON {
     }
     
     required init() { }
-    var isSelected = false
+    var isSelected = BehaviorSubject(value: false)
     var cellCode: String = ""
     var cellName: String = ""
     var cellOdds: String = ""
     var cellSons: [BasketballPlayCellInfo]!
     var isRang = false
+    
+    func seleCell(isSelected : Bool) {
+        self.isSelected.onNext(isSelected)
+    }
+    
 }

@@ -212,16 +212,24 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Pa-Z9-it7">
                                                     <rect key="frame" x="115" y="48" width="102" height="52"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal" title="Button">
                                                         <color key="titleColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="sfVisiClick:" destination="xxQ-pG-Gv4" eventType="touchUpInside" id="S24-8X-bfO"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Eq-di-Xmo">
                                                     <rect key="frame" x="218" y="48" width="102" height="52"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal" title="Button">
                                                         <color key="titleColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="sfHomeClick:" destination="xxQ-pG-Gv4" eventType="touchUpInside" id="Atf-29-jpS"/>
+                                                    </connections>
                                                 </button>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RJS-t5-Svi">
                                                     <rect key="frame" x="217" y="53" width="1" height="42"/>
@@ -233,30 +241,46 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DfG-f0-02d">
                                                     <rect key="frame" x="115" y="101" width="102" height="53"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal" title="Button">
                                                         <color key="titleColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="rfVisiClick:" destination="xxQ-pG-Gv4" eventType="touchUpInside" id="shg-KI-0OR"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ksi-AJ-v79">
                                                     <rect key="frame" x="218" y="101" width="102" height="53"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal" title="Button">
                                                         <color key="titleColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="rfHomeClick:" destination="xxQ-pG-Gv4" eventType="touchUpInside" id="coX-cF-gKI"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A7E-fB-iF7">
                                                     <rect key="frame" x="115" y="155" width="102" height="52"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal" title="Button">
                                                         <color key="titleColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="dxfVisiClick:" destination="xxQ-pG-Gv4" eventType="touchUpInside" id="cAt-CQ-DKF"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tgj-D1-w7i">
                                                     <rect key="frame" x="218" y="155" width="102" height="52"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal" title="Button">
                                                         <color key="titleColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="dxfHomeClick:" destination="xxQ-pG-Gv4" eventType="touchUpInside" id="nOa-E9-6oD"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="凯尔特任" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dzu-fh-3js">
                                                     <rect key="frame" x="91" y="0.0" width="114" height="47"/>
@@ -396,9 +420,9 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="dateLabel" destination="qVq-sn-dJc" id="F0R-52-sdQ"/>
-                                            <outlet property="dsfHomeTeam" destination="tgj-D1-w7i" id="eff-eS-Kdj"/>
-                                            <outlet property="dsfTitle" destination="Odi-M0-Im7" id="yE0-Sj-Q1Q"/>
-                                            <outlet property="dsfVisiTeam" destination="A7E-fB-iF7" id="iz9-FC-POC"/>
+                                            <outlet property="dxfHomeTeam" destination="tgj-D1-w7i" id="eff-eS-Kdj"/>
+                                            <outlet property="dxfTitle" destination="Odi-M0-Im7" id="yE0-Sj-Q1Q"/>
+                                            <outlet property="dxfVisiTeam" destination="A7E-fB-iF7" id="iz9-FC-POC"/>
                                             <outlet property="homeTeam" destination="45G-1Y-dub" id="ifA-O9-Ywk"/>
                                             <outlet property="leagueLabel" destination="apB-Nd-kEy" id="dqv-yN-ysL"/>
                                             <outlet property="leftLineOne" destination="WHC-cx-m8P" id="ZbI-vQ-O20"/>
@@ -491,6 +515,7 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="agJ-aH-kWi">
                                                     <rect key="frame" x="97" y="48" width="130" height="178"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal" title="Button">
                                                         <color key="titleColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
@@ -498,6 +523,7 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m41-ph-iRd">
                                                     <rect key="frame" x="228" y="48" width="130" height="178"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal" title="Button">
                                                         <color key="titleColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
@@ -674,6 +700,7 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tcG-Ii-gq8">
                                                     <rect key="frame" x="97" y="48" width="130" height="178"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal" title="Button">
                                                         <color key="titleColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
@@ -681,6 +708,7 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lsm-vJ-Pa6">
                                                     <rect key="frame" x="228" y="48" width="130" height="178"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal" title="Button">
                                                         <color key="titleColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
@@ -857,6 +885,7 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0iS-wB-GNZ">
                                                     <rect key="frame" x="97" y="48" width="130" height="178"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal" title="Button">
                                                         <color key="titleColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
@@ -864,6 +893,7 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rlp-pa-Auu">
                                                     <rect key="frame" x="228" y="48" width="130" height="178"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal" title="Button">
                                                         <color key="titleColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
@@ -1642,6 +1672,9 @@
                                         <state key="normal" title="Button">
                                             <color key="titleColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="sfVisiClick:" destination="b3j-k0-g9j" eventType="touchUpInside" id="EFd-Kb-HKy"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1uX-IC-kOi">
                                         <rect key="frame" x="199" y="44" width="159" height="36"/>
@@ -1650,6 +1683,9 @@
                                         <state key="normal" title="Button">
                                             <color key="titleColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="sfHomeClick:" destination="b3j-k0-g9j" eventType="touchUpInside" id="9VA-jg-ajt"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FdT-nd-RiF">
                                         <rect key="frame" x="39" y="120" width="159" height="36"/>
@@ -1658,6 +1694,9 @@
                                         <state key="normal" title="Button">
                                             <color key="titleColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="rfVisiClick:" destination="b3j-k0-g9j" eventType="touchUpInside" id="UtZ-Zc-YkA"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FcU-O4-x2s">
                                         <rect key="frame" x="199" y="120" width="159" height="36"/>
@@ -1666,6 +1705,9 @@
                                         <state key="normal" title="Button">
                                             <color key="titleColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="rfHomeClick:" destination="b3j-k0-g9j" eventType="touchUpInside" id="L9c-wz-ZnK"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qut-bi-l58">
                                         <rect key="frame" x="39" y="196" width="159" height="48"/>
@@ -1674,6 +1716,9 @@
                                         <state key="normal" title="Button">
                                             <color key="titleColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="dxfVisiClick:" destination="b3j-k0-g9j" eventType="touchUpInside" id="JBh-DO-co6"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8kj-6g-ohT">
                                         <rect key="frame" x="199" y="196" width="159" height="48"/>
@@ -1682,6 +1727,9 @@
                                         <state key="normal" title="Button">
                                             <color key="titleColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="dxfHomeClick:" destination="b3j-k0-g9j" eventType="touchUpInside" id="KQW-Eb-Bvy"/>
+                                        </connections>
                                     </button>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="3hQ-eA-5Yq">
                                         <rect key="frame" x="39" y="283" width="320" height="153"/>
