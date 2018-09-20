@@ -8,8 +8,14 @@
 
 import UIKit
 
+protocol BasketballHunheCellDelegate {
+    func didTipMore(playInfo : BasketballListModel) -> Void
+}
+
 class BasketballHunheCell: UITableViewCell {
 
+    public var delegate : BasketballHunheCellDelegate!
+    
     @IBOutlet weak var topLineOne : UIView!
     @IBOutlet weak var topLineTwo : UIView!
     @IBOutlet weak var topLineThree: UIView!
@@ -55,8 +61,7 @@ class BasketballHunheCell: UITableViewCell {
     // 更多玩法
     @IBOutlet weak var moreButton : UIButton!
     
-    @IBAction func moreButtonClick(_ sender: UIButton) {
-    }
+    private var playInfo : BasketballListModel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -86,6 +91,12 @@ class BasketballHunheCell: UITableViewCell {
         dsfVisiTeam.titleLabel?.textAlignment = .center
         dsfHomeTeam.titleLabel?.textAlignment = .center
     }
+    
+    @IBAction func moreButtonClick(_ sender: UIButton) {
+        guard delegate != nil else { return }
+        delegate.didTipMore(playInfo: self.playInfo)
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
@@ -96,6 +107,7 @@ class BasketballHunheCell: UITableViewCell {
 
 extension BasketballHunheCell {
     public func configure(with data : BasketballListModel) {
+        self.playInfo = data
         
         guard data.isShutDown == false else {
             
@@ -221,7 +233,7 @@ extension BasketballHunheCell {
         
     }
     
-    private func getAttributedString(cellName : String, cellOdds : String, fixedOdds : Int? = nil) -> NSAttributedString {
+    private func getAttributedString(cellName : String, cellOdds : String, fixedOdds : String? = nil) -> NSAttributedString {
         let cellNameAtt = NSMutableAttributedString(string: cellName,
                                                   attributes: [NSAttributedStringKey.foregroundColor: Color505050,
                                                                NSAttributedStringKey.font : Font14])
@@ -229,12 +241,12 @@ extension BasketballHunheCell {
         if let fix = fixedOdds {
             var color : UIColor
             
-            if fix > 0 {
+            if fix.contains("+"){
                 color = ColorEA5504
             }else {
                 color = Color44AE35
             }
-            let fixAtt = NSAttributedString(string: "\(fix)", attributes: [NSAttributedStringKey.foregroundColor : color])
+            let fixAtt = NSAttributedString(string: "(\(fix))", attributes: [NSAttributedStringKey.foregroundColor : color])
             cellNameAtt.append(fixAtt)
         }
         

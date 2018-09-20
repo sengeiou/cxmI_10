@@ -101,6 +101,10 @@
 		1144911B208611A3009F1D09 /* FootballMatchInfoProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1144911A208611A3009F1D09 /* FootballMatchInfoProtocol.swift */; };
 		1144911D2086130D009F1D09 /* FootballMatchInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1144911C2086130D009F1D09 /* FootballMatchInfoModel.swift */; };
 		114520B32089BCE70004F98B /* CXMMyCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114520B22089BCE70004F98B /* CXMMyCollectionVC.swift */; };
+		1145B3E721533FC90002E5ED /* CXMMBasketballHunhePlayPop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145B3E621533FC90002E5ED /* CXMMBasketballHunhePlayPop.swift */; };
+		1145B3E921534BB50002E5ED /* BasketballHunhePlayPopItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145B3E821534BB50002E5ED /* BasketballHunhePlayPopItem.swift */; };
+		1145B3EB215372630002E5ED /* CXMMBasketballSFCPlayPop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145B3EA215372630002E5ED /* CXMMBasketballSFCPlayPop.swift */; };
+		1145B3ED215380750002E5ED /* BasketballHunheViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145B3EC215380750002E5ED /* BasketballHunheViewModel.swift */; };
 		114800D2208C2C5E00621AFA /* ShareCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114800D1208C2C5E00621AFA /* ShareCell.swift */; };
 		114800D4208C2DD700621AFA /* ShareDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114800D3208C2DD700621AFA /* ShareDataModel.swift */; };
 		114800D6208C622800621AFA /* NewsListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114800D5208C622800621AFA /* NewsListModel.swift */; };
@@ -582,6 +586,10 @@
 		1144911A208611A3009F1D09 /* FootballMatchInfoProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballMatchInfoProtocol.swift; sourceTree = "<group>"; };
 		1144911C2086130D009F1D09 /* FootballMatchInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballMatchInfoModel.swift; sourceTree = "<group>"; };
 		114520B22089BCE70004F98B /* CXMMyCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMMyCollectionVC.swift; sourceTree = "<group>"; };
+		1145B3E621533FC90002E5ED /* CXMMBasketballHunhePlayPop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMMBasketballHunhePlayPop.swift; sourceTree = "<group>"; };
+		1145B3E821534BB50002E5ED /* BasketballHunhePlayPopItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketballHunhePlayPopItem.swift; sourceTree = "<group>"; };
+		1145B3EA215372630002E5ED /* CXMMBasketballSFCPlayPop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMMBasketballSFCPlayPop.swift; sourceTree = "<group>"; };
+		1145B3EC215380750002E5ED /* BasketballHunheViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketballHunheViewModel.swift; sourceTree = "<group>"; };
 		114800D1208C2C5E00621AFA /* ShareCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareCell.swift; sourceTree = "<group>"; };
 		114800D3208C2DD700621AFA /* ShareDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareDataModel.swift; sourceTree = "<group>"; };
 		114800D5208C622800621AFA /* NewsListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListModel.swift; sourceTree = "<group>"; };
@@ -1182,6 +1190,7 @@
 				116A27F22150F0090077444E /* BasketballDaxiaofenCell.swift */,
 				116A27F42150F0210077444E /* BasketballShengfuChaCell.swift */,
 				1171C94A2152528B0052B7C8 /* BasketballLeagueFilterItem.swift */,
+				1145B3E821534BB50002E5ED /* BasketballHunhePlayPopItem.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1193,6 +1202,8 @@
 				116A27F6215106EC0077444E /* CXMMBasketballConfirmVC.swift */,
 				116A27F8215108A10077444E /* CXMMBasketballOrderVC.swift */,
 				1173BED12150D836008BC28A /* CXMMBasketballMenu.swift */,
+				1145B3E621533FC90002E5ED /* CXMMBasketballHunhePlayPop.swift */,
+				1145B3EA215372630002E5ED /* CXMMBasketballSFCPlayPop.swift */,
 				118051532152491100B47605 /* CXMMBasketballLeagueFilter.swift */,
 			);
 			path = Controllers;
@@ -1210,6 +1221,7 @@
 			isa = PBXGroup;
 			children = (
 				116311DE2151EB3D000C362D /* BasketballViewModel.swift */,
+				1145B3EC215380750002E5ED /* BasketballHunheViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -3131,6 +3143,7 @@
 				E5D8ABB6206739CF002D688B /* OrderDetailTitleCell.swift in Sources */,
 				1143928520A68A4100A64075 /* UIImage+Scale.swift in Sources */,
 				117CCDF4209055A100B38543 /* FootballOrderFooter.swift in Sources */,
+				1145B3E921534BB50002E5ED /* BasketballHunhePlayPopItem.swift in Sources */,
 				112F77BB20EC7C8C005CA9E4 /* WMMenuItem.m in Sources */,
 				113B9CCD2087201E006AE3F8 /* NewsOnePicCell.swift in Sources */,
 				E50B9073205231B500417BFE /* RechargeHeaderView.swift in Sources */,
@@ -3206,6 +3219,7 @@
 				E50B9077205235BF00417BFE /* RechargeCardCell.swift in Sources */,
 				112E9D512122D8D7008466B4 /* DLTBetInfoRequestModel.swift in Sources */,
 				113DE741211AF50500DE8026 /* CXMMDLTRedTrendVC.swift in Sources */,
+				1145B3E721533FC90002E5ED /* CXMMBasketballHunhePlayPop.swift in Sources */,
 				E5883F5A2068EA5700CB3A46 /* MessageCenterCell.swift in Sources */,
 				11EB8EEA207B8B1500AFC9C1 /* BonusInfoModel.swift in Sources */,
 				116E99CE213FD514005F1217 /* SchoolListModel.swift in Sources */,
@@ -3246,6 +3260,7 @@
 				116E99C2213F77D2005F1217 /* CXMMDigitalHistoryDetailVC.swift in Sources */,
 				11D2EB5620A5D3F000EBB937 /* GuideViewController.swift in Sources */,
 				11E8ADB42147AAF900C9B762 /* CopyWritingModel.swift in Sources */,
+				1145B3EB215372630002E5ED /* CXMMBasketballSFCPlayPop.swift in Sources */,
 				11E8FA5920BFD5C20090BC6A /* CXMWorldCupOrderDetailVC.swift in Sources */,
 				11B081432133E2BA004FCAE9 /* SurprisePrizeMatchCell.swift in Sources */,
 				E5973E2F204F8B33006461CE /* MeCell.swift in Sources */,
@@ -3382,6 +3397,7 @@
 				114490FD20858CF2009F1D09 /* FootballMatchPagerView.swift in Sources */,
 				E550D8A320733A2D002DDE23 /* FootballOrderHunheCell.swift in Sources */,
 				E5D8ABBE206749F5002D688B /* OrderDetailHeaderView.swift in Sources */,
+				1145B3ED215380750002E5ED /* BasketballHunheViewModel.swift in Sources */,
 				11FEB962208DDAAA00926951 /* WeixinShare.swift in Sources */,
 				1144911B208611A3009F1D09 /* FootballMatchInfoProtocol.swift in Sources */,
 				114491142085F6FC009F1D09 /* FootballOddsTitleView.swift in Sources */,

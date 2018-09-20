@@ -241,6 +241,27 @@ extension CXMMBasketballVC: BasketBallHotSectionHeaderDelegate,
         tableView.reloadSections(IndexSet(integer: section), with: .automatic)
     }
 }
+// MARK: - 混合Cell Delegate
+extension CXMMBasketballVC : BasketballHunheCellDelegate {
+    // 点击 更多玩法
+    func didTipMore(playInfo: BasketballListModel) {
+        let story = UIStoryboard(storyboard: .Basketball)
+        
+        let hunhePlay = story.instantiateViewController(withIdentifier: "BasketballHunhePlayPop") as! CXMMBasketballHunhePlayPop
+        hunhePlay.configure(with: playInfo)
+        present(hunhePlay)
+    }
+}
+// MARK: - 胜分差Cell Delegate
+extension CXMMBasketballVC : BasketballShengfuChaCellDelegate {
+    func didTipShengfenCha(playInfo: BasketballListModel) {
+        let story = UIStoryboard(storyboard: .Basketball)
+        
+        let shengFenPlay = story.instantiateViewController(withIdentifier: "BasketballSFCPlayPop") as! CXMMBasketballSFCPlayPop
+        shengFenPlay.configure(with: playInfo)
+        present(shengFenPlay)
+    }
+}
 
 // MARK: - tableview delegate
 extension CXMMBasketballVC : UITableViewDelegate {
@@ -265,8 +286,6 @@ extension CXMMBasketballVC : UITableViewDataSource {
         }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        
         switch type {
         case .混合投注:
             return initHunheCell(indexPath: indexPath)
@@ -278,16 +297,13 @@ extension CXMMBasketballVC : UITableViewDataSource {
             return initDaXiaoFenCell(indexPath: indexPath)
         case .胜分差:
             return initShengFenChaCell(indexPath: indexPath)
-            
         }
-        
-        
     }
     
     // MARK: - Cell
     private func initHunheCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BasketballHunheCell", for: indexPath) as! BasketballHunheCell
-
+        cell.delegate = self
         let model = matchModel.list[indexPath.section].playList[indexPath.row]
         cell.configure(with: model)
         
@@ -320,6 +336,7 @@ extension CXMMBasketballVC : UITableViewDataSource {
     // 胜分差
     private func initShengFenChaCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BasketballShengfuChaCell", for: indexPath) as! BasketballShengfuChaCell
+        cell.delegate = self
         let model = matchModel.list[indexPath.section].playList[indexPath.row]
         cell.configure(with: model)
         return cell

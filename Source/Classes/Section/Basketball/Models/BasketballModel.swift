@@ -73,7 +73,7 @@ class BasketballListModel: HandyJSON {
 
 class BasketbalPlayInfo : HandyJSON {
     required init() { }
-    var fixedOdds: Int!
+    var fixedOdds: String!
     
     var homeCell: BasketballPlayCellInfo!
     var visitingCell: BasketballPlayCellInfo!

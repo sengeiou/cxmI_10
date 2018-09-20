@@ -104,7 +104,7 @@ extension BasketballRangCell {
         homeOdds.setAttributedTitle(homeOddAtt, for: .normal)
     }
     
-    private func getAttributedString(cellName : String, cellOdds : String, fixedOdds : Int?) -> NSAttributedString {
+    private func getAttributedString(cellName : String, cellOdds : String, fixedOdds : String?) -> NSAttributedString {
         let cellNameAtt = NSMutableAttributedString(string: cellName,
                                                     attributes: [NSAttributedStringKey.foregroundColor: Color505050,
                                                                  NSAttributedStringKey.font : Font14])
@@ -112,13 +112,13 @@ extension BasketballRangCell {
             
             var color : UIColor
             
-            if fix > 0 {
+            if fix.contains("+") {
                 color = ColorEA5504
             }else {
                 color = Color44AE35
             }
             
-            let fixAtt = NSAttributedString(string: "\(fix)", attributes: [NSAttributedStringKey.foregroundColor : color])
+            let fixAtt = NSAttributedString(string: "(\(fix))", attributes: [NSAttributedStringKey.foregroundColor : color])
             cellNameAtt.append(fixAtt)
         }
         

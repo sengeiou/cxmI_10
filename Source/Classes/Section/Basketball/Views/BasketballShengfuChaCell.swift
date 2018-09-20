@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol BasketballShengfuChaCellDelegate {
+    func didTipShengfenCha(playInfo : BasketballListModel) -> Void
+}
+
 class BasketballShengfuChaCell: UITableViewCell {
+    
+    public var delegate : BasketballShengfuChaCellDelegate!
     
     // 单关标识
     @IBOutlet weak var singleImg : UIImageView!
@@ -30,6 +36,8 @@ class BasketballShengfuChaCell: UITableViewCell {
     @IBOutlet weak var oddsLabel : UILabel!
     @IBOutlet weak var oddsButton : UIButton!
     
+    private var playInfo : BasketballListModel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         initSubview()
@@ -49,7 +57,15 @@ class BasketballShengfuChaCell: UITableViewCell {
 }
 
 extension BasketballShengfuChaCell {
+    @IBAction func oddsButtonClick(_ sender : UIButton) {
+        guard delegate != nil else { return }
+        delegate.didTipShengfenCha(playInfo: self.playInfo)
+    }
+}
+
+extension BasketballShengfuChaCell {
     public func configure(with data : BasketballListModel) {
+        self.playInfo = data
         // 客队名
         let visiMuatt = NSMutableAttributedString(string: "[客]",
                                                   attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F,
