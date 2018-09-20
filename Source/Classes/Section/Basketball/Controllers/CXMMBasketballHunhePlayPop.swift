@@ -311,7 +311,22 @@ extension CXMMBasketballHunhePlayPop {
 
 extension CXMMBasketballHunhePlayPop : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        switch indexPath.section {
+        case 0:
+            viewModel.seSFCVisiPlay(isSelected: true, index: indexPath.row)
+        case 1:
+            viewModel.seSFCHomePlay(isSelected: true, index: indexPath.row)
+        default : break
+        }
+    }
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0:
+            viewModel.seSFCVisiPlay(isSelected: false, index: indexPath.row)
+        case 1:
+            viewModel.seSFCHomePlay(isSelected: false, index: indexPath.row)
+        default : break
+        }
     }
 }
 extension CXMMBasketballHunhePlayPop : UICollectionViewDataSource {
@@ -323,7 +338,7 @@ extension CXMMBasketballHunhePlayPop : UICollectionViewDataSource {
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BasketballHunhePlayPopItem", for: indexPath) as! BasketballHunhePlayPopItem
-        
+        cell.index = indexPath.row
         for play in self.playInfo.matchPlays {
             switch play.playType {
             case "3":

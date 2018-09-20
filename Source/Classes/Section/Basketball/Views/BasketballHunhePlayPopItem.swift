@@ -18,6 +18,8 @@ class BasketballHunhePlayPopItem: UICollectionViewCell {
     @IBOutlet weak var bottomLine : UIView!
     
     @IBOutlet weak var title : UILabel!
+    
+    public var index : Int!
 }
 
 extension BasketballHunhePlayPopItem {

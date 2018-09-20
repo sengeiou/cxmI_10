@@ -221,7 +221,14 @@ extension CXMMBasketballVC {
                                 case "2":
                                     playInfo.rangfen = cellInfo
                                 case "3":
-                                    break
+                                    for ce in cell.visitingCell.cellSons {
+                                        let cellIn = BBCellModel()
+                                        playInfo.visiSFC.append(cellIn)
+                                    }
+                                    for ce in cell.homeCell.cellSons {
+                                        let cellIn = BBCellModel()
+                                        playInfo.homeSFC.append(cellIn)
+                                    }
                                 case "4":
                                     playInfo.daxiaofen = cellInfo
                                 default : break

@@ -104,7 +104,7 @@ class BasketballPlayCellInfo : HandyJSON {
     var cellCode: String = ""
     var cellName: String = ""
     var cellOdds: String = ""
-    var cellSons: [BasketballPlayCellInfo]!
+    var cellSons: [BasketballPlayCellInfo] = [BasketballPlayCellInfo]()
     var isRang = false
     
     func seleCell(isSelected : Bool) {

@@ -21,12 +21,10 @@ class BBPlayModel {
     var shengfu : BBPlayInfoModel = BBPlayInfoModel()
     var rangfen  : BBPlayInfoModel = BBPlayInfoModel()
     var daxiaofen : BBPlayInfoModel = BBPlayInfoModel()
-    var shengfencha  : [BBCellModel] = [BBCellModel]()
-    
-    
+    var visiSFC : [BBCellModel] = [BBCellModel]()
+    var homeSFC : [BBCellModel] = [BBCellModel]()
     
     // 交互
-    
     var selectedCellNum : BehaviorSubject = BehaviorSubject(value: 0)
     
     private var cellNum = 0 {
@@ -38,6 +36,7 @@ class BBPlayModel {
 }
 
 extension BBPlayModel {
+    // 胜负
     func seSFVisiPlay(isSelected: Bool) {
         shengfu.visiCell.isSelected.onNext(isSelected)
         changeCellNum(isSelected: isSelected)
@@ -63,6 +62,18 @@ extension BBPlayModel {
     }
     func seDXFHomePlay(isSelected : Bool) {
         daxiaofen.homeCell.isSelected.onNext(isSelected)
+        changeCellNum(isSelected: isSelected)
+    }
+    
+    // 胜分差
+    func seSFCVisiPlay(isSelected : Bool, index : Int) {
+        let cell = visiSFC[index]
+        cell.isSelected.onNext(isSelected)
+        changeCellNum(isSelected: isSelected)
+    }
+    func seSFCHomePlay(isSelected : Bool, index : Int) {
+        let cell = visiSFC[index]
+        cell.isSelected.onNext(isSelected)
         changeCellNum(isSelected: isSelected)
     }
     

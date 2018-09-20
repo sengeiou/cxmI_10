@@ -99,7 +99,7 @@ extension CXMMBasketballSFCPlayPop : UICollectionViewDataSource {
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BasketballHunhePlayPopItem", for: indexPath) as! BasketballHunhePlayPopItem
-        
+        cell.index = indexPath.row
         for play in self.playInfo.matchPlays {
             switch play.playType {
             case "3":
