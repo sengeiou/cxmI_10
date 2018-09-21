@@ -20,6 +20,9 @@ class BBPlaySectionModel {
 class BBPlayModel : NSObject {
     
     var changci : String!
+    var playType : BasketballPlayType!
+    // 单关
+    var single : Bool = false
     
     var shengfu : BBPlayInfoModel = BBPlayInfoModel()
     var rangfen  : BBPlayInfoModel = BBPlayInfoModel()
@@ -51,18 +54,7 @@ class BBPlayModel : NSObject {
 
 extension BBPlayModel {
     
-    private func canSePlay(isSelected : Bool) -> Bool {
-        switch isSelected {
-        case true:
-            guard viewModel.selectMatch(play: self) else { return false }
-        case false :
-            if cellNum <= 1 {
-                viewModel.deSelectMatch(play: self)
-            }
-            return true
-        }
-        return true
-    }
+    
     // 胜负
     func seSFVisiPlay(isSelected: Bool) {
         shengfu.visiCell.selected = !shengfu.visiCell.selected
@@ -131,6 +123,11 @@ extension BBPlayModel {
         
         cell.selected = !cell.selected
         
+        guard canSePlay(isSelected: cell.selected) else {
+            cell.selected = false
+            return
+        }
+        
         cell.isSelected.onNext(cell.selected)
         changeCellNum(isSelected: cell.selected)
         
@@ -145,6 +142,12 @@ extension BBPlayModel {
     func seSFCHomePlay(isSelected : Bool, index : Int) {
         let cell = homeSFC[index]
         cell.selected = !cell.selected
+        
+        guard canSePlay(isSelected: cell.selected) else {
+            cell.selected = false
+            return
+        }
+        
         cell.isSelected.onNext(cell.selected)
         changeCellNum(isSelected: cell.selected)
         
@@ -183,12 +186,27 @@ extension BBPlayModel {
             }
         }
     }
+    
+    private func canSePlay(isSelected : Bool) -> Bool {
+        switch isSelected {
+        case true:
+            guard viewModel.selectMatch(play: self) else { return false }
+        case false :
+            if cellNum <= 1 {
+                viewModel.deSelectMatch(play: self)
+            }
+            return true
+        }
+        return true
+    }
 }
 
 
 class BBPlayInfoModel {
     var homeCell : BBCellModel = BBCellModel()
     var visiCell : BBCellModel = BBCellModel()
+    
+    var single: Bool = false
 }
 class BBCellModel : NSObject {
     var selected : Bool = false

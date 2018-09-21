@@ -79,6 +79,19 @@ class CXMMBasketballVC: BaseViewController {
                 self?.selectNum.text = text
         }
         
+        // 确定按钮显示 样式
+        _ = viewModel.confirmButtonState.asObserver()
+            .subscribe({ [weak self](event) in
+                guard let canNext = event.element else { return }
+                self?.confirmBut.isUserInteractionEnabled = canNext
+                
+                switch canNext{
+                case true :
+                    self?.confirmBut.backgroundColor = ColorEA5504
+                case false:
+                    self?.confirmBut.backgroundColor = ColorC7C7C7
+                }
+            })
     }
     private func initSubview() {
         menu.delegate = self
@@ -174,8 +187,11 @@ extension CXMMBasketballVC {
                             let playInfo = BBPlayModel()
                             playInfo.viewModel = self.viewModel
                             playInfo.changci = play.changci
+                            playInfo.playType = .胜负
                             for cell in play.matchPlays {
                                 let cellInfo = BBPlayInfoModel()
+                                cellInfo.single = cell.single
+                                
                                 let homeCell = BBCellModel()
                                 cellInfo.homeCell = homeCell
                                 let visiCell = BBCellModel()
@@ -187,8 +203,11 @@ extension CXMMBasketballVC {
                             let playInfo = BBPlayModel()
                             playInfo.viewModel = self.viewModel
                             playInfo.changci = play.changci
+                            playInfo.playType = .让分胜负
                             for cell in play.matchPlays {
                                 let cellInfo = BBPlayInfoModel()
+                                cellInfo.single = cell.single
+                                
                                 let homeCell = BBCellModel()
                                 cellInfo.homeCell = homeCell
                                 let visiCell = BBCellModel()
@@ -200,8 +219,9 @@ extension CXMMBasketballVC {
                             let playInfo = BBPlayModel()
                             playInfo.viewModel = self.viewModel
                             playInfo.changci = play.changci
-                            
+                            playInfo.playType = .胜分差
                             for cell in play.matchPlays {
+                                playInfo.single = cell.single
                                 if let visi = cell.visitingCell {
                                     for ce in visi.cellSons {
                                         let visiCell = BBCellModel()
@@ -226,8 +246,11 @@ extension CXMMBasketballVC {
                             let playInfo = BBPlayModel()
                             playInfo.viewModel = self.viewModel
                             playInfo.changci = play.changci
+                            playInfo.playType = .大小分
                             for cell in play.matchPlays {
                                 let cellInfo = BBPlayInfoModel()
+                                cellInfo.single = cell.single
+                                
                                 let homeCell = BBCellModel()
                                 cellInfo.homeCell = homeCell
                                 let visiCell = BBCellModel()
@@ -239,8 +262,12 @@ extension CXMMBasketballVC {
                             let playInfo = BBPlayModel()
                             playInfo.viewModel = self.viewModel
                             playInfo.changci = play.changci
+                            playInfo.playType = .混合投注
+                            
                             for cell in play.matchPlays {
                                 let cellInfo = BBPlayInfoModel()
+                                cellInfo.single = cell.single
+                                
                                 let homeCell = BBCellModel()
                                 cellInfo.homeCell = homeCell
                                 let visiCell = BBCellModel()

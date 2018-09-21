@@ -25,8 +25,25 @@ class BasketballViewModel : AlertPro {
             if sePlayList.isEmpty {
                 selectNumText.onNext("请至少选择一场单关比赛\n或两场非单关比赛")
                 confirmButtonState.onNext(false)
-            }else {
+            }else if sePlayList.count == 1 {
+                let play = sePlayList[0]
+                
+                if play.single == true {
+                    selectNumText.onNext("您共选择\(sePlayList.count)场赛事")
+                    confirmButtonState.onNext(true)
+                }else {
+                    if play.shengfu.single || play.rangfen.single || play.daxiaofen.single {
+                        selectNumText.onNext("您共选择\(sePlayList.count)场赛事")
+                        confirmButtonState.onNext(true)
+                    }else{
+                        selectNumText.onNext("您共选择\(sePlayList.count)场赛事")
+                        confirmButtonState.onNext(false)
+                    }
+                }
+            }
+            else {
                 selectNumText.onNext("您共选择\(sePlayList.count)场赛事")
+                confirmButtonState.onNext(true)
             }
         }
     }
