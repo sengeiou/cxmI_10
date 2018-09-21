@@ -455,17 +455,17 @@ extension BasketballHunheCell {
     }
     
     private func lineDefaultColor() {
-        topLineOne.backgroundColor = ColorFFFFFF
-        topLineTwo.backgroundColor = ColorFFFFFF
-        topLineThree.backgroundColor = ColorFFFFFF
-        topLineFour.backgroundColor = ColorFFFFFF
+        topLineOne.backgroundColor = ColorEDEDED
+        topLineTwo.backgroundColor = ColorEDEDED
+        topLineThree.backgroundColor = ColorEDEDED
+        topLineFour.backgroundColor = ColorEDEDED
         
-        leftLineOne.backgroundColor = ColorFFFFFF
-        leftLineTwo.backgroundColor = ColorFFFFFF
-        leftLineThree.backgroundColor = ColorFFFFFF
+        leftLineOne.backgroundColor = ColorEDEDED
+        leftLineTwo.backgroundColor = ColorEDEDED
+        leftLineThree.backgroundColor = ColorEDEDED
         
-        rightLineOne.backgroundColor = ColorFFFFFF
-        rightLineTwo.backgroundColor = ColorFFFFFF
-        rightLineThree.backgroundColor = ColorFFFFFF
+        rightLineOne.backgroundColor = ColorEDEDED
+        rightLineTwo.backgroundColor = ColorEDEDED
+        rightLineThree.backgroundColor = ColorEDEDED
     }
 }
