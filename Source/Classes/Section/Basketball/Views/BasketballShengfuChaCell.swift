@@ -46,6 +46,8 @@ class BasketballShengfuChaCell: UITableViewCell {
     }
 
     private func initSubview() {
+        oddsLabel.layer.cornerRadius = 3
+        oddsLabel.layer.masksToBounds = true
         oddsLabel.layer.borderWidth = 1
         oddsLabel.layer.borderColor = ColorF4F4F4.cgColor
     }

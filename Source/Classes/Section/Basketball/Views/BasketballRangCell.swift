@@ -62,13 +62,9 @@ class BasketballRangCell: UITableViewCell {
 // MARK: - 点击事件
 extension BasketballRangCell {
     @IBAction func visiClick(_ sender : UIButton) {
-        sender.isSelected = !sender.isSelected
-        seButton(isSelected: sender.isSelected, sender: sender)
         viewModel.seRFVisiPlay(isSelected: sender.isSelected)
     }
     @IBAction func homeClick(_ sender : UIButton) {
-        sender.isSelected = !sender.isSelected
-        seButton(isSelected: sender.isSelected, sender: sender)
         viewModel.seRFHomePlay(isSelected: sender.isSelected)
     }
     private func seButton(isSelected : Bool, sender : UIButton) {

@@ -10,14 +10,14 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-fileprivate let maxNum : Int = 3
+
 
 class BBPlaySectionModel {
     var playType : BasketballPlayType = .混合投注
     var list : [BBPlayModel] = [BBPlayModel]()
 }
 
-class BBPlayModel {
+class BBPlayModel : NSObject {
     
     var changci : String!
     
@@ -30,15 +30,17 @@ class BBPlayModel {
     
     
     // 交互
+    weak var viewModel : BasketballViewModel!
+    
+    // 胜分差，选择项
     var seSFC : BehaviorSubject = BehaviorSubject(value: [BBCellModel]())
-    
-    var selectedCellNum : BehaviorSubject = BehaviorSubject(value: 0)
-    
     private var seSFCList : [BBCellModel] = [BBCellModel]() {
         didSet{
             seSFC.onNext(seSFCList)
         }
     }
+    // 混合，选取项
+    var selectedCellNum : BehaviorSubject = BehaviorSubject(value: 0)
     private var cellNum = 0 {
         didSet{
             selectedCellNum.onNext(cellNum)
@@ -48,35 +50,81 @@ class BBPlayModel {
 }
 
 extension BBPlayModel {
+    
+    private func canSePlay(isSelected : Bool) -> Bool {
+        switch isSelected {
+        case true:
+            guard viewModel.selectMatch(play: self) else { return false }
+        case false :
+            if cellNum <= 1 {
+                viewModel.deSelectMatch(play: self)
+            }
+            return true
+        }
+        return true
+    }
     // 胜负
     func seSFVisiPlay(isSelected: Bool) {
-        shengfu.visiCell.isSelected.onNext(isSelected)
-        changeCellNum(isSelected: isSelected)
+        shengfu.visiCell.selected = !shengfu.visiCell.selected
+        
+//        switch shengfu.visiCell.selected {
+//        case true:
+//            guard viewModel.selectMatch(play: self) else { return }
+//        case false :
+//            if cellNum <= 1 {
+//                viewModel.deSelectMatch(play: self)
+//            }
+//        }
+        
+        guard canSePlay(isSelected: shengfu.visiCell.selected) else {
+            shengfu.visiCell.selected = false
+            return }
+        
+        shengfu.visiCell.isSelected.onNext(shengfu.visiCell.selected)
+        changeCellNum(isSelected: shengfu.visiCell.selected)
     }
     func seSFHomePlay(isSelected: Bool) {
-        shengfu.homeCell.isSelected.onNext(isSelected)
-        changeCellNum(isSelected: isSelected)
+        shengfu.homeCell.selected = !shengfu.homeCell.selected
+        guard canSePlay(isSelected: shengfu.homeCell.selected) else {
+            shengfu.homeCell.selected = false
+            return }
+        shengfu.homeCell.isSelected.onNext(shengfu.homeCell.selected)
+        changeCellNum(isSelected: shengfu.homeCell.selected)
     }
-    
     // 让分
     func seRFVisiPlay(isSelected : Bool) {
-        rangfen.visiCell.isSelected.onNext(isSelected)
-        changeCellNum(isSelected: isSelected)
+        rangfen.visiCell.selected = !rangfen.visiCell.selected
+        guard canSePlay(isSelected: rangfen.visiCell.selected) else {
+            rangfen.visiCell.selected = false
+            return }
+        rangfen.visiCell.isSelected.onNext(rangfen.visiCell.selected)
+        changeCellNum(isSelected: rangfen.visiCell.selected)
     }
     func seRFHomePlay(isSelected : Bool) {
-        rangfen.homeCell.isSelected.onNext(isSelected)
-        changeCellNum(isSelected: isSelected)
+        rangfen.homeCell.selected = !rangfen.homeCell.selected
+        guard canSePlay(isSelected: rangfen.homeCell.selected) else {
+            rangfen.homeCell.selected = false
+            return }
+        rangfen.homeCell.isSelected.onNext(rangfen.homeCell.selected)
+        changeCellNum(isSelected: rangfen.homeCell.selected)
     }
     // 大小分
     func seDXFVisiPlay(isSelected : Bool) {
-        daxiaofen.visiCell.isSelected.onNext(isSelected)
-        changeCellNum(isSelected: isSelected)
+        daxiaofen.visiCell.selected = !daxiaofen.visiCell.selected
+        guard canSePlay(isSelected: daxiaofen.visiCell.selected) else {
+            daxiaofen.visiCell.selected = false
+            return }
+        daxiaofen.visiCell.isSelected.onNext(daxiaofen.visiCell.selected)
+        changeCellNum(isSelected: daxiaofen.visiCell.selected)
     }
     func seDXFHomePlay(isSelected : Bool) {
-        daxiaofen.homeCell.isSelected.onNext(isSelected)
-        changeCellNum(isSelected: isSelected)
+        daxiaofen.homeCell.selected = !daxiaofen.homeCell.selected
+        guard canSePlay(isSelected: daxiaofen.homeCell.selected) else {
+            daxiaofen.homeCell.selected = false
+            return }
+        daxiaofen.homeCell.isSelected.onNext(daxiaofen.homeCell.selected)
+        changeCellNum(isSelected: daxiaofen.homeCell.selected)
     }
-    
     // 胜分差
     func seSFCVisiPlay(isSelected : Bool, index : Int) {
         let cell = visiSFC[index]
@@ -106,6 +154,23 @@ extension BBPlayModel {
         case false:
             seSFCList.remove(cell)
         }
+    }
+    // 设置为选中状态
+    func deSeSFCVisiPlay() {
+        for (_, cell)  in visiSFC.enumerated() {
+            cell.selected = false
+            cell.isSelected.onNext(false)
+            changeCellNum(isSelected: false)
+        }
+        seSFCList.removeAll()
+    }
+    func deSeSFCHomePlay() {
+        for (_, cell)  in homeSFC.enumerated() {
+            cell.selected = false
+            cell.isSelected.onNext(false)
+            changeCellNum(isSelected: false)
+        }
+        seSFCList.removeAll()
     }
     
     private func changeCellNum(isSelected : Bool) {

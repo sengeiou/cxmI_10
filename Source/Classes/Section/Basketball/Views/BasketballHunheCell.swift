@@ -65,6 +65,8 @@ class BasketballHunheCell: UITableViewCell {
     
     private var viewModel : BBPlayModel!
     
+    private var homeViewModel : BasketballViewModel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         initSubview()
@@ -111,34 +113,21 @@ class BasketballHunheCell: UITableViewCell {
 // MARK: - 玩法 点击事件
 extension BasketballHunheCell {
     @IBAction func sfVisiClick(_ sender : UIButton) {
-        sender.isSelected = !sender.isSelected
-        seButton(isSelected: sender.isSelected, sender: sender)
-        
         viewModel.seSFVisiPlay(isSelected: sender.isSelected)
     }
     @IBAction func sfHomeClick(_ sender : UIButton) {
-        sender.isSelected = !sender.isSelected
-        seButton(isSelected: sender.isSelected, sender: sender)
         viewModel.seSFHomePlay(isSelected: sender.isSelected)
     }
     @IBAction func rfVisiClick(_ sender : UIButton) {
-        sender.isSelected = !sender.isSelected
-        seButton(isSelected: sender.isSelected, sender: sender)
         viewModel.seRFVisiPlay(isSelected: sender.isSelected)
     }
     @IBAction func rfHomeClick(_ sender : UIButton) {
-        sender.isSelected = !sender.isSelected
-        seButton(isSelected: sender.isSelected, sender: sender)
         viewModel.seRFHomePlay(isSelected: sender.isSelected)
     }
     @IBAction func dxfVisiClick(_ sender : UIButton) {
-        sender.isSelected = !sender.isSelected
-        seButton(isSelected: sender.isSelected, sender: sender)
         viewModel.seDXFVisiPlay(isSelected: sender.isSelected)
     }
     @IBAction func dxfHomeClick(_ sender : UIButton) {
-        sender.isSelected = !sender.isSelected
-        seButton(isSelected: sender.isSelected, sender: sender)
         viewModel.seDXFHomePlay(isSelected: sender.isSelected)
     }
     
@@ -155,8 +144,9 @@ extension BasketballHunheCell {
 }
 // MARK: - 数据 配置
 extension BasketballHunheCell {
-    public func configure(with data : BBPlayModel) {
+    public func configure(with data : BBPlayModel, viewModel : BasketballViewModel) {
         self.viewModel = data
+        self.homeViewModel = viewModel
         _ = data.shengfu.visiCell.isSelected.asObserver()
             .subscribe({ (event) in
                 guard let se = event.element else { return }
@@ -206,7 +196,10 @@ extension BasketballHunheCell {
                     let att = NSMutableAttributedString(string: "更多\n玩法",
                                                         attributes: [NSAttributedStringKey.foregroundColor : Color505050])
                     self?.moreButton.setAttributedTitle(att, for: .normal)
+                    
                 }else {
+                    
+
                     let muatt = NSMutableAttributedString(string: "已选\n",
                                                           attributes: [NSAttributedStringKey.foregroundColor : Color505050])
                     let numAtt = NSAttributedString(string: "\(num)",
@@ -283,17 +276,17 @@ extension BasketballHunheCell {
                                                        cellOdds: playInfo.homeCell.cellOdds)
                     sfHomeTeam.setAttributedTitle(homeOdds, for: .normal)
 
-                    _ = playInfo.visitingCell.isSelected.asObserver()
-                        .subscribe({ (event) in
-                            guard let se = event.element else { return }
-                            self.sfVisiTeam.isSelected = se
-                        })
-                    
-                    _ = playInfo.homeCell.isSelected.asObserver()
-                        .subscribe({ (event) in
-                            guard let se = event.element else { return }
-                            self.sfHomeTeam.isSelected = se
-                        })
+//                    _ = playInfo.visitingCell.isSelected.asObserver()
+//                        .subscribe({ (event) in
+//                            guard let se = event.element else { return }
+//                            self.sfVisiTeam.isSelected = se
+//                        })
+//
+//                    _ = playInfo.homeCell.isSelected.asObserver()
+//                        .subscribe({ (event) in
+//                            guard let se = event.element else { return }
+//                            self.sfHomeTeam.isSelected = se
+//                        })
                     
                 }
                 

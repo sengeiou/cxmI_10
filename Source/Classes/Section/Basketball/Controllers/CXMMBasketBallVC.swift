@@ -78,6 +78,7 @@ class CXMMBasketballVC: BaseViewController {
                 guard let text = event.element else { return }
                 self?.selectNum.text = text
         }
+        
     }
     private func initSubview() {
         menu.delegate = self
@@ -171,6 +172,7 @@ extension CXMMBasketballVC {
                         switch play.playType {
                         case "1":
                             let playInfo = BBPlayModel()
+                            playInfo.viewModel = self.viewModel
                             playInfo.changci = play.changci
                             for cell in play.matchPlays {
                                 let cellInfo = BBPlayInfoModel()
@@ -183,6 +185,7 @@ extension CXMMBasketballVC {
                             sectionModel.list.append(playInfo)
                         case "2":
                             let playInfo = BBPlayModel()
+                            playInfo.viewModel = self.viewModel
                             playInfo.changci = play.changci
                             for cell in play.matchPlays {
                                 let cellInfo = BBPlayInfoModel()
@@ -195,6 +198,7 @@ extension CXMMBasketballVC {
                             sectionModel.list.append(playInfo)
                         case "3":
                             let playInfo = BBPlayModel()
+                            playInfo.viewModel = self.viewModel
                             playInfo.changci = play.changci
                             
                             for cell in play.matchPlays {
@@ -220,6 +224,8 @@ extension CXMMBasketballVC {
                             break
                         case "4":
                             let playInfo = BBPlayModel()
+                            playInfo.viewModel = self.viewModel
+                            playInfo.changci = play.changci
                             for cell in play.matchPlays {
                                 let cellInfo = BBPlayInfoModel()
                                 let homeCell = BBCellModel()
@@ -231,6 +237,7 @@ extension CXMMBasketballVC {
                             sectionModel.list.append(playInfo)
                         case "5":
                             let playInfo = BBPlayModel()
+                            playInfo.viewModel = self.viewModel
                             playInfo.changci = play.changci
                             for cell in play.matchPlays {
                                 let cellInfo = BBPlayInfoModel()
@@ -417,7 +424,7 @@ extension CXMMBasketballVC : UITableViewDataSource {
         let model = matchModel.list[indexPath.section].playList[indexPath.row]
         cell.configure(with: model)
         
-        cell.configure(with: playViewModel.list[indexPath.section].list[indexPath.row])
+        cell.configure(with: playViewModel.list[indexPath.section].list[indexPath.row], viewModel : viewModel)
         
         return cell
     }
@@ -538,6 +545,7 @@ extension CXMMBasketballVC : CXMMBasketballMenuDelegate{
         // TODO: "处理，选择menu 项的逻辑"
         matchModel = nil
         self.playViewModel.list.removeAll()
+        self.viewModel.removeAllSePlay()
         self.tableView.reloadData()
         
         self.type = type

@@ -60,13 +60,9 @@ class BasketballDaxiaofenCell: UITableViewCell {
 // MARK: - 点击事件
 extension BasketballDaxiaofenCell {
     @IBAction func visiClick(_ sender : UIButton) {
-        sender.isSelected = !sender.isSelected
-        seButton(isSelected: sender.isSelected, sender: sender)
         viewModel.seDXFVisiPlay(isSelected: sender.isSelected)
     }
     @IBAction func homeClick(_ sender : UIButton) {
-        sender.isSelected = !sender.isSelected
-        seButton(isSelected: sender.isSelected, sender: sender)
         viewModel.seDXFHomePlay(isSelected: sender.isSelected)
     }
     private func seButton(isSelected : Bool, sender : UIButton) {

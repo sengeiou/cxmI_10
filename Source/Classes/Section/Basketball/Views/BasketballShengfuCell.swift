@@ -37,6 +37,8 @@ class BasketballShengfuCell: UITableViewCell {
     
     private var viewModel : BBPlayModel!
     
+    private var homeViewModel : BasketballViewModel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         initSubview()
@@ -62,13 +64,9 @@ class BasketballShengfuCell: UITableViewCell {
 // MARK: - 点击事件
 extension BasketballShengfuCell {
     @IBAction func visiClick(_ sender : UIButton) {
-        sender.isSelected = !sender.isSelected
-        seButton(isSelected: sender.isSelected, sender: sender)
         viewModel.seSFVisiPlay(isSelected: sender.isSelected)
     }
     @IBAction func homeClick(_ sender : UIButton) {
-        sender.isSelected = !sender.isSelected
-        seButton(isSelected: sender.isSelected, sender: sender)
         viewModel.seSFHomePlay(isSelected: sender.isSelected)
     }
     private func seButton(isSelected : Bool, sender : UIButton) {
