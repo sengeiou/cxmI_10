@@ -201,12 +201,16 @@ extension CXMMBasketballVC {
                                 if let visi = cell.visitingCell {
                                     for ce in visi.cellSons {
                                         let visiCell = BBCellModel()
+                                        visiCell.cellName = ce.cellName
+                                        visiCell.cellOdds = ce.cellOdds
                                         playInfo.visiSFC.append(visiCell)
                                     }
                                 }
                                 if let home = cell.homeCell {
                                     for ce in home.cellSons {
                                         let homeCell = BBCellModel()
+                                        homeCell.cellName = ce.cellName
+                                        homeCell.cellOdds = ce.cellOdds
                                         playInfo.homeSFC.append(homeCell)
                                     }
                                 }

@@ -70,7 +70,26 @@ extension BasketballShengfuChaCell {
     public func configure(with data : BBPlayModel) {
         self.viewModel = data
         
-        
+        _ = data.seSFC.asObserver()
+            .subscribe({ [weak self](event) in
+                guard let list = event.element else { return }
+                var str = ""
+                for cell in list {
+                    if cell.selected {
+                        str += "\(cell.cellName) "
+                    }
+                }
+                
+                if str == "" {
+                    self?.oddsLabel.text = "点击选择投注内容"
+                    self?.oddsLabel.textColor = Color505050
+                    self?.oddsLabel.backgroundColor = ColorFFFFFF
+                }else{
+                    self?.oddsLabel.text = str
+                    self?.oddsLabel.textColor = ColorFFFFFF
+                    self?.oddsLabel.backgroundColor = ColorEA5504
+                }
+            })
     }
     
     public func configure(with data : BasketballListModel) {

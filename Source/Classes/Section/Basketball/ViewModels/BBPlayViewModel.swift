@@ -27,9 +27,18 @@ class BBPlayModel {
     var visiSFC : [BBCellModel] = [BBCellModel]()
     var homeSFC : [BBCellModel] = [BBCellModel]()
     
+    
+    
     // 交互
+    var seSFC : BehaviorSubject = BehaviorSubject(value: [BBCellModel]())
+    
     var selectedCellNum : BehaviorSubject = BehaviorSubject(value: 0)
     
+    private var seSFCList : [BBCellModel] = [BBCellModel]() {
+        didSet{
+            seSFC.onNext(seSFCList)
+        }
+    }
     private var cellNum = 0 {
         didSet{
             selectedCellNum.onNext(cellNum)
@@ -76,12 +85,27 @@ extension BBPlayModel {
         
         cell.isSelected.onNext(cell.selected)
         changeCellNum(isSelected: cell.selected)
+        
+        switch cell.selected {
+        case true:
+            seSFCList.append(cell)
+        case false:
+            seSFCList.remove(cell)
+        }
+        
     }
     func seSFCHomePlay(isSelected : Bool, index : Int) {
         let cell = homeSFC[index]
         cell.selected = !cell.selected
         cell.isSelected.onNext(cell.selected)
         changeCellNum(isSelected: cell.selected)
+        
+        switch cell.selected {
+        case true:
+            seSFCList.append(cell)
+        case false:
+            seSFCList.remove(cell)
+        }
     }
     
     private func changeCellNum(isSelected : Bool) {
@@ -101,10 +125,13 @@ class BBPlayInfoModel {
     var homeCell : BBCellModel = BBCellModel()
     var visiCell : BBCellModel = BBCellModel()
 }
-class BBCellModel {
+class BBCellModel : NSObject {
     var selected : Bool = false
     var isSelected : BehaviorSubject<Bool> = BehaviorSubject(value: false)
     var bgColor : BehaviorSubject<UIColor> = BehaviorSubject(value: ColorFFFFFF)
+    
+    var cellName : String = ""
+    var cellOdds : String = ""
 }
 
 struct BBPlayViewModel {
