@@ -246,15 +246,29 @@ extension BasketballHunheCell {
         
         guard data.matchPlays.isEmpty == false else { return }
         
+        var single = false
+        
         for playInfo in data.matchPlays {
             
             switch playInfo.playType {
             case "1": // 胜负
                 switch playInfo.single {
                 case true:
-                    singleImg.isHidden = false
-                case false:
-                    singleImg.isHidden = true
+                    single = true
+                    topLineOne.backgroundColor = ColorEA5504
+                    topLineTwo.backgroundColor = ColorEA5504
+                    topLineThree.backgroundColor = ColorFFFFFF
+                    topLineFour.backgroundColor = ColorFFFFFF
+                    
+                    leftLineOne.backgroundColor = ColorEA5504
+                    leftLineTwo.backgroundColor = ColorFFFFFF
+                    leftLineThree.backgroundColor = ColorFFFFFF
+                    
+                    rightLineOne.backgroundColor = ColorEA5504
+                    rightLineTwo.backgroundColor = ColorFFFFFF
+                    rightLineThree.backgroundColor = ColorFFFFFF
+                case false :
+                    lineDefaultColor()
                 }
                
                 switch playInfo.isShow {
@@ -264,6 +278,9 @@ extension BasketballHunheCell {
                     
                     sfVisiTeam.setAttributedTitle(att, for: .normal)
                     sfHomeTeam.setAttributedTitle(att, for: .normal)
+                    
+                    sfVisiTeam.isUserInteractionEnabled = false
+                    sfHomeTeam.isUserInteractionEnabled = false
                 case true :
                     guard playInfo.homeCell != nil else { break }
                     guard playInfo.visitingCell != nil else { break }
@@ -276,26 +293,30 @@ extension BasketballHunheCell {
                                                        cellOdds: playInfo.homeCell.cellOdds)
                     sfHomeTeam.setAttributedTitle(homeOdds, for: .normal)
 
-//                    _ = playInfo.visitingCell.isSelected.asObserver()
-//                        .subscribe({ (event) in
-//                            guard let se = event.element else { return }
-//                            self.sfVisiTeam.isSelected = se
-//                        })
-//
-//                    _ = playInfo.homeCell.isSelected.asObserver()
-//                        .subscribe({ (event) in
-//                            guard let se = event.element else { return }
-//                            self.sfHomeTeam.isSelected = se
-//                        })
+                    sfVisiTeam.isUserInteractionEnabled = true
+                    sfHomeTeam.isUserInteractionEnabled = true
                     
                 }
                 
             case "2": // 让分胜负
+                
                 switch playInfo.single {
                 case true:
-                    singleImg.isHidden = false
-                case false:
-                    singleImg.isHidden = true
+                    single = true
+                    topLineOne.backgroundColor = ColorFFFFFF
+                    topLineTwo.backgroundColor = ColorEA5504
+                    topLineThree.backgroundColor = ColorEA5504
+                    topLineFour.backgroundColor = ColorFFFFFF
+                    
+                    leftLineOne.backgroundColor = ColorFFFFFF
+                    leftLineTwo.backgroundColor = ColorEA5504
+                    leftLineThree.backgroundColor = ColorFFFFFF
+                    
+                    rightLineOne.backgroundColor = ColorFFFFFF
+                    rightLineTwo.backgroundColor = ColorEA5504
+                    rightLineThree.backgroundColor = ColorFFFFFF
+                case false :
+                    lineDefaultColor()
                 }
                 
                 switch playInfo.isShow {
@@ -303,8 +324,10 @@ extension BasketballHunheCell {
                     
                     let att = NSAttributedString(string: "未开售")
                     
-                    sfVisiTeam.setAttributedTitle(att, for: .normal)
-                    sfHomeTeam.setAttributedTitle(att, for: .normal)
+                    rfVisiTeam.setAttributedTitle(att, for: .normal)
+                    rfHomeTeam.setAttributedTitle(att, for: .normal)
+                    rfVisiTeam.isUserInteractionEnabled = false
+                    rfHomeTeam.isUserInteractionEnabled = false
                 case true :
                     guard playInfo.homeCell != nil else { break }
                     guard playInfo.visitingCell != nil else { break }
@@ -318,35 +341,39 @@ extension BasketballHunheCell {
                     
                     rfHomeTeam.setAttributedTitle(homeOdds, for: .normal)
                     
-                    _ = playInfo.visitingCell.isSelected.asObserver()
-                        .subscribe({ (event) in
-                            guard let se = event.element else { return }
-                            self.rfVisiTeam.isSelected = se
-                        })
-                    
-                    _ = playInfo.homeCell.isSelected.asObserver()
-                        .subscribe({ (event) in
-                            guard let se = event.element else { return }
-                            self.rfHomeTeam.isSelected = se
-                        })
+                    rfVisiTeam.isUserInteractionEnabled = true
+                    rfHomeTeam.isUserInteractionEnabled = true
                     
                 }
                 
             case "4": // 大小分
                 switch playInfo.single {
                 case true:
-                    singleImg.isHidden = false
-                case false:
-                    singleImg.isHidden = true
+                    single = true
+                    topLineOne.backgroundColor = ColorFFFFFF
+                    topLineTwo.backgroundColor = ColorFFFFFF
+                    topLineThree.backgroundColor = ColorEA5504
+                    topLineFour.backgroundColor = ColorEA5504
+                    
+                    leftLineOne.backgroundColor = ColorFFFFFF
+                    leftLineTwo.backgroundColor = ColorFFFFFF
+                    leftLineThree.backgroundColor = ColorEA5504
+                    
+                    rightLineOne.backgroundColor = ColorFFFFFF
+                    rightLineTwo.backgroundColor = ColorFFFFFF
+                    rightLineThree.backgroundColor = ColorEA5504
+                case false :
+                    lineDefaultColor()
                 }
-                
                 switch playInfo.isShow {
                 case false :
                     
                     let att = NSAttributedString(string: "未开售")
                     
-                    sfVisiTeam.setAttributedTitle(att, for: .normal)
-                    sfHomeTeam.setAttributedTitle(att, for: .normal)
+                    dxfVisiTeam.setAttributedTitle(att, for: .normal)
+                    dxfHomeTeam.setAttributedTitle(att, for: .normal)
+                    dxfVisiTeam.isUserInteractionEnabled = false
+                    dxfHomeTeam.isUserInteractionEnabled = false
                 case true :
                     guard playInfo.homeCell != nil else { break }
                     guard playInfo.visitingCell != nil else { break }
@@ -358,17 +385,8 @@ extension BasketballHunheCell {
                                                        cellOdds: playInfo.homeCell.cellOdds)
                     dxfHomeTeam.setAttributedTitle(homeOdds, for: .normal)
                     
-                    _ = playInfo.visitingCell.isSelected.asObserver()
-                        .subscribe({ (event) in
-                            guard let se = event.element else { return }
-                            self.dxfVisiTeam.isSelected = se
-                        })
-                    
-                    _ = playInfo.homeCell.isSelected.asObserver()
-                        .subscribe({ (event) in
-                            guard let se = event.element else { return }
-                            self.dxfHomeTeam.isSelected = se
-                        })
+                    dxfVisiTeam.isUserInteractionEnabled = true
+                    dxfHomeTeam.isUserInteractionEnabled = true
                     
                 }
                 
@@ -377,7 +395,8 @@ extension BasketballHunheCell {
             default : break
             }
         }
-        
+        // 显示、隐藏单关
+        singleImg.isHidden = !single
     }
     
     private func getAttributedString(cellName : String, cellOdds : String, fixedOdds : String? = nil) -> NSAttributedString {
@@ -423,5 +442,20 @@ extension BasketballHunheCell {
         cellNameAtt.append(cellOddsAtt)
         
         return cellNameAtt
+    }
+    
+    private func lineDefaultColor() {
+        topLineOne.backgroundColor = ColorFFFFFF
+        topLineTwo.backgroundColor = ColorFFFFFF
+        topLineThree.backgroundColor = ColorFFFFFF
+        topLineFour.backgroundColor = ColorFFFFFF
+        
+        leftLineOne.backgroundColor = ColorFFFFFF
+        leftLineTwo.backgroundColor = ColorFFFFFF
+        leftLineThree.backgroundColor = ColorFFFFFF
+        
+        rightLineOne.backgroundColor = ColorFFFFFF
+        rightLineTwo.backgroundColor = ColorFFFFFF
+        rightLineThree.backgroundColor = ColorFFFFFF
     }
 }
