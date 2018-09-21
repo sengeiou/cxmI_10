@@ -35,6 +35,8 @@ class BasketballShengfuCell: UITableViewCell {
     // 主队赔率
     @IBOutlet weak var homeOdds : UIButton!
     
+    @IBOutlet weak var stopSeller: UIButton!
+    
     private var viewModel : BBPlayModel!
     
     private var homeViewModel : BasketballViewModel!
@@ -50,6 +52,11 @@ class BasketballShengfuCell: UITableViewCell {
         
         visiOdds.titleLabel?.textAlignment = .center
         homeOdds.titleLabel?.textAlignment = .center
+        
+        stopSeller.backgroundColor = UIColor(hexColor: "ededed", alpha: 0.9)
+        stopSeller.setTitle("本场停售\n 详情>>", for: .normal)
+        stopSeller.setTitleColor(Color505050, for: .normal)
+        stopSeller.titleLabel?.numberOfLines = 2
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -58,7 +65,9 @@ class BasketballShengfuCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    
+    private func changeSellerState(isSeller : Bool) {
+        stopSeller.isHidden = isSeller
+    }
 }
 
 // MARK: - 点击事件
@@ -97,6 +106,12 @@ extension BasketballShengfuCell {
     }
     
     public func configure(with data : BasketballListModel) {
+        
+        guard data.isShutDown == false else {
+            changeSellerState(isSeller: false)
+            return }
+        changeSellerState(isSeller: true)
+        
         // 客队名
         let visiMuatt = NSMutableAttributedString(string: "[客]",
                                                   attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F,

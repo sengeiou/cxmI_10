@@ -61,6 +61,8 @@ class BasketballHunheCell: UITableViewCell {
     // 更多玩法
     @IBOutlet weak var moreButton : UIButton!
     
+    @IBOutlet weak var stopSeller: UIButton!
+    
     private var playInfo : BasketballListModel!
     
     private var viewModel : BBPlayModel!
@@ -94,6 +96,11 @@ class BasketballHunheCell: UITableViewCell {
         rfHomeTeam.titleLabel?.textAlignment = .center
         dxfVisiTeam.titleLabel?.textAlignment = .center
         dxfHomeTeam.titleLabel?.textAlignment = .center
+        
+        stopSeller.backgroundColor = UIColor(hexColor: "ededed", alpha: 0.9)
+        stopSeller.setTitle("本场停售\n 详情>>", for: .normal)
+        stopSeller.setTitleColor(Color505050, for: .normal)
+        stopSeller.titleLabel?.numberOfLines = 2
     }
     
     @IBAction func moreButtonClick(_ sender: UIButton) {
@@ -107,6 +114,9 @@ class BasketballHunheCell: UITableViewCell {
         
     }
 
+    private func changeSellerState(isSeller : Bool) {
+        stopSeller.isHidden = isSeller
+    }
     
 }
 
@@ -218,9 +228,9 @@ extension BasketballHunheCell {
         self.playInfo = data
         
         guard data.isShutDown == false else {
-            
+            changeSellerState(isSeller: false)
             return }
-        
+        changeSellerState(isSeller: true)
         // 客队名
         let visiMuatt = NSMutableAttributedString(string: "[客]",
                                                   attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F,
