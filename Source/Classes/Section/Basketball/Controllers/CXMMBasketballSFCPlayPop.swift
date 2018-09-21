@@ -25,7 +25,7 @@ class CXMMBasketballSFCPlayPop: BasePopViewController {
     @IBOutlet weak var cancel  : UIButton!
     
     private var playInfo : BasketballListModel!
-    
+    private var viewModel : BBPlayModel!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.popStyle = .fromBottom
@@ -49,10 +49,25 @@ class CXMMBasketballSFCPlayPop: BasePopViewController {
         }
     }
     
-    
+    @objc public override func backPopVC() {
+        self.cancelClick(self.cancel)
+    }
+    override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if touch.view === self.pushBgView.superview {
+            return true
+        }
+        if touch.view !== self.collectionView || touch.view !== self.pushBgView {
+            return false
+        }
+        return true
+    }
 }
 
 extension CXMMBasketballSFCPlayPop {
+    public func configure(with data : BBPlayModel) {
+        self.viewModel = data
+        
+    }
     public func configure(with data : BasketballListModel) {
         self.playInfo = data
         
@@ -77,16 +92,22 @@ extension CXMMBasketballSFCPlayPop {
 // MARK: - 确认，，取消，，点击事件
 extension CXMMBasketballSFCPlayPop {
     @IBAction func confirmClick(_ sender : UIButton) {
-        
+        self.dismiss(animated: true, completion: nil)
     }
     @IBAction func cancelClick(_ sender : UIButton) {
-        
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
 extension CXMMBasketballSFCPlayPop : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        switch indexPath.section {
+        case 0:
+            viewModel.seSFCVisiPlay(isSelected: viewModel.visiSFC[indexPath.row].selected, index: indexPath.row)
+        case 1:
+            viewModel.seSFCHomePlay(isSelected: viewModel.homeSFC[indexPath.row].selected, index: indexPath.row)
+        default : break
+        }
     }
 }
 
@@ -103,17 +124,17 @@ extension CXMMBasketballSFCPlayPop : UICollectionViewDataSource {
         for play in self.playInfo.matchPlays {
             switch play.playType {
             case "3":
-                
                 switch indexPath.section {
                 case 0:
-                    
                     switch play.isShow {
                     case true :
                         if let visi = play.visitingCell {
                             cell.configure(with: visi.cellSons[indexPath.row], isShow: true)
+                            cell.configureViewModel(with: viewModel.visiSFC[indexPath.row], isShow: true)
                         }
                     case false:
                         cell.configure(with: nil, isShow: false)
+                        cell.configureViewModel(with: nil , isShow: false)
                     }
                     
                 case 1:
@@ -121,14 +142,15 @@ extension CXMMBasketballSFCPlayPop : UICollectionViewDataSource {
                     case true :
                         if let home = play.homeCell {
                             cell.configure(with: home.cellSons[indexPath.row], isShow: true)
+                            cell.configureViewModel(with: viewModel.homeSFC[indexPath.row], isShow: true)
                         }
                     case false:
                         cell.configure(with: nil, isShow: false)
+                        cell.configureViewModel(with: nil , isShow: false)
                     }
                     
                 default : break
                 }
-                
                 
             default: break
             }

@@ -162,16 +162,16 @@ extension CXMMBasketballVC {
                 }
                 weakSelf?.totalMatch.text = "共有\(data.allMatchCount)场比赛可投"
                 
-                
+                self.playViewModel.list.removeAll()
                 
                 for model in (weakSelf?.matchModel.list)! {
                     let sectionModel = BBPlaySectionModel()
                     
                     for play in model.playList {
-                        
                         switch play.playType {
                         case "1":
                             let playInfo = BBPlayModel()
+                            playInfo.changci = play.changci
                             for cell in play.matchPlays {
                                 let cellInfo = BBPlayInfoModel()
                                 let homeCell = BBCellModel()
@@ -183,6 +183,7 @@ extension CXMMBasketballVC {
                             sectionModel.list.append(playInfo)
                         case "2":
                             let playInfo = BBPlayModel()
+                            playInfo.changci = play.changci
                             for cell in play.matchPlays {
                                 let cellInfo = BBPlayInfoModel()
                                 let homeCell = BBCellModel()
@@ -193,6 +194,25 @@ extension CXMMBasketballVC {
                             }
                             sectionModel.list.append(playInfo)
                         case "3":
+                            let playInfo = BBPlayModel()
+                            playInfo.changci = play.changci
+                            
+                            for cell in play.matchPlays {
+                                if let visi = cell.visitingCell {
+                                    for ce in visi.cellSons {
+                                        let visiCell = BBCellModel()
+                                        playInfo.visiSFC.append(visiCell)
+                                    }
+                                }
+                                if let home = cell.homeCell {
+                                    for ce in home.cellSons {
+                                        let homeCell = BBCellModel()
+                                        playInfo.homeSFC.append(homeCell)
+                                    }
+                                }
+                            }
+                            sectionModel.list.append(playInfo)
+                            
                             break
                         case "4":
                             let playInfo = BBPlayModel()
@@ -237,8 +257,6 @@ extension CXMMBasketballVC {
                             sectionModel.list.append(playInfo)
                         default : break
                         }
-                        
-                        
                     }
                     self.playViewModel.list.append(sectionModel)
                     
@@ -341,11 +359,12 @@ extension CXMMBasketballVC : BasketballHunheCellDelegate {
 }
 // MARK: - 胜分差Cell Delegate
 extension CXMMBasketballVC : BasketballShengfuChaCellDelegate {
-    func didTipShengfenCha(playInfo: BasketballListModel) {
+    func didTipShengfenCha(playInfo: BasketballListModel, viewModel : BBPlayModel) {
         let story = UIStoryboard(storyboard: .Basketball)
         
         let shengFenPlay = story.instantiateViewController(withIdentifier: "BasketballSFCPlayPop") as! CXMMBasketballSFCPlayPop
         shengFenPlay.configure(with: playInfo)
+        shengFenPlay.configure(with: viewModel)
         present(shengFenPlay)
     }
 }
@@ -404,7 +423,7 @@ extension CXMMBasketballVC : UITableViewDataSource {
         
         let model = matchModel.list[indexPath.section].playList[indexPath.row]
         cell.configure(with: model)
-        
+        cell.configure(with: playViewModel.list[indexPath.section].list[indexPath.row])
         return cell
     }
     // 让分胜负
@@ -413,6 +432,7 @@ extension CXMMBasketballVC : UITableViewDataSource {
     
         let model = matchModel.list[indexPath.section].playList[indexPath.row]
         cell.configure(with: model)
+        cell.configure(with: playViewModel.list[indexPath.section].list[indexPath.row])
         return cell
     }
     // 大小分
@@ -420,6 +440,7 @@ extension CXMMBasketballVC : UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BasketballDaxiaofenCell", for: indexPath) as! BasketballDaxiaofenCell
         let model = matchModel.list[indexPath.section].playList[indexPath.row]
         cell.configure(with: model)
+        cell.configure(with: playViewModel.list[indexPath.section].list[indexPath.row])
         return cell
     }
     // 胜分差
@@ -428,6 +449,7 @@ extension CXMMBasketballVC : UITableViewDataSource {
         cell.delegate = self
         let model = matchModel.list[indexPath.section].playList[indexPath.row]
         cell.configure(with: model)
+        cell.configure(with: playViewModel.list[indexPath.section].list[indexPath.row])
         return cell
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -511,7 +533,7 @@ extension CXMMBasketballVC : CXMMBasketballMenuDelegate{
         
         // TODO: "处理，选择menu 项的逻辑"
         matchModel = nil
-        
+        self.playViewModel.list.removeAll()
         self.tableView.reloadData()
         
         self.type = type

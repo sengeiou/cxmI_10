@@ -23,6 +23,24 @@ class BasketballHunhePlayPopItem: UICollectionViewCell {
 }
 
 extension BasketballHunhePlayPopItem {
+    
+    public func configureViewModel(with data : BBCellModel?, isShow : Bool) {
+        guard let data = data else { return }
+        _ = data.isSelected.asObserver()
+            .subscribe { [weak self](event) in
+                guard let se = event.element else { return }
+                
+                switch se {
+                case true :
+                    self?.title.textColor = ColorFFFFFF
+                    self?.title.backgroundColor = ColorEA5504
+                case false :
+                    self?.title.textColor = Color505050
+                    self?.title.backgroundColor = ColorFFFFFF
+                }
+        }
+    }
+    
     public func configure(with data : BasketballPlayCellInfo?, isShow : Bool) {
         
         switch isShow {

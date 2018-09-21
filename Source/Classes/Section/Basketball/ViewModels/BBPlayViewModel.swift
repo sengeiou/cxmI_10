@@ -10,10 +10,13 @@ import Foundation
 import RxCocoa
 import RxSwift
 
+fileprivate let maxNum : Int = 3
+
 class BBPlaySectionModel {
     var playType : BasketballPlayType = .混合投注
     var list : [BBPlayModel] = [BBPlayModel]()
 }
+
 class BBPlayModel {
     
     var changci : String!
@@ -68,13 +71,17 @@ extension BBPlayModel {
     // 胜分差
     func seSFCVisiPlay(isSelected : Bool, index : Int) {
         let cell = visiSFC[index]
-        cell.isSelected.onNext(isSelected)
-        changeCellNum(isSelected: isSelected)
+        
+        cell.selected = !cell.selected
+        
+        cell.isSelected.onNext(cell.selected)
+        changeCellNum(isSelected: cell.selected)
     }
     func seSFCHomePlay(isSelected : Bool, index : Int) {
-        let cell = visiSFC[index]
-        cell.isSelected.onNext(isSelected)
-        changeCellNum(isSelected: isSelected)
+        let cell = homeSFC[index]
+        cell.selected = !cell.selected
+        cell.isSelected.onNext(cell.selected)
+        changeCellNum(isSelected: cell.selected)
     }
     
     private func changeCellNum(isSelected : Bool) {
@@ -95,6 +102,7 @@ class BBPlayInfoModel {
     var visiCell : BBCellModel = BBCellModel()
 }
 class BBCellModel {
+    var selected : Bool = false
     var isSelected : BehaviorSubject<Bool> = BehaviorSubject(value: false)
     var bgColor : BehaviorSubject<UIColor> = BehaviorSubject(value: ColorFFFFFF)
 }

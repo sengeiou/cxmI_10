@@ -36,6 +36,8 @@ class BasketballRangCell: UITableViewCell {
     // 主队赔率
     @IBOutlet weak var homeOdds : UIButton!
     
+    private var viewModel : BBPlayModel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         initSubview()
@@ -54,10 +56,48 @@ class BasketballRangCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+   
 }
 
+// MARK: - 点击事件
 extension BasketballRangCell {
+    @IBAction func visiClick(_ sender : UIButton) {
+        sender.isSelected = !sender.isSelected
+        seButton(isSelected: sender.isSelected, sender: sender)
+        viewModel.seRFVisiPlay(isSelected: sender.isSelected)
+    }
+    @IBAction func homeClick(_ sender : UIButton) {
+        sender.isSelected = !sender.isSelected
+        seButton(isSelected: sender.isSelected, sender: sender)
+        viewModel.seRFHomePlay(isSelected: sender.isSelected)
+    }
+    private func seButton(isSelected : Bool, sender : UIButton) {
+        switch isSelected {
+        case true:
+            sender.backgroundColor = ColorEA5504
+        case false:
+            sender.backgroundColor = ColorFFFFFF
+        }
+    }
+}
+// MARK: - 数据 配置
+extension BasketballRangCell {
+    public func configure(with data : BBPlayModel) {
+        self.viewModel = data
+        _ = data.rangfen.visiCell.isSelected.asObserver()
+            .subscribe({ [weak self](event) in
+                guard let se = event.element else { return }
+                self?.visiOdds.isSelected = se
+                self?.seButton(isSelected: se, sender: (self?.visiOdds)!)
+            })
+        _ = data.rangfen.homeCell.isSelected.asObserver()
+            .subscribe({ [weak self](event) in
+                guard let se = event.element else { return }
+                self?.homeOdds.isSelected = se
+                self?.seButton(isSelected: se, sender: (self?.homeOdds)!)
+            })
+    }
+    
     public func configure(with data : BasketballListModel) {
         // 客队名
         let visiMuatt = NSMutableAttributedString(string: "[客]",

@@ -153,7 +153,7 @@ extension BasketballHunheCell {
     
     
 }
-
+// MARK: - 数据 配置
 extension BasketballHunheCell {
     public func configure(with data : BBPlayModel) {
         self.viewModel = data
@@ -183,7 +183,7 @@ extension BasketballHunheCell {
                 self.rfHomeTeam.isSelected = se
                 self.seButton(isSelected: se, sender: self.rfHomeTeam)
             })
-        
+        // 大小分
         _ = data.daxiaofen.visiCell.isSelected.asObserver()
             .subscribe({ (event) in
                 guard let se = event.element else { return }
@@ -197,15 +197,25 @@ extension BasketballHunheCell {
                 self.dxfHomeTeam.isSelected = se
                 self.seButton(isSelected: se, sender: self.dxfHomeTeam)
             })
-        
+        // 更多
         _ = data.selectedCellNum.asObserver()
             .subscribe({ [weak self](event) in
                 guard let num = event.element else { return }
                 
                 if num <= 0 {
-                    self?.moreButton.setTitle("更多\n玩法", for: .normal)
+                    let att = NSMutableAttributedString(string: "更多\n玩法",
+                                                        attributes: [NSAttributedStringKey.foregroundColor : Color505050])
+                    self?.moreButton.setAttributedTitle(att, for: .normal)
                 }else {
-                    self?.moreButton.setTitle("已选\n\(num)项", for: .normal)
+                    let muatt = NSMutableAttributedString(string: "已选\n",
+                                                          attributes: [NSAttributedStringKey.foregroundColor : Color505050])
+                    let numAtt = NSAttributedString(string: "\(num)",
+                                                    attributes: [NSAttributedStringKey.foregroundColor : ColorEA5504])
+                    let att = NSAttributedString(string: "项",
+                        attributes: [NSAttributedStringKey.foregroundColor : Color505050])
+                    muatt.append(numAtt)
+                    muatt.append(att)
+                    self?.moreButton.setAttributedTitle(muatt, for: .normal)
                 }
                 
             })

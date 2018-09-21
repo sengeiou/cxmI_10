@@ -82,16 +82,27 @@ class CXMMBasketballHunhePlayPop: BasePopViewController {
         }
     }
     
-    
-    
-    // 左对齐等间距布局 (设置了最大间距)
+    @objc public override func backPopVC() {
+        self.cancelClick(self.cancel)
+    }
+    override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if touch.view === self.pushBgView.superview {
+            return true
+        }
+        if touch.view !== self.collectionView || touch.view !== self.pushBgView {
+            return false
+        }
+        return true
+    }
     
 }
 extension CXMMBasketballHunhePlayPop {
     @IBAction func confirmClick(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func cancelClick(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -313,18 +324,9 @@ extension CXMMBasketballHunhePlayPop : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            viewModel.seSFCVisiPlay(isSelected: true, index: indexPath.row)
+            viewModel.seSFCVisiPlay(isSelected: viewModel.visiSFC[indexPath.row].selected, index: indexPath.row)
         case 1:
-            viewModel.seSFCHomePlay(isSelected: true, index: indexPath.row)
-        default : break
-        }
-    }
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        switch indexPath.section {
-        case 0:
-            viewModel.seSFCVisiPlay(isSelected: false, index: indexPath.row)
-        case 1:
-            viewModel.seSFCHomePlay(isSelected: false, index: indexPath.row)
+            viewModel.seSFCHomePlay(isSelected: viewModel.homeSFC[indexPath.row].selected, index: indexPath.row)
         default : break
         }
     }
@@ -338,6 +340,7 @@ extension CXMMBasketballHunhePlayPop : UICollectionViewDataSource {
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BasketballHunhePlayPopItem", for: indexPath) as! BasketballHunhePlayPopItem
+        
         cell.index = indexPath.row
         for play in self.playInfo.matchPlays {
             switch play.playType {
@@ -348,9 +351,11 @@ extension CXMMBasketballHunhePlayPop : UICollectionViewDataSource {
                     case true :
                         if let visi = play.visitingCell {
                             cell.configure(with: visi.cellSons[indexPath.row], isShow: true)
+                            cell.configureViewModel(with: viewModel.visiSFC[indexPath.row], isShow: true)
                         }
                     case false:
                         cell.configure(with: nil, isShow: false)
+                        cell.configureViewModel(with: nil , isShow: false)
                     }
                     
                 case 1:
@@ -358,9 +363,11 @@ extension CXMMBasketballHunhePlayPop : UICollectionViewDataSource {
                     case true :
                         if let home = play.homeCell {
                             cell.configure(with: home.cellSons[indexPath.row], isShow: true)
+                            cell.configureViewModel(with: viewModel.homeSFC[indexPath.row], isShow: true)
                         }
                     case false:
                         cell.configure(with: nil, isShow: false)
+                        cell.configureViewModel(with: nil , isShow: false)
                     }
                     
                 default : break

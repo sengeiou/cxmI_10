@@ -9,7 +9,7 @@
 import UIKit
 
 protocol BasketballShengfuChaCellDelegate {
-    func didTipShengfenCha(playInfo : BasketballListModel) -> Void
+    func didTipShengfenCha(playInfo : BasketballListModel, viewModel : BBPlayModel) -> Void
 }
 
 class BasketballShengfuChaCell: UITableViewCell {
@@ -38,6 +38,8 @@ class BasketballShengfuChaCell: UITableViewCell {
     
     private var playInfo : BasketballListModel!
     
+    private var viewModel : BBPlayModel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         initSubview()
@@ -59,11 +61,18 @@ class BasketballShengfuChaCell: UITableViewCell {
 extension BasketballShengfuChaCell {
     @IBAction func oddsButtonClick(_ sender : UIButton) {
         guard delegate != nil else { return }
-        delegate.didTipShengfenCha(playInfo: self.playInfo)
+        delegate.didTipShengfenCha(playInfo: self.playInfo, viewModel: self.viewModel)
     }
 }
 
 extension BasketballShengfuChaCell {
+    
+    public func configure(with data : BBPlayModel) {
+        self.viewModel = data
+        
+        
+    }
+    
     public func configure(with data : BasketballListModel) {
         self.playInfo = data
         // 客队名

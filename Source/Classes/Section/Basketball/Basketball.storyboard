@@ -519,6 +519,9 @@
                                                     <state key="normal" title="Button">
                                                         <color key="titleColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="visiClick:" destination="6rf-1y-qdy" eventType="touchUpInside" id="obI-0o-Oe5"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m41-ph-iRd">
                                                     <rect key="frame" x="228" y="48" width="130" height="178"/>
@@ -527,6 +530,9 @@
                                                     <state key="normal" title="Button">
                                                         <color key="titleColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="homeClick:" destination="6rf-1y-qdy" eventType="touchUpInside" id="mA4-Zh-7Qp"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kjX-sP-ruv">
                                                     <rect key="frame" x="212.5" y="0.0" width="30" height="47"/>
@@ -704,6 +710,9 @@
                                                     <state key="normal" title="Button">
                                                         <color key="titleColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="visiClick:" destination="amP-fd-gv7" eventType="touchUpInside" id="7WU-2M-8EZ"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lsm-vJ-Pa6">
                                                     <rect key="frame" x="228" y="48" width="130" height="178"/>
@@ -712,6 +721,9 @@
                                                     <state key="normal" title="Button">
                                                         <color key="titleColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="homeClick:" destination="amP-fd-gv7" eventType="touchUpInside" id="eVu-6E-hUt"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="57e-hS-vCX">
                                                     <rect key="frame" x="212.5" y="0.0" width="30" height="47"/>
@@ -889,6 +901,9 @@
                                                     <state key="normal" title="Button">
                                                         <color key="titleColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="visiClick:" destination="KTu-OD-7m4" eventType="touchUpInside" id="Jn2-X7-J7E"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rlp-pa-Auu">
                                                     <rect key="frame" x="228" y="48" width="130" height="178"/>
@@ -897,6 +912,9 @@
                                                     <state key="normal" title="Button">
                                                         <color key="titleColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="homeClick:" destination="KTu-OD-7m4" eventType="touchUpInside" id="fvq-KQ-gQk"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nfs-sf-1wZ">
                                                     <rect key="frame" x="212.5" y="0.0" width="30" height="47"/>
