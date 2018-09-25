@@ -119,7 +119,7 @@ class BasketballHunheCell: UITableViewCell, AlertPro {
     }
 
     private func changeSellerState(isSeller : Bool) {
-//        stopSeller.isHidden = isSeller
+        stopSeller.isHidden = isSeller
     }
     
 }

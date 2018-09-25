@@ -38,6 +38,8 @@ class BasketballRangCell: UITableViewCell, AlertPro {
     // 停售
     @IBOutlet weak var stopSeller: UIButton!
     
+    private var playInfo : BasketballListModel!
+    
     private var viewModel : BBPlayModel!
     
     override func awakeFromNib() {
@@ -113,6 +115,7 @@ extension BasketballRangCell {
             changeSellerState(isSeller: false)
             return }
         changeSellerState(isSeller: true)
+        self.playInfo = data
         // 客队名
         let visiMuatt = NSMutableAttributedString(string: "[客]",
                                                   attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F,
