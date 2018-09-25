@@ -48,6 +48,8 @@ class BasketballListModel: HandyJSON {
     required init() { }
     /// 是否停售
     var isShutDown : Bool! = false
+    /// 停售原因
+    var shutDownMsg : String = ""
     var changci: String = ""
     var changciId: String = ""
     var isDan : Bool! = false

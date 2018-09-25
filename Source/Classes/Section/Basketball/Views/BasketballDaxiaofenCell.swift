@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BasketballDaxiaofenCell: UITableViewCell {
+class BasketballDaxiaofenCell: UITableViewCell, AlertPro {
 
     @IBOutlet weak var topLine : UIView!
     @IBOutlet weak var leftLine: UIView!
@@ -35,7 +35,7 @@ class BasketballDaxiaofenCell: UITableViewCell {
     @IBOutlet weak var visiOdds : UIButton!
     // 主队赔率
     @IBOutlet weak var homeOdds : UIButton!
-    
+    // 停售
     @IBOutlet weak var stopSeller: UIButton!
     
     private var viewModel : BBPlayModel!
@@ -62,6 +62,11 @@ class BasketballDaxiaofenCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    @IBAction func stopSelling(_ sender : UIButton) {
+        showCXMAlert(title: "停售原因", message: "\n\(playInfo.shutDownMsg)", action: "我知道了", cancel: nil) { (action) in
+            
+        }
     }
     private func changeSellerState(isSeller : Bool) {
         stopSeller.isHidden = isSeller

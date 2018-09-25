@@ -28,7 +28,7 @@ class BasketballViewModel : AlertPro {
             }else if sePlayList.count == 1 {
                 let play = sePlayList[0]
                 
-                if play.single == true {
+                if play.shengFenCha.single == true {
                     selectNumText.onNext("您共选择\(sePlayList.count)场赛事")
                     confirmButtonState.onNext(true)
                 }else {

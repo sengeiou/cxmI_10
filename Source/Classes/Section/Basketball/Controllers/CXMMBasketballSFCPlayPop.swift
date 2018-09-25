@@ -103,9 +103,9 @@ extension CXMMBasketballSFCPlayPop : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            viewModel.seSFCVisiPlay(isSelected: viewModel.visiSFC[indexPath.row].selected, index: indexPath.row)
+            viewModel.seSFCVisiPlay(isSelected: viewModel.shengFenCha.visiSFC[indexPath.row].selected, index: indexPath.row)
         case 1:
-            viewModel.seSFCHomePlay(isSelected: viewModel.homeSFC[indexPath.row].selected, index: indexPath.row)
+            viewModel.seSFCHomePlay(isSelected: viewModel.shengFenCha.homeSFC[indexPath.row].selected, index: indexPath.row)
         default : break
         }
     }
@@ -130,7 +130,7 @@ extension CXMMBasketballSFCPlayPop : UICollectionViewDataSource {
                     case true :
                         if let visi = play.visitingCell {
                             cell.configure(with: visi.cellSons[indexPath.row], isShow: true)
-                            cell.configureViewModel(with: viewModel.visiSFC[indexPath.row], isShow: true)
+                            cell.configureViewModel(with: viewModel.shengFenCha.visiSFC[indexPath.row], isShow: true)
                         }
                     case false:
                         cell.configure(with: nil, isShow: false)
@@ -142,7 +142,7 @@ extension CXMMBasketballSFCPlayPop : UICollectionViewDataSource {
                     case true :
                         if let home = play.homeCell {
                             cell.configure(with: home.cellSons[indexPath.row], isShow: true)
-                            cell.configureViewModel(with: viewModel.homeSFC[indexPath.row], isShow: true)
+                            cell.configureViewModel(with: viewModel.shengFenCha.homeSFC[indexPath.row], isShow: true)
                         }
                     case false:
                         cell.configure(with: nil, isShow: false)

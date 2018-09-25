@@ -12,7 +12,7 @@ protocol BasketballShengfuChaCellDelegate {
     func didTipShengfenCha(playInfo : BasketballListModel, viewModel : BBPlayModel) -> Void
 }
 
-class BasketballShengfuChaCell: UITableViewCell {
+class BasketballShengfuChaCell: UITableViewCell, AlertPro {
     
     public var delegate : BasketballShengfuChaCellDelegate!
     
@@ -36,6 +36,9 @@ class BasketballShengfuChaCell: UITableViewCell {
     @IBOutlet weak var oddsLabel : UILabel!
     @IBOutlet weak var oddsButton : UIButton!
     
+    // 停售
+    @IBOutlet weak var stopSeller: UIButton!
+    
     private var playInfo : BasketballListModel!
     
     private var viewModel : BBPlayModel!
@@ -50,12 +53,25 @@ class BasketballShengfuChaCell: UITableViewCell {
         oddsLabel.layer.masksToBounds = true
         oddsLabel.layer.borderWidth = 1
         oddsLabel.layer.borderColor = ColorF4F4F4.cgColor
+        
+        stopSeller.backgroundColor = UIColor(hexColor: "ededed", alpha: 0.9)
+        stopSeller.setTitle("本场停售\n 详情>>", for: .normal)
+        stopSeller.setTitleColor(Color505050, for: .normal)
+        stopSeller.titleLabel?.numberOfLines = 2
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    @IBAction func stopSelling(_ sender : UIButton) {
+        showCXMAlert(title: "停售原因", message: "\n\(playInfo.shutDownMsg)", action: "我知道了", cancel: nil) { (action) in
+            
+        }
+    }
+    private func changeSellerState(isSeller : Bool) {
+        stopSeller.isHidden = isSeller
     }
 
 }
@@ -96,6 +112,12 @@ extension BasketballShengfuChaCell {
     
     public func configure(with data : BasketballListModel) {
         self.playInfo = data
+        
+        guard data.isShutDown == false else {
+            changeSellerState(isSeller: false)
+            return }
+        changeSellerState(isSeller: true)
+        
         // 客队名
         let visiMuatt = NSMutableAttributedString(string: "[客]",
                                                   attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F,

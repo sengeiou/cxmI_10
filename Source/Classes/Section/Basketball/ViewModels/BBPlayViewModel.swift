@@ -21,15 +21,11 @@ class BBPlayModel : NSObject {
     
     var changci : String!
     var playType : BasketballPlayType!
-    // 单关
-    var single : Bool = false
     
     var shengfu : BBPlayInfoModel = BBPlayInfoModel()
     var rangfen  : BBPlayInfoModel = BBPlayInfoModel()
     var daxiaofen : BBPlayInfoModel = BBPlayInfoModel()
-    var visiSFC : [BBCellModel] = [BBCellModel]()
-    var homeSFC : [BBCellModel] = [BBCellModel]()
-    
+    var shengFenCha : BBPlayInfoModel = BBPlayInfoModel()
     
     
     // 交互
@@ -119,7 +115,7 @@ extension BBPlayModel {
     }
     // 胜分差
     func seSFCVisiPlay(isSelected : Bool, index : Int) {
-        let cell = visiSFC[index]
+        let cell = shengFenCha.visiSFC[index]
         
         cell.selected = !cell.selected
         
@@ -140,7 +136,7 @@ extension BBPlayModel {
         
     }
     func seSFCHomePlay(isSelected : Bool, index : Int) {
-        let cell = homeSFC[index]
+        let cell = shengFenCha.homeSFC[index]
         cell.selected = !cell.selected
         
         guard canSePlay(isSelected: cell.selected) else {
@@ -160,7 +156,7 @@ extension BBPlayModel {
     }
     // 设置为选中状态
     func deSeSFCVisiPlay() {
-        for (_, cell)  in visiSFC.enumerated() {
+        for (_, cell)  in shengFenCha.visiSFC.enumerated() {
             cell.selected = false
             cell.isSelected.onNext(false)
             changeCellNum(isSelected: false)
@@ -168,7 +164,7 @@ extension BBPlayModel {
         seSFCList.removeAll()
     }
     func deSeSFCHomePlay() {
-        for (_, cell)  in homeSFC.enumerated() {
+        for (_, cell)  in shengFenCha.homeSFC.enumerated() {
             cell.selected = false
             cell.isSelected.onNext(false)
             changeCellNum(isSelected: false)
@@ -206,7 +202,11 @@ class BBPlayInfoModel {
     var homeCell : BBCellModel = BBCellModel()
     var visiCell : BBCellModel = BBCellModel()
     
+    var visiSFC : [BBCellModel] = [BBCellModel]()
+    var homeSFC : [BBCellModel] = [BBCellModel]()
+    
     var single: Bool = false
+    var isShow: Bool = true
 }
 class BBCellModel : NSObject {
     var selected : Bool = false

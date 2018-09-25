@@ -12,7 +12,7 @@ protocol BasketballHunheCellDelegate {
     func didTipMore(playInfo : BasketballListModel, viewModel : BBPlayModel) -> Void
 }
 
-class BasketballHunheCell: UITableViewCell {
+class BasketballHunheCell: UITableViewCell, AlertPro {
 
     public var delegate : BasketballHunheCellDelegate!
     
@@ -60,7 +60,7 @@ class BasketballHunheCell: UITableViewCell {
     
     // 更多玩法
     @IBOutlet weak var moreButton : UIButton!
-    
+    // 停售
     @IBOutlet weak var stopSeller: UIButton!
     
     private var playInfo : BasketballListModel!
@@ -107,7 +107,11 @@ class BasketballHunheCell: UITableViewCell {
         guard delegate != nil else { return }
         delegate.didTipMore(playInfo: self.playInfo, viewModel : viewModel)
     }
-    
+    @IBAction func stopSelling(_ sender : UIButton) {
+        showCXMAlert(title: "停售原因", message: "\n\(playInfo.shutDownMsg)", action: "我知道了", cancel: nil) { (action) in
+            
+        }
+    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
@@ -115,7 +119,7 @@ class BasketballHunheCell: UITableViewCell {
     }
 
     private func changeSellerState(isSeller : Bool) {
-        stopSeller.isHidden = isSeller
+//        stopSeller.isHidden = isSeller
     }
     
 }

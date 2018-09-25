@@ -188,9 +188,11 @@ extension CXMMBasketballVC {
                             playInfo.viewModel = self.viewModel
                             playInfo.changci = play.changci
                             playInfo.playType = .胜负
+                           
                             for cell in play.matchPlays {
                                 let cellInfo = BBPlayInfoModel()
                                 cellInfo.single = cell.single
+                                cellInfo.isShow = cell.isShow
                                 
                                 let homeCell = BBCellModel()
                                 cellInfo.homeCell = homeCell
@@ -207,6 +209,7 @@ extension CXMMBasketballVC {
                             for cell in play.matchPlays {
                                 let cellInfo = BBPlayInfoModel()
                                 cellInfo.single = cell.single
+                                cellInfo.isShow = cell.isShow
                                 
                                 let homeCell = BBCellModel()
                                 cellInfo.homeCell = homeCell
@@ -221,13 +224,15 @@ extension CXMMBasketballVC {
                             playInfo.changci = play.changci
                             playInfo.playType = .胜分差
                             for cell in play.matchPlays {
-                                playInfo.single = cell.single
+                                playInfo.shengFenCha.single = cell.single
+                                playInfo.shengFenCha.isShow = cell.isShow
+                                
                                 if let visi = cell.visitingCell {
                                     for ce in visi.cellSons {
                                         let visiCell = BBCellModel()
                                         visiCell.cellName = ce.cellName
                                         visiCell.cellOdds = ce.cellOdds
-                                        playInfo.visiSFC.append(visiCell)
+                                        playInfo.shengFenCha.visiSFC.append(visiCell)
                                     }
                                 }
                                 if let home = cell.homeCell {
@@ -235,7 +240,7 @@ extension CXMMBasketballVC {
                                         let homeCell = BBCellModel()
                                         homeCell.cellName = ce.cellName
                                         homeCell.cellOdds = ce.cellOdds
-                                        playInfo.homeSFC.append(homeCell)
+                                        playInfo.shengFenCha.homeSFC.append(homeCell)
                                     }
                                 }
                             }
@@ -250,6 +255,7 @@ extension CXMMBasketballVC {
                             for cell in play.matchPlays {
                                 let cellInfo = BBPlayInfoModel()
                                 cellInfo.single = cell.single
+                                cellInfo.isShow = cell.isShow
                                 
                                 let homeCell = BBCellModel()
                                 cellInfo.homeCell = homeCell
@@ -267,6 +273,7 @@ extension CXMMBasketballVC {
                             for cell in play.matchPlays {
                                 let cellInfo = BBPlayInfoModel()
                                 cellInfo.single = cell.single
+                                cellInfo.isShow = cell.isShow
                                 
                                 let homeCell = BBCellModel()
                                 cellInfo.homeCell = homeCell
@@ -279,13 +286,16 @@ extension CXMMBasketballVC {
                                 case "2":
                                     playInfo.rangfen = cellInfo
                                 case "3":
+                                    guard cell.visitingCell != nil else { break }
+                                    guard cell.homeCell != nil else { break }
                                     for ce in cell.visitingCell.cellSons {
                                         let cellIn = BBCellModel()
-                                        playInfo.visiSFC.append(cellIn)
+                                        playInfo.shengFenCha.visiSFC.append(cellIn)
                                     }
+                                    
                                     for ce in cell.homeCell.cellSons {
                                         let cellIn = BBCellModel()
-                                        playInfo.homeSFC.append(cellIn)
+                                        playInfo.shengFenCha.homeSFC.append(cellIn)
                                     }
                                 case "4":
                                     playInfo.daxiaofen = cellInfo

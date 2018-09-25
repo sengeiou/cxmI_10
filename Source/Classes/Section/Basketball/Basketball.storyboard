@@ -311,6 +311,9 @@
                                                     <state key="normal" title="暂停销售">
                                                         <color key="titleColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="stopSelling:" destination="xxQ-pG-Gv4" eventType="touchUpInside" id="UuR-8X-Mbk"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -582,6 +585,18 @@
                                                         <constraint firstAttribute="width" constant="23" id="akp-0O-mRL"/>
                                                     </constraints>
                                                 </imageView>
+                                                <button opaque="NO" alpha="0.89999997615814209" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3G8-fj-lW7">
+                                                    <rect key="frame" x="97" y="48" width="261" height="178"/>
+                                                    <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <state key="normal" title="暂停销售">
+                                                        <color key="titleColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="stopSelling:" destination="6rf-1y-qdy" eventType="touchUpInside" id="B6V-Rw-0W6"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="ZTp-eQ-viy" firstAttribute="leading" secondItem="cjE-hF-y9M" secondAttribute="leading" constant="10" id="07Z-ba-VN1"/>
@@ -593,10 +608,12 @@
                                                 <constraint firstItem="xxj-o4-qYk" firstAttribute="top" secondItem="cjE-hF-y9M" secondAttribute="topMargin" constant="36" id="DGw-Qt-T5n"/>
                                                 <constraint firstItem="jWJ-8K-xXk" firstAttribute="leading" secondItem="Z9R-sz-1XJ" secondAttribute="leading" id="DXA-la-5rX"/>
                                                 <constraint firstItem="iu3-4b-07R" firstAttribute="trailing" secondItem="xxj-o4-qYk" secondAttribute="trailing" id="EL2-UB-PU2"/>
+                                                <constraint firstItem="FSQ-fc-xaA" firstAttribute="top" secondItem="3G8-fj-lW7" secondAttribute="bottom" id="ElJ-5p-I8h"/>
                                                 <constraint firstAttribute="bottom" secondItem="ZTp-eQ-viy" secondAttribute="bottom" id="Fqk-Bd-RsS"/>
                                                 <constraint firstItem="LSO-cX-XjO" firstAttribute="leading" secondItem="agJ-aH-kWi" secondAttribute="trailing" id="GNk-LG-o9H"/>
                                                 <constraint firstItem="m41-ph-iRd" firstAttribute="width" secondItem="agJ-aH-kWi" secondAttribute="width" id="GWh-XV-qJb"/>
                                                 <constraint firstItem="FSQ-fc-xaA" firstAttribute="top" secondItem="LSO-cX-XjO" secondAttribute="bottom" constant="5" id="J02-84-vuf"/>
+                                                <constraint firstItem="iu3-4b-07R" firstAttribute="leading" secondItem="3G8-fj-lW7" secondAttribute="trailing" id="J17-MF-GKR"/>
                                                 <constraint firstItem="eOL-61-jc9" firstAttribute="leading" secondItem="kjX-sP-ruv" secondAttribute="trailing" constant="5" id="JhJ-82-faa"/>
                                                 <constraint firstItem="FSQ-fc-xaA" firstAttribute="leading" secondItem="xxj-o4-qYk" secondAttribute="leading" id="JxV-c1-hcl"/>
                                                 <constraint firstItem="FSQ-fc-xaA" firstAttribute="top" secondItem="iu3-4b-07R" secondAttribute="bottom" id="KQi-NL-nVt"/>
@@ -619,6 +636,7 @@
                                                 <constraint firstItem="iu3-4b-07R" firstAttribute="leading" secondItem="m41-ph-iRd" secondAttribute="trailing" id="gGa-Oy-Myv"/>
                                                 <constraint firstItem="eOL-61-jc9" firstAttribute="bottom" secondItem="tbQ-sD-aI1" secondAttribute="bottom" id="gxw-eu-6qn"/>
                                                 <constraint firstItem="7Nf-ap-vfe" firstAttribute="leading" secondItem="xxj-o4-qYk" secondAttribute="leading" id="gyw-I4-Gzb"/>
+                                                <constraint firstItem="3G8-fj-lW7" firstAttribute="top" secondItem="xxj-o4-qYk" secondAttribute="bottom" id="hHv-FG-9vt"/>
                                                 <constraint firstItem="LSO-cX-XjO" firstAttribute="top" secondItem="xxj-o4-qYk" secondAttribute="bottom" constant="5" id="hZk-UP-U7c"/>
                                                 <constraint firstItem="FSQ-fc-xaA" firstAttribute="top" secondItem="7Nf-ap-vfe" secondAttribute="bottom" id="hpp-8c-5nP"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="FSQ-fc-xaA" secondAttribute="bottom" constant="16" id="iVY-KH-Ugx"/>
@@ -631,6 +649,7 @@
                                                 <constraint firstItem="kjX-sP-ruv" firstAttribute="bottom" secondItem="tbQ-sD-aI1" secondAttribute="bottom" id="r8U-xI-Op5"/>
                                                 <constraint firstAttribute="trailing" secondItem="xxj-o4-qYk" secondAttribute="trailing" constant="16" id="tNX-sV-t1D"/>
                                                 <constraint firstItem="eOL-61-jc9" firstAttribute="top" secondItem="tbQ-sD-aI1" secondAttribute="top" id="vSQ-Dv-PD9"/>
+                                                <constraint firstItem="3G8-fj-lW7" firstAttribute="leading" secondItem="7Nf-ap-vfe" secondAttribute="trailing" id="wLg-zo-qk4"/>
                                                 <constraint firstItem="FSQ-fc-xaA" firstAttribute="top" secondItem="agJ-aH-kWi" secondAttribute="bottom" id="xNt-P8-vY6"/>
                                                 <constraint firstItem="v71-5N-784" firstAttribute="top" secondItem="cjE-hF-y9M" secondAttribute="top" id="xir-rY-aVh"/>
                                                 <constraint firstItem="agJ-aH-kWi" firstAttribute="top" secondItem="xxj-o4-qYk" secondAttribute="bottom" id="y6C-ya-bCj"/>
@@ -646,6 +665,7 @@
                                             <outlet property="leftLine" destination="7Nf-ap-vfe" id="eFv-LC-hfu"/>
                                             <outlet property="rightLine" destination="iu3-4b-07R" id="Luc-2y-JFy"/>
                                             <outlet property="singleImg" destination="v71-5N-784" id="Ufe-6T-bSP"/>
+                                            <outlet property="stopSeller" destination="3G8-fj-lW7" id="W4P-Wr-Uq5"/>
                                             <outlet property="timeLabel" destination="jWJ-8K-xXk" id="UKU-bZ-4pi"/>
                                             <outlet property="topLine" destination="xxj-o4-qYk" id="l4R-DY-4XQ"/>
                                             <outlet property="visiOdds" destination="agJ-aH-kWi" id="MK0-N2-8vz"/>
@@ -773,6 +793,18 @@
                                                         <constraint firstAttribute="height" constant="26" id="hq4-xs-vCx"/>
                                                     </constraints>
                                                 </imageView>
+                                                <button opaque="NO" alpha="0.89999997615814209" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="368-zz-O6U">
+                                                    <rect key="frame" x="97" y="48" width="261" height="178"/>
+                                                    <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <state key="normal" title="暂停销售">
+                                                        <color key="titleColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="stopSelling:" destination="amP-fd-gv7" eventType="touchUpInside" id="Ftu-uv-1st"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="Ppt-yo-b90" secondAttribute="trailing" constant="10" id="3CK-sl-5cB"/>
@@ -808,10 +840,12 @@
                                                 <constraint firstAttribute="bottomMargin" secondItem="xjg-ET-Yhg" secondAttribute="bottom" constant="16" id="Xg0-qr-tik"/>
                                                 <constraint firstItem="Zo3-nf-34c" firstAttribute="trailing" secondItem="b4Q-s1-KwU" secondAttribute="trailing" id="ZG3-Lq-nWu"/>
                                                 <constraint firstItem="Lsm-vJ-Pa6" firstAttribute="width" secondItem="tcG-Ii-gq8" secondAttribute="width" id="ZZQ-SX-e8G"/>
+                                                <constraint firstItem="xjg-ET-Yhg" firstAttribute="top" secondItem="368-zz-O6U" secondAttribute="bottom" id="cUH-PP-qHR"/>
                                                 <constraint firstItem="Wfl-lc-uFc" firstAttribute="width" secondItem="Zo3-nf-34c" secondAttribute="width" id="dQG-GK-vnX"/>
                                                 <constraint firstItem="xjg-ET-Yhg" firstAttribute="leading" secondItem="yy4-kp-uWv" secondAttribute="leading" id="dxR-Uc-7oT"/>
                                                 <constraint firstItem="bf5-ed-4xQ" firstAttribute="leading" secondItem="Lsm-vJ-Pa6" secondAttribute="trailing" id="e5J-EW-Aic"/>
                                                 <constraint firstItem="Ppt-yo-b90" firstAttribute="leading" secondItem="rTE-FR-k11" secondAttribute="leading" constant="10" id="fuF-4i-97o"/>
+                                                <constraint firstItem="bf5-ed-4xQ" firstAttribute="leading" secondItem="368-zz-O6U" secondAttribute="trailing" id="glx-o0-u1t"/>
                                                 <constraint firstItem="oSh-ab-wph" firstAttribute="trailing" secondItem="Lsm-vJ-Pa6" secondAttribute="trailing" id="gwC-AG-eA9"/>
                                                 <constraint firstItem="Wfl-lc-uFc" firstAttribute="height" secondItem="Zo3-nf-34c" secondAttribute="height" id="hzN-zq-RNT"/>
                                                 <constraint firstItem="57e-hS-vCX" firstAttribute="top" secondItem="38f-5s-cJX" secondAttribute="top" id="ieR-ig-7YQ"/>
@@ -820,8 +854,10 @@
                                                 <constraint firstItem="yaU-Tb-XRF" firstAttribute="top" secondItem="yy4-kp-uWv" secondAttribute="bottom" id="ldd-oN-gG0"/>
                                                 <constraint firstItem="Lsm-vJ-Pa6" firstAttribute="leading" secondItem="uhg-qz-KNQ" secondAttribute="trailing" id="qQr-yC-bcT"/>
                                                 <constraint firstAttribute="trailing" secondItem="xjg-ET-Yhg" secondAttribute="trailing" constant="16" id="rDx-jw-DBb"/>
+                                                <constraint firstItem="368-zz-O6U" firstAttribute="leading" secondItem="yaU-Tb-XRF" secondAttribute="trailing" id="smf-9Z-T34"/>
                                                 <constraint firstItem="oSh-ab-wph" firstAttribute="width" secondItem="38f-5s-cJX" secondAttribute="width" id="vRO-o7-ybb"/>
                                                 <constraint firstItem="Wfl-lc-uFc" firstAttribute="leading" secondItem="b4Q-s1-KwU" secondAttribute="leading" id="vqj-OY-F1L"/>
+                                                <constraint firstItem="368-zz-O6U" firstAttribute="top" secondItem="yy4-kp-uWv" secondAttribute="bottom" id="xfW-eg-dAg"/>
                                                 <constraint firstItem="57e-hS-vCX" firstAttribute="bottom" secondItem="38f-5s-cJX" secondAttribute="bottom" id="xrX-nk-Co0"/>
                                                 <constraint firstItem="iQ6-wL-KVg" firstAttribute="top" secondItem="rTE-FR-k11" secondAttribute="top" id="yQS-M9-lBd"/>
                                                 <constraint firstItem="yy4-kp-uWv" firstAttribute="leading" secondItem="b4Q-s1-KwU" secondAttribute="trailing" constant="10" id="zQV-Ht-oga"/>
@@ -837,6 +873,7 @@
                                             <outlet property="leftLine" destination="yaU-Tb-XRF" id="O8X-gh-7Wh"/>
                                             <outlet property="rightLine" destination="bf5-ed-4xQ" id="7UX-n9-FVK"/>
                                             <outlet property="singleImg" destination="iQ6-wL-KVg" id="E33-Ki-8uR"/>
+                                            <outlet property="stopSeller" destination="368-zz-O6U" id="Q9C-0E-bWw"/>
                                             <outlet property="timeLabel" destination="Wfl-lc-uFc" id="Nap-fu-GtP"/>
                                             <outlet property="topLine" destination="yy4-kp-uWv" id="QsT-ZF-MCG"/>
                                             <outlet property="visiOdds" destination="tcG-Ii-gq8" id="Qnf-5J-z4H"/>
@@ -964,6 +1001,18 @@
                                                         <constraint firstAttribute="width" constant="23" id="EaC-fE-WrO"/>
                                                     </constraints>
                                                 </imageView>
+                                                <button opaque="NO" alpha="0.89999997615814209" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xWC-9j-iEU">
+                                                    <rect key="frame" x="97" y="48" width="261" height="178"/>
+                                                    <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <state key="normal" title="暂停销售">
+                                                        <color key="titleColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="stopSelling:" destination="KTu-OD-7m4" eventType="touchUpInside" id="Bwq-ed-z8d"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="vCY-Aw-s2O" firstAttribute="top" secondItem="nfs-sf-1wZ" secondAttribute="bottom" id="1Q1-90-zrO"/>
@@ -991,14 +1040,18 @@
                                                 <constraint firstItem="soQ-3j-8SZ" firstAttribute="leading" secondItem="Fc2-7L-Xov" secondAttribute="leading" id="Og9-Jd-akR"/>
                                                 <constraint firstItem="R96-v4-fte" firstAttribute="leading" secondItem="0iS-wB-GNZ" secondAttribute="leading" id="PHn-Qi-UUb"/>
                                                 <constraint firstItem="vCY-Aw-s2O" firstAttribute="leading" secondItem="Fc2-7L-Xov" secondAttribute="trailing" constant="10" id="PLo-x5-NUl"/>
+                                                <constraint firstItem="xWC-9j-iEU" firstAttribute="leading" secondItem="gU3-cd-1qq" secondAttribute="trailing" id="QbL-9d-HFJ"/>
                                                 <constraint firstItem="qQp-TV-8N9" firstAttribute="height" secondItem="soQ-3j-8SZ" secondAttribute="height" id="Tuv-eZ-N4W"/>
                                                 <constraint firstItem="0iS-wB-GNZ" firstAttribute="top" secondItem="vCY-Aw-s2O" secondAttribute="bottom" id="TyN-gK-3Dk"/>
+                                                <constraint firstItem="xWC-9j-iEU" firstAttribute="top" secondItem="vCY-Aw-s2O" secondAttribute="bottom" id="V02-eU-b5z"/>
                                                 <constraint firstItem="RXE-ME-dfA" firstAttribute="top" secondItem="vCY-Aw-s2O" secondAttribute="bottom" id="XYm-Fs-TR6"/>
                                                 <constraint firstItem="nfs-sf-1wZ" firstAttribute="bottom" secondItem="R96-v4-fte" secondAttribute="bottom" id="ZtH-ZY-Na9"/>
                                                 <constraint firstItem="s9S-wj-m9Q" firstAttribute="leading" secondItem="cGx-ar-bZb" secondAttribute="leading" id="bDa-NU-wrk"/>
                                                 <constraint firstItem="aan-C2-29k" firstAttribute="leading" secondItem="0iS-wB-GNZ" secondAttribute="trailing" id="dfK-ut-Uvx"/>
                                                 <constraint firstItem="vCY-Aw-s2O" firstAttribute="top" secondItem="cGx-ar-bZb" secondAttribute="topMargin" constant="36" id="er4-gw-N58"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="GMn-uJ-89x" secondAttribute="bottom" constant="16" id="esu-AB-MLz"/>
+                                                <constraint firstItem="GMn-uJ-89x" firstAttribute="top" secondItem="xWC-9j-iEU" secondAttribute="bottom" id="fAJ-Dd-3BT"/>
+                                                <constraint firstItem="RXE-ME-dfA" firstAttribute="leading" secondItem="xWC-9j-iEU" secondAttribute="trailing" id="fEt-Zf-p7y"/>
                                                 <constraint firstItem="gU3-cd-1qq" firstAttribute="top" secondItem="vCY-Aw-s2O" secondAttribute="bottom" id="fMg-CQ-shk"/>
                                                 <constraint firstItem="RXE-ME-dfA" firstAttribute="trailing" secondItem="vCY-Aw-s2O" secondAttribute="trailing" id="fRd-28-kNo"/>
                                                 <constraint firstAttribute="trailing" secondItem="vCY-Aw-s2O" secondAttribute="trailing" constant="16" id="gFo-fy-ICz"/>
@@ -1028,6 +1081,7 @@
                                             <outlet property="leftLine" destination="gU3-cd-1qq" id="wUY-4t-rHD"/>
                                             <outlet property="rightLine" destination="RXE-ME-dfA" id="pG6-ZH-mzO"/>
                                             <outlet property="singleImg" destination="s9S-wj-m9Q" id="Fps-7z-1X6"/>
+                                            <outlet property="stopSeller" destination="xWC-9j-iEU" id="6eO-1y-OSL"/>
                                             <outlet property="timeLabel" destination="qQp-TV-8N9" id="HAa-l7-hW8"/>
                                             <outlet property="topLine" destination="vCY-Aw-s2O" id="yUj-xw-uge"/>
                                             <outlet property="visiOdds" destination="0iS-wB-GNZ" id="3PK-0T-cSl"/>
@@ -1104,11 +1158,24 @@
                                                         <constraint firstAttribute="width" constant="23" id="wqV-qv-PHP"/>
                                                     </constraints>
                                                 </imageView>
+                                                <button opaque="NO" alpha="0.89999997615814209" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="boj-0d-xeB">
+                                                    <rect key="frame" x="96" y="36" width="263" height="142"/>
+                                                    <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <state key="normal" title="暂停销售">
+                                                        <color key="titleColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="stopSelling:" destination="Kbi-hR-tCw" eventType="touchUpInside" id="Oef-EG-IZD"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="m3P-oD-kdk" firstAttribute="leading" secondItem="OSN-WX-Sdz" secondAttribute="leading" constant="16" id="0W4-Qo-4pe"/>
                                                 <constraint firstItem="ICX-We-eWn" firstAttribute="bottom" secondItem="eVY-fY-jbm" secondAttribute="bottom" id="3AF-KS-QwV"/>
                                                 <constraint firstItem="eVY-fY-jbm" firstAttribute="leading" secondItem="cEz-M6-AYi" secondAttribute="leading" id="8KG-wv-tQy"/>
+                                                <constraint firstItem="boj-0d-xeB" firstAttribute="bottom" secondItem="cEz-M6-AYi" secondAttribute="bottom" id="AWX-IL-mHA"/>
                                                 <constraint firstItem="JEs-Sr-vxf" firstAttribute="trailing" secondItem="sbk-Ec-1nv" secondAttribute="trailing" id="Ajy-SD-dM5"/>
                                                 <constraint firstItem="kIr-Q4-OXw" firstAttribute="top" secondItem="cEz-M6-AYi" secondAttribute="top" id="BZK-lg-slN"/>
                                                 <constraint firstItem="m3P-oD-kdk" firstAttribute="leading" secondItem="sbk-Ec-1nv" secondAttribute="leading" id="CQF-Wi-JzL"/>
@@ -1120,7 +1187,9 @@
                                                 <constraint firstAttribute="bottom" secondItem="cEz-M6-AYi" secondAttribute="bottom" constant="16" id="IBb-7v-rzc"/>
                                                 <constraint firstItem="EZX-BL-4mT" firstAttribute="top" secondItem="OSN-WX-Sdz" secondAttribute="top" id="L2P-z2-rST"/>
                                                 <constraint firstItem="kIr-Q4-OXw" firstAttribute="bottom" secondItem="cEz-M6-AYi" secondAttribute="bottom" id="LHe-D7-fnC"/>
+                                                <constraint firstItem="boj-0d-xeB" firstAttribute="leading" secondItem="cEz-M6-AYi" secondAttribute="leading" id="Mlk-es-YkW"/>
                                                 <constraint firstItem="EZX-BL-4mT" firstAttribute="leading" secondItem="eVY-fY-jbm" secondAttribute="trailing" constant="5" id="NxJ-ez-mpI"/>
+                                                <constraint firstItem="boj-0d-xeB" firstAttribute="top" secondItem="cEz-M6-AYi" secondAttribute="top" id="P5a-1L-TgV"/>
                                                 <constraint firstItem="kIr-Q4-OXw" firstAttribute="leading" secondItem="cEz-M6-AYi" secondAttribute="leading" id="SjW-IT-6ol"/>
                                                 <constraint firstItem="ICX-We-eWn" firstAttribute="trailing" secondItem="cEz-M6-AYi" secondAttribute="trailing" id="XUq-5C-nx2"/>
                                                 <constraint firstItem="JEs-Sr-vxf" firstAttribute="width" secondItem="sbk-Ec-1nv" secondAttribute="width" id="Y6d-wR-N8S"/>
@@ -1130,6 +1199,7 @@
                                                 <constraint firstItem="EZX-BL-4mT" firstAttribute="bottom" secondItem="eVY-fY-jbm" secondAttribute="bottom" id="gaN-Rn-qWb"/>
                                                 <constraint firstItem="ICX-We-eWn" firstAttribute="width" secondItem="eVY-fY-jbm" secondAttribute="width" id="h32-RQ-f2c"/>
                                                 <constraint firstItem="JEs-Sr-vxf" firstAttribute="leading" secondItem="sbk-Ec-1nv" secondAttribute="leading" id="hci-5o-HNJ"/>
+                                                <constraint firstItem="boj-0d-xeB" firstAttribute="trailing" secondItem="cEz-M6-AYi" secondAttribute="trailing" id="ivH-ZU-8fd"/>
                                                 <constraint firstItem="JEs-Sr-vxf" firstAttribute="height" secondItem="sbk-Ec-1nv" secondAttribute="height" id="kgD-ex-P1C"/>
                                                 <constraint firstItem="Wfm-R9-zra" firstAttribute="top" secondItem="OSN-WX-Sdz" secondAttribute="top" id="lX5-lt-Tw3"/>
                                                 <constraint firstItem="cEz-M6-AYi" firstAttribute="leading" secondItem="m3P-oD-kdk" secondAttribute="trailing" constant="10" id="o1K-GR-NKg"/>
@@ -1148,6 +1218,7 @@
                                             <outlet property="oddsButton" destination="kIr-Q4-OXw" id="v7y-dy-5or"/>
                                             <outlet property="oddsLabel" destination="cEz-M6-AYi" id="pFN-or-NEP"/>
                                             <outlet property="singleImg" destination="Wfm-R9-zra" id="d7C-3j-48c"/>
+                                            <outlet property="stopSeller" destination="boj-0d-xeB" id="QyN-z8-CHP"/>
                                             <outlet property="timeLabel" destination="JEs-Sr-vxf" id="Id0-s0-ZTP"/>
                                             <outlet property="visiTeam" destination="eVY-fY-jbm" id="EM0-ag-zrD"/>
                                             <outlet property="vsTeam" destination="EZX-BL-4mT" id="3Yv-MK-9Px"/>
