@@ -325,9 +325,11 @@ extension CXMMBasketballHunhePlayPop : UICollectionViewDelegate {
         switch indexPath.section {
         case 0:
             guard viewModel.shengFenCha.isShow else { return }
+            guard viewModel.shengFenCha.visiSFC.isEmpty == false else { return }
             viewModel.seSFCVisiPlay(isSelected: viewModel.shengFenCha.visiSFC[indexPath.row].selected, index: indexPath.row)
         case 1:
             guard viewModel.shengFenCha.isShow else { return }
+            guard viewModel.shengFenCha.homeSFC.isEmpty == false else { return }
             viewModel.seSFCHomePlay(isSelected: viewModel.shengFenCha.homeSFC[indexPath.row].selected, index: indexPath.row)
         default : break
         }

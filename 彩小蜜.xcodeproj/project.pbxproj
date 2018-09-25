@@ -78,6 +78,7 @@
 		1142220E2141334400CCBB3A /* TeamDetailRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1142220D2141334400CCBB3A /* TeamDetailRecordCell.swift */; };
 		114222102141336400CCBB3A /* TeamDetailFutureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1142220F2141336400CCBB3A /* TeamDetailFutureCell.swift */; };
 		1142221221413A1600CCBB3A /* TeamDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1142221121413A1600CCBB3A /* TeamDetailModel.swift */; };
+		11423DC52159E741001C8E45 /* BasketballConfirmSFCCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11423DC42159E741001C8E45 /* BasketballConfirmSFCCell.swift */; };
 		1142DE7D208ED059009E3916 /* PaymentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1142DE7C208ED059009E3916 /* PaymentProtocol.swift */; };
 		1142F70020B3D54F00C3E2E7 /* TongJiProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1142F6FF20B3D54F00C3E2E7 /* TongJiProtocol.swift */; };
 		11436EF220B65D5700127247 /* OrderPaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11436EF120B65D5700127247 /* OrderPaymentCell.swift */; };
@@ -174,6 +175,8 @@
 		116A27F52150F0210077444E /* BasketballShengfuChaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116A27F42150F0210077444E /* BasketballShengfuChaCell.swift */; };
 		116A27F7215106EC0077444E /* CXMMBasketballConfirmVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116A27F6215106EC0077444E /* CXMMBasketballConfirmVC.swift */; };
 		116A27F9215108A10077444E /* CXMMBasketballOrderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116A27F8215108A10077444E /* CXMMBasketballOrderVC.swift */; };
+		116AC792215A16AA00F6BC73 /* BBConfirmViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116AC791215A16AA00F6BC73 /* BBConfirmViewModel.swift */; };
+		116AC795215A1EE400F6BC73 /* BasketballConfirmCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116AC794215A1EE400F6BC73 /* BasketballConfirmCell.swift */; };
 		116E0F292099739E009FE44E /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116E0F282099739E009FE44E /* Router.swift */; };
 		116E0F2B209973BD009FE44E /* RouterMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116E0F2A209973BD009FE44E /* RouterMatcher.swift */; };
 		116E0F322099A601009FE44E /* PaymentList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116E0F312099A601009FE44E /* PaymentList.swift */; };
@@ -563,6 +566,7 @@
 		1142220D2141334400CCBB3A /* TeamDetailRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailRecordCell.swift; sourceTree = "<group>"; };
 		1142220F2141336400CCBB3A /* TeamDetailFutureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailFutureCell.swift; sourceTree = "<group>"; };
 		1142221121413A1600CCBB3A /* TeamDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailModel.swift; sourceTree = "<group>"; };
+		11423DC42159E741001C8E45 /* BasketballConfirmSFCCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketballConfirmSFCCell.swift; sourceTree = "<group>"; };
 		1142DE7C208ED059009E3916 /* PaymentProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentProtocol.swift; sourceTree = "<group>"; };
 		1142F6FF20B3D54F00C3E2E7 /* TongJiProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TongJiProtocol.swift; sourceTree = "<group>"; };
 		11436EF120B65D5700127247 /* OrderPaymentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderPaymentCell.swift; sourceTree = "<group>"; };
@@ -659,6 +663,8 @@
 		116A27F42150F0210077444E /* BasketballShengfuChaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketballShengfuChaCell.swift; sourceTree = "<group>"; };
 		116A27F6215106EC0077444E /* CXMMBasketballConfirmVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMMBasketballConfirmVC.swift; sourceTree = "<group>"; };
 		116A27F8215108A10077444E /* CXMMBasketballOrderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMMBasketballOrderVC.swift; sourceTree = "<group>"; };
+		116AC791215A16AA00F6BC73 /* BBConfirmViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBConfirmViewModel.swift; sourceTree = "<group>"; };
+		116AC794215A1EE400F6BC73 /* BasketballConfirmCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketballConfirmCell.swift; sourceTree = "<group>"; };
 		116E0F282099739E009FE44E /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		116E0F2A209973BD009FE44E /* RouterMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterMatcher.swift; sourceTree = "<group>"; };
 		116E0F312099A601009FE44E /* PaymentList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentList.swift; sourceTree = "<group>"; };
@@ -1174,6 +1180,7 @@
 				113F2A442150A9CE008B39AA /* ViewModels */,
 				113F2A432150A9C8008B39AA /* Models */,
 				113F2A412150A9A5008B39AA /* Views */,
+				11423DC32159E6F9001C8E45 /* ConfirmViews */,
 				113F2A422150A9BF008B39AA /* Controllers */,
 			);
 			path = Basketball;
@@ -1222,6 +1229,7 @@
 			children = (
 				116311DE2151EB3D000C362D /* BasketballViewModel.swift */,
 				1145B3EE21538B8E0002E5ED /* BBPlayViewModel.swift */,
+				116AC791215A16AA00F6BC73 /* BBConfirmViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1237,6 +1245,15 @@
 				1142220F2141336400CCBB3A /* TeamDetailFutureCell.swift */,
 			);
 			path = TeamDetails;
+			sourceTree = "<group>";
+		};
+		11423DC32159E6F9001C8E45 /* ConfirmViews */ = {
+			isa = PBXGroup;
+			children = (
+				11423DC42159E741001C8E45 /* BasketballConfirmSFCCell.swift */,
+				116AC794215A1EE400F6BC73 /* BasketballConfirmCell.swift */,
+			);
+			path = ConfirmViews;
 			sourceTree = "<group>";
 		};
 		1142DE7E208ED06A009E3916 /* Protocol */ = {
@@ -1338,6 +1355,15 @@
 				115B0CEC20EF06A400848EC7 /* FootballDetailTeamInfoCell.swift */,
 			);
 			path = MatchDetailView;
+			sourceTree = "<group>";
+		};
+		116AC793215A172C00F6BC73 /* Football */ = {
+			isa = PBXGroup;
+			children = (
+				E5D5A372206D018B00FC865D /* FootballMatch */,
+				11227C0B20849DFD00680CCC /* FootballMatchTeamInfo */,
+			);
+			path = Football;
 			sourceTree = "<group>";
 		};
 		116E0F2E20999E1E009FE44E /* WebView */ = {
@@ -2140,6 +2166,7 @@
 			isa = PBXGroup;
 			children = (
 				E57375DA2046AE7B00148622 /* Home */,
+				116AC793215A172C00F6BC73 /* Football */,
 				117C729F2100755700D9EB83 /* Daletou */,
 				113F2A402150A87A008B39AA /* Basketball */,
 				E57375D92046AE7700148622 /* Lottery */,
@@ -2216,8 +2243,6 @@
 			children = (
 				E512A96420479F8A003F14F4 /* NetAPIManager */,
 				E5D5A371206D013500FC865D /* HomeList */,
-				E5D5A372206D018B00FC865D /* FootballMatch */,
-				11227C0B20849DFD00680CCC /* FootballMatchTeamInfo */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -3241,6 +3266,7 @@
 				11B1B97220F3752700387430 /* FootballLineupMemView.swift in Sources */,
 				11E8FA6920BFF5400090BC6A /* SettingPasswordCell.swift in Sources */,
 				E50C99BB20746E6B002D8C2F /* DateProtocol.swift in Sources */,
+				116AC795215A1EE400F6BC73 /* BasketballConfirmCell.swift in Sources */,
 				116E99CC213FB31D005F1217 /* DigitalHisDetail11Or5Cell.swift in Sources */,
 				116E0F322099A601009FE44E /* PaymentList.swift in Sources */,
 				E58B57B220561BB80025E2F1 /* Spacing&SizeConstraint.swift in Sources */,
@@ -3287,6 +3313,7 @@
 				11D9D9E62089D6A200F78FCF /* NewsDetailCell.swift in Sources */,
 				112E9D4D21228FE0008466B4 /* DLTHistoryTrendBottom.swift in Sources */,
 				1169180A207DBA8B00C8A287 /* PaymentResultModel.swift in Sources */,
+				116AC792215A16AA00F6BC73 /* BBConfirmViewModel.swift in Sources */,
 				11AB2C1F21300BD80044FB1C /* CXMMSurpriseViewController.swift in Sources */,
 				11E8FA6720BFEE5C0090BC6A /* SettingDataModel.swift in Sources */,
 				E56CE80E206A22240090A1B5 /* WithdrawalProgressCell.swift in Sources */,
@@ -3495,6 +3522,7 @@
 				116A27F32150F0090077444E /* BasketballDaxiaofenCell.swift in Sources */,
 				115076A62138E7640029A63E /* LeagueListModel.swift in Sources */,
 				11E8FA5620BFD5B60090BC6A /* WorldCupOrderDetailCell.swift in Sources */,
+				11423DC52159E741001C8E45 /* BasketballConfirmSFCCell.swift in Sources */,
 				E567636C206B375A00E2D9A8 /* HXTextView.swift in Sources */,
 				E50B907D20526BB200417BFE /* RechargePaymentCell.swift in Sources */,
 				E562989C2050D1DD006397EA /* CXMRegisterViewController.swift in Sources */,

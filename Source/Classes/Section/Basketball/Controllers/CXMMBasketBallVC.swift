@@ -188,16 +188,31 @@ extension CXMMBasketballVC {
                             playInfo.viewModel = self.viewModel
                             playInfo.changci = play.changci
                             playInfo.playType = .胜负
-                           
+                            playInfo.visiTeam = play.visitingTeamAbbr
+                            playInfo.homeTeam = play.homeTeamAbbr
+                            playInfo.playInfo = play
                             for cell in play.matchPlays {
                                 let cellInfo = BBPlayInfoModel()
                                 cellInfo.single = cell.single
                                 cellInfo.isShow = cell.isShow
                                 
                                 let homeCell = BBCellModel()
+                                homeCell.playType = cell.playType
+                                if cell.isShow && cell.homeCell != nil {
+                                    homeCell.cellName = cell.homeCell.cellName
+                                    homeCell.cellOdds = cell.homeCell.cellOdds
+                                }
+                                
                                 cellInfo.homeCell = homeCell
                                 let visiCell = BBCellModel()
+                                visiCell.playType = cell.playType
+                                if cell.isShow && cell.visitingCell != nil {
+                                    visiCell.cellName = cell.visitingCell.cellName
+                                    visiCell.cellOdds = cell.visitingCell.cellOdds
+                                }
+                                
                                 cellInfo.visiCell = visiCell
+                                
                                 playInfo.shengfu = cellInfo
                             }
                             sectionModel.list.append(playInfo)
@@ -206,15 +221,32 @@ extension CXMMBasketballVC {
                             playInfo.viewModel = self.viewModel
                             playInfo.changci = play.changci
                             playInfo.playType = .让分胜负
+                            playInfo.visiTeam = play.visitingTeamAbbr
+                            playInfo.homeTeam = play.homeTeamAbbr
+                            playInfo.playInfo = play
+                            
                             for cell in play.matchPlays {
                                 let cellInfo = BBPlayInfoModel()
                                 cellInfo.single = cell.single
                                 cellInfo.isShow = cell.isShow
                                 
                                 let homeCell = BBCellModel()
+                                homeCell.playType = cell.playType
+                                if cell.isShow && cell.homeCell != nil {
+                                    homeCell.cellName = cell.homeCell.cellName
+                                    homeCell.cellOdds = cell.homeCell.cellOdds
+                                }
+                                
                                 cellInfo.homeCell = homeCell
                                 let visiCell = BBCellModel()
+                                visiCell.playType = cell.playType
+                                if cell.isShow && cell.visitingCell != nil {
+                                    visiCell.cellName = cell.visitingCell.cellName
+                                    visiCell.cellOdds = cell.visitingCell.cellOdds
+                                }
+                                
                                 cellInfo.visiCell = visiCell
+                                
                                 playInfo.rangfen = cellInfo
                             }
                             sectionModel.list.append(playInfo)
@@ -223,6 +255,10 @@ extension CXMMBasketballVC {
                             playInfo.viewModel = self.viewModel
                             playInfo.changci = play.changci
                             playInfo.playType = .胜分差
+                            playInfo.visiTeam = play.visitingTeamAbbr
+                            playInfo.homeTeam = play.homeTeamAbbr
+                            playInfo.playInfo = play
+                            
                             for cell in play.matchPlays {
                                 playInfo.shengFenCha.single = cell.single
                                 playInfo.shengFenCha.isShow = cell.isShow
@@ -232,6 +268,7 @@ extension CXMMBasketballVC {
                                         let visiCell = BBCellModel()
                                         visiCell.cellName = ce.cellName
                                         visiCell.cellOdds = ce.cellOdds
+                                        visiCell.playType = cell.playType
                                         playInfo.shengFenCha.visiSFC.append(visiCell)
                                     }
                                 }
@@ -240,6 +277,7 @@ extension CXMMBasketballVC {
                                         let homeCell = BBCellModel()
                                         homeCell.cellName = ce.cellName
                                         homeCell.cellOdds = ce.cellOdds
+                                        homeCell.playType = cell.playType
                                         playInfo.shengFenCha.homeSFC.append(homeCell)
                                     }
                                 }
@@ -252,15 +290,32 @@ extension CXMMBasketballVC {
                             playInfo.viewModel = self.viewModel
                             playInfo.changci = play.changci
                             playInfo.playType = .大小分
+                            playInfo.visiTeam = play.visitingTeamAbbr
+                            playInfo.homeTeam = play.homeTeamAbbr
+                            playInfo.playInfo = play
+                            
                             for cell in play.matchPlays {
                                 let cellInfo = BBPlayInfoModel()
                                 cellInfo.single = cell.single
                                 cellInfo.isShow = cell.isShow
                                 
                                 let homeCell = BBCellModel()
+                                homeCell.playType = cell.playType
+                                if cell.isShow && cell.homeCell != nil {
+                                    homeCell.cellName = cell.homeCell.cellName
+                                    homeCell.cellOdds = cell.homeCell.cellOdds
+                                }
+                                
                                 cellInfo.homeCell = homeCell
                                 let visiCell = BBCellModel()
+                                visiCell.playType = cell.playType
+                                if cell.isShow && cell.visitingCell != nil {
+                                    visiCell.cellName = cell.visitingCell.cellName
+                                    visiCell.cellOdds = cell.visitingCell.cellOdds
+                                }
+                                
                                 cellInfo.visiCell = visiCell
+                                
                                 playInfo.daxiaofen = cellInfo
                             }
                             sectionModel.list.append(playInfo)
@@ -269,6 +324,9 @@ extension CXMMBasketballVC {
                             playInfo.viewModel = self.viewModel
                             playInfo.changci = play.changci
                             playInfo.playType = .混合投注
+                            playInfo.visiTeam = play.visitingTeamAbbr
+                            playInfo.homeTeam = play.homeTeamAbbr
+                            playInfo.playInfo = play
                             
                             for cell in play.matchPlays {
                                 let cellInfo = BBPlayInfoModel()
@@ -276,28 +334,64 @@ extension CXMMBasketballVC {
                                 cellInfo.isShow = cell.isShow
                                 
                                 let homeCell = BBCellModel()
+                                homeCell.playType = cell.playType
                                 cellInfo.homeCell = homeCell
+                                
                                 let visiCell = BBCellModel()
+                                visiCell.playType = cell.playType
                                 cellInfo.visiCell = visiCell
                                 
                                 switch cell.playType {
                                 case "1":
+                                    if cell.isShow && cell.homeCell != nil {
+                                        homeCell.cellName = cell.homeCell.cellName
+                                        homeCell.cellOdds = cell.homeCell.cellOdds
+                                    }
+                                    if cell.isShow && cell.visitingCell != nil {
+                                        visiCell.cellName = cell.visitingCell.cellName
+                                        visiCell.cellOdds = cell.visitingCell.cellOdds
+                                    }
+                                    
                                     playInfo.shengfu = cellInfo
                                 case "2":
+                                    if cell.isShow && cell.homeCell != nil {
+                                        homeCell.cellName = cell.homeCell.cellName
+                                        homeCell.cellOdds = cell.homeCell.cellOdds
+                                    }
+                                    if cell.isShow && cell.visitingCell != nil {
+                                        visiCell.cellName = cell.visitingCell.cellName
+                                        visiCell.cellOdds = cell.visitingCell.cellOdds
+                                    }
+                                    
                                     playInfo.rangfen = cellInfo
                                 case "3":
                                     guard cell.visitingCell != nil else { break }
                                     guard cell.homeCell != nil else { break }
                                     for ce in cell.visitingCell.cellSons {
                                         let cellIn = BBCellModel()
+                                        cellIn.cellName = ce.cellName
+                                        cellIn.cellOdds = ce.cellOdds
+                                        cellIn.playType = "31"
                                         playInfo.shengFenCha.visiSFC.append(cellIn)
                                     }
                                     
                                     for ce in cell.homeCell.cellSons {
                                         let cellIn = BBCellModel()
+                                        cellIn.cellName = ce.cellName
+                                        cellIn.cellOdds = ce.cellOdds
+                                        cellIn.playType = "32"
                                         playInfo.shengFenCha.homeSFC.append(cellIn)
                                     }
                                 case "4":
+                                    if cell.isShow && cell.homeCell != nil {
+                                        homeCell.cellName = cell.homeCell.cellName
+                                        homeCell.cellOdds = cell.homeCell.cellOdds
+                                    }
+                                    if cell.isShow && cell.visitingCell != nil {
+                                        visiCell.cellName = cell.visitingCell.cellName
+                                        visiCell.cellOdds = cell.visitingCell.cellOdds
+                                    }
+                                    
                                     playInfo.daxiaofen = cellInfo
                                 default : break
                                 }
@@ -371,6 +465,17 @@ extension CXMMBasketballVC {
     }
     
     
+}
+extension CXMMBasketballVC {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "pushConfirm":
+            let vc = segue.destination as! CXMMBasketballConfirmVC
+            vc.viewModel = self.viewModel
+        default: break
+            
+        }
+    }
 }
 // MARK: - header 点击事件
 extension CXMMBasketballVC: BasketBallHotSectionHeaderDelegate,

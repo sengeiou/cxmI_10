@@ -15,11 +15,14 @@ fileprivate let maxNum : Int = 3
 class BasketballViewModel : AlertPro {
     var selectNumText : BehaviorSubject<String> = BehaviorSubject(value: "请至少选择一场单关比赛\n或两场非单关比赛")
     
+    var filterList: [FootballPlayFilterModel] = [FootballPlayFilterModel]()
+    
     // 选取的 赛事
     var confirmButtonState : BehaviorSubject = BehaviorSubject(value: false)
     
+    var multiple : BehaviorSubject = BehaviorSubject(value: "5")
     
-    private var sePlayList = [BBPlayModel]() {
+    public var sePlayList = [BBPlayModel]() {
         didSet{
             
             if sePlayList.isEmpty {
@@ -75,5 +78,39 @@ extension BasketballViewModel {
     }
     public func deSelectMatch(play : BBPlayModel) {
         sePlaySet.remove(play)
+    }
+    
+    public func deletePlay(play : BBPlayModel) {
+        self.sePlaySet.remove(play)
+        
+    }
+    public func changeMultiple(multiple : String) {
+        self.multiple.onNext(multiple)
+    }
+}
+
+fileprivate var maxChuanguanNum: Set<Int> = [8]
+extension BasketballViewModel {
+    private func getChuanguan(sePlays : [BBPlayModel]) -> [FootballPlayFilterModel] {
+        let list = [FootballPlayFilterModel]()
+        
+        for play in sePlays {
+            switch play.playType {
+            case .胜负:
+                break
+            case .让分胜负:
+                break
+            case .大小分:
+                
+                break
+            case .胜分差:
+                break
+            case .混合投注:
+                break
+            }
+        }
+        
+        
+        return list
     }
 }

@@ -19,14 +19,23 @@ class BBPlaySectionModel {
 
 class BBPlayModel : NSObject {
     
+    var playInfo : BasketballListModel!
+    
     var changci : String!
-    var playType : BasketballPlayType!
+    var playType : BasketballPlayType = .混合投注
+    
+    var visiTeam : String = ""
+    var homeTeam : String = ""
+    
+    
     
     var shengfu : BBPlayInfoModel = BBPlayInfoModel()
     var rangfen  : BBPlayInfoModel = BBPlayInfoModel()
     var daxiaofen : BBPlayInfoModel = BBPlayInfoModel()
     var shengFenCha : BBPlayInfoModel = BBPlayInfoModel()
     
+    // 选中的Cell
+    var seCellList : [BBCellModel] = [BBCellModel]()
     
     // 交互
     weak var viewModel : BasketballViewModel!
@@ -50,19 +59,17 @@ class BBPlayModel : NSObject {
 
 extension BBPlayModel {
     
-    
+    private func selectCells(cell : BBCellModel) {
+        switch cell.selected {
+        case true:
+            seCellList.append(cell)
+        case false:
+            seCellList.remove(cell)
+        }
+    }
     // 胜负
     func seSFVisiPlay(isSelected: Bool) {
         shengfu.visiCell.selected = !shengfu.visiCell.selected
-        
-//        switch shengfu.visiCell.selected {
-//        case true:
-//            guard viewModel.selectMatch(play: self) else { return }
-//        case false :
-//            if cellNum <= 1 {
-//                viewModel.deSelectMatch(play: self)
-//            }
-//        }
         
         guard canSePlay(isSelected: shengfu.visiCell.selected) else {
             shengfu.visiCell.selected = false
@@ -70,6 +77,7 @@ extension BBPlayModel {
         
         shengfu.visiCell.isSelected.onNext(shengfu.visiCell.selected)
         changeCellNum(isSelected: shengfu.visiCell.selected)
+        selectCells(cell: shengfu.visiCell)
     }
     func seSFHomePlay(isSelected: Bool) {
         shengfu.homeCell.selected = !shengfu.homeCell.selected
@@ -78,6 +86,7 @@ extension BBPlayModel {
             return }
         shengfu.homeCell.isSelected.onNext(shengfu.homeCell.selected)
         changeCellNum(isSelected: shengfu.homeCell.selected)
+        selectCells(cell: shengfu.homeCell)
     }
     // 让分
     func seRFVisiPlay(isSelected : Bool) {
@@ -87,6 +96,7 @@ extension BBPlayModel {
             return }
         rangfen.visiCell.isSelected.onNext(rangfen.visiCell.selected)
         changeCellNum(isSelected: rangfen.visiCell.selected)
+        selectCells(cell: rangfen.visiCell)
     }
     func seRFHomePlay(isSelected : Bool) {
         rangfen.homeCell.selected = !rangfen.homeCell.selected
@@ -95,6 +105,7 @@ extension BBPlayModel {
             return }
         rangfen.homeCell.isSelected.onNext(rangfen.homeCell.selected)
         changeCellNum(isSelected: rangfen.homeCell.selected)
+        selectCells(cell: rangfen.homeCell)
     }
     // 大小分
     func seDXFVisiPlay(isSelected : Bool) {
@@ -104,6 +115,7 @@ extension BBPlayModel {
             return }
         daxiaofen.visiCell.isSelected.onNext(daxiaofen.visiCell.selected)
         changeCellNum(isSelected: daxiaofen.visiCell.selected)
+        selectCells(cell: daxiaofen.visiCell)
     }
     func seDXFHomePlay(isSelected : Bool) {
         daxiaofen.homeCell.selected = !daxiaofen.homeCell.selected
@@ -112,6 +124,7 @@ extension BBPlayModel {
             return }
         daxiaofen.homeCell.isSelected.onNext(daxiaofen.homeCell.selected)
         changeCellNum(isSelected: daxiaofen.homeCell.selected)
+        selectCells(cell: daxiaofen.homeCell)
     }
     // 胜分差
     func seSFCVisiPlay(isSelected : Bool, index : Int) {
@@ -133,7 +146,7 @@ extension BBPlayModel {
         case false:
             seSFCList.remove(cell)
         }
-        
+        selectCells(cell: cell)
     }
     func seSFCHomePlay(isSelected : Bool, index : Int) {
         let cell = shengFenCha.homeSFC[index]
@@ -153,6 +166,7 @@ extension BBPlayModel {
         case false:
             seSFCList.remove(cell)
         }
+        selectCells(cell: cell)
     }
     // 设置为选中状态
     func deSeSFCVisiPlay() {
@@ -213,6 +227,7 @@ class BBCellModel : NSObject {
     var isSelected : BehaviorSubject<Bool> = BehaviorSubject(value: false)
     var bgColor : BehaviorSubject<UIColor> = BehaviorSubject(value: ColorFFFFFF)
     
+    var playType : String = ""
     var cellName : String = ""
     var cellOdds : String = ""
 }

@@ -29,7 +29,7 @@ protocol FootballPlayFilterVCDelegate {
 class CXMFootballPlayFilterVC: BasePopViewController, FootballFilterBottomViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     
-    public var filterList: [FootballPlayFilterModel]! {
+    public var filterList: [FootballPlayFilterModel] = [FootballPlayFilterModel]() {
         didSet{
             guard filterList != nil else { return }
             oldFileterList = filterList.map { $0.copy() as! FootballPlayFilterModel }
