@@ -207,6 +207,7 @@ extension CXMMBasketballVC {
                                 if cell.isShow && cell.homeCell != nil {
                                     homeCell.cellName = cell.homeCell.cellName
                                     homeCell.cellOdds = cell.homeCell.cellOdds
+                                    homeCell.cellCode = cell.homeCell.cellCode
                                 }
                                 
                                 cellInfo.homeCell = homeCell
@@ -215,6 +216,7 @@ extension CXMMBasketballVC {
                                 if cell.isShow && cell.visitingCell != nil {
                                     visiCell.cellName = cell.visitingCell.cellName
                                     visiCell.cellOdds = cell.visitingCell.cellOdds
+                                    visiCell.cellCode = cell.visitingCell.cellCode
                                 }
                                 
                                 cellInfo.visiCell = visiCell
@@ -242,6 +244,7 @@ extension CXMMBasketballVC {
                                 if cell.isShow && cell.homeCell != nil {
                                     homeCell.cellName = cell.homeCell.cellName
                                     homeCell.cellOdds = cell.homeCell.cellOdds
+                                    homeCell.cellCode = cell.homeCell.cellCode
                                 }
                                 
                                 cellInfo.homeCell = homeCell
@@ -250,6 +253,7 @@ extension CXMMBasketballVC {
                                 if cell.isShow && cell.visitingCell != nil {
                                     visiCell.cellName = cell.visitingCell.cellName
                                     visiCell.cellOdds = cell.visitingCell.cellOdds
+                                    visiCell.cellCode = cell.visitingCell.cellCode
                                 }
                                 
                                 cellInfo.visiCell = visiCell
@@ -276,6 +280,7 @@ extension CXMMBasketballVC {
                                         let visiCell = BBCellModel()
                                         visiCell.cellName = ce.cellName
                                         visiCell.cellOdds = ce.cellOdds
+                                        visiCell.cellCode = ce.cellCode
                                         visiCell.playType = "31"
                                         playInfo.shengFenCha.visiSFC.append(visiCell)
                                     }
@@ -285,6 +290,7 @@ extension CXMMBasketballVC {
                                         let homeCell = BBCellModel()
                                         homeCell.cellName = ce.cellName
                                         homeCell.cellOdds = ce.cellOdds
+                                        homeCell.cellCode = ce.cellCode
                                         homeCell.playType = "32"
                                         playInfo.shengFenCha.homeSFC.append(homeCell)
                                     }
@@ -313,6 +319,7 @@ extension CXMMBasketballVC {
                                 if cell.isShow && cell.homeCell != nil {
                                     homeCell.cellName = cell.homeCell.cellName
                                     homeCell.cellOdds = cell.homeCell.cellOdds
+                                    homeCell.cellCode = cell.homeCell.cellCode
                                 }
                                 
                                 cellInfo.homeCell = homeCell
@@ -321,6 +328,7 @@ extension CXMMBasketballVC {
                                 if cell.isShow && cell.visitingCell != nil {
                                     visiCell.cellName = cell.visitingCell.cellName
                                     visiCell.cellOdds = cell.visitingCell.cellOdds
+                                    visiCell.cellCode = cell.visitingCell.cellCode
                                 }
                                 
                                 cellInfo.visiCell = visiCell
@@ -356,10 +364,12 @@ extension CXMMBasketballVC {
                                     if cell.isShow && cell.homeCell != nil {
                                         homeCell.cellName = cell.homeCell.cellName
                                         homeCell.cellOdds = cell.homeCell.cellOdds
+                                        homeCell.cellCode = cell.homeCell.cellCode
                                     }
                                     if cell.isShow && cell.visitingCell != nil {
                                         visiCell.cellName = cell.visitingCell.cellName
                                         visiCell.cellOdds = cell.visitingCell.cellOdds
+                                        visiCell.cellCode = cell.visitingCell.cellCode
                                     }
                                     
                                     playInfo.shengfu = cellInfo
@@ -367,10 +377,12 @@ extension CXMMBasketballVC {
                                     if cell.isShow && cell.homeCell != nil {
                                         homeCell.cellName = cell.homeCell.cellName
                                         homeCell.cellOdds = cell.homeCell.cellOdds
+                                        homeCell.cellCode = cell.homeCell.cellCode
                                     }
                                     if cell.isShow && cell.visitingCell != nil {
                                         visiCell.cellName = cell.visitingCell.cellName
                                         visiCell.cellOdds = cell.visitingCell.cellOdds
+                                        visiCell.cellCode = cell.visitingCell.cellCode
                                     }
                                     
                                     playInfo.rangfen = cellInfo
@@ -381,6 +393,7 @@ extension CXMMBasketballVC {
                                         let cellIn = BBCellModel()
                                         cellIn.cellName = ce.cellName
                                         cellIn.cellOdds = ce.cellOdds
+                                        cellIn.cellCode = ce.cellCode
                                         cellIn.playType = "31"
                                         playInfo.shengFenCha.visiSFC.append(cellIn)
                                     }
@@ -389,6 +402,7 @@ extension CXMMBasketballVC {
                                         let cellIn = BBCellModel()
                                         cellIn.cellName = ce.cellName
                                         cellIn.cellOdds = ce.cellOdds
+                                        cellIn.cellCode = ce.cellCode
                                         cellIn.playType = "32"
                                         playInfo.shengFenCha.homeSFC.append(cellIn)
                                     }
@@ -396,10 +410,12 @@ extension CXMMBasketballVC {
                                     if cell.isShow && cell.homeCell != nil {
                                         homeCell.cellName = cell.homeCell.cellName
                                         homeCell.cellOdds = cell.homeCell.cellOdds
+                                        homeCell.cellCode = cell.homeCell.cellCode
                                     }
                                     if cell.isShow && cell.visitingCell != nil {
                                         visiCell.cellName = cell.visitingCell.cellName
                                         visiCell.cellOdds = cell.visitingCell.cellOdds
+                                        visiCell.cellCode = cell.visitingCell.cellCode
                                     }
                                     
                                     playInfo.daxiaofen = cellInfo

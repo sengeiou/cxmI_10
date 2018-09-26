@@ -245,6 +245,7 @@ class BBCellModel : NSObject {
     var playType : String = ""
     var cellName : String = ""
     var cellOdds : String = ""
+    var cellCode : String = ""
 }
 
 struct BBPlayViewModel {
