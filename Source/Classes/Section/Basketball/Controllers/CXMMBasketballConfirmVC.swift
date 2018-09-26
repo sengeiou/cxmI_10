@@ -27,13 +27,10 @@ class CXMMBasketballConfirmVC: BaseViewController {
     
     public var viewModel : BasketballViewModel!
     
-//    private var viewModel : BBConfirmViewModel = BBConfirmViewModel()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "投注确认"
         initSubview()
-//        viewModel.sePlayList = homeViewModel.sePlayList
         setData()
         self.tableView.reloadData()
     }
@@ -58,8 +55,13 @@ class CXMMBasketballConfirmVC: BaseViewController {
                     self?.confirmBut.backgroundColor = ColorC7C7C7
                 }
 
-            })
-            .disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
+        
+        _ = viewModel.betTitle.asObserver()
+            .subscribe({ [weak self](event) in
+                guard let betTitle = event.element else { return }
+                self?.chuanGuanButton.setTitle(betTitle, for: .normal)
+            }).disposed(by: disposeBag)
     }
     private func initSubview() {
         tableView.separatorStyle = .none
@@ -71,7 +73,7 @@ class CXMMBasketballConfirmVC: BaseViewController {
 extension CXMMBasketballConfirmVC : FootballTimesFilterVCDelegate, FootballPlayFilterVCDelegate {
     // 串关
     func playFilterConfirm(filterList: [FootballPlayFilterModel]) {
-        
+        viewModel.changChuanguan()
     }
     
     func playFilterCancel() {
@@ -91,7 +93,7 @@ extension CXMMBasketballConfirmVC {
     @IBAction func chuanGuanClick(_ sender : UIButton) {
         let chuanguan = CXMFootballPlayFilterVC()
         chuanguan.delegate = self
-        chuanguan.filterList = viewModel.filterList
+        chuanguan.filterList = viewModel.getFilterList()
         present(chuanguan)
     }
     // 倍数
@@ -110,16 +112,52 @@ extension CXMMBasketballConfirmVC {
 }
 // MARK: - CELL Delegate
 extension CXMMBasketballConfirmVC : BasketballConfirmCellDelegate {
+    func didTipDan(playInfo: BBPlayModel) {
+        viewModel.setDan(play: playInfo)
+    }
+    
     func didTipDelete(playInfo: BBPlayModel) {
         viewModel.deletePlay(play: playInfo)
         tableView.reloadData()
     }
     
 }
+
+// MARK: - 胜分差，选取 delegate
+extension CXMMBasketballConfirmVC : BasketballSFCPlayPopDelegate{
+    func didTipConfirm(section : Int) {
+        self.tableView.reloadSections(IndexSet(integer: section), with: .none)
+    }
+}
+
 // MARK: - tableview Delegate
 extension CXMMBasketballConfirmVC : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let model = viewModel.sePlayList[indexPath.section]
         
+        switch model.playType {
+        case .混合投注:
+            let story = UIStoryboard(storyboard: .Basketball)
+            
+            let hunhePlay = story.instantiateViewController(withIdentifier: "BasketballHunhePlayPop") as! CXMMBasketballHunhePlayPop
+            hunhePlay.delegate = self
+            hunhePlay.section = indexPath.section
+            hunhePlay.configure(with: model)
+            
+            hunhePlay.configure(with: model.playInfo)
+            present(hunhePlay)
+        case .胜分差:
+            let story = UIStoryboard(storyboard: .Basketball)
+            
+            let shengFenPlay = story.instantiateViewController(withIdentifier: "BasketballSFCPlayPop") as! CXMMBasketballSFCPlayPop
+            shengFenPlay.delegate = self
+            shengFenPlay.section = indexPath.section
+            shengFenPlay.configure(with: model.playInfo)
+            shengFenPlay.configure(with: model)
+            present(shengFenPlay)
+        case .胜负, .让分胜负, .大小分:
+            break
+        }
     }
 }
 // MARK: - tableview DataSource
@@ -157,7 +195,7 @@ extension CXMMBasketballConfirmVC {
         case .混合投注, .胜分差:
             return UITableViewAutomaticDimension
         case .胜负, .让分胜负, .大小分:
-            return 130
+            return 150
         }
         
     }

@@ -22,6 +22,7 @@ class BBPlayModel : NSObject {
     var playInfo : BasketballListModel!
     
     var changci : String!
+    var isDanSe : Bool = false
     var playType : BasketballPlayType = .混合投注
     
     var visiTeam : String = ""
@@ -54,7 +55,20 @@ class BBPlayModel : NSObject {
             selectedCellNum.onNext(cellNum)
         }
     }
+    // 胆
+    var isDan : BehaviorSubject = BehaviorSubject(value: false)
     
+    var canSetDan : BehaviorSubject = BehaviorSubject(value: false)
+}
+
+extension BBPlayModel {
+    public func changeDan(isDan : Bool) {
+        isDanSe = isDan
+        self.isDan.onNext(isDanSe)
+    }
+    public func canChangeDan(canSet : Bool) {
+        self.canSetDan.onNext(canSet)
+    }
 }
 
 extension BBPlayModel {

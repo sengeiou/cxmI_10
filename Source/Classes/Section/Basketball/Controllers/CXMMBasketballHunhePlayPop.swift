@@ -9,7 +9,11 @@
 import UIKit
 
 class CXMMBasketballHunhePlayPop: BasePopViewController {
-
+    
+    public var delegate : BasketballSFCPlayPopDelegate!
+    
+    public var section : Int!
+    
     @IBOutlet weak var playView : UIView!
     
     @IBOutlet weak var visiTeam : UILabel!
@@ -99,6 +103,8 @@ class CXMMBasketballHunhePlayPop: BasePopViewController {
 extension CXMMBasketballHunhePlayPop {
     @IBAction func confirmClick(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
+        guard delegate != nil  else { return }
+        delegate.didTipConfirm(section: self.section)
     }
     
     @IBAction func cancelClick(_ sender: UIButton) {

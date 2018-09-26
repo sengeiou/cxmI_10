@@ -268,7 +268,7 @@ extension CXMMBasketballVC {
                                         let visiCell = BBCellModel()
                                         visiCell.cellName = ce.cellName
                                         visiCell.cellOdds = ce.cellOdds
-                                        visiCell.playType = cell.playType
+                                        visiCell.playType = "31"
                                         playInfo.shengFenCha.visiSFC.append(visiCell)
                                     }
                                 }
@@ -277,7 +277,7 @@ extension CXMMBasketballVC {
                                         let homeCell = BBCellModel()
                                         homeCell.cellName = ce.cellName
                                         homeCell.cellOdds = ce.cellOdds
-                                        homeCell.playType = cell.playType
+                                        homeCell.playType = "32"
                                         playInfo.shengFenCha.homeSFC.append(homeCell)
                                     }
                                 }

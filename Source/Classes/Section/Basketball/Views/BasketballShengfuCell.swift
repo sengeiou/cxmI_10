@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class BasketballShengfuCell: UITableViewCell, AlertPro {
 
@@ -44,11 +45,18 @@ class BasketballShengfuCell: UITableViewCell, AlertPro {
     
     private var homeViewModel : BasketballViewModel!
     
+    private var bag = DisposeBag()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         initSubview()
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        bag = DisposeBag()
+    }
+    
     private func initSubview() {
         visiOdds.titleLabel?.numberOfLines = 2
         homeOdds.titleLabel?.numberOfLines = 2
@@ -103,13 +111,13 @@ extension BasketballShengfuCell {
                 guard let se = event.element else { return }
                 self?.visiOdds.isSelected = se
                 self?.seButton(isSelected: se, sender: (self?.visiOdds)!)
-            })
+            }).disposed(by: bag)
         _ = data.shengfu.homeCell.isSelected.asObserver()
             .subscribe({ [weak self](event) in
                 guard let se = event.element else { return }
                 self?.homeOdds.isSelected = se
                 self?.seButton(isSelected: se, sender: (self?.homeOdds)!)
-            })
+            }).disposed(by: bag)
     }
     
     public func configure(with data : BasketballListModel) {

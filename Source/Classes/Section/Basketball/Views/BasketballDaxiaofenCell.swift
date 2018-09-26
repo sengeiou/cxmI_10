@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import RxSwift
 class BasketballDaxiaofenCell: UITableViewCell, AlertPro {
 
     @IBOutlet weak var topLine : UIView!
@@ -41,12 +41,15 @@ class BasketballDaxiaofenCell: UITableViewCell, AlertPro {
     private var playInfo : BasketballListModel!
     
     private var viewModel : BBPlayModel!
-    
+    private var bag = DisposeBag()
     override func awakeFromNib() {
         super.awakeFromNib()
         initSubview()
     }
-
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        bag = DisposeBag()
+    }
     private func initSubview() {
         visiOdds.titleLabel?.numberOfLines = 2
         homeOdds.titleLabel?.numberOfLines = 2
@@ -100,13 +103,13 @@ extension BasketballDaxiaofenCell {
                 guard let se = event.element else { return }
                 self?.visiOdds.isSelected = se
                 self?.seButton(isSelected: se, sender: (self?.visiOdds)!)
-            })
+            }).disposed(by: bag)
         _ = data.daxiaofen.homeCell.isSelected.asObserver()
             .subscribe({ [weak self](event) in
                 guard let se = event.element else { return }
                 self?.homeOdds.isSelected = se
                 self?.seButton(isSelected: se, sender: (self?.homeOdds)!)
-            })
+            }).disposed(by: bag)
     }
     
     public func configure(with data : BasketballListModel) {

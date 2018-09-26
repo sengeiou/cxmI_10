@@ -7,15 +7,21 @@
 //
 
 import UIKit
+import RxSwift
 
 protocol BasketballConfirmCellDelegate {
     func didTipDelete(playInfo : BBPlayModel) -> Void
+    func didTipDan(playInfo : BBPlayModel) -> Void
 }
 
 class BasketballConfirmCell: UITableViewCell {
 
     public var delegate : BasketballConfirmCellDelegate!
     
+    // 单关标识
+    @IBOutlet weak var singleIcon : UIImageView!
+    // 场次信息
+    @IBOutlet weak var changciLabel : UILabel!
     // 客队
     @IBOutlet weak var visiTeam : UILabel!
     // vs
@@ -31,12 +37,19 @@ class BasketballConfirmCell: UITableViewCell {
     @IBOutlet weak var homeOdds : UIButton!
     
     private var viewModel : BBPlayModel!
-    
+    private var bag = DisposeBag()
     override func awakeFromNib() {
         super.awakeFromNib()
         initSubview()
+        setData()
     }
-    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        bag = DisposeBag()
+    }
+    private func setData() {
+        
+    }
     private func initSubview() {
         danButton.layer.cornerRadius = 2
         danButton.layer.masksToBounds = true
@@ -75,13 +88,21 @@ extension BasketballConfirmCell {
         delegate.didTipDelete(playInfo: self.viewModel)
     }
     @IBAction func danClick(_ sender : UIButton) {
-        
+        guard delegate != nil else { return }
+        delegate.didTipDan(playInfo: self.viewModel)
     }
 }
 
 extension BasketballConfirmCell {
     public func configure(with data : BBPlayModel) {
         self.viewModel = data
+        
+        
+        
+        // 场次信息
+        self.changciLabel.text =  "\(data.playInfo.leagueAddr) \(data.playInfo.changci) \(data.playInfo.matchDay)"
+        
+        
         // 客队名
         let visiMuatt = NSMutableAttributedString(string: "[客]",
                                                   attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F,
@@ -101,7 +122,7 @@ extension BasketballConfirmCell {
         homeMuatt.append(homeAtt)
         homeTeam.attributedText = homeMuatt
 
-        // 赔率
+        // 赔率 // 单关显示
         
         var isShow : Bool
         var playInfo : BBPlayInfoModel!
@@ -110,14 +131,19 @@ extension BasketballConfirmCell {
         case .胜负:
             isShow = data.shengfu.isShow
             playInfo = data.shengfu
+            singleState(single: data.shengfu.single)
+            
         case .让分胜负:
             isShow = data.rangfen.isShow
             playInfo = data.rangfen
+            singleState(single: data.rangfen.single)
         case .大小分:
             isShow = data.daxiaofen.isShow
             playInfo = data.daxiaofen
+            singleState(single: data.daxiaofen.single)
         default:
             isShow = false
+            singleState(single: false)
         }
         
         
@@ -148,14 +174,45 @@ extension BasketballConfirmCell {
                 guard let se = event.element else { return }
                 self?.visiOdds.isSelected = se
                 self?.seButton(isSelected: se, sender: (self?.visiOdds)!)
-            })
+            }).disposed(by: bag)
         _ = data.shengfu.homeCell.isSelected.asObserver()
             .subscribe({ [weak self](event) in
                 guard let se = event.element else { return }
                 self?.homeOdds.isSelected = se
                 self?.seButton(isSelected: se, sender: (self?.homeOdds)!)
-            })
+            }).disposed(by: bag)
+        // 胆
         
+        _ = Observable.combineLatest(data.canSetDan, data.isDan).asObservable()
+            .subscribe({ [weak self](event) in
+                guard let canSet = event.element?.0 else { return }
+                guard let isDan = event.element?.1 else { return }
+                
+                switch canSet {
+                case true:
+                    
+                    switch isDan {
+                    case true :
+                        self?.danButton.layer.borderColor = ColorEA5504.cgColor
+                        self?.danButton.setTitleColor(ColorEA5504, for: .normal)
+                    case false :
+                        self?.danButton.layer.borderColor = ColorC8C8C8.cgColor
+                        self?.danButton.setTitleColor(ColorC8C8C8, for: .normal)
+                    }
+                    
+                    self?.danButton.isUserInteractionEnabled = true
+                    
+                case false :
+                    self?.danButton.isUserInteractionEnabled = false
+                    self?.danButton.layer.borderColor = ColorEDEDED.cgColor
+                    self?.danButton.setTitleColor(ColorEDEDED, for: .normal)
+                }
+            }).disposed(by: bag)
+
+    }
+    
+    private func singleState(single : Bool) {
+        self.singleIcon.isHidden = !single
     }
     
     private func getAttributedString(cellName : String, cellOdds : String) -> NSAttributedString {

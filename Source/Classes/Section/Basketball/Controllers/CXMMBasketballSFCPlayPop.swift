@@ -8,8 +8,16 @@
 
 import UIKit
 
+protocol BasketballSFCPlayPopDelegate {
+    func didTipConfirm(section : Int) -> Void
+}
+
 class CXMMBasketballSFCPlayPop: BasePopViewController {
 
+    public var delegate : BasketballSFCPlayPopDelegate!
+    
+    public var section : Int!
+    
     @IBOutlet weak var shenfenchaView : UIView!
     
     @IBOutlet weak var collectionView : UICollectionView!
@@ -93,6 +101,8 @@ extension CXMMBasketballSFCPlayPop {
 extension CXMMBasketballSFCPlayPop {
     @IBAction func confirmClick(_ sender : UIButton) {
         self.dismiss(animated: true, completion: nil)
+        guard delegate != nil else { return }
+        delegate.didTipConfirm(section: self.section)
     }
     @IBAction func cancelClick(_ sender : UIButton) {
         self.dismiss(animated: true, completion: nil)

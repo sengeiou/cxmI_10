@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import RxSwift
 protocol BasketballShengfuChaCellDelegate {
     func didTipShengfenCha(playInfo : BasketballListModel, viewModel : BBPlayModel) -> Void
 }
@@ -42,12 +42,15 @@ class BasketballShengfuChaCell: UITableViewCell, AlertPro {
     private var playInfo : BasketballListModel!
     
     private var viewModel : BBPlayModel!
-    
+    private var bag = DisposeBag()
     override func awakeFromNib() {
         super.awakeFromNib()
         initSubview()
     }
-
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        bag = DisposeBag()
+    }
     private func initSubview() {
         oddsLabel.layer.cornerRadius = 3
         oddsLabel.layer.masksToBounds = true
@@ -94,7 +97,15 @@ extension BasketballShengfuChaCell {
                 var str = ""
                 for cell in list {
                     if cell.selected {
-                        str += "\(cell.cellName) "
+                        
+                        switch cell.playType {
+                        case "31":
+                            str += "客胜\(cell.cellName) "
+                        case "32":
+                            str += "主胜\(cell.cellName) "
+                        default : break
+                        }
+                        
                     }
                 }
                 
@@ -107,7 +118,7 @@ extension BasketballShengfuChaCell {
                     self?.oddsLabel.textColor = ColorFFFFFF
                     self?.oddsLabel.backgroundColor = ColorEA5504
                 }
-            })
+            }).disposed(by: bag)
     }
     
     public func configure(with data : BasketballListModel) {

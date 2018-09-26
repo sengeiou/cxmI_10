@@ -7,11 +7,16 @@
 //
 
 import UIKit
+import RxSwift
 
 class BasketballConfirmSFCCell: UITableViewCell {
 
     public var delegate : BasketballConfirmCellDelegate!
     
+    // 单关标识
+    @IBOutlet weak var singleIcon : UIImageView!
+    // 场次信息
+    @IBOutlet weak var changciLabel : UILabel!
     // 客队
     @IBOutlet weak var visiTeam : UILabel!
     // vs
@@ -26,12 +31,15 @@ class BasketballConfirmSFCCell: UITableViewCell {
     @IBOutlet weak var oddsLabel : UILabel!
     
     private var playInfo : BBPlayModel!
-    
+    public var bag = DisposeBag()
     override func awakeFromNib() {
         super.awakeFromNib()
         initSubview()
     }
-
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        bag = DisposeBag()
+    }
     private func initSubview() {
         danButton.layer.cornerRadius = 2
         danButton.layer.masksToBounds = true
@@ -47,13 +55,18 @@ extension BasketballConfirmSFCCell {
         delegate.didTipDelete(playInfo: self.playInfo)
     }
     @IBAction func danClick(_ sender : UIButton) {
-        
+        guard delegate != nil else { return }
+        delegate.didTipDan(playInfo: self.playInfo)
     }
 }
 // MARK: - 数据显示
 extension BasketballConfirmSFCCell {
     public func configure(with data : BBPlayModel) {
         self.playInfo = data
+        
+        // 场次信息
+        self.changciLabel.text =  "\(data.playInfo.leagueAddr) \(data.playInfo.changci) \(data.playInfo.matchDay)"
+        
         // 客队名
         let visiMuatt = NSMutableAttributedString(string: "[客]",
                                                   attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F,
@@ -93,5 +106,8 @@ extension BasketballConfirmSFCCell {
             }
         }
         oddsLabel.text = odds
+        
+        
+        
     }
 }

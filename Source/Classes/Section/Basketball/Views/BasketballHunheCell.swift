@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 protocol BasketballHunheCellDelegate {
     func didTipMore(playInfo : BasketballListModel, viewModel : BBPlayModel) -> Void
@@ -69,11 +70,17 @@ class BasketballHunheCell: UITableViewCell, AlertPro {
     
     private var homeViewModel : BasketballViewModel!
     
+    private var bag = DisposeBag()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         initSubview()
     }
-
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        bag = DisposeBag()
+    }
+    
     private func initSubview() {
         sfTitle.text = "胜\n负"
         rfTitle.text = "让\n分"
@@ -166,41 +173,41 @@ extension BasketballHunheCell {
                 guard let se = event.element else { return }
                 self.sfVisiTeam.isSelected = se
                 self.seButton(isSelected: se, sender: self.sfVisiTeam)
-            })
+            }).disposed(by: bag)
         _ = data.shengfu.homeCell.isSelected.asObserver()
             .subscribe({ (event) in
                 guard let se = event.element else { return }
                 self.sfHomeTeam.isSelected = se
                 self.seButton(isSelected: se, sender: self.sfHomeTeam)
-            })
+            }).disposed(by: bag)
         // 让分
         _ = data.rangfen.visiCell.isSelected.asObserver()
             .subscribe({ (event) in
                 guard let se = event.element else { return }
                 self.rfVisiTeam.isSelected = se
                 self.seButton(isSelected: se, sender: self.rfVisiTeam)
-            })
+            }).disposed(by: bag)
         
         _ = data.rangfen.homeCell.isSelected.asObserver()
             .subscribe({ (event) in
                 guard let se = event.element else { return }
                 self.rfHomeTeam.isSelected = se
                 self.seButton(isSelected: se, sender: self.rfHomeTeam)
-            })
+            }).disposed(by: bag)
         // 大小分
         _ = data.daxiaofen.visiCell.isSelected.asObserver()
             .subscribe({ (event) in
                 guard let se = event.element else { return }
                 self.dxfVisiTeam.isSelected = se
                 self.seButton(isSelected: se, sender: self.dxfVisiTeam)
-            })
+            }).disposed(by: bag)
         
         _ = data.daxiaofen.homeCell.isSelected.asObserver()
             .subscribe({ (event) in
                 guard let se = event.element else { return }
                 self.dxfHomeTeam.isSelected = se
                 self.seButton(isSelected: se, sender: self.dxfHomeTeam)
-            })
+            }).disposed(by: bag)
         // 更多
         _ = data.selectedCellNum.asObserver()
             .subscribe({ [weak self](event) in
@@ -225,7 +232,7 @@ extension BasketballHunheCell {
                     self?.moreButton.setAttributedTitle(muatt, for: .normal)
                 }
                 
-            })
+            }).disposed(by: bag)
     }
     
     public func configure(with data : BasketballListModel) {
