@@ -27,6 +27,10 @@ class CXMMBasketballConfirmVC: BaseViewController {
     
     public var viewModel : BasketballViewModel!
     
+    private var requestModel : BasketballRequestMode!
+    
+    private var getBetInfoModel : BBGetBetInfoModel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "投注确认"
@@ -62,7 +66,24 @@ class CXMMBasketballConfirmVC: BaseViewController {
                 guard let betTitle = event.element else { return }
                 self?.chuanGuanButton.setTitle(betTitle, for: .normal)
             }).disposed(by: disposeBag)
+        
+        _ = Observable.combineLatest(viewModel.multiple, viewModel.betNum, viewModel.sePlays)
+            .asObservable()
+            .subscribe({ [weak self](event) in
+//                guard let item = event.element else { return }
+//                let multiple = item.0
+//                let betNum = item.1
+//                let sePlays = item.2
+                
+                self?.getBetInfoRequest()
+                
+            }).disposed(by: disposeBag)
     }
+    
+    private func setBetInfo() {
+        betInfo.text = "\(getBetInfoModel.betNum)注\(getBetInfoModel.times)倍 共需: \(getBetInfoModel.money)"
+    }
+    
     private func initSubview() {
         tableView.separatorStyle = .none
         tableView.backgroundColor = ColorEDEDED
@@ -212,5 +233,161 @@ extension CXMMBasketballConfirmVC {
             return 0.01
         }
         return 5
+    }
+}
+
+// MARK: - 网络请求
+extension CXMMBasketballConfirmVC {
+    private func loadNewData() {
+        
+    }
+    private func getBetInfoRequest() {
+        self.setRequestModel()
+        weak var weakSelf = self
+        showProgressHUD()
+        basketBallProvider.rx.request(.getBetInfo(requestModel: self.requestModel))
+        .asObservable()
+        .mapObject(type: BBGetBetInfoModel.self)
+            .subscribe(onNext: { (data) in
+                weakSelf?.dismissProgressHud()
+                weakSelf?.getBetInfoModel = data
+                weakSelf?.setBetInfo()
+            }, onError: { (error) in
+                weakSelf?.tableView.endrefresh()
+                weakSelf?.dismissProgressHud()
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        weakSelf?.pushLoginVC(from: self)
+                    default : break
+                    }
+                    if 300000...310000 ~= code {
+                        weakSelf?.showHUD(message: msg!)
+                    }
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil )
+    }
+}
+
+extension CXMMBasketballConfirmVC {
+    private func setRequestModel() {
+        self.requestModel = BasketballRequestMode()
+        
+        if let betType = try? viewModel.betNum.value() {
+            requestModel.betType = betType
+        }
+        if let times = try? viewModel.multiple.value() {
+            requestModel.times = times
+        }
+        requestModel.lotteryClassifyId = viewModel.lotteryClassifyId
+        requestModel.lotteryPlayClassifyId = viewModel.lotteryPlayClassifyId
+        requestModel.playType = viewModel.lotteryPlayClassifyId
+        requestModel.bonusId = ""
+        
+        var matchBetPlays = [BBMatchBetPlay]()
+        
+        for playInfo in viewModel.sePlayList {
+            var matchBetPlay = BBMatchBetPlay()
+            
+            if let isDan = try? playInfo.isDan.value() {
+                matchBetPlay.isDan = isDan
+            }
+            
+            matchBetPlay.changci = playInfo.changci
+        
+            matchBetPlay.lotteryClassifyId = viewModel.lotteryClassifyId
+            matchBetPlay.lotteryPlayClassifyId = viewModel.lotteryPlayClassifyId
+            matchBetPlay.matchId = playInfo.playInfo.matchId
+            matchBetPlay.matchTeam = playInfo.playInfo.homeTeamAbbr + "VS" + playInfo.playInfo.visitingTeamAbbr
+            matchBetPlay.matchTime = playInfo.playInfo.matchTime
+            matchBetPlay.playCode = playInfo.playInfo.playCode
+            matchBetPlay.changciId = playInfo.playInfo.changciId
+            
+            var matchBetCells = [BBMatchBetCell]()
+            
+            // 胜负
+            if playInfo.shengfu.isShow {
+                var matchBetCell = BBMatchBetCell()
+                var betCells = [BBCellModel]()
+                if playInfo.shengfu.visiCell.selected {
+                    betCells.append(playInfo.shengfu.visiCell)
+                }
+                if playInfo.shengfu.homeCell.selected {
+                    betCells.append(playInfo.shengfu.homeCell)
+                }
+                
+                matchBetCell.betCells = betCells
+                matchBetCell.playType = "1"
+                matchBetCell.single = playInfo.shengfu.single
+                matchBetCell.fixedOdds = playInfo.shengfu.fixOdds
+                matchBetCells.append(matchBetCell)
+            }
+            
+            // 让分胜负
+            if playInfo.rangfen.isShow {
+                var matchBetCell = BBMatchBetCell()
+                var betCells = [BBCellModel]()
+                if playInfo.rangfen.visiCell.selected {
+                    betCells.append(playInfo.rangfen.visiCell)
+                }
+                if playInfo.rangfen.homeCell.selected {
+                    betCells.append(playInfo.rangfen.homeCell)
+                }
+                
+                matchBetCell.betCells = betCells
+                matchBetCell.playType = "2"
+                matchBetCell.single = playInfo.rangfen.single
+                matchBetCell.fixedOdds = playInfo.rangfen.fixOdds
+                matchBetCells.append(matchBetCell)
+            }
+            // 大小分
+            if playInfo.daxiaofen.isShow {
+                var matchBetCell = BBMatchBetCell()
+                var betCells = [BBCellModel]()
+                if playInfo.daxiaofen.visiCell.selected {
+                    betCells.append(playInfo.daxiaofen.visiCell)
+                }
+                if playInfo.daxiaofen.homeCell.selected {
+                    betCells.append(playInfo.daxiaofen.homeCell)
+                }
+                
+                matchBetCell.betCells = betCells
+                matchBetCell.playType = "4"
+                matchBetCell.single = playInfo.daxiaofen.single
+                matchBetCell.fixedOdds = playInfo.daxiaofen.fixOdds
+                matchBetCells.append(matchBetCell)
+            }
+            // 胜分差
+            if playInfo.shengFenCha.isShow{
+                var matchBetCell = BBMatchBetCell()
+                var betCells = [BBCellModel]()
+
+                for cell in playInfo.shengFenCha.visiSFC {
+                    if cell.selected {
+                        betCells.append(cell)
+                    }
+                }
+                
+                for cell in playInfo.shengFenCha.homeSFC {
+                    if cell.selected {
+                        betCells.append(cell)
+                    }
+                }
+                
+                matchBetCell.betCells = betCells
+                matchBetCell.playType = "3"
+                matchBetCell.single = playInfo.daxiaofen.single
+                matchBetCell.fixedOdds = playInfo.daxiaofen.fixOdds
+                matchBetCells.append(matchBetCell)
+            }
+            
+            matchBetPlay.matchBetCells = matchBetCells
+            matchBetPlays.append(matchBetPlay)
+        }
+        
+        requestModel.matchBetPlays = matchBetPlays
     }
 }

@@ -36,12 +36,15 @@ class BBConfirmViewModel {
 //                selectNumText.onNext("您共选择\(sePlayList.count)场赛事")
                 confirmButtonState.onNext(true)
             }
+            
+            
         }
     }
     
     var seNum : BehaviorSubject = BehaviorSubject(value: 0)
     var confirmButtonState : BehaviorSubject = BehaviorSubject(value: false)
     var multiple : BehaviorSubject = BehaviorSubject(value: "5")
+    
 }
 
 extension BBConfirmViewModel {

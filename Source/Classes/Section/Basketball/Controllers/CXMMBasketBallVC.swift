@@ -13,7 +13,7 @@ enum BasketballPlayType : String {
     case 大小分
     case 胜分差
     case 让分胜负
-    case 混合投注
+    case 混合投注 
     
     static func getPlayType (type : BasketballPlayType) -> String {
         switch type {
@@ -167,6 +167,10 @@ extension CXMMBasketballVC {
                 weakSelf?.matchModel.lotteryClassifyId = data.lotteryClassifyId
                 weakSelf?.matchModel.lotteryPlayClassifyId = data.lotteryPlayClassifyId
                 
+                weakSelf?.viewModel.lotteryClassifyId = data.lotteryClassifyId
+                weakSelf?.viewModel.lotteryPlayClassifyId = data.lotteryPlayClassifyId
+                
+                
                 if data.hotPlayList.isEmpty == false {
                     let model = BasketballMatchModel()
                     model.title = "热门比赛"
@@ -195,9 +199,11 @@ extension CXMMBasketballVC {
                                 let cellInfo = BBPlayInfoModel()
                                 cellInfo.single = cell.single
                                 cellInfo.isShow = cell.isShow
+                                cellInfo.fixOdds = cell.fixedOdds
                                 
                                 let homeCell = BBCellModel()
                                 homeCell.playType = cell.playType
+                            
                                 if cell.isShow && cell.homeCell != nil {
                                     homeCell.cellName = cell.homeCell.cellName
                                     homeCell.cellOdds = cell.homeCell.cellOdds
@@ -229,6 +235,7 @@ extension CXMMBasketballVC {
                                 let cellInfo = BBPlayInfoModel()
                                 cellInfo.single = cell.single
                                 cellInfo.isShow = cell.isShow
+                                cellInfo.fixOdds = cell.fixedOdds
                                 
                                 let homeCell = BBCellModel()
                                 homeCell.playType = cell.playType
@@ -262,6 +269,7 @@ extension CXMMBasketballVC {
                             for cell in play.matchPlays {
                                 playInfo.shengFenCha.single = cell.single
                                 playInfo.shengFenCha.isShow = cell.isShow
+                                playInfo.shengFenCha.fixOdds = cell.fixedOdds
                                 
                                 if let visi = cell.visitingCell {
                                     for ce in visi.cellSons {
@@ -298,6 +306,7 @@ extension CXMMBasketballVC {
                                 let cellInfo = BBPlayInfoModel()
                                 cellInfo.single = cell.single
                                 cellInfo.isShow = cell.isShow
+                                cellInfo.fixOdds = cell.fixedOdds
                                 
                                 let homeCell = BBCellModel()
                                 homeCell.playType = cell.playType
@@ -332,6 +341,7 @@ extension CXMMBasketballVC {
                                 let cellInfo = BBPlayInfoModel()
                                 cellInfo.single = cell.single
                                 cellInfo.isShow = cell.isShow
+                                cellInfo.fixOdds = cell.fixedOdds
                                 
                                 let homeCell = BBCellModel()
                                 homeCell.playType = cell.playType

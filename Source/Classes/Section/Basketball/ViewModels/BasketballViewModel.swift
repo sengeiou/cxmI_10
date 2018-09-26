@@ -13,6 +13,10 @@ import RxCocoa
 fileprivate let maxNum : Int = 15
 
 class BasketballViewModel : AlertPro {
+    
+    var lotteryClassifyId: String = ""
+    var lotteryPlayClassifyId: String = ""
+    
     var selectNumText : BehaviorSubject<String> = BehaviorSubject(value: "请至少选择一场单关比赛\n或两场非单关比赛")
     
     var betTitle : BehaviorSubject = BehaviorSubject(value: "")
@@ -48,6 +52,8 @@ class BasketballViewModel : AlertPro {
     
     var multiple : BehaviorSubject = BehaviorSubject(value: "5")
     
+    var sePlays : BehaviorSubject = BehaviorSubject(value: [BBPlayModel]())
+    
     public var sePlayList = [BBPlayModel]() {
         didSet{
             
@@ -76,6 +82,7 @@ class BasketballViewModel : AlertPro {
             }
             
             getChuanguan(sePlays: sePlayList)
+            self.sePlays.onNext(self.sePlayList)
         }
     }
     

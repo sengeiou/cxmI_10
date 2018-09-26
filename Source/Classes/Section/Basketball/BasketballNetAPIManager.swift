@@ -16,6 +16,8 @@ enum BasketballNetAPIManager {
     case basketballMatchList(leagueId : String, playType: String)
     /// 篮球赛选条件列表
     case basketballFilterList()
+    /// 计算投注信息
+    case getBetInfo(requestModel: BasketballRequestMode)
 }
 
 extension BasketballNetAPIManager : TargetType {
@@ -31,6 +33,8 @@ extension BasketballNetAPIManager : TargetType {
             return "/lottery/lottery/match/getBasketBallMatchList"
         case .basketballFilterList:
             return "/lottery/lottery/match/filterBasketBallConditions"
+        case .getBetInfo:
+            return "/lottery/lottery/match/getBasketBallBetInfo"
         }
     }
     
@@ -43,6 +47,8 @@ extension BasketballNetAPIManager : TargetType {
             dic["playType"] = playType
         case .basketballFilterList:
             dic[""] = ""
+        case .getBetInfo(let requestModel):
+            dic = requestModel.toJSON()!
         default:
             return .requestPlain
         }

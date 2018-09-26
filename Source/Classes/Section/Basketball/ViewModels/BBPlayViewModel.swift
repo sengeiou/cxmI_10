@@ -235,6 +235,7 @@ class BBPlayInfoModel {
     
     var single: Bool = false
     var isShow: Bool = true
+    var fixOdds : String = ""
 }
 class BBCellModel : NSObject {
     var selected : Bool = false
