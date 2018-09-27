@@ -30,6 +30,9 @@ class BasketballConfirmSFCCell: UITableViewCell {
     
     @IBOutlet weak var oddsLabel : UILabel!
     
+    @IBOutlet weak var oddsTop : UIView!
+    @IBOutlet weak var oddsBot : UIView!
+    
     private var playInfo : BBPlayModel!
     public var bag = DisposeBag()
     override func awakeFromNib() {
@@ -46,6 +49,10 @@ class BasketballConfirmSFCCell: UITableViewCell {
         
         danButton.layer.borderWidth = 1
         danButton.layer.borderColor = ColorEDEDED.cgColor
+        
+        oddsLabel.backgroundColor = ColorEA5504
+        oddsTop.backgroundColor = ColorEA5504
+        oddsBot.backgroundColor = ColorEA5504
     }
 }
 // MARK: - 点击事件

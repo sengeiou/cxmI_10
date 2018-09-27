@@ -33,6 +33,11 @@ class CXMPurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableVie
             let vc = story.instantiateViewController(withIdentifier: "DaletouOrderVC") as! CXMMDaletouOrderVC
             vc.orderId = recordInfo.orderId
             pushViewController(vc: vc)
+        case "3": // 篮球
+            let story = UIStoryboard(storyboard: .Basketball)
+            let order = story.instantiateViewController(withIdentifier: "BasketballOrderVC") as! CXMMBasketballOrderVC
+            order.orderId = recordInfo.orderId
+            pushViewController(vc: order)
         default:
             break
         }

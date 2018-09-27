@@ -559,15 +559,15 @@ class CXMMeViewController: BaseViewController, UITableViewDelegate, UITableViewD
                 return
             }
             
-            let  vc = CXMActivityViewController()
+//            let  vc = CXMActivityViewController()
+//
+//            vc.urlStr = getCurentBaseWebUrl() + OrderRecord
+//
+//            pushViewController(vc: vc)
             
-            vc.urlStr = getCurentBaseWebUrl() + OrderRecord
             
-            pushViewController(vc: vc)
-            
-            
-//            pushPagerView(pagerType: .purchaseRecord)
-//            TongJi.log(.投注记录, label: "投注记录")
+            pushPagerView(pagerType: .purchaseRecord)
+            TongJi.log(.投注记录, label: "投注记录")
         case .账户明细:
             guard getUserData() != nil else {
                 pushLoginVC(from: self)
