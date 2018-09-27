@@ -9,7 +9,7 @@
 import Foundation
 import RxCocoa
 import RxSwift
-
+import HandyJSON
 
 
 class BBPlaySectionModel {
@@ -266,7 +266,10 @@ class BBPlayInfoModel {
     var isShow: Bool = true
     var fixOdds : String = ""
 }
-class BBCellModel : NSObject {
+class BBCellModel : NSObject , HandyJSON{
+    
+    required override init() {}
+    
     var selected : Bool = false
     var isSelected : BehaviorSubject<Bool> = BehaviorSubject(value: false)
     var bgColor : BehaviorSubject<UIColor> = BehaviorSubject(value: ColorFFFFFF)

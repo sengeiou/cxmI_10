@@ -26,6 +26,7 @@ class CXMMBasketballOrderVC: BaseViewController {
     
     @IBOutlet weak var oneMsgOrderStatus: UILabel!
     
+    // 中奖信息
     @IBOutlet weak var winningTitle: UILabel!
     @IBOutlet weak var winningAmount: UILabel!
     
@@ -104,11 +105,7 @@ class CXMMBasketballOrderVC: BaseViewController {
             oneMsgOrderStatus.text = ""
             break
         }
-        
     }
-    
-    
-    
 }
 // MARK: - 点击事件
 extension CXMMBasketballOrderVC {
