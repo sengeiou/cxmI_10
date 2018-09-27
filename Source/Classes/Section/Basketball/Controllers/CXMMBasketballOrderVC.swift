@@ -31,6 +31,8 @@ class CXMMBasketballOrderVC: BaseViewController {
     
     // 预测奖金
     @IBOutlet weak var forecastBonus : UILabel!
+    // 继续预约 按钮
+    @IBOutlet weak var goBuyButton : UIButton!
     
     private var disposeBag : DisposeBag = DisposeBag()
     
@@ -49,7 +51,7 @@ class CXMMBasketballOrderVC: BaseViewController {
     }
 
     private func initSubview() {
-        
+        self.goBuyButton.backgroundColor = ColorEA5504
     }
     private func setDefaultData() {
         winningTitle.text = ""
@@ -105,8 +107,21 @@ class CXMMBasketballOrderVC: BaseViewController {
         
     }
     
+    
+    
 }
+// MARK: - 点击事件
+extension CXMMBasketballOrderVC {
+    @IBAction func goBuyClick(_ sender : UIButton) {
+        guard orderInfo != nil else { return }
+        
+        let story = UIStoryboard(storyboard: .Basketball)
+        
+        let basketball = story.instantiateViewController(withIdentifier: "BasketballVC") as! CXMMBasketballVC
 
+        pushViewController(vc: basketball)
+    }
+}
 // MARK: - tableview Delegate
 extension CXMMBasketballOrderVC : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -3440,6 +3440,9 @@
                                 <state key="normal" title="继续预约">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="goBuyClick:" destination="WkK-ir-hVD" eventType="touchUpInside" id="NeR-QH-Mtv"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3457,6 +3460,7 @@
                     <size key="freeformSize" width="375" height="1000"/>
                     <connections>
                         <outlet property="forecastBonus" destination="cx8-D5-J95" id="x4j-jU-Lr0"/>
+                        <outlet property="goBuyButton" destination="GJU-Na-bvp" id="yXN-dh-fs8"/>
                         <outlet property="oneMsgOrderStatus" destination="XEw-cw-Ezy" id="y7X-7F-iDU"/>
                         <outlet property="orderIcon" destination="Oj1-cI-4qS" id="uYc-mT-T43"/>
                         <outlet property="orderStatus" destination="bHz-cs-h0U" id="FMQ-wp-Jz9"/>
