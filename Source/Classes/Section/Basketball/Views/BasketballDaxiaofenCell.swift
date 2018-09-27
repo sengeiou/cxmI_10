@@ -80,10 +80,10 @@ class BasketballDaxiaofenCell: UITableViewCell, AlertPro {
 // MARK: - 点击事件
 extension BasketballDaxiaofenCell {
     @IBAction func visiClick(_ sender : UIButton) {
-        viewModel.seDXFVisiPlay(isSelected: sender.isSelected)
+        viewModel.seDXFVisiPlay()
     }
     @IBAction func homeClick(_ sender : UIButton) {
-        viewModel.seDXFHomePlay(isSelected: sender.isSelected)
+        viewModel.seDXFHomePlay()
     }
     private func seButton(isSelected : Bool, sender : UIButton) {
         switch isSelected {

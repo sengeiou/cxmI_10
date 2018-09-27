@@ -81,10 +81,10 @@ class BasketballRangCell: UITableViewCell, AlertPro {
 // MARK: - 点击事件
 extension BasketballRangCell {
     @IBAction func visiClick(_ sender : UIButton) {
-        viewModel.seRFVisiPlay(isSelected: sender.isSelected)
+        viewModel.seRFVisiPlay()
     }
     @IBAction func homeClick(_ sender : UIButton) {
-        viewModel.seRFHomePlay(isSelected: sender.isSelected)
+        viewModel.seRFHomePlay()
     }
     private func seButton(isSelected : Bool, sender : UIButton) {
         switch isSelected {

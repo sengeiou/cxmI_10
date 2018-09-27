@@ -128,7 +128,8 @@ extension CXMMBasketballConfirmVC {
     }
     // 确认
     @IBAction func confirmClick(_ sender : UIButton) {
-        
+        changeConfirmButton(canTip: false)
+        saveBetInfoRequest()
     }
 }
 // MARK: - CELL Delegate
@@ -144,10 +145,14 @@ extension CXMMBasketballConfirmVC : BasketballConfirmCellDelegate {
     
 }
 
-// MARK: - 胜分差，选取 delegate
+// MARK: - 胜分差， 混合投注，弹窗  delegate
 extension CXMMBasketballConfirmVC : BasketballSFCPlayPopDelegate{
     func didTipConfirm(section : Int) {
         self.tableView.reloadSections(IndexSet(integer: section), with: .none)
+        getBetInfoRequest()
+    }
+    func didTipDelete(section: Int) {
+        getBetInfoRequest()
     }
 }
 
@@ -245,9 +250,9 @@ extension CXMMBasketballConfirmVC {
         self.setRequestModel()
         weak var weakSelf = self
         showProgressHUD()
-        basketBallProvider.rx.request(.getBetInfo(requestModel: self.requestModel))
-        .asObservable()
-        .mapObject(type: BBGetBetInfoModel.self)
+        _ = basketBallProvider.rx.request(.getBetInfo(requestModel: self.requestModel))
+            .asObservable()
+            .mapObject(type: BBGetBetInfoModel.self)
             .subscribe(onNext: { (data) in
                 weakSelf?.dismissProgressHud()
                 weakSelf?.getBetInfoModel = data
@@ -269,6 +274,55 @@ extension CXMMBasketballConfirmVC {
                 default: break
                 }
             }, onCompleted: nil , onDisposed: nil )
+            .disposed(by: disposeBag)
+    }
+    
+    private func saveBetInfoRequest() {
+        self.setRequestModel()
+        weak var weakSelf = self
+        showProgressHUD()
+        _ = basketBallProvider.rx.request(.saveBetInfo(requestModel: self.requestModel))
+            .asObservable()
+            .mapObject(type: DataModel.self)
+            .subscribe(onNext: { (data) in
+                weakSelf?.dismissProgressHud()
+                
+                weakSelf?.changeConfirmButton(canTip: true)
+                let vc = CXMPaymentViewController()
+                vc.lottoToken = data.data
+                
+                self.pushViewController(vc: vc)
+                
+            }, onError: { (error) in
+                weakSelf?.tableView.endrefresh()
+                weakSelf?.dismissProgressHud()
+                weakSelf?.changeConfirmButton(canTip: true)
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        weakSelf?.pushLoginVC(from: self)
+                    default : break
+                    }
+                    if 300000...310000 ~= code {
+                        weakSelf?.showHUD(message: msg!)
+                    }
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil )
+            .disposed(by: disposeBag)
+    }
+    
+    private func changeConfirmButton( canTip : Bool) {
+        switch canTip {
+        case true:
+            self.confirmBut.isUserInteractionEnabled = true
+            self.confirmBut.backgroundColor = ColorE85504
+        case false:
+            self.confirmBut.isUserInteractionEnabled = false
+            self.confirmBut.backgroundColor = ColorC7C7C7
+        }
     }
 }
 
@@ -308,80 +362,99 @@ extension CXMMBasketballConfirmVC {
             var matchBetCells = [BBMatchBetCell]()
             
             // 胜负
-            if playInfo.shengfu.isShow {
+            if playInfo.shengfu.isShow && (playInfo.shengfu.visiCell.selected
+                                        || playInfo.shengfu.homeCell.selected) {
                 var matchBetCell = BBMatchBetCell()
                 var betCells = [BBCellModel]()
                 if playInfo.shengfu.visiCell.selected {
+                    
+//                    var cell = BBBetCell()
+//                    cell.cellName = playInfo.shengfu.visiCell.cellName
+//                    cell.cellOdds = playInfo.shengfu.visiCell.cellOdds
+//                    cell.cellCode = playInfo.shengfu.visiCell.cellCode
+                    
+                    
+//                    betCells.append(cell)
                     betCells.append(playInfo.shengfu.visiCell)
                 }
                 if playInfo.shengfu.homeCell.selected {
-                    betCells.append(playInfo.shengfu.homeCell)
+//                    var cell = BBBetCell()
+//                    cell.cellName = playInfo.shengfu.homeCell.cellName
+//                    cell.cellOdds = playInfo.shengfu.homeCell.cellOdds
+//                    cell.cellCode = playInfo.shengfu.homeCell.cellCode
+//
+//
+//                    betCells.append(cell)
+//                    betCells.append(playInfo.shengfu.homeCell)
                 }
                 
                 matchBetCell.betCells = betCells
                 matchBetCell.playType = "1"
                 matchBetCell.single = playInfo.shengfu.single
-                matchBetCell.fixedOdds = playInfo.shengfu.fixOdds
+                matchBetCell.fixedOdds = "0"
                 matchBetCells.append(matchBetCell)
             }
             
-//            // 让分胜负
-//            if playInfo.rangfen.isShow {
-//                var matchBetCell = BBMatchBetCell()
-//                var betCells = [BBCellModel]()
-//                if playInfo.rangfen.visiCell.selected {
-//                    betCells.append(playInfo.rangfen.visiCell)
-//                }
-//                if playInfo.rangfen.homeCell.selected {
-//                    betCells.append(playInfo.rangfen.homeCell)
-//                }
-//                
-//                matchBetCell.betCells = betCells
-//                matchBetCell.playType = "2"
-//                matchBetCell.single = playInfo.rangfen.single
-//                matchBetCell.fixedOdds = playInfo.rangfen.fixOdds
-//                matchBetCells.append(matchBetCell)
-//            }
-//            // 大小分
-//            if playInfo.daxiaofen.isShow {
-//                var matchBetCell = BBMatchBetCell()
-//                var betCells = [BBCellModel]()
-//                if playInfo.daxiaofen.visiCell.selected {
-//                    betCells.append(playInfo.daxiaofen.visiCell)
-//                }
-//                if playInfo.daxiaofen.homeCell.selected {
-//                    betCells.append(playInfo.daxiaofen.homeCell)
-//                }
-//                
-//                matchBetCell.betCells = betCells
-//                matchBetCell.playType = "4"
-//                matchBetCell.single = playInfo.daxiaofen.single
-//                matchBetCell.fixedOdds = playInfo.daxiaofen.fixOdds
-//                matchBetCells.append(matchBetCell)
-//            }
-//            // 胜分差
-//            if playInfo.shengFenCha.isShow{
-//                var matchBetCell = BBMatchBetCell()
-//                var betCells = [BBCellModel]()
-//
-//                for cell in playInfo.shengFenCha.visiSFC {
-//                    if cell.selected {
-//                        betCells.append(cell)
-//                    }
-//                }
-//                
-//                for cell in playInfo.shengFenCha.homeSFC {
-//                    if cell.selected {
-//                        betCells.append(cell)
-//                    }
-//                }
-//                
-//                matchBetCell.betCells = betCells
-//                matchBetCell.playType = "3"
-//                matchBetCell.single = playInfo.daxiaofen.single
-//                matchBetCell.fixedOdds = playInfo.daxiaofen.fixOdds
-//                matchBetCells.append(matchBetCell)
-//            }
+            // 让分胜负
+            if playInfo.rangfen.isShow && (playInfo.rangfen.visiCell.selected
+                                        || playInfo.rangfen.homeCell.selected) {
+                var matchBetCell = BBMatchBetCell()
+                var betCells = [BBCellModel]()
+                if playInfo.rangfen.visiCell.selected {
+                    betCells.append(playInfo.rangfen.visiCell)
+                }
+                if playInfo.rangfen.homeCell.selected {
+                    betCells.append(playInfo.rangfen.homeCell)
+                }
+                
+                matchBetCell.betCells = betCells
+                matchBetCell.playType = "2"
+                matchBetCell.single = playInfo.rangfen.single
+                matchBetCell.fixedOdds = playInfo.rangfen.fixOdds
+                matchBetCells.append(matchBetCell)
+            }
+            // 大小分
+            if playInfo.daxiaofen.isShow && (playInfo.daxiaofen.visiCell.selected
+                                            || playInfo.daxiaofen.homeCell.selected) {
+                var matchBetCell = BBMatchBetCell()
+                var betCells = [BBCellModel]()
+                if playInfo.daxiaofen.visiCell.selected {
+                    betCells.append(playInfo.daxiaofen.visiCell)
+                }
+                if playInfo.daxiaofen.homeCell.selected {
+                    betCells.append(playInfo.daxiaofen.homeCell)
+                }
+                
+                matchBetCell.betCells = betCells
+                matchBetCell.playType = "4"
+                matchBetCell.single = playInfo.daxiaofen.single
+                matchBetCell.fixedOdds = playInfo.daxiaofen.fixOdds
+                matchBetCells.append(matchBetCell)
+            }
+            // 胜分差
+            if playInfo.shengFenCha.isShow && (playInfo.shengFenCha.visiCell.selected
+                                            || playInfo.shengFenCha.homeCell.selected){
+                var matchBetCell = BBMatchBetCell()
+                var betCells = [BBCellModel]()
+
+                for cell in playInfo.shengFenCha.visiSFC {
+                    if cell.selected {
+                        betCells.append(cell)
+                    }
+                }
+                
+                for cell in playInfo.shengFenCha.homeSFC {
+                    if cell.selected {
+                        betCells.append(cell)
+                    }
+                }
+                
+                matchBetCell.betCells = betCells
+                matchBetCell.playType = "3"
+                matchBetCell.single = playInfo.daxiaofen.single
+                matchBetCell.fixedOdds = playInfo.daxiaofen.fixOdds
+                matchBetCells.append(matchBetCell)
+            }
             
             matchBetPlay.matchBetCells = matchBetCells
             matchBetPlays.append(matchBetPlay)

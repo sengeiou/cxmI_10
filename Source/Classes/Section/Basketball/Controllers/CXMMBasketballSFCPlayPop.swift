@@ -10,6 +10,7 @@ import UIKit
 
 protocol BasketballSFCPlayPopDelegate {
     func didTipConfirm(section : Int) -> Void
+    func didTipDelete(section : Int) -> Void
 }
 
 class CXMMBasketballSFCPlayPop: BasePopViewController {
@@ -34,6 +35,9 @@ class CXMMBasketballSFCPlayPop: BasePopViewController {
     
     private var playInfo : BasketballListModel!
     private var viewModel : BBPlayModel!
+    
+    private var cellNum : Int!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.popStyle = .fromBottom
@@ -74,7 +78,7 @@ class CXMMBasketballSFCPlayPop: BasePopViewController {
 extension CXMMBasketballSFCPlayPop {
     public func configure(with data : BBPlayModel) {
         self.viewModel = data
-        
+        self.cellNum = self.viewModel.cellNum
     }
     public func configure(with data : BasketballListModel) {
         self.playInfo = data
@@ -100,12 +104,16 @@ extension CXMMBasketballSFCPlayPop {
 // MARK: - 确认，，取消，，点击事件
 extension CXMMBasketballSFCPlayPop {
     @IBAction func confirmClick(_ sender : UIButton) {
+        viewModel.cacheCellList.removeAll()
         self.dismiss(animated: true, completion: nil)
         guard delegate != nil else { return }
         delegate.didTipConfirm(section: self.section)
     }
     @IBAction func cancelClick(_ sender : UIButton) {
+        viewModel.backSelect(cellNumber: self.cellNum)
         self.dismiss(animated: true, completion: nil)
+        guard delegate != nil else { return }
+        delegate.didTipDelete(section: section)
     }
 }
 
@@ -113,9 +121,11 @@ extension CXMMBasketballSFCPlayPop : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            viewModel.seSFCVisiPlay(isSelected: viewModel.shengFenCha.visiSFC[indexPath.row].selected, index: indexPath.row)
+            viewModel.seSFCVisiPlay(index: indexPath.row)
+            viewModel.cacheCellList.insert(viewModel.shengFenCha.visiSFC[indexPath.row])
         case 1:
-            viewModel.seSFCHomePlay(isSelected: viewModel.shengFenCha.homeSFC[indexPath.row].selected, index: indexPath.row)
+            viewModel.seSFCHomePlay(index: indexPath.row)
+            viewModel.cacheCellList.insert(viewModel.shengFenCha.homeSFC[indexPath.row])
         default : break
         }
     }

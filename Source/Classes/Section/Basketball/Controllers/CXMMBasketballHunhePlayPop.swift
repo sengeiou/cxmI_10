@@ -47,6 +47,8 @@ class CXMMBasketballHunhePlayPop: BasePopViewController {
     
     private var viewModel : BBPlayModel!
     
+    private var cellNum : Int!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.popStyle = .fromBottom
@@ -102,13 +104,18 @@ class CXMMBasketballHunhePlayPop: BasePopViewController {
 }
 extension CXMMBasketballHunhePlayPop {
     @IBAction func confirmClick(_ sender: UIButton) {
+        viewModel.cacheCellList.removeAll()
         self.dismiss(animated: true, completion: nil)
         guard delegate != nil  else { return }
         delegate.didTipConfirm(section: self.section)
+        
     }
     
     @IBAction func cancelClick(_ sender: UIButton) {
+        viewModel.backSelect(cellNumber: self.cellNum)
         self.dismiss(animated: true, completion: nil)
+        guard delegate != nil else { return }
+        delegate.didTipDelete(section: section)
     }
 }
 
@@ -117,34 +124,41 @@ extension CXMMBasketballHunhePlayPop {
     @IBAction func sfVisiClick(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         seButton(isSelected: sender.isSelected, sender: sender)
-        viewModel.seSFVisiPlay(isSelected: sender.isSelected)
+        viewModel.seSFVisiPlay()
+        
+        viewModel.cacheCellList.insert(viewModel.shengfu.visiCell)
     }
     @IBAction func sfHomeClick(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         seButton(isSelected: sender.isSelected, sender: sender)
-        viewModel.seSFHomePlay(isSelected: sender.isSelected)
+        viewModel.seSFHomePlay()
+        viewModel.cacheCellList.insert(viewModel.shengfu.homeCell)
     }
     // 让分
     @IBAction func rfVisiClick(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         seButton(isSelected: sender.isSelected, sender: sender)
-        viewModel.seRFVisiPlay(isSelected: sender.isSelected)
+        viewModel.seRFVisiPlay()
+        viewModel.cacheCellList.insert(viewModel.rangfen.visiCell)
     }
     @IBAction func rfHomeClick(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         seButton(isSelected: sender.isSelected, sender: sender)
-        viewModel.seRFHomePlay(isSelected: sender.isSelected)
+        viewModel.seRFHomePlay()
+        viewModel.cacheCellList.insert(viewModel.rangfen.homeCell)
     }
     // 大小分
     @IBAction func dxfVisiClick(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         seButton(isSelected: sender.isSelected, sender: sender)
-        viewModel.seDXFVisiPlay(isSelected: sender.isSelected)
+        viewModel.seDXFVisiPlay()
+        viewModel.cacheCellList.insert(viewModel.daxiaofen.visiCell)
     }
     @IBAction func dxfHomeClick(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         seButton(isSelected: sender.isSelected, sender: sender)
-        viewModel.seDXFHomePlay(isSelected: sender.isSelected)
+        viewModel.seDXFHomePlay()
+        viewModel.cacheCellList.insert(viewModel.daxiaofen.homeCell)
     }
     
     private func seButton(isSelected : Bool, sender : UIButton) {
@@ -161,6 +175,7 @@ extension CXMMBasketballHunhePlayPop {
     
     public func configure(with data : BBPlayModel) {
         self.viewModel = data
+        self.cellNum = self.viewModel.cellNum
         
         _ = data.shengfu.visiCell.isSelected.asObserver()
             .subscribe({ (event) in
@@ -333,10 +348,12 @@ extension CXMMBasketballHunhePlayPop : UICollectionViewDelegate {
             guard viewModel.shengFenCha.isShow else { return }
             guard viewModel.shengFenCha.visiSFC.isEmpty == false else { return }
             viewModel.seSFCVisiPlay(isSelected: viewModel.shengFenCha.visiSFC[indexPath.row].selected, index: indexPath.row)
+            viewModel.cacheCellList.insert(viewModel.shengFenCha.visiSFC[indexPath.row])
         case 1:
             guard viewModel.shengFenCha.isShow else { return }
             guard viewModel.shengFenCha.homeSFC.isEmpty == false else { return }
             viewModel.seSFCHomePlay(isSelected: viewModel.shengFenCha.homeSFC[indexPath.row].selected, index: indexPath.row)
+            viewModel.cacheCellList.insert(viewModel.shengFenCha.homeSFC[indexPath.row])
         default : break
         }
     }

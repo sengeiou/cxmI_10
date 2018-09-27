@@ -50,3 +50,9 @@ struct BBMatchBetCell: HandyJSON {
     var single: Bool!
     var fixedOdds : String!
 }
+
+struct BBBetCell : HandyJSON {
+    var cellName : String = ""
+    var cellCode : String = ""
+    var cellOdds : String = ""
+}

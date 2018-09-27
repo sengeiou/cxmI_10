@@ -82,7 +82,10 @@ class BasketballViewModel : AlertPro {
             }
             
             getChuanguan(sePlays: sePlayList)
-            self.sePlays.onNext(self.sePlayList)
+            
+            if oldValue.count != sePlayList.count {
+                self.sePlays.onNext(self.sePlayList)
+            }
         }
     }
     

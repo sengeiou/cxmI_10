@@ -50,7 +50,7 @@ class BBPlayModel : NSObject {
     }
     // 混合，选取项
     var selectedCellNum : BehaviorSubject = BehaviorSubject(value: 0)
-    private var cellNum = 0 {
+    var cellNum = 0 {
         didSet{
             selectedCellNum.onNext(cellNum)
         }
@@ -59,6 +59,9 @@ class BBPlayModel : NSObject {
     var isDan : BehaviorSubject = BehaviorSubject(value: false)
     
     var canSetDan : BehaviorSubject = BehaviorSubject(value: false)
+    
+    // 临时CellList:
+    var cacheCellList : Set<BBCellModel> = Set()
 }
 
 extension BBPlayModel {
@@ -73,6 +76,31 @@ extension BBPlayModel {
 
 extension BBPlayModel {
     
+    public func backSelect(cellNumber : Int) {
+        for cell in cacheCellList {
+            cell.selected = !cell.selected
+            cell.isSelected.onNext(cell.selected)
+            changeCellNum(isSelected: cell.selected)
+            selectCells(cell: cell)
+            
+            if cell.playType == "3" {
+                switch cell.selected {
+                case true:
+                    seSFCList.append(cell)
+                case false:
+                    seSFCList.remove(cell)
+                }
+            }
+        }
+        cacheCellList.removeAll()
+        if cellNumber <= 0 {
+            viewModel.deSelectMatch(play: self)
+        }
+//        cellNum = cellNumber
+        
+        
+    }
+    
     private func selectCells(cell : BBCellModel) {
         switch cell.selected {
         case true:
@@ -82,7 +110,7 @@ extension BBPlayModel {
         }
     }
     // 胜负
-    func seSFVisiPlay(isSelected: Bool) {
+    func seSFVisiPlay(isSelected: Bool = false) {
         shengfu.visiCell.selected = !shengfu.visiCell.selected
         
         guard canSePlay(isSelected: shengfu.visiCell.selected) else {
@@ -93,7 +121,7 @@ extension BBPlayModel {
         changeCellNum(isSelected: shengfu.visiCell.selected)
         selectCells(cell: shengfu.visiCell)
     }
-    func seSFHomePlay(isSelected: Bool) {
+    func seSFHomePlay(isSelected: Bool = false) {
         shengfu.homeCell.selected = !shengfu.homeCell.selected
         guard canSePlay(isSelected: shengfu.homeCell.selected) else {
             shengfu.homeCell.selected = false
@@ -103,7 +131,7 @@ extension BBPlayModel {
         selectCells(cell: shengfu.homeCell)
     }
     // 让分
-    func seRFVisiPlay(isSelected : Bool) {
+    func seRFVisiPlay(isSelected : Bool = false) {
         rangfen.visiCell.selected = !rangfen.visiCell.selected
         guard canSePlay(isSelected: rangfen.visiCell.selected) else {
             rangfen.visiCell.selected = false
@@ -112,7 +140,7 @@ extension BBPlayModel {
         changeCellNum(isSelected: rangfen.visiCell.selected)
         selectCells(cell: rangfen.visiCell)
     }
-    func seRFHomePlay(isSelected : Bool) {
+    func seRFHomePlay(isSelected : Bool = false) {
         rangfen.homeCell.selected = !rangfen.homeCell.selected
         guard canSePlay(isSelected: rangfen.homeCell.selected) else {
             rangfen.homeCell.selected = false
@@ -122,7 +150,7 @@ extension BBPlayModel {
         selectCells(cell: rangfen.homeCell)
     }
     // 大小分
-    func seDXFVisiPlay(isSelected : Bool) {
+    func seDXFVisiPlay(isSelected : Bool = false) {
         daxiaofen.visiCell.selected = !daxiaofen.visiCell.selected
         guard canSePlay(isSelected: daxiaofen.visiCell.selected) else {
             daxiaofen.visiCell.selected = false
@@ -131,7 +159,7 @@ extension BBPlayModel {
         changeCellNum(isSelected: daxiaofen.visiCell.selected)
         selectCells(cell: daxiaofen.visiCell)
     }
-    func seDXFHomePlay(isSelected : Bool) {
+    func seDXFHomePlay(isSelected : Bool = false) {
         daxiaofen.homeCell.selected = !daxiaofen.homeCell.selected
         guard canSePlay(isSelected: daxiaofen.homeCell.selected) else {
             daxiaofen.homeCell.selected = false
@@ -141,7 +169,7 @@ extension BBPlayModel {
         selectCells(cell: daxiaofen.homeCell)
     }
     // 胜分差
-    func seSFCVisiPlay(isSelected : Bool, index : Int) {
+    func seSFCVisiPlay(isSelected : Bool = false, index : Int) {
         let cell = shengFenCha.visiSFC[index]
         
         cell.selected = !cell.selected
@@ -161,8 +189,9 @@ extension BBPlayModel {
             seSFCList.remove(cell)
         }
         selectCells(cell: cell)
+       
     }
-    func seSFCHomePlay(isSelected : Bool, index : Int) {
+    func seSFCHomePlay(isSelected : Bool = false, index : Int) {
         let cell = shengFenCha.homeSFC[index]
         cell.selected = !cell.selected
         

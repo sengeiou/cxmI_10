@@ -134,22 +134,22 @@ class BasketballHunheCell: UITableViewCell, AlertPro {
 // MARK: - 玩法 点击事件
 extension BasketballHunheCell {
     @IBAction func sfVisiClick(_ sender : UIButton) {
-        viewModel.seSFVisiPlay(isSelected: sender.isSelected)
+        viewModel.seSFVisiPlay()
     }
     @IBAction func sfHomeClick(_ sender : UIButton) {
-        viewModel.seSFHomePlay(isSelected: sender.isSelected)
+        viewModel.seSFHomePlay()
     }
     @IBAction func rfVisiClick(_ sender : UIButton) {
-        viewModel.seRFVisiPlay(isSelected: sender.isSelected)
+        viewModel.seRFVisiPlay()
     }
     @IBAction func rfHomeClick(_ sender : UIButton) {
-        viewModel.seRFHomePlay(isSelected: sender.isSelected)
+        viewModel.seRFHomePlay()
     }
     @IBAction func dxfVisiClick(_ sender : UIButton) {
-        viewModel.seDXFVisiPlay(isSelected: sender.isSelected)
+        viewModel.seDXFVisiPlay()
     }
     @IBAction func dxfHomeClick(_ sender : UIButton) {
-        viewModel.seDXFHomePlay(isSelected: sender.isSelected)
+        viewModel.seDXFHomePlay()
     }
     
     private func seButton(isSelected : Bool, sender : UIButton) {

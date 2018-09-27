@@ -88,10 +88,10 @@ class BasketballShengfuCell: UITableViewCell, AlertPro {
 // MARK: - 点击事件
 extension BasketballShengfuCell {
     @IBAction func visiClick(_ sender : UIButton) {
-        viewModel.seSFVisiPlay(isSelected: sender.isSelected)
+        viewModel.seSFVisiPlay()
     }
     @IBAction func homeClick(_ sender : UIButton) {
-        viewModel.seSFHomePlay(isSelected: sender.isSelected)
+        viewModel.seSFHomePlay()
     }
     private func seButton(isSelected : Bool, sender : UIButton) {
         switch isSelected {
