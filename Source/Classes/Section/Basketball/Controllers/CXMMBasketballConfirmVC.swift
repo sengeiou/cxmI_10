@@ -43,18 +43,8 @@ class CXMMBasketballConfirmVC: BaseViewController {
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        for play in viewModel.sePlayList {
-            play.confirmViewModel = nil
-        }
-        
-        viewModel = nil
     }
-    
-    deinit {
-        
-        
-        
-    }
+ 
     
     private func setData() {
         _ = viewModel.multiple.asObserver()
@@ -82,12 +72,18 @@ class CXMMBasketballConfirmVC: BaseViewController {
             .subscribe({ [weak self](event) in
                 guard let betTitle = event.element else { return }
                 self?.chuanGuanButton.setTitle(betTitle, for: .normal)
+                
             }).disposed(by: disposeBag)
         
         _ = viewModel.shouldRequest.asObserver()
             .subscribe({ [weak self](event) in
                 self?.getBetInfoRequest()
             }).disposed(by: disposeBag)
+        
+        _ = viewModel.sePlays.asObserver()
+            .subscribe({ [weak self](event) in
+                self?.tableView.reloadData()
+            })
     }
     
     private func setBetInfo() {
@@ -104,7 +100,8 @@ class CXMMBasketballConfirmVC: BaseViewController {
 extension CXMMBasketballConfirmVC : FootballTimesFilterVCDelegate, FootballPlayFilterVCDelegate {
     // 串关
     func playFilterConfirm(filterList: [FootballPlayFilterModel]) {
-        viewModel.changChuanguan()
+        viewModel.changeChuanguan()
+        getBetInfoRequest()
     }
     
     func playFilterCancel() {
@@ -169,7 +166,7 @@ extension CXMMBasketballConfirmVC : BasketballSFCPlayPopDelegate{
 // MARK: - tableview Delegate
 extension CXMMBasketballConfirmVC : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let model = viewModel.sePlayList[indexPath.section]
+        let model = viewModel.deSePlayList[indexPath.section]
         
         switch model.playType {
         case .混合投注:
@@ -199,25 +196,25 @@ extension CXMMBasketballConfirmVC : UITableViewDelegate {
 // MARK: - tableview DataSource
 extension CXMMBasketballConfirmVC : UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.sePlayList.count
+        return viewModel.deSePlayList.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let model = viewModel.sePlayList[indexPath.section]
+        let model = viewModel.deSePlayList[indexPath.section]
         
         switch model.playType {
         case .混合投注, .胜分差:
             let cell = tableView.dequeueReusableCell(withIdentifier: "BasketballConfirmSFCCell", for: indexPath) as! BasketballConfirmSFCCell
             cell.delegate = self
-            cell.configure(with: viewModel.sePlayList[indexPath.section])
+            cell.configure(with: viewModel.deSePlayList[indexPath.section])
             return cell
         case .胜负, .让分胜负, .大小分:
             let cell = tableView.dequeueReusableCell(withIdentifier: "BasketballConfirmCell", for: indexPath) as! BasketballConfirmCell
             cell.delegate = self
-            cell.configure(with: viewModel.sePlayList[indexPath.section], viewMo: self.viewModel)
+            cell.configure(with: viewModel.deSePlayList[indexPath.section], viewMo: self.viewModel)
             return cell
         }
     }
@@ -225,7 +222,7 @@ extension CXMMBasketballConfirmVC : UITableViewDataSource {
 extension CXMMBasketballConfirmVC {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        let model = viewModel.sePlayList[indexPath.section]
+        let model = viewModel.deSePlayList[indexPath.section]
         
         switch model.playType {
         case .混合投注, .胜分差:
@@ -244,7 +241,7 @@ extension CXMMBasketballConfirmVC {
         }
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if section + 1 == viewModel.sePlayList.count {
+        if section + 1 == viewModel.deSePlayList.count {
             return 0.01
         }
         return 5
@@ -258,8 +255,6 @@ extension CXMMBasketballConfirmVC {
     }
     private func getBetInfoRequest() {
         self.setRequestModel()
-        
-//        guard requestModel.matchBetPlays.count > 1 else { return }
         
         weak var weakSelf = self
         showProgressHUD()
@@ -358,12 +353,12 @@ extension CXMMBasketballConfirmVC {
         for playInfo in viewModel.sePlayList {
             var matchBetPlay = BBMatchBetPlay()
             
-            if let isDan = try? playInfo.isDan.value() {
-                matchBetPlay.isDan = isDan
-            }
+//            if let isDan = try? playInfo.isDan.value() {
+//                matchBetPlay.isDan = isDan
+//            }
             
             matchBetPlay.changci = playInfo.changci
-        
+            matchBetPlay.isDan = playInfo.isDanSe
             matchBetPlay.lotteryClassifyId = viewModel.lotteryClassifyId
             matchBetPlay.lotteryPlayClassifyId = viewModel.lotteryPlayClassifyId
             matchBetPlay.matchId = playInfo.playInfo.matchId
@@ -380,25 +375,10 @@ extension CXMMBasketballConfirmVC {
                 var matchBetCell = BBMatchBetCell()
                 var betCells = [BBCellModel]()
                 if playInfo.shengfu.visiCell.selected {
-                    
-//                    var cell = BBBetCell()
-//                    cell.cellName = playInfo.shengfu.visiCell.cellName
-//                    cell.cellOdds = playInfo.shengfu.visiCell.cellOdds
-//                    cell.cellCode = playInfo.shengfu.visiCell.cellCode
-                    
-                    
-//                    betCells.append(cell)
                     betCells.append(playInfo.shengfu.visiCell)
                 }
                 if playInfo.shengfu.homeCell.selected {
-//                    var cell = BBBetCell()
-//                    cell.cellName = playInfo.shengfu.homeCell.cellName
-//                    cell.cellOdds = playInfo.shengfu.homeCell.cellOdds
-//                    cell.cellCode = playInfo.shengfu.homeCell.cellCode
-//
-//
-//                    betCells.append(cell)
-//                    betCells.append(playInfo.shengfu.homeCell)
+                    betCells.append(playInfo.shengfu.homeCell)
                 }
                 
                 matchBetCell.betCells = betCells

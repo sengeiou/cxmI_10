@@ -52,9 +52,9 @@ class BBConfirmViewModel : AlertPro {
     
     var confirmButtonState : BehaviorSubject = BehaviorSubject(value: false)
     
-    
-    
     var sePlays : BehaviorSubject = BehaviorSubject(value: [BBPlayModel]())
+    
+    public var deSePlayList = [BBPlayModel]()
     
     public var sePlayList = [BBPlayModel]() {
         didSet{
@@ -112,6 +112,8 @@ extension BBConfirmViewModel {
             self.sePlaySet.insert(play)
         case false :
             if play.cellNum <= 0 {
+                play.isDanSe = false
+                play.canChangeDan(canSet: false)
                 self.sePlaySet.remove(play)
             }
         }
@@ -125,6 +127,8 @@ extension BBConfirmViewModel {
             self.sePlaySet.insert(play)
         case false :
             if play.cellNum <= 0 {
+                play.isDanSe = false
+                play.canChangeDan(canSet: false)
                 self.sePlaySet.remove(play)
             }
         }
@@ -139,6 +143,8 @@ extension BBConfirmViewModel {
             self.sePlaySet.insert(play)
         case false :
             if play.cellNum <= 0 {
+                play.isDanSe = false
+                play.canChangeDan(canSet: false)
                 self.sePlaySet.remove(play)
             }
         }
@@ -152,6 +158,8 @@ extension BBConfirmViewModel {
             self.sePlaySet.insert(play)
         case false :
             if play.cellNum <= 0 {
+                setDan(play: play)
+                play.canChangeDan(canSet: false)
                 self.sePlaySet.remove(play)
             }
         }
@@ -166,6 +174,8 @@ extension BBConfirmViewModel {
             self.sePlaySet.insert(play)
         case false :
             if play.cellNum <= 0 {
+                setDan(play: play)
+                play.canChangeDan(canSet: false)
                 self.sePlaySet.remove(play)
             }
         }
@@ -179,6 +189,8 @@ extension BBConfirmViewModel {
             self.sePlaySet.insert(play)
         case false :
             if play.cellNum <= 0 {
+                setDan(play: play)
+                play.canChangeDan(canSet: false)
                 self.sePlaySet.remove(play)
             }
         }
@@ -193,6 +205,8 @@ extension BBConfirmViewModel {
             self.sePlaySet.insert(play)
         case false :
             if play.cellNum <= 0 {
+                setDan(play: play)
+                play.canChangeDan(canSet: false)
                 self.sePlaySet.remove(play)
             }
         }
@@ -206,6 +220,8 @@ extension BBConfirmViewModel {
             self.sePlaySet.insert(play)
         case false :
             if play.cellNum <= 0 {
+                setDan(play: play)
+                play.canChangeDan(canSet: false)
                 self.sePlaySet.remove(play)
             }
         }
@@ -215,29 +231,15 @@ extension BBConfirmViewModel {
 
 
 extension BBConfirmViewModel {
-    public func selectMatch(play : BBPlayModel) -> Bool {
-        
-        guard sePlaySet.count < maxNum
-            || sePlaySet.contains(play) else {
-                
-                showHUD(message: "最多选择\(sePlaySet.count)场")
-                
-                return false
-        }
-        
-        sePlaySet.insert(play)
-        return true
-    }
-    public func deSelectMatch(play : BBPlayModel) {
-        sePlaySet.remove(play)
-    }
+
     
     public func deletePlay(play : BBPlayModel) {
         self.sePlaySet.remove(play)
-        
+        shouldRequest.onNext(true)
     }
     public func changeMultiple(multiple : String) {
         self.multiple.onNext(multiple)
+        shouldRequest.onNext(true)
     }
 }
 
@@ -262,10 +264,14 @@ extension BBConfirmViewModel {
             play.changeDan(isDan: play.isDanSe)
         }
         
-        
+        shouldRequest.onNext(true)
     }
     private func backDan() {
         for play in sePlayList {
+            play.changeDan(isDan: false)
+        }
+        
+        for play in deSePlayList {
             play.changeDan(isDan: false)
         }
     }
@@ -308,7 +314,7 @@ extension BBConfirmViewModel {
         return self.filterList
     }
     
-    public func changChuanguan() {
+    public func changeChuanguan() {
         var title = ""
         var filterNum = ""
         
@@ -389,7 +395,7 @@ extension BBConfirmViewModel {
         }
         
         filterList.last?.isSelected = true
-        changChuanguan()
+        changeChuanguan()
     }
     
     private func isAllSingle(sePlays : [BBPlayModel]) -> Bool {

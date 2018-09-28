@@ -504,12 +504,10 @@ extension CXMMBasketballVC {
         switch segue.identifier {
         case "pushConfirm":
             let vc = segue.destination as! CXMMBasketballConfirmVC
-            
-            
             vc.viewModel.sePlaySet = self.viewModel.sePlaySet
-            
-            
-//            vc.viewModel = self.viewModel
+            vc.viewModel.deSePlayList = self.viewModel.sePlayList
+            vc.viewModel.lotteryClassifyId = self.viewModel.lotteryClassifyId
+            vc.viewModel.lotteryPlayClassifyId = self.viewModel.lotteryPlayClassifyId
         default: break
             
         }
