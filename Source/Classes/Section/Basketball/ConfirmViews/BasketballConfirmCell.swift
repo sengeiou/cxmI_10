@@ -37,6 +37,9 @@ class BasketballConfirmCell: UITableViewCell {
     @IBOutlet weak var homeOdds : UIButton!
     
     private var viewModel : BBPlayModel!
+    
+    private var conViewModel : BBConfirmViewModel!
+    
     private var bag = DisposeBag()
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -77,10 +80,29 @@ class BasketballConfirmCell: UITableViewCell {
 
 extension BasketballConfirmCell {
     @IBAction func visiClick(_ sender : UIButton) {
-        viewModel.seSFVisiPlay(isSelected: sender.isSelected)
+        switch viewModel.playType {
+        case .胜负:
+            conViewModel.seSFVisiPlay(play: viewModel)
+        case .让分胜负:
+            conViewModel.seRFVisiPlay(play: viewModel)
+        case .大小分:
+            conViewModel.seDXFVisiPlay(play: viewModel)
+        default:
+            break
+        }
+        
     }
     @IBAction func homeClick(_ sender : UIButton) {
-        viewModel.seSFHomePlay(isSelected: sender.isSelected)
+        switch viewModel.playType {
+        case .胜负:
+            conViewModel.seSFHomePlay(play: viewModel)
+        case .让分胜负:
+            conViewModel.seRFHomePlay(play: viewModel)
+        case .大小分:
+            conViewModel.seDXFHomePlay(play: viewModel)
+        default:
+            break
+        }
     }
     
     @IBAction func deleteClick(_ sender : UIButton) {
@@ -94,11 +116,11 @@ extension BasketballConfirmCell {
 }
 
 extension BasketballConfirmCell {
-    public func configure(with data : BBPlayModel) {
+    public func configure(with data : BBPlayModel, viewMo : BBConfirmViewModel) {
         self.viewModel = data
         
-        
-        
+//        data.confirmViewModel = viewMo
+        self.conViewModel = viewMo
         // 场次信息
         self.changciLabel.text =  "\(data.playInfo.leagueAddr) \(data.playInfo.changci) \(data.playInfo.matchDay)"
         
@@ -133,14 +155,52 @@ extension BasketballConfirmCell {
             playInfo = data.shengfu
             singleState(single: data.shengfu.single)
             
+            _ = data.shengfu.visiCell.isSelected.asObserver()
+                .subscribe({ [weak self](event) in
+                    guard let se = event.element else { return }
+                    self?.visiOdds.isSelected = se
+                    self?.seButton(isSelected: se, sender: (self?.visiOdds)!)
+                }).disposed(by: bag)
+            _ = data.shengfu.homeCell.isSelected.asObserver()
+                .subscribe({ [weak self](event) in
+                    guard let se = event.element else { return }
+                    self?.homeOdds.isSelected = se
+                    self?.seButton(isSelected: se, sender: (self?.homeOdds)!)
+                }).disposed(by: bag)
         case .让分胜负:
             isShow = data.rangfen.isShow
             playInfo = data.rangfen
             singleState(single: data.rangfen.single)
+            
+            _ = data.rangfen.visiCell.isSelected.asObserver()
+                .subscribe({ [weak self](event) in
+                    guard let se = event.element else { return }
+                    self?.visiOdds.isSelected = se
+                    self?.seButton(isSelected: se, sender: (self?.visiOdds)!)
+                }).disposed(by: bag)
+            _ = data.rangfen.homeCell.isSelected.asObserver()
+                .subscribe({ [weak self](event) in
+                    guard let se = event.element else { return }
+                    self?.homeOdds.isSelected = se
+                    self?.seButton(isSelected: se, sender: (self?.homeOdds)!)
+                }).disposed(by: bag)
         case .大小分:
             isShow = data.daxiaofen.isShow
             playInfo = data.daxiaofen
             singleState(single: data.daxiaofen.single)
+            
+            _ = data.daxiaofen.visiCell.isSelected.asObserver()
+                .subscribe({ [weak self](event) in
+                    guard let se = event.element else { return }
+                    self?.visiOdds.isSelected = se
+                    self?.seButton(isSelected: se, sender: (self?.visiOdds)!)
+                }).disposed(by: bag)
+            _ = data.daxiaofen.homeCell.isSelected.asObserver()
+                .subscribe({ [weak self](event) in
+                    guard let se = event.element else { return }
+                    self?.homeOdds.isSelected = se
+                    self?.seButton(isSelected: se, sender: (self?.homeOdds)!)
+                }).disposed(by: bag)
         default:
             isShow = false
             singleState(single: false)
@@ -169,18 +229,10 @@ extension BasketballConfirmCell {
         
         
         
-        _ = data.shengfu.visiCell.isSelected.asObserver()
-            .subscribe({ [weak self](event) in
-                guard let se = event.element else { return }
-                self?.visiOdds.isSelected = se
-                self?.seButton(isSelected: se, sender: (self?.visiOdds)!)
-            }).disposed(by: bag)
-        _ = data.shengfu.homeCell.isSelected.asObserver()
-            .subscribe({ [weak self](event) in
-                guard let se = event.element else { return }
-                self?.homeOdds.isSelected = se
-                self?.seButton(isSelected: se, sender: (self?.homeOdds)!)
-            }).disposed(by: bag)
+        
+        
+       
+        
         // 胆
         
         _ = Observable.combineLatest(data.canSetDan, data.isDan).asObservable()

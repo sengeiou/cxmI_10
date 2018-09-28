@@ -19,6 +19,8 @@ class CXMMBasketballSFCPlayPop: BasePopViewController {
     
     public var section : Int!
     
+    public var style : BBPlayPopStyle = .defaul
+    
     @IBOutlet weak var shenfenchaView : UIView!
     
     @IBOutlet weak var collectionView : UICollectionView!

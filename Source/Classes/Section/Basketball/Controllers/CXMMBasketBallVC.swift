@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 enum BasketballPlayType : String {
     case 胜负
@@ -59,6 +60,7 @@ class CXMMBasketballVC: BaseViewController {
     
     private var playViewModel : BBPlayViewModel = BBPlayViewModel()
     
+    private var disposeBag : DisposeBag = DisposeBag()
     // MARK : - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,7 +79,7 @@ class CXMMBasketballVC: BaseViewController {
             .subscribe { [weak self](event) in
                 guard let text = event.element else { return }
                 self?.selectNum.text = text
-        }
+        }.disposed(by: disposeBag)
         
         // 确定按钮显示 样式
         _ = viewModel.confirmButtonState.asObserver()
@@ -91,7 +93,7 @@ class CXMMBasketballVC: BaseViewController {
                 case false:
                     self?.confirmBut.backgroundColor = ColorC7C7C7
                 }
-            })
+            }).disposed(by: disposeBag)
     }
     private func initSubview() {
         menu.delegate = self
@@ -190,6 +192,7 @@ extension CXMMBasketballVC {
                         case "1":
                             let playInfo = BBPlayModel()
                             playInfo.viewModel = self.viewModel
+                            
                             playInfo.changci = play.changci
                             playInfo.playType = .胜负
                             playInfo.visiTeam = play.visitingTeamAbbr
@@ -227,6 +230,7 @@ extension CXMMBasketballVC {
                         case "2":
                             let playInfo = BBPlayModel()
                             playInfo.viewModel = self.viewModel
+                            
                             playInfo.changci = play.changci
                             playInfo.playType = .让分胜负
                             playInfo.visiTeam = play.visitingTeamAbbr
@@ -264,6 +268,7 @@ extension CXMMBasketballVC {
                         case "3":
                             let playInfo = BBPlayModel()
                             playInfo.viewModel = self.viewModel
+                            
                             playInfo.changci = play.changci
                             playInfo.playType = .胜分差
                             playInfo.visiTeam = play.visitingTeamAbbr
@@ -302,6 +307,7 @@ extension CXMMBasketballVC {
                         case "4":
                             let playInfo = BBPlayModel()
                             playInfo.viewModel = self.viewModel
+                            
                             playInfo.changci = play.changci
                             playInfo.playType = .大小分
                             playInfo.visiTeam = play.visitingTeamAbbr
@@ -339,6 +345,7 @@ extension CXMMBasketballVC {
                         case "5":
                             let playInfo = BBPlayModel()
                             playInfo.viewModel = self.viewModel
+                            
                             playInfo.changci = play.changci
                             playInfo.playType = .混合投注
                             playInfo.visiTeam = play.visitingTeamAbbr
@@ -497,7 +504,12 @@ extension CXMMBasketballVC {
         switch segue.identifier {
         case "pushConfirm":
             let vc = segue.destination as! CXMMBasketballConfirmVC
-            vc.viewModel = self.viewModel
+            
+            
+            vc.viewModel.sePlaySet = self.viewModel.sePlaySet
+            
+            
+//            vc.viewModel = self.viewModel
         default: break
             
         }

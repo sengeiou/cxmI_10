@@ -41,6 +41,8 @@ class BBPlayModel : NSObject {
     // 交互
     weak var viewModel : BasketballViewModel!
     
+    weak var confirmViewModel : BBConfirmViewModel!
+    
     // 胜分差，选择项
     var seSFC : BehaviorSubject = BehaviorSubject(value: [BBCellModel]())
     private var seSFCList : [BBCellModel] = [BBCellModel]() {
@@ -244,9 +246,15 @@ extension BBPlayModel {
         switch isSelected {
         case true:
             guard viewModel.selectMatch(play: self) else { return false }
+//            if confirmViewModel != nil {
+//                guard confirmViewModel.selectMatch(play: self) else { return false }
+//            }
         case false :
             if cellNum <= 1 {
                 viewModel.deSelectMatch(play: self)
+//                if confirmViewModel != nil {
+//                    confirmViewModel.deSelectMatch(play: self)
+//                }
             }
             return true
         }

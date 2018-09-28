@@ -25,11 +25,13 @@ class CXMMBasketballConfirmVC: BaseViewController {
     
     private var disposeBag = DisposeBag()
     
-    public var viewModel : BasketballViewModel!
+    public var viewModel : BBConfirmViewModel! = BBConfirmViewModel()
     
     private var requestModel : BasketballRequestMode!
     
     private var getBetInfoModel : BBGetBetInfoModel!
+    
+    private var obser : Observable<Any>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +41,21 @@ class CXMMBasketballConfirmVC: BaseViewController {
         self.tableView.reloadData()
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        for play in viewModel.sePlayList {
+            play.confirmViewModel = nil
+        }
+        
+        viewModel = nil
+    }
+    
+    deinit {
+        
+        
+        
+    }
+    
     private func setData() {
         _ = viewModel.multiple.asObserver()
             .subscribe({ [weak self](event) in
@@ -67,16 +84,9 @@ class CXMMBasketballConfirmVC: BaseViewController {
                 self?.chuanGuanButton.setTitle(betTitle, for: .normal)
             }).disposed(by: disposeBag)
         
-        _ = Observable.combineLatest(viewModel.multiple, viewModel.betNum, viewModel.sePlays)
-            .asObservable()
+        _ = viewModel.shouldRequest.asObserver()
             .subscribe({ [weak self](event) in
-//                guard let item = event.element else { return }
-//                let multiple = item.0
-//                let betNum = item.1
-//                let sePlays = item.2
-                
                 self?.getBetInfoRequest()
-                
             }).disposed(by: disposeBag)
     }
     
@@ -207,7 +217,7 @@ extension CXMMBasketballConfirmVC : UITableViewDataSource {
         case .胜负, .让分胜负, .大小分:
             let cell = tableView.dequeueReusableCell(withIdentifier: "BasketballConfirmCell", for: indexPath) as! BasketballConfirmCell
             cell.delegate = self
-            cell.configure(with: viewModel.sePlayList[indexPath.section])
+            cell.configure(with: viewModel.sePlayList[indexPath.section], viewMo: self.viewModel)
             return cell
         }
     }
@@ -248,6 +258,9 @@ extension CXMMBasketballConfirmVC {
     }
     private func getBetInfoRequest() {
         self.setRequestModel()
+        
+//        guard requestModel.matchBetPlays.count > 1 else { return }
+        
         weak var weakSelf = self
         showProgressHUD()
         _ = basketBallProvider.rx.request(.getBetInfo(requestModel: self.requestModel))
@@ -432,8 +445,8 @@ extension CXMMBasketballConfirmVC {
                 matchBetCells.append(matchBetCell)
             }
             // 胜分差
-            if playInfo.shengFenCha.isShow && (playInfo.shengFenCha.visiCell.selected
-                                            || playInfo.shengFenCha.homeCell.selected){
+            if playInfo.shengFenCha.isShow && (playInfo.playType == .混合投注
+                                            || playInfo.playType == .胜分差){
                 var matchBetCell = BBMatchBetCell()
                 var betCells = [BBCellModel]()
 

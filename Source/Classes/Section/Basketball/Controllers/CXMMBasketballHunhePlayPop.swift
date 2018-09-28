@@ -8,11 +8,18 @@
 
 import UIKit
 
+enum BBPlayPopStyle {
+    case defaul
+    case confirm
+}
+
 class CXMMBasketballHunhePlayPop: BasePopViewController {
     
     public var delegate : BasketballSFCPlayPopDelegate!
     
     public var section : Int!
+    
+    public var style : BBPlayPopStyle = .defaul
     
     @IBOutlet weak var playView : UIView!
     
