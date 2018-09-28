@@ -291,7 +291,7 @@ extension CXMMBasketballConfirmVC {
         showProgressHUD()
         _ = basketBallProvider.rx.request(.saveBetInfo(requestModel: self.requestModel))
             .asObservable()
-            .mapObject(type: DataModel.self)
+            .mapBaseObject(type: DataModel.self)
             .subscribe(onNext: { (data) in
                 weakSelf?.dismissProgressHud()
                 
