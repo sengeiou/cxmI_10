@@ -12,7 +12,7 @@ import RxCocoa
 
 fileprivate let maxNum : Int = 15
 
-class BBConfirmViewModel : AlertPro {
+class BBConfirmViewModel : AlertPro, DateProtocol {
     
     var lotteryClassifyId: String = ""
     var lotteryPlayClassifyId: String = ""
@@ -25,6 +25,8 @@ class BBConfirmViewModel : AlertPro {
     var shouldRequest : BehaviorSubject = BehaviorSubject(value: true)
     
     var danIsSelect : BehaviorSubject = BehaviorSubject(value: false)
+    ///顶部显示的文本
+    var topText : BehaviorSubject<NSAttributedString> = BehaviorSubject(value: NSAttributedString(string: ""))
     
     private var filterList: [FootballPlayFilterModel] = [FootballPlayFilterModel]() {
         didSet{
@@ -87,6 +89,8 @@ class BBConfirmViewModel : AlertPro {
             
             if oldValue.count != sePlayList.count {
                 self.sePlays.onNext(self.sePlayList)
+                
+                changeTopText()
             }
         }
     }
@@ -94,12 +98,32 @@ class BBConfirmViewModel : AlertPro {
     var sePlaySet : Set<BBPlayModel> = Set() {
         didSet{
             sePlayList = sePlaySet.sorted{$0.changci < $1.changci}
+            
         }
     }
     
     public func removeAllSePlay() {
         sePlaySet.removeAll()
     }
+    
+    
+    private func changeTopText() {
+        var arr = [Int]()
+        for model in sePlayList {
+            arr.append(model.playInfo.betEndTime)
+        }
+        
+        guard let timeInt = arr.min() else { return }
+        
+        let time = timeStampToHHmm(timeInt)
+        
+        let attStr = NSMutableAttributedString(string: "已选\(sePlayList.count)场比赛 投注截止时间：", attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F])
+        let att = NSAttributedString(string: time, attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+        attStr.append(att)
+        
+        self.topText.onNext(attStr)
+    }
+    
 }
 
 extension BBConfirmViewModel {

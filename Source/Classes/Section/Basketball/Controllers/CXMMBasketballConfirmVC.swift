@@ -47,6 +47,10 @@ class CXMMBasketballConfirmVC: BaseViewController {
  
     
     private func setData() {
+        
+        _ = viewModel.topText.asObserver().bind(to: self.topLabel.rx.attributedText)
+            .disposed(by: disposeBag)
+        
         _ = viewModel.multiple.asObserver()
             .subscribe({ [weak self](event) in
                 guard let multiple = event.element else { return }
@@ -87,7 +91,25 @@ class CXMMBasketballConfirmVC: BaseViewController {
     }
     
     private func setBetInfo() {
-        betInfo.text = "\(getBetInfoModel.betNum)注\(getBetInfoModel.times)倍 共需: \(getBetInfoModel.money)"
+        
+        let moneyAtt = NSMutableAttributedString(string: "\(getBetInfoModel.betNum)注 \(getBetInfoModel.times)倍 共需：")
+        let moneyStr = NSAttributedString(string: "¥\(getBetInfoModel.money)\n", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+        
+        
+        let bonusAtt = NSAttributedString(string: "预测奖金: ")
+        let bonusStr = NSAttributedString(string: "\(getBetInfoModel.minBonus)-\(getBetInfoModel.maxBonus)", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+        
+        moneyAtt.append(moneyStr)
+        moneyAtt.append(bonusAtt)
+        moneyAtt.append(bonusStr)
+        
+        
+        betInfo.attributedText = moneyAtt
+        
+        
+        
+        
+        
     }
     
     private func initSubview() {
