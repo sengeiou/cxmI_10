@@ -278,7 +278,11 @@ extension CXMPaymentViewController {
             order.orderId = self.paymentResult.orderId
             pushViewController(vc: order)
         case "3": // 竞彩篮球
-            break
+            let story = UIStoryboard(storyboard: .Basketball)
+            let order = story.instantiateViewController(withIdentifier: "BasketballOrderVC") as! CXMMBasketballOrderVC
+            order.backType = .root
+            order.orderId = self.paymentResult.orderId
+            pushViewController(vc: order)
         case "4": // 快3
             break
         case "5": // 双色球

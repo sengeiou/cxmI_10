@@ -22,6 +22,8 @@ enum BasketballNetAPIManager {
     case saveBetInfo(requestModel: BasketballRequestMode)
     /// 订单详情
     case orderDetail(orderId : String)
+    /// 出票方案
+    case orderScheme(orderSn : String, programmeSn : String)
 }
 
 extension BasketballNetAPIManager : TargetType {
@@ -43,6 +45,8 @@ extension BasketballNetAPIManager : TargetType {
             return "/lottery/lottery/match/saveBasketBallBetInfo"
         case .orderDetail:
             return "/order/order/getBasketBallOrderDetail"
+        case .orderScheme:
+            return "/order/order/getBasketBallTicketScheme"
         }
     }
     
@@ -61,6 +65,9 @@ extension BasketballNetAPIManager : TargetType {
             dic = requestModel.toJSON()!
         case .orderDetail(let orderId):
             dic["orderId"] = orderId
+        case .orderScheme(let orderSn, let programmeSn) :
+            dic["orderSn"] = orderSn
+            dic["programmeSn"] = programmeSn
         default:
             return .requestPlain
         }

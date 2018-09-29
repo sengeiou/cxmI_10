@@ -112,6 +112,7 @@
 		114800D8208C80B100621AFA /* CXMNewsRecommendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114800D7208C80B100621AFA /* CXMNewsRecommendVC.swift */; };
 		114800DA208C97B400621AFA /* CXMNewsMeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114800D9208C97B400621AFA /* CXMNewsMeViewController.swift */; };
 		114800DC208C9AE700621AFA /* NewsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114800DB208C9AE700621AFA /* NewsHeaderView.swift */; };
+		1149F11E215F15BF00C9C755 /* BBSchemeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1149F11D215F15BF00C9C755 /* BBSchemeCell.swift */; };
 		114D06C520B54E7A00443BCC /* CXMActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D06C420B54E7A00443BCC /* CXMActivityViewController.swift */; };
 		114D06C720B54F4600443BCC /* CXMWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D06C620B54F4500443BCC /* CXMWebViewController.swift */; };
 		114D06CD20B55BA600443BCC /* ClearCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D06CC20B55BA600443BCC /* ClearCache.swift */; };
@@ -295,7 +296,7 @@
 		11E919C2215CB4DA00892408 /* BBOrderDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E919C1215CB4DA00892408 /* BBOrderDetailCell.swift */; };
 		11E919C4215CB50300892408 /* BBOrderDetailTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E919C3215CB50300892408 /* BBOrderDetailTitleCell.swift */; };
 		11E919C6215CB57200892408 /* BBOrderBetInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E919C5215CB57200892408 /* BBOrderBetInfoCell.swift */; };
-		11E919C8215CD7A700892408 /* CXMMBasketballOrderPro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E919C7215CD7A700892408 /* CXMMBasketballOrderPro.swift */; };
+		11E919C8215CD7A700892408 /* CXMMBasketballOrderScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E919C7215CD7A700892408 /* CXMMBasketballOrderScheme.swift */; };
 		11E969EA20C7E01700EAB733 /* Extension+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E969E920C7E01700EAB733 /* Extension+UIImage.swift */; };
 		11EA897220E36CD2000AB4BA /* AccountDetailData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EA897120E36CD2000AB4BA /* AccountDetailData.swift */; };
 		11EB8EE2207B6D9B00AFC9C1 /* CXMPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EB8EE1207B6D9B00AFC9C1 /* CXMPaymentViewController.swift */; };
@@ -609,6 +610,7 @@
 		114800D7208C80B100621AFA /* CXMNewsRecommendVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMNewsRecommendVC.swift; sourceTree = "<group>"; };
 		114800D9208C97B400621AFA /* CXMNewsMeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMNewsMeViewController.swift; sourceTree = "<group>"; };
 		114800DB208C9AE700621AFA /* NewsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsHeaderView.swift; sourceTree = "<group>"; };
+		1149F11D215F15BF00C9C755 /* BBSchemeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBSchemeCell.swift; sourceTree = "<group>"; };
 		114D06C420B54E7A00443BCC /* CXMActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMActivityViewController.swift; sourceTree = "<group>"; };
 		114D06C620B54F4500443BCC /* CXMWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXMWebViewController.swift; sourceTree = "<group>"; };
 		114D06CC20B55BA600443BCC /* ClearCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearCache.swift; sourceTree = "<group>"; };
@@ -799,7 +801,7 @@
 		11E919C1215CB4DA00892408 /* BBOrderDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBOrderDetailCell.swift; sourceTree = "<group>"; };
 		11E919C3215CB50300892408 /* BBOrderDetailTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBOrderDetailTitleCell.swift; sourceTree = "<group>"; };
 		11E919C5215CB57200892408 /* BBOrderBetInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBOrderBetInfoCell.swift; sourceTree = "<group>"; };
-		11E919C7215CD7A700892408 /* CXMMBasketballOrderPro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMMBasketballOrderPro.swift; sourceTree = "<group>"; };
+		11E919C7215CD7A700892408 /* CXMMBasketballOrderScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMMBasketballOrderScheme.swift; sourceTree = "<group>"; };
 		11E969E920C7E01700EAB733 /* Extension+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIImage.swift"; sourceTree = "<group>"; };
 		11E9AE4720A2AE85005D1DB4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Storyboard.strings"; sourceTree = "<group>"; };
 		11E9AE4820A2AE86005D1DB4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -1228,7 +1230,7 @@
 				1173BEC92150AD64008BC28A /* CXMMBasketballVC.swift */,
 				116A27F6215106EC0077444E /* CXMMBasketballConfirmVC.swift */,
 				116A27F8215108A10077444E /* CXMMBasketballOrderVC.swift */,
-				11E919C7215CD7A700892408 /* CXMMBasketballOrderPro.swift */,
+				11E919C7215CD7A700892408 /* CXMMBasketballOrderScheme.swift */,
 				1173BED12150D836008BC28A /* CXMMBasketballMenu.swift */,
 				1145B3E621533FC90002E5ED /* CXMMBasketballHunhePlayPop.swift */,
 				1145B3EA215372630002E5ED /* CXMMBasketballSFCPlayPop.swift */,
@@ -1735,6 +1737,7 @@
 				11E919C3215CB50300892408 /* BBOrderDetailTitleCell.swift */,
 				11E919C1215CB4DA00892408 /* BBOrderDetailCell.swift */,
 				11E919C5215CB57200892408 /* BBOrderBetInfoCell.swift */,
+				1149F11D215F15BF00C9C755 /* BBSchemeCell.swift */,
 			);
 			path = OrderViews;
 			sourceTree = "<group>";
@@ -3200,6 +3203,7 @@
 				113DE730211A95FB00DE8026 /* DLTOrderItem.swift in Sources */,
 				116E99D0213FE16C005F1217 /* CXMMPrizeMatchHistoryFilterVC.swift in Sources */,
 				11B1B97020F3637D00387430 /* FootballLineupViewOddCell.swift in Sources */,
+				1149F11E215F15BF00C9C755 /* BBSchemeCell.swift in Sources */,
 				115B0CF220EF41D200848EC7 /* FootballLineupCell.swift in Sources */,
 				1142221221413A1600CCBB3A /* TeamDetailModel.swift in Sources */,
 				E5D8ABB6206739CF002D688B /* OrderDetailTitleCell.swift in Sources */,
@@ -3362,7 +3366,7 @@
 				116E458721119ED000418661 /* DaletouDragBlueCell.swift in Sources */,
 				11062B2D20834A60001C1D14 /* LotteryDateFilterCell.swift in Sources */,
 				114800DA208C97B400621AFA /* CXMNewsMeViewController.swift in Sources */,
-				11E919C8215CD7A700892408 /* CXMMBasketballOrderPro.swift in Sources */,
+				11E919C8215CD7A700892408 /* CXMMBasketballOrderScheme.swift in Sources */,
 				E55016F920722E190056AB1F /* FootballFilterTopView.swift in Sources */,
 				E567636A206B2FDA00E2D9A8 /* HHTextView.swift in Sources */,
 				1157605721427191006D0856 /* TeamDetailMemberItem.swift in Sources */,

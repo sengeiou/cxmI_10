@@ -13,6 +13,8 @@ class CXMMBasketballOrderVC: BaseViewController {
 
     public var orderId : String = ""
     
+    public var backType : BackType = .notRoot
+    
     @IBOutlet weak var tableView : UITableView!
     
     @IBOutlet weak var orderIcon: UIImageView!
@@ -106,6 +108,16 @@ class CXMMBasketballOrderVC: BaseViewController {
             break
         }
     }
+    
+    override func back(_ sender: UIButton) {
+        switch backType {
+        case .notRoot:
+            self.popViewController()
+        case .root:
+            self.popToRootViewController()
+            //self.popToHome()
+        }
+    }
 }
 // MARK: - 点击事件
 extension CXMMBasketballOrderVC {
@@ -124,16 +136,16 @@ extension CXMMBasketballOrderVC : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 1:
-//            let story = UIStoryboard(storyboard: .Basketball)
-//            let vc = story.instantiateViewController(withIdentifier: "BasketballOrderPro") as! CXMMBasketballOrderPro
-//            vc.orderSn = self.orderInfo.orderSn
-//            vc.proSn = self.orderInfo.programmeSn
-//            pushViewController(vc: vc)
+            let story = UIStoryboard(storyboard: .Basketball)
+            let vc = story.instantiateViewController(withIdentifier: "BasketballOrderScheme") as! CXMMBasketballOrderScheme
+            vc.orderSn = self.orderInfo.orderSn
+            vc.programmeSn = self.orderInfo.programmeSn
+            pushViewController(vc: vc)
             
-            let scheme = CXMOrderSchemeVC()
-            scheme.programmeSn = self.orderInfo.programmeSn
-            scheme.orderSn = self.orderInfo.orderSn
-            pushViewController(vc: scheme)
+//            let scheme = CXMOrderSchemeVC()
+//            scheme.programmeSn = self.orderInfo.programmeSn
+//            scheme.orderSn = self.orderInfo.orderSn
+//            pushViewController(vc: scheme)
         default:
             break
         }

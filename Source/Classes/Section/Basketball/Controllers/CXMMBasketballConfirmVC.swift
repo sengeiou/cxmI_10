@@ -45,7 +45,6 @@ class CXMMBasketballConfirmVC: BaseViewController {
         super.viewDidDisappear(animated)
     }
  
-    
     private func setData() {
         
         _ = viewModel.topText.asObserver().bind(to: self.topLabel.rx.attributedText)
@@ -95,7 +94,6 @@ class CXMMBasketballConfirmVC: BaseViewController {
         let moneyAtt = NSMutableAttributedString(string: "\(getBetInfoModel.betNum)注 \(getBetInfoModel.times)倍 共需：")
         let moneyStr = NSAttributedString(string: "¥\(getBetInfoModel.money)\n", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
         
-        
         let bonusAtt = NSAttributedString(string: "预测奖金: ")
         let bonusStr = NSAttributedString(string: "\(getBetInfoModel.minBonus)-\(getBetInfoModel.maxBonus)", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
         
@@ -103,13 +101,7 @@ class CXMMBasketballConfirmVC: BaseViewController {
         moneyAtt.append(bonusAtt)
         moneyAtt.append(bonusStr)
         
-        
         betInfo.attributedText = moneyAtt
-        
-        
-        
-        
-        
     }
     
     private func initSubview() {
