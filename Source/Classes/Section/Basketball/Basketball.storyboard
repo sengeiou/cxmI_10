@@ -3595,13 +3595,13 @@
                                                         <constraint firstAttribute="width" constant="80" id="ce3-pP-6b2"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.62745098040000002" green="0.62745098040000002" blue="0.62745098040000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.31372549019607843" green="0.31372549019607843" blue="0.31372549019607843" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8aq-kQ-E8T">
-                                                    <rect key="frame" x="16" y="10" width="153" height="75"/>
+                                                    <rect key="frame" x="16" y="10" width="143" height="75"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.62745098040000002" green="0.62745098040000002" blue="0.62745098040000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.31372549019607843" green="0.31372549019607843" blue="0.31372549019607843" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SGG-av-b4C">
@@ -3610,7 +3610,7 @@
                                                         <constraint firstAttribute="width" constant="50" id="vDy-KN-cGu"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.62745098040000002" green="0.62745098040000002" blue="0.62745098040000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.31372549019607843" green="0.31372549019607843" blue="0.31372549019607843" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -3621,7 +3621,7 @@
                                                 <constraint firstItem="f2f-wB-PxR" firstAttribute="top" secondItem="7na-uT-utz" secondAttribute="top" constant="10" id="Uku-zG-UWN"/>
                                                 <constraint firstItem="cKl-11-zqh" firstAttribute="leading" secondItem="7na-uT-utz" secondAttribute="leading" constant="10" id="Zt0-C4-ZS9"/>
                                                 <constraint firstItem="8aq-kQ-E8T" firstAttribute="leading" secondItem="7na-uT-utz" secondAttribute="leading" constant="16" id="c1J-tG-7Dd"/>
-                                                <constraint firstItem="dcc-XB-gLP" firstAttribute="leading" secondItem="8aq-kQ-E8T" secondAttribute="trailing" id="cOe-RC-EDe"/>
+                                                <constraint firstItem="dcc-XB-gLP" firstAttribute="leading" secondItem="8aq-kQ-E8T" secondAttribute="trailing" constant="10" id="cOe-RC-EDe"/>
                                                 <constraint firstItem="SGG-av-b4C" firstAttribute="leading" secondItem="dcc-XB-gLP" secondAttribute="trailing" id="cl6-8J-oeb"/>
                                                 <constraint firstItem="dcc-XB-gLP" firstAttribute="top" secondItem="7na-uT-utz" secondAttribute="top" constant="10" id="ejl-xX-aRq"/>
                                                 <constraint firstItem="SGG-av-b4C" firstAttribute="top" secondItem="7na-uT-utz" secondAttribute="top" constant="10" id="iYS-od-g6H"/>

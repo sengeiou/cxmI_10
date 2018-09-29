@@ -17,7 +17,7 @@ class BBSchemeCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        self.state.textColor = ColorEA5504
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -29,7 +29,6 @@ class BBSchemeCell: UITableViewCell {
 
 extension BBSchemeCell {
     public func configure(with data : SchemeDetail) {
-        state.text = data.status
         
         let contents = data.tickeContent.components(separatedBy: "X")
         

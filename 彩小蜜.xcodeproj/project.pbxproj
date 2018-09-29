@@ -113,6 +113,7 @@
 		114800DA208C97B400621AFA /* CXMNewsMeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114800D9208C97B400621AFA /* CXMNewsMeViewController.swift */; };
 		114800DC208C9AE700621AFA /* NewsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114800DB208C9AE700621AFA /* NewsHeaderView.swift */; };
 		1149F11E215F15BF00C9C755 /* BBSchemeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1149F11D215F15BF00C9C755 /* BBSchemeCell.swift */; };
+		1149F120215F1EE500C9C755 /* BBSchemeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1149F11F215F1EE500C9C755 /* BBSchemeViewModel.swift */; };
 		114D06C520B54E7A00443BCC /* CXMActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D06C420B54E7A00443BCC /* CXMActivityViewController.swift */; };
 		114D06C720B54F4600443BCC /* CXMWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D06C620B54F4500443BCC /* CXMWebViewController.swift */; };
 		114D06CD20B55BA600443BCC /* ClearCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114D06CC20B55BA600443BCC /* ClearCache.swift */; };
@@ -611,6 +612,7 @@
 		114800D9208C97B400621AFA /* CXMNewsMeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMNewsMeViewController.swift; sourceTree = "<group>"; };
 		114800DB208C9AE700621AFA /* NewsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsHeaderView.swift; sourceTree = "<group>"; };
 		1149F11D215F15BF00C9C755 /* BBSchemeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBSchemeCell.swift; sourceTree = "<group>"; };
+		1149F11F215F1EE500C9C755 /* BBSchemeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBSchemeViewModel.swift; sourceTree = "<group>"; };
 		114D06C420B54E7A00443BCC /* CXMActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMActivityViewController.swift; sourceTree = "<group>"; };
 		114D06C620B54F4500443BCC /* CXMWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXMWebViewController.swift; sourceTree = "<group>"; };
 		114D06CC20B55BA600443BCC /* ClearCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearCache.swift; sourceTree = "<group>"; };
@@ -1256,6 +1258,7 @@
 				116311DE2151EB3D000C362D /* BasketballViewModel.swift */,
 				1145B3EE21538B8E0002E5ED /* BBPlayViewModel.swift */,
 				116AC791215A16AA00F6BC73 /* BBConfirmViewModel.swift */,
+				1149F11F215F1EE500C9C755 /* BBSchemeViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -3459,6 +3462,7 @@
 				E56298BD20513429006397EA /* CXMAuthenticationVC.swift in Sources */,
 				113DE732211AA26000DE8026 /* DLTProgrammeCell.swift in Sources */,
 				E58B57BE205671410025E2F1 /* LoginNetAPIManager.swift in Sources */,
+				1149F120215F1EE500C9C755 /* BBSchemeViewModel.swift in Sources */,
 				E56CE8042069E2340090A1B5 /* AccountDetailFooterView.swift in Sources */,
 				113B9CD120872226006AE3F8 /* NewsBottomView.swift in Sources */,
 				E550D899207339B6002DDE23 /* FootballOrderRangSPFCell.swift in Sources */,

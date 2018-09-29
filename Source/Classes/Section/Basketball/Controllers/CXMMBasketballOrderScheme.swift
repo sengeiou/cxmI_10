@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class CXMMBasketballOrderScheme: BaseViewController {
 
@@ -19,15 +20,23 @@ class CXMMBasketballOrderScheme: BaseViewController {
     
     private var schemeInfo : OrderSchemeInfoModel!
     
+    private var viewModel : BBSchemeViewModel = BBSchemeViewModel()
+    
+    private var disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "出票方案"
-        setData()
+//        setData()
         initSubview()
         loadNewData()
     }
 
     private func setData() {
+        viewModel.programme.asObserver()
+        .bind(to: programme.rx.attributedText)
+        .disposed(by: disposeBag)
+        
         
     }
     
@@ -44,17 +53,34 @@ extension CXMMBasketballOrderScheme : UITableViewDelegate {
 }
 extension CXMMBasketballOrderScheme : UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        guard self.schemeInfo != nil else { return 0 }
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.schemeInfo.ticketSchemeDetailDTOs.count != 0 ? schemeInfo.ticketSchemeDetailDTOs.count : 1
+        return viewModel.list.count != 0 ? viewModel.list.count : 1
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BBSchemeCell", for: indexPath) as! BBSchemeCell
-        if schemeInfo.ticketSchemeDetailDTOs.count != 0 {
-            cell.configure(with: schemeInfo.ticketSchemeDetailDTOs[indexPath.row])
+       
+        if viewModel.list.count != 0 {
+            let model = viewModel.list[indexPath.row]
+            
+            model.betInfo.asObserver()
+                .bind(to: cell.betInfo.rx.text)
+                .disposed(by: disposeBag)
+            
+            model.mulitle.asObserver()
+                .bind(to: cell.mulitle.rx.text)
+                .disposed(by: disposeBag)
+            
+            model.passType.asObserver()
+                .bind(to: cell.passType.rx.text)
+                .disposed(by: disposeBag)
+            
+            model.state.asObserver()
+                .bind(to: cell.state.rx.text)
+                .disposed(by: disposeBag)
         }
+        
         return cell
     }
 }
@@ -77,6 +103,9 @@ extension CXMMBasketballOrderScheme {
             .subscribe(onNext: { (data) in
                 self.dismissProgressHud()
                 weakSelf?.schemeInfo = data
+                
+                weakSelf?.viewModel.setData(data: data, programmeSn: (weakSelf?.programmeSn)!)
+                
                 weakSelf?.tableView.reloadData()
             }, onError: { (error) in
                 self.dismissProgressHud()
