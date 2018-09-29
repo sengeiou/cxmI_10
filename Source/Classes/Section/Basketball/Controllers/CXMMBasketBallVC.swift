@@ -19,15 +19,15 @@ enum BasketballPlayType : String {
     static func getPlayType (type : BasketballPlayType) -> String {
         switch type {
         case .胜负:
-            return "1"
+            return "2"
         case .大小分:
             return "4"
         case .胜分差:
             return "3"
         case .让分胜负:
-            return "2"
+            return "1"
         case .混合投注:
-            return "5"
+            return "6"
         }
     }
     
@@ -342,7 +342,7 @@ extension CXMMBasketballVC {
                                 playInfo.daxiaofen = cellInfo
                             }
                             sectionModel.list.append(playInfo)
-                        case "5":
+                        case "6":
                             let playInfo = BBPlayModel()
                             playInfo.viewModel = self.viewModel
                             
@@ -505,6 +505,7 @@ extension CXMMBasketballVC {
         case "pushConfirm":
             let vc = segue.destination as! CXMMBasketballConfirmVC
             vc.viewModel.sePlaySet = self.viewModel.sePlaySet
+            vc.type = self.type
             vc.viewModel.deSePlayList = self.viewModel.sePlayList
             vc.viewModel.lotteryClassifyId = self.viewModel.lotteryClassifyId
             vc.viewModel.lotteryPlayClassifyId = self.viewModel.lotteryPlayClassifyId

@@ -11,6 +11,8 @@ import RxSwift
 
 class CXMMBasketballConfirmVC: BaseViewController {
 
+    public var type : BasketballPlayType!
+    
     @IBOutlet weak var tableView : UITableView!
     /// 已选比赛数
     @IBOutlet weak var topLabel : UILabel!
@@ -360,7 +362,7 @@ extension CXMMBasketballConfirmVC {
         }
         requestModel.lotteryClassifyId = viewModel.lotteryClassifyId
         requestModel.lotteryPlayClassifyId = viewModel.lotteryPlayClassifyId
-        requestModel.playType = "1"
+        requestModel.playType = BasketballPlayType.getPlayType(type: type)
         
         var matchBetPlays = [BBMatchBetPlay]()
         
@@ -396,9 +398,9 @@ extension CXMMBasketballConfirmVC {
                 }
                 
                 matchBetCell.betCells = betCells
-                matchBetCell.playType = "1"
+                matchBetCell.playType = "2"
                 matchBetCell.single = playInfo.shengfu.single
-                matchBetCell.fixedOdds = "0"
+                matchBetCell.fixedOdds = playInfo.shengfu.fixOdds
                 matchBetCells.append(matchBetCell)
             }
             
@@ -415,7 +417,7 @@ extension CXMMBasketballConfirmVC {
                 }
                 
                 matchBetCell.betCells = betCells
-                matchBetCell.playType = "2"
+                matchBetCell.playType = "1"
                 matchBetCell.single = playInfo.rangfen.single
                 matchBetCell.fixedOdds = playInfo.rangfen.fixOdds
                 matchBetCells.append(matchBetCell)
