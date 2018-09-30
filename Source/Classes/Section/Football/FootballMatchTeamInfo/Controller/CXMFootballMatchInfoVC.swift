@@ -34,7 +34,7 @@ class CXMFootballMatchInfoVC: BaseViewController, UITableViewDelegate, LotteryPr
             self.tableView.reloadData()
         }
     }
-    private var oddsStyle : OddsPagerStyle! = .欧赔 {
+    private var oddsStyle : OddsPagerStyle = .欧赔 {
         didSet{
             self.tableView.reloadData()
         }

@@ -14,7 +14,7 @@ target '彩小蜜' do
 
   pod 'SnapKit'
 
-  pod 'HandyJSON’, '~> 4.1.1'
+  pod 'HandyJSON', '~> 4.2.0'
 
   pod 'DZNEmptyDataSet'
 
@@ -36,7 +36,7 @@ target '彩小蜜' do
 
   pod 'WechatOpenSDK'
   
-  pod 'RealmSwift'
+  pod 'RealmSwift', '~> 3.10.0'
 	
   pod 'ReachabilitySwift'
 

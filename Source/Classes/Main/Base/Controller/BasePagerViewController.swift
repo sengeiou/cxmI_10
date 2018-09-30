@@ -34,7 +34,7 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
     
     private var filterTime : FilterTime!
     
-    var pagerType: PagerViewType! = .leagueMatch {
+    var pagerType: PagerViewType = .leagueMatch {
         didSet{
             
         }

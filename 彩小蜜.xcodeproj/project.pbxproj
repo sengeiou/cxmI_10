@@ -409,7 +409,6 @@
 		E57375AD20468B8900148622 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E57375AB20468B8900148622 /* LaunchScreen.storyboard */; };
 		E57375B820468B8900148622 /* ___Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57375B720468B8900148622 /* ___Tests.swift */; };
 		E57375C320468B8900148622 /* ___UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57375C220468B8900148622 /* ___UITests.swift */; };
-		E57375F52046B1AD00148622 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E57375F42046B1AD00148622 /* Info.plist */; };
 		E57376022046B37900148622 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57376012046B37900148622 /* MainTabBarController.swift */; };
 		E57376462046BC6400148622 /* CXMMeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57376452046BC6400148622 /* CXMMeViewController.swift */; };
 		E5786FB2206DDA420045F7F5 /* FootballSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5786FB1206DDA420045F7F5 /* FootballSectionHeader.swift */; };
@@ -2962,7 +2961,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E57375F52046B1AD00148622 /* Info.plist in Resources */,
 				1173BECE2150CCF3008BC28A /* Basketball.storyboard in Resources */,
 				1138981C21103EF900E48B72 /* Daletou.storyboard in Resources */,
 				E57375AD20468B8900148622 /* LaunchScreen.storyboard in Resources */,

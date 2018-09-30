@@ -63,9 +63,9 @@ class FootballAnalysisSectionHeader: UITableViewHeaderFooterView {
         }
     }
     
-    public var headerStyle : AnalysisHeaderStyle! {
+    public var headerStyle : AnalysisHeaderStyle = .标题 {
         didSet{
-            guard headerStyle != nil else { return }
+//            guard headerStyle != nil else { return }
             switch headerStyle {
             case .标题:
                 layoutTitleView()
@@ -73,7 +73,7 @@ class FootballAnalysisSectionHeader: UITableViewHeaderFooterView {
                 layoutMatchView()
             case .标题与赛事, .主队, .客队:
                 layoutTitleAndMatchView()
-            default : break
+//            default : break
             }
         }
     }

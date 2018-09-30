@@ -40,9 +40,9 @@ class FootballScoreView: UIView {
     
     public var canAdd : Bool = true 
     
-    public var matchType : FootballMatchType! {
+    public var matchType : FootballMatchType = .比分 {
         didSet{
-            guard matchType != nil else { return }
+//            guard matchType != nil else { return }
             switch matchType {
             case .比分:
                 titlelb.text = "点击进行比分投注"

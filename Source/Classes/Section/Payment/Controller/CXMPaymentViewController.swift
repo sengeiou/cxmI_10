@@ -586,11 +586,11 @@ extension CXMPaymentViewController {
                 if self.saveBetInfo.bonusList.isEmpty {
                     cell.detail.text = "暂无优惠券"
                     cell.accessoryType = .none
-                    cell.cellStyle = .defaults
+                    cell.hcellStyle = .defaults
                 }else {
                     cell.detail.text = "- ¥" + self.saveBetInfo.bonusAmount
                     cell.accessoryType = .disclosureIndicator
-                    cell.cellStyle = .detail
+                    cell.hcellStyle = .detail
                 }
                 
             case 3:
