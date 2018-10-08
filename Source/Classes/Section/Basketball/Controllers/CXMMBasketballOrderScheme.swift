@@ -106,6 +106,8 @@ extension CXMMBasketballOrderScheme {
                 
                 weakSelf?.viewModel.setData(data: data, programmeSn: (weakSelf?.programmeSn)!)
                 
+                weakSelf?.setData()
+                
                 weakSelf?.tableView.reloadData()
             }, onError: { (error) in
                 self.dismissProgressHud()
