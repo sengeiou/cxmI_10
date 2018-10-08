@@ -42,5 +42,13 @@ struct MatchHisInfo : HandyJSON {
     var visitTeamAbbr : String = ""
     ///全场比分
     var whole : String = ""
+    /// 篮彩让分胜负
+    var hdc : String = ""
+    /// 篮球大小分
+    var hilo : String = ""
+    /// 篮球胜负
+    var mnl : String = ""
+    /// 篮球胜分差
+    var wnm : String = ""
 }
 

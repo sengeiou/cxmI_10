@@ -42,5 +42,10 @@ extension PrizeBasketHistoryCell {
         homeLabel.text = data.homeTeamAbbr
         visiLabel.text = data.visitTeamAbbr
         totalScore.text = data.whole
+        
+        sfLabel.text = data.mnl
+        rangLabel.text = data.hdc
+        sfcLabel.text = data.wnm
+        dxfLabel.text = data.hilo
     }
 }

@@ -36,8 +36,6 @@ class CXMMBasketballOrderScheme: BaseViewController {
         viewModel.programme.asObserver()
         .bind(to: programme.rx.attributedText)
         .disposed(by: disposeBag)
-        
-        
     }
     
     private func initSubview() {
