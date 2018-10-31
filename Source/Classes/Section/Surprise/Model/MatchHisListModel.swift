@@ -19,6 +19,7 @@ struct MatchHisListModel: HandyJSON {
 }
 
 struct MatchHisInfo : HandyJSON {
+    var changci : String = ""
     var changciId : String = ""
     /// 杯赛名称
     var cupName : String = ""

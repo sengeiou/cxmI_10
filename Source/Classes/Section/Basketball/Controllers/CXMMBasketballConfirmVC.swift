@@ -458,11 +458,13 @@ extension CXMMBasketballConfirmVC {
                     }
                 }
                 
-                matchBetCell.betCells = betCells
-                matchBetCell.playType = "3"
-                matchBetCell.single = playInfo.daxiaofen.single
-                matchBetCell.fixedOdds = playInfo.daxiaofen.fixOdds
-                matchBetCells.append(matchBetCell)
+                if betCells.isEmpty == false {
+                    matchBetCell.betCells = betCells
+                    matchBetCell.playType = "3"
+                    matchBetCell.single = playInfo.daxiaofen.single
+                    matchBetCell.fixedOdds = playInfo.daxiaofen.fixOdds
+                    matchBetCells.append(matchBetCell)
+                }
             }
             
             matchBetPlay.matchBetCells = matchBetCells

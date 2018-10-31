@@ -76,6 +76,39 @@ extension BBPlayModel {
 
 extension BBPlayModel {
     
+    public func removeSe() {
+        self.shengfu.homeCell.selected = false
+        self.shengfu.visiCell.selected = false
+        self.shengfu.homeCell.isSelected.onNext(false)
+        
+        self.shengfu.homeCell.selected = false
+        self.shengfu.visiCell.selected = false
+        self.shengfu.homeCell.isSelected.onNext(false)
+        self.shengfu.visiCell.isSelected.onNext(false)
+        
+        self.rangfen.homeCell.selected = false
+        self.rangfen.visiCell.selected = false
+        self.rangfen.homeCell.isSelected.onNext(false)
+        self.rangfen.visiCell.isSelected.onNext(false)
+        
+        self.daxiaofen.homeCell.selected = false
+        self.daxiaofen.visiCell.selected = false
+        self.daxiaofen.homeCell.isSelected.onNext(false)
+        self.daxiaofen.visiCell.isSelected.onNext(false)
+        
+        for cell in self.shengFenCha.homeSFC {
+            cell.selected = false
+            cell.isSelected.onNext(false)
+        }
+        for cell in self.shengFenCha.visiSFC {
+            cell.selected = false
+            cell.isSelected.onNext(false)
+        }
+       
+        self.seCellList.removeAll()
+        cellNum = 0
+    }
+    
     public func backSelect(cellNumber : Int) {
         for cell in cacheCellList {
             cell.selected = !cell.selected

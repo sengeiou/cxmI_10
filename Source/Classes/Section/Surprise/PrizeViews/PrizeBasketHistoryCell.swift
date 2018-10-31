@@ -38,7 +38,7 @@ class PrizeBasketHistoryCell: UITableViewCell {
 extension PrizeBasketHistoryCell {
     public func configure(with data : MatchHisInfo) {
         leagueLabel.text = data.cupName
-        dateLabel.text = data.changciId + " " + data.matchTime
+        dateLabel.text = data.changci + " " + data.matchTime
         homeLabel.text = data.homeTeamAbbr
         visiLabel.text = data.visitTeamAbbr
         totalScore.text = data.whole

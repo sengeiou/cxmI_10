@@ -122,9 +122,18 @@ extension BasketballViewModel {
         self.sePlaySet.remove(play)
         
     }
-//    public func changeMultiple(multiple : String) {
-////        self.multiple.onNext(multiple)
-//    }
+    public func removeAll() {
+        guard sePlaySet.isEmpty == false else { return }
+        
+        showCXMAlert(title: "温馨提示", message: "\n确定清空所选赛事吗？",
+                     action: "确定", cancel: "取消") { (action) in
+                        
+            for play in self.sePlaySet {
+                play.removeSe()
+            }
+            self.sePlaySet.removeAll()
+        }
+    }
 }
 
 // MARK: - 胆

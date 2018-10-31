@@ -189,7 +189,7 @@ extension CXMMBasketballVC {
                     
                     for play in model.playList {
                         switch play.playType {
-                        case "1":
+                        case "2":
                             let playInfo = BBPlayModel()
                             playInfo.viewModel = self.viewModel
                             
@@ -227,7 +227,7 @@ extension CXMMBasketballVC {
                                 playInfo.shengfu = cellInfo
                             }
                             sectionModel.list.append(playInfo)
-                        case "2":
+                        case "1":
                             let playInfo = BBPlayModel()
                             playInfo.viewModel = self.viewModel
                             
@@ -367,7 +367,7 @@ extension CXMMBasketballVC {
                                 cellInfo.visiCell = visiCell
                                 
                                 switch cell.playType {
-                                case "1":
+                                case "2":
                                     if cell.isShow && cell.homeCell != nil {
                                         homeCell.cellName = cell.homeCell.cellName
                                         homeCell.cellOdds = cell.homeCell.cellOdds
@@ -380,7 +380,7 @@ extension CXMMBasketballVC {
                                     }
                                     
                                     playInfo.shengfu = cellInfo
-                                case "2":
+                                case "1":
                                     if cell.isShow && cell.homeCell != nil {
                                         homeCell.cellName = cell.homeCell.cellName
                                         homeCell.cellOdds = cell.homeCell.cellOdds
@@ -494,10 +494,8 @@ extension CXMMBasketballVC {
     }
     
     @IBAction func didTipDeleteButton(_ sender : UIButton) {
-        
+        viewModel.removeAll()
     }
-    
-    
 }
 extension CXMMBasketballVC {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
