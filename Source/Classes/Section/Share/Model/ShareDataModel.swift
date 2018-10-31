@@ -69,7 +69,7 @@ struct ShareDataModel {
 
 struct ShareContentModel {
     /// 标题
-    var title : String! = ""
+    var title : String = ""
     /// 链接
     var urlStr: String!
     /// 图片
@@ -77,5 +77,5 @@ struct ShareContentModel {
     var sharePicUrl: String!
     var sharePicData: Data!
     /// 描述
-    var description: String! = ""
+    var description: String = ""
 }
