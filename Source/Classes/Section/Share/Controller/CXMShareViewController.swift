@@ -63,14 +63,37 @@ class CXMShareViewController: BasePopViewController, UICollectionViewDelegate, U
     }
     
     private func shareWeixin() {
-        
         guard shareContent != nil else { return }
-        //self.shareContent.sharePic = zipImage(image: self.shareContent.sharePic)
-        shareImage(content: self.shareContent, scene: WXSceneSession)
+       
+        switch shareContent.sharingType {
+        case .text:
+            shareText(content: shareContent, scene: WXSceneSession)
+        case .image:
+            shareImage(content: shareContent, scene: WXSceneSession)
+        case .vidio:
+            shareVideo(content: shareContent, scene: WXSceneSession)
+        case .webPage:
+            shareWebPage(content: shareContent, scene: WXSceneSession)
+//        default:
+//            shareWebPage(content: shareContent, scene: WXSceneSession)
+        }
+        
     }
     private func shareWeixinCircle() {
         guard shareContent != nil else { return }
-        shareImage(content: self.shareContent, scene: WXSceneTimeline)
+       
+        switch shareContent.sharingType {
+        case .text:
+            shareText(content: shareContent, scene: WXSceneTimeline)
+        case .image:
+            shareImage(content: shareContent, scene: WXSceneTimeline)
+        case .vidio:
+            shareVideo(content: shareContent, scene: WXSceneTimeline)
+        case .webPage:
+            shareWebPage(content: shareContent, scene: WXSceneTimeline)
+//        default:
+//            shareWebPage(content: shareContent, scene: WXSceneTimeline)
+        }
     }
     private func shareLink() {
         guard self.shareContent.urlStr != nil else { return }

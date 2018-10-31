@@ -323,10 +323,16 @@ extension BaseWebViewController {
         guard let urlStr = dic["url"] else { return }
         
         var shareContent = ShareContentModel()
-        shareContent.title = dic["title"]
-        shareContent.description = dic["description"]
+        shareContent.title = dic["title"] ?? ""
+        shareContent.description = dic["description"] ?? ""
         shareContent.urlStr = urlStr
         shareContent.sharePicUrl = dic["thumbUrl"]
+        
+        if let shareType = dic["sharingType"] {
+            if let sharingType = SharingType(rawValue: shareType) {
+                shareContent.sharingType = sharingType
+            }
+        }
         
         share(shareContent, from: self)
         

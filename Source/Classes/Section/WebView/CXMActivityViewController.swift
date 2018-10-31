@@ -166,8 +166,8 @@ class CXMActivityViewController: BaseWebViewController {
             guard let dic = data as? [String: String] else { return }
             
             self.shareContent = ShareContentModel()
-            self.shareContent.title = dic["title"]
-            self.shareContent.description = dic["description"]
+            self.shareContent.title = dic["title"] ?? ""
+            self.shareContent.description = dic["description"] ?? ""
             self.shareContent.urlStr = dic["url"]
             self.shareContent.sharePicUrl = dic["thumbUrl"]
         }

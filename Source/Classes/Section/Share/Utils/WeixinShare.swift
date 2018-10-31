@@ -21,11 +21,11 @@ protocol WeixinSharePro: WeixinShareDelegate {
 extension WeixinSharePro {
     /// 分享文本
     func shareText(content: ShareContentModel, scene : WXScene) {
-        share(text: content.description, scene: scene)
+        share(text: content.title, scene: scene)
     }
     
     /// 分享网页
-    func shareWeb(content: ShareContentModel, scene : WXScene) {
+    func shareWebPage(content: ShareContentModel, scene : WXScene) {
         guard content.sharePic != nil else { return }
         if scene == WXSceneSession {
             share(title: content.title, description: content.description, image: content.sharePic, url: content.urlStr, scene: scene)

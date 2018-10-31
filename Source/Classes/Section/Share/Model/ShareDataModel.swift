@@ -78,4 +78,13 @@ struct ShareContentModel {
     var sharePicData: Data!
     /// 描述
     var description: String = ""
+    
+    var sharingType : SharingType = .webPage
+}
+
+enum SharingType : String {
+    case text
+    case image
+    case webPage
+    case vidio
 }
