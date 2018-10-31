@@ -38,7 +38,7 @@ class CXMWorldCupOrderDetailVC: BaseViewController, UITableViewDelegate, UITable
     }
     
     // MARK: - 属性
-    public var backType : BackType! = .notRoot
+    public var backType : BackType = .notRoot
     
     public var orderId : String!
     private var orderInfo : OrderInfoModel!

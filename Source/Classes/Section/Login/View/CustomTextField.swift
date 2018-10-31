@@ -24,7 +24,7 @@ class CustomTextField: UITextField, CountdownButtonDelegate, UITextFieldDelegate
         customDelegate.countdown(button: button)
     }
     
-    public var style : CustomTFStyle! {
+    public var style : CustomTFStyle = .mobile {
         didSet{
             guard style != nil else { return }
             switch style {

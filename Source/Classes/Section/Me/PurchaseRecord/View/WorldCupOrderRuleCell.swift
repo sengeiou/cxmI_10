@@ -13,13 +13,10 @@ class WorldCupOrderRuleCell: UITableViewCell {
     public var orderInfo : OrderInfoModel! {
         didSet{
             guard orderInfo != nil else { return }
-            if orderInfo.passType == nil || orderInfo.passType == "null" {
-                orderInfo.passType = ""
-            }
-
+           
             let detailAtt = NSMutableAttributedString(string: "投注倍数: ")
-            guard orderInfo.betNum != nil , orderInfo.cathectic != nil else { return }
-            let details = NSAttributedString(string: "\(orderInfo.betNum!)注 \(orderInfo.cathectic!)倍", attributes: [NSAttributedStringKey.foregroundColor: Color505050])
+            
+            let details = NSAttributedString(string: "\(orderInfo.betNum)注 \(orderInfo.cathectic)倍", attributes: [NSAttributedStringKey.foregroundColor: Color505050])
             detailAtt.append(details)
             detail.attributedText = detailAtt
         }

@@ -14,7 +14,7 @@ class OrderDetailHeaderView: UIView {
     public var orderInfo: OrderInfoModel! {
         didSet{
             guard orderInfo != nil else { return }
-            if let url = URL(string: orderInfo.lotteryClassifyImg!){
+            if let url = URL(string: orderInfo.lotteryClassifyImg){
                 icon.kf.setImage(with: url)
             }
             //icon.image = UIImage(named: "Racecolorfootball")

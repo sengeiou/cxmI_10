@@ -10,18 +10,18 @@ import Foundation
 import HandyJSON
 
 struct OrderInfoModel: HandyJSON {
-    var acceptTime: String!
-    var cathectic : String!
-    var createTime: String!
-    var lotteryClassifyId: String!
-    var lotteryPlayClassifyId: String!
-    var lotteryClassifyImg: String!
-    var lotteryClassifyName: String!
+    var acceptTime: String = ""
+    var cathectic : String = ""
+    var createTime: String = ""
+    var lotteryClassifyId: String = ""
+    var lotteryPlayClassifyId: String = ""
+    var lotteryClassifyImg: String = ""
+    var lotteryClassifyName: String = ""
     var matchInfos: [MatchInfo]!
-    var moneyPaid: String!
+    var moneyPaid: String = ""
     var orderStatus: String!
     var orderStatusDesc: String!
-    var passType: String! 
+    var passType: String = ""
     var processResult: String!
     var processStatusDesc: String!
     var programmeSn: String!
@@ -44,14 +44,14 @@ struct OrderInfoModel: HandyJSON {
     /// web url
     var redirectUrl : String!
     
-    var betNum : String!
+    var betNum : String = ""
     
 }
 
 struct MatchInfo: HandyJSON {
     
     var cathecticResults: [CathecticResult]!
-    var changci: String!
+    var changci: String = ""
     var match: String!
     var playType: String!
     var result: String!

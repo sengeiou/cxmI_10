@@ -4,7 +4,7 @@ PODS:
   - DZNEmptyDataSet (1.8.1)
   - FSPagerView (0.7.1)
   - GTSDK (2.2.0.0-noidfa)
-  - HandyJSON (4.1.1)
+  - HandyJSON (4.2.0)
   - JPImageresizerView (0.3.9)
   - Kingfisher (4.7.0)
   - MJRefresh (3.1.15.3)
@@ -16,11 +16,11 @@ PODS:
     - RxSwift (~> 4.0)
   - PKHUD (5.0.0)
   - ReachabilitySwift (4.1.0)
-  - Realm (3.4.0):
-    - Realm/Headers (= 3.4.0)
-  - Realm/Headers (3.4.0)
-  - RealmSwift (3.4.0):
-    - Realm (= 3.4.0)
+  - Realm (3.10.0):
+    - Realm/Headers (= 3.10.0)
+  - Realm/Headers (3.10.0)
+  - RealmSwift (3.10.0):
+    - Realm (= 3.10.0)
   - Result (3.2.4)
   - RxCocoa (4.2.0):
     - RxSwift (~> 4.0)
@@ -38,14 +38,14 @@ DEPENDENCIES:
   - DZNEmptyDataSet
   - FSPagerView
   - GTSDK (= 2.2.0.0-noidfa)
-  - HandyJSON (~> 4.1.1)
+  - HandyJSON (~> 4.2.0)
   - JPImageresizerView
   - Kingfisher
   - MJRefresh
   - Moya/RxSwift
   - PKHUD
   - ReachabilitySwift
-  - RealmSwift
+  - RealmSwift (~> 3.10.0)
   - Result
   - RxCocoa (~> 4.0)
   - RxSwift (~> 4.0)
@@ -90,15 +90,15 @@ SPEC CHECKSUMS:
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   FSPagerView: 958aba39684e1573755ddcfcc29f7eebb8413cee
   GTSDK: 2cb8f5df1fbb250f596698443edd0191f77024f1
-  HandyJSON: 3a3de917c4118767ffe41c29b5acba23409649f4
+  HandyJSON: 9dfc026c7d7adc1f0f8ba8b181495f0e0763b0f4
   JPImageresizerView: 32677208d6f617dabd7ea8897a027126d7f12509
   Kingfisher: da6b005aa96d37698e3e4f1ccfe96a5b9bbf27d6
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
   Moya: a725035953bc1c0eb1be505ab903984501d82440
   PKHUD: 3c001512c6e002091184197a8de7a20420786e3b
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
-  Realm: 9527c7baa2260f3a3aad6823d2d71cafff9b046b
-  RealmSwift: f40a747beaea1cadde7dcef41ee5a34b3001677b
+  Realm: 85ab9e4f779d66f6e9ffeb118dc25b7f130c96ac
+  RealmSwift: 69121c8b86d0ae005fb779efdb10e606732e1c74
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
   RxCocoa: 0b54909c902e1e581212a03e690bbd94032d8baa
   RxSwift: e49536837d9901277638493ea537394d4b55f570
@@ -110,6 +110,6 @@ SPEC CHECKSUMS:
   XLPagerTabStrip: c908b17cbf42fcd2598ee1adfc49bae25444d88a
   YBPopupMenu: 6efb286385d95ba5f97c58b8464ec873645e8764
 
-PODFILE CHECKSUM: eedf50324c2b6c8b31fdb616818889aeef675570
+PODFILE CHECKSUM: 887d55d24dc9afcea97738275ffbbeceff08cfc2
 
 COCOAPODS: 1.5.0

@@ -8,14 +8,14 @@
 
 import UIKit
 
-enum CellStyle  {
+enum HCellStyle  {
     case detail
     case defaults
 }
 
 class PaymentCell: UITableViewCell {
 
-    public var cellStyle : CellStyle = .defaults
+    public var hcellStyle : HCellStyle = .defaults
     
     public var title : UILabel!
     public var detail : UILabel!
@@ -34,7 +34,7 @@ class PaymentCell: UITableViewCell {
             make.right.equalTo(detail.snp.left).offset(-1)
         }
 
-        if cellStyle == .defaults {
+        if hcellStyle == .defaults {
             detail.snp.makeConstraints { (make) in
                 make.top.bottom.equalTo(0)
                 make.right.equalTo(-rightSpacing)
