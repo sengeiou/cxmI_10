@@ -33,3 +33,7 @@ class FootballSaveBetInfoModel : HandyJSON{
     }
     
 }
+
+struct SaveBetInfoModel : HandyJSON {
+    var orderId : String = ""
+}

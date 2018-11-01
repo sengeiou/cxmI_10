@@ -78,7 +78,7 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "订单详情"
+        self.title = "模拟订单详情"
         initSubview()
         
         //orderInfoRequest()
@@ -86,6 +86,8 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
             self.loadNewData()
         }
         self.tableView.beginRefreshing()
+        
+        setRightNav()
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -177,12 +179,14 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
     
     func numberOfSections(in tableView: UITableView) -> Int {
         guard orderInfo != nil else { return 0 }
-        return 2
+//        return 2 // 显示方案信息
+        return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return orderInfo.matchInfos.count + 3
+//            return orderInfo.matchInfos.count + 3 // 显示 支付方式
+            return orderInfo.matchInfos.count + 2
         default:
             return 1
         }
@@ -274,4 +278,41 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
     }
     
 
+}
+
+extension CXMOrderDetailVC : ShareProtocol {
+    private func setRightNav(){
+        let codeItem = getRightNavOfQRCode()
+        let shareItem = getRightNavOfShare()
+        
+        navigationItem.rightBarButtonItems = [codeItem, shareItem]
+    }
+    
+    private func getRightNavOfQRCode() -> UIBarButtonItem {
+        let code = UIButton(type: .custom)
+        
+        code.setImage(UIImage(named: "ewm"), for: .normal)
+//        code.imageEdgeInsets = UIEdgeInsets(top: <#T##CGFloat#>, left: <#T##CGFloat#>, bottom: <#T##CGFloat#>, right: <#T##CGFloat#>)
+        code.addTarget(self, action: #selector(qrCodeClicked(sender:)), for: .touchUpInside)
+        return UIBarButtonItem(customView: code)
+    }
+    private func getRightNavOfShare() -> UIBarButtonItem {
+        let share = UIButton(type: .custom)
+        share.setImage(UIImage(named: "fenxiang"), for: .normal)
+        share.addTarget(self, action: #selector(shareClicked(sender:)), for: .touchUpInside)
+        return UIBarButtonItem(customView: share)
+    }
+    
+    @objc private func qrCodeClicked(sender : UIButton) {
+        let pop = CXMOrderDetailPop()
+        pop.configure(with: orderInfo.addFriendsQRBarUrl)
+        self.present(pop)
+    }
+    @objc private func shareClicked(sender : UIButton) {
+        
+        var model = ShareContentModel()
+        model.title = orderInfo.orderSn
+        model.sharingType = .text
+        share(model, from: self)
+    }
 }

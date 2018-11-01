@@ -412,7 +412,7 @@ class CXMFootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITabl
     //
     func orderConfirm(filterList: [FootballPlayFilterModel], times: String) {
         guard self.isAgreement == true else {
-            showCXMAlert(title: nil, message: "尊敬的用户，购彩需同意并接受《彩小秘投注服务协议》", action: "确定", cancel: nil) { (action) in
+            showCXMAlert(title: nil, message: "尊敬的用户，购彩需同意并接受《彩小秘模拟投注服务协议》", action: "确定", cancel: nil) { (action) in
                 
             }
             return }
@@ -432,11 +432,18 @@ class CXMFootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITabl
         
         _ = homeProvider.rx.request(.saveBetInfo(requestModel: requestModel))
             .asObservable()
-            .mapBaseObject(type: DataModel.self)
+            .mapObject(type: SaveBetInfoModel.self)
             .subscribe(onNext: { (data) in
-                let payment = CXMPaymentViewController()
-                payment.lottoToken = data.data
-                weakSelf?.pushViewController(vc: payment)
+//                let payment = CXMPaymentViewController()
+//                payment.lottoToken = data.data
+//                weakSelf?.pushViewController(vc: payment)
+                
+//                1.1.4 版，取消支付，直接跳转订单详情
+                
+                let order = CXMOrderDetailVC()
+                order.orderId = data.orderId
+                weakSelf?.pushViewController(vc: order)
+                
                 TongJi.log(.投注确认, label: self.matchType.rawValue, att: .彩种)
             }, onError: { (error) in
                 weakSelf?.dismissProgressHud()

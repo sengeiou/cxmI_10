@@ -71,7 +71,7 @@ struct ShareContentModel {
     /// 标题
     var title : String = ""
     /// 链接
-    var urlStr: String!
+    var urlStr: String = ""
     /// 图片
     var sharePic: UIImage!
     var sharePicUrl: String!

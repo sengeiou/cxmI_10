@@ -168,7 +168,7 @@ class CXMActivityViewController: BaseWebViewController {
             self.shareContent = ShareContentModel()
             self.shareContent.title = dic["title"] ?? ""
             self.shareContent.description = dic["description"] ?? ""
-            self.shareContent.urlStr = dic["url"]
+            self.shareContent.urlStr = dic["url"] ?? ""
             self.shareContent.sharePicUrl = dic["thumbUrl"]
         }
     }

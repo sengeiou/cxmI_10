@@ -27,7 +27,7 @@ struct OrderInfoModel: HandyJSON {
     var programmeSn: String!
     var ticketTime: String!
     var forecastMoney: String!
-    var orderSn : String!
+    var orderSn : String = ""
     var playType: String!
     /// 余额支付金额
     var surplus : Double = 0
@@ -45,7 +45,8 @@ struct OrderInfoModel: HandyJSON {
     var redirectUrl : String!
     
     var betNum : String = ""
-    
+    /// 客服二维码
+    var addFriendsQRBarUrl : String = ""
 }
 
 struct MatchInfo: HandyJSON {

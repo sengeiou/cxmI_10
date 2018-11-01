@@ -48,7 +48,7 @@ class CXMWorldCupOrderDetailVC: BaseViewController, UITableViewDelegate, UITable
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "订单详情"
+        self.title = "模拟订单详情"
         initSubview()
         
         //orderInfoRequest()

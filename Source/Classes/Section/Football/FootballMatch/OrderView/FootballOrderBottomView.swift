@@ -54,7 +54,7 @@ class FootballOrderBottomView: UIView {
             let moneyStr = NSAttributedString(string: "¥\(money)", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
             moneyAtt.append(moneyStr)
             
-            let bonusAtt = NSMutableAttributedString(string: "预测奖金: ")
+            let bonusAtt = NSMutableAttributedString(string: "模拟预测奖金: ")
             let bonusStr = NSAttributedString(string: "\(minBonus)-\(maxBouns)", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
             bonusAtt.append(bonusStr)
             
@@ -204,7 +204,7 @@ class FootballOrderBottomView: UIView {
         bonusLB.font = Font12
         bonusLB.textColor = Color787878
         bonusLB.textAlignment = .left
-        //bonusLB.text = "预测奖金： 30.06-42.56元"
+        //bonusLB.text = "模拟预测奖金： 30.06-42.56元"
         
         confirmBut = UIButton(type: .custom)
         confirmBut.setTitle("确定", for: .normal)

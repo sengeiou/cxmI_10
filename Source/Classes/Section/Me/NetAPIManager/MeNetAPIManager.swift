@@ -117,7 +117,7 @@ extension MeNetAPIManager : TargetType {
         case .coupon:
             return "/member/user/bonus/queryUserBonus"
         case .orderInfoList:
-            return "/order/order/ngetOrderInfoList"
+            return "/order/order/ngetOrderInfoListV2"
         case .orderInfo:
             return "/order/order/getOrderDetail"
         case .orderScheme:

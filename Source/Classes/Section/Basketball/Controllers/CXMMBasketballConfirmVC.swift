@@ -96,7 +96,7 @@ class CXMMBasketballConfirmVC: BaseViewController {
         let moneyAtt = NSMutableAttributedString(string: "\(getBetInfoModel.betNum)注 \(getBetInfoModel.times)倍 共需：")
         let moneyStr = NSAttributedString(string: "¥\(getBetInfoModel.money)\n", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
         
-        let bonusAtt = NSAttributedString(string: "预测奖金: ")
+        let bonusAtt = NSAttributedString(string: "模拟预测奖金: ")
         let bonusStr = NSAttributedString(string: "\(getBetInfoModel.minBonus)-\(getBetInfoModel.maxBonus)", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
         
         moneyAtt.append(moneyStr)

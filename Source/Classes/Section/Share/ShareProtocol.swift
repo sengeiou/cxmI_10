@@ -24,9 +24,9 @@ extension ShareProtocol {
             turn  = "1"
         }
         
-        contentModel.urlStr = content.urlStr + "&frz=\(turn)" + "&qd=\(Channel)"
-        
-        contentModel.sharingType = .text
+        if contentModel.urlStr != "" {
+            contentModel.urlStr = content.urlStr + "&frz=\(turn)" + "&qd=\(Channel)"
+        }
         
         if contentModel.sharePicUrl == nil ||
             contentModel.sharePicUrl == "" {

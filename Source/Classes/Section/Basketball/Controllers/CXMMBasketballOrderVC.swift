@@ -43,7 +43,7 @@ class CXMMBasketballOrderVC: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "订单详情"
+        self.navigationItem.title = "模拟订单详情"
         initSubview()
         
         tableView.headerRefresh {

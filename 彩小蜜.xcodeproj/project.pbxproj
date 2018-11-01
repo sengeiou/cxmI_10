@@ -26,6 +26,8 @@
 		112E9D4D21228FE0008466B4 /* DLTHistoryTrendBottom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112E9D4C21228FE0008466B4 /* DLTHistoryTrendBottom.swift */; };
 		112E9D4F2122AD4F008466B4 /* DLTTrendSettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112E9D4E2122AD4F008466B4 /* DLTTrendSettingModel.swift */; };
 		112E9D512122D8D7008466B4 /* DLTBetInfoRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112E9D502122D8D7008466B4 /* DLTBetInfoRequestModel.swift */; };
+		112EBE71218AA80D009F0C10 /* CXMOrderDetailPop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112EBE70218AA80D009F0C10 /* CXMOrderDetailPop.swift */; };
+		112EBE73218AB3E0009F0C10 /* SaveImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112EBE72218AB3E0009F0C10 /* SaveImage.swift */; };
 		112F77AA20EC79AE005CA9E4 /* CXMScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112F77A920EC79AE005CA9E4 /* CXMScoreViewController.swift */; };
 		112F77B920EC7C8C005CA9E4 /* WMPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 112F77AC20EC7C8C005CA9E4 /* WMPageController.m */; };
 		112F77BA20EC7C8C005CA9E4 /* UIViewController+WMPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 112F77AD20EC7C8C005CA9E4 /* UIViewController+WMPageController.m */; };
@@ -518,6 +520,8 @@
 		112E9D4C21228FE0008466B4 /* DLTHistoryTrendBottom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DLTHistoryTrendBottom.swift; sourceTree = "<group>"; };
 		112E9D4E2122AD4F008466B4 /* DLTTrendSettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DLTTrendSettingModel.swift; sourceTree = "<group>"; };
 		112E9D502122D8D7008466B4 /* DLTBetInfoRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DLTBetInfoRequestModel.swift; sourceTree = "<group>"; };
+		112EBE70218AA80D009F0C10 /* CXMOrderDetailPop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMOrderDetailPop.swift; sourceTree = "<group>"; };
+		112EBE72218AB3E0009F0C10 /* SaveImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveImage.swift; sourceTree = "<group>"; };
 		112F77A920EC79AE005CA9E4 /* CXMScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMScoreViewController.swift; sourceTree = "<group>"; };
 		112F77AC20EC7C8C005CA9E4 /* WMPageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMPageController.m; sourceTree = "<group>"; };
 		112F77AD20EC7C8C005CA9E4 /* UIViewController+WMPageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+WMPageController.m"; sourceTree = "<group>"; };
@@ -1867,6 +1871,7 @@
 				E56298A22050E712006397EA /* AlertProtocol.swift */,
 				E50C99BA20746E6B002D8C2F /* DateProtocol.swift */,
 				1137A4E921363519000CED33 /* LineNumberProtocol.swift */,
+				112EBE72218AB3E0009F0C10 /* SaveImage.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -2017,6 +2022,7 @@
 				E5D8ABB3206737FF002D688B /* CXMOrderDetailVC.swift */,
 				11E8FA5820BFD5C20090BC6A /* CXMWorldCupOrderDetailVC.swift */,
 				E5883F4B2068DA0800CB3A46 /* CXMOrderSchemeVC.swift */,
+				112EBE70218AA80D009F0C10 /* CXMOrderDetailPop.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3360,6 +3366,7 @@
 				116AC792215A16AA00F6BC73 /* BBConfirmViewModel.swift in Sources */,
 				11AB2C1F21300BD80044FB1C /* CXMMSurpriseViewController.swift in Sources */,
 				11E8FA6720BFEE5C0090BC6A /* SettingDataModel.swift in Sources */,
+				112EBE71218AA80D009F0C10 /* CXMOrderDetailPop.swift in Sources */,
 				E56CE80E206A22240090A1B5 /* WithdrawalProgressCell.swift in Sources */,
 				E5973E20204E34A3006461CE /* FontConstraint.swift in Sources */,
 				E56CE812206A23070090A1B5 /* WithdrawalProgressHeader.swift in Sources */,
@@ -3463,6 +3470,7 @@
 				1149F120215F1EE500C9C755 /* BBSchemeViewModel.swift in Sources */,
 				E56CE8042069E2340090A1B5 /* AccountDetailFooterView.swift in Sources */,
 				113B9CD120872226006AE3F8 /* NewsBottomView.swift in Sources */,
+				112EBE73218AB3E0009F0C10 /* SaveImage.swift in Sources */,
 				E550D899207339B6002DDE23 /* FootballOrderRangSPFCell.swift in Sources */,
 				E5786FC2206DEAB30045F7F5 /* FootballHunheCell.swift in Sources */,
 				E5973E29204E4387006461CE /* CXMForgetPswPhoneVC.swift in Sources */,

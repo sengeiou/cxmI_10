@@ -63,10 +63,11 @@ class OrderDetailHeaderView: UIView {
         super.layoutSubviews()
         
         line.snp.makeConstraints { (make) in
-            make.centerY.equalTo(self.snp.centerY).offset(7.5)
+//            make.centerY.equalTo(self.snp.centerY).offset(7.5)
             make.left.equalTo(self).offset(SeparatorLeftSpacing)
             make.right.equalTo(self).offset(-SeparatorLeftSpacing)
             make.height.equalTo(SeparationLineHeight)
+            make.bottom.equalTo(0)
         }
         icon.snp.makeConstraints { (make) in
             make.top.equalTo(self).offset(11)
@@ -100,24 +101,24 @@ class OrderDetailHeaderView: UIView {
             make.left.equalTo(moneyLB.snp.right).offset(10)
             make.right.equalTo(state)
         }
-        programmeTitle.snp.makeConstraints { (make) in
-            make.top.equalTo(line.snp.bottom).offset(10)
-            make.left.equalTo(self).offset(26)
-            make.width.equalTo(100)
-            make.height.equalTo(12)
-        }
-        programmeLB.snp.makeConstraints { (make) in
-            make.height.equalTo(19)
-            make.left.right.width.equalTo(programmeTitle)
-            make.bottom.equalTo(self).offset(-10)
-        }
-        
-        thankLB.snp.makeConstraints { (make) in
-            make.height.equalTo(19)
-            make.right.equalTo(self).offset(-26)
-            make.left.equalTo(programmeLB.snp.right).offset(10)
-            make.bottom.equalTo(self).offset(-12)
-        }
+//        programmeTitle.snp.makeConstraints { (make) in
+//            make.top.equalTo(line.snp.bottom).offset(10)
+//            make.left.equalTo(self).offset(26)
+//            make.width.equalTo(100)
+//            make.height.equalTo(12)
+//        }
+//        programmeLB.snp.makeConstraints { (make) in
+//            make.height.equalTo(19)
+//            make.left.right.width.equalTo(programmeTitle)
+//            make.bottom.equalTo(self).offset(-10)
+//        }
+//
+//        thankLB.snp.makeConstraints { (make) in
+//            make.height.equalTo(19)
+//            make.right.equalTo(self).offset(-26)
+//            make.left.equalTo(programmeLB.snp.right).offset(10)
+//            make.bottom.equalTo(self).offset(-12)
+//        }
         
     }
     

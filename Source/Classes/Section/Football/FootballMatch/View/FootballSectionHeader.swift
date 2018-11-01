@@ -23,7 +23,7 @@ class FootballSectionHeader: UITableViewHeaderFooterView, DateProtocol {
         didSet{
             guard matchModel != nil else { return }
 
-            title.text = matchModel.matchDay + "共有" + "\(matchModel.playList.count)" + "场比赛可投"
+            title.text = matchModel.matchDay + "共有" + "\(matchModel.playList.count)" + "场比赛可模拟投注"
     
             if matchModel.isSpreading == true {
                 spreadBut.setImage(UIImage(named: "Unfold"), for: .normal)
