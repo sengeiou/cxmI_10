@@ -179,8 +179,8 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
     
     func numberOfSections(in tableView: UITableView) -> Int {
         guard orderInfo != nil else { return 0 }
-//        return 2 // 显示方案信息
-        return 1
+        return 2 // 显示方案信息
+//        return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {

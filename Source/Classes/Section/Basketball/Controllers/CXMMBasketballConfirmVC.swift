@@ -37,7 +37,7 @@ class CXMMBasketballConfirmVC: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "投注确认"
+        self.navigationItem.title = "模拟投注"
         initSubview()
         setData()
         self.tableView.reloadData()

@@ -13,7 +13,7 @@ class OrderSchemeTitleCell: UITableViewCell {
     public var schemeInfo: OrderSchemeInfoModel! {
         didSet{
             guard schemeInfo != nil else { return }
-            let titleAtt = NSMutableAttributedString(string: "方案编号: ")
+            let titleAtt = NSMutableAttributedString(string: "模拟编号: ")
             let title = NSAttributedString(string: schemeInfo.programmeSn, attributes: [NSAttributedStringKey.foregroundColor: Color505050])
             titleAtt.append(title)
             
@@ -85,7 +85,7 @@ class OrderSchemeTitleCell: UITableViewCell {
         sectionTitle.font = Font13
         sectionTitle.textColor = ColorA0A0A0
         sectionTitle.textAlignment = .left
-        sectionTitle.text = "方案编号"
+        sectionTitle.text = "模拟编号"
         
 //        numTitle = getTitleLB("序号")
 //        numTitle.textAlignment = .left

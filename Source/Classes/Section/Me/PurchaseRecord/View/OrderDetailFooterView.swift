@@ -40,7 +40,7 @@ class OrderDetailFooterView: UIView {
     
     private func initSubview() {
         button = UIButton(type: .custom)
-        button.setTitle("继续预约", for: .normal)
+        button.setTitle("继续模拟投注", for: .normal)
         button.setTitleColor(ColorFFFFFF, for: .normal)
         button.backgroundColor = ColorEA5504
         button.addTarget(self, action: #selector(orderClicked(_:)), for: .touchUpInside)

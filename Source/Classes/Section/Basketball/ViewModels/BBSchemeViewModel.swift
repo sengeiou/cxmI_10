@@ -26,7 +26,7 @@ class BBSchemeViewModel {
 
 extension BBSchemeViewModel {
     public func setData(data : OrderSchemeInfoModel, programmeSn: String) {
-        let muPro = NSMutableAttributedString(string: "方案编号: ",
+        let muPro = NSMutableAttributedString(string: "模拟编号: ",
                                               attributes: [NSAttributedStringKey.foregroundColor : ColorA0A0A0])
         let pro = NSAttributedString(string: "\(programmeSn)",
                                         attributes: [NSAttributedStringKey.foregroundColor : Color505050])
