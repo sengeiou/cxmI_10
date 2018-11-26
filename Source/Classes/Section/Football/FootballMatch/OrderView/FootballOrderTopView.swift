@@ -22,9 +22,10 @@ class FootballOrderTopView: UIView, DateProtocol {
             
             guard let timeInt = arr.min() else { return }
             
-            let time = timeStampToHHmm(timeInt)
+            let time = timeStampToYMDHHmm(timeInt)
             
-            let attStr = NSMutableAttributedString(string: "已选\(playModelList.count)场比赛 投注截止时间：", attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F])
+            
+            let attStr = NSMutableAttributedString(string: "已选\(playModelList.count)场比赛 模拟投注截止时间：", attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F])
             let att = NSAttributedString(string: time, attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
             attStr.append(att)
             

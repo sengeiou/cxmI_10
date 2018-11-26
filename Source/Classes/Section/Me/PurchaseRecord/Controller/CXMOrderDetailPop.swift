@@ -70,7 +70,36 @@ extension CXMOrderDetailPop : SaveImageProtocol {
             make.left.right.equalTo(0)
             make.bottom.equalTo(0)
         }
+        
+//        //长按识别二维码
+//        let longPress = UILongPressGestureRecognizer.init(target: self, action: #selector(QRLongPress(gesture:)))
+//        longPress.minimumPressDuration = 1
+//        imageView.addGestureRecognizer(longPress)
+//        imageView.isUserInteractionEnabled = true
     }
+    
+    //MARK: - 长按二维码识别
+//    @objc func QRLongPress(gesture: UILongPressGestureRecognizer) {
+//
+//        if (gesture.state == UIGestureRecognizerState.began) {
+//
+//            //1.初始化扫描仪，设置设别类型和识别质量
+//            let options = ["IDetectorAccuracy" : CIDetectorAccuracyHigh]
+//            let detector: CIDetector = CIDetector.init(ofType: "CIDetectorTypeQRCode", context: nil, options: options)!
+//            //2.扫描获取的特征组
+//            let features = detector.features(in: CIImage.init(cgImage: (self.imageView.image?.cgImage)!))
+//            //3.获取扫描结果
+//            let feature = features[0] as! CIQRCodeFeature
+//            let scannedResult = feature.messageString
+//            //4.获取之后的操作
+//            print(scannedResult!)
+//
+//            UIApplication.shared.openURL(URL(string: scannedResult!)!)
+//
+//        } else if (gesture.state == UIGestureRecognizerState.ended) {
+//
+//        }
+//    }
     
     @objc private func saveButtonClicked(sender: UIButton) {
         

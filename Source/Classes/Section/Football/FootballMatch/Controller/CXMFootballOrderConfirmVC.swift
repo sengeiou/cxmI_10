@@ -412,7 +412,7 @@ class CXMFootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITabl
     //
     func orderConfirm(filterList: [FootballPlayFilterModel], times: String) {
         guard self.isAgreement == true else {
-            showCXMAlert(title: nil, message: "尊敬的用户，购彩需同意并接受《彩小秘模拟投注服务协议》", action: "确定", cancel: nil) { (action) in
+            showCXMAlert(title: nil, message: "尊敬的用户，购彩需同意并接受《模拟投注服务协议》", action: "确定", cancel: nil) { (action) in
                 
             }
             return }
