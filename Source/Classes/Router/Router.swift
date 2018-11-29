@@ -94,7 +94,7 @@ extension RouterPro {
             pushInformation(from: vc )
         case .晒单公园:
             pushShaidan(from: vc)
-        case .实时统计:
+        case .联赛资料:
             pushStatistics(from: vc )
         case .发现更多:
             pushSurpriseMore(from: vc)

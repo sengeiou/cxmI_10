@@ -59,11 +59,18 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 1 {
+        switch indexPath.section {
+        case 1:
             let scheme = CXMOrderSchemeVC()
             scheme.programmeSn = self.orderInfo.programmeSn
             scheme.orderSn = self.orderInfo.orderSn
             pushViewController(vc: scheme)
+        case 2:
+            let story = UIStoryboard.init(storyboard: .Seller)
+            let vc = story.instantiateViewController(withIdentifier: "SellerListVC") as! SellerListVC
+            pushViewController(vc: vc)
+        default:
+            break
         }
     }
     
@@ -173,13 +180,13 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
         table.register(OrderRuleCell.self, forCellReuseIdentifier: OrderRuleCellId)
         table.register(OrderPaymentCell.self, forCellReuseIdentifier: OrderPaymentCellId)
         table.register(OrderProgrammeCell.self, forCellReuseIdentifier: OrderProgrammeCellId)
-        
+        table.register(OrderStoreCell.self, forCellReuseIdentifier: OrderStoreCell.identifier)
         return table
     }()
     
     func numberOfSections(in tableView: UITableView) -> Int {
         guard orderInfo != nil else { return 0 }
-        return 2 // 显示方案信息
+        return 2 + 1 // 显示方案信息
 //        return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -223,10 +230,14 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
                 cell.line.isHidden = false
                 return cell
             }
-            
-        default:
+        case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: OrderProgrammeCellId, for: indexPath) as! OrderProgrammeCell
-                cell.orderInfo = self.orderInfo
+            cell.orderInfo = self.orderInfo
+            return cell
+        default:
+
+            let cell = tableView.dequeueReusableCell(withIdentifier: OrderStoreCell.identifier, for: indexPath) as! OrderStoreCell
+            
             return cell
         }
         
@@ -243,6 +254,8 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
             }
         case 1:
             return 124
+        case 2:
+            return 90
         default:
             return 0
         }
@@ -292,7 +305,6 @@ extension CXMOrderDetailVC : ShareProtocol {
         let code = UIButton(type: .custom)
         
         code.setImage(UIImage(named: "ewm"), for: .normal)
-//        code.imageEdgeInsets = UIEdgeInsets(top: <#T##CGFloat#>, left: <#T##CGFloat#>, bottom: <#T##CGFloat#>, right: <#T##CGFloat#>)
         code.addTarget(self, action: #selector(qrCodeClicked(sender:)), for: .touchUpInside)
         return UIBarButtonItem(customView: code)
     }

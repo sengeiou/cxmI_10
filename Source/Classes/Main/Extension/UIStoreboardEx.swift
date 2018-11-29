@@ -11,7 +11,9 @@ import Foundation
 extension UIStoryboard {
     enum Storyboard: String {
         case Basketball
-        
+        case Storyboard
+        case Shop
+        case Seller
     }
     
     convenience init(storyboard: Storyboard, bundle: Bundle? = nil) {

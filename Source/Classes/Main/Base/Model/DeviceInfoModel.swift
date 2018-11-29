@@ -118,4 +118,11 @@ struct DeviceInfoModel: HandyJSON {
     var net  : String!
     var IDFA : String!
     var token: String!
+    /// 经度
+    var lon : String = ""
+    /// 纬度
+    var lat : String = ""
+    /// 城市
+    var city : String = ""
+    
 }

@@ -117,7 +117,7 @@ class HomeSportLotteryCell: UITableViewCell, UICollectionViewDataSource, UIColle
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: homeFootballCellIdentifier, for: indexPath) as! HomeFootballCell
-        cell.playModel = self.playList[indexPath.row]
+        cell.configure(with: self.playList[indexPath.row])
         return cell
     }
     

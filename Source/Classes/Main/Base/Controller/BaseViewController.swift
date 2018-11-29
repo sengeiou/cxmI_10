@@ -173,6 +173,7 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
         super.viewDidLoad()
         self.view.backgroundColor = ColorF4F4F4
         setNavigation()
+        
         self.isHidenBar = true
         
         addPanGestureRecognizer = true
@@ -182,7 +183,7 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = false
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: Font17, NSAttributedStringKey.foregroundColor: UIColor.black]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: Font17, NSAttributedStringKey.foregroundColor: UIColor.white]
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -191,6 +192,9 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
         self.navigationController?.navigationBar.isHidden = false
         
         setLiftButtonItem()
+        setNavigationBar()
+    }
+    private func setNavigationBar() {
         
     }
     //MARK: - 空列表视图

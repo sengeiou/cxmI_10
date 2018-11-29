@@ -10,30 +10,8 @@ import UIKit
 
 class HomeFootballCell: UICollectionViewCell, RouterMatcher {
     
-    public var playModel: HomePlayModel! {
-        didSet{
-            guard playModel != nil else { return }
-            if let url = URL(string: playModel.lotteryImg) {
-                icon.kf.setImage(with: url)
-            }
-            
-            title.text = playModel.lotteryName
-            subTitle.text = playModel.subTitle
-            
-            let type = matcherHttp(urlStr: playModel.redirectUrl)
-            
-            switch type.0 {
-            case .竞彩足球:
-                subTitle.textColor = ColorE85504
-            case .大乐透:
-                subTitle.textColor = ColorE85504
-            default:
-                subTitle.textColor = Color787878
-            }
-    
-        }
-    }
-    
+    public static let identifier : String = "HomeFootballCellId"
+
     private var icon : UIImageView!
     private var title : UILabel!
     private var subTitle: UILabel!
@@ -41,11 +19,68 @@ class HomeFootballCell: UICollectionViewCell, RouterMatcher {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         initSubview()
     }
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension HomeFootballCell {
+    // 发现
+    public func configure(with data : HomeFindModel) {
+        
+        if let url = URL(string: data.classImg) {
+            icon.kf.setImage(with: url)
+        }
+        
+        title.text = data.className
+    }
+    // 玩法
+    public func configure(with data : HomePlayModel) {
+        if let url = URL(string: data.lotteryImg) {
+            icon.kf.setImage(with: url)
+        }
+        
+        title.text = data.lotteryName
+        subTitle.text = data.subTitle
+        
+        let type = matcherHttp(urlStr: data.redirectUrl)
+        
+        switch type.0 {
+        case .竞彩足球:
+            subTitle.textColor = ColorE85504
+        case .大乐透:
+            subTitle.textColor = ColorE85504
+        default:
+            subTitle.textColor = Color787878
+        }
+    }
+}
+
+// MARK: - 初始化
+extension HomeFootballCell {
+    private func initSubview() {
+        icon = UIImageView()
+        icon.image = UIImage(named: "足球")
+        
+        title = UILabel()
+        title.font = Font14
+        title.textColor = Color505050
+        title.textAlignment = .center
+        
+        subTitle = UILabel()
+        subTitle.font = Font12
+        subTitle.textColor = Color787878
+        subTitle.textAlignment = .center
+        
+        activityIcon = UIImageView()
+        
+        self.contentView.addSubview(icon)
+        self.contentView.addSubview(title)
+        self.contentView.addSubview(subTitle)
+        self.contentView.addSubview(activityIcon)
+        
         icon.snp.makeConstraints { (make) in
             make.top.equalTo(self.contentView).offset(5)
             make.left.equalTo(self.contentView).offset(15 * defaultScale)
@@ -67,35 +102,5 @@ class HomeFootballCell: UICollectionViewCell, RouterMatcher {
             make.left.equalTo(icon.snp.right).offset(-5)
             make.width.height.equalTo(32 * defaultScale)
         }
-    }
-    
-    private func initSubview() {
-        icon = UIImageView()
-        icon.image = UIImage(named: "足球")
-        
-        title = UILabel()
-        title.font = Font14
-        title.textColor = Color505050
-        title.text = "单关固定"
-        title.textAlignment = .center
-        
-        subTitle = UILabel()
-        subTitle.font = Font12
-        subTitle.textColor = Color787878
-        subTitle.text = "单关固定"
-        subTitle.textAlignment = .center
-        
-        activityIcon = UIImageView()
-        
-        self.contentView.addSubview(icon)
-        self.contentView.addSubview(title)
-        self.contentView.addSubview(subTitle)
-        self.contentView.addSubview(activityIcon)
-    }
-    
-    
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

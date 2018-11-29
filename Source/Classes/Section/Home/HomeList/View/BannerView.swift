@@ -15,7 +15,7 @@ protocol HomeHeaderViewDelegate {
     func didTipBanner(banner: BannerModel) -> Void
 }
 
-class HomeHeaderView: UIView, FSPagerViewDataSource, FSPagerViewDelegate {
+class BannerView: UIView, FSPagerViewDataSource, FSPagerViewDelegate {
 
     public var bannerList : [BannerModel]! {
         didSet{

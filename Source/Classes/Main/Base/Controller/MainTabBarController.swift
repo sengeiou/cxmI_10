@@ -157,9 +157,11 @@ extension MainTabBarController {
         let surpriseStory = UIStoryboard(name: "Surprise", bundle: nil)
         
         let surprise = surpriseStory.instantiateViewController(withIdentifier: "SurpriseViewController") as! CXMMSurpriseViewController
+        let shopStory = UIStoryboard(storyboard: .Shop)
+        let shopHome = shopStory.instantiateViewController(withIdentifier: "ShopHomeViewController") as! ShopHomeViewController
         
-        let vcArray: [UIViewController] = [CXMHomeViewController(),CXMScoreViewController(),surprise,CXMMeViewController()]
-        let titleArray = [("首页","tab_home"),("开奖","tab_lot"),("发现","tab_dis"),("我的","tab_min")]
+        let vcArray: [UIViewController] = [CXMHomeViewController(),CXMScoreViewController(),surprise, shopHome, CXMMeViewController()]
+        let titleArray = [("首页","tab_home"),("开奖","tab_lot"),("服务","tab_fw"),("商城","tab_shch"),("我的","tab_min")]
         
         for (index, vc) in vcArray.enumerated() {
             vc.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
@@ -167,7 +169,8 @@ extension MainTabBarController {
             vc.tabBarItem.selectedImage = UIImage(named: titleArray[index].1 + "_sel")?.withRenderingMode(.alwaysOriginal)
             
             let nav = UINavigationController(rootViewController: vc)
-            
+            nav.navigationBar.barTintColor = ColorD12120
+            nav.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: Font17, NSAttributedStringKey.foregroundColor: UIColor.white]
             addChildViewController(nav)
         }
     }

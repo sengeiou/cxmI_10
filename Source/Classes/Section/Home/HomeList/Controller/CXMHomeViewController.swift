@@ -15,6 +15,7 @@ enum ShowType {
     case onlyNews
 }
 
+fileprivate let homeSportsLotteryCellIdentifier = "homeSportsLotteryCellIdentifier"
 fileprivate let homeSportsCellIdentifier = "homeSportsCellIdentifier"
 fileprivate let homeActivityCellIdentifier = "homeActivityCellIdentifier"
 fileprivate let homeScrollBarCellIdentifier = "homeScrollBarCellIdentifier"
@@ -25,55 +26,9 @@ fileprivate let NewsThreePicCellId = "NewsThreePicCellId"
 
 
 
-class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, HomeSportLotteryCellDelegate, HomeHeaderViewDelegate {
+class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource,HomeHeaderViewDelegate {
     
-    // MARK: - banner 点击
-    func didTipBanner(banner: BannerModel) {
-        pushRouterVC("banner: \(banner.bannerName)", urlStr: banner.bannerLink, from: self)
-    }
-    
-    //MARK: - 点击事件
-    func didSelectItem(playModel: HomePlayModel, index: Int) {
-        pushRouterVC(urlStr: playModel.redirectUrl, from: self)
-        
-//        guard playModel.redirectUrl != nil , playModel.redirectUrl != "" else { return }
-//        guard playModel.status != "" else { return }
-//        switch playModel.status {
-//        case "0":
-//            //let url =  "http://192.168.31.205:8080?cxmxc=scm&type=1"
-//            pushRouterVC(urlStr: playModel.redirectUrl, from: self)
-//        case "1":
-//            showHUD(message: playModel.statusReason)
-//        default:
-//            break
-//        }
-        
-    }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if homeStyle == .onlyNews {
-            let web = CXMNewsDetailViewController()
-            web.articleId = self.newsList[indexPath.row].articleId
-            pushViewController(vc: web)
-        }else {
-            switch indexPath.section {
-            case 1:
-                guard homeData != nil, let activity = self.homeData.activity else { return }
-                pushRouterVC(activity.actTitle, urlStr: activity.actUrl, from: self)
-            case 3:
-                let web = CXMNewsDetailViewController()
-                web.articleId = self.newsList[indexPath.row].articleId
-                pushViewController(vc: web)
-                
-                // 测试web 传入Token
-//                let web = WebViewController()
-//
-//                web.urlStr = "http://192.168.1.150:8080/#/user/activity"
-//                pushViewController(vc: web)
-            default: break
-            }
-        }
-    }
+
     
     //MARK: - 属性 public
     public var homeStyle : ShowType! = .onlyNews {
@@ -85,9 +40,11 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
     
     //MARK: - 属性
     private var homeData : HomeDataModel!
-    private var header : HomeHeaderView!
+    private var header : BannerView!
     private var newsList : [NewsInfoModel]!
     private var newsListModel: NewsListModel!
+    
+    private var activityModel : ActivityModel!
     //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,10 +61,14 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
             self.loadNextData()
         }
         
+        activityRequest()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(configNotification(_:)), name: NSNotification.Name(rawValue: NotificationConfig), object: nil)
         
         getRealmData()
         
+        // 定位信息
+        setLocation()
     }
     
     private func getRealmData() {
@@ -186,82 +147,7 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
         homeListAndNewsRequest(pageNum: self.newsListModel.nextPage)
     }
     
-    //MARK: - 网络请求
     
-    private func homeListAndNewsRequest(pageNum: Int) {
-        weak var weakSelf = self
-        
-        if newsList == nil {
-            newsList = [NewsInfoModel]()
-        }
-        
-        var isTransaction : String
-        if homeStyle == .allShow {
-            isTransaction = "2"
-        }else {
-            isTransaction = "1"
-        }
-        
-        _ = homeProvider.rx.request(.hallMix(page: pageNum, isTransaction: isTransaction))
-            .asObservable()
-            .mapObject(type: HomeListModel.self)
-            .subscribe(onNext: { (data) in
-                weakSelf?.tableView.endrefresh()
-                if pageNum == 1 {
-                    weakSelf?.homeData = data.dlHallDTO
-                    guard weakSelf?.homeData.navBanners != nil else { return }
-                    weakSelf?.header.bannerList = weakSelf?.homeData.navBanners
-                }
-                
-                weakSelf?.newsListModel = data.dlArticlePage
-                if pageNum == 1 {
-                    weakSelf?.newsList.removeAll()
-                }
-                weakSelf?.newsList.append(contentsOf: self.newsListModel.list)
-                DispatchQueue.main.async {
-                    weakSelf?.tableView.reloadData()
-                }
-                
-                DispatchQueue.global().async {
-                    let xxx = data.toJSONString()
-                    let dataStr = xxx?.data(using: .utf8)
-                    
-                    guard let realm = try? Realm() else { return }
-                    let dataRealm = HomeRealmData()
-                    dataRealm.data = dataStr!
-                    
-//                    let turnOn = UserDefaults.standard.bool(forKey: TurnOn)
-//
-//                    if turnOn {
-//                        dataRealm.homeStyle = 1
-//                    }else {
-//                        dataRealm.homeStyle = 0
-//                    }
-                    
-                    try! realm.write {
-                        realm.add(dataRealm, update: true)
-                    }
-                }
-                
-            }, onError: { (error) in
-                weakSelf?.tableView.endrefresh()
-                guard let err = error as? HXError else { return }
-                switch err {
-                case .UnexpectedResult(let code, let msg):
-                    switch code {
-                    case 600:
-                        weakSelf?.removeUserData()
-                        weakSelf?.pushLoginVC(from: self)
-                    default : break
-                    }
-                    if 300000...310000 ~= code {
-                        self.showHUD(message: msg!)
-                    }
-                    print(code)
-                default: break
-                }
-            }, onCompleted: nil , onDisposed: nil )
-    }
 
     //MARK: - 懒加载
     lazy private var tableView: UITableView = {
@@ -270,13 +156,14 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
         table.dataSource = self
         table.backgroundColor = ColorF4F4F4
         table.separatorStyle = .none
-        header = HomeHeaderView()
+        header = BannerView()
         header.delegate = self
         table.tableHeaderView = header
         
         table.register(HomeScrollBarCell.self, forCellReuseIdentifier: homeScrollBarCellIdentifier)
         table.register(HomeActivityCell.self, forCellReuseIdentifier: homeActivityCellIdentifier)
-        table.register(HomeSportLotteryCell.self, forCellReuseIdentifier: homeSportsCellIdentifier)
+        table.register(HomeSportLotteryCell.self, forCellReuseIdentifier: homeSportsLotteryCellIdentifier)
+        table.register(HomeSportCell.self, forCellReuseIdentifier: homeSportsCellIdentifier)
         
         table.register(NewsNoPicCell.self, forCellReuseIdentifier: NewsNoPicCellId)
         table.register(NewsOnePicCell.self, forCellReuseIdentifier: NewsOnePicCellId)
@@ -287,24 +174,115 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
     
     
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+
+    private func setRightBarItem() {
+        let leftBut = UIButton(type: .custom)
+        //leftBut.setTitle("返回", for: .normal)
+        
+        leftBut.titleLabel?.font = Font15
+        
+        leftBut.contentEdgeInsets = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+        
+        leftBut.setTitleColor(UIColor.black, for: .normal)
+        
+        leftBut.setImage(UIImage(named:"ret"), for: .normal)
+        
+        leftBut.addTarget(self, action: #selector(rightBut(sender:)), for: .touchUpInside)
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: leftBut)
+    }
+    
+    @objc func rightBut(sender: UIButton) {
+        //let xxx = BasePopViewController()
+        //self.present(xxx, animated: true, completion: nil)
+        let football = CXMFootballMatchVC()
+        pushViewController(vc: football)
+        //pushLoginVC(from: self)
+    }
+    lazy var locationButton : UIButton = {
+        let button = UIButton(type: .custom)
+        button.frame = CGRect(x: 0, y: 0, width: 100, height: 40)
+        button.setImage(UIImage(named: "dw"), for: .normal)
+        button.setTitle("位置", for: .normal)
+        button.contentHorizontalAlignment = .left
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = Font14
+        return button
+    }()
+}
+
+// MARK: - 点击事件
+extension CXMHomeViewController : HomeSportLotteryCellDelegate, HomeSportCellDelegate {
+    // banner 点击
+    func didTipBanner(banner: BannerModel) {
+        pushRouterVC("banner: \(banner.bannerName)", urlStr: banner.bannerLink, from: self)
+    }
+    
+    // 玩法点击
+    func didSelectItem(playModel: HomePlayModel, index: Int) {
+        //        pushRouterVC(urlStr: playModel.redirectUrl, from: self)
+        
+        let story = UIStoryboard.init(storyboard: .Storyboard)
+        let vc = story.instantiateViewController(withIdentifier: "LotteryHomeVC") as! LotteryHomeVC
+        pushViewController(vc: vc)
+    }
+    // 发现点击
+    func didSelectSportItem(playModel: HomeFindModel, index: Int) {
+        pushRouterVC(urlStr: playModel.redirectUrl, from: self)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if homeStyle == .onlyNews {
+            let web = CXMNewsDetailViewController()
+            web.articleId = self.newsList[indexPath.row].articleId
+            pushViewController(vc: web)
+        }else {
+            switch indexPath.section {
+            case 1:
+                guard homeData != nil, let activity = self.homeData.activity else { return }
+                pushRouterVC(activity.actTitle, urlStr: activity.actUrl, from: self)
+            case 3:
+                let web = CXMNewsDetailViewController()
+                web.articleId = self.newsList[indexPath.row].articleId
+                pushViewController(vc: web)
+            default: break
+            }
+        }
+    }
+}
+
+// MARK: - table DataSource
+extension CXMHomeViewController {
     func numberOfSections(in tableView: UITableView) -> Int {
         guard homeStyle != nil else { return 0 }
         if homeStyle == .onlyNews {
-            return 1
+            return 1 + 1
         }else {
-            return 3 + 1
+            return 3 + 1 + 1
         }
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if homeStyle == .onlyNews {
-            guard newsList != nil, newsList.isEmpty == false else { return 0 }
-            return newsList.count
-        }else {
-            if section == 3 {
+            switch section {
+            case 0 :
+                return 1
+            default :
                 guard newsList != nil, newsList.isEmpty == false else { return 0 }
                 return newsList.count
-            }else {
+            }
+        }else {
+            switch section {
+            case 4:
+                guard newsList != nil, newsList.isEmpty == false else { return 0 }
+                return newsList.count
+            default :
                 return 1
             }
         }
@@ -313,16 +291,21 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if homeStyle == .onlyNews {
-            let newsInfo = newsList[indexPath.row]
             
-            if newsInfo.listStyle == "1" || newsInfo.listStyle == "4" {
-                return initNewsOnePicCell(indexPath: indexPath)
-            }else if newsInfo.listStyle == "3" {
-                return initNewsThreePicCell(indexPath: indexPath)
-            }else {
-                return initNewsNoPicCell(indexPath: indexPath)
+            switch indexPath.section {
+            case 0:
+                return initSportCell(indexPath: indexPath)
+            default :
+                let newsInfo = newsList[indexPath.row]
+                
+                if newsInfo.listStyle == "1" || newsInfo.listStyle == "4" {
+                    return initNewsOnePicCell(indexPath: indexPath)
+                }else if newsInfo.listStyle == "3" {
+                    return initNewsThreePicCell(indexPath: indexPath)
+                }else {
+                    return initNewsNoPicCell(indexPath: indexPath)
+                }
             }
-            
         }else {
             switch indexPath.section {
             case 0:
@@ -330,6 +313,8 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
             case 1:
                 return initActivityCell(indexPath: indexPath)
             case 2:
+                return initSportCell(indexPath: indexPath)
+            case 3:
                 return initSportLotteryCell(indexPath: indexPath)
             default:
                 
@@ -347,7 +332,7 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
     }
     
     private func initSportLotteryCell(indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: homeSportsCellIdentifier, for: indexPath) as! HomeSportLotteryCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: homeSportsLotteryCellIdentifier, for: indexPath) as! HomeSportLotteryCell
         if self.homeData != nil {
             cell.playList = self.homeData.lotteryClassifys
         }
@@ -355,6 +340,14 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
         cell.delegate = self
         return cell
     }
+    // 发现
+    private func initSportCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: homeSportsCellIdentifier, for: indexPath) as! HomeSportCell
+        cell.configure(with: self.homeData.discoveryHallClassifyDTOList)
+        cell.delegate = self
+        return cell
+    }
+    
     private func initActivityCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: homeActivityCellIdentifier, for: indexPath) as! HomeActivityCell
         
@@ -396,12 +389,27 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         if homeStyle == .onlyNews {
-            let newsInfo = newsList[indexPath.row]
-            if newsInfo.listStyle == "1" || newsInfo.listStyle == "4" || newsInfo.listStyle == "0" {
-                return 110 * defaultScale
-            }
-            else {
-                return 150 * defaultScale
+            switch indexPath.section {
+            case 0:
+                guard self.homeData != nil else { return 0 }
+                let count = self.homeData.lotteryClassifys.count
+                var verticalCount = count / HorizontalSportItemCount
+                
+                if count % HorizontalSportItemCount != 0 {
+                    verticalCount += 1
+                }
+                
+                let height : CGFloat = HomesectionTopSportSpacing * 2 + FootballSportCellHeight * CGFloat(verticalCount) + FootballCellLineSportSpacing * CGFloat(verticalCount) + HomeSectionViewSportHeight
+                
+                return height
+            default :
+                let newsInfo = newsList[indexPath.row]
+                if newsInfo.listStyle == "1" || newsInfo.listStyle == "4" || newsInfo.listStyle == "0" {
+                    return 110 * defaultScale
+                }
+                else {
+                    return 150 * defaultScale
+                }
             }
             //return 105 * defaultScale
         }else {
@@ -415,6 +423,18 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
                     return 90 * defaultScale
                 }
             case 2:
+                guard self.homeData != nil else { return 0 }
+                let count = self.homeData.discoveryHallClassifyDTOList.count
+                var verticalCount = count / HorizontalSportItemCount
+                
+                if count % HorizontalSportItemCount != 0 {
+                    verticalCount += 1
+                }
+                
+                let height : CGFloat = HomesectionTopSportSpacing * 2 + FootballSportCellHeight * CGFloat(verticalCount) + FootballCellLineSportSpacing * CGFloat(verticalCount) + HomeSectionViewSportHeight
+                
+                return height
+            case 3:
                 guard self.homeData != nil else { return 0 }
                 let count = self.homeData.lotteryClassifys.count
                 var verticalCount = count / HorizontalItemCount
@@ -464,41 +484,164 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return nil
     }
+}
+// MARK: - 网络请求
+extension CXMHomeViewController {
     
-    
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    private func homeListAndNewsRequest(pageNum: Int) {
+        weak var weakSelf = self
+        
+        if newsList == nil {
+            newsList = [NewsInfoModel]()
+        }
+        
+        var isTransaction : String
+        if homeStyle == .allShow {
+            isTransaction = "2"
+        }else {
+            isTransaction = "1"
+        }
+        
+        _ = homeProvider.rx.request(.hallMix(page: pageNum, isTransaction: isTransaction))
+            .asObservable()
+            .mapObject(type: HomeListModel.self)
+            .subscribe(onNext: { (data) in
+                weakSelf?.tableView.endrefresh()
+                if pageNum == 1 {
+                    weakSelf?.homeData = data.dlHallDTO
+                    guard weakSelf?.homeData.navBanners != nil else { return }
+                    weakSelf?.header.bannerList = weakSelf?.homeData.navBanners
+                }
+                
+                weakSelf?.newsListModel = data.dlArticlePage
+                if pageNum == 1 {
+                    weakSelf?.newsList.removeAll()
+                }
+                weakSelf?.newsList.append(contentsOf: self.newsListModel.list)
+                DispatchQueue.main.async {
+                    weakSelf?.tableView.reloadData()
+                }
+                
+                DispatchQueue.global().async {
+                    let xxx = data.toJSONString()
+                    let dataStr = xxx?.data(using: .utf8)
+                    
+                    guard let realm = try? Realm() else { return }
+                    let dataRealm = HomeRealmData()
+                    dataRealm.data = dataStr!
+                    try! realm.write {
+                        realm.add(dataRealm, update: true)
+                    }
+                }
+                
+            }, onError: { (error) in
+                weakSelf?.tableView.endrefresh()
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        weakSelf?.removeUserData()
+                        weakSelf?.pushLoginVC(from: self)
+                    default : break
+                    }
+                    if 300000...310000 ~= code {
+                        self.showHUD(message: msg!)
+                    }
+                    print(code)
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil )
     }
     
+    
+    
+}
 
-    private func setRightBarItem() {
-        let leftBut = UIButton(type: .custom)
-        //leftBut.setTitle("返回", for: .normal)
-        
-        leftBut.titleLabel?.font = Font15
-        
-        leftBut.contentEdgeInsets = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
-        
-        leftBut.setTitleColor(UIColor.black, for: .normal)
-        
-        leftBut.setImage(UIImage(named:"ret"), for: .normal)
-        
-        leftBut.addTarget(self, action: #selector(rightBut(sender:)), for: .touchUpInside)
-        
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: leftBut)
-        
+// MARK: - 定位
+extension CXMHomeViewController {
+    
+    
+    private func setLocation() {
+        setLocationNav()
+        startLocation()
+    }
+    
+    private func setLocationNav() {
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: locationButton)
+    }
+    
+    private func startLocation() {
+        LocationManager.shareManager.creatLocationManager().startLocation { (location, adress, error) in
+            print("经度 \(location?.coordinate.longitude ?? 0.0)")
+            print("纬度 \(location?.coordinate.latitude ?? 0.0)")
+            print("地址\(adress?.locality ?? "")")
+            print("error\(error ?? "没有错误")")
+            
+            var loca = Location(latitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!)
+            
+            let bd = loca.transformFromGPSToBD()
+            
+            if let locality = adress?.locality {
+                self.locationButton.setTitle("\(locality)", for: .normal)
+            }else {
+                self.locationButton.setTitle("位置", for: .normal)
+            }
+            
+            // 存储经纬度信息
+            if let latitude = location?.coordinate.latitude,
+                let longitude = location?.coordinate.longitude {
+                LocationManager.shareManager.saveLocation(latitude: latitude, longitude: longitude)
+            }
+            
+            print("\(bd.latitude),\(bd.longitude)")
+        }
+    }
+}
+
+// MARK: - 活动弹框
+extension CXMHomeViewController : ActivityPopVCDelegate {
+    func didTipActivity(link: String) {
         
     }
     
-    @objc func rightBut(sender: UIButton) {
-        //let xxx = BasePopViewController()
-        //self.present(xxx, animated: true, completion: nil)
-        let football = CXMFootballMatchVC()
-        pushViewController(vc: football)
-        //pushLoginVC(from: self)
+    private func showActivityPop() {
+        guard activityModel != nil else { return }
+        guard let url = URL(string : activityModel.bannerImage) else { return }
+        
+        let activity = ActivityPopVC()
+        
+        activity.imageView.kf.setImage(with: url, placeholder: nil, options: nil , progressBlock: nil) { (image, error, type , url) in
+            guard let img = image else { return }
+            
+            activity.configure(with: img.size.width, height: img.size.height)
+            activity.delegate = self
+            self.present(activity)
+        }
+        
     }
     
+    private func activityRequest() {
+        _ = activityProvider.rx.request(.activity).asObservable()
+            .mapObject(type: ActivityModel.self)
+            .subscribe(onNext: { (data) in
+                self.activityModel = data
+                self.showActivityPop()
+            }, onError: { (error) in
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        break
+                    default : break
+                    }
+                    if 300000...310000 ~= code {
+                        self.showHUD(message: msg!)
+                    }
+                    print(code)
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil)
+    }
 }

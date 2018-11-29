@@ -12,7 +12,9 @@ import HandyJSON
 
 /// banner
 struct BannerModel: HandyJSON {
-   var bannerImage: String!
-   var bannerLink: String!
-   var bannerName: String = ""
+    var bannerImage: String!
+    var bannerLink: String!
+    var bannerName: String = ""
+    /// 商城详情用
+    var image : String = ""
 }

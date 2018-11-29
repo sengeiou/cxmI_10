@@ -255,7 +255,7 @@ class CXMMeViewController: BaseViewController, UITableViewDelegate, UITableViewD
         let but = UIButton(type: .custom)
         but.setTitle("设置", for: .normal)
         but.titleLabel?.font = Font15
-        but.setTitleColor(Color787878, for: .normal)
+        but.setTitleColor(UIColor.white, for: .normal)
         but.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         but.addTarget(self, action: #selector(setting), for: .touchUpInside)
         
@@ -285,9 +285,9 @@ class CXMMeViewController: BaseViewController, UITableViewDelegate, UITableViewD
         
         uiInfo.isShowTansfer = true
         
-        uiInfo.customBannerColor = ColorFFFFFF
+        uiInfo.customBannerColor = ColorD12120
         
-        uiInfo.topViewTextColor = UIColor.black
+        uiInfo.topViewTextColor = UIColor.white
         
         uiInfo.titleFont = Font15
         
@@ -299,7 +299,7 @@ class CXMMeViewController: BaseViewController, UITableViewDelegate, UITableViewD
         
         uiInfo.commentCommitButtonBgColor = ColorEA5504
         
-        uiInfo.commentCommitButtonBgHighColor = ColorFFFFFF
+        uiInfo.commentCommitButtonBgHighColor = ColorD12120
         //uiInfo.serviceNameTextColor = Color0099D9
         
         
