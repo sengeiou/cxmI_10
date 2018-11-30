@@ -18,6 +18,10 @@ class ServiceHome: BaseViewController {
         super.viewDidLoad()
         self.navigationItem.title = "服务"
         hideBackBut()
+        tableView.headerRefresh {
+            self.serviceRequest()
+        }
+        tableView.beginRefreshing()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -25,13 +29,13 @@ class ServiceHome: BaseViewController {
     }
 
 }
-
+// MARK: - 点击事件
 extension ServiceHome : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
 }
-
+// MARK: - DataSource
 extension ServiceHome : UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -43,5 +47,11 @@ extension ServiceHome : UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ServiceHomeCell", for: indexPath) as! ServiceHomeCell
         
         return cell
+    }
+}
+// MARK: - 网络请求
+extension ServiceHome {
+    private func serviceRequest() {
+        
     }
 }

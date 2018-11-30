@@ -21,7 +21,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="c9d-et-3Mp">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="c9d-et-3Mp">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -29,7 +29,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="114"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zIp-hI-NWU" id="3lr-NN-NZb">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="113.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="114"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9FD-k3-lHx">
@@ -44,12 +44,22 @@
                                                     <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0JG-OI-hUB">
+                                                    <rect key="frame" x="20" y="112.5" width="302" height="1"/>
+                                                    <color key="backgroundColor" red="0.92941176470588238" green="0.92941176470588238" blue="0.92941176470588238" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="8dl-we-akb"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="reI-fh-c4y" secondAttribute="trailing" constant="20" id="1s4-yC-30s"/>
+                                                <constraint firstAttribute="trailing" secondItem="0JG-OI-hUB" secondAttribute="trailing" constant="20" id="3fV-Ed-LCB"/>
+                                                <constraint firstItem="0JG-OI-hUB" firstAttribute="leading" secondItem="3lr-NN-NZb" secondAttribute="leading" constant="20" id="7Of-Cw-ffM"/>
                                                 <constraint firstItem="reI-fh-c4y" firstAttribute="top" secondItem="3lr-NN-NZb" secondAttribute="topMargin" constant="5" id="CSL-bZ-ciF"/>
                                                 <constraint firstItem="9FD-k3-lHx" firstAttribute="leading" secondItem="3lr-NN-NZb" secondAttribute="leading" constant="20" id="K3i-Cv-nTU"/>
                                                 <constraint firstItem="9FD-k3-lHx" firstAttribute="top" secondItem="3lr-NN-NZb" secondAttribute="top" constant="20" id="eM9-EO-CWn"/>
+                                                <constraint firstAttribute="bottom" secondItem="0JG-OI-hUB" secondAttribute="bottom" id="mj1-ZT-kGc"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="reI-fh-c4y" secondAttribute="bottom" constant="5" id="rwh-m2-8WU"/>
                                                 <constraint firstAttribute="bottom" secondItem="9FD-k3-lHx" secondAttribute="bottom" constant="20" id="sDR-75-hbc"/>
                                                 <constraint firstItem="reI-fh-c4y" firstAttribute="leading" secondItem="9FD-k3-lHx" secondAttribute="trailing" constant="20" id="zMO-K5-sne"/>

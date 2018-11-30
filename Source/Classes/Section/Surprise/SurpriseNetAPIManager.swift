@@ -32,9 +32,11 @@ enum SurpriseAPIManager {
     /// 开奖详情  （期号）
     case lottoPrizeDetail(termNum : String, lotteryId : String)
     /// 小白课堂
-    case schoolList()
+    case schoolList
     /// 球队详情
     case teamDetail(teamId : String)
+    /// 服务列表
+    case serviceList
 }
 
 extension SurpriseAPIManager : TargetType {
@@ -67,6 +69,8 @@ extension SurpriseAPIManager : TargetType {
             return "/lottery/discoveryPage/queryJcOpenPrizesByDate"
         case .teamDetail:
             return "/lottery/discoveryPage/teamDetailForDiscovery"
+        case .serviceList:
+            return ""
         }
     }
     

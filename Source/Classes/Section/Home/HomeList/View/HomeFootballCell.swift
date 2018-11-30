@@ -27,14 +27,21 @@ class HomeFootballCell: UICollectionViewCell, RouterMatcher {
     }
 }
 
-extension HomeFootballCell {
+extension HomeFootballCell: AnimatedImageViewDelegate {
+    
+    func animatedImageView(_ imageView: AnimatedImageView, didPlayAnimationLoops count: UInt) {
+        icon.stopAnimating()
+        icon.image = UIImage(named: "money")
+    }
+    
     // 发现
     public func configure(with data : HomeFindModel) {
         
         if let url = URL(string: data.classImg) {
             icon.kf.setImage(with: url)
+            icon.delegate = self
         }
-        icon.repeatCount = .once
+        
         title.text = data.className
     }
     // 玩法
@@ -64,7 +71,7 @@ extension HomeFootballCell {
     private func initSubview() {
         icon = AnimatedImageView()
         icon.image = UIImage(named: "足球")
-        
+        icon.repeatCount = .finite(count: 2)
         
         title = UILabel()
         title.font = Font14
