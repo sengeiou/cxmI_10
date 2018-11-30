@@ -71,6 +71,8 @@ extension ShopNetAPIManager : TargetType {
             dic["num"] = goodsNum
         case .goodsUpdate(let model):
             dic = model.toJSON()!
+        case .bannerList:
+            dic["emptyStr"] = ""
         default:
             return .requestPlain
         }

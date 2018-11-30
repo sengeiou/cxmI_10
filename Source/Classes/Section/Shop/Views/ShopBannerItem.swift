@@ -17,18 +17,18 @@ class ShopBannerItem: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: CGRect.zero)
         initSubview()
-        
-        var model = BannerModel()
-        model.bannerImage = "https://static.caixiaomi.net/uploadImgs/20181127/098ceeeef00a4232938979fa2c1bcb59.png"
-        model.bannerLink = "http://caixiaomi.net?cxmxc=scm&type=8&showBar=1&from=app&showtitle=1&id=1518"
-        model.bannerName = "欧战明天凌晨即将上演"
-        bannerView.bannerList = [model,model,model]
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+}
+
+extension ShopBannerItem {
+    public func configure(with data : [BannerModel]) {
+        bannerView.bannerList = data
+    }
 }
 
 // MARK: 初始化

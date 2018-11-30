@@ -50,8 +50,6 @@ target '彩小蜜' do
 
   pod 'YBPopupMenu', '~> 1.1.2'
 
-  pod 'Gifu'
-
   # Pods for 彩小蜜
 
   

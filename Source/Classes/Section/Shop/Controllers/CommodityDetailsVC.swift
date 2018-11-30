@@ -41,11 +41,11 @@ class CommodityDetailsVC: BaseViewController {
         tableView.estimatedRowHeight = 80
         header = BannerView()
         header.frame = CGRect(x: 0.0, y: 0.0, width: screenWidth, height: 320.0)
-        var model = BannerModel()
-        model.bannerImage = "https://static.caixiaomi.net/uploadImgs/20181127/098ceeeef00a4232938979fa2c1bcb59.png"
-        model.bannerLink = "http://caixiaomi.net?cxmxc=scm&type=8&showBar=1&from=app&showtitle=1&id=1518"
-        model.bannerName = "欧战明天凌晨即将上演"
-        header.bannerList = [model,model,model]
+//        var model = BannerModel()
+//        model.bannerImage = "https://static.caixiaomi.net/uploadImgs/20181127/098ceeeef00a4232938979fa2c1bcb59.png"
+//        model.bannerLink = "http://caixiaomi.net?cxmxc=scm&type=8&showBar=1&from=app&showtitle=1&id=1518"
+//        model.bannerName = "欧战明天凌晨即将上演"
+//        header.bannerList = [model,model,model]
         tableView.tableHeaderView = header
     }
 
@@ -117,7 +117,6 @@ extension CommodityDetailsVC : UITableViewDataSource {
     }
     private func initImageCell(indexPath : IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CommodityImageCell", for: indexPath) as! CommodityImageCell
-        
         cell.configure(with: goodsDetail!.detailPicList[indexPath.row])
         return cell
     }
@@ -138,6 +137,7 @@ extension CommodityDetailsVC {
                 weakSelf?.tableView.endrefresh()
                 weakSelf?.goodsDetail = data
                 weakSelf?.tableView.reloadData()
+                weakSelf?.header.bannerList = data.bannerList
                 weakSelf?.setupData()
             }, onError: { (error) in
                 weakSelf?.tableView.endrefresh()

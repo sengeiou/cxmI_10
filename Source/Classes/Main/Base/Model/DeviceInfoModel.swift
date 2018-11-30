@@ -65,6 +65,13 @@ class DeviceManager: AlertPro  {
         device.net = net
         device.channel = Channel 
         device.IDFA = ASIdentifierManager.shared().advertisingIdentifier.uuidString
+        
+        if let location = LocationManager.getLocation() {
+            device.city = location.locality
+            device.lat = "\(location.latitude ?? 0.0)"
+            device.lon = "\(location.longitude ?? 0.0)"
+            device.province = location.administrativeArea
+        }
         self.device = device
         
         //return device

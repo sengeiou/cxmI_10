@@ -27,7 +27,7 @@ struct Location: LocationPro {
     
 }
 
-class LocationModel {
+class LocationModel : NSObject, NSCoding {
     /// 省
     var administrativeArea : String = ""
     /// 自治区
@@ -37,6 +37,34 @@ class LocationModel {
     var subLocality : String = ""
     /// 地名
     var name : String = ""
+    ///
+    var latitude: Double!
+    
+    var longitude: Double!
+    
+    override init() {
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        administrativeArea = aDecoder.decodeObject(forKey: "administrativeArea") as? String ?? ""
+        subAdministrativeArea = aDecoder.decodeObject(forKey: "subAdministrativeArea") as? String ?? ""
+        locality = aDecoder.decodeObject(forKey: "locality") as? String ?? ""
+        subLocality = aDecoder.decodeObject(forKey: "subLocality") as? String ?? ""
+        name = aDecoder.decodeObject(forKey: "name") as? String ?? ""
+        latitude = aDecoder.decodeObject(forKey: "latitude") as? Double ?? 0.0
+        longitude = aDecoder.decodeObject(forKey: "longitude") as? Double ?? 0.0
+    }
+    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(administrativeArea, forKey: "administrativeArea")
+        aCoder.encode(subAdministrativeArea, forKey: "subAdministrativeArea")
+        aCoder.encode(locality, forKey: "locality")
+        aCoder.encode(subLocality, forKey: "subLocality")
+        aCoder.encode(name, forKey: "name")
+        aCoder.encode(latitude, forKey: "latitude")
+        aCoder.encode(longitude, forKey: "longitude")
+    }
 }
 
 class LocationManager: NSObject {
@@ -120,6 +148,8 @@ extension LocationManager:CLLocationManagerDelegate {
                 let firstPlaceMark = placemark!.first
                 
                 let model = LocationModel()
+                model.latitude = self.curLocation?.coordinate.latitude
+                model.longitude = self.curLocation?.coordinate.longitude
                 
                 self.curAddress = ""
                 //省
@@ -158,14 +188,14 @@ extension LocationManager:CLLocationManagerDelegate {
     
 }
 extension LocationManager {
-    func saveLocation(latitude : Double, longitude : Double) {
-        UserDefaults.standard.set(latitude, forKey: "latitude")
-        UserDefaults.standard.set(longitude, forKey: "longitude")
+    static func saveLocation(location : LocationModel) {
+        let data = NSKeyedArchiver.archivedData(withRootObject: location)
+        UserDefaults.standard.set(data, forKey: "location")
     }
-    func getLocation() -> (latitude : Double, longitude : Double) {
-        let latitude = UserDefaults.standard.double(forKey: "latitude")
-        let longitude = UserDefaults.standard.double(forKey: "longitude")
-        return (latitude: latitude, longitude : longitude)
+    static func getLocation() -> LocationModel? {
+        guard let location = UserDefaults.standard.data(forKey: "location") else { return nil }
+        guard let model = NSKeyedUnarchiver.unarchiveObject(with: location) as? LocationModel else { return nil }
+        return model
     }
 }
 

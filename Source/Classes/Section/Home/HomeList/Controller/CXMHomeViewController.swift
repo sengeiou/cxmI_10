@@ -588,11 +588,16 @@ extension CXMHomeViewController {
                 self.locationButton.setTitle("位置", for: .normal)
             }
             
-            // 存储经纬度信息
-            if let latitude = location?.coordinate.latitude,
-                let longitude = location?.coordinate.longitude {
-                LocationManager.shareManager.saveLocation(latitude: latitude, longitude: longitude)
+            if let adress = adress {
+                // 存储经纬度信息
+                LocationManager.saveLocation(location: adress)
+//                if let latitude = location?.coordinate.latitude,
+//                    let longitude = location?.coordinate.longitude {
+//
+//                }
             }
+            
+            let xx = LocationManager.getLocation()
             
             print("\(bd.latitude),\(bd.longitude)")
         }

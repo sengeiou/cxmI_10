@@ -156,7 +156,7 @@ extension MainTabBarController {
         
         let surpriseStory = UIStoryboard(name: "Surprise", bundle: nil)
         
-        let surprise = surpriseStory.instantiateViewController(withIdentifier: "SurpriseViewController") as! CXMMSurpriseViewController
+        let surprise = surpriseStory.instantiateViewController(withIdentifier: "ServiceHome") as! ServiceHome
         let shopStory = UIStoryboard(storyboard: .Shop)
         let shopHome = shopStory.instantiateViewController(withIdentifier: "ShopHomeViewController") as! ShopHomeViewController
         

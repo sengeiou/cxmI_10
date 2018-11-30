@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import Kingfisher
 
 class HomeFootballCell: UICollectionViewCell, RouterMatcher {
     
     public static let identifier : String = "HomeFootballCellId"
 
-    private var icon : UIImageView!
+    private var icon : AnimatedImageView!
     private var title : UILabel!
     private var subTitle: UILabel!
     private var activityIcon : UIImageView!
@@ -33,7 +34,7 @@ extension HomeFootballCell {
         if let url = URL(string: data.classImg) {
             icon.kf.setImage(with: url)
         }
-        
+        icon.repeatCount = .once
         title.text = data.className
     }
     // 玩法
@@ -61,7 +62,7 @@ extension HomeFootballCell {
 // MARK: - 初始化
 extension HomeFootballCell {
     private func initSubview() {
-        icon = UIImageView()
+        icon = AnimatedImageView()
         icon.image = UIImage(named: "足球")
         
         

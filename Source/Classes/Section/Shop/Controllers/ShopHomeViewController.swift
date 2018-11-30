@@ -14,6 +14,8 @@ class ShopHomeViewController: BaseViewController {
     
     private var pageModel : BasePageModel<GoodsListModel>!
     
+    private var bannerList : [BannerModel] = [BannerModel]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "商城"
@@ -27,7 +29,7 @@ class ShopHomeViewController: BaseViewController {
             self.loadNextData()
         }
         collectionView.beginRefreshing()
-        
+        goodsBannerRequest()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -67,7 +69,7 @@ extension ShopHomeViewController : UICollectionViewDataSource {
         switch indexPath.section {
         case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ShopBannerItem.identifier, for: indexPath) as! ShopBannerItem
-            
+            cell.configure(with: bannerList)
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ShopItem.identifier, for: indexPath) as! ShopItem
@@ -130,6 +132,32 @@ extension ShopHomeViewController {
                 weakSelf?.collectionView.endrefresh()
                 weakSelf?.pageModel = data
                 weakSelf?.collectionView.reloadData()
+            }, onError: { (error) in
+                weakSelf?.collectionView.endrefresh()
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        weakSelf?.removeUserData()
+                        weakSelf?.pushLoginVC(from: self)
+                    default : break
+                    }
+                    if 300000...310000 ~= code {
+                        self.showHUD(message: msg!)
+                    }
+                    print(code)
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil )
+    }
+    
+    private func goodsBannerRequest() {
+        weak var weakSelf = self
+        _ = shopProvider.rx.request(.bannerList).asObservable()
+            .mapObject(type: GoodsBanner.self)
+            .subscribe(onNext: { (data) in
+                weakSelf?.bannerList = data.bannerList
             }, onError: { (error) in
                 weakSelf?.collectionView.endrefresh()
                 guard let err = error as? HXError else { return }
