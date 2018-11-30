@@ -10,22 +10,38 @@ import UIKit
 
 class CommodityOrderDetailVC: BaseViewController {
 
+    public var orderId : String!
+    
     @IBOutlet weak var tableView : UITableView!
     
     private var nameTextField : UITextField!
     private var phoneTextField : UITextField!
     private var adressTextView : HHTextView!
     
+    private var orderDetail : GoodsOrderDetail!
+    private var calculate : GoodsCalculate!
+    
+    private var goodsNum : Int = 1 {
+        didSet{
+            if goodsNum == 0 {
+                goodsNum = 1
+            }
+            
+            // 更新显示信息
+            calculatePriceRequest()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "订单详情"
         initSubview()
+        orderDetailRequest()
+        calculatePriceRequest()
     }
     
     private func initSubview() {
         tableView.register(ComOrderHeaderFooter.self, forHeaderFooterViewReuseIdentifier: ComOrderHeaderFooter.identifier)
-        
-        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -34,9 +50,38 @@ class CommodityOrderDetailVC: BaseViewController {
         adressTextView.resignFirstResponder()
     }
 }
-
-// MARK: -
+// MARK: - setupData
+extension CommodityOrderDetailVC {
+    private func setupData() {
+        
+    }
+}
+// MARK: - 点击事件
 extension CommodityOrderDetailVC : UITableViewDelegate {
+    
+    @IBAction func paymentClicked(_ sender: UIButton) {
+        guard nameTextField.text != nil && nameTextField.text != "" else {
+            showHUD(message: "请输入正确的联系人")
+            return
+        }
+        guard phoneTextField.text != nil && phoneTextField.text != "" else {
+            showHUD(message: "请输入联系电话")
+            return
+        }
+        guard adressTextView.text != nil && adressTextView.text != "" else {
+            showHUD(message: "请输入地址")
+            return
+        }
+        
+        var model = GoodsOrderUpdate()
+        model.goodsId = self.orderId
+        model.contactsName = self.nameTextField.text ?? ""
+        model.phone = self.phoneTextField.text ?? ""
+        model.address = self.adressTextView.text
+        
+        goodsUpdateRequest(model: model)
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         nameTextField.resignFirstResponder()
         phoneTextField.resignFirstResponder()
@@ -46,6 +91,7 @@ extension CommodityOrderDetailVC : UITableViewDelegate {
 // MARK: - DataSource
 extension CommodityOrderDetailVC : UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
+        guard orderDetail != nil else { return 0 }
         return 3
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -122,7 +168,7 @@ extension CommodityOrderDetailVC : UITableViewDataSource {
     
     private func initOrderInfoCell(indexPath : IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ComOrderInfoCell", for: indexPath) as! ComOrderInfoCell
-        
+        cell.configure(with: orderDetail)
         return cell
     }
     private func initOrderInputCell(indexPath : IndexPath) -> UITableViewCell {
@@ -149,9 +195,98 @@ extension CommodityOrderDetailVC : UITableViewDataSource {
         switch indexPath.row {
         case 0:
             cell.title.text = "商品数量"
+            cell.detail.text = "\(goodsNum)"
         default:
             cell.title.text = "商品总价"
+            if calculate != nil {
+                cell.detail.text = "¥ " + calculate.totalPrice
+            }
         }
         return cell
+    }
+}
+// MARK: - 网络请求
+extension CommodityOrderDetailVC {
+    private func orderDetailRequest() {
+        weak var weakSelf = self
+        
+        _ = shopProvider.rx.request(.orderDetail(orderId: orderId)).asObservable()
+            .mapObject(type: GoodsOrderDetail.self)
+            .subscribe(onNext: { (data) in
+                weakSelf?.tableView.endrefresh()
+                weakSelf?.orderDetail = data
+                weakSelf?.setupData()
+                weakSelf?.tableView.reloadData()
+            }, onError: { (error) in
+                weakSelf?.tableView.endrefresh()
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        weakSelf?.removeUserData()
+                        weakSelf?.pushLoginVC(from: self)
+                    default : break
+                    }
+                    if 300000...310000 ~= code {
+                        self.showHUD(message: msg!)
+                    }
+                    print(code)
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil )
+    }
+    private func calculatePriceRequest() {
+        weak var weakSelf = self
+        _ = shopProvider.rx.request(.calculatePrice(orderId: orderId, goodsNum: "1")).asObservable()
+            .mapObject(type: GoodsCalculate.self)
+            .subscribe(onNext: { (data) in
+                weakSelf?.calculate = data
+                weakSelf?.tableView.reloadData()
+            }, onError: { (error) in
+                weakSelf?.tableView.endrefresh()
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        weakSelf?.removeUserData()
+                        weakSelf?.pushLoginVC(from: self)
+                    default : break
+                    }
+                    if 300000...310000 ~= code {
+                        self.showHUD(message: msg!)
+                    }
+                    print(code)
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil )
+    }
+    
+    private func goodsUpdateRequest(model : GoodsOrderUpdate) {
+        
+        weak var weakSelf = self
+        _ = shopProvider.rx.request(.goodsUpdate(model : model)).asObservable()
+            .mapBaseObject(type: DataModel.self)
+            .subscribe(onNext: { (data) in
+                
+            }, onError: { (error) in
+                
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        weakSelf?.removeUserData()
+                        weakSelf?.pushLoginVC(from: self)
+                    default : break
+                    }
+                    if 300000...310000 ~= code {
+                        self.showHUD(message: msg!)
+                    }
+                    print(code)
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil )
     }
 }

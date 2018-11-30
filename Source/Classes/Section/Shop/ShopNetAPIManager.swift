@@ -15,16 +15,17 @@ enum ShopNetAPIManager {
     /// 轮播图
     case bannerList
     /// 计算商品价钱
-    case calculatePrice(goodsId : String, goodsNum : String)
-    /// 提交商品
+    case calculatePrice(orderId : String, goodsNum : String)
+    /// 提交商品（订单）
     case goodsAdd(goodsId : String)
     /// 商品详情
     case goodsDetail(goodsId : String)
     /// 商品首页
     case goodsList(page : Int)
     /// 商品信息更新 (购买)
-    case goodsUpdate()
-    
+    case goodsUpdate(model : GoodsOrderUpdate)
+    /// 订单q详情
+    case orderDetail(orderId : String)
 }
 
 extension ShopNetAPIManager : TargetType {
@@ -47,6 +48,8 @@ extension ShopNetAPIManager : TargetType {
             return "/order/goods/goodsList"
         case .goodsUpdate:
             return "/order/goods/goodsUpdate"
+        case .orderDetail:
+            return "/order/goods/orderDetail"
         }
     }
     
@@ -59,6 +62,15 @@ extension ShopNetAPIManager : TargetType {
             dic["size"] = "20"
         case .goodsDetail(let goodsId):
             dic["goodsId"] = goodsId
+        case .goodsAdd(let goodsId):
+            dic["goodsId"] = goodsId
+        case .orderDetail(let orderId):
+            dic["orderId"] = orderId
+        case .calculatePrice(let orderId, let goodsNum):
+            dic["orderId"] = orderId
+            dic["num"] = goodsNum
+        case .goodsUpdate(let model):
+            dic = model.toJSON()!
         default:
             return .requestPlain
         }

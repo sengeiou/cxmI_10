@@ -32,7 +32,7 @@ struct GoodsDetailModel: HandyJSON {
     /// 描述
     var description : String = ""
     /// 详情图
-    var detailPic : String = ""
+    var detailPicList : [GoodsImage]!
     /// 历史价格
     var historyPrice : String = ""
     /// 付款人数
@@ -41,4 +41,23 @@ struct GoodsDetailModel: HandyJSON {
     var presentPrice : String = ""
 }
 
+struct GoodsImage : HandyJSON {
+    var image : String = ""
+}
 
+struct GoodsOrderDetail : HandyJSON {
+    var description : String = ""
+    var orderId : String = ""
+    var orderPic : String = ""
+    var price : String = ""
+}
+struct GoodsCalculate : HandyJSON {
+    var totalPrice : String = ""
+}
+struct GoodsOrderUpdate : HandyJSON {
+    var address : String = ""
+    var contactsName : String = ""
+    var goodsId : String = ""
+    var num : String = ""
+    var phone : String = ""
+}

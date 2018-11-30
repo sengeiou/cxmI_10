@@ -64,6 +64,7 @@ extension HomeFootballCell {
         icon = UIImageView()
         icon.image = UIImage(named: "足球")
         
+        
         title = UILabel()
         title.font = Font14
         title.textColor = Color505050

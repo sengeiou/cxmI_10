@@ -27,3 +27,13 @@ class ComOrderInfoCell: UITableViewCell {
     }
 
 }
+
+extension ComOrderInfoCell {
+    public func configure(with data : GoodsOrderDetail) {
+        if let url = URL(string: data.orderPic){
+            icon.kf.setImage(with: url)
+        }
+        title.text = data.description
+        price.text = "¥ " + data.price
+    }
+}

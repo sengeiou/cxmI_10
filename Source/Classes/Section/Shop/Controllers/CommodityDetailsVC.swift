@@ -13,6 +13,9 @@ class CommodityDetailsVC: BaseViewController {
     public var goodsId : String!
     
     @IBOutlet weak var tableView : UITableView!
+    @IBOutlet weak var goodsPrice : UILabel!
+    @IBOutlet weak var hisPrice : UILabel!
+    @IBOutlet weak var submitBut : UIButton!
     
     private var goodsDetail : GoodsDetailModel!
     
@@ -25,6 +28,13 @@ class CommodityDetailsVC: BaseViewController {
             self.loadNewData()
         }
         tableView.beginRefreshing()
+    }
+    private func setupData() {
+        guard goodsDetail != nil else { return }
+        
+        goodsPrice.text = "¥" + goodsDetail.presentPrice
+        hisPrice.text = "¥" + goodsDetail.historyPrice
+        
     }
     
     private func initSubview() {
@@ -42,19 +52,34 @@ class CommodityDetailsVC: BaseViewController {
 }
 // MARK: - 点击事件
 extension CommodityDetailsVC : UITableViewDelegate {
-    
+    @IBAction func submitClicked(_ sender: UIButton) {
+        goodsAddRequest()
+    }
 }
 // MARK: - TableView DataSource
 extension CommodityDetailsVC : UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        guard goodsDetail != nil else { return 0 }
+        return 3
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        switch section {
+        case 0:
+            return 1
+        case 1:
+            return 1
+        case 2:
+            return goodsDetail.detailPicList != nil ? goodsDetail.detailPicList.count : 0
+        default:
+            return 0
+        }
+        
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
+            return initInfoCell(indexPath: indexPath)
+        case 1:
             return initDetailCell(indexPath: indexPath)
         default:
             return initImageCell(indexPath: indexPath)
@@ -63,8 +88,13 @@ extension CommodityDetailsVC : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
-        case 0:
-            return 80
+        case 1:
+            let count = lineNumber(totalNum: goodsDetail.baseAttributeList.count, horizonNum: 2)
+            if count == 0 {
+                return 30 + 20 + 30
+            }else {
+                return CGFloat(count * 30) + 20 + 30
+            }
         default:
             return UITableViewAutomaticDimension
         }
@@ -75,18 +105,20 @@ extension CommodityDetailsVC : UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 1
     }
+    private func initInfoCell(indexPath : IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CommodityInfoCell", for: indexPath) as! CommodityInfoCell
+        cell.configure(with: goodsDetail)
+        return cell
+    }
     private func initDetailCell(indexPath : IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CommodityDetailCell", for: indexPath) as! CommodityDetailCell
+        cell.configure(with: goodsDetail.baseAttributeList)
         return cell
     }
     private func initImageCell(indexPath : IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CommodityImageCell", for: indexPath) as! CommodityImageCell
-        switch indexPath.row {
-        case 0:
-            cell.configure(with: "https://static.caixiaomi.net/uploadImgs/20181128/024047955fa546869d7163cf6b788697.png")
-        default:
-            cell.configure(with: "https://static.caixiaomi.net/uploadImgs/20181128/c1391439509547af8e27a95763d35a37.png")
-        }
+        
+        cell.configure(with: goodsDetail!.detailPicList[indexPath.row])
         return cell
     }
 }
@@ -103,11 +135,42 @@ extension CommodityDetailsVC {
         _ = shopProvider.rx.request(.goodsDetail(goodsId: goodsId)).asObservable()
             .mapObject(type: GoodsDetailModel.self)
             .subscribe(onNext: { (data) in
+                weakSelf?.tableView.endrefresh()
                 weakSelf?.goodsDetail = data
                 weakSelf?.tableView.reloadData()
-                
+                weakSelf?.setupData()
             }, onError: { (error) in
                 weakSelf?.tableView.endrefresh()
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        weakSelf?.removeUserData()
+                        weakSelf?.pushLoginVC(from: self)
+                    default : break
+                    }
+                    if 300000...310000 ~= code {
+                        self.showHUD(message: msg!)
+                    }
+                    print(code)
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil )
+    }
+    
+    private func goodsAddRequest() {
+        weak var weakSelf = self
+        _ = shopProvider.rx.request(.goodsAdd(goodsId: goodsId)).asObservable()
+            .mapBaseObject(type: DataModel.self)
+            .subscribe(onNext: { (data) in
+                
+                let story = UIStoryboard(storyboard: .Shop)
+                let order = story.instantiateViewController(withIdentifier: "CommodityOrderDetailVC") as! CommodityOrderDetailVC
+                order.orderId = data.data
+                weakSelf?.pushViewController(vc: order)
+                
+            }, onError: { (error) in
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):

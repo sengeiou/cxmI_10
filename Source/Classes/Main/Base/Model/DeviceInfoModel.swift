@@ -124,5 +124,7 @@ struct DeviceInfoModel: HandyJSON {
     var lat : String = ""
     /// 城市
     var city : String = ""
+    /// 省
+    var province : String = ""
     
 }

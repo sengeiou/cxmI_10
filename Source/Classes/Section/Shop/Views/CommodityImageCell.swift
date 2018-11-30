@@ -39,9 +39,9 @@ class CommodityImageCell: UITableViewCell {
 
 // MARK: - 数据更新
 extension CommodityImageCell {
-    public func configure(with data : String) {
+    public func configure(with data : GoodsImage) {
         
-        guard let url = URL(string: data) else {
+        guard let url = URL(string: data.image) else {
             aspectConstraint = nil
             icon.image = nil
             return

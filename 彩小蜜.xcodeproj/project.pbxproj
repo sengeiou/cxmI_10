@@ -239,6 +239,8 @@
 		117C729A2100685B00D9EB83 /* LotteryCollectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117C72992100685A00D9EB83 /* LotteryCollectModel.swift */; };
 		117CCDF4209055A100B38543 /* FootballOrderFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117CCDF3209055A100B38543 /* FootballOrderFooter.swift */; };
 		118051542152491100B47605 /* CXMMBasketballLeagueFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118051532152491100B47605 /* CXMMBasketballLeagueFilter.swift */; };
+		11936A0A21B0D9720044A7AF /* CommodityDetailItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11936A0921B0D9720044A7AF /* CommodityDetailItem.swift */; };
+		11936A0C21B0DE0D0044A7AF /* CommodityInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11936A0B21B0DE0D0044A7AF /* CommodityInfoCell.swift */; };
 		11998CA0210EEE8A00AAAB8F /* CXMMFootballMatchMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11998C9F210EEE8A00AAAB8F /* CXMMFootballMatchMenu.swift */; };
 		119D8FCB20E0EFEE00576044 /* FootballStopSellingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119D8FCA20E0EFEE00576044 /* FootballStopSellingView.swift */; };
 		11A1416B212C070E0050D9FD /* DLTProDefaultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A1416A212C070E0050D9FD /* DLTProDefaultCell.swift */; };
@@ -770,6 +772,8 @@
 		117CCDF3209055A100B38543 /* FootballOrderFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballOrderFooter.swift; sourceTree = "<group>"; };
 		118051532152491100B47605 /* CXMMBasketballLeagueFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMMBasketballLeagueFilter.swift; sourceTree = "<group>"; };
 		118C4C2820BA922B009FF712 /* 彩小蜜.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "彩小蜜.entitlements"; sourceTree = "<group>"; };
+		11936A0921B0D9720044A7AF /* CommodityDetailItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommodityDetailItem.swift; sourceTree = "<group>"; };
+		11936A0B21B0DE0D0044A7AF /* CommodityInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommodityInfoCell.swift; sourceTree = "<group>"; };
 		11998C9F210EEE8A00AAAB8F /* CXMMFootballMatchMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMMFootballMatchMenu.swift; sourceTree = "<group>"; };
 		119D8FCA20E0EFEE00576044 /* FootballStopSellingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballStopSellingView.swift; sourceTree = "<group>"; };
 		11A1416A212C070E0050D9FD /* DLTProDefaultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DLTProDefaultCell.swift; sourceTree = "<group>"; };
@@ -1672,7 +1676,9 @@
 			children = (
 				11B8D92221AD3F1B0063F450 /* ShopItem.swift */,
 				11B8D92421AD405F0063F450 /* ShopBannerItem.swift */,
+				11936A0B21B0DE0D0044A7AF /* CommodityInfoCell.swift */,
 				11EFB29521AE378B00B9B8B1 /* CommodityDetailCell.swift */,
+				11936A0921B0D9720044A7AF /* CommodityDetailItem.swift */,
 				11EFB29721AE37A000B9B8B1 /* CommodityImageCell.swift */,
 				11EFB29F21AE47C400B9B8B1 /* ComOrderInfoCell.swift */,
 				11EFB2A121AE480C00B9B8B1 /* ComOrderInputCell.swift */,
@@ -3394,6 +3400,7 @@
 				E5B68AFD205A81A70038A5A2 /* Extension+Color.swift in Sources */,
 				11FEB964208DDC2100926951 /* AppKeyConstraint.swift in Sources */,
 				11227C162084D7C900680CCC /* FootballMatchInfoHeader.swift in Sources */,
+				11936A0C21B0DE0D0044A7AF /* CommodityInfoCell.swift in Sources */,
 				E56CE80C206A21670090A1B5 /* CXMWithdrawalProgressVC.swift in Sources */,
 				E512A96D20480917003F14F4 /* HomeDataModel.swift in Sources */,
 				B4C375AE21461DF200390A3A /* AppConfig.swift in Sources */,
@@ -3443,6 +3450,7 @@
 				116E458B2111B47E00418661 /* CXMMDaletouHistoryAward.swift in Sources */,
 				11CBF02A2138060600CB20AC /* LeagueMatchItem.swift in Sources */,
 				113DE73F211AE96900DE8026 /* DLTHistoryTrendCell.swift in Sources */,
+				11936A0A21B0D9720044A7AF /* CommodityDetailItem.swift in Sources */,
 				113DE72A211A8E1300DE8026 /* DLTPrizeOrderCell.swift in Sources */,
 				11551CF420E22D18002FE691 /* AccountDetailFilterModel.swift in Sources */,
 				E533BF012060DE600037D2D8 /* RechargeTitleCell.swift in Sources */,
