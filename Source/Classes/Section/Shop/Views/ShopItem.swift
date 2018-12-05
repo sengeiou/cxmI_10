@@ -32,9 +32,12 @@ extension ShopItem {
             icon.kf.setImage(with: url)
         }
         goodsName.text = data.description
-        goodsPrice.text = data.presentPrice
-        hisPrice.text = data.historyPrice
+        goodsPrice.text = "¥ " + data.presentPrice
         salesNum.text = data.paidNum + "人付款"
+        
+        let historyPrice = NSMutableAttributedString(string: "¥ \(data.historyPrice)" , attributes: [NSAttributedStringKey.strikethroughStyle : 1])
+        
+        hisPrice.attributedText = historyPrice
     }
 }
 

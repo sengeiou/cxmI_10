@@ -65,7 +65,7 @@ class CXMMeViewController: BaseViewController, UITableViewDelegate, UITableViewD
         super.viewDidLoad()
         hideBackBut()
         setRightBut()
-        self.navigationItem.title = "彩小秘 · 我的"
+        self.navigationItem.title = "我的"
         self.view.addSubview(tableView)
         
         self.photoSelect = YHPhotoSelect(controller: self, delegate: self)
@@ -245,9 +245,9 @@ class CXMMeViewController: BaseViewController, UITableViewDelegate, UITableViewD
     
     private func setupNavigationBarTitle() {
         #if DEBUG
-        self.navigationItem.title = "彩小秘 · 我的(\(getCurrentPlatformType().description))"
+        self.navigationItem.title = "我的(\(getCurrentPlatformType().description))"
         #else
-        self.navigationItem.title = "彩小秘 · 我的"
+        self.navigationItem.title = "我的"
         #endif
     }
     
@@ -375,8 +375,11 @@ class CXMMeViewController: BaseViewController, UITableViewDelegate, UITableViewD
         item2.title = "账户明细"
         item2.iconStr = "Details"
         item2.pushType = .账户明细
-        section1.list.append(item2)
         
+        if userInfo != nil, userInfo.recharegeTurnOn {
+            section1.list.append(item2)
+        }
+    
         var item3 = MeListDataModel()
         item3.title = "我的卡券"
         item3.iconStr = "coupon"
@@ -458,10 +461,12 @@ class CXMMeViewController: BaseViewController, UITableViewDelegate, UITableViewD
             .mapObject(type: UserInfoDataModel.self)
             .subscribe(onNext: { (data) in
                 guard weakSelf != nil else { return }
-                weakSelf!.userInfo = data
-                weakSelf!.headerView.userInfo = data
+                weakSelf?.userInfo = data
+                weakSelf?.headerView.userInfo = data
                 weakSelf?.newsheaderView.userInfo = data
                 weakSelf?.footerView.changeLoginButtonStatus()
+                weakSelf?.setupUserInfo()
+                weakSelf?.setData()
                 if self.showType == .allShow {
                     self.meSectionList = self.getBuyData()
                     if data.activityDTOList != nil {

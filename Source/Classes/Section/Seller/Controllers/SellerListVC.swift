@@ -11,13 +11,18 @@ import UIKit
 class SellerListVC: BaseViewController {
 
     @IBOutlet weak var tableView : UITableView!
+    @IBOutlet weak var cooperationBut : UIButton!
     
-    private var sellerList : [SellerListModel]!
+    private var sellerListModel : SellerListModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "合作店铺"
         sellerListRequest()
+        initSubview()
+    }
+    private func initSubview() {
+        cooperationBut.isHidden = true
     }
 }
 
@@ -25,11 +30,13 @@ class SellerListVC: BaseViewController {
 extension SellerListVC : UITableViewDelegate {
     // 什么是合作店铺
     @IBAction func SellerExplainClicked(_ sender: UIButton) {
-        
+        if let url = sellerListModel.protocalUrl {
+            pushRouterVC(urlStr: url, from: self)
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let model = sellerList[indexPath.row]
+        let model = sellerListModel.list[indexPath.row]
     
         let story = UIStoryboard(storyboard: .Seller)
         let detail = story.instantiateViewController(withIdentifier: "SellerDetailVC") as! SellerDetailVC
@@ -43,11 +50,12 @@ extension SellerListVC : UITableViewDataSource {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sellerList != nil ? sellerList.count : 0
+        guard sellerListModel != nil else { return 0 }
+        return sellerListModel.list != nil ? sellerListModel.list.count : 0
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SellerListCell", for: indexPath) as! SellerListCell
-        cell.configure(with: sellerList[indexPath.row])
+        cell.configure(with: sellerListModel.list[indexPath.row])
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -59,11 +67,13 @@ extension SellerListVC {
     private func sellerListRequest() {
         weak var weakSelf = self
         _ = sellerProvider.rx.request(.sellerList).asObservable()
-            .mapArray(type: SellerListModel.self)
+            .mapObject(type: SellerListModel.self)
             .subscribe(onNext: { (data) in
-                weakSelf?.sellerList = data
+                weakSelf?.sellerListModel = data
                 weakSelf?.tableView.reloadData()
-                
+                if data.protocalUrl != nil {
+                    weakSelf?.cooperationBut.isHidden = false
+                }
             }, onError: { (error) in
                 weakSelf?.tableView.endrefresh()
                 guard let err = error as? HXError else { return }

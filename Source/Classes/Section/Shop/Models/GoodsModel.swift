@@ -57,7 +57,7 @@ struct GoodsCalculate : HandyJSON {
 struct GoodsOrderUpdate : HandyJSON {
     var address : String = ""
     var contactsName : String = ""
-    var goodsId : String = ""
+    var orderId : String = ""
     var num : String = ""
     var phone : String = ""
 }

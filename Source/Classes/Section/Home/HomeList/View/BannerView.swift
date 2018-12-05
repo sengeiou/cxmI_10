@@ -11,7 +11,7 @@ import FSPagerView
 
 fileprivate let headerCellIdentifier = "headerCellIdentifier"
 
-protocol HomeHeaderViewDelegate {
+protocol BannerViewDelegate {
     func didTipBanner(banner: BannerModel) -> Void
 }
 
@@ -25,7 +25,7 @@ class BannerView: UIView, FSPagerViewDataSource, FSPagerViewDelegate {
         }
     }
     
-    public var delegate : HomeHeaderViewDelegate!
+    public var delegate : BannerViewDelegate!
     
     init() {
         super.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: bannerHeight))

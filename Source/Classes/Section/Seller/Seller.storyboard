@@ -131,6 +131,7 @@
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="cooperationBut" destination="diK-ve-4F9" id="w5Y-vv-wQn"/>
                         <outlet property="tableView" destination="mQq-uG-PIm" id="lwT-EU-s2z"/>
                     </connections>
                 </viewController>

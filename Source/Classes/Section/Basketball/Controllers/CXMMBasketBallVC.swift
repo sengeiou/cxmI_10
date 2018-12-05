@@ -122,7 +122,7 @@ class CXMMBasketballVC: BaseViewController {
         let helpBut = UIButton(type: .custom)
         helpBut.frame = CGRect(x: 0, y: 0, width: 40, height: 30)
         helpBut.setTitle("帮助", for: .normal)
-        helpBut.setTitleColor(Color787878, for: .normal)
+        helpBut.setTitleColor(ColorFFFFFF, for: .normal)
         helpBut.addTarget(self, action: #selector(helpClicked(_:)), for: .touchUpInside)
         
         //self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightBut)

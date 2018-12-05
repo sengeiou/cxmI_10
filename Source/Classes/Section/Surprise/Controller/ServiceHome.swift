@@ -14,6 +14,8 @@ class ServiceHome: BaseViewController {
     
     private var serviceModel : ServiceHomeModel!
     
+    private var serviceList : [ServiceHomeModel]!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "服务"
@@ -32,7 +34,8 @@ class ServiceHome: BaseViewController {
 // MARK: - 点击事件
 extension ServiceHome : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        let model = serviceList[indexPath.row]
+        pushRouterVC(urlStr: model.url, from: self)
     }
 }
 // MARK: - DataSource
@@ -41,17 +44,42 @@ extension ServiceHome : UITableViewDataSource {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return serviceList != nil ? serviceList.count : 0
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ServiceHomeCell", for: indexPath) as! ServiceHomeCell
-        
+        cell.configure(with: serviceList[indexPath.row])
         return cell
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60 * defaultScale
     }
 }
 // MARK: - 网络请求
 extension ServiceHome {
     private func serviceRequest() {
-        
+        weak var weakSelf = self
+        _ = surpriseProvider.rx.request(.serviceList).asObservable()
+            .mapArray(type: ServiceHomeModel.self)
+            .subscribe(onNext: { (data) in
+                weakSelf?.tableView.endrefresh()
+                weakSelf?.serviceList = data
+                weakSelf?.tableView.reloadData()
+            }, onError: { (error) in
+                weakSelf?.tableView.endrefresh()
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        weakSelf?.pushLoginVC(from: self)
+                    default : break
+                    }
+                    if 300000...310000 ~= code {
+                        weakSelf?.showHUD(message: msg!)
+                    }
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil )
     }
 }

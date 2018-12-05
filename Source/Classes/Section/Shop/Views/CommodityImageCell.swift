@@ -40,19 +40,34 @@ class CommodityImageCell: UITableViewCell {
 // MARK: - 数据更新
 extension CommodityImageCell {
     public func configure(with data : BannerModel) {
-        
         guard let url = URL(string: data.bannerImage) else {
             aspectConstraint = nil
             icon.image = nil
             return
         }
-        
-        icon.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil) { (image, error, type, url) in
-            if let img = image {
-                let aspect = img.size.width / img.size.height
-                
-                self.aspectConstraint = NSLayoutConstraint(item: self.icon, attribute: .width, relatedBy: .equal, toItem: self.icon, attribute: .height, multiplier: aspect, constant: 0.0)
-            }
+        let data = try? Data(contentsOf: url)
+        //从网络获取数据流,再通过数据流初始化图片
+        if let imageData = data, let image = UIImage(data: imageData) {
+            let aspect = image.size.width / image.size.height
+            //设置imageView宽高比约束
+            aspectConstraint = NSLayoutConstraint(item: icon,
+                                                  attribute: .width, relatedBy: .equal,
+                                                  toItem: icon, attribute: .height,
+                                                  multiplier: aspect, constant: 0.0)
+            //加载图片
+            icon.image = image
         }
+        
+        
+//        icon.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil) { (image, error, type, url) in
+//            if let img = image {
+//                let aspect = img.size.width / img.size.height
+//
+//                self.aspectConstraint = NSLayoutConstraint(item: self.icon, attribute: .width, relatedBy: .equal, toItem: self.icon, attribute: .height, multiplier: aspect, constant: 0.0)
+//                self.icon.image = img
+//                self.contentView.setNeedsLayout()
+//                self.contentView.setNeedsDisplay()
+//            }
+//        }
     }
 }

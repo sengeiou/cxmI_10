@@ -10,6 +10,11 @@ import Foundation
 import HandyJSON
 
 struct SellerListModel : HandyJSON {
+    var list : [SellerInfoModel]!
+    var protocalUrl : String!
+}
+
+struct SellerInfoModel : HandyJSON {
     var collNum : String = ""
     var cooperAuth : String = ""
     var storeId : String = ""

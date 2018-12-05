@@ -26,7 +26,7 @@ fileprivate let NewsThreePicCellId = "NewsThreePicCellId"
 
 
 
-class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource,HomeHeaderViewDelegate {
+class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource,BannerViewDelegate {
     
 
     
@@ -48,7 +48,7 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
     //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "彩小秘 · 大厅"
+        self.navigationItem.title = "彩小秘"
         newsList = [NewsInfoModel]()
         hideBackBut()
         
@@ -132,20 +132,7 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
             self.homeStyle = .onlyNews
         }
     }
-    //MARK: - 加载数据
-    private func loadNewData() {
-        //configRequest()
-        homeListAndNewsRequest(pageNum: 1)
-    }
-    private func loadNextData() {
-        guard self.newsListModel != nil else { return }
-        guard self.newsListModel.isLastPage == false else {
-            self.tableView.noMoreData()
-            return }
-        
-        //newsListRequest(1)
-        homeListAndNewsRequest(pageNum: self.newsListModel.nextPage)
-    }
+    
     
     
 
@@ -182,27 +169,18 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
 
     private func setRightBarItem() {
         let leftBut = UIButton(type: .custom)
-        //leftBut.setTitle("返回", for: .normal)
-        
         leftBut.titleLabel?.font = Font15
-        
         leftBut.contentEdgeInsets = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
-        
         leftBut.setTitleColor(UIColor.black, for: .normal)
-        
         leftBut.setImage(UIImage(named:"ret"), for: .normal)
-        
         leftBut.addTarget(self, action: #selector(rightBut(sender:)), for: .touchUpInside)
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: leftBut)
     }
     
     @objc func rightBut(sender: UIButton) {
-        //let xxx = BasePopViewController()
-        //self.present(xxx, animated: true, completion: nil)
         let football = CXMFootballMatchVC()
         pushViewController(vc: football)
-        //pushLoginVC(from: self)
     }
     lazy var locationButton : UIButton = {
         let button = UIButton(type: .custom)
@@ -225,11 +203,7 @@ extension CXMHomeViewController : HomeSportLotteryCellDelegate, HomeSportCellDel
     
     // 玩法点击
     func didSelectItem(playModel: HomePlayModel, index: Int) {
-        //        pushRouterVC(urlStr: playModel.redirectUrl, from: self)
-        
-        let story = UIStoryboard.init(storyboard: .Storyboard)
-        let vc = story.instantiateViewController(withIdentifier: "LotteryHomeVC") as! LotteryHomeVC
-        pushViewController(vc: vc)
+        pushRouterVC(urlStr: playModel.redirectUrl, from: self)
     }
     // 发现点击
     func didSelectSportItem(playModel: HomeFindModel, index: Int) {
@@ -239,19 +213,44 @@ extension CXMHomeViewController : HomeSportLotteryCellDelegate, HomeSportCellDel
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if homeStyle == .onlyNews {
-            let web = CXMNewsDetailViewController()
-            web.articleId = self.newsList[indexPath.row].articleId
-            pushViewController(vc: web)
-        }else {
-            switch indexPath.section {
-            case 1:
-                guard homeData != nil, let activity = self.homeData.activity else { return }
-                pushRouterVC(activity.actTitle, urlStr: activity.actUrl, from: self)
-            case 3:
+            if homeData.discoveryHallClassifyDTOList.count != 0 {
+                switch indexPath.section {
+                case 1:
+                    let web = CXMNewsDetailViewController()
+                    web.articleId = self.newsList[indexPath.row].articleId
+                    pushViewController(vc: web)
+                default:
+                    break
+                }
+            }else {
                 let web = CXMNewsDetailViewController()
                 web.articleId = self.newsList[indexPath.row].articleId
                 pushViewController(vc: web)
-            default: break
+            }
+        }else {
+            
+            if homeData.discoveryHallClassifyDTOList.count != 0 {
+                switch indexPath.section {
+                case 1:
+                    guard homeData != nil, let activity = self.homeData.activity else { return }
+                    pushRouterVC(activity.actTitle, urlStr: activity.actUrl, from: self)
+                case 4:
+                    let web = CXMNewsDetailViewController()
+                    web.articleId = self.newsList[indexPath.row].articleId
+                    pushViewController(vc: web)
+                default: break
+                }
+            }else {
+                switch indexPath.section {
+                case 1:
+                    guard homeData != nil, let activity = self.homeData.activity else { return }
+                    pushRouterVC(activity.actTitle, urlStr: activity.actUrl, from: self)
+                case 3:
+                    let web = CXMNewsDetailViewController()
+                    web.articleId = self.newsList[indexPath.row].articleId
+                    pushViewController(vc: web)
+                default: break
+                }
             }
         }
     }
@@ -261,29 +260,59 @@ extension CXMHomeViewController : HomeSportLotteryCellDelegate, HomeSportCellDel
 extension CXMHomeViewController {
     func numberOfSections(in tableView: UITableView) -> Int {
         guard homeStyle != nil else { return 0 }
+        guard homeData != nil else { return 0 }
         if homeStyle == .onlyNews {
+            if homeData.discoveryHallClassifyDTOList.count != 0 {
+                return 1 + 1 + 1
+            }
             return 1 + 1
         }else {
-            return 3 + 1 + 1
+            if homeData.discoveryHallClassifyDTOList.count != 0 {
+                return 3 + 1 + 1
+            }
+            return 3 + 1
         }
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if homeStyle == .onlyNews {
-            switch section {
-            case 0 :
-                return 1
-            default :
-                guard newsList != nil, newsList.isEmpty == false else { return 0 }
-                return newsList.count
+            
+            if homeData.discoveryHallClassifyDTOList.count != 0 {
+                switch section {
+                case 0 :
+                    return 1
+                case 1:
+                    return 1
+                default :
+                    guard newsList != nil, newsList.isEmpty == false else { return 0 }
+                    return newsList.count
+                }
+            }else {
+                switch section {
+                case 0 :
+                    return 1
+                default :
+                    guard newsList != nil, newsList.isEmpty == false else { return 0 }
+                    return newsList.count
+                }
             }
         }else {
-            switch section {
-            case 4:
-                guard newsList != nil, newsList.isEmpty == false else { return 0 }
-                return newsList.count
-            default :
-                return 1
+            if homeData.discoveryHallClassifyDTOList.count != 0 {
+                switch section {
+                case 4:
+                    guard newsList != nil, newsList.isEmpty == false else { return 0 }
+                    return newsList.count
+                default :
+                    return 1
+                }
+            }else {
+                switch section {
+                case 3:
+                    guard newsList != nil, newsList.isEmpty == false else { return 0 }
+                    return newsList.count
+                default :
+                    return 1
+                }
             }
         }
     }
@@ -292,10 +321,22 @@ extension CXMHomeViewController {
         
         if homeStyle == .onlyNews {
             
-            switch indexPath.section {
-            case 0:
-                return initSportCell(indexPath: indexPath)
-            default :
+            if homeData.discoveryHallClassifyDTOList.count != 0 {
+                switch indexPath.section {
+                case 0:
+                    return initSportCell(indexPath: indexPath)
+                default :
+                    let newsInfo = newsList[indexPath.row]
+                    
+                    if newsInfo.listStyle == "1" || newsInfo.listStyle == "4" {
+                        return initNewsOnePicCell(indexPath: indexPath)
+                    }else if newsInfo.listStyle == "3" {
+                        return initNewsThreePicCell(indexPath: indexPath)
+                    }else {
+                        return initNewsNoPicCell(indexPath: indexPath)
+                    }
+                }
+            }else {
                 let newsInfo = newsList[indexPath.row]
                 
                 if newsInfo.listStyle == "1" || newsInfo.listStyle == "4" {
@@ -305,7 +346,23 @@ extension CXMHomeViewController {
                 }else {
                     return initNewsNoPicCell(indexPath: indexPath)
                 }
+//                switch indexPath.section {
+//                case 0:
+//                    return initSportCell(indexPath: indexPath)
+//                default :
+//                    let newsInfo = newsList[indexPath.row]
+//
+//                    if newsInfo.listStyle == "1" || newsInfo.listStyle == "4" {
+//                        return initNewsOnePicCell(indexPath: indexPath)
+//                    }else if newsInfo.listStyle == "3" {
+//                        return initNewsThreePicCell(indexPath: indexPath)
+//                    }else {
+//                        return initNewsNoPicCell(indexPath: indexPath)
+//                    }
+//                }
             }
+            
+            
         }else {
             switch indexPath.section {
             case 0:
@@ -343,7 +400,10 @@ extension CXMHomeViewController {
     // 发现
     private func initSportCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: homeSportsCellIdentifier, for: indexPath) as! HomeSportCell
-        cell.configure(with: self.homeData.discoveryHallClassifyDTOList)
+        if self.homeData != nil {
+            cell.configure(with: self.homeData.discoveryHallClassifyDTOList)
+        }
+        
         cell.delegate = self
         return cell
     }
@@ -385,24 +445,32 @@ extension CXMHomeViewController {
         return cell
     }
     
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         if homeStyle == .onlyNews {
-            switch indexPath.section {
-            case 0:
-                guard self.homeData != nil else { return 0 }
-                let count = self.homeData.lotteryClassifys.count
-                var verticalCount = count / HorizontalSportItemCount
-                
-                if count % HorizontalSportItemCount != 0 {
-                    verticalCount += 1
+            if homeData.discoveryHallClassifyDTOList.count != 0 {
+                switch indexPath.section {
+                case 0:
+                    guard self.homeData != nil else { return 0 }
+                    let count = self.homeData.lotteryClassifys.count
+                    var verticalCount = count / HorizontalSportItemCount
+                    
+                    if count % HorizontalSportItemCount != 0 {
+                        verticalCount += 1
+                    }
+                    
+                    let height : CGFloat = HomesectionTopSportSpacing * 2 + FootballSportCellHeight * CGFloat(verticalCount) + FootballCellLineSportSpacing * CGFloat(verticalCount) + HomeSectionViewSportHeight
+                    
+                    return height
+                default :
+                    let newsInfo = newsList[indexPath.row]
+                    if newsInfo.listStyle == "1" || newsInfo.listStyle == "4" || newsInfo.listStyle == "0" {
+                        return 110 * defaultScale
+                    }
+                    else {
+                        return 150 * defaultScale
+                    }
                 }
-                
-                let height : CGFloat = HomesectionTopSportSpacing * 2 + FootballSportCellHeight * CGFloat(verticalCount) + FootballCellLineSportSpacing * CGFloat(verticalCount) + HomeSectionViewSportHeight
-                
-                return height
-            default :
+            }else {
                 let newsInfo = newsList[indexPath.row]
                 if newsInfo.listStyle == "1" || newsInfo.listStyle == "4" || newsInfo.listStyle == "0" {
                     return 110 * defaultScale
@@ -411,7 +479,6 @@ extension CXMHomeViewController {
                     return 150 * defaultScale
                 }
             }
-            //return 105 * defaultScale
         }else {
             switch indexPath.section {
             case 0:
@@ -487,6 +554,18 @@ extension CXMHomeViewController {
 }
 // MARK: - 网络请求
 extension CXMHomeViewController {
+    private func loadNewData() {
+        homeListAndNewsRequest(pageNum: 1)
+    }
+    private func loadNextData() {
+        guard self.newsListModel != nil else { return }
+        guard self.newsListModel.isLastPage == false else {
+            self.tableView.noMoreData()
+            return }
+        
+        //newsListRequest(1)
+        homeListAndNewsRequest(pageNum: self.newsListModel.nextPage)
+    }
     
     private func homeListAndNewsRequest(pageNum: Int) {
         weak var weakSelf = self
@@ -577,6 +656,8 @@ extension CXMHomeViewController {
             print("纬度 \(location?.coordinate.latitude ?? 0.0)")
             print("地址\(adress?.locality ?? "")")
             print("error\(error ?? "没有错误")")
+            
+            guard location != nil else { return }
             
             var loca = Location(latitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!)
             

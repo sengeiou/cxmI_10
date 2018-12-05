@@ -32,18 +32,7 @@ struct HomeDataModel :  HandyJSON {
     var winningMsgs: [WinningMsgModel]!
     var discoveryHallClassifyDTOList : [HomeFindModel] = [HomeFindModel]()
 }
-/// 发现
-struct HomeFindModel : HandyJSON {
-    var classImg : String = ""
-    var className : String = ""
-    var classifyId: String = ""
-    var redirectUrl: String = ""
-    /// 是否上线 0 待上线,1上线
-    var status : String = ""
-    var statusReason : String = ""
-    /// 发现页业务类型
-    var type : String = ""
-}
+
 /// 玩法
 struct HomePlayModel:  HandyJSON {
     var lotteryId: String!

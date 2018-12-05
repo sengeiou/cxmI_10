@@ -14,6 +14,7 @@ extension UIStoryboard {
         case Storyboard
         case Shop
         case Seller
+        case Surprise
     }
     
     convenience init(storyboard: Storyboard, bundle: Bundle? = nil) {

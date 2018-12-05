@@ -39,8 +39,12 @@ class ShopHomeViewController: BaseViewController {
         collectionView.register(ShopBannerItem.self, forCellWithReuseIdentifier: ShopBannerItem.identifier)
     }
 }
-// MARK: - collection Delegate
-extension ShopHomeViewController : UICollectionViewDelegate {
+// MARK: - 点击事件，代理
+extension ShopHomeViewController : UICollectionViewDelegate, BannerViewDelegate {
+    
+    func didTipBanner(banner: BannerModel) {
+        pushRouterVC(urlStr: banner.bannerLink, from: self)
+    }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let model = pageModel.list[indexPath.row]
         let story = UIStoryboard(storyboard: .Shop)
@@ -69,6 +73,7 @@ extension ShopHomeViewController : UICollectionViewDataSource {
         switch indexPath.section {
         case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ShopBannerItem.identifier, for: indexPath) as! ShopBannerItem
+            cell.bannerView.delegate = self
             cell.configure(with: bannerList)
             return cell
         default:

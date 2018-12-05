@@ -37,6 +37,8 @@ enum SurpriseAPIManager {
     case teamDetail(teamId : String)
     /// 服务列表
     case serviceList
+    /// 发现更多
+    case surpriseMoreList
 }
 
 extension SurpriseAPIManager : TargetType {
@@ -70,7 +72,9 @@ extension SurpriseAPIManager : TargetType {
         case .teamDetail:
             return "/lottery/discoveryPage/teamDetailForDiscovery"
         case .serviceList:
-            return ""
+            return "/order/serv/servlist"
+        case .surpriseMoreList:
+            return "/lottery/lottery/hall/moreDiscoveryClass"
         }
     }
     
@@ -103,6 +107,10 @@ extension SurpriseAPIManager : TargetType {
             dic["lotteryClassify"] = lotteryId
         case .teamDetail(let teamId):
             dic["teamId"] = teamId
+        case .surpriseMoreList:
+            dic["emptyStr"] = ""
+        case .serviceList:
+            dic["emptyStr"] = ""
         default:
             return .requestPlain
         }

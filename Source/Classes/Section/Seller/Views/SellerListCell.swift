@@ -25,7 +25,7 @@ class SellerListCell: UITableViewCell {
 }
 
 extension SellerListCell {
-    public func configure(with data : SellerListModel) {
+    public func configure(with data : SellerInfoModel) {
         if let url = URL(string: data.logo) {
             icon.kf.setImage(with: url)
         }

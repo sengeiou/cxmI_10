@@ -133,5 +133,57 @@
             </objects>
             <point key="canvasLocation" x="3956" y="513.19340329835086"/>
         </scene>
+        <!--Score Home View Controller-->
+        <scene sceneID="N5S-Ii-XPa">
+            <objects>
+                <viewController storyboardIdentifier="ScoreHomeViewController" automaticallyAdjustsScrollViewInsets="NO" id="z11-lD-3CL" customClass="ScoreHomeViewController" customModule="彩小蜜" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="AZb-7h-MWR"/>
+                        <viewControllerLayoutGuide type="bottom" id="g9q-ow-aLb"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="K2E-cG-Rsl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qla-dh-DoB">
+                                <rect key="frame" x="0.0" y="63" width="375" height="603"/>
+                            </scrollView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="MdX-wq-VcV" customClass="ButtonBarView" customModule="XLPagerTabStrip">
+                                <rect key="frame" x="0.0" y="20" width="375" height="43"/>
+                                <color key="backgroundColor" red="0.027450980390000001" green="0.72549019609999998" blue="0.60784313729999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="43" id="qcB-1O-LoX"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="iWV-i5-wEb">
+                                    <size key="itemSize" width="79" height="42"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="35" minY="0.0" maxX="35" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="g9q-ow-aLb" firstAttribute="top" secondItem="qla-dh-DoB" secondAttribute="bottom" constant="1" id="DwI-yo-Paa"/>
+                            <constraint firstItem="MdX-wq-VcV" firstAttribute="leading" secondItem="K2E-cG-Rsl" secondAttribute="leading" id="H26-gq-N5H"/>
+                            <constraint firstItem="MdX-wq-VcV" firstAttribute="top" secondItem="AZb-7h-MWR" secondAttribute="bottom" id="MP5-5t-lUY"/>
+                            <constraint firstItem="qla-dh-DoB" firstAttribute="leading" secondItem="K2E-cG-Rsl" secondAttribute="leading" id="QnO-3K-5L2"/>
+                            <constraint firstAttribute="trailing" secondItem="qla-dh-DoB" secondAttribute="trailing" id="Vue-QA-g0Z"/>
+                            <constraint firstAttribute="trailing" secondItem="MdX-wq-VcV" secondAttribute="trailing" id="nIQ-qM-AWd"/>
+                            <constraint firstItem="qla-dh-DoB" firstAttribute="top" secondItem="AZb-7h-MWR" secondAttribute="bottom" constant="43" id="wpG-jw-PiI"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="hyD-fB-Ygb"/>
+                    <connections>
+                        <outlet property="buttonBarView" destination="MdX-wq-VcV" id="X9l-f9-BS9"/>
+                        <outlet property="containerView" destination="qla-dh-DoB" id="aDf-oY-a8L"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="G85-5u-VNe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4895" y="1189"/>
+        </scene>
     </scenes>
 </document>

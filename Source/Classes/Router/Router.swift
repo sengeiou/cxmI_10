@@ -98,7 +98,10 @@ extension RouterPro {
             pushStatistics(from: vc )
         case .发现更多:
             pushSurpriseMore(from: vc)
-            
+        case .比分直播:
+            pushScore(from: vc)
+        case .线下店铺:
+            pushSeller(from: vc)
         default:
             break
         }
@@ -207,10 +210,23 @@ extension RouterPro {
     }
     /// 发现更多
     private func pushSurpriseMore(from vc : UIViewController) {
-        
+        let story = UIStoryboard.init(storyboard: .Surprise)
+        let lottery = story.instantiateViewController(withIdentifier: "SurpriseHomeMoreVC") as! SurpriseHomeMoreVC
+        pushViewController(lottery, from: vc)
     }
-    
-    
+    /// 比分直播
+    private func pushScore(from vc : UIViewController) {
+        let story = UIStoryboard(storyboard: .Storyboard)
+        let score = story.instantiateViewController(withIdentifier: "ScoreHomeViewController") as! ScoreHomeViewController
+        score.pushFrom = .other
+        pushViewController(score, from: vc)
+    }
+    /// 线下店铺
+    private func pushSeller(from vc : UIViewController) {
+        let story = UIStoryboard(storyboard: .Seller)
+        let seller = story.instantiateViewController(withIdentifier: "SellerListVC") as! SellerListVC
+        pushViewController(seller, from: vc)
+    }
     private func pushViewController(_ vc: UIViewController, from formvc: UIViewController) {
         formvc.navigationController?.pushViewController(vc, animated: true)
     }

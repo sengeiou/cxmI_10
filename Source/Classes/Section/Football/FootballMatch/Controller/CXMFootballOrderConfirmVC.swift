@@ -434,16 +434,17 @@ class CXMFootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITabl
             .asObservable()
             .mapObject(type: SaveBetInfoModel.self)
             .subscribe(onNext: { (data) in
-//                let payment = CXMPaymentViewController()
-//                payment.lottoToken = data.data
-//                weakSelf?.pushViewController(vc: payment)
                 
-//                1.1.4 版，取消支付，直接跳转订单详情
-                
-                let order = CXMOrderDetailVC()
-                order.orderId = data.orderId
-                weakSelf?.pushViewController(vc: order)
-                
+                if data.payToken != "" {
+                    let payment = CXMPaymentViewController()
+                    payment.lottoToken = data.payToken
+                    weakSelf?.pushViewController(vc: payment)
+                }else {
+                    // 1.1.4 版，取消支付，直接跳转订单详情
+                    let order = CXMOrderDetailVC()
+                    order.orderId = data.orderId
+                    weakSelf?.pushViewController(vc: order)
+                }
                 TongJi.log(.投注确认, label: self.matchType.rawValue, att: .彩种)
             }, onError: { (error) in
                 weakSelf?.dismissProgressHud()
@@ -831,7 +832,7 @@ class CXMFootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITabl
         rightBut.frame = CGRect(x: 0, y: 0, width: 16, height: 16)
         
         rightBut.setTitle("胆", for: .normal)
-        rightBut.setTitleColor(Color787878, for: .normal)
+        rightBut.setTitleColor(ColorFFFFFF, for: .normal)
         
         rightBut.addTarget(self, action: #selector(showMenu(_:)), for: .touchUpInside)
         

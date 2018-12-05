@@ -41,13 +41,13 @@ extension ShopNetAPIManager : TargetType {
         case .calculatePrice:
             return "/order/goods/calculatePrice"
         case .goodsAdd:
-            return "/order/goods/goodsAdd"
+            return "/order/goods/orderAdd"
         case .goodsDetail:
             return "/order/goods/goodsDetail"
         case .goodsList:
             return "/order/goods/goodsList"
         case .goodsUpdate:
-            return "/order/goods/goodsUpdate"
+            return "/order/goods/orderUpdate"
         case .orderDetail:
             return "/order/goods/orderDetail"
         }

@@ -8,6 +8,10 @@
 
 import Foundation
 import HandyJSON
+
 struct ServiceHomeModel: HandyJSON{
-    
+    var logo : String = ""
+    var name : String = ""
+    var servId : String = ""
+    var url : String = ""
 }

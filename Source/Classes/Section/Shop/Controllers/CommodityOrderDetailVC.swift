@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CommodityOrderDetailVC: BaseViewController {
+class CommodityOrderDetailVC: BaseViewController, UIGestureRecognizerDelegate {
 
     public var orderId : String!
     
@@ -17,47 +17,49 @@ class CommodityOrderDetailVC: BaseViewController {
     private var nameTextField : UITextField!
     private var phoneTextField : UITextField!
     private var adressTextView : HHTextView!
+    private var goodsNumTF : UITextField!
+    
     
     private var orderDetail : GoodsOrderDetail!
     private var calculate : GoodsCalculate!
     
-    private var goodsNum : Int = 1 {
-        didSet{
-            if goodsNum == 0 {
-                goodsNum = 1
-            }
-            
-            // 更新显示信息
-            calculatePriceRequest()
-        }
-    }
+    private var numViewModel : NumPlusReduceViewModel = NumPlusReduceViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "订单详情"
         initSubview()
         orderDetailRequest()
-        calculatePriceRequest()
+        
     }
     
     private func initSubview() {
         tableView.register(ComOrderHeaderFooter.self, forHeaderFooterViewReuseIdentifier: ComOrderHeaderFooter.identifier)
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        nameTextField.resignFirstResponder()
-        phoneTextField.resignFirstResponder()
-        adressTextView.resignFirstResponder()
-    }
 }
 // MARK: - setupData
 extension CommodityOrderDetailVC {
     private func setupData() {
-        
+        _ = numViewModel.number.subscribe { (event) in
+            if let num = event.element {
+                self.calculatePriceRequest(num: num)
+            }
+        }
     }
 }
 // MARK: - 点击事件
-extension CommodityOrderDetailVC : UITableViewDelegate {
+extension CommodityOrderDetailVC : UITableViewDelegate, NumPlusReduceViewProtocol {
+    
+    // -
+    func reduce(view: NumPlusReduceView) {
+        numViewModel.reduce()
+    }
+    // +
+    func plus(view: NumPlusReduceView) {
+        numViewModel.plus()
+    }
+    
     
     @IBAction func paymentClicked(_ sender: UIButton) {
         guard nameTextField.text != nil && nameTextField.text != "" else {
@@ -74,7 +76,7 @@ extension CommodityOrderDetailVC : UITableViewDelegate {
         }
         
         var model = GoodsOrderUpdate()
-        model.goodsId = self.orderId
+        model.orderId = self.orderId
         model.contactsName = self.nameTextField.text ?? ""
         model.phone = self.phoneTextField.text ?? ""
         model.address = self.adressTextView.text
@@ -82,10 +84,10 @@ extension CommodityOrderDetailVC : UITableViewDelegate {
         goodsUpdateRequest(model: model)
     }
     
+
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        nameTextField.resignFirstResponder()
-        phoneTextField.resignFirstResponder()
-        adressTextView.resignFirstResponder()
+        tableView.endEditing(true)
     }
 }
 // MARK: - DataSource
@@ -168,7 +170,12 @@ extension CommodityOrderDetailVC : UITableViewDataSource {
     
     private func initOrderInfoCell(indexPath : IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ComOrderInfoCell", for: indexPath) as! ComOrderInfoCell
+        cell.numView.viewModel = self.numViewModel
+        
+        cell.numView.delegate = self
+        cell.numView.configure(with: "")
         cell.configure(with: orderDetail)
+        self.goodsNumTF = cell.numView.textField
         return cell
     }
     private func initOrderInputCell(indexPath : IndexPath) -> UITableViewCell {
@@ -195,12 +202,18 @@ extension CommodityOrderDetailVC : UITableViewDataSource {
         switch indexPath.row {
         case 0:
             cell.title.text = "商品数量"
-            cell.detail.text = "\(goodsNum)"
+            _ = numViewModel.number.subscribe { (event) in
+                cell.detail.text = event.element
+            }
+            
         default:
             cell.title.text = "商品总价"
-            if calculate != nil {
-                cell.detail.text = "¥ " + calculate.totalPrice
-            }
+            _ = numViewModel.totalPrice.subscribe({ (event) in
+                if let price = event.element {
+                    cell.detail.text = "¥ " + price
+                }
+            })
+            
         }
         return cell
     }
@@ -236,13 +249,14 @@ extension CommodityOrderDetailVC {
                 }
             }, onCompleted: nil , onDisposed: nil )
     }
-    private func calculatePriceRequest() {
+    private func calculatePriceRequest(num : String) {
         weak var weakSelf = self
-        _ = shopProvider.rx.request(.calculatePrice(orderId: orderId, goodsNum: "1")).asObservable()
+        _ = shopProvider.rx.request(.calculatePrice(orderId: orderId, goodsNum: num)).asObservable()
             .mapObject(type: GoodsCalculate.self)
             .subscribe(onNext: { (data) in
                 weakSelf?.calculate = data
-                weakSelf?.tableView.reloadData()
+                weakSelf?.numViewModel.totalPrice.onNext(data.totalPrice)
+                
             }, onError: { (error) in
                 weakSelf?.tableView.endrefresh()
                 guard let err = error as? HXError else { return }
@@ -266,12 +280,14 @@ extension CommodityOrderDetailVC {
     private func goodsUpdateRequest(model : GoodsOrderUpdate) {
         
         weak var weakSelf = self
+        showProgressHUD()
         _ = shopProvider.rx.request(.goodsUpdate(model : model)).asObservable()
             .mapBaseObject(type: DataModel.self)
             .subscribe(onNext: { (data) in
-                
+               weakSelf?.dismissProgressHud()
+               weakSelf?.pushRouterVC(urlStr: data.data, from: self)
             }, onError: { (error) in
-                
+                weakSelf?.dismissProgressHud()
                 guard let err = error as? HXError else { return }
                 switch err {
                 case .UnexpectedResult(let code, let msg):

@@ -14,18 +14,11 @@ class ComOrderInfoCell: UITableViewCell {
     @IBOutlet weak var title : UILabel!
     @IBOutlet weak var price : UILabel!
     
-    
+    public var numView : NumPlusReduceView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        initSubview()
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }
 
 extension ComOrderInfoCell {
@@ -35,5 +28,18 @@ extension ComOrderInfoCell {
         }
         title.text = data.description
         price.text = "¥ " + data.price
+    }
+}
+
+extension ComOrderInfoCell {
+    private func initSubview() {
+        numView = NumPlusReduceView()
+        self.contentView.addSubview(numView)
+        numView.snp.makeConstraints { (make) in
+            make.bottom.equalTo(-20)
+            make.right.equalTo(-15)
+            make.width.equalTo(74)
+            make.height.equalTo(22)
+        }
     }
 }
