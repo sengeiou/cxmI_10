@@ -28,8 +28,6 @@ fileprivate let NewsThreePicCellId = "NewsThreePicCellId"
 
 class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource,BannerViewDelegate {
     
-
-    
     //MARK: - 属性 public
     public var homeStyle : ShowType! = .onlyNews {
         didSet{
@@ -133,9 +131,6 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
         }
     }
     
-    
-    
-
     //MARK: - 懒加载
     lazy private var tableView: UITableView = {
         let table = UITableView(frame: CGRect.zero, style: .grouped)
@@ -159,14 +154,11 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
         return table
     }()
     
-    
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
     private func setRightBarItem() {
         let leftBut = UIButton(type: .custom)
         leftBut.titleLabel?.font = Font15
@@ -688,7 +680,8 @@ extension CXMHomeViewController {
 // MARK: - 活动弹框
 extension CXMHomeViewController : ActivityPopVCDelegate {
     func didTipActivity(link: String) {
-        
+        guard activityModel != nil else { return }
+        pushRouterVC(urlStr: activityModel.bannerLink, from: self)
     }
     
     private func showActivityPop() {
@@ -702,6 +695,7 @@ extension CXMHomeViewController : ActivityPopVCDelegate {
             
             activity.configure(with: img.size.width, height: img.size.height)
             activity.delegate = self
+            
             self.present(activity)
         }
         

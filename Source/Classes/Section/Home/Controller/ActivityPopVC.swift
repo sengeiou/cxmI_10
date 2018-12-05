@@ -16,18 +16,26 @@ class ActivityPopVC: UIViewController {
 
     public var delegate : ActivityPopVCDelegate!
     
+    lazy var deleteBut : UIButton = {
+        let but = UIButton(type: .custom)
+//        but.setImage(UIImage(named: "关闭"), for: .normal)
+        but.setBackgroundImage(UIImage(named: "关闭"), for: .normal)
+        but.addTarget(self, action: #selector(deleteClicked), for: .touchUpInside)
+        return but
+    }()
+    
     init() {
         super.init(nibName: nil, bundle: nil)
         self.modalTransitionStyle = .crossDissolve
         self.modalPresentationStyle = .custom
-        self.view.backgroundColor = UIColor(white: 0.5, alpha: 0.5)
+        self.view.backgroundColor = UIColor(white: 0.2, alpha: 0.8)
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.modalTransitionStyle = .crossDissolve
         self.modalPresentationStyle = .custom
-        self.view.backgroundColor = UIColor(white: 0.5, alpha: 0.5)
+        self.view.backgroundColor = UIColor(white: 0.2, alpha: 0.8)
     }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -55,11 +63,14 @@ extension ActivityPopVC {
     @objc private func didTipImageView() {
         guard delegate != nil else { return }
         delegate.didTipActivity(link: "")
-        print("ssssssssss")
+    }
+    
+    @objc private func deleteClicked() {
+        self.dismiss(animated: true , completion: nil)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.dismiss(animated: true , completion: nil)
+//        self.dismiss(animated: true , completion: nil)
     }
 }
 extension ActivityPopVC {
@@ -86,7 +97,18 @@ extension ActivityPopVC {
             
             make.height.equalTo(imageHeight)
         }
+        
+        self.view.addSubview(deleteBut)
+        
+        deleteBut.snp.makeConstraints { (make) in
+            make.top.equalTo(imageView.snp.bottom).offset(30)
+            make.width.height.equalTo(30)
+            make.centerX.equalTo(imageView.snp.centerX)
+        }
+        
     }
+    
+    
 }
 // MARK: - 初始化页面
 extension ActivityPopVC {

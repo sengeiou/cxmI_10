@@ -300,10 +300,7 @@ class CXMMeViewController: BaseViewController, UITableViewDelegate, UITableViewD
         uiInfo.commentCommitButtonBgColor = ColorEA5504
         
         uiInfo.commentCommitButtonBgHighColor = ColorD12120
-        //uiInfo.serviceNameTextColor = Color0099D9
-        
-        
-        
+     
         ZCLibClient.getZCLibClient().libInitInfo = initInfo
         
         ZCSobot.startZCChatVC(uiInfo, with: self, target: nil, pageBlock: { (chatVC, type) in

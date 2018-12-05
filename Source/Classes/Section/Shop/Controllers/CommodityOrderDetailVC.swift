@@ -8,11 +8,12 @@
 
 import UIKit
 
-class CommodityOrderDetailVC: BaseViewController, UIGestureRecognizerDelegate {
+class CommodityOrderDetailVC: BaseViewController, UIGestureRecognizerDelegate, Service {
 
     public var orderId : String!
     
     @IBOutlet weak var tableView : UITableView!
+    @IBOutlet weak var payMentBut : UIButton!
     
     private var nameTextField : UITextField!
     private var phoneTextField : UITextField!
@@ -80,6 +81,9 @@ extension CommodityOrderDetailVC : UITableViewDelegate, NumPlusReduceViewProtoco
         model.contactsName = self.nameTextField.text ?? ""
         model.phone = self.phoneTextField.text ?? ""
         model.address = self.adressTextView.text
+        if let num = try? numViewModel.number.value() {
+            model.num = num
+        }
         
         goodsUpdateRequest(model: model)
     }
@@ -230,6 +234,7 @@ extension CommodityOrderDetailVC {
                 weakSelf?.orderDetail = data
                 weakSelf?.setupData()
                 weakSelf?.tableView.reloadData()
+                weakSelf?.payMentBut.setTitle(data.bottonInfo, for: .normal)
             }, onError: { (error) in
                 weakSelf?.tableView.endrefresh()
                 guard let err = error as? HXError else { return }
@@ -282,10 +287,17 @@ extension CommodityOrderDetailVC {
         weak var weakSelf = self
         showProgressHUD()
         _ = shopProvider.rx.request(.goodsUpdate(model : model)).asObservable()
-            .mapBaseObject(type: DataModel.self)
+            .mapObject(type: PaymentModel.self)
             .subscribe(onNext: { (data) in
+                if data.payToken != "" {
+                    let payment = CXMPaymentViewController()
+                    payment.lottoToken = data.payToken
+                    weakSelf?.pushViewController(vc: payment)
+                }else{
+                    weakSelf?.initZhiChiService()
+                }
                weakSelf?.dismissProgressHud()
-               weakSelf?.pushRouterVC(urlStr: data.data, from: self)
+               
             }, onError: { (error) in
                 weakSelf?.dismissProgressHud()
                 guard let err = error as? HXError else { return }

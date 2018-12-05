@@ -307,6 +307,9 @@
 		11DEF328215B891A0038B0E6 /* BBGetBetInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DEF327215B891A0038B0E6 /* BBGetBetInfoModel.swift */; };
 		11DEF32A215B8B8A0038B0E6 /* BBProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DEF329215B8B8A0038B0E6 /* BBProtocol.swift */; };
 		11DEF32C215B8FFD0038B0E6 /* BBRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DEF32B215B8FFD0038B0E6 /* BBRequestModel.swift */; };
+		11E2C00A21B7CEE400719661 /* coin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 11E2C00921B7CEE400719661 /* coin.mp3 */; };
+		11E2C00C21B7D04800719661 /* CommodityOrderDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E2C00B21B7D04800719661 /* CommodityOrderDetailModel.swift */; };
+		11E2C00E21B7D33A00719661 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E2C00D21B7D33A00719661 /* Service.swift */; };
 		11E8AD28214763BC00C9B762 /* CourseTabCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E8AD27214763BC00C9B762 /* CourseTabCellViewModel.swift */; };
 		11E8ADB42147AAF900C9B762 /* CopyWritingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E8ADB32147AAF900C9B762 /* CopyWritingModel.swift */; };
 		11E8ADB52147C22F00C9B762 /* LeagueDetailScoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116F5422214614EF0002D002 /* LeagueDetailScoreCell.swift */; };
@@ -854,6 +857,9 @@
 		11DEF327215B891A0038B0E6 /* BBGetBetInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBGetBetInfoModel.swift; sourceTree = "<group>"; };
 		11DEF329215B8B8A0038B0E6 /* BBProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBProtocol.swift; sourceTree = "<group>"; };
 		11DEF32B215B8FFD0038B0E6 /* BBRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBRequestModel.swift; sourceTree = "<group>"; };
+		11E2C00921B7CEE400719661 /* coin.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = coin.mp3; sourceTree = "<group>"; };
+		11E2C00B21B7D04800719661 /* CommodityOrderDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommodityOrderDetailModel.swift; sourceTree = "<group>"; };
+		11E2C00D21B7D33A00719661 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		11E8AD27214763BC00C9B762 /* CourseTabCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseTabCellViewModel.swift; sourceTree = "<group>"; };
 		11E8ADB32147AAF900C9B762 /* CopyWritingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyWritingModel.swift; sourceTree = "<group>"; };
 		11E8FA5420BFD5B50090BC6A /* WorldCupOrderDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldCupOrderDetailCell.swift; sourceTree = "<group>"; };
@@ -1713,6 +1719,7 @@
 			children = (
 				11CC697621AFEF5700F60C57 /* GoodsModel.swift */,
 				112B351521B65D480010C305 /* NumPlusReduceViewModel.swift */,
+				11E2C00B21B7D04800719661 /* CommodityOrderDetailModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1953,6 +1960,7 @@
 				B4C375AF21465F1900390A3A /* ConfigureRequestProtocol.swift */,
 				1142F6FF20B3D54F00C3E2E7 /* TongJiProtocol.swift */,
 				11F24F8021B6805A00722B2B /* PushFrom.swift */,
+				11E2C00D21B7D33A00719661 /* Service.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -2565,6 +2573,7 @@
 				E59CB3DC205BA1650086DD0E /* HomeSportLotteryCell.swift */,
 				11B8D91621AD2E330063F450 /* HomeSportCell.swift */,
 				E59CB3E0205BBD900086DD0E /* HomeFootballCell.swift */,
+				11E2C00921B7CEE400719661 /* coin.mp3 */,
 				E59CB3DE205BA17F0086DD0E /* BannerView.swift */,
 			);
 			path = View;
@@ -3142,6 +3151,7 @@
 			files = (
 				1173BECE2150CCF3008BC28A /* Basketball.storyboard in Resources */,
 				1138981C21103EF900E48B72 /* Daletou.storyboard in Resources */,
+				11E2C00A21B7CEE400719661 /* coin.mp3 in Resources */,
 				E57375AD20468B8900148622 /* LaunchScreen.storyboard in Resources */,
 				E57375AA20468B8900148622 /* Assets.xcassets in Resources */,
 				11B8D92121AD3D0E0063F450 /* Shop.storyboard in Resources */,
@@ -3541,6 +3551,7 @@
 				1158FC4721105A7A0004229D /* DaletouCollectionView.swift in Sources */,
 				E5973E1C204D4A75006461CE /* ScreenConstraint.swift in Sources */,
 				11EB8EE2207B6D9B00AFC9C1 /* CXMPaymentViewController.swift in Sources */,
+				11E2C00C21B7D04800719661 /* CommodityOrderDetailModel.swift in Sources */,
 				11F24F8321B6933F00722B2B /* ScoreHomeViewController.swift in Sources */,
 				11EFB2A221AE480C00B9B8B1 /* ComOrderInputCell.swift in Sources */,
 				115076AC213918EE0029A63E /* LeagueDetailShooterCell.swift in Sources */,
@@ -3756,6 +3767,7 @@
 				11353EA12134F06700C1D645 /* SurpriseShooterHeader.swift in Sources */,
 				11CC697121AF8BF300F60C57 /* SellerListCell.swift in Sources */,
 				E5D5A37B206D193100FC865D /* FootballBottomView.swift in Sources */,
+				11E2C00E21B7D33A00719661 /* Service.swift in Sources */,
 				116E458321119DFD00418661 /* DaletouDanRedCell.swift in Sources */,
 				E562989F2050E04C006397EA /* ValidateProtocol.swift in Sources */,
 				11E8FA5B20BFDD5F0090BC6A /* CXMUserInfoSettingVC.swift in Sources */,
