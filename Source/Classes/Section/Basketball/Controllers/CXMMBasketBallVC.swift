@@ -122,7 +122,7 @@ class CXMMBasketballVC: BaseViewController {
         let helpBut = UIButton(type: .custom)
         helpBut.frame = CGRect(x: 0, y: 0, width: 40, height: 30)
         helpBut.setTitle("帮助", for: .normal)
-        helpBut.setTitleColor(ColorFFFFFF, for: .normal)
+        helpBut.setTitleColor(ColorNavItem, for: .normal)
         helpBut.addTarget(self, action: #selector(helpClicked(_:)), for: .touchUpInside)
         
         //self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightBut)
@@ -690,7 +690,7 @@ extension CXMMBasketballVC : CXMMBasketballMenuDelegate{
         titleView.frame = CGRect(x: 0, y: 0, width: 150, height: 30)
         titleView.titleLabel?.font = Font17
         titleView.setTitle(type.rawValue, for: .normal)
-        titleView.setTitleColor(Color505050, for: .normal)
+        titleView.setTitleColor(ColorNavItem, for: .normal)
         
         titleView.addTarget(self, action: #selector(titleViewClicked(_:)), for: .touchUpInside)
         

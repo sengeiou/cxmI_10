@@ -188,7 +188,7 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
         button.setImage(UIImage(named: "dw"), for: .normal)
         button.setTitle("位置", for: .normal)
         button.contentHorizontalAlignment = .left
-        button.setTitleColor(UIColor.white, for: .normal)
+        button.setTitleColor(ColorNavItem, for: .normal)
         button.titleLabel?.font = Font14
         return button
     }()

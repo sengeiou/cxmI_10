@@ -255,7 +255,7 @@ class CXMMeViewController: BaseViewController, UITableViewDelegate, UITableViewD
         let but = UIButton(type: .custom)
         but.setTitle("设置", for: .normal)
         but.titleLabel?.font = Font15
-        but.setTitleColor(UIColor.white, for: .normal)
+        but.setTitleColor(ColorNavItem, for: .normal)
         but.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         but.addTarget(self, action: #selector(setting), for: .touchUpInside)
         

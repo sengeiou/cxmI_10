@@ -832,7 +832,7 @@ class CXMFootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITabl
         rightBut.frame = CGRect(x: 0, y: 0, width: 16, height: 16)
         
         rightBut.setTitle("胆", for: .normal)
-        rightBut.setTitleColor(ColorFFFFFF, for: .normal)
+        rightBut.setTitleColor(ColorNavItem, for: .normal)
         
         rightBut.addTarget(self, action: #selector(showMenu(_:)), for: .touchUpInside)
         

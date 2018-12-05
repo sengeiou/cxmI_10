@@ -71,7 +71,7 @@ class CXMMDaletouMenu: PopMenu {
     private func getBut(_ title : String) -> UIButton {
         let but = UIButton(type: .custom)
         but.setTitle(title, for: .normal)
-        but.setTitleColor(ColorFFFFFF, for: .normal)
+        but.setTitleColor(Color505050, for: .normal)
         but.layer.borderColor = ColorC7C7C7.cgColor
         but.layer.cornerRadius = 1
         but.layer.borderWidth = 1
