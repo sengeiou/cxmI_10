@@ -9,7 +9,7 @@
 import UIKit
 import UserNotifications
 import PushKit
-import AudioToolbox
+
 
 let device = DeviceManager.share.device
 
@@ -39,12 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AppDelegateProtocol, GeTu
         self.window?.makeKeyAndVisible()
         
         registerApp()
-        
-        var systemSoundID : SystemSoundID = 0
-        let path = Bundle.main.path(forResource: "coin", ofType: "mp3")
-        AudioServicesCreateSystemSoundID(NSURL.fileURL(withPath: path!) as CFURL, &systemSoundID)
-        AudioServicesPlayAlertSound(SystemSoundID(systemSoundID))
-        
+  
         return true
     }
 

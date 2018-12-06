@@ -71,7 +71,7 @@ extension SellerListVC {
             .subscribe(onNext: { (data) in
                 weakSelf?.sellerListModel = data
                 weakSelf?.tableView.reloadData()
-                if data.protocalUrl != nil {
+                if data.protocalUrl != nil && data.protocalUrl != "" {
                     weakSelf?.cooperationBut.isHidden = false
                 }
             }, onError: { (error) in

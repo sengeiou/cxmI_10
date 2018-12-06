@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 import HandyJSON
+import AudioToolbox
 
 enum ShowType {
     case allShow
@@ -74,8 +75,12 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
             self.homeStyle = .onlyNews
         }else {
             self.homeStyle = .allShow
+            
+            var systemSoundID : SystemSoundID = 0
+            let path = Bundle.main.path(forResource: "coin", ofType: "mp3")
+            AudioServicesCreateSystemSoundID(NSURL.fileURL(withPath: path!) as CFURL, &systemSoundID)
+            AudioServicesPlayAlertSound(SystemSoundID(systemSoundID))
         }
-        
     }
     
     private func getRealmData() {
@@ -180,7 +185,7 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
         let button = UIButton(type: .custom)
         button.frame = CGRect(x: 0, y: 0, width: 100, height: 40)
         button.setImage(UIImage(named: "dw"), for: .normal)
-        button.setTitle("位置", for: .normal)
+        button.setTitle("中国", for: .normal)
         button.contentHorizontalAlignment = .left
         button.setTitleColor(ColorNavItem, for: .normal)
         button.titleLabel?.font = Font14
@@ -653,7 +658,7 @@ extension CXMHomeViewController {
             if let locality = adress?.locality {
                 self.locationButton.setTitle("\(locality)", for: .normal)
             }else {
-                self.locationButton.setTitle("位置", for: .normal)
+                self.locationButton.setTitle("中国", for: .normal)
             }
             
             if let adress = adress {
