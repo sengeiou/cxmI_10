@@ -224,7 +224,7 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
     }
 }
 
-extension BaseWebViewController {
+extension BaseWebViewController : Service {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         guard message.name == "appNative" else { return }
        
@@ -260,6 +260,8 @@ extension BaseWebViewController {
             shouldReloadData()
         case "backReloadData":   // 返回刷新
             backReloadData(dic: dic)
+        case "pushService":      // 联系客服
+            pushService()
         default:
             break
         }
@@ -372,5 +374,8 @@ extension BaseWebViewController {
         default:
             break
         }
+    }
+    private func pushService() {
+        initZhiChiService()
     }
 }
