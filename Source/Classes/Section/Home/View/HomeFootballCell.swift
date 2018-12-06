@@ -8,7 +8,7 @@
 
 import UIKit
 import Kingfisher
-import AudioToolbox
+
 
 class HomeFootballCell: UICollectionViewCell, RouterMatcher {
     
@@ -41,10 +41,6 @@ extension HomeFootballCell: AnimatedImageViewDelegate {
         if let url = URL(string: data.classImg) {
             icon.kf.setImage(with: url)
             icon.delegate = self
-            var systemSoundID : SystemSoundID = 0
-            let path = Bundle.main.path(forResource: "coin", ofType: "mp3")
-            AudioServicesCreateSystemSoundID(NSURL.fileURL(withPath: path!) as CFURL, &systemSoundID)
-            AudioServicesPlayAlertSound(SystemSoundID(systemSoundID))
         }
         
         title.text = data.className

@@ -295,10 +295,10 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
 
 extension CXMOrderDetailVC : ShareProtocol {
     private func setRightNav(){
-        let codeItem = getRightNavOfQRCode()
+//        let codeItem = getRightNavOfQRCode()
         let shareItem = getRightNavOfShare()
         
-        navigationItem.rightBarButtonItems = [codeItem, shareItem]
+        navigationItem.rightBarButtonItems = [shareItem]
     }
     
     private func getRightNavOfQRCode() -> UIBarButtonItem {
@@ -310,6 +310,7 @@ extension CXMOrderDetailVC : ShareProtocol {
     }
     private func getRightNavOfShare() -> UIBarButtonItem {
         let share = UIButton(type: .custom)
+        share.frame = CGRect(x: 0, y: 0, width: 40, height: 30)
         share.setImage(UIImage(named: "fenxiang"), for: .normal)
         share.addTarget(self, action: #selector(shareClicked(sender:)), for: .touchUpInside)
         return UIBarButtonItem(customView: share)

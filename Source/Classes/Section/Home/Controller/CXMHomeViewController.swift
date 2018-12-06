@@ -67,6 +67,15 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
         
         // 定位信息
         setLocation()
+        
+        let turnOn = UserDefaults.standard.bool(forKey: TurnOn)
+        
+        if turnOn == false {
+            self.homeStyle = .onlyNews
+        }else {
+            self.homeStyle = .allShow
+        }
+        
     }
     
     private func getRealmData() {
@@ -96,15 +105,7 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
         super.viewWillAppear(animated)
         self.isHidenBar = false
         
-        let turnOn = UserDefaults.standard.bool(forKey: TurnOn)
         
-        if turnOn == false {
-            self.homeStyle = .onlyNews
-        }else {
-            self.homeStyle = .allShow
-        }
-        
-        tableView.reloadData()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -129,6 +130,7 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
         }else if turnOn == false && self.homeStyle != .onlyNews {
             self.homeStyle = .onlyNews
         }
+        
     }
     
     //MARK: - 懒加载
@@ -255,9 +257,9 @@ extension CXMHomeViewController {
         guard homeData != nil else { return 0 }
         if homeStyle == .onlyNews {
             if homeData.discoveryHallClassifyDTOList.count != 0 {
-                return 1 + 1 + 1
+                return 1 + 1
             }
-            return 1 + 1
+            return 1
         }else {
             if homeData.discoveryHallClassifyDTOList.count != 0 {
                 return 3 + 1 + 1
@@ -273,20 +275,13 @@ extension CXMHomeViewController {
                 switch section {
                 case 0 :
                     return 1
-                case 1:
-                    return 1
                 default :
                     guard newsList != nil, newsList.isEmpty == false else { return 0 }
                     return newsList.count
                 }
             }else {
-                switch section {
-                case 0 :
-                    return 1
-                default :
-                    guard newsList != nil, newsList.isEmpty == false else { return 0 }
-                    return newsList.count
-                }
+                guard newsList != nil, newsList.isEmpty == false else { return 0 }
+                return newsList.count
             }
         }else {
             if homeData.discoveryHallClassifyDTOList.count != 0 {
@@ -698,7 +693,6 @@ extension CXMHomeViewController : ActivityPopVCDelegate {
             
             self.present(activity)
         }
-        
     }
     
     private func activityRequest() {

@@ -162,7 +162,7 @@ class CXMNewsDetailViewController: BaseViewController, UITableViewDelegate, UITa
         shareBut = UIButton(type: .custom)
         shareBut.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         shareBut.setTitle("分享", for: .normal)
-        shareBut.setTitleColor(Color9F9F9F, for: .normal)
+        shareBut.setTitleColor(ColorNavItem, for: .normal)
         shareBut.addTarget(self, action: #selector(shareButClicked(_:)), for: .touchUpInside)
         
         let collectItem = UIBarButtonItem(customView: collectBut)

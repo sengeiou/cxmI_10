@@ -363,7 +363,7 @@ class CXMMeViewController: BaseViewController, UITableViewDelegate, UITableViewD
         var section2 = MeSectionModel()
         
         var item1 = MeListDataModel()
-        item1.title = "投注记录"
+        item1.title = "模拟记录"
         item1.iconStr = "recording"
         item1.pushType = .投注记录
         section1.list.append(item1)

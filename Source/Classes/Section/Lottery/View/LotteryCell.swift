@@ -132,9 +132,9 @@ class LotteryCell: UITableViewCell {
     
     public func changeCollectionSelected(selected : Bool) {
         if selected {
-            self.collectionButton.setImage(UIImage(named: "se收藏"), for: .normal)
+            self.collectionButton.setImage(UIImage(named: "se收藏-1"), for: .normal)
         }else {
-            self.collectionButton.setImage(UIImage(named: "收藏"), for: .normal)
+            self.collectionButton.setImage(UIImage(named: "收藏-1"), for: .normal)
         }
         self.collectionButton.isSelected = selected
         
@@ -260,7 +260,7 @@ class LotteryCell: UITableViewCell {
         line.image = UIImage(named : "line")
         
         collectionButton = UIButton(type: .custom)
-        collectionButton.setImage(UIImage(named: "收藏"), for: .normal)
+        collectionButton.setImage(UIImage(named: "收藏-1"), for: .normal)
         collectionButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         collectionButton.addTarget(self, action: #selector(collectionClick(_:)), for: .touchUpInside)
         
