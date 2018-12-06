@@ -40,6 +40,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AppDelegateProtocol, GeTu
         
         registerApp()
   
+        if let agent = UIWebView.init().stringByEvaluatingJavaScript(from: "navigator.userAgent") {
+            let newAgent = agent + "app/ios&"
+            UserDefaults.standard.register(defaults: ["UserAgent": newAgent])
+        }
+        
         return true
     }
 

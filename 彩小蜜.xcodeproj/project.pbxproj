@@ -3998,18 +3998,18 @@
 				CODE_SIGN_ENTITLEMENTS = "彩小蜜/彩小蜜.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7U38QDAPJN;
+				DEVELOPMENT_TEAM = QDPVKJVWX6;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
 					"\"${PODS_ROOT}/Headers/Public/BaiduMobStat\"",
 					"\"${PODS_ROOT}/Headers/Public/WechatOpenSDK\"",
-					"\"${PODS_ROOT}\"",
+					"\"${PODS_ROOT}\"/**",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/彩小蜜/Resource/Plist/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.caixiaomi.itoolss;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qiuduoduo.itools;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Source/Classes/ThirdParty/Header.h";
@@ -4029,18 +4029,18 @@
 				CODE_SIGN_ENTITLEMENTS = "彩小蜜/彩小蜜.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7U38QDAPJN;
+				DEVELOPMENT_TEAM = QDPVKJVWX6;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
 					"\"${PODS_ROOT}/Headers/Public/BaiduMobStat\"",
 					"\"${PODS_ROOT}/Headers/Public/WechatOpenSDK\"",
-					"\"${PODS_ROOT}\"",
+					"\"${PODS_ROOT}\"/**",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/彩小蜜/Resource/Plist/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.caixiaomi.itoolss;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qiuduoduo.itools;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Source/Classes/ThirdParty/Header.h";

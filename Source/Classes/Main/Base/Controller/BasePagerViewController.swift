@@ -11,7 +11,7 @@ import XLPagerTabStrip
 
 enum PagerViewType: String {
     case coupon = "我的卡券"
-    case purchaseRecord = "投注记录"
+    case purchaseRecord = "模拟记录"
     case message = "消息中心"
     case accountDetails = "账户明细"
     case trend = "走势图"

@@ -76,10 +76,18 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
         }else {
             self.homeStyle = .allShow
             
-            var systemSoundID : SystemSoundID = 0
-            let path = Bundle.main.path(forResource: "coin", ofType: "mp3")
-            AudioServicesCreateSystemSoundID(NSURL.fileURL(withPath: path!) as CFURL, &systemSoundID)
-            AudioServicesPlayAlertSound(SystemSoundID(systemSoundID))
+            if homeData != nil {
+                if homeData.discoveryHallClassifyDTOList.count != 0 {
+                    for data in homeData.discoveryHallClassifyDTOList {
+                        if data.type == "10" {
+                            var systemSoundID : SystemSoundID = 0
+                            let path = Bundle.main.path(forResource: "coin", ofType: "mp3")
+                            AudioServicesCreateSystemSoundID(NSURL.fileURL(withPath: path!) as CFURL, &systemSoundID)
+                            AudioServicesPlayAlertSound(SystemSoundID(systemSoundID))
+                        }
+                    }
+                }
+            }
         }
     }
     
@@ -202,10 +210,18 @@ extension CXMHomeViewController : HomeSportLotteryCellDelegate, HomeSportCellDel
     
     // 玩法点击
     func didSelectItem(playModel: HomePlayModel, index: Int) {
+        guard playModel.status == "0" else {
+            showHUD(message: playModel.statusReason)
+            return
+        }
         pushRouterVC(urlStr: playModel.redirectUrl, from: self)
     }
     // 发现点击
     func didSelectSportItem(playModel: HomeFindModel, index: Int) {
+        guard playModel.status == "1" else {
+            showHUD(message: playModel.statusReason)
+            return
+        }
         pushRouterVC(urlStr: playModel.redirectUrl, from: self)
     }
     
@@ -443,7 +459,7 @@ extension CXMHomeViewController {
                 switch indexPath.section {
                 case 0:
                     guard self.homeData != nil else { return 0 }
-                    let count = self.homeData.lotteryClassifys.count
+                    let count = self.homeData.discoveryHallClassifyDTOList.count
                     var verticalCount = count / HorizontalSportItemCount
                     
                     if count % HorizontalSportItemCount != 0 {

@@ -29,6 +29,7 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
         
         initProgressView()
         initWebView()
+        
         loadWebView()
         
         NotificationCenter.default.addObserver(self, selector: #selector(didLoginSuccess), name: NSNotification.Name(rawValue: LoginSuccess), object: nil)
@@ -100,14 +101,14 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
         
         webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
         
-        webView.evaluateJavaScript("navigator.userAgent") { (result, error) in
-            if let resu = result as? String {
-                if #available(iOS 9.0, *) {
-                    self.webView.customUserAgent = "app/ios&" + resu
-                } else {
-                }
-            }
-        }
+//        webView.evaluateJavaScript("navigator.userAgent") { (result, error) in
+//            if let resu = result as? String {
+//                if #available(iOS 9.0, *) {
+//                    self.webView.customUserAgent = "app/ios&" + resu
+//                } else {
+//                }
+//            }
+//        }
         
         self.view.addSubview(webView)
         
@@ -135,18 +136,6 @@ class BaseWebViewController: BaseViewController, WKUIDelegate, WKNavigationDeleg
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-       
-//        if showTitle == nil {
-//            webView.evaluateJavaScript("getCxmTitle()") { (data, error) in
-//                if let title = data as? String {
-//                    self.navigationItem.title = title
-//                }else {
-//                    self.navigationItem.title = webView.title
-//                }
-//            }
-//        }else {
-//            self.navigationItem.title = self.showTitle
-//        }
         
         let model = JSDataModel()
         let jsData = model.toJSONString()

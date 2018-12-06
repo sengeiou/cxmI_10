@@ -85,7 +85,7 @@ extension RouterPro {
             guard let id = type.1?.subid else { return }
             pushPrizeDigitalHistory(from: vc, lotteryId: id)
         case .专家广场:
-            pushExpert(from: vc)
+            pushExpert(url: urlStr, from: vc)
         case .彩票学堂:
             pushLottoSchool(from: vc )
         case .活动中心:
@@ -183,8 +183,8 @@ extension RouterPro {
     }
     
     /// 专家广场
-    private func pushExpert(from vc : UIViewController) {
-        
+    private func pushExpert(url : String, from vc : UIViewController) {
+        pushWebview(urlStr: url, from: vc)
     }
     /// 彩票学堂
     private func pushLottoSchool(from vc : UIViewController) {

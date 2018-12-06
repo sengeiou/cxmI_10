@@ -72,8 +72,8 @@ public func getCurentBaseWebUrl() -> String! {
     if baseUrl.scheme == "https" {
         return "https://m.caixiaomi.net"
     }else{
-//        return "http://192.168.31.205:3000"
-        return "http://t1.caixiaomi.net:9805"
+        return "http://192.168.31.205:8080"
+//        return "http://t1.caixiaomi.net:9805"
     }
 }
 
