@@ -47,6 +47,8 @@ struct OrderInfoModel: HandyJSON {
     var betNum : String = ""
     /// 客服二维码
     var addFriendsQRBarUrl : String = ""
+    /// 是否显示合作店铺 0 不显示 1 显示
+    var showStore : String = ""
 }
 
 struct MatchInfo: HandyJSON {
