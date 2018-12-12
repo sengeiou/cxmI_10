@@ -13,8 +13,6 @@ import PushKit
 
 let device = DeviceManager.share.device
 
-fileprivate let ShowGuided = "IsShowGuided"
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, AppDelegateProtocol, GeTuiSdkDelegate, UNUserNotificationCenterDelegate, GuideViewControllerDelegate {
 

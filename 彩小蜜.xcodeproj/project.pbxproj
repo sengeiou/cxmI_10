@@ -281,6 +281,8 @@
 		11B8D92521AD405F0063F450 /* ShopBannerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B8D92421AD405F0063F450 /* ShopBannerItem.swift */; };
 		11BD09EA21C0E31300D29D52 /* HXGuideMaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BD09E921C0E31300D29D52 /* HXGuideMaskView.swift */; };
 		11BD09F021C0EEE100D29D52 /* guide_arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 11BD09EF21C0EEE100D29D52 /* guide_arrow@3x.png */; };
+		11BD09F221C0FA7B00D29D52 /* OrderDetailQRCodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BD09F121C0FA7B00D29D52 /* OrderDetailQRCodeCell.swift */; };
+		11BD09F421C0FD3900D29D52 /* Football.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11BD09F321C0FD3900D29D52 /* Football.storyboard */; };
 		11BDF4DD20F59FDC00AA94B2 /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BDF4DC20F59FDC00AA94B2 /* Protocol.swift */; };
 		11C4F45C20E095D800CCDFC6 /* YHPhotoSelect.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C4F45020E095D800CCDFC6 /* YHPhotoSelect.m */; };
 		11C4F45D20E095D800CCDFC6 /* YHResizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C4F45520E095D800CCDFC6 /* YHResizeView.m */; };
@@ -827,6 +829,8 @@
 		11B8D92421AD405F0063F450 /* ShopBannerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopBannerItem.swift; sourceTree = "<group>"; };
 		11BD09E921C0E31300D29D52 /* HXGuideMaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HXGuideMaskView.swift; sourceTree = "<group>"; };
 		11BD09EF21C0EEE100D29D52 /* guide_arrow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide_arrow@3x.png"; sourceTree = "<group>"; };
+		11BD09F121C0FA7B00D29D52 /* OrderDetailQRCodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailQRCodeCell.swift; sourceTree = "<group>"; };
+		11BD09F321C0FD3900D29D52 /* Football.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Football.storyboard; sourceTree = "<group>"; };
 		11BDF4DC20F59FDC00AA94B2 /* Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
 		11C4F44D20E095D800CCDFC6 /* YHImageEditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YHImageEditVC.h; sourceTree = "<group>"; };
 		11C4F44F20E095D800CCDFC6 /* YHPhotoSelect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YHPhotoSelect.h; sourceTree = "<group>"; };
@@ -2239,6 +2243,7 @@
 				E5D8ABBF20674A07002D688B /* OrderDetailFooterView.swift */,
 				E5883F4D2068DA2300CB3A46 /* OrderSchemeCell.swift */,
 				E5883F512068DFBF00CB3A46 /* OrderSchemeTitleCell.swift */,
+				11BD09F121C0FA7B00D29D52 /* OrderDetailQRCodeCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2959,6 +2964,7 @@
 			isa = PBXGroup;
 			children = (
 				116E457E21115EB800418661 /* PopMenu.swift */,
+				11BD09F321C0FD3900D29D52 /* Football.storyboard */,
 				E5786FC5206E29560045F7F5 /* Protocol */,
 				E5D5A375206D022800FC865D /* Model */,
 				11A250BC207C9BF100780D3D /* TeamView */,
@@ -3164,6 +3170,7 @@
 				11B8D92121AD3D0E0063F450 /* Shop.storyboard in Resources */,
 				11B179242090AFC50061226C /* Storyboard.storyboard in Resources */,
 				11AB2C222130119C0044FB1C /* Surprise.storyboard in Resources */,
+				11BD09F421C0FD3900D29D52 /* Football.storyboard in Resources */,
 				11CC696F21AF880D00F60C57 /* Seller.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3465,6 +3472,7 @@
 				E51F9A64205A2A2D00AB8A21 /* ForgetPswVCodeFooterView.swift in Sources */,
 				116E0F292099739E009FE44E /* Router.swift in Sources */,
 				E55016F7207228220056AB1F /* FootballFilterCell.swift in Sources */,
+				11BD09F221C0FA7B00D29D52 /* OrderDetailQRCodeCell.swift in Sources */,
 				11353EA62134FFCC00C1D645 /* SurpriseShooterHeaderModel.swift in Sources */,
 				1173BED22150D836008BC28A /* CXMMBasketballMenu.swift in Sources */,
 				E56CE814206A33310090A1B5 /* MessageCenterModel.swift in Sources */,

@@ -19,3 +19,7 @@ let DateFilterNotificationName = "DateFilterNotificationName"
 
 // 数据持久化
 let UserIconData = "UserIconData"
+let MaskShow = "MaskShow"
+
+
+let ShowGuided = "IsShowGuided"

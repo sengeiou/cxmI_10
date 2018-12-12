@@ -32,6 +32,20 @@ class OrderStoreCell: UITableViewCell {
         initSubview()
     }
 
+    
+
+    @objc private func enterStoreClicked() {
+        
+    }
+    
+}
+
+extension OrderStoreCell {
+    public func configure(with data : AppendInfo) {
+        
+    }
+}
+extension OrderStoreCell {
     private func initSubview() {
         self.selectionStyle = .none
         
@@ -87,13 +101,4 @@ class OrderStoreCell: UITableViewCell {
             make.height.equalTo(30)
         }
     }
-
-    @objc private func enterStoreClicked() {
-        
-    }
-    
-}
-
-extension OrderStoreCell {
-    
 }

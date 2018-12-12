@@ -66,9 +66,21 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
             scheme.orderSn = self.orderInfo.orderSn
             pushViewController(vc: scheme)
         case 2:
-            let story = UIStoryboard.init(storyboard: .Seller)
-            let vc = story.instantiateViewController(withIdentifier: "SellerListVC") as! SellerListVC
-            pushViewController(vc: vc)
+            
+            let model = orderInfo.appendInfoList[indexPath.row]
+            
+            switch model.type {
+            case "0":
+                let story = UIStoryboard.init(storyboard: .Seller)
+                let vc = story.instantiateViewController(withIdentifier: "SellerListVC") as! SellerListVC
+                pushViewController(vc: vc)
+            case "1":
+                pushRouterVC(urlStr: model.pushurl, from: self)
+            default :
+                break
+            }
+            
+            
         default:
             break
         }
@@ -168,44 +180,41 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
 //            make.height.equalTo(44 * defaultScale)
 //        }
         
-        tableView.snp.makeConstraints { (make) in
-            make.top.left.right.equalTo(self.view)
-            make.bottom.equalTo(0)
-        }
-    }
-
-    // MARK: - 懒加载
-    lazy private var tableView: UITableView = {
-        let table = UITableView(frame: CGRect.zero, style: .grouped)
-        table.delegate = self
-        table.dataSource = self
-        table.separatorStyle = .none
+//        tableView.snp.makeConstraints { (make) in
+//            make.top.left.right.equalTo(self.view)
+//            make.bottom.equalTo(0)
+//        }
+        
+        tableView.separatorStyle = .none
         
         header = OrderDetailHeaderView()
         
-        table.tableHeaderView = header
+        tableView.tableHeaderView = header
         
-        table.estimatedRowHeight = 80
+        tableView.estimatedRowHeight = 80
         //table.rowHeight = UITableViewAutomaticDimension
         
-        table.register(OrderDetailTitleCell.self, forCellReuseIdentifier: OrderDetailTitleCellId)
-        table.register(OrderDetailCell.self, forCellReuseIdentifier: OrderDetailCellId)
-        table.register(OrderRuleCell.self, forCellReuseIdentifier: OrderRuleCellId)
-        table.register(OrderPaymentCell.self, forCellReuseIdentifier: OrderPaymentCellId)
-        table.register(OrderProgrammeCell.self, forCellReuseIdentifier: OrderProgrammeCellId)
-        table.register(OrderStoreCell.self, forCellReuseIdentifier: OrderStoreCell.identifier)
-        return table
-    }()
+        tableView.register(OrderDetailTitleCell.self, forCellReuseIdentifier: OrderDetailTitleCellId)
+        tableView.register(OrderDetailCell.self, forCellReuseIdentifier: OrderDetailCellId)
+        tableView.register(OrderRuleCell.self, forCellReuseIdentifier: OrderRuleCellId)
+        tableView.register(OrderPaymentCell.self, forCellReuseIdentifier: OrderPaymentCellId)
+        tableView.register(OrderProgrammeCell.self, forCellReuseIdentifier: OrderProgrammeCellId)
+        tableView.register(OrderStoreCell.self, forCellReuseIdentifier: OrderStoreCell.identifier)
+    }
+
+    @IBOutlet weak var tableView : UITableView!
     
     func numberOfSections(in tableView: UITableView) -> Int {
         guard orderInfo != nil else { return 0 }
         
-        switch orderInfo.showStore {
-        case "1":
-            return 2 + 1
-        default:
-            return 2
-        }
+        return 2 + orderInfo.appendInfoList.count
+        
+//        switch orderInfo.showStore {
+//        case "1":
+//            return 2 + 1
+//        default:
+//            return 2 + 1
+//        }
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
@@ -254,13 +263,32 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
             return cell
         default:
 
-            let cell = tableView.dequeueReusableCell(withIdentifier: OrderStoreCell.identifier, for: indexPath) as! OrderStoreCell
+            let model = orderInfo.appendInfoList[indexPath.row]
             
-            return cell
+            switch model.type {
+            case "1":
+                return initQRCodeCell(indexPath: indexPath)
+            case "0":
+                return initStoreCell(indexPath: indexPath)
+            default :
+                return UITableViewCell()
+            }
         }
-        
-        
     }
+    
+    private func initStoreCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: OrderStoreCell.identifier, for: indexPath) as! OrderStoreCell
+        cell.configure(with: orderInfo.appendInfoList[indexPath.row])
+        return cell
+    }
+    
+    private func initQRCodeCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "OrderDetailQRCodeCell", for: indexPath) as! OrderDetailQRCodeCell
+        cell.delegate = self
+        cell.configure(with: orderInfo.appendInfoList[indexPath.row])
+        return cell
+    }
+    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
@@ -273,7 +301,17 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
         case 1:
             return 124
         case 2:
-            return 90
+            
+            let model = orderInfo.appendInfoList[indexPath.row]
+            
+            switch model.type {
+            case "1":
+                return 250
+            case "0":
+                return 90
+            default :
+                return 0
+            }
         default:
             return 0
         }
@@ -352,22 +390,41 @@ extension CXMOrderDetailVC : ShareProtocol {
 extension CXMOrderDetailVC {
     
     private func showMask() {
-        let model = HXGuideInfoModel()
-        model.text = """
-                      添加彩票店主微信号完成后
-        返回APP订单页，点击此按钮分享给微信店主
-        """
-
-        model.frameBaseWindow = share.convert(share.bounds, to: nil)
-        model.textColor = ColorFFFFFF
-        model.insetEdge = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        model.maskCornerRadius = 15
-        modes.append(model)
         
-        let gv = HXGuideMaskView(frame: self.view.bounds)
-        gv.showMask(data: modes)
+        if UserDefaults.standard.bool(forKey: MaskShow) == false {
+            UserDefaults.standard.set(true, forKey: MaskShow)
+            let model = HXGuideInfoModel()
+            model.text = """
+            添加彩票店主微信号完成后
+            返回APP订单页，点击此按钮分享给微信店主
+            """
+            
+            model.frameBaseWindow = share.convert(share.bounds, to: nil)
+            model.textColor = ColorFFFFFF
+            model.insetEdge = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            model.maskCornerRadius = 15
+            modes.append(model)
+            
+            let gv = HXGuideMaskView(frame: self.view.bounds)
+            gv.showMask(data: modes)
+        }
+    }
+}
+
+extension CXMOrderDetailVC : OrderDetailQRCodeCellDelegate {
+    func didTipCopy(cell: OrderDetailQRCodeCell, model: AppendInfo) {
+        showHUD(message: "复制成功")
+        let paseboard = UIPasteboard.general
+        
+        paseboard.string = model.wechat
     }
     
+    func didTipCall(cell: OrderDetailQRCodeCell, model: AppendInfo) {
+        if let url = URL(string: "tel://\(model.phone)") {
+            UIApplication.shared.openURL(url)
+        }
+        
+    }
     
     
 }
