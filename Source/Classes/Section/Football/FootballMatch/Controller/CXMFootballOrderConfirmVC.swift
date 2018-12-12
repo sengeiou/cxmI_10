@@ -441,7 +441,8 @@ class CXMFootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITabl
                     weakSelf?.pushViewController(vc: payment)
                 }else {
                     // 1.1.4 版，取消支付，直接跳转订单详情
-                    let order = CXMOrderDetailVC()
+                    let story = UIStoryboard(storyboard: .Football)
+                    let order = story.instantiateViewController(withIdentifier: "OrderDetailVC") as! CXMOrderDetailVC
                     order.orderId = data.orderId
                     weakSelf?.pushViewController(vc: order)
                 }

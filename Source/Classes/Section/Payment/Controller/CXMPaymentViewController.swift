@@ -262,12 +262,15 @@ extension CXMPaymentViewController {
         
         switch self.palyId {
         case "0":
-            let order = CXMOrderDetailVC()
+            
+            let story = UIStoryboard(storyboard: .Football)
+            let order = story.instantiateViewController(withIdentifier: "OrderDetailVC") as! CXMOrderDetailVC
             order.backType = .root
             order.orderId = self.paymentResult.orderId
             self.pushViewController(vc: order)
         case "1":
-            let order = CXMOrderDetailVC()
+            let story = UIStoryboard(storyboard: .Football)
+            let order = story.instantiateViewController(withIdentifier: "OrderDetailVC") as! CXMOrderDetailVC
             order.backType = .root
             order.orderId = self.paymentResult.orderId
             self.pushViewController(vc: order)

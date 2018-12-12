@@ -171,7 +171,7 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
         footer = OrderDetailFooterView()
         footer.delegate = self
         
-        self.view.addSubview(tableView)
+//        self.view.addSubview(tableView)
 //        self.view.addSubview(footer)
         
 //        footer.snp.makeConstraints { (make) in
