@@ -47,7 +47,7 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
     //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "彩小秘"
+        self.navigationItem.title = "球多多"
         newsList = [NewsInfoModel]()
         hideBackBut()
         
@@ -118,6 +118,15 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
         super.viewWillAppear(animated)
         self.isHidenBar = false
         
+        let turnOn = UserDefaults.standard.bool(forKey: TurnOn)
+        
+        if turnOn == false {
+            self.homeStyle = .onlyNews
+        }else {
+            self.homeStyle = .allShow
+        }
+        
+//        tableView.reloadData()
         
     }
     override func viewDidAppear(_ animated: Bool) {

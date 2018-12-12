@@ -82,6 +82,9 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
     private var header : OrderDetailHeaderView!
     private var footer : OrderDetailFooterView!
     
+    private var share : UIButton!
+    
+    private var modes = [HXGuideInfoModel]()
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,19 +102,18 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.isHidenBar = true 
+        self.isHidenBar = true
+        
+        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        showMask()
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        tableView.snp.makeConstraints { (make) in
-            make.top.left.right.equalTo(self.view)
-            make.bottom.equalTo(footer.snp.top)
-        }
-        footer.snp.makeConstraints { (make) in
-            make.bottom.equalTo(-SafeAreaBottomHeight)
-            make.left.right.equalTo(0)
-            make.height.equalTo(44 * defaultScale)
-        }
+        
+        
     }
     // MARK: - 网络请求
     private func loadNewData() {
@@ -158,7 +160,18 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
         footer.delegate = self
         
         self.view.addSubview(tableView)
-        self.view.addSubview(footer)
+//        self.view.addSubview(footer)
+        
+//        footer.snp.makeConstraints { (make) in
+//            make.bottom.equalTo(-SafeAreaBottomHeight)
+//            make.left.right.equalTo(0)
+//            make.height.equalTo(44 * defaultScale)
+//        }
+        
+        tableView.snp.makeConstraints { (make) in
+            make.top.left.right.equalTo(self.view)
+            make.bottom.equalTo(0)
+        }
     }
 
     // MARK: - 懒加载
@@ -314,7 +327,7 @@ extension CXMOrderDetailVC : ShareProtocol {
         return UIBarButtonItem(customView: code)
     }
     private func getRightNavOfShare() -> UIBarButtonItem {
-        let share = UIButton(type: .custom)
+        share = UIButton(type: .custom)
         share.frame = CGRect(x: 0, y: 0, width: 40, height: 30)
         share.setImage(UIImage(named: "fenxiang"), for: .normal)
         share.addTarget(self, action: #selector(shareClicked(sender:)), for: .touchUpInside)
@@ -333,4 +346,28 @@ extension CXMOrderDetailVC : ShareProtocol {
         model.sharingType = .text
         share(model, from: self)
     }
+}
+
+// MARK: - 引导蒙版
+extension CXMOrderDetailVC {
+    
+    private func showMask() {
+        let model = HXGuideInfoModel()
+        model.text = """
+                      添加彩票店主微信号完成后
+        返回APP订单页，点击此按钮分享给微信店主
+        """
+
+        model.frameBaseWindow = share.convert(share.bounds, to: nil)
+        model.textColor = ColorFFFFFF
+        model.insetEdge = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        model.maskCornerRadius = 15
+        modes.append(model)
+        
+        let gv = HXGuideMaskView(frame: self.view.bounds)
+        gv.showMask(data: modes)
+    }
+    
+    
+    
 }

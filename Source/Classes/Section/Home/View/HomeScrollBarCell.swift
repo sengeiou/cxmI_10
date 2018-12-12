@@ -102,7 +102,7 @@ class HomeScrollBarCell: UITableViewCell, FSPagerViewDataSource, FSPagerViewDele
         let at = NSAttributedString(string: "元", attributes: [NSAttributedStringKey.foregroundColor: Color787878])
         
         muAtt.append(att)
-        muAtt.append(at)
+//        muAtt.append(at)
         
         cell.textLabel?.attributedText = muAtt
         cell.textLabel?.font = Font14

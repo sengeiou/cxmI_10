@@ -166,6 +166,9 @@ extension LocationManager:CLLocationManagerDelegate {
                 if let locality = firstPlaceMark?.locality {
                     self.curAddress?.append(locality)
                     model.locality = locality
+                    if model.administrativeArea == "" {
+                        model.administrativeArea = locality
+                    }
                 }
                 //区
                 if let subLocality = firstPlaceMark?.subLocality {

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 /// app 主色 主风格
-let ColorEA5504 = UIColor(hexColor: "D12120")
+let ColorEA5504 = UIColor(hexColor: "d54745", alpha: 1)
 /// app 主色2
 let ColorE85504 = UIColor(hexColor: "E85504")
 /// app 主色3 红色

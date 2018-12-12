@@ -50,7 +50,7 @@ struct GoodsOrderDetail : HandyJSON {
     var orderId : String = ""
     var orderPic : String = ""
     var price : String = ""
-    var bottonInfo : String = ""
+    var buttonInfo : String = ""
 }
 struct GoodsCalculate : HandyJSON {
     var totalPrice : String = ""

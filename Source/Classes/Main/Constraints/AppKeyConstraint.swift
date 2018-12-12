@@ -20,6 +20,8 @@ let ZhiChiAppKey = "92afce39268e4926ab9f681b04bf44db"
 let Channel = "c36010"
 
 let phoneNum = "400-012-6600"
+
+let website = "http://www.renrentiyua.com"
 /// 个推
 #if DEBUG
     let GetuiAppID  = "SQ3WV0duEo5YipEvzlaXS2"

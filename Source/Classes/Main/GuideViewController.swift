@@ -16,7 +16,7 @@ class GuideViewController: UIViewController, UIScrollViewDelegate {
 
     public var delegate : GuideViewControllerDelegate!
     
-    private var imageList : [String] = ["guide", "guide", "guide"]
+    private var imageList : [String] = ["guide", "guide", "guide", "guide"]
     
     private var scrollView : UIScrollView!
     

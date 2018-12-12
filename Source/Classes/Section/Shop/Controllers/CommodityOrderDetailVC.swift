@@ -234,7 +234,7 @@ extension CommodityOrderDetailVC {
                 weakSelf?.orderDetail = data
                 weakSelf?.setupData()
                 weakSelf?.tableView.reloadData()
-                weakSelf?.payMentBut.setTitle(data.bottonInfo, for: .normal)
+                weakSelf?.payMentBut.setTitle(data.buttonInfo, for: .normal)
             }, onError: { (error) in
                 weakSelf?.tableView.endrefresh()
                 guard let err = error as? HXError else { return }
