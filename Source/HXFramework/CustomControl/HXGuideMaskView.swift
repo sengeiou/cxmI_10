@@ -16,6 +16,7 @@ class HXGuideMaskView: UIView {
         case leftBottom /*👋 左下方 👋*/
         case rightTop /*👋 右上方 👋*/
         case rightBottom /*👋 右下方 👋*/
+        case bottom
     }
     /*👋 箭头的图片 👋*/
     var arrowImage : UIImage? = UIImage.init(named: "guide_arrow") {
@@ -170,6 +171,8 @@ class HXGuideMaskView: UIView {
                 x = data.horizontalInset
             }
             textRect = CGRect.init(x: x, y: arrowRect.minY - data.space - textSize.height, width: textSize.width, height: textSize.height)
+            
+            
             break
         case .rightBottom:
             /// 右下
@@ -182,6 +185,20 @@ class HXGuideMaskView: UIView {
                 x = data.horizontalInset + maxWidth - textSize.width
             }
             textRect = CGRect.init(x: x, y: arrowRect.minY - data.space - imgSize.height, width: textSize.width, height: textSize.height)
+            break
+        case .bottom:
+            
+            transform = CGAffineTransform.init(scaleX: 1, y: -1)
+            arrowRect = CGRect.init(x: UIScreen.main.bounds.size.width / 2 - imgSize.width * 0.5, y: self.fetchVisualFrame().origin.y - data.space - imgSize.height, width: imgSize.width, height: imgSize.height)
+            var x : CGFloat = 0
+            if textSize.width < self.fetchVisualFrame().width {
+                x = UIScreen.main.bounds.size.width / 2 - textSize.width * 0.5
+            } else {
+                x = data.horizontalInset + maxWidth - textSize.width
+            }
+            textRect = CGRect.init(x: x, y: arrowRect.minY - data.space, width: textSize.width, height: textSize.height)
+            
+            buttonRect = CGRect(x: UIScreen.main.bounds.size.width / 2 - 62, y: textRect.minY - 50, width: 124, height: 34)
             break
         }
         
@@ -213,14 +230,29 @@ class HXGuideMaskView: UIView {
             /// 当前显示的视图在右上角
             return MYHGuideMaskItemRegion.rightTop
         }
-        if ((visualCenter.x <= viewCenter.x)    &&
+        
+        if ((visualCenter.x == viewCenter.x)    &&
+            (visualCenter.y > viewCenter.y))
+        {
+            /// 当前显示的视图在左下角
+            return MYHGuideMaskItemRegion.bottom
+        }
+        
+        if ((visualCenter.x < viewCenter.x)    &&
             (visualCenter.y > viewCenter.y))
         {
             /// 当前显示的视图在左下角
             return MYHGuideMaskItemRegion.leftBottom
         }
         /// 当前显示的视图在右下角
-        return MYHGuideMaskItemRegion.rightBottom
+        if ((visualCenter.x > viewCenter.x)    &&
+            (visualCenter.y > viewCenter.y))
+        {
+            /// 当前显示的视图在左下角
+            return MYHGuideMaskItemRegion.rightBottom
+        }
+        
+        return MYHGuideMaskItemRegion.bottom
     }
     //MARK: 蒙版
     private lazy var maskLayerView: UIView = {

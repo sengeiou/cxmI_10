@@ -530,6 +530,62 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		111538C621C2140F004A2252 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 111538BF21C2140E004A2252 /* BBGestureBack.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CEDECB8F205CC3CD00C08340;
+			remoteInfo = BBGestureBack_Full_oc;
+		};
+		111538C821C2140F004A2252 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 111538BF21C2140E004A2252 /* BBGestureBack.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CFD0E96B207A621C00E58465;
+			remoteInfo = BBGestureBack_Full_swift;
+		};
+		111538CA21C2140F004A2252 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 111538BF21C2140E004A2252 /* BBGestureBack.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CF73731120B5592A00BBE7AC;
+			remoteInfo = BBGestureBack_SysFull_oc;
+		};
+		111538CC21C2140F004A2252 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 111538BF21C2140E004A2252 /* BBGestureBack.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CF395E0A20BD496B00434CC7;
+			remoteInfo = BBGestureBack_SysFull_swift;
+		};
+		111538D421C2146C004A2252 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 111538CE21C2146C004A2252 /* LoadingView.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6E12CBE621A80B0500D9B925;
+			remoteInfo = LoadingView;
+		};
+		111538D621C2146C004A2252 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 111538CE21C2146C004A2252 /* LoadingView.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6E12CBFA21A80B0600D9B925;
+			remoteInfo = LoadingViewTests;
+		};
+		111538D821C2146C004A2252 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 111538CE21C2146C004A2252 /* LoadingView.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6E12CC0521A80B0600D9B925;
+			remoteInfo = LoadingViewUITests;
+		};
+		111538DE21C2159D004A2252 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 111538DA21C2159D004A2252 /* AKExcelDemo.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4BDDB5871EDE71EB00B746C4;
+			remoteInfo = AKExcelDemo;
+		};
 		E57375B420468B8900148622 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E573759720468B8900148622 /* Project object */;
@@ -555,6 +611,9 @@
 		11062B28208344DC001C1D14 /* CXMLotteryMoreFilterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMLotteryMoreFilterVC.swift; sourceTree = "<group>"; };
 		11062B2C20834A60001C1D14 /* LotteryDateFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryDateFilterCell.swift; sourceTree = "<group>"; };
 		11062B2E20834BFA001C1D14 /* LotteryDateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryDateModel.swift; sourceTree = "<group>"; };
+		111538BF21C2140E004A2252 /* BBGestureBack.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BBGestureBack.xcodeproj; path = "BBGestureBack-master/BBGestureBack.xcodeproj"; sourceTree = "<group>"; };
+		111538CE21C2146C004A2252 /* LoadingView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LoadingView.xcodeproj; path = "XLoadingView-master/LoadingView.xcodeproj"; sourceTree = "<group>"; };
+		111538DA21C2159D004A2252 /* AKExcelDemo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AKExcelDemo.xcodeproj; path = AKExcelDemo/AKExcelDemo.xcodeproj; sourceTree = "<group>"; };
 		11174BF121ABF8EE007E0940 /* UIImageViewEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewEx.swift; sourceTree = "<group>"; };
 		111A982A20945796003CA901 /* NewsDeatilTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDeatilTitleCell.swift; sourceTree = "<group>"; };
 		11227C0920849D9700680CCC /* CXMFootballMatchInfoPopVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMFootballMatchInfoPopVC.swift; sourceTree = "<group>"; };
@@ -1130,6 +1189,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		111538C021C2140E004A2252 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				111538C721C2140F004A2252 /* BBGestureBack_Full_oc.app */,
+				111538C921C2140F004A2252 /* BBGestureBack_Full_swift.app */,
+				111538CB21C2140F004A2252 /* BBGestureBack_SysFull_oc.app */,
+				111538CD21C2140F004A2252 /* BBGestureBack_SysFull_swift.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		111538CF21C2146C004A2252 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				111538D521C2146C004A2252 /* LoadingView.app */,
+				111538D721C2146C004A2252 /* LoadingViewTests.xctest */,
+				111538D921C2146C004A2252 /* LoadingViewUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		111538DB21C2159D004A2252 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				111538DF21C2159D004A2252 /* AKExcelDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		111A982C20948128003CA901 /* Router */ = {
 			isa = PBXGroup;
 			children = (
@@ -2336,6 +2424,9 @@
 		E57375A120468B8900148622 /* 彩小蜜 */ = {
 			isa = PBXGroup;
 			children = (
+				111538DA21C2159D004A2252 /* AKExcelDemo.xcodeproj */,
+				111538CE21C2146C004A2252 /* LoadingView.xcodeproj */,
+				111538BF21C2140E004A2252 /* BBGestureBack.xcodeproj */,
 				118C4C2820BA922B009FF712 /* 彩小蜜.entitlements */,
 				E57375D52046AE1900148622 /* Resource */,
 			);
@@ -3147,6 +3238,20 @@
 			mainGroup = E573759620468B8900148622;
 			productRefGroup = E57375A020468B8900148622 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 111538DB21C2159D004A2252 /* Products */;
+					ProjectRef = 111538DA21C2159D004A2252 /* AKExcelDemo.xcodeproj */;
+				},
+				{
+					ProductGroup = 111538C021C2140E004A2252 /* Products */;
+					ProjectRef = 111538BF21C2140E004A2252 /* BBGestureBack.xcodeproj */;
+				},
+				{
+					ProductGroup = 111538CF21C2146C004A2252 /* Products */;
+					ProjectRef = 111538CE21C2146C004A2252 /* LoadingView.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				E573759E20468B8900148622 /* 彩小蜜 */,
@@ -3155,6 +3260,65 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		111538C721C2140F004A2252 /* BBGestureBack_Full_oc.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = BBGestureBack_Full_oc.app;
+			remoteRef = 111538C621C2140F004A2252 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		111538C921C2140F004A2252 /* BBGestureBack_Full_swift.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = BBGestureBack_Full_swift.app;
+			remoteRef = 111538C821C2140F004A2252 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		111538CB21C2140F004A2252 /* BBGestureBack_SysFull_oc.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = BBGestureBack_SysFull_oc.app;
+			remoteRef = 111538CA21C2140F004A2252 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		111538CD21C2140F004A2252 /* BBGestureBack_SysFull_swift.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = BBGestureBack_SysFull_swift.app;
+			remoteRef = 111538CC21C2140F004A2252 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		111538D521C2146C004A2252 /* LoadingView.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = LoadingView.app;
+			remoteRef = 111538D421C2146C004A2252 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		111538D721C2146C004A2252 /* LoadingViewTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = LoadingViewTests.xctest;
+			remoteRef = 111538D621C2146C004A2252 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		111538D921C2146C004A2252 /* LoadingViewUITests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = LoadingViewUITests.xctest;
+			remoteRef = 111538D821C2146C004A2252 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		111538DF21C2159D004A2252 /* AKExcelDemo.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = AKExcelDemo.app;
+			remoteRef = 111538DE21C2159D004A2252 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		E573759D20468B8900148622 /* Resources */ = {

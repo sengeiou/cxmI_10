@@ -165,9 +165,9 @@ extension LocationManager:CLLocationManagerDelegate {
                 //市
                 if let locality = firstPlaceMark?.locality {
                     self.curAddress?.append(locality)
-                    model.locality = locality
+                    model.locality = locality.replacingOccurrences(of: "市", with: "")
                     if model.administrativeArea == "" {
-                        model.administrativeArea = locality
+                        model.administrativeArea = locality.replacingOccurrences(of: "市", with: "")
                     }
                 }
                 //区

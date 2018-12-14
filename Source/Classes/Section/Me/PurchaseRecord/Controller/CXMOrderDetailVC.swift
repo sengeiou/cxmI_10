@@ -120,7 +120,7 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        showMask()
+        
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -145,6 +145,8 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
                 weakSelf?.orderInfo = data
                 weakSelf?.header.orderInfo = self.orderInfo
                 weakSelf?.tableView.reloadData()
+                
+                weakSelf?.showMask()
             }, onError: { (error) in
                 //self.dismissProgressHud()
                 weakSelf?.tableView.endrefresh()
@@ -395,16 +397,39 @@ extension CXMOrderDetailVC {
             UserDefaults.standard.set(true, forKey: MaskShow)
             let model = HXGuideInfoModel()
             model.text = """
-            添加彩票店主微信号完成后
+                        添加彩票店主微信号完成后
             返回APP订单页，点击此按钮分享给微信店主
             """
-            
+        
             model.frameBaseWindow = share.convert(share.bounds, to: nil)
             model.textColor = ColorFFFFFF
             model.insetEdge = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             model.maskCornerRadius = 15
+        
+        
+            let model2 = HXGuideInfoModel()
+            model2.text = """
+            首先添加店主微信号
+            """
+        
+            if orderInfo != nil && orderInfo.appendInfoList.isEmpty == false {
+                if orderInfo.appendInfoList[0].type == "1" {
+                    DispatchQueue.main.async {
+                        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 2), at: .none, animated: true)
+                    }
+                    if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 2)) {
+                        model2.frameBaseWindow = CGRect(x: 0, y: UIScreen.main.bounds.size.height - cell.bounds.size.height, width: cell.bounds.size.width, height: cell.bounds.size.height)
+                        model2.textColor = ColorFFFFFF
+                        model2.insetEdge = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+                        model2.maskCornerRadius = 15
+                        
+                        modes.append(model2)
+                    }
+                }
+            }
+        
             modes.append(model)
-            
+        
             let gv = HXGuideMaskView(frame: self.view.bounds)
             gv.showMask(data: modes)
         }

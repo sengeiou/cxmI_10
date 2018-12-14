@@ -721,7 +721,9 @@ extension CXMHomeViewController : ActivityPopVCDelegate {
             activity.configure(with: img.size.width, height: img.size.height)
             activity.delegate = self
             
-            self.present(activity)
+            DispatchQueue.main.async {
+                self.present(activity)
+            }
         }
     }
     
