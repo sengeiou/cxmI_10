@@ -288,6 +288,7 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
         let cell = tableView.dequeueReusableCell(withIdentifier: "OrderDetailQRCodeCell", for: indexPath) as! OrderDetailQRCodeCell
         cell.delegate = self
         cell.configure(with: orderInfo.appendInfoList[indexPath.row])
+        print(cell.frame)
         return cell
     }
     
@@ -394,6 +395,8 @@ extension CXMOrderDetailVC {
     private func showMask() {
         
         if UserDefaults.standard.bool(forKey: MaskShow) == false {
+        
+            let gv = HXGuideMaskView(frame: self.view.bounds)
             UserDefaults.standard.set(true, forKey: MaskShow)
             let model = HXGuideInfoModel()
             model.text = """
@@ -417,8 +420,18 @@ extension CXMOrderDetailVC {
                     DispatchQueue.main.async {
                         self.tableView.scrollToRow(at: IndexPath(row: 0, section: 2), at: .none, animated: true)
                     }
-                    if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 2)) {
-                        model2.frameBaseWindow = CGRect(x: 0, y: UIScreen.main.bounds.size.height - cell.bounds.size.height, width: cell.bounds.size.width, height: cell.bounds.size.height)
+                    
+                    if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 2)) as? OrderDetailQRCodeCell {
+                        
+                        if cell.frame.maxY >= tableView.bounds.size.height {
+                            
+                            model2.frameBaseWindow = CGRect(x: 0, y: UIScreen.main.bounds.size.height - cell.bounds.size.height, width: cell.bounds.size.width, height: cell.bounds.size.height)
+                        }else {
+                            var fra = cell.frame
+                            fra.origin.y -= 68.0
+                            model2.frameBaseWindow = gv.convert(fra, from: cell.superview!)
+                        }
+                        
                         model2.textColor = ColorFFFFFF
                         model2.insetEdge = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
                         model2.maskCornerRadius = 15
@@ -430,7 +443,7 @@ extension CXMOrderDetailVC {
         
             modes.append(model)
         
-            let gv = HXGuideMaskView(frame: self.view.bounds)
+        
             gv.showMask(data: modes)
         }
     }

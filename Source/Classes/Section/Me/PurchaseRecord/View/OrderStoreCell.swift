@@ -61,6 +61,7 @@ extension OrderStoreCell {
         image.image = UIImage(named: "renzheng")
         
         enterStore = UIButton(type: .custom)
+        enterStore.isUserInteractionEnabled = false
         enterStore.setTitle("进店逛逛", for: .normal)
         enterStore.setTitleColor(Color404040, for: .normal)
         enterStore.titleLabel?.font = Font15
