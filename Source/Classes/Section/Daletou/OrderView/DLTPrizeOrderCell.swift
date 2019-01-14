@@ -55,7 +55,7 @@ extension DLTPrizeOrderCell {
         default: break
         }
         
-        detailLabel.text = type + " \(orderInfo.betNum)注" + " \(orderInfo.cathectic)倍" + " \(orderInfo.amount).00元" + append
+        detailLabel.text = type + " \(orderInfo.betNum)注" + " \(orderInfo.cathectic)倍" + " \(orderInfo.amount).00" + append
          
         
         self.collectionView.reloadData()

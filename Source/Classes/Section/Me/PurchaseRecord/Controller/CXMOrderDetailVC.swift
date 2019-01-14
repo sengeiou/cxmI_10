@@ -384,7 +384,8 @@ extension CXMOrderDetailVC : ShareProtocol {
         
         var model = ShareContentModel()
         model.title = orderInfo.orderSn
-        model.sharingType = .text
+        model.urlStr = orderInfo.orderShareUrl
+        model.sharingType = .webPage
         share(model, from: self)
     }
 }

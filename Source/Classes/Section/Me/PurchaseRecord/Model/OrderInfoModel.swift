@@ -45,6 +45,7 @@ struct OrderInfoModel: HandyJSON {
     var redirectUrl : String!
     
     var betNum : String = ""
+    
     /// 客服二维码
     var addFriendsQRBarUrl : String = ""
     /// 是否显示合作店铺 0 不显示 1 显示
@@ -52,6 +53,7 @@ struct OrderInfoModel: HandyJSON {
     
     var appendInfoList : [AppendInfo] = [AppendInfo]()
     
+    var orderShareUrl : String = ""
 }
 
 struct MatchInfo: HandyJSON {

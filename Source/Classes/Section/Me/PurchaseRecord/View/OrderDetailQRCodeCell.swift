@@ -41,6 +41,8 @@ class OrderDetailQRCodeCell: UITableViewCell {
         delegate.didTipCall(cell: self, model: model)
     }
     
+    
+    
 }
 
 extension OrderDetailQRCodeCell {
