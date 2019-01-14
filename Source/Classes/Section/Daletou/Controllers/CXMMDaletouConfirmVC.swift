@@ -75,11 +75,14 @@ class CXMMDaletouConfirmVC: BaseViewController {
         self.bottomView.delegate = self
         self.tableView.reloadData()
         
-        settingData()
+//        settingData()
         initSubview()
         
     }
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        settingData()
+    }
     private func settingData() {
         _ = Observable.combineLatest(bettingNum, multiple, money, agreement)
             .asObservable()
@@ -94,7 +97,7 @@ class CXMMDaletouConfirmVC: BaseViewController {
                 
                 let att = NSMutableAttributedString(string: "\(num)注\(multiple)倍 共需: ")
                 
-                let money = NSAttributedString(string: "¥\(num * money * multiple)",
+                let money = NSAttributedString(string: "\(num * money * multiple).00",
                     attributes: [NSAttributedStringKey.foregroundColor: ColorE85504])
                 att.append(money)
                 self.bottomView.moneyLabel.attributedText = att

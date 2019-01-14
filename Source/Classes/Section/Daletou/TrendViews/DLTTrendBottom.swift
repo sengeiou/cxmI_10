@@ -69,7 +69,7 @@ extension DLTTrendBottom {
                 att.append(numAtt)
                 att.append(defa)
                 att.append(money)
-                att.append(yuan)
+//                att.append(yuan)
                 self.detailLabel.attributedText = att
                 self.confirmBut.backgroundColor = ColorE85504
                 self.confirmBut.isUserInteractionEnabled = true

@@ -145,7 +145,7 @@ class CXMMDaletouViewController: BaseViewController {
                 att.append(numAtt)
                 att.append(defa)
                 att.append(money)
-                att.append(yuan)
+//                att.append(yuan)
                 self.bottomView.titleLabel.attributedText = att
                 self.bottomView.confirmBut.backgroundColor = ColorE85504
                 self.bottomView.confirmBut.isUserInteractionEnabled = true
