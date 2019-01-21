@@ -87,7 +87,7 @@ class CXMOrderSchemeVC: BaseViewController, UITableViewDelegate, UITableViewData
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard self.orderSchemeInfo != nil && orderSchemeInfo.ticketSchemeDetailDTOs.isEmpty == false else { return 0 }
+        guard self.orderSchemeInfo != nil && orderSchemeInfo.ticketSchemeDetailDTOs.isEmpty == false else { return 1 }
         return self.orderSchemeInfo.ticketSchemeDetailDTOs.count + 1
     }
     
