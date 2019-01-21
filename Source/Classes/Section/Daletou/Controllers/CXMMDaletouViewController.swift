@@ -47,7 +47,10 @@ class CXMMDaletouViewController: BaseViewController {
     
     private var type : DaletouType = .标准选号 {
         didSet{
-            titleView.setTitle(type.rawValue, for: .normal)
+            
+            if titleView != nil {
+                titleView.setTitle(type.rawValue, for: .normal)
+            }
             
             switch type {
             case .标准选号:
@@ -110,7 +113,13 @@ class CXMMDaletouViewController: BaseViewController {
         super.viewDidLoad()
         menu.delegate = self
         bottomView.delegate = self
-        setNavigationTitleView()
+        
+        if UserDefaults.standard.bool(forKey: "dantuoIsOpen") {
+            setNavigationTitleView()
+        }else {
+            self.navigationItem.title = "标准选号"
+        }
+    
         setTableview()
         setSubview()
         
@@ -721,9 +730,15 @@ extension CXMMDaletouViewController : UITableViewDelegate {
 extension CXMMDaletouViewController : CXMMDaletouMenuDelegate {
     
     func didTipMenu(view: CXMMDaletouMenu, type: DaletouType) {
-        
-        self.type = type
         titleIcon.image = UIImage(named: "Down")
+        guard UserDefaults.standard.bool(forKey: "dantuoIsOpen") else {
+            if type == .胆拖选号 {
+                showHUD(message: "敬请期待")
+            }
+            return
+        }
+        self.type = type
+        
     }
     func didCancel() {
         titleIcon.image = UIImage(named: "Down")
@@ -752,6 +767,10 @@ extension CXMMDaletouViewController : CXMMDaletouMenuDelegate {
     }
     
     @objc private func titleViewClicked(_ sender: UIButton) {
+        
+        guard UserDefaults.standard.bool(forKey: "dantuoIsOpen") else {
+            return
+        }
         showMatchMenu()
         titleIcon.image = UIImage(named: "Upon")
     }
@@ -806,6 +825,9 @@ extension CXMMDaletouViewController {
             .mapObject(type: DaletouOmissionModel.self)
             .subscribe(onNext: { (data) in
                 self.omissionModel = data
+            
+                UserDefaults.standard.set(data.isShowDragOn, forKey: "dantuoIsOpen")
+                
                 self.prizeList = data.prizeList
                 for i in 0..<self.redList.count {
                     self.redList[i].omissionNum = self.omissionModel.preList[i]

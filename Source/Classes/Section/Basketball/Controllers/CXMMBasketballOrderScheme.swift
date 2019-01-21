@@ -26,7 +26,7 @@ class CXMMBasketballOrderScheme: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "出票方案"
+        self.navigationItem.title = "模拟方案"
 //        setData()
         initSubview()
         loadNewData()

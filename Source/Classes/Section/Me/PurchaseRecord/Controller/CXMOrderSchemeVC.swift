@@ -20,7 +20,7 @@ class CXMOrderSchemeVC: BaseViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "出票方案"
+        self.title = "模拟方案"
         self.view.addSubview(self.tableView)
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
