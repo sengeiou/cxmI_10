@@ -133,7 +133,7 @@ class BasePopViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, 
         return UIImage(named: "empty")
     }
     func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        let att = NSAttributedString(string: emptyTitle, attributes: [NSAttributedStringKey.foregroundColor: ColorA0A0A0, NSAttributedStringKey.font: Font15])
+        let att = NSAttributedString(string: emptyTitle, attributes: [NSAttributedString.Key.foregroundColor: ColorA0A0A0, NSAttributedString.Key.font: Font15])
         return att
     }
     func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {

@@ -24,7 +24,7 @@ class CountdownButton: UIButton {
         didSet{
             if stop {
                 isCounting = false
-                let title = NSAttributedString(string: "获取短信验证码", attributes: [NSAttributedStringKey.foregroundColor: ColorA0A0A0])
+                let title = NSAttributedString(string: "获取短信验证码", attributes: [NSAttributedString.Key.foregroundColor: ColorA0A0A0])
                 self.setAttributedTitle(title, for: .normal)
             }
         }
@@ -50,14 +50,14 @@ class CountdownButton: UIButton {
     
     private var remainingSeconds: Int = 0 {
         willSet {
-            let second = NSAttributedString(string: "\(newValue)s", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
-            let title = NSMutableAttributedString(string: "验证码已发送", attributes: [NSAttributedStringKey.foregroundColor: ColorA0A0A0])
+            let second = NSAttributedString(string: "\(newValue)s", attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
+            let title = NSMutableAttributedString(string: "验证码已发送", attributes: [NSAttributedString.Key.foregroundColor: ColorA0A0A0])
             title.append(second)
             
             self.setAttributedTitle(title, for: .normal)
             
             if newValue <= 0 {
-                let title = NSAttributedString(string: "重新获取验证码", attributes: [NSAttributedStringKey.foregroundColor: ColorA0A0A0])
+                let title = NSAttributedString(string: "重新获取验证码", attributes: [NSAttributedString.Key.foregroundColor: ColorA0A0A0])
                 self.setAttributedTitle(title, for: .normal)
                 isCounting = false
             }

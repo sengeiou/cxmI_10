@@ -189,7 +189,7 @@ extension CXMMDaletouOrderVC {
         orderStatus.text = orderModel.orderStatusDesc
         
         // 1.2.0 去掉¥符号
-        let moneyAtt = NSMutableAttributedString(string: "", attributes: [NSAttributedStringKey.font: Font10])
+        let moneyAtt = NSMutableAttributedString(string: "", attributes: [NSAttributedString.Key.font: Font10])
         let money = NSAttributedString(string: orderModel.ticketAmount)
         moneyAtt.append(money)
         

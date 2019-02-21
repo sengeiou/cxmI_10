@@ -194,7 +194,7 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
         tableView.tableHeaderView = header
         
         tableView.estimatedRowHeight = 80
-        //table.rowHeight = UITableViewAutomaticDimension
+        //table.rowHeight = UITableView.automaticDimension
         
         tableView.register(OrderDetailTitleCell.self, forCellReuseIdentifier: OrderDetailTitleCellId)
         tableView.register(OrderDetailCell.self, forCellReuseIdentifier: OrderDetailCellId)
@@ -299,7 +299,7 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
             if indexPath.row == 0 {
                 return 65 * defaultScale
             }else {
-                return UITableViewAutomaticDimension
+                return UITableView.automaticDimension
             }
         case 1:
             return 124

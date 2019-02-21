@@ -306,7 +306,7 @@ class CXMFootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITabl
         case .总进球:
             return 125 * defaultScale
         case .混合过关:
-            return UITableViewAutomaticDimension
+            return UITableView.automaticDimension
         case .二选一:
             return 101 * defaultScale
         default:

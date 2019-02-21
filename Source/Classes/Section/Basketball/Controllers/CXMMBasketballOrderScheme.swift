@@ -84,7 +84,7 @@ extension CXMMBasketballOrderScheme : UITableViewDataSource {
 }
 extension CXMMBasketballOrderScheme {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
 }
 // MARK: - 网络请求

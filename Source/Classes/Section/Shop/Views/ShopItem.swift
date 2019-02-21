@@ -35,7 +35,7 @@ extension ShopItem {
         goodsPrice.text = "¥ " + data.presentPrice
         salesNum.text = data.paidNum + "人付款"
         
-        let historyPrice = NSMutableAttributedString(string: "¥ \(data.historyPrice)" , attributes: [NSAttributedStringKey.strikethroughStyle : 1])
+        let historyPrice = NSMutableAttributedString(string: "¥ \(data.historyPrice)" , attributes: [NSAttributedString.Key.strikethroughStyle : 1])
         
         hisPrice.attributedText = historyPrice
     }

@@ -49,15 +49,15 @@ class FootballOddsCell: UITableViewCell {
             }
             
             let homeMuAtt = NSMutableAttributedString(string: "\(europeInfo.initWin!)\n")
-            let homeAtt = NSAttributedString(string: "\(europeInfo.realWin!)\(homeUp)", attributes: [NSAttributedStringKey.foregroundColor: homeColor])
+            let homeAtt = NSAttributedString(string: "\(europeInfo.realWin!)\(homeUp)", attributes: [NSAttributedString.Key.foregroundColor: homeColor])
             homeMuAtt.append(homeAtt)
             
             let flatMuAtt = NSMutableAttributedString(string: "\(europeInfo.initDraw!)\n")
-            let flatAtt = NSAttributedString(string: "\(europeInfo.realDraw!)\(flatUp)", attributes: [NSAttributedStringKey.foregroundColor: flatColor])
+            let flatAtt = NSAttributedString(string: "\(europeInfo.realDraw!)\(flatUp)", attributes: [NSAttributedString.Key.foregroundColor: flatColor])
             flatMuAtt.append(flatAtt)
             
             let visiMuAtt = NSMutableAttributedString(string: "\(europeInfo.initLose!)\n")
-            let visiAtt = NSAttributedString(string: "\(europeInfo.realLose!)\(visiUp)", attributes: [NSAttributedStringKey.foregroundColor: visiColor])
+            let visiAtt = NSAttributedString(string: "\(europeInfo.realLose!)\(visiUp)", attributes: [NSAttributedString.Key.foregroundColor: visiColor])
             visiMuAtt.append(visiAtt)
             
             homelb.attributedText = homeMuAtt
@@ -94,11 +94,11 @@ class FootballOddsCell: UITableViewCell {
             }
             
             let homeMuAtt = NSMutableAttributedString(string: "\(asiaInfo.initOdds1!)\n")
-            let homeAtt = NSAttributedString(string: "\(asiaInfo.realOdds1!)\(homeUp)", attributes: [NSAttributedStringKey.foregroundColor: homeColor])
+            let homeAtt = NSAttributedString(string: "\(asiaInfo.realOdds1!)\(homeUp)", attributes: [NSAttributedString.Key.foregroundColor: homeColor])
             homeMuAtt.append(homeAtt)
             
             let visiMuAtt = NSMutableAttributedString(string: "\(asiaInfo.initOdds2!)\n")
-            let visiAtt = NSAttributedString(string: "\(asiaInfo.realOdds2!)\(visiUp)", attributes: [NSAttributedStringKey.foregroundColor: visiColor])
+            let visiAtt = NSAttributedString(string: "\(asiaInfo.realOdds2!)\(visiUp)", attributes: [NSAttributedString.Key.foregroundColor: visiColor])
             visiMuAtt.append(visiAtt)
             
             homelb.attributedText = homeMuAtt
@@ -144,15 +144,15 @@ class FootballOddsCell: UITableViewCell {
             }
             
             let homeMuAtt = NSMutableAttributedString(string: "\(daxiaoInfo.initWin!)\n")
-            let homeAtt = NSAttributedString(string: "\(daxiaoInfo.realWin!)\(homeUp)", attributes: [NSAttributedStringKey.foregroundColor: homeColor])
+            let homeAtt = NSAttributedString(string: "\(daxiaoInfo.realWin!)\(homeUp)", attributes: [NSAttributedString.Key.foregroundColor: homeColor])
             homeMuAtt.append(homeAtt)
             
             let flatMuAtt = NSMutableAttributedString(string: "\(daxiaoInfo.initDraw!)\n")
-            let flatAtt = NSAttributedString(string: "\(daxiaoInfo.realDraw!)\(flatUp)", attributes: [NSAttributedStringKey.foregroundColor: flatColor])
+            let flatAtt = NSAttributedString(string: "\(daxiaoInfo.realDraw!)\(flatUp)", attributes: [NSAttributedString.Key.foregroundColor: flatColor])
             flatMuAtt.append(flatAtt)
             
             let visiMuAtt = NSMutableAttributedString(string: "\(daxiaoInfo.initLose!)\n")
-            let visiAtt = NSAttributedString(string: "\(daxiaoInfo.realLose!)\(visiUp)", attributes: [NSAttributedStringKey.foregroundColor: visiColor])
+            let visiAtt = NSAttributedString(string: "\(daxiaoInfo.realLose!)\(visiUp)", attributes: [NSAttributedString.Key.foregroundColor: visiColor])
             visiMuAtt.append(visiAtt)
             
             homelb.attributedText = homeMuAtt
@@ -171,7 +171,7 @@ class FootballOddsCell: UITableViewCell {
     private var topLine : UIImageView!
     
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initSubview()
     }

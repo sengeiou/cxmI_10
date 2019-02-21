@@ -27,9 +27,9 @@ class BBSchemeViewModel {
 extension BBSchemeViewModel {
     public func setData(data : OrderSchemeInfoModel, programmeSn: String) {
         let muPro = NSMutableAttributedString(string: "模拟编号: ",
-                                              attributes: [NSAttributedStringKey.foregroundColor : ColorA0A0A0])
+                                              attributes: [NSAttributedString.Key.foregroundColor : ColorA0A0A0])
         let pro = NSAttributedString(string: "\(programmeSn)",
-                                        attributes: [NSAttributedStringKey.foregroundColor : Color505050])
+                                        attributes: [NSAttributedString.Key.foregroundColor : Color505050])
         muPro.append(pro)
         
         programme.onNext(muPro)

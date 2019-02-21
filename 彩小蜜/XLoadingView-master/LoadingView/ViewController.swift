@@ -47,7 +47,7 @@ extension ViewController: XLoadingViewDelegate {
     func loadingViewPromptText(_ loadingView: XLoadingView) -> NSAttributedString? {
         switch loadingView.state {
         case .error:
-            return NSAttributedString(string: "网络未连接，点击重新加载", attributes: [NSAttributedStringKey.foregroundColor: UIColor.darkGray])
+            return NSAttributedString(string: "网络未连接，点击重新加载", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
         default:
             return nil
         }

@@ -24,7 +24,7 @@ class UserInfoIconCell: UITableViewCell {
     private var titleLabel: UILabel!
     private var icon : UIImageView!
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         initSubview()

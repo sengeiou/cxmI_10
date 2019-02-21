@@ -117,8 +117,8 @@ class BBConfirmViewModel : AlertPro, DateProtocol {
         
         let time = timeStampToHHmm(timeInt)
         
-        let attStr = NSMutableAttributedString(string: "已选\(sePlayList.count)场比赛 投注截止时间：", attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F])
-        let att = NSAttributedString(string: time, attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+        let attStr = NSMutableAttributedString(string: "已选\(sePlayList.count)场比赛 投注截止时间：", attributes: [NSAttributedString.Key.foregroundColor: Color9F9F9F])
+        let att = NSAttributedString(string: time, attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
         attStr.append(att)
         
         self.topText.onNext(attStr)

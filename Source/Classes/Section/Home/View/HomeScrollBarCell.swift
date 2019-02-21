@@ -23,7 +23,7 @@ class HomeScrollBarCell: UITableViewCell, FSPagerViewDataSource, FSPagerViewDele
     private var bgView: UIView!
     private var icon : UIImageView!
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         initSubview()
@@ -97,9 +97,9 @@ class HomeScrollBarCell: UITableViewCell, FSPagerViewDataSource, FSPagerViewDele
         
         let winning = winningList[index]
         
-        let muAtt = NSMutableAttributedString(string: winning.winningMsg, attributes: [NSAttributedStringKey.foregroundColor: Color787878])
-        let att = NSAttributedString(string: "\(winning.winningMoney!)", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
-        let at = NSAttributedString(string: "元", attributes: [NSAttributedStringKey.foregroundColor: Color787878])
+        let muAtt = NSMutableAttributedString(string: winning.winningMsg, attributes: [NSAttributedString.Key.foregroundColor: Color787878])
+        let att = NSAttributedString(string: "\(winning.winningMoney!)", attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
+        let at = NSAttributedString(string: "元", attributes: [NSAttributedString.Key.foregroundColor: Color787878])
         
         muAtt.append(att)
 //        muAtt.append(at)

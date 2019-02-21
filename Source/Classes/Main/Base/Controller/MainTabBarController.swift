@@ -170,8 +170,8 @@ extension MainTabBarController {
             
             let nav = UINavigationController(rootViewController: vc)
             nav.navigationBar.barTintColor = ColorD12120
-            nav.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: Font17, NSAttributedStringKey.foregroundColor: UIColor.white]
-            addChildViewController(nav)
+            nav.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: Font17, NSAttributedString.Key.foregroundColor: UIColor.white]
+            addChild(nav)
         }
     }
     

@@ -215,18 +215,18 @@ extension BasketballHunheCell {
                 
                 if num <= 0 {
                     let att = NSMutableAttributedString(string: "更多\n玩法",
-                                                        attributes: [NSAttributedStringKey.foregroundColor : Color505050])
+                                                        attributes: [NSAttributedString.Key.foregroundColor : Color505050])
                     self?.moreButton.setAttributedTitle(att, for: .normal)
                     
                 }else {
                     
 
                     let muatt = NSMutableAttributedString(string: "已选\n",
-                                                          attributes: [NSAttributedStringKey.foregroundColor : Color505050])
+                                                          attributes: [NSAttributedString.Key.foregroundColor : Color505050])
                     let numAtt = NSAttributedString(string: "\(num)",
-                                                    attributes: [NSAttributedStringKey.foregroundColor : ColorEA5504])
+                                                    attributes: [NSAttributedString.Key.foregroundColor : ColorEA5504])
                     let att = NSAttributedString(string: "项",
-                        attributes: [NSAttributedStringKey.foregroundColor : Color505050])
+                        attributes: [NSAttributedString.Key.foregroundColor : Color505050])
                     muatt.append(numAtt)
                     muatt.append(att)
                     self?.moreButton.setAttributedTitle(muatt, for: .normal)
@@ -244,20 +244,20 @@ extension BasketballHunheCell {
         changeSellerState(isSeller: true)
         // 客队名
         let visiMuatt = NSMutableAttributedString(string: "[客]",
-                                                  attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F,
-                                                               NSAttributedStringKey.font: Font14])
+                                                  attributes: [NSAttributedString.Key.foregroundColor: Color9F9F9F,
+                                                               NSAttributedString.Key.font: Font14])
         let visiAtt = NSAttributedString(string: data.visitingTeamAbbr,
-                                         attributes: [NSAttributedStringKey.foregroundColor: Color505050,
-                                                      NSAttributedStringKey.font: Font14])
+                                         attributes: [NSAttributedString.Key.foregroundColor: Color505050,
+                                                      NSAttributedString.Key.font: Font14])
         visiMuatt.append(visiAtt)
         visiTeam.attributedText = visiMuatt
         // 主队名
         let homeMuatt = NSMutableAttributedString(string: "[主]",
-                                                  attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F,
-                                                               NSAttributedStringKey.font: Font14])
+                                                  attributes: [NSAttributedString.Key.foregroundColor: Color9F9F9F,
+                                                               NSAttributedString.Key.font: Font14])
         let homeAtt = NSAttributedString(string: data.homeTeamAbbr,
-                                         attributes: [NSAttributedStringKey.foregroundColor: Color505050,
-                                                      NSAttributedStringKey.font : Font14])
+                                         attributes: [NSAttributedString.Key.foregroundColor: Color505050,
+                                                      NSAttributedString.Key.font : Font14])
         homeMuatt.append(homeAtt)
         homeTeam.attributedText = homeMuatt
         
@@ -422,8 +422,8 @@ extension BasketballHunheCell {
     
     private func getAttributedString(cellName : String, cellOdds : String, fixedOdds : String? = nil) -> NSAttributedString {
         let cellNameAtt = NSMutableAttributedString(string: cellName,
-                                                  attributes: [NSAttributedStringKey.foregroundColor: Color505050,
-                                                               NSAttributedStringKey.font : Font14])
+                                                  attributes: [NSAttributedString.Key.foregroundColor: Color505050,
+                                                               NSAttributedString.Key.font : Font14])
         
         if let fix = fixedOdds {
             var color : UIColor
@@ -433,13 +433,13 @@ extension BasketballHunheCell {
             }else {
                 color = Color44AE35
             }
-            let fixAtt = NSAttributedString(string: "(\(fix))", attributes: [NSAttributedStringKey.foregroundColor : color])
+            let fixAtt = NSAttributedString(string: "(\(fix))", attributes: [NSAttributedString.Key.foregroundColor : color])
             cellNameAtt.append(fixAtt)
         }
         
         let cellOddsAtt = NSAttributedString(string: "\n\(cellOdds)",
-            attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F,
-                         NSAttributedStringKey.font: Font12])
+            attributes: [NSAttributedString.Key.foregroundColor: Color9F9F9F,
+                         NSAttributedString.Key.font: Font12])
         
         cellNameAtt.append(cellOddsAtt)
         
@@ -448,17 +448,17 @@ extension BasketballHunheCell {
     
     private func getAttributedStringSe(cellName : String, cellOdds : String, fixedOdds : String? = nil) -> NSAttributedString {
         let cellNameAtt = NSMutableAttributedString(string: cellName,
-                                                    attributes: [NSAttributedStringKey.foregroundColor: ColorFFFFFF,
-                                                                 NSAttributedStringKey.font : Font14])
+                                                    attributes: [NSAttributedString.Key.foregroundColor: ColorFFFFFF,
+                                                                 NSAttributedString.Key.font : Font14])
         
         if let fix = fixedOdds {
-            let fixAtt = NSAttributedString(string: "(\(fix))", attributes: [NSAttributedStringKey.foregroundColor : ColorFFFFFF])
+            let fixAtt = NSAttributedString(string: "(\(fix))", attributes: [NSAttributedString.Key.foregroundColor : ColorFFFFFF])
             cellNameAtt.append(fixAtt)
         }
         
         let cellOddsAtt = NSAttributedString(string: "\n\(cellOdds)",
-            attributes: [NSAttributedStringKey.foregroundColor: ColorFFFFFF,
-                         NSAttributedStringKey.font: Font12])
+            attributes: [NSAttributedString.Key.foregroundColor: ColorFFFFFF,
+                         NSAttributedString.Key.font: Font12])
         
         cellNameAtt.append(cellOddsAtt)
         

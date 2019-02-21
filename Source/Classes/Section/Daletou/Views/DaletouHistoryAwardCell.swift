@@ -23,7 +23,7 @@ class DaletouHistoryAwardCell: UITableViewCell {
     private var blue1: UILabel!
     private var blue2: UILabel!
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initSubview()
     }

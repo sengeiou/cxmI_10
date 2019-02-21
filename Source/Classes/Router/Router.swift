@@ -255,10 +255,10 @@ extension RouterPro {
     func getCurrentVC()->UIViewController{
         
         var window = UIApplication.shared.keyWindow
-        if window?.windowLevel != UIWindowLevelNormal{
+        if window?.windowLevel != UIWindow.Level.normal{
             let windows = UIApplication.shared.windows
             for  tempwin in windows{
-                if tempwin.windowLevel == UIWindowLevelNormal{
+                if tempwin.windowLevel == UIWindow.Level.normal{
                     window = tempwin
                     break
                 }
@@ -367,10 +367,10 @@ struct Router : RouterMatcher {
     func getCurrentVC()->UIViewController{
         
         var window = UIApplication.shared.keyWindow
-        if window?.windowLevel != UIWindowLevelNormal{
+        if window?.windowLevel != UIWindow.Level.normal{
             let windows = UIApplication.shared.windows
             for  tempwin in windows{
-                if tempwin.windowLevel == UIWindowLevelNormal{
+                if tempwin.windowLevel == UIWindow.Level.normal{
                     window = tempwin
                     break
                 }

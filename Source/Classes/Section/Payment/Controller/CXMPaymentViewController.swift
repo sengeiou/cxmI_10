@@ -578,7 +578,7 @@ extension CXMPaymentViewController {
             switch indexPath.row {
             case 0:
                 cell.title.text = "订单金额"
-                let money = NSAttributedString(string:"¥" + self.saveBetInfo.orderMoney, attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+                let money = NSAttributedString(string:"¥" + self.saveBetInfo.orderMoney, attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
                 cell.detail.attributedText = money
             case 1:
                 cell.title.text = "余额抵扣"
@@ -598,7 +598,7 @@ extension CXMPaymentViewController {
                 
             case 3:
                 cell.title.text = "还需支付"
-                let money = NSAttributedString(string:"¥ " + "\(self.saveBetInfo.thirdPartyPaid!)", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+                let money = NSAttributedString(string:"¥ " + "\(self.saveBetInfo.thirdPartyPaid!)", attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
                 cell.detail.attributedText = money
             default: break
             }

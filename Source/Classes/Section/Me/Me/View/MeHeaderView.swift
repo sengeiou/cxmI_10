@@ -83,7 +83,7 @@ class MeHeaderView: UIView , UserInfoPro, AlertPro{
             attStr = NSMutableAttributedString(string: "0.00")
         }
         
-        let 元 = NSAttributedString(string: "元", attributes: [NSAttributedStringKey.font: Font14])
+        let 元 = NSAttributedString(string: "元", attributes: [NSAttributedString.Key.font: Font14])
         attStr.append(元)
         return attStr
     }

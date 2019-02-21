@@ -213,7 +213,7 @@ class CXMMeViewController: BaseViewController, UITableViewDelegate, UITableViewD
     
     // 长按操作切换不同开发环境
     @objc func longPressAction(_ sender: UIGestureRecognizer) {
-        if sender.state == UIGestureRecognizerState.began {
+        if sender.state == UIGestureRecognizer.State.began {
             print("长按")
             showPlatformActionSheet()
         }
@@ -849,7 +849,7 @@ extension CXMMeViewController: YHDPhotoSelectDelegate {
             self.newsheaderView.setIcon(image: resultImg)
         }
         
-        let data = UIImagePNGRepresentation(resultImg)
+        let data = resultImg.pngData()
         
         UserDefaults.standard.set(data, forKey: UserIconData)
         

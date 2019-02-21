@@ -87,7 +87,7 @@ class HXGuideMaskView: UIView {
         toPath.append(visualPath)
         // 遮罩的路径
         self.maskLayer.path = toPath.cgPath
-        self.maskLayer.fillRule = kCAFillRuleEvenOdd
+        self.maskLayer.fillRule = CAShapeLayerFillRule.evenOdd
         self.layer.mask = self.maskLayer
         // 开始移动动画
         let anim = CABasicAnimation.init(keyPath: "path")

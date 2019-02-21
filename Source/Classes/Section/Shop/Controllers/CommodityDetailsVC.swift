@@ -35,7 +35,7 @@ class CommodityDetailsVC: BaseViewController {
         goodsPrice.text = "¥" + goodsDetail.presentPrice
 //        hisPrice.text = "¥" + goodsDetail.historyPrice
         
-        let historyPrice = NSMutableAttributedString(string: "¥ \( goodsDetail.historyPrice)" , attributes: [NSAttributedStringKey.strikethroughStyle : 1])
+        let historyPrice = NSMutableAttributedString(string: "¥ \( goodsDetail.historyPrice)" , attributes: [NSAttributedString.Key.strikethroughStyle : 1])
         
         hisPrice.attributedText = historyPrice
     }
@@ -94,7 +94,7 @@ extension CommodityDetailsVC : UITableViewDataSource {
                 return CGFloat(count * 30) + 20 + 30
             }
         default:
-            return UITableViewAutomaticDimension
+            return UITableView.automaticDimension
         }
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

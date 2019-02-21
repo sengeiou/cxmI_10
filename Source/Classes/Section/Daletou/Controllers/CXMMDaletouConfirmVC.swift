@@ -92,13 +92,13 @@ class CXMMDaletouConfirmVC: BaseViewController {
                     self.bottomView.confirmBut.isUserInteractionEnabled = false
                     return
                 }
-                self.bottomView.confirmBut.backgroundColor = ColorE85504
+                self.bottomView.confirmBut.backgroundColor = ColorEA5504
                 self.bottomView.confirmBut.isUserInteractionEnabled = true
                 
                 let att = NSMutableAttributedString(string: "\(num)注\(multiple)倍 共需: ")
                 
                 let money = NSAttributedString(string: "\(num * money * multiple).00",
-                    attributes: [NSAttributedStringKey.foregroundColor: ColorE85504])
+                    attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
                 att.append(money)
                 self.bottomView.moneyLabel.attributedText = att
                 self.bottomView.multipleBut.setTitle("倍数 \(multiple)倍", for: .normal)
@@ -178,16 +178,19 @@ extension CXMMDaletouConfirmVC {
             .asObservable()
             .mapObject(type: SaveBetInfoModel.self)
             .subscribe(onNext: { (data) in
-                if data.payToken != "" {
-                    weakSelf?.changeConfirmButton(canTip: true)
-                    let vc = CXMPaymentViewController()
-                    vc.lottoToken = data.payToken
-                    self.pushViewController(vc: vc)
-                }else {
-                    let story = UIStoryboard(name: "Daletou", bundle: nil)
-                    let vc = story.instantiateViewController(withIdentifier: "DaletouOrderVC") as! CXMMDaletouOrderVC
-                    vc.orderId = data.orderId
-                    self.pushViewController(vc: vc)
+                
+                DispatchQueue.main.async {
+                    if data.payToken != "" {
+                        weakSelf?.changeConfirmButton(canTip: true)
+                        let vc = CXMPaymentViewController()
+                        vc.lottoToken = data.payToken
+                        self.pushViewController(vc: vc)
+                    }else {
+                        let story = UIStoryboard(name: "Daletou", bundle: nil)
+                        let vc = story.instantiateViewController(withIdentifier: "DaletouOrderVC") as! CXMMDaletouOrderVC
+                        vc.orderId = data.orderId
+                        self.pushViewController(vc: vc)
+                    }
                 }
             }, onError: { (error) in
                 weakSelf?.changeConfirmButton(canTip: true)

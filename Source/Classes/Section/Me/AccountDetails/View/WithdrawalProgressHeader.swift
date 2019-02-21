@@ -49,7 +49,7 @@ class WithdrawalProgressHeader: UIView {
         moneyLB.textAlignment = .center
         //moneyLB.text = "100.00"
         
-        let moneyAtt = NSMutableAttributedString(string: "¥", attributes: [NSAttributedStringKey.font: Font14])
+        let moneyAtt = NSMutableAttributedString(string: "¥", attributes: [NSAttributedString.Key.font: Font14])
         
         
         

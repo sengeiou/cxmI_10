@@ -203,7 +203,7 @@ extension CXMMLeagueMatchVC : UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "LeagueMatchReusableView", for: indexPath) as! LeagueMatchReusableView
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "LeagueMatchReusableView", for: indexPath) as! LeagueMatchReusableView
         
         switch indexPath.section {
         case 0:

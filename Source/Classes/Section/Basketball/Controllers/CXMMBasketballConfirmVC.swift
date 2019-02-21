@@ -94,10 +94,10 @@ class CXMMBasketballConfirmVC: BaseViewController {
     private func setBetInfo() {
         
         let moneyAtt = NSMutableAttributedString(string: "\(getBetInfoModel.betNum)注 \(getBetInfoModel.times)倍 共需：")
-        let moneyStr = NSAttributedString(string: "¥\(getBetInfoModel.money)\n", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+        let moneyStr = NSAttributedString(string: "¥\(getBetInfoModel.money)\n", attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
         
         let bonusAtt = NSAttributedString(string: "模拟预测奖金: ")
-        let bonusStr = NSAttributedString(string: "\(getBetInfoModel.minBonus)-\(getBetInfoModel.maxBonus)", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+        let bonusStr = NSAttributedString(string: "\(getBetInfoModel.minBonus)-\(getBetInfoModel.maxBonus)", attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
         
         moneyAtt.append(moneyStr)
         moneyAtt.append(bonusAtt)
@@ -242,7 +242,7 @@ extension CXMMBasketballConfirmVC {
         
         switch model.playType {
         case .混合投注, .胜分差:
-            return UITableViewAutomaticDimension
+            return UITableView.automaticDimension
         case .胜负, .让分胜负, .大小分:
             return 150
         }

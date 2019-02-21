@@ -47,9 +47,9 @@ class OrderDetailCell: UITableViewCell {
                     }
                     let cathectic = cath.cathectic.replacingOccurrences(of: "null", with: "")
 
-                    let rec = NSAttributedString(string: cathectic + "\n", attributes: [NSAttributedStringKey.foregroundColor: color])
+                    let rec = NSAttributedString(string: cathectic + "\n", attributes: [NSAttributedString.Key.foregroundColor: color])
                     
-                    let res = NSAttributedString(string: result.matchResult + "\n", attributes: [NSAttributedStringKey.foregroundColor: color])
+                    let res = NSAttributedString(string: result.matchResult + "\n", attributes: [NSAttributedString.Key.foregroundColor: color])
                     record.append(rec)
                     resultAtt.append(res)
                 }
@@ -79,7 +79,7 @@ class OrderDetailCell: UITableViewCell {
     private var danIcon : UIImageView!
     //private var oddsIcon: UIImageView!
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         initSubview()

@@ -56,7 +56,7 @@ class CXMLoginViewController: BaseViewController, UITextFieldDelegate, ValidateP
     
     //摇一摇登录
     #if DEBUG
-    override func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) {
+    override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         var pwd: String = "aaa123456"
         let url = UserDefaults.standard.string(forKey: kBaseUrl) ?? "https://api.caixiaomi.net"
         let baseUrl = NSURL(string: url)!

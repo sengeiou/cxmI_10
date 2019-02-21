@@ -30,19 +30,19 @@ extension BBOrderBetInfoCell {
     public func configure(with data : OrderInfoModel) {
         
         let guoguanAtt = NSMutableAttributedString(string: "过关方式: ",
-                                                   attributes: [NSAttributedStringKey.foregroundColor : ColorA0A0A0])
+                                                   attributes: [NSAttributedString.Key.foregroundColor : ColorA0A0A0])
         let guoguan = NSAttributedString(string: "\(data.passType)",
-                                        attributes: [NSAttributedStringKey.foregroundColor: Color505050])
+            attributes: [NSAttributedString.Key.foregroundColor: Color505050])
         
         guoguanAtt.append(guoguan)
         
         self.guoguan.attributedText = guoguanAtt
         
         let betAtt = NSMutableAttributedString(string: "投注倍数: ",
-                                               attributes: [NSAttributedStringKey.foregroundColor : ColorA0A0A0])
+                                               attributes: [NSAttributedString.Key.foregroundColor : ColorA0A0A0])
         
         let bet = NSAttributedString(string: "\(data.betNum)注\(data.cathectic)倍",
-                                    attributes: [NSAttributedStringKey.foregroundColor: Color505050])
+            attributes: [NSAttributedString.Key.foregroundColor: Color505050])
         betAtt.append(bet)
         betLabel.attributedText = betAtt
     }

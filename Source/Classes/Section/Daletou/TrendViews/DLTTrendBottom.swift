@@ -62,23 +62,23 @@ extension DLTTrendBottom {
             
             if num > 0 {
                 let att = NSMutableAttributedString(string: "共")
-                let numAtt = NSAttributedString(string: "\(num)", attributes: [NSAttributedStringKey.foregroundColor: ColorE85504])
+                let numAtt = NSAttributedString(string: "\(num)", attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
                 let defa = NSAttributedString(string: "注 合计")
-                let money = NSAttributedString(string: "\(num * 2)", attributes: [NSAttributedStringKey.foregroundColor: ColorE85504])
+                let money = NSAttributedString(string: "\(num * 2).00", attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
                 let yuan = NSAttributedString(string: "元")
                 att.append(numAtt)
                 att.append(defa)
                 att.append(money)
 //                att.append(yuan)
                 self.detailLabel.attributedText = att
-                self.confirmBut.backgroundColor = ColorE85504
+                self.confirmBut.backgroundColor = ColorEA5504
                 self.confirmBut.isUserInteractionEnabled = true
             }else {
                 let att = NSMutableAttributedString(string: "请至少选择")
                 
-                let numAtt = NSAttributedString(string: "\(5)", attributes: [NSAttributedStringKey.foregroundColor: ColorE85504])
+                let numAtt = NSAttributedString(string: "\(5)", attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
                 let defa = NSAttributedString(string: "个红球")
-                let money = NSAttributedString(string: "2", attributes: [NSAttributedStringKey.foregroundColor: Color0081CC])
+                let money = NSAttributedString(string: "2", attributes: [NSAttributedString.Key.foregroundColor: Color0081CC])
                 let defa1 = NSAttributedString(string: "个蓝球")
                 att.append(numAtt)
                 att.append(defa)

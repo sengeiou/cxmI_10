@@ -147,16 +147,16 @@ class CXMMDaletouViewController: BaseViewController {
         _ = settingNum.asObservable().subscribe(onNext: { (num) in
             if num > 0 {
                 let att = NSMutableAttributedString(string: "共")
-                let numAtt = NSAttributedString(string: "\(num)", attributes: [NSAttributedStringKey.foregroundColor: ColorE85504])
+                let numAtt = NSAttributedString(string: "\(num)", attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
                 let defa = NSAttributedString(string: "注 合计")
-                let money = NSAttributedString(string: "\(num * 2)", attributes: [NSAttributedStringKey.foregroundColor: ColorE85504])
+                let money = NSAttributedString(string: "\(num * 2).00", attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
                 let yuan = NSAttributedString(string: "元")
                 att.append(numAtt)
                 att.append(defa)
                 att.append(money)
 //                att.append(yuan)
                 self.bottomView.titleLabel.attributedText = att
-                self.bottomView.confirmBut.backgroundColor = ColorE85504
+                self.bottomView.confirmBut.backgroundColor = ColorEA5504
                 self.bottomView.confirmBut.isUserInteractionEnabled = true
             }else {
                 let att = NSMutableAttributedString(string: "请至少选择")
@@ -166,9 +166,9 @@ class CXMMDaletouViewController: BaseViewController {
                     red = 6
                 }
                 
-                let numAtt = NSAttributedString(string: "\(red)", attributes: [NSAttributedStringKey.foregroundColor: ColorE85504])
+                let numAtt = NSAttributedString(string: "\(red)", attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
                 let defa = NSAttributedString(string: "个红球")
-                let money = NSAttributedString(string: "2", attributes: [NSAttributedStringKey.foregroundColor: Color0081CC])
+                let money = NSAttributedString(string: "2", attributes: [NSAttributedString.Key.foregroundColor: Color0081CC])
                 let defa1 = NSAttributedString(string: "个蓝球")
                 att.append(numAtt)
                 att.append(defa)
@@ -789,7 +789,7 @@ extension CXMMDaletouViewController {
         self.becomeFirstResponder()
     }
     
-    override func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) {
+    override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         switch type {
         case .标准选号:
             let model = getOneRandom()
@@ -803,10 +803,10 @@ extension CXMMDaletouViewController {
             break
         }
     }
-    override func motionCancelled(_ motion: UIEventSubtype, with event: UIEvent?) {
+    override func motionCancelled(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         
     }
-    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         
     }
     

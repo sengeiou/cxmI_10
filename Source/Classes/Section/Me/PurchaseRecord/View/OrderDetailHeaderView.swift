@@ -20,7 +20,7 @@ class OrderDetailHeaderView: UIView {
             //icon.image = UIImage(named: "Racecolorfootball")
             
             
-            let moneyAtt = NSMutableAttributedString(string: "¥", attributes: [NSAttributedStringKey.font: Font10])
+            let moneyAtt = NSMutableAttributedString(string: "¥", attributes: [NSAttributedString.Key.font: Font10])
             let money = NSAttributedString(string: orderInfo.ticketAmount)
             moneyAtt.append(money)
             

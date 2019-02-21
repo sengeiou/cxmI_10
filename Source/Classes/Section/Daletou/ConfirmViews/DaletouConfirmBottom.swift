@@ -23,6 +23,11 @@ class DaletouConfirmBottom: UIView {
     @IBOutlet weak var confirmBut : UIButton!
     @IBOutlet weak var appendBut : UIButton!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+    }
+    
     @IBAction func MultipleClick(_ sender: UIButton) {
         guard delegate != nil else { return }
         delegate.didTipMultiple()

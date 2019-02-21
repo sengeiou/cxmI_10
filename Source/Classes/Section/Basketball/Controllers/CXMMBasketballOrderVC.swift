@@ -69,7 +69,7 @@ class CXMMBasketballOrderVC: BaseViewController {
         
         playName.text = orderInfo.lotteryClassifyName
         
-        let moneyAtt = NSMutableAttributedString(string: "¥", attributes: [NSAttributedStringKey.font: Font10])
+        let moneyAtt = NSMutableAttributedString(string: "¥", attributes: [NSAttributedString.Key.font: Font10])
         let money = NSAttributedString(string: orderInfo.ticketAmount)
         moneyAtt.append(money)
         
@@ -216,7 +216,7 @@ extension CXMMBasketballOrderVC {
             case self.orderInfo.matchInfos.count + 1:
                 return 70
             default :
-                return UITableViewAutomaticDimension
+                return UITableView.automaticDimension
             }
         
         case 1:

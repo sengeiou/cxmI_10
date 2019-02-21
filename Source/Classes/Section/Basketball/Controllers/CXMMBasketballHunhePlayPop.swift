@@ -232,16 +232,16 @@ extension CXMMBasketballHunhePlayPop {
         collectionView.reloadData()
         // 客队
         let visiAtt = NSMutableAttributedString(string: "[客]",
-                                                    attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F])
+                                                attributes: [NSAttributedString.Key.foregroundColor: Color9F9F9F])
         let visiTeamAtt = NSAttributedString(string: data.visitingTeamAbbr,
-                                             attributes: [NSAttributedStringKey.foregroundColor: Color505050])
+                                             attributes: [NSAttributedString.Key.foregroundColor: Color505050])
         visiAtt.append(visiTeamAtt)
         visiTeam.attributedText = visiAtt
         // 主队
         let homeAtt = NSMutableAttributedString(string: "[主]",
-                                                attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F])
+                                                attributes: [NSAttributedString.Key.foregroundColor: Color9F9F9F])
         let homeTeamAtt = NSAttributedString(string: data.homeTeamAbbr,
-                                             attributes: [NSAttributedStringKey.foregroundColor: Color505050])
+                                             attributes: [NSAttributedString.Key.foregroundColor: Color505050])
         homeAtt.append(homeTeamAtt)
         homeTeam.attributedText = homeAtt
         
@@ -279,7 +279,7 @@ extension CXMMBasketballHunhePlayPop {
                         color = ColorEA5504
                     }
                     let titleAtt = NSMutableAttributedString(string: "主队让分 ")
-                    let title = NSAttributedString(string: "\(fix)分", attributes: [NSAttributedStringKey.foregroundColor: color])
+                    let title = NSAttributedString(string: "\(fix)分", attributes: [NSAttributedString.Key.foregroundColor: color])
                     titleAtt.append(title)
                     rangFenTitle.attributedText = titleAtt
                 }
@@ -307,7 +307,7 @@ extension CXMMBasketballHunhePlayPop {
                 if let fix = playInfo.fixedOdds {
             
                     let titleAtt = NSMutableAttributedString(string: "总分 ")
-                    let title = NSAttributedString(string: "\(fix)", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+                    let title = NSAttributedString(string: "\(fix)", attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
                     titleAtt.append(title)
                     daxiaofenTitle.attributedText = titleAtt
                 }
@@ -336,11 +336,11 @@ extension CXMMBasketballHunhePlayPop {
     
     private func getAttributedString(cellName : String, cellOdds : String) -> NSAttributedString {
         let cellNameAtt = NSMutableAttributedString(string: cellName,
-                                                    attributes: [NSAttributedStringKey.foregroundColor: Color505050,
-                                                                 NSAttributedStringKey.font : Font14])
+                                                    attributes: [NSAttributedString.Key.foregroundColor: Color505050,
+                                                                 NSAttributedString.Key.font : Font14])
         let cellOddsAtt = NSAttributedString(string: "\(cellOdds)",
-            attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F,
-                         NSAttributedStringKey.font: Font12])
+            attributes: [NSAttributedString.Key.foregroundColor: Color9F9F9F,
+                         NSAttributedString.Key.font: Font12])
         
         cellNameAtt.append(cellOddsAtt)
         

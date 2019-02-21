@@ -34,7 +34,7 @@ class NoticeCell: UITableViewCell {
     private var activity: UIImageView!
     private var detailIcon : UIImageView!
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initSubview()
     }
