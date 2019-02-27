@@ -35,7 +35,8 @@ extension RouterPro {
         case .竞彩足球:
             pushFootballVC(from: vc)
         case .大乐透:
-            pushDaletou(from: vc)
+            pushESportsList(from: vc)
+//            pushDaletou(from: vc)
         case .竞彩篮球:
 //            pushLotto(urlStr: urlStr, from: vc)
             pushBasketball(from: vc)
@@ -144,6 +145,16 @@ extension RouterPro {
         let basketball = story.instantiateViewController(withIdentifier: "BasketballVC") as! CXMMBasketballVC
         
         pushViewController(basketball, from: vc)
+    }
+    private func pushESportsList(from vc : UIViewController) {
+        let story = UIStoryboard(storyboard: .ESports)
+        let esportsList = story.instantiateViewController(withIdentifier: "ESportsList") as! ESportsList
+        pushViewController(esportsList, from: vc)
+    }
+    private func pushESportsLoL(from vc : UIViewController) {
+        let story = UIStoryboard(storyboard: .ESports)
+        let esportsLol = story.instantiateViewController(withIdentifier: "ESportsList") as! ESportsList
+        pushViewController(esportsLol, from: vc)
     }
     private func pushKuai3(from vc : UIViewController) {
         showHUD(message: "敬请期待")

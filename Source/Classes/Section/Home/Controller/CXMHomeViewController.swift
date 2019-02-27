@@ -219,6 +219,9 @@ extension CXMHomeViewController : HomeSportLotteryCellDelegate, HomeSportCellDel
     
     // 玩法点击
     func didSelectItem(playModel: HomePlayModel, index: Int) {
+        
+        
+        
         guard playModel.status == "0" else {
             showHUD(message: playModel.statusReason)
             return

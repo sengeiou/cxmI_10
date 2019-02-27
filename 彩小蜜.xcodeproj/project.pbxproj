@@ -112,6 +112,17 @@
 		1145B3E921534BB50002E5ED /* BasketballHunhePlayPopItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145B3E821534BB50002E5ED /* BasketballHunhePlayPopItem.swift */; };
 		1145B3EB215372630002E5ED /* CXMMBasketballSFCPlayPop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145B3EA215372630002E5ED /* CXMMBasketballSFCPlayPop.swift */; };
 		1145B3EF21538B8E0002E5ED /* BBPlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145B3EE21538B8E0002E5ED /* BBPlayViewModel.swift */; };
+		1145EDE02224D21700E8FAF2 /* ESports.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1145EDDF2224D21700E8FAF2 /* ESports.storyboard */; };
+		1145EDE22224D28200E8FAF2 /* ESportsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145EDE12224D28200E8FAF2 /* ESportsList.swift */; };
+		1145EDE42224D3C300E8FAF2 /* ESportsListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145EDE32224D3C300E8FAF2 /* ESportsListCell.swift */; };
+		1145EDE62224D48900E8FAF2 /* ESportsListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145EDE52224D48900E8FAF2 /* ESportsListModel.swift */; };
+		1145EDE82224D54100E8FAF2 /* ESportsNetAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145EDE72224D54100E8FAF2 /* ESportsNetAPIManager.swift */; };
+		1145EDEC2224DD0700E8FAF2 /* ESportsLotteryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145EDEB2224DD0700E8FAF2 /* ESportsLotteryList.swift */; };
+		1145EDEE2224E60F00E8FAF2 /* ESportsLoLCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145EDED2224E60F00E8FAF2 /* ESportsLoLCell.swift */; };
+		1145EDF022251D5700E8FAF2 /* ESportsLotteryVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145EDEF22251D5700E8FAF2 /* ESportsLotteryVM.swift */; };
+		1145EDF22225246F00E8FAF2 /* ESportsLoLList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145EDF12225246F00E8FAF2 /* ESportsLoLList.swift */; };
+		1145EDF6222535C900E8FAF2 /* UIButtonEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145EDF5222535C900E8FAF2 /* UIButtonEx.swift */; };
+		1145EDF82225379900E8FAF2 /* ESportsLoLModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145EDF72225379900E8FAF2 /* ESportsLoLModel.swift */; };
 		114800D2208C2C5E00621AFA /* ShareCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114800D1208C2C5E00621AFA /* ShareCell.swift */; };
 		114800D4208C2DD700621AFA /* ShareDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114800D3208C2DD700621AFA /* ShareDataModel.swift */; };
 		114800D6208C622800621AFA /* NewsListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114800D5208C622800621AFA /* NewsListModel.swift */; };
@@ -717,6 +728,17 @@
 		1145B3E821534BB50002E5ED /* BasketballHunhePlayPopItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketballHunhePlayPopItem.swift; sourceTree = "<group>"; };
 		1145B3EA215372630002E5ED /* CXMMBasketballSFCPlayPop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMMBasketballSFCPlayPop.swift; sourceTree = "<group>"; };
 		1145B3EE21538B8E0002E5ED /* BBPlayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBPlayViewModel.swift; sourceTree = "<group>"; };
+		1145EDDF2224D21700E8FAF2 /* ESports.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ESports.storyboard; sourceTree = "<group>"; };
+		1145EDE12224D28200E8FAF2 /* ESportsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESportsList.swift; sourceTree = "<group>"; };
+		1145EDE32224D3C300E8FAF2 /* ESportsListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESportsListCell.swift; sourceTree = "<group>"; };
+		1145EDE52224D48900E8FAF2 /* ESportsListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESportsListModel.swift; sourceTree = "<group>"; };
+		1145EDE72224D54100E8FAF2 /* ESportsNetAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESportsNetAPIManager.swift; sourceTree = "<group>"; };
+		1145EDEB2224DD0700E8FAF2 /* ESportsLotteryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESportsLotteryList.swift; sourceTree = "<group>"; };
+		1145EDED2224E60F00E8FAF2 /* ESportsLoLCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESportsLoLCell.swift; sourceTree = "<group>"; };
+		1145EDEF22251D5700E8FAF2 /* ESportsLotteryVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESportsLotteryVM.swift; sourceTree = "<group>"; };
+		1145EDF12225246F00E8FAF2 /* ESportsLoLList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESportsLoLList.swift; sourceTree = "<group>"; };
+		1145EDF5222535C900E8FAF2 /* UIButtonEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonEx.swift; sourceTree = "<group>"; };
+		1145EDF72225379900E8FAF2 /* ESportsLoLModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESportsLoLModel.swift; sourceTree = "<group>"; };
 		114800D1208C2C5E00621AFA /* ShareCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareCell.swift; sourceTree = "<group>"; };
 		114800D3208C2DD700621AFA /* ShareDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareDataModel.swift; sourceTree = "<group>"; };
 		114800D5208C622800621AFA /* NewsListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListModel.swift; sourceTree = "<group>"; };
@@ -1527,6 +1549,79 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		1145EDCF2224CFCD00E8FAF2 /* E-sports */ = {
+			isa = PBXGroup;
+			children = (
+				1145EDDF2224D21700E8FAF2 /* ESports.storyboard */,
+				1145EDE72224D54100E8FAF2 /* ESportsNetAPIManager.swift */,
+				1145EDDE2224D19200E8FAF2 /* ViewModels */,
+				1145EDDD2224D18C00E8FAF2 /* Models */,
+				1145EDDC2224D18500E8FAF2 /* Views */,
+				1145EDDB2224D18000E8FAF2 /* ViewControllers */,
+				1145EDD82224D08000E8FAF2 /* LOL */,
+				1145EDDA2224D16000E8FAF2 /* CS */,
+				1145EDD92224D09100E8FAF2 /* GOK */,
+			);
+			path = "E-sports";
+			sourceTree = "<group>";
+		};
+		1145EDD82224D08000E8FAF2 /* LOL */ = {
+			isa = PBXGroup;
+			children = (
+				1145EDF72225379900E8FAF2 /* ESportsLoLModel.swift */,
+				1145EDED2224E60F00E8FAF2 /* ESportsLoLCell.swift */,
+				1145EDF12225246F00E8FAF2 /* ESportsLoLList.swift */,
+			);
+			path = LOL;
+			sourceTree = "<group>";
+		};
+		1145EDD92224D09100E8FAF2 /* GOK */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = GOK;
+			sourceTree = "<group>";
+		};
+		1145EDDA2224D16000E8FAF2 /* CS */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CS;
+			sourceTree = "<group>";
+		};
+		1145EDDB2224D18000E8FAF2 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				1145EDE12224D28200E8FAF2 /* ESportsList.swift */,
+				1145EDEB2224DD0700E8FAF2 /* ESportsLotteryList.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		1145EDDC2224D18500E8FAF2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1145EDE32224D3C300E8FAF2 /* ESportsListCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		1145EDDD2224D18C00E8FAF2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1145EDE52224D48900E8FAF2 /* ESportsListModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1145EDDE2224D19200E8FAF2 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				1145EDEF22251D5700E8FAF2 /* ESportsLotteryVM.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		114D06CB20B558C100443BCC /* Tool */ = {
 			isa = PBXGroup;
 			children = (
@@ -2116,6 +2211,7 @@
 				E550D88F2073267E002DDE23 /* Extension+Array.swift */,
 				11E969E920C7E01700EAB733 /* Extension+UIImage.swift */,
 				11174BF121ABF8EE007E0940 /* UIImageViewEx.swift */,
+				1145EDF5222535C900E8FAF2 /* UIButtonEx.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -2496,6 +2592,7 @@
 				116AC793215A172C00F6BC73 /* Football */,
 				117C729F2100755700D9EB83 /* Daletou */,
 				113F2A402150A87A008B39AA /* Basketball */,
+				1145EDCF2224CFCD00E8FAF2 /* E-sports */,
 				E57375D92046AE7700148622 /* Lottery */,
 				11BD5CEA20B3BA3A00A3AE6A /* Surprise */,
 				11B8D91A21AD3CA10063F450 /* Shop */,
@@ -3326,6 +3423,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1173BECE2150CCF3008BC28A /* Basketball.storyboard in Resources */,
+				1145EDE02224D21700E8FAF2 /* ESports.storyboard in Resources */,
 				1138981C21103EF900E48B72 /* Daletou.storyboard in Resources */,
 				11E2C00A21B7CEE400719661 /* coin.mp3 in Resources */,
 				E57375AD20468B8900148622 /* LaunchScreen.storyboard in Resources */,
@@ -3652,6 +3750,7 @@
 				116E458121119DB300418661 /* DaletouDragRedCell.swift in Sources */,
 				11B8D91921AD34CB0063F450 /* LotteryHomeVC.swift in Sources */,
 				11062B1F2082FFD8001C1D14 /* LotteryHeaderView.swift in Sources */,
+				1145EDF022251D5700E8FAF2 /* ESportsLotteryVM.swift in Sources */,
 				E5786FC0206DEA650045F7F5 /* Football2-1Cell.swift in Sources */,
 				116E458B2111B47E00418661 /* CXMMDaletouHistoryAward.swift in Sources */,
 				11CBF02A2138060600CB20AC /* LeagueMatchItem.swift in Sources */,
@@ -3660,6 +3759,7 @@
 				113DE72A211A8E1300DE8026 /* DLTPrizeOrderCell.swift in Sources */,
 				11551CF420E22D18002FE691 /* AccountDetailFilterModel.swift in Sources */,
 				E533BF012060DE600037D2D8 /* RechargeTitleCell.swift in Sources */,
+				1145EDF82225379900E8FAF2 /* ESportsLoLModel.swift in Sources */,
 				E5D5A377206D034100FC865D /* CXMFootballMatchVC.swift in Sources */,
 				E550D897207339A4002DDE23 /* FootballOrderSPFCell.swift in Sources */,
 				115B0CF020EF41BA00848EC7 /* FootballLineupMemberCell.swift in Sources */,
@@ -3707,6 +3807,7 @@
 				1155A3FE213CD8290048F69A /* LeagueDetailPagerHeader.swift in Sources */,
 				11551CF620E23179002FE691 /* AccountDetailFilterCell.swift in Sources */,
 				116E99C8213F8E7E005F1217 /* DigitalHisLottoTitleCell.swift in Sources */,
+				1145EDEC2224DD0700E8FAF2 /* ESportsLotteryList.swift in Sources */,
 				E512A96620479FD7003F14F4 /* HomeNetAPIManager.swift in Sources */,
 				E50643AE206CBE3C0046A2D4 /* WinningMsgModel.swift in Sources */,
 				114491042085982B009F1D09 /* FootballAnalysisSectionHeader.swift in Sources */,
@@ -3750,9 +3851,11 @@
 				11AB2C1F21300BD80044FB1C /* CXMMSurpriseViewController.swift in Sources */,
 				11E8FA6720BFEE5C0090BC6A /* SettingDataModel.swift in Sources */,
 				112EBE71218AA80D009F0C10 /* CXMOrderDetailPop.swift in Sources */,
+				1145EDE82224D54100E8FAF2 /* ESportsNetAPIManager.swift in Sources */,
 				11CC696321AF860B00F60C57 /* SellerDetail.swift in Sources */,
 				E56CE80E206A22240090A1B5 /* WithdrawalProgressCell.swift in Sources */,
 				E5973E20204E34A3006461CE /* FontConstraint.swift in Sources */,
+				1145EDF22225246F00E8FAF2 /* ESportsLoLList.swift in Sources */,
 				E56CE812206A23070090A1B5 /* WithdrawalProgressHeader.swift in Sources */,
 				1145B3EF21538B8E0002E5ED /* BBPlayViewModel.swift in Sources */,
 				116E458721119ED000418661 /* DaletouDragBlueCell.swift in Sources */,
@@ -3771,6 +3874,7 @@
 				11E969EA20C7E01700EAB733 /* Extension+UIImage.swift in Sources */,
 				11B0813D2133DAFF004FCAE9 /* CXMMPrizeListVC.swift in Sources */,
 				1142220E2141334400CCBB3A /* TeamDetailRecordCell.swift in Sources */,
+				1145EDE22224D28200E8FAF2 /* ESportsList.swift in Sources */,
 				E5973E33204FC1D9006461CE /* MeFooterView.swift in Sources */,
 				11436EF420B6BF9600127247 /* ShareProtocol.swift in Sources */,
 				112E9D4A21227575008466B4 /* CXMMDLTTrendSettingVC.swift in Sources */,
@@ -3844,11 +3948,13 @@
 				11E8AD28214763BC00C9B762 /* CourseTabCellViewModel.swift in Sources */,
 				11B8D91F21AD3CFB0063F450 /* ShopHomeViewController.swift in Sources */,
 				11B1B96C20F30EA200387430 /* FootballLiveInfoModel.swift in Sources */,
+				1145EDE42224D3C300E8FAF2 /* ESportsListCell.swift in Sources */,
 				E5786FBE206DE9BD0045F7F5 /* FootballBanQuanCCell.swift in Sources */,
 				E50B907120522FFF00417BFE /* CXMRechargeViewController.swift in Sources */,
 				1155A400213D10960048F69A /* LeagueDetailTeamCell.swift in Sources */,
 				E5973E2B204E442F006461CE /* CXMForgetPswVCodeVC.swift in Sources */,
 				1173BEC62150AB4B008BC28A /* BasketBallSectionHeader.swift in Sources */,
+				1145EDEE2224E60F00E8FAF2 /* ESportsLoLCell.swift in Sources */,
 				11CA4AD520A0562D00FB32D1 /* FootballHotSectionHeader.swift in Sources */,
 				117A817E209DDD5E003ED9C3 /* URLParseProtocol.swift in Sources */,
 				E5786FBA206DE9620045F7F5 /* FootballTotalCell.swift in Sources */,
@@ -3933,6 +4039,7 @@
 				E57375A320468B8900148622 /* AppDelegate.swift in Sources */,
 				112F77BA20EC7C8C005CA9E4 /* UIViewController+WMPageController.m in Sources */,
 				11CC697321AF93AA00F60C57 /* SellerListViewModel.swift in Sources */,
+				1145EDE62224D48900E8FAF2 /* ESportsListModel.swift in Sources */,
 				11E8FA5720BFD5B60090BC6A /* WorldCupOrderDetailTitleCell.swift in Sources */,
 				11A25C522080BF2000085C58 /* FootballHunheView.swift in Sources */,
 				E51F9A5C205A29B800AB8A21 /* RegisterFooterView.swift in Sources */,
@@ -3975,6 +4082,7 @@
 				1158FC3F21104FD20004229D /* CXMMDaletouViewController.swift in Sources */,
 				11411D05209171FE0009E6CE /* NoticeCell.swift in Sources */,
 				116EB20E207F064300B32ABD /* FootballScoreCollectionCell.swift in Sources */,
+				1145EDF6222535C900E8FAF2 /* UIButtonEx.swift in Sources */,
 				116A27F52150F0210077444E /* BasketballShengfuChaCell.swift in Sources */,
 				E550D89F207339F9002DDE23 /* FootballOrderBanQuanCCell.swift in Sources */,
 				116A27F32150F0090077444E /* BasketballDaxiaofenCell.swift in Sources */,

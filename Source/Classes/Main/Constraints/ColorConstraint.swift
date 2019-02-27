@@ -17,6 +17,7 @@ let ColorEA5504 = UIColor(hexColor: "d54745", alpha: 1)
 let ColorE85504 = UIColor(hexColor: "d54745", alpha: 1)
 /// app 主色3 红色
 let ColorD12120 = UIColor(hexColor: "D12120")
+let ColorD31E14 = UIColor(hexColor: "D31E14")
 /// 导航栏颜色
 let ColorNav = UIColor(hexColor: "D12120")
 /// 导航栏ITEM 颜色
