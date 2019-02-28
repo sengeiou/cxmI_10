@@ -10,20 +10,13 @@ import Foundation
 import HandyJSON
 import RxSwift
 import RxCocoa
-
-
-
-struct ESportsLoLModel : ESportsLottery {
-    typealias Item = ESportsLoLData
-    
-    var data: [ESportsLoLData] = [ESportsLoLData(),ESportsLoLData()]
-   
-}
+import SVProgressHUD
 
 
 
 
-struct ESportsLoLData : ESportsModel {
+
+struct LoLData : ESportsModel {
     
     var betDetail: BehaviorSubject<String> = BehaviorSubject(value: "玩法投注")
     
@@ -47,7 +40,7 @@ struct ESportsLoLData : ESportsModel {
     
 }
 
-extension ESportsLoLData {
+extension LoLData {
     var hashValue : Int{
         return
             id.hashValue       ^
@@ -58,13 +51,15 @@ extension ESportsLoLData {
             season.hashValue
     }
     
-    static func == (lhs: ESportsLoLData, rhs: ESportsLoLData) -> Bool {
+    static func == (lhs: LoLData, rhs: LoLData) -> Bool {
         return lhs.id == rhs.id
     }
 }
 
 struct LoLPlayData : HandyJSON {
     var id = ""
+    var title : String = "获胜"
+    var odds : [String] = ["2.0"]
 }
 
 extension LoLPlayData : Hashable {

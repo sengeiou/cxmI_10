@@ -24,7 +24,7 @@ class ESportsList: BaseViewController {
 extension ESportsList : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let story = UIStoryboard(storyboard: .ESports)
-        let vc = story.instantiateViewController(withIdentifier: "ESportsLoLList") as! ESportsLoLList
+        let vc = story.instantiateViewController(withIdentifier: "LoLList") as! LoLList
         pushViewController(vc: vc)
     }
 }

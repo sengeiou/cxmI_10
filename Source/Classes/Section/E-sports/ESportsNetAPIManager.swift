@@ -18,7 +18,8 @@ let eSportsProvider = MoyaProvider<ESportsAPIManager>(requestClosure: requestClo
 enum ESportsAPIManager {
     /// 电竞列表
     case eSportsList
-    
+    /// 英雄联盟比赛列表
+    case lolList
 }
 
 extension ESportsAPIManager : TargetType {
@@ -33,7 +34,8 @@ extension ESportsAPIManager : TargetType {
         switch self {
         case .eSportsList:
             return "/lotto/lotto/getTicketInfo"
-        
+        case .lolList:
+            return ""
         }
     }
     

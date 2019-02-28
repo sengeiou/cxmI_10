@@ -59,6 +59,7 @@
 		113BC9FF2112F4C100FCACBF /* CXMMDaletouConfirmVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113BC9FE2112F4C100FCACBF /* CXMMDaletouConfirmVC.swift */; };
 		113BCA012112F82900FCACBF /* DaletouConfirmCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113BCA002112F82900FCACBF /* DaletouConfirmCell.swift */; };
 		113BCA032112F86E00FCACBF /* DaletouConfirmItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113BCA022112F86E00FCACBF /* DaletouConfirmItem.swift */; };
+		113BD91C22268A3100D65124 /* LoLPlayList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113BD91B22268A3100D65124 /* LoLPlayList.swift */; };
 		113CD0B42119947F00F76DE0 /* CXMMDLTNetAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113CD0B32119947F00F76DE0 /* CXMMDLTNetAPIManager.swift */; };
 		113CD0B62119B4CD00F76DE0 /* CXMMDaletouOrderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113CD0B52119B4CD00F76DE0 /* CXMMDaletouOrderVC.swift */; };
 		113D8EA9212433C00020EAC4 /* DLTRedBlueTrendStageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113D8EA8212433C00020EAC4 /* DLTRedBlueTrendStageItem.swift */; };
@@ -118,11 +119,11 @@
 		1145EDE62224D48900E8FAF2 /* ESportsListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145EDE52224D48900E8FAF2 /* ESportsListModel.swift */; };
 		1145EDE82224D54100E8FAF2 /* ESportsNetAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145EDE72224D54100E8FAF2 /* ESportsNetAPIManager.swift */; };
 		1145EDEC2224DD0700E8FAF2 /* ESportsLotteryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145EDEB2224DD0700E8FAF2 /* ESportsLotteryList.swift */; };
-		1145EDEE2224E60F00E8FAF2 /* ESportsLoLCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145EDED2224E60F00E8FAF2 /* ESportsLoLCell.swift */; };
+		1145EDEE2224E60F00E8FAF2 /* LoLCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145EDED2224E60F00E8FAF2 /* LoLCell.swift */; };
 		1145EDF022251D5700E8FAF2 /* ESportsLotteryVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145EDEF22251D5700E8FAF2 /* ESportsLotteryVM.swift */; };
-		1145EDF22225246F00E8FAF2 /* ESportsLoLList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145EDF12225246F00E8FAF2 /* ESportsLoLList.swift */; };
+		1145EDF22225246F00E8FAF2 /* LoLList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145EDF12225246F00E8FAF2 /* LoLList.swift */; };
 		1145EDF6222535C900E8FAF2 /* UIButtonEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145EDF5222535C900E8FAF2 /* UIButtonEx.swift */; };
-		1145EDF82225379900E8FAF2 /* ESportsLoLModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145EDF72225379900E8FAF2 /* ESportsLoLModel.swift */; };
+		1145EDF82225379900E8FAF2 /* LoLModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1145EDF72225379900E8FAF2 /* LoLModel.swift */; };
 		114800D2208C2C5E00621AFA /* ShareCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114800D1208C2C5E00621AFA /* ShareCell.swift */; };
 		114800D4208C2DD700621AFA /* ShareDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114800D3208C2DD700621AFA /* ShareDataModel.swift */; };
 		114800D6208C622800621AFA /* NewsListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114800D5208C622800621AFA /* NewsListModel.swift */; };
@@ -295,6 +296,11 @@
 		11BD09F221C0FA7B00D29D52 /* OrderDetailQRCodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BD09F121C0FA7B00D29D52 /* OrderDetailQRCodeCell.swift */; };
 		11BD09F421C0FD3900D29D52 /* Football.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11BD09F321C0FD3900D29D52 /* Football.storyboard */; };
 		11BDF4DD20F59FDC00AA94B2 /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BDF4DC20F59FDC00AA94B2 /* Protocol.swift */; };
+		11C1BDF522277FCE004C5A01 /* LoLPlayConfirm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C1BDF422277FCE004C5A01 /* LoLPlayConfirm.swift */; };
+		11C1BDFF222782FA004C5A01 /* LoLViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C1BDFE222782FA004C5A01 /* LoLViewModel.swift */; };
+		11C1BE012227C03B004C5A01 /* LoLPlayConfirmCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C1BE002227C03B004C5A01 /* LoLPlayConfirmCell.swift */; };
+		11C1BE032227C066004C5A01 /* LoLPlayConfirmSubCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C1BE022227C066004C5A01 /* LoLPlayConfirmSubCell.swift */; };
+		11C1BE052227D904004C5A01 /* LoLPlayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C1BE042227D904004C5A01 /* LoLPlayCell.swift */; };
 		11C4F45C20E095D800CCDFC6 /* YHPhotoSelect.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C4F45020E095D800CCDFC6 /* YHPhotoSelect.m */; };
 		11C4F45D20E095D800CCDFC6 /* YHResizeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C4F45520E095D800CCDFC6 /* YHResizeView.m */; };
 		11C4F45E20E095D800CCDFC6 /* YHCropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C4F45620E095D800CCDFC6 /* YHCropView.m */; };
@@ -675,6 +681,7 @@
 		113BC9FE2112F4C100FCACBF /* CXMMDaletouConfirmVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMMDaletouConfirmVC.swift; sourceTree = "<group>"; };
 		113BCA002112F82900FCACBF /* DaletouConfirmCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaletouConfirmCell.swift; sourceTree = "<group>"; };
 		113BCA022112F86E00FCACBF /* DaletouConfirmItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaletouConfirmItem.swift; sourceTree = "<group>"; };
+		113BD91B22268A3100D65124 /* LoLPlayList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoLPlayList.swift; sourceTree = "<group>"; };
 		113CD0B32119947F00F76DE0 /* CXMMDLTNetAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMMDLTNetAPIManager.swift; sourceTree = "<group>"; };
 		113CD0B52119B4CD00F76DE0 /* CXMMDaletouOrderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMMDaletouOrderVC.swift; sourceTree = "<group>"; };
 		113D8EA8212433C00020EAC4 /* DLTRedBlueTrendStageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DLTRedBlueTrendStageItem.swift; sourceTree = "<group>"; };
@@ -734,11 +741,11 @@
 		1145EDE52224D48900E8FAF2 /* ESportsListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESportsListModel.swift; sourceTree = "<group>"; };
 		1145EDE72224D54100E8FAF2 /* ESportsNetAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESportsNetAPIManager.swift; sourceTree = "<group>"; };
 		1145EDEB2224DD0700E8FAF2 /* ESportsLotteryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESportsLotteryList.swift; sourceTree = "<group>"; };
-		1145EDED2224E60F00E8FAF2 /* ESportsLoLCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESportsLoLCell.swift; sourceTree = "<group>"; };
+		1145EDED2224E60F00E8FAF2 /* LoLCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoLCell.swift; sourceTree = "<group>"; };
 		1145EDEF22251D5700E8FAF2 /* ESportsLotteryVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESportsLotteryVM.swift; sourceTree = "<group>"; };
-		1145EDF12225246F00E8FAF2 /* ESportsLoLList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESportsLoLList.swift; sourceTree = "<group>"; };
+		1145EDF12225246F00E8FAF2 /* LoLList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoLList.swift; sourceTree = "<group>"; };
 		1145EDF5222535C900E8FAF2 /* UIButtonEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonEx.swift; sourceTree = "<group>"; };
-		1145EDF72225379900E8FAF2 /* ESportsLoLModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESportsLoLModel.swift; sourceTree = "<group>"; };
+		1145EDF72225379900E8FAF2 /* LoLModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoLModel.swift; sourceTree = "<group>"; };
 		114800D1208C2C5E00621AFA /* ShareCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareCell.swift; sourceTree = "<group>"; };
 		114800D3208C2DD700621AFA /* ShareDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareDataModel.swift; sourceTree = "<group>"; };
 		114800D5208C622800621AFA /* NewsListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListModel.swift; sourceTree = "<group>"; };
@@ -913,6 +920,11 @@
 		11BD09F121C0FA7B00D29D52 /* OrderDetailQRCodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailQRCodeCell.swift; sourceTree = "<group>"; };
 		11BD09F321C0FD3900D29D52 /* Football.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Football.storyboard; sourceTree = "<group>"; };
 		11BDF4DC20F59FDC00AA94B2 /* Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
+		11C1BDF422277FCE004C5A01 /* LoLPlayConfirm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoLPlayConfirm.swift; sourceTree = "<group>"; };
+		11C1BDFE222782FA004C5A01 /* LoLViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoLViewModel.swift; sourceTree = "<group>"; };
+		11C1BE002227C03B004C5A01 /* LoLPlayConfirmCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoLPlayConfirmCell.swift; sourceTree = "<group>"; };
+		11C1BE022227C066004C5A01 /* LoLPlayConfirmSubCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoLPlayConfirmSubCell.swift; sourceTree = "<group>"; };
+		11C1BE042227D904004C5A01 /* LoLPlayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoLPlayCell.swift; sourceTree = "<group>"; };
 		11C4F44D20E095D800CCDFC6 /* YHImageEditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YHImageEditVC.h; sourceTree = "<group>"; };
 		11C4F44F20E095D800CCDFC6 /* YHPhotoSelect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YHPhotoSelect.h; sourceTree = "<group>"; };
 		11C4F45020E095D800CCDFC6 /* YHPhotoSelect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YHPhotoSelect.m; sourceTree = "<group>"; };
@@ -1568,9 +1580,15 @@
 		1145EDD82224D08000E8FAF2 /* LOL */ = {
 			isa = PBXGroup;
 			children = (
-				1145EDF72225379900E8FAF2 /* ESportsLoLModel.swift */,
-				1145EDED2224E60F00E8FAF2 /* ESportsLoLCell.swift */,
-				1145EDF12225246F00E8FAF2 /* ESportsLoLList.swift */,
+				11C1BDFE222782FA004C5A01 /* LoLViewModel.swift */,
+				1145EDF72225379900E8FAF2 /* LoLModel.swift */,
+				1145EDED2224E60F00E8FAF2 /* LoLCell.swift */,
+				11C1BE042227D904004C5A01 /* LoLPlayCell.swift */,
+				11C1BE002227C03B004C5A01 /* LoLPlayConfirmCell.swift */,
+				11C1BE022227C066004C5A01 /* LoLPlayConfirmSubCell.swift */,
+				1145EDF12225246F00E8FAF2 /* LoLList.swift */,
+				113BD91B22268A3100D65124 /* LoLPlayList.swift */,
+				11C1BDF422277FCE004C5A01 /* LoLPlayConfirm.swift */,
 			);
 			path = LOL;
 			sourceTree = "<group>";
@@ -3722,6 +3740,7 @@
 				11EB8EE8207B8A5500AFC9C1 /* FootballSaveBetInfoModel.swift in Sources */,
 				11547F90213791D70068596C /* ActivityCenterCell.swift in Sources */,
 				E59CB3E1205BBD900086DD0E /* HomeFootballCell.swift in Sources */,
+				11C1BDFF222782FA004C5A01 /* LoLViewModel.swift in Sources */,
 				11062B2F20834BFA001C1D14 /* LotteryDateModel.swift in Sources */,
 				E537397D2057F7220087E4E6 /* RealInfoDataModel.swift in Sources */,
 				113CD0B62119B4CD00F76DE0 /* CXMMDaletouOrderVC.swift in Sources */,
@@ -3759,7 +3778,7 @@
 				113DE72A211A8E1300DE8026 /* DLTPrizeOrderCell.swift in Sources */,
 				11551CF420E22D18002FE691 /* AccountDetailFilterModel.swift in Sources */,
 				E533BF012060DE600037D2D8 /* RechargeTitleCell.swift in Sources */,
-				1145EDF82225379900E8FAF2 /* ESportsLoLModel.swift in Sources */,
+				1145EDF82225379900E8FAF2 /* LoLModel.swift in Sources */,
 				E5D5A377206D034100FC865D /* CXMFootballMatchVC.swift in Sources */,
 				E550D897207339A4002DDE23 /* FootballOrderSPFCell.swift in Sources */,
 				115B0CF020EF41BA00848EC7 /* FootballLineupMemberCell.swift in Sources */,
@@ -3795,6 +3814,7 @@
 				116AC795215A1EE400F6BC73 /* BasketballConfirmCell.swift in Sources */,
 				116E99CC213FB31D005F1217 /* DigitalHisDetail11Or5Cell.swift in Sources */,
 				116E0F322099A601009FE44E /* PaymentList.swift in Sources */,
+				11C1BDF522277FCE004C5A01 /* LoLPlayConfirm.swift in Sources */,
 				11EFB2A621AE486900B9B8B1 /* ComOrderPriceCell.swift in Sources */,
 				E58B57B220561BB80025E2F1 /* Spacing&SizeConstraint.swift in Sources */,
 				E58B57C9205688570025E2F1 /* UserDataModel.swift in Sources */,
@@ -3855,7 +3875,7 @@
 				11CC696321AF860B00F60C57 /* SellerDetail.swift in Sources */,
 				E56CE80E206A22240090A1B5 /* WithdrawalProgressCell.swift in Sources */,
 				E5973E20204E34A3006461CE /* FontConstraint.swift in Sources */,
-				1145EDF22225246F00E8FAF2 /* ESportsLoLList.swift in Sources */,
+				1145EDF22225246F00E8FAF2 /* LoLList.swift in Sources */,
 				E56CE812206A23070090A1B5 /* WithdrawalProgressHeader.swift in Sources */,
 				1145B3EF21538B8E0002E5ED /* BBPlayViewModel.swift in Sources */,
 				116E458721119ED000418661 /* DaletouDragBlueCell.swift in Sources */,
@@ -3887,6 +3907,7 @@
 				114491162085FC23009F1D09 /* FootballOddsCell.swift in Sources */,
 				11FEB943208D781400926951 /* DeviceInfoModel.swift in Sources */,
 				11E8FA6520BFEDD50090BC6A /* CXMSettingPasswordVC.swift in Sources */,
+				11C1BE012227C03B004C5A01 /* LoLPlayConfirmCell.swift in Sources */,
 				E581F37C2063573C002AB9F7 /* PaymentNetAPIManager.swift in Sources */,
 				11B081452133E31F004FCAE9 /* SurprisePrizeDigitalItem.swift in Sources */,
 				11CC696B21AF87D600F60C57 /* SellerListVC.swift in Sources */,
@@ -3909,11 +3930,13 @@
 				E5786FC4206E13840045F7F5 /* FootballTeamView.swift in Sources */,
 				11C4F45D20E095D800CCDFC6 /* YHResizeView.m in Sources */,
 				112F77BE20EC7C8C005CA9E4 /* WMProgressView.m in Sources */,
+				113BD91C22268A3100D65124 /* LoLPlayList.swift in Sources */,
 				11BD09EA21C0E31300D29D52 /* HXGuideMaskView.swift in Sources */,
 				E533BF0520610D170037D2D8 /* BasePopViewController.swift in Sources */,
 				E5103256206502DA00A0156C /* PurchaseRecordCell.swift in Sources */,
 				11C4F46020E095D800CCDFC6 /* YHImageEditVC.m in Sources */,
 				11A25C542080C4B500085C58 /* TopTitleView.swift in Sources */,
+				11C1BE032227C066004C5A01 /* LoLPlayConfirmSubCell.swift in Sources */,
 				114520B32089BCE70004F98B /* CXMMyCollectionVC.swift in Sources */,
 				116E45892111A7DB00418661 /* CXMMDaletouMenu.swift in Sources */,
 				E56CE8082069E63E0090A1B5 /* BasePageModel.swift in Sources */,
@@ -3954,7 +3977,8 @@
 				1155A400213D10960048F69A /* LeagueDetailTeamCell.swift in Sources */,
 				E5973E2B204E442F006461CE /* CXMForgetPswVCodeVC.swift in Sources */,
 				1173BEC62150AB4B008BC28A /* BasketBallSectionHeader.swift in Sources */,
-				1145EDEE2224E60F00E8FAF2 /* ESportsLoLCell.swift in Sources */,
+				1145EDEE2224E60F00E8FAF2 /* LoLCell.swift in Sources */,
+				11C1BE052227D904004C5A01 /* LoLPlayCell.swift in Sources */,
 				11CA4AD520A0562D00FB32D1 /* FootballHotSectionHeader.swift in Sources */,
 				117A817E209DDD5E003ED9C3 /* URLParseProtocol.swift in Sources */,
 				E5786FBA206DE9620045F7F5 /* FootballTotalCell.swift in Sources */,

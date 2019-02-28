@@ -54,7 +54,7 @@ extension ESportsLotteryList : UITableViewDataSource {
         return 10
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ESportsLoLCell", for: indexPath) as! ESportsLoLCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ESportsLoLCell", for: indexPath) as! LoLCell
         
         return cell
     }

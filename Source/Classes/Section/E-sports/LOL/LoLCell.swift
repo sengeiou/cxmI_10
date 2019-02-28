@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ESportsLoLCell: UITableViewCell {
+class LoLCell: UITableViewCell {
 
     /// 赛季
     @IBOutlet weak var season : UILabel!
@@ -31,7 +31,7 @@ class ESportsLoLCell: UITableViewCell {
     }
 }
 
-extension ESportsLoLCell {
+extension LoLCell {
     private func initSubview() {
         betDetail.layer.cornerRadius = 5
         betDetail.layer.borderWidth = 1
