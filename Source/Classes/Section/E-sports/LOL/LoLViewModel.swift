@@ -16,7 +16,7 @@ import SVProgressHUD
 struct LoLModel : ESportsLottery, AlertPro {
     typealias Item = LoLData
     
-    var data: [LoLData] = [LoLData(),LoLData()]
+    var data: [LoLData] = [LoLData]()
     
 }
 extension LoLModel {
@@ -32,14 +32,46 @@ extension LoLModel {
     }
 }
 
+
+
 /// 玩法
 struct LoLPlayModel : ESportsPlay {
+    var selectData: Set<ESportsPlayModel> = Set()
+    
+    var homeTeam: BehaviorSubject<String> = BehaviorSubject(value: "")
+    
+    var visiTeam: BehaviorSubject<String> = BehaviorSubject(value: "")
+    
+    
     typealias Item = LoLData
     
     var data: LoLData = LoLData()
+    
+    var list: [ESportsPlayModel] = [ESportsPlayModel]()
 }
 extension LoLPlayModel {
     
+    mutating func setData(data: LoLData) {
+        self.data = data
+        homeTeam.onNext(data.homeTeam)
+        visiTeam.onNext(data.visiTeam)
+        
+        for item in data.play {
+            var play = ESportsPlayModel()
+            for odd in item.odds {
+                var od = ESportsItemModel()
+                
+                od.text = BehaviorSubject(value: odd)
+                
+                play.items.append(od)
+            }
+            play.title.onNext(item.title)
+            list.append(play)
+        }
+        
+        
+        reloadData.onNext(true)
+    }
 }
 
 

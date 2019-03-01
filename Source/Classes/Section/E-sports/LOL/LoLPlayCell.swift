@@ -7,25 +7,43 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
+
+protocol LoLPlayCellProtocol {
+    func didTipHome(view : LoLPlayCell, index : Int) -> Void
+    func didTipVisi(view : LoLPlayCell, index : Int) -> Void
+}
 
 class LoLPlayCell: UITableViewCell {
 
+    public var delegate : LoLPlayCellProtocol!
+    
     @IBOutlet weak var title : UILabel!
     
-    @IBOutlet weak var homeOdds : UILabel!
-    @IBOutlet weak var homeTeam : UILabel!
-    @IBOutlet weak var visiOdds : UILabel!
-    @IBOutlet weak var visiTeam : UILabel!
+    @IBOutlet weak var homeOdds : UIButton!
+    @IBOutlet weak var visiOdds : UIButton!
+    
+    @IBAction func home(sender : UIButton) {
+        guard delegate != nil else { return }
+        delegate.didTipHome(view: self, index: self.tag)
+    }
+    @IBAction func visi(sender : UIButton) {
+        guard delegate != nil else { return }
+        delegate.didTipVisi(view: self, index: self.tag)
+    }
+    
+    var bag = DisposeBag()
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        homeOdds.titleLabel?.numberOfLines = 2
+        visiOdds.titleLabel?.numberOfLines = 2
+        homeOdds.titleLabel?.textAlignment = .center
+        visiOdds.titleLabel?.textAlignment = .center
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        bag = DisposeBag()
     }
-
 }

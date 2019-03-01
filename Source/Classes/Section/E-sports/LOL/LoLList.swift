@@ -36,7 +36,7 @@ class LoLList: BaseViewController {
         
         var play1 = LoLPlayData()
         play1.title = "获胜方"
-        play1.odds = ["3.0"]
+        play1.odds = ["3.0","1.2"]
         
         var play2 = LoLPlayData()
         play2.title = "对局比分"
@@ -54,6 +54,11 @@ class LoLList: BaseViewController {
         play5.title = "获得一血"
         play5.odds = ["2.5","3.5","2.5","3.5","1.0","2.3"]
         
+        mo1.play.append(play1)
+        mo1.play.append(play2)
+        mo1.play.append(play3)
+        mo1.play.append(play4)
+        mo1.play.append(play5)
         mo1.play.append(play1)
         mo1.play.append(play2)
         mo1.play.append(play3)
@@ -77,7 +82,17 @@ class LoLList: BaseViewController {
         mo1.play.append(play3)
         mo1.play.append(play4)
         mo1.play.append(play5)
+        mo2.play.append(play1)
+        mo2.play.append(play2)
+        mo1.play.append(play3)
+        mo1.play.append(play4)
+        mo1.play.append(play5)
         
+        mo3.play.append(play1)
+        mo3.play.append(play2)
+        mo1.play.append(play3)
+        mo1.play.append(play4)
+        mo1.play.append(play5)
         mo3.play.append(play1)
         mo3.play.append(play2)
         mo1.play.append(play3)

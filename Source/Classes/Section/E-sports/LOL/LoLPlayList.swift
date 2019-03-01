@@ -47,7 +47,7 @@ extension LoLPlayList {
         
         viewModel.reloadData.subscribe { (event) in
             self.tableView.reloadData()
-        }
+        }.disposed(by: bag)
     }
 }
 
@@ -58,6 +58,16 @@ extension LoLPlayList {
     }
     @IBAction func delete(sender : UIButton) {
         
+    }
+}
+
+extension LoLPlayList : LoLPlayCellProtocol {
+    func didTipHome(view: LoLPlayCell, index: Int) {
+        viewModel.sePlayItem(playItem: viewModel.list[index], index: 0)
+    }
+    
+    func didTipVisi(view: LoLPlayCell, index: Int) {
+        viewModel.sePlayItem(playItem: viewModel.list[index], index: 1)
     }
 }
 
@@ -87,14 +97,45 @@ extension LoLPlayList : UITableViewDataSource {
         return 1
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch indexPath.section {
+        case 0:
+            return initPlayCollectionCell(indexPath: indexPath)
+        default:
+            return initPlayCell(indexPath: indexPath)
+        }
+    }
+    
+    
+    private func initPlayCell(indexPath : IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LoLPlayCell", for: indexPath) as! LoLPlayCell
+        cell.delegate = self
         
-        let play = viewModel.data.play[indexPath.section]
+        let play = viewModel.list[indexPath.section]
         
-        cell.homeTeam.text = play.title
-        cell.visiTeam.text = play.title
+        play.title.bind(to: cell.title.rx.text).disposed(by: cell.bag)
+        
+        let item1 = play.items[0]
+        let item2 = play.items[1]
+        
+        item1.text.bind(to: cell.homeOdds.rx.title()).disposed(by: cell.bag)
+        item2.text.bind(to: cell.visiOdds.rx.title()).disposed(by: cell.bag)
+        
+        
+        cell.tag = indexPath.section
+        item1.itemBackgroundColor.bind(to: cell.homeOdds.rx.backgroundColor()).disposed(by: cell.bag)
+        item2.itemBackgroundColor.bind(to: cell.visiOdds.rx.backgroundColor()).disposed(by: cell.bag)
+        
         return cell
     }
+    
+    private func initPlayCollectionCell(indexPath : IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ESPortsCollectionCell", for: indexPath) as! ESPortsCollectionCell
+        
+        cell.playModel = viewModel.list[indexPath.section]
+        
+        return cell
+    }
+    
 }
 
 

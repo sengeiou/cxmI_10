@@ -245,6 +245,9 @@
 		11754E0D211D6DC70061C5AB /* DLTTrendBottom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11754E0C211D6DC70061C5AB /* DLTTrendBottom.swift */; };
 		11754E11211D6F070061C5AB /* DLTTrendBallItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11754E10211D6F070061C5AB /* DLTTrendBallItem.swift */; };
 		11754E14211D82DD0061C5AB /* DLTTrendBottomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11754E13211D82DD0061C5AB /* DLTTrendBottomModel.swift */; };
+		1179B31D2228DCB400467D4F /* ESportsPlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1179B31C2228DCB400467D4F /* ESportsPlayViewModel.swift */; };
+		1179B32722291EBE00467D4F /* ESPortsCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1179B32622291EBE00467D4F /* ESPortsCollectionCell.swift */; };
+		1179B3292229212600467D4F /* ESPortsCollectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1179B3282229212600467D4F /* ESPortsCollectionItem.swift */; };
 		1179BD8320C39A28000D4875 /* CXMActivityRechargeCouponVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1179BD8220C39A28000D4875 /* CXMActivityRechargeCouponVC.swift */; };
 		1179BD8520C3A54D000D4875 /* CXMActivityRechargeResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1179BD8420C3A54D000D4875 /* CXMActivityRechargeResultVC.swift */; };
 		1179BD8C20C3D108000D4875 /* ActivityNetAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1179BD8B20C3D108000D4875 /* ActivityNetAPIManager.swift */; };
@@ -868,6 +871,9 @@
 		11754E0C211D6DC70061C5AB /* DLTTrendBottom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DLTTrendBottom.swift; sourceTree = "<group>"; };
 		11754E10211D6F070061C5AB /* DLTTrendBallItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DLTTrendBallItem.swift; sourceTree = "<group>"; };
 		11754E13211D82DD0061C5AB /* DLTTrendBottomModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DLTTrendBottomModel.swift; sourceTree = "<group>"; };
+		1179B31C2228DCB400467D4F /* ESportsPlayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESportsPlayViewModel.swift; sourceTree = "<group>"; };
+		1179B32622291EBE00467D4F /* ESPortsCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESPortsCollectionCell.swift; sourceTree = "<group>"; };
+		1179B3282229212600467D4F /* ESPortsCollectionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESPortsCollectionItem.swift; sourceTree = "<group>"; };
 		1179BD8220C39A28000D4875 /* CXMActivityRechargeCouponVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMActivityRechargeCouponVC.swift; sourceTree = "<group>"; };
 		1179BD8420C3A54D000D4875 /* CXMActivityRechargeResultVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXMActivityRechargeResultVC.swift; sourceTree = "<group>"; };
 		1179BD8B20C3D108000D4875 /* ActivityNetAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityNetAPIManager.swift; sourceTree = "<group>"; };
@@ -1620,6 +1626,8 @@
 			isa = PBXGroup;
 			children = (
 				1145EDE32224D3C300E8FAF2 /* ESportsListCell.swift */,
+				1179B32622291EBE00467D4F /* ESPortsCollectionCell.swift */,
+				1179B3282229212600467D4F /* ESPortsCollectionItem.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1636,6 +1644,7 @@
 			isa = PBXGroup;
 			children = (
 				1145EDEF22251D5700E8FAF2 /* ESportsLotteryVM.swift */,
+				1179B31C2228DCB400467D4F /* ESportsPlayViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -3911,6 +3920,7 @@
 				E581F37C2063573C002AB9F7 /* PaymentNetAPIManager.swift in Sources */,
 				11B081452133E31F004FCAE9 /* SurprisePrizeDigitalItem.swift in Sources */,
 				11CC696B21AF87D600F60C57 /* SellerListVC.swift in Sources */,
+				1179B31D2228DCB400467D4F /* ESportsPlayViewModel.swift in Sources */,
 				E57376022046B37900148622 /* MainTabBarController.swift in Sources */,
 				E550D89420733891002DDE23 /* FootballOrderBottomView.swift in Sources */,
 				116E0F2B209973BD009FE44E /* RouterMatcher.swift in Sources */,
@@ -4074,6 +4084,7 @@
 				11FEB95D208D8DA100926951 /* NewsDetailFooter.swift in Sources */,
 				1142220C2141331900CCBB3A /* TeamDetailMemberCell.swift in Sources */,
 				11EFB2A821AE7B9E00B9B8B1 /* ComOrderHeaderFooter.swift in Sources */,
+				1179B32722291EBE00467D4F /* ESPortsCollectionCell.swift in Sources */,
 				E5786FBC206DE98A0045F7F5 /* FootballScoreCell.swift in Sources */,
 				11353EA12134F06700C1D645 /* SurpriseShooterHeader.swift in Sources */,
 				11CC697121AF8BF300F60C57 /* SellerListCell.swift in Sources */,
@@ -4135,6 +4146,7 @@
 				11CC696921AF877300F60C57 /* SellerNetAPIManager.swift in Sources */,
 				1142DE7D208ED059009E3916 /* PaymentProtocol.swift in Sources */,
 				1173BED02150CD96008BC28A /* UIStoreboardEx.swift in Sources */,
+				1179B3292229212600467D4F /* ESPortsCollectionItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

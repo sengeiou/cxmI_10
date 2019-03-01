@@ -22,6 +22,7 @@ extension ESportsModel {
 }
 
 
+
 /// 投注页 业务逻辑 协议
 protocol ESportsLottery {
     associatedtype Item : ESportsModel
@@ -89,41 +90,7 @@ extension ESportsLottery {
     
 }
 
-// MARK: - 玩法投注
-protocol ESportsPlay {
-    associatedtype Item : ESportsModel
-    var data : Item { get set }
-}
-extension ESportsPlay {
-    /// 主队名
-    var homeTeam : BehaviorSubject<String> {
-        return BehaviorSubject(value: "EDG战队")
-    }
-    /// 客队名
-    var visiTeam : BehaviorSubject<String> {
-        return BehaviorSubject(value: "IG战队")
-    }
-    /// 更新数据
-    var reloadData : BehaviorSubject<Bool> {
-        return BehaviorSubject(value: false)
-    }
-    /// 数据
-//    var data : Item {
-//        set{ }
-//        get{ return Item() }
-//    }
-    
-}
 
-extension ESportsPlay {
-    public mutating func setData(data : Item) {
-        self.data = data
-        homeTeam.onNext(data.homeTeam)
-        visiTeam.onNext(data.visiTeam)
-        reloadData.onNext(true)
-    }
-    
-}
 
 
 
