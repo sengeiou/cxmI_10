@@ -11,8 +11,7 @@ import RxCocoa
 import RxSwift
 
 protocol LoLPlayCellProtocol {
-    func didTipHome(view : LoLPlayCell, index : Int) -> Void
-    func didTipVisi(view : LoLPlayCell, index : Int) -> Void
+    func didTipItem(view : LoLPlayCell, type : ItemType, section : Int) -> Void
 }
 
 class LoLPlayCell: UITableViewCell {
@@ -26,11 +25,11 @@ class LoLPlayCell: UITableViewCell {
     
     @IBAction func home(sender : UIButton) {
         guard delegate != nil else { return }
-        delegate.didTipHome(view: self, index: self.tag)
+        delegate.didTipItem(view: self, type: .homeTeam, section: self.tag)
     }
     @IBAction func visi(sender : UIButton) {
         guard delegate != nil else { return }
-        delegate.didTipVisi(view: self, index: self.tag)
+        delegate.didTipItem(view: self, type: .visiTeam, section: self.tag)
     }
     
     var bag = DisposeBag()

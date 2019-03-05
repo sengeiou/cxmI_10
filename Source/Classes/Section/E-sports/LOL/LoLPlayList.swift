@@ -42,8 +42,11 @@ extension LoLPlayList {
     private func setData() {
         viewModel.setData(data: defData)
         
-        viewModel.homeTeam.bind(to: homeTeam.rx.text).disposed(by: bag)
-        viewModel.visiTeam.bind(to: visiTeam.rx.text).disposed(by: bag)
+//        viewModel.homeTeam.bind(to: homeTeam.rx.text).disposed(by: bag)
+//        viewModel.visiTeam.bind(to: visiTeam.rx.text).disposed(by: bag)
+        
+        homeTeam.text = viewModel.homeTeam
+        visiTeam.text = viewModel.visiTeam
         
         viewModel.reloadData.subscribe { (event) in
             self.tableView.reloadData()
@@ -61,20 +64,20 @@ extension LoLPlayList {
     }
 }
 
-extension LoLPlayList : LoLPlayCellProtocol {
-    func didTipHome(view: LoLPlayCell, index: Int) {
-        viewModel.sePlayItem(playItem: viewModel.list[index], index: 0)
+extension LoLPlayList : LoLPlayCellProtocol, ESPortsCollectionCellProtocol {
+    func didTipItem(view : LoLPlayCell, type : ItemType, section : Int) {
+        viewModel.sePlayItem(play: viewModel.list[section], type : type, index: 0)
     }
-    
-    func didTipVisi(view: LoLPlayCell, index: Int) {
-        viewModel.sePlayItem(playItem: viewModel.list[index], index: 1)
+    func didTipItem(view: ESPortsCollectionCell, type: ItemType, section: Int, index: Int) {
+        viewModel.sePlayItem(play: viewModel.list[section], type : type, index: index)
     }
 }
 
 extension LoLPlayList : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 40.0
+
+        return viewModel.list[indexPath.section].cellHeight
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
@@ -91,37 +94,37 @@ extension LoLPlayList : UITableViewDelegate {
 
 extension LoLPlayList : UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.data.play.count
+        return viewModel.list.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.section {
-        case 0:
-            return initPlayCollectionCell(indexPath: indexPath)
-        default:
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {        
+        let play = viewModel.list[indexPath.section]
+        
+        if play.homeItems.count == 1 {
             return initPlayCell(indexPath: indexPath)
+        }else {
+            return initPlayCollectionCell(indexPath: indexPath)
         }
     }
-    
     
     private func initPlayCell(indexPath : IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LoLPlayCell", for: indexPath) as! LoLPlayCell
         cell.delegate = self
+        cell.tag = indexPath.section
         
         let play = viewModel.list[indexPath.section]
         
-        play.title.bind(to: cell.title.rx.text).disposed(by: cell.bag)
+        cell.title.text = play.title
+        cell.title.backgroundColor = play.titleBgColor
+        let item1 = play.homeItems[0]
+        let item2 = play.visiItems[0]
         
-        let item1 = play.items[0]
-        let item2 = play.items[1]
-        
-        item1.text.bind(to: cell.homeOdds.rx.title()).disposed(by: cell.bag)
-        item2.text.bind(to: cell.visiOdds.rx.title()).disposed(by: cell.bag)
+        item1.attText.bind(to: cell.homeOdds.rx.attributedTitle()).disposed(by: cell.bag)
+        item2.attText.bind(to: cell.visiOdds.rx.attributedTitle()).disposed(by: cell.bag)
         
         
-        cell.tag = indexPath.section
         item1.itemBackgroundColor.bind(to: cell.homeOdds.rx.backgroundColor()).disposed(by: cell.bag)
         item2.itemBackgroundColor.bind(to: cell.visiOdds.rx.backgroundColor()).disposed(by: cell.bag)
         
@@ -130,7 +133,12 @@ extension LoLPlayList : UITableViewDataSource {
     
     private func initPlayCollectionCell(indexPath : IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ESPortsCollectionCell", for: indexPath) as! ESPortsCollectionCell
+        cell.delegate = self
+        cell.tag = indexPath.section
         
+        let play = viewModel.list[indexPath.section]
+        cell.title.text = play.title
+        cell.title.backgroundColor = play.titleBgColor
         cell.playModel = viewModel.list[indexPath.section]
         
         return cell
@@ -138,9 +146,22 @@ extension LoLPlayList : UITableViewDataSource {
     
 }
 
-
+// MARK: - 初始化
 extension LoLPlayList {
     private func initSubview() {
         tableView.backgroundColor = ColorFFFFFF
+        setRightNav()
+    }
+    private func setRightNav() {
+        let right = UIButton(type: .custom)
+        right.setTitle("帮助", for: .normal)
+        right.setTitleColor(Color505050, for: .normal)
+        right.addTarget(self, action: #selector(rightNavItem(sender:)), for: .touchUpInside)
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: right)
+    }
+    
+    @objc private func rightNavItem( sender : UIButton ) {
+        
     }
 }

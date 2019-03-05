@@ -287,6 +287,8 @@
 		11B1B96E20F3609B00387430 /* FootballLineupViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B1B96D20F3609B00387430 /* FootballLineupViewCell.swift */; };
 		11B1B97020F3637D00387430 /* FootballLineupViewOddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B1B96F20F3637D00387430 /* FootballLineupViewOddCell.swift */; };
 		11B1B97220F3752700387430 /* FootballLineupMemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B1B97120F3752700387430 /* FootballLineupMemView.swift */; };
+		11B2D2BC222D0BA500AF835E /* ESportsConfirmViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B2D2BB222D0BA500AF835E /* ESportsConfirmViewModel.swift */; };
+		11B2D2C6222D284B00AF835E /* UILabelEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B2D2C5222D284B00AF835E /* UILabelEx.swift */; };
 		11B68C6B20A1A862002D74F0 /* JSDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B68C6A20A1A862002D74F0 /* JSDataModel.swift */; };
 		11B8D91721AD2E330063F450 /* HomeSportCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B8D91621AD2E330063F450 /* HomeSportCell.swift */; };
 		11B8D91921AD34CB0063F450 /* LotteryHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B8D91821AD34CB0063F450 /* LotteryHomeVC.swift */; };
@@ -914,6 +916,8 @@
 		11B1B96D20F3609B00387430 /* FootballLineupViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballLineupViewCell.swift; sourceTree = "<group>"; };
 		11B1B96F20F3637D00387430 /* FootballLineupViewOddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballLineupViewOddCell.swift; sourceTree = "<group>"; };
 		11B1B97120F3752700387430 /* FootballLineupMemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballLineupMemView.swift; sourceTree = "<group>"; };
+		11B2D2BB222D0BA500AF835E /* ESportsConfirmViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESportsConfirmViewModel.swift; sourceTree = "<group>"; };
+		11B2D2C5222D284B00AF835E /* UILabelEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelEx.swift; sourceTree = "<group>"; };
 		11B68C6A20A1A862002D74F0 /* JSDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSDataModel.swift; sourceTree = "<group>"; };
 		11B8D91621AD2E330063F450 /* HomeSportCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSportCell.swift; sourceTree = "<group>"; };
 		11B8D91821AD34CB0063F450 /* LotteryHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryHomeVC.swift; sourceTree = "<group>"; };
@@ -1645,6 +1649,7 @@
 			children = (
 				1145EDEF22251D5700E8FAF2 /* ESportsLotteryVM.swift */,
 				1179B31C2228DCB400467D4F /* ESportsPlayViewModel.swift */,
+				11B2D2BB222D0BA500AF835E /* ESportsConfirmViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -2239,6 +2244,7 @@
 				11E969E920C7E01700EAB733 /* Extension+UIImage.swift */,
 				11174BF121ABF8EE007E0940 /* UIImageViewEx.swift */,
 				1145EDF5222535C900E8FAF2 /* UIButtonEx.swift */,
+				11B2D2C5222D284B00AF835E /* UILabelEx.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -3806,6 +3812,7 @@
 				115B0CF820EF752400848EC7 /* FootballMatchInfoFutureCell.swift in Sources */,
 				118051542152491100B47605 /* CXMMBasketballLeagueFilter.swift in Sources */,
 				116EB210207F087D00B32ABD /* CXMFootballScoreFilterVC.swift in Sources */,
+				11B2D2BC222D0BA500AF835E /* ESportsConfirmViewModel.swift in Sources */,
 				E5973E31204F8FD4006461CE /* MeHeaderView.swift in Sources */,
 				E550D8A72073719A002DDE23 /* CXMFootballPlayFilterVC.swift in Sources */,
 				11E8FA5F20BFE96C0090BC6A /* UserInfoSettingHeaderView.swift in Sources */,
@@ -4032,6 +4039,7 @@
 				E51F9A60205A29EE00AB8A21 /* VCodeLoginFooterView.swift in Sources */,
 				11547F9C2137FB990068596C /* CXMMLeagueMatchVC.swift in Sources */,
 				115076A42138E1920029A63E /* CXMMLeagueMatchDetailVC.swift in Sources */,
+				11B2D2C6222D284B00AF835E /* UILabelEx.swift in Sources */,
 				11551CF220E225C5002FE691 /* CXMAccountDetailsFilter.swift in Sources */,
 				115B0CEB20EF068A00848EC7 /* FootballDetailStatisticsCell.swift in Sources */,
 				112F77B920EC7C8C005CA9E4 /* WMPageController.m in Sources */,

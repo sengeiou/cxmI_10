@@ -8,9 +8,14 @@
 
 import UIKit
 
+
+
 class ESPortsCollectionItem: UICollectionViewCell {
     
-    @IBOutlet weak var title : UIButton!
+    public static var width : CGFloat = 40
+    public static let height : CGFloat = 30.0
+    
+    @IBOutlet weak var title : UILabel!
     
     @IBOutlet weak var topLine : UIView!
     @IBOutlet weak var bottomLine : UIView!

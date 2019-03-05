@@ -30,6 +30,8 @@ struct LoLData : ESportsModel {
 
     var play : [LoLPlayData] = [LoLPlayData]()
     
+    
+    
     var selectPlay : Set<LoLPlayData> = Set()
     
     mutating func mapping(mapper: HelpingMapper) {
@@ -58,11 +60,22 @@ extension LoLData {
 
 struct LoLPlayData : HandyJSON {
     var id = ""
-    var title : String = "获胜"
-    var odds : [String] = ["2.0"]
+    var title : String = "对局比分"
+    var playType : String = "0"
+    var homePlay : [LoLPlayItemData] = [LoLPlayItemData]()
+    var visiPlay : [LoLPlayItemData] = [LoLPlayItemData]()
+}
+
+struct LoLPlayItemData : HandyJSON {
+    var title : String = "地图"
+    var odds : String = "2.0"
 }
 
 extension LoLPlayData : Hashable {
+    static func == (lhs: LoLPlayData, rhs: LoLPlayData) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
     var hashValue : Int {
         return
             id.hashValue

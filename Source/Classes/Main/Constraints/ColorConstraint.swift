@@ -47,6 +47,16 @@ let Color65AADDa1 = UIColor(hexColor: "65AADD", alpha: 0.1)
 
 /// 黄橙色
 let ColorF7931E = UIColor(hexColor: "F7931E")
+/// 黄色
+let ColorF5AD41 = UIColor(hexColor: "F5AD41")
+let Color85A5E0 = UIColor(hexColor: "85A5E0")
+let Color64AADD = UIColor(hexColor: "64AADD")
+let Color6CD5C4 = UIColor(hexColor: "6CD5C4")
+let ColorE86D8E = UIColor(hexColor: "E86D8E")
+let Color5D53B5 = UIColor(hexColor: "5D53B5")
+let Color1B57AB = UIColor(hexColor: "1B57AB")
+let Color5E89E0 = UIColor(hexColor: "5E89E0")
+let Color429992 = UIColor(hexColor: "429992")
 /// 橙色
 let ColorFDC801 = UIColor(hexColor: "FDC801")
 /// 未认证条，字体颜色
