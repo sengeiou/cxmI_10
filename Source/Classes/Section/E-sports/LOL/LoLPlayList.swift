@@ -23,7 +23,7 @@ class LoLPlayList: BaseViewController {
     @IBOutlet weak var homeTeam : UILabel!
     @IBOutlet weak var visiTeam : UILabel!
     
-    private var viewModel : LoLPlayModel = LoLPlayModel()
+    public var viewModel : LoLPlayModel = LoLPlayModel()
     
     private var bag = DisposeBag()
     override func viewDidLoad() {
@@ -33,6 +33,7 @@ class LoLPlayList: BaseViewController {
         
         
         setData()
+        self.tableView.reloadData()
     }
 
 }
@@ -40,7 +41,7 @@ class LoLPlayList: BaseViewController {
 // MARK: - 设置数据
 extension LoLPlayList {
     private func setData() {
-        viewModel.setData(data: defData)
+//        viewModel.setData(data: defData)
         
 //        viewModel.homeTeam.bind(to: homeTeam.rx.text).disposed(by: bag)
 //        viewModel.visiTeam.bind(to: visiTeam.rx.text).disposed(by: bag)
@@ -57,10 +58,11 @@ extension LoLPlayList {
 // MARK: - 点击事件
 extension LoLPlayList {
     @IBAction func confirm(sender : UIButton) {
-        
+        viewModel.confirm()
+        self.popViewController()
     }
     @IBAction func delete(sender : UIButton) {
-        
+        viewModel.removeAllSelect()
     }
 }
 

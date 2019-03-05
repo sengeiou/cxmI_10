@@ -221,6 +221,11 @@ class LoLList: BaseViewController {
         viewModel.data.append(mo2)
         viewModel.data.append(mo3)
         
+        var playModel1 = LoLPlayModel()
+        playModel1.setData(data: mo1)
+        
+        viewModel.playModel.append(playModel1)
+        
         setData()
     }
     
@@ -254,6 +259,7 @@ extension LoLList : UITableViewDelegate {
         
         let data = viewModel.data[indexPath.row]
         vc.defData = data
+        vc.viewModel = viewModel.playModel[indexPath.row]
         pushViewController(vc: vc)
     }
     

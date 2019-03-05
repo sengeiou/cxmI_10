@@ -42,7 +42,7 @@ class ESportsPlayModel : NSObject {
     var visiItems : [ESportsItemModel] = [ESportsItemModel]()
     
     var seItems : Set<ESportsItemModel> = Set()
-    
+    var temSeItems : Set<ESportsItemModel> = Set()
     var itemWidth : CGFloat = 40.0
     let itemheight : CGFloat = 40.0
     var cellHeight : CGFloat = 40.0
@@ -57,10 +57,24 @@ class ESportsItemModel : NSObject {
     var attText : BehaviorSubject<NSAttributedString>!
     
     var itemBackgroundColor : BehaviorSubject<UIColor> = BehaviorSubject(value: ColorFFFFFF)
-    var isSelect = BehaviorSubject(value: false)
-    
+
     var deText : NSAttributedString!
     var seText : NSAttributedString!
+    
+    
+    var isSelected : Bool = false {
+        didSet{
+            switch isSelected {
+            case true:
+                self.attText.onNext(self.seText)
+                self.itemBackgroundColor.onNext(ColorEA5504)
+            case false:
+                self.attText.onNext(self.deText)
+                self.itemBackgroundColor.onNext(ColorFFFFFF)
+            }
+        }
+    }
+    
 }
 
 
@@ -77,7 +91,11 @@ protocol ESportsPlay {
     /// 客队名
     var visiTeam : String { get set }
     
+    /// 所有选中项
     var selectData : Set<ESportsPlayModel> { get set }
+    
+    /// 临时的选中项
+    var temSeData : Set<ESportsPlayModel> { get set }
     
     mutating func setData(data : Item) -> Void
 }
@@ -91,6 +109,7 @@ extension ESportsPlay {
 
 extension ESportsPlay {
 
+    /// 选取Item
     public mutating func sePlayItem(play : ESportsPlayModel, type : ItemType, index : Int) {
         switch type {
         case .homeTeam:
@@ -102,34 +121,46 @@ extension ESportsPlay {
         }
     }
     
-    private mutating func changeSelectType(item : ESportsItemModel, play : ESportsPlayModel) {
-        
-        if let isSelect = try? item.isSelect.value() {
-            
-            item.isSelect.onNext(!isSelect)
-            switch isSelect {
-            case true: // 取消选中操作
-                item.attText.onNext(item.deText)
-                item.itemBackgroundColor.onNext(ColorFFFFFF)
-                play.seItems.remove(item)
-                
-                if play.seItems.isEmpty {
-                    selectData.remove(play)
-                }
-            case false: // 选取当前Item
-                
-                item.attText.onNext(item.seText)
-                
-                item.itemBackgroundColor.onNext(ColorEA5504)
-                
-                play.seItems.insert(item)
-                selectData.insert(play)
+    /// 移除所有选中项
+    public mutating func removeAllSelect() {
+        for data in selectData {
+            for item in data.homeItems {
+                item.isSelected = false
             }
+            for item in data.visiItems {
+                item.isSelected = false
+            }
+        }
+        temSeData.removeAll()
+        selectData.removeAll()
+    }
+    /// 确定按钮
+    public mutating func confirm() {
+        // 合并两个结合
+        selectData = selectData.union(temSeData)
+        
+        for play in temSeData {
+            play.seItems = play.seItems.union(play.temSeItems)
         }
     }
     
-    public func changeBGColor() {
-        
-    }
     
+}
+
+extension ESportsPlay {
+    // 改变选中状态
+    private mutating func changeSelectType(item : ESportsItemModel, play : ESportsPlayModel) {
+        
+        item.isSelected = !item.isSelected
+        switch item.isSelected {
+        case true: // 取消选中操作
+            play.temSeItems.insert(item)
+            temSeData.insert(play)
+        case false: // 选取当前Item
+            play.temSeItems.remove(item)
+            if play.seItems.isEmpty {
+                temSeData.remove(play)
+            }
+        }
+    }
 }

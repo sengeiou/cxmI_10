@@ -18,6 +18,7 @@ struct LoLModel : ESportsLottery, AlertPro {
     
     var data: [LoLData] = [LoLData]()
     
+    var playModel : [LoLPlayModel] = [LoLPlayModel]()
 }
 extension LoLModel {
     func request() {
@@ -35,10 +36,12 @@ extension LoLModel {
 
 
 /// 玩法
-struct LoLPlayModel : ESportsPlay {
+class LoLPlayModel : ESportsPlay {
     
     // 选中的数据
     var selectData: Set<ESportsPlayModel> = Set()
+    
+    var temSeData: Set<ESportsPlayModel> = Set()
     
     var homeTeam: String = ""
     var visiTeam: String = ""
@@ -52,7 +55,7 @@ struct LoLPlayModel : ESportsPlay {
 }
 extension LoLPlayModel {
     
-    mutating func setData(data: LoLData) {
+    func setData(data: LoLData) {
         self.data = data
         homeTeam = data.homeTeam
         visiTeam = data.visiTeam
