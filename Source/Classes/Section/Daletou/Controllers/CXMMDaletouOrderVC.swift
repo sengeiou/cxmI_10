@@ -185,7 +185,7 @@ extension CXMMDaletouOrderVC {
         if let url = URL(string: orderModel.lotteryClassifyImg) {
             self.orderIcon.kf.setImage(with: url)
         }
-        
+        stageNum.text = "大乐透" + orderModel.termNum + "期"
         orderStatus.text = orderModel.orderStatusDesc
         
         // 1.2.0 去掉¥符号
@@ -211,7 +211,11 @@ extension CXMMDaletouOrderVC {
             winningTitle.text = "中奖金额"
             winningAmount.text = "¥ " + orderModel.winningMoney
             orderStatusIcon.image = UIImage(named: "Prize")
-        
+        case "9" :
+            oneMsgOrderStatus.text = ""
+            winningTitle.text = "中奖金额"
+            winningAmount.text = "¥ " + orderModel.winningMoney
+            orderStatusIcon.image = UIImage(named: "Prize")
         default:
             winningTitle.text = ""
             winningAmount.text = ""
