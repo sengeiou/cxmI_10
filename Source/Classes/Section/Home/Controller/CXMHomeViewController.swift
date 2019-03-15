@@ -384,27 +384,58 @@ extension CXMHomeViewController {
             
             
         }else {
-            switch indexPath.section {
-            case 0:
-                return initScrollBarCell(indexPath: indexPath)
-            case 1:
-                return initActivityCell(indexPath: indexPath)
-            case 2:
-                return initSportCell(indexPath: indexPath)
-            case 3:
-                return initSportLotteryCell(indexPath: indexPath)
-            default:
+            
+            if homeData.discoveryHallClassifyDTOList.count != 0 {
+                switch indexPath.section {
+                case 0:
+                    return initScrollBarCell(indexPath: indexPath)
+                case 1:
+                    return initActivityCell(indexPath: indexPath)
+                case 2:
+                    return initSportCell(indexPath: indexPath)
+                case 3:
+                    return initSportLotteryCell(indexPath: indexPath)
+                default:
+                    
+                    let newsInfo = newsList[indexPath.row]
+                    
+                    if newsInfo.listStyle == "1" || newsInfo.listStyle == "4" {
+                        return initNewsOnePicCell(indexPath: indexPath)
+                    }else if newsInfo.listStyle == "3" {
+                        return initNewsThreePicCell(indexPath: indexPath)
+                    }else {
+                        return initNewsNoPicCell(indexPath: indexPath)
+                    }
+                }
                 
-                let newsInfo = newsList[indexPath.row]
                 
-                if newsInfo.listStyle == "1" || newsInfo.listStyle == "4" {
-                    return initNewsOnePicCell(indexPath: indexPath)
-                }else if newsInfo.listStyle == "3" {
-                    return initNewsThreePicCell(indexPath: indexPath)
-                }else {
-                    return initNewsNoPicCell(indexPath: indexPath)
+                
+                
+            }else {
+                switch indexPath.section {
+                case 0:
+                    return initScrollBarCell(indexPath: indexPath)
+                case 1:
+                    return initActivityCell(indexPath: indexPath)
+                case 2:
+                    return initSportLotteryCell(indexPath: indexPath)
+//                case 3:
+//                    return initSportLotteryCell(indexPath: indexPath)
+                default:
+                    
+                    let newsInfo = newsList[indexPath.row]
+                    
+                    if newsInfo.listStyle == "1" || newsInfo.listStyle == "4" {
+                        return initNewsOnePicCell(indexPath: indexPath)
+                    }else if newsInfo.listStyle == "3" {
+                        return initNewsThreePicCell(indexPath: indexPath)
+                    }else {
+                        return initNewsNoPicCell(indexPath: indexPath)
+                    }
                 }
             }
+            
+            
         }
     }
     
@@ -500,49 +531,88 @@ extension CXMHomeViewController {
                 }
             }
         }else {
-            switch indexPath.section {
-            case 0:
-                return 35
-            case 1:
-                if self.homeData != nil, self.homeData.activity == nil {
-                    return 0
-                }else {
-                    return 90 * defaultScale
+            
+            if homeData.discoveryHallClassifyDTOList.count != 0 {
+                switch indexPath.section {
+                case 0:
+                    return 35
+                case 1:
+                    if self.homeData != nil, self.homeData.activity == nil {
+                        return 0
+                    }else {
+                        return 90 * defaultScale
+                    }
+                case 2:
+                    guard self.homeData != nil else { return 0 }
+                    let count = self.homeData.discoveryHallClassifyDTOList.count
+                    var verticalCount = count / HorizontalSportItemCount
+                    
+                    if count % HorizontalSportItemCount != 0 {
+                        verticalCount += 1
+                    }
+                    
+                    let height : CGFloat = HomesectionTopSportSpacing * 2 + FootballSportCellHeight * CGFloat(verticalCount) + FootballCellLineSportSpacing * CGFloat(verticalCount) + HomeSectionViewSportHeight
+                    
+                    return height
+                case 3:
+                    guard self.homeData != nil else { return 0 }
+                    let count = self.homeData.lotteryClassifys.count
+                    var verticalCount = count / HorizontalItemCount
+                    
+                    if count % HorizontalItemCount != 0 {
+                        verticalCount += 1
+                    }
+                    
+                    let height : CGFloat = HomesectionTopSpacing * 2 + FootballCellHeight * CGFloat(verticalCount) + FootballCellLineSpacing * CGFloat(verticalCount) + HomeSectionViewHeight
+                    
+                    return height
+                default:
+                    let newsInfo = newsList[indexPath.row]
+                    
+                    if newsInfo.listStyle == "1" || newsInfo.listStyle == "4" || newsInfo.listStyle == "0" {
+                        return 110 * defaultScale
+                    }
+                    else {
+                        return 150 * defaultScale
+                    }
                 }
-            case 2:
-                guard self.homeData != nil else { return 0 }
-                let count = self.homeData.discoveryHallClassifyDTOList.count
-                var verticalCount = count / HorizontalSportItemCount
+            }else {
+                switch indexPath.section {
+                case 0:
+                    return 35
+                case 1:
+                    if self.homeData != nil, self.homeData.activity == nil {
+                        return 0
+                    }else {
+                        return 90 * defaultScale
+                    }
+                case 2:
+                    guard self.homeData != nil else { return 0 }
+                    let count = self.homeData.lotteryClassifys.count
+                    var verticalCount = count / HorizontalItemCount
+                    
+                    if count % HorizontalItemCount != 0 {
+                        verticalCount += 1
+                    }
+                    
+                    let height : CGFloat = HomesectionTopSpacing * 2 + FootballCellHeight * CGFloat(verticalCount) + FootballCellLineSpacing * CGFloat(verticalCount) + HomeSectionViewHeight
+                    
+                    return height
                 
-                if count % HorizontalSportItemCount != 0 {
-                    verticalCount += 1
-                }
-                
-                let height : CGFloat = HomesectionTopSportSpacing * 2 + FootballSportCellHeight * CGFloat(verticalCount) + FootballCellLineSportSpacing * CGFloat(verticalCount) + HomeSectionViewSportHeight
-                
-                return height
-            case 3:
-                guard self.homeData != nil else { return 0 }
-                let count = self.homeData.lotteryClassifys.count
-                var verticalCount = count / HorizontalItemCount
-                
-                if count % HorizontalItemCount != 0 {
-                    verticalCount += 1
-                }
-                
-                let height : CGFloat = HomesectionTopSpacing * 2 + FootballCellHeight * CGFloat(verticalCount) + FootballCellLineSpacing * CGFloat(verticalCount) + HomeSectionViewHeight
-                
-                return height
-            default:
-                let newsInfo = newsList[indexPath.row]
-                
-                if newsInfo.listStyle == "1" || newsInfo.listStyle == "4" || newsInfo.listStyle == "0" {
-                    return 110 * defaultScale
-                }
-                else {
-                    return 150 * defaultScale
+                    
+                default:
+                    let newsInfo = newsList[indexPath.row]
+                    
+                    if newsInfo.listStyle == "1" || newsInfo.listStyle == "4" || newsInfo.listStyle == "0" {
+                        return 110 * defaultScale
+                    }
+                    else {
+                        return 150 * defaultScale
+                    }
                 }
             }
+            
+            
         }
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
