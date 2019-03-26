@@ -55,6 +55,8 @@ class CXMMBasketballOrderVC: BaseViewController {
 
     private func initSubview() {
         self.goBuyButton.backgroundColor = ColorEA5504
+        
+        tableView.register(OrderStoreCell.self, forCellReuseIdentifier: OrderStoreCell.identifier)
     }
     private func setDefaultData() {
         winningTitle.text = ""
@@ -155,11 +157,14 @@ extension CXMMBasketballOrderVC : UITableViewDelegate {
 extension CXMMBasketballOrderVC : UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         guard orderInfo != nil else { return 0 }
-        return 2
+        return 2 + orderInfo.appendInfoList.count
+//        return 2
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         switch section {
         case 0:
+            //            return orderInfo.matchInfos.count + 3 // 显示 支付方式
             return orderInfo.matchInfos.count + 2
         default:
             return 1
@@ -177,9 +182,35 @@ extension CXMMBasketballOrderVC : UITableViewDataSource {
             default :
                 return initDetailCell(indexPath: indexPath)
             }
-        default:
+        case 1:
             return initProgrammeCell(indexPath: indexPath)
+        default:
+            let model = orderInfo.appendInfoList[indexPath.row]
+            
+            switch model.type {
+            case "1":
+                return initQRCodeCell(indexPath: indexPath)
+            case "0":
+                return initStoreCell(indexPath: indexPath)
+            default :
+                return UITableViewCell()
+            }
+            
         }
+    }
+    
+    private func initStoreCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: OrderStoreCell.identifier, for: indexPath) as! OrderStoreCell
+        cell.configure(with: orderInfo.appendInfoList[indexPath.row])
+        return cell
+    }
+    
+    private func initQRCodeCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "OrderDetailQRCodeCell", for: indexPath) as! OrderDetailQRCodeCell
+        cell.delegate = self
+        cell.configure(with: orderInfo.appendInfoList[indexPath.row])
+        print(cell.frame)
+        return cell
     }
     
     private func initDetailTitleCell(indexPath: IndexPath) -> UITableViewCell {
@@ -220,7 +251,7 @@ extension CXMMBasketballOrderVC {
             }
         
         case 1:
-            return 180
+            return 118
         default:
             return 0
         }
@@ -238,6 +269,24 @@ extension CXMMBasketballOrderVC {
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 5
     }
+}
+
+extension CXMMBasketballOrderVC : OrderDetailQRCodeCellDelegate {
+    func didTipCopy(cell: OrderDetailQRCodeCell, model: AppendInfo) {
+        showHUD(message: "复制成功")
+        let paseboard = UIPasteboard.general
+        
+        paseboard.string = model.wechat
+    }
+    
+    func didTipCall(cell: OrderDetailQRCodeCell, model: AppendInfo) {
+        if let url = URL(string: "tel://\(model.phone)") {
+            UIApplication.shared.openURL(url)
+        }
+        
+    }
+    
+    
 }
 // MARK: - 网络请求
 extension CXMMBasketballOrderVC {

@@ -307,16 +307,24 @@ extension CXMMBasketballConfirmVC {
         showProgressHUD()
         _ = basketBallProvider.rx.request(.saveBetInfo(requestModel: self.requestModel))
             .asObservable()
-            .mapBaseObject(type: DataModel.self)
+            .mapObject(type: SaveBetInfoModel.self)
             .subscribe(onNext: { (data) in
+                
+                if data.payToken != "" {
+                    let payment = CXMPaymentViewController()
+                    payment.lottoToken = data.payToken
+                    weakSelf?.pushViewController(vc: payment)
+                }else {
+                    // 1.1.4 版，取消支付，直接跳转订单详情
+                    let story = UIStoryboard(storyboard: .Basketball)
+                    let order = story.instantiateViewController(withIdentifier: "BasketballOrderVC") as! CXMMBasketballOrderVC
+                    order.orderId = data.orderId
+                    weakSelf?.pushViewController(vc: order)
+                }
+                
                 weakSelf?.dismissProgressHud()
-                
                 weakSelf?.changeConfirmButton(canTip: true)
-                let vc = CXMPaymentViewController()
-                vc.lottoToken = data.data
-                
-                self.pushViewController(vc: vc)
-                
+
             }, onError: { (error) in
                 weakSelf?.tableView.endrefresh()
                 weakSelf?.dismissProgressHud()
