@@ -252,6 +252,18 @@ extension CXMMBasketballOrderVC {
         
         case 1:
             return 118
+        case 2:
+            
+            let model = orderInfo.appendInfoList[indexPath.row]
+            
+            switch model.type {
+            case "1":
+                return 250
+            case "0":
+                return 90
+            default :
+                return 0
+            }
         default:
             return 0
         }
