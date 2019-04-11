@@ -42,7 +42,7 @@ class LotterySectionHeader: UITableViewHeaderFooterView, DateProtocol {
 //                let weekAtt = NSAttributedString(string: " " + week)
 //                let totalAtt = NSAttributedString(string: "共有")
 //
-//                let countAtt = NSAttributedString(string: "\(resultList.count)", attributes: [NSAttributedStringKey.foregroundColor : ColorE85504])
+//                let countAtt = NSAttributedString(string: "\(resultList.count)", attributes: [NSAttributedString.Key.foregroundColor : ColorE85504])
 //
 //                let lAtt = NSAttributedString(string: "场比赛")
 //

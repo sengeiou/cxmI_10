@@ -7,13 +7,26 @@
 //  比赛列表
 
 import UIKit
+import XLPagerTabStrip
 
 fileprivate let LotteryCellId = "LotteryCellId"
 fileprivate let LotterySectionHeaderId = "LotterySectionHeaderId"
 
-class CXMScoreListViewController: BaseViewController, LotterySectionHeaderDelegate, LotteryProtocol {
-
+class CXMScoreListViewController: BaseViewController, LotterySectionHeaderDelegate, LotteryProtocol, IndicatorInfoProvider {
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        
+        switch matchType {
+        case "0":
+            return IndicatorInfo(title: "未结束")
+        case "1":
+            return IndicatorInfo(title: "已结束")
+        default:
+            return IndicatorInfo(title: "我的比赛")
+        }
+    }
+    
     // MARK: - 属性 public
+    public var pushFrom : PushFrom = .defaul
     
     public var changeNum : ((_ notFinishNum: String, _ finishNum: String, _ collectNum: String) -> Void)!
     public var shouldLogin : ( () -> Void )!
@@ -56,8 +69,14 @@ class CXMScoreListViewController: BaseViewController, LotterySectionHeaderDelega
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.isHidenBar = false
         self.tableView.isUserInteractionEnabled = true
+        
+        switch pushFrom {
+        case .other:
+            self.isHidenBar = true
+        case .defaul:
+            self.isHidenBar = false
+        }
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

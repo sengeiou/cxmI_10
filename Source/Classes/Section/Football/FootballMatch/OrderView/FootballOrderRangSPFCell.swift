@@ -40,7 +40,7 @@ class FootballOrderRangSPFCell: UITableViewCell, DateProtocol {
     // 单关图标
     private var typeIcon : UIImageView!
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initSubview()
         //setupDanBut()

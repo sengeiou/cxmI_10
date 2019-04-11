@@ -65,7 +65,7 @@ class CXMMeViewController: BaseViewController, UITableViewDelegate, UITableViewD
         super.viewDidLoad()
         hideBackBut()
         setRightBut()
-        self.navigationItem.title = "彩小秘 · 我的"
+        self.navigationItem.title = "我的"
         self.view.addSubview(tableView)
         
         self.photoSelect = YHPhotoSelect(controller: self, delegate: self)
@@ -213,7 +213,7 @@ class CXMMeViewController: BaseViewController, UITableViewDelegate, UITableViewD
     
     // 长按操作切换不同开发环境
     @objc func longPressAction(_ sender: UIGestureRecognizer) {
-        if sender.state == UIGestureRecognizerState.began {
+        if sender.state == UIGestureRecognizer.State.began {
             print("长按")
             showPlatformActionSheet()
         }
@@ -245,9 +245,9 @@ class CXMMeViewController: BaseViewController, UITableViewDelegate, UITableViewD
     
     private func setupNavigationBarTitle() {
         #if DEBUG
-        self.navigationItem.title = "彩小秘 · 我的(\(getCurrentPlatformType().description))"
+        self.navigationItem.title = "我的(\(getCurrentPlatformType().description))"
         #else
-        self.navigationItem.title = "彩小秘 · 我的"
+        self.navigationItem.title = "我的"
         #endif
     }
     
@@ -255,7 +255,7 @@ class CXMMeViewController: BaseViewController, UITableViewDelegate, UITableViewD
         let but = UIButton(type: .custom)
         but.setTitle("设置", for: .normal)
         but.titleLabel?.font = Font15
-        but.setTitleColor(Color787878, for: .normal)
+        but.setTitleColor(ColorNavItem, for: .normal)
         but.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         but.addTarget(self, action: #selector(setting), for: .touchUpInside)
         
@@ -285,9 +285,9 @@ class CXMMeViewController: BaseViewController, UITableViewDelegate, UITableViewD
         
         uiInfo.isShowTansfer = true
         
-        uiInfo.customBannerColor = ColorFFFFFF
+        uiInfo.customBannerColor = ColorD12120
         
-        uiInfo.topViewTextColor = UIColor.black
+        uiInfo.topViewTextColor = UIColor.white
         
         uiInfo.titleFont = Font15
         
@@ -299,11 +299,8 @@ class CXMMeViewController: BaseViewController, UITableViewDelegate, UITableViewD
         
         uiInfo.commentCommitButtonBgColor = ColorEA5504
         
-        uiInfo.commentCommitButtonBgHighColor = ColorFFFFFF
-        //uiInfo.serviceNameTextColor = Color0099D9
-        
-        
-        
+        uiInfo.commentCommitButtonBgHighColor = ColorD12120
+     
         ZCLibClient.getZCLibClient().libInitInfo = initInfo
         
         ZCSobot.startZCChatVC(uiInfo, with: self, target: nil, pageBlock: { (chatVC, type) in
@@ -375,8 +372,11 @@ class CXMMeViewController: BaseViewController, UITableViewDelegate, UITableViewD
         item2.title = "账户明细"
         item2.iconStr = "Details"
         item2.pushType = .账户明细
-        section1.list.append(item2)
         
+        if userInfo != nil, userInfo.recharegeTurnOn {
+            section1.list.append(item2)
+        }
+    
         var item3 = MeListDataModel()
         item3.title = "我的卡券"
         item3.iconStr = "coupon"
@@ -458,10 +458,12 @@ class CXMMeViewController: BaseViewController, UITableViewDelegate, UITableViewD
             .mapObject(type: UserInfoDataModel.self)
             .subscribe(onNext: { (data) in
                 guard weakSelf != nil else { return }
-                weakSelf!.userInfo = data
-                weakSelf!.headerView.userInfo = data
+                weakSelf?.userInfo = data
+                weakSelf?.headerView.userInfo = data
                 weakSelf?.newsheaderView.userInfo = data
                 weakSelf?.footerView.changeLoginButtonStatus()
+                weakSelf?.setupUserInfo()
+                weakSelf?.setData()
                 if self.showType == .allShow {
                     self.meSectionList = self.getBuyData()
                     if data.activityDTOList != nil {
@@ -551,6 +553,7 @@ class CXMMeViewController: BaseViewController, UITableViewDelegate, UITableViewD
         self.present(alertController)
     }
     
+    //MARK: - PUSH
     private func pushMeViewController (_ model: MeListDataModel) {
         switch model.pushType {
         case .投注记录:
@@ -847,7 +850,7 @@ extension CXMMeViewController: YHDPhotoSelectDelegate {
             self.newsheaderView.setIcon(image: resultImg)
         }
         
-        let data = UIImagePNGRepresentation(resultImg)
+        let data = resultImg.pngData()
         
         UserDefaults.standard.set(data, forKey: UserIconData)
         

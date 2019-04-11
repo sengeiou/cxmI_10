@@ -14,7 +14,7 @@ protocol RouterPro : RouterMatcher, AlertPro { }
 extension RouterPro {
     /// 路由跳转
     func pushRouterVC(_ name: String = "", urlStr: String, from vc : UIViewController) {
-        //let urlStr = "http://192.168.31.205:8080/activity/rechangeActivity?cxmxc=scm&showtitle=1&type=1&usinfo=2"
+//        let urlStr = "http://192.168.31.178:8080/lottery/freebuy/singleNote?cxmxc=scm&type=3&id=1"
         //"http://39.106.18.39:9805/activity/tuiguang?cxmxc=scm&type=1&usinfo=1&showtitle=1&cfrom=app"
         
         let type = matcherHttp(urlStr: urlStr)
@@ -35,7 +35,8 @@ extension RouterPro {
         case .竞彩足球:
             pushFootballVC(from: vc)
         case .大乐透:
-            pushDaletou(from: vc)
+            pushESportsList(from: vc)
+//            pushDaletou(from: vc)
         case .竞彩篮球:
 //            pushLotto(urlStr: urlStr, from: vc)
             pushBasketball(from: vc)
@@ -85,7 +86,7 @@ extension RouterPro {
             guard let id = type.1?.subid else { return }
             pushPrizeDigitalHistory(from: vc, lotteryId: id)
         case .专家广场:
-            pushExpert(from: vc)
+            pushExpert(url: urlStr, from: vc)
         case .彩票学堂:
             pushLottoSchool(from: vc )
         case .活动中心:
@@ -94,11 +95,14 @@ extension RouterPro {
             pushInformation(from: vc )
         case .晒单公园:
             pushShaidan(from: vc)
-        case .实时统计:
+        case .联赛资料:
             pushStatistics(from: vc )
         case .发现更多:
             pushSurpriseMore(from: vc)
-            
+        case .比分直播:
+            pushScore(from: vc)
+        case .线下店铺:
+            pushSeller(from: vc)
         default:
             break
         }
@@ -142,6 +146,16 @@ extension RouterPro {
         
         pushViewController(basketball, from: vc)
     }
+    private func pushESportsList(from vc : UIViewController) {
+        let story = UIStoryboard(storyboard: .ESports)
+        let esportsList = story.instantiateViewController(withIdentifier: "ESportsList") as! ESportsList
+        pushViewController(esportsList, from: vc)
+    }
+    private func pushESportsLoL(from vc : UIViewController) {
+        let story = UIStoryboard(storyboard: .ESports)
+        let esportsLol = story.instantiateViewController(withIdentifier: "ESportsList") as! ESportsList
+        pushViewController(esportsLol, from: vc)
+    }
     private func pushKuai3(from vc : UIViewController) {
         showHUD(message: "敬请期待")
     }
@@ -180,8 +194,8 @@ extension RouterPro {
     }
     
     /// 专家广场
-    private func pushExpert(from vc : UIViewController) {
-        
+    private func pushExpert(url : String, from vc : UIViewController) {
+        pushWebview(urlStr: url, from: vc)
     }
     /// 彩票学堂
     private func pushLottoSchool(from vc : UIViewController) {
@@ -207,10 +221,23 @@ extension RouterPro {
     }
     /// 发现更多
     private func pushSurpriseMore(from vc : UIViewController) {
-        
+        let story = UIStoryboard.init(storyboard: .Surprise)
+        let lottery = story.instantiateViewController(withIdentifier: "SurpriseHomeMoreVC") as! SurpriseHomeMoreVC
+        pushViewController(lottery, from: vc)
     }
-    
-    
+    /// 比分直播
+    private func pushScore(from vc : UIViewController) {
+        let story = UIStoryboard(storyboard: .Storyboard)
+        let score = story.instantiateViewController(withIdentifier: "ScoreHomeViewController") as! ScoreHomeViewController
+        score.pushFrom = .other
+        pushViewController(score, from: vc)
+    }
+    /// 线下店铺
+    private func pushSeller(from vc : UIViewController) {
+        let story = UIStoryboard(storyboard: .Seller)
+        let seller = story.instantiateViewController(withIdentifier: "SellerListVC") as! SellerListVC
+        pushViewController(seller, from: vc)
+    }
     private func pushViewController(_ vc: UIViewController, from formvc: UIViewController) {
         formvc.navigationController?.pushViewController(vc, animated: true)
     }
@@ -239,10 +266,10 @@ extension RouterPro {
     func getCurrentVC()->UIViewController{
         
         var window = UIApplication.shared.keyWindow
-        if window?.windowLevel != UIWindowLevelNormal{
+        if window?.windowLevel != UIWindow.Level.normal{
             let windows = UIApplication.shared.windows
             for  tempwin in windows{
-                if tempwin.windowLevel == UIWindowLevelNormal{
+                if tempwin.windowLevel == UIWindow.Level.normal{
                     window = tempwin
                     break
                 }
@@ -351,10 +378,10 @@ struct Router : RouterMatcher {
     func getCurrentVC()->UIViewController{
         
         var window = UIApplication.shared.keyWindow
-        if window?.windowLevel != UIWindowLevelNormal{
+        if window?.windowLevel != UIWindow.Level.normal{
             let windows = UIApplication.shared.windows
             for  tempwin in windows{
-                if tempwin.windowLevel == UIWindowLevelNormal{
+                if tempwin.windowLevel == UIWindow.Level.normal{
                     window = tempwin
                     break
                 }

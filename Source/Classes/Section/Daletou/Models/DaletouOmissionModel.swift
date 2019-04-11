@@ -19,7 +19,8 @@ struct DaletouOmissionModel : HandyJSON {
     var prizeList : [DLTHistoricalData]!
     var prizes : String = ""
     var term_num : String = ""
-    
+    /// 是否展示胆拖
+    var isShowDragOn : Bool!
 }
 
 struct DLTHistoricalData : HandyJSON {

@@ -45,6 +45,11 @@ struct UserInfoDataModel: HandyJSON {
     var activityDTOList : [MeListDataModel]!
     var hasPass = false
     var realInfo: String!
+    
+    /// 充值开关
+    var recharegeTurnOn : Bool = false
+    /// 提现开关
+    var withdrawTurnOn : Bool = false
 }
 
 

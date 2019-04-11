@@ -63,27 +63,27 @@ class TeamDetailRecordHeader: UITableViewHeaderFooterView {
 extension TeamDetailRecordHeader {
     public func configure(with data : TeamRecoreDetail) {
         let muAtt = NSMutableAttributedString(string: "最近战绩",
-                                              attributes :[NSAttributedStringKey.foregroundColor: Color505050,
-                                                           NSAttributedStringKey.font : Font14])
+                                              attributes :[NSAttributedString.Key.foregroundColor: Color505050,
+                                                           NSAttributedString.Key.font : Font14])
         
         let countAtt = NSAttributedString(string: " \(data.matchCount)场比赛",
-                                            attributes: [NSAttributedStringKey.foregroundColor : Color787878,
-                                                        NSAttributedStringKey.font : Font12])
+            attributes: [NSAttributedString.Key.foregroundColor : Color787878,
+                         NSAttributedString.Key.font : Font12])
         
         let teamAtt = NSAttributedString(string: " \(data.homeTeam)",
-                                            attributes: [NSAttributedStringKey.foregroundColor: Color787878,
-                                                         NSAttributedStringKey.font : Font12])
+            attributes: [NSAttributedString.Key.foregroundColor: Color787878,
+                         NSAttributedString.Key.font : Font12])
         
         let winAtt = NSAttributedString(string: " \(data.win)胜",
-                                            attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504,
-                                                        NSAttributedStringKey.font : Font12])
+            attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504,
+                         NSAttributedString.Key.font : Font12])
         
         let flatAtt = NSAttributedString(string: "\(data.flat)平",
-                                            attributes: [NSAttributedStringKey.foregroundColor: Color6CD6C4,
-                                                        NSAttributedStringKey.font : Font12])
+            attributes: [NSAttributedString.Key.foregroundColor: Color6CD6C4,
+                         NSAttributedString.Key.font : Font12])
         let losAtt = NSAttributedString(string: "\(data.negative)负",
-                                        attributes: [NSAttributedStringKey.foregroundColor: Color44AE35,
-                                                    NSAttributedStringKey.font : Font12])
+            attributes: [NSAttributedString.Key.foregroundColor: Color44AE35,
+                         NSAttributedString.Key.font : Font12])
         
         muAtt.append(countAtt)
         muAtt.append(teamAtt)

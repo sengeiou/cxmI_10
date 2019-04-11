@@ -24,14 +24,14 @@ class FootballTotalView: UIView {
             
             guard let totalCellModels = teamInfo.matchPlays[0].matchCells else { return }
             
-            let att0 = NSAttributedString(string: totalCellModels[0].cellName, attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F])
-            let att1 = NSAttributedString(string: totalCellModels[1].cellName, attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F])
-            let att2 = NSAttributedString(string: totalCellModels[2].cellName, attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F])
-            let att3 = NSAttributedString(string: totalCellModels[3].cellName, attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F])
-            let att4 = NSAttributedString(string: totalCellModels[4].cellName, attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F])
-            let att5 = NSAttributedString(string: totalCellModels[5].cellName, attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F])
-            let att6 = NSAttributedString(string: totalCellModels[6].cellName, attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F])
-            let att7 = NSAttributedString(string: totalCellModels[7].cellName, attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F])
+            let att0 = NSAttributedString(string: totalCellModels[0].cellName, attributes: [NSAttributedString.Key.foregroundColor: Color9F9F9F])
+            let att1 = NSAttributedString(string: totalCellModels[1].cellName, attributes: [NSAttributedString.Key.foregroundColor: Color9F9F9F])
+            let att2 = NSAttributedString(string: totalCellModels[2].cellName, attributes: [NSAttributedString.Key.foregroundColor: Color9F9F9F])
+            let att3 = NSAttributedString(string: totalCellModels[3].cellName, attributes: [NSAttributedString.Key.foregroundColor: Color9F9F9F])
+            let att4 = NSAttributedString(string: totalCellModels[4].cellName, attributes: [NSAttributedString.Key.foregroundColor: Color9F9F9F])
+            let att5 = NSAttributedString(string: totalCellModels[5].cellName, attributes: [NSAttributedString.Key.foregroundColor: Color9F9F9F])
+            let att6 = NSAttributedString(string: totalCellModels[6].cellName, attributes: [NSAttributedString.Key.foregroundColor: Color9F9F9F])
+            let att7 = NSAttributedString(string: totalCellModels[7].cellName, attributes: [NSAttributedString.Key.foregroundColor: Color9F9F9F])
             
             title0 = NSMutableAttributedString(string: totalCellModels[0].cellName)
             
@@ -148,16 +148,16 @@ class FootballTotalView: UIView {
 
             guard teamInfo.matchPlays[0].matchCells.isEmpty == false else { return }
             
-            let titleAtt = NSMutableAttributedString(string: teamInfo.matchPlays[0].matchCells[but.tag].cellName, attributes: [NSAttributedStringKey.foregroundColor: ColorFFFFFF])
+            let titleAtt = NSMutableAttributedString(string: teamInfo.matchPlays[0].matchCells[but.tag].cellName, attributes: [NSAttributedString.Key.foregroundColor: ColorFFFFFF])
 
-            let att = NSAttributedString(string: teamInfo.matchPlays[0].matchCells[but.tag].cellOdds, attributes: [NSAttributedStringKey.foregroundColor: ColorFFFFFF])
+            let att = NSAttributedString(string: teamInfo.matchPlays[0].matchCells[but.tag].cellOdds, attributes: [NSAttributedString.Key.foregroundColor: ColorFFFFFF])
             titleAtt.append(att)
             but.setAttributedTitle(titleAtt, for: .normal)
             
         }else {
-            let titleAtt = NSMutableAttributedString(string: teamInfo.matchPlays[0].matchCells[but.tag].cellName, attributes: [NSAttributedStringKey.foregroundColor: Color505050])
+            let titleAtt = NSMutableAttributedString(string: teamInfo.matchPlays[0].matchCells[but.tag].cellName, attributes: [NSAttributedString.Key.foregroundColor: Color505050])
 
-            let att = NSAttributedString(string: teamInfo.matchPlays[0].matchCells[but.tag].cellOdds, attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F])
+            let att = NSAttributedString(string: teamInfo.matchPlays[0].matchCells[but.tag].cellOdds, attributes: [NSAttributedString.Key.foregroundColor: Color9F9F9F])
             titleAtt.append(att)
             but.setAttributedTitle(titleAtt, for: .normal)
         }

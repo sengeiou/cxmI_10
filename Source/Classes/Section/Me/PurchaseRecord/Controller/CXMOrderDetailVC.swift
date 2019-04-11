@@ -59,11 +59,30 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 1 {
+        switch indexPath.section {
+        case 1:
             let scheme = CXMOrderSchemeVC()
             scheme.programmeSn = self.orderInfo.programmeSn
             scheme.orderSn = self.orderInfo.orderSn
             pushViewController(vc: scheme)
+        case 2:
+            
+            let model = orderInfo.appendInfoList[indexPath.row]
+            
+            switch model.type {
+            case "0":
+                let story = UIStoryboard.init(storyboard: .Seller)
+                let vc = story.instantiateViewController(withIdentifier: "SellerListVC") as! SellerListVC
+                pushViewController(vc: vc)
+            case "1":
+                pushRouterVC(urlStr: model.pushurl, from: self)
+            default :
+                break
+            }
+            
+            
+        default:
+            break
         }
     }
     
@@ -75,6 +94,9 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
     private var header : OrderDetailHeaderView!
     private var footer : OrderDetailFooterView!
     
+    private var share : UIButton!
+    
+    private var modes = [HXGuideInfoModel]()
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,19 +114,18 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.isHidenBar = true 
+        self.isHidenBar = true
+        
+        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        tableView.snp.makeConstraints { (make) in
-            make.top.left.right.equalTo(self.view)
-            make.bottom.equalTo(footer.snp.top)
-        }
-        footer.snp.makeConstraints { (make) in
-            make.bottom.equalTo(-SafeAreaBottomHeight)
-            make.left.right.equalTo(0)
-            make.height.equalTo(44 * defaultScale)
-        }
+        
+        
     }
     // MARK: - 网络请求
     private func loadNewData() {
@@ -124,6 +145,8 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
                 weakSelf?.orderInfo = data
                 weakSelf?.header.orderInfo = self.orderInfo
                 weakSelf?.tableView.reloadData()
+                
+                weakSelf?.showMask()
             }, onError: { (error) in
                 //self.dismissProgressHud()
                 weakSelf?.tableView.endrefresh()
@@ -150,37 +173,50 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
         footer = OrderDetailFooterView()
         footer.delegate = self
         
-        self.view.addSubview(tableView)
-        self.view.addSubview(footer)
-    }
-
-    // MARK: - 懒加载
-    lazy private var tableView: UITableView = {
-        let table = UITableView(frame: CGRect.zero, style: .grouped)
-        table.delegate = self
-        table.dataSource = self
-        table.separatorStyle = .none
+//        self.view.addSubview(tableView)
+//        self.view.addSubview(footer)
+        
+//        footer.snp.makeConstraints { (make) in
+//            make.bottom.equalTo(-SafeAreaBottomHeight)
+//            make.left.right.equalTo(0)
+//            make.height.equalTo(44 * defaultScale)
+//        }
+        
+//        tableView.snp.makeConstraints { (make) in
+//            make.top.left.right.equalTo(self.view)
+//            make.bottom.equalTo(0)
+//        }
+        
+        tableView.separatorStyle = .none
         
         header = OrderDetailHeaderView()
         
-        table.tableHeaderView = header
+        tableView.tableHeaderView = header
         
-        table.estimatedRowHeight = 80
-        //table.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 80
+        //table.rowHeight = UITableView.automaticDimension
         
-        table.register(OrderDetailTitleCell.self, forCellReuseIdentifier: OrderDetailTitleCellId)
-        table.register(OrderDetailCell.self, forCellReuseIdentifier: OrderDetailCellId)
-        table.register(OrderRuleCell.self, forCellReuseIdentifier: OrderRuleCellId)
-        table.register(OrderPaymentCell.self, forCellReuseIdentifier: OrderPaymentCellId)
-        table.register(OrderProgrammeCell.self, forCellReuseIdentifier: OrderProgrammeCellId)
-        
-        return table
-    }()
+        tableView.register(OrderDetailTitleCell.self, forCellReuseIdentifier: OrderDetailTitleCellId)
+        tableView.register(OrderDetailCell.self, forCellReuseIdentifier: OrderDetailCellId)
+        tableView.register(OrderRuleCell.self, forCellReuseIdentifier: OrderRuleCellId)
+        tableView.register(OrderPaymentCell.self, forCellReuseIdentifier: OrderPaymentCellId)
+        tableView.register(OrderProgrammeCell.self, forCellReuseIdentifier: OrderProgrammeCellId)
+        tableView.register(OrderStoreCell.self, forCellReuseIdentifier: OrderStoreCell.identifier)
+    }
+
+    @IBOutlet weak var tableView : UITableView!
     
     func numberOfSections(in tableView: UITableView) -> Int {
         guard orderInfo != nil else { return 0 }
-        return 2 // 显示方案信息
-//        return 1
+        
+        return 2 + orderInfo.appendInfoList.count
+        
+//        switch orderInfo.showStore {
+//        case "1":
+//            return 2 + 1
+//        default:
+//            return 2 + 1
+//        }
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
@@ -223,15 +259,39 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
                 cell.line.isHidden = false
                 return cell
             }
-            
-        default:
+        case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: OrderProgrammeCellId, for: indexPath) as! OrderProgrammeCell
-                cell.orderInfo = self.orderInfo
+            cell.orderInfo = self.orderInfo
             return cell
+        default:
+
+            let model = orderInfo.appendInfoList[indexPath.row]
+            
+            switch model.type {
+            case "1":
+                return initQRCodeCell(indexPath: indexPath)
+            case "0":
+                return initStoreCell(indexPath: indexPath)
+            default :
+                return UITableViewCell()
+            }
         }
-        
-        
     }
+    
+    private func initStoreCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: OrderStoreCell.identifier, for: indexPath) as! OrderStoreCell
+        cell.configure(with: orderInfo.appendInfoList[indexPath.row])
+        return cell
+    }
+    
+    private func initQRCodeCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "OrderDetailQRCodeCell", for: indexPath) as! OrderDetailQRCodeCell
+        cell.delegate = self
+        cell.configure(with: orderInfo.appendInfoList[indexPath.row])
+        print(cell.frame)
+        return cell
+    }
+    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
@@ -239,10 +299,22 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
             if indexPath.row == 0 {
                 return 65 * defaultScale
             }else {
-                return UITableViewAutomaticDimension
+                return UITableView.automaticDimension
             }
         case 1:
             return 124
+        case 2:
+            
+            let model = orderInfo.appendInfoList[indexPath.row]
+            
+            switch model.type {
+            case "1":
+                return 250
+            case "0":
+                return 90
+            default :
+                return 0
+            }
         default:
             return 0
         }
@@ -282,22 +354,22 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
 
 extension CXMOrderDetailVC : ShareProtocol {
     private func setRightNav(){
-        let codeItem = getRightNavOfQRCode()
+//        let codeItem = getRightNavOfQRCode()
         let shareItem = getRightNavOfShare()
         
-        navigationItem.rightBarButtonItems = [codeItem, shareItem]
+        navigationItem.rightBarButtonItems = [shareItem]
     }
     
     private func getRightNavOfQRCode() -> UIBarButtonItem {
         let code = UIButton(type: .custom)
         
         code.setImage(UIImage(named: "ewm"), for: .normal)
-//        code.imageEdgeInsets = UIEdgeInsets(top: <#T##CGFloat#>, left: <#T##CGFloat#>, bottom: <#T##CGFloat#>, right: <#T##CGFloat#>)
         code.addTarget(self, action: #selector(qrCodeClicked(sender:)), for: .touchUpInside)
         return UIBarButtonItem(customView: code)
     }
     private func getRightNavOfShare() -> UIBarButtonItem {
-        let share = UIButton(type: .custom)
+        share = UIButton(type: .custom)
+        share.frame = CGRect(x: 0, y: 0, width: 40, height: 30)
         share.setImage(UIImage(named: "fenxiang"), for: .normal)
         share.addTarget(self, action: #selector(shareClicked(sender:)), for: .touchUpInside)
         return UIBarButtonItem(customView: share)
@@ -312,7 +384,86 @@ extension CXMOrderDetailVC : ShareProtocol {
         
         var model = ShareContentModel()
         model.title = orderInfo.orderSn
-        model.sharingType = .text
+        model.urlStr = orderInfo.orderShareUrl
+        model.sharingType = .webPage
         share(model, from: self)
     }
+}
+
+// MARK: - 引导蒙版
+extension CXMOrderDetailVC {
+    
+    private func showMask() {
+        
+        if UserDefaults.standard.bool(forKey: MaskShow) == false {
+        
+            let gv = HXGuideMaskView(frame: self.view.bounds)
+            UserDefaults.standard.set(true, forKey: MaskShow)
+            let model = HXGuideInfoModel()
+            model.text = """
+                        添加彩票店主微信号完成后
+            返回APP订单页，点击此按钮分享给微信店主
+            """
+        
+            model.frameBaseWindow = share.convert(share.bounds, to: nil)
+            model.textColor = ColorFFFFFF
+            model.insetEdge = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            model.maskCornerRadius = 15
+        
+        
+            let model2 = HXGuideInfoModel()
+            model2.text = """
+            首先添加店主微信号
+            """
+        
+            if orderInfo != nil && orderInfo.appendInfoList.isEmpty == false {
+                if orderInfo.appendInfoList[0].type == "1" {
+                    DispatchQueue.main.async {
+                        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 2), at: .none, animated: true)
+                    }
+                    
+                    if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 2)) as? OrderDetailQRCodeCell {
+                        
+                        if cell.frame.maxY >= tableView.bounds.size.height {
+                            
+                            model2.frameBaseWindow = CGRect(x: 0, y: UIScreen.main.bounds.size.height - cell.bounds.size.height, width: cell.bounds.size.width, height: cell.bounds.size.height)
+                        }else {
+                            var fra = cell.frame
+                            fra.origin.y -= 68.0
+                            model2.frameBaseWindow = gv.convert(fra, from: cell.superview!)
+                        }
+                        
+                        model2.textColor = ColorFFFFFF
+                        model2.insetEdge = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+                        model2.maskCornerRadius = 15
+                        
+                        modes.append(model2)
+                    }
+                }
+            }
+        
+            modes.append(model)
+        
+        
+            gv.showMask(data: modes)
+        }
+    }
+}
+
+extension CXMOrderDetailVC : OrderDetailQRCodeCellDelegate {
+    func didTipCopy(cell: OrderDetailQRCodeCell, model: AppendInfo) {
+        showHUD(message: "复制成功")
+        let paseboard = UIPasteboard.general
+        
+        paseboard.string = model.wechat
+    }
+    
+    func didTipCall(cell: OrderDetailQRCodeCell, model: AppendInfo) {
+        if let url = URL(string: "tel://\(model.phone)") {
+            UIApplication.shared.openURL(url)
+        }
+        
+    }
+    
+    
 }

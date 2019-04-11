@@ -19,7 +19,7 @@ protocol MeHeaderViewDelegate {
     func didTipLogin() -> Void
 }
 
-class MeHeaderView: UIView , UserInfoPro{
+class MeHeaderView: UIView , UserInfoPro, AlertPro{
 
     public func setIcon(image: UIImage) {
         icon.image = image
@@ -27,13 +27,25 @@ class MeHeaderView: UIView , UserInfoPro{
     
     // MARK: - 点击事件
     @objc private func rechargeClicked(_ sender: UIButton) {
-        guard delegate != nil else { return }
-        delegate.rechargeClicked()
+        guard userInfo != nil else { return }
+        switch userInfo.recharegeTurnOn {
+        case true:
+            guard delegate != nil else { return }
+            delegate.rechargeClicked()
+        case false :
+            showHUD(message: "暂时无法使用")
+        }
     }
     
     @objc private func withdrawalClicked(_ sender: UIButton) {
-        guard delegate != nil else { return }
-        delegate.withdrawalClicked()
+        guard userInfo != nil else { return }
+        switch userInfo.withdrawTurnOn {
+        case true:
+            guard delegate != nil else { return }
+            delegate.withdrawalClicked()
+        case false:
+            showHUD(message: "暂时无法使用")
+        }
     }
     @objc private func alertClicked(_ sender: UIButton) {
         guard delegate != nil else { return }
@@ -71,7 +83,7 @@ class MeHeaderView: UIView , UserInfoPro{
             attStr = NSMutableAttributedString(string: "0.00")
         }
         
-        let 元 = NSAttributedString(string: "元", attributes: [NSAttributedStringKey.font: Font14])
+        let 元 = NSAttributedString(string: "元", attributes: [NSAttributedString.Key.font: Font14])
         attStr.append(元)
         return attStr
     }

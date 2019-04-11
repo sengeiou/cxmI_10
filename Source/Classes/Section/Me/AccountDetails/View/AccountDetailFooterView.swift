@@ -14,13 +14,13 @@ class AccountDetailFooterView: UIView {
         didSet{
             guard dataModel != nil else { return }
             let rechargeAtt = NSMutableAttributedString(string: "充值 ")
-            let recharge = NSAttributedString(string: dataModel.rechargeMoney + "元", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+            let recharge = NSAttributedString(string: dataModel.rechargeMoney + "元", attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
             let withTitle = NSAttributedString(string: ",提现")
-            let with = NSAttributedString(string: dataModel.withDrawMoney + "元", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+            let with = NSAttributedString(string: dataModel.withDrawMoney + "元", attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
             let buyTitle = NSAttributedString(string: ",购彩")
-            let buy = NSAttributedString(string:"" + dataModel.buyMoney + "元", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+            let buy = NSAttributedString(string:"" + dataModel.buyMoney + "元", attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
             let reTitle = NSAttributedString(string: ",中奖")
-            let reward = NSAttributedString(string:"" + dataModel.rewardMoney + "元", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+            let reward = NSAttributedString(string:"" + dataModel.rewardMoney + "元", attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
             rechargeAtt.append(recharge)
             rechargeAtt.append(withTitle)
             rechargeAtt.append(with)

@@ -93,9 +93,9 @@ class FootballMatchInfoCell: UITableViewCell {
 //                visiColor = Color9F9F9F
 //            }
             
-            let homeAtt = NSAttributedString(string: "\(teamInfo.homeTeamAbbr!)", attributes: [NSAttributedStringKey.foregroundColor: homeColor])
-            let wholeAtt = NSAttributedString(string: "\(teamInfo.whole!)", attributes: [NSAttributedStringKey.foregroundColor: wholeColor])
-            let visiAtt = NSAttributedString(string: teamInfo.visitingTeamAbbr!, attributes: [NSAttributedStringKey.foregroundColor: visiColor])
+            let homeAtt = NSAttributedString(string: "\(teamInfo.homeTeamAbbr!)", attributes: [NSAttributedString.Key.foregroundColor: homeColor])
+            let wholeAtt = NSAttributedString(string: "\(teamInfo.whole!)", attributes: [NSAttributedString.Key.foregroundColor: wholeColor])
+            let visiAtt = NSAttributedString(string: teamInfo.visitingTeamAbbr!, attributes: [NSAttributedString.Key.foregroundColor: visiColor])
             
 //            muAtt.append(homeAtt)
 //            muAtt.append(wholeAtt)
@@ -126,7 +126,7 @@ class FootballMatchInfoCell: UITableViewCell {
     
     private var line : UIImageView!
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initSubview()
     }

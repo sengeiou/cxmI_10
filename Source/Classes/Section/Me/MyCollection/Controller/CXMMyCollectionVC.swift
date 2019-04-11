@@ -225,12 +225,12 @@ class CXMMyCollectionVC: BaseViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         return "确认删除"
     }
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .delete
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == UITableViewCellEditingStyle.delete {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
 //            collectList.remove(at: indexPath.row)
 //            tableView.deleteRows(at: [indexPath], with: .fade)
             collectionDeleteRequest(collectId: collectList[indexPath.row].articleId, indexPath: indexPath)
@@ -247,7 +247,7 @@ class CXMMyCollectionVC: BaseViewController, UITableViewDelegate, UITableViewDat
         but.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         but.setTitle("编辑", for: .normal)
         but.setTitle("取消", for: .selected)
-        but.setTitleColor(Color787878, for: .normal)
+        but.setTitleColor(ColorNavItem, for: .normal)
         but.addTarget(self, action: #selector(editingClicked(_:)), for: .touchUpInside)
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: but)

@@ -46,7 +46,7 @@ class DaletouConfirmCell: UITableViewCell {
 extension DaletouConfirmCell {
     public func configure(with data : DaletouDataList) {
         self.data = data
-        let detail = "\(data.bettingNum)注 \(data.multiple)倍 \(data.bettingNum * data.money * data.multiple).00元"
+        let detail = "\(data.bettingNum)注 \(data.multiple)倍 \(data.bettingNum * data.money * data.multiple).00"
         
         switch data.type {
         case .标准选号:

@@ -20,10 +20,10 @@ class CXMOrderSchemeVC: BaseViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "出票方案"
+        self.title = "模拟方案"
         self.view.addSubview(self.tableView)
         
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 300
         orderSchemeRequest()
     }
@@ -74,7 +74,7 @@ class CXMOrderSchemeVC: BaseViewController, UITableViewDelegate, UITableViewData
         table.separatorStyle = .none
         
         table.estimatedRowHeight = orderSectionHeaderHeight * 20
-        table.rowHeight = UITableViewAutomaticDimension
+        table.rowHeight = UITableView.automaticDimension
         
         table.register(OrderSchemeTitleCell.self, forCellReuseIdentifier: OrderSchemeTitleCellId)
         table.register(OrderSchemeCell.self, forCellReuseIdentifier: OrderSchemeCellId)
@@ -87,7 +87,7 @@ class CXMOrderSchemeVC: BaseViewController, UITableViewDelegate, UITableViewData
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard self.orderSchemeInfo != nil && orderSchemeInfo.ticketSchemeDetailDTOs.isEmpty == false else { return 0 }
+        guard self.orderSchemeInfo != nil && orderSchemeInfo.ticketSchemeDetailDTOs.isEmpty == false else { return 1 }
         return self.orderSchemeInfo.ticketSchemeDetailDTOs.count + 1
     }
     
@@ -116,9 +116,9 @@ class CXMOrderSchemeVC: BaseViewController, UITableViewDelegate, UITableViewData
         case 0:
             return  orderSectionHeaderHeight * 2 - 10
         case 1:
-            return UITableViewAutomaticDimension
+            return UITableView.automaticDimension
         default:
-            return UITableViewAutomaticDimension
+            return UITableView.automaticDimension
         }
     }
     

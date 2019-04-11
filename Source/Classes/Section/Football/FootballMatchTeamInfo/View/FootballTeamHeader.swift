@@ -57,14 +57,14 @@ class FootballTeamHeader: UIView, DateProtocol {
             case "1": // 已完成
                 
                 let muName = NSMutableAttributedString(string: "\(liveInfoModel.fsH)   ",
-                                                       attributes: [NSAttributedStringKey.font : Font30,
-                                                                    NSAttributedStringKey.foregroundColor: ColorE85504])
+                    attributes: [NSAttributedString.Key.font : Font30,
+                                 NSAttributedString.Key.foregroundColor: ColorE85504])
                 let name = NSAttributedString(string: "已结束",
-                                              attributes: [NSAttributedStringKey.font : Font15])
+                                              attributes: [NSAttributedString.Key.font : Font15])
                 
                 let oddName = NSAttributedString(string: "   \(liveInfoModel.fsA)",
-                                                 attributes: [NSAttributedStringKey.font : Font30,
-                                                              NSAttributedStringKey.foregroundColor: ColorE85504])
+                    attributes: [NSAttributedString.Key.font : Font30,
+                                 NSAttributedString.Key.foregroundColor: ColorE85504])
                 
                 
                 muName.append(name)
@@ -83,18 +83,18 @@ class FootballTeamHeader: UIView, DateProtocol {
                 
             case "6": // 进行中
                 let muName = NSMutableAttributedString(string: "\(liveInfoModel.fsH)   ",
-                                                       attributes: [NSAttributedStringKey.font : Font30,
-                                                                    NSAttributedStringKey.foregroundColor: ColorE85504])
+                    attributes: [NSAttributedString.Key.font : Font30,
+                                 NSAttributedString.Key.foregroundColor: ColorE85504])
                 let name = NSAttributedString(string: "\(liveInfoModel.minute)",
-                                              attributes: [NSAttributedStringKey.font : Font15,
-                                                           NSAttributedStringKey.foregroundColor: Color505050])
+                    attributes: [NSAttributedString.Key.font : Font15,
+                                 NSAttributedString.Key.foregroundColor: Color505050])
                 
-                let min = NSAttributedString(string: "′", attributes: [NSAttributedStringKey.font : Font15,
-                                                                         NSAttributedStringKey.foregroundColor: ColorE85504])
+                let min = NSAttributedString(string: "′", attributes: [NSAttributedString.Key.font : Font15,
+                                                                         NSAttributedString.Key.foregroundColor: ColorE85504])
                 
                 let oddName = NSAttributedString(string: "   \(liveInfoModel.fsA)",
-                                                 attributes: [NSAttributedStringKey.font : Font30,
-                                                              NSAttributedStringKey.foregroundColor: ColorE85504])
+                    attributes: [NSAttributedString.Key.font : Font30,
+                                 NSAttributedString.Key.foregroundColor: ColorE85504])
             
                 muName.append(name)
                 muName.append(min)

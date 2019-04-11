@@ -16,6 +16,8 @@ enum ActivityNetAPIManager {
     case receiveRechargeBonus(payLogId : String)
     /// 保存世界杯投注信息
     case saveWCBetInfo(dic: [String: String])
+    /// 首页弹屏
+    case activity
 }
 
 extension ActivityNetAPIManager : TargetType {
@@ -24,22 +26,18 @@ extension ActivityNetAPIManager : TargetType {
         return URL(string : url! + xpath)!
     }
     
-    var path : String {
-        return ""
-    }
-    
     var xpath: String {
         switch self {
         case .receiveRechargeBonus:
             return "/member/user/bonus/rechargeSucReiceiveBonus"
         case .saveWCBetInfo:
             return "/lottery/dl/wc/saveBetInfo"
+        case .activity:
+            return "/lottery/lottery/nav/banner/openNavs"
         }
     }
     
-    
     var task: Task {
-        
         
         var dic : [String: Any] = [:]
         //dic["header"] = DeviceManager.share.device
@@ -49,6 +47,8 @@ extension ActivityNetAPIManager : TargetType {
             dic["payLogId"] = payLogId
         case .saveWCBetInfo(let dict):
             dic = dict
+        case .activity:
+            dic["emptyStr"] = ""
         default:
             return .requestPlain
         }
@@ -71,7 +71,9 @@ extension ActivityNetAPIManager : TargetType {
             //"token" : "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxZDg4OTYxZDUtYjI0Yi00NzAxLWJhZWMtNzBkZmUxY2MwMDAzIiwidXNlcklkIjoiNDAwMDY4In0.1aBwA_Rasiew0kiLK8uR3AiUGj1iJ6ZZ8Hvup5v8tNUVMpQWWHVQBSrUBGCxZ28Lmsk0I-cQGQkOcAdoJKJQE1GGjDqSfAWGD951Kyq187C_axWKNazkRK1b-RIuuXV4ZSSSYhn0o45KsLCUh1YO76Q19oFnuVCbrF8DTvXTbSY"
         ]
     }
-    
+    var path : String {
+        return ""
+    }
     var method : Moya.Method {
         switch self {
         default:

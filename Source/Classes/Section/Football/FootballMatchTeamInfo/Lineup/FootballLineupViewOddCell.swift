@@ -85,7 +85,7 @@ class FootballLineupViewOddCell: UITableViewCell {
     private var lIcon : FootballLineupMemView! // 左
     private var rIcon : FootballLineupMemView! // 右
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.backgroundColor = UIColor.clear
         initSubview()

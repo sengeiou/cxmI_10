@@ -54,16 +54,16 @@ class CouponCell: UITableViewCell {
             
            
             
-            let moneyAtt = NSMutableAttributedString(string: "¥", attributes: [NSAttributedStringKey.font: Font18, NSAttributedStringKey.foregroundColor: moneyColor])
-            let money = NSAttributedString(string: couponInfo.bonusPrice, attributes: [NSAttributedStringKey.foregroundColor: moneyColor])
+            let moneyAtt = NSMutableAttributedString(string: "¥", attributes: [NSAttributedString.Key.font: Font18, NSAttributedString.Key.foregroundColor: moneyColor])
+            let money = NSAttributedString(string: couponInfo.bonusPrice, attributes: [NSAttributedString.Key.foregroundColor: moneyColor])
             moneyAtt.append(money)
             
             let timeAtt = NSMutableAttributedString(string: "有效期: ")
-            let time = NSAttributedString(string: couponInfo.limitTime, attributes: [NSAttributedStringKey.foregroundColor: ColorA0A0A0])
+            let time = NSAttributedString(string: couponInfo.limitTime, attributes: [NSAttributedString.Key.foregroundColor: ColorA0A0A0])
             timeAtt.append(time)
             
             let insAtt = NSMutableAttributedString(string: "使用说明: ")
-            let ins = NSAttributedString(string: couponInfo.useRange, attributes: [NSAttributedStringKey.foregroundColor: ColorA0A0A0])
+            let ins = NSAttributedString(string: couponInfo.useRange, attributes: [NSAttributedString.Key.foregroundColor: ColorA0A0A0])
             insAtt.append(ins)
             
             moneyLB.attributedText = moneyAtt
@@ -86,7 +86,7 @@ class CouponCell: UITableViewCell {
     private var overdue: UILabel!       // 快过期时间
     private var useBut: UIButton!       // 立即使用
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.contentView.backgroundColor = ColorF4F4F4
         initSubview()

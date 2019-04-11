@@ -37,15 +37,19 @@ class CXMMDaletouOrderVC: BaseViewController {
     
     private var orderModel : DLTOrderDetailModel!
     
+    private var share : UIButton!
+    private var modes = [HXGuideInfoModel]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "方案详情"
+        self.navigationItem.title = "模拟订单详情"
         setTableview()
         loadNewData()
         setDefaultData()
         
         buyThisButton.backgroundColor = ColorEA5504
         buyDaletouButton.backgroundColor = ColorEA5504
+        
+        setRightNav()
     }
 
     override func back(_ sender: UIButton) {
@@ -58,28 +62,29 @@ class CXMMDaletouOrderVC: BaseViewController {
         }
     }
     
+    
   
 }
 
 extension CXMMDaletouOrderVC {
     @IBAction func buyDaletou(_ sender: UIButton) {
-        let stor = UIStoryboard(name: "Daletou", bundle: nil)
-        
-        let dlt = stor.instantiateViewController(withIdentifier: "DaletouViewController") as! CXMMDaletouViewController
-        
-        pushViewController(vc: dlt)
+//        let stor = UIStoryboard(name: "Daletou", bundle: nil)
+//
+//        let dlt = stor.instantiateViewController(withIdentifier: "DaletouViewController") as! CXMMDaletouViewController
+//
+//        pushViewController(vc: dlt)
     }
     
     @IBAction func buyThisNumber(_ sender: UIButton) {
         
-        let stor = UIStoryboard(name: "Daletou", bundle: nil)
-        
-        let dlt = stor.instantiateViewController(withIdentifier: "DaletouConfirmVC") as! CXMMDaletouConfirmVC
-        
-        dlt.list = parse().0
-        dlt.isAppendSubject.onNext(parse().1)
-        dlt.multiple.onNext(parse().2)
-        pushViewController(vc: dlt)
+//        let stor = UIStoryboard(name: "Daletou", bundle: nil)
+//
+//        let dlt = stor.instantiateViewController(withIdentifier: "DaletouConfirmVC") as! CXMMDaletouConfirmVC
+//
+//        dlt.list = parse().0
+//        dlt.isAppendSubject.onNext(parse().1)
+//        dlt.multiple.onNext(parse().2)
+//        pushViewController(vc: dlt)
     }
     
     private func parse() -> ([DaletouDataList], Bool, Int){
@@ -169,6 +174,7 @@ extension CXMMDaletouOrderVC {
 extension CXMMDaletouOrderVC {
     private func setTableview() {
         self.tableView.separatorStyle = .none
+        self.tableView.register(OrderStoreCell.self, forCellReuseIdentifier: OrderStoreCell.identifier)
     }
     private func setDefaultData() {
         winningTitle.text = ""
@@ -179,10 +185,11 @@ extension CXMMDaletouOrderVC {
         if let url = URL(string: orderModel.lotteryClassifyImg) {
             self.orderIcon.kf.setImage(with: url)
         }
-        
+        stageNum.text = "大乐透" + orderModel.termNum + "期"
         orderStatus.text = orderModel.orderStatusDesc
         
-        let moneyAtt = NSMutableAttributedString(string: "¥", attributes: [NSAttributedStringKey.font: Font10])
+        // 1.2.0 去掉¥符号
+        let moneyAtt = NSMutableAttributedString(string: "", attributes: [NSAttributedString.Key.font: Font10])
         let money = NSAttributedString(string: orderModel.ticketAmount)
         moneyAtt.append(money)
         
@@ -204,7 +211,11 @@ extension CXMMDaletouOrderVC {
             winningTitle.text = "中奖金额"
             winningAmount.text = "¥ " + orderModel.winningMoney
             orderStatusIcon.image = UIImage(named: "Prize")
-        
+        case "9" :
+            oneMsgOrderStatus.text = ""
+            winningTitle.text = "中奖金额"
+            winningAmount.text = "¥ " + orderModel.winningMoney
+            orderStatusIcon.image = UIImage(named: "Prize")
         default:
             winningTitle.text = ""
             winningAmount.text = ""
@@ -233,6 +244,7 @@ extension CXMMDaletouOrderVC {
                 weakSelf?.setData()
                 weakSelf?.tableView.reloadData()
                 weakSelf?.dismissProgressHud()
+                weakSelf?.showMask()
             }, onError: { (error) in
                 weakSelf?.dismissProgressHud()
                 guard let err = error as? HXError else { return }
@@ -267,7 +279,20 @@ extension CXMMDaletouOrderVC : UITableViewDelegate {
             vc.orderSn = self.orderModel.orderSn
             vc.proSn = self.orderModel.programmeSn
             pushViewController(vc: vc)
+        case 3:
             
+            let model = orderModel.appendInfoList[indexPath.row]
+            
+            switch model.type {
+            case "0":
+                let story = UIStoryboard.init(storyboard: .Seller)
+                let vc = story.instantiateViewController(withIdentifier: "SellerListVC") as! SellerListVC
+                pushViewController(vc: vc)
+            case "1":
+                pushRouterVC(urlStr: model.pushurl, from: self)
+            default :
+                break
+            }
         default:
             break
         }
@@ -275,7 +300,8 @@ extension CXMMDaletouOrderVC : UITableViewDelegate {
 }
 extension CXMMDaletouOrderVC : UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        guard orderModel != nil else { return 0 }
+        return 3 + orderModel.appendInfoList.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard orderModel != nil else { return 0 }
@@ -287,7 +313,7 @@ extension CXMMDaletouOrderVC : UITableViewDataSource {
         case 2:
             return 1
         default:
-            return 0
+            return 1
         }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -313,7 +339,17 @@ extension CXMMDaletouOrderVC : UITableViewDataSource {
         case 2:
             return initProgrammeCell(indexPath: indexPath)
         default:
-            return UITableViewCell()
+            
+            let model = orderModel.appendInfoList[indexPath.row]
+            
+            switch model.type {
+            case "1":
+                return initQRCodeCell(indexPath: indexPath)
+            case "0":
+                return initStoreCell(indexPath: indexPath)
+            default :
+                return UITableViewCell()
+            }
         }
         
         
@@ -365,7 +401,19 @@ extension CXMMDaletouOrderVC : UITableViewDataSource {
             }
             
         case 2:
-            return 180
+            return 120
+        case 3:
+            
+            let model = orderModel.appendInfoList[indexPath.row]
+            
+            switch model.type {
+            case "1":
+                return 250
+            case "0":
+                return 90
+            default :
+                return 0
+            }
         default:
             return 0
         }
@@ -407,5 +455,134 @@ extension CXMMDaletouOrderVC : UITableViewDataSource {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "DLTPrizeExplainCell", for: indexPath) as! DLTPrizeExplainCell
         
         return cell
+    }
+    
+    private func initStoreCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: OrderStoreCell.identifier, for: indexPath) as! OrderStoreCell
+        cell.configure(with: orderModel.appendInfoList[indexPath.row])
+        return cell
+    }
+    
+    private func initQRCodeCell(indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "OrderDetailQRCodeCell", for: indexPath) as! OrderDetailQRCodeCell
+        cell.delegate = self
+        cell.configure(with: orderModel.appendInfoList[indexPath.row])
+        print(cell.frame)
+        return cell
+    }
+}
+extension CXMMDaletouOrderVC : ShareProtocol {
+    private func setRightNav(){
+        //        let codeItem = getRightNavOfQRCode()
+        let shareItem = getRightNavOfShare()
+        
+        navigationItem.rightBarButtonItems = [shareItem]
+    }
+    
+    private func getRightNavOfQRCode() -> UIBarButtonItem {
+        let code = UIButton(type: .custom)
+        
+        code.setImage(UIImage(named: "ewm"), for: .normal)
+        code.addTarget(self, action: #selector(qrCodeClicked(sender:)), for: .touchUpInside)
+        return UIBarButtonItem(customView: code)
+    }
+    private func getRightNavOfShare() -> UIBarButtonItem {
+        share = UIButton(type: .custom)
+        share.frame = CGRect(x: 0, y: 0, width: 40, height: 30)
+        share.setImage(UIImage(named: "fenxiang"), for: .normal)
+        share.addTarget(self, action: #selector(shareClicked(sender:)), for: .touchUpInside)
+        return UIBarButtonItem(customView: share)
+    }
+    
+    @objc private func qrCodeClicked(sender : UIButton) {
+        let pop = CXMOrderDetailPop()
+        pop.configure(with: orderModel.addFriendsQRBarUrl)
+        self.present(pop)
+    }
+    
+    @objc private func shareClicked(sender : UIButton) {
+        
+        var model = ShareContentModel()
+        model.title = orderModel.orderSn
+        model.urlStr = orderModel.orderShareUrl
+        model.sharingType = .webPage
+        share(model, from: self)
+    }
+}
+extension CXMMDaletouOrderVC : OrderDetailQRCodeCellDelegate {
+    func didTipCopy(cell: OrderDetailQRCodeCell, model: AppendInfo) {
+        showHUD(message: "复制成功")
+        let paseboard = UIPasteboard.general
+        
+        paseboard.string = model.wechat
+    }
+    
+    func didTipCall(cell: OrderDetailQRCodeCell, model: AppendInfo) {
+        if let url = URL(string: "tel://\(model.phone)") {
+            UIApplication.shared.openURL(url)
+        }
+        
+    }
+    
+    
+}
+
+// MARK: - 引导蒙版
+extension CXMMDaletouOrderVC {
+    
+    private func showMask() {
+        
+        if UserDefaults.standard.bool(forKey: MaskShow) == false {
+            
+            let gv = HXGuideMaskView(frame: self.view.bounds)
+            UserDefaults.standard.set(true, forKey: MaskShow)
+            let model = HXGuideInfoModel()
+            model.text = """
+            添加彩票店主微信号完成后
+            返回APP订单页，点击此按钮分享给微信店主
+            """
+            
+            model.frameBaseWindow = share.convert(share.bounds, to: nil)
+            model.textColor = ColorFFFFFF
+            model.insetEdge = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            model.maskCornerRadius = 15
+            
+            
+            let model2 = HXGuideInfoModel()
+            model2.text = """
+            首先添加店主微信号
+            """
+            
+            if orderModel != nil && orderModel.appendInfoList.isEmpty == false {
+                if orderModel.appendInfoList[0].type == "1" {
+                    DispatchQueue.main.async {
+                        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 2), at: .none, animated: true)
+                    }
+                    
+                    if let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 2)) as? OrderDetailQRCodeCell {
+                        
+                        if cell.frame.maxY >= tableView.bounds.size.height {
+                            
+                            model2.frameBaseWindow = CGRect(x: 0, y: UIScreen.main.bounds.size.height - cell.bounds.size.height, width: cell.bounds.size.width, height: cell.bounds.size.height)
+                        }else {
+                            var fra = cell.frame
+                            fra.origin.y -= 68.0
+                            model2.frameBaseWindow = gv.convert(fra, from: cell.superview!)
+                        }
+                        
+                        model2.textColor = ColorFFFFFF
+                        model2.insetEdge = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+                        model2.maskCornerRadius = 15
+                        
+                        modes.append(model2)
+                    }
+                }
+            }
+            
+            modes.append(model)
+            
+            
+            gv.showMask(data: modes)
+        }
     }
 }

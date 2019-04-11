@@ -9,17 +9,19 @@
 import Foundation
 
 /// 微信分享
-let WeixinAppID = "wxf63a7421996362f5"
+let WeixinAppID = "wx1767896f012e05a2"
 
 /// 百度统计
 let BaiduAppKey = "8b4996b71f"
 
 /// 智齿客服
-let ZhiChiAppKey = "92afce39268e4926ab9f681b04bf44db"
+let ZhiChiAppKey = "193e17343a3b430a9d21af67c92f5491"
 /// 渠道
-let Channel = "c16010"
+let Channel = "c36010"
 
 let phoneNum = "400-012-6600"
+
+let website = "http://www.renrentiyua.com"
 /// 个推
 #if DEBUG
     let GetuiAppID  = "SQ3WV0duEo5YipEvzlaXS2"
@@ -27,9 +29,9 @@ let phoneNum = "400-012-6600"
     let GetuiSecrct = "svMsjRq4LR6gT6RZk8rfO9"
 
 #else
-    let GetuiAppID  = "dqYmwUERnLAVGciYVdLoy4"
-    let GetuiAppKey = "9GStgrZXEMAbF9noB8bnS4"
-    let GetuiSecrct = "JHnOaUxRAa5X8k99u7yXQ2"
+    let GetuiAppID  = "NRtMIfLwdc7LTbK7sf0Kn"
+    let GetuiAppKey = "EQ3i8BjTze9buaOPD9gHn1"
+    let GetuiSecrct = "lERUWPih8JAgrXaoO62u88"
 #endif
 
 // test

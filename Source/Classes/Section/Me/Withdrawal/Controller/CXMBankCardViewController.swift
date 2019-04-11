@@ -153,11 +153,11 @@ class CXMBankCardViewController: BaseViewController, UITableViewDelegate, UITabl
                     })
                     return }
                 
-                let attStr = NSMutableAttributedString(string: "默认收款卡已设置为", attributes: [NSAttributedStringKey.foregroundColor: ColorA0A0A0])
+                let attStr = NSMutableAttributedString(string: "默认收款卡已设置为", attributes: [NSAttributedString.Key.foregroundColor: ColorA0A0A0])
                 
-                let bankCardNo = NSAttributedString(string: "尾号为\(data.lastCardNo4!)", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
-                let 的 = NSAttributedString(string: "的", attributes: [NSAttributedStringKey.foregroundColor: ColorA0A0A0])
-                let cardName = NSAttributedString(string: data.bankName, attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+                let bankCardNo = NSAttributedString(string: "尾号为\(data.lastCardNo4!)", attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
+                let 的 = NSAttributedString(string: "的", attributes: [NSAttributedString.Key.foregroundColor: ColorA0A0A0])
+                let cardName = NSAttributedString(string: data.bankName, attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
                 attStr.append(bankCardNo)
                 attStr.append(的)
                 attStr.append(cardName)

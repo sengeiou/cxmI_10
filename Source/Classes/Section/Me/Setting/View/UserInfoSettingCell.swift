@@ -22,7 +22,7 @@ class UserInfoSettingCell: UITableViewCell {
     private var title : UILabel!
     private var detail: UILabel!
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initSubView()
     }

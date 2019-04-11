@@ -45,8 +45,8 @@ class RegisterFooterView: UIView {
         register.layer.cornerRadius = 5
         
         
-        let muAtt = NSMutableAttributedString(string: "我已满18周岁并同意接受 ", attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F])
-        let att = NSAttributedString(string: "《注册服务协议》", attributes: [NSAttributedStringKey.foregroundColor: Color505050])
+        let muAtt = NSMutableAttributedString(string: "我已满18周岁并同意接受 ", attributes: [NSAttributedString.Key.foregroundColor: Color9F9F9F])
+        let att = NSAttributedString(string: "《注册服务协议》", attributes: [NSAttributedString.Key.foregroundColor: Color505050])
         muAtt.append(att)
         
         agreementBut = UIButton(type: .custom)
