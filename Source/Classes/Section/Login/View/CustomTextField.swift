@@ -74,7 +74,7 @@ class CustomTextField: UITextField, CountdownButtonDelegate, UITextFieldDelegate
         }
         
         //UITextFieldTextDidChangeNotification
-        NotificationCenter.default.addObserver(self, selector: #selector(textFieldTextDidChanged(notice:)), name: NSNotification.Name.UITextFieldTextDidChange, object: self)
+        NotificationCenter.default.addObserver(self, selector: #selector(textFieldTextDidChanged(notice:)), name: UITextField.textDidChangeNotification, object: self)
         
         
         switch style {

@@ -74,9 +74,9 @@ class CXMFootballMatchInfoPopVC: BasePopViewController, BottomViewDelegate {
         visiDetail.text = "客队\(vvInfo.win!)胜\(vvInfo.draw!)平\(vvInfo.lose!)负"
         
         let muAtt = NSMutableAttributedString(string: "共\(hvInfo.total!)次交锋 主队 ")
-        let homeAtt = NSAttributedString(string: "\(hvInfo.win!)胜", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
-        let flatAtt = NSAttributedString(string: "\(hvInfo.draw!)平", attributes: [NSAttributedStringKey.foregroundColor: Color0099D9])
-        let visiAtt = NSAttributedString(string: "\(hvInfo.lose!)负", attributes: [NSAttributedStringKey.foregroundColor: Color44AE35])
+        let homeAtt = NSAttributedString(string: "\(hvInfo.win!)胜", attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
+        let flatAtt = NSAttributedString(string: "\(hvInfo.draw!)平", attributes: [NSAttributedString.Key.foregroundColor: Color0099D9])
+        let visiAtt = NSAttributedString(string: "\(hvInfo.lose!)负", attributes: [NSAttributedString.Key.foregroundColor: Color44AE35])
         muAtt.append(homeAtt)
         muAtt.append(flatAtt)
         muAtt.append(visiAtt)

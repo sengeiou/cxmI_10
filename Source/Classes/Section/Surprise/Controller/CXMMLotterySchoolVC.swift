@@ -51,7 +51,7 @@ extension CXMMLotterySchoolVC {
         
         weak var weakSelf = self
         
-        _ = surpriseProvider.rx.request(.schoolList())
+        _ = surpriseProvider.rx.request(.schoolList)
             .asObservable()
             .mapObject(type: SchoolListModel.self)
             .subscribe(onNext: { (data) in

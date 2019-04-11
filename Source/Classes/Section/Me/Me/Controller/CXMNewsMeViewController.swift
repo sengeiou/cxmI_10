@@ -267,7 +267,7 @@ extension CXMNewsMeViewController: YHDPhotoSelectDelegate {
         
         self.headerView.setIcon(image: resultImg)
         
-        let data = UIImagePNGRepresentation(resultImg)
+        let data = resultImg.pngData()
         
         UserDefaults.standard.set(data, forKey: UserIconData)
         

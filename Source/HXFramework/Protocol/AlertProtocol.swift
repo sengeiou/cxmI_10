@@ -49,7 +49,7 @@ extension AlertPro {
     }
     
     public func showCXMAlert(title: String?, message: String, action: String, cancel: String?, on vc : UIViewController , confirm: ((UIAlertAction)->Void)?) {
-        let attStr = NSAttributedString(string: message, attributes: [NSAttributedStringKey.foregroundColor: Color787878])
+        let attStr = NSAttributedString(string: message, attributes: [NSAttributedString.Key.foregroundColor: Color787878])
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.setValue(attStr, forKey: "attributedMessage")
@@ -70,7 +70,7 @@ extension AlertPro {
     public func showCXMAlert(title: String?, message: String, action: String, cancel: String?,confirm: ((UIAlertAction)->Void)?, canceled : ((UIAlertAction)-> Void)?) {
         if let vc = UIApplication.shared.keyWindow?.rootViewController {
             
-            let attStr = NSAttributedString(string: message, attributes: [NSAttributedStringKey.foregroundColor: Color787878])
+            let attStr = NSAttributedString(string: message, attributes: [NSAttributedString.Key.foregroundColor: Color787878])
             
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alert.setValue(attStr, forKey: "attributedMessage")
@@ -91,7 +91,7 @@ extension AlertPro {
     public func showCXMAlert(title: String?, message: String, action: String, cancel: String?,confirm: ((UIAlertAction)->Void)?) {
         if let vc = UIApplication.shared.keyWindow?.rootViewController {
             
-            let attStr = NSAttributedString(string: message, attributes: [NSAttributedStringKey.foregroundColor: Color787878])
+            let attStr = NSAttributedString(string: message, attributes: [NSAttributedString.Key.foregroundColor: Color787878])
             
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alert.setValue(attStr, forKey: "attributedMessage")

@@ -47,7 +47,10 @@ class CXMMDaletouViewController: BaseViewController {
     
     private var type : DaletouType = .标准选号 {
         didSet{
-            titleView.setTitle(type.rawValue, for: .normal)
+            
+            if titleView != nil {
+                titleView.setTitle(type.rawValue, for: .normal)
+            }
             
             switch type {
             case .标准选号:
@@ -110,7 +113,13 @@ class CXMMDaletouViewController: BaseViewController {
         super.viewDidLoad()
         menu.delegate = self
         bottomView.delegate = self
-        setNavigationTitleView()
+        
+        if UserDefaults.standard.bool(forKey: "dantuoIsOpen") {
+            setNavigationTitleView()
+        }else {
+            self.navigationItem.title = "标准选号"
+        }
+    
         setTableview()
         setSubview()
         
@@ -138,16 +147,16 @@ class CXMMDaletouViewController: BaseViewController {
         _ = settingNum.asObservable().subscribe(onNext: { (num) in
             if num > 0 {
                 let att = NSMutableAttributedString(string: "共")
-                let numAtt = NSAttributedString(string: "\(num)", attributes: [NSAttributedStringKey.foregroundColor: ColorE85504])
+                let numAtt = NSAttributedString(string: "\(num)", attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
                 let defa = NSAttributedString(string: "注 合计")
-                let money = NSAttributedString(string: "\(num * 2)", attributes: [NSAttributedStringKey.foregroundColor: ColorE85504])
+                let money = NSAttributedString(string: "\(num * 2).00", attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
                 let yuan = NSAttributedString(string: "元")
                 att.append(numAtt)
                 att.append(defa)
                 att.append(money)
-                att.append(yuan)
+//                att.append(yuan)
                 self.bottomView.titleLabel.attributedText = att
-                self.bottomView.confirmBut.backgroundColor = ColorE85504
+                self.bottomView.confirmBut.backgroundColor = ColorEA5504
                 self.bottomView.confirmBut.isUserInteractionEnabled = true
             }else {
                 let att = NSMutableAttributedString(string: "请至少选择")
@@ -157,9 +166,9 @@ class CXMMDaletouViewController: BaseViewController {
                     red = 6
                 }
                 
-                let numAtt = NSAttributedString(string: "\(red)", attributes: [NSAttributedStringKey.foregroundColor: ColorE85504])
+                let numAtt = NSAttributedString(string: "\(red)", attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
                 let defa = NSAttributedString(string: "个红球")
-                let money = NSAttributedString(string: "2", attributes: [NSAttributedStringKey.foregroundColor: Color0081CC])
+                let money = NSAttributedString(string: "2", attributes: [NSAttributedString.Key.foregroundColor: Color0081CC])
                 let defa1 = NSAttributedString(string: "个蓝球")
                 att.append(numAtt)
                 att.append(defa)
@@ -721,9 +730,15 @@ extension CXMMDaletouViewController : UITableViewDelegate {
 extension CXMMDaletouViewController : CXMMDaletouMenuDelegate {
     
     func didTipMenu(view: CXMMDaletouMenu, type: DaletouType) {
-        
-        self.type = type
         titleIcon.image = UIImage(named: "Down")
+        guard UserDefaults.standard.bool(forKey: "dantuoIsOpen") else {
+            if type == .胆拖选号 {
+                showHUD(message: "敬请期待")
+            }
+            return
+        }
+        self.type = type
+        
     }
     func didCancel() {
         titleIcon.image = UIImage(named: "Down")
@@ -734,7 +749,7 @@ extension CXMMDaletouViewController : CXMMDaletouMenuDelegate {
         titleView.frame = CGRect(x: 0, y: 0, width: 150, height: 30)
         titleView.titleLabel?.font = Font17
         titleView.setTitle(type.rawValue, for: .normal)
-        titleView.setTitleColor(Color505050, for: .normal)
+        titleView.setTitleColor(ColorNavItem, for: .normal)
        
         titleView.addTarget(self, action: #selector(titleViewClicked(_:)), for: .touchUpInside)
 
@@ -752,6 +767,10 @@ extension CXMMDaletouViewController : CXMMDaletouMenuDelegate {
     }
     
     @objc private func titleViewClicked(_ sender: UIButton) {
+        
+        guard UserDefaults.standard.bool(forKey: "dantuoIsOpen") else {
+            return
+        }
         showMatchMenu()
         titleIcon.image = UIImage(named: "Upon")
     }
@@ -770,7 +789,7 @@ extension CXMMDaletouViewController {
         self.becomeFirstResponder()
     }
     
-    override func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) {
+    override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         switch type {
         case .标准选号:
             let model = getOneRandom()
@@ -784,10 +803,10 @@ extension CXMMDaletouViewController {
             break
         }
     }
-    override func motionCancelled(_ motion: UIEventSubtype, with event: UIEvent?) {
+    override func motionCancelled(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         
     }
-    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         
     }
     
@@ -806,6 +825,9 @@ extension CXMMDaletouViewController {
             .mapObject(type: DaletouOmissionModel.self)
             .subscribe(onNext: { (data) in
                 self.omissionModel = data
+            
+                UserDefaults.standard.set(data.isShowDragOn, forKey: "dantuoIsOpen")
+                
                 self.prizeList = data.prizeList
                 for i in 0..<self.redList.count {
                     self.redList[i].omissionNum = self.omissionModel.preList[i]

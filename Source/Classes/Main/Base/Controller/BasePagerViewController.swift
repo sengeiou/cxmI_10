@@ -11,7 +11,7 @@ import XLPagerTabStrip
 
 enum PagerViewType: String {
     case coupon = "我的卡券"
-    case purchaseRecord = "投注记录"
+    case purchaseRecord = "模拟记录"
     case message = "消息中心"
     case accountDetails = "账户明细"
     case trend = "走势图"
@@ -305,7 +305,7 @@ extension BasePagerViewController : AccountDetailsFilterDelegate {
         rightButton.frame = CGRect(x: 0, y: 0, width: 90, height: 40)
         rightButton.setTitle("最近一周", for: .normal)
         rightButton.titleLabel?.font = Font14
-        rightButton.setTitleColor(Color787878, for: .normal)
+        rightButton.setTitleColor(ColorNavItem, for: .normal)
         rightButton.setImage(UIImage(named: "Collapse"), for: .normal)
         rightButton.contentHorizontalAlignment = .right
         rightButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 15)

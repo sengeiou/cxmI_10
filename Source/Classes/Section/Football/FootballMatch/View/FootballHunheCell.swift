@@ -58,15 +58,15 @@ class FootballHunheCell: UITableViewCell, DateProtocol, FootballStopSellingViewD
             }
             
             if playInfoModel.selectedHunhe.isEmpty == false {
-                let muAtt = NSMutableAttributedString(string: "已选\n", attributes: [NSAttributedStringKey.foregroundColor: Color505050])
-                let num = NSAttributedString(string: "\(playInfoModel.selectedHunhe.count)", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
-                let 项 = NSAttributedString(string: "项", attributes: [NSAttributedStringKey.foregroundColor: Color505050])
+                let muAtt = NSMutableAttributedString(string: "已选\n", attributes: [NSAttributedString.Key.foregroundColor: Color505050])
+                let num = NSAttributedString(string: "\(playInfoModel.selectedHunhe.count)", attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
+                let 项 = NSAttributedString(string: "项", attributes: [NSAttributedString.Key.foregroundColor: Color505050])
                 muAtt.append(num)
                 muAtt.append(项)
                 
                 moreBut.setAttributedTitle(muAtt, for: .normal)
             }else {
-                let att = NSAttributedString(string: "更多\n玩法", attributes: [NSAttributedStringKey.foregroundColor: Color787878])
+                let att = NSAttributedString(string: "更多\n玩法", attributes: [NSAttributedString.Key.foregroundColor: Color787878])
                 moreBut.setAttributedTitle(att, for: .normal)
             }
             
@@ -107,7 +107,7 @@ class FootballHunheCell: UITableViewCell, DateProtocol, FootballStopSellingViewD
     
     private var line : UIImageView!
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initSubview()
     }

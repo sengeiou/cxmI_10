@@ -20,7 +20,7 @@ class PaymentCell: UITableViewCell {
     public var title : UILabel!
     public var detail : UILabel!
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initSubview()
     }

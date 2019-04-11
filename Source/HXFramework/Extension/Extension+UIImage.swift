@@ -16,11 +16,11 @@ extension UIImage {
         let newImage = self.resizeImage(image: image, newSize: newSize)
         
         var compress:CGFloat = 0.9
-        var data = UIImageJPEGRepresentation(newImage, compress)
+        var data = newImage.jpegData(compressionQuality: compress)
         
         while (data?.count)! > maxLength && compress > 0.01 {
             compress -= 0.02
-            data = UIImageJPEGRepresentation(newImage, compress)
+            data = newImage.jpegData(compressionQuality: compress)
         }
         
         return data

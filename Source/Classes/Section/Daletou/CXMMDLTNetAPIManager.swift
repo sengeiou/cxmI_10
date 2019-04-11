@@ -44,13 +44,13 @@ extension DLTAPIManager : TargetType {
         case .tickenInfo:
             return "/lotto/lotto/getTicketInfo"
         case .orderDetail:
-            return "/order/order/getLottoOrderDetail"
+            return "/order/order/getLottoOrderDetailSimulat"
         case .ticketScheme:
             return "/order/order/getLottoTicketScheme"
         case .chartData:
             return "/lotto/lotto/getChartData"
-        case .setInfo:
-            return "/lotto/lotto/saveBetInfo"
+        case .setInfo:   // 新版模拟投注确认
+            return "/lotto/lotto/createOrderBySimulate"
         }
     }
     

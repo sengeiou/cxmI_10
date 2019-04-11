@@ -17,12 +17,12 @@ class OrderRuleCell: UITableViewCell {
                 orderInfo.passType = ""
             }
             let titleAtt = NSMutableAttributedString(string: "过关方式: ")
-            let tit = NSAttributedString(string: orderInfo.passType, attributes: [NSAttributedStringKey.foregroundColor: Color505050])
+            let tit = NSAttributedString(string: orderInfo.passType, attributes: [NSAttributedString.Key.foregroundColor: Color505050])
             titleAtt.append(tit)
             title.attributedText = titleAtt
             
             let detailAtt = NSMutableAttributedString(string: "投注倍数: ")
-            let details = NSAttributedString(string: orderInfo.cathectic, attributes: [NSAttributedStringKey.foregroundColor: Color505050])
+            let details = NSAttributedString(string: orderInfo.cathectic, attributes: [NSAttributedString.Key.foregroundColor: Color505050])
             detailAtt.append(details)
             detail.attributedText = detailAtt
         }
@@ -32,7 +32,7 @@ class OrderRuleCell: UITableViewCell {
     private var detail : UILabel!
     private var line : UIView!
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initSubview()
     }

@@ -131,20 +131,20 @@ extension BasketballShengfuCell {
         self.playInfo = data
         // 客队名
         let visiMuatt = NSMutableAttributedString(string: "[客]",
-                                                  attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F,
-                                                               NSAttributedStringKey.font: Font14])
+                                                  attributes: [NSAttributedString.Key.foregroundColor: Color9F9F9F,
+                                                               NSAttributedString.Key.font: Font14])
         let visiAtt = NSAttributedString(string: data.visitingTeamAbbr,
-                                         attributes: [NSAttributedStringKey.foregroundColor: Color505050,
-                                                      NSAttributedStringKey.font: Font14])
+                                         attributes: [NSAttributedString.Key.foregroundColor: Color505050,
+                                                      NSAttributedString.Key.font: Font14])
         visiMuatt.append(visiAtt)
         visiTeam.attributedText = visiMuatt
         // 主队名
         let homeMuatt = NSMutableAttributedString(string: "[主]",
-                                                  attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F,
-                                                               NSAttributedStringKey.font: Font14])
+                                                  attributes: [NSAttributedString.Key.foregroundColor: Color9F9F9F,
+                                                               NSAttributedString.Key.font: Font14])
         let homeAtt = NSAttributedString(string: data.homeTeamAbbr,
-                                         attributes: [NSAttributedStringKey.foregroundColor: Color505050,
-                                                      NSAttributedStringKey.font : Font14])
+                                         attributes: [NSAttributedString.Key.foregroundColor: Color505050,
+                                                      NSAttributedString.Key.font : Font14])
         homeMuatt.append(homeAtt)
         homeTeam.attributedText = homeMuatt
         
@@ -187,11 +187,11 @@ extension BasketballShengfuCell {
     
     private func getAttributedString(cellName : String, cellOdds : String) -> NSAttributedString {
         let cellNameAtt = NSMutableAttributedString(string: cellName,
-                                                    attributes: [NSAttributedStringKey.foregroundColor: Color505050,
-                                                                 NSAttributedStringKey.font : Font14])
+                                                    attributes: [NSAttributedString.Key.foregroundColor: Color505050,
+                                                                 NSAttributedString.Key.font : Font14])
         let cellOddsAtt = NSAttributedString(string: "\n\(cellOdds)",
-            attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F,
-                         NSAttributedStringKey.font: Font12])
+            attributes: [NSAttributedString.Key.foregroundColor: Color9F9F9F,
+                         NSAttributedString.Key.font: Font12])
         
         cellNameAtt.append(cellOddsAtt)
         

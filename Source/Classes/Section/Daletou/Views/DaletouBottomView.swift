@@ -23,6 +23,11 @@ class DaletouBottomView: UIView {
     
     @IBOutlet weak var confirmBut : UIButton!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+    }
+    
     @IBAction func confirmClick(_ sender: UIButton) {
         guard delegate != nil else { fatalError("delegate为空")}
         delegate.didTipConfirm()

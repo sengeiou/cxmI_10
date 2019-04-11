@@ -26,7 +26,7 @@ class CXMMBasketballOrderScheme: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "出票方案"
+        self.navigationItem.title = "模拟方案"
 //        setData()
         initSubview()
         loadNewData()
@@ -84,7 +84,7 @@ extension CXMMBasketballOrderScheme : UITableViewDataSource {
 }
 extension CXMMBasketballOrderScheme {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
 }
 // MARK: - 网络请求

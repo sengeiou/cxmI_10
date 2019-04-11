@@ -20,10 +20,10 @@ class CouponFilterCell: UITableViewCell {
             var endTitle = ""
             if bonusInfo.bonusPrice != "不使用优惠券" {
                 moneyAtt.append(moneyAt)
-                money = NSAttributedString(string: bonusInfo.bonusPrice, attributes: [NSAttributedStringKey.font: Font24])
+                money = NSAttributedString(string: bonusInfo.bonusPrice, attributes: [NSAttributedString.Key.font: Font24])
                 endTitle = "有效期至"
             }else {
-                money = NSAttributedString(string: bonusInfo.bonusPrice, attributes: [NSAttributedStringKey.font: Font15])
+                money = NSAttributedString(string: bonusInfo.bonusPrice, attributes: [NSAttributedString.Key.font: Font15])
             }
             moneyAtt.append(money)
             
@@ -33,9 +33,9 @@ class CouponFilterCell: UITableViewCell {
             
             titleLb.text = bonusInfo.minGoodsAmount
             
-            let overdueAtt = NSMutableAttributedString(string: "\(bonusInfo.leaveTime) ", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
+            let overdueAtt = NSMutableAttributedString(string: "\(bonusInfo.leaveTime) ", attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
             
-            let time = NSAttributedString(string:"\(endTitle) \(bonusInfo.bonusEndTime)", attributes: [NSAttributedStringKey.foregroundColor: ColorC8C8C8])
+            let time = NSAttributedString(string:"\(endTitle) \(bonusInfo.bonusEndTime)", attributes: [NSAttributedString.Key.foregroundColor: ColorC8C8C8])
             overdueAtt.append(time)
             overdueLb.attributedText = overdueAtt
             
@@ -59,7 +59,7 @@ class CouponFilterCell: UITableViewCell {
     private var selectedIcon : UIImageView!
     private var overdueLb : UILabel!  // 剩余过期时间
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         initSubview()

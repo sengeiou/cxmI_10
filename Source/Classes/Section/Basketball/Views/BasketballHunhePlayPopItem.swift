@@ -52,11 +52,11 @@ extension BasketballHunhePlayPopItem {
         case true :
             guard let data = data else { return }
             let nameAtt = NSMutableAttributedString(string: data.cellName,
-                                                    attributes: [NSAttributedStringKey.foregroundColor: Color505050,
-                                                                 NSAttributedStringKey.font : Font14])
+                                                    attributes: [NSAttributedString.Key.foregroundColor: Color505050,
+                                                                 NSAttributedString.Key.font : Font14])
             let oddAtt = NSAttributedString(string: data.cellOdds,
-                                            attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F,
-                                                         NSAttributedStringKey.font : Font12])
+                                            attributes: [NSAttributedString.Key.foregroundColor: Color9F9F9F,
+                                                         NSAttributedString.Key.font : Font12])
             nameAtt.append(oddAtt)
             title.attributedText = nameAtt
         }

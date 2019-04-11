@@ -371,7 +371,7 @@ extension CXMUserInfoSettingVC: YHDPhotoSelectDelegate {
         
         self.tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
         
-        let data = UIImagePNGRepresentation(resultImg)
+        let data = resultImg.pngData()
         
         UserDefaults.standard.set(data, forKey: UserIconData)
         

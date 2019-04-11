@@ -89,16 +89,16 @@ extension CXMMBasketballSFCPlayPop {
         
         // 客队
         let visiAtt = NSMutableAttributedString(string: "[客]",
-                                                attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F])
+                                                attributes: [NSAttributedString.Key.foregroundColor: Color9F9F9F])
         let visiTeamAtt = NSAttributedString(string: data.visitingTeamAbbr,
-                                             attributes: [NSAttributedStringKey.foregroundColor: Color505050])
+                                             attributes: [NSAttributedString.Key.foregroundColor: Color505050])
         visiAtt.append(visiTeamAtt)
         visiTeam.attributedText = visiAtt
         // 主队
         let homeAtt = NSMutableAttributedString(string: "[主]",
-                                                attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F])
+                                                attributes: [NSAttributedString.Key.foregroundColor: Color9F9F9F])
         let homeTeamAtt = NSAttributedString(string: data.homeTeamAbbr,
-                                             attributes: [NSAttributedStringKey.foregroundColor: Color505050])
+                                             attributes: [NSAttributedString.Key.foregroundColor: Color505050])
         homeAtt.append(homeTeamAtt)
         homeTeam.attributedText = homeAtt
     }

@@ -21,13 +21,13 @@ class FootballAnalysisSectionHeader: UITableViewHeaderFooterView {
     public var teamInfo : MatchTeamInfoModel! {
         didSet{
             guard teamInfo != nil else { return }
-            let homeAtt = NSAttributedString(string: "\(teamInfo.win!)胜", attributes: [NSAttributedStringKey.foregroundColor: ColorEA5504])
-            let flatAtt = NSAttributedString(string: "\(teamInfo.draw!)平", attributes: [NSAttributedStringKey.foregroundColor: Color65AADD])
-            let visiAtt = NSAttributedString(string: "\(teamInfo.lose!)负", attributes: [NSAttributedStringKey.foregroundColor: Color44AE35])
+            let homeAtt = NSAttributedString(string: "\(teamInfo.win!)胜", attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
+            let flatAtt = NSAttributedString(string: "\(teamInfo.draw!)平", attributes: [NSAttributedString.Key.foregroundColor: Color65AADD])
+            let visiAtt = NSAttributedString(string: "\(teamInfo.lose!)负", attributes: [NSAttributedString.Key.foregroundColor: Color44AE35])
             switch headerStyle {
             case .标题:
                 let muAtt = NSMutableAttributedString(string: "历史交锋 ")
-                let attOne = NSAttributedString(string: "近\(teamInfo.total!)场比赛 主队 ", attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F])
+                let attOne = NSAttributedString(string: "近\(teamInfo.total!)场比赛 主队 ", attributes: [NSAttributedString.Key.foregroundColor: Color9F9F9F])
                 
                 muAtt.append(attOne)
                 muAtt.append(homeAtt)
@@ -36,9 +36,10 @@ class FootballAnalysisSectionHeader: UITableViewHeaderFooterView {
                 
                 title.attributedText = muAtt
             case .主队:
-                let muAtt = NSMutableAttributedString(string: "最近战绩 ", attributes: [NSAttributedStringKey.foregroundColor: Color505050])
-                let attOne = NSAttributedString(string: "\(teamInfo.total!)场比赛  ", attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F])
-                let homeAttTitle = NSAttributedString(string: "\(teamInfo.teamAbbr!) (主队) ", attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F])
+                
+                let muAtt = NSMutableAttributedString(string: "最近战绩 ", attributes :  [NSAttributedString.Key.foregroundColor: Color505050])
+                let attOne = NSAttributedString(string: "\(teamInfo.total!)场比赛  ", attributes : [NSAttributedString.Key.foregroundColor: Color9F9F9F])
+                let homeAttTitle = NSAttributedString(string: "\(teamInfo.teamAbbr!) (主队) ", attributes : [NSAttributedString.Key.foregroundColor: Color9F9F9F])
                 
                 muAtt.append(attOne)
                 muAtt.append(homeAttTitle)
@@ -48,9 +49,9 @@ class FootballAnalysisSectionHeader: UITableViewHeaderFooterView {
                 
                 title.attributedText = muAtt
             case .客队:
-                let muAtt = NSMutableAttributedString(string: "最近战绩 ", attributes: [NSAttributedStringKey.foregroundColor: Color505050])
-                let attOne = NSAttributedString(string: "\(teamInfo.total!)场比赛  ", attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F])
-                let homeAttTitle = NSAttributedString(string: "\(teamInfo.teamAbbr!) (客队) ", attributes: [NSAttributedStringKey.foregroundColor: Color9F9F9F])
+                let muAtt = NSMutableAttributedString(string: "最近战绩 ", attributes : [NSAttributedString.Key.foregroundColor: Color505050])
+                let attOne = NSAttributedString(string: "\(teamInfo.total!)场比赛  ", attributes : [NSAttributedString.Key.foregroundColor: Color9F9F9F])
+                let homeAttTitle = NSAttributedString(string: "\(teamInfo.teamAbbr!) (客队) ", attributes : [NSAttributedString.Key.foregroundColor: Color9F9F9F])
                 muAtt.append(attOne)
                 muAtt.append(homeAttTitle)
                 muAtt.append(homeAtt)

@@ -13,10 +13,9 @@ class SettingPasswordCell: UITableViewCell {
     public var title : UILabel!
     public var textField : CustomTextField!
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initSubview()
-        
     }
     
     private func initSubview() {

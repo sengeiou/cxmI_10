@@ -36,4 +36,5 @@ class FootballSaveBetInfoModel : HandyJSON{
 
 struct SaveBetInfoModel : HandyJSON {
     var orderId : String = ""
+    var payToken : String = ""
 }

@@ -37,15 +37,17 @@ public func hasLogin() -> Bool {
 ///
 /// - Returns: ApiUrl
 public func platformBaseUrl() -> String! {
-    let baseUrl = UserDefaults.standard.string(forKey: kBaseUrl) ?? "https://api.caixiaomi.net"
+    
     var url = "https://api.caixiaomi.net"
     
-    if baseUrl == "http://39.106.18.39:8765" {
-        url = "http://39.106.18.39:8765"
-    }else{
-        url = "https://api.caixiaomi.net"
-    }
-    
+    #if DEBUG
+        let baseUrl = UserDefaults.standard.string(forKey: kBaseUrl) ?? "https://api.caixiaomi.net"
+        if baseUrl == "http://39.106.18.39:8765" {
+            url = "http://39.106.18.39:8765"
+        }else{
+            url = "https://api.caixiaomi.net"
+        }
+    #endif
     return url + "/api"
 }
 
@@ -55,6 +57,8 @@ public func getCurrentPlatformType() -> String! {
     //        http://t1.caixiaomi.net:9805
     //生产环境：https://api.caixiaomi.net
     //        https://m.caixiaomi.net
+    
+    
     
     let url = UserDefaults.standard.string(forKey: kBaseUrl) ?? "https://api.caixiaomi.net"
     let baseUrl = NSURL(string: url)!
@@ -72,7 +76,7 @@ public func getCurentBaseWebUrl() -> String! {
     if baseUrl.scheme == "https" {
         return "https://m.caixiaomi.net"
     }else{
-//        return "http://192.168.31.205:3000"
+//        return "http://192.168.31.205:8080"
         return "http://t1.caixiaomi.net:9805"
     }
 }
