@@ -35,13 +35,13 @@ class OrderSchemeCell: UITableViewCell {
             guard schemeDetail.status != nil else { return }
             switch schemeDetail.status {
             case "0":
-                orderState.text = "模拟中"
+                orderState.text = "出票中"
             case "1":
-                orderState.text = "模拟成功"
+                orderState.text = "出票成功"
             case "2":
-                orderState.text = "模拟失败"
+                orderState.text = "出票失败"
             case "3":
-                orderState.text = "模拟中"
+                orderState.text = "出票中"
             
             default: break
                 

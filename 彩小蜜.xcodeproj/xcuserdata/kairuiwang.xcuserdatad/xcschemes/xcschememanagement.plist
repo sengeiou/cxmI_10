@@ -4,10 +4,37 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>彩小蜜.xcscheme_^#shared#^_</key>
+		<key>Copy of 彩小蜜.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
-			<integer>24</integer>
+			<integer>1</integer>
+		</dict>
+		<key>彩小蜜.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>E573759E20468B8900148622</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E57375B220468B8900148622</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E57375BD20468B8900148622</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

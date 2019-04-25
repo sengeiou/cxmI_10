@@ -117,7 +117,7 @@ class CXMFootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITabl
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "模拟投注"
+        self.title = "确认投注"
         initSubview()
         setRightButtonItem()
         setEmpty(title: "暂无可选赛事", tableView)
@@ -412,7 +412,7 @@ class CXMFootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITabl
     //
     func orderConfirm(filterList: [FootballPlayFilterModel], times: String) {
         guard self.isAgreement == true else {
-            showCXMAlert(title: nil, message: "尊敬的用户，购彩需同意并接受《模拟投注服务协议》", action: "确定", cancel: nil) { (action) in
+            showCXMAlert(title: nil, message: "尊敬的用户，购彩需同意并接受《投注服务协议》", action: "确定", cancel: nil) { (action) in
                 
             }
             return }
@@ -430,22 +430,22 @@ class CXMFootballOrderConfirmVC: BaseViewController, UITableViewDelegate, UITabl
     private func saveBetInfo(requestModel: FootballRequestMode) {
         weak var weakSelf = self
         
-        _ = homeProvider.rx.request(.saveBetInfo(requestModel: requestModel))
+        _ = homeProvider.rx.request(.nSaveBetInfo(requestModel: requestModel))
             .asObservable()
-            .mapObject(type: SaveBetInfoModel.self)
+            .mapBaseObject(type: DataModel.self)
             .subscribe(onNext: { (data) in
                 
-                if data.payToken != "" {
+//                if data.data != "" {
                     let payment = CXMPaymentViewController()
-                    payment.lottoToken = data.payToken
+                    payment.lottoToken = data.data
                     weakSelf?.pushViewController(vc: payment)
-                }else {
-                    // 1.1.4 版，取消支付，直接跳转订单详情
-                    let story = UIStoryboard(storyboard: .Football)
-                    let order = story.instantiateViewController(withIdentifier: "OrderDetailVC") as! CXMOrderDetailVC
-                    order.orderId = data.orderId
-                    weakSelf?.pushViewController(vc: order)
-                }
+//                }else {
+//                    // 1.1.4 版，取消支付，直接跳转订单详情
+//                    let story = UIStoryboard(storyboard: .Football)
+//                    let order = story.instantiateViewController(withIdentifier: "OrderDetailVC") as! CXMOrderDetailVC
+////                    order.orderId = data.orderId
+//                    weakSelf?.pushViewController(vc: order)
+//                }
                 TongJi.log(.投注确认, label: self.matchType.rawValue, att: .彩种)
             }, onError: { (error) in
                 weakSelf?.dismissProgressHud()

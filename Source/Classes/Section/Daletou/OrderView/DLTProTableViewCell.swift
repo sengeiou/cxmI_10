@@ -56,13 +56,13 @@ extension DLTProTableViewCell {
         
         switch orderInfo.status {
         case "0":
-            stateLabel.text = "模拟中"
+            stateLabel.text = "出票中"
         case "1":
-            stateLabel.text = "模拟成功"
+            stateLabel.text = "出票成功"
         case "2":
-            stateLabel.text = "模拟失败"
+            stateLabel.text = "出票失败"
         case "3":
-            stateLabel.text = "模拟中"
+            stateLabel.text = "出票中"
         default:
             stateLabel.text = ""
         }

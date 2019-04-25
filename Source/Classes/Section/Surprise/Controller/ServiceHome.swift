@@ -18,7 +18,7 @@ class ServiceHome: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "服务"
+        self.navigationItem.title = "发现"
         hideBackBut()
         tableView.headerRefresh {
             self.serviceRequest()

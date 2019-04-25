@@ -20,6 +20,7 @@ struct AllPaymentModel: HandyJSON {
 }
 
 struct PaymentList : HandyJSON {
+    var isReadonly: String!
     var isEnable: Bool!
     var payCode: String!
     var payConfig: String!
@@ -31,6 +32,7 @@ struct PaymentList : HandyJSON {
     var paySort: String!
     var payTitle: String!
     var payType: String!
+    var readMoney: [String]!
 }
 
 struct RechargeUserInfo: HandyJSON {

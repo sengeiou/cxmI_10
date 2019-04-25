@@ -13,6 +13,8 @@ fileprivate let OrderDetailCellId = "OrderDetailCellId"
 fileprivate let OrderRuleCellId = "OrderRuleCellId"
 fileprivate let OrderPaymentCellId = "OrderPaymentCellId"
 fileprivate let OrderProgrammeCellId = "OrderProgrammeCellId"
+//奖金如何计算
+fileprivate let OrdercalculateBonusesCellId = "OrdercalculateBonusesCell"
 
 enum BackType {
     case root
@@ -59,7 +61,17 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.section {
+            
+//        case 0:
+//            switch indexPath.row{
+//            case orderInfo.matchInfos.count + 2:
+//                let web = CXMWebViewController()
+//                pushViewController(vc: web)
+//            default:
+//                break
+//            }
         case 1:
             let scheme = CXMOrderSchemeVC()
             scheme.programmeSn = self.orderInfo.programmeSn
@@ -100,7 +112,7 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "模拟订单详情"
+        self.title = "订单详情"
         initSubview()
         
         //orderInfoRequest()
@@ -109,7 +121,7 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
         }
         self.tableView.beginRefreshing()
         
-        setRightNav()
+//        setRightNav()
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -146,7 +158,7 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
                 weakSelf?.header.orderInfo = self.orderInfo
                 weakSelf?.tableView.reloadData()
                 
-                weakSelf?.showMask()
+//                weakSelf?.showMask()
             }, onError: { (error) in
                 //self.dismissProgressHud()
                 weakSelf?.tableView.endrefresh()
@@ -173,19 +185,19 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
         footer = OrderDetailFooterView()
         footer.delegate = self
         
-//        self.view.addSubview(tableView)
-//        self.view.addSubview(footer)
+        self.view.addSubview(tableView)
+        self.view.addSubview(footer)
         
-//        footer.snp.makeConstraints { (make) in
-//            make.bottom.equalTo(-SafeAreaBottomHeight)
-//            make.left.right.equalTo(0)
-//            make.height.equalTo(44 * defaultScale)
-//        }
+        footer.snp.makeConstraints { (make) in
+            make.bottom.equalTo(-SafeAreaBottomHeight)
+            make.left.right.equalTo(0)
+            make.height.equalTo(44 * defaultScale)
+        }
         
-//        tableView.snp.makeConstraints { (make) in
-//            make.top.left.right.equalTo(self.view)
-//            make.bottom.equalTo(0)
-//        }
+        tableView.snp.makeConstraints { (make) in
+            make.top.left.right.equalTo(self.view)
+            make.bottom.equalTo(footer.snp.top)
+        }
         
         tableView.separatorStyle = .none
         
@@ -202,6 +214,7 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
         tableView.register(OrderPaymentCell.self, forCellReuseIdentifier: OrderPaymentCellId)
         tableView.register(OrderProgrammeCell.self, forCellReuseIdentifier: OrderProgrammeCellId)
         tableView.register(OrderStoreCell.self, forCellReuseIdentifier: OrderStoreCell.identifier)
+        tableView.register(OrdercalculateBonusesCell.self, forCellReuseIdentifier: OrdercalculateBonusesCellId)
     }
 
     @IBOutlet weak var tableView : UITableView!
@@ -221,10 +234,12 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-//            return orderInfo.matchInfos.count + 3 // 显示 支付方式
-            return orderInfo.matchInfos.count + 2
-        default:
+            return orderInfo.matchInfos.count + 3 // 显示 支付方式
+//            return orderInfo.matchInfos.count + 2
+        case 1:
             return 1
+        default:
+            return 0
         }
     }
     
@@ -263,18 +278,19 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
             let cell = tableView.dequeueReusableCell(withIdentifier: OrderProgrammeCellId, for: indexPath) as! OrderProgrammeCell
             cell.orderInfo = self.orderInfo
             return cell
-        default:
-
-            let model = orderInfo.appendInfoList[indexPath.row]
             
-            switch model.type {
-            case "1":
-                return initQRCodeCell(indexPath: indexPath)
-            case "0":
-                return initStoreCell(indexPath: indexPath)
-            default :
+        default:
+//            let model = orderInfo.appendInfoList[indexPath.row]
+//
+//            switch model.type {
+//            case "1":
+//                return initQRCodeCell(indexPath: indexPath)
+//            case "0":
+//                return initStoreCell(indexPath: indexPath)
+//            default :
                 return UITableViewCell()
-            }
+//            }
+            
         }
     }
     
@@ -302,11 +318,10 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
                 return UITableView.automaticDimension
             }
         case 1:
-            return 124
+            return 88
         case 2:
-            
             let model = orderInfo.appendInfoList[indexPath.row]
-            
+
             switch model.type {
             case "1":
                 return 250
@@ -445,7 +460,7 @@ extension CXMOrderDetailVC {
             modes.append(model)
         
         
-            gv.showMask(data: modes)
+//            gv.showMask(data: modes)
         }
     }
 }

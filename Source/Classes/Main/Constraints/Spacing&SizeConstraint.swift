@@ -57,7 +57,7 @@ let CouponCellHeight : CGFloat = 131 * defaultScale
 let RecordCellHeight : CGFloat = 71 * defaultScale
 let OrderDetailCellHeight: CGFloat = 65 * defaultScale
 //let OrderHeaderViewHeight: CGFloat = defaultScale < 1 ? 123 : 122.5 * defaultScale 1.1.4 更新
-let OrderHeaderViewHeight: CGFloat = defaultScale < 1 ? 70 : 70 * defaultScale
+let OrderHeaderViewHeight: CGFloat = defaultScale < 1 ? 123 : 122.5 * defaultScale
 let orderSectionHeaderHeight: CGFloat = 36 * defaultScale
 //MARK: -  首页足球尺寸
 

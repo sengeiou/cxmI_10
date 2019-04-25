@@ -388,7 +388,7 @@ class CXMMeViewController: BaseViewController, UITableViewDelegate, UITableViewD
                 }
             }
         }
-        section1.list.append(item3)
+//        section1.list.append(item3)
         
         var item4 = MeListDataModel()
         item4.title = "消息中心"
@@ -734,13 +734,13 @@ class CXMMeViewController: BaseViewController, UITableViewDelegate, UITableViewD
         guard buttonIndex != 0  else { return  }
         switch buttonIndex {
         case 1:
-            UserDefaults.standard.set("https://api.caixiaomi.net", forKey: kBaseUrl)
+            UserDefaults.standard.set("http://94.191.113.169:8765", forKey: kBaseUrl)
             UserDefaults.standard.set("https://m.caixiaomi.net", forKey: kBaseWebUrl)
         case 2:
             UserDefaults.standard.set("http://39.106.18.39:8765", forKey: kBaseUrl)
             UserDefaults.standard.set("http://t1.caixiaomi.net:9805", forKey: kBaseWebUrl)
         default:
-            UserDefaults.standard.set("https://api.caixiaomi.net", forKey: kBaseUrl)
+            UserDefaults.standard.set("http://94.191.113.169:8765", forKey: kBaseUrl)
             UserDefaults.standard.set("https://m.caixiaomi.net", forKey: kBaseWebUrl)
         }
         UserDefaults.standard.synchronize()

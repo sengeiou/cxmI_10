@@ -61,7 +61,7 @@ class CXMMeAboutViewController: BaseViewController, UITableViewDelegate, UITable
         let footer = AboutFooter()
         
         table.tableHeaderView = header
-        table.tableFooterView = footer
+//        table.tableFooterView = footer
         
         
         table.register(AboutCell.self, forCellReuseIdentifier: AboutCellId)

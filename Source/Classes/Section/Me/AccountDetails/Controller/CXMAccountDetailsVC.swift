@@ -281,9 +281,9 @@ class CXMAccountDetailsVC: BaseViewController, IndicatorInfoProvider, UITableVie
         // 提现可进入详情
         guard account.processType == "4" else { return }
        
-        let progress = CXMWithdrawalProgressVC()
-        progress.withdawalSn = account.payId
-        pushViewController(vc: progress)
+//        let progress = CXMWithdrawalProgressVC()
+//        progress.withdawalSn = account.payId
+//        pushViewController(vc: progress)
     }
     
     //MARK: - TABLEVIEW  DATASOURCE

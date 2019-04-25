@@ -17,12 +17,20 @@ class PaymentMethodCell: UITableViewCell {
             if let url = URL(string: paymentInfo.payImg) {
                 icon.kf.setImage(with: url)
             }
+            
+            if paymentInfo.payDesc != ""{
+                payDesc.text = paymentInfo.payDesc
+                upPayDescConstraints()
+            }else{
+                onlyTitleConstraints()
+            }
         }
     }
     
     public var title : UILabel!
     public var selectedIcon : UIImageView!
     public var icon : UIImageView!
+    private var payDesc : UILabel!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -38,9 +46,9 @@ class PaymentMethodCell: UITableViewCell {
             make.centerY.equalTo(self.contentView.snp.centerY)
         }
         title.snp.makeConstraints { (make) in
-            make.top.bottom.equalTo(0)
-            make.left.equalTo(icon.snp.right).offset(15 * defaultScale)
-            make.right.equalTo(selectedIcon.snp.left).offset(-1)
+            make.top.equalTo(self.contentView).offset(10)
+            make.left.equalTo(icon.snp.right).offset(8.5)
+            make.right.equalTo(selectedIcon.snp.left).offset(-10)
         }
         
         selectedIcon.snp.makeConstraints { (make) in
@@ -49,6 +57,35 @@ class PaymentMethodCell: UITableViewCell {
             make.width.height.equalTo(24 * defaultScale)
         }
     }
+    
+    private func upPayDescConstraints(){
+        title.font = Font14
+        payDesc.font = Font10
+        
+        title.snp.remakeConstraints { (make) in
+            make.top.equalTo(self.contentView).offset(8.5)
+            make.left.equalTo(icon.snp.right).offset(8.5)
+            make.right.equalTo(selectedIcon.snp.left).offset(-10)
+        }
+        
+        payDesc.snp.makeConstraints { (make) in
+            make.top.equalTo(title.snp.bottom).offset(5)
+            make.left.equalTo(icon.snp.right).offset(8.5)
+            make.right.equalTo(selectedIcon.snp.left).offset(-10)
+        }
+    }
+    
+    private func onlyTitleConstraints(){
+        title.font = Font15
+        title.snp.makeConstraints { (make) in
+            make.top.bottom.equalTo(0)
+            make.left.equalTo(icon.snp.right).offset(15 * defaultScale)
+            make.right.equalTo(selectedIcon.snp.left).offset(-1)
+        }
+    }
+    
+    
+    
     private func initSubview() {
         self.selectionStyle = .none
         
@@ -63,8 +100,15 @@ class PaymentMethodCell: UITableViewCell {
         selectedIcon = UIImageView()
         selectedIcon.image = UIImage(named: "chargesure")
         
+        payDesc = UILabel()
+        payDesc.font = Font15
+        payDesc.textColor = Color505050
+        payDesc.text = ""
+        payDesc.textAlignment = .left
+        
         self.contentView.addSubview(icon)
         self.contentView.addSubview(title)
+        self.contentView.addSubview(payDesc)
         self.contentView.addSubview(selectedIcon)
     }
     

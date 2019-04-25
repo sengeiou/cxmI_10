@@ -42,7 +42,7 @@ enum MeNetAPIManager {
     case accountDetailsList (amountType: String, pageNum: Int, timeType: String)
     /// 统计账户信息
     case accountStatistics(timeType: String)
-    /// 消息列表 0通知，1消息 
+    /// 消息列表 0通知，1消息
     case messageList (msgType: String, pageNum: Int)
     /// 提现进度
     case withdrawProgressList (withdawSn: String)
@@ -85,7 +85,7 @@ extension MeNetAPIManager : TargetType {
         return [
             "Content-Type" : "application/json",
             "token" : UserInfoManager().getToken(),
-//            "header": DeviceManager.share.device.toJSONString()!
+            //            "header": DeviceManager.share.device.toJSONString()!
             //"token" : "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIxZDg4OTYxZDUtYjI0Yi00NzAxLWJhZWMtNzBkZmUxY2MwMDAzIiwidXNlcklkIjoiNDAwMDY4In0.1aBwA_Rasiew0kiLK8uR3AiUGj1iJ6ZZ8Hvup5v8tNUVMpQWWHVQBSrUBGCxZ28Lmsk0I-cQGQkOcAdoJKJQE1GGjDqSfAWGD951Kyq187C_axWKNazkRK1b-RIuuXV4ZSSSYhn0o45KsLCUh1YO76Q19oFnuVCbrF8DTvXTbSY"
         ]
     }
@@ -174,13 +174,13 @@ extension MeNetAPIManager : TargetType {
             dic["bankCardNo"] = bankCardNo.replacingOccurrences(of: " ", with: "")
             
         case .userInfo:
-            dic["str"] = "d14fs54df4sf韩笑孟宪征"
+            dic["str"] = ""
         case .realInfo:
-            dic["str"] = "d14fs54df4sf韩笑孟宪征"
+            dic["str"] = ""
         case .bankList:
-            dic["str"] = "d14fs54df4sf韩笑孟宪征"
+            dic["str"] = ""
         case .withDrawDataShow:
-            dic["str"] = "d14fs54df4sf韩笑孟宪征"
+            dic["str"] = ""
         case .setBankDefault ( let cardId ):
             dic["id"] = cardId
         case .deleteBank (let status, let cardId):
@@ -221,8 +221,8 @@ extension MeNetAPIManager : TargetType {
             dic["withdrawSn"] = withdawSn
         case .collectAdd(let articledId):
             dic["articleId"] = articledId
-//            dic["articleTitle"] = articleTitle
-//            dic["collectFrom"] = collectFrom
+            //            dic["articleTitle"] = articleTitle
+        //            dic["collectFrom"] = collectFrom
         case .collectDelete(let collectId):
             dic["id"] = collectId
         case .collectList(let pageNum):
@@ -262,7 +262,7 @@ extension MeNetAPIManager : TargetType {
         dict["device"] = DeviceManager.share.device.toJSON()
         
         let jsonStr = try? JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted)
-    
+        
         
         return .requestData(jsonStr!)
     }

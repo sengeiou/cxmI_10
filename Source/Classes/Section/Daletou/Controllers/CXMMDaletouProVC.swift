@@ -20,7 +20,7 @@ class CXMMDaletouProVC: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "模拟方案"
+        self.navigationItem.title = "方案"
         loadNewData()
         setSubview()
         

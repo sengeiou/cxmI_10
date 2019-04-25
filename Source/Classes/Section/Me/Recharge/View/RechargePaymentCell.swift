@@ -18,12 +18,19 @@ class RechargePaymentCell: UITableViewCell {
             if let url = URL(string: paymentInfo.payImg) {
                 icon.kf.setImage(with: url)
             }
+            if paymentInfo.payDesc != ""{
+                payDesc.text = paymentInfo.payDesc
+                upPayDescConstraints()
+            }else{
+                onlyTitleConstraints()
+            }
         }
     }
     
     //MARK: - 属性
     private var icon : UIImageView!
     private var title : UILabel!
+    private var payDesc : UILabel!
     private var selectorIcon : UIImageView!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -47,8 +54,15 @@ class RechargePaymentCell: UITableViewCell {
         title.text = "微信支付"
         title.textAlignment = .left
         
+        payDesc = UILabel()
+        payDesc.font = Font15
+        payDesc.textColor = Color505050
+        payDesc.text = "微信支付"
+        payDesc.textAlignment = .left
+        
         self.contentView.addSubview(icon)
         self.contentView.addSubview(title)
+        self.contentView.addSubview(payDesc)
         self.contentView.addSubview(selectorIcon)
     }
     
@@ -62,7 +76,6 @@ class RechargePaymentCell: UITableViewCell {
         }
         title.snp.makeConstraints { (make) in
             make.top.equalTo(self.contentView).offset(10)
-            make.bottom.equalTo(self.contentView).offset(-10)
             make.left.equalTo(icon.snp.right).offset(8.5)
             make.right.equalTo(selectorIcon.snp.left).offset(-10)
         }
@@ -70,6 +83,33 @@ class RechargePaymentCell: UITableViewCell {
             make.centerY.equalTo(self.contentView.snp.centerY)
             make.right.equalTo(self.contentView).offset(-21)
             make.height.width.equalTo(21)
+        }
+    }
+    
+    private func upPayDescConstraints(){
+        title.font = Font14
+        payDesc.font = Font10
+        
+        title.snp.remakeConstraints { (make) in
+         make.top.equalTo(self.contentView).offset(8.5)
+            make.left.equalTo(icon.snp.right).offset(8.5)
+            make.right.equalTo(selectorIcon.snp.left).offset(-10)
+        }
+        payDesc.numberOfLines = 0
+        payDesc.snp.makeConstraints { (make) in
+            make.top.equalTo(title.snp.bottom).offset(5)
+            make.left.equalTo(icon.snp.right).offset(8.5)
+            make.right.equalTo(selectorIcon.snp.left).offset(-10)
+        }
+    }
+    
+    private func onlyTitleConstraints(){
+        title.font = Font15
+        title.snp.remakeConstraints { (make) in
+            make.top.equalTo(self.contentView).offset(10)
+            make.bottom.equalTo(self.contentView).offset(-10)
+            make.left.equalTo(icon.snp.right).offset(8.5)
+            make.right.equalTo(selectorIcon.snp.left).offset(-10)
         }
     }
     

@@ -71,7 +71,7 @@ class CXMMDaletouConfirmVC: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "模拟投注"
+        self.title = "投注"
         self.bottomView.delegate = self
         self.tableView.reloadData()
         
@@ -95,7 +95,7 @@ class CXMMDaletouConfirmVC: BaseViewController {
                 self.bottomView.confirmBut.backgroundColor = ColorEA5504
                 self.bottomView.confirmBut.isUserInteractionEnabled = true
                 
-                let att = NSMutableAttributedString(string: "\(num)注\(multiple)倍 共需: ")
+                let att = NSMutableAttributedString(string: "\(num)注\(multiple)倍 共需:")
                 
                 let money = NSAttributedString(string: "\(num * money * multiple).00",
                     attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])

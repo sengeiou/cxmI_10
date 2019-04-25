@@ -52,6 +52,9 @@ class CXMPaymentViewController: BaseViewController, UITableViewDelegate, UITable
     
     private var backed  = false
     
+    /// 控制还需支付 是否显示
+    private var needPay  = false
+    
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,7 +102,7 @@ class CXMPaymentViewController: BaseViewController, UITableViewDelegate, UITable
         guard maxTimes > 0 else {
             timer.invalidate()
             SVProgressHUD.dismiss()
-            showCXMAlert(title: "查询失败", message: "暂未查询到您的支付结果，如果您已经确认支付并成功扣款，可能存在延迟到账的情况，请到账户明细中查看或联系客服查询", action: "知道了", cancel: nil) { (action) in
+            showCXMAlert(title: "查询失败", message: "暂未查询到您的支付结果，如果您已经确认支付并成功扣款，可能存在延迟到账情况。若未成功支付，订单将在固定时间内失效，如有疑问请核对账户明细或联系客服查询", action: "知道了", cancel: nil) { (action) in
                 self.canPayment = true
             }
             return
@@ -181,8 +184,15 @@ class CXMPaymentViewController: BaseViewController, UITableViewDelegate, UITable
         }else if indexPath.section == 1 {
             
             if indexPath.row != 0 {
-                self.paymentModel = paymentAllList[indexPath.row - 1 ]
+                self.paymentModel = paymentAllList[indexPath.row - 1]
                 self.selectedIndex = indexPath
+                
+                if self.paymentModel.isReadonly == "1"{
+                    confirmBut.setTitle("去充值", for: .normal)
+                }else{
+                    confirmBut.setTitle("确认支付", for: .normal)
+                }
+
                 if indexPath.row == 1 {
 //                    if self.matchType != nil {
 //                        TongJi.log(.微信支付, label: self.matchType.rawValue, att: .彩种)
@@ -201,7 +211,14 @@ class CXMPaymentViewController: BaseViewController, UITableViewDelegate, UITable
         guard canPayment else { return }
         self.canPayment = false
         maxTimes = QueryMaxTimes
-        paymentRequest()
+        
+        if self.paymentModel != nil,self.paymentModel.isReadonly == "1"{
+            let recharge = CXMRechargeViewController()
+            recharge.backMe = true
+            self.pushViewController(vc: recharge)
+        }else{
+            paymentRequest()
+        }
     }
     // 选取的  优惠券
     func didSelected(bonus bonusId: String) {
@@ -331,6 +348,11 @@ extension CXMPaymentViewController {
                     bonus.leaveTime = ""
                     weakSelf?.saveBetInfo.bonusList.append(bonus)
                 }
+                
+                if weakSelf?.saveBetInfo.thirdPartyPaid == 0.0 {
+                    weakSelf?.needPay = true
+                    weakSelf?.tableView.reloadData()
+                }
                 weakSelf?.lottoToken = data.payToken
                 data.setBonus() // 设置默认选中的优惠券
                 //weakSelf?.tableView.reloadData()
@@ -416,6 +438,9 @@ extension CXMPaymentViewController {
                 switch err {
                 case .UnexpectedResult(let code, let msg):
                     switch code {
+                    case 1:
+                        self.showHUD(message: msg!)
+                        
                     case 600:
                         weakSelf?.removeUserData()
                         weakSelf?.pushLoginVC(from: self)
@@ -485,7 +510,7 @@ extension CXMPaymentViewController {
                         self.canPayment = true
                         self.timer.invalidate()
                         //self.showHUD(message: data.msg)
-                        self.showCXMAlert(title: "查询失败", message: "暂未查询到您的支付结果，如果您已经确认支付并成功扣款，可能存在延迟到账的情况，请到账户明细中查看或联系客服查询", action: "知道了", cancel: nil) { (action) in
+                        self.showCXMAlert(title: "查询失败", message: "暂未查询到您的支付结果，如果您已经确认支付并成功扣款，可能存在延迟到账情况。若未成功支付，订单将在固定时间内失效，如有疑问请核对账户明细或联系客服查询", action: "知道了", cancel: nil) { (action) in
                             self.canPayment = true
                         }
                         SVProgressHUD.dismiss()
@@ -557,6 +582,7 @@ extension CXMPaymentViewController {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
+            if needPay == true{return 3}
             return 4
         case 1:
             guard self.saveBetInfo != nil else { return 0 }
@@ -578,11 +604,11 @@ extension CXMPaymentViewController {
             switch indexPath.row {
             case 0:
                 cell.title.text = "订单金额"
-                let money = NSAttributedString(string:"¥" + self.saveBetInfo.orderMoney, attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
+                let money = NSAttributedString(string: self.saveBetInfo.orderMoney + "元", attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
                 cell.detail.attributedText = money
             case 1:
                 cell.title.text = "余额抵扣"
-                cell.detail.text = "- ¥" + self.saveBetInfo.surplus
+                cell.detail.text = self.saveBetInfo.surplus + "元"
             case 2:
                 cell.title.text = "优惠券抵扣"
                 
@@ -591,14 +617,14 @@ extension CXMPaymentViewController {
                     cell.accessoryType = .none
                     cell.hcellStyle = .defaults
                 }else {
-                    cell.detail.text = "- ¥" + self.saveBetInfo.bonusAmount
+                    cell.detail.text = self.saveBetInfo.bonusAmount + "元"
                     cell.accessoryType = .disclosureIndicator
                     cell.hcellStyle = .detail
                 }
                 
             case 3:
                 cell.title.text = "还需支付"
-                let money = NSAttributedString(string:"¥ " + "\(self.saveBetInfo.thirdPartyPaid!)", attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
+                let money = NSAttributedString(string: "\(self.saveBetInfo.thirdPartyPaid!)元", attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
                 cell.detail.attributedText = money
             default: break
             }

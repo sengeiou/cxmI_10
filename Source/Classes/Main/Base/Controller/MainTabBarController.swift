@@ -9,7 +9,6 @@
 import UIKit
 import Reachability
 
-
 let NotificationConfig = "NotificationConfigName"
 let TurnOn = "TurnOn"
 
@@ -138,7 +137,7 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
          */
         
 //        if viewController == self.viewControllers![1] {
-//            lottery.backDefault = true
+//            lottery.backDefault = tr
 //        }
         
         return true
@@ -160,8 +159,12 @@ extension MainTabBarController {
         let shopStory = UIStoryboard(storyboard: .Shop)
         let shopHome = shopStory.instantiateViewController(withIdentifier: "ShopHomeViewController") as! ShopHomeViewController
         
-        let vcArray: [UIViewController] = [CXMHomeViewController(),CXMScoreViewController(),surprise, shopHome, CXMMeViewController()]
-        let titleArray = [("首页","tab_home"),("开奖","tab_lot"),("服务","tab_fw"),("商城","tab_shch"),("我的","tab_min")]
+//        let vcArray: [UIViewController] = [CXMHomeViewController(),CXMScoreViewController(),surprise, shopHome, CXMMeViewController()]
+//        let titleArray = [("首页","tab_home"),("开奖","tab_lot"),("发现","tab_fw"),("商城","tab_shch"),("我的","tab_min")]
+        
+        let vcArray: [UIViewController] = [CXMHomeViewController(),CXMScoreViewController(),surprise, CXMMeViewController()]
+        let titleArray = [("首页","tab_dt"),("开奖","tab_bs"),("发现","tab_fx"),("我的","tab_wd")]
+    
         
         for (index, vc) in vcArray.enumerated() {
             vc.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)

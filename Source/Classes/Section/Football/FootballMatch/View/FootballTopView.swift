@@ -12,7 +12,7 @@ class FootballTopView: UIView {
 
     public var number : String = "0" {
         didSet{
-            titleLB.text = "共有\(number)场比赛可模拟投注"
+            titleLB.text = "共有\(number)场比赛可投注"
         }
     }
     
@@ -56,7 +56,7 @@ class FootballTopView: UIView {
         titleLB.font = Font14
         titleLB.textColor = Color9F9F9F
         titleLB.textAlignment = .left
-        titleLB.text = "共有\(number)场比赛可模拟投注"
+        titleLB.text = "共有\(number)场比赛可投注"
         
         bgView.addSubview(titleLB)
         self.addSubview(bgView)

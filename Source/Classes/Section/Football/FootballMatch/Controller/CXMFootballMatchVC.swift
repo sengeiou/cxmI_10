@@ -12,13 +12,13 @@ import SVProgressHUD
 let MaxSelectedNum = 15
 
 enum FootballMatchType: String {
-    case 胜平负 = "模拟胜平负"
-    case 让球胜平负 = "模拟让球胜平负"
-    case 总进球 = "模拟总进球"
-    case 比分 = "模拟比分"
-    case 半全场 = "模拟半全场"
-    case 二选一 = "模拟2选1"
-    case 混合过关 = "模拟混合投注"
+    case 胜平负 = "胜平负"
+    case 让球胜平负 = "让球胜平负"
+    case 总进球 = "总进球"
+    case 比分 = "比分"
+    case 半全场 = "半全场"
+    case 二选一 = "2选1"
+    case 混合过关 = "混合投注"
     
     func getMatchType(type: String) -> FootballMatchType {
         var matchType : FootballMatchType = .胜平负

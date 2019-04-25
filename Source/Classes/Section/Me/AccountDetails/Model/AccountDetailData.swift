@@ -13,4 +13,3 @@ struct AccountDetailData: HandyJSON {
     var pageInfo : BasePageModel<AccountDetailModel>!
     var userAccountByTimeDTO: AccountStatisticsModel!
 }
-

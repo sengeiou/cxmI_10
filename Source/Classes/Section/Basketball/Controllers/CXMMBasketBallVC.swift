@@ -180,7 +180,7 @@ extension CXMMBasketballVC {
                     weakSelf?.matchModel.list.insert(model, at: 0)
                     weakSelf?.hasHot = true
                 }
-                weakSelf?.totalMatch.text = "共有\(data.allMatchCount)场比赛可模拟投注"
+                weakSelf?.totalMatch.text = "共有\(data.allMatchCount)场比赛可投注"
                 
                 self.playViewModel.list.removeAll()
                 

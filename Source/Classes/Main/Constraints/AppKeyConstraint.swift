@@ -9,30 +9,47 @@
 import Foundation
 
 /// 微信分享
-let WeixinAppID = "wx1767896f012e05a2"
+let WeixinAppID = "wx87a74970342bfefd"
 
-/// 百度统计
-let BaiduAppKey = "8b4996b71f"
+/// 百度统计 BAIDU_APP_KEY: "44482325ea"
+let BaiduAppKey = "44482325ea"
+
 
 /// 智齿客服
 let ZhiChiAppKey = "193e17343a3b430a9d21af67c92f5491"
 /// 渠道
-let Channel = "c36010"
+let Channel = "c46016"
 
 let phoneNum = "400-012-6600"
 
 let website = "http://www.renrentiyua.com"
+
+
+/*	
+ 应用名称： 圣河彩店
+ appId： AJ2aStM5OS63nUuQD7TVu3
+ appSecret： fguquBeDT39WFcqjjixAo8
+ appKey： 81rV5jRDQx8HyL5hVJbR
+ 应用包名： com.shenghecp.selltool
+ 应用签名： 0D:6A:3F:FB:F9:99:FB:6C:9B:57:61:9E:A9:17:84:5E:C8:BF:8B:14:7D:30:A7:D7:C0:13:A1:64:08:32:9E:E2
+ iOS bundleID： com.shenghecaidian.itools
+ masterSecret：
+ 【个推】 3XlcmmSaF46jL96roGqhU4
+ */
+
 /// 个推
 #if DEBUG
-    let GetuiAppID  = "SQ3WV0duEo5YipEvzlaXS2"
-    let GetuiAppKey = "Y1seeH4pyr7TCBEZDNwaF"
-    let GetuiSecrct = "svMsjRq4LR6gT6RZk8rfO9"
+let GetuiAppID  = "AJ2aStM5OS63nUuQD7TVu3"
+let GetuiAppKey = "81rV5jRDQx8HyL5hVJbR"
+let GetuiSecrct = "fguquBeDT39WFcqjjixAo8"
 
 #else
-    let GetuiAppID  = "NRtMIfLwdc7LTbK7sf0Kn"
-    let GetuiAppKey = "EQ3i8BjTze9buaOPD9gHn1"
-    let GetuiSecrct = "lERUWPih8JAgrXaoO62u88"
+let GetuiAppID  = "AJ2aStM5OS63nUuQD7TVu3"
+let GetuiAppKey = "81rV5jRDQx8HyL5hVJbR"
+let GetuiSecrct = "fguquBeDT39WFcqjjixAo8"
+
 #endif
 
 // test
+
 

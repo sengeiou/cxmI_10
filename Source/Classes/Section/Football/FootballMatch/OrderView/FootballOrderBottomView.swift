@@ -51,10 +51,10 @@ class FootballOrderBottomView: UIView {
             guard let maxBouns = betInfo.maxBonus else { return }
             
             let moneyAtt = NSMutableAttributedString(string: "\(betNum)注 \(times)倍 共需：")
-            let moneyStr = NSAttributedString(string: "\(money)", attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
+            let moneyStr = NSAttributedString(string: "\(money)元", attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
             moneyAtt.append(moneyStr)
             
-            let bonusAtt = NSMutableAttributedString(string: "模拟预测奖金: ")
+            let bonusAtt = NSMutableAttributedString(string: "预测奖金: ")
             let bonusStr = NSAttributedString(string: "\(minBonus)-\(maxBouns)", attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
             bonusAtt.append(bonusStr)
             

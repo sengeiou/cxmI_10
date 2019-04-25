@@ -30,7 +30,7 @@ class AccountDetailsCell: UITableViewCell {
                 make.left.equalTo(titleLB.snp.right).offset(10)
                 make.width.equalTo(titleLB)
             }
-            
+            print(accountDetail.processType)
             switch accountDetail.processType {
             case "1":
                 icon.image = UIImage(named: "Thewinning")
@@ -55,7 +55,10 @@ class AccountDetailsCell: UITableViewCell {
                 icon.image = UIImage(named: "")
             case "6":
                 icon.image = UIImage(named: "refund")
-            default: break
+            case "8":
+                icon.image = UIImage(named: "backMoney")
+            default:
+                break
             }
             
         }
@@ -175,7 +178,8 @@ class AccountDetailsCell: UITableViewCell {
         }
         stateIcon.snp.makeConstraints { (make) in
             make.centerY.equalTo(moneyLB.snp.centerY)
-            make.height.width.equalTo(11)
+//          make.height.width.equalTo(11)
+            make.height.width.equalTo(0)
             make.right.equalTo(-(rightSpacing - 2))
         }
         

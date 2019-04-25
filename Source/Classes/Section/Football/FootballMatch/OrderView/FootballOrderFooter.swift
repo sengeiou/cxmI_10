@@ -53,7 +53,7 @@ class FootballOrderFooter: UIView {
     private func initSubview() {
         
         let muAtt = NSMutableAttributedString(string: "我已阅读并同意 ", attributes: [NSAttributedString.Key.foregroundColor: Color9F9F9F])
-        let att = NSAttributedString(string: "《模拟投注服务协议》", attributes: [NSAttributedString.Key.foregroundColor: Color505050])
+        let att = NSAttributedString(string: "《投注服务协议》", attributes: [NSAttributedString.Key.foregroundColor: Color505050])
         muAtt.append(att)
         
         agreementBut = UIButton(type: .custom)

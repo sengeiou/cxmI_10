@@ -47,7 +47,7 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
     //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "球多多"
+        self.navigationItem.title = "圣和彩店"
         newsList = [NewsInfoModel]()
         hideBackBut()
         
@@ -67,7 +67,7 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
         getRealmData()
         
         // 定位信息
-        setLocation()
+//        setLocation()
         
         let turnOn = UserDefaults.standard.bool(forKey: TurnOn)
         

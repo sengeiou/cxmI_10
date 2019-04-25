@@ -13,7 +13,7 @@ class OrderProgrammeCell: UITableViewCell {
     public var orderInfo : OrderInfoModel! {
         didSet{
             guard orderInfo != nil else { return }
-            let noAtt = NSMutableAttributedString(string: "模拟编号: ")
+            let noAtt = NSMutableAttributedString(string: "方案编号: ")
             let timeAtt = NSMutableAttributedString(string: "创建时间: ")
             let orderAtt = NSMutableAttributedString(string: "店主接单: ")
             let ticketAtt = NSMutableAttributedString(string: "店主出票: ")
@@ -87,15 +87,15 @@ class OrderProgrammeCell: UITableViewCell {
             make.top.equalTo(programmeNo.snp.bottom).offset(1)
             make.left.right.height.equalTo(programmeNo)
         }
-        orderTime.snp.makeConstraints { (make) in
-            make.top.equalTo(creatTime.snp.bottom).offset(1)
-            make.left.right.height.equalTo(programmeNo)
-        }
-        ticketTime.snp.makeConstraints { (make) in
-            make.top.equalTo(orderTime.snp.bottom).offset(1)
-            make.bottom.equalTo(self.contentView).offset(-11)
-            make.left.right.height.equalTo(programmeNo)
-        }
+//        orderTime.snp.makeConstraints { (make) in
+//            make.top.equalTo(creatTime.snp.bottom).offset(1)
+//            make.left.right.height.equalTo(programmeNo)
+//        }
+//        ticketTime.snp.makeConstraints { (make) in
+//            make.top.equalTo(orderTime.snp.bottom).offset(1)
+//            make.bottom.equalTo(self.contentView).offset(-11)
+//            make.left.right.height.equalTo(programmeNo)
+//        }
     }
     
     private func initSubview() {
@@ -114,7 +114,7 @@ class OrderProgrammeCell: UITableViewCell {
         detailLB.font = Font14
         detailLB.textColor = Color505050
         detailLB.textAlignment = .right
-        detailLB.text = "模拟方案"
+        detailLB.text = "查看出票方案"
         
         detailIcon = UIImageView()
         detailIcon.image = UIImage(named: "jump")
@@ -130,8 +130,8 @@ class OrderProgrammeCell: UITableViewCell {
         self.contentView.addSubview(detailIcon)
         self.contentView.addSubview(programmeNo)
         self.contentView.addSubview(creatTime)
-        self.contentView.addSubview(orderTime)
-        self.contentView.addSubview(ticketTime)
+//        self.contentView.addSubview(orderTime)
+//        self.contentView.addSubview(ticketTime)
         
     }
     
@@ -140,7 +140,7 @@ class OrderProgrammeCell: UITableViewCell {
         lab.font = Font12
         lab.textColor = ColorA0A0A0
         lab.textAlignment = .left
-        lab.text = "模拟编号： 10514545661466561498"
+        lab.text = "编号： 10514545661466561498"
         
         return lab
     }

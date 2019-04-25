@@ -28,4 +28,5 @@ struct BasePageModel<T>: HandyJSON {
     var size: String!
     var startRow: String!
     var total: String!
+
 }

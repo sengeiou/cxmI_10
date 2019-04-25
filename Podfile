@@ -14,7 +14,7 @@ target '彩小蜜' do
 
   pod 'SnapKit'
 
-  pod 'HandyJSON', '~> 4.2.0'
+pod 'HandyJSON', '~> 5.0.0-beta.1'
 
   pod 'DZNEmptyDataSet'
 

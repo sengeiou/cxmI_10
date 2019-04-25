@@ -23,7 +23,7 @@ extension AlertPro {
     
     /// 无按钮提示
     public func showHUD(message: String) {
-        HUD.flash(.label(message), delay: 1.0)
+        HUD.flash(.label(message), delay: 2.0)
         
     }
     

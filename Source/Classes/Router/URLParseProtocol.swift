@@ -19,19 +19,35 @@ extension URLParseProtocol {
         
         guard urlStr.contains("&"), urlStr.contains("?") else { return nil }
     
-        guard let com = urlStr.components(separatedBy: "?").last else { return nil }
+        guard let index = urlStr.index(of: "?") else { return nil }
+        let str1 = urlStr[index...]
+        var com = String(str1)
+        com.removeFirst()
+
+//        guard let com = urlStr.components(separatedBy: "?").last else {
+//            return nil
+//        }
+        
         let urlComponents = com.components(separatedBy: "&")
         
         var i = 0
         for keyValue in urlComponents {
             let components = keyValue.components(separatedBy: "=")
-            
             let key = components.first ?? ""
             let value = components.last ?? ""
             if key == "type" {
                 urlModel.type = value
             }else if key == "id" {
-                urlModel.id = value
+                for i in 0..<urlComponents.count{
+                    if urlComponents[i].contains("id"){
+                        guard let index = urlComponents[i].index(of: "=") else { return nil }
+                        let str1 = urlComponents[i][index...]
+                        var id = String(str1)
+                        id.removeFirst()
+                        urlModel.id = id
+                    }
+                }
+//                urlModel.id = value
             }else if key == "subid" {
                 urlModel.subid = value
             }else if key == "cmshare" {
@@ -44,6 +60,11 @@ extension URLParseProtocol {
             
             i += 1
         }
+        
+
+        
+        
         return urlModel
     }
+    
 }

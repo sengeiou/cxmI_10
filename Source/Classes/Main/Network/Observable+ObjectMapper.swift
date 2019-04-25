@@ -74,12 +74,10 @@ extension Observable where E == Response {
             
             print("""
                     ************************************
-                    
                     code   :    \(json["code"] as! String)
                     msg    :    \(json["msg"] as! String)
                     URL    :    \(String(describing: response.request?.url))
                     TOKEN  :    \(UserInfoManager().getToken())
-                
                     ************************************
                 """)
             
@@ -88,7 +86,7 @@ extension Observable where E == Response {
                 guard let codeStr = json["code"] as? String else { throw HXError.ParseCodeError }
                 guard let code = Int(codeStr) else { throw HXError.ParseCodeError }
                 
-                throw HXError.UnexpectedResult(resultCode: code , resultMsg: json["msg"] as? String )
+                throw HXError.UnexpectedResult(resultCode: code , resultMsg: json["msg"] as? String)
             }
 
             data["showMsg"] = json["msg"] as! String
@@ -102,7 +100,6 @@ extension Observable where E == Response {
 //                    ************************************
 //                    """)
             }
-            
             return JSONDeserializer<T>.deserializeFrom(dict: data)!
         }
     }

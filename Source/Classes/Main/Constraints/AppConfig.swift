@@ -38,14 +38,14 @@ public func hasLogin() -> Bool {
 /// - Returns: ApiUrl
 public func platformBaseUrl() -> String! {
     
-    var url = "https://api.caixiaomi.net"
+    var url = "http://94.191.113.169:8765"
     
     #if DEBUG
-        let baseUrl = UserDefaults.standard.string(forKey: kBaseUrl) ?? "https://api.caixiaomi.net"
+        let baseUrl = UserDefaults.standard.string(forKey: kBaseUrl) ?? "http://94.191.113.169:8765"
         if baseUrl == "http://39.106.18.39:8765" {
             url = "http://39.106.18.39:8765"
         }else{
-            url = "https://api.caixiaomi.net"
+            url = "http://94.191.113.169:8765"
         }
     #endif
     return url + "/api"
@@ -60,9 +60,9 @@ public func getCurrentPlatformType() -> String! {
     
     
     
-    let url = UserDefaults.standard.string(forKey: kBaseUrl) ?? "https://api.caixiaomi.net"
+    let url = UserDefaults.standard.string(forKey: kBaseUrl) ?? "http://94.191.113.169:8765"
     let baseUrl = NSURL(string: url)!
-    if baseUrl.scheme == "https" {
+    if baseUrl.scheme == "https" || baseUrl == NSURL.init(string: "http://94.191.113.169:8765"){
         return "当前环境:生产环境"
     }else{
         return "当前环境:测试环境"
@@ -71,12 +71,12 @@ public func getCurrentPlatformType() -> String! {
 
 /// 获取当前BaseWebUrl
 public func getCurentBaseWebUrl() -> String! {
-    let url = UserDefaults.standard.string(forKey: kBaseUrl) ?? "https://api.caixiaomi.net"
+    let url = UserDefaults.standard.string(forKey: kBaseUrl) ?? "http://94.191.113.169:8765"
     let baseUrl = NSURL(string: url)!
-    if baseUrl.scheme == "https" {
+    if baseUrl.scheme == "https" || baseUrl == NSURL.init(string: "http://94.191.113.169:8765") {
         return "https://m.caixiaomi.net"
     }else{
-//        return "http://192.168.31.205:8080"
+//        return "http://192.168.31.206:8080
         return "http://t1.caixiaomi.net:9805"
     }
 }

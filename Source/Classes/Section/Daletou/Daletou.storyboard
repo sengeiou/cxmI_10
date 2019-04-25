@@ -1045,7 +1045,7 @@
                                             <constraint firstAttribute="height" constant="1" id="va8-0J-Zfj"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="模拟追加投注" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MKg-uH-FHn">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="追加投注" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MKg-uH-FHn">
                                         <rect key="frame" x="37" y="8" width="212" height="12"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="12" id="pIz-cG-W0i"/>
@@ -1628,6 +1628,9 @@
                                                 <constraint firstItem="Xcd-6p-OId" firstAttribute="top" secondItem="Saq-LB-klO" secondAttribute="top" constant="1" id="uAI-Al-vpe"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="titleLabel" destination="Xcd-6p-OId" id="ccA-UG-SGo"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DLTProgrammeCell" rowHeight="212" id="j2O-oL-ylJ" customClass="DLTProgrammeCell" customModule="彩小蜜" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="505" width="375" height="212"/>
@@ -1657,7 +1660,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="70" id="9pL-Kk-7EL"/>
                                                     </constraints>
-                                                    <state key="normal" title="模拟方案">
+                                                    <state key="normal" title="方案">
                                                         <color key="titleColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                 </button>
@@ -1668,7 +1671,7 @@
                                                         <constraint firstAttribute="width" constant="13" id="vvf-D1-5Te"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="模拟编号:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="neU-vC-8bA">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="编号:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="neU-vC-8bA">
                                                     <rect key="frame" x="16" y="67" width="80" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="80" id="aEJ-MB-7ck"/>
@@ -2004,7 +2007,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="模拟编号:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QsV-HH-5kd">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="编号:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QsV-HH-5kd">
                                             <rect key="frame" x="16" y="1" width="80" height="37.5"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="80" id="tZl-qh-UJj"/>
@@ -2026,7 +2029,7 @@
                                                 <constraint firstAttribute="height" constant="1" id="f7C-5A-N6u"/>
                                             </constraints>
                                         </view>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="模拟投注信息" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ly5-Hm-0uC">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="投注信息" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ly5-Hm-0uC">
                                             <rect key="frame" x="16" y="41.5" width="100" height="37.5"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="100" id="ucp-pw-YdM"/>
@@ -2173,7 +2176,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="模拟中" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fvM-hB-Szi">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="出票中" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fvM-hB-Szi">
                                                     <rect key="frame" x="279" y="15" width="80" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="80" id="OmD-5C-XGV"/>

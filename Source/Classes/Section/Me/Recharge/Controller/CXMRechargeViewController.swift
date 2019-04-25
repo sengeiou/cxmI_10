@@ -14,7 +14,41 @@ fileprivate let RechargeCardCellIdentifier = "RechargeCardCellIdentifier"
 fileprivate let RechargeTitleCellIdentifier = "RechargeTitleCellIdentifier"
 fileprivate let RechargePaymentTitleCellId = "RechargePaymentTitleCellId"
 
+
+
+fileprivate let titleHeight : CGFloat = 20
+fileprivate let rowSpacing : CGFloat = 13.5
+fileprivate let textfieldHeight : CGFloat = 36
+fileprivate let cardHeight : CGFloat = 36
+fileprivate let topSpacing : CGFloat = 17
+
 class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, RechargeFooterViewDelegate, UITextFieldDelegate, ValidatePro, ActivityRechargeResultVCDelegate, ActivityRechargeCouponVCDelegate, RechargeCardCellDelegate {
+    
+    
+    
+    private let itemW = (screenWidth - 13.5 * 4) / 3
+    private let itemH = cardHeight
+    /** 列数  */
+    private var colums:Int = 3
+    
+    /** 左边间距  */
+    private var leftMargin:CGFloat = 13.5
+    
+    /** 右边间距  */
+    private var rightMargin:CGFloat = 13.5
+    
+    /** 上边间距  */
+    private var topMargin:CGFloat = 13.5
+    
+    /** 底部边间距  */
+    private var bottomMargin:CGFloat = 13.5
+    
+    /** colums(每一列之间的间距)间距  */
+    private var columsMargin:CGFloat = 13.5
+    
+    /** row(每一行之间的间距)间距  */
+    private var rowMargin:CGFloat = 13.5
+    
     
     public var userInfo  : UserInfoDataModel!
     public var rechargeAmounts : String? {
@@ -53,10 +87,16 @@ class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITabl
     
     private var selectedIndex : IndexPath!
     
+    public var backMe: Bool = false
+    private var index: Int = 0
+    
     //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "充值"
+
+    
+        
         initSubview()
         
         userInfoRequest()
@@ -106,7 +146,7 @@ class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITabl
         guard maxTimes > 0 else {
             timer.invalidate()
             self.dismissProgressHud()
-            showCXMAlert(title: "查询失败", message: "暂未查询到您的支付结果，如果您已经确认支付并成功扣款，可能存在延迟到账的情况，请到账户明细中查看或联系客服查询", action: "知道了", cancel: nil) { (action) in
+            showCXMAlert(title: "查询失败", message: "暂未查询到您的支付结果，如果您已经确认支付并成功扣款，可能存在延迟到账情况。若未成功支付，订单将在固定时间内失效，如有疑问请核对账户明细或联系客服查询", action: "知道了", cancel: nil) { (action) in
                 self.canPayment = true
             }
             return
@@ -242,8 +282,15 @@ class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITabl
     //MARK: - Tableview Delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 2, indexPath.row != 0 {
+            
+            self.index = indexPath.row - 1
             self.paymentModel = self.paymentAllList[indexPath.row - 1]
             self.selectedIndex = indexPath
+            let index = IndexPath.init(row: 0, section: 1)
+            let cell = tableView.cellForRow(at: index) as! RechargeCardCell
+            cell.paymentModel = self.paymentModel
+
+            tableView.reloadData()
         }else {
             guard self.selectedIndex != nil else { return }
             tableView.selectRow(at: self.selectedIndex, animated: false, scrollPosition: .none)
@@ -285,6 +332,10 @@ class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITabl
                 switch err {
                 case .UnexpectedResult(let code, let msg):
                     switch code {
+                        
+                    case 1:
+                      self.showHUD(message: msg!)
+                        
                     case 600:
                         weakSelf?.removeUserData()
                         weakSelf?.pushLoginVC(from: self)
@@ -346,7 +397,7 @@ class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITabl
                     self.dismissProgressHud()
                     self.canPayment = true
                     //self.showHUD(message: data.msg)
-                    self.showCXMAlert(title: "查询失败", message: "暂未查询到您的支付结果，如果您已经确认支付并成功扣款，可能存在延迟到账的情况，请到账户明细中查看或联系客服查询", action: "知道了", cancel: nil) { (action) in
+                    self.showCXMAlert(title: "查询失败", message: "暂未查询到您的支付结果，如果您已经确认支付并成功扣款，可能存在延迟到账情况。若未成功支付，订单将在固定时间内失效，如有疑问请核对账户明细或联系客服查询", action: "知道了", cancel: nil) { (action) in
                         self.canPayment = true
                     }
                     
@@ -373,7 +424,7 @@ class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITabl
                         self.dismissProgressHud()
                         self.canPayment = true
                         //self.showHUD(message: data.msg)
-                        self.showCXMAlert(title: "查询失败", message: "暂未查询到您的支付结果，如果您已经确认支付并成功扣款，可能存在延迟到账的情况，请到账户明细中查看或联系客服查询", action: "知道了", cancel: nil) { (action) in
+                        self.showCXMAlert(title: "查询失败", message: "暂未查询到您的支付结果，如果您已经确认支付并成功扣款，可能存在延迟到账情况。若未成功支付，订单将在固定时间内失效，如有疑问请核对账户明细或联系客服查询", action: "知道了", cancel: nil) { (action) in
                             self.canPayment = true
                         }
                         self.dismissProgressHud()
@@ -589,7 +640,11 @@ class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITabl
 //            if self.paymentMethodModel != nil, self.paymentMethodModel.rechargeUserDTO != nil {
 //                cell.isNewUser = self.paymentMethodModel.rechargeUserDTO.oldUserBz
 //            }
+            if self.paymentAllList != nil{
+                cell.paymentModel = self.paymentAllList[index]
+            }
             
+
             cell.delegate = self
             self.cardCell = cell
             cell.textfield.delegate = self
@@ -628,7 +683,16 @@ class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITabl
         case 0:
             return 70
         case 1:
-            return RechargeCardCell.height()
+            var item = 0
+            if self.paymentAllList != nil{
+               item = self.paymentAllList[index].readMoney.count
+            }
+            if item % 3 == 0{
+                item = item / 3
+            }else{
+                item = (item / 3) + 1
+            }
+            return CGFloat(titleHeight + textfieldHeight + cardHeight * CGFloat(item) + bottomMargin * CGFloat(item + 1) + 30.5)
         case 2:
             return defaultCellHeight
         default:
@@ -676,9 +740,14 @@ class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITabl
             timer = nil
         }
         
-        
-        self.dismissProgressHud()
-        self.popViewController()
+        if backMe{
+            let main = MainTabBarController()
+            main.selectedIndex = 3
+            UIApplication.shared.keyWindow?.rootViewController = main
+        }else{
+            self.dismissProgressHud()
+            self.popViewController()
+        }
     }
     
     override func didReceiveMemoryWarning() {

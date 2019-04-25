@@ -13,8 +13,8 @@ class PurchaseRecordCell: UITableViewCell {
     public var recordInfo : PurchaseRecordInfoModel! {
         didSet{
             guard recordInfo != nil else { return }
-            let moneyAtt = NSMutableAttributedString(string: "¥", attributes: [NSAttributedString.Key.font: Font11])
-            let money = NSAttributedString(string: recordInfo.ticketAmount)
+            let moneyAtt = NSMutableAttributedString(string: "", attributes: [NSAttributedString.Key.font: Font11])
+            let money = NSAttributedString(string: recordInfo.ticketAmount + "元")
             moneyAtt.append(money)
             moneyLB.attributedText = moneyAtt
             
@@ -44,6 +44,7 @@ class PurchaseRecordCell: UITableViewCell {
                 stateIcon.image = UIImage(named: "jump")
             case "5": // 已中奖
                 stateBut.textColor = ColorE95504
+                detailLB.text = recordInfo.orderStatusInfo + "元"
                 detailLB.font = Font15
                 detailLB.textColor = ColorE95504
                 stateIcon.image = UIImage(named: "redarrow")

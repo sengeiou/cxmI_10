@@ -43,6 +43,8 @@ enum HomeNetAPIManager {
     case hallMixData(page: Int, isTransaction: String)
     /// 彩票大厅数据，彩种新接口
     case hallMix(page: Int, isTransaction: String)
+    /// 保存投注信息
+    case nSaveBetInfo(requestModel: FootballRequestMode)
 }
 
 extension HomeNetAPIManager : TargetType {
@@ -84,7 +86,8 @@ extension HomeNetAPIManager : TargetType {
             return "/lottery/hall/getHallMixData"
         case .hallMix:
             return "/lottery/hall/getAllLotteryInHallMixData"
-            
+        case .nSaveBetInfo:
+            return "/lottery/match/nSaveBetInfo"
         }
     }
     
@@ -127,6 +130,8 @@ extension HomeNetAPIManager : TargetType {
             dic["page"] = page
             dic["size"] = "20"
             dic["isTransaction"] = isTransaction
+        case .nSaveBetInfo(let requestModel) :
+            dic = requestModel.toJSON()!
             
         default:
             return .requestPlain

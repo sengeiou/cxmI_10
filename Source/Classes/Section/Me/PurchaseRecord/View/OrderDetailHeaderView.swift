@@ -20,25 +20,44 @@ class OrderDetailHeaderView: UIView {
             //icon.image = UIImage(named: "Racecolorfootball")
             
             
-            let moneyAtt = NSMutableAttributedString(string: "¥", attributes: [NSAttributedString.Key.font: Font10])
-            let money = NSAttributedString(string: orderInfo.ticketAmount)
+            let moneyAtt = NSMutableAttributedString(string: "", attributes: [NSAttributedString.Key.font: Font10])
+            let money = NSAttributedString(string: orderInfo.ticketAmount + "元")
             moneyAtt.append(money)
             
             titleLB.text = orderInfo.lotteryClassifyName
             moneyLB.attributedText = moneyAtt
             programmeLB.text = orderInfo.orderStatusDesc
-            forecastMoney.text = orderInfo.forecastMoney
             
+            if orderInfo.forecastMoney != ""{
+                forecastMoney.text = orderInfo.forecastMoney + "元"
+            }else{
+                forecastMoney.text = orderInfo.forecastMoney
+            }
+
             if orderInfo.orderStatus == "5" {
                 setWinMoney()
-                winMoney.text = "¥ " + orderInfo.processStatusDesc
-                state.text = orderInfo.orderStatusDesc
+                if orderInfo.processStatusDesc != ""{
+                    winMoney.text = orderInfo.processStatusDesc + ""
+                }else{
+                    winMoney.text = orderInfo.processStatusDesc
+                }
+                state.text = orderInfo.processResult
                 state.textColor = ColorEA5504
-            }else {
+            }else if orderInfo.orderStatus == "9" {
+                setWinMoney()
+                winTitle.text = "派奖金额"
+                if orderInfo.processStatusDesc != ""{
+                    winMoney.text = orderInfo.processStatusDesc + ""
+                }else{
+                    winMoney.text = orderInfo.processStatusDesc
+                }
+                state.text = orderInfo.processResult
+                state.textColor = ColorEA5504
+    
+            }else{
                 thankLB.text = orderInfo.processStatusDesc
                 state.text = orderInfo.processResult
             }
-            
         }
     }
     
@@ -63,11 +82,11 @@ class OrderDetailHeaderView: UIView {
         super.layoutSubviews()
         
         line.snp.makeConstraints { (make) in
-//            make.centerY.equalTo(self.snp.centerY).offset(7.5)
+            make.centerY.equalTo(self.snp.centerY).offset(7.5)
             make.left.equalTo(self).offset(SeparatorLeftSpacing)
             make.right.equalTo(self).offset(-SeparatorLeftSpacing)
             make.height.equalTo(SeparationLineHeight)
-            make.bottom.equalTo(0)
+//            make.bottom.equalTo(0)
         }
         icon.snp.makeConstraints { (make) in
             make.top.equalTo(self).offset(11)
@@ -101,24 +120,24 @@ class OrderDetailHeaderView: UIView {
             make.left.equalTo(moneyLB.snp.right).offset(10)
             make.right.equalTo(state)
         }
-//        programmeTitle.snp.makeConstraints { (make) in
-//            make.top.equalTo(line.snp.bottom).offset(10)
-//            make.left.equalTo(self).offset(26)
-//            make.width.equalTo(100)
-//            make.height.equalTo(12)
-//        }
-//        programmeLB.snp.makeConstraints { (make) in
-//            make.height.equalTo(19)
-//            make.left.right.width.equalTo(programmeTitle)
-//            make.bottom.equalTo(self).offset(-10)
-//        }
-//
-//        thankLB.snp.makeConstraints { (make) in
-//            make.height.equalTo(19)
-//            make.right.equalTo(self).offset(-26)
-//            make.left.equalTo(programmeLB.snp.right).offset(10)
-//            make.bottom.equalTo(self).offset(-12)
-//        }
+        programmeTitle.snp.makeConstraints { (make) in
+            make.top.equalTo(line.snp.bottom).offset(10)
+            make.left.equalTo(self).offset(26)
+            make.width.equalTo(100)
+            make.height.equalTo(12)
+        }
+        programmeLB.snp.makeConstraints { (make) in
+            make.height.equalTo(19)
+            make.left.right.width.equalTo(programmeTitle)
+            make.bottom.equalTo(self).offset(-10)
+        }
+
+        thankLB.snp.makeConstraints { (make) in
+            make.height.equalTo(19)
+            make.right.equalTo(self).offset(-26)
+            make.left.equalTo(programmeLB.snp.right).offset(10)
+            make.bottom.equalTo(self).offset(-12)
+        }
         
     }
     
@@ -162,7 +181,7 @@ class OrderDetailHeaderView: UIView {
         programmeTitle.text = "方案状态"
         
         programmeLB = UILabel()
-        programmeLB.font = Font14
+        programmeLB.font = Font13
         programmeLB.textColor = Color505050
         programmeLB.textAlignment = .left
         

@@ -50,6 +50,8 @@ class DeviceManager: AlertPro  {
         }
         
         let infoDictionary = Bundle.main.infoDictionary!
+        
+        device.appCodeName = "11"
         device.plat = "iphone"
         device.apiv = "1"
         device.appv = infoDictionary["CFBundleShortVersionString"] as? String
@@ -61,8 +63,9 @@ class DeviceManager: AlertPro  {
         device.mid = identifier
         device.build = UIDevice.current.systemVersion
         device.net = net
-        device.channel = Channel 
+        device.channel = Channel
         device.IDFA = ASIdentifierManager.shared().advertisingIdentifier.uuidString
+
         
         if let location = LocationManager.getLocation() {
             device.city =  location.locality.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
@@ -131,5 +134,7 @@ struct DeviceInfoModel: HandyJSON {
     var city : String = ""
     /// 省
     var province : String = ""
+    /// 区分不同app
+    var appCodeName : String!
     
 }

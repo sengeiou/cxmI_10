@@ -9,21 +9,21 @@
 
 
 /// 投注记录
-let OrderRecord = "/user/record"
+let OrderRecord = "/user/record?qd=c46016"
 /// 安全保障
-let webInsurance = "/user/insurance?showtitle=1"
+let webInsurance = "/mjpublic/insurance?showtitle=1"
 /// 帮助中心
 let webHelp = "/user/help?showtitle=1"
 /// 玩法帮助
-let webPlayHelp = "/freebuy/inToplay?showtitle=1"
+let webPlayHelp = "/mjpublic/inToplay?showtitle=1"
 /// 购彩协议
-let webBuyAgreement = "/freebuy/protocol?showtitle=1"
+let webBuyAgreement = "/mjpublic/protocol?showtitle=1"
 /// 注册协议
-let webRegisterAgreement = "/user/service?showtitle=1"
+let webRegisterAgreement = "/mjpublic/service?showtitle=1"
 /// 发现
 let SurpriseUrl = "/faxian/news?showBar=1"
 /// 胆说明
-let danExplainUrl = "/freebuy/explain?showBar=1&showtitle=1"
+let danExplainUrl = "/mjpublic/explain?showBar=1&showtitle=1"
 /// 大乐透玩法帮助
 let DLTPlayHelpUrl = "/daletou/playHelp?showtitle=1"
 /// 胆拖 说明

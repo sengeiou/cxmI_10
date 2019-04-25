@@ -41,7 +41,7 @@ class CXMMDaletouOrderVC: BaseViewController {
     private var modes = [HXGuideInfoModel]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "模拟订单详情"
+        self.navigationItem.title = "订单详情"
         setTableview()
         loadNewData()
         setDefaultData()
