@@ -73,6 +73,8 @@ enum MeNetAPIManager {
     case surprise(page: Int, extendCat: String)
     /// 展示文案 1- 提现说明文案
     case copywriting(type : String)
+    /// 检查版本是否最新
+    case updateApp(channel: String, version: String)
 }
 
 extension MeNetAPIManager : TargetType {
@@ -156,7 +158,10 @@ extension MeNetAPIManager : TargetType {
             return "/lottery/dl/article/findList"
         case .copywriting:
             return "/member/appDoc/queryAppDocByType"
+        case .updateApp:
+            return "/member/user/app/updateApp"
         }
+        
     }
     
     
@@ -250,9 +255,11 @@ extension MeNetAPIManager : TargetType {
             dic["page"] = page
             dic["size"] = "20"
             dic["extendCat"] = extendCat
+        case .updateApp(let channel, let version):
+            dic["channel"] = channel
+            dic["version"] = version
         case .copywriting(let type):
             dic["docClassify"] = type
-            
         default:
             return .requestPlain
         }

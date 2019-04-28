@@ -10,6 +10,7 @@ import UIKit
 import RealmSwift
 import HandyJSON
 import AudioToolbox
+import Moya
 
 enum ShowType {
     case allShow
@@ -44,6 +45,8 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
     private var newsListModel: NewsListModel!
     
     private var activityModel : ActivityModel!
+    
+    private var updateAppModel : HomeUpdateAppModel!
     //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,7 +63,9 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
             self.loadNextData()
         }
         
+        updateApp()
         activityRequest()
+        
         
         NotificationCenter.default.addObserver(self, selector: #selector(configNotification(_:)), name: NSNotification.Name(rawValue: NotificationConfig), object: nil)
         
@@ -644,6 +649,36 @@ extension CXMHomeViewController {
 }
 // MARK: - 网络请求
 extension CXMHomeViewController {
+    
+    
+    
+    private func updateApp() {
+        
+        _ = userProvider.rx.request(.updateApp(channel: Channel, version: majorVersion!))
+            .asObservable()
+            .mapObject(type: HomeUpdateAppModel.self)
+            .subscribe(onNext: { (data) in
+                self.updateAppModel = data
+                self.showUpdateAppPop()
+            }, onError: { (error) in
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 301060:
+                       print("无最新版本")
+                    default : break
+                    }
+                    if 300000...310000 ~= code {
+//                        self.showHUD(message: msg!)
+                    }
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil)
+    }
+
+    
+    
     private func loadNewData() {
         homeListAndNewsRequest(pageNum: 1)
     }
@@ -774,6 +809,42 @@ extension CXMHomeViewController {
         }
     }
 }
+
+
+// MARK: - 更新弹框
+extension CXMHomeViewController : UpdateAppPopVcDelegate {
+    func didTipUpdateApp(link: String) {
+        guard updateAppModel != nil else { return }
+        pushRouterVC(urlStr: updateAppModel.url, from: self)
+    }
+    
+    private func showUpdateAppPop() {
+        guard updateAppModel != nil else { return }
+        let updateApp = UpdateAppPopVc()
+        updateApp.imageView.image = UIImage(named: "update")
+        
+        //是否强制升级:0-非强制 1-强制
+        if updateAppModel.type == "0"{
+            updateApp.deleteBut.isHidden = false
+        }else{
+            updateApp.deleteBut.isHidden = true
+        }
+        
+        updateApp.configure(version: updateAppModel.version)
+        
+
+        if updateAppModel.updateLogList != nil{
+            updateApp.configureList(list:updateAppModel.updateLogList)
+        }
+        
+        updateApp.delegate = self
+        
+        DispatchQueue.main.async {
+            self.present(updateApp)
+        }
+    }
+}
+
 
 // MARK: - 活动弹框
 extension CXMHomeViewController : ActivityPopVCDelegate {

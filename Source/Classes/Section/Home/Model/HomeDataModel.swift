@@ -54,3 +54,13 @@ struct HomeActivityModel:  HandyJSON {
     var actTitle: String! = ""
     var actUrl: String!
 }
+
+
+/// 活动栏
+struct HomeUpdateAppModel:  HandyJSON {
+    var type: String!
+    var url: String!
+    var updateLogList: [String]!
+    var version: String!
+    var channel: String!
+}
