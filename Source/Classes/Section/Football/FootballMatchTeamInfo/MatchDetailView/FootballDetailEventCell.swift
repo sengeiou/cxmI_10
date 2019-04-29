@@ -148,7 +148,7 @@ class FootballDetailEventCell: UITableViewCell {
     private var topLine: UIView!
     private var botLine: UIView!
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
         initSubview()

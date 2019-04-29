@@ -31,7 +31,7 @@ class MeCell: UITableViewCell {
     public var detail : TTTAttributedLabel!
     public var noticeIcon : UIImageView!
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
          createUI()
     }
@@ -82,7 +82,7 @@ class MeCell: UITableViewCell {
         detail.font = Font12
         detail.textColor = Color787878
         detail.lineBreakMode = .byWordWrapping
-        detail.linkAttributes =  [NSAttributedStringKey.foregroundColor: Color787878]
+        detail.linkAttributes =  [NSAttributedString.Key.foregroundColor: Color787878]
         
         self.contentView.addSubview(icon)
         self.contentView.addSubview(title)

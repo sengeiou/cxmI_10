@@ -60,9 +60,9 @@ extension DaletouDanRedCell : DaletouCollectionViewDelegate {
 extension DaletouDanRedCell {
     public func configure(model : DaletouOmissionModel, display : DLTDisplayStyle) {
         let att = NSMutableAttributedString(string: "奖池: ",
-                                            attributes: [NSAttributedStringKey.foregroundColor: Color787878])
+                                            attributes: [NSAttributedString.Key.foregroundColor: Color787878])
         let money = NSAttributedString(string: "\(model.prizes)",
-            attributes: [NSAttributedStringKey.foregroundColor: ColorE85504])
+            attributes: [NSAttributedString.Key.foregroundColor: ColorE85504])
         att.append(money)
         self.detailLabel.attributedText = att
     }

@@ -134,7 +134,7 @@ class CXMWorldCupOrderDetailVC: BaseViewController, UITableViewDelegate, UITable
         table.tableHeaderView = header
         
         table.estimatedRowHeight = 80
-        //table.rowHeight = UITableViewAutomaticDimension
+        //table.rowHeight = UITableView.automaticDimension
         
         table.register(WorldCupOrderDetailTitleCell.self, forCellReuseIdentifier: WorldCupOrderDetailTitleCellId)
         table.register(WorldCupOrderDetailCell.self, forCellReuseIdentifier: WorldCupOrderDetailCellId)
@@ -208,7 +208,7 @@ class CXMWorldCupOrderDetailVC: BaseViewController, UITableViewDelegate, UITable
             if indexPath.row == 0 {
                 return 65 * defaultScale
             }else {
-                return UITableViewAutomaticDimension
+                return UITableView.automaticDimension
             }
         case 1:
             return 124

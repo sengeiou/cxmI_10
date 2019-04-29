@@ -22,7 +22,7 @@ class OrderPaymentCell: UITableViewCell {
             
             if orderInfo.surplus > 0 {
                 let surplusAtt = NSMutableAttributedString(string: "余额支付 ")
-                let surplus = NSAttributedString(string: "\(orderInfo.surplus) 元", attributes: [NSAttributedStringKey.foregroundColor: Color505050])
+                let surplus = NSAttributedString(string: "\(orderInfo.surplus) 元", attributes: [NSAttributedString.Key.foregroundColor: Color505050])
                 surplusAtt.append(surplus)
                 detailAtt.append(surplusAtt)
             }
@@ -33,7 +33,7 @@ class OrderPaymentCell: UITableViewCell {
                     title = "\n"
                 }
                 let paidAtt = NSMutableAttributedString(string: "\(title)\(orderInfo.payName) ")
-                let paid = NSAttributedString(string: "\(orderInfo.thirdPartyPaid) 元", attributes: [NSAttributedStringKey.foregroundColor: Color505050])
+                let paid = NSAttributedString(string: "\(orderInfo.thirdPartyPaid) 元", attributes: [NSAttributedString.Key.foregroundColor: Color505050])
                 paidAtt.append(paid)
                 detailAtt.append(paidAtt)
             }
@@ -43,13 +43,13 @@ class OrderPaymentCell: UITableViewCell {
                     title = "\n"
                 }
                 let bonusAtt = NSMutableAttributedString(string: "\(title)优惠券抵现 ")
-                let bonus = NSAttributedString(string: "\(orderInfo.bonus) 元", attributes: [NSAttributedStringKey.foregroundColor: Color505050])
+                let bonus = NSAttributedString(string: "\(orderInfo.bonus) 元", attributes: [NSAttributedString.Key.foregroundColor: Color505050])
                 bonusAtt.append(bonus)
                 detailAtt.append(bonusAtt)
             }
             
-//            let money = NSAttributedString(string: " 20.00", attributes: [NSAttributedStringKey.foregroundColor: Color505050])
-//            let details = NSAttributedString(string: orderInfo.cathectic, attributes: [NSAttributedStringKey.foregroundColor: Color505050])
+//            let money = NSAttributedString(string: " 20.00", attributes: [NSAttributedString.Key.foregroundColor: Color505050])
+//            let details = NSAttributedString(string: orderInfo.cathectic, attributes: [NSAttributedString.Key.foregroundColor: Color505050])
 //            detailAtt.append(details)
 //            detailAtt.append(money)
             detail.attributedText = detailAtt
@@ -60,7 +60,7 @@ class OrderPaymentCell: UITableViewCell {
     private var detail : UILabel!
     private var line : UIView!
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initSubview()
     }

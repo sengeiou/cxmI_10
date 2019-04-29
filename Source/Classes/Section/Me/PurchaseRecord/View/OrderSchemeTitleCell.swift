@@ -14,7 +14,7 @@ class OrderSchemeTitleCell: UITableViewCell {
         didSet{
             guard schemeInfo != nil else { return }
             let titleAtt = NSMutableAttributedString(string: "模拟编号: ")
-            let title = NSAttributedString(string: schemeInfo.programmeSn, attributes: [NSAttributedStringKey.foregroundColor: Color505050])
+            let title = NSAttributedString(string: schemeInfo.programmeSn, attributes: [NSAttributedString.Key.foregroundColor: Color505050])
             titleAtt.append(title)
             
             sectionTitle.attributedText = titleAtt
@@ -29,7 +29,7 @@ class OrderSchemeTitleCell: UITableViewCell {
     private var multipleTitle : UILabel!
     private var orderState : UILabel!
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         initSubview()

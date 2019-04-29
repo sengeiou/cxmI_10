@@ -16,15 +16,13 @@ class CXMScoreViewController: WMPageController, AlertPro {
     public var backDefault : Bool = false {
         didSet{
             if backDefault {
-//                if self.dateList == nil {
-//                    //self.dateList = LotteryDateModel().getDates()
-//                    self.selectedDateModel = self.dateList[16]
-//                }
                 notScore.shouldReloadData = true
                 self.selectIndex = 0
             }
         }
     }
+    
+    public var pushFrom : PushFrom = .defaul
     
     private var titleDatas : [String] = ["未结束","已结束","我的比赛"]
     private var finishedLabel: UILabel!
@@ -61,6 +59,7 @@ class CXMScoreViewController: WMPageController, AlertPro {
     /// 我的比赛
     private var collectScore = CXMScoreListViewController()
     
+    
     override func viewDidLoad() {
         finishedLabel = initLabel()
         notFinishedLabel = initLabel()
@@ -80,9 +79,8 @@ class CXMScoreViewController: WMPageController, AlertPro {
         self.progressViewIsNaughty = true
         
         super.viewDidLoad()
-        self.navigationItem.title = "彩小秘 · 比赛"
+        self.navigationItem.title = "比赛"
         setRightBarButton()
-        
         
         notScore.shouldLogin = { [weak self] in
             self?.login()
@@ -94,13 +92,7 @@ class CXMScoreViewController: WMPageController, AlertPro {
             self?.login()
         }
         
-    }
-    
-    private func login() {
-        let login = CXMVCodeLoginViewController()
-        login.currentVC = self
-        login.loginDelegate = self
-        self.navigationController?.pushViewController(login, animated: true)
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -110,6 +102,12 @@ class CXMScoreViewController: WMPageController, AlertPro {
         }
     }
     
+    private func login() {
+        let login = CXMVCodeLoginViewController()
+        login.currentVC = self
+        login.loginDelegate = self
+        self.navigationController?.pushViewController(login, animated: true)
+    }
     private func initLabel() -> UILabel {
         let label = UILabel()
         label.textColor = Color9F9F9F
@@ -126,8 +124,6 @@ class CXMScoreViewController: WMPageController, AlertPro {
     private func setRightBarButton() {
         matchFilter = UIButton(type: .custom)
         matchFilter.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-        //matchFilter.setTitle("筛选", for: .normal)
-        //matchFilter.setTitleColor(Color787878, for: .normal)
         matchFilter.setImage(UIImage(named:"filter"), for: .normal)
         matchFilter.imageEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         

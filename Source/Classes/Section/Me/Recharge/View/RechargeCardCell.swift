@@ -49,7 +49,7 @@ class RechargeCardCell: UITableViewCell {
     public var activityImageView : UIImageView!
     private var activityMoney : UILabel!
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         initSubview()

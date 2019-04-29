@@ -76,11 +76,11 @@ extension BBOrderDetailCell {
                 let res : NSAttributedString
                 
                 if index == data.cathecticResults.count - 1 {
-                    rec = NSAttributedString(string: cathectic, attributes: [NSAttributedStringKey.foregroundColor: color])
-                    res = NSAttributedString(string: result.matchResult, attributes: [NSAttributedStringKey.foregroundColor: color])
+                    rec = NSAttributedString(string: cathectic, attributes: [NSAttributedString.Key.foregroundColor: color])
+                    res = NSAttributedString(string: result.matchResult, attributes: [NSAttributedString.Key.foregroundColor: color])
                 }else {
-                    rec = NSAttributedString(string: cathectic + "\n", attributes: [NSAttributedStringKey.foregroundColor: color])
-                    res = NSAttributedString(string: result.matchResult + "\n", attributes: [NSAttributedStringKey.foregroundColor: color])
+                    rec = NSAttributedString(string: cathectic + "\n", attributes: [NSAttributedString.Key.foregroundColor: color])
+                    res = NSAttributedString(string: result.matchResult + "\n", attributes: [NSAttributedString.Key.foregroundColor: color])
                 }
                 record.append(rec)
                 resultAtt.append(res)

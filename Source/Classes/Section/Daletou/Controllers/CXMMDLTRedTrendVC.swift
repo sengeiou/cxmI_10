@@ -200,14 +200,26 @@ extension CXMMDLTRedTrendVC {
         
         _ = dltProvider.rx.request(.setInfo(model: model))
             .asObservable()
-            .mapBaseObject(type: DataModel.self)
+            .mapObject(type: SaveBetInfoModel.self)
             .subscribe(onNext: { (data) in
                 weakSelf?.changeConfirmButton(canTip: true)
                 
-                let vc = CXMPaymentViewController()
-                vc.lottoToken = data.data
+//                let vc = CXMPaymentViewController()
+//                vc.lottoToken = data.data
+//
+//                self.pushViewController(vc: vc)
                 
-                self.pushViewController(vc: vc)
+                if data.payToken != "" {
+                    let vc = CXMPaymentViewController()
+                    vc.lottoToken = data.payToken
+                    self.pushViewController(vc: vc)
+                }else {
+                    let story = UIStoryboard(name: "Daletou", bundle: nil)
+                    let vc = story.instantiateViewController(withIdentifier: "DaletouOrderVC") as! CXMMDaletouOrderVC
+                    vc.orderId = data.orderId
+                    self.pushViewController(vc: vc)
+                }
+                
             }, onError: { (error) in
                 weakSelf?.changeConfirmButton(canTip: true)
                 guard let err = error as? HXError else { return }

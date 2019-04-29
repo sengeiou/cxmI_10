@@ -38,9 +38,7 @@ class DeviceManager: AlertPro  {
                 net = "UNKNOWN"
             }
         }
-        
     
-        
         var device = DeviceInfoModel()
         
         var systemInfo = utsname()
@@ -54,7 +52,7 @@ class DeviceManager: AlertPro  {
         let infoDictionary = Bundle.main.infoDictionary!
         device.plat = "iphone"
         device.apiv = "1"
-        device.appv = infoDictionary["CFBundleShortVersionString"] as! String
+        device.appv = infoDictionary["CFBundleShortVersionString"] as? String
         device.appid = UIDevice.current.identifierForVendor?.description
         device.mac = getMacAddress()
         device.w = screenWidth
@@ -65,6 +63,13 @@ class DeviceManager: AlertPro  {
         device.net = net
         device.channel = Channel 
         device.IDFA = ASIdentifierManager.shared().advertisingIdentifier.uuidString
+        
+        if let location = LocationManager.getLocation() {
+            device.city =  location.locality.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+            device.lat = "\(location.latitude ?? 0.0)"
+            device.lon = "\(location.longitude ?? 0.0)"
+            device.province = location.administrativeArea.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        }
         self.device = device
         
         //return device
@@ -118,4 +123,13 @@ struct DeviceInfoModel: HandyJSON {
     var net  : String!
     var IDFA : String!
     var token: String!
+    /// 经度
+    var lon : String = ""
+    /// 纬度
+    var lat : String = ""
+    /// 城市
+    var city : String = ""
+    /// 省
+    var province : String = ""
+    
 }

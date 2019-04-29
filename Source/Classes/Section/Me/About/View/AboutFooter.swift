@@ -46,7 +46,7 @@ class AboutFooter: UIView {
         webLB.font = Font13
         webLB.textColor = ColorEA5504
         webLB.textAlignment = .left
-        webLB.text = "官网： http://www.caixiaomi.net"
+        webLB.text = "官网： " + website
         webLB.sizeToFit()
         
         self.addSubview(serviceLB)

@@ -139,13 +139,25 @@ extension CXMMDLTHotColdVC {
         
         _ = dltProvider.rx.request(.setInfo(model: model))
             .asObservable()
-            .mapBaseObject(type: DataModel.self)
+            .mapObject(type: SaveBetInfoModel.self)
             .subscribe(onNext: { (data) in
-                print(data)
-                let vc = CXMPaymentViewController()
-                vc.lottoToken = data.data
+//                print(data)
+//                let vc = CXMPaymentViewController()
+//                vc.lottoToken = data.data
+//
+//                self.pushViewController(vc: vc)
                 
-                self.pushViewController(vc: vc)
+                if data.payToken != "" {
+                    let vc = CXMPaymentViewController()
+                    vc.lottoToken = data.payToken
+                    self.pushViewController(vc: vc)
+                }else {
+                    let story = UIStoryboard(name: "Daletou", bundle: nil)
+                    let vc = story.instantiateViewController(withIdentifier: "DaletouOrderVC") as! CXMMDaletouOrderVC
+                    vc.orderId = data.orderId
+                    self.pushViewController(vc: vc)
+                }
+                
             }, onError: { (error) in
                 guard let err = error as? HXError else { return }
                 switch err {

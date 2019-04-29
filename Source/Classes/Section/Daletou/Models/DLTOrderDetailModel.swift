@@ -39,6 +39,16 @@ struct DLTOrderDetailModel: HandyJSON  {
     var winningMoney : String = ""
     /// 状态描述
     var processStatusDesc : String = ""
+    
+    // ----------- 1.2.0 大乐透新加，店铺信息
+    /// 客服二维码
+    var addFriendsQRBarUrl : String = ""
+    /// 是否显示合作店铺 0 不显示 1 显示
+    var showStore : String = ""
+    
+    var appendInfoList : [AppendInfo] = [AppendInfo]()
+    
+    var orderShareUrl : String = ""
 }
 
 struct DLTOrderResult : HandyJSON {

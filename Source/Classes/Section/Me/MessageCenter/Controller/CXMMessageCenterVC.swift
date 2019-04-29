@@ -181,7 +181,7 @@ class CXMMessageCenterVC: BaseViewController, IndicatorInfoProvider, UITableView
         if messageType == .message {
             return 206 * defaultScale
         }else {
-            return UITableViewAutomaticDimension
+            return UITableView.automaticDimension
         }
     }
     

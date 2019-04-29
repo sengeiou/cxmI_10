@@ -50,7 +50,7 @@ class FootballSPFCell: UITableViewCell, DateProtocol, FootballStopSellingViewDel
     
     private var stopSellingView: FootballStopSellingView!
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initSubview()
     }

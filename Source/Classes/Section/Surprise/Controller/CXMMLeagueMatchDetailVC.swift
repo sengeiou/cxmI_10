@@ -535,7 +535,7 @@ extension CXMMLeagueMatchDetailVC : UITableViewDataSource {
             case .hide:
                 return 150
             case .show:
-                return UITableViewAutomaticDimension
+                return UITableView.automaticDimension
             }
         default:
             

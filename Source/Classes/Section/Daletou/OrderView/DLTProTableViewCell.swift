@@ -56,18 +56,18 @@ extension DLTProTableViewCell {
         
         switch orderInfo.status {
         case "0":
-            stateLabel.text = "待出票"
+            stateLabel.text = "模拟中"
         case "1":
-            stateLabel.text = "出票成功"
+            stateLabel.text = "模拟成功"
         case "2":
-            stateLabel.text = "出票失败"
+            stateLabel.text = "模拟失败"
         case "3":
-            stateLabel.text = "出票中"
+            stateLabel.text = "模拟中"
         default:
             stateLabel.text = ""
         }
         
-        detailLabel.text = type + " \(orderInfo.betNum)注" + " \(orderInfo.cathectic)倍" + " \(orderInfo.amount).00元" + append
+        detailLabel.text = type + " \(orderInfo.betNum)注" + " \(orderInfo.cathectic)倍" + " \(orderInfo.amount).00" + append
         
         self.collectionView.reloadData()
     }

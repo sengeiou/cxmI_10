@@ -13,7 +13,7 @@ class PurchaseRecordCell: UITableViewCell {
     public var recordInfo : PurchaseRecordInfoModel! {
         didSet{
             guard recordInfo != nil else { return }
-            let moneyAtt = NSMutableAttributedString(string: "¥", attributes: [NSAttributedStringKey.font: Font11])
+            let moneyAtt = NSMutableAttributedString(string: "¥", attributes: [NSAttributedString.Key.font: Font11])
             let money = NSAttributedString(string: recordInfo.ticketAmount)
             moneyAtt.append(money)
             moneyLB.attributedText = moneyAtt
@@ -64,7 +64,7 @@ class PurchaseRecordCell: UITableViewCell {
     private var stateIcon : UIImageView!
     private var detailLB : UILabel!
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initSubview()
     }

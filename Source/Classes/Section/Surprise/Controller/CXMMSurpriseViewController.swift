@@ -41,7 +41,7 @@ class CXMMSurpriseViewController: BaseViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "彩小秘 · 发现"
+        self.navigationItem.title = "发现"
         hideBackBut()
         
         initSubview()

@@ -46,7 +46,7 @@ extension WeixinSharePro {
     /// 分享视频
     func shareVideo(content: ShareContentModel, scene: WXScene) {
         guard content.sharePic != nil else { return }
-        guard let data = UIImagePNGRepresentation(content.sharePic) else { return }
+        guard let data = content.sharePic.pngData() else { return }
         if scene == WXSceneSession {
             share(title: content.title, description: content.description, imageDate: data, videoUrl: content.urlStr, scene: scene)
         }else if scene == WXSceneTimeline {

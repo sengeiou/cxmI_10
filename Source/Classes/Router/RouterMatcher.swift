@@ -74,7 +74,9 @@ enum PushControllerType : String{
     case 活动中心
     case 资讯信息
     case 晒单公园
-    case 实时统计
+    case 联赛资料
+    case 比分直播
+    case 线下店铺
     case 发现更多
     case none
 }
@@ -185,8 +187,12 @@ extension RouterMatcher {
             case "6":
                 return (.晒单公园, urlModel)
             case "7":
-                return (.实时统计, urlModel)
-            case "8":
+                return (.联赛资料, urlModel)
+            case "9":
+                return (.比分直播, urlModel)
+            case "10":
+                return (.线下店铺, urlModel)
+            case "0":
                 return (.发现更多, urlModel)
             default :
                 return (.none, urlModel)

@@ -173,6 +173,7 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
         super.viewDidLoad()
         self.view.backgroundColor = ColorF4F4F4
         setNavigation()
+        
         self.isHidenBar = true
         
         addPanGestureRecognizer = true
@@ -182,7 +183,7 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = false
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: Font17, NSAttributedStringKey.foregroundColor: UIColor.black]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: Font17, NSAttributedString.Key.foregroundColor: UIColor.white]
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -191,6 +192,9 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
         self.navigationController?.navigationBar.isHidden = false
         
         setLiftButtonItem()
+        setNavigationBar()
+    }
+    private func setNavigationBar() {
         
     }
     //MARK: - 空列表视图
@@ -198,7 +202,7 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
         return UIImage(named: "empty")
     }
     func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        let att = NSAttributedString(string: emptyTitle, attributes: [NSAttributedStringKey.foregroundColor: ColorA0A0A0, NSAttributedStringKey.font: Font15])
+        let att = NSAttributedString(string: emptyTitle, attributes: [NSAttributedString.Key.foregroundColor: ColorA0A0A0, NSAttributedString.Key.font: Font15])
         return att
     }
     func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {

@@ -18,10 +18,10 @@ class OrderProgrammeCell: UITableViewCell {
             let orderAtt = NSMutableAttributedString(string: "店主接单: ")
             let ticketAtt = NSMutableAttributedString(string: "店主出票: ")
             
-            let num = NSAttributedString(string: orderInfo.programmeSn, attributes: [NSAttributedStringKey.foregroundColor: Color505050])
-            let time = NSAttributedString(string: orderInfo.createTime, attributes: [NSAttributedStringKey.foregroundColor: Color505050])
-            let order = NSAttributedString(string: orderInfo.acceptTime , attributes: [NSAttributedStringKey.foregroundColor: Color505050])
-            let ticket = NSAttributedString(string: orderInfo.ticketTime, attributes: [NSAttributedStringKey.foregroundColor: Color505050])
+            let num = NSAttributedString(string: orderInfo.programmeSn, attributes: [NSAttributedString.Key.foregroundColor: Color505050])
+            let time = NSAttributedString(string: orderInfo.createTime, attributes: [NSAttributedString.Key.foregroundColor: Color505050])
+            let order = NSAttributedString(string: orderInfo.acceptTime , attributes: [NSAttributedString.Key.foregroundColor: Color505050])
+            let ticket = NSAttributedString(string: orderInfo.ticketTime, attributes: [NSAttributedString.Key.foregroundColor: Color505050])
             
             noAtt.append(num)
             timeAtt.append(time)
@@ -45,7 +45,7 @@ class OrderProgrammeCell: UITableViewCell {
     private var detailIcon : UIImageView!
     private var line : UIView!
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initSubview()
     }

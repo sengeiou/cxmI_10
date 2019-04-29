@@ -65,6 +65,7 @@ class FootballPlayListModel:NSObject, HandyJSON {
 //    var selectedScore : [FootballPlayCellModel]!
 //    var selectedBan : [FootballPlayCellModel]!
     var selectedHunhe : [FootballPlayCellModel] = [FootballPlayCellModel]()
+
 }
 
 class FootballMatchPlay : NSObject, HandyJSON {

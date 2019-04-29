@@ -16,7 +16,7 @@ class WorldCupOrderRuleCell: UITableViewCell {
            
             let detailAtt = NSMutableAttributedString(string: "投注倍数: ")
             
-            let details = NSAttributedString(string: "\(orderInfo.betNum)注 \(orderInfo.cathectic)倍", attributes: [NSAttributedStringKey.foregroundColor: Color505050])
+            let details = NSAttributedString(string: "\(orderInfo.betNum)注 \(orderInfo.cathectic)倍", attributes: [NSAttributedString.Key.foregroundColor: Color505050])
             detailAtt.append(details)
             detail.attributedText = detailAtt
         }
@@ -26,7 +26,7 @@ class WorldCupOrderRuleCell: UITableViewCell {
     private var detail : UILabel!
     private var line : UIView!
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initSubview()
     }

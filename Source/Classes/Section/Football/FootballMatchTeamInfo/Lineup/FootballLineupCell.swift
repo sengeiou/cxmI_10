@@ -44,7 +44,7 @@ class FootballLineupCell: UITableViewCell {
     private var homeLabel : UILabel!
     private var visiLabel : UILabel!
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
         initBackView()

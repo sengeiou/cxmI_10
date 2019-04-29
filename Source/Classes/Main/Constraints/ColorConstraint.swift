@@ -10,10 +10,18 @@ import Foundation
 import UIKit
 
 /// app 主色 主风格
-let ColorEA5504 = UIColor(hexColor: "EA5504")
+let ColorEA5504 = UIColor(hexColor: "d54745", alpha: 1)
 /// app 主色2
-let ColorE85504 = UIColor(hexColor: "E85504")
 
+//let ColorE85504 = UIColor(hexColor: "E85504")
+let ColorE85504 = UIColor(hexColor: "d54745", alpha: 1)
+/// app 主色3 红色
+let ColorD12120 = UIColor(hexColor: "D12120")
+let ColorD31E14 = UIColor(hexColor: "D31E14")
+/// 导航栏颜色
+let ColorNav = UIColor(hexColor: "D12120")
+/// 导航栏ITEM 颜色
+let ColorNavItem = UIColor(hexColor: "FFFFFF")
 /// 浅灰色字体
 let ColorA0A0A0 = UIColor(hexColor: "A0A0A0")
 let ColorEAEAEA = UIColor(hexColor: "EAEAEA")
@@ -39,6 +47,16 @@ let Color65AADDa1 = UIColor(hexColor: "65AADD", alpha: 0.1)
 
 /// 黄橙色
 let ColorF7931E = UIColor(hexColor: "F7931E")
+/// 黄色
+let ColorF5AD41 = UIColor(hexColor: "F5AD41")
+let Color85A5E0 = UIColor(hexColor: "85A5E0")
+let Color64AADD = UIColor(hexColor: "64AADD")
+let Color6CD5C4 = UIColor(hexColor: "6CD5C4")
+let ColorE86D8E = UIColor(hexColor: "E86D8E")
+let Color5D53B5 = UIColor(hexColor: "5D53B5")
+let Color1B57AB = UIColor(hexColor: "1B57AB")
+let Color5E89E0 = UIColor(hexColor: "5E89E0")
+let Color429992 = UIColor(hexColor: "429992")
 /// 橙色
 let ColorFDC801 = UIColor(hexColor: "FDC801")
 /// 未认证条，字体颜色
@@ -82,3 +100,10 @@ let ColorEB1C24 = UIColor(hexColor: "EB1C24")
 let Color439E0B = UIColor(hexColor: "439E0B")
 /// 蓝球开奖背景色 橙色
 let ColorFC6F1C = UIColor(hexColor: "FC6F1C")
+
+///
+let Color404040 = UIColor(hexColor: "404040")
+///
+let ColorF8F8F8 = UIColor(hexColor: "F8F8F8")
+///
+let Color8E8E8E = UIColor(hexColor: "8E8E8E")
