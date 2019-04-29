@@ -387,8 +387,10 @@
 		11FEB95F208DD55200926951 /* WeixinCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FEB95E208DD55200926951 /* WeixinCenter.swift */; };
 		11FEB962208DDAAA00926951 /* WeixinShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FEB961208DDAAA00926951 /* WeixinShare.swift */; };
 		11FEB964208DDC2100926951 /* AppKeyConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11FEB963208DDC2100926951 /* AppKeyConstraint.swift */; };
+		3FDA6AE24EC5CBEC3DC6A1BD /* Pods____UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49CBED854E2AF39CD088BF2F /* Pods____UITests.framework */; };
 		B4C375AE21461DF200390A3A /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C375AD21461DF200390A3A /* AppConfig.swift */; };
 		B4C375B021465F1900390A3A /* ConfigureRequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C375AF21465F1900390A3A /* ConfigureRequestProtocol.swift */; };
+		CC102FAC451CA6647F398D8C /* Pods____Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D52061D69ABC39B7AD9C485 /* Pods____Tests.framework */; };
 		E503F5BE2079E8D6006D4A0B /* FootballFilterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E503F5BD2079E8D6006D4A0B /* FootballFilterProtocol.swift */; };
 		E503F5C0207A11B3006D4A0B /* FootballRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E503F5BF207A11B3006D4A0B /* FootballRequestModel.swift */; };
 		E503F5C2207A15A7006D4A0B /* FootballOrderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E503F5C1207A15A7006D4A0B /* FootballOrderProtocol.swift */; };
@@ -1031,6 +1033,9 @@
 		11FEB95E208DD55200926951 /* WeixinCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeixinCenter.swift; sourceTree = "<group>"; };
 		11FEB961208DDAAA00926951 /* WeixinShare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeixinShare.swift; sourceTree = "<group>"; };
 		11FEB963208DDC2100926951 /* AppKeyConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKeyConstraint.swift; sourceTree = "<group>"; };
+		1D52061D69ABC39B7AD9C485 /* Pods____Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods____Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D0A819E3543C03ED4AC13B0 /* Pods____.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods____.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		49CBED854E2AF39CD088BF2F /* Pods____UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods____UITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B0C42B903C8908121D72F5C /* Pods-彩小蜜Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜Tests/Pods-彩小蜜Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		A0F39BAB4469B5128625D7A3 /* Pods-彩小蜜UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜UITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜UITests/Pods-彩小蜜UITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A7A8CDA4EA02975014D806E4 /* Pods-彩小蜜.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜.release.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜/Pods-彩小蜜.release.xcconfig"; sourceTree = "<group>"; };
@@ -1220,6 +1225,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC102FAC451CA6647F398D8C /* Pods____Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1227,6 +1233,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FDA6AE24EC5CBEC3DC6A1BD /* Pods____UITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3258,6 +3265,9 @@
 				11FEB94F208D7F3D00926951 /* libsqlite3.0.tbd */,
 				11FEB94D208D7F2C00926951 /* libz.tbd */,
 				11FEB94B208D7F1A00926951 /* SystemConfiguration.framework */,
+				2D0A819E3543C03ED4AC13B0 /* Pods____.framework */,
+				1D52061D69ABC39B7AD9C485 /* Pods____Tests.framework */,
+				49CBED854E2AF39CD088BF2F /* Pods____UITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -3364,6 +3374,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = E573759620468B8900148622;
 			productRefGroup = E57375A020468B8900148622 /* Products */;

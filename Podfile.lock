@@ -4,7 +4,7 @@ PODS:
   - DZNEmptyDataSet (1.8.1)
   - FSPagerView (0.7.1)
   - GTSDK (2.2.0.0-noidfa)
-  - HandyJSON (4.2.0)
+  - HandyJSON (5.0.0-beta.1)
   - JPImageresizerView (0.3.9)
   - Kingfisher (4.7.0)
   - MJRefresh (3.1.15.3)
@@ -38,7 +38,7 @@ DEPENDENCIES:
   - DZNEmptyDataSet
   - FSPagerView
   - GTSDK (= 2.2.0.0-noidfa)
-  - HandyJSON (~> 4.2.0)
+  - HandyJSON (~> 5.0.0-beta.1)
   - JPImageresizerView
   - Kingfisher
   - MJRefresh
@@ -58,7 +58,7 @@ DEPENDENCIES:
   - YBPopupMenu (~> 1.1.2)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - Alamofire
     - BaiduMobStat
     - DZNEmptyDataSet
@@ -90,7 +90,7 @@ SPEC CHECKSUMS:
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   FSPagerView: 958aba39684e1573755ddcfcc29f7eebb8413cee
   GTSDK: 2cb8f5df1fbb250f596698443edd0191f77024f1
-  HandyJSON: 9dfc026c7d7adc1f0f8ba8b181495f0e0763b0f4
+  HandyJSON: 582477127ab3ab65bd2e471815f1a7b846856978
   JPImageresizerView: 32677208d6f617dabd7ea8897a027126d7f12509
   Kingfisher: da6b005aa96d37698e3e4f1ccfe96a5b9bbf27d6
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
@@ -110,6 +110,6 @@ SPEC CHECKSUMS:
   XLPagerTabStrip: c908b17cbf42fcd2598ee1adfc49bae25444d88a
   YBPopupMenu: 6efb286385d95ba5f97c58b8464ec873645e8764
 
-PODFILE CHECKSUM: 32c63ee97927f44694531243c524e904102f24ba
+PODFILE CHECKSUM: a302e0a8fe689d5d74a79916bf4314144b8fba72
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.3
