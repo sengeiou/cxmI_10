@@ -261,7 +261,7 @@ class NewsHeaderView: UIView, UserInfoPro {
                 icon.image = image
             }
         }else {
-            icon.image = UIImage(named: "head")
+            icon.image = UIImage(named: "shengHeHead")
         }
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(userIconClick))

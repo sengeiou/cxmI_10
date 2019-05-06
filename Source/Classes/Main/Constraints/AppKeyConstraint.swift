@@ -27,6 +27,9 @@ let website = "http://www.renrentiyua.com"
 /// 主程序版本号
 let majorVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String
 
+/// 个人资料闪屏
+var turnOn = false
+
 /*	
  应用名称： 圣河彩店
  appId： AJ2aStM5OS63nUuQD7TVu3

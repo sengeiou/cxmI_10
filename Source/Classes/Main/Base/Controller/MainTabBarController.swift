@@ -70,7 +70,7 @@ class MainTabBarController: UITabBarController, UserInfoPro, UITabBarControllerD
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: NotificationConfig), object: nil, userInfo: ["showStyle": data.turnOn])
                 UserDefaults.standard.set(data.turnOn, forKey: TurnOn)
                 UserDefaults.standard.synchronize()
-
+                turnOn = data.turnOn
                 self.queryUserNotice(data.turnOn)
             }, onError: { (error) in
                 guard let err = error as? HXError else { return }

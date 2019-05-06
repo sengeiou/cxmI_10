@@ -98,6 +98,7 @@ class CXMMeViewController: BaseViewController, UITableViewDelegate, UITableViewD
         }else if turnOn == false && self.showType != .onlyNews {
             showType = .onlyNews
         }
+
         // 隐藏消息 红点的显示
         hidenNotic()
     }
