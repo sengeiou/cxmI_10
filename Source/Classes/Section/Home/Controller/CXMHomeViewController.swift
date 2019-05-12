@@ -853,20 +853,27 @@ extension CXMHomeViewController : ActivityPopVCDelegate {
         pushRouterVC(urlStr: activityModel.bannerLink, from: self)
     }
     
+    
+    
+
+    
+    
     private func showActivityPop() {
         guard activityModel != nil else { return }
+        
         guard let url = URL(string : activityModel.bannerImage) else { return }
-        
         let activity = ActivityPopVC()
-        
         activity.imageView.kf.setImage(with: url, placeholder: nil, options: nil , progressBlock: nil) { (image, error, type , url) in
             guard let img = image else { return }
-            
+    
             activity.configure(with: img.size.width, height: img.size.height)
             activity.delegate = self
             
             DispatchQueue.main.async {
-                self.present(activity)
+                let currentVc = self.viewController()
+                if currentVc == self{
+                    self.present(activity)
+                }
             }
         }
     }

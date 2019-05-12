@@ -25,7 +25,7 @@ protocol RechargeCardCellDelegate {
 
 class RechargeCardCell: UITableViewCell {
     
-
+    
     private let itemW = (screenWidth - 13.5 * 4) / 3
     private let itemH = cardHeight
     /** 列数  */
@@ -52,8 +52,11 @@ class RechargeCardCell: UITableViewCell {
     
     var row = 0
     var colum = 0
-    private var buttonArr : [UIButton] = []
     
+    private var buttonArr : [UIButton] = []
+    private var viewArr : [UIView] = []
+    private var labelArr : [UILabel] = []
+    private var indexArr : [Int] = []
     public var paymentModel : PaymentList!{
         didSet{
             guard paymentModel != nil else { return }
@@ -70,11 +73,11 @@ class RechargeCardCell: UITableViewCell {
             guard giveAmount != nil else { return }
             //guard isNewUser != nil else { return }
             activityMoney.text = giveAmount
-//            if isNewUser == "0" {
-//                activityMoney.text = "送\(giveAmount!)元"
-//            }else if isNewUser == "1" {
-//                activityMoney.text = "最高可送\(giveAmount!)元"
-//            }
+            //            if isNewUser == "0" {
+            //                activityMoney.text = "送\(giveAmount!)元"
+            //            }else if isNewUser == "1" {
+            //                activityMoney.text = "最高可送\(giveAmount!)元"
+            //            }
         }
     }
     //public var isNewUser : String!
@@ -86,11 +89,11 @@ class RechargeCardCell: UITableViewCell {
     public var activityImageView : UIImageView!
     private var activityMoney : UILabel!
     
-
+    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-
+        
         initSubview()
     }
     //MARK: 点击事件
@@ -119,7 +122,7 @@ class RechargeCardCell: UITableViewCell {
         activityMoney.font = Font12
         activityMoney.textColor = ColorFFFFFF
         activityMoney.textAlignment = .center
-//        activityMoney.text = "送10元优惠券"
+        //        activityMoney.text = "送10元优惠券"
         
         
         textfield = CustomTextField()
@@ -131,22 +134,22 @@ class RechargeCardCell: UITableViewCell {
         textfield.layer.borderWidth = 1
         textfield.layer.borderColor = ColorC8C8C8.cgColor
         textfield.textColor = ColorE95504
-
         
-
+        
+        
         if self.paymentModel != nil && self.paymentModel.isReadonly == "0"{
             textfield.isUserInteractionEnabled = true
         }else{
             textfield.isUserInteractionEnabled = false
         }
-
+        
         
         self.contentView.addSubview(title)
         self.contentView.addSubview(textfield)
-//        self.contentView.addSubview(card20)
-//        self.contentView.addSubview(card50)
-//        self.contentView.addSubview(card100)
-//        self.contentView.addSubview(card200)
+        //        self.contentView.addSubview(card20)
+        //        self.contentView.addSubview(card50)
+        //        self.contentView.addSubview(card100)
+        //        self.contentView.addSubview(card200)
         self.contentView.addSubview(activityImageView)
         activityImageView.addSubview(activityMoney)
         
@@ -164,14 +167,20 @@ class RechargeCardCell: UITableViewCell {
             make.top.equalTo(title.snp.bottom).offset(rowSpacing)
         }
         
-        
-        
         buttonArr.removeAll()
+        viewArr.removeAll()
+        labelArr.removeAll()
+        indexArr.removeAll()
         
         if paymentModel != nil{
             for i in 0..<paymentModel.readMoney.count{
-                let but = createCardBut(Int(paymentModel.readMoney[i])!)
+                let but = createCardBut(Int(paymentModel.readMoney[i].readmoney)!)
                 buttonArr.append(but)
+                
+                let view = createCardView(UIImage(named: "赠送")!)
+                let label = createCardLabel(String(paymentModel.readMoney[i].givemoney))
+                viewArr.append(view)
+                labelArr.append(label)
             }
         }
         
@@ -179,38 +188,63 @@ class RechargeCardCell: UITableViewCell {
             row = i / colums
             colum = i % colums
             self.contentView.addSubview(buttonArr[i])
+            
+
+            buttonArr[i].addSubview(viewArr[i])
+            buttonArr[i].addSubview(labelArr[i])
+            
+            if paymentModel.readMoney[i].givemoney == "0"{
+                let v = viewArr[i]
+                let label = labelArr[i]
+                v.isHidden = true
+                label.isHidden = true
+            }
+            
+            
             buttonArr[i].snp.makeConstraints { (make) in
                 make.leading.equalTo(self.contentView).offset((self.leftMargin + (self.columsMargin + itemW) * colum.wd_CGFloat))
                 make.top.equalTo(textfield.snp.bottom).offset((self.topMargin + (itemH + self.rowMargin) * row.wd_CGFloat))
                 make.width.equalTo(itemW)
                 make.height.equalTo(itemH)
             }
+            
+
+            labelArr[i].snp.makeConstraints { (make) in
+                make.top.equalTo(buttonArr[i])
+                make.right.equalTo(buttonArr[i]).offset(-8)
+            }
+            let labelWidth = getLabWidth(labelStr: labelArr[i].text!, font: Font12, height: 16)
+            viewArr[i].snp.makeConstraints { (make) in
+                make.top.equalTo(buttonArr[i])
+                make.centerX.equalTo(labelArr[i])
+                make.width.equalTo(labelWidth + 4)
+                make.height.equalTo(18)
+            }
         }
+
         
         
+        //        card20.snp.makeConstraints { (make) in
+        //            make.height.equalTo(cardHeight)
+        //            make.width.equalTo(card50)
+        //            make.left.equalTo(self.contentView).offset(19)
+        //            make.top.equalTo(textfield.snp.bottom).offset(rowSpacing)
+        //        }
+        //        card50.snp.makeConstraints { (make) in
+        //            make.height.width.top.equalTo(card100)
+        //            make.left.equalTo(card20.snp.right).offset(13.5)
+        //        }
+        //        card100.snp.makeConstraints { (make) in
+        //            make.height.width.top.equalTo(card20)
+        //            make.left.equalTo(card50.snp.right).offset(13.5)
+        //            make.right.equalTo(self.contentView).offset(-19)
+        //        }
         
-        
-//        card20.snp.makeConstraints { (make) in
-//            make.height.equalTo(cardHeight)
-//            make.width.equalTo(card50)
-//            make.left.equalTo(self.contentView).offset(19)
-//            make.top.equalTo(textfield.snp.bottom).offset(rowSpacing)
-//        }
-//        card50.snp.makeConstraints { (make) in
-//            make.height.width.top.equalTo(card100)
-//            make.left.equalTo(card20.snp.right).offset(13.5)
-//        }
-//        card100.snp.makeConstraints { (make) in
-//            make.height.width.top.equalTo(card20)
-//            make.left.equalTo(card50.snp.right).offset(13.5)
-//            make.right.equalTo(self.contentView).offset(-19)
-//        }
-        
-//        card200.snp.makeConstraints { (make) in
-//            make.height.width.top.equalTo(card20)
-//            make.left.equalTo(card100.snp.right).offset(13.5)
-//            make.right.equalTo(self.contentView).offset(-19)
-//        }
+        //        card200.snp.makeConstraints { (make) in
+        //            make.height.width.top.equalTo(card20)
+        //            make.left.equalTo(card100.snp.right).offset(13.5)
+        //            make.right.equalTo(self.contentView).offset(-19)
+        //        }
         
         activityImageView.snp.makeConstraints { (make) in
             make.bottom.equalTo(textfield.snp.top).offset(-4)
@@ -227,6 +261,30 @@ class RechargeCardCell: UITableViewCell {
         }
     }
     
+    private func getLabWidth(labelStr:String,font:UIFont,height:CGFloat) -> CGFloat {
+        let statusLabelText: String = labelStr
+        let size = CGSize(width: 900, height: height)
+        let dic = NSDictionary(object: font, forKey: NSAttributedString.Key.font as NSCopying)
+        let strSize = statusLabelText.boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: dic as? [NSAttributedString.Key : Any], context: nil).size
+        return strSize.width
+    }
+    
+    
+    private func createCardLabel(_ text : String) -> UILabel{
+        let label = UILabel()
+        label.font = Font11
+        label.textColor = .white
+        label.text = "送\(text)"
+        return label
+    }
+    
+    
+    private func createCardView(_ image : UIImage) -> UIView {
+        let v = UIView()
+        v.layer.contents = image.cgImage
+        return v
+    }
+    
     private func createCardBut(_ tag : Int) -> UIButton {
         let but = UIButton(type: .custom)
         but.tag = tag
@@ -240,7 +298,7 @@ class RechargeCardCell: UITableViewCell {
         return but
     }
     
-     static public func height() -> CGFloat {
+    static public func height() -> CGFloat {
         return CGFloat(titleHeight + textfieldHeight + cardHeight + rowSpacing * 4)
     }
     
@@ -250,10 +308,10 @@ class RechargeCardCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         
     }
-
+    
 }
 
 

@@ -173,7 +173,17 @@ class CXMWithdrawalViewController: BaseViewController, ValidatePro, UITextFieldD
             .asObservable()
             .mapObject(type: CopyWritingModel.self)
             .subscribe(onNext: { (data) in
-                self.instructions.text = data.content
+                
+                let myMutableString = NSMutableAttributedString(string: data.content, attributes: [NSAttributedString.Key.font:Font13])
+                
+                myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: ColorA0A0A0, range: NSRange(location:0,length:75))
+                
+                myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.red, range: NSRange(location:75,length:69))
+
+                myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: ColorA0A0A0, range: NSRange(location:144,length:154))
+                
+                self.instructions.attributedText = myMutableString
+                
             }, onError: { (error) in
                 guard let err = error as? HXError else { return }
                 switch err {

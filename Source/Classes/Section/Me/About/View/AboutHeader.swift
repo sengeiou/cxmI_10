@@ -44,7 +44,7 @@ class AboutHeader: UIView {
         versionLB.font = Font12
         versionLB.textColor = ColorEA5504
         versionLB.textAlignment = .left
-        versionLB.text = "v" + DeviceManager.share.device.appv
+        versionLB.text = "v" + majorVersion!
         
         self.addSubview(icon)
         self.addSubview(versionLB)

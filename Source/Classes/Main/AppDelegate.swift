@@ -14,6 +14,7 @@ import PushKit
 let device = DeviceManager.share.device
 
 @UIApplicationMain
+
 class AppDelegate: UIResponder, UIApplicationDelegate, AppDelegateProtocol, GeTuiSdkDelegate, UNUserNotificationCenterDelegate, GuideViewControllerDelegate {
 
     var window: UIWindow?

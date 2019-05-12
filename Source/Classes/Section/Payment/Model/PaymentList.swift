@@ -32,7 +32,12 @@ struct PaymentList : HandyJSON {
     var paySort: String!
     var payTitle: String!
     var payType: String!
-    var readMoney: [String]!
+    var readMoney: [ReadMoney]!
+}
+
+struct ReadMoney : HandyJSON {
+    var readmoney: String!
+    var givemoney: String!
 }
 
 struct RechargeUserInfo: HandyJSON {
