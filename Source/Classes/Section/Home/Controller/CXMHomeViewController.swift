@@ -158,7 +158,6 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
         }else if turnOn == false && self.homeStyle != .onlyNews {
             self.homeStyle = .onlyNews
         }
-        
     }
     
     //MARK: - 懒加载
