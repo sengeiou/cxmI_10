@@ -139,6 +139,7 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
         TongJi.start("大厅")
         TongJi.log(.show, label: "大厅")
     }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         TongJi.end("大厅")
