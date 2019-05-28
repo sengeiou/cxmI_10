@@ -7,7 +7,6 @@
 */
 
 
-
 "关闭" = "Close";
 
 "暂无客服在线" = "Service Unavailable";
@@ -21,6 +20,8 @@
 "清空聊天记录" = "Clear Chat History";
 
 "留言" = "Email";
+
+"文件" = "Files";
 
 "排队中，您在队伍中" = "Please wait，there are";
 
@@ -99,7 +100,7 @@
 
 "松开手指，取消发送" = "Slide up to cancel";
 
-"新会话" = "New Chat";
+"重新建立会话" = "New Chat";
 
 "结束本次对话？" = "End the conversation now?";
 
@@ -194,24 +195,7 @@
 "请输入昵称（必填）" = "Nickname(required)";
 "请输入手机号码（必填）" = "Tel(required)";
 "要删除这张照片吗？" = "Want to delete this photo?";
-/************************图片************************/
 
-// 转人工的按钮图片
-"zcicon_manualWork_nol" = "zcicon_manualWork_normal_en";
-
-"zcicon_manualWork_pre" = "zcicon_manualWork_pressed_en";
-
-// 评价按钮的 解决和未解决
-"ZCIcon_NotSolved_nol" = "ZCIcon_NotSolved_nol_en";
-
-
-"ZCIcon_Resolved_nol" = "ZCIcon_Resolved_nol_en";
-
-
-"ZCIcon_NotSolved_sel" = "ZCIcon_NotSolved_sel_en";
-
-
-"ZCIcon_Resolved_sel" = "ZCIcon_Resolved_sel_en";
 
 
 /*******  2.2.1 新增 ********/
@@ -257,4 +241,42 @@
 
 "请填写问题描述" = "Please fill in the description of the problem";
 
-"请选择问题类型" = "请选择问题类型";
+"请选择问题类型" = "Please select the problem type";
+
+"选择要咨询的业务" = "选择要咨询的业务";
+
+"切换业务" = "Switching operations";
+
+"客服%@撤回了一条消息" = "Customer service %@ withdraws a message";
+
+
+"温馨提示：从正规网站按照正常操作进行交易，不要轻易提供验证码、账号等隐私信息，谨防被骗！" =  "温馨提示：从正规网站按照正常操作进行交易，不要轻易提供验证码、账号等隐私信息，谨防被骗！";
+
+"用其他应用打开" = "Other apps open";
+
+"立即下载" = "Download now";
+
+"智齿暂时无法打开此类文件，可使用其他应用打开浏览" = "Please use other applications to open browsing";
+
+"正在下载中...(%.2fKB/%.2fKB)" = "Downloading...(%.2fKB/%.2fKB)";
+
+"文件大小:%.2fKB)" = "File size:%.2fKB)";
+
+"不能上传20M以上的文件" = "Can't upload files of more than 20 M";
+
+
+"位置" = "Location";
+
+"轻触拍照，按住摄像" = "Tap to take a picture and hold down the camera";
+
+/***************** 2.7.1 ********************/
+"选择要留言的业务" = "选择要留言的业务";
+"前往留言记录" = "前往留言记录";
+"完成" = "完成";
+"我们将会以链接的形式在会话中向您反馈工单处理状态" = "我们将会以链接的形式在会话中向您反馈工单处理状态";
+"创建成功" = "创建成功";
+"全部展开" = "全部展开";
+"点击收起" = "点击收起";
+"问题描述:" = "问题描述:";
+"对不起，未能解决您的问题，正在为您转人工客服" = "对不起，未能解决您的问题，正在为您转人工客服";
+"留言记录" = "留言记录";

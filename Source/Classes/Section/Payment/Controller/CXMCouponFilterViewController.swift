@@ -17,6 +17,13 @@ protocol CouponFilterViewControllerDelegate {
 class CXMCouponFilterViewController: BasePopViewController, UITableViewDelegate, UITableViewDataSource {
     
     public var bonusList: [BonusInfoModel]!
+//    {
+//        didSet{
+//            guard bonusList != nil else { return }
+//            
+//            self.viewHeight = CGFloat(bonusList.count) * (80 * defaultScale) + 100 * defaultScale
+//        }
+//    }
     
     public var delegate : CouponFilterViewControllerDelegate!
     
@@ -68,7 +75,8 @@ class CXMCouponFilterViewController: BasePopViewController, UITableViewDelegate,
     }
     // MARK: - 初始化
     private func initSubview() {
-        self.viewHeight = 350 * defaultScale
+        
+//        self.viewHeight = CGFloat(bonusList.count) * (80 * defaultScale) + 100 * defaultScale
         
         topLine = UIView()
         topLine.backgroundColor = ColorC8C8C8
@@ -80,7 +88,7 @@ class CXMCouponFilterViewController: BasePopViewController, UITableViewDelegate,
         titlelb.font = Font24
         titlelb.textColor = Color9F9F9F
         titlelb.textAlignment = .center
-        titlelb.text = "可用优惠券"
+        titlelb.text = "我的优惠券"
         
         confirmBut = UIButton(type: .custom)
         confirmBut.setTitle("确定", for: .normal)
@@ -124,7 +132,7 @@ class CXMCouponFilterViewController: BasePopViewController, UITableViewDelegate,
         
         let bonusInfo = bonusList[indexPath.row]
         cell.bonusInfo = bonusInfo
-        
+//        print("\(indexPath.row)---" + "\(bonusInfo.isSelected)")
         if bonusInfo.isSelected == true {
             self.bonusId = bonusInfo.userBonusId
             //bonusInfo.isSelected = true
@@ -156,6 +164,7 @@ class CXMCouponFilterViewController: BasePopViewController, UITableViewDelegate,
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let bonus = bonusList[indexPath.row]
         self.bonusId = bonus.userBonusId
+
 //
 //        bonus.isSelected = !bonus.isSelected
 //        
@@ -186,7 +195,9 @@ class CXMCouponFilterViewController: BasePopViewController, UITableViewDelegate,
     }
     
     
-    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+            dismiss(animated: true, completion: nil )
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

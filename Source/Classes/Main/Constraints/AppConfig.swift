@@ -8,6 +8,9 @@
 
 import Foundation
 
+
+var popNumber = 0
+
 let kBaseUrl = "baseurl"
 let kBaseWebUrl = "baseweburl"
 

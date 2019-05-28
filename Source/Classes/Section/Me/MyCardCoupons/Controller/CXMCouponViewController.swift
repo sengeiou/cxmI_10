@@ -11,23 +11,29 @@ import XLPagerTabStrip
 
 //import DZNEmptyDataSet
 
+protocol CouponViewRuleDelegate {
+    func didSelect(time : FilterTime, title : String) -> Void
+}
+
 fileprivate let CouponCellId = "CouponCellId"
 
 enum CouponType: String {
-    case unUsed = "未使用"
-    case used = "已使用"
+    case unUsed = "可使用"
+//    case used = "已使用"
     case overdue = "已过期"
 }
 
 class CXMCouponViewController: BaseViewController, IndicatorInfoProvider, UITableViewDelegate, UITableViewDataSource, CouponCellDelegate {
 
+    public var delegate : CouponViewRuleDelegate!
+    
     public var couponType : CouponType = .unUsed {
         didSet{
             switch couponType {
             case .unUsed:
-                TongJi.log(.我的卡券未使用, label: "我的卡券未使用")
-            case .used:
-                TongJi.log(.我的卡券已使用, label: "我的卡券已使用")
+                TongJi.log(.我的卡券未使用, label: "我的卡券可使用")
+//            case .used:
+//                TongJi.log(.我的卡券已使用, label: "我的卡券已使用")
             case .overdue:
                 TongJi.log(.我的卡券已过期, label: "我的卡券已过期")
             }
@@ -98,8 +104,8 @@ class CXMCouponViewController: BaseViewController, IndicatorInfoProvider, UITabl
         switch couponType {
         case .unUsed:
             status = "0"
-        case .used:
-            status = "1"
+//        case .used:
+//            status = "1"
         case .overdue:
             status = "2"
         }

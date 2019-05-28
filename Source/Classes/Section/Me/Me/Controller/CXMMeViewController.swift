@@ -389,7 +389,7 @@ class CXMMeViewController: BaseViewController, UITableViewDelegate, UITableViewD
                 }
             }
         }
-//        section1.list.append(item3)
+        section1.list.append(item3)
         
         var item4 = MeListDataModel()
         item4.title = "消息中心"
@@ -676,6 +676,22 @@ class CXMMeViewController: BaseViewController, UITableViewDelegate, UITableViewD
                     cell.icon.kf.setImage(with: url)
                 }
                 cell.title.text = row.title
+            }
+        }else if row.pushType == .账户明细 {
+            cell.icon.image = UIImage(named: section.list[indexPath.row].iconStr)
+            cell.title.text = section.list[indexPath.row].title
+            cell.numLabel.text = ""
+        }else if row.pushType == .我的卡券 {
+            cell.icon.image = UIImage(named: section.list[indexPath.row].iconStr)
+            cell.title.text = section.list[indexPath.row].title
+            if self.userInfo != nil{
+                if self.userInfo.bonusNumber == "0" || self.userInfo.bonusNumber == nil{
+                    cell.numLabel.text = ""
+                }else{
+                    cell.numLabel.text = "\(self.userInfo.bonusNumber ?? "0")可用张优惠券"
+                }
+            }else{
+                cell.numLabel.text = ""
             }
         }else if row.pushType == .联系客服 {
             cell.icon.image = UIImage(named: section.list[indexPath.row].iconStr)

@@ -44,9 +44,12 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
     private var newsList : [NewsInfoModel]!
     private var newsListModel: NewsListModel!
     
-    private var activityModel : ActivityModel!
+    private var activityModel : [ActivityModel]!
     
     private var updateAppModel : HomeUpdateAppModel!
+    
+    private var isUpdateApp = false
+    
     //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -130,6 +133,13 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
         }else {
             self.homeStyle = .allShow
         }
+        
+        guard activityModel != nil else { return }
+        
+        if popNumber < self.activityModel.count{
+            self.showActivityPop(index: popNumber)
+        }
+        
         
 //        tableView.reloadData()
         
@@ -654,7 +664,6 @@ extension CXMHomeViewController {
     
     
     private func updateApp() {
-        
         _ = userProvider.rx.request(.updateApp(channel: Channel, version: majorVersion!))
             .asObservable()
             .mapObject(type: HomeUpdateAppModel.self)
@@ -811,15 +820,47 @@ extension CXMHomeViewController {
     }
 }
 
+// MARK: - 优惠券弹框
+extension CXMHomeViewController : CouponPopVCDelegate {
+    func didTipCouponPop() {
+        pushPagerView(pagerType: .coupon)
+    }
+    
+    private func showCouponPop() {
+        guard self.activityModel != nil else { return }
+        let coupon = CouponPopVC()
+        coupon.activityModel = self.activityModel
+        let img = UIImage(named: "优惠券")
+        
+        let scaleWH: CGFloat = img!.size.height / img!.size.width
+        
+        coupon.configure(with: screenWidth - 50, height: (screenWidth - 50) * scaleWH)
+        coupon.imageView.image = img
+        coupon.delegate = self
+        
+        DispatchQueue.main.async {
+            self.present(coupon)
+        }
+    }
+}
+
 
 // MARK: - 更新弹框
 extension CXMHomeViewController : UpdateAppPopVcDelegate {
+    func deleteClicked() {
+        isUpdateApp = false
+        if popNumber < self.activityModel.count{
+            self.showActivityPop(index: popNumber)
+        }
+    }
+    
     func didTipUpdateApp(link: String) {
         guard updateAppModel != nil else { return }
         pushRouterVC(urlStr: updateAppModel.url, from: self)
     }
     
     private func showUpdateAppPop() {
+        isUpdateApp = true
         guard updateAppModel != nil else { return }
         let updateApp = UpdateAppPopVc()
         updateApp.imageView.image = UIImage(named: "update")
@@ -848,43 +889,85 @@ extension CXMHomeViewController : UpdateAppPopVcDelegate {
 
 
 // MARK: - 活动弹框
-extension CXMHomeViewController : ActivityPopVCDelegate {
+extension CXMHomeViewController : HomeActivityViewDelegate {
+    
     func didTipActivity(link: String) {
         guard activityModel != nil else { return }
-        pushRouterVC(urlStr: activityModel.bannerLink, from: self)
+        if popNumber == 1{
+            pushPagerView(pagerType: .coupon)
+        }else{
+            pushRouterVC(urlStr: activityModel[popNumber].bannerLink, from: self)
+        }
+        
     }
     
-    
-    
-
-    
-    
-    private func showActivityPop() {
-        guard activityModel != nil else { return }
-        
-        guard let url = URL(string : activityModel.bannerImage) else { return }
-        let activity = ActivityPopVC()
-        activity.imageView.kf.setImage(with: url, placeholder: nil, options: nil , progressBlock: nil) { (image, error, type , url) in
-            guard let img = image else { return }
-    
-            activity.configure(with: img.size.width, height: img.size.height)
-            activity.delegate = self
-            
-            DispatchQueue.main.async {
-                let currentVc = self.viewController()
-                if currentVc == self{
-                    self.present(activity)
-                }
-            }
+    func deleteHide() {
+        if popNumber < self.activityModel.count{
+            self.showActivityPop(index: popNumber)
         }
     }
+
+    func showActivityPop(index: Int){
+        
+        let activity = HomeActivityView.init(frame: UIScreen.main.bounds)
+        activity.activityModel = self.activityModel
+        activity.createView()
+        var url = URL.init(string: "")
+        if index == 1{
+            
+        }else{
+            url = URL(string : activityModel[index].bannerImage)
+        }
+        
+        activity.imageView.kf.setImage(with: url, placeholder: nil, options: nil , progressBlock: nil) { (image, error, type , url) in
+            if index == 1{
+                let img = Image(named: "优惠券")
+                let scaleWH: CGFloat = img!.size.height / img!.size.width
+                activity.configure(with: popNumber, width: screenWidth - 50, height: (screenWidth - 50) * scaleWH)
+                activity.imageView.image = img
+                activity.delegate = self
+                return
+            }
+            let img = image
+            activity.configure(with: popNumber, width: img!.size.width, height: img!.size.height)
+            activity.delegate = self
+        }
+        
+        activity.show()
+    }
+
+        
+//        guard let url = URL(string : activityModel[0].bannerImage) else { return }
+//        let activity = ActivityPopVC()
+//        activity.activityModel = self.activityModel
+//        activity.imageView.kf.setImage(with: url, placeholder: nil, options: nil , progressBlock: nil) { (image, error, type , url) in
+//            guard let img = image else { return }
+//
+//            activity.configure(with: img.size.width, height: img.size.height)
+//            activity.delegate = self
+//
+//            DispatchQueue.main.async {
+//                self.present(activity)
+//            }
+//        }
     
     private func activityRequest() {
         _ = activityProvider.rx.request(.activity).asObservable()
-            .mapObject(type: ActivityModel.self)
+            .mapArray(type: ActivityModel.self)
             .subscribe(onNext: { (data) in
+                print(data)
                 self.activityModel = data
-                self.showActivityPop()
+                
+                if self.isUpdateApp == false{
+                    self.showActivityPop(index: 0)
+                }
+
+//                let offlinePayment = OfflinePayment.init(frame: UIScreen.main.bounds)
+//                offlinePayment.configure(width: screenWidth - 50, height: (screenWidth - 50) * 0.8)
+//                offlinePayment.createView()
+//                offlinePayment.show()
+                
+
             }, onError: { (error) in
                 guard let err = error as? HXError else { return }
                 switch err {

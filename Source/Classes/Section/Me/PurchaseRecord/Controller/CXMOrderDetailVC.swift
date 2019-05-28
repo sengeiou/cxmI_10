@@ -185,13 +185,15 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
         footer = OrderDetailFooterView()
         footer.delegate = self
         
-        self.view.addSubview(tableView)
         self.view.addSubview(footer)
+        self.view.addSubview(tableView)
+
         
         footer.snp.makeConstraints { (make) in
-            make.bottom.equalTo(-SafeAreaBottomHeight)
-            make.left.right.equalTo(0)
             make.height.equalTo(44 * defaultScale)
+            make.top.equalTo(screenHeight - 44 * defaultScale)
+            make.right.equalTo(self.view.snp_right)
+            make.left.equalTo(self.view.snp_left)
         }
         
         tableView.snp.makeConstraints { (make) in
@@ -204,7 +206,7 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
         header = OrderDetailHeaderView()
         
         tableView.tableHeaderView = header
-        
+//        tableView.tableFooterView = footer
         tableView.estimatedRowHeight = 80
         //table.rowHeight = UITableView.automaticDimension
         

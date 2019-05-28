@@ -50,6 +50,8 @@ target '彩小蜜' do
 
   pod 'YBPopupMenu', '~> 1.1.2'
 
+pod 'Spring', :git => 'https://github.com/MengTo/Spring.git'
+
   # Pods for 彩小蜜
 
   

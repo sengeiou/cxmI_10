@@ -37,7 +37,7 @@
 @property (nonatomic, assign) NSUInteger       unknownWordsCount;
 
 // 初始化
--(instancetype)initWithFrame:(CGRect)frame WithSuperController:(UIViewController *)superController;
+-(instancetype)initWithFrame:(CGRect)frame WithSuperController:(UIViewController *)superController customNav:(BOOL)isCreated;
 
 // 设置页面代理
 @property (nonatomic,assign) id<ZCChatViewDelegate>delegate;
@@ -66,11 +66,25 @@
 @property(nonatomic,strong) UIButton    * moreButton;
 
 /**
+ *
+ *  评价
+ *
+ **/
+@property (nonatomic,strong) UIButton * evaluationBtn;
+
+
+/**
  *  标题
  */
 @property(nonatomic,strong) UILabel    * titleLabel;
 
+/**
+ *   跳转到用户自己的 留言VC
+ **/
+@property(nonatomic,assign) BOOL  isJumpCustomLeaveVC;
 
+// 系统导航栏是否设置透明度
+@property (nonatomic,assign) BOOL  nacTranslucent;
 
 // 显示聊天窗口
 -(void)showZCChatView:(ZCKitInfo *)kitInfo;
@@ -90,18 +104,18 @@
  **/
 -(void)confimGoBack;
 
-
-/**
- *  点击返回后的回调（注意：实现此方法后，sdk不自动实现返回事件）
- *  @param backBlock
- */
--(void)setPageBlock:(void (^)(ZCChatView *object,ZCPageBlockType type))pageClick messageLinkClick:(void (^)(NSString *link)) linkBlock;
-
 /**
  *
  *   跑马灯动画
  *
  **/
 -(void)beginAniantions;
+
+/**
+ *
+ *  去评价
+ *
+ **/
+-(void)goEvaluation;
 
 @end

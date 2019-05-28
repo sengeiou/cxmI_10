@@ -7,22 +7,22 @@
 		<key>BBGestureBack_Full_oc.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>27</integer>
+			<integer>29</integer>
 		</dict>
 		<key>BBGestureBack_Full_swift.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>29</integer>
+			<integer>30</integer>
 		</dict>
 		<key>BBGestureBack_SysFull_oc.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>30</integer>
+			<integer>31</integer>
 		</dict>
 		<key>BBGestureBack_SysFull_swift.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>31</integer>
+			<integer>32</integer>
 		</dict>
 	</dict>
 </dict>

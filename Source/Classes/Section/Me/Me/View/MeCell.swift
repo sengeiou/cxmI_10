@@ -30,6 +30,7 @@ class MeCell: UITableViewCell {
     public var title : UILabel!
     public var detail : TTTAttributedLabel!
     public var noticeIcon : UIImageView!
+    public var numLabel: UILabel!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -56,6 +57,14 @@ class MeCell: UITableViewCell {
             make.right.equalTo(self.contentView).offset(-22.5)
             make.bottom.equalTo(self.contentView).offset(-10)
         }
+        
+        numLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(self.contentView).offset(10)
+            make.right.equalTo(self.contentView).offset(-10)
+            make.width.equalTo(100)
+            make.bottom.equalTo(self.contentView).offset(-10)
+        }
+        
         noticeIcon.snp.makeConstraints { (make) in
             make.centerY.equalTo(title.snp.centerY)
             make.right.equalTo(20)
@@ -84,9 +93,17 @@ class MeCell: UITableViewCell {
         detail.lineBreakMode = .byWordWrapping
         detail.linkAttributes =  [NSAttributedString.Key.foregroundColor: Color787878]
         
+        numLabel = UILabel()
+        numLabel.textAlignment = .center
+        numLabel.textColor = ColorE85504
+        numLabel.font = Font14
+        numLabel.sizeToFit()
+        
+        
         self.contentView.addSubview(icon)
         self.contentView.addSubview(title)
         self.contentView.addSubview(detail)
+        self.contentView.addSubview(numLabel)
         title.addSubview(noticeIcon)
     }
     

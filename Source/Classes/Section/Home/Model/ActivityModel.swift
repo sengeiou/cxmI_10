@@ -9,10 +9,44 @@
 import Foundation
 import HandyJSON
 
-struct ActivityModel : HandyJSON {
+
+
+
+class ActivityModel : NSObject, HandyJSON {
+    required override init() { }
+    
+//    var promotionModel: promotionModel!
+//    var couponModel: couponModel!
+    var name : Int!
+    
     var bannerImage : String = ""
     var bannerLink : String = ""
     var bannerName : String = ""
     var endTime : String = ""
     var startTime : String = ""
+    
+    var bonusPrice : String = ""
+    var bonusNumber : String = ""
+    
+}
+
+
+//struct ActivityModel : HandyJSON {
+//    var promotionModel: [promotionModel]!
+//    var couponModel: [couponModel]!
+//}
+
+struct promotionModel : HandyJSON {
+    var bannerImage : String = ""
+    var bannerLink : String = ""
+    var bannerName : String = ""
+    var endTime : String = ""
+    var startTime : String = ""
+    var name : Int!
+}
+
+struct couponModel : HandyJSON {
+    var bonusPrice : String = ""
+    var name : Int!
+    var bonusNumber : String = ""
 }

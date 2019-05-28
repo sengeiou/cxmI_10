@@ -58,11 +58,13 @@ class CouponCell: UITableViewCell {
             let money = NSAttributedString(string: couponInfo.bonusPrice, attributes: [NSAttributedString.Key.foregroundColor: moneyColor])
             moneyAtt.append(money)
             
-            let timeAtt = NSMutableAttributedString(string: "有效期: ")
+            let timeAtt = NSMutableAttributedString(string: "")
+//            let timeAtt = NSMutableAttributedString(string: "有效期: ")
             let time = NSAttributedString(string: couponInfo.limitTime, attributes: [NSAttributedString.Key.foregroundColor: ColorA0A0A0])
             timeAtt.append(time)
             
-            let insAtt = NSMutableAttributedString(string: "使用说明: ")
+            let insAtt = NSMutableAttributedString(string: "")
+//            let insAtt = NSMutableAttributedString(string: "使用说明: ")
             let ins = NSAttributedString(string: couponInfo.useRange, attributes: [NSAttributedString.Key.foregroundColor: ColorA0A0A0])
             insAtt.append(ins)
             
@@ -108,7 +110,7 @@ class CouponCell: UITableViewCell {
         titleLB.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(moneyLB)
             make.left.equalTo(moneyLB.snp.right).offset(10)
-            make.right.equalTo(stateIcon.snp.left).offset(-1)
+            make.right.equalTo(bgImageView).offset(-1)
         }
         stateIcon.snp.makeConstraints { (make) in
             make.height.width.equalTo(40)
@@ -153,7 +155,7 @@ class CouponCell: UITableViewCell {
         moneyLB.textColor = ColorE95504
         
         titleLB = UILabel()
-        titleLB.font = Font15
+        titleLB.font = Font14
         titleLB.textColor = Color505050
         titleLB.numberOfLines = 0
         

@@ -30,6 +30,17 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
         }
     }
     
+    public var showCoupon : Bool = false {
+        didSet{
+            if showCoupon {
+                setRightRuleBut()
+            }
+        }
+    }
+    
+    
+    
+    
     private var rightButton: UIButton!
     
     private var filterTime : FilterTime!
@@ -120,14 +131,16 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
     
     //MARK: - 初始化控制器
     private func getCouponViewController() -> [UIViewController]{
+        self.showCoupon = true
         let notUsed = CXMCouponViewController()
         notUsed.couponType = .unUsed
-        let used = CXMCouponViewController()
-        used.couponType = .used
+//        let used = CXMCouponViewController()
+//        used.couponType = .used
         let overdue = CXMCouponViewController()
         overdue.couponType = .overdue
         
-        return [notUsed, used, overdue]
+//        return [notUsed, used, overdue]
+        return [notUsed, overdue]
     }
     
     private func getPurchaseRecordVC() -> [UIViewController] {
@@ -271,8 +284,25 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftBut)
     }
     
+    //MARK: - 使用规则
+    private func setRightRuleBut() {
+        let but = UIButton(type: .custom)
+        but.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        but.titleLabel?.font = Font15
+        but.setTitle("使用规则", for: .normal)
+        but.setTitleColor(ColorNavItem, for: .normal)
+        but.addTarget(self, action: #selector(rule), for: .touchUpInside)
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: but)
+    }
     
+    @objc private func rule() {
+        let homeWeb = CXMWebViewController()
+        homeWeb.urlStr = getCurentBaseWebUrl() + Bounsrule
+        self.navigationController?.pushViewController(homeWeb, animated: true)
+    }
     
+
     @objc private func back(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -316,4 +346,5 @@ extension BasePagerViewController : AccountDetailsFilterDelegate {
     }
     
     
+
 }

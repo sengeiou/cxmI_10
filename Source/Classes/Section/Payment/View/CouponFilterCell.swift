@@ -13,7 +13,15 @@ class CouponFilterCell: UITableViewCell {
     public var bonusInfo : BonusInfoModel! {
         didSet{
             guard bonusInfo != nil else { return }
-            
+            if bonusInfo.thisStatus == "1"{
+                moneylb.textColor = UIColor.init(hexColor: "6a6a6a", alpha: 1)
+                self.contentView.backgroundColor = UIColor.init(hexColor: "f5f5f5", alpha: 1)
+                self.contentView.isUserInteractionEnabled = false
+            }else{
+                moneylb.textColor = ColorEA5504
+                self.contentView.backgroundColor = .white
+                self.contentView.isUserInteractionEnabled = true
+            }
             let moneyAtt = NSMutableAttributedString(string: "")
             let moneyAt = NSAttributedString(string: "¥ ")
             var money : NSAttributedString!
@@ -21,7 +29,7 @@ class CouponFilterCell: UITableViewCell {
             if bonusInfo.bonusPrice != "不使用优惠券" {
                 moneyAtt.append(moneyAt)
                 money = NSAttributedString(string: bonusInfo.bonusPrice, attributes: [NSAttributedString.Key.font: Font24])
-                endTitle = "有效期至"
+                endTitle = "有效期至:"
             }else {
                 money = NSAttributedString(string: bonusInfo.bonusPrice, attributes: [NSAttributedString.Key.font: Font15])
             }
@@ -31,7 +39,7 @@ class CouponFilterCell: UITableViewCell {
             
             contentlb.text = bonusInfo.useRange
             
-            titleLb.text = bonusInfo.minGoodsAmount
+            titleLb.text = " \(bonusInfo.minGoodsAmount!)"
             
             let overdueAtt = NSMutableAttributedString(string: "\(bonusInfo.leaveTime) ", attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
             
@@ -83,12 +91,12 @@ class CouponFilterCell: UITableViewCell {
         moneylb.textAlignment = .left
         
         contentlb = UILabel()
-        contentlb.font = Font13
+        contentlb.font = Font14
         contentlb.textColor = Color505050
         contentlb.textAlignment = .left
         
         overdueLb = UILabel()
-        overdueLb.font = Font11
+        overdueLb.font = Font12
         overdueLb.textColor = ColorC8C8C8
         overdueLb.textAlignment = .left
         overdueLb.text = "5天后过期，有效期至2018/07/09"
@@ -146,7 +154,7 @@ class CouponFilterCell: UITableViewCell {
             selectedIcon.image = UIImage(named: "Mentionmoneysteps_nor")
         }
         guard bonusInfo != nil else { return }
-        bonusInfo.isSelected = selected
+//        bonusInfo.isSelected = selected
     }
 
     required init?(coder aDecoder: NSCoder) {

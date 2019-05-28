@@ -54,6 +54,17 @@ typedef NS_ENUM(NSInteger,ZCTipCellMessageType) {
     
     /** 排队达到阀值*/
     ZCTipCellMessageWatingFull                       = 19,
+    /** 消息撤回*/
+    ZCTipCellMessageRevertMsg                        = 20,
+    
+    /** 安全提示 */
+    ZCTipCellMessageSafety                           = 21,
+    
+    /*** 您的留言状态有更新  ***/
+    ZCTipCellMessageUpdateLeave                      = 22,
+    
+    /***** 情绪转人工和重复提问转人工 提示文案   ****/
+    ZCTipCellMessageRobotTurnMsg                     = 23,
 };
 
 
@@ -68,6 +79,13 @@ typedef NS_ENUM(NSInteger,ZCTipCellMessageType) {
  *  会话时间
  */
 @property (nonatomic , strong) NSString *date;
+
+/**
+ * 消息id
+ */
+@property (nonatomic , strong) NSString *msgId;
+@property (nonatomic , strong) NSString *revokeMsgId;
+
 
 /**
  *  内容[未使用]
@@ -177,7 +195,7 @@ typedef NS_ENUM(NSInteger,ZCTipCellMessageType) {
 
 /**
  机器人评价
- 0，不处理，1新添加(可赞、可踩)，2已赞，3已踩，
+ 0，不处理，1新添加(可赞、可踩)，2已赞，3已踩，4 超时下线之后不能在评价 置灰并给提示“会话结束，无法反馈”
  */
 @property (nonatomic , assign) int commentType;
 
@@ -206,6 +224,85 @@ typedef NS_ENUM(NSInteger,ZCTipCellMessageType) {
  */
 @property (nonatomic , strong) NSString* isQuestionFlag;
 
+
+
+// ////////////////////////////////////关键字转人工数据使用
+/**
+ *
+ *     命中的关键字id
+ *
+ **/
+@property (nonatomic,copy) NSString * keywordId;
+
+/**
+ *
+ *           keyword:命中的关键字
+ *
+ **/
+@property (nonatomic,copy) NSString * keyword;
+
+
+/**
+ *
+ *   transferFlag:1-指定技能组；2-客户选择技能组
+ *
+ **/
+@property (nonatomic,assign) int  transferFlag;
+
+
+/**
+ *
+ *   groupId:指定技能组id
+ *
+ **/
+@property (nonatomic,copy) NSString * groupId;
+
+
+/**
+ *
+ *    tipsMessage:机器人转技能组提示语
+ *
+ **/
+@property (nonatomic,copy) NSString * tipsMessage;
+
+/**
+ *
+ *    groupList:选择技能组列表，模型：[{groupId：技能组id，groupName:技能组名称}，……]
+ *
+ **/
+@property (nonatomic,strong) NSMutableArray * groupList;
+
+/**
+ *
+ *   用户发消息 判定是否是被超时下线，如果超时下线不在执行关键字转人工
+ *
+ **/
+@property (nonatomic,assign) BOOL userOffline;
+
+
+/**
+ *
+ *   revokeFlag  0    1 撤回 “显示 客服xxx 撤回了一条消息”
+ *
+ **/
+@property (nonatomic,assign) BOOL revokeFlag;
+
+
+/**
+ *
+ *  transferType  转人工类型，0-不转，1-重复提问转人工，2-情绪负向转人工
+ *
+ **/
+@property (nonatomic,assign)  int transferType;
+
+/**
+ *
+ *  queueFlag  排队方式标记  只在关键字转人工的时候传给服务端，其他情况传空
+ *
+ **/
+@property (nonatomic,assign)  int queueFlag;
+
+
 /**
  *  初始化
  *
@@ -218,4 +315,8 @@ typedef NS_ENUM(NSInteger,ZCTipCellMessageType) {
 
 
 -(NSString *)getTipMsg:(int)action content:(NSString*)message isOpenLeave:(NSUInteger) isOpen;
+
+-(instancetype)initWithModel:(ZCLibMessage *)model isShowGroup:(BOOL)isShow;
+
+
 @end

@@ -10,6 +10,7 @@ import UIKit
 
 protocol UpdateAppPopVcDelegate {
     func didTipUpdateApp(link : String) -> Void
+    func deleteClicked() -> Void
 }
 
 
@@ -88,7 +89,6 @@ class UpdateAppPopVc: UIViewController {
         updateButton.addTarget(self, action: #selector(didTipImageView), for: .touchUpInside)
         return updateButton
     }()
-    
 }
 
 
@@ -99,6 +99,7 @@ extension UpdateAppPopVc {
     }
     
     @objc private func deleteClicked() {
+        delegate.deleteClicked()
         self.dismiss(animated: true , completion: nil)
     }
     

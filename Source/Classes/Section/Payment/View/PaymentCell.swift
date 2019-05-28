@@ -44,7 +44,7 @@ class PaymentCell: UITableViewCell {
             detail.snp.makeConstraints { (make) in
                 make.top.bottom.equalTo(0)
                 make.right.equalTo(-1)
-                make.width.equalTo(100 * defaultScale)
+                make.left.equalTo(title.snp.right).offset(10)
             }
         }
     }

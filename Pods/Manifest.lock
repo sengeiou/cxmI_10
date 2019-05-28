@@ -26,7 +26,8 @@ PODS:
     - RxSwift (~> 4.0)
   - RxSwift (4.1.2)
   - SnapKit (4.0.0)
-  - SobotKit (2.5.5)
+  - SobotKit (2.7.2)
+  - Spring (1.0.6)
   - SVProgressHUD (2.2.5)
   - TTTAttributedLabel (2.0.0)
   - WechatOpenSDK (1.8.2)
@@ -51,6 +52,7 @@ DEPENDENCIES:
   - RxSwift (~> 4.0)
   - SnapKit
   - SobotKit
+  - Spring (from `https://github.com/MengTo/Spring.git`)
   - SVProgressHUD
   - TTTAttributedLabel
   - WechatOpenSDK
@@ -84,6 +86,15 @@ SPEC REPOS:
     - XLPagerTabStrip
     - YBPopupMenu
 
+EXTERNAL SOURCES:
+  Spring:
+    :git: https://github.com/MengTo/Spring.git
+
+CHECKOUT OPTIONS:
+  Spring:
+    :commit: fafd0b2e8d4d46405bd86fa7ba84bb7f73a20b13
+    :git: https://github.com/MengTo/Spring.git
+
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   BaiduMobStat: e84187c7057f87daac852e05692fd94c8d656bd3
@@ -103,13 +114,14 @@ SPEC CHECKSUMS:
   RxCocoa: 0b54909c902e1e581212a03e690bbd94032d8baa
   RxSwift: e49536837d9901277638493ea537394d4b55f570
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
-  SobotKit: a0cde2fa9f8119484dd2945ad80c3473a05be2ec
+  SobotKit: fa230366982ee9a292c70429314691eb3876e237
+  Spring: 3d113f14575ef79aec9c5f906dfa4f5001c03254
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
   WechatOpenSDK: 676feec516a11173eafd1fe64b10d27babf28701
   XLPagerTabStrip: c908b17cbf42fcd2598ee1adfc49bae25444d88a
   YBPopupMenu: 6efb286385d95ba5f97c58b8464ec873645e8764
 
-PODFILE CHECKSUM: dcbd74b8498838dbe35bcd30518714fc5196ca17
+PODFILE CHECKSUM: b586f2f18f0fe39ba92eac2600f5f46df2773b9d
 
 COCOAPODS: 1.5.3

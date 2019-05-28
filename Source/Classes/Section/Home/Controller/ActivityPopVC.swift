@@ -10,11 +10,15 @@ import UIKit
 
 protocol ActivityPopVCDelegate {
     func didTipActivity(link : String) -> Void
+    func deleteClicked() -> Void
 }
+
+
 
 class ActivityPopVC: UIViewController {
 
     public var delegate : ActivityPopVCDelegate!
+    public var activityModel : [ActivityModel]!
     
     lazy var deleteBut : UIButton = {
         let but = UIButton(type: .custom)
@@ -63,16 +67,35 @@ extension ActivityPopVC {
     @objc private func didTipImageView() {
         guard delegate != nil else { return }
         delegate.didTipActivity(link: "")
+        self.dismiss(animated: true, completion: nil)
     }
     
     @objc private func deleteClicked() {
-        self.dismiss(animated: true , completion: nil)
+        self.dismiss(animated: true, completion: nil)
+        delegate.deleteClicked()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 //        self.dismiss(animated: true , completion: nil)
     }
 }
+
+// MARK: - 优惠券弹框
+extension ActivityPopVC  {
+
+    private func showCouponPop() {
+        guard self.activityModel != nil else { return }
+        let coupon = CouponPopVC()
+        let img = UIImage(named: "优惠券")
+        coupon.configure(with: img!.size.width, height: img!.size.height)
+        coupon.imageView.image = img
+
+        DispatchQueue.main.async {
+            self.present(coupon, animated: true)
+        }
+    }
+}
+
 extension ActivityPopVC {
     public func configure(with width : CGFloat, height : CGFloat) {
         
@@ -114,8 +137,7 @@ extension ActivityPopVC {
 extension ActivityPopVC {
     private func initSubview() {
         
-    }
-    
-    
-    
+    } 
 }
+
+

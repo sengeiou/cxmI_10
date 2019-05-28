@@ -109,12 +109,19 @@ typedef void(^ReceivedMessageBlock)(id message,int nleft,NSDictionary *object);
 
 
 /**
- 初始化智齿客服
+ 初始化智齿客服 2.7.2开始使用
  
  @param appkey 智齿appkey(如果是电商版本，请填写自己公司的APPKEY)
+ @param resultBlock 初始化结果回调
  */
--(void)initSobotSDK:(NSString *) appkey;
+-(void)initSobotSDK:(NSString *) appkey result:(void (^)(id object))resultBlock;
 
+/**
+ *
+ *  初始化智齿客服 (2.7.1之前使用)
+ *
+ **/
+-(void)initSobotSDK:(NSString *) appkey;
 
 /**
  检查初始化状态，（成功/失败）
@@ -123,15 +130,12 @@ typedef void(^ReceivedMessageBlock)(id message,int nleft,NSDictionary *object);
 -(BOOL) getInitState;
 
 
-
-
 /**
- 关闭通道，清理内存，退出智齿客户
+ 关闭通道，清理内存，退出智齿客户 移除推送
  说明：调用此方法后将不能接收到离线消息，除非再次进入智齿SDK重新激活,
  isClosePush:YES ,是关闭push；NO离线用户，但是可以收到push推送
  */
 +(void) closeAndoutZCServer:(BOOL) isClosePush;
-
 
 
 /**
@@ -147,6 +151,15 @@ typedef void(^ReceivedMessageBlock)(id message,int nleft,NSDictionary *object);
 -(int) getUnReadMessage;
 
 
+
+/**
+ 清空用户下的所有未读消息(本地清空)
+
+ @param userId 接入的用户ID
+ */
+-(void) clearUnReadNumber:(NSString *) userId;
+
+
 /**
  获取最后一条消息
  
@@ -156,11 +169,43 @@ typedef void(^ReceivedMessageBlock)(id message,int nleft,NSDictionary *object);
 
 
 /**
+* @deprecated This method is deprecated starting in version 2.6.3
+ * @note Please use @code [checkIMConnected]
  初始化智齿客服，会建立长连接通道，监听服务端消息
  检查如果断开就重新连接
  （建议启动应用时调用，没有发起过咨询不会浪费资源,至少转一次人工才有效果）
+    isAgInit 是否再次重新构建通道
  */
--(void)initZCIMCaht;
+-(void)initZCIMCaht:(BOOL)isAgInit;
+
+
+/**
+ @note 检查当前消息通道是否建立，没有就重新建立
+ 如果调用 closeIMConnection 后，可调用此方法重新建立链接
+ */
+-(void)checkIMConnected;
+
+
+/**
+ @note 关闭当前消息通道，使其不再接受消息
+ */
+-(void)closeIMConnection;
+
+
+
+/**
+ 移除IM所有监听，可能会影响应用在后台存活时长，如果调用此方法后需要checkIMObserverWithCreate重新激活
+ 网络监听 ZCNotification_NetworkChange
+ UIApplicationDidBecomeActiveNotification
+ UIApplicationDidEnterBackgroundNotification
+ */
+-(void)removeIMAllObserver;
+
+
+/**
+ 检查当前监听是否被移除，如果移除就重新注册
+ */
+-(void)checkIMObserverWithRegister;
 
 
 @end

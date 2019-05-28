@@ -14,6 +14,13 @@
  */
 @interface ZCLibInitInfo : NSObject
 
+/**
+ *  接口域名,
+ * 默认SaaS平台域名为:https://api.sobot.com
+ * 如果您是腾讯云服务，请设置为：https://ten.sobot.com
+ * 如果您是本地化部署，请使用你们自己的部署的服务域名
+ */
+@property(nonatomic,strong) NSString *apiHost;
 
 
 /**
@@ -22,6 +29,14 @@
  *
  */
 @property (nonatomic,strong) NSString   *appKey;
+
+
+/**
+ *
+ *  customerCode   商户对接id （仅电商版适用，如果没有appkey，请提供此编码）
+ *
+ */
+@property (nonatomic,strong) NSString   *customerCode;
 
 
 /**
@@ -38,6 +53,18 @@
  *  0 可转入其他客服  1 必须转入指定客服（注意：如果当前指定的客服不在线，选择之后不能在转接到其他客服）
  */
 @property (nonatomic,assign) int  tranReceptionistFlag;
+
+
+
+/**
+ 跨公司转接人工(仅电商版本可用)
+ */
+// 1 是开启，默认0不开启
+@property (nonatomic,assign)  int   flowType;
+// 转接到的公司ID
+@property (nonatomic,strong)  NSString  * flowCompanyId;
+// 转接到的公司技能组
+@property (nonatomic,strong)  NSString  * flowGroupId;
 
 
 
@@ -93,6 +120,22 @@
  *  将自动显示到客服工作台客户资料
  */
 @property (nonatomic,strong) NSDictionary *customInfo;
+
+
+
+/**
+ *  转人工 指定技能组 溢出
+ * [{"actionType":"to_group","optionId":"3","deciId":"162bb6bb038d4a9ea018241a30694064","spillId":"7"},
+ {"actionType":"to_group","optionId":"4","deciId":"a457f4dfe92842f8a11d1616c1c58dc1"}]
+ 
+ actionType:执行动作类型：to_group:转接指定技能组
+ optionId:是否溢出  指定技能组时：3：溢出，4：不溢出。
+ deciId:指定的技能组。
+ spillId:溢出条件  指定客服组时：4:技能组无客服在线,5:技能组所有客服忙碌,6:技能组不上班,7:智能判断
+ *
+ */
+@property (nonatomic,strong) NSArray *customGroupType;
+
 
 
 /**
@@ -268,6 +311,13 @@
 
 /**
  *
+ * 私钥
+ *
+ **/
+@property (nonatomic,copy) NSString * platformKey;
+
+/**
+ *
  *   是否允许请求热点引导问题接口
  */
 @property (nonatomic,assign) BOOL isEnableHotGuide;
@@ -286,6 +336,20 @@
  *   机器人问答是否支持分词联想
  */
 @property (nonatomic,assign) BOOL isEnableAutoTips;
+
+/**
+ *
+ *  自定发送商品订单信息类型
+ *  0 不发 1 给机器人发送 2 给人工发送  3 机器人和人工都发送
+ **/
+@property (nonatomic,assign) int goodMsgType;
+
+/**
+ *
+ *   自动发送商品订单信息内容
+ *   例如：“商品订单编号1403388282”
+ **/
+@property (nonatomic,copy) NSString * goodMsg;
 
 
 

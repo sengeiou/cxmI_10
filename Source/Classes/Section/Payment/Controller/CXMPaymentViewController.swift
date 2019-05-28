@@ -176,6 +176,13 @@ class CXMPaymentViewController: BaseViewController, UITableViewDelegate, UITable
                 guard self.saveBetInfo != nil, self.saveBetInfo.bonusList.isEmpty == false else { return }
                 
                 let coupon = CXMCouponFilterViewController()
+                
+                if self.saveBetInfo.bonusList.count >= 6 {
+                    coupon.viewHeight = CGFloat(6) * (80 * defaultScale) + 100 * defaultScale
+                }else{
+                    coupon.viewHeight = CGFloat(self.saveBetInfo.bonusList.count) * (80 * defaultScale) + 100 * defaultScale
+                }
+
                 coupon.delegate = self
                 coupon.bonusList = self.saveBetInfo.bonusList
                 present(coupon)
@@ -227,6 +234,7 @@ class CXMPaymentViewController: BaseViewController, UITableViewDelegate, UITable
         self.saveBetInfo.setBonus()
         
         orderRequest(bonusId: bonusId)
+        self.tableView.reloadData()
     }
     
     deinit {
@@ -353,6 +361,12 @@ extension CXMPaymentViewController {
                     weakSelf?.needPay = true
                     weakSelf?.tableView.reloadData()
                 }
+                
+                
+                if weakSelf?.saveBetInfo.bonusDesc != "" {
+                    self.showHUD(message: (weakSelf?.saveBetInfo.bonusDesc)!)
+                }
+                
                 weakSelf?.lottoToken = data.payToken
                 data.setBonus() // 设置默认选中的优惠券
                 //weakSelf?.tableView.reloadData()
@@ -368,7 +382,6 @@ extension CXMPaymentViewController {
                         weakSelf?.pushLoginVC(from: self)
                     default : break
                     }
-                    
                     if 300000...310000 ~= code {
                         print(code)
                         self.showHUD(message: msg!)
@@ -617,9 +630,26 @@ extension CXMPaymentViewController {
                     cell.accessoryType = .none
                     cell.hcellStyle = .defaults
                 }else {
-                    cell.detail.text = self.saveBetInfo.bonusAmount + "元"
-                    cell.accessoryType = .disclosureIndicator
-                    cell.hcellStyle = .detail
+                    
+                    if self.saveBetInfo.bonusId.isEmpty{
+                        if self.saveBetInfo.bonusNumber == "0"{
+                            cell.detail.text = "暂无可用优惠券"
+                            cell.accessoryType = .disclosureIndicator
+                            cell.hcellStyle = .detail
+                            cell.detail.textColor = Color505050
+                        }else{
+                            cell.detail.text = "\(self.saveBetInfo.bonusNumber ?? "0")张优惠券可用"
+                            cell.accessoryType = .disclosureIndicator
+                            cell.hcellStyle = .detail
+                            cell.detail.textColor = ColorEA5504
+                        }
+                    }else{
+                        cell.detail.textColor = ColorEA5504
+                        cell.detail.text = "\(self.saveBetInfo.bonusAmount!)元优惠券 " + "-" + self.saveBetInfo.bonusAmount + "元"
+                        cell.accessoryType = .disclosureIndicator
+                        cell.hcellStyle = .detail
+                    }
+
                 }
                 
             case 3:

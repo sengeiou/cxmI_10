@@ -28,3 +28,5 @@ let danExplainUrl = "/mjpublic/explain?showBar=1&showtitle=1"
 let DLTPlayHelpUrl = "/daletou/playHelp?showtitle=1"
 /// 胆拖 说明
 let DLTDanHelpUrl = "/daletou/whatDantuo?showtitle=1"
+/// 投注记录
+let Bounsrule = "/user/bounsrule?showtitle=1"

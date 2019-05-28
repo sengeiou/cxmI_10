@@ -408,7 +408,13 @@
 		BB1B5A6D226DAB2700418FFF /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB1B5A6C226DAB2700418FFF /* Realm.framework */; };
 		BB1B5A6F226DAB4400418FFF /* PKHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB1B5A6E226DAB4400418FFF /* PKHUD.framework */; };
 		BB1B5A71226DABCD00418FFF /* YBPopupMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB1B5A70226DABCD00418FFF /* YBPopupMenu.framework */; };
+		BB1F0BBC2297DD85001BD2A9 /* GetXibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1F0BBB2297DD85001BD2A9 /* GetXibView.swift */; };
+		BB1F0BBE2297ED74001BD2A9 /* OfflinePayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1F0BBD2297ED74001BD2A9 /* OfflinePayment.swift */; };
 		BB39A6232272D7D400119EE3 /* UpdateAppPopVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB39A6222272D7D300119EE3 /* UpdateAppPopVc.swift */; };
+		BB3F91EB2293D14A00B02ECA /* CouponPopVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3F91EA2293D14A00B02ECA /* CouponPopVC.swift */; };
+		BB3F921E229556CE00B02ECA /* BasicDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3F921D229556CE00B02ECA /* BasicDialog.swift */; };
+		BB3F922C2295588700B02ECA /* Spring.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB3F922B2295588700B02ECA /* Spring.framework */; };
+		BB3F923622955B2500B02ECA /* HomeActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3F923522955B2500B02ECA /* HomeActivityView.swift */; };
 		BBCF5D3D226A0EB900AA7564 /* OrdercalculateBonusesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCF5D3B226A0EB800AA7564 /* OrdercalculateBonusesCell.swift */; };
 		BBCF5D3E226A0EB900AA7564 /* OrdercalculateBonusesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBCF5D3C226A0EB900AA7564 /* OrdercalculateBonusesCell.xib */; };
 		E503F5BE2079E8D6006D4A0B /* FootballFilterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E503F5BD2079E8D6006D4A0B /* FootballFilterProtocol.swift */; };
@@ -1099,7 +1105,13 @@
 		BB1B5A6C226DAB2700418FFF /* Realm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Realm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB1B5A6E226DAB4400418FFF /* PKHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = PKHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB1B5A70226DABCD00418FFF /* YBPopupMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = YBPopupMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB1F0BBB2297DD85001BD2A9 /* GetXibView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetXibView.swift; sourceTree = "<group>"; };
+		BB1F0BBD2297ED74001BD2A9 /* OfflinePayment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflinePayment.swift; sourceTree = "<group>"; };
 		BB39A6222272D7D300119EE3 /* UpdateAppPopVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAppPopVc.swift; sourceTree = "<group>"; };
+		BB3F91EA2293D14A00B02ECA /* CouponPopVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponPopVC.swift; sourceTree = "<group>"; };
+		BB3F921D229556CE00B02ECA /* BasicDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicDialog.swift; sourceTree = "<group>"; };
+		BB3F922B2295588700B02ECA /* Spring.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Spring.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB3F923522955B2500B02ECA /* HomeActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeActivityView.swift; sourceTree = "<group>"; };
 		BBCF5D3B226A0EB800AA7564 /* OrdercalculateBonusesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdercalculateBonusesCell.swift; sourceTree = "<group>"; };
 		BBCF5D3C226A0EB900AA7564 /* OrdercalculateBonusesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrdercalculateBonusesCell.xib; sourceTree = "<group>"; };
 		BBF8EFAB226F3E2100B67ADF /* 彩小蜜.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; name = "彩小蜜.xcworkspace"; path = "../shenghecaidian/彩小蜜.xcworkspace"; sourceTree = "<group>"; };
@@ -1280,6 +1292,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB3F922C2295588700B02ECA /* Spring.framework in Frameworks */,
 				BB1B5A71226DABCD00418FFF /* YBPopupMenu.framework in Frameworks */,
 				BB1B5A6F226DAB4400418FFF /* PKHUD.framework in Frameworks */,
 				BB1B5A6D226DAB2700418FFF /* Realm.framework in Frameworks */,
@@ -2890,6 +2903,7 @@
 				11D9D9DF2089CD2500F78FCF /* CXMNewsDetailViewController.swift */,
 				114800D7208C80B100621AFA /* CXMNewsRecommendVC.swift */,
 				11F2217121AE8E9100DAFBC5 /* ActivityPopVC.swift */,
+				BB3F91EA2293D14A00B02ECA /* CouponPopVC.swift */,
 				BB39A6222272D7D300119EE3 /* UpdateAppPopVc.swift */,
 			);
 			path = Controller;
@@ -2905,6 +2919,7 @@
 				E59CB3E0205BBD900086DD0E /* HomeFootballCell.swift */,
 				11E2C00921B7CEE400719661 /* coin.mp3 */,
 				E59CB3DE205BA17F0086DD0E /* BannerView.swift */,
+				BB3F923522955B2500B02ECA /* HomeActivityView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2963,6 +2978,7 @@
 				11FEB963208DDC2100926951 /* AppKeyConstraint.swift */,
 				11436EF720B6E9A700127247 /* NoticeName.swift */,
 				B4C375AD21461DF200390A3A /* AppConfig.swift */,
+				BB1F0BBB2297DD85001BD2A9 /* GetXibView.swift */,
 			);
 			path = Constraints;
 			sourceTree = "<group>";
@@ -3078,6 +3094,7 @@
 				11EB8EE3207B6E8800AFC9C1 /* PaymentCell.swift */,
 				11EB8EE5207B791500AFC9C1 /* PaymentMethodCell.swift */,
 				11691807207DB82E00C8A287 /* CouponFilterCell.swift */,
+				BB1F0BBD2297ED74001BD2A9 /* OfflinePayment.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3099,6 +3116,7 @@
 				E510324F2064FD2D00A0156C /* BasePagerViewController.swift */,
 				E533BF0420610D170037D2D8 /* BasePopViewController.swift */,
 				E50643A9206C93A70046A2D4 /* BaseWebViewController.swift */,
+				BB3F921D229556CE00B02ECA /* BasicDialog.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3350,6 +3368,7 @@
 		F57F686066089931831C044D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BB3F922B2295588700B02ECA /* Spring.framework */,
 				BBF8EFAD226F3E2900B67ADF /* 彩小蜜.xcodeproj */,
 				BBF8EFAB226F3E2100B67ADF /* 彩小蜜.xcworkspace */,
 				BB1B5A70226DABCD00418FFF /* YBPopupMenu.framework */,
@@ -3396,7 +3415,7 @@
 				E573759C20468B8900148622 /* Frameworks */,
 				E573759D20468B8900148622 /* Resources */,
 				79A143FE82CCFC3896A4449A /* [CP] Embed Pods Frameworks */,
-				9F8EA057CD5BB6E3E2B195D8 /* [CP] Copy Pods Resources */,
+				4D016959C11EE3E11A7FE66B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3657,6 +3676,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		4D016959C11EE3E11A7FE66B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-彩小蜜/Pods-彩小蜜-resources.sh",
+				"${PODS_ROOT}/SobotKit/SobotKit.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SobotKit.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-彩小蜜/Pods-彩小蜜-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		79A143FE82CCFC3896A4449A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3681,6 +3718,7 @@
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/Spring/Spring.framework",
 				"${BUILT_PRODUCTS_DIR}/TTTAttributedLabel/TTTAttributedLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
 				"${BUILT_PRODUCTS_DIR}/YBPopupMenu/YBPopupMenu.framework",
@@ -3704,6 +3742,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Spring.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTTAttributedLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YBPopupMenu.framework",
@@ -3711,30 +3750,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-彩小蜜/Pods-彩小蜜-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9F8EA057CD5BB6E3E2B195D8 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-彩小蜜/Pods-彩小蜜-resources.sh",
-				"${PODS_ROOT}/SobotKit/SobotKit.bundle",
-				"${PODS_ROOT}/SobotKit/ZCEmojiExpression.bundle",
-				"${PODS_ROOT}/SobotKit/en.lproj",
-				"${PODS_ROOT}/SobotKit/zh-Hans.lproj",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SobotKit.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ZCEmojiExpression.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/en.lproj",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/zh-Hans.lproj",
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-彩小蜜/Pods-彩小蜜-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DFC20DFC2DF2096E3AD54A9F /* [CP] Check Pods Manifest.lock */ = {
@@ -3798,6 +3813,7 @@
 				112E9D4F2122AD4F008466B4 /* DLTTrendSettingModel.swift in Sources */,
 				11647F0120EDF59800B55897 /* FootballDetailSectionHeader.swift in Sources */,
 				11DEF32A215B8B8A0038B0E6 /* BBProtocol.swift in Sources */,
+				BB3F923622955B2500B02ECA /* HomeActivityView.swift in Sources */,
 				1179BD8C20C3D108000D4875 /* ActivityNetAPIManager.swift in Sources */,
 				11E8FA5D20BFDEFE0090BC6A /* UserInfoSettingCell.swift in Sources */,
 				11547F9A2137E2780068596C /* PrizeBasketHistoryCell.swift in Sources */,
@@ -3922,6 +3938,7 @@
 				116E0F292099739E009FE44E /* Router.swift in Sources */,
 				E55016F7207228220056AB1F /* FootballFilterCell.swift in Sources */,
 				11BD09F221C0FA7B00D29D52 /* OrderDetailQRCodeCell.swift in Sources */,
+				BB1F0BBE2297ED74001BD2A9 /* OfflinePayment.swift in Sources */,
 				11353EA62134FFCC00C1D645 /* SurpriseShooterHeaderModel.swift in Sources */,
 				1173BED22150D836008BC28A /* CXMMBasketballMenu.swift in Sources */,
 				E56CE814206A33310090A1B5 /* MessageCenterModel.swift in Sources */,
@@ -4010,6 +4027,8 @@
 				11B081432133E2BA004FCAE9 /* SurprisePrizeMatchCell.swift in Sources */,
 				11F24F8121B6805A00722B2B /* PushFrom.swift in Sources */,
 				E5973E2F204F8B33006461CE /* MeCell.swift in Sources */,
+				BB1F0BBC2297DD85001BD2A9 /* GetXibView.swift in Sources */,
+				BB3F91EB2293D14A00B02ECA /* CouponPopVC.swift in Sources */,
 				11B081472133EE59004FCAE9 /* SurpriseNetAPIManager.swift in Sources */,
 				115B0CF620EF559200848EC7 /* FootballLineupView.swift in Sources */,
 				E56CE816206A3FBF0090A1B5 /* AccountStatisticsModel.swift in Sources */,
@@ -4197,6 +4216,7 @@
 				11551CF220E225C5002FE691 /* CXMAccountDetailsFilter.swift in Sources */,
 				115B0CEB20EF068A00848EC7 /* FootballDetailStatisticsCell.swift in Sources */,
 				112F77B920EC7C8C005CA9E4 /* WMPageController.m in Sources */,
+				BB3F921E229556CE00B02ECA /* BasicDialog.swift in Sources */,
 				E550D8A52073598E002DDE23 /* FootballOrderTopView.swift in Sources */,
 				11B0813B2133B49B004FCAE9 /* SurpriseCategoryCell.swift in Sources */,
 				E5883F6020690E8B00CB3A46 /* AccountDetailsCell.swift in Sources */,
@@ -4419,6 +4439,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = /Users/kairuiwang/Desktop/shengHe/Source/Classes/ThirdParty/Header.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = "";
 			};
@@ -4470,6 +4491,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = /Users/kairuiwang/Desktop/shengHe/Source/Classes/ThirdParty/Header.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = "";
 				VALIDATE_PRODUCT = YES;
@@ -4495,11 +4517,12 @@
 					"\"${PODS_ROOT}\"/**",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/彩小蜜/Resource/Plist/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.shenghecaidian.itools;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Source/Classes/ThirdParty/Header.h";
 				SWIFT_VERSION = 4.2;
 				SYSTEM_HEADER_SEARCH_PATHS = "";
@@ -4526,11 +4549,12 @@
 					"\"${PODS_ROOT}\"/**",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/彩小蜜/Resource/Plist/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.shenghecaidian.itools;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Source/Classes/ThirdParty/Header.h";
 				SWIFT_VERSION = 4.2;
 				SYSTEM_HEADER_SEARCH_PATHS = "";
