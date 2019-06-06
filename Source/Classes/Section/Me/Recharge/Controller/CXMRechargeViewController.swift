@@ -22,8 +22,11 @@ fileprivate let textfieldHeight : CGFloat = 36
 fileprivate let cardHeight : CGFloat = 36
 fileprivate let topSpacing : CGFloat = 17
 
-class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, RechargeFooterViewDelegate, UITextFieldDelegate, ValidatePro, ActivityRechargeResultVCDelegate, ActivityRechargeCouponVCDelegate, RechargeCardCellDelegate {
+
+class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, RechargeFooterViewDelegate, UITextFieldDelegate, ValidatePro, ActivityRechargeResultVCDelegate, ActivityRechargeCouponVCDelegate, RechargeCardCellDelegate{
     
+    // MARK: - 属性
+    public var backType : BackType = .notRoot
     
     
     private let itemW = (screenWidth - 13.5 * 4) / 3
@@ -89,19 +92,33 @@ class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITabl
     
     public var backMe: Bool = false
     private var index: Int = 0
+    public var payListIndexPath: IndexPath!
+    
+    public var payToken = ""
+    public var payCode = ""
+    public var orderSn = ""
+    
+    /// 充值金额的高度
+    public var rechargeAmount = false
     
     //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "充值"
 
-    
+//        let shareVC = CXMShareViewController()
+//        shareVC.shareViewControllerDelegate = s®®elf
         
-        initSubview()
+        if payListIndexPath != nil && payListIndexPath.row == 3{
+            rechargeAmount = true
+        }
+        
         
         userInfoRequest()
         
         NotificationCenter.default.addObserver(self, selector: #selector(startPollingTimer), name: NSNotification.Name(rawValue: NotificationWillEnterForeground), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(test), name: NSNotification.Name(rawValue:"isTest"), object: nil)
         
         setData()
     }
@@ -158,17 +175,29 @@ class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITabl
     
     func recharge() {
         guard self.canPayment else { return }
-        guard validate(.number, str: self.cardCell.textfield.text) else {
-            showHUD(message: "请输入整数的充值金额")
-            return
+
+        if self.paymentModel.payCode == "app_offline"{
+            
+            let offlinePayment = OfflinePayment.init(frame: UIScreen.main.bounds)
+            offlinePayment.configure(width: screenWidth - 50, height: (screenWidth - 50) * 0.8)
+            offlinePayment.createView()
+            offlinePayment.delegate = self
+            offlinePayment.wechatLabel.text = self.paymentModel.payTitle
+            offlinePayment.show()
+            
+        }else{
+            guard validate(.number, str: self.cardCell.textfield.text) else {
+                showHUD(message: "请输入整数的充值金额")
+                return
+            }
+            maxTimes = QueryMaxTimes
+            self.canPayment = false
+            if let money = Double(self.cardCell.textfield.text!) {
+                self.rechargeMoney = money
+            }
+            
+            rechargeRequest(amount: self.cardCell.textfield.text!)
         }
-        maxTimes = QueryMaxTimes
-        self.canPayment = false
-        if let money = Double(self.cardCell.textfield.text!) {
-            self.rechargeMoney = money
-        }
-        
-        rechargeRequest(amount: self.cardCell.textfield.text!)
         TongJi.log(.充值支付, label: "ios", att: .终端)
     }
     
@@ -289,8 +318,24 @@ class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITabl
             let index = IndexPath.init(row: 0, section: 1)
             let cell = tableView.cellForRow(at: index) as! RechargeCardCell
             cell.paymentModel = self.paymentModel
-
-            tableView.reloadData()
+            
+            //选择线下支付 隐藏第一组的高度
+            if self.paymentModel.payCode == "app_offline"{
+                rechargeAmount = true
+                tableView.reloadData()
+                let index = IndexPath.init(row: 0, section: 1)
+                let cell = tableView.cellForRow(at: index) as! RechargeCardCell
+                _ = cell.contentView.subviews.map {
+                    $0.removeFromSuperview()
+                }
+            }else{
+                rechargeAmount = false
+                tableView.reloadData()
+            }
+            
+            //置空已经选择的
+            payListIndexPath = nil
+            
         }else {
             guard self.selectedIndex != nil else { return }
             tableView.selectRow(at: self.selectedIndex, animated: false, scrollPosition: .none)
@@ -487,6 +532,16 @@ class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITabl
                 weakSelf?.paymentMethodModel = data
                 weakSelf?.paymentAllList = data.paymentDTOList
                 weakSelf?.tableview.reloadData()
+                
+                
+                if weakSelf?.payListIndexPath != nil{
+                    weakSelf?.paymentModel = weakSelf?.paymentAllList[(weakSelf?.payListIndexPath.row)! - 1]
+                    weakSelf?.paymentAllList[(weakSelf?.payListIndexPath.row)! - 1] = (weakSelf?.paymentModel!)!
+                }
+                
+
+                 weakSelf?.tableview.reloadData()
+                
             }, onError: { (error) in
                 self.dismissProgressHud()
                 guard let err = error as? HXError else { return }
@@ -640,20 +695,32 @@ class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITabl
 //            if self.paymentMethodModel != nil, self.paymentMethodModel.rechargeUserDTO != nil {
 //                cell.isNewUser = self.paymentMethodModel.rechargeUserDTO.oldUserBz
 //            }
-            if self.paymentAllList != nil{
-                cell.paymentModel = self.paymentAllList[index]
+            if rechargeAmount == true{
+                _ = cell.contentView.subviews.map {
+                    $0.removeFromSuperview()
+                }
+            }else{
+                if payListIndexPath != nil{
+                    if self.paymentAllList != nil{
+                        cell.paymentModel = self.paymentAllList[payListIndexPath.row - 1]
+                    }
+                }else{
+                    if self.paymentAllList != nil{
+                        cell.paymentModel = self.paymentAllList[index]
+                    }
+                }
+                
+                cell.delegate = self
+                self.cardCell = cell
+                cell.textfield.delegate = self
+                self.textfield = cell.textfield
+                
+                if giveAmount != nil {
+                    cell.activityImageView.isHidden = false
+                    cell.giveAmount = giveAmount
+                }
             }
             
-
-            cell.delegate = self
-            self.cardCell = cell
-            cell.textfield.delegate = self
-            self.textfield = cell.textfield
-            
-            if giveAmount != nil {
-                cell.activityImageView.isHidden = false
-                cell.giveAmount = giveAmount
-            }
             
             return cell
         case 2:
@@ -664,14 +731,22 @@ class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITabl
             
             let cell = tableview.dequeueReusableCell(withIdentifier: RechargeCellIdentifier, for: indexPath) as! RechargePaymentCell
             cell.paymentInfo = self.paymentAllList[indexPath.row - 1]
-            if indexPath.row == 1 {
-                if selectedIndex == nil {
-                    self.selectedIndex = indexPath
-                    self.paymentModel = self.paymentAllList[indexPath.row - 1]
+            
+            
+            if payListIndexPath != nil{
+                self.selectedIndex = payListIndexPath
+                self.paymentModel = self.paymentAllList[payListIndexPath.row - 1]
+                tableView.selectRow(at: payListIndexPath, animated: true , scrollPosition: .none)
+            }else{
+                if indexPath.row == 1 {
+                    if selectedIndex == nil {
+                        self.selectedIndex = indexPath
+                        self.paymentModel = self.paymentAllList[indexPath.row - 1]
+                    }
+                    tableView.selectRow(at: self.selectedIndex, animated: true , scrollPosition: .none)
                 }
-                tableView.selectRow(at: self.selectedIndex, animated: true , scrollPosition: .none)
-                
             }
+            
             return cell
         default:
             return UITableViewCell()
@@ -683,16 +758,33 @@ class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITabl
         case 0:
             return 70
         case 1:
-            var item = 0
-            if self.paymentAllList != nil{
-               item = self.paymentAllList[index].readMoney.count
-            }
-            if item % 3 == 0{
-                item = item / 3
+            
+            if rechargeAmount == true {
+                return 0.00001
             }else{
-                item = (item / 3) + 1
+                var item = 0
+                if self.payListIndexPath != nil {
+                    if self.paymentAllList != nil{
+                        item = self.paymentAllList[payListIndexPath.row - 1].readMoney.count
+                    }
+                    if item % 3 == 0{
+                        item = item / 3
+                    }else{
+                        item = (item / 3) + 1
+                    }
+                }else{
+                    if self.paymentAllList != nil{
+                        item = self.paymentAllList[index].readMoney.count
+                    }
+                    if item % 3 == 0{
+                        item = item / 3
+                    }else{
+                        item = (item / 3) + 1
+                    }
+                }
+                 return CGFloat(titleHeight + textfieldHeight + cardHeight * CGFloat(item) + bottomMargin * CGFloat(item + 1) + 30.5)
             }
-            return CGFloat(titleHeight + textfieldHeight + cardHeight * CGFloat(item) + bottomMargin * CGFloat(item + 1) + 30.5)
+           
         case 2:
             return defaultCellHeight
         default:
@@ -754,8 +846,42 @@ class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITabl
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+}
+
+extension CXMRechargeViewController : OfflinePaymentDelegate{
+    func deleteHide() {
+        
+    }
     
+    func didTipContact() {
+        self.shareClicked()
+    }
+}
+
+extension CXMRechargeViewController : ShareProtocol{
 
     
 
+    @objc func test(nofi : Notification){
+        
+        switch backType {
+        case .notRoot:
+            let story = UIStoryboard(storyboard: .Football)
+            let order = story.instantiateViewController(withIdentifier: "OrderDetailVC") as! CXMOrderDetailVC
+            order.orderId = orderDetailid
+            order.backType = .root
+            pushViewController(vc: order)
+        case .root:
+            self.popToRootViewController()
+        }
+    }
+
+    private func shareClicked() {
+        WeixinCenter.share.pushOrderDetail = true
+        
+        var model = ShareContentModel()
+        model.title = "店主你好，我需要给账号充值购彩金"
+        model.sharingType = .text
+        share(model, from: self)
+    }
 }

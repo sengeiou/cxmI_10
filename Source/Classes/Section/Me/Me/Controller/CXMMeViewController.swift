@@ -165,6 +165,7 @@ class CXMMeViewController: BaseViewController, UITableViewDelegate, UITableViewD
         print("充值")
         let recharge = CXMRechargeViewController()
         recharge.userInfo = userInfo
+        recharge.backType = .root
         pushViewController(vc: recharge)
         TongJi.log(.充值, label: "充值")
 
@@ -688,7 +689,7 @@ class CXMMeViewController: BaseViewController, UITableViewDelegate, UITableViewD
                 if self.userInfo.bonusNumber == "0" || self.userInfo.bonusNumber == nil{
                     cell.numLabel.text = ""
                 }else{
-                    cell.numLabel.text = "\(self.userInfo.bonusNumber ?? "0")可用张优惠券"
+                    cell.numLabel.text = "\(self.userInfo.bonusNumber ?? "0")张可用优惠券"
                 }
             }else{
                 cell.numLabel.text = ""

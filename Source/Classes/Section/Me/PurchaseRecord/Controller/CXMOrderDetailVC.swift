@@ -22,7 +22,7 @@ enum BackType {
 }
 
 class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, OrderDetailFooterViewDelegate {
-
+    
     // MARK: - 点击事件
     func goBuy() {
         guard orderInfo != nil else { return }
@@ -55,23 +55,24 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
         homeData.lotteryName = orderInfo.lotteryClassifyName
         homeData.playType = orderInfo.lotteryPlayClassifyId
         
-        
+
         pushViewController(vc: football)
         
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+
         switch indexPath.section {
             
-//        case 0:
-//            switch indexPath.row{
-//            case orderInfo.matchInfos.count + 2:
-//                let web = CXMWebViewController()
-//                pushViewController(vc: web)
-//            default:
-//                break
-//            }
+            //        case 0:
+            //            switch indexPath.row{
+            //            case orderInfo.matchInfos.count + 2:
+            //                let web = CXMWebViewController()
+            //                pushViewController(vc: web)
+            //            default:
+            //                break
+        //            }
         case 1:
             let scheme = CXMOrderSchemeVC()
             scheme.programmeSn = self.orderInfo.programmeSn
@@ -104,11 +105,14 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
     public var orderId : String!
     private var orderInfo : OrderInfoModel!
     private var header : OrderDetailHeaderView!
+    private var offlineHeader : OfflineOrderDetailHeaderView!
     private var footer : OrderDetailFooterView!
     
     private var share : UIButton!
     
     private var modes = [HXGuideInfoModel]()
+    
+    private var timer : Timer!
     // MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -121,19 +125,28 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
         }
         self.tableView.beginRefreshing()
         
-//        setRightNav()
+        //        setRightNav()
         
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.isHidenBar = true
         
+        self.tableView.headerRefresh {
+            self.loadNewData()
+        }
+        self.tableView.beginRefreshing()
         
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.stopTimer()
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -155,10 +168,20 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
                 //self.dismissProgressHud()
                 weakSelf?.tableView.endrefresh()
                 weakSelf?.orderInfo = data
-                weakSelf?.header.orderInfo = self.orderInfo
-                weakSelf?.tableView.reloadData()
+                weakSelf?.header.orderInfo = weakSelf?.orderInfo
+                weakSelf?.offlineHeader.orderInfo = weakSelf?.orderInfo
                 
-//                weakSelf?.showMask()
+                if weakSelf?.orderInfo.orderStatus == "0" && weakSelf?.orderInfo.payCode == "app_offline"{
+                    weakSelf?.tableView.tableHeaderView =  weakSelf?.offlineHeader
+                    weakSelf?.computationTimestamp()
+                    weakSelf?.timer = Timer.scheduledTimer(timeInterval: 1.0, target: weakSelf!, selector: #selector(weakSelf?.computationTimestamp), userInfo: nil, repeats:true);
+                    weakSelf?.timer.fire()
+
+                }else{
+                    weakSelf?.tableView.tableHeaderView = weakSelf?.header
+                }
+                weakSelf?.tableView.reloadData()
+                //                weakSelf?.showMask()
             }, onError: { (error) in
                 //self.dismissProgressHud()
                 weakSelf?.tableView.endrefresh()
@@ -168,18 +191,75 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
                     switch code {
                     case 600:
                         weakSelf?.removeUserData()
-                        weakSelf?.pushLoginVC(from: self)
+                        weakSelf?.pushLoginVC(from: weakSelf!)
                     default : break
                     }
                     
                     if 300000...310000 ~= code {
                         print(code)
-                        self.showHUD(message: msg!)
+                        weakSelf?.showHUD(message: msg!)
                     }
                 default: break
                 }
             }, onCompleted: nil , onDisposed: nil )
     }
+    
+    
+    
+    @objc private func computationTimestamp(){
+        let datefmatter = DateFormatter()
+        datefmatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let date = datefmatter.date(from: self.orderInfo.createTime)
+        let dateStamp:TimeInterval = date!.timeIntervalSince1970
+        let createStamp = Int(dateStamp)
+        
+        let now = NSDate()
+        let timeInterval = now.timeIntervalSince1970
+        let nowStamp = Int(timeInterval)
+        
+        let isPayTimeLong = Int(self.orderInfo.isPayTimeLong)
+        let countDown =  isPayTimeLong! - (nowStamp - createStamp)
+        print(countDown)
+        
+        if countDown < 0{
+            stopTimer()
+           navigationController?.popViewController(animated: true)
+        }
+        
+        let num = self.transToHourMinSec(time: Float(countDown))
+        let headerView = self.tableView.tableHeaderView as? OfflineOrderDetailHeaderView
+        headerView!.countdownLB.text = num
+    }
+    
+    private func stopTimer(){
+        if timer != nil {
+            timer.invalidate() //销毁timer
+            timer = nil
+            print("定时器销毁")
+        }
+    }
+    
+    private func transToHourMinSec(time: Float) -> String{
+        let allTime: Int = Int(time)
+        var hours = 0
+        var minutes = 0
+        var seconds = 0
+        var hoursText = ""
+        var minutesText = ""
+        var secondsText = ""
+        
+        hours = allTime / 3600
+        hoursText = hours > 9 ? "\(hours)" : "0\(hours)"
+        
+        minutes = allTime % 3600 / 60
+        minutesText = minutes > 9 ? "\(minutes)" : "0\(minutes)"
+        
+        seconds = allTime % 3600 % 60
+        secondsText = seconds > 9 ? "\(seconds)" : "0\(seconds)"
+        
+        return "失效倒计时: \(minutesText):\(secondsText)"
+    }
+    
     // MARK: - 初始化
     private func initSubview() {
         footer = OrderDetailFooterView()
@@ -187,7 +267,7 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
         
         self.view.addSubview(footer)
         self.view.addSubview(tableView)
-
+        
         
         footer.snp.makeConstraints { (make) in
             make.height.equalTo(44 * defaultScale)
@@ -202,11 +282,12 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
         }
         
         tableView.separatorStyle = .none
-        
+        offlineHeader = OfflineOrderDetailHeaderView()
+        offlineHeader.delegate = self
         header = OrderDetailHeaderView()
+
         
-        tableView.tableHeaderView = header
-//        tableView.tableFooterView = footer
+        //        tableView.tableFooterView = footer
         tableView.estimatedRowHeight = 80
         //table.rowHeight = UITableView.automaticDimension
         
@@ -218,7 +299,7 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
         tableView.register(OrderStoreCell.self, forCellReuseIdentifier: OrderStoreCell.identifier)
         tableView.register(OrdercalculateBonusesCell.self, forCellReuseIdentifier: OrdercalculateBonusesCellId)
     }
-
+    
     @IBOutlet weak var tableView : UITableView!
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -226,24 +307,26 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
         
         return 2 + orderInfo.appendInfoList.count
         
-//        switch orderInfo.showStore {
-//        case "1":
-//            return 2 + 1
-//        default:
-//            return 2 + 1
-//        }
+        //        switch orderInfo.showStore {
+        //        case "1":
+        //            return 2 + 1
+        //        default:
+        //            return 2 + 1
+        //        }
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
             return orderInfo.matchInfos.count + 3 // 显示 支付方式
-//            return orderInfo.matchInfos.count + 2
+        //            return orderInfo.matchInfos.count + 2
         case 1:
             return 1
         default:
             return 0
         }
     }
+    
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -282,16 +365,16 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
             return cell
             
         default:
-//            let model = orderInfo.appendInfoList[indexPath.row]
-//
-//            switch model.type {
-//            case "1":
-//                return initQRCodeCell(indexPath: indexPath)
-//            case "0":
-//                return initStoreCell(indexPath: indexPath)
-//            default :
-                return UITableViewCell()
-//            }
+            //            let model = orderInfo.appendInfoList[indexPath.row]
+            //
+            //            switch model.type {
+            //            case "1":
+            //                return initQRCodeCell(indexPath: indexPath)
+            //            case "0":
+            //                return initStoreCell(indexPath: indexPath)
+            //            default :
+            return UITableViewCell()
+            //            }
             
         }
     }
@@ -323,7 +406,7 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
             return 88
         case 2:
             let model = orderInfo.appendInfoList[indexPath.row]
-
+            
             switch model.type {
             case "1":
                 return 250
@@ -350,12 +433,19 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
         return nil
     }
     
+    
     override func back(_ sender: UIButton) {
-        switch backType {
-        case .root:
-            popToRootViewController()
-        default:
-            popViewController()
+        self.stopTimer()
+        if offline == true{
+            pushPagerView(pagerType: .purchaseRecord)
+            TongJi.log(.投注记录, label: "投注记录")
+        }else{
+            switch backType {
+            case .root:
+                popToRootViewController()
+            default:
+                popViewController()
+            }
         }
         self.tableView.endrefresh()
     }
@@ -366,12 +456,16 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
         // Dispose of any resources that can be recreated.
     }
     
-
+    deinit {
+        self.stopTimer()
+    }
+    
+    
 }
 
 extension CXMOrderDetailVC : ShareProtocol {
     private func setRightNav(){
-//        let codeItem = getRightNavOfQRCode()
+        //        let codeItem = getRightNavOfQRCode()
         let shareItem = getRightNavOfShare()
         
         navigationItem.rightBarButtonItems = [shareItem]
@@ -413,26 +507,26 @@ extension CXMOrderDetailVC {
     private func showMask() {
         
         if UserDefaults.standard.bool(forKey: MaskShow) == false {
-        
+            
             let gv = HXGuideMaskView(frame: self.view.bounds)
             UserDefaults.standard.set(true, forKey: MaskShow)
             let model = HXGuideInfoModel()
             model.text = """
-                        添加彩票店主微信号完成后
+            添加彩票店主微信号完成后
             返回APP订单页，点击此按钮分享给微信店主
             """
-        
+            
             model.frameBaseWindow = share.convert(share.bounds, to: nil)
             model.textColor = ColorFFFFFF
             model.insetEdge = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             model.maskCornerRadius = 15
-        
-        
+            
+            
             let model2 = HXGuideInfoModel()
             model2.text = """
             首先添加店主微信号
             """
-        
+            
             if orderInfo != nil && orderInfo.appendInfoList.isEmpty == false {
                 if orderInfo.appendInfoList[0].type == "1" {
                     DispatchQueue.main.async {
@@ -458,11 +552,11 @@ extension CXMOrderDetailVC {
                     }
                 }
             }
-        
+            
             modes.append(model)
-        
-        
-//            gv.showMask(data: modes)
+            
+            
+            //            gv.showMask(data: modes)
         }
     }
 }
@@ -483,4 +577,20 @@ extension CXMOrderDetailVC : OrderDetailQRCodeCellDelegate {
     }
     
     
+}
+
+
+extension CXMOrderDetailVC : OfflineOrderDetailHeaderViewDelegate {
+    
+    func didTipDualPayment() {
+        orderDetailid = self.orderId
+        let vc = CXMPaymentViewController()
+        vc.backType = .notRoot
+        vc.lottoToken = self.orderInfo.payToken
+        vc.payCode = self.orderInfo.payCode
+        vc.orderSn = self.orderInfo.orderSn
+        offline = true
+        self.pushViewController(vc: vc)
+    }
+
 }

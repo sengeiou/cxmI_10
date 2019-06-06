@@ -415,6 +415,7 @@
 		BB3F921E229556CE00B02ECA /* BasicDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3F921D229556CE00B02ECA /* BasicDialog.swift */; };
 		BB3F922C2295588700B02ECA /* Spring.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB3F922B2295588700B02ECA /* Spring.framework */; };
 		BB3F923622955B2500B02ECA /* HomeActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB3F923522955B2500B02ECA /* HomeActivityView.swift */; };
+		BB62CECC229E71FF00BC1828 /* OfflineOrderDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB62CECB229E71FF00BC1828 /* OfflineOrderDetailHeaderView.swift */; };
 		BBCF5D3D226A0EB900AA7564 /* OrdercalculateBonusesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCF5D3B226A0EB800AA7564 /* OrdercalculateBonusesCell.swift */; };
 		BBCF5D3E226A0EB900AA7564 /* OrdercalculateBonusesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBCF5D3C226A0EB900AA7564 /* OrdercalculateBonusesCell.xib */; };
 		E503F5BE2079E8D6006D4A0B /* FootballFilterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E503F5BD2079E8D6006D4A0B /* FootballFilterProtocol.swift */; };
@@ -1112,6 +1113,7 @@
 		BB3F921D229556CE00B02ECA /* BasicDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicDialog.swift; sourceTree = "<group>"; };
 		BB3F922B2295588700B02ECA /* Spring.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Spring.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB3F923522955B2500B02ECA /* HomeActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeActivityView.swift; sourceTree = "<group>"; };
+		BB62CECB229E71FF00BC1828 /* OfflineOrderDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineOrderDetailHeaderView.swift; sourceTree = "<group>"; };
 		BBCF5D3B226A0EB800AA7564 /* OrdercalculateBonusesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdercalculateBonusesCell.swift; sourceTree = "<group>"; };
 		BBCF5D3C226A0EB900AA7564 /* OrdercalculateBonusesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrdercalculateBonusesCell.xib; sourceTree = "<group>"; };
 		BBF8EFAB226F3E2100B67ADF /* 彩小蜜.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; name = "彩小蜜.xcworkspace"; path = "../shenghecaidian/彩小蜜.xcworkspace"; sourceTree = "<group>"; };
@@ -2569,6 +2571,7 @@
 				11436EF120B65D5700127247 /* OrderPaymentCell.swift */,
 				E5D8ABBB2067443E002D688B /* OrderProgrammeCell.swift */,
 				E5D8ABBD206749F5002D688B /* OrderDetailHeaderView.swift */,
+				BB62CECB229E71FF00BC1828 /* OfflineOrderDetailHeaderView.swift */,
 				E5D8ABBF20674A07002D688B /* OrderDetailFooterView.swift */,
 				E5883F4D2068DA2300CB3A46 /* OrderSchemeCell.swift */,
 				E5883F512068DFBF00CB3A46 /* OrderSchemeTitleCell.swift */,
@@ -4213,6 +4216,7 @@
 				11547F9C2137FB990068596C /* CXMMLeagueMatchVC.swift in Sources */,
 				115076A42138E1920029A63E /* CXMMLeagueMatchDetailVC.swift in Sources */,
 				11B2D2C6222D284B00AF835E /* UILabelEx.swift in Sources */,
+				BB62CECC229E71FF00BC1828 /* OfflineOrderDetailHeaderView.swift in Sources */,
 				11551CF220E225C5002FE691 /* CXMAccountDetailsFilter.swift in Sources */,
 				115B0CEB20EF068A00848EC7 /* FootballDetailStatisticsCell.swift in Sources */,
 				112F77B920EC7C8C005CA9E4 /* WMPageController.m in Sources */,

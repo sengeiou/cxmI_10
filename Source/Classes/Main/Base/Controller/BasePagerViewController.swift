@@ -304,7 +304,12 @@ class BasePagerViewController: ButtonBarPagerTabStripViewController {
     
 
     @objc private func back(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
+        if offline == true{
+            offline = false
+            self.navigationController?.popToRootViewController(animated: true)
+        }else{
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 
 }

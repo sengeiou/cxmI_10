@@ -10,6 +10,7 @@ import Foundation
 
 protocol WeixinShareDelegate {
     func onShardWeixin(response: SendMessageToWXResp) -> Void
+    func pushOrderDetail() -> Void
 }
 protocol WeixinPayDelegate {
     func onPaybuyWeixin(response: PayResp) -> Void
@@ -22,6 +23,8 @@ class WeixinCenter : NSObject, WXApiDelegate{
     
     public var shareDelegate : WeixinShareDelegate!
     public var payDelegate : WeixinPayDelegate!
+    public var pushOrderDetail : Bool!
+    
     override init() {
         
         super.init()
@@ -35,6 +38,10 @@ class WeixinCenter : NSObject, WXApiDelegate{
         if resp.isKind(of: SendMessageToWXResp.self) {
             guard shareDelegate != nil else { return }
             shareDelegate.onShardWeixin(response: resp as! SendMessageToWXResp)
+            if pushOrderDetail == true{
+                pushOrderDetail = false
+                shareDelegate.pushOrderDetail()
+            }
         }else if resp.isKind(of: PayResp.self) {
             guard payDelegate != nil else { return }
             payDelegate.onPaybuyWeixin(response: resp as! PayResp)

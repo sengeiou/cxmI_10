@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 fileprivate let ShareCellId = "ShareCellId"
 
 fileprivate let topInset : CGFloat = 33 * defaultScale
@@ -16,6 +17,7 @@ fileprivate let minimumLineSpacing : CGFloat = 10
 fileprivate let minimumInteritemSpacing : CGFloat = 20 * defaultScale
 fileprivate let cellWidth : CGFloat = (screenWidth - leftInset * 2 - minimumInteritemSpacing * 4) / 4
 fileprivate let cellHeight : CGFloat = 70 * defaultScale
+
 
 class CXMShareViewController: BasePopViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, WeixinSharePro {
     
@@ -32,6 +34,7 @@ class CXMShareViewController: BasePopViewController, UICollectionViewDelegate, U
         self.popStyle = .fromBottom
         
         shareList = ShareDataManager.share.getShardList()
+    
         
         initSubview()
     }
@@ -44,6 +47,7 @@ class CXMShareViewController: BasePopViewController, UICollectionViewDelegate, U
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let shareData = shareList[indexPath.row]
         share(with: shareData.shareCode)
+        dismiss(animated: true , completion: nil )
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -122,6 +126,10 @@ class CXMShareViewController: BasePopViewController, UICollectionViewDelegate, U
         default:
             break
         }
+    }
+    
+    func pushOrderDetail() {
+         NotificationCenter.default.post(name: NSNotification.Name("isTest"), object: self, userInfo: ["post":"NewTest"])
     }
     
     // MARK: - 网络请求

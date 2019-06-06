@@ -61,7 +61,7 @@ class MeCell: UITableViewCell {
         numLabel.snp.makeConstraints { (make) in
             make.top.equalTo(self.contentView).offset(10)
             make.right.equalTo(self.contentView).offset(-10)
-            make.width.equalTo(100)
+            make.left.equalTo(title.snp.right).offset(10)
             make.bottom.equalTo(self.contentView).offset(-10)
         }
         
@@ -94,7 +94,7 @@ class MeCell: UITableViewCell {
         detail.linkAttributes =  [NSAttributedString.Key.foregroundColor: Color787878]
         
         numLabel = UILabel()
-        numLabel.textAlignment = .center
+        numLabel.textAlignment = .right
         numLabel.textColor = ColorE85504
         numLabel.font = Font14
         numLabel.sizeToFit()

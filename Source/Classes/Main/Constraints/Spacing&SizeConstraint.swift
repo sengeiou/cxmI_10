@@ -39,7 +39,7 @@ let SeparationLineHeight = 1
 
 //MARK: - TABLE VIEW
 /// 默认cell 高度
-let defaultCellHeight : CGFloat = 55 * defaultScale
+let defaultCellHeight : CGFloat = 60 * defaultScale
 /// heightForHeaderInSection
 let sectionHeaderHeight : CGFloat = 5
 let SeparatorLeftSpacing : CGFloat = 10

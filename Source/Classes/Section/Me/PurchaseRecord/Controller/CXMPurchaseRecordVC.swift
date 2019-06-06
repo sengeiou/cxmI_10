@@ -67,6 +67,11 @@ class CXMPurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableVie
         super.viewDidLoad()
         //self.title = "购彩记录"
         self.view.addSubview(self.tableView)
+        
+        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         setEmpty(title: "暂无投注记录", tableView)
         addPanGestureRecognizer = false
         self.tableView.headerRefresh {
@@ -78,10 +83,6 @@ class CXMPurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableVie
         self.tableView.beginRefreshing()
         self.recordList = []
         recordRequest(1)
-        
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         TongJi.start("投注记录页")
     }
     override func viewDidDisappear(_ animated: Bool) {
@@ -206,9 +207,10 @@ class CXMPurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableVie
         super.back(sender)
         TongJi.log(.投注记录返回, label: "投注记录返回")
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
 }

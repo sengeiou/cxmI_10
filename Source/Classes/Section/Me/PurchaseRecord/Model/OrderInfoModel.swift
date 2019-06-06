@@ -54,6 +54,17 @@ struct OrderInfoModel: HandyJSON {
     var appendInfoList : [AppendInfo] = [AppendInfo]()
     
     var orderShareUrl : String = ""
+    
+    /// 订单创建时间
+//    var createTime : String = ""
+    
+    /// 订单有效时间
+    var isPayTimeLong : String = ""
+    
+    /// 线下支付
+    var payCode : String = ""
+    
+    var payToken: String = ""
 }
 
 struct MatchInfo: HandyJSON {

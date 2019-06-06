@@ -962,12 +962,6 @@ extension CXMHomeViewController : HomeActivityViewDelegate {
                     self.showActivityPop(index: 0)
                 }
 
-//                let offlinePayment = OfflinePayment.init(frame: UIScreen.main.bounds)
-//                offlinePayment.configure(width: screenWidth - 50, height: (screenWidth - 50) * 0.8)
-//                offlinePayment.createView()
-//                offlinePayment.show()
-                
-
             }, onError: { (error) in
                 guard let err = error as? HXError else { return }
                 switch err {

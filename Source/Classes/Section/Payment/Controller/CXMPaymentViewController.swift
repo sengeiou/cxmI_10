@@ -24,6 +24,12 @@ fileprivate let PaymentMethodCellId = "PaymentMethodCellId"
 
 class CXMPaymentViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, CouponFilterViewControllerDelegate, WeixinPayDelegate {
     
+    public var backType: BackType = .root
+    
+    public var payCode = ""
+    
+    public var orderSn = ""
+    
     public var lottoToken : String!
     
     public var pushWebUrl : String!
@@ -54,6 +60,8 @@ class CXMPaymentViewController: BaseViewController, UITableViewDelegate, UITable
     
     /// 控制还需支付 是否显示
     private var needPay  = false
+    
+    
     
     // MARK: - 生命周期
     override func viewDidLoad() {
@@ -193,8 +201,8 @@ class CXMPaymentViewController: BaseViewController, UITableViewDelegate, UITable
             if indexPath.row != 0 {
                 self.paymentModel = paymentAllList[indexPath.row - 1]
                 self.selectedIndex = indexPath
-                
-                if self.paymentModel.isReadonly == "1"{
+
+                if self.paymentModel.isReadonly == "1" || self.paymentModel.payCode == "app_offline"{
                     confirmBut.setTitle("去充值", for: .normal)
                 }else{
                     confirmBut.setTitle("确认支付", for: .normal)
@@ -219,10 +227,15 @@ class CXMPaymentViewController: BaseViewController, UITableViewDelegate, UITable
         self.canPayment = false
         maxTimes = QueryMaxTimes
         
-        if self.paymentModel != nil,self.paymentModel.isReadonly == "1"{
-            let recharge = CXMRechargeViewController()
-            recharge.backMe = true
-            self.pushViewController(vc: recharge)
+        if self.paymentModel != nil,self.paymentModel.isReadonly == "1" || self.paymentModel.payCode == "app_offline"{
+//            let recharge = CXMRechargeViewController()
+//            recharge.payCode = self.paymentModel.payCode
+//            recharge.payToken = self.saveBetInfo.payToken
+//            recharge.backMe = true
+//            self.pushViewController(vc: recharge)
+            
+            appOffline(token: self.saveBetInfo.payToken, code: self.paymentModel.payCode)
+
         }else{
             paymentRequest()
         }
@@ -329,13 +342,80 @@ extension CXMPaymentViewController {
 // MARK: - 网络请求
 extension CXMPaymentViewController {
 
+    
+    // 线下支付创建订单
+    private func appOffline(token: String, code: String) {
+        
+        NotificationCenter.default.removeObserver(self)
+        if timer != nil {
+            timer.invalidate()
+            timer = nil
+        }
+        
+        weak var weakSelf = self
+        _ = paymentProvider.rx.request(.appOfflineCreateOrder(payCode: code, payToken: token, orderSn: self.orderSn)).asObservable().mapArray(type: BasePageModel<Any>.self)
+            .subscribe(onNext: { (data) in
+                switch weakSelf?.backType {
+                case .root?:
+                    let recharge = CXMRechargeViewController()
+                    recharge.backType = .root
+                    recharge.payListIndexPath = IndexPath.init(row: self.selectedIndex.row, section: self.selectedIndex.section + 1)
+                    if self.paymentModel.payCode == "app_offline"{
+                        recharge.rechargeAmount = true
+                    }
+                    self.pushViewController(vc: recharge)
+                default:
+                    let recharge = CXMRechargeViewController()
+                    recharge.backType = .notRoot
+                    recharge.payListIndexPath = IndexPath.init(row: self.selectedIndex.row, section: self.selectedIndex.section + 1)
+                    self.pushViewController(vc: recharge)
+                }
+            }, onError: { (error) in
+                weakSelf?.dismissProgressHud()
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        weakSelf?.removeUserData()
+                        weakSelf?.pushLoginVC(from: self)
+                    default : break
+                    }
+                    if 300000...310000 ~= code {
+                        print(code)
+                        self.showHUD(message: msg!)
+                    }
+                    if 0...0 ~= code {
+                        switch weakSelf?.backType {
+                        case .root?:
+                            let recharge = CXMRechargeViewController()
+                            recharge.backType = .root
+                            recharge.payListIndexPath = IndexPath.init(row: self.selectedIndex.row, section: self.selectedIndex.section + 1)
+                            if self.paymentModel.payCode == "app_offline"{
+                                recharge.rechargeAmount = true
+                            }
+                            self.pushViewController(vc: recharge)
+                        default:
+                            let recharge = CXMRechargeViewController()
+                            recharge.backType = .notRoot
+                            recharge.payListIndexPath = IndexPath.init(row: self.selectedIndex.row, section: self.selectedIndex.section + 1)
+                            self.pushViewController(vc: recharge)
+                        }
+                    
+                    }
+                default: break
+                }
+            },  onCompleted: nil, onDisposed: nil)
+    }
+    
+    
     // 订单
     private func orderRequest(bonusId: String) {
         guard self.lottoToken != nil else { return }
         weak var weakSelf = self
         self.showProgressHUD()
-        
-        _ = paymentProvider.rx.request(.payBefore(bonusId: bonusId, payToken: self.lottoToken))
+
+        _ = paymentProvider.rx.request(.payBefore(bonusId: bonusId, payToken: self.lottoToken, payCode: self.payCode, orderSn: self.orderSn))
             .asObservable()
             .mapObject(type: FootballSaveBetInfoModel.self)
             .subscribe(onNext: { (data) in
@@ -432,7 +512,7 @@ extension CXMPaymentViewController {
         self.showProgressHUD()
         
         
-        _ = paymentProvider.rx.request(.paymentNew(payCode: paymentModel.payCode, payToken: self.lottoToken, weChat : true))
+        _ = paymentProvider.rx.request(.paymentNew(payCode: paymentModel.payCode, payToken: self.lottoToken, weChat : true, orderSn: self.orderSn))
             .asObservable()
             .mapObject(type: PaymentResultModel.self)
             .subscribe(onNext: { (data) in

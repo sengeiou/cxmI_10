@@ -8,8 +8,15 @@
 
 import Foundation
 
-
+/// 首页显示的弹框个数
 var popNumber = 0
+
+
+/// 判断是不是二次支付 跳转逻辑
+var offline = false
+
+/// orderid
+var orderDetailid = ""
 
 let kBaseUrl = "baseurl"
 let kBaseWebUrl = "baseweburl"

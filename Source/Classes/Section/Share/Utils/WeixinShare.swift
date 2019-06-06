@@ -11,7 +11,7 @@ import Foundation
 
 struct WeixinShare {
     static func share() {
-        
+
     }
 }
 

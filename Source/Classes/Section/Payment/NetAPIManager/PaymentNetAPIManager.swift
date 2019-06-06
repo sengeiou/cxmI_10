@@ -26,9 +26,13 @@ enum PaymentNetAPIManager {
     case allPayment
     
     /// 新支付
-    case paymentNew(payCode: String, payToken: String, weChat : Bool)
+    case paymentNew(payCode: String, payToken: String, weChat : Bool, orderSn: String)
+    
     /// 支付订单金额计算
-    case payBefore(bonusId: String, payToken: String)
+    case payBefore(bonusId: String, payToken: String, payCode: String, orderSn: String)
+    
+    /// 线下支付创建订单
+    case appOfflineCreateOrder(payCode: String, payToken: String, orderSn: String)
     
 }
 
@@ -57,6 +61,8 @@ extension PaymentNetAPIManager : TargetType {
             return "/payment/allPaymentWithRecharge"
         case .payBefore:
             return "/payment/unifiedPayBefore"
+        case .appOfflineCreateOrder:
+            return "/payment/appOfflineCreateOrder"
         }
     }
     
@@ -67,10 +73,11 @@ extension PaymentNetAPIManager : TargetType {
         case .payment(let payCode, let payToken):
             dic["payCode"] = payCode
             dic["payToken"] = payToken
-        case .paymentNew(let payCode, let payToken, let weChart):
+        case .paymentNew(let payCode, let payToken, let weChart, let orderSn):
             dic["payCode"] = payCode
             dic["payToken"] = payToken
             dic["innerWechat"] = weChart
+            dic["orderSn"] = orderSn
         case .paymentRecharge(let payCode, let totalAmount):
             dic["payCode"] = payCode
             dic["totalAmount"] = totalAmount
@@ -81,9 +88,17 @@ extension PaymentNetAPIManager : TargetType {
             dic["payLogId"] = payLogId
         case .paymentAll:
             break
-        case .payBefore(let bonusId, let payToken):
+        case .allPayment:
+            break
+        case .payBefore(let bonusId, let payToken, let payCode, let orderSn):
             dic["bonusId"] = bonusId
             dic["payToken"] = payToken
+            dic["payCode"] = payCode
+            dic["orderSn"] = orderSn
+        case .appOfflineCreateOrder(let payCode, let payToken, let orderSn):
+            dic["payCode"] = payCode
+            dic["payToken"] = payToken
+            dic["orderSn"] = orderSn
         default:
             break
         }
