@@ -341,6 +341,8 @@ class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITabl
             tableView.selectRow(at: self.selectedIndex, animated: false, scrollPosition: .none)
         }
     }
+
+    
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -646,6 +648,7 @@ class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITabl
         let tableview = UITableView(frame: CGRect.zero, style: .grouped)
         tableview.delegate = self
         tableview.dataSource = self
+        tableview.separatorStyle = .none
         self.view.addSubview(tableview)
         tableview.register(RechargeTitleCell.self, forCellReuseIdentifier: RechargeTitleCellIdentifier)
         tableview.register(RechargeCardCell.self, forCellReuseIdentifier: RechargeCardCellIdentifier)
@@ -786,7 +789,11 @@ class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITabl
             }
            
         case 2:
-            return defaultCellHeight
+            if indexPath.row == 0{
+                return titleCellHeight
+            }else{
+                return defaultCellHeight
+            }
         default:
             return defaultCellHeight
         }

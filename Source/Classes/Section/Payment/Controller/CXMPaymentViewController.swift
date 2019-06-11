@@ -70,7 +70,7 @@ class CXMPaymentViewController: BaseViewController, UITableViewDelegate, UITable
         WeixinCenter.share.payDelegate = self
         initSubview()
         orderRequest(bonusId: "")
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(startPollingTimer), name: NSNotification.Name(rawValue: NotificationWillEnterForeground), object: nil)
     }
 
@@ -358,7 +358,8 @@ extension CXMPaymentViewController {
                 switch weakSelf?.backType {
                 case .root?:
                     let recharge = CXMRechargeViewController()
-                    recharge.backType = .root
+//                            recharge.backType = .root
+                    recharge.backMe = true
                     recharge.payListIndexPath = IndexPath.init(row: self.selectedIndex.row, section: self.selectedIndex.section + 1)
                     if self.paymentModel.payCode == "app_offline"{
                         recharge.rechargeAmount = true
@@ -389,7 +390,8 @@ extension CXMPaymentViewController {
                         switch weakSelf?.backType {
                         case .root?:
                             let recharge = CXMRechargeViewController()
-                            recharge.backType = .root
+//                            recharge.backType = .root
+                            recharge.backMe = true
                             recharge.payListIndexPath = IndexPath.init(row: self.selectedIndex.row, section: self.selectedIndex.section + 1)
                             if self.paymentModel.payCode == "app_offline"{
                                 recharge.rechargeAmount = true
@@ -440,6 +442,8 @@ extension CXMPaymentViewController {
                 if weakSelf?.saveBetInfo.thirdPartyPaid == 0.0 {
                     weakSelf?.needPay = true
                     weakSelf?.tableView.reloadData()
+                }else{
+                    weakSelf?.allPaymentRequest()
                 }
                 
                 
@@ -450,7 +454,7 @@ extension CXMPaymentViewController {
                 weakSelf?.lottoToken = data.payToken
                 data.setBonus() // 设置默认选中的优惠券
                 //weakSelf?.tableView.reloadData()
-                weakSelf?.allPaymentRequest()
+
             }, onError: { (error) in
                 weakSelf?.dismissProgressHud()
                 guard let err = error as? HXError else { return }
@@ -480,6 +484,14 @@ extension CXMPaymentViewController {
             .mapArray(type: PaymentList.self)
             .subscribe(onNext: { (data) in
                 weakSelf?.paymentAllList = data
+                if data[0].isReadonly == "1" || data[0].payCode == "app_offline"{
+                    weakSelf?.confirmBut.setTitle("去充值", for: .normal)
+                }else{
+                    weakSelf?.confirmBut.setTitle("确认支付", for: .normal)
+                }
+                
+                
+                
                 weakSelf?.tableView.reloadData()
             }, onError: { (error) in
                 guard let err = error as? HXError else { return }
@@ -675,7 +687,9 @@ extension CXMPaymentViewController {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            if needPay == true{return 3}
+            if needPay == true{
+                return 3
+            }
             return 4
         case 1:
             guard self.saveBetInfo != nil else { return 0 }

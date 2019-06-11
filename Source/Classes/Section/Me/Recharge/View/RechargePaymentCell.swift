@@ -32,6 +32,7 @@ class RechargePaymentCell: UITableViewCell {
     private var title : UILabel!
     private var payDesc : UILabel!
     private var selectorIcon : UIImageView!
+    private var lineView : UIView!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -60,10 +61,14 @@ class RechargePaymentCell: UITableViewCell {
         payDesc.text = "微信支付"
         payDesc.textAlignment = .left
         
+        lineView = UIView()
+        lineView.backgroundColor = .lightGray
+        
         self.contentView.addSubview(icon)
         self.contentView.addSubview(title)
         self.contentView.addSubview(payDesc)
         self.contentView.addSubview(selectorIcon)
+        self.contentView.addSubview(lineView)
     }
     
     override func layoutSubviews() {
@@ -83,6 +88,10 @@ class RechargePaymentCell: UITableViewCell {
             make.centerY.equalTo(self.contentView.snp.centerY)
             make.right.equalTo(self.contentView).offset(-21)
             make.height.width.equalTo(21)
+        }
+        lineView.snp.makeConstraints { (make) in
+            make.height.equalTo(0.5)
+            make.top.left.right.equalTo(self.contentView)
         }
     }
     

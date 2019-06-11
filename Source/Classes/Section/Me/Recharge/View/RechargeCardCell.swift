@@ -88,7 +88,7 @@ class RechargeCardCell: UITableViewCell {
     public var textfield : CustomTextField!
     public var activityImageView : UIImageView!
     private var activityMoney : UILabel!
-    
+
     
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -106,8 +106,8 @@ class RechargeCardCell: UITableViewCell {
     
     
     private func initSubview() {
-        self.selectionStyle = .none
-        
+
+
         title = UILabel()
         title.font = Font14
         title.text = "充值金额"
@@ -136,6 +136,9 @@ class RechargeCardCell: UITableViewCell {
         textfield.textColor = ColorE95504
         
         
+
+        
+        
         
         if self.paymentModel != nil && self.paymentModel.isReadonly == "0"{
             textfield.isUserInteractionEnabled = true
@@ -152,6 +155,7 @@ class RechargeCardCell: UITableViewCell {
         //        self.contentView.addSubview(card200)
         self.contentView.addSubview(activityImageView)
         activityImageView.addSubview(activityMoney)
+
         
         title.snp.makeConstraints { (make) in
             make.height.equalTo(titleHeight)
@@ -166,6 +170,8 @@ class RechargeCardCell: UITableViewCell {
             make.right.equalTo(self.contentView).offset(-19)
             make.top.equalTo(title.snp.bottom).offset(rowSpacing)
         }
+        
+ 
         
         buttonArr.removeAll()
         viewArr.removeAll()
@@ -221,6 +227,8 @@ class RechargeCardCell: UITableViewCell {
                 make.height.equalTo(18)
             }
         }
+        
+        
 
         
         

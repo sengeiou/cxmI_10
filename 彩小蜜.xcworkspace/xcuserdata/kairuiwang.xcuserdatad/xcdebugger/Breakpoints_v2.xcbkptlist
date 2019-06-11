@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Classes/Section/Payment/Controller/CXMPaymentViewController.swift"
-            timestampString = "581507822.872818"
+            timestampString = "581851214.995142"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "539"
-            endingLineNumber = "539"
+            startingLineNumber = "551"
+            endingLineNumber = "551"
             landmarkName = "paymentRequest()"
             landmarkType = "7">
          </BreakpointContent>
@@ -154,7 +154,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Classes/Main/Base/Controller/BaseViewController.swift"
-            timestampString = "581507822.87292"
+            timestampString = "581851214.995427"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "110"
@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Classes/Section/Payment/Controller/CXMPaymentViewController.swift"
-            timestampString = "581507822.873001"
+            timestampString = "581851214.9956959"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "366"
-            endingLineNumber = "366"
+            startingLineNumber = "360"
+            endingLineNumber = "360"
             landmarkName = "appOffline(token:code:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -186,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Classes/Section/Payment/Controller/CXMPaymentViewController.swift"
-            timestampString = "581507822.873065"
+            timestampString = "581851214.995791"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "371"
-            endingLineNumber = "371"
+            startingLineNumber = "369"
+            endingLineNumber = "369"
             landmarkName = "appOffline(token:code:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -201,13 +201,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Source/Classes/Section/Home/Controller/CXMHomeViewController.swift"
-            timestampString = "581507822.873129"
+            filePath = "Source/Classes/Section/Payment/Controller/CXMPaymentViewController.swift"
+            timestampString = "581851214.995874"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "233"
-            endingLineNumber = "233"
-            landmarkName = "didTipBanner(banner:)"
+            startingLineNumber = "392"
+            endingLineNumber = "392"
+            landmarkName = "appOffline(token:code:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -217,13 +217,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Source/Classes/Section/Home/Controller/CXMHomeViewController.swift"
-            timestampString = "581507822.873582"
+            filePath = "Source/Classes/Section/Payment/Controller/CXMPaymentViewController.swift"
+            timestampString = "581851214.996001"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "245"
-            endingLineNumber = "245"
-            landmarkName = "didSelectItem(playModel:index:)"
+            startingLineNumber = "401"
+            endingLineNumber = "401"
+            landmarkName = "appOffline(token:code:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Source/Classes/Section/Payment/Controller/CXMPaymentViewController.swift"
+            timestampString = "581851214.996078"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "399"
+            endingLineNumber = "399"
+            landmarkName = "appOffline(token:code:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
