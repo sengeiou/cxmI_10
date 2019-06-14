@@ -18,6 +18,8 @@ enum ActivityNetAPIManager {
     case saveWCBetInfo(dic: [String: String])
     /// 首页弹屏
     case activity
+    /// 首页弹屏 新版本
+    case activityNew
 }
 
 extension ActivityNetAPIManager : TargetType {
@@ -34,6 +36,8 @@ extension ActivityNetAPIManager : TargetType {
             return "/lottery/dl/wc/saveBetInfo"
         case .activity:
             return "/lottery/lottery/nav/banner/openNavs"
+        case .activityNew:
+            return "/lottery/lottery/nav/banner/openNavsNew"
         }
     }
     
@@ -47,6 +51,8 @@ extension ActivityNetAPIManager : TargetType {
             dic["payLogId"] = payLogId
         case .saveWCBetInfo(let dict):
             dic = dict
+        case .activityNew:
+            dic["emptyStr"] = ""
         case .activity:
             dic["emptyStr"] = ""
         default:

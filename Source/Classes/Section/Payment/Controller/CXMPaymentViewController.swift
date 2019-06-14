@@ -442,6 +442,8 @@ extension CXMPaymentViewController {
                 if weakSelf?.saveBetInfo.thirdPartyPaid == 0.0 {
                     weakSelf?.needPay = true
                     weakSelf?.tableView.reloadData()
+                    guard weakSelf?.paymentModel != nil else { return }
+                    weakSelf?.paymentModel.payCode = ""
                 }else{
                     weakSelf?.allPaymentRequest()
                 }

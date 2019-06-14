@@ -17,6 +17,7 @@ class MeFooterView: UIView {
     // MARK: - 点击事件
     @objc private func signOutClicked(_ sender: UIButton) {
         guard delegate != nil else { return }
+        popNumber = 0
         delegate.signOutClicked()
     }
     

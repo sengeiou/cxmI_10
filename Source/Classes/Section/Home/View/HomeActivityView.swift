@@ -18,7 +18,7 @@ protocol HomeActivityViewDelegate {
 class HomeActivityView: BasicDialog {
 
     public var delegate : HomeActivityViewDelegate!
-    public var activityModel : [ActivityModel]!
+    public var activityModel : ActivityModel!
     
     lazy var deleteBut : UIButton = {
         let but = UIButton(type: .custom)
@@ -108,7 +108,7 @@ extension HomeActivityView {
             make.height.equalTo(imageHeight)
         }
         
-        if index == 1{
+        if activityModel.name == "2"{
            setLabelAttributedStr()
         }
         
@@ -123,6 +123,8 @@ extension HomeActivityView {
     }
     
     public func setLabelAttributedStr(){
+        
+        guard activityModel.name == "2" else { return }
         
         imageView.addSubview(titlelLabel)
         imageView.addSubview(detailLabel)
@@ -139,7 +141,7 @@ extension HomeActivityView {
         
         let bonusNumberAttributedStrM : NSMutableAttributedString = NSMutableAttributedString()
         let titlelLabel1 = NSAttributedString.init(string: "您还有", attributes: [NSAttributedString.Key.backgroundColor : UIColor.clear , NSAttributedString.Key.foregroundColor : UIColor.red , NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14)])
-        let titlelLabel2 = NSAttributedString.init(string: " \(activityModel[1].bonusNumber) ", attributes: [NSAttributedString.Key.backgroundColor : UIColor.clear , NSAttributedString.Key.foregroundColor : UIColor.red , NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 24)])
+        let titlelLabel2 = NSAttributedString.init(string: " \(activityModel.bonusNumber) ", attributes: [NSAttributedString.Key.backgroundColor : UIColor.clear , NSAttributedString.Key.foregroundColor : UIColor.red , NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 24)])
         let titlelLabel3 = NSAttributedString.init(string: "张优惠券", attributes: [NSAttributedString.Key.backgroundColor : UIColor.clear , NSAttributedString.Key.foregroundColor : UIColor.red , NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14)])
         bonusNumberAttributedStrM.append(titlelLabel1)
         bonusNumberAttributedStrM.append(titlelLabel2)
@@ -148,7 +150,7 @@ extension HomeActivityView {
         let bonusPriceAttributedStrM : NSMutableAttributedString = NSMutableAttributedString()
         let bonusPriceLabel1 = NSAttributedString.init(string: "价值", attributes: [NSAttributedString.Key.backgroundColor : UIColor.clear , NSAttributedString.Key.foregroundColor : UIColor.red , NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 16)])
         
-        let bonusPriceLabel2 = NSAttributedString.init(string: " \(activityModel[1].bonusPrice) ", attributes: [NSAttributedString.Key.backgroundColor : UIColor.clear , NSAttributedString.Key.foregroundColor : UIColor.red , NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 26)])
+        let bonusPriceLabel2 = NSAttributedString.init(string: " \(activityModel.bonusPrice) ", attributes: [NSAttributedString.Key.backgroundColor : UIColor.clear , NSAttributedString.Key.foregroundColor : UIColor.red , NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 26)])
         
         let bonusPriceLabel3 = NSAttributedString.init(string: "元\n即将过期", attributes: [NSAttributedString.Key.backgroundColor : UIColor.clear , NSAttributedString.Key.foregroundColor : UIColor.red , NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 16)])
         bonusPriceAttributedStrM.append(bonusPriceLabel1)

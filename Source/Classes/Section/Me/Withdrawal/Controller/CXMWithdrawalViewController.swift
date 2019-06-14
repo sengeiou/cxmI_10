@@ -134,7 +134,14 @@ class CXMWithdrawalViewController: BaseViewController, ValidatePro, UITextFieldD
                     case 600:
                         weakSelf?.removeUserData()
                         weakSelf?.pushLoginVC(from: self)
-                    default : break
+//                    case 304048:
+//                        self.popViewController()
+//                    case 304056:
+//                        self.popViewController()
+                    default :
+                        self.showHUD(message: msg!)
+                        self.popViewController()
+                        break
                     }
                     
                     if 300000...310000 ~= code {

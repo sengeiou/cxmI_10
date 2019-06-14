@@ -17,7 +17,7 @@ class ActivityModel : NSObject, HandyJSON {
     
 //    var promotionModel: promotionModel!
 //    var couponModel: couponModel!
-    var name : Int!
+    var name : String!
     
     var bannerImage : String = ""
     var bannerLink : String = ""

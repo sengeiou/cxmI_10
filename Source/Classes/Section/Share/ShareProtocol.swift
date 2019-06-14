@@ -34,9 +34,18 @@ extension ShareProtocol {
                 contentModel.sharePic = UIImage(named: "fenxiangtubiao")
             }
             
-            let share = CXMShareViewController()
-            share.shareContent = contentModel
-            vc.present(share)
+            if vc.classForCoder == CXMRechargeViewController.self{
+                let share = CXMShareViewController()
+                share.contact = true
+                share.shareContent = contentModel
+                vc.present(share)
+            }else{
+                let share = CXMShareViewController()
+                share.contact = false
+                share.shareContent = contentModel
+                vc.present(share)
+            }
+
         }else {
             if let url = URL(string: contentModel.sharePicUrl) {
                 UIImageView().kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil , completionHandler: { (image, error, type , url) in

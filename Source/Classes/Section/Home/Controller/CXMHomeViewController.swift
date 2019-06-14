@@ -72,6 +72,8 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
         
         NotificationCenter.default.addObserver(self, selector: #selector(configNotification(_:)), name: NSNotification.Name(rawValue: NotificationConfig), object: nil)
         
+        NotificationCenter.default.addObserver(self, selector:#selector(didBecome),name: UIApplication.didBecomeActiveNotification,object: nil)
+
         getRealmData()
         
         // 定位信息
@@ -139,8 +141,6 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
         if popNumber < self.activityModel.count{
             self.showActivityPop(index: popNumber)
         }
-        
-        
 //        tableView.reloadData()
         
     }
@@ -148,6 +148,10 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
         super.viewDidAppear(animated)
         TongJi.start("大厅")
         TongJi.log(.show, label: "大厅")
+    }
+    
+    @objc func didBecome(){
+        print("didi become")
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -848,6 +852,7 @@ extension CXMHomeViewController : CouponPopVCDelegate {
 // MARK: - 更新弹框
 extension CXMHomeViewController : UpdateAppPopVcDelegate {
     func deleteClicked() {
+        guard self.activityModel != nil else { return }
         isUpdateApp = false
         if popNumber < self.activityModel.count{
             self.showActivityPop(index: popNumber)
@@ -893,12 +898,11 @@ extension CXMHomeViewController : HomeActivityViewDelegate {
     
     func didTipActivity(link: String) {
         guard activityModel != nil else { return }
-        if popNumber == 1{
+        if activityModel[popNumber].name == "2"{
             pushPagerView(pagerType: .coupon)
         }else{
             pushRouterVC(urlStr: activityModel[popNumber].bannerLink, from: self)
         }
-        
     }
     
     func deleteHide() {
@@ -908,31 +912,31 @@ extension CXMHomeViewController : HomeActivityViewDelegate {
     }
 
     func showActivityPop(index: Int){
-        
+        guard self.activityModel.count != 0 else { return }
         let activity = HomeActivityView.init(frame: UIScreen.main.bounds)
-        activity.activityModel = self.activityModel
+        
+        activity.activityModel = self.activityModel[index]
         activity.createView()
+        
         var url = URL.init(string: "")
-        if index == 1{
-            
-        }else{
-            url = URL(string : activityModel[index].bannerImage)
+        if activity.activityModel.name != "2"{
+            url = URL(string : activity.activityModel.bannerImage)
         }
         
         activity.imageView.kf.setImage(with: url, placeholder: nil, options: nil , progressBlock: nil) { (image, error, type , url) in
-            if index == 1{
+            if activity.activityModel.name == "2"{
                 let img = Image(named: "优惠券")
                 let scaleWH: CGFloat = img!.size.height / img!.size.width
                 activity.configure(with: popNumber, width: screenWidth - 50, height: (screenWidth - 50) * scaleWH)
                 activity.imageView.image = img
                 activity.delegate = self
                 return
+            }else{
+                let img = image
+                activity.configure(with: popNumber, width: img!.size.width, height: img!.size.height)
+                activity.delegate = self
             }
-            let img = image
-            activity.configure(with: popNumber, width: img!.size.width, height: img!.size.height)
-            activity.delegate = self
         }
-        
         activity.show()
     }
 
@@ -952,7 +956,7 @@ extension CXMHomeViewController : HomeActivityViewDelegate {
 //        }
     
     private func activityRequest() {
-        _ = activityProvider.rx.request(.activity).asObservable()
+        _ = activityProvider.rx.request(.activityNew).asObservable()
             .mapArray(type: ActivityModel.self)
             .subscribe(onNext: { (data) in
                 print(data)

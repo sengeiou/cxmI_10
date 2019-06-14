@@ -22,7 +22,18 @@ fileprivate let cellHeight : CGFloat = 70 * defaultScale
 class CXMShareViewController: BasePopViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, WeixinSharePro {
     
     public var shareContent: ShareContentModel!
-
+    
+    /// 判断显示联系店主开关
+    public var contact = false{
+        didSet{
+            if contact == false{
+                shareList = ShareDataManager.share.getShardList()
+            }else{
+                shareList = ShareDataManager.share.getShardContact()
+            }
+        }
+    }
+    
     // MARK: - 属性 private
     private var bottomLine : UIView!
     private var cancelBut: UIButton!
@@ -34,7 +45,6 @@ class CXMShareViewController: BasePopViewController, UICollectionViewDelegate, U
         self.popStyle = .fromBottom
         
         shareList = ShareDataManager.share.getShardList()
-    
         
         initSubview()
     }

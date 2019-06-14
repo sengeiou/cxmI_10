@@ -73,54 +73,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Source/Classes/Section/Surprise/Controller/CXMMLeagueMatchDetailVC.swift"
-            timestampString = "578807406.587606"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "469"
-            endingLineNumber = "469"
-            landmarkName = "initLeagueScoreCell(indexPath:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Source/Classes/Section/Surprise/Controller/CXMMLeagueMatchDetailVC.swift"
-            timestampString = "578807406.587702"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "475"
-            endingLineNumber = "475"
-            landmarkName = "initLeagueScoreCell(indexPath:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Source/Classes/Section/Surprise/Controller/CXMMLeagueMatchDetailVC.swift"
-            timestampString = "578807406.5877579"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "471"
-            endingLineNumber = "471"
-            landmarkName = "initLeagueScoreCell(indexPath:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Source/Classes/Main/Util/WeixinCenter.swift"
             timestampString = "580967045.507486"
             startingColumnNumber = "9223372036854775807"
@@ -137,24 +89,8 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Source/Classes/Section/Payment/Controller/CXMPaymentViewController.swift"
-            timestampString = "581914452.498895"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "551"
-            endingLineNumber = "551"
-            landmarkName = "paymentRequest()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Source/Classes/Main/Base/Controller/BaseViewController.swift"
-            timestampString = "581914093.77969"
+            timestampString = "582108504.414728"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "110"
@@ -170,7 +106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Classes/Section/Payment/Controller/CXMPaymentViewController.swift"
-            timestampString = "581914452.50016"
+            timestampString = "582177864.3641289"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "360"
@@ -186,7 +122,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Classes/Section/Payment/Controller/CXMPaymentViewController.swift"
-            timestampString = "581914452.500806"
+            timestampString = "582177864.364228"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "369"
@@ -202,12 +138,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Classes/Section/Payment/Controller/CXMPaymentViewController.swift"
-            timestampString = "581914452.5014"
+            timestampString = "582177864.3643"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "392"
-            endingLineNumber = "392"
-            landmarkName = "appOffline(token:code:)"
+            startingLineNumber = "444"
+            endingLineNumber = "444"
+            landmarkName = "orderRequest(bonusId:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -218,28 +154,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/Classes/Section/Payment/Controller/CXMPaymentViewController.swift"
-            timestampString = "581914452.502071"
+            timestampString = "582177864.364347"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "401"
-            endingLineNumber = "401"
-            landmarkName = "appOffline(token:code:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Source/Classes/Section/Payment/Controller/CXMPaymentViewController.swift"
-            timestampString = "581914452.502618"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "399"
-            endingLineNumber = "399"
-            landmarkName = "appOffline(token:code:)"
+            startingLineNumber = "448"
+            endingLineNumber = "448"
+            landmarkName = "orderRequest(bonusId:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

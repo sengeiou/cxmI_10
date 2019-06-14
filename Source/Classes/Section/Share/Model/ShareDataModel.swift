@@ -59,7 +59,27 @@ class ShareDataManager {
         
         return shareList
     }
+    
+    
+    func getShardContact() -> [ShareDataModel] {
+        var shareList = [ShareDataModel]()
+
+        var weixin = ShareDataModel()
+        weixin.title = "微信"
+        weixin.iconPic = "微信"
+        weixin.shareCode = .ShareWeixin
+
+        if WXApi.isWXAppInstalled(){
+            shareList.append(weixin)
+        }
+        
+        return shareList
+    }
 }
+
+
+
+
 
 struct ShareDataModel {
     var title : String!
