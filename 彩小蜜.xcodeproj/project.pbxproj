@@ -390,6 +390,7 @@
 		3FDA6AE24EC5CBEC3DC6A1BD /* Pods____UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49CBED854E2AF39CD088BF2F /* Pods____UITests.framework */; };
 		B4C375AE21461DF200390A3A /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C375AD21461DF200390A3A /* AppConfig.swift */; };
 		B4C375B021465F1900390A3A /* ConfigureRequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C375AF21465F1900390A3A /* ConfigureRequestProtocol.swift */; };
+		BBD3428B2280376C0093308A /* UpdateAppPopVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD3428A2280376C0093308A /* UpdateAppPopVc.swift */; };
 		CC102FAC451CA6647F398D8C /* Pods____Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D52061D69ABC39B7AD9C485 /* Pods____Tests.framework */; };
 		E503F5BE2079E8D6006D4A0B /* FootballFilterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E503F5BD2079E8D6006D4A0B /* FootballFilterProtocol.swift */; };
 		E503F5C0207A11B3006D4A0B /* FootballRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E503F5BF207A11B3006D4A0B /* FootballRequestModel.swift */; };
@@ -1041,6 +1042,7 @@
 		A7A8CDA4EA02975014D806E4 /* Pods-彩小蜜.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜.release.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜/Pods-彩小蜜.release.xcconfig"; sourceTree = "<group>"; };
 		B4C375AD21461DF200390A3A /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		B4C375AF21465F1900390A3A /* ConfigureRequestProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureRequestProtocol.swift; sourceTree = "<group>"; };
+		BBD3428A2280376C0093308A /* UpdateAppPopVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAppPopVc.swift; sourceTree = "<group>"; };
 		C46655EB1FBD7C2CB77E79A1 /* Pods-彩小蜜UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜UITests/Pods-彩小蜜UITests.release.xcconfig"; sourceTree = "<group>"; };
 		C6498BCAF23256B536C54738 /* Pods-彩小蜜.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜.debug.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜/Pods-彩小蜜.debug.xcconfig"; sourceTree = "<group>"; };
 		E503F5BD2079E8D6006D4A0B /* FootballFilterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballFilterProtocol.swift; sourceTree = "<group>"; };
@@ -2798,6 +2800,7 @@
 				11D9D9DF2089CD2500F78FCF /* CXMNewsDetailViewController.swift */,
 				114800D7208C80B100621AFA /* CXMNewsRecommendVC.swift */,
 				11F2217121AE8E9100DAFBC5 /* ActivityPopVC.swift */,
+				BBD3428A2280376C0093308A /* UpdateAppPopVc.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3345,7 +3348,7 @@
 				TargetAttributes = {
 					E573759E20468B8900148622 = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -4082,6 +4085,7 @@
 				113AAD7A2121330700FB86B8 /* DLTRedBlueTrendItem.swift in Sources */,
 				E5883F522068DFBF00CB3A46 /* OrderSchemeTitleCell.swift in Sources */,
 				1158FC4921105AF90004229D /* DaletouItem.swift in Sources */,
+				BBD3428B2280376C0093308A /* UpdateAppPopVc.swift in Sources */,
 				1158FC4B211063470004229D /* DaletouDataModel.swift in Sources */,
 				11C4F46320E09BB000CCDFC6 /* UserInfoIconCell.swift in Sources */,
 				1144910620859B29009F1D09 /* FootballAnalysisMatchView.swift in Sources */,
@@ -4339,8 +4343,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "彩小蜜/彩小蜜.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = QDPVKJVWX6;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4354,7 +4358,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qiuduoduo.itools;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = iOS_Qiuduoduo_Distribution;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Source/Classes/ThirdParty/Header.h";
 				SWIFT_VERSION = 4.2;
 				SYSTEM_HEADER_SEARCH_PATHS = "";
@@ -4370,8 +4374,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "彩小蜜/彩小蜜.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = QDPVKJVWX6;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4385,7 +4389,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.qiuduoduo.itools;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = iOS_Qiuduoduo_Distribution;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Source/Classes/ThirdParty/Header.h";
 				SWIFT_VERSION = 4.2;
 				SYSTEM_HEADER_SEARCH_PATHS = "";

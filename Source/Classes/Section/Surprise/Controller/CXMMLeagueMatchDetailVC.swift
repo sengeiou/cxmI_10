@@ -466,7 +466,7 @@ extension CXMMLeagueMatchDetailVC : UITableViewDataSource {
             
             switch scoreStyle {
             case .总积分:
-                cell.configure(with: self.leagueDetailModel.leagueScore.matchScoreDTOList[0].leagueCcoreList[indexPath.row - 1], style: .data)
+                cell.configure(with: self.leagueDetailModel.leagueScore.matchScoreDTOList[indexPath.section - 2].leagueCcoreList[indexPath.row - 1], style: .data)
             case .主场积分:
                 if leagueDetailModel.leagueScore.matchScoreDTOList.count > 1 {
                     cell.configure(with: self.leagueDetailModel.leagueScore.matchScoreDTOList[1].leagueCcoreList[indexPath.row - 1], style: .data)

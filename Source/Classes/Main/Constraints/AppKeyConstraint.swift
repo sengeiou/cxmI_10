@@ -22,6 +22,11 @@ let Channel = "c36010"
 let phoneNum = "400-012-6600"
 
 let website = "http://www.renrentiyua.com"
+
+/// 主程序版本号
+let majorVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String
+
+
 /// 个推
 #if DEBUG
     let GetuiAppID  = "SQ3WV0duEo5YipEvzlaXS2"
