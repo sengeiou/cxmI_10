@@ -72,7 +72,7 @@ class BasketballViewModel : AlertPro {
                         confirmButtonState.onNext(true)
                     }else{
                         selectNumText.onNext("您共选择\(sePlayList.count)场赛事")
-                        confirmButtonState.onNext(false)
+                        confirmButtonState.onNext(true)
                     }
                 }
             }

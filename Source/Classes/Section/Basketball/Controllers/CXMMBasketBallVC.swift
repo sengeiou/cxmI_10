@@ -10,10 +10,10 @@ import UIKit
 import RxSwift
 
 enum BasketballPlayType : String {
-    case 胜负
-    case 大小分
-    case 胜分差
     case 让分胜负
+    case 胜负
+    case 胜分差
+    case 大小分
     case 混合投注 
     
     static func getPlayType (type : BasketballPlayType) -> String {
@@ -33,6 +33,8 @@ enum BasketballPlayType : String {
     
 }
 
+fileprivate var maxNum: Set<Int> = [8]
+
 class CXMMBasketballVC: BaseViewController {
 
     @IBOutlet weak var totalMatch : UILabel!
@@ -41,7 +43,7 @@ class CXMMBasketballVC: BaseViewController {
     @IBOutlet weak var selectNum : UILabel!
     @IBOutlet weak var confirmBut: UIButton!
     
-    private var type : BasketballPlayType = .混合投注 {
+    public var type : BasketballPlayType = .混合投注 {
         didSet{
             guard titleView != nil else { return }
             titleView.setTitle(type.rawValue, for: .normal)
@@ -68,10 +70,10 @@ class CXMMBasketballVC: BaseViewController {
         initSubview()
         setData()
         filterRequest()
-        tableView.headerRefresh {
+//        tableView.headerRefresh {
             self.loadNewData()
-        }
-        tableView.beginRefreshing()
+//        }
+//        tableView.beginRefreshing()
     }
     // MARK: - 设置显示数据
     private func setData() {
@@ -156,6 +158,7 @@ extension CXMMBasketballVC {
         basketballRequest("")
     }
     private func basketballRequest(_ leagueId : String) {
+        self.showProgressHUD()
         weak var weakSelf = self
         _ = basketBallProvider.rx.request(.basketballMatchList(leagueId: leagueId,
                                                                playType: BasketballPlayType.getPlayType(type: self.type)))
@@ -286,7 +289,7 @@ extension CXMMBasketballVC {
                                         visiCell.cellName = ce.cellName
                                         visiCell.cellOdds = ce.cellOdds
                                         visiCell.cellCode = ce.cellCode
-                                        visiCell.playType = "31"
+                                        visiCell.playType = "3"
                                         playInfo.shengFenCha.visiSFC.append(visiCell)
                                     }
                                 }
@@ -296,7 +299,7 @@ extension CXMMBasketballVC {
                                         homeCell.cellName = ce.cellName
                                         homeCell.cellOdds = ce.cellOdds
                                         homeCell.cellCode = ce.cellCode
-                                        homeCell.playType = "32"
+                                        homeCell.playType = "3"
                                         playInfo.shengFenCha.homeSFC.append(homeCell)
                                     }
                                 }
@@ -401,7 +404,7 @@ extension CXMMBasketballVC {
                                         cellIn.cellName = ce.cellName
                                         cellIn.cellOdds = ce.cellOdds
                                         cellIn.cellCode = ce.cellCode
-                                        cellIn.playType = "31"
+                                        cellIn.playType = "3"
                                         playInfo.shengFenCha.visiSFC.append(cellIn)
                                     }
                                     
@@ -410,7 +413,7 @@ extension CXMMBasketballVC {
                                         cellIn.cellName = ce.cellName
                                         cellIn.cellOdds = ce.cellOdds
                                         cellIn.cellCode = ce.cellCode
-                                        cellIn.playType = "32"
+                                        cellIn.playType = "3"
                                         playInfo.shengFenCha.homeSFC.append(cellIn)
                                     }
                                 case "4":
@@ -437,7 +440,7 @@ extension CXMMBasketballVC {
                     
                 }
                 weakSelf?.tableView.reloadData()
-                
+                self.dismissProgressHud()
             }, onError: { (error) in
                 weakSelf?.tableView.endrefresh()
                 guard let err = error as? HXError else { return }
@@ -490,28 +493,232 @@ extension CXMMBasketballVC : CXMMBasketballLeagueFilterDelegate{
 // MARK: - 删除、确认，点击事件
 extension CXMMBasketballVC {
     @IBAction func didTipConfirmButton(_ sender : UIButton) {
-        
-    }
-    
-    @IBAction func didTipDeleteButton(_ sender : UIButton) {
-        viewModel.removeAll()
-    }
-}
-extension CXMMBasketballVC {
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier {
-        case "pushConfirm":
-            let vc = segue.destination as! CXMMBasketballConfirmVC
+
+        guard self.viewModel.sePlayList.isEmpty == false else {
+            showHUD(message: "您还未选择比赛")
+            return }
+       
+        //胜分差特殊 只能单独计算
+        if self.type == .胜分差 {
+           
+            TongJi.log(.场次确认, label: self.type.rawValue, att: .彩种)
+            let story = UIStoryboard(storyboard: .Basketball)
+            let vc = story.instantiateViewController(withIdentifier: "BasketballConfirmVC") as! CXMMBasketballConfirmVC
             vc.viewModel.sePlaySet = self.viewModel.sePlaySet
             vc.type = self.type
             vc.viewModel.deSePlayList = self.viewModel.sePlayList
             vc.viewModel.lotteryClassifyId = self.viewModel.lotteryClassifyId
             vc.viewModel.lotteryPlayClassifyId = self.viewModel.lotteryPlayClassifyId
-        default: break
+            pushViewController(vc: vc)
+        
+        }else{
+            guard self.viewModel.sePlayList.count >= 2 else {
+                let play = self.viewModel.sePlayList[0]
+                if play.playInfo.matchPlays.count == 1 {
+                    guard play.playInfo.matchPlays[0].single == true else {
+                        showHUD(message: "您还需要再选择一场比赛")
+                        return }
+                    
+                    TongJi.log(.场次确认, label: self.type.rawValue, att: .彩种)
+                    let story = UIStoryboard(storyboard: .Basketball)
+                    let vc = story.instantiateViewController(withIdentifier: "BasketballConfirmVC") as! CXMMBasketballConfirmVC
+                    vc.viewModel.sePlaySet = self.viewModel.sePlaySet
+                    vc.type = self.type
+                    vc.viewModel.deSePlayList = self.viewModel.sePlayList
+                    vc.viewModel.lotteryClassifyId = self.viewModel.lotteryClassifyId
+                    vc.viewModel.lotteryPlayClassifyId = self.viewModel.lotteryPlayClassifyId
+                    pushViewController(vc: vc)
+                    
+                }else{
+                    guard play.playInfo.matchPlays.count == 4 else { return }
+                    
+                    let can = isAllSingle(playList: viewModel.sePlayList[0])
+                    
+                    if can {
+                        let story = UIStoryboard(storyboard: .Basketball)
+                        let vc = story.instantiateViewController(withIdentifier: "BasketballConfirmVC") as! CXMMBasketballConfirmVC
+                        vc.viewModel.sePlaySet = self.viewModel.sePlaySet
+                        vc.type = self.type
+                        vc.viewModel.deSePlayList = self.viewModel.sePlayList
+                        vc.viewModel.lotteryClassifyId = self.viewModel.lotteryClassifyId
+                        vc.viewModel.lotteryPlayClassifyId = self.viewModel.lotteryPlayClassifyId
+                        pushViewController(vc: vc)
+                    }else {
+                        showHUD(message: "您还需要再选择一场比赛")
+                    }
+                }
+                
+                return
+            }
             
+            TongJi.log(.场次确认, label: self.type.rawValue, att: .彩种)
+            let story = UIStoryboard(storyboard: .Basketball)
+            let vc = story.instantiateViewController(withIdentifier: "BasketballConfirmVC") as! CXMMBasketballConfirmVC
+            vc.viewModel.sePlaySet = self.viewModel.sePlaySet
+            vc.type = self.type
+            vc.viewModel.deSePlayList = self.viewModel.sePlayList
+            vc.viewModel.lotteryClassifyId = self.viewModel.lotteryClassifyId
+            vc.viewModel.lotteryPlayClassifyId = self.viewModel.lotteryPlayClassifyId
+            pushViewController(vc: vc)
         }
     }
+    
+    @IBAction func didTipDeleteButton(_ sender : UIButton) {
+        viewModel.removeAll()
+    }
+    
+    
+    func isAllSingle(playList: BBPlayModel) -> Bool {
+        var allSin = true
+        
+        maxNum.removeAll()
+        maxNum.insert(8)
+        
+        let spf = playList.shengfu
+        let rangSpf = playList.rangfen
+        let daxiaofen = playList.daxiaofen
+        let shengFenCha = playList.shengFenCha
+        
+        
+        
+        
+        if spf.homeCell.selected || spf.visiCell.selected {
+            if spf.single == false {
+                allSin = false
+                //break
+            }
+        }
+        
+        if rangSpf.homeCell.selected || rangSpf.visiCell.selected {
+            if rangSpf.single == false {
+                allSin = false
+                //break
+            }
+        }
+        
+        if daxiaofen.homeCell.selected || daxiaofen.visiCell.selected {
+            if daxiaofen.single == false {
+                allSin = false
+                //break
+            }
+        }
+        
+        
+        if shengFenCha != nil {
+            var i = 0
+            for cell in shengFenCha.visiSFC  {
+                
+                if cell.selected{
+                    allSin = shengFenCha.visiSFC[i].selected
+                    break
+                }
+                i += 1
+            }
+            
+            var j = 0
+            for cell in shengFenCha.homeSFC {
+                
+                if cell.selected{
+                    allSin = shengFenCha.homeSFC[j].selected
+                    break
+                }
+                j += 1
+            }
+            
+            var s = 0
+            for cell in playList.seCellList {
+                
+                if cell.playType != "3"{
+                    allSin = false
+                    break
+                }
+                s += 1
+            }
+        }
+        
+        
+//        var scoreSin = false
+//
+//        var selected :Bool = false
+//
+//        var homeScore = true
+//        var visiScore = true
+//        var daxiaofenSin = true
+//
+//        if shengFenCha.homeCell.cellSons != nil {
+//            for cell in shengFenCha.visitingCell.cellSons {
+//                if cell.isSelected.asObserver().hasObservers{
+//                    homeScore = shengFenCha.single
+//                    selected = true
+//                    maxNum.insert(4)
+//                    break
+//                }
+//            }
+//
+//            for cell in shengFenCha.visitingCell.cellSons {
+//                if cell.isSelected.asObserver().hasObservers {
+//                    visiScore = shengFenCha.single
+//                    selected = true
+//                    maxNum.insert(4)
+//                    break
+//                }
+//            }
+//        }
+//
+//        if daxiaofen.matchCells != nil {
+//            for cell in daxiaofen.matchCells {
+//                if cell.isSelected.asObserver().hasObservers{
+//                    daxiaofenSin = daxiaofen.single
+//                    selected = true
+//                    maxNum.insert(6)
+//                    break
+//                }
+//            }
+//        }
+//
+//
+//        if homeScore == false ||  visiScore == false || daxiaofenSin == false {
+//            allSin = false
+//        }
+//
+//        if spf.homeCell != nil {
+//            if spf.homeCell!.isSelected.asObserver().hasObservers || spf.visitingCell.isSelected.asObserver().hasObservers {
+//                if spf.single == false {
+//                    allSin = false
+//                    //break
+//                }
+//            }
+//        }
+//
+//        if rangSpf.homeCell != nil {
+//            if rangSpf.homeCell!.isSelected.asObserver().hasObservers || rangSpf.visitingCell.isSelected.asObserver().hasObservers {
+//                if rangSpf.single == false {
+//                    allSin = false
+//                    //break
+//                }
+//            }
+//        }
+        
+        return allSin
+    }
 }
+
+extension CXMMBasketballVC {
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        switch segue.identifier {
+//        case "pushConfirm":
+//            let vc = segue.destination as! CXMMBasketballConfirmVC
+//            vc.viewModel.sePlaySet = self.viewModel.sePlaySet
+//            vc.type = self.type
+//            vc.viewModel.deSePlayList = self.viewModel.sePlayList
+//            vc.viewModel.lotteryClassifyId = self.viewModel.lotteryClassifyId
+//            vc.viewModel.lotteryPlayClassifyId = self.viewModel.lotteryPlayClassifyId
+//        default: break
+//
+//        }
+//    }
+}
+
 // MARK: - header 点击事件
 extension CXMMBasketballVC: BasketBallHotSectionHeaderDelegate,
                             BasketBallSectionHeaderDelegate {
@@ -532,6 +739,52 @@ extension CXMMBasketballVC: BasketBallHotSectionHeaderDelegate,
         tableView.reloadSections(IndexSet(integer: section), with: .automatic)
     }
 }
+
+
+// MARK: - 混合 按钮 点击   delegate
+//extension CXMMBasketballVC  {
+//    func didSelectedHunHeView(view: BasketBallHunheView, teamInfo: BasketballListModel, index: IndexPath) {
+//        guard self.matchModel.list.isEmpty == false else { return }
+//        let cell = self.tableView.cellForRow(at: index) as! BasketballHunheCell
+//        let matchModel = self.matchModel.list[index.section]
+//        cell.playInfo = matchModel.playList[index.row]
+//
+//        //self.tableView.reloadRows(at: [index], with: .none)
+//        guard viewModel.sePlayList.count < MaxSelectedNum else {
+//
+//            var change = true
+//
+//            for team in viewModel.sePlayList {
+////                let playInfo = team.playInfo!
+////                if cell.playInfo == teamInfo {
+////                    change = false
+////                    break
+////                }
+//            }
+//            if change {
+//                view.backSelectedState()
+//                showHUD(message: "最多可选15场比赛")
+//                self.tableView.reloadRows(at: [index], with: .none)
+//            }
+//
+//            return }
+//        viewModel.sePlaySet.insert(cell.viewModel)
+//    }
+//
+//    func didDeSelectedHunHeView(view: BasketBallHunheView, teamInfo: BasketballListModel, index: IndexPath) {
+//        //self.tableView.reloadRows(at: [index], with: .none)
+//
+//        let cell = self.tableView.cellForRow(at: index) as! BasketballHunheCell
+//        let matchModel = self.matchModel.list[index.section]
+//        cell.playInfo = matchModel.playList[index.row]
+//
+//        guard viewModel.sePlayList.count == 0 else { return }
+//        viewModel.sePlaySet.remove(cell.viewModel)
+//    }
+//
+//}
+
+
 // MARK: - 混合Cell Delegate
 extension CXMMBasketballVC : BasketballHunheCellDelegate {
     // 点击 更多玩法
@@ -546,14 +799,18 @@ extension CXMMBasketballVC : BasketballHunheCellDelegate {
     }
 }
 // MARK: - 胜分差Cell Delegate
-extension CXMMBasketballVC : BasketballShengfuChaCellDelegate {
+extension CXMMBasketballVC : BasketballShengfuChaCellDelegate,BasketballSFCPlayPopSelectCellListDelegate{
     func didTipShengfenCha(playInfo: BasketballListModel, viewModel : BBPlayModel) {
         let story = UIStoryboard(storyboard: .Basketball)
         
         let shengFenPlay = story.instantiateViewController(withIdentifier: "BasketballSFCPlayPop") as! CXMMBasketballSFCPlayPop
+        shengFenPlay.selectCellListDelegate = self
         shengFenPlay.configure(with: playInfo)
         shengFenPlay.configure(with: viewModel)
         present(shengFenPlay)
+    }
+    func didSelectCellList(){
+        self.tableView.reloadData()
     }
 }
 
@@ -598,6 +855,9 @@ extension CXMMBasketballVC : UITableViewDataSource {
     private func initHunheCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BasketballHunheCell", for: indexPath) as! BasketballHunheCell
         cell.delegate = self
+//        cell.teamView.delegate = self
+//        cell.rangTeamView.delegate = self
+//        cell.daXiaoTeamView.delegate = self
         let model = matchModel.list[indexPath.section].playList[indexPath.row]
         cell.configure(with: model)
         
@@ -671,7 +931,7 @@ extension CXMMBasketballVC {
         case .大小分:
             return 130
         case .胜分差:
-            return 90
+            return UITableView.automaticDimension
         
         }
     }

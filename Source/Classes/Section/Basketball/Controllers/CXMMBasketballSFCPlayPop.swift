@@ -13,10 +13,14 @@ protocol BasketballSFCPlayPopDelegate {
     func didTipDelete(section : Int) -> Void
 }
 
+protocol BasketballSFCPlayPopSelectCellListDelegate {
+    func didSelectCellList() -> Void
+}
+
 class CXMMBasketballSFCPlayPop: BasePopViewController {
 
     public var delegate : BasketballSFCPlayPopDelegate!
-    
+    public var selectCellListDelegate : BasketballSFCPlayPopSelectCellListDelegate!
     public var section : Int!
     
     public var style : BBPlayPopStyle = .defaul
@@ -108,6 +112,8 @@ extension CXMMBasketballSFCPlayPop {
     @IBAction func confirmClick(_ sender : UIButton) {
         viewModel.cacheCellList.removeAll()
         self.dismiss(animated: true, completion: nil)
+        guard selectCellListDelegate != nil else { return }
+        selectCellListDelegate.didSelectCellList()
         guard delegate != nil else { return }
         delegate.didTipConfirm(section: self.section)
     }

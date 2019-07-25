@@ -80,9 +80,13 @@ class CXMCouponViewController: BaseViewController, IndicatorInfoProvider, UITabl
     
     //MARK: - 点击事件
     func didTipUseButtong(_ cell: CouponCell, couponInfo: CouponInfoModel) {
-        let match = CXMFootballMatchVC()
-        match.matchType = .混合过关
-        pushViewController(vc: match)
+//        let match = CXMFootballMatchVC()
+//        match.matchType = .混合过关
+//        pushViewController(vc: match)
+        
+        let main = MainTabBarController()
+        main.selectedIndex = 0
+        UIApplication.shared.keyWindow?.rootViewController = main
     }
     
     //MARK: - 加载数据

@@ -390,6 +390,7 @@
 		4E93990F74409AE8AF055360 /* Pods____Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D43EE0EBE61F8B9C14FE787 /* Pods____Tests.framework */; };
 		B4C375AE21461DF200390A3A /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C375AD21461DF200390A3A /* AppConfig.swift */; };
 		B4C375B021465F1900390A3A /* ConfigureRequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C375AF21465F1900390A3A /* ConfigureRequestProtocol.swift */; };
+		BB0DE2FA22D87A28009EDAEB /* HomeSuspendedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0DE2F922D87A28009EDAEB /* HomeSuspendedView.swift */; };
 		BB1B5A44226DA85900418FFF /* XLPagerTabStrip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB1B5A43226DA85900418FFF /* XLPagerTabStrip.framework */; };
 		BB1B5A46226DA87500418FFF /* HandyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB1B5A45226DA87500418FFF /* HandyJSON.framework */; };
 		BB1B5A48226DA88C00418FFF /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB1B5A47226DA88C00418FFF /* RxSwift.framework */; };
@@ -418,6 +419,9 @@
 		BB62CECC229E71FF00BC1828 /* OfflineOrderDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB62CECB229E71FF00BC1828 /* OfflineOrderDetailHeaderView.swift */; };
 		BBCF5D3D226A0EB900AA7564 /* OrdercalculateBonusesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCF5D3B226A0EB800AA7564 /* OrdercalculateBonusesCell.swift */; };
 		BBCF5D3E226A0EB900AA7564 /* OrdercalculateBonusesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBCF5D3C226A0EB900AA7564 /* OrdercalculateBonusesCell.xib */; };
+		BBD90D8822E1630B00DA9A9D /* SuspendedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD90D8722E1630B00DA9A9D /* SuspendedViewController.swift */; };
+		BBD90D8A22E59D3300DA9A9D /* GGPaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD90D8922E59D3300DA9A9D /* GGPaddingLabel.swift */; };
+		BBF2584A22D588A200CB532D /* BasketBallHunheView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF2584922D588A100CB532D /* BasketBallHunheView.swift */; };
 		E503F5BE2079E8D6006D4A0B /* FootballFilterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E503F5BD2079E8D6006D4A0B /* FootballFilterProtocol.swift */; };
 		E503F5C0207A11B3006D4A0B /* FootballRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E503F5BF207A11B3006D4A0B /* FootballRequestModel.swift */; };
 		E503F5C2207A15A7006D4A0B /* FootballOrderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E503F5C1207A15A7006D4A0B /* FootballOrderProtocol.swift */; };
@@ -1088,6 +1092,7 @@
 		A7A8CDA4EA02975014D806E4 /* Pods-彩小蜜.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜.release.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜/Pods-彩小蜜.release.xcconfig"; sourceTree = "<group>"; };
 		B4C375AD21461DF200390A3A /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		B4C375AF21465F1900390A3A /* ConfigureRequestProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureRequestProtocol.swift; sourceTree = "<group>"; };
+		BB0DE2F922D87A28009EDAEB /* HomeSuspendedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSuspendedView.swift; sourceTree = "<group>"; };
 		BB1B5A43226DA85900418FFF /* XLPagerTabStrip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = XLPagerTabStrip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB1B5A45226DA87500418FFF /* HandyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = HandyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB1B5A47226DA88C00418FFF /* RxSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1116,6 +1121,9 @@
 		BB62CECB229E71FF00BC1828 /* OfflineOrderDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineOrderDetailHeaderView.swift; sourceTree = "<group>"; };
 		BBCF5D3B226A0EB800AA7564 /* OrdercalculateBonusesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdercalculateBonusesCell.swift; sourceTree = "<group>"; };
 		BBCF5D3C226A0EB900AA7564 /* OrdercalculateBonusesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrdercalculateBonusesCell.xib; sourceTree = "<group>"; };
+		BBD90D8722E1630B00DA9A9D /* SuspendedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuspendedViewController.swift; sourceTree = "<group>"; };
+		BBD90D8922E59D3300DA9A9D /* GGPaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GGPaddingLabel.swift; sourceTree = "<group>"; };
+		BBF2584922D588A100CB532D /* BasketBallHunheView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketBallHunheView.swift; sourceTree = "<group>"; };
 		BBF8EFAB226F3E2100B67ADF /* 彩小蜜.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; name = "彩小蜜.xcworkspace"; path = "../shenghecaidian/彩小蜜.xcworkspace"; sourceTree = "<group>"; };
 		BBF8EFAD226F3E2900B67ADF /* 彩小蜜.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "彩小蜜.xcodeproj"; path = "../shenghecaidian/彩小蜜.xcodeproj"; sourceTree = "<group>"; };
 		C46655EB1FBD7C2CB77E79A1 /* Pods-彩小蜜UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-彩小蜜UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-彩小蜜UITests/Pods-彩小蜜UITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -1542,9 +1550,10 @@
 		113F2A412150A9A5008B39AA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BBF2584922D588A100CB532D /* BasketBallHunheView.swift */,
+				1173BED52150E13C008BC28A /* BasketballHunheCell.swift */,
 				1173BEC52150AB4B008BC28A /* BasketBallSectionHeader.swift */,
 				1173BEC72150AB67008BC28A /* BasketBallHotSectionHeader.swift */,
-				1173BED52150E13C008BC28A /* BasketballHunheCell.swift */,
 				116A27EE2150EFDA0077444E /* BasketballShengfuCell.swift */,
 				116A27F02150EFF20077444E /* BasketballRangCell.swift */,
 				116A27F22150F0090077444E /* BasketballDaxiaofenCell.swift */,
@@ -2751,7 +2760,6 @@
 				E57375F62046B1E800148622 /* Share */,
 				116E0F2E20999E1E009FE44E /* WebView */,
 				1179BD8620C3D086000D4875 /* Activity */,
-				E57375F02046B11300148622 /* NewFeature */,
 			);
 			path = Section;
 			sourceTree = "<group>";
@@ -2923,6 +2931,7 @@
 				11E2C00921B7CEE400719661 /* coin.mp3 */,
 				E59CB3DE205BA17F0086DD0E /* BannerView.swift */,
 				BB3F923522955B2500B02ECA /* HomeActivityView.swift */,
+				BB0DE2F922D87A28009EDAEB /* HomeSuspendedView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3014,37 +3023,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		E57375F02046B11300148622 /* NewFeature */ = {
-			isa = PBXGroup;
-			children = (
-				E57375F32046B13100148622 /* Model */,
-				E57375F22046B12F00148622 /* View */,
-				E57375F12046B12D00148622 /* Controller */,
-			);
-			path = NewFeature;
-			sourceTree = "<group>";
-		};
-		E57375F12046B12D00148622 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		E57375F22046B12F00148622 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		E57375F32046B13100148622 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		E57375F62046B1E800148622 /* Share */ = {
 			isa = PBXGroup;
 			children = (
@@ -3120,6 +3098,7 @@
 				E533BF0420610D170037D2D8 /* BasePopViewController.swift */,
 				E50643A9206C93A70046A2D4 /* BaseWebViewController.swift */,
 				BB3F921D229556CE00B02ECA /* BasicDialog.swift */,
+				BBD90D8722E1630B00DA9A9D /* SuspendedViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3235,6 +3214,7 @@
 				E567636B206B375A00E2D9A8 /* HXTextView.swift */,
 				11BD09E921C0E31300D29D52 /* HXGuideMaskView.swift */,
 				11BD09EF21C0EEE100D29D52 /* guide_arrow@3x.png */,
+				BBD90D8922E59D3300DA9A9D /* GGPaddingLabel.swift */,
 			);
 			path = CustomControl;
 			sourceTree = "<group>";
@@ -4043,6 +4023,7 @@
 				1158FC4721105A7A0004229D /* DaletouCollectionView.swift in Sources */,
 				E5973E1C204D4A75006461CE /* ScreenConstraint.swift in Sources */,
 				11EB8EE2207B6D9B00AFC9C1 /* CXMPaymentViewController.swift in Sources */,
+				BB0DE2FA22D87A28009EDAEB /* HomeSuspendedView.swift in Sources */,
 				11E2C00C21B7D04800719661 /* CommodityOrderDetailModel.swift in Sources */,
 				11F24F8321B6933F00722B2B /* ScoreHomeViewController.swift in Sources */,
 				11EFB2A221AE480C00B9B8B1 /* ComOrderInputCell.swift in Sources */,
@@ -4213,6 +4194,7 @@
 				E503F5BE2079E8D6006D4A0B /* FootballFilterProtocol.swift in Sources */,
 				11227C122084BFF900680CCC /* FootballBuyRatioView.swift in Sources */,
 				E51F9A60205A29EE00AB8A21 /* VCodeLoginFooterView.swift in Sources */,
+				BBD90D8822E1630B00DA9A9D /* SuspendedViewController.swift in Sources */,
 				11547F9C2137FB990068596C /* CXMMLeagueMatchVC.swift in Sources */,
 				115076A42138E1920029A63E /* CXMMLeagueMatchDetailVC.swift in Sources */,
 				11B2D2C6222D284B00AF835E /* UILabelEx.swift in Sources */,
@@ -4247,6 +4229,7 @@
 				E537397420576FEE0087E4E6 /* APIManager.swift in Sources */,
 				11998CA0210EEE8A00AAAB8F /* CXMMFootballMatchMenu.swift in Sources */,
 				113AAD7A2121330700FB86B8 /* DLTRedBlueTrendItem.swift in Sources */,
+				BBD90D8A22E59D3300DA9A9D /* GGPaddingLabel.swift in Sources */,
 				E5883F522068DFBF00CB3A46 /* OrderSchemeTitleCell.swift in Sources */,
 				1158FC4921105AF90004229D /* DaletouItem.swift in Sources */,
 				1158FC4B211063470004229D /* DaletouDataModel.swift in Sources */,
@@ -4330,6 +4313,7 @@
 				117C729A2100685B00D9EB83 /* LotteryCollectModel.swift in Sources */,
 				116F54272146503D0002D002 /* LeagueDetailCourseHeader.swift in Sources */,
 				11CC696921AF877300F60C57 /* SellerNetAPIManager.swift in Sources */,
+				BBF2584A22D588A200CB532D /* BasketBallHunheView.swift in Sources */,
 				1142DE7D208ED059009E3916 /* PaymentProtocol.swift in Sources */,
 				1173BED02150CD96008BC28A /* UIStoreboardEx.swift in Sources */,
 				1179B3292229212600467D4F /* ESPortsCollectionItem.swift in Sources */,
@@ -4443,7 +4427,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/Source/Classes/ThirdParty/Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/kairuiwang/Desktop/shengHe 2/Source/Classes/ThirdParty/Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = "";
 			};
@@ -4495,7 +4479,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/Source/Classes/ThirdParty/Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/kairuiwang/Desktop/shengHe 2/Source/Classes/ThirdParty/Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = "";
 				VALIDATE_PRODUCT = YES;
@@ -4513,6 +4497,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QDPVKJVWX6;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -4527,7 +4515,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/Source/Classes/ThirdParty/Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/kairuiwang/Desktop/shengHe 2/Source/Classes/ThirdParty/Header.h";
 				SWIFT_VERSION = 4.2;
 				SYSTEM_HEADER_SEARCH_PATHS = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -4545,6 +4533,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QDPVKJVWX6;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -4559,7 +4551,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/Source/Classes/ThirdParty/Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/kairuiwang/Desktop/shengHe 2/Source/Classes/ThirdParty/Header.h";
 				SWIFT_VERSION = 4.2;
 				SYSTEM_HEADER_SEARCH_PATHS = "";
 				TARGETED_DEVICE_FAMILY = 1;

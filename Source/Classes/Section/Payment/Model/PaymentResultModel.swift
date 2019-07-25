@@ -17,6 +17,7 @@ struct PaymentResultModel : HandyJSON {
     var payLogId: String!
     var lotteryClassifyId : String!
     var wxAppPayInfo: PaymentInfoModel!
+    var orderSn: String!
 }
 
 struct PaymentInfoModel: HandyJSON {

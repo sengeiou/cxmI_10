@@ -48,6 +48,10 @@ class PurchaseRecordCell: UITableViewCell {
                 detailLB.font = Font15
                 detailLB.textColor = ColorE95504
                 stateIcon.image = UIImage(named: "redarrow")
+            case "9":
+                stateBut.textColor = Color505050
+                detailLB.textColor = ColorA0A0A0
+                stateIcon.image = UIImage(named: "jump")
             default: break
                 
             }

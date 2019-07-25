@@ -60,6 +60,7 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
     
     public func pushViewController(vc: UIViewController) {
         DispatchQueue.main.async {
+            homeSuspendedView.isHidden = true
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
@@ -171,6 +172,7 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
     
     private var emptyTitle: String!
     
+
     //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -180,7 +182,7 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
         self.isHidenBar = true
         
         addPanGestureRecognizer = true
-        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -217,9 +219,12 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
     
     private func showTabBar() {
         self.tabBarController?.tabBar.isHidden = false
+        homeSuspendedView.isHidden = false
     }
     private func hideTabBar() {
         self.tabBarController?.tabBar.isHidden = true
+        let homeSuspendedView = HomeSuspendedView.singleHomeSuspendedView
+        homeSuspendedView.isHidden = true
     }
     
     private func setLiftButtonItem() {
@@ -238,7 +243,6 @@ class BaseViewController: UIViewController, AlertPro, DZNEmptyDataSetSource, DZN
     
     @objc func back(_ sender: UIButton) {
         popViewController()
-        
         self.dismissProgressHud()
     }
     

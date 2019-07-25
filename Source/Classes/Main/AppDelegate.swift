@@ -22,8 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AppDelegateProtocol, GeTu
     var rootViewController : MainTabBarController!
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-        self.window = UIWindow(frame: UIScreen.main.bounds)
+        Bugly.start(withAppId: "7a77bd863c")
         rootViewController = MainTabBarController()
         //UserDefaults.standard.set(false, forKey: ShowGuided)
         if UserDefaults.standard.bool(forKey: ShowGuided) == false {

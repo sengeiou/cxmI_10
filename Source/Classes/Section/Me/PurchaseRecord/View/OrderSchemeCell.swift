@@ -89,13 +89,16 @@ class OrderSchemeCell: UITableViewCell {
         
         contentLB = getDetailLB()
         contentLB.numberOfLines = 0
+        contentLB.textAlignment = .center
         
         passLB = getDetailLB()
+        passLB.textAlignment = .center
         multipleLB = getDetailLB()
+        multipleLB.textAlignment = .center
         //multipleLB.textAlignment = .right
         orderState = getDetailLB()
         orderState.textColor = ColorEA5504
-        orderState.textAlignment = .right
+        orderState.textAlignment = .center
         
         self.contentView.addSubview(line)
         self.contentView.addSubview(orderState)
@@ -141,6 +144,11 @@ class OrderSchemeCell: UITableViewCell {
         //lab.text = "白塞"
         lab.textColor = Color505050
         lab.textAlignment = .center
+        
+        lab.numberOfLines = 0
+        lab.textAlignment = .right
+        lab.sizeToFit()
+        
         return lab
     }
     

@@ -12,7 +12,7 @@ import XLPagerTabStrip
 fileprivate let LotteryCellId = "LotteryCellId"
 fileprivate let LotterySectionHeaderId = "LotterySectionHeaderId"
 
-class CXMScoreListViewController: BaseViewController, LotterySectionHeaderDelegate, LotteryProtocol, IndicatorInfoProvider {
+class CXMScoreListViewController: SuspendedViewController, LotterySectionHeaderDelegate, LotteryProtocol, IndicatorInfoProvider {
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         
         switch matchType {

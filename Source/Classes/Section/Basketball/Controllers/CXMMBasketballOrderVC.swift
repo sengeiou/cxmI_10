@@ -70,9 +70,9 @@ class CXMMBasketballOrderVC: BaseViewController {
         }
         
         playName.text = orderInfo.lotteryClassifyName
-        
-        let moneyAtt = NSMutableAttributedString(string: "¥", attributes: [NSAttributedString.Key.font: Font10])
-        let money = NSAttributedString(string: orderInfo.ticketAmount)
+
+        let moneyAtt = NSMutableAttributedString(string: "", attributes: [NSAttributedString.Key.font: Font10])
+        let money = NSAttributedString(string: orderInfo.ticketAmount + "元")
         moneyAtt.append(money)
         
         payMoney.attributedText = moneyAtt

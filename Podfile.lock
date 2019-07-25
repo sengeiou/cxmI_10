@@ -1,6 +1,7 @@
 PODS:
   - Alamofire (4.7.2)
   - BaiduMobStat (4.7.2)
+  - Bugly (2.5.0)
   - DZNEmptyDataSet (1.8.1)
   - FSPagerView (0.7.1)
   - GTSDK (2.2.0.0-noidfa)
@@ -36,6 +37,7 @@ PODS:
 
 DEPENDENCIES:
   - BaiduMobStat
+  - Bugly
   - DZNEmptyDataSet
   - FSPagerView
   - GTSDK (= 2.2.0.0-noidfa)
@@ -63,6 +65,7 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - BaiduMobStat
+    - Bugly
     - DZNEmptyDataSet
     - FSPagerView
     - GTSDK
@@ -98,6 +101,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   BaiduMobStat: e84187c7057f87daac852e05692fd94c8d656bd3
+  Bugly: 3ca9f255c01025582df26f9222893b383c7e4b4e
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   FSPagerView: 958aba39684e1573755ddcfcc29f7eebb8413cee
   GTSDK: 2cb8f5df1fbb250f596698443edd0191f77024f1
@@ -122,6 +126,6 @@ SPEC CHECKSUMS:
   XLPagerTabStrip: c908b17cbf42fcd2598ee1adfc49bae25444d88a
   YBPopupMenu: 6efb286385d95ba5f97c58b8464ec873645e8764
 
-PODFILE CHECKSUM: b586f2f18f0fe39ba92eac2600f5f46df2773b9d
+PODFILE CHECKSUM: 2e92d0b8903ccf71328c90bccd35c7896f5616a4
 
 COCOAPODS: 1.5.3

@@ -100,6 +100,7 @@ class CXMFootballMatchInfoVC: BaseViewController, UITableViewDelegate, LotteryPr
         super.viewDidAppear(animated)
         TongJi.start("赛事分析页/赔率页")
         shouldStartTimer(true)
+        homeSuspendedView.isHidden = true
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)

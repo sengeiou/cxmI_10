@@ -30,17 +30,18 @@ struct BasketballRequestMode : HandyJSON {
 struct BBMatchBetPlay: HandyJSON {
     var changci: String!
     var changciId: String!
-    var isDan: Bool! = false
+//    var isDan: Bool! = false
+    var isDan: Int!
     var lotteryClassifyId: String!
     var lotteryPlayClassifyId: String!
-    var matchId: String!
+    var matchId: Int!
     /// 投注场次队名,如：中国VS日本 ,
     var matchTeam: String!
     /// 比赛时间
     var matchTime: Int!
     /// 投注赛事编码 ,
     var playCode: String!
-    
+
     var matchBetCells: [BBMatchBetCell]!
 }
 

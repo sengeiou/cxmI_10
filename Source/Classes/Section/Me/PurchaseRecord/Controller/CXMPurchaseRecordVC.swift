@@ -17,7 +17,7 @@ enum PurchaseRecordType: String {
 
 fileprivate let PurchaseRecordCellId = "PurchaseRecordCellId"
 
-class CXMPurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableViewDelegate, UITableViewDataSource {
+class CXMPurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableViewDelegate, UITableViewDataSource, OrderDetailExpiredDelegate {
 
     //MARK: - 点击事件
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -28,6 +28,7 @@ class CXMPurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableVie
             let story = UIStoryboard(storyboard: .Football)
             let order = story.instantiateViewController(withIdentifier: "OrderDetailVC") as! CXMOrderDetailVC
 //            let order = CXMOrderDetailVC()
+            order.orderDetailExpiredDelegate = self
             order.orderId = recordInfo.orderId
             pushViewController(vc: order)
         case "2": // 大乐透
@@ -36,13 +37,19 @@ class CXMPurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableVie
             vc.orderId = recordInfo.orderId
             pushViewController(vc: vc)
         case "3": // 篮球
-            let story = UIStoryboard(storyboard: .Basketball)
-            let order = story.instantiateViewController(withIdentifier: "BasketballOrderVC") as! CXMMBasketballOrderVC
+            let story = UIStoryboard(storyboard: .Football)
+            let order = story.instantiateViewController(withIdentifier: "OrderDetailVC") as! CXMOrderDetailVC
             order.orderId = recordInfo.orderId
+            order.orderDetailExpiredDelegate = self
             pushViewController(vc: order)
         default:
             break
         }
+    }
+    
+    //提示二次支付订单过期
+    func expired(){
+       showHUD(message: "此订单已超时，请下拉刷新页面")
     }
     
     public var recordType : PurchaseRecordType = .all {
@@ -65,14 +72,9 @@ class CXMPurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.recordList = []
         //self.title = "购彩记录"
         self.view.addSubview(self.tableView)
-        
-        
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        setEmpty(title: "暂无投注记录", tableView)
         addPanGestureRecognizer = false
         self.tableView.headerRefresh {
             self.loadNewData()
@@ -81,8 +83,13 @@ class CXMPurchaseRecordVC: BaseViewController, IndicatorInfoProvider, UITableVie
             self.loadNextData()
         }
         self.tableView.beginRefreshing()
-        self.recordList = []
         recordRequest(1)
+        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setEmpty(title: "暂无投注记录", tableView)
+
         TongJi.start("投注记录页")
     }
     override func viewDidDisappear(_ animated: Bool) {

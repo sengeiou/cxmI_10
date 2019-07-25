@@ -8,7 +8,7 @@
 
 import UIKit
 import RxSwift
-class BasketballRangCell: UITableViewCell, AlertPro {
+class BasketballRangCell: UITableViewCell, AlertPro, DateProtocol {
 
     @IBOutlet weak var topLine : UIView!
     @IBOutlet weak var leftLine: UIView!
@@ -123,7 +123,7 @@ extension BasketballRangCell {
         let visiMuatt = NSMutableAttributedString(string: "[客]",
                                                   attributes: [NSAttributedString.Key.foregroundColor: Color9F9F9F,
                                                                NSAttributedString.Key.font: Font14])
-        let visiAtt = NSAttributedString(string: data.visitingTeamAbbr,
+        let visiAtt = NSAttributedString(string: data.visitingTeamName,
                                          attributes: [NSAttributedString.Key.foregroundColor: Color505050,
                                                       NSAttributedString.Key.font: Font14])
         visiMuatt.append(visiAtt)
@@ -132,7 +132,7 @@ extension BasketballRangCell {
         let homeMuatt = NSMutableAttributedString(string: "[主]",
                                                   attributes: [NSAttributedString.Key.foregroundColor: Color9F9F9F,
                                                                NSAttributedString.Key.font: Font14])
-        let homeAtt = NSAttributedString(string: data.homeTeamAbbr,
+        let homeAtt = NSAttributedString(string: data.homeTeamName,
                                          attributes: [NSAttributedString.Key.foregroundColor: Color505050,
                                                       NSAttributedString.Key.font : Font14])
         homeMuatt.append(homeAtt)
@@ -140,7 +140,7 @@ extension BasketballRangCell {
         
         leagueLabel.text = data.leagueAddr
         dateLabel.text = data.changci
-        timeLabel.text = data.matchDay
+        timeLabel.text = "截止:" + self.timeStampToHHmm(data.betEndTime)
         
         guard data.matchPlays.count == 1 else { return }
         

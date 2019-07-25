@@ -11,7 +11,7 @@ import UIKit
 fileprivate let CouponFilterCellId = "CouponFilterCellId"
 
 protocol CouponFilterViewControllerDelegate {
-    func didSelected(bonus bonusId : String) -> Void
+    func didSelected(bonus bonusId : String,index bonusIndex : Int) -> Void
 }
 
 class CXMCouponFilterViewController: BasePopViewController, UITableViewDelegate, UITableViewDataSource {
@@ -34,6 +34,7 @@ class CXMCouponFilterViewController: BasePopViewController, UITableViewDelegate,
     private var titlelb : UILabel!
     private var confirmBut: UIButton!
     private var selectedIndex : IndexPath!
+    private var bonusIndex: Int!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.popStyle = .fromBottom
@@ -42,7 +43,7 @@ class CXMCouponFilterViewController: BasePopViewController, UITableViewDelegate,
         setEmpty(title: "暂无可用优惠券", tableView)
     }
 
-    
+
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -163,6 +164,7 @@ class CXMCouponFilterViewController: BasePopViewController, UITableViewDelegate,
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let bonus = bonusList[indexPath.row]
+        bonusIndex = indexPath.row
         self.bonusId = bonus.userBonusId
 
 //
@@ -191,7 +193,7 @@ class CXMCouponFilterViewController: BasePopViewController, UITableViewDelegate,
     @objc private func confirmClicked(_ sender: UIButton) {
         dismiss(animated: true, completion: nil )
         guard delegate != nil, self.bonusId != nil else { return }
-        delegate.didSelected(bonus: self.bonusId)
+        delegate.didSelected(bonus: self.bonusId, index: self.bonusIndex)
     }
     
     

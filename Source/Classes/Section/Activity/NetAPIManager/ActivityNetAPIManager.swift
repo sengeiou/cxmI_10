@@ -16,8 +16,8 @@ enum ActivityNetAPIManager {
     case receiveRechargeBonus(payLogId : String)
     /// 保存世界杯投注信息
     case saveWCBetInfo(dic: [String: String])
-    /// 首页弹屏
-    case activity
+    /// 首页悬浮框
+    case suspended
     /// 首页弹屏 新版本
     case activityNew
 }
@@ -34,8 +34,8 @@ extension ActivityNetAPIManager : TargetType {
             return "/member/user/bonus/rechargeSucReiceiveBonus"
         case .saveWCBetInfo:
             return "/lottery/dl/wc/saveBetInfo"
-        case .activity:
-            return "/lottery/lottery/nav/banner/openNavs"
+        case .suspended:
+            return "/lottery/lottery/nav/banner/openNavsSusp"
         case .activityNew:
             return "/lottery/lottery/nav/banner/openNavsNew"
         }
@@ -53,7 +53,7 @@ extension ActivityNetAPIManager : TargetType {
             dic = dict
         case .activityNew:
             dic["emptyStr"] = ""
-        case .activity:
+        case .suspended:
             dic["emptyStr"] = ""
         default:
             return .requestPlain

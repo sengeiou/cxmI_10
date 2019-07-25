@@ -13,23 +13,23 @@ protocol BasketballHunheCellDelegate {
     func didTipMore(playInfo : BasketballListModel, viewModel : BBPlayModel) -> Void
 }
 
-class BasketballHunheCell: UITableViewCell, AlertPro {
-
+class BasketballHunheCell: UITableViewCell, AlertPro, DateProtocol{
+    
     public var delegate : BasketballHunheCellDelegate!
     
-    @IBOutlet weak var topLineOne : UIView!
-    @IBOutlet weak var topLineTwo : UIView!
-    @IBOutlet weak var topLineThree: UIView!
-    @IBOutlet weak var topLineFour : UIView!
-    
-    @IBOutlet weak var leftLineOne : UIView!
-    @IBOutlet weak var leftLineTwo : UIView!
-    @IBOutlet weak var leftLineThree: UIView!
-    
-    @IBOutlet weak var rightLineOne: UIView!
-    @IBOutlet weak var rightLineTwo: UIView!
-    @IBOutlet weak var rightLineThree: UIView!
-    
+//    @IBOutlet weak var topLineOne : UIView!
+//    @IBOutlet weak var topLineTwo : UIView!
+//    @IBOutlet weak var topLineThree: UIView!
+//    @IBOutlet weak var topLineFour : UIView!
+//
+//    @IBOutlet weak var leftLineOne : UIView!
+//    @IBOutlet weak var leftLineTwo : UIView!
+//    @IBOutlet weak var leftLineThree: UIView!
+//
+//    @IBOutlet weak var rightLineOne: UIView!
+//    @IBOutlet weak var rightLineTwo: UIView!
+//    @IBOutlet weak var rightLineThree: UIView!
+//
     // 单关标识
     @IBOutlet weak var singleImg : UIImageView!
     // 客队
@@ -63,6 +63,22 @@ class BasketballHunheCell: UITableViewCell, AlertPro {
     @IBOutlet weak var moreButton : UIButton!
     // 停售
     @IBOutlet weak var stopSeller: UIButton!
+    
+    // 胜负单关红线
+    @IBOutlet weak var shengFuSingleRedLine: UIView!
+    
+    // 让分单关红线
+    @IBOutlet weak var rangFenSingleRedLine: UIView!
+    
+    // 大小分单关红线
+    @IBOutlet weak var daxiaoSingleRedLine: UIView!
+    
+    
+    
+    @IBOutlet weak var shengFuStackview: UIStackView!
+    @IBOutlet weak var rangFenStackview: UIStackView!
+    @IBOutlet weak var daxiaoStackview: UIStackView!
+    
     
     private var playInfo : BasketballListModel!
     
@@ -103,11 +119,35 @@ class BasketballHunheCell: UITableViewCell, AlertPro {
         rfHomeTeam.titleLabel?.textAlignment = .center
         dxfVisiTeam.titleLabel?.textAlignment = .center
         dxfHomeTeam.titleLabel?.textAlignment = .center
-        
+
+        setSingeLine()
+
         stopSeller.backgroundColor = UIColor(hexColor: "ededed", alpha: 0.9)
         stopSeller.setTitle("本场停售\n 详情>>", for: .normal)
         stopSeller.setTitleColor(Color505050, for: .normal)
         stopSeller.titleLabel?.numberOfLines = 2
+    }
+    
+    private func setSingeLine(){
+        shengFuSingleRedLine.backgroundColor = ColorFFFFFF
+        shengFuSingleRedLine.layer.cornerRadius = 1
+        shengFuSingleRedLine.layer.borderWidth = 0.3
+        shengFuSingleRedLine.layer.borderColor = ColorC8C8C8.cgColor
+        
+        rangFenSingleRedLine.backgroundColor = ColorFFFFFF
+        rangFenSingleRedLine.layer.cornerRadius = 1
+        rangFenSingleRedLine.layer.borderWidth = 0.3
+        rangFenSingleRedLine.layer.borderColor = ColorC8C8C8.cgColor
+        
+        daxiaoSingleRedLine.backgroundColor = ColorFFFFFF
+        daxiaoSingleRedLine.layer.cornerRadius = 1
+        daxiaoSingleRedLine.layer.borderWidth = 0.3
+        daxiaoSingleRedLine.layer.borderColor = ColorC8C8C8.cgColor
+        
+        
+        shengFuStackview.backgroundColor = ColorEDEDED
+        rangFenStackview.backgroundColor = ColorEDEDED
+        daxiaoStackview.backgroundColor = ColorEDEDED
     }
     
     @IBAction func moreButtonClick(_ sender: UIButton) {
@@ -121,14 +161,13 @@ class BasketballHunheCell: UITableViewCell, AlertPro {
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         
     }
-
+    
     private func changeSellerState(isSeller : Bool) {
         stopSeller.isHidden = isSeller
     }
-    
 }
 
 // MARK: - 玩法 点击事件
@@ -220,19 +259,33 @@ extension BasketballHunheCell {
                     
                 }else {
                     
-
+                    
                     let muatt = NSMutableAttributedString(string: "已选\n",
                                                           attributes: [NSAttributedString.Key.foregroundColor : Color505050])
                     let numAtt = NSAttributedString(string: "\(num)",
-                                                    attributes: [NSAttributedString.Key.foregroundColor : ColorEA5504])
+                        attributes: [NSAttributedString.Key.foregroundColor : ColorEA5504])
                     let att = NSAttributedString(string: "项",
-                        attributes: [NSAttributedString.Key.foregroundColor : Color505050])
+                                                 attributes: [NSAttributedString.Key.foregroundColor : Color505050])
                     muatt.append(numAtt)
                     muatt.append(att)
                     self?.moreButton.setAttributedTitle(muatt, for: .normal)
                 }
                 
             }).disposed(by: bag)
+        
+        
+        changeViewBorderColor(single: data.shengfu.single, lineView: shengFuSingleRedLine)
+        changeViewBorderColor(single: data.rangfen.single, lineView: rangFenSingleRedLine)
+        changeViewBorderColor(single: data.daxiaofen.single, lineView: daxiaoSingleRedLine)
+    }
+    
+    
+    private func changeViewBorderColor(single : Bool, lineView :UIView) {
+        if single {
+            lineView.layer.borderColor = ColorEA5504.cgColor
+        }else {
+            lineView.layer.borderColor = ColorC8C8C8.cgColor
+        }
     }
     
     public func configure(with data : BasketballListModel) {
@@ -246,7 +299,7 @@ extension BasketballHunheCell {
         let visiMuatt = NSMutableAttributedString(string: "[客]",
                                                   attributes: [NSAttributedString.Key.foregroundColor: Color9F9F9F,
                                                                NSAttributedString.Key.font: Font14])
-        let visiAtt = NSAttributedString(string: data.visitingTeamAbbr,
+        let visiAtt = NSAttributedString(string: data.visitingTeamName,
                                          attributes: [NSAttributedString.Key.foregroundColor: Color505050,
                                                       NSAttributedString.Key.font: Font14])
         visiMuatt.append(visiAtt)
@@ -255,7 +308,7 @@ extension BasketballHunheCell {
         let homeMuatt = NSMutableAttributedString(string: "[主]",
                                                   attributes: [NSAttributedString.Key.foregroundColor: Color9F9F9F,
                                                                NSAttributedString.Key.font: Font14])
-        let homeAtt = NSAttributedString(string: data.homeTeamAbbr,
+        let homeAtt = NSAttributedString(string: data.homeTeamName,
                                          attributes: [NSAttributedString.Key.foregroundColor: Color505050,
                                                       NSAttributedString.Key.font : Font14])
         homeMuatt.append(homeAtt)
@@ -263,8 +316,7 @@ extension BasketballHunheCell {
         
         leagueLabel.text = data.leagueAddr
         dateLabel.text = data.changci
-        timeLabel.text = data.matchDay
-        
+        timeLabel.text = "截止" + timeStampToHHmm(data.betEndTime)
         guard data.matchPlays.isEmpty == false else { return }
         
         var single = false
@@ -272,26 +324,26 @@ extension BasketballHunheCell {
         for playInfo in data.matchPlays {
             
             switch playInfo.playType {
-            case "1": // 胜负
+            case "2": // 胜负
                 switch playInfo.single {
                 case true:
                     single = true
-                    topLineOne.backgroundColor = ColorEA5504
-                    topLineTwo.backgroundColor = ColorEA5504
-                    topLineThree.backgroundColor = ColorFFFFFF
-                    topLineFour.backgroundColor = ColorFFFFFF
-                    
-                    leftLineOne.backgroundColor = ColorEA5504
-                    leftLineTwo.backgroundColor = ColorFFFFFF
-                    leftLineThree.backgroundColor = ColorFFFFFF
-                    
-                    rightLineOne.backgroundColor = ColorEA5504
-                    rightLineTwo.backgroundColor = ColorFFFFFF
-                    rightLineThree.backgroundColor = ColorFFFFFF
+//                    topLineOne.backgroundColor = ColorEA5504
+//                    topLineTwo.backgroundColor = ColorEA5504
+//                    topLineThree.backgroundColor = ColorFFFFFF
+//                    topLineFour.backgroundColor = ColorFFFFFF
+//
+//                    leftLineOne.backgroundColor = ColorEA5504
+//                    leftLineTwo.backgroundColor = ColorFFFFFF
+//                    leftLineThree.backgroundColor = ColorFFFFFF
+//
+//                    rightLineOne.backgroundColor = ColorEA5504
+//                    rightLineTwo.backgroundColor = ColorFFFFFF
+//                    rightLineThree.backgroundColor = ColorFFFFFF
                 case false :
                     lineDefaultColor()
                 }
-               
+                
                 switch playInfo.isShow {
                 case false :
                     
@@ -309,33 +361,33 @@ extension BasketballHunheCell {
                     let visiOdds = getAttributedString(cellName: playInfo.visitingCell.cellName,
                                                        cellOdds: playInfo.visitingCell.cellOdds)
                     sfVisiTeam.setAttributedTitle(visiOdds, for: .normal)
-
+                    
                     let homeOdds = getAttributedString(cellName: playInfo.homeCell.cellName,
                                                        cellOdds: playInfo.homeCell.cellOdds)
                     sfHomeTeam.setAttributedTitle(homeOdds, for: .normal)
-
+                    
                     sfVisiTeam.isUserInteractionEnabled = true
                     sfHomeTeam.isUserInteractionEnabled = true
                     
                 }
                 
-            case "2": // 让分胜负
+            case "1": // 让分胜负
                 
                 switch playInfo.single {
                 case true:
                     single = true
-                    topLineOne.backgroundColor = ColorFFFFFF
-                    topLineTwo.backgroundColor = ColorEA5504
-                    topLineThree.backgroundColor = ColorEA5504
-                    topLineFour.backgroundColor = ColorFFFFFF
-                    
-                    leftLineOne.backgroundColor = ColorFFFFFF
-                    leftLineTwo.backgroundColor = ColorEA5504
-                    leftLineThree.backgroundColor = ColorFFFFFF
-                    
-                    rightLineOne.backgroundColor = ColorFFFFFF
-                    rightLineTwo.backgroundColor = ColorEA5504
-                    rightLineThree.backgroundColor = ColorFFFFFF
+//                    topLineOne.backgroundColor = ColorFFFFFF
+//                    topLineTwo.backgroundColor = ColorEA5504
+//                    topLineThree.backgroundColor = ColorEA5504
+//                    topLineFour.backgroundColor = ColorFFFFFF
+//
+//                    leftLineOne.backgroundColor = ColorFFFFFF
+//                    leftLineTwo.backgroundColor = ColorEA5504
+//                    leftLineThree.backgroundColor = ColorFFFFFF
+//
+//                    rightLineOne.backgroundColor = ColorFFFFFF
+//                    rightLineTwo.backgroundColor = ColorEA5504
+//                    rightLineThree.backgroundColor = ColorFFFFFF
                 case false :
                     lineDefaultColor()
                 }
@@ -371,18 +423,18 @@ extension BasketballHunheCell {
                 switch playInfo.single {
                 case true:
                     single = true
-                    topLineOne.backgroundColor = ColorFFFFFF
-                    topLineTwo.backgroundColor = ColorFFFFFF
-                    topLineThree.backgroundColor = ColorEA5504
-                    topLineFour.backgroundColor = ColorEA5504
-                    
-                    leftLineOne.backgroundColor = ColorFFFFFF
-                    leftLineTwo.backgroundColor = ColorFFFFFF
-                    leftLineThree.backgroundColor = ColorEA5504
-                    
-                    rightLineOne.backgroundColor = ColorFFFFFF
-                    rightLineTwo.backgroundColor = ColorFFFFFF
-                    rightLineThree.backgroundColor = ColorEA5504
+//                    topLineOne.backgroundColor = ColorFFFFFF
+//                    topLineTwo.backgroundColor = ColorFFFFFF
+//                    topLineThree.backgroundColor = ColorEA5504
+//                    topLineFour.backgroundColor = ColorEA5504
+//
+//                    leftLineOne.backgroundColor = ColorFFFFFF
+//                    leftLineTwo.backgroundColor = ColorFFFFFF
+//                    leftLineThree.backgroundColor = ColorEA5504
+//
+//                    rightLineOne.backgroundColor = ColorFFFFFF
+//                    rightLineTwo.backgroundColor = ColorFFFFFF
+//                    rightLineThree.backgroundColor = ColorEA5504
                 case false :
                     lineDefaultColor()
                 }
@@ -412,7 +464,7 @@ extension BasketballHunheCell {
                 }
                 
                 
-//            case "3": // 胜分差
+            //            case "3": // 胜分差
             default : break
             }
         }
@@ -422,8 +474,8 @@ extension BasketballHunheCell {
     
     private func getAttributedString(cellName : String, cellOdds : String, fixedOdds : String? = nil) -> NSAttributedString {
         let cellNameAtt = NSMutableAttributedString(string: cellName,
-                                                  attributes: [NSAttributedString.Key.foregroundColor: Color505050,
-                                                               NSAttributedString.Key.font : Font14])
+                                                    attributes: [NSAttributedString.Key.foregroundColor: Color505050,
+                                                                 NSAttributedString.Key.font : Font14])
         
         if let fix = fixedOdds {
             var color : UIColor
@@ -466,17 +518,17 @@ extension BasketballHunheCell {
     }
     
     private func lineDefaultColor() {
-        topLineOne.backgroundColor = ColorEDEDED
-        topLineTwo.backgroundColor = ColorEDEDED
-        topLineThree.backgroundColor = ColorEDEDED
-        topLineFour.backgroundColor = ColorEDEDED
-        
-        leftLineOne.backgroundColor = ColorEDEDED
-        leftLineTwo.backgroundColor = ColorEDEDED
-        leftLineThree.backgroundColor = ColorEDEDED
-        
-        rightLineOne.backgroundColor = ColorEDEDED
-        rightLineTwo.backgroundColor = ColorEDEDED
-        rightLineThree.backgroundColor = ColorEDEDED
+//        topLineOne.backgroundColor = ColorEDEDED
+//        topLineTwo.backgroundColor = ColorEDEDED
+//        topLineThree.backgroundColor = ColorEDEDED
+//        topLineFour.backgroundColor = ColorEDEDED
+//
+//        leftLineOne.backgroundColor = ColorEDEDED
+//        leftLineTwo.backgroundColor = ColorEDEDED
+//        leftLineThree.backgroundColor = ColorEDEDED
+//
+//        rightLineOne.backgroundColor = ColorEDEDED
+//        rightLineTwo.backgroundColor = ColorEDEDED
+//        rightLineThree.backgroundColor = ColorEDEDED
     }
 }

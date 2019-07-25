@@ -50,6 +50,11 @@ class CXMMBasketballHunhePlayPop: BasePopViewController {
     @IBOutlet weak var confirm : UIButton!
     @IBOutlet weak var cancel  : UIButton!
     
+    @IBOutlet weak var shengFuView: UIView!
+    @IBOutlet weak var rangFenView: UIView!
+    @IBOutlet weak var daxiaoView: UIView!
+    
+    
     private var playInfo : BasketballListModel!
     
     private var viewModel : BBPlayModel!
@@ -61,7 +66,33 @@ class CXMMBasketballHunhePlayPop: BasePopViewController {
         self.popStyle = .fromBottom
         initSubview()
         setData()
+
+        setSingleLine()
     }
+    
+    /// 设置边框都为默认颜色
+    private func setSingleLine(){
+        
+        collectionView.backgroundColor = ColorFFFFFF
+        collectionView.layer.cornerRadius = 1
+        collectionView.layer.borderWidth = 0.3
+        collectionView.layer.borderColor = ColorC8C8C8.cgColor
+        
+        shengFuView.layer.cornerRadius = 1
+        shengFuView.layer.borderWidth = 0.3
+        shengFuView.layer.borderColor = ColorC8C8C8.cgColor
+        
+        rangFenView.layer.cornerRadius = 1
+        rangFenView.layer.borderWidth = 0.3
+        rangFenView.layer.borderColor = ColorC8C8C8.cgColor
+        
+        daxiaoView.layer.cornerRadius = 1
+        daxiaoView.layer.borderWidth = 0.3
+        daxiaoView.layer.borderColor = ColorC8C8C8.cgColor
+    }
+    
+    
+    
 
     private func setData() {
         sfTitle.text = "胜\n负"
@@ -79,7 +110,8 @@ class CXMMBasketballHunhePlayPop: BasePopViewController {
         
         dxfVisiOdds.titleLabel?.textAlignment = .center
         dxfHomeOdds.titleLabel?.textAlignment = .center
-        
+        dxfVisiOdds.titleLabel?.numberOfLines = 0
+        dxfHomeOdds.titleLabel?.numberOfLines = 0
         
     }
     
@@ -168,6 +200,7 @@ extension CXMMBasketballHunhePlayPop {
         viewModel.cacheCellList.insert(viewModel.daxiaofen.homeCell)
     }
     
+    
     private func seButton(isSelected : Bool, sender : UIButton) {
         switch isSelected {
         case true:
@@ -224,12 +257,38 @@ extension CXMMBasketballHunhePlayPop {
                 self.dxfHomeOdds.isSelected = se
                 self.seButton(isSelected: se, sender: self.dxfHomeOdds)
             })
+        
+    }
+    
+    /// 判断是否是单关 显示红框
+    private func changeViewBorderColor(single : Bool, lineView :UIView) {
+        if single {
+            lineView.layer.borderColor = ColorEA5504.cgColor
+        }else {
+            lineView.layer.borderColor = ColorC8C8C8.cgColor
+        }
+        
+        //判断 胜分差 显示单关图标
+        if single == true && lineView == collectionView{
+            // 胜分差单关
+            let shengfenchaTitleMuatt = NSMutableAttributedString(string: "胜分差",
+                                                                  attributes: [NSAttributedString.Key.foregroundColor: Color505050,
+                                                                               NSAttributedString.Key.font: Font14])
+            let shengfenchaTitlettAtt = NSAttributedString(string: "[单]",
+                                                           attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504,
+                                                                        NSAttributedString.Key.font : Font14])
+            shengfenchaTitleMuatt.append(shengfenchaTitlettAtt)
+            shengfenchaTitle.attributedText = shengfenchaTitleMuatt
+        }
     }
     
     public func configure(with data : BasketballListModel) {
         self.playInfo = data
-        
         collectionView.reloadData()
+       
+        
+        
+        
         // 客队
         let visiAtt = NSMutableAttributedString(string: "[客]",
                                                 attributes: [NSAttributedString.Key.foregroundColor: Color9F9F9F])
@@ -248,7 +307,7 @@ extension CXMMBasketballHunhePlayPop {
         for playInfo in data.matchPlays {
             
             switch playInfo.playType {
-            case "1": // 胜负
+            case "2": // 胜负
             
                 switch playInfo.isShow {
                 case false :
@@ -269,8 +328,13 @@ extension CXMMBasketballHunhePlayPop {
                                                        cellOdds: playInfo.homeCell.cellOdds)
                     sfHomeOdds.setAttributedTitle(homeOdds, for: .normal)
                 }
+                switch playInfo.single {
+                case true :
+                    changeViewBorderColor(single: playInfo.single, lineView: shengFuView)
+                case false : break
+                }
                 
-            case "2": // 让分胜负
+            case "1": // 让分胜负
                 if let fix = playInfo.fixedOdds {
                     var color : UIColor
                     if fix.contains("-") {
@@ -278,7 +342,7 @@ extension CXMMBasketballHunhePlayPop {
                     }else {
                         color = ColorEA5504
                     }
-                    let titleAtt = NSMutableAttributedString(string: "主队让分 ")
+                    let titleAtt = NSMutableAttributedString(string: "让分 ")
                     let title = NSAttributedString(string: "\(fix)分", attributes: [NSAttributedString.Key.foregroundColor: color])
                     titleAtt.append(title)
                     rangFenTitle.attributedText = titleAtt
@@ -302,7 +366,11 @@ extension CXMMBasketballHunhePlayPop {
                     
                     rfHomeOdds.setAttributedTitle(homeOdds, for: .normal)
                 }
-                
+                switch playInfo.single {
+                case true :
+                    changeViewBorderColor(single: playInfo.single, lineView: rangFenView)
+                case false : break
+                }
             case "4": // 大小分
                 if let fix = playInfo.fixedOdds {
             
@@ -321,18 +389,43 @@ extension CXMMBasketballHunhePlayPop {
                     guard playInfo.homeCell != nil else { break }
                     guard playInfo.visitingCell != nil else { break }
                     
-                    let visiOdds = getAttributedString(cellName: playInfo.visitingCell.cellName,
+                    let visiOdds = getDoubleNumAttributedString(cellName: playInfo.visitingCell.cellName,
                                                        cellOdds: playInfo.visitingCell.cellOdds)
                     dxfVisiOdds.setAttributedTitle(visiOdds, for: .normal)
-                    let homeOdds = getAttributedString(cellName: playInfo.homeCell.cellName,
+                    let homeOdds = getDoubleNumAttributedString(cellName: playInfo.homeCell.cellName,
                                                        cellOdds: playInfo.homeCell.cellOdds)
                     dxfHomeOdds.setAttributedTitle(homeOdds, for: .normal)
+                }
+                switch playInfo.single {
+                case true :
+                    changeViewBorderColor(single: playInfo.single, lineView: daxiaoView)
+                case false : break
+                }
+            case "3": // 胜分差
+                switch playInfo.single {
+                    case true :
+                        changeViewBorderColor(single: playInfo.single, lineView: collectionView)
+                    case false : break
                 }
             default : break
             }
         }
 
     }
+    
+    private func getDoubleNumAttributedString(cellName : String, cellOdds : String) -> NSAttributedString {
+        let cellNameAtt = NSMutableAttributedString(string: cellName,
+                                                    attributes: [NSAttributedString.Key.foregroundColor: Color505050,
+                                                                 NSAttributedString.Key.font : Font14])
+        let cellOddsAtt = NSAttributedString(string: "\n\(cellOdds)",
+            attributes: [NSAttributedString.Key.foregroundColor: Color9F9F9F,
+                         NSAttributedString.Key.font: Font12])
+        
+        cellNameAtt.append(cellOddsAtt)
+        
+        return cellNameAtt
+    }
+    
     
     private func getAttributedString(cellName : String, cellOdds : String) -> NSAttributedString {
         let cellNameAtt = NSMutableAttributedString(string: cellName,
@@ -355,11 +448,13 @@ extension CXMMBasketballHunhePlayPop : UICollectionViewDelegate {
             guard viewModel.shengFenCha.isShow else { return }
             guard viewModel.shengFenCha.visiSFC.isEmpty == false else { return }
             viewModel.seSFCVisiPlay(isSelected: viewModel.shengFenCha.visiSFC[indexPath.row].selected, index: indexPath.row)
+            viewModel.shengFenCha.single = true
             viewModel.cacheCellList.insert(viewModel.shengFenCha.visiSFC[indexPath.row])
         case 1:
             guard viewModel.shengFenCha.isShow else { return }
             guard viewModel.shengFenCha.homeSFC.isEmpty == false else { return }
             viewModel.seSFCHomePlay(isSelected: viewModel.shengFenCha.homeSFC[indexPath.row].selected, index: indexPath.row)
+            viewModel.shengFenCha.single = true
             viewModel.cacheCellList.insert(viewModel.shengFenCha.homeSFC[indexPath.row])
         default : break
         }

@@ -148,7 +148,8 @@ class WorldCupOrderDetailCell: UITableViewCell {
     private func getDetailLB() -> UILabel {
         let lab = UILabel()
         lab.font = Font12
-        
+        //去掉最后内容 不显示省略号
+        lab.lineBreakMode = .byClipping
         lab.textColor = Color505050
         lab.textAlignment = .center
         return lab

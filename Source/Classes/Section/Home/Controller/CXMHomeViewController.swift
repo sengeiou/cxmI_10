@@ -27,8 +27,9 @@ fileprivate let NewsOnePicCellId = "NewsOnePicCellId"
 fileprivate let NewsThreePicCellId = "NewsThreePicCellId"
 
 
+//应该继承:BaseViewController, 因为悬浮框的问题需要重新继承:SuspendedViewController 它继承了BaseViewController
+class CXMHomeViewController: SuspendedViewController, UITableViewDelegate, UITableViewDataSource,BannerViewDelegate {
 
-class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource,BannerViewDelegate {
     
     //MARK: - 属性 public
     public var homeStyle : ShowType! = .onlyNews {
@@ -50,10 +51,17 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
     
     private var isUpdateApp = false
     
+    private var isSuspended = false
+    
+
+    
+
     //MARK: - 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "圣和彩店"
+        
+        
         newsList = [NewsInfoModel]()
         hideBackBut()
         
@@ -69,6 +77,7 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
         updateApp()
         activityRequest()
         
+        suspendedRequest()
         
         NotificationCenter.default.addObserver(self, selector: #selector(configNotification(_:)), name: NSNotification.Name(rawValue: NotificationConfig), object: nil)
         
@@ -124,8 +133,10 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
         }
     }
     
+    //视图即将显示
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         self.isHidenBar = false
         
         let turnOn = UserDefaults.standard.bool(forKey: TurnOn)
@@ -142,8 +153,13 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
             self.showActivityPop(index: popNumber)
         }
 //        tableView.reloadData()
-        
     }
+    
+    //视图即将消失
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         TongJi.start("大厅")
@@ -230,6 +246,8 @@ class CXMHomeViewController: BaseViewController, UITableViewDelegate, UITableVie
     }()
 }
 
+
+
 // MARK: - 点击事件
 extension CXMHomeViewController : HomeSportLotteryCellDelegate, HomeSportCellDelegate {
     // banner 点击
@@ -239,8 +257,6 @@ extension CXMHomeViewController : HomeSportLotteryCellDelegate, HomeSportCellDel
     
     // 玩法点击
     func didSelectItem(playModel: HomePlayModel, index: Int) {
-        
-        
         
         guard playModel.status == "0" else {
             showHUD(message: playModel.statusReason)
@@ -258,7 +274,7 @@ extension CXMHomeViewController : HomeSportLotteryCellDelegate, HomeSportCellDel
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+
         if homeStyle == .onlyNews {
             if homeData.discoveryHallClassifyDTOList.count != 0 {
                 switch indexPath.section {
@@ -895,7 +911,7 @@ extension CXMHomeViewController : UpdateAppPopVcDelegate {
 
 // MARK: - 活动弹框
 extension CXMHomeViewController : HomeActivityViewDelegate {
-    
+
     func didTipActivity(link: String) {
         guard activityModel != nil else { return }
         if activityModel[popNumber].name == "2"{
@@ -983,4 +999,54 @@ extension CXMHomeViewController : HomeActivityViewDelegate {
                 }
             }, onCompleted: nil , onDisposed: nil)
     }
+    
+
+    
+//    private func suspendedRequest() {
+//        _ = activityProvider.rx.request(.suspended).asObservable()
+//            .mapObject(type: ActivityModel.self)
+//            .subscribe(onNext: { (data) in
+//                self.suspendedModel = data
+//                self.showSuspended()
+//            }, onError: { (error) in
+//                guard let err = error as? HXError else { return }
+//                switch err {
+//                case .UnexpectedResult(let code, let msg):
+//                    switch code {
+//                    case 600:
+//                        break
+//                    default : break
+//                    }
+//                    if 300000...310000 ~= code {
+//                        self.showHUD(message: msg!)
+//                    }
+//                default: break
+//                }
+//            }, onCompleted: nil , onDisposed: nil)
+//    }
+    
+    private func suspendedRequest() {
+        _ = activityProvider.rx.request(.suspended).asObservable()
+            .mapObject(type: ActivityModel.self)
+            .subscribe(onNext: { (data) in
+                homeSuspendedView.suspendedModel = data
+            }, onError: { (error) in
+                guard let err = error as? HXError else { return }
+                switch err {
+                case .UnexpectedResult(let code, let msg):
+                    switch code {
+                    case 600:
+                        break
+                    default : break
+                    }
+                    if 300000...310000 ~= code {
+                        self.showHUD(message: msg!)
+                    }
+                default: break
+                }
+            }, onCompleted: nil , onDisposed: nil)
+    }
+    
 }
+
+

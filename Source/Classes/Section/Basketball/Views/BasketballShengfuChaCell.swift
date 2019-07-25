@@ -12,7 +12,7 @@ protocol BasketballShengfuChaCellDelegate {
     func didTipShengfenCha(playInfo : BasketballListModel, viewModel : BBPlayModel) -> Void
 }
 
-class BasketballShengfuChaCell: UITableViewCell, AlertPro {
+class BasketballShengfuChaCell: UITableViewCell, AlertPro, DateProtocol  {
     
     public var delegate : BasketballShengfuChaCellDelegate!
     
@@ -33,7 +33,7 @@ class BasketballShengfuChaCell: UITableViewCell, AlertPro {
     @IBOutlet weak var timeLabel : UILabel!
     
     
-    @IBOutlet weak var oddsLabel : UILabel!
+    @IBInspectable @IBOutlet weak var oddsLabel : GGPaddingLabel!
     @IBOutlet weak var oddsButton : UIButton!
     
     // 停售
@@ -56,6 +56,8 @@ class BasketballShengfuChaCell: UITableViewCell, AlertPro {
         oddsLabel.layer.masksToBounds = true
         oddsLabel.layer.borderWidth = 1
         oddsLabel.layer.borderColor = ColorF4F4F4.cgColor
+        oddsLabel.numberOfLines = 0
+        oddsButton.titleLabel?.numberOfLines = 0
         
         stopSeller.backgroundColor = UIColor(hexColor: "ededed", alpha: 0.9)
         stopSeller.setTitle("本场停售\n 详情>>", for: .normal)
@@ -99,13 +101,15 @@ extension BasketballShengfuChaCell {
                     if cell.selected {
                         
                         switch cell.playType {
-                        case "31":
-                            str += "客胜\(cell.cellName) "
-                        case "32":
-                            str += "主胜\(cell.cellName) "
+                        case "3":
+                            guard cell.cellCode != "" else { return }
+                            if  Int(cell.cellCode)! > 6{
+                                str += "客胜" + cell.cellName + " "
+                            }else{
+                                str += "主胜" + cell.cellName + " "
+                            }
                         default : break
                         }
-                        
                     }
                 }
                 
@@ -114,9 +118,18 @@ extension BasketballShengfuChaCell {
                     self?.oddsLabel.textColor = Color505050
                     self?.oddsLabel.backgroundColor = ColorFFFFFF
                 }else{
-                    self?.oddsLabel.text = str
+                    
+                    //通过富文本来设置行间距
+                    let paraph = NSMutableParagraphStyle()
+                    //将行间距设置为28
+                    paraph.lineSpacing = 4
+                    //样式属性集合
+                    let attributes = [NSAttributedString.Key.font:UIFont.systemFont(ofSize: 14),
+                                      NSAttributedString.Key.paragraphStyle: paraph]
+                    self?.oddsLabel.attributedText = NSAttributedString(string: str, attributes: attributes)
                     self?.oddsLabel.textColor = ColorFFFFFF
                     self?.oddsLabel.backgroundColor = ColorEA5504
+                    self?.oddsLabel.textAlignment = .center
                 }
             }).disposed(by: bag)
     }
@@ -133,7 +146,7 @@ extension BasketballShengfuChaCell {
         let visiMuatt = NSMutableAttributedString(string: "[客]",
                                                   attributes: [NSAttributedString.Key.foregroundColor: Color9F9F9F,
                                                                NSAttributedString.Key.font: Font14])
-        let visiAtt = NSAttributedString(string: data.visitingTeamAbbr,
+        let visiAtt = NSAttributedString(string: data.visitingTeamName,
                                          attributes: [NSAttributedString.Key.foregroundColor: Color505050,
                                                       NSAttributedString.Key.font: Font14])
         visiMuatt.append(visiAtt)
@@ -142,7 +155,7 @@ extension BasketballShengfuChaCell {
         let homeMuatt = NSMutableAttributedString(string: "[主]",
                                                   attributes: [NSAttributedString.Key.foregroundColor: Color9F9F9F,
                                                                NSAttributedString.Key.font: Font14])
-        let homeAtt = NSAttributedString(string: data.homeTeamAbbr,
+        let homeAtt = NSAttributedString(string: data.homeTeamName,
                                          attributes: [NSAttributedString.Key.foregroundColor: Color505050,
                                                       NSAttributedString.Key.font : Font14])
         homeMuatt.append(homeAtt)
@@ -150,7 +163,7 @@ extension BasketballShengfuChaCell {
         
         leagueLabel.text = data.leagueAddr
         dateLabel.text = data.changci
-        timeLabel.text = data.matchDay
+        timeLabel.text = "截止:" + self.timeStampToHHmm(data.betEndTime)
         
         guard data.matchPlays.count == 1 else { return }
         
@@ -162,8 +175,6 @@ extension BasketballShengfuChaCell {
         case false:
             singleImg.isHidden = true
         }
-        
-        
     }
     
     private func getAttributedString(cellName : String, cellOdds : String) -> NSAttributedString {

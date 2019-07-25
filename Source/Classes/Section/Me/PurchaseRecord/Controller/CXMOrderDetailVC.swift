@@ -21,32 +21,16 @@ enum BackType {
     case notRoot
 }
 
+protocol OrderDetailExpiredDelegate {
+    func expired() -> Void
+}
+
 class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, OrderDetailFooterViewDelegate {
     
     // MARK: - 点击事件
     func goBuy() {
         guard orderInfo != nil else { return }
         
-        let football = CXMFootballMatchVC()
-        
-        switch orderInfo.lotteryPlayClassifyId {
-        case "2":
-            football.matchType = .胜平负
-        case "1":
-            football.matchType = .让球胜平负
-        case "4":
-            football.matchType = .总进球
-        case "5":
-            football.matchType = .半全场
-        case "3":
-            football.matchType = .比分
-        case "6":
-            football.matchType = .混合过关
-        case "7":
-            football.matchType = .二选一
-        default: break
-            
-        }
         
         var homeData = HomePlayModel()
         homeData.lotteryId = orderInfo.lotteryClassifyId
@@ -55,14 +39,55 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
         homeData.lotteryName = orderInfo.lotteryClassifyName
         homeData.playType = orderInfo.lotteryPlayClassifyId
         
-
-        pushViewController(vc: football)
-        
+        switch orderInfo.lotteryClassifyId {
+        case "1":
+            let football = CXMFootballMatchVC()
+            
+            switch orderInfo.lotteryPlayClassifyId {
+            case "2":
+                football.matchType = .胜平负
+            case "1":
+                football.matchType = .让球胜平负
+            case "4":
+                football.matchType = .总进球
+            case "5":
+                football.matchType = .半全场
+            case "3":
+                football.matchType = .比分
+            case "6":
+                football.matchType = .混合过关
+            case "7":
+                football.matchType = .二选一
+                
+            default: break
+            }
+            pushViewController(vc: football)
+        case "3":
+            let story = UIStoryboard(storyboard: .Basketball)
+            let basketball = story.instantiateViewController(withIdentifier: "BasketballVC") as! CXMMBasketballVC
+            
+            switch orderInfo.playType {
+            case "2":
+                basketball.type = .胜负
+            case "1":
+                basketball.type = .让分胜负
+            case "4":
+                basketball.type = .大小分
+            case "3":
+                basketball.type = .胜分差
+            case "6":
+                basketball.type = .混合投注
+                
+            default: break
+            }
+            pushViewController(vc: basketball)
+        default: break
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-
+        
         switch indexPath.section {
             
             //        case 0:
@@ -99,6 +124,9 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    //提示过期的弹框
+    public var orderDetailExpiredDelegate : OrderDetailExpiredDelegate!
+    
     // MARK: - 属性
     public var backType : BackType = .notRoot
     
@@ -120,10 +148,10 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
         initSubview()
         
         //orderInfoRequest()
-        self.tableView.headerRefresh {
+//        self.tableView.headerRefresh {
             self.loadNewData()
-        }
-        self.tableView.beginRefreshing()
+//        }
+//        self.tableView.beginRefreshing()
         
         //        setRightNav()
         
@@ -132,11 +160,11 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
         super.viewWillAppear(animated)
         self.isHidenBar = true
         
-        self.tableView.headerRefresh {
-            self.loadNewData()
-        }
-        self.tableView.beginRefreshing()
-        
+//        self.tableView.headerRefresh {
+//            self.loadNewData()
+//        }
+//        self.tableView.beginRefreshing()
+    
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -176,7 +204,7 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
                     weakSelf?.computationTimestamp()
                     weakSelf?.timer = Timer.scheduledTimer(timeInterval: 1.0, target: weakSelf!, selector: #selector(weakSelf?.computationTimestamp), userInfo: nil, repeats:true);
                     weakSelf?.timer.fire()
-
+                    
                 }else{
                     weakSelf?.tableView.tableHeaderView = weakSelf?.header
                 }
@@ -223,7 +251,10 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
         
         if countDown < 0{
             stopTimer()
-           navigationController?.popViewController(animated: true)
+            navigationController?.popViewController(animated: true)
+            
+            guard orderDetailExpiredDelegate != nil else { return }
+            orderDetailExpiredDelegate.expired()
         }
         
         let num = self.transToHourMinSec(time: Float(countDown))
@@ -285,7 +316,7 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
         offlineHeader = OfflineOrderDetailHeaderView()
         offlineHeader.delegate = self
         header = OrderDetailHeaderView()
-
+        
         
         //        tableView.tableFooterView = footer
         tableView.estimatedRowHeight = 80
@@ -338,7 +369,7 @@ class CXMOrderDetailVC: BaseViewController, UITableViewDelegate, UITableViewData
                 return cell
             case 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: OrderDetailCellId, for: indexPath) as! OrderDetailCell
-                if self.orderInfo.matchInfos.count >= 1 {
+                if self.orderInfo.matchInfos.count >= 1{
                     cell.matchInfo = self.orderInfo.matchInfos[indexPath.row - 1]
                 }
                 cell.line.isHidden = true
@@ -592,5 +623,5 @@ extension CXMOrderDetailVC : OfflineOrderDetailHeaderViewDelegate {
         offline = true
         self.pushViewController(vc: vc)
     }
-
+    
 }

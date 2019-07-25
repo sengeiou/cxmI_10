@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 
-class CXMMBasketballConfirmVC: BaseViewController {
+class CXMMBasketballConfirmVC: BaseViewController,FootballOrderFooterDelegate {
 
     public var type : BasketballPlayType!
     
@@ -35,9 +35,12 @@ class CXMMBasketballConfirmVC: BaseViewController {
     
     private var obser : Observable<Any>!
     
+    private var footer: FootballOrderFooter!
+    private var isAgreement : Bool = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "投注"
+        self.navigationItem.title = "确认投注"
         initSubview()
         setData()
         self.tableView.reloadData()
@@ -94,10 +97,10 @@ class CXMMBasketballConfirmVC: BaseViewController {
     private func setBetInfo() {
         
         let moneyAtt = NSMutableAttributedString(string: "\(getBetInfoModel.betNum)注 \(getBetInfoModel.times)倍 共需：")
-        let moneyStr = NSAttributedString(string: "¥\(getBetInfoModel.money)\n", attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
+        let moneyStr = NSAttributedString(string: "\(getBetInfoModel.money)元\n", attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
         
         let bonusAtt = NSAttributedString(string: "预测奖金：")
-        let bonusStr = NSAttributedString(string: "\(getBetInfoModel.minBonus)-\(getBetInfoModel.maxBonus)", attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
+        let bonusStr = NSAttributedString(string: "\(getBetInfoModel.minBonus)-\(getBetInfoModel.maxBonus)元", attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
         
         moneyAtt.append(moneyStr)
         moneyAtt.append(bonusAtt)
@@ -109,6 +112,20 @@ class CXMMBasketballConfirmVC: BaseViewController {
     private func initSubview() {
         tableView.separatorStyle = .none
         tableView.backgroundColor = ColorEDEDED
+        footer = FootballOrderFooter()
+        footer.delegate = self
+        tableView.tableFooterView = footer
+    }
+    
+    // MARK: - FOOTER  delegate 协议
+    func didTipSelectedAgreement(isAgerr: Bool) {
+        self.isAgreement = isAgerr
+    }
+    
+    func didTipAgreement() {
+        let agreement = CXMWebViewController()
+        agreement.urlStr = getCurentBaseWebUrl() + webBuyAgreement
+        pushViewController(vc: agreement)
     }
 
 }
@@ -164,6 +181,10 @@ extension CXMMBasketballConfirmVC : BasketballConfirmCellDelegate {
     func didTipDelete(playInfo: BBPlayModel) {
         viewModel.deletePlay(play: playInfo)
         tableView.reloadData()
+        
+        if viewModel.deSePlayList.count == 0{
+            self.popViewController()
+        }
     }
     
 }
@@ -269,8 +290,10 @@ extension CXMMBasketballConfirmVC {
     private func loadNewData() {
         
     }
+    
     private func getBetInfoRequest() {
         self.setRequestModel()
+        guard self.requestModel.matchBetPlays.count != 0 else{ return }
         
         weak var weakSelf = self
         showProgressHUD()
@@ -307,19 +330,19 @@ extension CXMMBasketballConfirmVC {
         showProgressHUD()
         _ = basketBallProvider.rx.request(.saveBetInfo(requestModel: self.requestModel))
             .asObservable()
-            .mapObject(type: SaveBetInfoModel.self)
+            .mapBaseObject(type: DataModel.self)
             .subscribe(onNext: { (data) in
                 
-                if data.payToken != "" {
+                if data.data != "" {
                     let payment = CXMPaymentViewController()
-                    payment.lottoToken = data.payToken
+                    payment.lottoToken = data.data
                     weakSelf?.pushViewController(vc: payment)
                 }else {
                     // 1.1.4 版，取消支付，直接跳转订单详情
-                    let story = UIStoryboard(storyboard: .Basketball)
-                    let order = story.instantiateViewController(withIdentifier: "BasketballOrderVC") as! CXMMBasketballOrderVC
-                    order.orderId = data.orderId
-                    weakSelf?.pushViewController(vc: order)
+//                    let story = UIStoryboard(storyboard: .Basketball)
+//                    let order = story.instantiateViewController(withIdentifier: "BasketballOrderVC") as! CXMMBasketballOrderVC
+//                    order.orderId = data.orderId
+//                    weakSelf?.pushViewController(vc: order)
                 }
                 
                 weakSelf?.dismissProgressHud()
@@ -382,11 +405,17 @@ extension CXMMBasketballConfirmVC {
 //            }
             
             matchBetPlay.changci = playInfo.changci
-            matchBetPlay.isDan = playInfo.isDanSe
+            if playInfo.isDanSe{
+                 matchBetPlay.isDan = 1
+            }else
+            {
+                 matchBetPlay.isDan = 0
+            }
+//            matchBetPlay.isDan = playInfo.isDanSe
             matchBetPlay.lotteryClassifyId = viewModel.lotteryClassifyId
             matchBetPlay.lotteryPlayClassifyId = viewModel.lotteryPlayClassifyId
-            matchBetPlay.matchId = playInfo.playInfo.matchId
-            matchBetPlay.matchTeam = playInfo.playInfo.homeTeamAbbr + "VS" + playInfo.playInfo.visitingTeamAbbr
+            matchBetPlay.matchId = Int(playInfo.playInfo.matchId)
+            matchBetPlay.matchTeam = playInfo.playInfo.homeTeamName + "VS" + playInfo.playInfo.visitingTeamName
             matchBetPlay.matchTime = playInfo.playInfo.matchTime
             matchBetPlay.playCode = playInfo.playInfo.playCode
             matchBetPlay.changciId = playInfo.playInfo.changciId
@@ -408,7 +437,17 @@ extension CXMMBasketballConfirmVC {
                 matchBetCell.betCells = betCells
                 matchBetCell.playType = "2"
                 matchBetCell.single = playInfo.shengfu.single
-                matchBetCell.fixedOdds = playInfo.shengfu.fixOdds
+//                if playInfo.shengfu.fixOdds != ""{
+//                    let fixedOdds = Float(playInfo.shengfu.fixOdds)!
+//                    let temp = Float(0.0)
+//                    if fixedOdds > temp{
+//                        matchBetCell.fixedOdds = playInfo.shengfu.fixOdds
+//                    }else{
+//                        matchBetCell.fixedOdds = "0"
+//                    }
+//                }else{
+                matchBetCell.fixedOdds = "0"
+//                }
                 matchBetCells.append(matchBetCell)
             }
             
@@ -432,7 +471,7 @@ extension CXMMBasketballConfirmVC {
             }
             // 大小分
             if playInfo.daxiaofen.isShow && (playInfo.daxiaofen.visiCell.selected
-                                            || playInfo.daxiaofen.homeCell.selected) {
+                                          || playInfo.daxiaofen.homeCell.selected) {
                 var matchBetCell = BBMatchBetCell()
                 var betCells = [BBCellModel]()
                 if playInfo.daxiaofen.visiCell.selected {
@@ -469,8 +508,8 @@ extension CXMMBasketballConfirmVC {
                 if betCells.isEmpty == false {
                     matchBetCell.betCells = betCells
                     matchBetCell.playType = "3"
-                    matchBetCell.single = playInfo.daxiaofen.single
-                    matchBetCell.fixedOdds = playInfo.daxiaofen.fixOdds
+                    matchBetCell.single = playInfo.shengFenCha.single
+                    matchBetCell.fixedOdds = playInfo.shengFenCha.fixOdds
                     matchBetCells.append(matchBetCell)
                 }
             }
@@ -478,7 +517,6 @@ extension CXMMBasketballConfirmVC {
             matchBetPlay.matchBetCells = matchBetCells
             matchBetPlays.append(matchBetPlay)
         }
-        
         requestModel.matchBetPlays = matchBetPlays
     }
 }

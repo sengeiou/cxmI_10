@@ -21,4 +21,5 @@
 #import "YHPhotoSelect.h"
 #import "WMPageController.h"
 #import "YBPopupMenu.h"
+#import <Bugly/Bugly.h>
 

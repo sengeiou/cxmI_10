@@ -22,7 +22,9 @@ class OrderPaymentCell: UITableViewCell {
             
             if orderInfo.surplus > 0 {
                 let surplusAtt = NSMutableAttributedString(string: "余额支付 ")
-                let surplus = NSAttributedString(string: "\(orderInfo.surplus) 元", attributes: [NSAttributedString.Key.foregroundColor: Color505050])
+                
+                let s = String(format:"%.2f",orderInfo.surplus)
+                let surplus = NSAttributedString(string: s + " 元", attributes: [NSAttributedString.Key.foregroundColor: Color505050])
                 surplusAtt.append(surplus)
                 detailAtt.append(surplusAtt)
             }

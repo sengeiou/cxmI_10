@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ServiceHome: BaseViewController {
+class ServiceHome: SuspendedViewController {
 
     @IBOutlet weak var tableView : UITableView!
     

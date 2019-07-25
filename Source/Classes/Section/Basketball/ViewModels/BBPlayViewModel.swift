@@ -143,7 +143,7 @@ extension BBPlayModel {
     // 胜负
     func seSFVisiPlay(isSelected: Bool = false) {
         shengfu.visiCell.selected = !shengfu.visiCell.selected
-        
+
         guard canSePlay(isSelected: shengfu.visiCell.selected) else {
             shengfu.visiCell.selected = false
             return }
@@ -309,6 +309,7 @@ class BBCellModel : NSObject , HandyJSON{
     var cellName : String = ""
     var cellOdds : String = ""
     var cellCode : String = ""
+    var cellSons : NSArray = []
 }
 
 struct BBPlayViewModel {

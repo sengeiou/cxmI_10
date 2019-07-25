@@ -59,7 +59,7 @@ extension HomeFootballCell: AnimatedImageViewDelegate {
         switch type.0 {
         case .竞彩足球:
             subTitle.textColor = ColorE85504
-        case .大乐透:
+        case .竞彩篮球:
             subTitle.textColor = ColorE85504
         default:
             subTitle.textColor = Color787878

@@ -35,8 +35,8 @@ extension RouterPro {
         case .竞彩足球:
             pushFootballVC(from: vc)
         case .大乐透:
-            pushESportsList(from: vc)
-//            pushDaletou(from: vc)
+//            pushESportsList(from: vc)
+            pushDaletou(from: vc)
         case .竞彩篮球:
 //            pushLotto(urlStr: urlStr, from: vc)
             pushBasketball(from: vc)

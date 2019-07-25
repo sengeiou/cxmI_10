@@ -52,6 +52,8 @@ target '彩小蜜' do
 
 pod 'Spring', :git => 'https://github.com/MengTo/Spring.git'
 
+pod 'Bugly'
+
   # Pods for 彩小蜜
 
   

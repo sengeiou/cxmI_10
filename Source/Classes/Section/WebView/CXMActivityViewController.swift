@@ -45,7 +45,7 @@ class CXMActivityViewController: BaseWebViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+       
         let dele = UIBarButtonItem(customView: deleteBut)
         self.navigationItem.leftBarButtonItems?.append(dele)
         

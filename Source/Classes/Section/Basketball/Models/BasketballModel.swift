@@ -71,9 +71,11 @@ class BasketballListModel: HandyJSON {
     var visitingTeamAbbr: String = ""
     var visitingTeamId: String = ""
     var visitingTeamName: String = ""
+    var homeTeamName: String = ""
     /// 排名
     var visitingTeamRank: String = ""
     var matchPlays : [BasketbalPlayInfo] = [BasketbalPlayInfo]()
+    var selectedHunhe : [BasketballPlayCellInfo] = [BasketballPlayCellInfo]()
 }
 
 class BasketbalPlayInfo : HandyJSON {

@@ -27,7 +27,7 @@ enum MePushType {
 
 fileprivate let meCellIdentifier = "meCellIdentifier"
 
-class CXMMeViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, MeHeaderViewDelegate, MeFooterViewDelegate, TTTAttributedLabelDelegate, ClearCache {
+class CXMMeViewController: SuspendedViewController, UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, MeHeaderViewDelegate, MeFooterViewDelegate, TTTAttributedLabelDelegate, ClearCache {
     
     func didTipLogin() {
         goLogin()

@@ -120,7 +120,7 @@ extension BasketBallSectionHeader {
             spreadBut.setImage(UIImage(named: "Collapse"), for: .normal)
         }
         
-        title.text = data.matchDay + "共有" + "\(data.allMatchCount)" + "场比赛可投注"
+        title.text = data.matchDay + "共有" + "\(data.playList.count)" + "场比赛可投注"
     }
 }
 

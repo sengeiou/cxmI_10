@@ -14,7 +14,7 @@ protocol BasketballConfirmCellDelegate {
     func didTipDan(playInfo : BBPlayModel) -> Void
 }
 
-class BasketballConfirmCell: UITableViewCell {
+class BasketballConfirmCell: UITableViewCell, DateProtocol {
 
     public var delegate : BasketballConfirmCellDelegate!
     
@@ -122,14 +122,14 @@ extension BasketballConfirmCell {
 //        data.confirmViewModel = viewMo
         self.conViewModel = viewMo
         // 场次信息
-        self.changciLabel.text =  "\(data.playInfo.leagueAddr) \(data.playInfo.changci) \(data.playInfo.matchDay)"
+        self.changciLabel.text =  "\(data.playInfo.leagueAddr) \(data.playInfo.changci) \(self.timeStampToHHmm(data.playInfo.betEndTime))"
         
         
         // 客队名
         let visiMuatt = NSMutableAttributedString(string: "[客]",
                                                   attributes: [NSAttributedString.Key.foregroundColor: Color9F9F9F,
                                                                NSAttributedString.Key.font: Font14])
-        let visiAtt = NSAttributedString(string: data.playInfo.visitingTeamAbbr,
+        let visiAtt = NSAttributedString(string: data.playInfo.visitingTeamName,
                                          attributes: [NSAttributedString.Key.foregroundColor: Color505050,
                                                       NSAttributedString.Key.font: Font14])
         visiMuatt.append(visiAtt)
@@ -138,7 +138,7 @@ extension BasketballConfirmCell {
         let homeMuatt = NSMutableAttributedString(string: "[主]",
                                                   attributes: [NSAttributedString.Key.foregroundColor: Color9F9F9F,
                                                                NSAttributedString.Key.font: Font14])
-        let homeAtt = NSAttributedString(string: data.playInfo.homeTeamAbbr,
+        let homeAtt = NSAttributedString(string: data.playInfo.homeTeamName,
                                          attributes: [NSAttributedString.Key.foregroundColor: Color505050,
                                                       NSAttributedString.Key.font : Font14])
         homeMuatt.append(homeAtt)

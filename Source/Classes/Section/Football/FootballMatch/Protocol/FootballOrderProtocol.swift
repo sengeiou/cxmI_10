@@ -40,7 +40,7 @@ extension FootballOrderProtocol where Self: CXMFootballOrderConfirmVC {
             matchBetCell.lotteryClassifyId = self.classFyId
             matchBetCell.lotteryPlayClassifyId = self.playclassFyId
             matchBetCell.matchId = playInfo.matchId
-            matchBetCell.matchTeam = playInfo.homeTeamAbbr + "VS" + playInfo.visitingTeamAbbr
+            matchBetCell.matchTeam = playInfo.homeTeamAbbr + "VS" + playInfo.visitingTeamName
             matchBetCell.matchTime = playInfo.matchTime
             matchBetCell.playCode = playInfo.playCode
             matchBetCell.changciId = playInfo.changciId

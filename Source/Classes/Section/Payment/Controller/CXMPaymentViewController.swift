@@ -61,7 +61,7 @@ class CXMPaymentViewController: BaseViewController, UITableViewDelegate, UITable
     /// 控制还需支付 是否显示
     private var needPay  = false
     
-    
+    private var boundsIndex = 0
     
     // MARK: - 生命周期
     override func viewDidLoad() {
@@ -227,7 +227,7 @@ class CXMPaymentViewController: BaseViewController, UITableViewDelegate, UITable
         self.canPayment = false
         maxTimes = QueryMaxTimes
         
-        if self.paymentModel != nil,self.paymentModel.isReadonly == "1" || self.paymentModel.payCode == "app_offline"{
+        if self.paymentModel != nil,(self.paymentModel.isReadonly == "1" || self.paymentModel.payCode == "app_offline") &&   self.saveBetInfo.thirdPartyPaid != 0.0 {
 //            let recharge = CXMRechargeViewController()
 //            recharge.payCode = self.paymentModel.payCode
 //            recharge.payToken = self.saveBetInfo.payToken
@@ -241,12 +241,13 @@ class CXMPaymentViewController: BaseViewController, UITableViewDelegate, UITable
         }
     }
     // 选取的  优惠券
-    func didSelected(bonus bonusId: String) {
-        
+    func didSelected(bonus bonusId: String, index bonusIndex: Int) {
+
         self.saveBetInfo.bonusId = bonusId
         self.saveBetInfo.setBonus()
         
         orderRequest(bonusId: bonusId)
+        boundsIndex = bonusIndex
         self.tableView.reloadData()
     }
     
@@ -319,11 +320,18 @@ extension CXMPaymentViewController {
             order.orderId = self.paymentResult.orderId
             pushViewController(vc: order)
         case "3": // 竞彩篮球
-            let story = UIStoryboard(storyboard: .Basketball)
-            let order = story.instantiateViewController(withIdentifier: "BasketballOrderVC") as! CXMMBasketballOrderVC
+//            let story = UIStoryboard(storyboard: .Basketball)
+//            let order = story.instantiateViewController(withIdentifier: "BasketballOrderVC") as! CXMMBasketballOrderVC
+//            order.backType = .root
+//            order.orderId = self.paymentResult.orderId
+//            pushViewController(vc: order)
+            
+            let story = UIStoryboard(storyboard: .Football)
+            let order = story.instantiateViewController(withIdentifier: "OrderDetailVC") as! CXMOrderDetailVC
             order.backType = .root
             order.orderId = self.paymentResult.orderId
-            pushViewController(vc: order)
+            self.pushViewController(vc: order)
+            
         case "4": // 快3
             break
         case "5": // 双色球
@@ -444,6 +452,7 @@ extension CXMPaymentViewController {
                     weakSelf?.tableView.reloadData()
                     guard weakSelf?.paymentModel != nil else { return }
                     weakSelf?.paymentModel.payCode = ""
+                    weakSelf?.confirmBut.setTitle("确认支付", for: .normal)
                 }else{
                     weakSelf?.allPaymentRequest()
                 }
@@ -491,8 +500,6 @@ extension CXMPaymentViewController {
                 }else{
                     weakSelf?.confirmBut.setTitle("确认支付", for: .normal)
                 }
-                
-                
                 
                 weakSelf?.tableView.reloadData()
             }, onError: { (error) in
@@ -547,7 +554,6 @@ extension CXMPaymentViewController {
                     switch code {
                     case 1:
                         self.showHUD(message: msg!)
-                        
                     case 600:
                         weakSelf?.removeUserData()
                         weakSelf?.pushLoginVC(from: self)
@@ -644,15 +650,28 @@ extension CXMPaymentViewController {
         guard self.saveBetInfo != nil else { return }
         guard self.saveBetInfo.thirdPartyPaid != nil else { return }
         guard self.saveBetInfo.thirdPartyPaid != 0 else {
-            
-            showHUD(message: self.paymentResult.showMsg)
             SVProgressHUD.dismiss()
+            showHUD(message: self.paymentResult.showMsg)
             self.pushOrderDetailVC()
             //self.canPayment = true
             return
         }
-        
+        SVProgressHUD.dismiss()
         guard self.paymentResult != nil else { return }
+        if self.paymentModel.payCode == "app_jhpay"{
+            var aliUrl = "alipays://platformapi/startapp?appId=20000067&url=https%3A%2F%2Fopenauth.alipay.com%2Foauth2%2FpublicAppAuthorize.htm%3Fapp_id%3D2019061165500931%26scope%3Dauth_base%26redirect_uri%3D"
+            
+            guard self.paymentResult.orderSn != nil else { return }
+            
+            let url = "http://t1.caixiaomi.net:9805/static/payCallBack/zfbcallback.html?app_id=2019061165500931&&payType=zf&orderSn=" + self.paymentResult.orderSn
+            
+            let encodableDelimiters = CharacterSet(charactersIn: "!*'();:@&=+$,/?%#[]")
+            let encodUrl = url.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed.subtracting(encodableDelimiters)) ?? ""
+            
+            aliUrl = aliUrl + encodUrl
+            self.paymentResult.payUrl = aliUrl
+        }
+        
         
         if let payUrl = self.paymentResult.payUrl {
             guard let url = URL(string: payUrl) else { return }
@@ -678,6 +697,21 @@ extension CXMPaymentViewController {
             //self.queryPaymentResultRequest()
         }
     }
+    
+//    if(mIsToPayType==3){    //跳转支付宝
+//    String orderSn=model.getOrderSn();
+//    String aliUrl="alipays://platformapi/startapp?appId=20000067&url=https%3A%2F%2Fopenauth.alipay.com%2Foauth2%2FpublicAppAuthorize.htm%3Fapp_id%3D2019061165500931%26scope%3Dauth_base%26redirect_uri%3D";
+//    String url="http://t1.caixiaomi.net:9805/static/payCallBack/zfbcallback.html?app_id=2019061165500931&&payType=zf&orderSn="+ orderSn;
+//    try {
+//    aliUrl=aliUrl+ URLEncoder.encode(url,"utf-8");
+//    Uri uri = Uri.parse(aliUrl);
+//    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+//    startActivity(intent);
+//    } catch (UnsupportedEncodingException e) {
+//    e.printStackTrace();
+//    }
+//    }
+    
 }
 
 extension CXMPaymentViewController {
@@ -741,7 +775,7 @@ extension CXMPaymentViewController {
                         }
                     }else{
                         cell.detail.textColor = ColorEA5504
-                        cell.detail.text = "\(self.saveBetInfo.bonusAmount!)元优惠券 " + "-" + self.saveBetInfo.bonusAmount + "元"
+                        cell.detail.text = "\(self.saveBetInfo.bonusList[boundsIndex].bonusName!)" + "-" + self.saveBetInfo.bonusAmount + "元"
                         cell.accessoryType = .disclosureIndicator
                         cell.hcellStyle = .detail
                     }

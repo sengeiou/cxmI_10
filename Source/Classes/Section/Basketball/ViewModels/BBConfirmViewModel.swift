@@ -115,7 +115,7 @@ class BBConfirmViewModel : AlertPro, DateProtocol {
         
         guard let timeInt = arr.min() else { return }
         
-        let time = timeStampToHHmm(timeInt)
+        let time = timeStampToYMDHHmm(timeInt)
         
         let attStr = NSMutableAttributedString(string: "已选\(sePlayList.count)场比赛 投注截止时间：", attributes: [NSAttributedString.Key.foregroundColor: Color9F9F9F])
         let att = NSAttributedString(string: time, attributes: [NSAttributedString.Key.foregroundColor: ColorEA5504])
@@ -258,6 +258,7 @@ extension BBConfirmViewModel {
 
     
     public func deletePlay(play : BBPlayModel) {
+        self.deSePlayList.remove(play)
         self.sePlaySet.remove(play)
         shouldRequest.onNext(true)
     }

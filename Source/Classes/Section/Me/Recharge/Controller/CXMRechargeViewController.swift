@@ -496,6 +496,21 @@ class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITabl
         
         guard self.paymentResult != nil else { return }
         
+        if self.paymentModel.payCode == "app_jhpay"{
+            var aliUrl = "alipays://platformapi/startapp?appId=20000067&url=https%3A%2F%2Fopenauth.alipay.com%2Foauth2%2FpublicAppAuthorize.htm%3Fapp_id%3D2019061165500931%26scope%3Dauth_base%26redirect_uri%3D"
+            
+            guard self.paymentResult.orderSn != nil else { return }
+            
+            let url = "http://t1.caixiaomi.net:9805/static/payCallBack/zfbcallback.html?app_id=2019061165500931&&payType=cz&orderSn=" + self.paymentResult.orderSn
+            
+            let encodableDelimiters = CharacterSet(charactersIn: "!*'();:@&=+$,/?%#[]")
+            let encodUrl = url.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed.subtracting(encodableDelimiters)) ?? ""
+
+            aliUrl = aliUrl + encodUrl
+            self.paymentResult.payUrl = aliUrl
+        }
+        
+        
         if let payUrl = self.paymentResult.payUrl {
             guard let url = URL(string: payUrl) else { return }
             
@@ -534,7 +549,7 @@ class CXMRechargeViewController: BaseViewController, UITableViewDelegate, UITabl
                 weakSelf?.paymentMethodModel = data
                 weakSelf?.paymentAllList = data.paymentDTOList
                 weakSelf?.tableview.reloadData()
-                
+            
                 
                 if weakSelf?.payListIndexPath != nil{
                     weakSelf?.paymentModel = weakSelf?.paymentAllList[(weakSelf?.payListIndexPath.row)! - 1]

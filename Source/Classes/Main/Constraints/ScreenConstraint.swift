@@ -19,3 +19,6 @@ let SafeTopHeight = screenWidth == 812.0 ? 44 : 20
 let SafeAreaBottomHeight: CGFloat = screenHeight == 812.0 ? 24 : 0
 
 let isIphoneX = screenHeight == 812.0 ? true : false
+
+//悬浮框单li
+var homeSuspendedView = HomeSuspendedView.singleHomeSuspendedView
